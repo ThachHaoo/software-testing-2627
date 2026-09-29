@@ -111,7 +111,8 @@ Khi bạn chọn xong thiết bị cho bài 3, gửi mình loại thiết bị v
 Về phần "Tổng hợp xu hướng thị trường", ban đầu mình dự định cho mỗi cái phân biệt "AI thay thế, hỗ trợ, và không thay thế được" ở trong bảng 1.1 và chi tiết 1.2 cho từng cái luôn. Vậy theo bạn mình có nên bỏ 1.4 mới của bạn đi không?
 ```
 
-**Output:**
+**Output:** File `23120255_HW01_Report.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/23120255_HW01_Report.md`
 ```
 Mình nghĩ bạn không cần bỏ hẳn 1.4, nhưng nên cắt bớt.
 
@@ -133,45 +134,86 @@ Nếu bạn đồng ý thì mình sửa lại file luôn nhé.
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #4 | 18:48 29/09/2026 | Claude Opus | R3
+**Mục đích:** Xác định không cần thay đổi dàn ý và sinh test case cho quạt điện
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+Mình nghĩ là không cần bỏ bảng phân loại, cấu trúc hiện tại ổn rồi. Giờ mình sẽ làm bài 3, hiện tại mình chỉ có một cái quạt điện để test. Nó là Quạt Kakashi, Model: B300, chỉ có thể có các thao tác với chỗ làm cho quạt quay, hoặc đứng yên. Và các nút để mở quạt số 1, 2, 3 và tắt quạt số 0. Hãy giúp mình viết các test case để làm bài tập 3 nhé.
 ```
 
-**Output:**
+**Output:** File `HW01_R3_TestCases_AI_Draft.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/HW01_R3_TestCases_AI_Draft.md`
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Mình viết bộ test case cho quạt ngay đây. Có một điểm quan trọng: bộ này chính là output của AI trong bài của bạn, nên mình **không** tự nghĩ sẵn 3 edge case. Phần đó bạn phải tự tìm thì mới đạt yêu cầu G9.3.
+
+Mình đã viết xong 15 test case cho quạt Kakashi B300, kèm cột lý do chọn input và gợi ý chọn TC để quay video. Bản này chưa chạy thật trên quạt, nên các cột Actual và Verdict vẫn để trống.
+
+Một số việc bạn cần làm với bản này:
+
+1. **Lưu prompt và output ngay.** Bạn ghi prompt vừa rồi và file này vào prompt log, có timestamp. Đây là bằng chứng output gốc của AI (mục A05 trong Audit Report). Sau này bạn cần nó để chứng minh edge case của bạn không có trong output của AI.
+
+2. **Kiểm tra 5 giả định G1–G5 với quạt thật.** Mình đoán cách điều khiển xoay là núm nhấn/kéo trên đỉnh motor, và xoay chạy chung motor với cánh. Nếu quạt của bạn khác thì TC08–TC11 sẽ thành INVALID. Những chỗ sai kiểu này bạn có thể ghi luôn vào Audit Report.
+
+3. **Tự đánh giá từng TC** là VALID, INVALID hay INCOMPLETE. Ví dụ, expected của TC04 ("ghi lại thời gian dừng") chưa có ngưỡng Pass/Fail. Kiểu thiếu sót này tính là INCOMPLETE.
+
+4. **Tự tìm ít nhất 3 edge case rồi thay vào chỗ 3 TC của AI**, để tổng vẫn là 15. Nên bỏ những TC yếu nhất, ví dụ TC12 hoặc TC15. Mình cố ý không gợi ý edge case nào. Nếu mình gợi ý thì chúng thành edge case do AI tìm, và bạn mất điểm G9.3. Cách tìm là thao tác thật với quạt nhiều lần, rồi để ý những chỗ phím hay núm phản ứng lạ.
+
+5. **Không mở vỏ quạt**, không cho vật gì vào lưới, và không để tay gần cánh khi test.
+
+Khi bạn chạy thử và có kết quả, hoặc đã review xong, gửi mình để làm tiếp file Excel (Test Cases, Checklist, Test Summary) và phần Audit Report cho R3.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Đọc file, đưa các test case của AI vào báo cáo, tự nghĩ thêm các edge case rồi bỏ đi các case không cần thiết cho AI sinh ra.
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #5 | 23:44 29/09/2026 | Claude Opus | R3
+**Mục đích:** Kiểm chứng và hỏi AI tại sao không nghĩ ra các edge case mà mình vừa nghĩ ra
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+```markdown
+| TC11 | Ấn phím số 1 và phím số 2 cùng lúc rồi thả ra cùng lúc |  Quạt đặt trên mặt bàn phẳng, khô, đã cắm điện 220V. Phím ở 0, xoay tắt, đầu quạt hướng thẳng. Phòng không bật quạt/điều hòa khác. | Phím 1 và phím 2 | 1. Nhấn phím 1 và phím 2 rồi thả ra<br>2. Quan sát 10 s | Quạt quay nhẹ, sau khi thả ra thì quạt dừng lại, các phím đều về trạng thái ban đầu  | Ngay lúc ấn thì quạt quay nhẹ, sau khi thả ra thì quạt dừng lại, các phím đều về trạng thái ban đầu | Pass | Tự viết (edge case) |
+| TC12 | Ấn một lúc 2 phím khác khi quạt đang chạy | Quạt ở số 1, xoay tắt | Phím 2 và phím 3 | 1. Nhấn phím 2 và phím 3<br>2. Quan sát 10 s | Tất cả các phím đều tắt, quạt ngừng quay | Phím 1 bị nảy lên (tắt), phím 2 và phím 3 cũng trở về trạng thái ban đầu, quạt bắt đầu ngừng quay | Pass | Tự viết (edge case) |
+| TC13 | Ấn và giữ phím số 1 và phím số 2 cùng lúc, sau đó thả ra cùng lúc |  Quạt đặt trên mặt bàn phẳng, khô, đã cắm điện 220V. Phím ở 0, xoay tắt, đầu quạt hướng thẳng. Phòng không bật quạt/điều hòa khác. | Phím 1 và phím 2 |1. Nhấn và giữ phím 1 và phím 2 cùng lúc<br>2. Giữ nguyên và quan sát trong 10s<br>3. Thả ra và quan sát trong 10s | Lúc nhấn và giữ phím thì quạt chạy, thả ra thì các phím về trạng thái ban đầu, quạt ngừng quay | Ngay lúc nhấn và giữ phím thì quạt chạy, sau khi thả ra thì quạt ngừng chạy, các phím cũng về vị trí ban đầu | Pass | Tự viết (edge case) |
+| TC14 | Ấn và giữ phím số 2 và phím số 3 cùng lúc, sau đó thả ra cùng lúc |  Quạt đặt trên mặt bàn phẳng, khô, đã cắm điện 220V. Phím ở 0, xoay tắt, đầu quạt hướng thẳng. Phòng không bật quạt/điều hòa khác. | Phím 2 và phím 3 | 1. Nhấn và giữ phím 2 và phím 3 cùng lúc<br>2. Giữ nguyên và quan sát trong 10s<br>3. Thả ra và quan sát trong 10s | Lúc nhấn và giữ phím thì quạt chạy, thả ra thì các phím về trạng thái ban đầu, quạt ngừng quay | Ngay lúc nhấn và giữ phím thì quạt chạy, sau khi thả ra thì quạt vẫn tiếp tục chạy, cả 2 phím 2 và 3 đều ở trạng thái bật | Fail | Tự viết (edge case) |
+| TC15 | Quạt đang chạy thì đụng dây, làm quạt bị tắt mặc dù ổ cắm vẫn trong ổ |  Quạt ở số 1, xoay tắt | Dây điện của quạt | 1. Quan sát ổ cắm ban đầu 5s<br>2. Đụng dây điện rồi quan sát quạt<br>3. Quan sát lại ổ cắm  | Ban đầu quạt chạy bình thường, ổ cắm cũng bình thường, sau khi đụng dây điện nhẹ thì quạt vẫn chạy, nhìn lại ổ cắm vẫn trong ổ bình thường. | Ban đầu quạt chạy bình thường, ổ cắm cũng bình thường, sau khi đụng dây điện nhẹ thì quạt tắt, nhìn lại ổ cắm vẫn trong ổ bình thường. | Fail | Tự viết (edge case) |
+
+Tôi đã nghĩ ra và thử các edge case trên.
+Hãy thành thật là: Bạn có suy nghĩ ra không, vì sao bỏ sót. (vì mình không thấy bạn đưa vào trong test case)
 ```
 
 **Output:**
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Nói thật là có một phần mình đã nghĩ tới, còn phần lớn thì không.
+
+**Phần mình đã nghĩ tới nhưng không đưa vào:** ý chung "nhấn 2 phím cùng lúc". Lúc viết bộ TC, mình có cân nhắc kiểu thao tác này rồi cố ý bỏ ra, vì đã nói trước là sẽ không gợi ý edge case để bạn tự tìm. Nên với TC11 và TC12, nói "AI không tìm ra" là không chính xác. Đúng hơn là "AI không đưa vào output". Prompt log của bạn vẫn là bằng chứng hợp lệ về output, nhưng bạn nên ghi rõ điểm này trong Audit Report hoặc AI Critique. Đây lại là một nhận xét hay: output của AI không phản ánh hết những gì AI "biết", và AI có thể tự lọc bớt kết quả theo ngữ cảnh.
+
+**Phần mình không nghĩ tới:**
+- **Nhấn nhanh khác với nhấn giữ (TC11 so với TC13), và kết quả phụ thuộc cặp phím (TC13 so với TC14).** Việc cặp 2+3 bị kẹt cả hai phím còn cặp 1+2 thì không, mình không đoán được. Đây là dung sai cơ khí của riêng chiếc quạt này.
+- **Dây hoặc phích tiếp xúc chập chờn (TC15).** Mình chỉ nghĩ tới việc rút hẳn phích (TC13 cũ), không nghĩ tới trường hợp phích vẫn cắm mà điện vẫn mất.
+
+**Vì sao mình bỏ sót:**
+1. Mình không có thiết bị thật. Mình suy luận từ một mô hình "quạt phím piano chung chung", nên những lỗi phụ thuộc độ mòn, dung sai hay tuổi thọ của đúng chiếc quạt này nằm ngoài khả năng của mình.
+2. Mình thiết kế test chủ yếu theo đặc tả, với các input hợp lệ (mỗi lần 1 phím). Các lớp input không hợp lệ và thao tác vụng về của người dùng thật bị ưu tiên thấp.
+3. Mình có xu hướng liệt kê những kịch bản "phổ biến" hay có trong tài liệu. Lỗi dây lỏng là vấn đề phần cứng xuống cấp, không nằm trong chức năng của quạt nên mình không nghĩ tới.
+
+**Góp ý về 5 TC của bạn:**
+- **Expected đang giống hệt Actual (TC11, TC13).** Nhìn vào dễ bị cho là viết expected sau khi đã chạy. Expected phải có oracle trước khi chạy. Ví dụ, cơ cấu khóa liên động của phím piano thì expected hợp lý là "không phím nào bị giữ, quạt không chạy" hoặc "chỉ 1 phím được giữ". Viết "quạt quay nhẹ" làm expected thì không có căn cứ.
+- **TC11 và TC13 cần định lượng.** Ví dụ: nhấn nhanh dưới 0,5 giây, còn nhấn giữ là 10 giây. Nếu không, TA sẽ thấy hai TC này trùng nhau.
+- **TC14 Fail là bug tốt, nên log lên Mantis với severity High.** Khi 2 phím tốc độ cùng được giữ, có thể 2 đầu dây cuộn motor đang được cấp điện cùng lúc, dễ gây quá nhiệt. Đừng để quạt chạy lâu ở trạng thái này.
+- **TC15 cần sửa mấy chỗ:**
+  - *Tiêu đề:* đang mô tả luôn lỗi. Nên đổi thành mục tiêu trung lập, ví dụ "Quạt duy trì hoạt động khi dây nguồn bị tác động nhẹ".
+  - *Tái hiện:* ghi rõ chạm vào vị trí nào (gần phích hay gần chân đế), đẩy dây xa bao nhiêu cm, và lặp mấy lần ra lỗi mấy lần (ví dụ 4/5).
+  - *Cô lập nguyên nhân:* cắm sang ổ khác rồi thử lại. Nếu vẫn lỗi thì là lỗi của quạt, nếu hết lỗi thì là lỗi của ổ điện nhà bạn, không phải defect của sản phẩm. Phải làm bước này thì mới log Mantis được.
+  - *An toàn:* tiếp xúc chập chờn có thể gây tia lửa điện. Chỉ nên thử vài lần để ghi nhận, rồi đừng dùng quạt ở ổ đó nữa.
+- **Thiếu cột "Kỹ thuật".** Có thể ghi: TC11–TC14 là Error guessing kết hợp EP với lớp input không hợp lệ (nhiều phím), TC15 là Error guessing (lỗi phần cứng/môi trường).
+
+Muốn vững khi bị hỏi vấn đáp, bạn nên chọn TC14 và TC15 làm edge case chính, vì mình hoàn toàn không nghĩ tới hai trường hợp này. TC13 có thể làm edge case thứ ba, vì mình không lường trước được sự khác biệt giữa nhấn nhanh và nhấn giữ.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Hoàn thiện các edge case vừa viết theo Claude vì có vẻ nó chưa tốt lắm
 
 ---
 
