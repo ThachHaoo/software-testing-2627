@@ -5,7 +5,7 @@
 # Bảng Kiểm Quyền Riêng tư & Sử dụng AI Có Trách nhiệm
 
 **Bài tập:** HW#01 – QA/QC Jobs · 20 Defects · Test a Physical Product
-**Công cụ AI:** Claude Opus 5.5 (24 lượt), Gemini Flash (1 lượt) – chi tiết ở AI-03 và Phụ lục A
+**Công cụ AI:** Claude Opus 5.5 (28 lượt), Gemini Flash (1 lượt) – chi tiết ở AI-03 và Phụ lục A
 
 ## 1. Trước khi dùng AI
 

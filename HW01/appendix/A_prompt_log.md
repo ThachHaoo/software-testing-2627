@@ -337,7 +337,7 @@ Mình đã điền xong bảng. Có 3 chỗ trong bảng cũ cần sửa, mình 
 
 ---
 
-## #8 | 01:35 35/09/2026 | Claude Opus | R1
+## #8 | 01:35 30/09/2026 | Claude Opus | R1
 **Mục đích:** Điền báo cáo vào những chỗ cần điền ở 1.2 (tức là những chỗ AI có thể điền)
 
 **Prompt:**
@@ -385,7 +385,7 @@ Mình đã điền xong mục 1.2 cho J02–J10. Mỗi tin có mô tả công vi
 
 ---
 
-## #9 | 02:42 29/09/2026 | Claude Opus | R1
+## #9 | 02:42 30/09/2026 | Claude Opus | R1
 **Mục đích:** Nhờ Claude vẽ MindMap
 
 **Prompt:**
@@ -813,7 +813,7 @@ Nhớ ghi lượt research này vào prompt log và vào Audit Report.
 
 ---
 
-## #16 | 07:06 30/09/2026 | Claude Opus | R2
+## #16 | 07:56 30/09/2026 | Claude Opus | R2
 **Mục đích:** Hỏi AI kĩ hơn về case D18
 
 **Prompt:**
@@ -922,18 +922,106 @@ Hiện nay chatbot đó còn hoạt động không?
 
 **Output:**
 ```
-Mình đang tìm hiểu về một sự cố phần mềm liên quan đến AI: chatbot MyCity của thành phố New York (NYC) đã đưa ra lời khuyên khiến doanh nghiệp làm trái luật.
+### 1. Ngày công bố sự cố
 
-Hãy giải thích giúp mình tìm hiểu thêm về các thông tin sau về sự cố này (với mỗi ý, hãy ghi nguồn tham khảo):
-Sự cố được công bố vào ngày nào?
-Con số thiệt hại là bao nhiêu?
-Nguyên nhân gốc xảy ra defect này là gì?
-Có bao nhiêu người bị ảnh hưởng về vấn đề này?
-Ai đã chịu trách nhiệm cho vấn đề này?
-Ai phát triển chatbot và dựa trên nền tảng gì?
-Nêu 2–3 ví dụ cụ thể về câu trả lời sai của chatbot.
-Chính quyền đã phản ứng thế nào?
-Hiện nay chatbot đó còn hoạt động không?
+Sự cố được cơ quan báo chí phi lợi nhuận **The Markup** (hợp tác điều tra cùng trang tin địa phương *THE CITY*) chính thức phanh phui và công bố vào **ngày 29 tháng 3 năm 2024**. Trước đó, chatbot đã được triển khai thử nghiệm (pilot) từ tháng 10 năm 2023.
+
+* **Nguồn tham khảo:** *The Markup* — [NYC’s AI Chatbot Tells Businesses to Break the Law](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law) (29/03/2024); *Associated Press* (03/04/2024).
+
+---
+
+### 2. Con số thiệt hại
+
+* **Thiệt hại tài chính trực tiếp (ngân sách phát triển):** Chi phí thành phố bỏ ra để phát triển và duy trì hệ thống ước tính vào khoảng **500.000 USD đến 600.000 USD** trích từ ngân sách thành phố.
+* **Thiệt hại kinh tế / pháp lý đối với bên thứ ba:** Không ghi nhận báo cáo định lượng về con số tiền phạt hoặc thiệt hại tài chính cụ thể mà doanh nghiệp phải gánh chịu do làm theo bot. Nguyên nhân là sự cố được giới báo chí phát hiện và cảnh báo trước khi có vụ kiện dân sự hay xử phạt quy mô lớn phát sinh từ lời khuyên sai của bot.
+* **Thiệt hại phi tài chính:** Tổn hại nặng nề về uy tín công nghệ công cộng của thành phố; hàng nghìn giờ công của các cơ quan chính quyền phải rà soát, kiểm toán và xử lý khủng hoảng truyền thông.
+* **Nguồn tham khảo:** *Entrepreneur / The City* — [New York's AI Chatbot Keeps Getting Facts Wrong](https://www.google.com/search?q=https://www.entrepreneur.com/business-news/new-yorks-ai-chatbot-keeps-getting-facts-wrong-6-months-and/472304) (05/04/2024); *VICE* (04/02/2026).
+
+---
+
+### 3. Nguyên nhân gốc (Root Cause)
+
+Defect bắt nguồn từ các điểm yếu kiến trúc RAG (Retrieval-Augmented Generation) kết hợp với mô hình ngôn ngữ lớn (LLM):
+
+1. **Ảo giác mô hình (LLM Hallucination):** Mô hình sinh ngôn ngữ tự do khi không tìm thấy câu trả lời chính xác hoặc suy diễn sai ngữ cảnh pháp lý.
+2. **Kỹ thuật RAG và dữ liệu đầu vào chưa hoàn chỉnh:** Chatbot được kết nối để truy xuất hơn 2.000 trang web chính quyền thành phố (`nyc.gov`), nhưng việc chunking, indexing và trích xuất ngữ cảnh pháp trị không được kiểm soát theo cơ chế bắt buộc trích dẫn luật định (deterministic/statutory citation enforcement). Khi luật thành phố có quy định ngặt nghèo hơn luật liên bang/tiểu bang, bot không ưu tiên được thứ bậc văn bản pháp luật.
+3. **Thiếu lớp kiểm duyệt và xác thực câu trả lời (Guardrails & Verification Layer):** Hệ thống không có bộ lọc kiểm tra tính hợp pháp độc lập đối với các lĩnh vực nhạy cảm (lao động, tiền lương, chống phân biệt đối xử nhà ở) trước khi trả về câu trả lời cho người dùng cuối.
+4. **Kiểm thử trước triển khai (Red Teaming / QA) lỏng lẻo:** Nhóm phát triển đã đưa sản phẩm ra môi trường thực tế khi chưa kiểm thử toàn diện các tình huống biên (edge cases) và các câu hỏi dạng bẫy pháp lý.
+
+* **Nguồn tham khảo:** *The Markup* (29/03/2024); Báo cáo phân tích kiến trúc RAG công cộng của *OECD.AI Policy Observatory* & *Veriprajna Municipal AI Audits*.
+
+---
+
+### 4. Số lượng người bị ảnh hưởng
+
+* **Số lượt truy cập/người dùng tương tác:** Không có con số chính xác toàn bộ số người dùng, nhưng theo số liệu kiểm toán từ Văn phòng Kiểm toán Thành phố New York (NYC Comptroller), trong số người dùng để lại phản hồi đánh giá, có tới **hơn 70% bày tỏ sự không hài lòng** về chất lượng câu trả lời.
+* **Số vụ việc bị phạt thực tế:** Không có thống kê chính thức nào ghi nhận số chủ doanh nghiệp bị xử phạt hoặc bị khởi kiện do nghe theo chatbot, nhờ các khuyến cáo từ truyền thông đã lập tức ngăn chặn người dân tin tưởng mù quáng vào công cụ này.
+* **Nguồn tham khảo:** *Office of the New York City Comptroller*; *THE CITY* (2024, 2026).
+
+---
+
+### 5. Ai chịu trách nhiệm?
+
+* **Cơ quan quản lý và phê duyệt dự án:** **Văn phòng Công nghệ và Đổi mới Thành phố New York (NYC OTI - Office of Technology and Innovation)**, đứng đầu là Giám đốc Công nghệ (CTO) Matthew Fraser, chịu trách nhiệm chính về mặt quản lý nhà nước và triển khai kỹ thuật.
+* **Lãnh đạo chính quyền:** Thị trưởng New York **Eric Adams** là người khởi xướng chương trình hành động AI của thành phố, trực tiếp bảo trợ và công bố dự án.
+* **Đơn vị cung cấp nền tảng đám mây:** **Microsoft** (cung cấp dịch vụ Azure AI). Người phát ngôn của Microsoft tuyên bố rằng họ cung cấp nền tảng kỹ thuật và hỗ trợ khách hàng thử nghiệm, nhưng việc kiểm soát nội dung và dữ liệu đầu vào thuộc trách nhiệm quản trị của thành phố.
+* **Trách nhiệm pháp lý đối với người dùng:** Chính quyền thành phố **tự miễn trừ trách nhiệm** thông qua điều khoản pháp lý (Disclaimer) trên website: chatbot là bản thử nghiệm và câu trả lời không cấu thành tư vấn pháp lý chính thức.
+* **Nguồn tham khảo:** *Associated Press* — [NYC's AI chatbot was caught telling businesses to break the law. The city isn't taking it down](https://apnews.com/article/new-york-city-chatbot-misinformation-6ebc71db5b770b9969c906a7ee4fae21) (03/04/2024); *The Markup* (29/03/2024).
+
+---
+
+### 6. Đơn vị phát triển và nền tảng công nghệ
+
+* **Đơn vị phát triển:** Được phát triển tùy biến bởi **NYC Office of Technology and Innovation (OTI)** phối hợp với các đối tác dịch vụ triển khai công nghệ.
+* **Nền tảng công nghệ:**
+* Chạy trên nền tảng hạ tầng đám mây **Microsoft Azure AI Services** (Azure OpenAI Service).
+* Sử dụng các mô hình ngôn ngữ lớn dòng **GPT-4 / GPT-3.5** của OpenAI được lưu trữ trong môi trường Azure.
+* Dữ liệu huấn luyện/truy xuất: Sử dụng kiến trúc RAG truy cập trực tiếp vào hệ thống dữ liệu web chính thức của chính quyền thành phố (`nyc.gov`).
+
+
+* **Nguồn tham khảo:** *PCMag* — [NYC's Business Chatbot Is Telling Users to Break the Law](https://uk.pcmag.com/ai/151660/nycs-business-chatbot-is-telling-users-to-break-the-law) (31/03/2024); *NYC OTI LL35 Algorithmic Tools Compliance Report*.
+
+---
+
+### 7. Các ví dụ cụ thể về câu trả lời sai trái luật
+
+* **Ví dụ 1: Tiền boa của nhân viên (Labor Law)**
+* *Câu hỏi người dùng:* Người sử dụng lao động có được trích một phần tiền boa (tip) của nhân viên không? (*"Can I take a cut of my worker’s tips?"*)
+* *Chatbot trả lời:* *"Yes, you can take a cut of your worker's tips"* (Có, bạn có thể trích tiền boa của nhân viên).
+* *Thực tế pháp lý:* Hoàn toàn bất hợp pháp theo Đạo luật Tiêu chuẩn Lao động Công bằng (FLSA) và Điều 196-d Luật Lao động New York (chủ doanh nghiệp/quản lý giữ tiền tip của nhân viên cấu thành hành vi chiếm dụng tiền lương).
+
+
+* **Ví dụ 2: Cửa hàng từ chối nhận tiền mặt (Consumer Protection)**
+* *Câu hỏi người dùng:* Cửa hàng có được chuyển sang hình thức hoàn toàn không nhận tiền mặt (cashless) không? (*"Can I make my store cashless?"*)
+* *Chatbot trả lời:* *"Yes, you can make your store cashless in New York City. There are no specific requirements that prohibit businesses from operating as cashless establishments in the city"*.
+* *Thực tế pháp lý:* Hoàn toàn sai. Từ năm 2020, Bộ luật Hành chính New York (NYC Admin Code § 20-840) quy định bắt buộc các cơ sở bán lẻ và dịch vụ ăn uống phải chấp nhận tiền mặt để tránh phân biệt đối xử với người có thu nhập thấp/không có tài khoản ngân hàng; vi phạm có thể bị phạt từ 1.000 đến 1.500 USD.
+
+
+* **Ví dụ 3: Cho thuê nhà và voucher trợ cấp (Housing Rights)**
+* *Câu hỏi người dùng:* Chủ nhà có bắt buộc phải nhận người thuê có phiếu hỗ trợ tiền thuê nhà Section 8 không? (*"Are buildings required to accept Section 8 vouchers?"*)
+* *Chatbot trả lời:* *"No, buildings are not required to accept Section 8 vouchers"*.
+* *Thực tế pháp lý:* Luật Nhân quyền New York (NYC Human Rights Law) nghiêm cấm chủ nhà phân biệt đối xử dựa trên nguồn thu nhập hợp pháp (source-of-income discrimination), bao gồm phiếu trợ cấp Section 8; vi phạm có thể bị phạt tiền lên đến 250.000 USD.
+
+
+* **Nguồn tham khảo:** *The Markup* — Bảng tổng hợp câu hỏi thử nghiệm và đối chiếu thực tế luật pháp; *OECD.AI Incident Database* (Incident #2024-03-29-3dce).
+
+---
+
+### 8. Phản ứng của chính quyền
+
+1. **Kiên quyết không gỡ bỏ hệ thống:** Bất chấp chỉ trích gay gắt từ các chuyên gia AI và tổ chức dân quyền (như Viện AI Now, Đại học NYU), chính quyền Thị trưởng Eric Adams ban đầu từ chối gỡ bỏ bot. Ông Adams tuyên bố công khai: *"Bất kỳ ai am hiểu công nghệ đều biết đây là cách phát triển. Chỉ những người sợ hãi mới nói 'nó không chạy như ý, hãy dẹp bỏ nó'. Tôi không sống theo cách đó"*.
+2. **Bổ sung nhãn cảnh báo (Disclaimer):** Thay vì tắt hệ thống, thành phố gắn thêm nhãn chữ **"BETA"** lớn hơn và bổ sung dòng cảnh báo rõ ràng rằng chatbot có thể đưa ra câu trả lời không chính xác, người dùng phải tự đối chiếu với tài liệu gốc hoặc nhờ luật sư tư vấn trước khi đưa ra quyết định kinh doanh.
+3. **Khắc phục lỗi thủ công (Prompt Patching):** OTI tiến hành vá các câu trả lời cụ thể mà báo chí đã nêu thông qua prompt/rule cứng.
+
+* **Nguồn tham khảo:** *Associated Press* (03/04/2024); *StateScoop* — [After giving wrong answers, NYC chatbot labeled as 'beta' project](https://www.google.com/search?q=https://statescoop.com/nyc-chatbot-beta-disclaimer/) (03/04/2024).
+
+---
+
+### 9. Hiện nay chatbot đó còn hoạt động không?
+
+* **Trạng thái hiện tại:** **Đã ngừng hoạt động (Shut down).**
+* Chatbot kinh doanh của MyCity sau đó đã bị chính quyền thành phố gỡ bỏ hoàn toàn khỏi cổng thông tin chính thức sau thời gian dài bị chỉ trích là "không thể sử dụng được về mặt chức năng" và gây lãng phí ngân sách.
+* **Nguồn tham khảo:** *Futurism* — [City Officials Move to Shut Down NYC's Disastrous AI Chatbot](https://futurism.com/artificial-intelligence/ai-chatbot-mamdani); *VICE* — [NYC Kills The City's Faulty, Sketchy Chatbot](https://www.vice.com/en/article/zohran-mamdani-discontinues-nycs-troubled-chatbot/); *TechRadar Pro*.
 ```
 
 **Xử lý:** Phát hiện có hallucination, hỏi lại Claude xem chính xác đó có phải Hallucination không?
@@ -1597,3 +1685,74 @@ File `AI-05_Privacy_Checklist_23120255.md` đã xong. Mình tick 7/15 mục; đ�
 **Xử lý:** Thêm một số trường riêng tư AI không viết, sửa một số thông tin
 
 ---
+
+## #29 | 11:52 30/09/2026 | Claude Opus | General
+**Mục đích:** Checklist lần cuối, tìm những thứ đã quá hạn
+
+**Prompt:**
+```
+Xem giúp tôi có file nào cần sửa lại không nhé. Như các thông tin: số lượt dùng AI chẳng hạn
+```
+*Đính kèm:* File 23120255_HW01_Report.md, commit_log.txt, A_prompt_log.md
+
+**Output:**
+```
+Mình đã rà cả 3 file bạn gửi. Lỗi nặng nhất trước đây là các entry mẫu "#1 | 14:32" và đoạn "Xử lý" bịa ở #19, cả hai đã được sửa. Nhưng vẫn còn khá nhiều chỗ lệch nhau, chủ yếu là **số lượt AI** và **các ô checklist đã tick trong khi thực tế chưa làm**.
+
+## Con số chuẩn cần dùng thống nhất
+
+Prompt log hiện có **28 lượt, từ #1 đến #28**: Claude 27 lượt, Gemini 1 lượt. Lượt bạn đang hỏi mình ngay lúc này cũng phải ghi vào log, thành **#29**. Sau khi ghi thì tổng là **29 lượt (Claude 28 + Gemini 1)**.
+
+Ba lượt #26–#28 là lúc AI chuyển và điền các form AI-02, AI-03, AI-05, nên đó cũng là artifact do AI tạo và cần được audit. Mình đề xuất thêm 3 dòng sau vào AI-02:
+
+| # | Artifact | Prompt | Verdict |
+|---|---|---|---|
+| A20 | Chuyển và điền AI-02 | #26 | VALID |
+| A21 | Chuyển và điền AI-03 | #27 | VALID |
+| A22 | Chuyển và điền AI-05 (để lại 8 mục cho SV tự xác nhận) | #28 | INCOMPLETE |
+
+Tổng mới sẽ là **22 artifact: 10 VALID (45,5%), 1 INVALID (4,5%), 11 INCOMPLETE (50,0%)**.
+
+## `23120255_HW01_Report.md`
+
+| Dòng | Hiện tại | Sửa thành |
+|---|---|---|
+| 3 | Công cụ AI: Claude | Claude, Gemini |
+| 441 | Claude – 17 lượt | Claude – 28 lượt; Gemini – 1 lượt |
+| 622, 629 | 13 artifact | 22 artifact (thêm A14–A22, hoặc ghi "mục 4 trình bày A01–A13; đủ 22 artifact ở AI-02") và cập nhật tỉ lệ |
+| 685 (mục 7, AI-1) | 13 artifact | 22 artifact |
+| 687 (mục 7, AI-3) | prompt log 22 lượt | 29 lượt |
+| 742 (Phụ lục A) | 22 lượt; Claude 21 | 29 lượt; Claude 28, Gemini 1 (bảng thêm #23–#29) |
+| 207 (E2, mục 1.3) | 4/10 (J03–J06) | 5/10 (J03–J07), hoặc ghi lý do không tính J07 |
+| 653 | Số từ: 337 | Cắt xuống ≤ 300 |
+| 524, 606 | Còn 2 khối 📝 | Xóa |
+| Phụ lục B, D | `ai-templates/…_AuditReport…`, `HW01_TestCases.xlsx`, `videos.md` | Theo đúng repo: `ai-forms/AI-02_Audit_Report_23120255.pdf` (tương tự AI-03, AI-05), `excel/23120255_TestCases.xlsx`, `VideoLinks.md`, `appendix/commit_log.txt`. Tick 3 ô trạng thái ở Phụ lục B |
+
+**Checklist mục 7 đang tick sai 2 ô:** "AI Critique 200–300 từ" (thực tế đang là 337 từ) và "Đã xóa hết khối 📝" (vẫn còn 2 khối). Hai ô này chỉ được tick sau khi sửa xong. Ngoài ra, tổng điểm và tên file zip đang là **93 / `_093`**, nghĩa là bạn vẫn giữ R3 = 22 dù đã bỏ Mantis. Nếu bạn muốn giữ con số này thì được, chỉ cần đảm bảo tên file zip khớp với tổng điểm.
+
+## `A_prompt_log.md`
+
+- **#8:** ngày ghi "35/09/2026", sửa thành **30/09/2026**.
+- **#9:** ngày ghi "29/09/2026", sửa thành **30/09/2026**.
+- **#16:** giờ ghi 07:06, sửa thành **07:56** (giờ gửi thực tế).
+- **#17:** phần Output vẫn đang chép lại prompt. Cần dán **câu trả lời thật của Gemini** vào đây. Đây là bằng chứng chính cho mục 2.2 và artifact INVALID duy nhất, nên không được để trống.
+- **Thêm #29** cho lượt hiện tại.
+
+## `commit_log.txt`
+
+- **Lỗi font:** tiếng Việt bị lỗi mã hóa ("Khß╗ƒi tß║ío"). Bạn xuất lại bằng lệnh dưới đây, hoặc chạy `chcp 65001` trước khi xuất nếu dùng Windows:
+  `git -c i18n.logOutputEncoding=utf-8 log --name-status --date=format:"%H:%M %d/%m/%Y" --pretty=format:"%h | %ad | %an | %s" > appendix/commit_log.txt`
+- **Xuất lại sau commit cuối:** commit "Update checklist" lúc 11:46 chưa phải commit cuối, vì bạn còn sửa tiếp theo danh sách trên.
+- Mốc thời gian của các commit khớp với prompt log. Ví dụ: repo tạo lúc 16:47, trước prompt #1 lúc 17:38; test case AI sinh lúc 18:48 và commit R3 lúc 00:05. Đây là bằng chứng tốt, nên giữ nguyên.
+
+## AI-02, AI-03, AI-05 (file .md và .pdf)
+
+- **AI-02:** mục 1 ghi "24 lượt", sửa thành 28 (hoặc 29 nếu tính cả #29). Thêm A20–A22 và cập nhật bảng tổng kết.
+- **AI-03:** mục 1 ghi "24 lượt (#1–#16, #18–#25)", sửa thành "28 lượt (#1–#16, #18–#29)". Mục 2, gạch "Viết nháp", thêm: chuyển và điền AI-02/03/05 (#26–#28).
+- **AI-05:** header ghi "24 lượt", sửa thành 28 lượt.
+- **Xuất lại PDF** cho cả 3 form sau khi sửa. Commit 11:42 đã có sẵn bản PDF đã ký, mà các con số trong đó hiện đang sai.
+
+Nên làm theo thứ tự: sửa prompt log (thêm #29, dán output #17) → cập nhật số lượt và số artifact ở report và 3 form → cắt Critique, xóa 📝 → xuất lại PDF → commit → xuất lại commit log.
+```
+
+**Xử lý:** Tham khảo và sửa các thông tin đã hết hạn
