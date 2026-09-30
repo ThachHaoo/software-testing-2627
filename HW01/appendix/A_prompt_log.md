@@ -1,5 +1,5 @@
 # Prompt Log – HW01
-**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude
+**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude, Gemini
 
 ---
 
@@ -489,7 +489,7 @@ Mình thấy là tạo bằng mermaid nó rối và khó nhìn quá. Bạn có t
 Có thể tham khảo qua hình mindmap này chẳng hạn
 ```
 *Đính kèm:* Cùng với một ảnh mindmap lấy trên mạng theo: [link](https://learningfundamentals.com.au/resources/)
-
+ư
 **Output:** File `mindmap_ai.png` do AI tạo, lưu nguyên bản tại
 `ai-outputs/mindmap_ai.png`
 ```
@@ -597,7 +597,7 @@ Khi bạn chốt xong nội dung, gửi mình file `.mmd` đã sửa (thêm `✎
 
 ---
 
-## #12 | 05:02 30/09/2026 | Claude Opus | R3
+## #12 | 05:02 30/09/2026 | Claude Opus | R1
 **Mục đích:** Đưa bằng chứng để bẻ AI
 
 **Prompt:**
@@ -631,7 +631,7 @@ Bạn muốn mình xuất `mindmap_fixed.png` theo phương án của bạn khô
 
 ---
 
-## #13 | 05:05 30/09/2026 | Claude Opus | R3
+## #13 | 05:05 30/09/2026 | Claude Opus | R1
 **Mục đích:** Hỗ trợ viết báo cáo mục 1.4
 
 **Prompt:**
@@ -694,30 +694,325 @@ Mình điền bảng dựa trên dữ liệu JD đã lấy ở 1.1–1.2. J01 (L
 - **Phần Nhận xét là phân tích.** Nên viết lại theo cách của bạn, hoặc ghi rõ trong Audit Report là AI soạn nháp. Nó cũng nên khớp với các ô AI Impact Analysis bạn tự viết ở 1.2, để hai phần không mâu thuẫn nhau.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Đưa vào 1.4 rồi review lại và chỉnh sửa
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #14 | 05:16 30/09/2026 | Claude Opus | R2
+**Mục đích:** Nhờ AI research các software defect case thực tế
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+Giờ qua thực hiện requirement 2. Hãy giúp tôi research "software defects publicized between 2022 and 2026."
+Không bịa nguồn
+Cứ research theo các tiêu chí: 
+
+| ID | Tên defect | Năm công bố | Tổ chức / Sản phẩm | Nhóm | Loại lỗi | Severity | Nguồn | 
+| ID | Mô tả | Hậu quả | Giải pháp (thực tế) | Bài học kiểm thử |
+
+Sau khi research xong, tôi sẽ đưa format để bạn điền vào nhé
+```
+
+**Output:** Cùng với artifact research mà AI tạo ra, ở đây chưa sử dụng, dùng nó để làm context cho prompt tiếp theo
+```
+Mình bắt đầu nghiên cứu 20 software defect được công bố trong giai đoạn 2022–2026, trong đó có ít nhất 5 defect liên quan AI/LLM. Mỗi defect đều sẽ kèm nguồn thật để bạn kiểm chứng.
+
+Mình đã tổng hợp xong 20 software defect có thật, công bố trong giai đoạn 2022–2026. Trong đó 8 defect thuộc nhóm AI/LLM (vượt mức tối thiểu 5), 12 defect còn lại là Non-AI. Mỗi defect đều có nguồn gốc (postmortem, cơ quan quản lý, bản án hoặc advisory) hoặc bài của báo lớn.
+
+- **Độ nghiêm trọng:** 9 Critical, 9 High, 2 Medium và 0 Low. Nếu giảng viên bắt buộc phải có mức Low, bạn nên bổ sung một lỗi UI nhỏ lấy từ bug tracker công khai.
+- **Bài học kiểm thử quan trọng nhất:** các sự cố lớn nhất (CrowdStrike 2024, AWS 10/2025, Cloudflare 11/2025, Google Cloud 6/2025) đều giống nhau ở một điểm. Một file cấu hình hoặc dữ liệu đúng cú pháp nhưng sai ngữ nghĩa đã được đẩy ra toàn cầu mà không qua kiểm tra, không có canary và không triển khai theo giai đoạn.
+- **Những chỗ AI hay viết sai, dùng để kiểm tra:**
+  - CrowdStrike: template có 21 trường nhưng code chỉ truyền 20 giá trị, AI hay viết ngược lại.
+  - Mata v. Avianca: chỉ có một khoản phạt 5.000 USD áp chung cho hai luật sư và hãng luật, không phải mỗi luật sư bị phạt 5.000 USD.
+  - Bard: con số mất 100 tỷ USD vốn hóa bị quy hết cho lỗi của Bard, trong khi Reuters gắn nó với cả buổi ra mắt kém ấn tượng.
+  - Optus: nâng cấp của Singtel chỉ là tác nhân kích hoạt, nguyên nhân gốc nằm ở các router của Optus.
+- **Chi tiết cần lưu ý:**
+  - Thời lượng sự cố Rogers khác nhau tùy nguồn (15 hoặc 26 giờ).
+  - Nguồn không thống nhất về thời điểm vá EchoLeak.
+  - Vụ Replit chỉ đáng tin ở mức trung bình vì nguồn chính là bài đăng của chính người bị hại.
+  - Sự cố ChatGPT Redis được xếp vào Non-AI. Nếu giảng viên tính cả nó là AI thì nhóm AI/LLM sẽ có 9 defect.
+
+Báo cáo còn liệt kê các ứng viên đã bị loại kèm lý do, ví dụ Southwest 2022 và Log4Shell.
+```
+
+**Xử lý:** Sử dụng thông tin mà Claude vừa research hiện tại để thực hiện tiếp mục 2
+
+---
+
+## #15 | 07:02 30/09/2026 | Claude Opus | R2
+**Mục đích:** Điền các defect vào mục 2, đồng thời check lại thông tin
+
+**Prompt:**
+```
+Giờ hãy giúp tôi điền thông tin đầy đủ vào các form này nhé:
+## 2. Requirement 2 – 20 Software Defects 2022–2026
+
+### 2.0 Thang đánh giá Severity
+
+| Mức | Định nghĩa áp dụng trong bài |
+|---|---|
+| Critical | [VD: gây thiệt hại tài chính/an toàn lớn, sập hệ thống diện rộng, lộ dữ liệu quy mô lớn] |
+| High | [VD: mất chức năng chính, ảnh hưởng nhiều người dùng, có workaround khó] |
+| Medium | [VD: lỗi chức năng phụ, có workaround] |
+| Low | [VD: lỗi hiển thị, ảnh hưởng nhỏ] |
+
+### 2.1 Bảng 20 defect
+
+**Bảng tổng quan:**
+
+| ID | Tên defect | Năm công bố | Tổ chức / Sản phẩm | Nhóm | Loại lỗi | Severity | Nguồn |
+|---|---|---|---|---|---|---|---|
+| D01 | [...] | [2022–2026] | [...] | [AI/LLM / Non-AI] | [VD: Hallucination / Prompt injection / Bias / Logic / Config / Security...] | [...] | [link] |
+| D02 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D03 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D04 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D05 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D06 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D07 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D08 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D09 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D10 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D11 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D12 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D13 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D14 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D15 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D16 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D17 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D18 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D19 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+| D20 | [...] | [...] | [...] | [...] | [...] | [...] | [link] |
+
+**Thống kê:** AI/LLM: [x]/20 (yêu cầu >= 5) · Critical [x] · High [x] · Medium [x] · Low [x]
+
+**Bảng chi tiết:**
+
+> 📝 Mỗi ô 1–3 câu. "Giải pháp" = cách hãng đã khắc phục thực tế (theo nguồn) + bài học kiểm thử (loại test nào lẽ ra bắt được lỗi này).
+
+| ID | Mô tả | Hậu quả | Giải pháp (thực tế) | Bài học kiểm thử |
+|---|---|---|---|---|
+| D01 | [...] | [...] | [...] | [...] |
+| D02 | [...] | [...] | [...] | [...] |
+| D03 | [...] | [...] | [...] | [...] |
+| D04 | [...] | [...] | [...] | [...] |
+| D05 | [...] | [...] | [...] | [...] |
+| D06 | [...] | [...] | [...] | [...] |
+| D07 | [...] | [...] | [...] | [...] |
+| D08 | [...] | [...] | [...] | [...] |
+| D09 | [...] | [...] | [...] | [...] |
+| D10 | [...] | [...] | [...] | [...] |
+| D11 | [...] | [...] | [...] | [...] |
+| D12 | [...] | [...] | [...] | [...] |
+| D13 | [...] | [...] | [...] | [...] |
+| D14 | [...] | [...] | [...] | [...] |
+| D15 | [...] | [...] | [...] | [...] |
+| D16 | [...] | [...] | [...] | [...] |
+| D17 | [...] | [...] | [...] | [...] |
+| D18 | [...] | [...] | [...] | [...] |
+| D19 | [...] | [...] | [...] | [...] |
+| D20 | [...] | [...] | [...] | [...] |
+
+```
+
+**Output:** File `HW01_R2.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/HW01_R2.md`
+```
+Mình đã điền xong Requirement 2 vào file `HW01_R2.md`, gồm thang severity 4 mức, bảng tổng quan 20 defect và bảng chi tiết. Thống kê: 8/20 defect thuộc nhóm AI/LLM, gồm 9 Critical, 9 High, 2 Medium và không có Low. Dữ liệu đều lấy từ báo cáo research; mỗi dòng có 1–2 nguồn dạng link rút gọn. Mình không thêm số liệu nào ngoài nguồn. Các con số như "khoảng 3 giờ" hay "812 CAD" là mình tự cộng hoặc trừ từ mốc giờ và số tiền trong nguồn.
+
+**Cần kiểm tra trước khi nộp:**
+- **Mức Low đang là 0.** Đề không bắt buộc phải có mỗi mức một defect, nhưng nếu TA hỏi thì bạn có thể giải thích: sự cố được báo chí đưa tin thường có hậu quả lớn, nên mẫu 20 defect tự nhiên lệch về phía nặng.
+- **Nhóm của D12 (ChatGPT Redis).** Mình xếp D12 vào Non-AI vì lỗi nằm ở thư viện Redis, không phải ở model. Nếu bạn muốn tính là AI thì con số AI/LLM thành 9/20.
+- **Độ tin cậy của D20 (Replit) chỉ ở mức trung bình**, vì nguồn chính là bài đăng trên X của chính người bị hại. Nếu muốn an toàn hơn, bạn có thể thay D20 bằng một vụ khác, ví dụ vụ chatbot Chevrolet bán xe 1 USD, sau khi tự kiểm chứng.
+- **Nên mở từng link một lần** để chắc link còn sống, và cũng là để trả lời được nếu bị hỏi lúc vấn đáp.
+
+**Cho mục 2.2 (AI bịa hoặc lệch khi giải thích):** cách dễ nhất là hỏi một AI bất kỳ về D01 CrowdStrike hoặc D14 Mata v. Avianca. AI thường nói ngược 20/21 trường ở D01, hoặc nói "mỗi luật sư bị phạt 5.000 USD" ở D14. Đáp án đúng kèm nguồn nằm trong phần cuối của báo cáo research. Bạn cần tự hỏi, tự chụp màn hình và khoanh đỏ câu sai.
+
+Nhớ ghi lượt research này vào prompt log và vào Audit Report.
+```
+
+**Xử lý:** Lấy dữ liệu HW01_R2.md vào, rồi sau đó kiểm tra với các resource trong research.
+
+---
+
+## #16 | 07:06 30/09/2026 | Claude Opus | R2
+**Mục đích:** Hỏi AI kĩ hơn về case D18
+
+**Prompt:**
+```
+Mình đã kiểm tra lại các phần 2.1 mà bạn làm, mình đã xác thực nó đúng với các resource mà bạn gắn link.
+Giờ mình muốn bạn giúp mình giải thích 1 defect trong danh sách, chính là defect D18 - Chatbot MyCity của NYC khuyên doanh nghiệp làm trái luật
+Giờ mình muốn bạn giải thích thêm về 1 số thông tin của defect này (với mỗi ý, hãy ghi nguồn tham khảo):
+
+* Sự cố được công bố vào ngày nào?
+* con số thiệt hại là bao nhiêu?
+* Nguyên nhân gốc xảy ra defect này là gì?
+* Có bao nhiêu người bị ảnh hưởng về vấn đề này.
+* Ai đã chịu trách nhiệm cho vấn đề này
+* Ai phát triển chatbot và dựa trên nền tảng gì?
+* Nêu 2–3 ví dụ cụ thể về câu trả lời sai của chatbot.
+* Chính quyền đã phản ứng thế nào?
+* Hiện nay chatbot đó còn hoạt động không?
 ```
 
 **Output:**
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Mình sẽ đối chiếu trực tiếp với các nguồn gốc để trả lời từng ý.
+
+Dưới đây là câu trả lời cho từng ý. Mình đối chiếu trực tiếp với các nguồn gốc, và chỗ nào nguồn không nói thì mình ghi rõ là không có.
+
+**1. Sự cố được công bố vào ngày nào?**
+Ngày **29/03/2024**. The Markup đăng bài điều tra của Colin Lecher (phối hợp với THE CITY). Chatbot thì đã ra mắt từ trước đó, ngày **16/10/2023**, ở dạng thử nghiệm beta.
+Nguồn: [The Markup, 29/03/2024](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law); [NYC Mayor's Office, 16/10/2023](https://www.nyc.gov/mayors-office/news/2023/10/mayor-adams-releases-first-of-its-kind-plan-responsible-artificial-intelligence-use-nyc)
+
+**2. Con số thiệt hại là bao nhiêu?**
+**Không có nguồn nào công bố thiệt hại** cho doanh nghiệp hay người dân. Con số duy nhất có nguồn là **chi phí làm chatbot**: gần **600.000 USD** để xây nền tảng, và khoảng **500.000 USD/năm** để duy trì. Đây là chi phí, không phải thiệt hại do lỗi gây ra.
+Nguồn: [The Markup, 30/01/2026](https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law); [Entrepreneur](https://www.entrepreneur.com/business-news/nycs-first-ai-chatbot-keeps-getting-important-things-wrong/472280)
+
+**3. Nguyên nhân gốc là gì?**
+**Không có báo cáo nguyên nhân gốc chính thức.** Reuters viết rằng cả Microsoft lẫn Tòa thị chính đều không nói rõ lỗi do đâu. Những gì có nguồn:
+- Chatbot chạy trên dịch vụ Microsoft Azure AI.
+- Chatbot được lấy dữ liệu từ hơn 2.000 trang web doanh nghiệp của NYC.
+- Microsoft cam kết làm cho câu trả lời "grounded on the city's official documentation" (bám vào tài liệu chính thức của thành phố). Câu này ngầm cho thấy trước đó câu trả lời chưa bám đủ vào tài liệu.
+
+Kết luận "LLM hallucination do grounding chưa đủ" là **suy luận hợp lý**, không phải nguyên nhân gốc đã được xác nhận.
+Nguồn: [Reuters (StreetInsider), 04/04/2024](https://www.streetinsider.com/Reuters/New+York+City+defends+AI+chatbot+that+advised+entrepreneurs+to+break+laws/23031207.html); [AP (KSAT), 03/04/2024](https://www.ksat.com/tech/2024/04/03/nycs-ai-chatbot-was-caught-telling-businesses-to-break-the-law-the-city-isnt-taking-it-down/); [NYC Mayor's Office](https://www.nyc.gov/mayors-office/news/2023/10/mayor-adams-releases-first-of-its-kind-plan-responsible-artificial-intelligence-use-nyc)
+
+**4. Có bao nhiêu người bị ảnh hưởng?**
+**Không có số liệu.** Thành phố chỉ nói chatbot "has already provided thousands of people with timely, accurate answers", tức là đã trả lời đúng cho hàng nghìn người. Đây là lời tự nhận của thành phố, không phải số người bị trả lời sai. Trong đợt kiểm tra của The Markup, cả **10/10 nhân viên** hỏi về voucher nhà ở đều nhận câu trả lời sai.
+Nguồn: [The Markup, 29/03/2024](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law)
+
+**5. Ai chịu trách nhiệm?**
+Chatbot do chính quyền NYC thời Thị trưởng Eric Adams vận hành. Cơ quan trực tiếp phụ trách là **Office of Technology and Innovation (OTI)**. OTI thừa nhận có vấn đề và hứa sẽ "significantly mitigate inaccurate answers" (giảm đáng kể câu trả lời sai). Không có ai bị kỷ luật hay chịu chế tài pháp lý.
+Nguồn: [Reuters (StreetInsider)](https://www.streetinsider.com/Reuters/New+York+City+defends+AI+chatbot+that+advised+entrepreneurs+to+break+laws/23031207.html)
+
+**6. Ai phát triển và dựa trên nền tảng gì?**
+OTI phối hợp với Department of Small Business Services (SBS) phát triển chatbot, đặt trên trang MyCity Business. Chatbot chạy trên **Microsoft Azure AI** (không phải ChatGPT của OpenAI).
+Nguồn: [NYC Mayor's Office](https://www.nyc.gov/mayors-office/news/2023/10/mayor-adams-releases-first-of-its-kind-plan-responsible-artificial-intelligence-use-nyc); [The Markup](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law)
+
+**7. Ví dụ câu trả lời sai**
+- Chatbot nói *"No, landlords do not need to accept"* voucher Section 8. Thực tế luật NYC cấm phân biệt đối xử theo nguồn thu nhập.
+- Chatbot nói *"Yes, you can take a cut of your worker's tips"*. Thực tế chủ doanh nghiệp không được lấy tiền tip của nhân viên.
+- Chatbot nói nhà hàng được từ chối tiền mặt. Thực tế luật năm 2020 bắt buộc phải nhận tiền mặt.
+- AP còn ghi nhận chatbot nói vẫn được phục vụ phô mai **bị chuột gặm** cho khách, và nói chủ được đuổi việc nhân viên khi họ khiếu nại quấy rối tình dục.
+
+Nguồn: [The Markup](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law); [AP (KSAT)](https://www.ksat.com/tech/2024/04/03/nycs-ai-chatbot-was-caught-telling-businesses-to-break-the-law-the-city-isnt-taking-it-down/)
+
+**8. Chính quyền phản ứng thế nào?**
+Thị trưởng Adams thừa nhận *"It's wrong in some areas, and we've got to fix it"* nhưng vẫn giữ chatbot hoạt động. Ông nói: *"Only those who are fearful sit down and say, 'Oh, it is not working the way we want, now we have to run away from it all together.' I don't live that way."* Thành phố bổ sung cảnh báo rằng câu trả lời không phải tư vấn pháp lý và có thể sai. Microsoft cam kết cải thiện độ chính xác.
+Nguồn: [AP (KSAT)](https://www.ksat.com/tech/2024/04/03/nycs-ai-chatbot-was-caught-telling-businesses-to-break-the-law-the-city-isnt-taking-it-down/); [Reuters (StreetInsider)](https://www.streetinsider.com/Reuters/New+York+City+defends+AI+chatbot+that+advised+entrepreneurs+to+break+laws/23031207.html)
+
+**9. Hiện nay chatbot còn hoạt động không?**
+**Không.** Tháng 01/2026, chính quyền của Thị trưởng mới Zohran Mamdani quyết định khai tử chatbot. Họ gọi nó là *"functionally unusable"* (thực tế không dùng được) và coi đây là biện pháp cắt giảm ngân sách. Bản cập nhật ngày 04/02/2026 ghi nhận trang chatbot đã hiện thông báo "beta test has ended" và chuyển người dùng về NYC.gov.
+Nguồn: [The Markup, 30/01/2026 (cập nhật 04/02/2026)](https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law)
+
+---
+
+**Cần sửa ở bảng 2.1:** ô "Giải pháp" của D18 đang ghi "chính quyền mới **dự định** gỡ bỏ". Nên sửa thành **"chính quyền mới đã gỡ bỏ chatbot (trang báo 'beta test has ended', 02/2026)"**.
+
+**Gợi ý cho mục 2.2:** khi bạn hỏi một AI khác về D18, những chỗ nó dễ trả lời sai nhất là:
+- Nói chatbot "dùng ChatGPT".
+- Coi 600.000 USD là "thiệt hại".
+- Bịa ra nguyên nhân gốc cụ thể hoặc số người bị ảnh hưởng.
+- Nói chatbot vẫn đang chạy, nếu kiến thức của AI đó cũ hơn năm 2026.
+
+Nhớ đối chiếu mọi câu trả lời với các nguồn ở trên. Bản giải thích này của mình cũng cần ghi vào prompt log.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Sau khi check lại thấy đúng như LLM nói, và không có gì hallucination nên chưa viết được, thử mở session mới rồi hỏi lại.
+
+---
+
+## #17 | 08:08 30/09/2026 | Gemini Flash | R2
+**Mục đích:** Hỏi thông tin chi tiết về D18 với Gemini để kiểm tra có bị Hallucination không
+
+**Prompt:**
+```
+Mình đang tìm hiểu về một sự cố phần mềm liên quan đến AI: chatbot MyCity của thành phố New York (NYC) đã đưa ra lời khuyên khiến doanh nghiệp làm trái luật.
+
+Hãy giải thích giúp mình tìm hiểu thêm về các thông tin sau về sự cố này (với mỗi ý, hãy ghi nguồn tham khảo):
+Sự cố được công bố vào ngày nào?
+Con số thiệt hại là bao nhiêu?
+Nguyên nhân gốc xảy ra defect này là gì?
+Có bao nhiêu người bị ảnh hưởng về vấn đề này?
+Ai đã chịu trách nhiệm cho vấn đề này?
+Ai phát triển chatbot và dựa trên nền tảng gì?
+Nêu 2–3 ví dụ cụ thể về câu trả lời sai của chatbot.
+Chính quyền đã phản ứng thế nào?
+Hiện nay chatbot đó còn hoạt động không?
+```
+
+**Output:**
+```
+Mình đang tìm hiểu về một sự cố phần mềm liên quan đến AI: chatbot MyCity của thành phố New York (NYC) đã đưa ra lời khuyên khiến doanh nghiệp làm trái luật.
+
+Hãy giải thích giúp mình tìm hiểu thêm về các thông tin sau về sự cố này (với mỗi ý, hãy ghi nguồn tham khảo):
+Sự cố được công bố vào ngày nào?
+Con số thiệt hại là bao nhiêu?
+Nguyên nhân gốc xảy ra defect này là gì?
+Có bao nhiêu người bị ảnh hưởng về vấn đề này?
+Ai đã chịu trách nhiệm cho vấn đề này?
+Ai phát triển chatbot và dựa trên nền tảng gì?
+Nêu 2–3 ví dụ cụ thể về câu trả lời sai của chatbot.
+Chính quyền đã phản ứng thế nào?
+Hiện nay chatbot đó còn hoạt động không?
+```
+
+**Xử lý:** Phát hiện có hallucination, hỏi lại Claude xem chính xác đó có phải Hallucination không?
+
+---
+
+## #18 | 08:55 30/09/2026 | Claude Opus | R2
+**Mục đích:** Hỏi xác nhận lại với Claude cùng với bằng chứng của mình xem có phải là hallucination không
+
+**Prompt:**
+```
+Mình vừa hỏi Gemini với câu hỏi tương tự thì có thấy câu trả lời này:
+"Đơn vị cung cấp nền tảng đám mây: Microsoft (cung cấp dịch vụ Azure AI). Người phát ngôn của Microsoft tuyên bố rằng họ cung cấp nền tảng kỹ thuật và hỗ trợ khách hàng thử nghiệm, nhưng việc kiểm soát nội dung và dữ liệu đầu vào thuộc trách nhiệm quản trị của thành phố."
+Nhưng nếu mình đọc ở ksat thì lại là: "to improve the service and ensure the outputs are accurate and grounded on the city’s official documentation."
+Mình cảm thấy câu trả lời của Gemini giống như là đổ trách nhiệm cho quản trị của thành phố trong khi thật sự không phải như vậy. Bạn nghĩ đây có phải là hallucination và có thêm bias gì nữa không?
+```
+
+**Output:**
+```
+Có, đây là hallucination. Nhưng mình nghĩ nên gọi đúng tên loại lỗi, và phần "bias" cần viết thận trọng hơn cách bạn đang nghĩ.
+
+## 1. Hallucination: bịa ra phát ngôn và gán cho Microsoft
+
+Theo các nguồn mình kiểm tra, Microsoft chỉ có hai lần phản hồi về vụ này:
+
+| Nguồn | Microsoft nói gì |
+|---|---|
+| [The Markup, 29/03/2024](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law) | **Từ chối bình luận** |
+| [AP (NBC New York)](https://www.nbcnewyork.com/news/local/nycs-ai-chatbot-was-caught-telling-businesses-to-break-the-law-the-city-isnt-taking-it-down/5287713/), [AP (KSAT)](https://www.ksat.com/tech/2024/04/03/nycs-ai-chatbot-was-caught-telling-businesses-to-break-the-law-the-city-isnt-taking-it-down/) | Microsoft cho biết đang *làm việc cùng nhân viên thành phố* "to improve the service and ensure the outputs are accurate and grounded on the city's official documentation" |
+
+Không nguồn nào có một "người phát ngôn Microsoft" nói rằng việc kiểm soát nội dung và dữ liệu đầu vào thuộc trách nhiệm của thành phố. Nói cách khác, Gemini tạo ra một **phát ngôn không tồn tại** rồi gán cho một nguồn cụ thể. Đây là loại hallucination nguy hiểm nhất, vì câu trả lời trông như có trích dẫn nên người đọc dễ tin.
+
+Một lưu ý: mình chưa đọc hết mọi bài báo trên đời. Cách viết an toàn trong bài là: *"không tìm thấy phát ngôn này trong các nguồn gốc (The Markup, AP, Reuters)"*.
+
+## 2. Bias: có, nhưng nên mô tả chính xác
+
+Chỗ bạn cần sửa lại: **thành phố thực sự có trách nhiệm**. Thành phố sở hữu và vận hành chatbot qua OTI và SBS; Thị trưởng Adams nói *"we've got to fix it"*; OTI hứa sẽ giảm câu trả lời sai. Vì vậy kết luận "thành phố chịu trách nhiệm" tự nó **không sai**. Cái sai là:
+- **Gán kết luận đó cho Microsoft**, như thể Microsoft tự nói ra.
+- **Làm lệch cán cân trách nhiệm.** Phát ngôn thật của Microsoft cho thấy Microsoft cùng tham gia sửa lỗi, tức là trách nhiệm chung. Bản của Gemini biến Microsoft thành bên đứng ngoài, chỉ "cung cấp nền tảng".
+
+Như vậy có thể gọi là **framing bias** (thiên lệch trong cách trình bày): câu trả lời nghiêng về hướng giảm nhẹ trách nhiệm của nhà cung cấp công nghệ.
+
+Về nguyên nhân, mình không kết luận được Gemini "cố ý bênh Microsoft". Giả thuyết hợp lý hơn là Gemini lấy khuôn mẫu **"Shared Responsibility Model"** quen thuộc của các nhà cung cấp cloud (nhà cung cấp lo hạ tầng, khách hàng lo dữ liệu và nội dung) rồi áp lên vụ việc cụ thể này như thể đó là phát ngôn thật. Đây là kiểu hallucination điển hình: điền vào chỗ trống bằng một câu *nghe hợp lý* thay vì một câu *có thật*. Trong báo cáo, bạn nên viết đây là **giả thuyết**, đừng viết như sự thật.
+
+## 3. Gợi ý viết vào mục 2.2
+
+| Mục | Nội dung |
+|---|---|
+| Câu AI trả lời sai | "Người phát ngôn của Microsoft tuyên bố rằng họ cung cấp nền tảng kỹ thuật... nhưng việc kiểm soát nội dung và dữ liệu đầu vào thuộc trách nhiệm quản trị của thành phố." |
+| Loại | Hallucination (bịa phát ngôn và gán cho nguồn cụ thể), kèm framing bias (làm lệch cán cân trách nhiệm) |
+| Sự thật theo nguồn | The Markup: Microsoft từ chối bình luận. AP: Microsoft nói đang làm việc cùng thành phố "to improve the service and ensure the outputs are accurate and grounded on the city's official documentation", tức là trách nhiệm chung, không phải đẩy trách nhiệm cho thành phố. |
+| Vì sao AI sai (giả thuyết) | AI có thể đã áp khuôn mẫu "shared responsibility" phổ biến của cloud lên vụ việc cụ thể, và tạo ra một phát ngôn nghe hợp lý thay vì trích dẫn thật. |
+| Cách phát hiện / phòng tránh | Với mọi câu "X tuyên bố rằng...", phải yêu cầu AI đưa link nguồn rồi tự mở nguồn đối chiếu; không chấp nhận trích dẫn không có nguồn. |
+
+Nhớ chụp màn hình câu trả lời của Gemini, khoanh đỏ câu sai, và ghi prompt kèm timestamp vào prompt log. Câu trả lời này cũng là một ví dụ rất tốt cho phần AI Critique.
+```
+
+**Xử lý:** Xác nhận đó là hallucination thật, đồng thời đó cũng là một framing bias. Giờ trình bày vào báo cáo
 
 ---
 
