@@ -100,3 +100,9 @@ M	HW01/ai-forms/AI-02_Audit_Report_23120255.pdf
 M	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.md
 M	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
 M	HW01/appendix/A_prompt_log.md
+
+64256c8 | 12:12 30/09/2026 | TonKnight | update commit log
+M	HW01/appendix/commit_log.txt
+
+bff27f5 | 12:14 30/09/2026 | TonKnight | Thêm report pdf
+A	HW01/23120255_HW01_Report.pdf
