@@ -1,0 +1,91 @@
+05028e0 | 16:47 29/09/2026 | TonKnight | Khß╗ƒi tß║ío HW01
+A	HW01/23120255_HW01_Report.md
+A	HW01/R1_jobs/.gitkeep
+A	HW01/R3_device/.gitkeep
+A	HW01/ai-forms/AI-02_Audit_Report.docx
+A	HW01/ai-forms/AI-03_Disclosure_Form.docx
+A	HW01/ai-forms/AI-05_Privacy_Checklist.docx
+A	HW01/appendix/A_prompt_log.md
+A	HW01/appendix/commit_log.txt
+A	HW01/excel/23120255_TestCases.xlsx
+A	HW01/mantis/.gitkeep
+
+427250d | 17:07 29/09/2026 | TonKnight | D├án ├╜ c╞í bß║ún report
+M	HW01/23120255_HW01_Report.md
+
+f11867a | 18:50 29/09/2026 | TonKnight | Viß║┐t c├íc prompt General v├á ho├án thiß╗çn d├án ├╜
+M	HW01/23120255_HW01_Report.md
+M	HW01/appendix/A_prompt_log.md
+
+6296295 | 21:23 29/09/2026 | TonKnight | Th├¬m ß║únh thiß║┐t bß╗ï c├╣ng vß╗¢i thß║╗ sinh vi├¬n
+A	HW01/R3_device/AnhThietBi_TheSinhVien.jpg
+
+d97fb1d | 00:05 30/09/2026 | TonKnight | Ho├án thiß╗çn Requirement 3 ß╗ƒ b├ío c├ío v├á cß║ú prompt_log
+M	HW01/23120255_HW01_Report.md
+M	HW01/appendix/A_prompt_log.md
+A	HW01/appendix/ai-outputs/23120255_HW01_Report.md
+A	HW01/appendix/ai-outputs/HW01_R3_TestCases_AI_Draft.md
+
+da95b82 | 05:12 30/09/2026 | TonKnight | Ho├án thiß╗çn Requirement 1 ß╗ƒ b├ío c├ío, ß║únh v├á prompt
+M	HW01/23120255_HW01_Report.md
+D	HW01/R1_jobs/.gitkeep
+A	HW01/R1_jobs/J01.png
+A	HW01/R1_jobs/J02_1.png
+A	HW01/R1_jobs/J02_2.png
+A	HW01/R1_jobs/J03.png
+A	HW01/R1_jobs/J04.png
+A	HW01/R1_jobs/J05.png
+A	HW01/R1_jobs/J06.png
+A	HW01/R1_jobs/J07.png
+A	HW01/R1_jobs/J08.png
+A	HW01/R1_jobs/J09.png
+A	HW01/R1_jobs/J10.png
+A	HW01/R1_jobs/mindmap_QA_QC.png
+A	HW01/R1_jobs/mindmap_fixed.png
+M	HW01/appendix/A_prompt_log.md
+A	HW01/appendix/ai-outputs/HW01_R1_1.2.md
+A	HW01/appendix/ai-outputs/mindmap_ai.mmd
+A	HW01/appendix/ai-outputs/mindmap_ai.png
+
+bc30f27 | 09:23 30/09/2026 | TonKnight | Ho├án thiß╗çn Requirement 2 ß╗ƒ b├ío c├ío, ß║únh v├á prompt
+M	HW01/23120255_HW01_Report.md
+A	HW01/R2_defects/R2_ai_hallucination.png
+A	HW01/R2_defects/R2_defect_fact.png
+M	HW01/appendix/A_prompt_log.md
+A	HW01/appendix/ai-outputs/HW01_R2.md
+
+f6b2cee | 09:30 30/09/2026 | TonKnight | Chß╗ënh sß╗¡a mß╗Öt sß╗æ lß╗ùi dß║½n link
+M	HW01/23120255_HW01_Report.md
+
+38768bb | 09:31 30/09/2026 | TonKnight | Chß╗ënh lß║íi c├óu tß╗½ D16
+M	HW01/23120255_HW01_Report.md
+
+0aae7aa | 10:53 30/09/2026 | TonKnight | Ho├án thiß╗çn b├ío c├ío
+M	HW01/23120255_HW01_Report.md
+A	HW01/VideoLinks.md
+M	HW01/appendix/A_prompt_log.md
+A	HW01/appendix/ai-outputs/HW01_Section4_AuditReport.md
+
+0ed7591 | 11:42 30/09/2026 | TonKnight | Ho├án th├ánh b├ái nß╗Öp
+M	HW01/23120255_HW01_Report.md
+D	HW01/R3_device/.gitkeep
+D	HW01/ai-forms/AI-02_Audit_Report.docx
+A	HW01/ai-forms/AI-02_Audit_Report_23120255.md
+A	HW01/ai-forms/AI-02_Audit_Report_23120255.pdf
+D	HW01/ai-forms/AI-03_Disclosure_Form.docx
+A	HW01/ai-forms/AI-03_Disclosure_Form_23120255.md
+A	HW01/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+D	HW01/ai-forms/AI-05_Privacy_Checklist.docx
+A	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.md
+A	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+A	HW01/ai-forms/signature.png
+M	HW01/appendix/A_prompt_log.md
+A	HW01/appendix/ai-outputs/23120255_TestCases.xlsx
+A	HW01/appendix/ai-outputs/AI-02_Audit_Report_23120255.md
+A	HW01/appendix/ai-outputs/AI-03_Disclosure_Form_23120255.md
+A	HW01/appendix/ai-outputs/AI-05_Privacy_Checklist_23120255.md
+M	HW01/excel/23120255_TestCases.xlsx
+D	HW01/mantis/.gitkeep
+
+3dc502a | 11:46 30/09/2026 | TonKnight | Update checklist
+M	HW01/23120255_HW01_Report.md
