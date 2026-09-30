@@ -3,27 +3,6 @@
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
-
-**Prompt:**
-```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
-```
-
-**Output:**
-```
-TC01: Kiểm tra bật quạt ở mức 1
-...
-```
-
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
-
----
-
 ## #1 | 17:38 29/09/2026 | Claude Opus | General
 **Mục đích:** Đưa context bài tập cho AI để viết format report
 
@@ -1485,23 +1464,136 @@ Nếu thầy trả lời trước hạn nộp và vẫn yêu cầu Mantis, bạn
 **Xử lý:** Bỏ các Mantis ra khỏi bài và thêm ### 3.6 để thay thế cho Mantis
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #25 | 10:57 30/09/2026 | Claude Opus | R3
+**Mục đích:** Tạo file excel TestCases.xlsx
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+- [ ] File Excel: Test Cases / Checklist / Test Summary Report
+
+Về yêu cầu này, bạn hỗ trợ tôi tạo file "23120255_TestCases.xlsx" nhé, như yêu cầu của đề: "·        Excel: Test Cases / Checklist / Test Summary Report (incremental)." nhé
 ```
 
-**Output:**
+**Output:** File `23120255_TestCases.xlsx` do AI tạo, lưu nguyên bản tại
+`ai-outputs/23120255_TestCases.xlsx`
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Mình đã tạo xong file `23120255_TestCases.xlsx` gồm 3 sheet đúng tên đề yêu cầu. Mọi số liệu tổng hợp đều tính bằng công thức, và mình đã chạy tính lại: 53 công thức, không có lỗi. Kết quả tính ra khớp với báo cáo: 13 Pass, 2 Fail, 10 TC từ AI, 5 TC bạn tự viết, 5 TC có video, và 2 defect khớp với 2 TC Fail.
+
+- **Test Cases:** 15 TC chép nguyên từ bảng 3.3 của bạn, thêm các cột Kỹ thuật, Chức năng (F1–F4), HW, Ngày chạy và Video (5 link YouTube).
+  - Cột Verdict có danh sách chọn (Pass/Fail/Blocked/Not Run) và tự tô màu.
+  - Ô nền vàng là những ô cần cập nhật khi chạy lại.
+- **Checklist:** 17 mục kiểm tra nhanh. Cột Trạng thái tự lấy Verdict của TC tham chiếu, nên khi bạn sửa sheet Test Cases thì Checklist tự cập nhật theo.
+  - 2 mục Độ bền và An toàn để Not Run, có ghi lý do. Đây là 2 TC của AI mà bạn đã loại.
+- **Test Summary Report:** gồm 5 phần:
+  - Thông tin kiểm thử.
+  - Kết quả thực thi và pass rate 86,7%.
+  - Độ bao phủ theo chức năng.
+  - Bảng BUG-01, BUG-02, cột Mantis ghi "Chưa log (chờ giảng viên xác nhận)".
+  - Kết luận (trích nguyên văn mục 3.5 của bạn) và bảng **lịch sử cập nhật**. Bảng lịch sử là để đáp ứng chữ "incremental" của đề: từ HW02 bạn chỉ cần thêm TC với cột HW mới và thêm một dòng lịch sử.
+
+**Bạn cần kiểm tra lại:**
+- **Cột "Kỹ thuật"** bảng 3.3 của bạn không có, nên mình lấy từ bản nháp của AI và từ góp ý ở #5. Nếu TA hỏi lúc vấn đáp, bạn cần giải thích được vì sao mỗi TC dùng kỹ thuật đó.
+- **Ngày chạy** chỉ điền cho 5 TC có video (29/09/2026). Các TC còn lại bạn điền ngày thực tế đã chạy.
+- **TC08:** mình đã đổi "(theo G3)" thành "(theo F3)" trong Excel. Bảng 3.3 trong báo cáo cũng nên sửa theo cho khớp.
+- **Ghi vào prompt log (#23) và Disclosure:** file Excel do AI tạo từ dữ liệu của bạn.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Kiểm tra lại file 23120255_TestCases.xlsx xem đã đúng và đầy đủ chưa, nếu có thì chỉnh sửa lại theo ý mình
+
+---
+
+## #26 | 11:13 30/09/2026 | Claude Opus | General
+**Mục đích:** Chuyển file AI-02_Audit_Report về .md và nhờ AI hỗ trợ hoàn thiện
+
+**Prompt:**
+```
+Đây là report và prompt_log hiện tại của tôi.
+---
+Đọc qua rồi giúp tôi chuyển file AI-02_Audit_Report về dạng md rồi điền vào nhé
+```
+*Đính kèm:* File 23120255_HW01_Report.md và A_Prompt_log.md hiện tại
+**Output:** File `AI-02_Audit_Report_23120255.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/AI-02_Audit_Report_23120255.md`
+```
+Mình đã chuyển AI-02 sang file `AI-02_Audit_Report_23120255.md` theo đúng khung của mẫu gốc (mục 1–6, chữ ký, tham khảo) và điền đủ **19 artifact**. A01–A13 lấy từ mục 4 trong báo cáo của bạn, còn A14–A19 là các lượt từ #19 đến #25. Kết quả: 8 VALID (42,1%), 1 INVALID (5,3%), 10 INCOMPLETE (52,6%). Ô Giảng viên và Chữ ký mình để trống cho bạn tự điền.
+
+Khi đọc lại báo cáo và prompt log, mình thấy vài chỗ **đang mâu thuẫn với khai báo**. Nên sửa trước khi nộp:
+
+1. **AI Critique đang có 337 từ**, vượt mức 200–300, trong khi checklist đã tick "200–300 từ". Cần cắt khoảng 40 từ. Câu *"AI có thể tạo sinh rất mạnh, nhưng có thể một nửa số đó chưa đủ tốt"* có thể thay bằng "7/13 artifact phải sửa". Ngoài ra còn lỗi chính tả "bịa lời phát ngôn **của** rồi gán".
+2. **Prompt log vẫn còn 3 lỗi**, trong khi checklist đã tick:
+   - Ô "Xử lý" của **#19** đang là đoạn mẫu bịa: *"Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ… → AI-02 Artifact #3"*.
+   - **4 mục mẫu "#1 | 14:32"** ở cuối file và 1 mục ở đầu file vẫn còn.
+   - **#17** phần Output vẫn đang chép lại prompt, chưa phải câu trả lời của Gemini.
+3. **Timestamp #16:** log ghi 07:06, nhưng lượt đó thực tế gửi lúc 07:56. Trong AI-02, mình giữ 07:06 cho khớp log. Bạn sửa cả hai chỗ về 07:56 nhé. #8 ("35/09") và #9 ("29/09") cũng chưa sửa.
+4. **Mục 4 trong báo cáo vẫn ghi 13 artifact và "17 lượt"**, trong khi AI-02 ghi 19. Bạn có thể thêm A14–A19 vào mục 4 (copy từ AI-02), hoặc ghi một dòng "Mục 4 trình bày A01–A13; bản đầy đủ 19 artifact ở AI-02". Nhớ sửa cả dòng AI-1 ở mục 7 cho khớp.
+5. **Mục 7:** R3 vẫn là 22 điểm và tổng 93. Sau khi bỏ Mantis, nên sửa thành **21 / 92** như đã bàn, và đổi tên file zip thành `…_092.zip`.
+
+Đề ghi "False AI disclosure = 0 grade". Vì vậy mục 1 và 2 là quan trọng nhất: đây là những chỗ checklist khẳng định đã xong nhưng thực tế chưa đúng.
+```
+
+**Xử lý:** Thêm một số trường riêng tư AI không viết, sửa một số thông tin
+
+---
+
+## #27 | 11:23 30/09/2026 | Claude Opus | General
+**Mục đích:** Chuyển file AI-03_Disclosure_Form về .md và nhờ AI hỗ trợ hoàn thiện
+
+**Prompt:**
+```
+Tiếp tục giúp mình chuyển đổi file này sang .md và điền những thông tin cần thiết vào nhé
+```
+*Đính kèm:* File AI-03_Disclosure_Form.docx
+
+**Output:** File `AI-03_Disclosure_Form_23120255.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/AI-03_Disclosure_Form_23120255.md`
+```
+Mình đã chuyển AI-03 sang file `AI-03_Disclosure_Form_23120255.md` và điền đủ 6 câu khai báo, khớp với AI-02, mục 6 trong báo cáo và prompt log từ #1 đến #25. Ô Giảng viên và Chữ ký vẫn để trống để bạn tự ký.
+
+**Vài điểm bạn nên kiểm tra lại:**
+- **Mục 2, ô "code" mình để trống.** Bạn không tự viết code. Phần code dùng để vẽ mindmap và tạo file Excel là do AI chạy nội bộ, nên mình xếp chúng vào ô "thiết kế đồ hoạ" và "phân tích dữ liệu". Nếu bạn muốn khai chặt chẽ hơn thì có thể tick thêm ô "code" và ghi chú như vậy.
+- **Mục 3 dẫn nguyên văn 3 prompt:** #4, #14 và #17. Mình chọn 3 prompt này vì chúng tạo ra các artifact quan trọng nhất (bộ test case, 20 defect và hallucination của Gemini).
+- **Mục 5 nói rằng bạn đã "đổi xưng hô, sửa các điểm không đúng với thực tế"** trong các phần AI soạn nháp. Câu này chỉ đúng khi bạn đã sửa xong các lỗi mình nêu ở lượt trước:
+  - AI Critique đang dài 337 từ, vượt giới hạn.
+  - Còn các entry "#1" mẫu trong prompt log.
+  - Output của #17 chưa phải là câu trả lời thật của Gemini.
+  - Timestamp của #8, #9, #16 chưa đúng.
+
+  Đây là form cam kết. Nếu ký rồi mà những chỗ trên vẫn sai thì lỗi thuộc diện "khai báo sai lệch", nên bạn sửa hết rồi mới ký.
+- **Cấp độ AI để là Cấp 4,** lấy theo header báo cáo của bạn. Bạn đối chiếu lại với thang 5 cấp trong slide của môn cho chắc.
+```
+
+**Xử lý:** Thêm một số trường riêng tư AI không viết, sửa một số thông tin
+
+---
+
+## #28 | 11:28 30/09/2026 | Claude Opus | General
+**Mục đích:** Chuyển file AI-05_Privacy_Checklist về .md và nhờ AI hỗ trợ hoàn thiện
+
+**Prompt:**
+```
+Tiếp tục giúp mình thực hiện chuyển file này thành file .md và điền các thông tin bạn biết vào nhé
+```
+*Đính kèm:* File AI-05_Privacy_Checklist.docx
+
+**Output:** File `AI-05_Privacy_Checklist_23120255.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/AI-05_Privacy_Checklist_23120255.md`
+```
+File `AI-05_Privacy_Checklist_23120255.md` đã xong. Mình tick 7/15 mục; đây là những mục có bằng chứng rõ từ chính buổi làm việc này. Mỗi mục đều có một dòng ghi chú căn cứ để bạn đối chiếu.
+
+**8 mục mình để trống, bạn cần tự xác nhận hoặc sửa xong mới tick:**
+- **Không tự biết được (3 mục):** Cấp độ AI; loại tài khoản Claude; đã đọc Thoả thuận AI.
+- **Cần bạn tự đánh giá (2 mục):**
+  - *Dữ liệu cá nhân:* bạn không nhập dữ liệu của người khác, nhưng có gửi họ tên, MSSV và link GitHub của chính bạn trong file báo cáo.
+  - *Tài liệu có bản quyền:* bạn có gửi ảnh chụp tài liệu ISTQB của thầy và ảnh mindmap © Learning Fundamentals để tham khảo. Mình ghi rõ trong ghi chú để bạn tự quyết. Khai minh bạch như vậy an toàn hơn là tick bừa.
+- **Chưa đúng ở thời điểm hiện tại (2 mục):** prompt log (vẫn còn entry mẫu, output #17 sai, timestamp sai) và AI Critique (337 chữ).
+- **Vấn đáp (1 mục):** mình ghi sẵn 3 nội dung nên ôn.
+
+Đây là form cam kết cuối cùng, nên chỉ tick khi mục đó đúng thật. Còn 3 việc cần làm trước khi ký bộ AI-02/03/05:
+1. Sửa prompt log.
+2. Cắt AI Critique xuống dưới 300 chữ.
+3. Đồng bộ số artifact trong mục 4 (hiện ghi 13) với AI-02 (19).
+```
+
+**Xử lý:** Thêm một số trường riêng tư AI không viết, sửa một số thông tin
 
 ---
