@@ -1,108 +1,222 @@
-05028e0 | 16:47 29/09/2026 | TonKnight | Khởi tạo HW01
-A	HW01/23120255_HW01_Report.md
-A	HW01/R1_jobs/.gitkeep
-A	HW01/R3_device/.gitkeep
-A	HW01/ai-forms/AI-02_Audit_Report.docx
-A	HW01/ai-forms/AI-03_Disclosure_Form.docx
-A	HW01/ai-forms/AI-05_Privacy_Checklist.docx
-A	HW01/appendix/A_prompt_log.md
-A	HW01/appendix/commit_log.txt
-A	HW01/excel/23120255_TestCases.xlsx
-A	HW01/mantis/.gitkeep
-
-427250d | 17:07 29/09/2026 | TonKnight | Dàn ý cơ bản report
-M	HW01/23120255_HW01_Report.md
-
-f11867a | 18:50 29/09/2026 | TonKnight | Viết các prompt General và hoàn thiện dàn ý
-M	HW01/23120255_HW01_Report.md
-M	HW01/appendix/A_prompt_log.md
-
-6296295 | 21:23 29/09/2026 | TonKnight | Thêm ảnh thiết bị cùng với thẻ sinh viên
-A	HW01/R3_device/AnhThietBi_TheSinhVien.jpg
-
-d97fb1d | 00:05 30/09/2026 | TonKnight | Hoàn thiện Requirement 3 ở báo cáo và cả prompt_log
-M	HW01/23120255_HW01_Report.md
-M	HW01/appendix/A_prompt_log.md
-A	HW01/appendix/ai-outputs/23120255_HW01_Report.md
-A	HW01/appendix/ai-outputs/HW01_R3_TestCases_AI_Draft.md
-
-da95b82 | 05:12 30/09/2026 | TonKnight | Hoàn thiện Requirement 1 ở báo cáo, ảnh và prompt
-M	HW01/23120255_HW01_Report.md
-D	HW01/R1_jobs/.gitkeep
-A	HW01/R1_jobs/J01.png
-A	HW01/R1_jobs/J02_1.png
-A	HW01/R1_jobs/J02_2.png
-A	HW01/R1_jobs/J03.png
-A	HW01/R1_jobs/J04.png
-A	HW01/R1_jobs/J05.png
-A	HW01/R1_jobs/J06.png
-A	HW01/R1_jobs/J07.png
-A	HW01/R1_jobs/J08.png
-A	HW01/R1_jobs/J09.png
-A	HW01/R1_jobs/J10.png
-A	HW01/R1_jobs/mindmap_QA_QC.png
-A	HW01/R1_jobs/mindmap_fixed.png
-M	HW01/appendix/A_prompt_log.md
-A	HW01/appendix/ai-outputs/HW01_R1_1.2.md
-A	HW01/appendix/ai-outputs/mindmap_ai.mmd
-A	HW01/appendix/ai-outputs/mindmap_ai.png
-
-bc30f27 | 09:23 30/09/2026 | TonKnight | Hoàn thiện Requirement 2 ở báo cáo, ảnh và prompt
-M	HW01/23120255_HW01_Report.md
-A	HW01/R2_defects/R2_ai_hallucination.png
-A	HW01/R2_defects/R2_defect_fact.png
-M	HW01/appendix/A_prompt_log.md
-A	HW01/appendix/ai-outputs/HW01_R2.md
-
-f6b2cee | 09:30 30/09/2026 | TonKnight | Chỉnh sửa một số lỗi dẫn link
-M	HW01/23120255_HW01_Report.md
-
-38768bb | 09:31 30/09/2026 | TonKnight | Chỉnh lại câu từ D16
-M	HW01/23120255_HW01_Report.md
-
-0aae7aa | 10:53 30/09/2026 | TonKnight | Hoàn thiện báo cáo
-M	HW01/23120255_HW01_Report.md
-A	HW01/VideoLinks.md
-M	HW01/appendix/A_prompt_log.md
-A	HW01/appendix/ai-outputs/HW01_Section4_AuditReport.md
-
-0ed7591 | 11:42 30/09/2026 | TonKnight | Hoàn thành bài nộp
-M	HW01/23120255_HW01_Report.md
-D	HW01/R3_device/.gitkeep
-D	HW01/ai-forms/AI-02_Audit_Report.docx
-A	HW01/ai-forms/AI-02_Audit_Report_23120255.md
-A	HW01/ai-forms/AI-02_Audit_Report_23120255.pdf
-D	HW01/ai-forms/AI-03_Disclosure_Form.docx
-A	HW01/ai-forms/AI-03_Disclosure_Form_23120255.md
-A	HW01/ai-forms/AI-03_Disclosure_Form_23120255.pdf
-D	HW01/ai-forms/AI-05_Privacy_Checklist.docx
-A	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.md
-A	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
-A	HW01/ai-forms/signature.png
-M	HW01/appendix/A_prompt_log.md
-A	HW01/appendix/ai-outputs/23120255_TestCases.xlsx
-A	HW01/appendix/ai-outputs/AI-02_Audit_Report_23120255.md
-A	HW01/appendix/ai-outputs/AI-03_Disclosure_Form_23120255.md
-A	HW01/appendix/ai-outputs/AI-05_Privacy_Checklist_23120255.md
-M	HW01/excel/23120255_TestCases.xlsx
-D	HW01/mantis/.gitkeep
-
-3dc502a | 11:46 30/09/2026 | TonKnight | Update checklist
-M	HW01/23120255_HW01_Report.md
-
-df5a3a2 | 11:48 30/09/2026 | TonKnight | update log
-M	HW01/appendix/commit_log.txt
-
-306a192 | 12:10 30/09/2026 | TonKnight | Finish HW1
-M	HW01/23120255_HW01_Report.md
-M	HW01/ai-forms/AI-02_Audit_Report_23120255.md
-M	HW01/ai-forms/AI-02_Audit_Report_23120255.pdf
-M	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.md
-M	HW01/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
-M	HW01/appendix/A_prompt_log.md
-
-64256c8 | 12:12 30/09/2026 | TonKnight | update commit log
-M	HW01/appendix/commit_log.txt
-
-bff27f5 | 12:14 30/09/2026 | TonKnight | Thêm report pdf
-A	HW01/23120255_HW01_Report.pdf
+* commit caf308212b9475e0356d80458e88698d76cd25bf (HEAD -> main, origin/main, origin/HEAD)
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 12:15:11 2026 +0700
+| 
+|     Update commit log
+| 
+|  HW01/appendix/commit_log.txt | 6 ++++++
+|  1 file changed, 6 insertions(+)
+| 
+* commit bff27f5ccc99cd10dd83b54d11b5a436bbf4fc91
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 12:14:41 2026 +0700
+| 
+|     Thêm report pdf
+| 
+|  HW01/23120255_HW01_Report.pdf | Bin 0 -> 9852620 bytes
+|  1 file changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit 64256c84daf16adde43b499d07b1e1e363ee1280
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 12:12:37 2026 +0700
+| 
+|     update commit log
+| 
+|  HW01/appendix/commit_log.txt | 33 ++++++++++++++++++++++-----------
+|  1 file changed, 22 insertions(+), 11 deletions(-)
+| 
+* commit 306a192695e2e0202ed84d41d76861179ec17c4a
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 12:10:42 2026 +0700
+| 
+|     Finish HW1
+| 
+|  HW01/23120255_HW01_Report.md                 | 209 +++++++++++++----
+|  HW01/ai-forms/AI-02_Audit_Report_23120255.md |  23 +-
+|  .../ai-forms/AI-02_Audit_Report_23120255.pdf | Bin 1373007 -> 1398199 bytes
+|  .../AI-05_Privacy_Checklist_23120255.md      |   2 +-
+|  .../AI-05_Privacy_Checklist_23120255.pdf     | Bin 1152035 -> 1152036 bytes
+|  HW01/appendix/A_prompt_log.md                | 187 +++++++++++++--
+|  6 files changed, 350 insertions(+), 71 deletions(-)
+| 
+* commit df5a3a249f6d886bb0508b5dc40071f51885ba92
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 11:48:02 2026 +0700
+| 
+|     update log
+| 
+|  HW01/appendix/commit_log.txt | 91 ++++++++++++++++++++++++++++++++++
+|  1 file changed, 91 insertions(+)
+| 
+* commit 3dc502ac641237e325341cc486681410c63a36ff
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 11:46:10 2026 +0700
+| 
+|     Update checklist
+| 
+|  HW01/23120255_HW01_Report.md | 10 ++--------
+|  1 file changed, 2 insertions(+), 8 deletions(-)
+| 
+* commit 0ed7591b6b149c0aeb4ad5bd87dd9f4bbfe5c408
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 11:42:30 2026 +0700
+| 
+|     Hoàn thành bài nộp
+| 
+|  HW01/23120255_HW01_Report.md                 |  16 +-
+|  HW01/R3_device/.gitkeep                      |   0
+|  HW01/ai-forms/AI-02_Audit_Report.docx        | Bin 32452 -> 0 bytes
+|  HW01/ai-forms/AI-02_Audit_Report_23120255.md | 101 +++++++++++
+|  .../ai-forms/AI-02_Audit_Report_23120255.pdf | Bin 0 -> 1373007 bytes
+|  HW01/ai-forms/AI-03_Disclosure_Form.docx     | Bin 199059 -> 0 bytes
+|  .../AI-03_Disclosure_Form_23120255.md        | 132 ++++++++++++++
+|  .../AI-03_Disclosure_Form_23120255.pdf       | Bin 0 -> 1225001 bytes
+|  HW01/ai-forms/AI-05_Privacy_Checklist.docx   | Bin 29059 -> 0 bytes
+|  .../AI-05_Privacy_Checklist_23120255.md      |  57 ++++++
+|  .../AI-05_Privacy_Checklist_23120255.pdf     | Bin 0 -> 1152035 bytes
+|  HW01/ai-forms/signature.png                  | Bin 0 -> 1226029 bytes
+|  HW01/appendix/A_prompt_log.md                | 156 +++++++++++++----
+|  .../ai-outputs/23120255_TestCases.xlsx       | Bin 0 -> 18355 bytes
+|  .../AI-02_Audit_Report_23120255.md           | 101 +++++++++++
+|  .../AI-03_Disclosure_Form_23120255.md        | 132 ++++++++++++++
+|  .../AI-05_Privacy_Checklist_23120255.md      |  74 ++++++++
+|  HW01/excel/23120255_TestCases.xlsx           | Bin 6190 -> 20681 bytes
+|  HW01/mantis/.gitkeep                         |   0
+|  19 files changed, 729 insertions(+), 40 deletions(-)
+| 
+* commit 0aae7aa51568acc38fd9d4261d7eb6379708fc17
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 10:53:47 2026 +0700
+| 
+|     Hoàn thiện báo cáo
+| 
+|  HW01/23120255_HW01_Report.md                 | 451 ++++++++++------
+|  HW01/VideoLinks.md                           |   9 +
+|  HW01/appendix/A_prompt_log.md                | 453 +++++++++++++++--
+|  .../ai-outputs/HW01_Section4_AuditReport.md  | 207 ++++++++
+|  4 files changed, 941 insertions(+), 179 deletions(-)
+| 
+* commit 38768bb2b5ac585c36cfe441c7938e884861c1f8
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 09:31:59 2026 +0700
+| 
+|     Chỉnh lại câu từ D16
+| 
+|  HW01/23120255_HW01_Report.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit f6b2ceebd4e0effb92c582016d536d4c79506d37
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 09:30:55 2026 +0700
+| 
+|     Chỉnh sửa một số lỗi dẫn link
+| 
+|  HW01/23120255_HW01_Report.md | 4 ++--
+|  1 file changed, 2 insertions(+), 2 deletions(-)
+| 
+* commit bc30f277d1beb737dd9d125e75e0e1c9418dd2e8
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 09:23:17 2026 +0700
+| 
+|     Hoàn thiện Requirement 2 ở báo cáo, ảnh và prompt
+| 
+|  HW01/23120255_HW01_Report.md            | 129 ++++-----
+|  HW01/R2_defects/R2_ai_hallucination.png | Bin 0 -> 328623 bytes
+|  HW01/R2_defects/R2_defect_fact.png      | Bin 0 -> 437298 bytes
+|  HW01/appendix/A_prompt_log.md           | 327 ++++++++++++++++++++--
+|  HW01/appendix/ai-outputs/HW01_R2.md     |  64 +++++
+|  5 files changed, 436 insertions(+), 84 deletions(-)
+| 
+* commit da95b82e489edb56d523b4ebb016696a875ca938
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 05:12:16 2026 +0700
+| 
+|     Hoàn thiện Requirement 1 ở báo cáo, ảnh và prompt
+| 
+|  HW01/23120255_HW01_Report.md            | 290 +++++------
+|  HW01/R1_jobs/.gitkeep                   |   0
+|  HW01/R1_jobs/J01.png                    | Bin 0 -> 366715 bytes
+|  HW01/R1_jobs/J02_1.png                  | Bin 0 -> 389097 bytes
+|  HW01/R1_jobs/J02_2.png                  | Bin 0 -> 293925 bytes
+|  HW01/R1_jobs/J03.png                    | Bin 0 -> 828527 bytes
+|  HW01/R1_jobs/J04.png                    | Bin 0 -> 962326 bytes
+|  HW01/R1_jobs/J05.png                    | Bin 0 -> 818245 bytes
+|  HW01/R1_jobs/J06.png                    | Bin 0 -> 863278 bytes
+|  HW01/R1_jobs/J07.png                    | Bin 0 -> 825337 bytes
+|  HW01/R1_jobs/J08.png                    | Bin 0 -> 457829 bytes
+|  HW01/R1_jobs/J09.png                    | Bin 0 -> 808618 bytes
+|  HW01/R1_jobs/J10.png                    | Bin 0 -> 958991 bytes
+|  HW01/R1_jobs/mindmap_QA_QC.png          | Bin 0 -> 585510 bytes
+|  HW01/R1_jobs/mindmap_fixed.png          | Bin 0 -> 629115 bytes
+|  HW01/appendix/A_prompt_log.md           | 567 ++++++++++++++++++++++
+|  HW01/appendix/ai-outputs/HW01_R1_1.2.md | 155 ++++++
+|  HW01/appendix/ai-outputs/mindmap_ai.mmd |  54 +++
+|  HW01/appendix/ai-outputs/mindmap_ai.png | Bin 0 -> 518576 bytes
+|  19 files changed, 908 insertions(+), 158 deletions(-)
+| 
+* commit d97fb1df872a44aa13fc33a935c86fe84da8d0ee
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Wed Sep 30 00:05:08 2026 +0700
+| 
+|     Hoàn thiện Requirement 3 ở báo cáo và cả prompt_log
+| 
+|  HW01/23120255_HW01_Report.md                 | 188 ++---
+|  HW01/appendix/A_prompt_log.md                |  82 +-
+|  .../ai-outputs/23120255_HW01_Report.md       | 735 +++++++++++++++++
+|  .../ai-outputs/HW01_R3_TestCases_AI_Draft.md |  56 ++
+|  4 files changed, 914 insertions(+), 147 deletions(-)
+| 
+* commit 6296295baedccfa97ff04710fa913e030f49df6c
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Tue Sep 29 21:23:19 2026 +0700
+| 
+|     Thêm ảnh thiết bị cùng với thẻ sinh viên
+| 
+|  HW01/R3_device/AnhThietBi_TheSinhVien.jpg | Bin 0 -> 93163 bytes
+|  1 file changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit f11867a185ef4a695a1351caf7e788d06819bb3d
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Tue Sep 29 18:50:10 2026 +0700
+| 
+|     Viết các prompt General và hoàn thiện dàn ý
+| 
+|  HW01/23120255_HW01_Report.md  | 722 +++++++++++++++++++++++++++++++-
+|  HW01/appendix/A_prompt_log.md | 218 ++++++++++
+|  2 files changed, 931 insertions(+), 9 deletions(-)
+| 
+* commit 427250d7c70ca64e776279c96e67127a00bbc122
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Tue Sep 29 17:07:16 2026 +0700
+| 
+|     Dàn ý cơ bản report
+| 
+|  HW01/23120255_HW01_Report.md | 30 ++++++++++++++++++++++++++++++
+|  1 file changed, 30 insertions(+)
+| 
+* commit 05028e031b11a7a4af78828ec2883d50f3420990
+| Author: TonKnight <tanhiep24135@gmail.com>
+| Date:   Tue Sep 29 16:47:43 2026 +0700
+| 
+|     Khởi tạo HW01
+| 
+|  HW01/23120255_HW01_Report.md               |   0
+|  HW01/R1_jobs/.gitkeep                      |   0
+|  HW01/R3_device/.gitkeep                    |   0
+|  HW01/ai-forms/AI-02_Audit_Report.docx      | Bin 0 -> 32452 bytes
+|  HW01/ai-forms/AI-03_Disclosure_Form.docx   | Bin 0 -> 199059 bytes
+|  HW01/ai-forms/AI-05_Privacy_Checklist.docx | Bin 0 -> 29059 bytes
+|  HW01/appendix/A_prompt_log.md              |   0
+|  HW01/appendix/commit_log.txt               |   0
+|  HW01/excel/23120255_TestCases.xlsx         | Bin 0 -> 6190 bytes
+|  HW01/mantis/.gitkeep                       |   0
+|  10 files changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit dd2aa45da94d59d91316ffc43e2e78caeedfe5ad
+  Author: TonKnight <23120255@student.hcmus.edu.vn>
+  Date:   Tue Sep 29 15:44:16 2026 +0700
+  
+      Initial commit
+  
+   README.md | 1 +
+   1 file changed, 1 insertion(+)
