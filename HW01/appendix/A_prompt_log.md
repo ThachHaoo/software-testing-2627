@@ -1016,19 +1016,46 @@ Nhớ chụp màn hình câu trả lời của Gemini, khoanh đỏ câu sai, v�
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #19 | 09:44 30/09/2026 | Claude Opus | General
+**Mục đích:** Hỗ trợ viết báo cáo mục 4
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+Được rồi. Mình đã xong hết các R1, R2, R3
+Sau đây là file report hiện tại của mình
+Cùng với các prompt_log mình đã sử dụng (không cần quan tâm các prompt #1 mẫu, mình đặt dàn ý trước để viết cho nhanh)
+Giờ giúp mình hoàn thành mục: "4. AI Audit Report" nhé
 ```
+*Đính kèm:* 2 file report và prompt_log hiện tại.
 
-**Output:**
+**Output:** File `HW01_Section4_AuditReport.md` do AI tạo, lưu nguyên bản tại
+`ai-outputs/HW01_Section4_AuditReport.md`
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Mục 4 đã xong, nằm trong file `HW01_Section4_AuditReport.md`. Có 13 artifact, dựng từ các lượt #1–#18 trong prompt log và nội dung report hiện tại của bạn. Mỗi artifact có đủ 5 mục; câu nào mình trích nguyên văn thì khớp với prompt log.
+
+Tổng hợp theo artifact:
+
+| Kết quả | Số lượng | Tỉ lệ |
+|---|---|---|
+| VALID | 5 | 38,5% |
+| INVALID | 1 (của Gemini) | 7,7% |
+| INCOMPLETE | 7 | 53,8% |
+
+Riêng 15 test case do AI sinh: 14 VALID, 1 INCOMPLETE, và không có edge case thực tế nào nằm trong output của AI.
+
+**Cần sửa trong prompt log trước khi nộp.** Mấy chỗ dưới đây dễ bị coi là khai báo sai, mà khai báo sai có thể khiến bài bị 0 điểm:
+- **Các mục mẫu "#1 | 14:32 29/09/2026" phải xóa hết.** Có 1 mục ở đầu file và 5 bản lặp ở cuối file. Nội dung ghi "TC09 sai vì quạt không có hẹn giờ… TC11 thiếu bước kiểm tra độ rung", nhưng chưa từng có lượt nào như vậy. Nếu để lại, người chấm sẽ thấy đây là log bịa.
+- **#17 (Gemini):** ô Output đang chép lại nguyên prompt. Bạn cần dán câu trả lời thật của Gemini vào đó, vì đây là bằng chứng chính cho mục 2.2.
+- **Timestamp:** #8 ghi "35/09/2026" (không có ngày này), #9 ghi "29/09/2026" nhưng thực tế phải là 30/09.
+
+**Các chỗ mình để hộp 📝 gợi ý, bạn tự quyết:**
+- **TC03:** expected vẫn chưa có ngưỡng Pass/Fail. Nếu bạn thêm ngưỡng thì ô "Student fix" của A12 mới có thay đổi thật.
+- **TC08:** đang ghi "(theo G3)", cần đổi thành "F3".
+- **E2 ở mục 1.3:** bạn ghi 4/10, còn A05 mình ghi 5/10, cần thống nhất một con số.
+
+**Nên kiểm tra lại:**
+- **Số mục ISTQB:** mình dẫn §1.4.5, §4.2, §4.4.1, §5.1 và §5.5 theo syllabus v4.0. Bạn đối chiếu lại với tài liệu của thầy xem số mục có khớp không.
+- **Tính tổng cho mục 7:** mình tính Gemini là 1 artifact. Nếu bạn dùng tỉ lệ này cho phần Tự đánh giá, nên nói rõ cách tính.
 ```
 
 **Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
@@ -1037,67 +1064,425 @@ TC01: Kiểm tra bật quạt ở mức 1
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #20 | 10:17 30/09/2026 | Claude Opus | General
+**Mục đích:** Hỗ trợ chỉnh sửa phần AI Critique
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+Đây là bản nháp mình đã viết cho: "
+
+## 5. AI Critique
+
+> 📝 **Hướng dẫn:** 1 đoạn **200–300 từ**, tự viết. Trả lời đủ 3 câu hỏi của đề:
+> 1. AI sai / bias / thiếu ở đâu? → dẫn ví dụ cụ thể (E1–E3 mindmap, hallucination 2.2, edge case 3.4).
+> 2. Vì sao AI không bắt được? → thiếu ngữ cảnh vật lý, dữ liệu huấn luyện có hạn, xu hướng trả lời "trung bình/phổ biến", tự tin khi không chắc...
+> 3. Nguyên tắc rút ra khi cộng tác với AI? → 1–2 nguyên tắc cụ thể, có thể áp dụng lại ở HW sau.
+
+[Đoạn văn 200–300 từ]
+
+**Số từ:** [...]
+
+---"
+
+"Qua HW01, em thấy rằng AI ít khi sai theo một pattern để người dùng nhận diện, đáng sợ nhất là câu trả lời nào cũng cảm giác đầy đủ, có nguồn xác thực nhưng đôi khi không đúng hoặc không đủ. Ví dụ như Gemini đã Hallucination về D18 của em, bịa lời phát ngôn của Microsoft đổ lỗi cho quản trị thành phố, trong khi thực sự thì Microsoft sẽ cố gắng hỗ trợ khắc phục, sau đó nó còn gắn liền thêm nguồn PCMag làm cho người dùng an tâm rằng có nguồn. Nhưng khi nhấn vào thì không thấy phát ngôn đó ở đâu cả. Và AI có lẽ cũng thường framing bias cho các nhà cung cấp AI rằng họ thường vô tội (có thể là do Gemini hoặc ở session hiện tại). Hơn nữa qua phần thiết kế test case, có thể thấy rằng AI không thể bắt được hết các edge case được, vì nó không hề có đủ trải nghiệm, không có thiết bị thật để làm mà chỉ suy luận, nên hầu hết các test mà nó sinh ra toàn ở happy path hoặc ở chức năng chính của quạt. Và khi sinh gì đó có vẻ như nó thường thiếu/sai như là hallucination, không đủ thông tin về thị trường. Vì những điều đó, nên chúng ta phải kiểm tra lại những gì mà được AI sinh ra, phải có một nguồn sự thật để kiểm chứng lại, AI có thể tạo sinh rất mạnh, nhưng có thể một nửa số đó chưa đủ tốt, vì vậy cũng cần sự can thiệp của con người để làm cho nó tốt hơn."
+Bạn nghĩ có cần chỉnh sửa gì không
 ```
 
 **Output:**
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Bản nháp của bạn trả lời đủ cả 3 câu hỏi và dài 264 từ, nằm trong khoảng 200–300. Ý mở đầu cũng là ý hay nhất bài: câu trả lời sai của AI "trông vẫn đầy đủ, có nguồn". Có 4 chỗ mình nghĩ nên sửa, xếp theo mức độ quan trọng:
+
+**1. Có hai câu đang khẳng định quá mức.**
+- *"đổ lỗi cho quản trị thành phố, trong khi thực sự thì Microsoft sẽ cố gắng hỗ trợ khắc phục"*: thành phố thực sự có trách nhiệm (họ vận hành chatbot). Cái sai của Gemini là **bịa lời phát ngôn rồi gán cho Microsoft**. Bạn nên viết đúng như vậy để khớp với mục 2.2 và A10.
+- *"AI có lẽ cũng thường framing bias cho các nhà cung cấp AI rằng họ thường vô tội"*: bạn mới có 1 ví dụ, chưa đủ để nói "thường". Nếu TA hỏi thì bạn khó bảo vệ. Nên giới hạn lại, kiểu "trong trường hợp này, câu trả lời nghiêng về giảm trách nhiệm của nhà cung cấp". Phần trong ngoặc "(có thể là do Gemini hoặc ở session hiện tại)" chưa rõ nghĩa, nên bỏ.
+
+**2. Phần edge case chưa chính xác và bỏ sót điểm mạnh nhất của bạn.**
+- Nói *"toàn ở happy path"* là hơi quá, vì bộ TC của AI có state transition và decision table. Nói đúng hơn là AI **chỉ dùng input hợp lệ, mỗi lần 1 phím**.
+- Bạn chưa nhắc tới phát hiện ở #5/A13: AI **có nghĩ tới** thao tác nhấn 2 phím nhưng **không đưa vào output**. Đây là chi tiết riêng của bài bạn, rất đúng tinh thần "Why did the AI fail to catch it?", nên dành 1 câu cho nó.
+
+**3. Thiếu ví dụ từ mindmap (G9.1).** Hướng dẫn yêu cầu dẫn cả E1–E3. Chỉ cần nửa câu, ví dụ E2 (thiếu chức danh QC vì AI dùng cách gọi chức danh quốc tế, trong khi 5/10 tin ở R1 có chữ "QC").
+
+**4. Nguyên tắc cuối bài còn chung chung.** Câu "phải kiểm tra lại, cần sự can thiệp của con người" ai cũng viết được. Nên đổi thành 2 nguyên tắc cụ thể mà bạn đã thực sự làm trong bài, ví dụ:
+- Buộc AI trích nguyên văn kèm URL cho từng ý, rồi tự mở nguồn và Ctrl+F để đối chiếu.
+- Cho AI sinh test case trước, rồi người tìm edge case trên thiết bị thật; sau đó hỏi AI "có gì bạn đã nghĩ tới mà không đưa vào không".
+
+Cụm *"có thể một nửa số đó chưa đủ tốt"* nên thay bằng số liệu của bạn: 7/13 artifact bị INCOMPLETE (54%, theo mục 4.x). Như vậy phần Critique sẽ nối được với Audit Report.
+
+**Lỗi nhỏ:**
+- Xưng hô chưa thống nhất: đoạn này dùng "em", còn Audit Report dùng "tôi". Nên chọn một.
+- "Hallucination" giữa câu nên viết thường.
+- *"AI ít khi sai theo một pattern để người dùng nhận diện"* hơi khó hiểu. Có thể viết lại thành "lỗi của AI không có dấu hiệu dễ nhận ra".
+
+**Về độ dài:** thêm ý 2, 3 và 4 thì bài sẽ vượt 300 từ. Bạn có thể cắt câu *"Và khi sinh gì đó có vẻ như nó thường thiếu/sai như là hallucination, không đủ thông tin về thị trường"*, vì ý này đã được phần đầu và con số 54% nói thay rồi.
+
+Sửa xong bạn gửi lại, mình đếm từ và soát lần cuối cho. Câu chữ nên là của bạn, vì đề ghi rõ phần này "mandatory, tự viết".
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Tham khảo ý kiến của AI, sửa lại vì cảm thấy cần thiết rồi đưa vào báo cáo
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #21 | 10:29 30/09/2026 | Claude Opus | General
+**Mục đích:** Hỗ trợ hoàn thiện phần Mandatory Disclosure
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+```markdown
+## 6. Mandatory Disclosure
+
+> 📝 Điền cụ thể, khớp với cột "Nguồn" ở 3.3 và danh sách artifact ở mục 4. Không để lại dấu ngoặc vuông.
+
+*"[Mindmap vai trò QA/QC (1.3), bộ test case ban đầu (3.3), ...] was initially generated by [Claude – model ...]; I reviewed and modified [section 1.3 – 3 errors E1–E3, section 3.3 – TC.., TC.., ...], added [edge cases TC13, TC14, TC15]; [section 1.1–1.2 job research, 2.1 defect verification, 3.5 execution & videos, 5 AI Critique] was written entirely by me. The detailed AI Audit Report is attached as Appendix A. I confirm I did not use AI to generate any artifact listed in the prohibited category below."*
+
+**Prohibited category (không dùng AI):** ảnh thiết bị + thẻ SV; giọng thuyết minh video; 10 screenshot tin tuyển dụng; prompt log có timestamp.
+
+Hỗ trợ mình viết lại đoạn này theo tiếng Việt nhé. Như thể chúng ta đã cùng nhau viết report này vậy
 ```
 
 **Output:**
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Mình viết lại dựa trên đúng những gì đã diễn ra trong prompt log và mục 4. Đề phạt 0 điểm nếu khai báo sai, nên mình ghi đầy đủ cả những phần AI đã hỗ trợ, kể cả mục 4.
+
+```markdown
+## 6. Mandatory Disclosure
+
+*"Các phần sau được **Claude (claude-opus-5-5)** tạo bản đầu tiên: khung báo cáo (dàn ý, bảng biểu, placeholder); danh sách gợi ý tin tuyển dụng J08–J10 và phần điền bảng 1.1; phần tóm tắt mô tả công việc và kỹ năng của J02–J10 (1.2); mindmap vai trò QA/QC bản gốc (1.3); bảng thống kê, bảng phân loại và đoạn nhận xét nháp ở 1.4; báo cáo research và hai bảng 20 defect (2.0, 2.1); phần giải thích D18 dùng làm đáp án đối chứng (2.2); bộ 15 test case ban đầu và các giả định về thiết bị, từ đó tôi xây dựng TC01–TC10 và bảng chức năng F1–F4 (3.2, 3.3); bản nháp AI Audit Report (mục 4). **Gemini Flash** được dùng một lần để kiểm tra hallucination (mục 2.2).*
+
+*Tôi đã xem xét và chỉnh sửa: mục 1.1 (đối chiếu từng tin bằng tài khoản của mình, sửa mức lương J03–J10); mục 1.3 (tìm và sửa 3 lỗi E1–E3, quyết định nội dung mindmap đã sửa); mục 1.4 (phân loại J01, đếm lại kỹ năng trên 10 tin); mục 2.1 (mở và kiểm chứng toàn bộ nguồn, cập nhật D16 và D18); mục 3.3 (chọn giữ 10/15 test case của AI, lược bớt phép đo, chạy thật và điền Actual/Verdict); mục 4 (rà soát và xác nhận từng verdict).*
+
+*Tôi đã bổ sung các edge case **TC11, TC12, TC13, TC14, TC15**, tự nghĩ ra và thử trên quạt thật trước khi hỏi lại AI.*
+
+*Các phần do tôi tự viết hoàn toàn: nội dung J01 và toàn bộ 10 ô **AI Impact Analysis** (1.2); phần phân tích lỗi của mindmap (1.3); việc hỏi Gemini, phát hiện câu bịa và chụp minh chứng (2.2); thông tin thiết bị (3.1); việc thực thi 5 test case, quay video có thuyết minh và phần kết luận (3.5); **AI Critique** (mục 5); **Tự đánh giá** (mục 7).*
+
+*AI Audit Report chi tiết nằm ở mục 4 và file AI-02 (Phụ lục B); toàn bộ prompt kèm timestamp nằm ở Phụ lục A. Tôi xác nhận không dùng AI để tạo bất kỳ artifact nào thuộc danh mục bị cấm dưới đây."*
+
+**Danh mục cấm dùng AI:** ảnh thiết bị chụp cùng thẻ sinh viên; giọng thuyết minh trong video; 10 ảnh chụp màn hình tin tuyển dụng; prompt log có timestamp.
+
+
+**Trước khi dán vào báo cáo, bạn cần kiểm tra mấy chỗ sau cho khớp với thực tế:**
+- **`mindmap_fixed.png`:** nếu ảnh này là mình render từ file `.mmd` do bạn sửa, thì câu "quyết định nội dung mindmap đã sửa" là đúng. Nếu bạn tự vẽ bằng công cụ khác thì có thể ghi mạnh hơn.
+- **Mục 2.2:** phần phân loại "hallucination + framing bias" có dựa trên xác nhận của mình (#18). Nếu muốn chặt chẽ hơn, bạn có thể thêm "(đã đối chiếu với Claude, #18)" vào câu tự viết.
+- **Mục 5:** chỉ ghi "tự viết hoàn toàn" nếu bản cuối đúng là câu chữ của bạn. Mình mới góp ý, chưa viết hộ câu nào.
+- **Mục 1.4:** đoạn nhận xét là mình soạn nháp. Nếu bạn đã viết lại gần như toàn bộ thì có thể chuyển nó sang nhóm "tự viết".
+- **Khai báo có đúng như lời không:** "Tôi đã xem xét và chỉnh sửa" nghĩa là bạn cam kết đã thật sự kiểm tra các mục đó. Hiện còn 3 việc chưa xong nên sửa trước khi nộp: xóa các mục mẫu "#1" trong prompt log, dán output thật của Gemini vào #17, và sửa timestamp #8, #9. Nếu chưa sửa mà vẫn khai "đã rà soát" thì chính chỗ đó lại thành điểm yếu.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Kiểm tra lại xem có thông tin nào sai không, sau đó đưa bản hoàn thiện vào
 
 ---
 
-## #1 | 14:32 29/09/2026 | Claude Opus | R3
-**Mục đích:** Sinh test case nháp cho quạt điện
+## #22 | 10:36 30/09/2026 | Claude Opus | General
+**Mục đích:** Hỗ trợ hoàn thiện phần phụ lục
 
 **Prompt:**
 ```
-Sinh 15 test case cho quạt đứng <hãng> <model>, 3 mức gió, có xoay,
-không remote. Mỗi TC gồm Objective, Input, Steps, Expected.
+## Phụ lục
+
+### A: Prompt log
+
+> 📝 🔒 Tự ghi, **mọi prompt** gửi AI đều phải có. Nộp kèm file riêng `prompt_log.md`; ở đây để bảng tóm tắt.
+
+| Mã | Thời gian (HH:MM dd/mm/yyyy) | Tool / model | Mục đích | Dùng ở section | File/đoạn output |
+|---|---|---|---|---|---|
+| P01 | [..:.. ../../2026] | Claude [...] | [...] | [..] | [prompt_log.md#p01] |
+| P02 | [...] | [...] | [...] | [...] | [...] |
+
+Mẫu mỗi entry trong `prompt_log.md`:
+
+```markdown
+## P01 – [HH:MM dd/mm/yyyy] – Claude [model]
+**Mục đích:** [...]
+**Prompt:**
+> [nguyên văn]
+**Output:** [nguyên văn hoặc link screenshot]
+**Dùng ở:** Section [..] – Audit entry A[..]
+
+### B: AI-02, AI-03, AI-05
+
+| Template | File | Trạng thái |
+|---|---|---|
+| [AI-02] AI Audit Report | `AI-02_AuditReport_23120255.[pdf/docx]` | [ ] |
+| [AI-03] AI Disclosure Form (ký) | `AI-03_Disclosure_23120255.pdf` | [ ] |
+| [AI-05] Privacy & Responsible Use Checklist (ký) | `AI-05_Checklist_23120255.pdf` | [ ] |
+| [AI-06] Student Acknowledgement (ký tuần 1) | [đã nộp ngày ../../2026] | [ ] |
+
+### C: Git commit log
+
+> 📝 Chạy `git log --oneline --date=format:'%H:%M %d/%m/%Y' --pretty=format:'%h %ad %s'` trong thư mục HW01 và dán kết quả hoặc screenshot.
+
+
+[commit log]
+
+
+### D: Cấu trúc thư mục nộp (zip + GitHub)
+
+23120255_HW01_AI_<grade>.zip
+├── 23120255_HW01_Report.pdf
+├── prompt_log.md
+├── HW01_TestCases.xlsx          # sheets: Test Cases / Checklist / Test Summary Report
+├── mindmap/
+│   ├── mindmap_ai.png
+│   └── mindmap_fixed.(png|md)
+├── images/
+│   ├── J01.png … J10.png
+│   ├── device_with_student_id.jpg
+│   ├── mantis_home.png, mantis_bug_*.png
+│   └── ...
+├── videos.md                    # >= 5 link YouTube Unlisted
+└── ai-templates/
+    ├── AI-02_AuditReport_23120255.*
+    ├── AI-03_Disclosure_23120255.pdf
+    └── AI-05_Checklist_23120255.pdf
+
+Giúp tôi hoàn thiện phần này nhé
 ```
 
 **Output:**
 ```
-TC01: Kiểm tra bật quạt ở mức 1
-...
+Mình điền dựa trên prompt log của bạn và các file đã tạo trong buổi làm việc.
+
+```markdown
+## Phụ lục
+
+### A: Prompt log
+
+Toàn bộ prompt và output nguyên văn nằm ở file riêng `appendix/A_prompt_log.md`. Mỗi entry gồm: mã `#n`, thời gian, công cụ, section, mục đích, prompt, output và cách xử lý. Output dạng file được lưu nguyên bản trong `appendix/ai-outputs/`. Bảng dưới là tóm tắt.
+
+| Mã | Thời gian | Tool / model | Mục đích | Dùng ở section | Output / Audit entry |
+|---|---|---|---|---|---|
+| #1 | 17:38 29/09/2026 | Claude Opus 5.5 | Đưa đề bài để AI nắm context | Toàn bài | Nguyên văn trong log · A01 |
+| #2 | 17:41 29/09/2026 | Claude Opus 5.5 | Hoàn thiện dàn ý báo cáo | Toàn bài | `ai-outputs/23120255_HW01_Report.md` · A01 |
+| #3 | 18:34 29/09/2026 | Claude Opus 5.5 | Hỏi có nên bỏ mục 1.4 | 1.4 | Nguyên văn trong log · A01 |
+| #4 | 18:48 29/09/2026 | Claude Opus 5.5 | Sinh test case cho quạt Kakashi B300 | 3.2, 3.3 | `ai-outputs/HW01_R3_TestCases_AI_Draft.md` · A12 |
+| #5 | 23:44 29/09/2026 | Claude Opus 5.5 | Hỏi AI vì sao bỏ sót 5 edge case | 3.3, 3.4 | Nguyên văn trong log · A13 |
+| #6 | 00:27 30/09/2026 | Claude Opus 5.5 | Tìm thêm tin tuyển dụng có yêu cầu AI | 1.1 | Nguyên văn trong log · A02 |
+| #7 | 01:15 30/09/2026 | Claude Opus 5.5 | Điền bảng 10 tin tuyển dụng | 1.1 | Nguyên văn trong log · A03 |
+| #8 | 01:35 30/09/2026 | Claude Opus 5.5 | Tóm tắt JD cho 1.2 | 1.2 | `ai-outputs/HW01_R1_1.2.md` · A04 |
+| #9 | 02:42 30/09/2026 | Claude Opus 5.5 | Vẽ mindmap vai trò QA/QC (Mermaid) | 1.3 | `ai-outputs/mindmap_ai.mmd` · A05 |
+| #10 | 02:51 30/09/2026 | Claude Opus 5.5 | Vẽ lại mindmap nhiều màu | 1.3 | `ai-outputs/mindmap_ai.png` · A05 |
+| #11 | 04:58 30/09/2026 | Claude Opus 5.5 | Review câu chữ mục 1.3 | 1.3 | Nguyên văn trong log · A06 |
+| #12 | 05:02 30/09/2026 | Claude Opus 5.5 | Phản biện về nguồn ISTQB | 1.3 | Nguyên văn trong log · A06 |
+| #13 | 05:05 30/09/2026 | Claude Opus 5.5 | Điền thống kê và phân loại 1.4 | 1.4 | Nguyên văn trong log · A07 |
+| #14 | 05:16 30/09/2026 | Claude Opus 5.5 (Research) | Research 20 software defect 2022–2026 | 2.1 | Báo cáo research trong log · A08 |
+| #15 | 07:02 30/09/2026 | Claude Opus 5.5 | Điền bảng 2.0, 2.1 | 2.0, 2.1 | `ai-outputs/HW01_R2.md` · A08 |
+| #16 | 07:56 30/09/2026 | Claude Opus 5.5 | Giải thích chi tiết D18 | 2.1, 2.2 | Nguyên văn trong log · A09 |
+| #17 | 08:08 30/09/2026 | Gemini Flash | Hỏi D18 để kiểm tra hallucination | 2.2 | `R2_defects/R2_ai_hallucination.png` · A10 |
+| #18 | 08:55 30/09/2026 | Claude Opus 5.5 | Xác nhận hallucination và bias | 2.2 | Nguyên văn trong log · A11 |
+| #19 | 09:43 30/09/2026 | Claude Opus 5.5 | Soạn nháp AI Audit Report | 4 | `ai-outputs/HW01_Section4_AuditReport.md` |
+| #20 | 10:17 30/09/2026 | Claude Opus 5.5 | Góp ý bản nháp AI Critique (không viết hộ) | 5 | Nguyên văn trong log |
+| #21 | 10:29 30/09/2026 | Claude Opus 5.5 | Viết lại Mandatory Disclosure bằng tiếng Việt | 6 | Nguyên văn trong log |
+| #22 | 10:35 30/09/2026 | Claude Opus 5.5 | Hoàn thiện Phụ lục | Phụ lục | Nguyên văn trong log |
+
+**Tổng:** 22 lượt; Claude 21 lượt, Gemini 1 lượt.
+
+### B: AI-02, AI-03, AI-05
+
+| Template | File | Trạng thái |
+|---|---|---|
+| [AI-02] AI Audit Report (5 mục / artifact) | `ai-templates/AI-02_AuditReport_23120255.pdf` | [ ] Đã điền (nội dung như mục 4) |
+| [AI-03] AI Disclosure Form | `ai-templates/AI-03_Disclosure_23120255.pdf` | [ ] Đã ký |
+| [AI-05] Privacy & Responsible Use Checklist | `ai-templates/AI-05_Checklist_23120255.pdf` | [ ] Đã ký |
+| [AI-06] Student Acknowledgement | Đã nộp tuần 1 | [ ] Ngày nộp: ../../2026 |
+
+### C: Git commit log
+
+Repo: [ThachHaoo/software-testing-2627 – HW01](https://github.com/ThachHaoo/software-testing-2627/tree/main/HW01)
+
+[dán kết quả lệnh: git log --date=format:'%H:%M %d/%m/%Y' --pretty=format:'%h %ad %s' -- HW01]
+
+### D: Cấu trúc thư mục nộp (zip + GitHub)
+
+23120255_HW01_AI_<grade>.zip
+├── 23120255_HW01_Report.pdf
+├── HW01_TestCases.xlsx              # sheets: Test Cases / Checklist / Test Summary Report
+├── R1_jobs/
+│   ├── J01.png, J02_1.png, J02_2.png, J03.png … J10.png
+│   ├── mindmap_QA_QC.png            # bản gốc do AI sinh
+│   └── mindmap_fixed.png            # bản đã sửa (E1–E3)
+├── R2_defects/
+│   ├── R2_ai_hallucination.png      # Hình 2.1 – câu trả lời của Gemini
+│   └── R2_defect_fact.png           # Hình 2.2 – phát ngôn thật trên AP
+├── R3_device/
+│   ├── AnhThietBi_TheSinhVien.jpg
+│   ├── mantis_home.png              # trang chủ Mantis, username = 23120255
+│   └── mantis_bug_TC14.png, mantis_bug_TC15.png
+├── videos.md                        # 5 link YouTube: TC01, TC08, TC13, TC14, TC15
+├── appendix/
+│   ├── A_prompt_log.md
+│   └── ai-outputs/
+│       ├── 23120255_HW01_Report.md
+│       ├── HW01_R3_TestCases_AI_Draft.md
+│       ├── HW01_R1_1.2.md
+│       ├── mindmap_ai.mmd, mindmap_ai.png
+│       ├── HW01_R2.md
+│       └── HW01_Section4_AuditReport.md
+└── ai-templates/
+    ├── AI-02_AuditReport_23120255.pdf
+    ├── AI-03_Disclosure_23120255.pdf
+    └── AI-05_Checklist_23120255.pdf
+
+
+**Những chỗ cần bạn xử lý:**
+- **Prompt log:** bảng tóm tắt được lập từ log của bạn, nhưng file `A_prompt_log.md` vẫn phải do bạn tự ghi, vì đây là artifact cấm dùng AI.
+  - Thêm entry #19–#22 cho các lượt vừa rồi.
+  - Sửa #16 từ 07:06 thành 07:56, #8 từ "35/09" thành 30/09, #9 từ 29/09 thành 30/09.
+  - Xóa các mục mẫu "#1 | 14:32".
+  - Dán output thật của Gemini vào #17.
+- **Thiếu Mantis và Excel.** Báo cáo hiện kết thúc R3 ở mục 3.5, không có mục **3.6 Test Summary (+ Mantis)**. Đề bắt buộc nộp screenshot bug trên FIT Mantis (kèm trang chủ hiện username = MSSV) và file Excel. TC14 và TC15 đang Fail nên có sẵn 2 bug để log. Trong cây thư mục mình đã để sẵn tên file; nếu bạn đặt tên khác thì sửa lại cho khớp.
+- **Git log:** chạy lệnh trong mục C sau lần commit cuối cùng rồi dán vào, để log có đầy đủ commit.
+- **Mục B:** chỉ đánh dấu các ô khi đã thật sự điền và ký form. Ngày nộp AI-06 thì bạn tự điền.
 ```
 
-**Xử lý:** Giữ TC01–TC08 (VALID). TC09 sai vì quạt không có hẹn giờ
-(INVALID). TC11 thiếu bước kiểm tra độ rung (INCOMPLETE, đã sửa).
-→ AI-02 Artifact #3
+**Xử lý:** Kiểm tra lại xem có thông tin nào sai không, rồi đưa bản hoàn thiện vào report
 
+---
+
+## #23 | 10:42 30/09/2026 | Claude Opus | General
+**Mục đích:** Hỗ trợ hoàn thiện phần tự đánh giá và checklist
+
+**Prompt:**
+```
+Giúp tôi tự đánh giá và hoàn thành Checklist nhé:
+
+```markdown
+## 7. Tự đánh giá
+
+| No. | Tiêu chí | Điểm tối đa | Tự đánh giá | Căn cứ / tự nhận xét |
+|---|---|---|---|---|
+| 1 | Job Market 2026+ (10 jobs × 3 pts + AI Impact) | 40 | [..] | [VD: đủ 10 tin trong 60 ngày, x tin AI, đủ screenshot...] |
+| 2 | Software Defects 2022–2026 (20 defects) | 20 | [..] | [...] |
+| 3 | Physical-product test design (15 TCs + 5 videos) | 25 | [..] | [...] |
+| AI-1 | [AI-02] AI Audit Report (5-section) attached | 8 | [..] | [...] |
+| AI-2 | AI Critique 200–300 words + [AI-03] Disclosure attached | 4 | [..] | [...] |
+| AI-3 | [AI-05] Checklist signed + anti-cheat artifacts | 3 | [..] | [...] |
+| | **Tổng** | **100** | **[...]** | |
+
+> 📝 Tổng tự đánh giá = 3 chữ số trong tên file `23120255_HW01_AI_<grade>.zip`.
+
+**Checklist trước khi nộp:**
+
+- [x] 10 tin đều trong 60 ngày, >= 3 tin AI, mọi screenshot thấy username + ngày
+- [x] 20 defect 2022–2026, >= 5 defect AI/LLM, đủ link nguồn
+- [x] 1 chỗ AI hallucinate/bias có screenshot
+- [x] Mindmap AI + 3 lỗi + bản sửa (PNG/Markdown)
+- [x] Ảnh thiết bị + thẻ SV cùng khung; serial đã che 4 ký tự giữa
+- [x] 15 TC, >= 3 edge case SV tự tìm có chứng minh
+- [x] >= 5 video <= 60s, có giọng thuyết minh, YouTube Unlisted
+- [ ] File Excel: Test Cases / Checklist / Test Summary Report
+- [x] AI Audit Report 5 mục cho mọi artifact + tỉ lệ VALID/INVALID/INCOMPLETE
+- [x] AI Critique 200–300 từ
+- [x] Mandatory Disclosure đã điền cụ thể
+- [x] AI-02, AI-03 (đã ký), AI-05 (đã ký); AI-06 đã ký từ tuần 1
+- [x] Prompt log .md có timestamp mọi prompt
+- [ ] Đã xóa hết khối 📝 và dấu `[...]`
+- [ ] Tên file zip: `23120255_HW01_AI_<grade>.zip`
+
+```
+
+**Output:**
+```
+Mình chấm theo hướng hơi khắt khe, vì TA thường trừ điểm đúng ở những chỗ bạn còn thiếu. Dưới đây là 2 kịch bản. Bảng điền sẵn theo kịch bản bạn đã sửa xong các việc còn tồn (xem danh sách cuối bài).
+
+```markdown
+## 7. Tự đánh giá
+
+| No. | Tiêu chí | Điểm tối đa | Tự đánh giá | Căn cứ / tự nhận xét |
+|---|---|---|---|---|
+| 1 | Job Market 2026+ (10 jobs × 3 pts + AI Impact) | 40 | 37 | Đủ 10 tin trong 60 ngày (sớm nhất 29/08/2026), 5/10 tin yêu cầu AI (≥ 3); mỗi tin có link, screenshot có username và ngày, mô tả, kỹ năng, lương, AI Impact Analysis tách 3 ý. Có mindmap AI + 3 lỗi + bản sửa (G9.1) và tổng hợp thị trường (1.4). Tự trừ: J10 là vị trí security testing, không hẳn QA/QC; một số ô AI Impact còn chung chung; 7/10 tin không công bố lương. |
+| 2 | Software Defects 2022–2026 (20 defects) | 20 | 19 | Đủ 20 defect 2022–2026, 8 defect AI/LLM (≥ 5); mỗi defect có nguồn, mô tả, severity, hậu quả, giải pháp, bài học kiểm thử; đã tự mở và kiểm chứng toàn bộ link. Tìm được 1 chỗ Gemini hallucinate + framing bias, có ảnh khoanh đỏ và nguồn đối chiếu. Tự trừ: 1 link phụ (D16) đã hết hạn; không có defect mức Low. |
+| 3 | Physical-product test design (15 TCs + 5 videos) | 25 | 22 | 15 TC đủ Objective / Input / Steps / Expected / Actual / Verdict; 5 edge case tự tìm (≥ 3) có đối chiếu với output gốc của AI; 5 video ≤ 60 s có thuyết minh; 2 TC Fail được log lên Mantis. Tự trừ: quạt không có serial number (đã ghi rõ); expected của một số edge case chưa có oracle độc lập; TC15 chưa cô lập nguyên nhân bằng ổ cắm khác. |
+| AI-1 | [AI-02] AI Audit Report (5-section) attached | 8 | 8 | 13 artifact, mỗi artifact đủ 5 mục; đánh giá riêng 15 TC của AI; có tỉ lệ VALID / INVALID / INCOMPLETE và kết luận khi nào nên / không nên dùng AI. |
+| AI-2 | AI Critique 200–300 words + [AI-03] Disclosure attached | 4 | 4 | Critique tự viết, trong khoảng 200–300 từ, dẫn ví dụ cụ thể (Gemini/D18, edge case, mindmap); Disclosure ghi cụ thể phần AI tạo / SV sửa / SV tự viết; AI-03 đã ký. |
+| AI-3 | [AI-05] Checklist signed + anti-cheat artifacts | 3 | 3 | AI-05 đã ký; ảnh thiết bị + thẻ SV, video có giọng thuyết minh, screenshot tin tuyển dụng có username, prompt log 22 lượt có timestamp đều tự làm. |
+| | **Tổng** | **100** | **93** | |
+
+**Checklist trước khi nộp:**
+
+- [x] 10 tin đều trong 60 ngày, >= 3 tin AI, mọi screenshot thấy username + ngày
+- [x] 20 defect 2022–2026, >= 5 defect AI/LLM, đủ link nguồn
+- [x] 1 chỗ AI hallucinate/bias có screenshot
+- [x] Mindmap AI + 3 lỗi + bản sửa (PNG/Markdown)
+- [x] Ảnh thiết bị + thẻ SV cùng khung; quạt không có serial number (đã ghi rõ ở 3.1)
+- [x] 15 TC, >= 3 edge case SV tự tìm có chứng minh
+- [x] >= 5 video <= 60s, có giọng thuyết minh, YouTube Unlisted
+- [ ] Mục 3.6 Test Summary + screenshot Mantis (trang chủ có username 23120255 + bug TC14, TC15)
+- [ ] File Excel: Test Cases / Checklist / Test Summary Report
+- [x] AI Audit Report 5 mục cho mọi artifact + tỉ lệ VALID/INVALID/INCOMPLETE
+- [ ] AI Critique 200–300 từ (bản cuối, đã đếm lại số từ)
+- [x] Mandatory Disclosure đã điền cụ thể
+- [x] AI-02, AI-03 (đã ký), AI-05 (đã ký); AI-06 đã ký từ tuần 1
+- [ ] Prompt log .md có timestamp mọi prompt (thêm #19–#22, sửa timestamp #8/#9/#16, xóa mục mẫu "#1 | 14:32", dán output thật của Gemini vào #17)
+- [ ] Đã xóa hết khối 📝 và dấu `[...]`
+- [ ] Tên file zip: `23120255_HW01_AI_093.zip`
+
+**Vì sao mình bỏ tick 4 ô** mà trước đó bạn đã tick hoặc chưa có:
+- **Mantis:** checklist cũ không có dòng này, nhưng danh sách nộp bài của đề bắt buộc phải có. Mình đã thêm vào.
+- **Serial number:** ô này bạn tick "đã che 4 ký tự giữa", nhưng thực tế quạt không có serial. Mình giữ tick nhưng sửa lại câu cho đúng sự thật.
+- **Prompt log:** hiện vẫn còn các mục mẫu bịa và #17 chưa có output thật. Khi chưa sửa thì không nên tick.
+- **AI Critique:** bạn đang sửa lại theo góp ý, nên chỉ tick sau khi có bản cuối.
+
+**Hai kịch bản điểm:**
+
+| Tình trạng lúc nộp | R3 | AI-2 | AI-3 | Tổng |
+|---|---|---|---|---|
+| Đã làm xong Mantis, Excel, prompt log, Critique | 22 | 4 | 3 | **93** |
+| Chưa làm Mantis và Excel | ~18 | 4 | 3 | **~89** |
+| Prompt log vẫn còn mục mẫu hoặc output sai | – | – | 0 | có thể bị **mất cả cột AI** |
+
+Chỗ rủi ro nhất là prompt log. Đề ghi rõ nếu thiếu Audit Report, prompt log hoặc Critique thì mất toàn bộ cột AI compliance, và khai báo sai thì bị 0 điểm. Vì vậy nên sửa prompt log trước tiên. Điểm tự đánh giá chỉ nên chốt sau khi làm xong các việc trên, và nhớ cập nhật con số trong tên file zip cho khớp.
+```
+
+**Xử lý:** Xem bản đánh giá và checklist mà Claude vừa thêm, xem có chỗ nào thiếu, chỗ nào thừa không, sửa lại rồi đưa vào.
+
+---
+
+## #24 | 10:46 30/09/2026 | Claude Opus | General
+**Mục đích:** Xác minh không sử dụng Mantis
+
+**Prompt:**
+```
+Mình không làm Mantis nhé, vì hỏi mà thầy chưa trả lời nên có lẽ bài này chưa cần Mantis
+```
+
+**Output:**
+```
+Được, vậy mình bỏ Mantis ra. Nhưng nên ghi rõ lý do trong báo cáo: danh sách nộp bài của đề có mục "Bug screenshots: FIT Mantis", nên nếu bài không có gì mà cũng không giải thích thì TA dễ trừ điểm.
+
+**Cách giảm rủi ro:** thêm một mục 3.6 ngắn. Mục này ghi nhận 2 bug từ TC14 và TC15 ngay trong báo cáo (và trong sheet Test Summary của file Excel), kèm một dòng giải thích vì sao chưa có Mantis:
+
+```markdown
+### 3.6 Test Summary
+
+| Chỉ số | Số lượng | Tỉ lệ |
+|---|---|---|
+| Tổng TC thiết kế | 15 | 100% |
+| Đã thực thi | 15 | 100% |
+| Pass | 13 | 86,7% |
+| Fail | 2 | 13,3% |
+| TC từ AI (giữ nguyên / đã sửa) / SV tự viết | 10 / 5 | – |
+
+**Defect tìm được:**
+
+| Bug ID | TC | Tóm tắt | Severity | Priority | Trạng thái |
+|---|---|---|---|---|---|
+| BUG-01 | TC14 | Nhấn giữ đồng thời phím 2 và 3 rồi thả ra: cả hai phím bị kẹt ở trạng thái bật, quạt vẫn chạy | High | High | New |
+| BUG-02 | TC15 | Tác động nhẹ vào dây nguồn khi quạt đang chạy thì quạt tắt, dù phích vẫn cắm trong ổ | High | High | New |
+
+> Ghi chú: Chưa log bug lên FIT Mantis vì đã hỏi giảng viên về yêu cầu này cho HW01 nhưng chưa nhận được phản hồi trước hạn nộp. Bug được ghi nhận đầy đủ tại bảng trên và sheet Test Summary trong file Excel.
+
+Bạn kiểm tra lại dòng "Đã thực thi 15/15". Nếu thực tế bạn chỉ chạy thật 5 TC có quay video thì sửa thành 5, và ghi 10 TC còn lại là Not Run. Tuy vậy bảng 3.3 của bạn đã có Actual cho cả 15 TC, nên nếu bạn chạy đủ thì giữ nguyên số 15.
+
+**Các chỗ cần sửa lại cho khớp:**
+
+1. **Mục 7, dòng 3 (R3):** câu "2 TC Fail được log lên Mantis" đổi thành **"2 TC Fail được ghi nhận thành bug trong Test Summary (chưa log Mantis, đã hỏi giảng viên)"**. Điểm tự đánh giá nên hạ xuống **21** vì vẫn có rủi ro bị trừ. Tổng mới là **92**, tên file sẽ là `23120255_HW01_AI_092.zip`.
+2. **Checklist:** thay dòng Mantis bằng
+   `- [x] Mục 3.6 Test Summary + bảng bug (Mantis: chưa yêu cầu, đã hỏi giảng viên)`
+3. **Phụ lục D:** xóa 2 dòng `mantis_home.png` và `mantis_bug_TC14.png, mantis_bug_TC15.png` trong thư mục `R3_device/`.
+
+Nếu thầy trả lời trước hạn nộp và vẫn yêu cầu Mantis, bạn chỉ cần log 2 bug trong bảng trên, chụp màn hình rồi bỏ dòng ghi chú là xong.
+```
+
+**Xử lý:** Bỏ các Mantis ra khỏi bài và thêm ### 3.6 để thay thế cho Mantis
 ---
 
 ## #1 | 14:32 29/09/2026 | Claude Opus | R3
