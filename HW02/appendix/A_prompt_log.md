@@ -2053,12 +2053,106 @@ Báo cáo cho phiên thảo luận (số Pass/Fail/Blocked cuối theo suite).
 ```
 
 **Output:**
-```
+````
 Có đủ 3 file ảnh kiểm tay của TC-216. Giờ ghi các thay đổi.
+
+Em đã chốt xong verdict bước 6 của A_FR01 và commit ở `32390b1`. Kết quả cuối: **43 Pass, 65 Fail, 25 Blocked, 0 Not run**. Tổng không đổi so với lượt trước, vì TC-217 chuyển Fail → Blocked còn TC-216 chuyển Blocked → Fail.
+
+**Đã làm:**
+- **TC-02:** giữ Fail, notes thêm câu về EC2 (bị chặn bởi TC-01; đã kiểm ở API TC-29).
+- **TC-217:** Blocked theo A20, gốc TC-01, notes giống TC-218; đã bỏ dòng "chờ SV kiểm tay". TC-231 không đổi.
+- **TC-216:** cập nhật Thao tác riêng, Expected, notes, actual nguyên văn của em, status Fail, `auto_status` để trống. 3 file ảnh kiểm tay đều có trong `evidence/`.
+- **14 case** có notes "Pass hộp đen", ghi rõ luật tương ứng:
+  - TS-DOM-UI: 16, 18, 19, 20, 21, 22, 23, 24
+  - TS-BVA-UI: 63, 67, 70, 73, 76
+  - TS-SV: 210
+- **Không thêm notes cho 17** (mật khẩu rỗng): case này bị chặn bằng bong bóng HTML5 ngay ở ô Mật khẩu, không phải hộp lỗi "Mật khẩu quá yếu!". Các case UI Pass còn lại (05, 07, 60) cũng bị chặn bằng bong bóng HTML5 ngay trên trường mục tiêu.
+
+**Kết quả theo suite:**
+
+| Suite | Pass | Fail | Blocked |
+|---|---|---|---|
+| TS-DOM-UI | 11 | 2 | 14 |
+| TS-DOM-API | 3 | 27 | 0 |
+| TS-BVA-UI | 6 | 11 | 2 |
+| TS-BVA-API | 13 | 6 | 0 |
+| TS-GUI | 2 | 3 | 0 |
+| TS-SV | 8 | 16 | 9 |
+| **Tổng** | **43** | **65** | **25** |
+
+check_domain 0 lỗi; lint 0 lỗi.
+
+**Cần em xem:**
+1. **Notes của TC-216 ghi chưa đúng:** câu "trang Quản lý Người dùng (admin) … chỉ id, email, mật khẩu". Theo `frontend-admin/src/App.jsx` khoảng dòng 879–905, bảng có các cột **ID, Email, Role, Số ĐT**, không có mật khẩu. Em chép đúng nguyên văn em gửi nên chưa sửa.
+2. `evidence/TC-FR01-216_ui.png` (ảnh tự động cũ) đã vào commit nhưng không còn được `evidence` của case nào trỏ tới.
+3. Ở thư mục gốc repo có `package-lock.json` mới, chưa commit. Có thể do lỡ chạy `npm` ở thư mục gốc.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: hoàn tất verdict bước 6 HW02/A_FR01 (TC-02, 217, 216 kiểm tay, notes Pass hộp đen) + commit 6/7b
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (TC-02 notes; TC-217 → Blocked; TC-216 thiết kế + kết quả kiểm tay; notes Pass hộp đen cho 14 case) · testcases.md · HW02/README.md · evidence/ (294 file merge + 3 ảnh kiểm tay)
+- Kết quả cuối: Pass 43 · Fail 65 · Blocked 25 · Not run 0 — DOM-UI 11/2/14 · DOM-API 3/27/0 · BVA-UI 6/11/2 · BVA-API 13/6/0 · GUI 2/3/0 · SV 8/16/9
+- Notes Pass hộp đen (14): 16, 18, 19, 20, 21, 22, 23, 24, 63, 67, 70, 73, 76, 210
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (UB do A4) · lint 0 lỗi / 4 cảnh báo · 3 ảnh kiểm tay TC-216 có đủ
+- Commit: 32390b1 HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216 (301 file)
+- Cần quyết định / câu hỏi:
+  1. Notes TC-216 ghi admin hiện "id, email, mật khẩu"; code admin hiện ID, Email, Role, Số ĐT → SV sửa lại câu?
+  2. evidence/TC-FR01-216_ui.png (ảnh tự động cũ) đã commit nhưng không case nào trỏ tới → xoá hay giữ?
+  3. package-lock.json ở thư mục gốc repo (chưa commit) → có vẻ do chạy npm nhầm thư mục, SV xoá?
+  4. Bước tiếp theo: bước 7 (SV tự viết bug report + GitHub Issues 🔒).
+```
+````
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 32 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 30 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #33 | 23:29 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Chỉnh TC-FR01-216 và dọn repo, theo quan sát của SV:
+1. TC-216 notes: thay câu cũ về trang admin bằng: "SV sửa điểm quan sát ngày 2026-10-19: trang Quản lý Người dùng (admin :5174) chỉ có các cột ID, Email, Role, Số ĐT, Hành động — không hiển thị Họ Tên nên không dùng làm điểm quan sát (ảnh TC-FR01-216_manual_admin.png). Kiểm tay, không tự động hoá."
+   Thêm: "Lần chạy tự động: form chặn do mật khẩu (A20) → kiểm tay qua API."
+2. TC-216 evidence: thêm evidence/TC-FR01-216_ui.png (ảnh lần chạy tự động) và evidence/TC-FR01-216_manual_admin.png (kiểm file tồn tại); giữ 3 ảnh kiểm tay đã có. Khôi phục auto_status từ HW02/tests/results/A_FR01.json. Status giữ Fail.
+3. package-lock.json ở gốc repo: nếu gốc không có package.json thì xoá; báo lại.
+4. render_md.
+5. Commit "HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 theo quan sát trang admin" gồm testcases.json/.md, evidence/TC-FR01-216_manual_admin.png, A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Ở gốc repo không có `package.json`, còn `package-lock.json` thì rỗng (`"packages": {}`), nên xoá. Giờ sửa TC-216, lấy `auto_status` từ file kết quả.
+
+Em đã chỉnh TC-FR01-216 và dọn repo, commit ở `a6cd0ef`.
+
+- **Notes:** câu cũ về trang admin đã thay bằng câu em gửi (các cột ID, Email, Role, Số ĐT, Hành động), có thêm câu "Lần chạy tự động: form chặn do mật khẩu (A20) → kiểm tay qua API."
+- **Evidence:** giờ gồm 5 ảnh, cả 5 file đều có trong thư mục:
+  - `TC-FR01-216_ui.png` (ảnh lần chạy tự động)
+  - 3 ảnh kiểm tay đã có: `_manual_alert`, `_manual_header`, `_manual_profile`
+  - `TC-FR01-216_manual_admin.png` (mới thêm)
+- **auto_status:** lấy lại từ `results/A_FR01.json` là `Blocked` (lần chạy tự động gắn Blocked theo A20). Status vẫn là Fail.
+- **`package-lock.json` ở gốc repo:** đã xoá. Gốc không có `package.json`, và file này rỗng (`"packages": {}`), chưa từng commit.
+
+Tổng kết quả không đổi: 43 Pass, 65 Fail, 25 Blocked. check_domain 0 lỗi.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: chỉnh notes/evidence/auto_status TC-FR01-216 theo quan sát trang admin; dọn package-lock.json ở gốc
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (TC-216: notes, evidence 5 ảnh, auto_status Blocked) · testcases.md · thêm evidence/TC-FR01-216_manual_admin.png · xoá package-lock.json ở gốc (chưa từng commit)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (UB do A4) · cả 5 ảnh evidence của TC-216 có trong thư mục · tổng giữ nguyên Pass 43 / Fail 65 / Blocked 25
+- Commit: a6cd0ef HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 theo quan sát trang admin
+- Cần quyết định / câu hỏi:
+  1. Bước tiếp: bước 7 của SV (bug report + GitHub Issues 🔒). AI chỉ kiểm trường thiếu, severity/priority, và chạy `gh issue create --body-file` với file SV đã viết.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 33 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 31 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
