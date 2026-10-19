@@ -58,7 +58,7 @@ Skill dùng trong repo:
 **Test basis:** `../eshop-sut/README.md` (SRS v2.0 — mục FR-01, FR-07, FR-15, FR-20, FR-21…24 GUI, SEC-xx), `../eshop-sut/api_specification.md`, mã nguồn `../eshop-sut/{frontend-web,frontend-admin,frontend-mobile,backend}`. SRS là oracle; code chỉ để biết tên trường/nhãn/endpoint thật. Mở thư mục SUT bằng `/add-dir ../eshop-sut` nếu chưa truy cập được.
 
 **SUT & môi trường** (ghi vào `HW02/env/environment.md`):
-- Repo SUT gốc `ttbhanh/eshop-sut`, commit **`85af3ba`**; nhóm fork tại `tkob-team/eshop-sut` (GitHub Issues của nhóm ở đây; Issues trên fork phải được bật trong Settings).
+- SUT = fork nhóm `tkob-team/eshop-sut` @ **`de0f48f`** (= repo gốc `ttbhanh/eshop-sut` commit `85af3ba` + `.gitignore`, không đổi mã). GitHub Issues của nhóm ở fork này; Issues trên fork phải được bật trong Settings.
 - Chạy trên **Windows (PowerShell), không chạy trong WSL2**. Backend :3000, web :5173, admin :5174.
 - Tài khoản: admin `admin@eshop.com` / `Admin123!` (setup_guide ghi `admin123` — sai so với seed), user `test@eshop.com` / `Test1234!`.
 - **Mỗi lần `node server.js` khởi động, CSDL bị xoá và seed lại**; giỏ hàng nằm trong RAM (`userCarts`). Restart backend = mất tài khoản/sản phẩm/giỏ đã tạo. Viết precondition và cleanup theo đặc điểm này.
@@ -71,6 +71,9 @@ Skill dùng trong repo:
 - 2026-10-19: Prompt log **trích tự động bằng script** (mục 4); sinh viên tự ghi Section/Mục đích/Xử lý; khai trong Disclosure.
 - 2026-10-19: BVA theo **mô hình 9 điểm của slide** (LB−1, LB, LB+1, NOM, UB−1, UB, UB+1, MIN_UI, MAX_UI); ghi rõ trong report.
 - 2026-10-19: Test case lưu trong `testcases.json` theo schema `test-case-writing` + mở rộng `domain`; bảng .md sinh từ JSON.
+- 2026-10-19 (A_FR01 review bước 1): email trùng so sánh **có phân biệt hoa/thường** và **cắt khoảng trắng đầu/cuối** (A3); expected của case tuân theo giả định này. Giữ A5 (tập ký tự đặc biệt đóng), A8 (xác nhận mật khẩu chỉ kiểm ở UI), A1/A4 (không có cận trên; MIN_UI/MAX_UI xét ở bước 4).
+- 2026-10-19 (A_FR01 phạm vi): giữ FR-22.1–22.4, kiểm bằng suite GUI riêng, không phân lớp; bỏ FR-21 và SEC-01 khỏi phạm vi.
+- 2026-10-19: SUT = `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã); ghi ở `meta.sut_version` và `HW02/env/environment.md`.
 - Transcript ghi nhận các lượt #1–#3 của session cloud ngày 12/10 do Claude Sonnet 4.6 trả lời, các lượt sau Claude Opus 5.5 → AI-03 khai cả hai.
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.

@@ -2,7 +2,7 @@
 
 | Mục | Giá trị |
 |---|---|
-| SUT | EShop, repo `ttbhanh/eshop-sut`, commit `85af3ba` (fork nhóm `tkob-team/eshop-sut`) |
+| SUT | EShop, fork nhóm `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã) |
 | Máy | [...] (OS, CPU/RAM) |
 | Node.js | [...] (`node -v`) |
 | Trình duyệt | [...] (tên + phiên bản) |
