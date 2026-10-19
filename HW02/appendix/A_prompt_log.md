@@ -1178,4 +1178,83 @@ Thêm **A18**: ô Xác nhận mật khẩu cũng phải là `type="password"`, v
 
 ---
 
-**Tổng:** 20 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 18 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #21 | 17:09 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Commit riêng trước: "HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)" chỉ gồm .claude/skills/domain-bva-testing/scripts/render_md.py.
+
+Sau đó áp dụng review bước 3 cho HW02/A_FR01 (em sửa trên bản đóng băng, KHÔNG freeze lại):
+1. Tách TS-DOM thành TS-DOM-UI (TC-FR01-01…) và TS-DOM-API (đánh số tiếp), mỗi suite một procedure riêng. Ghi notes cho suite nào vẫn > 25 dòng: "giữ đủ lớp theo quy tắc mỗi case không hợp lệ phủ một lớp".
+2. Case hợp lệ gộp: chỉ gộp lớp có căn cứ SRS (EC1/EC2, EC7, EC18, EC22, EC25, EC28, EC31, EC33/EC34, EC39). EC8 và EC19 (dựa trên giả định A3) mỗi lớp một case hợp lệ riêng, ở cả UI và API.
+3. Case API của EC19 dùng biến thể hoa/thường khác với case UI (ví dụ 'TEST@eshop.com' so với 'Test@eshop.com') để hai case không phụ thuộc nhau.
+4. A17 sửa thành: nếu thiếu ô Xác nhận mật khẩu, case có V5 = EC39 bỏ qua bước nhập V5 (ghi notes), chỉ các case EC40–EC42 → Blocked. Cập nhật procedure của TS-DOM-UI cho khớp.
+5. TC của EC24 (Mật khẩu rỗng): thêm notes "V5 = V4 = rỗng; EC39/EC40 trùng nhau chỉ vì V4 rỗng; lỗi quy cho EC24 — đối chiếu validationMessage của ô Mật khẩu khi chạy".
+6. Không đổi số TS-BVA (60–) và TS-GUI (90–).
+7. Chạy check_domain (0 lỗi, 50/50 EC), lint, render. Commit "HW02[A-FR01] 3/7: Test case Domain" gồm testcases.json/.md, file đóng băng bước 3 + INDEX.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận (kèm số TC mỗi suite).
+8. Oracle tương đối: mọi Expected dạng "vẫn chỉ có đúng 1 user email 'test@eshop.com'" hoặc "không có thêm user nào" đổi thành "so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa". Case hợp lệ: "đúng 1 user mới so với bước 1, có name/email như cột dữ liệu".
+9. Cleanup hai tầng, ghi vào preconditions/cleanup của cả TS-DOM-UI và TS-DOM-API: (a) trước mỗi lượt chạy cả suite: khởi động lại backend để CSDL seed sạch; (b) sau mỗi case, kể cả khi Fail: xoá mọi user mới so với bước 1 bằng DELETE /api/admin/users/:id. Nếu xoá thất bại thì ghi notes, không đổi verdict của case.
+10. Ghi giả định A19: "Tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi."
+11. Preconditions của TS-DOM-UI ghi đủ trạng thái ban đầu: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token); chạy tay thì dùng cửa sổ ẩn danh/tắt autofill; Playwright dùng browser context mới cho mỗi case.
+12. Procedure của TS-DOM-UI viết rõ từng bước, mỗi bước có phản hồi quan sát được: (1) mở /register → 4 ô trống; (2) nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu bằng cách gõ đúng chuỗi trong cột; ô có giá trị `''` (rỗng) thì không nhập gì, giữ nguyên ô trống; giá trị có ␣ thì gõ đúng số dấu cách đó → ô hiển thị đúng giá trị đã gõ (mật khẩu hiện dạng che); (3) bấm nút 'Đăng Ký' đúng một lần → hệ thống phản hồi; (4) quan sát: hộp lỗi đỏ trên form / bong bóng kiểm tra của trình duyệt / URL trên thanh địa chỉ → so với cột Expected; (5) kiểm CSDL theo oracle tương đối.
+13. Procedure của TS-DOM-API ghi rõ: header Content-Type: application/json; khoá body name/email/password lấy từ cột dữ liệu; '— thiếu trường —' = bỏ khoá khỏi body; 'số …' = giá trị số JSON; '' = chuỗi rỗng; gửi đúng một request; quan sát HTTP status + body.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Đã commit `31f42ad`. Giờ dựng lại TS-DOM thành 2 suite UI và API; TS-GUI giữ nguyên.
+
+Đã áp dụng đủ 13 mục review bước 3 và commit `448b10d`. Bản vá `render_md.py` commit riêng trước ở `31f42ad`. check_domain 0 lỗi, phủ 50/50 EC; lint 0 lỗi.
+
+| Suite | Số TC | Mã | Nội dung |
+|---|---|---|---|
+| TS-DOM-UI | 27 | 01–27 | 2 case hợp lệ gộp (chỉ gồm lớp có căn cứ SRS) + EC8 riêng (03) + EC19 `Test@eshop.com` (04) + 20 case không hợp lệ (05–24) + 3 case V5 (25–27) |
+| TS-DOM-API | 30 | 28–57 | 2 case hợp lệ gộp + EC8 (30) + EC19 `TEST@eshop.com` (31) + 20 case không hợp lệ (32–51) + 6 lớp chỉ có ở API (52–57) |
+| TS-GUI | 5 | 90–94 | không đổi |
+| **Tổng** | **62** | | TS-BVA vẫn để trống từ 60 |
+
+**Thay đổi chính:**
+- **Oracle tương đối:** không còn chỗ nào ghi "vẫn chỉ có đúng 1…" hay "không có thêm user".
+- **Hai suite tách theo tầng:** mỗi suite có procedure, preconditions và cleanup riêng theo mục 9, 11, 12, 13. Cả hai đều có notes "giữ đủ lớp…" vì vẫn hơn 25 dòng.
+- **A17 sửa** theo mục 4; thêm **A19**. TC-FR01-17 (EC24) có notes theo mục 5. Các case V5 = EC39 có notes "bỏ qua bước nhập V5 nếu thiếu ô".
+- **Bỏ cột thừa:** cột "Tầng" không cần nữa vì đã tách suite; TS-DOM-API không có cột Xác nhận mật khẩu (A8).
+
+**Lệch so với khối lệnh:** mục 12 đánh số bước "mở `/register`" là (1). Nhưng oracle mục 8 so với "danh sách lấy ở bước 1", nên em đặt bước lấy danh sách user (`GET /api/admin/users`) làm bước 1. Năm bước của mục 12 thành bước 2–6 (API: 2–4).
+
+**Chỗ `render_md.py` chưa hiển thị** (dữ liệu trong JSON vẫn đủ):
+- Các bước của TS-GUI không có trong `.md`, chỉ có bảng tóm tắt.
+- `notes` của suite không hiện.
+- Tiêu đề "Bước 3b — Minimum Set" chỉ nhận mã `TS-DOM`, nên hai suite mới hiện tên mặc định.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá render_md (commit riêng) + áp dụng review bước 3 HW02/A_FR01 (không freeze lại) + commit 3/7
+- File đã tạo/sửa:
+  - .claude/skills/domain-bva-testing/scripts/render_md.py (commit riêng)
+  - HW02/A_FR01/testcases.json:
+    - tách TS-DOM-UI 27 TC (01–27) / TS-DOM-API 30 TC (28–57), TS-GUI 5 TC (90–94) giữ nguyên → tổng 62
+    - EC8, EC19 có case hợp lệ riêng ở cả hai tầng; EC19: UI 'Test@eshop.com', API 'TEST@eshop.com'
+    - oracle tương đối; preconditions/procedure/cleanup hai tầng
+    - A17 sửa, thêm A19
+  - testcases.md (render lại)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (V4 chưa có BVA → bước 4), 50/50 EC · lint 0 lỗi / 2 cảnh báo (hai suite > 25 dòng, đã ghi notes) · test Not run
+- Commit:
+  - 31f42ad HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+  - 448b10d HW02[A-FR01] 3/7: Test case Domain (testcases.json/.md, A_FR01_step3_20261019-1656.{json,md}, INDEX.md, A_prompt_log.md)
+- Cần quyết định / câu hỏi:
+  1. Procedure: bước lấy danh sách user là bước 1 (để oracle "bước 1" đúng), 5 bước của mục 12 thành bước 2–6. Đồng ý không?
+  2. render_md chưa hiển thị: các bước của suite step-by-step (TS-GUI), notes của suite, tiêu đề "Bước 3b" cho TS-DOM-UI/API → vá harness thêm một commit riêng không?
+  3. Bước tiếp theo: /domain-bva-testing HW02/A_FR01 4 (TS-BVA từ TC-FR01-60; với 2 tầng UI/API, dải 60–89 chỉ có 30 mã).
+```
+````
+*File AI ghi/gửi trong lượt này:* `fr01_step3_split.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 21 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 19 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

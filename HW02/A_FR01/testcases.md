@@ -142,7 +142,8 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 | EC49 | Tạo đúng 1 bản ghi user mới với name/email đã nhập | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31 |
 | EC50 | Không tạo bản ghi (số user không đổi) | TC-FR01-05, TC-FR01-06, TC-FR01-07, TC-FR01-08, TC-FR01-09, TC-FR01-10, TC-FR01-11, TC-FR01-12, TC-FR01-13, TC-FR01-14, TC-FR01-15, TC-FR01-16, TC-FR01-17, TC-FR01-18, TC-FR01-19, TC-FR01-20, TC-FR01-21, TC-FR01-22, TC-FR01-23, TC-FR01-24, TC-FR01-25, TC-FR01-26, TC-FR01-27, TC-FR01-32, TC-FR01-33, TC-FR01-34, TC-FR01-35, TC-FR01-36, TC-FR01-37, TC-FR01-38, TC-FR01-39, TC-FR01-40, TC-FR01-41, TC-FR01-42, TC-FR01-43, TC-FR01-44, TC-FR01-45, TC-FR01-46, TC-FR01-47, TC-FR01-48, TC-FR01-49, TC-FR01-50, TC-FR01-51, TC-FR01-52, TC-FR01-53, TC-FR01-54, TC-FR01-55, TC-FR01-56, TC-FR01-57 |
 
-### TS-DOM-UI — Domain — minimum set, tầng UI (FR-01)
+### Bước 3b — Minimum Set of Test Cases (Domain) · TS-DOM-UI — Domain — minimum set, tầng UI (FR-01)
+**Ghi chú suite:** giữ đủ lớp theo quy tắc mỗi case không hợp lệ phủ một lớp
 **Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).; Web http://localhost:5173 đang chạy.; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).; Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).; Trạng thái ban đầu của mỗi case: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token).; Chạy tay: dùng cửa sổ ẩn danh và tắt autofill. Playwright: browser context mới cho mỗi case.
 
 **Quy trình chung:**
@@ -185,7 +186,8 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 | TC-FR01-26 | Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu khác Mật khẩu | EC41, EC44, EC46, EC50 | Nguyen Van A | dom26_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234? | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chỉ khác ký tự cuối ('?' thay '!'); cả hai chuỗi đều là mật khẩu mạnh nên lỗi chỉ đến từ không khớp. | AI |
 | TC-FR01-27 | Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu chỉ khác Mật khẩu ở chữ hoa/thường | EC42, EC44, EC46, EC50 | Nguyen Van A | dom27_{ts}@domain.com | chưa có | Abcd1234! | abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Khác đúng một ký tự về hoa/thường (A7). | AI |
 
-### TS-DOM-API — Domain — minimum set, tầng API (FR-01)
+### Bước 3b — Minimum Set of Test Cases (Domain) · TS-DOM-API — Domain — minimum set, tầng API (FR-01)
+**Ghi chú suite:** giữ đủ lớp theo quy tắc mỗi case không hợp lệ phủ một lớp
 **Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).; Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).
 
 **Quy trình chung:**
@@ -237,6 +239,51 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 | TC-FR01-92 | Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký |  | Ô Mật khẩu và ô Xác nhận mật khẩu đều có type="password" và che ký tự đã nhập. | FR-22.3 quy định type=password; áp dụng cho cả ô Xác nhận mật khẩu theo A18. | AI |
 | TC-FR01-93 | Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa |  | Thông báo lỗi nằm phía trên nút 'Đăng Ký'. | Chọn dữ liệu vượt qua kiểm tra HTML5 để thông báo lỗi chắc chắn nằm trong DOM và đo được vị trí (A16). | AI |
 | TC-FR01-94 | Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở form Đăng ký |  | Form có trường Xác nhận mật khẩu (FR-01.9). | Case kiểm sự tồn tại của trường mà A17 nhắc tới; tách khỏi các case nhập liệu để kết luận riêng. | AI |
+
+**Các bước chi tiết:**
+
+**TC-FR01-90** — Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của form Đăng ký
+
+- Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
+- Dữ liệu: Nhãn: 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'
+- Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
+- Bước 2: Đọc nhãn của 4 trường 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'. → Mỗi nhãn có ký tự '*' ngay bên cạnh tên trường.
+- Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
+
+**TC-FR01-91** — Kiểm tra thuộc tính type của ô Email khi mở form Đăng ký
+
+- Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
+- Dữ liệu: Thuộc tính cần đọc: type của ô 'Email'
+- Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
+- Bước 2: Đọc thuộc tính type của thẻ input thuộc nhãn 'Email' (DevTools hoặc locator.getAttribute('type')). → Giá trị type là "email".
+- Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
+
+**TC-FR01-92** — Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký
+
+- Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
+- Dữ liệu: Mật khẩu: 'Abcd1234!'
+- Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
+- Bước 2: Đọc thuộc tính type của thẻ input thuộc nhãn 'Mật khẩu'. → Giá trị type là "password".
+- Bước 3: Gõ 'Abcd1234!' vào ô 'Mật khẩu'. → Ô hiển thị ký tự che (•), không hiện chuỗi 'Abcd1234!'.
+- Bước 4: Đọc thuộc tính type của thẻ input thuộc nhãn 'Xác nhận mật khẩu' (A18). → Giá trị type là "password".
+- Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
+
+**TC-FR01-93** — Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa
+
+- Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
+- Dữ liệu: Mật khẩu 'abcd1234!' (thiếu chữ hoa); Email 'gui93_{ts}@domain.com'
+- Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
+- Bước 2: Nhập Họ Tên 'Nguyen Van A', Email 'gui93_{ts}@domain.com', Mật khẩu 'abcd1234!', Xác nhận mật khẩu 'abcd1234!' rồi bấm 'Đăng Ký'. → Hộp thông báo lỗi xuất hiện trong DOM (mọi ô đã điền nên trình duyệt không chặn bằng bong bóng HTML5).
+- Bước 3: Lấy boundingBox của hộp lỗi và của nút 'Đăng Ký'. → Cạnh dưới của hộp lỗi (y + height) ≤ cạnh trên (y) của nút 'Đăng Ký'.
+- Dọn dẹp: Nếu user 'gui93_{ts}@domain.com' bị tạo: xoá bằng DELETE /api/admin/users/:id (token admin).
+
+**TC-FR01-94** — Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở form Đăng ký
+
+- Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
+- Dữ liệu: Nhãn cần tìm: 'Xác nhận mật khẩu'
+- Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
+- Bước 2: Tìm ô nhập có nhãn 'Xác nhận mật khẩu' trong form. → Có đúng 1 ô nhập với nhãn 'Xác nhận mật khẩu', nằm sau ô 'Mật khẩu'.
+- Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
 
 ### Truy vết yêu cầu ↔ test case
 | Yêu cầu | Test case | Số TC |
