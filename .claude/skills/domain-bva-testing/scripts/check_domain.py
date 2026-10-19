@@ -7,6 +7,12 @@ Exit 1 nếu có ERROR.
 import json
 import sys
 from collections import Counter, defaultdict
+import sys as _sys
+for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output bị chuyển hướng
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 BVA_POINTS = {"LB-1", "LB", "LB+1", "NOM", "UB-1", "UB", "UB+1", "MIN_UI", "MAX_UI"}
 

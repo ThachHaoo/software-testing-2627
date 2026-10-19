@@ -12,6 +12,12 @@ import json
 import re
 import shutil
 from pathlib import Path
+import sys as _sys
+for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output bị chuyển hướng
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 STATUS = {"passed": "Pass", "failed": "Fail", "timedOut": "Fail", "skipped": "Not run", "interrupted": "Blocked"}
 ID_RE = re.compile(r"^(TC-[A-Z0-9]+(?:-[A-Z0-9]+)*-\d{2,4})\b")

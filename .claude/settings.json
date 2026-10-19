@@ -1,4 +1,8 @@
 {
+  "env": {
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1"
+  },
   "cleanupPeriodDays": 365,
   "permissions": {
     "allow": [
@@ -25,7 +29,9 @@
           {
             "type": "command",
             "command": "python",
-            "args": ["${CLAUDE_PROJECT_DIR}/tools/hooks/on_stop.py"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/tools/hooks/on_stop.py"
+            ],
             "timeout": 60
           }
         ]

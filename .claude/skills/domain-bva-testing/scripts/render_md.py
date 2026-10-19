@@ -10,6 +10,12 @@ import argparse
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
+import sys as _sys
+for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output bị chuyển hướng
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 
 def as_list(v):
@@ -54,8 +60,10 @@ def render(data, h):
         out += [f"{H} Yêu cầu (test basis)", table(["Mã", "Nội dung"], [[r["id"], r["text"]] for r in data["requirements"]]), ""]
 
     out += [f"{H} Bước 1 — Biến vào/ra"]
-    out += [table(["Mã", "Biến", "Vào/Ra", "Nguồn", "Kiểu", "Ràng buộc (đặc tả)"],
-                  [[v["id"], v.get("name"), "Vào" if v.get("io") == "input" else "Ra", v.get("source"), v.get("type"), v.get("constraint")] for v in variables]), ""]
+    has_note = any(v.get("note") for v in variables)
+    out += [table(["Mã", "Biến", "Vào/Ra", "Nguồn", "Kiểu", "Ràng buộc (đặc tả)"] + (["Ghi chú"] if has_note else []),
+                  [[v["id"], v.get("name"), "Vào" if v.get("io") == "input" else "Ra", v.get("source"), v.get("type"), v.get("constraint")]
+                   + ([v.get("note", "")] if has_note else []) for v in variables]), ""]
 
     out += [f"{H} Bước 2 — Complete Set of Partitions"]
     out += [table(["EC", "Biến", "Lớp tương đương", "Hợp lệ", "Hướng dẫn", "Ghi chú"],
@@ -106,7 +114,10 @@ def render(data, h):
                       [[c["id"], c.get("expected_result"), c.get("actual_result"), c.get("status"), c.get("evidence"), c.get("bug_id")] for _, c in cases]), ""]
     st = Counter(c.get("status") or "Not run" for _, c in cases)
     og = Counter(ORIGIN.get(c.get("origin"), c.get("origin") or "?") for _, c in cases)
-    out += [f"**Tổng:** {len(cases)} TC · " + " · ".join(f"{k}: {v}" for k, v in st.items()) + " · Nguồn: " + ", ".join(f"{k} {v}" for k, v in og.items())]
+    if cases:
+        out += [f"**Tổng:** {len(cases)} TC · " + " · ".join(f"{k}: {v}" for k, v in st.items()) + " · Nguồn: " + ", ".join(f"{k} {v}" for k, v in og.items())]
+    else:
+        out += ["**Tổng:** chưa có test case (bước 3–4)."]
     return "\n".join(out) + "\n"
 
 

@@ -11,6 +11,12 @@ import json
 import re
 from collections import Counter
 from pathlib import Path
+import sys as _sys
+for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output bị chuyển hướng
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 START, END = "<!-- SUMMARY:START -->", "<!-- SUMMARY:END -->"
 
