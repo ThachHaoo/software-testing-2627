@@ -6,7 +6,7 @@ Usage: python merge_results.py testcases.json results.json [--dry-run]
 - Actual lấy từ annotation type "actual"; bằng chứng lấy từ attachment có path.
 - Annotation type "verdict" (Pass/Fail/Blocked/Not run/Skipped) thay cho status của Playwright, vd Blocked theo A17/A20.
 - Ảnh/attachment có path được chép vào <thư mục feature>/evidence/ (Playwright xoá test-results mỗi lần chạy):
-  bỏ trace .zip, bỏ file trùng nội dung (sha256, giữ file đầu), tên theo file test đặt (TC-xx_ui.png, _api.png, _req.json, _res.json; ảnh Playwright tự chụp → _failed.png).
+  bỏ trace .zip, bỏ file trùng nội dung (sha256, giữ file đầu), tên theo tên attachment (TC-xx_ui.png, _api.png, _req.json, _res.json; ảnh Playwright tự chụp → _failed.png).
 - Ghi thêm "auto_status" (kết quả tự động gốc) cạnh "status"; testcases.json giữ nguyên định dạng phần trước "suites".
 - Không đụng tới expected_result.
 """
@@ -15,6 +15,7 @@ import hashlib
 import json
 import re
 import shutil
+import unicodedata
 from pathlib import Path
 import sys as _sys
 for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output bị chuyển hướng
@@ -26,17 +27,24 @@ for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output b
 STATUS = {"passed": "Pass", "failed": "Fail", "timedOut": "Fail", "skipped": "Not run", "interrupted": "Blocked"}
 VERDICTS = {"Pass", "Fail", "Blocked", "Not run", "Skipped"}
 SKIP_EXT = (".zip",)          # trace Playwright: nặng, có token/payload → để lại test-results/, không chép vào evidence
-# Hậu tố tên file evidence theo tên file test tự đặt (<mã TC><hậu tố>.<đuôi>); ảnh Playwright tự chụp → _failed
-SUFFIX = {("", ".png"): "_ui", ("_request", ".json"): "_req", ("_response", ".json"): "_res"}
+# Hậu tố tên file evidence theo TÊN attachment (Playwright đổi tên file thành <tên>-<sha1>.<đuôi>).
+# Tên dạng "<mã TC>_x" → bỏ mã TC; ảnh Playwright tự chụp (test-failed-N.png / test-finished-N.png) → _failed.
+NAME_SUFFIX = {"screenshot": "_ui", "_request": "_req", "_response": "_res", "render từ response thật": "_api",
+               "sau đăng nhập": "_login", "trang Quản lý Người dùng": "_admin"}
 
 
-def evidence_name(cid, src, used):
-    stem, ext = src.stem, src.suffix.lower()
-    rest = stem[len(cid):] if stem.startswith(cid) else None
-    if rest is not None and (rest == "" or rest.startswith("_")):
-        suf = SUFFIX.get((rest, ext), rest)
+def slug(s):
+    s = unicodedata.normalize("NFD", s.replace("đ", "d").replace("Đ", "D"))
+    return re.sub(r"[^A-Za-z0-9]+", "-", "".join(ch for ch in s if not unicodedata.combining(ch))).strip("-").lower()
+
+
+def evidence_name(cid, att_name, src, used):
+    ext = src.suffix.lower()
+    if re.fullmatch(r"test-(failed|finished)-\d+\.png", src.name):
+        suf = "_failed"
     else:
-        suf = "_failed" if ext == ".png" else "_" + re.sub(r"[^A-Za-z0-9]+", "-", stem).strip("-").lower()
+        key = att_name[len(cid):] if att_name.startswith(cid + "_") else att_name
+        suf = NAME_SUFFIX.get(key) or "_" + slug(key)
     name, n = f"{cid}{suf}{ext}", 2
     while name in used:
         name, n = f"{cid}{suf}-{n}{ext}", n + 1
@@ -88,7 +96,8 @@ def collect(results):
                     print(f"[WARN] {m.group(1)}: verdict '{verdict[-1]}' không thuộc {sorted(VERDICTS)} — dùng status của Playwright")
                     verdict = []
                 err = (last.get("error") or {}).get("message", "")
-                files = [a["path"] for a in last.get("attachments", []) if a.get("path") and not a["path"].lower().endswith(SKIP_EXT)]
+                files = [(a.get("name", ""), a["path"]) for a in last.get("attachments", [])
+                         if a.get("path") and not a["path"].lower().endswith(SKIP_EXT)]
                 found[m.group(1)] = {
                     "status": verdict[-1] if verdict else STATUS.get(last.get("status"), last.get("status")),
                     "actual": ann[-1] if ann else "",
@@ -128,7 +137,7 @@ def main():
             s["cases"][k] = c
             c["actual_result"] = r["actual"] or (f"(không ghi actual) {r['error']}" if r["error"] else "")
             ev, used, seen = [], set(), set()
-            for p in r["evidence"]:
+            for att_name, p in r["evidence"]:
                 src = Path(p)
                 if not src.exists():
                     continue
@@ -137,7 +146,7 @@ def main():
                     dup += 1
                     continue
                 seen.add(h)
-                dst = evdir / evidence_name(c["id"], src, used)
+                dst = evdir / evidence_name(c["id"], att_name, src, used)
                 if not a.dry_run:
                     evdir.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(src, dst)
