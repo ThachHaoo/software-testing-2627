@@ -1,0 +1,10 @@
+# Harness — không bao giờ push
+.transcripts/
+context/private/
+.claude/settings.local.json
+
+# Node / Playwright
+node_modules/
+test-results/
+playwright-report/
+HW02/tests/results/

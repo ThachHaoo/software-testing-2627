@@ -1,0 +1,11 @@
+{
+  "name": "hw02-eshop-tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.48.2"
+  }
+}

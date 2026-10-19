@@ -1,0 +1,10 @@
+# Ghi chú cho prompt log — EM TỰ VIẾT (script không viết phần này).
+# Xem số #n: python tools/extract_prompt_log.py .transcripts/*.jsonl --since 2026-10-12 --list
+# Mỗi lượt: section, muc_dich, xu_ly; tuỳ chọn ai_output_file, dinh_kem.
+# Số #n đổi nếu thêm session cũ hơn vào .transcripts/ — chép đủ transcript trước rồi mới ghi chú.
+
+[1]
+section  = "Toàn bài"
+muc_dich = "[...]"
+xu_ly    = "[...]"
+dinh_kem = "`attachment.txt` (context và bài học HW01)"
