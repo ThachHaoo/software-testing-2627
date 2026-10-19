@@ -45,7 +45,7 @@
       "A18 (FR-22.3 cho ô Xác nhận mật khẩu): FR-22.3 chỉ nêu 'Trường Mật khẩu'. Giả định ô Xác nhận mật khẩu cũng là trường mật khẩu → cũng phải dùng type=\"password\" (kiểm ở TC-FR01-92).",
       "A19 (Độc lập giữa các case): tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi.",
       "A20 (lỗi đã biết chặn case khác): Khi một case không kiểm được đúng mục đích của nó vì một lỗi đã được case khác kết luận, case đó ghi Blocked và notes ghi mã case hoặc bug gây chặn. Mục đích của case được kiểm ở bản tầng API nếu có. Chỉ case kết luận nguyên nhân gốc mới ghi Fail. (Cùng nguyên tắc với A17.) (AI đề xuất, SV duyệt 2026-10-19)",
-      "A21 (email chỉ gồm ký tự ASCII): FR-22.2 bắt ô Email dùng type=\"email\". A2 lấy quy tắc HTML5 làm tham chiếu phụ, và theo định nghĩa “valid e-mail address” của HTML5, phần local chỉ gồm ký tự ASCII. Vì vậy email có ký tự ngoài ASCII là sai định dạng. → TC-219: tеst@eshop.com (chữ е Cyrillic) phải bị từ chối, 4xx, không tạo user. Thêm EC52 “Email có ký tự ngoài ASCII” (không hợp lệ), do TC-219 phủ. Ý tưởng homoglyph của bạn giữ nguyên ở cột Lý do. Nay case này có oracle, không còn là quan sát suông. (AI đề xuất, SV duyệt 2026-10-19)",
+      "A21 (email chỉ gồm ký tự ASCII): FR-22.2 bắt ô Email dùng type=\"email\". A2 lấy quy tắc HTML5 làm tham chiếu phụ, và theo định nghĩa “valid e-mail address” của HTML5, phần local chỉ gồm ký tự ASCII. Vì vậy email có ký tự ngoài ASCII là sai định dạng. → TC-219: tеst@eshop.com (chữ е Cyrillic) phải bị từ chối, 4xx, không tạo user. Thêm EC52 “Email có ký tự ngoài ASCII” (không hợp lệ), do TC-219 phủ. Nay case này có oracle, không còn là quan sát suông. (AI đề xuất, SV duyệt 2026-10-19)",
       "A22 (đăng ký khi đang đăng nhập): SRS không hạn chế việc này. Giả định ít suy diễn nhất: form vẫn dùng được, đăng ký tài khoản mới thành công, chuyển tới /login (FR-01.10), tạo đúng 1 user mới, và tài khoản test@eshop.com không bị thay đổi. → Expected của TC-223. (AI đề xuất, SV duyệt 2026-10-19)",
       "A23 (role khi đăng ký): tài khoản tạo qua đăng ký luôn có role user; trường không có trong api_specification bị bỏ qua (mở rộng SEC-06 và FR-04). → TC-222 giữ nguyên Expected, chỉ thêm căn cứ. (AI đề xuất, SV duyệt 2026-10-19)"
     ]
@@ -4672,7 +4672,7 @@
           },
           "expected_result": "HTTP 4xx kèm trường error; so với danh sách bước 1: không có user mới (A21, A11)",
           "requirements": [
-            "FR-01.4"
+            "FR-01.3"
           ],
           "covers": [
             "EC52"
@@ -4823,7 +4823,7 @@
           "technique": "EG",
           "bva_point": "",
           "rationale": "[UI+API] FR-01.8: tập ký tự đặc biệt là tập đóng `{@ $ ! % * ? &}` (A5); khoảng trắng nằm ngoài tập → thuộc EC36. Chọn khoảng trắng làm đại diện theo error guessing (ký tự hay bị xử lý sai: trim, `\\s` trong regex).",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",
@@ -4852,7 +4852,7 @@
           "technique": "EP",
           "bva_point": "",
           "rationale": "[UI+API] A2: phần domain không được rỗng hai bên dấu '.'; luật này chưa có lớp nào trong testcases.md phủ. Hai dấu chấm liền nhau tạo nhãn rỗng ở giữa.",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",
@@ -4881,7 +4881,7 @@
           "technique": "EP",
           "bva_point": "",
           "rationale": "[UI+API] A2, cùng luật với case trên nhưng nhãn rỗng nằm ở đầu domain.",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",
@@ -4910,7 +4910,7 @@
           "technique": "EP",
           "bva_point": "",
           "rationale": "[UI+API] FR-01.3, A2: lớp email hợp lệ có '.', '+' ở phần local và nhiều cấp subdomain. Bộ kiểm tra quá chặt sẽ từ chối nhầm lớp này.",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",
@@ -4939,7 +4939,7 @@
           "technique": "EG",
           "bva_point": "",
           "rationale": "[UI+API] FR-01.8: '＄' là ký tự full-width U+FF04 (dễ gõ nhầm từ bộ gõ), nhìn giống '$' nhưng không thuộc tập cho phép.",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",
@@ -5027,7 +5027,7 @@
           "technique": "EG",
           "bva_point": "",
           "rationale": "[UI+API] A1: Họ Tên không giới hạn tập ký tự. Emoji là ký tự 4 byte UTF-8, hay bị lỗi mã hoá khi lưu.",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",

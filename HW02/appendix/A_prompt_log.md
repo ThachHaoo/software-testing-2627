@@ -1577,4 +1577,40 @@ Có 3 chỗ em nên xem trước khi commit:
 
 ---
 
-**Tổng:** 26 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 24 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #27 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Hoàn thiện TS-SV HW02/A_FR01 (KHÔNG freeze). SV đã duyệt nội dung dưới đây.
+1. A3 (SV chốt): "Email so sánh sau khi cắt khoảng trắng đầu/cuối; phần local phân biệt hoa/thường, phần domain không phân biệt (RFC 5321 §2.4). SV sửa ở bước 5." EC19 thu hẹp "Chỉ khác hoa/thường ở phần local" (valid, giữ TC-04, TC-31). Thêm EC51 "Chỉ khác hoa/thường ở phần domain" (invalid, split, note "SV thêm ở bước 5 (A3)"), TC-206 covers EC51.
+2. Thêm A20, A21, A22, A23 đúng nguyên văn trong khối "Giả định mới" của phiên thảo luận (dán bên dưới). Ghi cuối mỗi dòng: "(AI đề xuất, SV duyệt 2026-10-19)".
+3. Thêm EC52 "Email có ký tự ngoài ASCII (vd chữ Cyrillic giống Latin)" — invalid, guideline must-be, note "A21; SV thêm ở bước 5". TC-219: covers EC52, tiêu đề "Kiểm tra từ chối đăng ký qua API khi email chứa chữ Cyrillic nhìn giống tài khoản đã có", expected "HTTP 4xx kèm trường error; so với danh sách bước 1: không có user mới (A21, A11)", origin Both, notes "Expected do AI đặt theo A21 theo yêu cầu SV".
+4. TC-223: expected theo A22 (form dùng được; đăng ký thành công, chuyển /login; đúng 1 user mới; test@eshop.com không đổi name/email/role), origin Both, notes như trên.
+5. requirements: thêm API-REG (api_specification.md dòng 14–21), SEC-04, SEC-05, SEC-06* ("mở rộng cho đăng ký, A23"). Gán: 207→FR-01.10; 214→API-REG; 222→SEC-06*; 215(+230)→thêm SEC-05; 216→thêm SEC-04; 223→để trống, notes "ngoài FR-01 (A22)". meta.scope: thêm "TS-SV có kiểm thăm dò SEC-04, SEC-05, SEC-06* liên quan trực tiếp tới dữ liệu đăng ký".
+6. Cặp UI/API đã tách: notes chỉ giữ quan sát của tầng đó. Bản API 224–232: expected có yếu tố UI → đổi sang HTTP status + body + số user mới, notes "chỉnh Expected theo tầng API khi tách"; liệt kê case đã đổi.
+7. check_domain, lint, render. Commit "HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết)" kèm A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+
+--- Giả định mới ---
+A20 (lỗi đã biết chặn case khác): Khi một case không kiểm được đúng mục đích của nó vì một lỗi đã được case khác kết luận, case đó ghi Blocked và notes ghi mã case hoặc bug gây chặn. Mục đích của case được kiểm ở bản tầng API nếu có. Chỉ case kết luận nguyên nhân gốc mới ghi Fail. (Cùng nguyên tắc với A17.)
+A21 (email chỉ gồm ký tự ASCII): FR-22.2 bắt ô Email dùng type="email". A2 lấy quy tắc HTML5 làm tham chiếu phụ, và theo định nghĩa “valid e-mail address” của HTML5, phần local chỉ gồm ký tự ASCII. Vì vậy email có ký tự ngoài ASCII là sai định dạng. → TC-219: tеst@eshop.com (chữ е Cyrillic) phải bị từ chối, 4xx, không tạo user. Thêm EC52 “Email có ký tự ngoài ASCII” (không hợp lệ), do TC-219 phủ. Ý tưởng homoglyph của bạn giữ nguyên ở cột Lý do. Nay case này có oracle, không còn là quan sát suông.
+A22 (đăng ký khi đang đăng nhập): SRS không hạn chế việc này. Giả định ít suy diễn nhất: form vẫn dùng được, đăng ký tài khoản mới thành công, chuyển tới /login (FR-01.10), tạo đúng 1 user mới, và tài khoản test@eshop.com không bị thay đổi. → Expected của TC-223.
+A23 (role khi đăng ký): tài khoản tạo qua đăng ký luôn có role user; trường không có trong api_specification bị bỏ qua (mở rộng SEC-06 và FR-04). → TC-222 giữ nguyên Expected, chỉ thêm căn cứ.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+```
+Sửa toàn bộ trong một script. Phần meta/requirements/partitions sửa theo chuỗi để giữ nguyên định dạng; phần suites dump lại.
+
+Notes đang dính liền: "→ Fail Chỉnh Expected…". Em thêm dấu phân cách rồi commit.
+```
+*File AI ghi/gửi trong lượt này:* `fr01_sv_final.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 27 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 25 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
