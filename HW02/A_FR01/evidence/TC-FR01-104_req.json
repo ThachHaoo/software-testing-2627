@@ -1,0 +1,13 @@
+{
+  "method": "POST",
+  "url": "/api/register",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "count": 1,
+  "body": {
+    "name": "Nguyen Van A",
+    "email": "bvapi104_1792424872695@domain.com",
+    "password": "Abcdef12!"
+  }
+}

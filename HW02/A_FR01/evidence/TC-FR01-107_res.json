@@ -1,0 +1,9 @@
+[
+  {
+    "status": 200,
+    "body": {
+      "message": "User registered successfully",
+      "id": 51
+    }
+  }
+]

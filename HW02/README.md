@@ -16,7 +16,10 @@
 ## Test summary
 
 <!-- SUMMARY:START -->
-(chạy `python tools/summary.py HW02 --write HW02/README.md`)
+| Feature | Chức năng | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC SV thêm | Bug |
+|---|---|---|---|---|---|---|---|---|---|---|
+| A_FR01 | FR-01 Đăng ký tài khoản (web frontend-web + API POST /api/register) | 133 | 108 | 43 | 65 | 25 | 0 | 108 | 25 | 0 |
+| **Tổng** | **1 feature** | **133** | **108** | **43** | **65** | **25** | **0** | **108** | **25** | **0** |
 <!-- SUMMARY:END -->
 
 ## Video demo (YouTube)

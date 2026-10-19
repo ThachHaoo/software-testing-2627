@@ -1694,7 +1694,7 @@ Báo cáo cho phiên thảo luận: danh sách file, số test, các case không
 ```
 
 **Output:**
-```
+````
 Làm PHẦN 1 trước.
 
 Phần 2: đọc merge_results.py và automation.md.
@@ -1712,11 +1712,322 @@ Nhận đủ 133 test, đúng bằng số case trong JSON. Giờ bật SUT để
 TC-01 fail, TC-28 pass. Trước khi kết luận cần kiểm xem fail đến từ SUT hay từ script: xem annotation actual và ảnh chụp.
 
 Cleanup đúng: chỉ còn 2 user seed. 133/133 expected đều nhận diện được oracle. Chạy thử merge ở chế độ dry-run trên kết quả chạy thử rồi tắt SUT.
+
+Xong cả ba phần. Phần 1 và 2 đã commit; phần 3 viết xong và chạy thử được, chưa commit. Chạy thử TC-FR01-01 Fail, TC-FR01-28 Pass; đây chỉ là chạy thử, chưa kết luận gì về lỗi.
+
+- **Phần 1** (`f3126b0`): TC-219 đổi sang FR-01.3; 224–228 và 231 thành origin `Both`; bỏ câu "Ý tưởng homoglyph của bạn…" khỏi A21.
+- **Phần 2** (`6a127ec`): `merge_results.py` dùng annotation `verdict` thay cho trạng thái Playwright khi có (giá trị không hợp lệ thì cảnh báo). Dry-run với một kết quả giả cho ra Blocked đúng. `automation.md` có thêm mẫu cho API và mẫu Blocked.
+
+**Phần 3 — file:**
+
+| File | Nội dung |
+|---|---|
+| `HW02/tests/A_FR01/lib.ts` | Đọc `testcases.json`; chuyển giá trị cột thành giá trị gửi đi (`{ts}`, thiếu trường, số JSON, mật khẩu 200.000 ký tự); fixture `admin` lưu danh sách user ở bước 1 và xoá user mới sau mỗi case kể cả khi Fail; đọc oracle từ `expected_result`; ghi bằng chứng |
+| `HW02/tests/A_FR01/A_FR01.spec.ts` | 6 describe theo suite; tầng UI, API, GUI chạy riêng; cài sẵn thao tác riêng của 207, 208, 209, 211, 214, 216, 222, 223, 229 |
+| `HW02/tests/global-setup.ts` | Kiểm backend :3000, web :5173, đăng nhập admin, có `test@eshop.com`; thiếu thì dừng và nhắc em restart backend |
+| `playwright.config.ts`, `README.md` | Sửa: project `A_FR01`, `video: 'off'`, globalSetup, workers 1 |
+
+`--list` nhận **133 test**, khớp 133 case. 64 case UI/GUI (DOM-UI 27, BVA-UI 19, GUI 5, SV-UI 13), 69 case API.
+
+**Chạy thử** (em tự bật backend và web, chạy xong đã tắt; backend khởi động lại nên CSDL đã seed lại):
+- **TC-FR01-01 (UI): Fail.** Ảnh chụp cho thấy dữ liệu gõ đúng, mật khẩu hiện 9 ký tự che. Actual: "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 (A17); URL=/register; POST gửi 0 lần; hộp lỗi="Mật khẩu quá yếu!…"; user mới=0". Script ghi đúng điều quan sát được.
+- **TC-FR01-28 (API): Pass.** HTTP 200 `{"message":"User registered successfully","id":3}`, đúng 1 user mới; có đủ request.json, response.json và ảnh render từ response thật.
+- Cleanup chạy đúng: sau lượt chạy chỉ còn 2 user seed. `merge_results --dry-run` gộp được cả 2 case.
+- Một script Python dò lại cùng các regex cho thấy 133/133 expected đều nhận diện được loại oracle (thành công hoặc từ chối).
+
+**Các phần không tự động hoá hết** (đã ghi trong comment, không đổi expected):
+1. **TC-216:** nếu trang Quản lý Người dùng không hiển thị Họ Tên thì không kiểm được "hiển thị dạng chữ". Script ghi verdict `Not run` để em kiểm tay; phần "không chạy script" vẫn kiểm qua dialog.
+2. **TC-217:** "hiển thị đúng emoji" không nêu trang nào, nên chỉ kiểm giá trị lưu trong CSDL; phần hiển thị em kiểm tay.
+3. **TC-92:** "che ký tự" kiểm qua `type="password"` cộng ảnh chụp, không đo pixel.
+4. **A20 chỉ tự động** khi bước chuẩn bị không thực hiện được (Blocked): 208 không gửi request nào; 216 hoặc 223 bước đăng ký/đăng nhập trước đó thất bại; case SV có "Hệ thống báo email/mật khẩu" nhưng thông báo nói về trường khác (200, 202–204, 210 bản UI). Việc case nào là nguyên nhân gốc (Fail) hay bị chặn (Blocked) ở các case còn lại em quyết khi xem kết quả.
+5. **TC-93:** nếu form không có ô Xác nhận mật khẩu thì script bỏ qua giá trị của ô này và vẫn đo vị trí thông báo lỗi. TC-93 không thuộc nhóm A17, nên đây là lựa chọn của AI.
+6. **Dữ liệu ghi cứng:** mật khẩu `Test1234!` của `test@eshop.com` (dùng cho TC-223) không có trong JSON nên lấy từ SRS README dòng 23. `global-setup.ts` cũng ghi cứng tài khoản admin; trong spec thì tài khoản admin đọc từ preconditions.
+7. **Ảnh trùng:** Playwright tự đính kèm thêm ảnh `test-failed-1.png` / `test-finished-1.png` (do config `screenshot: 'on'`) bên cạnh ảnh script chụp. merge sẽ chép ra cả `TC-xx_2.png`.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: P1 sửa nguồn/truy vết TS-SV · P2 vá merge_results (verdict) + automation.md · P3 bước 6 script Playwright A_FR01 (chưa chạy cả bộ)
+- File đã tạo/sửa:
+  - P1: HW02/A_FR01/testcases.json/.md
+  - P2: scripts/merge_results.py, references/automation.md
+  - P3: HW02/tests/A_FR01/lib.ts, HW02/tests/A_FR01/A_FR01.spec.ts, HW02/tests/global-setup.ts (mới); playwright.config.ts, tests/README.md (sửa); package-lock.json (npm install)
+- Số test: 133 (--list) = 133 case JSON; UI/GUI 64, API 69
+- Kết quả kiểm tra: check_domain 0 lỗi (P1) · lint 0 lỗi · chạy thử: TC-FR01-01 Fail (form chặn bằng thông báo "Mật khẩu quá yếu!…", không gửi request, user mới 0; chưa kết luận bug) · TC-FR01-28 Pass (HTTP 200, 1 user mới) · cleanup đúng · merge --dry-run gộp 2/2
+- Không tự động hoá hết: TC-216 (admin không hiện Họ Tên → Not run, kiểm tay) · TC-217 (phần hiển thị emoji) · TC-92 (che ký tự = type + ảnh) · A20 chỉ tự động cho case bị chặn ở bước chuẩn bị · TC-93 bỏ qua ô Xác nhận nếu không có · mật khẩu test@eshop.com lấy từ README
+- Commit: f3126b0 HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV · 6a127ec HW02: vá harness – merge_results nhận verdict Blocked · P3 chưa commit
+- Cần quyết định / câu hỏi:
+  1. TC-93: thiếu ô Xác nhận thì bỏ qua giá trị đó (như hiện tại), hay áp A17/A20 → Blocked?
+  2. Ảnh trùng do screenshot 'on' (Playwright tự chụp thêm) → giữ, hay đổi 'only-on-failure' (vẫn có ảnh script tự chụp)?
+  3. Commit P3 kèm package-lock.json không? Message đề xuất: "HW02[A-FR01] 6/7: script Playwright đọc testcases.json".
+  4. SV chạy cả bộ trên máy: restart backend + web → `$env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/A_FR01.json"; npx playwright test A_FR01` → merge_results.py. Lượt chạy thử của AI chỉ để kiểm script, không dùng làm kết quả nộp.
+```
+````
 *File AI ghi/gửi trong lượt này:* `lib.ts`, `A_FR01.spec.ts`, `playwright.config.ts`, `global-setup.ts`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 28 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 26 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #29 | 22:39 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+TC-93 giữ nguyên. playwright.config: screenshot 'only-on-failure'. Kiểm lại tên file setup (báo cáo ghi "A_FR01etup.ts").
+Commit "HW02[A-FR01] 6/7a: script Playwright đọc testcases.json" gồm HW02/tests/** (kèm package-lock.json), tests/README.md, A_prompt_log.md. Không commit test-results/, results/.
+Báo cáo cho phiên thảo luận.
+```
+
+**Output:**
+````
+Tên file đúng là `global-setup.ts`. Đổi `screenshot` sang `only-on-failure` và sửa comment trong spec cho khớp.
+
+Script Playwright của A_FR01 đã commit ở `d840b73`.
+
+- **Tên file setup:** file thật là `HW02/tests/global-setup.ts`, config cũng trỏ đúng tên này (`globalSetup: './global-setup.ts'`). Chữ "A_FR01etup.ts" chỉ là lỗi hiển thị trong báo cáo, không có file nào tên như vậy.
+- **Screenshot:** config đã đổi sang `only-on-failure`, comment trong spec cũng sửa cho khớp. Mỗi case vẫn có ảnh do test tự chụp (`TC-xx.png`, `TC-xx_api.png`), không còn ảnh trùng khi case pass. Case fail vẫn có thêm ảnh Playwright tự chụp.
+- **TC-93:** giữ nguyên như em chốt.
+- **Commit:** gồm 7 file trong danh sách bên dưới. `test-results/`, `results/` và `node_modules/` đã nằm trong `.gitignore` nên không vào commit.
+
+`--list` sau khi sửa vẫn ra 133 test. Em chưa chạy lại test nào sau khi đổi config.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: chốt config screenshot, kiểm tên file setup, commit script bước 6
+- File đã tạo/sửa: HW02/tests/playwright.config.ts (screenshot 'only-on-failure') · A_FR01/A_FR01.spec.ts (comment)
+- Commit gồm: tests/A_FR01/A_FR01.spec.ts, tests/A_FR01/lib.ts, tests/global-setup.ts, tests/package-lock.json, tests/playwright.config.ts, tests/README.md, appendix/A_prompt_log.md
+- Kết quả kiểm tra: --list 133 test · tên file setup đúng (global-setup.ts, config trỏ './global-setup.ts') · test-results/, results/, node_modules/ bị .gitignore loại · chưa chạy cả bộ
+- Commit: d840b73 HW02[A-FR01] 6/7a: script Playwright đọc testcases.json
+- Cần quyết định / câu hỏi:
+  1. SV chạy cả bộ trên máy: restart backend (CSDL seed sạch) + web :5173 (+ admin :5174 cho TC-216) → trong HW02/tests: $env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/A_FR01.json"; npx playwright test A_FR01 → python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/A_FR01/testcases.json HW02/tests/results/A_FR01.json → render_md → commit 6/7b.
+  2. Sau khi merge: SV xem từng case Fail/Blocked theo A17/A20 (case nào là nguyên nhân gốc), kiểm tay TC-216/217 trước khi chốt verdict.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #30 | 22:56 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+SV vừa chạy cả bộ A_FR01 + merge_results + render + summary → git báo 421 file thay đổi. CHƯA commit.
+1. Thống kê thay đổi: theo thư mục và theo đuôi file (png/json/khác); kiểm có file nào thuộc test-results/, results/, node_modules/ bị lọt .gitignore không.
+2. Dung lượng evidence/ (tổng MB, ảnh lớn nhất). Có file dạng TC-xx_2/_3 thừa không.
+3. Tóm tắt kết quả chạy từ testcases.json: số Pass / Fail / Blocked / Not run theo từng suite (TS-DOM-UI, TS-DOM-API, TS-BVA-UI, TS-BVA-API, TS-GUI, TS-SV); liệt kê case Fail/Blocked kèm actual_result rút gọn (≤ 100 ký tự).
+4. Nhóm các case Fail theo thông điệp actual giống nhau (vd "Mật khẩu quá yếu!") để thấy các nguyên nhân dùng chung. KHÔNG kết luận bug, KHÔNG sửa expected.
+5. Đề xuất (chưa làm) cách giữ evidence: commit tất cả vào git hay chỉ một phần; giảm dung lượng ảnh (viewport thay fullPage, nén) nếu tổng > 8 MB.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Đã có số liệu và các nhóm Fail. Kiểm thêm một việc trước khi báo cáo: các case UI "từ chối" đang Pass có phải nhờ đúng trường bị kiểm không.
+
+Em đã rà xong: 421 file thay đổi đều đúng chỗ, không file nào lọt `.gitignore`. Kết quả chạy: 52 Pass, 73 Fail, 8 Blocked, 0 Not run trên 133 case. Chưa commit, chưa kết luận bug, không sửa expected.
+
+**1. Các file thay đổi**
+- **Theo thư mục:** 417 file mới trong `HW02/A_FR01/evidence/`. 4 file sửa: `testcases.json`, `testcases.md`, `HW02/README.md`, `A_prompt_log.md`.
+- **Theo đuôi file:** 206 png, 139 json, 73 zip, 3 md.
+- **Lọt `.gitignore`:** không có file nào thuộc `test-results/`, `results/` hay `node_modules/`.
+- **merge_results.py định dạng lại cả `testcases.json`:** diff dài 1.371 dòng vì các dòng requirements/partitions viết một dòng bị tách ra nhiều dòng. Em đã so nội dung: ngoài `status`, `actual_result`, `evidence` thì giống hệt bản HEAD.
+
+**2. Thư mục evidence: 15 MB, vượt ngưỡng 8 MB**
+
+| Loại | Số file | Dung lượng |
+|---|---|---|
+| zip (trace của case fail) | 73 | **10,9 MB** — file lớn nhất `TC-FR01-02_3.zip` 0,59 MB |
+| png | 206 | 3,5 MB |
+| json (request/response) | 138 | ~0 MB |
+
+Các file có hậu tố `_n` là do merge đánh số theo thứ tự attachment, không phải file sinh nhầm. Có hai nhóm thừa:
+- 46 file `_4.png` của case API fail giống hệt `_3.png` từng byte. Đó là ảnh Playwright tự chụp lúc fail, trùng với ảnh render response.
+- 4 trong 27 file `_2.png` của case UI fail giống hệt ảnh chính `TC-xx.png`.
+
+**3. Kết quả theo suite**
+
+| Suite | Pass | Fail | Blocked |
+|---|---|---|---|
+| TS-DOM-UI | 20 | 4 | 3 |
+| TS-DOM-API | 3 | 27 | 0 |
+| TS-BVA-UI | 6 | 13 | 0 |
+| TS-BVA-API | 13 | 6 | 0 |
+| TS-GUI | 2 | 3 | 0 |
+| TS-SV | 8 | 20 | 5 |
+| **Tổng** | **52** | **73** | **8** |
+
+Blocked:
+- 25, 26, 27: thiếu ô Xác nhận mật khẩu, bị chặn bởi TC-94 (A17).
+- 200, 203, 204: thông báo lỗi nói về trường khác (A20).
+- 208: form không gửi request nào.
+- 216: đăng ký qua UI không thành công.
+
+**4. Nhóm case Fail theo actual giống nhau**
+
+| Số case | Actual dùng chung | Mã case |
+|---|---|---|
+| 42 | API: expected từ chối, nhận **HTTP 200** và tạo 1 user | 32–57, 79, 82, 86, 89, 102, 105, 201, 206, 213, 219–221, 224–226, 228 |
+| 23 | UI: expected thành công, hộp lỗi **"Mật khẩu quá yếu!…"**, không gửi request, ở lại `/register` | 01–04, 61, 62, 64–66, 68, 69, 71, 72, 74, 75, 77, 78, 205, 211, 215, 217, 218, 223 |
+| 1 | API 30 (EC8): HTTP 200, email lưu còn khoảng trắng `"  api30_…  "` | 30 |
+| 1 | API 209: 2 request đồng thời đều HTTP 200, tạo 2 user cùng email | 209 |
+| 1 | API 212: HTTP 413 (trang lỗi HTML) | 212 |
+| 1 | API 214: HTTP 500 (trang lỗi HTML) | 214 |
+| 1 | UI 202: `Abcd 1234` được chấp nhận, chuyển `/login`, tạo user | 202 |
+| 3 | GUI 90: nhãn không có `*` · 91: ô Email `type="text"` · 94: không có ô Xác nhận mật khẩu | 90, 91, 94 |
+
+Trong 23 case nhóm thứ hai có 18 case dùng mật khẩu `Abcd1234!` (danh nghĩa của AI); 4 case SV dùng `Hiep123$`.
+
+**Em nên xem trước khi chốt:** 9 case UI "từ chối" đang **Pass** nhưng hộp lỗi lại nói về trường khác:
+- 08–15: biến mục tiêu là Email, hộp lỗi là "Mật khẩu quá yếu!".
+- 06: biến mục tiêu là Họ Tên, hộp lỗi cũng là "Mật khẩu quá yếu!".
+
+Theo oracle A10 thì Pass, vì A10 không quy định nội dung thông báo. Nhưng các case này chưa chứng minh được form kiểm đúng trường đang xét — giống tình huống SV-01 đã ghi Blocked theo A20. Script chỉ áp kiểm tra "thông báo đúng trường" cho case có chữ "báo email/mật khẩu" trong expected. Em quyết có áp A20 cho 9 case này không; em chưa sửa gì.
+
+**5. Đề xuất giữ bằng chứng (chưa làm)**
+1. **Bỏ trace (.zip) khỏi git và khỏi gói nộp** để giảm 10,9 MB. Hai cách:
+   - (a) sửa `merge_results.py` không chép attachment `.zip` vào evidence, trace vẫn nằm ở `test-results/` để debug;
+   - (b) thêm `HW02/A_FR01/evidence/*.zip` vào `.gitignore`.
+   
+   Em đề xuất (a), vì trace chứa token/payload và quá nặng cho gói nộp.
+2. **Bỏ ảnh trùng:** khi merge, bỏ attachment giống hệt từng byte với ảnh đã chép (46 file `_4.png` và 4 file `_2.png`).
+3. **Đặt tên evidence theo tên attachment** thay cho `_2`, `_3`: `TC-xx_request.json`, `TC-xx_response.json`, `TC-xx_api.png`, `TC-xx_failed.png`, để report trích dẫn dễ hơn.
+4. **Ảnh:** PNG tổng chỉ 3,5 MB nên chưa cần đổi sang viewport hay nén. Sau khi bỏ trace và ảnh trùng, evidence còn khoảng 3 MB.
+5. **Định dạng:** `merge_results.py` nên giữ định dạng phần ngoài suites như các script AI đã dùng, để diff chỉ còn status/actual/evidence.
+
+Sau khi vá harness: xoá thư mục evidence, merge lại từ `results/A_FR01.json` (không cần chạy lại test, miễn `test-results/` còn nguyên) rồi commit.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: rà thay đổi sau lượt chạy A_FR01 của SV (thống kê, evidence, kết quả, nhóm Fail, đề xuất giữ evidence); chưa commit
+- File đã tạo/sửa: không (chỉ đọc)
+- Thay đổi git: 421 file: 417 mới trong HW02/A_FR01/evidence (206 png, 138 json, 73 zip); 4 sửa (testcases.json, testcases.md, HW02/README.md, A_prompt_log.md); không file nào lọt .gitignore; testcases.json chỉ khác status/actual_result/evidence (bị định dạng lại toàn file)
+- Evidence: 15 MB (zip/trace 10,9 MB; png 3,5 MB; json ~0); 46 file _4.png (API) giống hệt _3.png; 4/27 file _2.png (UI) giống hệt ảnh chính
+- Kết quả: Pass 52 · Fail 73 · Blocked 8 · Not run 0 — DOM-UI 20/4/3 · DOM-API 3/27/0 · BVA-UI 6/13/0 · BVA-API 13/6/0 · GUI 2/3/0 · SV 8/20/5 (Pass/Fail/Blocked)
+- Nhóm Fail (chưa kết luận bug): 42 case API từ chối nhưng HTTP 200 · 23 case UI thành công nhưng hộp lỗi "Mật khẩu quá yếu!" · 30 email không cắt khoảng trắng · 209 hai request đồng thời đều 200 · 212 HTTP 413 · 214 HTTP 500 · 202 UI nhận 'Abcd 1234' · GUI 90/91/94
+- Commit: chưa
+- Cần quyết định / câu hỏi:
+  1. 9 case UI Pass (06, 08–15) bị từ chối bằng thông báo về Mật khẩu thay vì trường mục tiêu → giữ Pass (A10) hay áp A20 → Blocked?
+  2. Vá harness: merge_results bỏ trace .zip + bỏ ảnh trùng + đặt tên theo attachment + giữ định dạng file → rồi merge lại từ results/A_FR01.json (evidence còn ~3 MB)?
+  3. Sau đó commit "HW02[A-FR01] 6/7b: kết quả chạy + evidence".
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #31 | 23:05 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+PHẦN 1 — vá harness, commit riêng "HW02: vá harness – merge_results gọn evidence":
+- merge_results.py: bỏ attachment .zip (trace); bỏ file trùng nội dung (so sha256, giữ file đầu); tên file theo tên attachment (vd TC-xx_ui.png, TC-xx_api.png, TC-xx_req.json, TC-xx_res.json); ghi testcases.json cùng định dạng các script khác (indent 2, ensure_ascii=False, giữ thứ tự khoá) để diff chỉ còn status/actual/evidence.
+- Lưu trạng thái tự động gốc: thêm trường "auto_status" (Pass/Fail/Blocked từ Playwright) bên cạnh "status".
+
+PHẦN 2 — merge lại (KHÔNG chạy lại test):
+- Xoá HW02/A_FR01/evidence/, chạy lại merge_results từ HW02/tests/results/A_FR01.json. Báo dung lượng evidence mới.
+
+PHẦN 3 — chốt verdict theo quy tắc SV duyệt:
+"Kết quả lệch do chính biến mục tiêu của case → giữ Fail. Lệch do biến khác gây ra (vd mật khẩu bị chặn trong case kiểm Email/Họ Tên) → Blocked theo A20, ghi case gốc."
+- Áp cho: 23 case UI 'Mật khẩu quá yếu!' và 9 case UI Pass giả (06, 08–15). Case gốc: TC-FR01-01.
+- Case đổi verdict: status mới, giữ auto_status, notes "Verdict chỉnh theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — <lý do 1 câu>".
+- KHÔNG đổi API Fail, 202, 30, 209, 212, 214, GUI. KHÔNG sửa expected.
+- TC-216/217: giữ trạng thái hiện tại, ghi "chờ SV kiểm tay".
+- Xuất bảng đề xuất trước khi ghi: | TC | biến mục tiêu | auto_status | verdict mới | lý do |. Nếu có case không rõ biến mục tiêu → không đổi, liệt kê để SV quyết.
+- render_md, summary.py --write HW02/README.md.
+- CHƯA commit. Báo cáo cho phiên thảo luận: bảng đề xuất + số Pass/Fail/Blocked mới theo suite + dung lượng evidence.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Phần 1: viết lại cách merge chép evidence và ghi file.
+
+Commit bản vá harness. Sau đó khôi phục `testcases.json` về HEAD (diff hiện tại chỉ là kết quả merge cũ, đã xác nhận ở lượt trước), xoá evidence và merge lại.
+
+Phần 3: lập bảng đề xuất. Biến mục tiêu lấy từ lớp đầu vào trong `covers` (bỏ EC39 vì đó là bước bỏ qua theo A17; bỏ các lớp đầu ra).
+
+Bảng đã khớp quy tắc: 18 case đổi sang Blocked, TC-02 không rõ biến mục tiêu nên không đổi. Ghi vào file, rồi render và chạy summary.
+
+Em đã làm xong cả ba phần; chưa commit phần 2 và 3. Có 17 case đổi verdict sang Blocked (không phải 18 như em ghi ở bước giữa, đếm lại bảng đúng là 17). Kết quả mới: 43 Pass, 65 Fail, 25 Blocked, 0 Not run.
+
+**Phần 1 — vá `merge_results.py`.** Commit `f64f135`, và commit sửa `95d1f39`. Bản `f64f135` đặt tên evidence theo tên file, nhưng Playwright đã đổi tên file thành `<tên>-<sha1>`, nên tên ra sai. `95d1f39` chuyển sang đặt tên theo tên attachment. Những gì đã làm:
+- Bỏ trace `.zip`.
+- Bỏ file trùng nội dung (so sha256, giữ file đầu).
+- Đặt tên file: `_ui.png`, `_api.png`, `_req.json`, `_res.json`; ảnh Playwright tự chụp đặt là `_failed.png`.
+- Thêm trường `auto_status` ngay sau `status`.
+- Giữ nguyên định dạng phần trước `"suites"`. Diff của `testcases.json` giờ chỉ còn `status`, `auto_status`, `actual_result`, `evidence`.
+
+**Phần 2 — merge lại** (không chạy lại test): evidence còn **3,4 MB**, 294 file (trước là 15 MB, 417 file).
+
+| Loại | Số file |
+|---|---|
+| `_ui.png` | 64 |
+| `_api.png` | 69 |
+| `_req.json` | 69 |
+| `_res.json` | 69 |
+| `_failed.png` | 23 |
+
+50 attachment trùng nội dung đã bị bỏ. File lớn nhất là `TC-FR01-212_api.png`, 41 KB.
+
+**Phần 3 — bảng đề xuất (đã ghi vào file).** Biến mục tiêu lấy từ lớp đầu vào trong `covers`, bỏ EC39 (bước nhập bị bỏ qua theo A17).
+
+| TC | biến mục tiêu | auto_status | verdict mới | lý do |
+|---|---|---|---|---|
+| 01 | tất cả (case hợp lệ) | Fail | Fail | case gốc: mật khẩu danh nghĩa hợp lệ theo SRS bị từ chối |
+| 02 | Họ Tên (EC2) + Mật khẩu (EC34) + … | Fail | Fail | **không rõ biến mục tiêu → chưa đổi, chờ SV quyết** |
+| 03, 205 | Email | Fail | Blocked | form từ chối bằng "Mật khẩu quá yếu!" trước khi xét Email |
+| 04 | Email (đã tồn tại) | Fail | Blocked | như trên |
+| 61, 62, 215, 218 | Họ Tên | Fail | Blocked | như trên |
+| 223 | trạng thái đã đăng nhập | Fail | Blocked | như trên |
+| 64–66, 68, 69, 71, 72, 74, 75, 77, 78, 211 | Mật khẩu | Fail | Fail | lệch do chính biến mục tiêu |
+| 217 | Họ Tên | Fail | Fail | giữ nguyên, chờ SV kiểm tay |
+| 06 | Họ Tên | Pass | Blocked | Pass giả: bị từ chối bằng thông báo về Mật khẩu |
+| 08–13 | Email | Pass | Blocked | như trên |
+| 14, 15 | Email (đã tồn tại) | Pass | Blocked | như trên |
+
+- Mỗi case đổi verdict có notes: "Verdict chỉnh theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — …".
+- TC-216 và TC-217 giữ verdict, notes thêm "chờ SV kiểm tay".
+- Không đổi các case Fail ở API, 202, 30, 209, 212, 214, GUI. Không sửa expected.
+
+**Pass/Fail/Blocked mới theo suite:**
+
+| Suite | Pass | Fail | Blocked |
+|---|---|---|---|
+| TS-DOM-UI | 11 | 2 | 14 |
+| TS-DOM-API | 3 | 27 | 0 |
+| TS-BVA-UI | 6 | 11 | 2 |
+| TS-BVA-API | 13 | 6 | 0 |
+| TS-GUI | 2 | 3 | 0 |
+| TS-SV | 8 | 16 | 9 |
+| **Tổng** | **43** | **65** | **25** |
+
+`auto_status` vẫn giữ kết quả tự động gốc: 52 Pass, 73 Fail, 8 Blocked. Đã chạy lại `render_md` và `summary.py --write HW02/README.md`; check_domain 0 lỗi.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá merge_results (gọn evidence, auto_status, giữ định dạng) · merge lại · chốt verdict theo A20
+- File đã tạo/sửa: .claude/skills/domain-bva-testing/scripts/merge_results.py (đã commit) · HW02/A_FR01/testcases.json (kết quả + 17 verdict A20 + notes 216/217) · testcases.md · HW02/README.md · HW02/A_FR01/evidence/ (dựng lại)
+- Evidence: 3,4 MB / 294 file (64 _ui.png, 69 _api.png, 69 _req.json, 69 _res.json, 23 _failed.png); bỏ 73 trace .zip + 50 attachment trùng; lớn nhất 41 KB
+- Kết quả: Pass 43 · Fail 65 · Blocked 25 · Not run 0 (auto_status: 52/73/8) — DOM-UI 11/2/14 · DOM-API 3/27/0 · BVA-UI 6/11/2 · BVA-API 13/6/0 · GUI 2/3/0 · SV 8/16/9
+- Verdict đổi (A20, gốc TC-FR01-01): Fail→Blocked 03, 04, 61, 62, 205, 215, 218, 223 · Pass→Blocked 06, 08–15 · giữ Fail (biến mục tiêu Mật khẩu) 64–66, 68, 69, 71, 72, 74, 75, 77, 78, 211
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (UB do A4) · diff testcases.json chỉ các trường kết quả + notes
+- Commit: f64f135, 95d1f39 (vá harness) · kết quả + evidence: chưa commit
+- Cần quyết định / câu hỏi:
+  1. TC-FR01-02 (case hợp lệ gộp EC2 Họ Tên + EC34 Mật khẩu ngoài tập): giữ Fail hay Blocked theo TC-01?
+  2. TC-216/217: SV kiểm tay rồi chốt verdict.
+  3. Đề xuất commit: "HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict A20" (testcases.json/.md, evidence/, README.md, A_prompt_log.md).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 31 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 29 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

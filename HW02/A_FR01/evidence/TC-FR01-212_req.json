@@ -1,0 +1,13 @@
+{
+  "method": "POST",
+  "url": "/api/register",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "count": 1,
+  "body": {
+    "name": "Lê Tấn Hiệp",
+    "email": "hiep.sv13@domain.com",
+    "password": "Hiep123$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa… (200000 ký tự)"
+  }
+}
