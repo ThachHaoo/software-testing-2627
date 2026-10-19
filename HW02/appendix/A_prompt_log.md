@@ -1257,4 +1257,33 @@ Báo cáo cho phiên thảo luận (kèm số TC mỗi suite).
 
 ---
 
-**Tổng:** 21 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 19 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #22 | 17:17 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+(a) Commit riêng "HW02: vá harness (SKILL.md: quy tắc tiền điều kiện/cách nhập; render_md: bước chi tiết, ghi chú suite, tiêu đề suite)" gồm .claude/skills/domain-bva-testing/SKILL.md và scripts/render_md.py.
+(b) Render lại HW02/A_FR01/testcases.md, kiểm TS-GUI đã hiện bước chi tiết. Commit "HW02[A-FR01] 3/7: render lại (bước chi tiết TS-GUI, ghi chú suite)" gồm testcases.md, A_prompt_log.md.
+(c) Ghi vào CLAUDE.md mục "Quyết định đã chốt": dải mã TC — TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV (SV bổ sung) từ 200. Gộp vào commit (a).
+(d) Chạy: /domain-bva-testing HW02/A_FR01 4
+    Ràng buộc: mô hình 9 điểm theo slide; bước nhảy 1 ký tự; biến đang xét chạy qua điểm biên, các biến khác giữ nominal hợp lệ; ghi "layer" UI/API cho từng case; MIN_UI/MAX_UI chỉ thêm khi giao diện thật sự giới hạn (maxlength…) — không có thì ghi lý do vào notes; dùng lại preconditions/procedure/cleanup của TS-DOM-UI/API. Chạy freeze --step 4, check_domain, lint, render. KHÔNG commit. Dừng hẳn sau bước này.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+```
+Thêm quyết định dải mã TC vào CLAUDE.md, commit (a), render lại và commit (b).
+
+TS-GUI giờ đã hiện đủ bước chi tiết. Commit (b).
+
+Giờ đến bước 4. Đọc lại SKILL.md (đã sửa) và kiểm UI có `maxlength` không.
+```
+*File AI ghi/gửi trong lượt này:* `fr01_step4_bva.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 22 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 20 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
