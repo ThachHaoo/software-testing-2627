@@ -43,6 +43,17 @@ def table(headers, rows):
 ORIGIN = {"AI": "AI", "Human": "SV", "Both": "AI + SV sửa"}
 
 
+def show(v):
+    """Giá trị nhập: hiện rõ chuỗi rỗng và khoảng trắng đầu/cuối (␣) để bảng .md không đánh lừa người đọc."""
+    if not isinstance(v, str):
+        return v
+    if v == "":
+        return "`''` (rỗng)"
+    if v != v.strip():
+        return "`" + v.replace(" ", "␣").replace("\t", "⇥") + "`"
+    return v
+
+
 def render(data, h):
     H = "#" * h
     meta, dom = data.get("meta", {}), data.get("domain", {})
@@ -83,7 +94,7 @@ def render(data, h):
         for c in s.get("cases", []):
             ins = c.get("inputs", {})
             rows.append([c["id"], c.get("title"), ", ".join(as_list(c.get("covers")))] + ([c.get("bva_point")] if bva else [])
-                        + [ins.get(k, "") for k in cols] + [c.get("expected_result"), c.get("rationale"), ORIGIN.get(c.get("origin"), c.get("origin"))])
+                        + [show(ins.get(k, "")) for k in cols] + [c.get("expected_result"), c.get("rationale"), ORIGIN.get(c.get("origin"), c.get("origin"))])
         body = []
         if s.get("preconditions"):
             body.append("**Tiền điều kiện:** " + "; ".join(s["preconditions"]))
