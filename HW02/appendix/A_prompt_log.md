@@ -1379,4 +1379,61 @@ Phần thiết kế của AI (bước 1–4) đã xong. Bước 5 là phần em 
 
 ---
 
-**Tổng:** 23 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 21 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #24 | 17:45 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Sửa HW02/A_FR01/testcases.json theo review của SV (KHÔNG freeze, đây là chỉnh sửa của SV):
+- TC-FR01-90: expected → "3 nhãn Họ Tên, Email, Mật khẩu (các trường bắt buộc FR-01 liệt kê) đều có ký hiệu '*' (FR-22.1)." Nếu form có ô Xác nhận mật khẩu thì ghi nhận thêm có '*' hay không nhưng không dùng để kết luận case này.
+- TC-FR01-92: chỉ kiểm ô Mật khẩu có type="password" và che ký tự. Phần ô Xác nhận mật khẩu: ghi notes "kiểm khi ô tồn tại; sự tồn tại do TC-FR01-94 kết luận (A17)".
+- Cả hai: origin "Both", notes ghi lý do sửa: "SV sửa: tránh một nguyên nhân (thiếu ô Xác nhận mật khẩu) làm fail nhiều case; FR-01 chỉ liệt kê 3 trường bắt buộc."
+- Rà các case khác xem còn case nào có expected phụ thuộc vào việc ô Xác nhận mật khẩu tồn tại mà không thuộc nhóm A17 (EC39–42, TC-94) không. Chỉ liệt kê, không tự sửa.
+- Chạy check_domain, lint, render.
+- Nếu commit 4/7 chưa tạo: gộp vào 4/7. Nếu đã tạo: commit riêng "HW02[A-FR01] 4/7b: SV sửa TC-90, TC-92 cô lập nguyên nhân thiếu ô Xác nhận mật khẩu" (kèm A_prompt_log.md).
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Đã rà xong. Giờ sửa TC-90 và TC-92: tiêu đề, bước và dữ liệu đổi theo expected mới cho nhất quán.
+
+Commit 4/7 đã tạo trước đó (`b567dc2`), nên làm commit riêng 4/7b.
+
+Em đã sửa TC-90 và TC-92 theo review và commit riêng ở `6a5a17e` (commit 4/7 đã có từ trước). Không freeze lại. check_domain và lint đều 0 lỗi.
+
+**Đã sửa:**
+- **TC-FR01-90:** expected còn 3 nhãn Họ Tên, Email, Mật khẩu. Em sửa cả bước 2, test_data và rationale để khớp. Ô Xác nhận mật khẩu, nếu có, chỉ ghi nhận có `*` hay không, không dùng để kết luận case.
+- **TC-FR01-92:** chỉ kiểm ô Mật khẩu. Em bỏ bước 4 (kiểm type ô Xác nhận mật khẩu), đổi tiêu đề và rationale; phần ô Xác nhận chuyển vào notes đúng câu em đưa.
+- **Cả hai case:** origin `Both`, notes có lý do sửa. Diff chỉ nằm trong hai case này.
+
+**Rà các case khác.** Các chỗ dưới đây vẫn phụ thuộc vào việc ô Xác nhận mật khẩu tồn tại mà không thuộc nhóm A17. Em chưa sửa:
+1. **TC-FR01-93 bước 2:** gõ "Xác nhận mật khẩu 'abcd1234!'" nhưng không có hướng dẫn bỏ qua khi thiếu ô. Nếu thiếu ô thì case này hỏng ở bước nhập, chưa tới chỗ đo vị trí thông báo lỗi (FR-22.4).
+2. **Procedure bước 3 của TS-DOM-UI và TS-BVA-UI:** cột expected ghi "Mật khẩu và Xác nhận mật khẩu hiện dạng che". Phần action đã có nhánh A17 nhưng expected không ghi "(nếu có)", khác với bước 2 đã ghi.
+3. **A18:** vẫn ghi "kiểm ở TC-FR01-92", nhưng TC-92 không còn kiểm ô Xác nhận mật khẩu, nên A18 hiện không có case nào kiểm.
+
+TC-25/26/27 (EC40–EC42) và TC-94 thuộc nhóm A17, không cần đổi.
+
+Có file `HW02/A_FR01/sv_cases.md` chưa được git theo dõi. Em không mở và không đưa vào commit.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: SV sửa TC-FR01-90, TC-FR01-92 (không freeze) + rà các case phụ thuộc ô Xác nhận mật khẩu
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (TC-90: steps[1], test_data, expected, rationale, origin Both, notes · TC-92: title, bỏ bước 4, expected, rationale, origin Both, notes) · testcases.md (render)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (thiếu UB do A4) · origin AI 98, Both 2 · lint 0 lỗi / 2 cảnh báo (TS-DOM > 25 dòng) · test Not run
+- Commit: 6a5a17e HW02[A-FR01] 4/7b: SV sửa TC-90, TC-92 cô lập nguyên nhân thiếu ô Xác nhận mật khẩu (testcases.json/.md, A_prompt_log.md)
+- Cần quyết định / câu hỏi (chỉ liệt kê, chưa sửa):
+  1. TC-FR01-93 bước 2 nhập Xác nhận mật khẩu, không có nhánh A17 → thiếu ô thì case FR-22.4 hỏng ở bước nhập.
+  2. Procedure bước 3 của TS-DOM-UI và TS-BVA-UI: expected "Mật khẩu và Xác nhận mật khẩu hiện dạng che" chưa ghi "(nếu có)".
+  3. A18 vẫn tham chiếu TC-FR01-92, nhưng TC-92 không còn kiểm ô Xác nhận mật khẩu → sửa A18 hoặc gán case khác.
+  4. HW02/A_FR01/sv_cases.md chưa được git theo dõi (AI không mở) → SV tự xử lý ở bước 5.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 24 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 22 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
