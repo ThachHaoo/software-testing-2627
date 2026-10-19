@@ -4,6 +4,7 @@
 Usage: python merge_results.py testcases.json results.json [--dry-run]
 - Test được nhận diện qua mã TC ở đầu tiêu đề (vd "TC-FR01-03 Kiểm tra …").
 - Actual lấy từ annotation type "actual"; bằng chứng lấy từ attachment có path.
+- Annotation type "verdict" (Pass/Fail/Blocked/Not run/Skipped) thay cho status của Playwright, vd Blocked theo A17/A20.
 - Ảnh/attachment có path được chép vào <thư mục feature>/evidence/ (Playwright xoá test-results mỗi lần chạy).
 - Không đụng tới expected_result.
 """
@@ -20,6 +21,7 @@ for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output b
         pass
 
 STATUS = {"passed": "Pass", "failed": "Fail", "timedOut": "Fail", "skipped": "Not run", "interrupted": "Blocked"}
+VERDICTS = {"Pass", "Fail", "Blocked", "Not run", "Skipped"}
 ID_RE = re.compile(r"^(TC-[A-Z0-9]+(?:-[A-Z0-9]+)*-\d{2,4})\b")
 
 
@@ -42,11 +44,17 @@ def collect(results):
                 if not runs:
                     continue
                 last = runs[-1]
-                ann = [a.get("description", "") for a in (t.get("annotations", []) + last.get("annotations", [])) if a.get("type") == "actual"]
+                anns = t.get("annotations", []) + last.get("annotations", [])
+                ann = [a.get("description", "") for a in anns if a.get("type") == "actual"]
+                # annotation "verdict" (vd Blocked theo A17/A20) thắng STATUS map; lý do nằm trong annotation "actual"
+                verdict = [a.get("description", "").strip() for a in anns if a.get("type") == "verdict"]
+                if verdict and verdict[-1] not in VERDICTS:
+                    print(f"[WARN] {m.group(1)}: verdict '{verdict[-1]}' không thuộc {sorted(VERDICTS)} — dùng status của Playwright")
+                    verdict = []
                 err = (last.get("error") or {}).get("message", "")
                 files = [a["path"] for a in last.get("attachments", []) if a.get("path")]
                 found[m.group(1)] = {
-                    "status": STATUS.get(last.get("status"), last.get("status")),
+                    "status": verdict[-1] if verdict else STATUS.get(last.get("status"), last.get("status")),
                     "actual": ann[-1] if ann else "",
                     "error": re.sub(r"\x1b\[[0-9;]*m", "", err).strip().splitlines()[0] if err else "",
                     "evidence": files,
