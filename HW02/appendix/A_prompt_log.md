@@ -1436,4 +1436,145 @@ Có file `HW02/A_FR01/sv_cases.md` chưa được git theo dõi. Em không mở 
 
 ---
 
-**Tổng:** 24 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 22 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #25 | 19:14 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+   Chép các case trong HW02/A_FR01/sv_cases.md vào suite TS-SV (mã từ TC-FR01-200, origin "Human"), giữ nguyên ý của em, chỉ chuẩn hoá theo schema (tiêu đề Action+Function+Condition, covers nếu khớp EC có sẵn, nếu không khớp EC nào thì ghi rõ "lớp mới"). Không thêm, bớt hay sửa expected.
+   Sau đó, với TỪNG case của em, đối chiếu với các bản đóng băng bước 2–4 trong appendix/ai-outputs/ và trả lời trung thực:
+   (a) case này đã có trong bản nháp của AI chưa (ghi mã EC/TC nếu có);
+   (b) nếu chưa: AI đã nghĩ tới nhưng không đưa vào output, hay không nghĩ tới;
+   (c) nguyên nhân thuộc loại nào: thông tin trong prompt chưa đủ, giới hạn của công cụ, hay độ phức tạp của feature — kèm 1–2 câu giải thích.
+   Không đề xuất thêm case mới. Chạy check_domain, render. Commit "HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả lời gap analysis của AI".
+   Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Đã lấy được bảng EC → TC từ bản đóng băng bước 4. Giờ viết suite TS-SV.
+
+Lint báo TC-200 và TC-201 trùng dữ liệu, vì hai case chỉ khác tầng mà tầng chưa có trong cột. Em thêm cột "Tầng" vào TS-SV rồi sinh lại.
+
+Đã chép 24 case vào TS-SV (TC-FR01-200…223). Giờ viết câu trả lời gap analysis vào file riêng, ghi rõ đó là lời của AI.
+
+Em đã chép 24 case của em vào suite TS-SV (TC-FR01-200 đến 223, origin `Human`), trả lời gap analysis cho từng case và commit ở `8d837f1`. check_domain 0 lỗi; lint 0 lỗi.
+
+**Cách chuẩn hoá TS-SV:**
+- Expected, Lý do (vào `rationale`) và Actual (vào `actual_result`) chép nguyên văn. Status để `Not run`, vì nhiều dòng có hai verdict khác nhau cho UI và API.
+- Thêm cột "Tầng" vì lint báo SV-01 và SV-02 trùng dữ liệu khi chưa phân biệt tầng. Thêm cột "Thao tác riêng", tách từ phần Lý do/Expected của em (bấm 2 lần, gửi đồng thời, `{}`, `text/plain`, thêm `role`, đăng nhập sau khi đăng ký…).
+- Layer `UI+API` cho các dòng em ghi cả hai tầng. Giá trị này ngoài schema (chỉ có UI/API/Mobile).
+- 16 case khớp EC có sẵn. 7 case ghi "lớp mới": SV-04, 05, 09, 10, 15, 22, 23, 24.
+- SV-14 (`{}`) vi phạm cùng lúc EC5, EC16 và EC37. Em ghi là "lớp mới: tổ hợp", vì ghi cả ba mã thì check_domain báo lỗi; notes đã giải thích.
+- 4 case chưa gán mã yêu cầu vì em không ghi mã cụ thể: SV-08 ("FR-01" chung), SV-15, SV-23, SV-24. Lint báo 4 cảnh báo cho chỗ này.
+
+**Câu trả lời gap analysis** nằm trong `HW02/A_FR01/ai_gap_answer.md`, ghi rõ là lời của AI, không phải phân tích của SV. Mỗi case có (a), (b), (c), mã EC/TC lấy theo bản đóng băng bước 4.
+
+Vài điểm em nên tự kiểm khi viết phần phân tích:
+- **Đã nghĩ tới nhưng không đưa vào:**
+  - SV-04/05: chính AI viết luật "không rỗng hai bên dấu chấm" trong A2 nhưng không tách lớp.
+  - SV-03: mô tả EC36 có ghi khoảng trắng nhưng AI chọn `#`.
+  - SV-08: A12 có nhắc đăng nhập.
+  - SV-13: AI có grep `limit` trong server.js.
+  - SV-14: AI bỏ tổ hợp có chủ đích theo quy tắc mỗi case một lớp.
+  - SV-16: AI đã đọc SEC-05.
+  - SV-07 (một phần): bản nháp A3 bước 1 đề xuất không phân biệt hoa/thường, nhưng không tách phần local và domain.
+- **SV-01:** AI đã đọc regex ở Register.jsx dòng 15 từ bước 0 nhưng không kiểm mật khẩu danh nghĩa `Abcd1234!` của chính mình có qua được phía client không.
+- **SV-02** không phải bỏ sót, chỉ khác giá trị đại diện.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: bước 5 HW02/A_FR01: chép case SV vào TS-SV + câu trả lời gap analysis của AI
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (thêm TS-SV 24 TC: TC-FR01-200…223) · testcases.md (render) · HW02/A_FR01/ai_gap_answer.md (mới, câu trả lời của AI)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (UB do A4), 50/50 EC · lint 0 lỗi / 6 cảnh báo (4 case SV chưa gán mã yêu cầu; 2 suite TS-DOM > 25 dòng) · tổng 124 TC (AI 98, Both 2, Human 24) · test: tất cả Not run trong JSON (Actual SV ghi tay đã chép vào actual_result)
+- Commit: 8d837f1 HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả lời gap analysis của AI (sv_cases.md đã có từ commit 2448cf1)
+- Cần quyết định / câu hỏi:
+  1. Status của TS-SV: để Not run chờ bước 6, hay SV chốt verdict theo từng tầng? Với dòng UI+API có hai verdict, có tách thành hai case không? (Hiện giữ 1:1 theo sv_cases.md.)
+  2. layer "UI+API" không có trong schema (UI/API/Mobile) → giữ hay tách?
+  3. SV-07 có Expected ngược với A3/EC19 → cần chốt lại A3 (domain không phân biệt hoa/thường?) trước bước 6.
+  4. SV-08, SV-15, SV-23, SV-24 chưa gán mã yêu cầu → SV chọn mã hoặc ghi "ngoài FR-01".
+  5. ai_gap_answer.md là lời của AI → khai trong Audit/Disclosure; phần "vì sao AI bỏ sót" trong report do SV tự viết.
+```
+````
+*File AI ghi/gửi trong lượt này:* `fr01_step5_sv.py`, `ai_gap_answer.md`
+
+**Xử lý:** [...]
+
+---
+
+## #26 | 19:28 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+A. Vá harness (commit riêng "HW02: vá harness – render_md chỉ đánh dấu rỗng cho biến đầu vào"):
+   render_md.py suite_table: chỉ áp show() (hiện `''` (rỗng)/␣) cho cột là biến đầu vào trong domain.variables; cột khác để trống nếu không có giá trị.
+
+B. Sửa TS-SV trong HW02/A_FR01/testcases.json theo quyết định của SV (KHÔNG freeze):
+   1. Chuyển Actual ghi tay từ actual_result (và câu "Actual: …" trong rationale của TC-200) sang notes: "Quan sát thăm dò (SV chạy tay 19/10): …". actual_result rỗng, status Not run.
+   2. Tách 10 dòng UI+API (202–205, 210, 211, 215, 217, 218 → UI giữ mã; API mã mới từ TC-FR01-224 theo thứ tự). TC-216 layer UI. Origin Human, notes "tách từ TC-xxx". Không đổi dữ liệu/expected.
+   3. Thêm vào preconditions của TS-SV: trạng thái ban đầu các case UI như TS-DOM-UI (trang /register vừa tải, các ô trống, chưa đăng nhập, không autofill), trừ TC-223.
+   4. Thêm meta.assumptions A20 đúng nguyên văn SV sẽ gửi (CHỜ — không tự viết).
+   5. Mục A3, mã yêu cầu cho 207/214/222/223, oracle cho 219/223: CHỜ SV gửi quyết định, chưa sửa.
+   Chạy check_domain, lint, render. Chưa commit — báo cáo danh sách mã mới và các mục đang chờ.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Bản vá render đã commit ở `85458ad`. Giờ sửa TS-SV: chuyển phần quan sát sang notes, tách các dòng UI+API, thêm tiền điều kiện.
+
+Bản vá render đã commit ở `85458ad`. Phần B đã sửa xong trong `testcases.json`, chưa commit; mục 4 và 5 đang chờ quyết định của em. check_domain 0 lỗi, 50/50 EC; lint 0 lỗi.
+
+**A. render_md.py:** `show()` giờ chỉ áp cho cột trùng tên biến đầu vào: Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu. Cột "Thao tác riêng" và "Tầng" khi trống thì để trống. Cột "Email trong CSDL" không trùng tên V3 nên cũng không áp, nhưng cột này không bao giờ rỗng.
+
+**B1. Actual chuyển sang notes:** cả 24 case có notes "Quan sát thăm dò (SV chạy tay 19/10): …". `actual_result` rỗng hết, status `Not run`. Câu "Actual: …" trong rationale của TC-200 cũng đã chuyển sang notes.
+
+**B2. Tách các dòng UI+API:** em đếm được 10 dòng UI+API. 9 dòng được tách; TC-216 chỉ đổi layer thành UI, không tách. Bản UI giữ mã cũ, bản API mang mã mới:
+
+| UI (giữ mã) | 202 | 203 | 204 | 205 | 210 | 211 | 215 | 217 | 218 |
+|---|---|---|---|---|---|---|---|---|---|
+| API (mã mới) | 224 | 225 | 226 | 227 | 228 | 229 | 230 | 231 | 232 |
+
+- Dữ liệu và expected không đổi.
+- Tiêu đề đổi "qua UI và API" thành "qua UI" hoặc "qua API".
+- Notes ghi hai chiều: bản API có "Tách từ TC-xxx"; bản UI có "Bản API tách thành TC-xxx".
+
+**B3:** đã thêm tiền điều kiện trạng thái ban đầu cho các case tầng UI của TS-SV, trừ TC-223.
+
+Có 3 chỗ em nên xem trước khi commit:
+- Mỗi cặp tách ra đều mang nguyên câu quan sát gồm cả phần API lẫn UI, vì em không tự cắt câu của em. Muốn mỗi bản chỉ giữ phần của tầng mình thì em nói.
+- Expected của TC-227 (bản API của SV-06) vẫn có "chuyển tới /login", vốn chỉ đúng ở UI. Em không sửa vì lệnh là không đổi expected.
+- TS-SV giờ có 33 dòng, lint cảnh báo thêm "> 25 dòng" (tổng 7 cảnh báo).
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: A. vá render_md (show() chỉ cho cột biến đầu vào) · B. sửa TS-SV theo quyết định SV (không freeze)
+- File đã tạo/sửa:
+  - .claude/skills/domain-bva-testing/scripts/render_md.py (đã commit)
+  - HW02/A_FR01/testcases.json (TS-SV: chuyển Actual sang notes; tách 9 dòng; TC-216 → UI; thêm tiền điều kiện UI)
+  - testcases.md (render)
+- Mã mới (bản API): 202→224, 203→225, 204→226, 205→227, 210→228, 211→229, 215→230, 217→231, 218→232. TS-SV 33 TC; tổng 133 (AI 98, Both 2, Human 33)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (UB do A4), 50/50 EC · lint 0 lỗi / 7 cảnh báo (4 case chưa gán mã yêu cầu; TS-DOM-UI, TS-DOM-API, TS-SV > 25 dòng) · test Not run (133)
+- Commit: 85458ad HW02: vá harness – render_md chỉ đánh dấu rỗng cho biến đầu vào · phần B chưa commit
+- Đang chờ SV:
+  1. A20: nguyên văn do SV gửi.
+  2. A3: chốt lại trường hợp chỉ khác hoa/thường ở phần domain (SV-07, TC-206).
+  3. Mã yêu cầu cho TC-207, 214, 222, 223.
+  4. Oracle cho TC-219 (homoglyph) và TC-223 (đang đăng nhập).
+- Cần quyết định / câu hỏi:
+  5. Mỗi cặp tách ra đều mang nguyên câu quan sát (cả UI lẫn API) → giữ hay chỉ để phần của tầng tương ứng?
+  6. Expected của TC-227 (SV-06 bản API) có "chuyển tới /login" → SV có sửa expected cho bản API không?
+  7. Đề xuất message commit khi xong: "HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, quan sát sang notes)".
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 26 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 24 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

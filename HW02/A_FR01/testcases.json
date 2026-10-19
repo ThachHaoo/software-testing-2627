@@ -11,7 +11,7 @@
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
     "environment": "Windows (PowerShell), backend http://localhost:3000, web http://localhost:5173 (route /register); chi tiết ở HW02/env/environment.md",
-    "scope": "Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST /api/register (tầng API). Trong phạm vi: FR-01 (phân lớp + BVA) và FR-22.1–FR-22.4 (thuộc tính tĩnh của form — kiểm bằng suite GUI riêng, không phân lớp, vì không phải miền giá trị nhập). Ngoài phạm vi: FR-21 (tiêu chuẩn giao diện chung, áp dụng toàn hệ thống, không riêng form đăng ký) và SEC-01 (mật khẩu không lưu plaintext — yêu cầu bảo mật tham khảo, không thuộc FR-01 và không quan sát được qua UI/API đăng ký); đăng ký trên Mobile (Pool D, FR-20); đăng nhập (FR-02); các trang khác.",
+    "scope": "Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST /api/register (tầng API). Trong phạm vi: FR-01 (phân lớp + BVA) và FR-22.1–FR-22.4 (thuộc tính tĩnh của form — kiểm bằng suite GUI riêng, không phân lớp, vì không phải miền giá trị nhập). Ngoài phạm vi: FR-21 (tiêu chuẩn giao diện chung, áp dụng toàn hệ thống, không riêng form đăng ký) và SEC-01 (mật khẩu không lưu plaintext — yêu cầu bảo mật tham khảo, không thuộc FR-01 và không quan sát được qua UI/API đăng ký); đăng ký trên Mobile (Pool D, FR-20); đăng nhập (FR-02); các trang khác. TS-SV có kiểm thăm dò SEC-04, SEC-05, SEC-06* liên quan trực tiếp tới dữ liệu đăng ký.",
     "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI)",
     "references": [
       "../eshop-sut/README.md dòng 30–36 — FR-01 Đăng ký tài khoản (oracle)",
@@ -27,7 +27,7 @@
     "assumptions": [
       "A1 (Họ Tên): FR-01 chỉ nói 'phải cung cấp'. SRS không nêu độ dài tối thiểu/tối đa hay tập ký tự → chỉ coi 'rỗng' là không hợp lệ. Chuỗi chỉ gồm khoảng trắng: giả định bị coi như rỗng (bị từ chối). Không có cận trên → không sinh UB/MAX_UI cho Họ Tên trừ khi SV quyết định khác.",
       "A2 (Email – định dạng): FR-01 chỉ đưa mẫu 'user@domain.com'. Giả định định dạng hợp lệ = <local>@<domain>.<tld>: đúng một '@', phần local không rỗng, phần domain có ít nhất một dấu '.' và không rỗng hai bên dấu chấm. FR-22 yêu cầu type=\"email\" nên quy tắc HTML5 của trình duyệt dùng làm tham chiếu phụ. SRS không nêu độ dài tối đa → không kiểm cận trên độ dài email.",
-      "A3 (Email – duy nhất): SRS không nói so sánh có phân biệt hoa/thường và có cắt khoảng trắng đầu/cuối hay không. Giả định (SV chốt 2026-10-19): so sánh CÓ phân biệt hoa/thường (TEST@eshop.com khác test@eshop.com, coi là email mới) và khoảng trắng đầu/cuối được cắt trước khi so sánh (' test@eshop.com ' trùng test@eshop.com). Expected của các case liên quan email trùng tuân theo giả định này.",
+      "A3 (Email – duy nhất): Email so sánh sau khi cắt khoảng trắng đầu/cuối; phần local phân biệt hoa/thường, phần domain không phân biệt (RFC 5321 §2.4). SV sửa ở bước 5.",
       "A4 (Mật khẩu – độ dài): chỉ có cận dưới 8 ký tự. SRS không có cận trên → không có UB; BVA độ dài chỉ quanh LB = 8 (7, 8, 9) và NOM.",
       "A5 (Mật khẩu – ký tự đặc biệt): hiểu danh sách (@, $, !, %, *, ?, &) là tập ĐÓNG: mật khẩu chỉ chứa ký tự đặc biệt ngoài tập này (ví dụ #, ^, -, khoảng trắng) bị coi là thiếu ký tự đặc biệt → bị từ chối. SRS không nói ký tự ngoài tập có được phép xuất hiện thêm hay không → giả định được phép nếu đã có ít nhất một ký tự trong tập.",
       "A6 (Mật khẩu – chữ hoa/thường): giả định chỉ tính chữ Latin A–Z / a–z; chữ có dấu tiếng Việt (Ă, ê…) không tính là chữ hoa/thường. SRS im lặng. Expected của EC27/EC30 phụ thuộc giả định này; kết quả lệch được phân tích là SRS mơ hồ trước khi kết luận lỗi.",
@@ -43,7 +43,11 @@
       "A16 (Thông báo kiểm tra HTML5): khi trình duyệt chặn submit bằng bong bóng kiểm tra của thuộc tính required/type, bong bóng đó được coi là 'thông báo lỗi trên form' trong oracle của V6. SRS không phân biệt cơ chế hiển thị (SV xác nhận 2026-10-19). Cách quan sát: bong bóng HTML5 không nằm trong DOM → oracle = form không gửi request POST /api/register + ô liên quan ở trạng thái :invalid / validationMessage không rỗng.",
       "A17 (Thiếu ô Xác nhận mật khẩu): nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường (TC-FR01-94) → Fail; case có V5 = EC39 bỏ qua bước nhập V5 và ghi notes; chỉ các case EC40–EC42 → Blocked kèm mã bug. Không xoá case.",
       "A18 (FR-22.3 cho ô Xác nhận mật khẩu): FR-22.3 chỉ nêu 'Trường Mật khẩu'. Giả định ô Xác nhận mật khẩu cũng là trường mật khẩu → cũng phải dùng type=\"password\" (kiểm ở TC-FR01-92).",
-      "A19 (Độc lập giữa các case): tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi."
+      "A19 (Độc lập giữa các case): tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi.",
+      "A20 (lỗi đã biết chặn case khác): Khi một case không kiểm được đúng mục đích của nó vì một lỗi đã được case khác kết luận, case đó ghi Blocked và notes ghi mã case hoặc bug gây chặn. Mục đích của case được kiểm ở bản tầng API nếu có. Chỉ case kết luận nguyên nhân gốc mới ghi Fail. (Cùng nguyên tắc với A17.) (AI đề xuất, SV duyệt 2026-10-19)",
+      "A21 (email chỉ gồm ký tự ASCII): FR-22.2 bắt ô Email dùng type=\"email\". A2 lấy quy tắc HTML5 làm tham chiếu phụ, và theo định nghĩa “valid e-mail address” của HTML5, phần local chỉ gồm ký tự ASCII. Vì vậy email có ký tự ngoài ASCII là sai định dạng. → TC-219: tеst@eshop.com (chữ е Cyrillic) phải bị từ chối, 4xx, không tạo user. Thêm EC52 “Email có ký tự ngoài ASCII” (không hợp lệ), do TC-219 phủ. Ý tưởng homoglyph của bạn giữ nguyên ở cột Lý do. Nay case này có oracle, không còn là quan sát suông. (AI đề xuất, SV duyệt 2026-10-19)",
+      "A22 (đăng ký khi đang đăng nhập): SRS không hạn chế việc này. Giả định ít suy diễn nhất: form vẫn dùng được, đăng ký tài khoản mới thành công, chuyển tới /login (FR-01.10), tạo đúng 1 user mới, và tài khoản test@eshop.com không bị thay đổi. → Expected của TC-223. (AI đề xuất, SV duyệt 2026-10-19)",
+      "A23 (role khi đăng ký): tài khoản tạo qua đăng ký luôn có role user; trường không có trong api_specification bị bỏ qua (mở rộng SEC-06 và FR-04). → TC-222 giữ nguyên Expected, chỉ thêm căn cứ. (AI đề xuất, SV duyệt 2026-10-19)"
     ]
   },
   "requirements": [
@@ -62,7 +66,11 @@
     {"id": "FR-22.1", "text": "Trường bắt buộc có ký hiệu * bên cạnh nhãn."},
     {"id": "FR-22.2", "text": "Trường Email dùng type=\"email\"."},
     {"id": "FR-22.3", "text": "Trường Mật khẩu dùng type=\"password\"."},
-    {"id": "FR-22.4", "text": "Thông báo lỗi xuất hiện phía trên nút submit."}
+    {"id": "FR-22.4", "text": "Thông báo lỗi xuất hiện phía trên nút submit."},
+    {"id": "API-REG", "text": "POST /api/register nhận body JSON {name, email, password}; thành công trả 200 {\"message\": \"User registered successfully\", \"id\": n} (api_specification.md dòng 14–21)."},
+    {"id": "SEC-04", "text": "Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng innerHTML trực tiếp (README.md dòng 281)."},
+    {"id": "SEC-05", "text": "Truy vấn CSDL phải dùng Parameterized Query, không nối chuỗi trực tiếp (README.md dòng 282)."},
+    {"id": "SEC-06*", "text": "API cập nhật hồ sơ không được cho phép thay đổi trường role từ client (README.md dòng 283) — mở rộng cho đăng ký, A23."}
   ],
   "domain": {
     "variables": [
@@ -162,7 +170,7 @@
       {"id": "EC17", "variable": "V2", "class": "Tầng API: email không phải chuỗi (ví dụ số 123)", "valid": false, "guideline": "type", "note": "Chỉ tầng API (A15)."},
 
       {"id": "EC18", "variable": "V3", "class": "Email chưa tồn tại trong bảng users", "valid": true, "guideline": "set", "note": "FR-01.4."},
-      {"id": "EC19", "variable": "V3", "class": "Chỉ khác email đã có ở chữ hoa/thường (ví dụ 'TEST@eshop.com' khi đã có 'test@eshop.com')", "valid": true, "guideline": "split", "note": "A3 (SV chốt): so sánh phân biệt hoa/thường → coi là email mới, hợp lệ."},
+      {"id": "EC19", "variable": "V3", "class": "Chỉ khác hoa/thường ở phần local (ví dụ 'Test@eshop.com' khi đã có 'test@eshop.com')", "valid": true, "guideline": "split", "note": "A3 (SV sửa ở bước 5): phần local phân biệt hoa/thường → coi là email mới, hợp lệ."},
       {"id": "EC20", "variable": "V3", "class": "Trùng chính xác email đã có (ví dụ 'test@eshop.com')", "valid": false, "guideline": "set", "note": "FR-01.4. Dùng tài khoản seed (A13)."},
       {"id": "EC21", "variable": "V3", "class": "Trùng email đã có sau khi cắt khoảng trắng đầu/cuối (ví dụ ' test@eshop.com ')", "valid": false, "guideline": "split", "note": "A3 (SV chốt): cắt khoảng trắng rồi mới so sánh → trùng. Tách khỏi EC20 vì so khớp chuỗi nguyên văn sẽ không phát hiện trùng."},
 
@@ -196,7 +204,9 @@
       {"id": "EC47", "variable": "V8", "class": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}", "valid": true, "guideline": "output", "note": "api_specification.md dòng 21."},
       {"id": "EC48", "variable": "V8", "class": "HTTP 4xx, body có trường error", "valid": false, "guideline": "output", "note": "A11. 5xx hoặc không phản hồi không thuộc lớp mong đợi nào → không đạt oracle."},
       {"id": "EC49", "variable": "V9", "class": "Tạo đúng 1 bản ghi user mới với name/email đã nhập", "valid": true, "guideline": "output", "note": "A12: quan sát qua GET /api/admin/users hoặc đăng nhập."},
-      {"id": "EC50", "variable": "V9", "class": "Không tạo bản ghi (số user không đổi)", "valid": false, "guideline": "output", "note": "A12."}
+      {"id": "EC50", "variable": "V9", "class": "Không tạo bản ghi (số user không đổi)", "valid": false, "guideline": "output", "note": "A12."},
+      {"id": "EC51", "variable": "V3", "class": "Chỉ khác hoa/thường ở phần domain (ví dụ 'test@ESHOP.COM' khi đã có 'test@eshop.com')", "valid": false, "guideline": "split", "note": "SV thêm ở bước 5 (A3)"},
+      {"id": "EC52", "variable": "V2", "class": "Email có ký tự ngoài ASCII (vd chữ Cyrillic giống Latin)", "valid": false, "guideline": "must-be", "note": "A21; SV thêm ở bước 5"}
     ]
   },
   "suites": [
@@ -4058,7 +4068,8 @@
       "preconditions": [
         "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).",
         "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).",
-        "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19)."
+        "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).",
+        "Trạng thái ban đầu của mỗi case tầng UI (trừ TC-FR01-223): trang /register vừa tải xong, các ô Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu (nếu có) đều trống; chưa đăng nhập (localStorage không có token); chạy tay dùng cửa sổ ẩn danh và tắt autofill; Playwright dùng browser context mới cho mỗi case."
       ],
       "procedure": [
         {
@@ -4113,14 +4124,14 @@
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "[UI] FR-01.3: Email phải có định dạng hợp lệ (user@domain.com). Mật khẩu Hiep123$ hợp lệ theo SRS (8 ký tự, có hoa, thường, số, '$') để case chỉ vi phạm email. Actual: form chặn ở bước kiểm mật khẩu nên không kiểm được email → lỗi mật khẩu che lỗi email",
+          "rationale": "[UI] FR-01.3: Email phải có định dạng hợp lệ (user@domain.com). Mật khẩu Hiep123$ hợp lệ theo SRS (8 ký tự, có hoa, thường, số, '$') để case chỉ vi phạm email.",
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "Báo lỗi: \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-01 trong sv_cases.md. Khớp EC10 (không có '@')."
+          "notes": "Nguồn: SV-01 trong sv_cases.md. Khớp EC10 (không có '@'). Quan sát thăm dò (SV chạy tay 19/10): Báo lỗi: \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; form chặn ở bước kiểm mật khẩu nên không kiểm được email → lỗi mật khẩu che lỗi email"
         },
         {
           "id": "TC-FR01-201",
@@ -4146,17 +4157,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":3}`; tạo 1 user mới (email \"1\") → Fail",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-02 trong sv_cases.md. Khớp EC10 (không có '@')."
+          "notes": "Nguồn: SV-02 trong sv_cases.md. Khớp EC10 (không có '@'). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":3}`; tạo 1 user mới (email \"1\") → Fail"
         },
         {
           "id": "TC-FR01-202",
-          "title": "Kiểm tra từ chối đăng ký qua UI và API khi mật khẩu chỉ có khoảng trắng làm ký tự đặc biệt",
-          "layer": "UI+API",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi mật khẩu chỉ có khoảng trắng làm ký tự đặc biệt",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Lê Tấn Hiệp",
             "Email": "hiep.sv03@domain.com",
             "Mật khẩu": "Abcd 1234",
@@ -4175,17 +4186,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":4}`; tạo 1 user mới → Fail; UI: form chấp nhận `Abcd 1234`, chuyển tới /login; đăng nhập bằng tài khoản vừa tạo thành công (tức là đã tạo user) → Fail",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-03 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập)."
+          "notes": "Bản API tách thành TC-FR01-224. Nguồn: SV-03 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): UI: form chấp nhận `Abcd 1234`, chuyển tới /login; đăng nhập bằng tài khoản vừa tạo thành công (tức là đã tạo user) → Fail"
         },
         {
           "id": "TC-FR01-203",
-          "title": "Kiểm tra từ chối đăng ký qua UI và API khi domain của email có hai dấu chấm liền nhau",
-          "layer": "UI+API",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi domain của email có hai dấu chấm liền nhau",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Lê Tấn Hiệp",
             "Email": "hiep.sv04@domain..com",
             "Mật khẩu": "Hiep123$",
@@ -4204,17 +4215,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":5}`; tạo 1 user mới → Fail; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Blocked bởi lỗi regex mật khẩu (form chặn trước bước kiểm email)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-04 trong sv_cases.md. Lớp mới — không khớp EC nào của bước 2."
+          "notes": "Bản API tách thành TC-FR01-225. Nguồn: SV-04 trong sv_cases.md. Lớp mới — không khớp EC nào của bước 2. Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Blocked bởi lỗi regex mật khẩu (form chặn trước bước kiểm email)"
         },
         {
           "id": "TC-FR01-204",
-          "title": "Kiểm tra từ chối đăng ký qua UI và API khi domain của email bắt đầu bằng dấu chấm",
-          "layer": "UI+API",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi domain của email bắt đầu bằng dấu chấm",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Lê Tấn Hiệp",
             "Email": "hiep.sv05@.domain.com",
             "Mật khẩu": "Hiep123$",
@@ -4233,17 +4244,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":6}`; tạo 1 user mới → Fail; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Blocked bởi lỗi regex mật khẩu (form chặn trước bước kiểm email)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-05 trong sv_cases.md. Lớp mới — không khớp EC nào của bước 2."
+          "notes": "Bản API tách thành TC-FR01-226. Nguồn: SV-05 trong sv_cases.md. Lớp mới — không khớp EC nào của bước 2. Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Blocked bởi lỗi regex mật khẩu (form chặn trước bước kiểm email)"
         },
         {
           "id": "TC-FR01-205",
-          "title": "Kiểm tra đăng ký thành công qua UI và API khi email có '.', '+' ở phần local và nhiều cấp subdomain",
-          "layer": "UI+API",
+          "title": "Kiểm tra đăng ký thành công qua UI khi email có '.', '+' ở phần local và nhiều cấp subdomain",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Lê Tấn Hiệp",
             "Email": "nguyen.van+sv06@mail.domain.com.vn",
             "Mật khẩu": "Hiep123$",
@@ -4262,10 +4273,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":7}`; tạo 1 user mới → Pass; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-06 trong sv_cases.md. Thuộc EC7 (đúng định dạng); SV coi là nhóm con cần đại diện riêng của lớp hợp lệ."
+          "notes": "Bản API tách thành TC-FR01-227. Nguồn: SV-06 trong sv_cases.md. Thuộc EC7 (đúng định dạng); SV coi là nhóm con cần đại diện riêng của lớp hợp lệ. Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")"
         },
         {
           "id": "TC-FR01-206",
@@ -4283,7 +4294,7 @@
             "FR-01.4"
           ],
           "covers": [
-            "EC19"
+            "EC51"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -4291,10 +4302,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":8}`; tạo 1 user mới với email \"test@ESHOP.COM\" dù đã có test@eshop.com → Fail (theo Expected hiện tại; phụ thuộc cách chốt A3)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-07 trong sv_cases.md. Dữ liệu thuộc EC19 (chỉ khác hoa/thường) nhưng Expected của SV ngược với A3/EC19 → chờ SV chốt lại A3."
+          "notes": "Nguồn: SV-07 trong sv_cases.md. Dữ liệu thuộc EC19 (chỉ khác hoa/thường) nhưng Expected của SV ngược với A3/EC19 → chờ SV chốt lại A3. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":8}`; tạo 1 user mới với email \"test@ESHOP.COM\" dù đã có test@eshop.com → Fail (theo Expected hiện tại; phụ thuộc cách chốt A3)"
         },
         {
           "id": "TC-FR01-207",
@@ -4308,7 +4319,9 @@
             "Thao tác riêng": "Sau khi đăng ký: POST /api/login với hiep.sv08@domain.com / Hiep123$"
           },
           "expected_result": "Đăng ký thành công; sau đó đăng nhập bằng hiep.sv08@domain.com / Hiep123$ thành công",
-          "requirements": [],
+          "requirements": [
+            "FR-01.10"
+          ],
           "covers": [
             "EC49"
           ],
@@ -4318,10 +4331,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":9}`; tạo 1 user mới; đăng nhập lại bằng hiep.sv08@domain.com / Hiep123$: HTTP 200, có token → Pass",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-08 trong sv_cases.md. Phủ lớp đầu ra EC49 (tạo bản ghi), oracle mở rộng bằng đăng nhập. SV ghi 'FR-01' chung → chưa gán mã yêu cầu con."
+          "notes": "Nguồn: SV-08 trong sv_cases.md. Phủ lớp đầu ra EC49 (tạo bản ghi), oracle mở rộng bằng đăng nhập. SV ghi 'FR-01' chung → chưa gán mã yêu cầu con. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":9}`; tạo 1 user mới; đăng nhập lại bằng hiep.sv08@domain.com / Hiep123$: HTTP 200, có token → Pass"
         },
         {
           "id": "TC-FR01-208",
@@ -4347,10 +4360,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; không gửi được request nào → Blocked bởi lỗi regex mật khẩu (chưa kiểm được việc double-click)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-09 trong sv_cases.md. Lớp mới — số lần submit không phải biến của bước 1."
+          "notes": "Nguồn: SV-09 trong sv_cases.md. Lớp mới — số lần submit không phải biến của bước 1. Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; không gửi được request nào → Blocked bởi lỗi regex mật khẩu (chưa kiểm được việc double-click)"
         },
         {
           "id": "TC-FR01-209",
@@ -4376,17 +4389,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: request 1 HTTP 200 (id 10); request 2 HTTP 200 (id 11); tạo 2 user cùng email hiep.sv10@domain.com → Fail",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-10 trong sv_cases.md. Lớp mới — tính đồng thời không phải biến của bước 1."
+          "notes": "Nguồn: SV-10 trong sv_cases.md. Lớp mới — tính đồng thời không phải biến của bước 1. Quan sát thăm dò (SV chạy tay 19/10): API: request 1 HTTP 200 (id 10); request 2 HTTP 200 (id 11); tạo 2 user cùng email hiep.sv10@domain.com → Fail"
         },
         {
           "id": "TC-FR01-210",
-          "title": "Kiểm tra từ chối đăng ký qua UI và API khi mật khẩu dùng ký tự '＄' full-width thay cho '$'",
-          "layer": "UI+API",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi mật khẩu dùng ký tự '＄' full-width thay cho '$'",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Lê Tấn Hiệp",
             "Email": "hiep.sv11@domain.com",
             "Mật khẩu": "Hiep123＄",
@@ -4405,17 +4418,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":12}`; tạo 1 user mới → Fail; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Pass (trùng hợp: regex UI từ chối mọi ký tự đặc biệt, kể cả \"$\" hợp lệ, nên không chứng minh được UI phân biệt \"＄\" với \"$\")",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-11 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập)."
+          "notes": "Bản API tách thành TC-FR01-228. Nguồn: SV-11 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Pass (trùng hợp: regex UI từ chối mọi ký tự đặc biệt, kể cả \"$\" hợp lệ, nên không chứng minh được UI phân biệt \"＄\" với \"$\")"
         },
         {
           "id": "TC-FR01-211",
-          "title": "Kiểm tra đăng ký và đăng nhập lại qua UI và API khi mật khẩu có khoảng trắng ở đầu",
-          "layer": "UI+API",
+          "title": "Kiểm tra đăng ký và đăng nhập lại qua UI khi mật khẩu có khoảng trắng ở đầu",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Lê Tấn Hiệp",
             "Email": "hiep.sv12@domain.com",
             "Mật khẩu": " Hiep123$",
@@ -4434,10 +4447,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":13}`; tạo 1 user mới; đăng nhập lại bằng `␣Hiep123$`: HTTP 200, có token → Pass; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-12 trong sv_cases.md. Khớp EC34 (có ký tự trong tập và ký tự ngoài tập)."
+          "notes": "Bản API tách thành TC-FR01-229. Nguồn: SV-12 trong sv_cases.md. Khớp EC34 (có ký tự trong tập và ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")"
         },
         {
           "id": "TC-FR01-212",
@@ -4463,10 +4476,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 413, trang lỗi HTML \"PayloadTooLargeError: request entity too large\"; không tạo user mới → Fail (xung đột A4: SRS không có cận trên, server giới hạn body ~100 KB)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-13 trong sv_cases.md. Thuộc EC22 (độ dài ≥ 8), giá trị rất lớn — bước 4 không có điểm UB/MAX_UI (A4)."
+          "notes": "Nguồn: SV-13 trong sv_cases.md. Thuộc EC22 (độ dài ≥ 8), giá trị rất lớn — bước 4 không có điểm UB/MAX_UI (A4). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 413, trang lỗi HTML \"PayloadTooLargeError: request entity too large\"; không tạo user mới → Fail (xung đột A4: SRS không có cận trên, server giới hạn body ~100 KB)"
         },
         {
           "id": "TC-FR01-213",
@@ -4494,10 +4507,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":14}`; tạo 1 user mới với name và email rỗng (NULL) → Fail",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-14 trong sv_cases.md. Dữ liệu vi phạm đồng thời EC5, EC16, EC37; không ghi 3 mã này vào covers vì check_domain báo lỗi khi một case phủ hơn một lớp không hợp lệ (quy tắc minimum set)."
+          "notes": "Nguồn: SV-14 trong sv_cases.md. Dữ liệu vi phạm đồng thời EC5, EC16, EC37; không ghi 3 mã này vào covers vì check_domain báo lỗi khi một case phủ hơn một lớp không hợp lệ (quy tắc minimum set). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":14}`; tạo 1 user mới với name và email rỗng (NULL) → Fail"
         },
         {
           "id": "TC-FR01-214",
@@ -4511,7 +4524,9 @@
             "Thao tác riêng": "Header `Content-Type: text/plain`"
           },
           "expected_result": "HTTP 4xx (ví dụ 400/415); không tạo tài khoản",
-          "requirements": [],
+          "requirements": [
+            "API-REG"
+          ],
           "covers": [
             "lớp mới: Content-Type khác application/json"
           ],
@@ -4521,17 +4536,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 500, trang lỗi HTML \"TypeError: Cannot destructure property 'name' of …\"; không tạo user mới → Fail (Expected 4xx, nhận 5xx; server lộ stack trace)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-15 trong sv_cases.md. Lớp mới — header không phải biến của bước 1. Chưa gán mã yêu cầu (SV không ghi)."
+          "notes": "Nguồn: SV-15 trong sv_cases.md. Lớp mới — header không phải biến của bước 1. Chưa gán mã yêu cầu (SV không ghi). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 500, trang lỗi HTML \"TypeError: Cannot destructure property 'name' of …\"; không tạo user mới → Fail (Expected 4xx, nhận 5xx; server lộ stack trace)"
         },
         {
           "id": "TC-FR01-215",
-          "title": "Kiểm tra đăng ký thành công qua UI và API khi Họ Tên là chuỗi SQL injection",
-          "layer": "UI+API",
+          "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên là chuỗi SQL injection",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "Robert'); DROP TABLE users;--",
             "Email": "hiep.sv16@domain.com",
             "Mật khẩu": "Hiep123$",
@@ -4539,7 +4554,8 @@
           },
           "expected_result": "Đăng ký thành công; Họ Tên lưu nguyên văn; bảng users vẫn còn đủ dữ liệu",
           "requirements": [
-            "FR-01.1"
+            "FR-01.1",
+            "SEC-05"
           ],
           "covers": [
             "EC1"
@@ -4550,17 +4566,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":15}`; tạo 1 user mới, Họ Tên lưu nguyên văn; GET /api/admin/users vẫn trả đủ user (2 seed + user mới) → Pass; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-16 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu)."
+          "notes": "Bản API tách thành TC-FR01-230. Nguồn: SV-16 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu). Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")"
         },
         {
           "id": "TC-FR01-216",
           "title": "Kiểm tra cách hiển thị Họ Tên sau khi đăng ký khi Họ Tên chứa thẻ HTML có script",
-          "layer": "UI+API",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "<img src=x onerror=alert(1)>",
             "Email": "hiep.sv17@domain.com",
             "Mật khẩu": "Hiep123$",
@@ -4568,7 +4584,8 @@
           },
           "expected_result": "Đăng ký thành công; trang danh sách user của admin hiển thị chuỗi dạng chữ, không chạy script",
           "requirements": [
-            "FR-01.1"
+            "FR-01.1",
+            "SEC-04"
           ],
           "covers": [
             "EC1"
@@ -4579,17 +4596,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":16}`; tạo 1 user mới, Họ Tên lưu nguyên văn chuỗi `<img …>`; Admin UI: trang Quản lý Người dùng không hiển thị Họ Tên nên không quan sát được; Web UI: sau khi đăng nhập, header hiện \"Chào,\" kèm icon ảnh lỗi, tức là chuỗi bị render thành thẻ `<img>` thay vì chữ (App.jsx dòng 27 dùng `dangerouslySetInnerHTML`) → Fail (stored XSS, ghi nhận ngoài căn cứ FR-01)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-17 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu). SV gắn nhãn [EXP] (khám phá)."
+          "notes": "Nguồn: SV-17 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu). SV gắn nhãn [EXP] (khám phá). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":16}`; tạo 1 user mới, Họ Tên lưu nguyên văn chuỗi `<img …>`; Admin UI: trang Quản lý Người dùng không hiển thị Họ Tên nên không quan sát được; Web UI: sau khi đăng nhập, header hiện \"Chào,\" kèm icon ảnh lỗi, tức là chuỗi bị render thành thẻ `<img>` thay vì chữ (App.jsx dòng 27 dùng `dangerouslySetInnerHTML`) → Fail (stored XSS, ghi nhận ngoài căn cứ FR-01)"
         },
         {
           "id": "TC-FR01-217",
-          "title": "Kiểm tra đăng ký thành công qua UI và API khi Họ Tên chứa emoji",
-          "layer": "UI+API",
+          "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên chứa emoji",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "🐻 Hiệp 🐻",
             "Email": "hiep.sv18@domain.com",
             "Mật khẩu": "Hiep123$",
@@ -4608,17 +4625,17 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":17}`; tạo 1 user mới, Họ Tên lưu đúng \"🐻 Hiệp 🐻\" → Pass; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-18 trong sv_cases.md. Thuộc EC2 (có chữ tiếng Việt có dấu); emoji 4 byte UTF-8 không có lớp riêng ở bước 2."
+          "notes": "Bản API tách thành TC-FR01-231. Nguồn: SV-18 trong sv_cases.md. Thuộc EC2 (có chữ tiếng Việt có dấu); emoji 4 byte UTF-8 không có lớp riêng ở bước 2. Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")"
         },
         {
           "id": "TC-FR01-218",
-          "title": "Kiểm tra đăng ký thành công qua UI và API khi Họ Tên là chuỗi 'null'",
-          "layer": "UI+API",
+          "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên là chuỗi 'null'",
+          "layer": "UI",
           "inputs": {
-            "Tầng": "UI+API",
+            "Tầng": "UI",
             "Họ Tên": "null",
             "Email": "hiep.sv19@domain.com",
             "Mật khẩu": "Hiep123$",
@@ -4637,14 +4654,14 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":18}`; tạo 1 user mới, Họ Tên lưu đúng chuỗi \"null\" → Pass; UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-19 trong sv_cases.md. Khớp EC1 (chuỗi không rỗng). Khác EC5 (giá trị JSON null)."
+          "notes": "Bản API tách thành TC-FR01-232. Nguồn: SV-19 trong sv_cases.md. Khớp EC1 (chuỗi không rỗng). Khác EC5 (giá trị JSON null). Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")"
         },
         {
           "id": "TC-FR01-219",
-          "title": "Kiểm tra đăng ký qua API khi email chứa chữ Cyrillic nhìn giống hệt tài khoản đã có",
+          "title": "Kiểm tra từ chối đăng ký qua API khi email chứa chữ Cyrillic nhìn giống tài khoản đã có",
           "layer": "API",
           "inputs": {
             "Tầng": "API",
@@ -4653,23 +4670,23 @@
             "Mật khẩu": "Hiep123$",
             "Thao tác riêng": ""
           },
-          "expected_result": "Không có Expected theo SRS — ghi nhận hệ thống có chấp nhận email nhìn giống hệt tài khoản seed test@eshop.com hay không",
+          "expected_result": "HTTP 4xx kèm trường error; so với danh sách bước 1: không có user mới (A21, A11)",
           "requirements": [
             "FR-01.4"
           ],
           "covers": [
-            "EC18"
+            "EC52"
           ],
           "technique": "EG",
           "bva_point": "",
           "rationale": "Homoglyph: về chuỗi là email khác nên lọt qua kiểm trùng FR-01.4, nhưng tạo rủi ro mạo danh. SRS không quy định.",
-          "origin": "Human",
+          "origin": "Both",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":19}`; tạo 1 user mới với email chứa chữ \"е\" Cyrillic → hệ thống chấp nhận email nhìn giống hệt test@eshop.com (quan sát, không chấm Pass/Fail)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-20 trong sv_cases.md. Chữ 'е' trong email là Cyrillic U+0435. Về chuỗi thuộc EC18 (email chưa tồn tại). Case quan sát, SRS không có Expected."
+          "notes": "Nguồn: SV-20 trong sv_cases.md. Chữ 'е' trong email là Cyrillic U+0435. Về chuỗi thuộc EC18 (email chưa tồn tại). Case quan sát, SRS không có Expected. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":19}`; tạo 1 user mới với email chứa chữ \"е\" Cyrillic → hệ thống chấp nhận email nhìn giống hệt test@eshop.com (quan sát, không chấm Pass/Fail) Expected do AI đặt theo A21 theo yêu cầu SV."
         },
         {
           "id": "TC-FR01-220",
@@ -4695,10 +4712,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":20}`; tạo 1 user mới với email `\"hiep sv21\"@domain.com` → Fail",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-21 trong sv_cases.md. Khớp EC15 (khoảng trắng bên trong)."
+          "notes": "Nguồn: SV-21 trong sv_cases.md. Khớp EC15 (khoảng trắng bên trong). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":20}`; tạo 1 user mới với email `\"hiep sv21\"@domain.com` → Fail"
         },
         {
           "id": "TC-FR01-221",
@@ -4724,10 +4741,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":21}`; tạo 1 user mới với email `hiep.sv22@[127.0.0.1]` → Fail",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-22 trong sv_cases.md. Lớp mới — có dấu chấm nên không thuộc EC14."
+          "notes": "Nguồn: SV-22 trong sv_cases.md. Lớp mới — có dấu chấm nên không thuộc EC14. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":21}`; tạo 1 user mới với email `hiep.sv22@[127.0.0.1]` → Fail"
         },
         {
           "id": "TC-FR01-222",
@@ -4741,7 +4758,9 @@
             "Thao tác riêng": "Body thêm trường `\"role\": \"admin\"`"
           },
           "expected_result": "Đăng ký thành công; tài khoản mới có role 'user', không phải 'admin'",
-          "requirements": [],
+          "requirements": [
+            "SEC-06*"
+          ],
           "covers": [
             "lớp mới: body có trường thừa role"
           ],
@@ -4751,10 +4770,10 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":22}`; tạo 1 user mới, role \"user\" dù body gửi `\"role\":\"admin\"` → Pass",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-23 trong sv_cases.md. Lớp mới — trường ngoài spec không phải biến của bước 1. Chưa gán mã yêu cầu (FR-04 ngoài phạm vi)."
+          "notes": "Nguồn: SV-23 trong sv_cases.md. Lớp mới — trường ngoài spec không phải biến của bước 1. Chưa gán mã yêu cầu (FR-04 ngoài phạm vi). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":22}`; tạo 1 user mới, role \"user\" dù body gửi `\"role\":\"admin\"` → Pass"
         },
         {
           "id": "TC-FR01-223",
@@ -4767,7 +4786,7 @@
             "Mật khẩu": "Hiep123$",
             "Thao tác riêng": "Đăng nhập bằng test@eshop.com trước khi mở /register"
           },
-          "expected_result": "Không có Expected theo SRS — ghi nhận hành vi khi mở /register và đăng ký trong lúc đang đăng nhập bằng test@eshop.com",
+          "expected_result": "Form dùng được; đăng ký thành công, chuyển tới /login (FR-01.10); so với danh sách bước 1: đúng 1 user mới; tài khoản test@eshop.com không đổi name/email/role (A22).",
           "requirements": [],
           "covers": [
             "lớp mới: trạng thái đã đăng nhập"
@@ -4775,13 +4794,275 @@
           "technique": "EG",
           "bva_point": "",
           "rationale": "[UI] SRS im lặng về trạng thái đã đăng nhập.",
+          "origin": "Both",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nguồn: SV-24 trong sv_cases.md. Lớp mới — trái với tiền điều kiện 'chưa đăng nhập' của TS-DOM-UI. Case quan sát, SRS không có Expected. Quan sát thăm dò (SV chạy tay 19/10): UI: khi đang đăng nhập (header \"Chào, Test User\") vẫn mở được /register và form hiển thị bình thường (quan sát, SRS không quy định) Expected do AI đặt theo A22 theo yêu cầu SV. Không gán mã yêu cầu: ngoài FR-01 (A22)."
+        },
+        {
+          "id": "TC-FR01-224",
+          "title": "Kiểm tra từ chối đăng ký qua API khi mật khẩu chỉ có khoảng trắng làm ký tự đặc biệt",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Lê Tấn Hiệp",
+            "Email": "hiep.sv03@domain.com",
+            "Mật khẩu": "Abcd 1234",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách bước 1: không có user mới.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC36"
+          ],
+          "technique": "EG",
+          "bva_point": "",
+          "rationale": "[UI+API] FR-01.8: tập ký tự đặc biệt là tập đóng `{@ $ ! % * ? &}` (A5); khoảng trắng nằm ngoài tập → thuộc EC36. Chọn khoảng trắng làm đại diện theo error guessing (ký tự hay bị xử lý sai: trim, `\\s` trong regex).",
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
-          "actual_result": "UI: khi đang đăng nhập (header \"Chào, Test User\") vẫn mở được /register và form hiển thị bình thường (quan sát, SRS không quy định)",
+          "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Nguồn: SV-24 trong sv_cases.md. Lớp mới — trái với tiền điều kiện 'chưa đăng nhập' của TS-DOM-UI. Case quan sát, SRS không có Expected."
+          "notes": "Tách từ TC-FR01-202. Nguồn: SV-03 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":4}`; tạo 1 user mới → Fail · Chỉnh Expected theo tầng API khi tách."
+        },
+        {
+          "id": "TC-FR01-225",
+          "title": "Kiểm tra từ chối đăng ký qua API khi domain của email có hai dấu chấm liền nhau",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Lê Tấn Hiệp",
+            "Email": "hiep.sv04@domain..com",
+            "Mật khẩu": "Hiep123$",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách bước 1: không có user mới.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "lớp mới: domain có nhãn rỗng giữa hai dấu chấm (A2)"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "[UI+API] A2: phần domain không được rỗng hai bên dấu '.'; luật này chưa có lớp nào trong testcases.md phủ. Hai dấu chấm liền nhau tạo nhãn rỗng ở giữa.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-203. Nguồn: SV-04 trong sv_cases.md. Lớp mới — không khớp EC nào của bước 2. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":5}`; tạo 1 user mới → Fail · Chỉnh Expected theo tầng API khi tách."
+        },
+        {
+          "id": "TC-FR01-226",
+          "title": "Kiểm tra từ chối đăng ký qua API khi domain của email bắt đầu bằng dấu chấm",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Lê Tấn Hiệp",
+            "Email": "hiep.sv05@.domain.com",
+            "Mật khẩu": "Hiep123$",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách bước 1: không có user mới.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "lớp mới: domain có nhãn rỗng ở đầu (A2)"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "[UI+API] A2, cùng luật với case trên nhưng nhãn rỗng nằm ở đầu domain.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-204. Nguồn: SV-05 trong sv_cases.md. Lớp mới — không khớp EC nào của bước 2. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":6}`; tạo 1 user mới → Fail · Chỉnh Expected theo tầng API khi tách."
+        },
+        {
+          "id": "TC-FR01-227",
+          "title": "Kiểm tra đăng ký thành công qua API khi email có '.', '+' ở phần local và nhiều cấp subdomain",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Lê Tấn Hiệp",
+            "Email": "nguyen.van+sv06@mail.domain.com.vn",
+            "Mật khẩu": "Hiep123$",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}; so với danh sách bước 1: đúng 1 user mới, có name 'Lê Tấn Hiệp' và email 'nguyen.van+sv06@mail.domain.com.vn'.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC7"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "[UI+API] FR-01.3, A2: lớp email hợp lệ có '.', '+' ở phần local và nhiều cấp subdomain. Bộ kiểm tra quá chặt sẽ từ chối nhầm lớp này.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-205. Nguồn: SV-06 trong sv_cases.md. Thuộc EC7 (đúng định dạng); SV coi là nhóm con cần đại diện riêng của lớp hợp lệ. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":7}`; tạo 1 user mới → Pass · Chỉnh Expected theo tầng API khi tách."
+        },
+        {
+          "id": "TC-FR01-228",
+          "title": "Kiểm tra từ chối đăng ký qua API khi mật khẩu dùng ký tự '＄' full-width thay cho '$'",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Lê Tấn Hiệp",
+            "Email": "hiep.sv11@domain.com",
+            "Mật khẩu": "Hiep123＄",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách bước 1: không có user mới.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC36"
+          ],
+          "technique": "EG",
+          "bva_point": "",
+          "rationale": "[UI+API] FR-01.8: '＄' là ký tự full-width U+FF04 (dễ gõ nhầm từ bộ gõ), nhìn giống '$' nhưng không thuộc tập cho phép.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-210. Nguồn: SV-11 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":12}`; tạo 1 user mới → Fail · Chỉnh Expected theo tầng API khi tách."
+        },
+        {
+          "id": "TC-FR01-229",
+          "title": "Kiểm tra đăng ký và đăng nhập lại qua API khi mật khẩu có khoảng trắng ở đầu",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Lê Tấn Hiệp",
+            "Email": "hiep.sv12@domain.com",
+            "Mật khẩu": " Hiep123$",
+            "Thao tác riêng": "Sau khi đăng ký: đăng nhập lại bằng đúng chuỗi ␣Hiep123$"
+          },
+          "expected_result": "Đăng ký thành công; đăng nhập lại bằng đúng chuỗi ␣Hiep123$ thành công",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC34"
+          ],
+          "technique": "EG",
+          "bva_point": "",
+          "rationale": "[UI+API] A5: ký tự ngoài tập được phép đi kèm khi đã có '$'. Soi xem hệ thống có tự cắt khoảng trắng ở bước đăng ký mà không cắt ở bước đăng nhập (hoặc ngược lại) khiến người dùng không đăng nhập được.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-211. Nguồn: SV-12 trong sv_cases.md. Khớp EC34 (có ký tự trong tập và ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":13}`; tạo 1 user mới; đăng nhập lại bằng `␣Hiep123$`: HTTP 200, có token → Pass"
+        },
+        {
+          "id": "TC-FR01-230",
+          "title": "Kiểm tra đăng ký thành công qua API khi Họ Tên là chuỗi SQL injection",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "Robert'); DROP TABLE users;--",
+            "Email": "hiep.sv16@domain.com",
+            "Mật khẩu": "Hiep123$",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "Đăng ký thành công; Họ Tên lưu nguyên văn; bảng users vẫn còn đủ dữ liệu",
+          "requirements": [
+            "FR-01.1",
+            "SEC-05"
+          ],
+          "covers": [
+            "EC1"
+          ],
+          "technique": "EG",
+          "bva_point": "",
+          "rationale": "[UI+API] FR-01.1 (A1: Họ Tên không giới hạn tập ký tự). Chuỗi SQL injection kinh điển — xác nhận backend dùng truy vấn tham số hoá.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-215. Nguồn: SV-16 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":15}`; tạo 1 user mới, Họ Tên lưu nguyên văn; GET /api/admin/users vẫn trả đủ user (2 seed + user mới) → Pass"
+        },
+        {
+          "id": "TC-FR01-231",
+          "title": "Kiểm tra đăng ký thành công qua API khi Họ Tên chứa emoji",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "🐻 Hiệp 🐻",
+            "Email": "hiep.sv18@domain.com",
+            "Mật khẩu": "Hiep123$",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}; so với danh sách bước 1: đúng 1 user mới, name lưu đúng '🐻 Hiệp 🐻'.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC2"
+          ],
+          "technique": "EG",
+          "bva_point": "",
+          "rationale": "[UI+API] A1: Họ Tên không giới hạn tập ký tự. Emoji là ký tự 4 byte UTF-8, hay bị lỗi mã hoá khi lưu.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-217. Nguồn: SV-18 trong sv_cases.md. Thuộc EC2 (có chữ tiếng Việt có dấu); emoji 4 byte UTF-8 không có lớp riêng ở bước 2. Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":17}`; tạo 1 user mới, Họ Tên lưu đúng \"🐻 Hiệp 🐻\" → Pass · Chỉnh Expected theo tầng API khi tách."
+        },
+        {
+          "id": "TC-FR01-232",
+          "title": "Kiểm tra đăng ký thành công qua API khi Họ Tên là chuỗi 'null'",
+          "layer": "API",
+          "inputs": {
+            "Tầng": "API",
+            "Họ Tên": "null",
+            "Email": "hiep.sv19@domain.com",
+            "Mật khẩu": "Hiep123$",
+            "Thao tác riêng": ""
+          },
+          "expected_result": "Đăng ký thành công; Họ Tên lưu đúng chuỗi `null`, không bị biến thành giá trị rỗng",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC1"
+          ],
+          "technique": "EG",
+          "bva_point": "",
+          "rationale": "[UI+API] A1: chuỗi `null` là Họ Tên không rỗng nên hợp lệ. Soi xem có bị nhầm với giá trị null khi lưu/hiển thị.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Tách từ TC-FR01-218. Nguồn: SV-19 trong sv_cases.md. Khớp EC1 (chuỗi không rỗng). Khác EC5 (giá trị JSON null). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":18}`; tạo 1 user mới, Họ Tên lưu đúng chuỗi \"null\" → Pass"
         }
       ]
     }
