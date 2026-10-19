@@ -59,6 +59,7 @@ def render(data, h):
     meta, dom = data.get("meta", {}), data.get("domain", {})
     variables = dom.get("variables", [])
     vname = {v["id"]: v.get("name", v["id"]) for v in variables}
+    input_names = {v.get("name") for v in variables if v.get("io") == "input"}  # show() chỉ áp cho cột là biến đầu vào
     parts = dom.get("partitions", [])
     pmap = {p["id"]: p for p in parts}
     suites = data.get("suites", [])
@@ -94,7 +95,7 @@ def render(data, h):
         for c in s.get("cases", []):
             ins = c.get("inputs", {})
             rows.append([c["id"], c.get("title"), ", ".join(as_list(c.get("covers")))] + ([c.get("bva_point")] if bva else [])
-                        + [show(ins.get(k, "")) for k in cols] + [c.get("expected_result"), c.get("rationale"), ORIGIN.get(c.get("origin"), c.get("origin"))])
+                        + [show(ins.get(k, "")) if k in input_names else ins.get(k, "") for k in cols] +[c.get("expected_result"), c.get("rationale"), ORIGIN.get(c.get("origin"), c.get("origin"))])
         body = []
         if s.get("preconditions"):
             body.append("**Tiền điều kiện:** " + "; ".join(s["preconditions"]))
