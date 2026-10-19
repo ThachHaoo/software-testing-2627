@@ -1017,12 +1017,165 @@ Có 2 điểm em cần biết:
 ```
 
 **Output:**
-```
+````
 Viết `domain.partitions` (50 lớp) và thêm 2 giả định mới cho các lớp tầng API và cho thông báo HTML5.
+
+Bước 2 xong: đã phân 50 lớp tương đương (17 hợp lệ, 33 không hợp lệ) cho cả 9 biến, kể cả 4 biến đầu ra. Bản nháp đã đóng băng; check_domain 0 lỗi. Chưa commit, chờ em review.
+
+| Biến | Lớp hợp lệ | Lớp không hợp lệ |
+|---|---|---|
+| V1 Họ Tên | EC1 chữ không dấu, EC2 có dấu tiếng Việt | EC3 rỗng, EC4 chỉ khoảng trắng, EC5 thiếu/null (API), EC6 sai kiểu (API) |
+| V2 Email | EC7 đúng định dạng, EC8 có khoảng trắng đầu/cuối | EC9 rỗng, EC10 thiếu @, EC11 nhiều @, EC12 trước @ rỗng, EC13 sau @ rỗng, EC14 domain không có dấu chấm, EC15 khoảng trắng ở giữa, EC16–17 thiếu/sai kiểu (API) |
+| V3 Email đã tồn tại | EC18 chưa có, EC19 chỉ khác hoa/thường | EC20 trùng y hệt, EC21 trùng sau khi cắt khoảng trắng |
+| V4 Mật khẩu | EC22 dài ≥ 8, EC25 có chữ hoa, EC28 có chữ thường, EC31 có chữ số, EC33 có ký tự đặc biệt trong tập, EC34 trong tập + ngoài tập | EC23 dài 1–7, EC24 rỗng, EC26/EC27 không có chữ hoa A–Z (EC27: chỉ có chữ hoa có dấu), EC29/EC30 tương tự cho chữ thường, EC32 không có số, EC35 không có ký tự đặc biệt, EC36 chỉ có ký tự ngoài tập, EC37–38 thiếu/sai kiểu (API) |
+| V5 Xác nhận mật khẩu | EC39 khớp | EC40 rỗng, EC41 khác ký tự, EC42 chỉ khác hoa/thường |
+| V6–V9 (đầu ra) | EC43 không lỗi, EC45 chuyển `/login`, EC47 HTTP 200 + message/id, EC49 tạo 1 user | EC44 có thông báo lỗi, EC46 ở lại `/register`, EC48 HTTP 4xx + error, EC50 không tạo user |
+
+**Cách chia:**
+- Mỗi điều kiện của Mật khẩu là một chiều riêng. Mỗi lớp không hợp lệ chỉ vi phạm một điều kiện, các điều kiện khác vẫn thoả, nên ở bước 3 mỗi case không hợp lệ phủ đúng một lớp.
+- Mỗi lớp được tách thêm đều có lý do trong cột `note`.
+- Thêm 2 giả định:
+  - **A15:** ở tầng API, trường bị thiếu, bằng null hoặc sai kiểu thì không hợp lệ (EC5, EC6, EC16, EC17, EC37, EC38).
+  - **A16:** bong bóng cảnh báo HTML5 cũng tính là thông báo lỗi trên form.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 2: phân lớp tương đương
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json (thêm domain.partitions EC1–EC50; thêm giả định A15, A16)
+  - HW02/A_FR01/testcases.md (render lại)
+  - HW02/appendix/ai-outputs/A_FR01_step2_20261019-1641.{json,md} + 2 dòng mới trong INDEX.md
+- Kết quả kiểm tra: check_domain 0 lỗi / 51 cảnh báo (50 lớp chưa có case phủ + V4 chưa có case BVA → bước 3–4) · lint 0 lỗi / 16 cảnh báo (chưa có TC) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 2/7: Phân lớp tương đương"
+- Cần quyết định / câu hỏi:
+  1. A15: có giữ 6 lớp chỉ kiểm ở tầng API (thiếu/null, sai kiểu cho name/email/password) không? Giữ thì bước 3 sẽ có thêm 6 case API.
+  2. A16: bong bóng HTML5 có được tính là "thông báo lỗi trên form" không?
+  3. EC27/EC30 (chữ hoa/thường có dấu không được tính, theo A6): giữ hay bỏ?
+  4. EC8 và EC21 lấy từ giả định A3 (cắt khoảng trắng đầu/cuối). Nếu SV đổi A3 thì phải đổi theo hai lớp này.
+  5. EC19 (chỉ khác hoa/thường → coi là email mới) đi theo A3 em chốt (có phân biệt hoa/thường). Xác nhận đúng ý em chưa?
+  6. Các lớp email sai định dạng (EC10–EC15) chia theo từng phần của mẫu bị vi phạm. Có muốn gộp bớt cho minimum set gọn hơn không?
+```
+````
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 18 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 16 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #19 | 16:47 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Áp dụng review bước 2 cho HW02/A_FR01 (em sửa trên bản đóng băng, KHÔNG freeze lại):
+1. Giữ A15 và 6 lớp chỉ có ở API. Giữ EC10–EC15 riêng. Giữ EC27/EC30 theo A6; ghi thêm vào A6: "Expected của EC27/EC30 phụ thuộc giả định này; kết quả lệch được phân tích là SRS mơ hồ trước khi kết luận lỗi".
+2. A16: xác nhận. Bổ sung cách quan sát: bong bóng HTML5 không nằm trong DOM → oracle = form không gửi request + ô ở trạng thái :invalid / validationMessage không rỗng.
+3. Xác nhận EC19 theo A3. A3 không đổi.
+4. Thêm giả định A17: "Nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường → Fail; các case cần nhập V5 ở tầng UI → Blocked kèm mã bug. Không xoá case."
+5. Chạy check_domain.py, render_md.py. Commit "HW02[A-FR01] 2/7: Phân lớp tương đương" gồm testcases.json/.md, file đóng băng bước 2 + INDEX.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Em đã áp dụng review bước 2 cho A_FR01 và commit `d799b74`. Không freeze lại; check_domain 0 lỗi.
+
+Thay đổi trong `testcases.json`:
+- **A6:** thêm câu về EC27/EC30: Expected phụ thuộc giả định này, kết quả lệch được phân tích là SRS mơ hồ trước khi kết luận lỗi.
+- **A16:** ghi là SV xác nhận 2026-10-19 và thêm cách quan sát. Bong bóng HTML5 không nằm trong DOM, nên oracle là: form không gửi `POST /api/register`, và ô liên quan ở trạng thái `:invalid` hoặc `validationMessage` không rỗng.
+- **A17 (mới):** nếu form không có ô Xác nhận mật khẩu thì case kiểm sự tồn tại của trường → Fail; các case cần nhập V5 ở tầng UI → Blocked kèm mã bug. Không xoá case.
+- A3, A15, EC10–EC15, EC19 giữ nguyên như em chốt.
+
+Trong commit, `A_prompt_log.md` chưa có lượt này vì hook Stop chỉ tạo lại log sau khi lượt kết thúc. Bản cập nhật sẽ vào commit của bước 3.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: áp dụng review bước 2 HW02/A_FR01 (không freeze lại) + commit 2/7
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (A6 bổ sung, A16 xác nhận + cách quan sát, thêm A17) · testcases.md (render lại)
+- Kết quả kiểm tra: check_domain 0 lỗi / 51 cảnh báo (50 EC chưa có case phủ + V4 chưa có BVA → bước 3–4) · lint 0 lỗi / 16 cảnh báo · test Not run
+- Commit: d799b74 HW02[A-FR01] 2/7: Phân lớp tương đương (testcases.json/.md, A_FR01_step2_20261019-1641.{json,md}, ai-outputs/INDEX.md, A_prompt_log.md)
+- Cần quyết định / câu hỏi:
+  1. A_prompt_log.md chưa có lượt này (hook tạo lại log sau khi lượt kết thúc) → sẽ commit kèm bước 3.
+  2. Bước tiếp theo: /domain-bva-testing HW02/A_FR01 3 (TS-DOM minimum set). Gợi ý chốt trước: case cho 6 lớp chỉ có ở API và 3 lớp của V5 đặt chung trong TS-DOM, phân biệt bằng trường layer, hay tách suite riêng?
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #20 | 16:51 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+/domain-bva-testing HW02/A_FR01 3
+Ràng buộc thêm cho bước này:
+- Mỗi case ghi rõ "layer": "UI" hoặc "API". Lớp chỉ có ở API → case API. Lớp ở tầng UI → case UI; chỉ thêm bản API khi lớp đó có ý nghĩa ở cả hai tầng (theo A9).
+- Mã TC: TC-FR01-01… cho TS-DOM. Chừa khoảng trống: TS-BVA bắt đầu từ TC-FR01-60, TS-GUI (FR-22) từ TC-FR01-90.
+- Tạo luôn suite TS-GUI cho FR-22.1–22.4 (step-by-step, technique "checklist", không gắn EC).
+- Oracle theo A10/A16/A17; case UI không hợp lệ kiểm ba điều: thông báo lỗi (cách quan sát theo A16), vẫn ở /register, không tạo user.
+- Chạy freeze --step 3, check_domain (phải 0 lỗi, mọi EC đã phủ), lint, render. KHÔNG làm bước 4. KHÔNG commit.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Đã nắm schema và linter. Sinh TS-DOM và TS-GUI bằng script Python, chèn vào chỗ `"suites": []` để không đổi định dạng phần còn lại của file.
+
+Bash lỗi khi parse heredoc dài. Ghi script ra file tạm ngoài repo rồi chạy.
+
+Bước 3 xong: TS-DOM có 53 case, TS-GUI có 5 case. Cả 50 EC đều đã có case phủ và không case nào phủ hai lớp không hợp lệ. check_domain 0 lỗi, lint 0 lỗi. Bản nháp đã freeze, chưa commit.
+
+**TS-DOM (TC-FR01-01…53):**
+
+| Mã | Tầng | Nội dung |
+|---|---|---|
+| 01–02 | UI | 2 case hợp lệ: 01 phủ các lớp hợp lệ chính; 02 gom các lớp tách riêng (EC2, EC8, EC19, EC34) |
+| 03–22 | UI | 20 case không hợp lệ cho các lớp có ở cả hai tầng (V1–V4) |
+| 23–25 | UI | 3 case V5, chỉ có ở UI (A8) |
+| 26–27 | API | 2 case hợp lệ |
+| 28–47 | API | Bản API của 20 lớp không hợp lệ ở trên (theo A9) |
+| 48–53 | API | 6 lớp chỉ có ở API (A15) |
+
+**Oracle:**
+- Case UI không hợp lệ kiểm 3 điều: có thông báo lỗi (hộp lỗi đỏ, hoặc theo A16: không gửi request và ô liên quan có `validationMessage` không rỗng), URL vẫn là `/register`, `GET /api/admin/users` không có thêm user.
+- Case trùng email kiểm "vẫn chỉ có 1 user `test@eshop.com`".
+- Case API: HTTP 4xx kèm trường `error` (A11).
+- Email dùng hậu tố `{ts}` để không trùng giữa các lần chạy. Cleanup chung: xoá user bằng `DELETE /api/admin/users/:id` hoặc khởi động lại backend.
+
+**TS-GUI (TC-FR01-90…94), step-by-step, technique `checklist`:**
+- 90: ký hiệu `*` (FR-22.1)
+- 91: `type="email"` (FR-22.2)
+- 92: `type="password"` (FR-22.3)
+- 93: thông báo lỗi nằm trên nút "Đăng Ký", đo bằng boundingBox (FR-22.4)
+- 94 (thêm ngoài khối lệnh): case kiểm ô Xác nhận mật khẩu có tồn tại không (FR-01.9). A17 nhắc tới case này nhưng chưa có, nên em đặt vào suite này.
+
+Thêm **A18**: ô Xác nhận mật khẩu cũng phải là `type="password"`, vì FR-22.3 chỉ nói "Trường Mật khẩu".
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 3: TS-DOM (minimum set) + TS-GUI
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (suites TS-DOM 53 case, TS-GUI 5 case; giả định A18) · testcases.md (render) · ai-outputs/A_FR01_step3_20261019-1656.{json,md} + INDEX.md
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (V4 chưa có BVA → bước 4), 50/50 EC đã phủ · lint 0 lỗi / 1 cảnh báo (TS-DOM > 25 dòng) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 3/7: Test case Domain"
+- Cần quyết định / câu hỏi:
+  1. A17 hiểu theo chữ: thủ tục UI có bước nhập V5 → nếu thiếu ô Xác nhận mật khẩu thì cả 25 case UI (01–25) đều Blocked, không riêng 23–25. Có muốn: V5 = Mật khẩu (EC39) thì bỏ qua bước nhập, chỉ 23–25 Blocked không?
+  2. TS-DOM 53 case (lint cảnh báo > 25 dòng): giữ một suite hay tách TS-DOM-UI / TS-DOM-API? Hoặc cắt bớt bản API của các lớp tách theo cơ chế HTML5 (EC4, EC14, EC24)?
+  3. TC-02/TC-27 gom 4 lớp hợp lệ tách riêng (EC2, EC8, EC19, EC34) cho đúng minimum set → nếu Fail phải chạy tách lớp mới biết nguyên nhân. Chấp nhận không?
+  4. TC-03 hoặc TC-FR01-14 khi chọn TC-FR01-14 (EC24, Mật khẩu rỗng): Xác nhận mật khẩu cũng để rỗng (= Mật khẩu), đã ghi trong notes. Kiểu gì V5 cũng bị vi phạm theo A7 → xác nhận cách xử lý này.
+  5. TC-02 và TC-27 cùng tạo user 'Test@eshop.com' → hai case phải dọn dữ liệu (cleanup) giữa hai lần chạy, nếu không case thứ hai sẽ gặp trùng. Có đổi email cho một case không?
+  6. Thêm TC-FR01-94 (kiểm sự tồn tại của ô Xác nhận mật khẩu, FR-01.9) vào TS-GUI, ngoài phạm vi khối lệnh → giữ hay chuyển chỗ?
+  7. Ô có giá trị rỗng hoặc toàn khoảng trắng (TC-03/04/05/13/23…) trong bảng .md nhìn như ô trống → có cần render_md hiển thị dạng '' hoặc '␣␣␣' không?
+```
+````
+*File AI ghi/gửi trong lượt này:* `fr01_step3_gen.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 20 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 18 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

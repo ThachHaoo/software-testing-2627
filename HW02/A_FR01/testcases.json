@@ -41,7 +41,9 @@
       "A14 (FR-22 thuộc tính form): ký hiệu '*', type=\"email\", type=\"password\", vị trí thông báo lỗi là thuộc tính tĩnh của form, không phải miền giá trị nhập → không phân lớp ở bước 2; kiểm bằng suite GUI riêng (SV chốt 2026-10-19).",
       "A15 (Sai kiểu / thiếu trường ở tầng API): SRS không nói gì về body JSON. Giả định trường name/email/password bị thiếu, bằng null hoặc không phải chuỗi JSON (ví dụ số 123) là dữ liệu không hợp lệ → phải bị từ chối với 4xx, không tạo user (theo A9, A11). Các lớp này chỉ tạo được ở tầng API vì ô nhập trên UI luôn gửi chuỗi.",
       "A16 (Thông báo kiểm tra HTML5): khi trình duyệt chặn submit bằng bong bóng kiểm tra của thuộc tính required/type, bong bóng đó được coi là 'thông báo lỗi trên form' trong oracle của V6. SRS không phân biệt cơ chế hiển thị (SV xác nhận 2026-10-19). Cách quan sát: bong bóng HTML5 không nằm trong DOM → oracle = form không gửi request POST /api/register + ô liên quan ở trạng thái :invalid / validationMessage không rỗng.",
-      "A17 (Thiếu ô Xác nhận mật khẩu): nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường → Fail; các case cần nhập V5 ở tầng UI → Blocked kèm mã bug. Không xoá case."
+      "A17 (Thiếu ô Xác nhận mật khẩu): nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường (TC-FR01-94) → Fail; case có V5 = EC39 bỏ qua bước nhập V5 và ghi notes; chỉ các case EC40–EC42 → Blocked kèm mã bug. Không xoá case.",
+      "A18 (FR-22.3 cho ô Xác nhận mật khẩu): FR-22.3 chỉ nêu 'Trường Mật khẩu'. Giả định ô Xác nhận mật khẩu cũng là trường mật khẩu → cũng phải dùng type=\"password\" (kiểm ở TC-FR01-92).",
+      "A19 (Độc lập giữa các case): tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi."
     ]
   },
   "requirements": [
@@ -197,5 +199,2238 @@
       {"id": "EC50", "variable": "V9", "class": "Không tạo bản ghi (số user không đổi)", "valid": false, "guideline": "output", "note": "A12."}
     ]
   },
-  "suites": []
+  "suites": [
+    {
+      "id": "TS-DOM-UI",
+      "name": "Domain — minimum set, tầng UI (FR-01)",
+      "format": "matrix",
+      "description": "Minimum set tầng UI: case hợp lệ phủ nhiều lớp hợp lệ có căn cứ SRS nhất; lớp dựa trên giả định A3 (EC8, EC19) có case hợp lệ riêng; mỗi case không hợp lệ phủ đúng một lớp không hợp lệ đầu vào, các biến khác giữ giá trị danh nghĩa (Họ Tên 'Nguyen Van A', Email mới, Mật khẩu 'Abcd1234!', Xác nhận mật khẩu = Mật khẩu).",
+      "notes": "giữ đủ lớp theo quy tắc mỗi case không hợp lệ phủ một lớp",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).",
+        "Web http://localhost:5173 đang chạy.",
+        "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).",
+        "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).",
+        "Trạng thái ban đầu của mỗi case: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token).",
+        "Chạy tay: dùng cửa sổ ẩn danh và tắt autofill. Playwright: browser context mới cho mỗi case."
+      ],
+      "procedure": [
+        {
+          "action": "Gọi GET /api/admin/users (token admin) và lưu danh sách id/email/name.",
+          "expected": "HTTP 200; danh sách có admin@eshop.com và test@eshop.com."
+        },
+        {
+          "action": "Mở http://localhost:5173/register.",
+          "expected": "Form 'Đăng Ký Tài Khoản' hiển thị; các ô Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu (nếu có) đều trống."
+        },
+        {
+          "action": "Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu bằng cách gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không nhập gì, giữ ô trống. Giá trị có ␣: gõ đúng số dấu cách đó. Nếu form không có ô Xác nhận mật khẩu: case có V5 = EC39 bỏ qua bước nhập V5 và ghi notes; case EC40–EC42 dừng, Blocked (A17).",
+          "expected": "Mỗi ô hiển thị đúng giá trị đã gõ; Mật khẩu và Xác nhận mật khẩu hiện dạng che."
+        },
+        {
+          "action": "Bấm nút 'Đăng Ký' đúng một lần.",
+          "expected": "Hệ thống phản hồi: hiện lỗi, trình duyệt chặn submit, hoặc chuyển trang."
+        },
+        {
+          "action": "Quan sát hộp lỗi đỏ trên form, bong bóng kiểm tra của trình duyệt (validationMessage của ô) và URL trên thanh địa chỉ.",
+          "expected": "Khớp phần UI của cột Expected."
+        },
+        {
+          "action": "Gọi lại GET /api/admin/users và so với danh sách lưu ở bước 1.",
+          "expected": "Số user mới và name/email của user mới như cột Expected (oracle tương đối)."
+        }
+      ],
+      "columns": [
+        "Họ Tên",
+        "Email",
+        "Email trong CSDL",
+        "Mật khẩu",
+        "Xác nhận mật khẩu"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: xoá mọi user mới so với danh sách ở bước 1 bằng DELETE /api/admin/users/:id (token admin). Nếu xoá thất bại: ghi vào notes của case, không đổi verdict (A19)."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR01-01",
+          "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩu mạnh",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom01_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_{ts}@domain.com' như cột dữ liệu.",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8",
+            "FR-01.9",
+            "FR-01.10"
+          ],
+          "covers": [
+            "EC1",
+            "EC7",
+            "EC18",
+            "EC22",
+            "EC25",
+            "EC28",
+            "EC31",
+            "EC33",
+            "EC39",
+            "EC43",
+            "EC45",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ thứ nhất: giá trị danh nghĩa đơn giản nhất của các lớp hợp lệ có căn cứ SRS (tên ASCII, email đúng mẫu chưa tồn tại, mật khẩu 9 ký tự chỉ dùng ký tự đặc biệt trong tập).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-02",
+          "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "dom02_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!#",
+            "Xác nhận mật khẩu": "Abcd1234!#"
+          },
+          "expected_result": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'dom02_{ts}@domain.com' như cột dữ liệu.",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8",
+            "FR-01.9",
+            "FR-01.10"
+          ],
+          "covers": [
+            "EC2",
+            "EC7",
+            "EC18",
+            "EC22",
+            "EC25",
+            "EC28",
+            "EC31",
+            "EC34",
+            "EC39",
+            "EC43",
+            "EC45",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ thứ hai: phủ các lớp hợp lệ còn lại có căn cứ SRS (EC2 tên có dấu — SRS không giới hạn ký tự; EC34 — A5 cho phép ký tự ngoài tập đi kèm).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-03",
+          "title": "Kiểm tra đăng ký thành công qua UI khi email có khoảng trắng đầu/cuối",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "  dom03_{ts}@domain.com  ",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom03_{ts}@domain.com' như cột dữ liệu. Email lưu đã được cắt khoảng trắng (A3).",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8",
+            "FR-01.9",
+            "FR-01.10"
+          ],
+          "covers": [
+            "EC8",
+            "EC39",
+            "EC43",
+            "EC45",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp dựa trên giả định A3 nên tách thành case riêng; hai khoảng trắng mỗi bên, phần còn lại là email mới đúng mẫu.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-04",
+          "title": "Kiểm tra đăng ký thành công qua UI khi email chỉ khác hoa/thường với tài khoản đã có",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "Test@eshop.com",
+            "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'Test@eshop.com' như cột dữ liệu; user seed 'test@eshop.com' không bị sửa.",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8",
+            "FR-01.9",
+            "FR-01.10"
+          ],
+          "covers": [
+            "EC19",
+            "EC39",
+            "EC43",
+            "EC45",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp dựa trên giả định A3 nên tách thành case riêng; biến thể 'Test@eshop.com' khác biến thể của case API để hai case không phụ thuộc nhau.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-05",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Họ Tên rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "",
+            "Email": "dom05_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC3",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-06",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Họ Tên chỉ gồm khoảng trắng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "   ",
+            "Email": "dom06_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC4",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "3 khoảng trắng: vượt qua required của HTML5 nhưng vẫn rỗng sau khi cắt (A1).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-07",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.2"
+          ],
+          "covers": [
+            "EC9",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-08",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email không có ký tự '@'",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom08_{ts}domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC10",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Giữ nguyên các phần khác của mẫu, chỉ bỏ '@' để lỗi chỉ đến từ thiếu '@'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-09",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email có hai ký tự '@'",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom09@x_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC11",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thêm đúng một '@' thừa, phần local và domain vẫn không rỗng.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-10",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email có phần local rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "@dom{ts}.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC12",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Domain đúng mẫu, chỉ thiếu phần trước '@'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-11",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email có phần domain rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom11_{ts}@",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC13",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Phần local đúng mẫu, chỉ thiếu phần sau '@'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-12",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email có domain không chứa dấu chấm",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom12_{ts}@domain",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC14",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "HTML5 type=email chấp nhận dạng này nhưng thiếu .tld theo A2 — đại diện điển hình nhất của lớp.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-13",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email có khoảng trắng ở giữa phần local",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom 13_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC15",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Một khoảng trắng duy nhất ở giữa, đầu/cuối không có khoảng trắng để không lẫn với EC8.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-14",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email trùng chính xác tài khoản đã có",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "test@eshop.com",
+            "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.4"
+          ],
+          "covers": [
+            "EC20",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Tài khoản seed luôn có sau khi backend khởi động (A13).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-15",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Email trùng tài khoản đã có sau khi cắt khoảng trắng đầu/cuối",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": " test@eshop.com ",
+            "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.4"
+          ],
+          "covers": [
+            "EC21",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Một khoảng trắng mỗi bên — ít nhất để khác chuỗi nguyên văn nhưng trùng sau khi cắt (A3).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-16",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu 7 ký tự thoả các điều kiện còn lại",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom16_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!x",
+            "Xác nhận mật khẩu": "Abc12!x"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.6"
+          ],
+          "covers": [
+            "EC23",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "7 ký tự có đủ chữ hoa, chữ thường, chữ số và '!' → chỉ vi phạm độ dài. Điểm 7 được xét lại ở BVA.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-17",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom17_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "",
+            "Xác nhận mật khẩu": ""
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.5"
+          ],
+          "covers": [
+            "EC24",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "V5 = V4 = rỗng; EC39/EC40 trùng nhau chỉ vì V4 rỗng; lỗi quy cho EC24 — đối chiếu validationMessage của ô Mật khẩu khi chạy."
+        },
+        {
+          "id": "TC-FR01-18",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ hoa",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom18_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "abcd1234!",
+            "Xác nhận mật khẩu": "abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7a"
+          ],
+          "covers": [
+            "EC26",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lấy danh nghĩa 'Abcd1234!' đổi 'A' thành 'a' → chỉ thiếu chữ hoa.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-19",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu chỉ có chữ hoa có dấu tiếng Việt",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom19_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Êbcd1234!",
+            "Xác nhận mật khẩu": "Êbcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7a"
+          ],
+          "covers": [
+            "EC27",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay 'A' bằng 'Ê' → chữ hoa duy nhất nằm ngoài A–Z (A6).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-20",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ thường",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom20_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "ABCD1234!",
+            "Xác nhận mật khẩu": "ABCD1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7b"
+          ],
+          "covers": [
+            "EC29",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Viết hoa toàn bộ giá trị danh nghĩa → chỉ thiếu chữ thường.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-21",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu chỉ có chữ thường có dấu tiếng Việt",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom21_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "ABCê1234!",
+            "Xác nhận mật khẩu": "ABCê1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7b"
+          ],
+          "covers": [
+            "EC30",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chữ thường duy nhất là 'ê' (A6), các điều kiện khác thoả.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-22",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ số",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom22_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcdefgh!",
+            "Xác nhận mật khẩu": "Abcdefgh!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7c"
+          ],
+          "covers": [
+            "EC32",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "9 ký tự, thay các chữ số bằng chữ thường → chỉ thiếu chữ số.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-23",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có ký tự đặc biệt",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom23_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd12345",
+            "Xác nhận mật khẩu": "Abcd12345"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC35",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay '!' bằng '5' → chỉ thiếu ký tự đặc biệt.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-24",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu chỉ có ký tự đặc biệt ngoài tập cho phép",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom24_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234#",
+            "Xác nhận mật khẩu": "Abcd1234#"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC36",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay '!' bằng '#' (ngoài tập, A5); độ dài và các loại ký tự khác giữ nguyên.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17)."
+        },
+        {
+          "id": "TC-FR01-25",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom25_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": ""
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "covers": [
+            "EC40",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng (A7).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng UI (A8). Nếu form không có ô Xác nhận mật khẩu → Blocked kèm mã bug (A17)."
+        },
+        {
+          "id": "TC-FR01-26",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu khác Mật khẩu",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom26_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234?"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "covers": [
+            "EC41",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chỉ khác ký tự cuối ('?' thay '!'); cả hai chuỗi đều là mật khẩu mạnh nên lỗi chỉ đến từ không khớp.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng UI (A8). Nếu form không có ô Xác nhận mật khẩu → Blocked kèm mã bug (A17)."
+        },
+        {
+          "id": "TC-FR01-27",
+          "title": "Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu chỉ khác Mật khẩu ở chữ hoa/thường",
+          "layer": "UI",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom27_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "covers": [
+            "EC42",
+            "EC44",
+            "EC46",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Khác đúng một ký tự về hoa/thường (A7).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng UI (A8). Nếu form không có ô Xác nhận mật khẩu → Blocked kèm mã bug (A17)."
+        }
+      ]
+    },
+    {
+      "id": "TS-DOM-API",
+      "name": "Domain — minimum set, tầng API (FR-01)",
+      "format": "matrix",
+      "description": "Minimum set tầng API (A9): cùng quy tắc chọn như TS-DOM-UI cho các lớp có ở cả hai tầng, cộng 6 lớp chỉ có ở API (A15). V5 không áp dụng ở API (A8) nên không có cột Xác nhận mật khẩu.",
+      "notes": "giữ đủ lớp theo quy tắc mỗi case không hợp lệ phủ một lớp",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).",
+        "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).",
+        "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19)."
+      ],
+      "procedure": [
+        {
+          "action": "Gọi GET /api/admin/users (token admin) và lưu danh sách id/email/name.",
+          "expected": "HTTP 200; danh sách có admin@eshop.com và test@eshop.com."
+        },
+        {
+          "action": "Gửi đúng một request POST http://localhost:3000/api/register, header Content-Type: application/json. Body gồm khoá name/email/password lấy từ cột Họ Tên/Email/Mật khẩu: '— thiếu trường —' = bỏ khoá khỏi body; 'số …' = giá trị số JSON; `''` = chuỗi rỗng; khoảng trắng (␣) giữ nguyên.",
+          "expected": "Nhận được phản hồi HTTP."
+        },
+        {
+          "action": "Ghi lại HTTP status và body JSON của phản hồi.",
+          "expected": "Khớp phần API của cột Expected."
+        },
+        {
+          "action": "Gọi lại GET /api/admin/users và so với danh sách lưu ở bước 1.",
+          "expected": "Số user mới và name/email của user mới như cột Expected (oracle tương đối)."
+        }
+      ],
+      "columns": [
+        "Họ Tên",
+        "Email",
+        "Email trong CSDL",
+        "Mật khẩu"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: xoá mọi user mới so với danh sách ở bước 1 bằng DELETE /api/admin/users/:id (token admin). Nếu xoá thất bại: ghi vào notes của case, không đổi verdict (A19)."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR01-28",
+          "title": "Kiểm tra đăng ký thành công qua API khi Họ Tên không dấu, email mới và mật khẩu mạnh",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api28_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'api28_{ts}@domain.com' như cột dữ liệu.",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC1",
+            "EC7",
+            "EC18",
+            "EC22",
+            "EC25",
+            "EC28",
+            "EC31",
+            "EC33",
+            "EC47",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ thứ nhất: giá trị danh nghĩa đơn giản nhất của các lớp hợp lệ có căn cứ SRS (tên ASCII, email đúng mẫu chưa tồn tại, mật khẩu 9 ký tự chỉ dùng ký tự đặc biệt trong tập).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-29",
+          "title": "Kiểm tra đăng ký thành công qua API khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "api29_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!#"
+          },
+          "expected_result": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'api29_{ts}@domain.com' như cột dữ liệu.",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC2",
+            "EC7",
+            "EC18",
+            "EC22",
+            "EC25",
+            "EC28",
+            "EC31",
+            "EC34",
+            "EC47",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ thứ hai: phủ các lớp hợp lệ còn lại có căn cứ SRS (EC2 tên có dấu — SRS không giới hạn ký tự; EC34 — A5 cho phép ký tự ngoài tập đi kèm).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-30",
+          "title": "Kiểm tra đăng ký thành công qua API khi email có khoảng trắng đầu/cuối",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "  api30_{ts}@domain.com  ",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'api30_{ts}@domain.com' như cột dữ liệu. Email lưu đã được cắt khoảng trắng (A3).",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC8",
+            "EC47",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp dựa trên giả định A3 nên tách thành case riêng; hai khoảng trắng mỗi bên, phần còn lại là email mới đúng mẫu.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-31",
+          "title": "Kiểm tra đăng ký thành công qua API khi email chỉ khác hoa/thường với tài khoản đã có",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "TEST@eshop.com",
+            "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 200, body {\"message\": \"User registered successfully\", \"id\": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'TEST@eshop.com' như cột dữ liệu; user seed 'test@eshop.com' không bị sửa.",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.5",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC19",
+            "EC47",
+            "EC49"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp dựa trên giả định A3 nên tách thành case riêng; biến thể 'TEST@eshop.com' khác biến thể của case UI để hai case không phụ thuộc nhau.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-32",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Họ Tên rỗng",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "",
+            "Email": "api32_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC3",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-33",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Họ Tên chỉ gồm khoảng trắng",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "   ",
+            "Email": "api33_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC4",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "3 khoảng trắng: vượt qua required của HTML5 nhưng vẫn rỗng sau khi cắt (A1).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-34",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email rỗng",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.2"
+          ],
+          "covers": [
+            "EC9",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-35",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email không có ký tự '@'",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom35_{ts}domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC10",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Giữ nguyên các phần khác của mẫu, chỉ bỏ '@' để lỗi chỉ đến từ thiếu '@'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-36",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email có hai ký tự '@'",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom36@x_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC11",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thêm đúng một '@' thừa, phần local và domain vẫn không rỗng.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-37",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email có phần local rỗng",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "@dom{ts}.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC12",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Domain đúng mẫu, chỉ thiếu phần trước '@'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-38",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email có phần domain rỗng",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom38_{ts}@",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC13",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Phần local đúng mẫu, chỉ thiếu phần sau '@'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-39",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email có domain không chứa dấu chấm",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom39_{ts}@domain",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC14",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "HTML5 type=email chấp nhận dạng này nhưng thiếu .tld theo A2 — đại diện điển hình nhất của lớp.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-40",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email có khoảng trắng ở giữa phần local",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "dom 40_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "covers": [
+            "EC15",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Một khoảng trắng duy nhất ở giữa, đầu/cuối không có khoảng trắng để không lẫn với EC8.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-41",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email trùng chính xác tài khoản đã có",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "test@eshop.com",
+            "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.4"
+          ],
+          "covers": [
+            "EC20",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Tài khoản seed luôn có sau khi backend khởi động (A13).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-42",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Email trùng tài khoản đã có sau khi cắt khoảng trắng đầu/cuối",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": " test@eshop.com ",
+            "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.4"
+          ],
+          "covers": [
+            "EC21",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Một khoảng trắng mỗi bên — ít nhất để khác chuỗi nguyên văn nhưng trùng sau khi cắt (A3).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-43",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu 7 ký tự thoả các điều kiện còn lại",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api43_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!x"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.6"
+          ],
+          "covers": [
+            "EC23",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "7 ký tự có đủ chữ hoa, chữ thường, chữ số và '!' → chỉ vi phạm độ dài. Điểm 7 được xét lại ở BVA.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-44",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu rỗng",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api44_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": ""
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.5"
+          ],
+          "covers": [
+            "EC24",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-45",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có chữ hoa",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api45_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7a"
+          ],
+          "covers": [
+            "EC26",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lấy danh nghĩa 'Abcd1234!' đổi 'A' thành 'a' → chỉ thiếu chữ hoa.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-46",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu chỉ có chữ hoa có dấu tiếng Việt",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api46_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Êbcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7a"
+          ],
+          "covers": [
+            "EC27",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay 'A' bằng 'Ê' → chữ hoa duy nhất nằm ngoài A–Z (A6).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-47",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có chữ thường",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api47_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "ABCD1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7b"
+          ],
+          "covers": [
+            "EC29",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Viết hoa toàn bộ giá trị danh nghĩa → chỉ thiếu chữ thường.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-48",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu chỉ có chữ thường có dấu tiếng Việt",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api48_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "ABCê1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7b"
+          ],
+          "covers": [
+            "EC30",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chữ thường duy nhất là 'ê' (A6), các điều kiện khác thoả.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-49",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có chữ số",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api49_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcdefgh!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.7c"
+          ],
+          "covers": [
+            "EC32",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "9 ký tự, thay các chữ số bằng chữ thường → chỉ thiếu chữ số.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-50",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có ký tự đặc biệt",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api50_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd12345"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC35",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay '!' bằng '5' → chỉ thiếu ký tự đặc biệt.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-51",
+          "title": "Kiểm tra từ chối đăng ký qua API khi Mật khẩu chỉ có ký tự đặc biệt ngoài tập cho phép",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api51_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234#"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "covers": [
+            "EC36",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay '!' bằng '#' (ngoài tập, A5); độ dài và các loại ký tự khác giữ nguyên.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-52",
+          "title": "Kiểm tra từ chối đăng ký qua API khi body thiếu trường name",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "— thiếu trường —",
+            "Email": "api52_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC5",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Bỏ hẳn khoá name khỏi body — đại diện cho 'thiếu hoặc null' (A15).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng API (A15)."
+        },
+        {
+          "id": "TC-FR01-53",
+          "title": "Kiểm tra từ chối đăng ký qua API khi name là số JSON",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "số 123",
+            "Email": "api53_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "covers": [
+            "EC6",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Giá trị số JSON thay cho chuỗi (A15).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng API (A15)."
+        },
+        {
+          "id": "TC-FR01-54",
+          "title": "Kiểm tra từ chối đăng ký qua API khi body thiếu trường email",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "— thiếu trường —",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.2"
+          ],
+          "covers": [
+            "EC16",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Bỏ hẳn khoá email khỏi body (A15).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng API (A15)."
+        },
+        {
+          "id": "TC-FR01-55",
+          "title": "Kiểm tra từ chối đăng ký qua API khi email là số JSON",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "số 123",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.2"
+          ],
+          "covers": [
+            "EC17",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Giá trị số JSON thay cho chuỗi (A15).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng API (A15)."
+        },
+        {
+          "id": "TC-FR01-56",
+          "title": "Kiểm tra từ chối đăng ký qua API khi body thiếu trường password",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api56_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "— thiếu trường —"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.5"
+          ],
+          "covers": [
+            "EC37",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Bỏ hẳn khoá password khỏi body (A15).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng API (A15)."
+        },
+        {
+          "id": "TC-FR01-57",
+          "title": "Kiểm tra từ chối đăng ký qua API khi password là số JSON",
+          "layer": "API",
+          "inputs": {
+            "Họ Tên": "Nguyen Van A",
+            "Email": "api57_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "số 12345678"
+          },
+          "expected_result": "HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+          "requirements": [
+            "FR-01.5"
+          ],
+          "covers": [
+            "EC38",
+            "EC48",
+            "EC50"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Số 8 chữ số: đủ độ dài nếu bị ép thành chuỗi, nên lỗi chỉ đến từ sai kiểu (A15).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Lớp chỉ có ở tầng API (A15)."
+        }
+      ]
+    },
+    {
+      "id": "TS-GUI",
+      "name": "GUI — thuộc tính form (FR-22) và sự tồn tại trường (FR-01.9)",
+      "format": "steps",
+      "description": "Kiểm tĩnh thuộc tính form theo checklist, không gắn lớp tương đương (A14).",
+      "cases": [
+        {
+          "id": "TC-FR01-90",
+          "cleanup": [
+            "Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu."
+          ],
+          "title": "Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của form Đăng ký",
+          "layer": "UI",
+          "requirements": [
+            "FR-22.1"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "FR-01 liệt kê 4 trường bắt buộc; FR-22.1 yêu cầu '*' cho mọi trường bắt buộc.",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
+          ],
+          "test_data": "Nhãn: 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/register.",
+              "expected": "Form 'Đăng Ký Tài Khoản' hiển thị."
+            },
+            {
+              "action": "Đọc nhãn của 4 trường 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'.",
+              "expected": "Mỗi nhãn có ký tự '*' ngay bên cạnh tên trường."
+            }
+          ],
+          "expected_result": "Cả 4 nhãn trường bắt buộc theo FR-01 đều có ký hiệu '*'.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-91",
+          "cleanup": [
+            "Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu."
+          ],
+          "title": "Kiểm tra thuộc tính type của ô Email khi mở form Đăng ký",
+          "layer": "UI",
+          "requirements": [
+            "FR-22.2"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Kiểm trực tiếp thuộc tính mà FR-22.2 quy định.",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
+          ],
+          "test_data": "Thuộc tính cần đọc: type của ô 'Email'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/register.",
+              "expected": "Form 'Đăng Ký Tài Khoản' hiển thị."
+            },
+            {
+              "action": "Đọc thuộc tính type của thẻ input thuộc nhãn 'Email' (DevTools hoặc locator.getAttribute('type')).",
+              "expected": "Giá trị type là \"email\"."
+            }
+          ],
+          "expected_result": "Ô Email có type=\"email\".",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-92",
+          "cleanup": [
+            "Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu."
+          ],
+          "title": "Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký",
+          "layer": "UI",
+          "requirements": [
+            "FR-22.3"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "FR-22.3 quy định type=password; áp dụng cho cả ô Xác nhận mật khẩu theo A18.",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
+          ],
+          "test_data": "Mật khẩu: 'Abcd1234!'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/register.",
+              "expected": "Form 'Đăng Ký Tài Khoản' hiển thị."
+            },
+            {
+              "action": "Đọc thuộc tính type của thẻ input thuộc nhãn 'Mật khẩu'.",
+              "expected": "Giá trị type là \"password\"."
+            },
+            {
+              "action": "Gõ 'Abcd1234!' vào ô 'Mật khẩu'.",
+              "expected": "Ô hiển thị ký tự che (•), không hiện chuỗi 'Abcd1234!'."
+            },
+            {
+              "action": "Đọc thuộc tính type của thẻ input thuộc nhãn 'Xác nhận mật khẩu' (A18).",
+              "expected": "Giá trị type là \"password\"."
+            }
+          ],
+          "expected_result": "Ô Mật khẩu và ô Xác nhận mật khẩu đều có type=\"password\" và che ký tự đã nhập.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR01-93",
+          "title": "Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa",
+          "layer": "UI",
+          "requirements": [
+            "FR-22.4"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Chọn dữ liệu vượt qua kiểm tra HTML5 để thông báo lỗi chắc chắn nằm trong DOM và đo được vị trí (A16).",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
+          ],
+          "test_data": "Mật khẩu 'abcd1234!' (thiếu chữ hoa); Email 'gui93_{ts}@domain.com'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/register.",
+              "expected": "Form 'Đăng Ký Tài Khoản' hiển thị."
+            },
+            {
+              "action": "Nhập Họ Tên 'Nguyen Van A', Email 'gui93_{ts}@domain.com', Mật khẩu 'abcd1234!', Xác nhận mật khẩu 'abcd1234!' rồi bấm 'Đăng Ký'.",
+              "expected": "Hộp thông báo lỗi xuất hiện trong DOM (mọi ô đã điền nên trình duyệt không chặn bằng bong bóng HTML5)."
+            },
+            {
+              "action": "Lấy boundingBox của hộp lỗi và của nút 'Đăng Ký'.",
+              "expected": "Cạnh dưới của hộp lỗi (y + height) ≤ cạnh trên (y) của nút 'Đăng Ký'."
+            }
+          ],
+          "expected_result": "Thông báo lỗi nằm phía trên nút 'Đăng Ký'.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Nếu user 'gui93_{ts}@domain.com' bị tạo: xoá bằng DELETE /api/admin/users/:id (token admin)."
+          ]
+        },
+        {
+          "id": "TC-FR01-94",
+          "cleanup": [
+            "Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu."
+          ],
+          "title": "Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở form Đăng ký",
+          "layer": "UI",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Case kiểm sự tồn tại của trường mà A17 nhắc tới; tách khỏi các case nhập liệu để kết luận riêng.",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
+          ],
+          "test_data": "Nhãn cần tìm: 'Xác nhận mật khẩu'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/register.",
+              "expected": "Form 'Đăng Ký Tài Khoản' hiển thị."
+            },
+            {
+              "action": "Tìm ô nhập có nhãn 'Xác nhận mật khẩu' trong form.",
+              "expected": "Có đúng 1 ô nhập với nhãn 'Xác nhận mật khẩu', nằm sau ô 'Mật khẩu'."
+            }
+          ],
+          "expected_result": "Form có trường Xác nhận mật khẩu (FR-01.9).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        }
+      ]
+    }
+  ]
 }

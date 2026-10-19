@@ -91,76 +91,172 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
-| EC1 | Không rỗng, chỉ chữ Latin không dấu và khoảng trắng (ví dụ 'Nguyen Van A') | ⚠ chưa phủ |
-| EC2 | Không rỗng, có chữ tiếng Việt có dấu (ví dụ 'Nguyễn Văn Ánh') | ⚠ chưa phủ |
-| EC3 | Rỗng (0 ký tự) | ⚠ chưa phủ |
-| EC4 | Chỉ gồm khoảng trắng (ví dụ '   ') | ⚠ chưa phủ |
-| EC5 | Tầng API: trường name thiếu trong body hoặc bằng null | ⚠ chưa phủ |
-| EC6 | Tầng API: name không phải chuỗi (ví dụ số 123) | ⚠ chưa phủ |
-| EC7 | Đúng định dạng <local>@<domain>.<tld> (ví dụ 'newuser@domain.com') | ⚠ chưa phủ |
-| EC8 | Đúng định dạng nhưng có khoảng trắng đầu/cuối (ví dụ '  newuser@domain.com  ') | ⚠ chưa phủ |
-| EC9 | Rỗng (0 ký tự) | ⚠ chưa phủ |
-| EC10 | Không có ký tự '@' (ví dụ 'newuserdomain.com') | ⚠ chưa phủ |
-| EC11 | Có nhiều hơn một '@' (ví dụ 'new@user@domain.com') | ⚠ chưa phủ |
-| EC12 | Phần local rỗng (ví dụ '@domain.com') | ⚠ chưa phủ |
-| EC13 | Phần domain rỗng (ví dụ 'newuser@') | ⚠ chưa phủ |
-| EC14 | Phần domain không có dấu '.' (ví dụ 'newuser@domain') | ⚠ chưa phủ |
-| EC15 | Có khoảng trắng bên trong (ví dụ 'new user@domain.com') | ⚠ chưa phủ |
-| EC16 | Tầng API: trường email thiếu trong body hoặc bằng null | ⚠ chưa phủ |
-| EC17 | Tầng API: email không phải chuỗi (ví dụ số 123) | ⚠ chưa phủ |
-| EC18 | Email chưa tồn tại trong bảng users | ⚠ chưa phủ |
-| EC19 | Chỉ khác email đã có ở chữ hoa/thường (ví dụ 'TEST@eshop.com' khi đã có 'test@eshop.com') | ⚠ chưa phủ |
-| EC20 | Trùng chính xác email đã có (ví dụ 'test@eshop.com') | ⚠ chưa phủ |
-| EC21 | Trùng email đã có sau khi cắt khoảng trắng đầu/cuối (ví dụ ' test@eshop.com ') | ⚠ chưa phủ |
-| EC22 | Độ dài ≥ 8 ký tự (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC23 | Độ dài 1–7 ký tự (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC24 | Rỗng (0 ký tự) | ⚠ chưa phủ |
-| EC25 | Có ≥ 1 chữ hoa A–Z | ⚠ chưa phủ |
-| EC26 | Không có chữ hoa nào (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC27 | Chữ hoa duy nhất là chữ có dấu tiếng Việt, ví dụ 'Ê' (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC28 | Có ≥ 1 chữ thường a–z | ⚠ chưa phủ |
-| EC29 | Không có chữ thường nào (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC30 | Chữ thường duy nhất là chữ có dấu tiếng Việt, ví dụ 'ê' (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC31 | Có ≥ 1 chữ số 0–9 | ⚠ chưa phủ |
-| EC32 | Không có chữ số nào (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC33 | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | ⚠ chưa phủ |
-| EC34 | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (ví dụ '!' và '#') | ⚠ chưa phủ |
-| EC35 | Không có ký tự đặc biệt nào (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC36 | Chỉ có ký tự đặc biệt ngoài tập, ví dụ '#', '^', '-', khoảng trắng (các điều kiện khác thoả) | ⚠ chưa phủ |
-| EC37 | Tầng API: trường password thiếu trong body hoặc bằng null | ⚠ chưa phủ |
-| EC38 | Tầng API: password không phải chuỗi (ví dụ số 12345678) | ⚠ chưa phủ |
-| EC39 | Khớp chính xác với Mật khẩu | ⚠ chưa phủ |
-| EC40 | Rỗng | ⚠ chưa phủ |
-| EC41 | Khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường) | ⚠ chưa phủ |
-| EC42 | Chỉ khác Mật khẩu ở chữ hoa/thường (ví dụ 'Abcd1234!' và 'abcd1234!') | ⚠ chưa phủ |
-| EC43 | Không có thông báo lỗi | ⚠ chưa phủ |
-| EC44 | Có thông báo lỗi trên form (hộp lỗi hoặc bong bóng HTML5) | ⚠ chưa phủ |
-| EC45 | Chuyển tới trang Đăng nhập /login | ⚠ chưa phủ |
-| EC46 | Ở lại trang /register | ⚠ chưa phủ |
-| EC47 | HTTP 200, body {"message": "User registered successfully", "id": n} | ⚠ chưa phủ |
-| EC48 | HTTP 4xx, body có trường error | ⚠ chưa phủ |
-| EC49 | Tạo đúng 1 bản ghi user mới với name/email đã nhập | ⚠ chưa phủ |
-| EC50 | Không tạo bản ghi (số user không đổi) | ⚠ chưa phủ |
+| EC1 | Không rỗng, chỉ chữ Latin không dấu và khoảng trắng (ví dụ 'Nguyen Van A') | TC-FR01-01, TC-FR01-28 |
+| EC2 | Không rỗng, có chữ tiếng Việt có dấu (ví dụ 'Nguyễn Văn Ánh') | TC-FR01-02, TC-FR01-29 |
+| EC3 | Rỗng (0 ký tự) | TC-FR01-05, TC-FR01-32 |
+| EC4 | Chỉ gồm khoảng trắng (ví dụ '   ') | TC-FR01-06, TC-FR01-33 |
+| EC5 | Tầng API: trường name thiếu trong body hoặc bằng null | TC-FR01-52 |
+| EC6 | Tầng API: name không phải chuỗi (ví dụ số 123) | TC-FR01-53 |
+| EC7 | Đúng định dạng <local>@<domain>.<tld> (ví dụ 'newuser@domain.com') | TC-FR01-01, TC-FR01-02, TC-FR01-28, TC-FR01-29 |
+| EC8 | Đúng định dạng nhưng có khoảng trắng đầu/cuối (ví dụ '  newuser@domain.com  ') | TC-FR01-03, TC-FR01-30 |
+| EC9 | Rỗng (0 ký tự) | TC-FR01-07, TC-FR01-34 |
+| EC10 | Không có ký tự '@' (ví dụ 'newuserdomain.com') | TC-FR01-08, TC-FR01-35 |
+| EC11 | Có nhiều hơn một '@' (ví dụ 'new@user@domain.com') | TC-FR01-09, TC-FR01-36 |
+| EC12 | Phần local rỗng (ví dụ '@domain.com') | TC-FR01-10, TC-FR01-37 |
+| EC13 | Phần domain rỗng (ví dụ 'newuser@') | TC-FR01-11, TC-FR01-38 |
+| EC14 | Phần domain không có dấu '.' (ví dụ 'newuser@domain') | TC-FR01-12, TC-FR01-39 |
+| EC15 | Có khoảng trắng bên trong (ví dụ 'new user@domain.com') | TC-FR01-13, TC-FR01-40 |
+| EC16 | Tầng API: trường email thiếu trong body hoặc bằng null | TC-FR01-54 |
+| EC17 | Tầng API: email không phải chuỗi (ví dụ số 123) | TC-FR01-55 |
+| EC18 | Email chưa tồn tại trong bảng users | TC-FR01-01, TC-FR01-02, TC-FR01-28, TC-FR01-29 |
+| EC19 | Chỉ khác email đã có ở chữ hoa/thường (ví dụ 'TEST@eshop.com' khi đã có 'test@eshop.com') | TC-FR01-04, TC-FR01-31 |
+| EC20 | Trùng chính xác email đã có (ví dụ 'test@eshop.com') | TC-FR01-14, TC-FR01-41 |
+| EC21 | Trùng email đã có sau khi cắt khoảng trắng đầu/cuối (ví dụ ' test@eshop.com ') | TC-FR01-15, TC-FR01-42 |
+| EC22 | Độ dài ≥ 8 ký tự (các điều kiện khác thoả) | TC-FR01-01, TC-FR01-02, TC-FR01-28, TC-FR01-29 |
+| EC23 | Độ dài 1–7 ký tự (các điều kiện khác thoả) | TC-FR01-16, TC-FR01-43 |
+| EC24 | Rỗng (0 ký tự) | TC-FR01-17, TC-FR01-44 |
+| EC25 | Có ≥ 1 chữ hoa A–Z | TC-FR01-01, TC-FR01-02, TC-FR01-28, TC-FR01-29 |
+| EC26 | Không có chữ hoa nào (các điều kiện khác thoả) | TC-FR01-18, TC-FR01-45 |
+| EC27 | Chữ hoa duy nhất là chữ có dấu tiếng Việt, ví dụ 'Ê' (các điều kiện khác thoả) | TC-FR01-19, TC-FR01-46 |
+| EC28 | Có ≥ 1 chữ thường a–z | TC-FR01-01, TC-FR01-02, TC-FR01-28, TC-FR01-29 |
+| EC29 | Không có chữ thường nào (các điều kiện khác thoả) | TC-FR01-20, TC-FR01-47 |
+| EC30 | Chữ thường duy nhất là chữ có dấu tiếng Việt, ví dụ 'ê' (các điều kiện khác thoả) | TC-FR01-21, TC-FR01-48 |
+| EC31 | Có ≥ 1 chữ số 0–9 | TC-FR01-01, TC-FR01-02, TC-FR01-28, TC-FR01-29 |
+| EC32 | Không có chữ số nào (các điều kiện khác thoả) | TC-FR01-22, TC-FR01-49 |
+| EC33 | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | TC-FR01-01, TC-FR01-28 |
+| EC34 | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (ví dụ '!' và '#') | TC-FR01-02, TC-FR01-29 |
+| EC35 | Không có ký tự đặc biệt nào (các điều kiện khác thoả) | TC-FR01-23, TC-FR01-50 |
+| EC36 | Chỉ có ký tự đặc biệt ngoài tập, ví dụ '#', '^', '-', khoảng trắng (các điều kiện khác thoả) | TC-FR01-24, TC-FR01-51 |
+| EC37 | Tầng API: trường password thiếu trong body hoặc bằng null | TC-FR01-56 |
+| EC38 | Tầng API: password không phải chuỗi (ví dụ số 12345678) | TC-FR01-57 |
+| EC39 | Khớp chính xác với Mật khẩu | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04 |
+| EC40 | Rỗng | TC-FR01-25 |
+| EC41 | Khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường) | TC-FR01-26 |
+| EC42 | Chỉ khác Mật khẩu ở chữ hoa/thường (ví dụ 'Abcd1234!' và 'abcd1234!') | TC-FR01-27 |
+| EC43 | Không có thông báo lỗi | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04 |
+| EC44 | Có thông báo lỗi trên form (hộp lỗi hoặc bong bóng HTML5) | TC-FR01-05, TC-FR01-06, TC-FR01-07, TC-FR01-08, TC-FR01-09, TC-FR01-10, TC-FR01-11, TC-FR01-12, TC-FR01-13, TC-FR01-14, TC-FR01-15, TC-FR01-16, TC-FR01-17, TC-FR01-18, TC-FR01-19, TC-FR01-20, TC-FR01-21, TC-FR01-22, TC-FR01-23, TC-FR01-24, TC-FR01-25, TC-FR01-26, TC-FR01-27 |
+| EC45 | Chuyển tới trang Đăng nhập /login | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04 |
+| EC46 | Ở lại trang /register | TC-FR01-05, TC-FR01-06, TC-FR01-07, TC-FR01-08, TC-FR01-09, TC-FR01-10, TC-FR01-11, TC-FR01-12, TC-FR01-13, TC-FR01-14, TC-FR01-15, TC-FR01-16, TC-FR01-17, TC-FR01-18, TC-FR01-19, TC-FR01-20, TC-FR01-21, TC-FR01-22, TC-FR01-23, TC-FR01-24, TC-FR01-25, TC-FR01-26, TC-FR01-27 |
+| EC47 | HTTP 200, body {"message": "User registered successfully", "id": n} | TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31 |
+| EC48 | HTTP 4xx, body có trường error | TC-FR01-32, TC-FR01-33, TC-FR01-34, TC-FR01-35, TC-FR01-36, TC-FR01-37, TC-FR01-38, TC-FR01-39, TC-FR01-40, TC-FR01-41, TC-FR01-42, TC-FR01-43, TC-FR01-44, TC-FR01-45, TC-FR01-46, TC-FR01-47, TC-FR01-48, TC-FR01-49, TC-FR01-50, TC-FR01-51, TC-FR01-52, TC-FR01-53, TC-FR01-54, TC-FR01-55, TC-FR01-56, TC-FR01-57 |
+| EC49 | Tạo đúng 1 bản ghi user mới với name/email đã nhập | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31 |
+| EC50 | Không tạo bản ghi (số user không đổi) | TC-FR01-05, TC-FR01-06, TC-FR01-07, TC-FR01-08, TC-FR01-09, TC-FR01-10, TC-FR01-11, TC-FR01-12, TC-FR01-13, TC-FR01-14, TC-FR01-15, TC-FR01-16, TC-FR01-17, TC-FR01-18, TC-FR01-19, TC-FR01-20, TC-FR01-21, TC-FR01-22, TC-FR01-23, TC-FR01-24, TC-FR01-25, TC-FR01-26, TC-FR01-27, TC-FR01-32, TC-FR01-33, TC-FR01-34, TC-FR01-35, TC-FR01-36, TC-FR01-37, TC-FR01-38, TC-FR01-39, TC-FR01-40, TC-FR01-41, TC-FR01-42, TC-FR01-43, TC-FR01-44, TC-FR01-45, TC-FR01-46, TC-FR01-47, TC-FR01-48, TC-FR01-49, TC-FR01-50, TC-FR01-51, TC-FR01-52, TC-FR01-53, TC-FR01-54, TC-FR01-55, TC-FR01-56, TC-FR01-57 |
+
+### TS-DOM-UI — Domain — minimum set, tầng UI (FR-01)
+**Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).; Web http://localhost:5173 đang chạy.; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).; Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).; Trạng thái ban đầu của mỗi case: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token).; Chạy tay: dùng cửa sổ ẩn danh và tắt autofill. Playwright: browser context mới cho mỗi case.
+
+**Quy trình chung:**
+1. Gọi GET /api/admin/users (token admin) và lưu danh sách id/email/name. → HTTP 200; danh sách có admin@eshop.com và test@eshop.com.
+2. Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị; các ô Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu (nếu có) đều trống.
+3. Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu bằng cách gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không nhập gì, giữ ô trống. Giá trị có ␣: gõ đúng số dấu cách đó. Nếu form không có ô Xác nhận mật khẩu: case có V5 = EC39 bỏ qua bước nhập V5 và ghi notes; case EC40–EC42 dừng, Blocked (A17). → Mỗi ô hiển thị đúng giá trị đã gõ; Mật khẩu và Xác nhận mật khẩu hiện dạng che.
+4. Bấm nút 'Đăng Ký' đúng một lần. → Hệ thống phản hồi: hiện lỗi, trình duyệt chặn submit, hoặc chuyển trang.
+5. Quan sát hộp lỗi đỏ trên form, bong bóng kiểm tra của trình duyệt (validationMessage của ô) và URL trên thanh địa chỉ. → Khớp phần UI của cột Expected.
+6. Gọi lại GET /api/admin/users và so với danh sách lưu ở bước 1. → Số user mới và name/email của user mới như cột Expected (oracle tương đối).
+
+**Dọn dẹp:** Sau mỗi case, kể cả khi Fail: xoá mọi user mới so với danh sách ở bước 1 bằng DELETE /api/admin/users/:id (token admin). Nếu xoá thất bại: ghi vào notes của case, không đổi verdict (A19).
+
+| #TC | Tiêu đề | EC phủ | Họ Tên | Email | Email trong CSDL | Mật khẩu | Xác nhận mật khẩu | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR01-01 | Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩu mạnh | EC1, EC7, EC18, EC22, EC25, EC28, EC31, EC33, EC39, EC43, EC45, EC49 | Nguyen Van A | dom01_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_{ts}@domain.com' như cột dữ liệu. | Case hợp lệ thứ nhất: giá trị danh nghĩa đơn giản nhất của các lớp hợp lệ có căn cứ SRS (tên ASCII, email đúng mẫu chưa tồn tại, mật khẩu 9 ký tự chỉ dùng ký tự đặc biệt trong tập). | AI |
+| TC-FR01-02 | Kiểm tra đăng ký thành công qua UI khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập | EC2, EC7, EC18, EC22, EC25, EC28, EC31, EC34, EC39, EC43, EC45, EC49 | Nguyễn Văn Ánh | dom02_{ts}@domain.com | chưa có | Abcd1234!# | Abcd1234!# | Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'dom02_{ts}@domain.com' như cột dữ liệu. | Case hợp lệ thứ hai: phủ các lớp hợp lệ còn lại có căn cứ SRS (EC2 tên có dấu — SRS không giới hạn ký tự; EC34 — A5 cho phép ký tự ngoài tập đi kèm). | AI |
+| TC-FR01-03 | Kiểm tra đăng ký thành công qua UI khi email có khoảng trắng đầu/cuối | EC8, EC39, EC43, EC45, EC49 | Nguyen Van A | `␣␣dom03_{ts}@domain.com␣␣` | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom03_{ts}@domain.com' như cột dữ liệu. Email lưu đã được cắt khoảng trắng (A3). | Lớp dựa trên giả định A3 nên tách thành case riêng; hai khoảng trắng mỗi bên, phần còn lại là email mới đúng mẫu. | AI |
+| TC-FR01-04 | Kiểm tra đăng ký thành công qua UI khi email chỉ khác hoa/thường với tài khoản đã có | EC19, EC39, EC43, EC45, EC49 | Nguyen Van A | Test@eshop.com | đã có 'test@eshop.com' (seed) | Abcd1234! | Abcd1234! | Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'Test@eshop.com' như cột dữ liệu; user seed 'test@eshop.com' không bị sửa. | Lớp dựa trên giả định A3 nên tách thành case riêng; biến thể 'Test@eshop.com' khác biến thể của case API để hai case không phụ thuộc nhau. | AI |
+| TC-FR01-05 | Kiểm tra từ chối đăng ký qua UI khi Họ Tên rỗng | EC3, EC44, EC46, EC50 | `''` (rỗng) | dom05_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'. | AI |
+| TC-FR01-06 | Kiểm tra từ chối đăng ký qua UI khi Họ Tên chỉ gồm khoảng trắng | EC4, EC44, EC46, EC50 | `␣␣␣` | dom06_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | 3 khoảng trắng: vượt qua required của HTML5 nhưng vẫn rỗng sau khi cắt (A1). | AI |
+| TC-FR01-07 | Kiểm tra từ chối đăng ký qua UI khi Email rỗng | EC9, EC44, EC46, EC50 | Nguyen Van A | `''` (rỗng) | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'. | AI |
+| TC-FR01-08 | Kiểm tra từ chối đăng ký qua UI khi Email không có ký tự '@' | EC10, EC44, EC46, EC50 | Nguyen Van A | dom08_{ts}domain.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Giữ nguyên các phần khác của mẫu, chỉ bỏ '@' để lỗi chỉ đến từ thiếu '@'. | AI |
+| TC-FR01-09 | Kiểm tra từ chối đăng ký qua UI khi Email có hai ký tự '@' | EC11, EC44, EC46, EC50 | Nguyen Van A | dom09@x_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thêm đúng một '@' thừa, phần local và domain vẫn không rỗng. | AI |
+| TC-FR01-10 | Kiểm tra từ chối đăng ký qua UI khi Email có phần local rỗng | EC12, EC44, EC46, EC50 | Nguyen Van A | @dom{ts}.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Domain đúng mẫu, chỉ thiếu phần trước '@'. | AI |
+| TC-FR01-11 | Kiểm tra từ chối đăng ký qua UI khi Email có phần domain rỗng | EC13, EC44, EC46, EC50 | Nguyen Van A | dom11_{ts}@ | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Phần local đúng mẫu, chỉ thiếu phần sau '@'. | AI |
+| TC-FR01-12 | Kiểm tra từ chối đăng ký qua UI khi Email có domain không chứa dấu chấm | EC14, EC44, EC46, EC50 | Nguyen Van A | dom12_{ts}@domain | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | HTML5 type=email chấp nhận dạng này nhưng thiếu .tld theo A2 — đại diện điển hình nhất của lớp. | AI |
+| TC-FR01-13 | Kiểm tra từ chối đăng ký qua UI khi Email có khoảng trắng ở giữa phần local | EC15, EC44, EC46, EC50 | Nguyen Van A | dom 13_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Một khoảng trắng duy nhất ở giữa, đầu/cuối không có khoảng trắng để không lẫn với EC8. | AI |
+| TC-FR01-14 | Kiểm tra từ chối đăng ký qua UI khi Email trùng chính xác tài khoản đã có | EC20, EC44, EC46, EC50 | Nguyen Van A | test@eshop.com | đã có 'test@eshop.com' (seed) | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Tài khoản seed luôn có sau khi backend khởi động (A13). | AI |
+| TC-FR01-15 | Kiểm tra từ chối đăng ký qua UI khi Email trùng tài khoản đã có sau khi cắt khoảng trắng đầu/cuối | EC21, EC44, EC46, EC50 | Nguyen Van A | `␣test@eshop.com␣` | đã có 'test@eshop.com' (seed) | Abcd1234! | Abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Một khoảng trắng mỗi bên — ít nhất để khác chuỗi nguyên văn nhưng trùng sau khi cắt (A3). | AI |
+| TC-FR01-16 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu 7 ký tự thoả các điều kiện còn lại | EC23, EC44, EC46, EC50 | Nguyen Van A | dom16_{ts}@domain.com | chưa có | Abc12!x | Abc12!x | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | 7 ký tự có đủ chữ hoa, chữ thường, chữ số và '!' → chỉ vi phạm độ dài. Điểm 7 được xét lại ở BVA. | AI |
+| TC-FR01-17 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu rỗng | EC24, EC44, EC46, EC50 | Nguyen Van A | dom17_{ts}@domain.com | chưa có | `''` (rỗng) | `''` (rỗng) | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'. | AI |
+| TC-FR01-18 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ hoa | EC26, EC44, EC46, EC50 | Nguyen Van A | dom18_{ts}@domain.com | chưa có | abcd1234! | abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Lấy danh nghĩa 'Abcd1234!' đổi 'A' thành 'a' → chỉ thiếu chữ hoa. | AI |
+| TC-FR01-19 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu chỉ có chữ hoa có dấu tiếng Việt | EC27, EC44, EC46, EC50 | Nguyen Van A | dom19_{ts}@domain.com | chưa có | Êbcd1234! | Êbcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thay 'A' bằng 'Ê' → chữ hoa duy nhất nằm ngoài A–Z (A6). | AI |
+| TC-FR01-20 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ thường | EC29, EC44, EC46, EC50 | Nguyen Van A | dom20_{ts}@domain.com | chưa có | ABCD1234! | ABCD1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Viết hoa toàn bộ giá trị danh nghĩa → chỉ thiếu chữ thường. | AI |
+| TC-FR01-21 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu chỉ có chữ thường có dấu tiếng Việt | EC30, EC44, EC46, EC50 | Nguyen Van A | dom21_{ts}@domain.com | chưa có | ABCê1234! | ABCê1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chữ thường duy nhất là 'ê' (A6), các điều kiện khác thoả. | AI |
+| TC-FR01-22 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ số | EC32, EC44, EC46, EC50 | Nguyen Van A | dom22_{ts}@domain.com | chưa có | Abcdefgh! | Abcdefgh! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | 9 ký tự, thay các chữ số bằng chữ thường → chỉ thiếu chữ số. | AI |
+| TC-FR01-23 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có ký tự đặc biệt | EC35, EC44, EC46, EC50 | Nguyen Van A | dom23_{ts}@domain.com | chưa có | Abcd12345 | Abcd12345 | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thay '!' bằng '5' → chỉ thiếu ký tự đặc biệt. | AI |
+| TC-FR01-24 | Kiểm tra từ chối đăng ký qua UI khi Mật khẩu chỉ có ký tự đặc biệt ngoài tập cho phép | EC36, EC44, EC46, EC50 | Nguyen Van A | dom24_{ts}@domain.com | chưa có | Abcd1234# | Abcd1234# | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thay '!' bằng '#' (ngoài tập, A5); độ dài và các loại ký tự khác giữ nguyên. | AI |
+| TC-FR01-25 | Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu rỗng | EC40, EC44, EC46, EC50 | Nguyen Van A | dom25_{ts}@domain.com | chưa có | Abcd1234! | `''` (rỗng) | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng (A7). | AI |
+| TC-FR01-26 | Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu khác Mật khẩu | EC41, EC44, EC46, EC50 | Nguyen Van A | dom26_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234? | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chỉ khác ký tự cuối ('?' thay '!'); cả hai chuỗi đều là mật khẩu mạnh nên lỗi chỉ đến từ không khớp. | AI |
+| TC-FR01-27 | Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu chỉ khác Mật khẩu ở chữ hoa/thường | EC42, EC44, EC46, EC50 | Nguyen Van A | dom27_{ts}@domain.com | chưa có | Abcd1234! | abcd1234! | Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Khác đúng một ký tự về hoa/thường (A7). | AI |
+
+### TS-DOM-API — Domain — minimum set, tầng API (FR-01)
+**Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).; Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).
+
+**Quy trình chung:**
+1. Gọi GET /api/admin/users (token admin) và lưu danh sách id/email/name. → HTTP 200; danh sách có admin@eshop.com và test@eshop.com.
+2. Gửi đúng một request POST http://localhost:3000/api/register, header Content-Type: application/json. Body gồm khoá name/email/password lấy từ cột Họ Tên/Email/Mật khẩu: '— thiếu trường —' = bỏ khoá khỏi body; 'số …' = giá trị số JSON; `''` = chuỗi rỗng; khoảng trắng (␣) giữ nguyên. → Nhận được phản hồi HTTP.
+3. Ghi lại HTTP status và body JSON của phản hồi. → Khớp phần API của cột Expected.
+4. Gọi lại GET /api/admin/users và so với danh sách lưu ở bước 1. → Số user mới và name/email của user mới như cột Expected (oracle tương đối).
+
+**Dọn dẹp:** Sau mỗi case, kể cả khi Fail: xoá mọi user mới so với danh sách ở bước 1 bằng DELETE /api/admin/users/:id (token admin). Nếu xoá thất bại: ghi vào notes của case, không đổi verdict (A19).
+
+| #TC | Tiêu đề | EC phủ | Họ Tên | Email | Email trong CSDL | Mật khẩu | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|
+| TC-FR01-28 | Kiểm tra đăng ký thành công qua API khi Họ Tên không dấu, email mới và mật khẩu mạnh | EC1, EC7, EC18, EC22, EC25, EC28, EC31, EC33, EC47, EC49 | Nguyen Van A | api28_{ts}@domain.com | chưa có | Abcd1234! | HTTP 200, body {"message": "User registered successfully", "id": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'api28_{ts}@domain.com' như cột dữ liệu. | Case hợp lệ thứ nhất: giá trị danh nghĩa đơn giản nhất của các lớp hợp lệ có căn cứ SRS (tên ASCII, email đúng mẫu chưa tồn tại, mật khẩu 9 ký tự chỉ dùng ký tự đặc biệt trong tập). | AI |
+| TC-FR01-29 | Kiểm tra đăng ký thành công qua API khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập | EC2, EC7, EC18, EC22, EC25, EC28, EC31, EC34, EC47, EC49 | Nguyễn Văn Ánh | api29_{ts}@domain.com | chưa có | Abcd1234!# | HTTP 200, body {"message": "User registered successfully", "id": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'api29_{ts}@domain.com' như cột dữ liệu. | Case hợp lệ thứ hai: phủ các lớp hợp lệ còn lại có căn cứ SRS (EC2 tên có dấu — SRS không giới hạn ký tự; EC34 — A5 cho phép ký tự ngoài tập đi kèm). | AI |
+| TC-FR01-30 | Kiểm tra đăng ký thành công qua API khi email có khoảng trắng đầu/cuối | EC8, EC47, EC49 | Nguyen Van A | `␣␣api30_{ts}@domain.com␣␣` | chưa có | Abcd1234! | HTTP 200, body {"message": "User registered successfully", "id": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'api30_{ts}@domain.com' như cột dữ liệu. Email lưu đã được cắt khoảng trắng (A3). | Lớp dựa trên giả định A3 nên tách thành case riêng; hai khoảng trắng mỗi bên, phần còn lại là email mới đúng mẫu. | AI |
+| TC-FR01-31 | Kiểm tra đăng ký thành công qua API khi email chỉ khác hoa/thường với tài khoản đã có | EC19, EC47, EC49 | Nguyen Van A | TEST@eshop.com | đã có 'test@eshop.com' (seed) | Abcd1234! | HTTP 200, body {"message": "User registered successfully", "id": n}; so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'TEST@eshop.com' như cột dữ liệu; user seed 'test@eshop.com' không bị sửa. | Lớp dựa trên giả định A3 nên tách thành case riêng; biến thể 'TEST@eshop.com' khác biến thể của case UI để hai case không phụ thuộc nhau. | AI |
+| TC-FR01-32 | Kiểm tra từ chối đăng ký qua API khi Họ Tên rỗng | EC3, EC48, EC50 | `''` (rỗng) | api32_{ts}@domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'. | AI |
+| TC-FR01-33 | Kiểm tra từ chối đăng ký qua API khi Họ Tên chỉ gồm khoảng trắng | EC4, EC48, EC50 | `␣␣␣` | api33_{ts}@domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | 3 khoảng trắng: vượt qua required của HTML5 nhưng vẫn rỗng sau khi cắt (A1). | AI |
+| TC-FR01-34 | Kiểm tra từ chối đăng ký qua API khi Email rỗng | EC9, EC48, EC50 | Nguyen Van A | `''` (rỗng) | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'. | AI |
+| TC-FR01-35 | Kiểm tra từ chối đăng ký qua API khi Email không có ký tự '@' | EC10, EC48, EC50 | Nguyen Van A | dom35_{ts}domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Giữ nguyên các phần khác của mẫu, chỉ bỏ '@' để lỗi chỉ đến từ thiếu '@'. | AI |
+| TC-FR01-36 | Kiểm tra từ chối đăng ký qua API khi Email có hai ký tự '@' | EC11, EC48, EC50 | Nguyen Van A | dom36@x_{ts}@domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thêm đúng một '@' thừa, phần local và domain vẫn không rỗng. | AI |
+| TC-FR01-37 | Kiểm tra từ chối đăng ký qua API khi Email có phần local rỗng | EC12, EC48, EC50 | Nguyen Van A | @dom{ts}.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Domain đúng mẫu, chỉ thiếu phần trước '@'. | AI |
+| TC-FR01-38 | Kiểm tra từ chối đăng ký qua API khi Email có phần domain rỗng | EC13, EC48, EC50 | Nguyen Van A | dom38_{ts}@ | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Phần local đúng mẫu, chỉ thiếu phần sau '@'. | AI |
+| TC-FR01-39 | Kiểm tra từ chối đăng ký qua API khi Email có domain không chứa dấu chấm | EC14, EC48, EC50 | Nguyen Van A | dom39_{ts}@domain | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | HTML5 type=email chấp nhận dạng này nhưng thiếu .tld theo A2 — đại diện điển hình nhất của lớp. | AI |
+| TC-FR01-40 | Kiểm tra từ chối đăng ký qua API khi Email có khoảng trắng ở giữa phần local | EC15, EC48, EC50 | Nguyen Van A | dom 40_{ts}@domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Một khoảng trắng duy nhất ở giữa, đầu/cuối không có khoảng trắng để không lẫn với EC8. | AI |
+| TC-FR01-41 | Kiểm tra từ chối đăng ký qua API khi Email trùng chính xác tài khoản đã có | EC20, EC48, EC50 | Nguyen Van A | test@eshop.com | đã có 'test@eshop.com' (seed) | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Tài khoản seed luôn có sau khi backend khởi động (A13). | AI |
+| TC-FR01-42 | Kiểm tra từ chối đăng ký qua API khi Email trùng tài khoản đã có sau khi cắt khoảng trắng đầu/cuối | EC21, EC48, EC50 | Nguyen Van A | `␣test@eshop.com␣` | đã có 'test@eshop.com' (seed) | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Một khoảng trắng mỗi bên — ít nhất để khác chuỗi nguyên văn nhưng trùng sau khi cắt (A3). | AI |
+| TC-FR01-43 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu 7 ký tự thoả các điều kiện còn lại | EC23, EC48, EC50 | Nguyen Van A | api43_{ts}@domain.com | chưa có | Abc12!x | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | 7 ký tự có đủ chữ hoa, chữ thường, chữ số và '!' → chỉ vi phạm độ dài. Điểm 7 được xét lại ở BVA. | AI |
+| TC-FR01-44 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu rỗng | EC24, EC48, EC50 | Nguyen Van A | api44_{ts}@domain.com | chưa có | `''` (rỗng) | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chuỗi rỗng là đại diện duy nhất của lớp 'rỗng'. | AI |
+| TC-FR01-45 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có chữ hoa | EC26, EC48, EC50 | Nguyen Van A | api45_{ts}@domain.com | chưa có | abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Lấy danh nghĩa 'Abcd1234!' đổi 'A' thành 'a' → chỉ thiếu chữ hoa. | AI |
+| TC-FR01-46 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu chỉ có chữ hoa có dấu tiếng Việt | EC27, EC48, EC50 | Nguyen Van A | api46_{ts}@domain.com | chưa có | Êbcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thay 'A' bằng 'Ê' → chữ hoa duy nhất nằm ngoài A–Z (A6). | AI |
+| TC-FR01-47 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có chữ thường | EC29, EC48, EC50 | Nguyen Van A | api47_{ts}@domain.com | chưa có | ABCD1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Viết hoa toàn bộ giá trị danh nghĩa → chỉ thiếu chữ thường. | AI |
+| TC-FR01-48 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu chỉ có chữ thường có dấu tiếng Việt | EC30, EC48, EC50 | Nguyen Van A | api48_{ts}@domain.com | chưa có | ABCê1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Chữ thường duy nhất là 'ê' (A6), các điều kiện khác thoả. | AI |
+| TC-FR01-49 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có chữ số | EC32, EC48, EC50 | Nguyen Van A | api49_{ts}@domain.com | chưa có | Abcdefgh! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | 9 ký tự, thay các chữ số bằng chữ thường → chỉ thiếu chữ số. | AI |
+| TC-FR01-50 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu không có ký tự đặc biệt | EC35, EC48, EC50 | Nguyen Van A | api50_{ts}@domain.com | chưa có | Abcd12345 | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thay '!' bằng '5' → chỉ thiếu ký tự đặc biệt. | AI |
+| TC-FR01-51 | Kiểm tra từ chối đăng ký qua API khi Mật khẩu chỉ có ký tự đặc biệt ngoài tập cho phép | EC36, EC48, EC50 | Nguyen Van A | api51_{ts}@domain.com | chưa có | Abcd1234# | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Thay '!' bằng '#' (ngoài tập, A5); độ dài và các loại ký tự khác giữ nguyên. | AI |
+| TC-FR01-52 | Kiểm tra từ chối đăng ký qua API khi body thiếu trường name | EC5, EC48, EC50 | — thiếu trường — | api52_{ts}@domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Bỏ hẳn khoá name khỏi body — đại diện cho 'thiếu hoặc null' (A15). | AI |
+| TC-FR01-53 | Kiểm tra từ chối đăng ký qua API khi name là số JSON | EC6, EC48, EC50 | số 123 | api53_{ts}@domain.com | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Giá trị số JSON thay cho chuỗi (A15). | AI |
+| TC-FR01-54 | Kiểm tra từ chối đăng ký qua API khi body thiếu trường email | EC16, EC48, EC50 | Nguyen Van A | — thiếu trường — | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Bỏ hẳn khoá email khỏi body (A15). | AI |
+| TC-FR01-55 | Kiểm tra từ chối đăng ký qua API khi email là số JSON | EC17, EC48, EC50 | Nguyen Van A | số 123 | chưa có | Abcd1234! | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Giá trị số JSON thay cho chuỗi (A15). | AI |
+| TC-FR01-56 | Kiểm tra từ chối đăng ký qua API khi body thiếu trường password | EC37, EC48, EC50 | Nguyen Van A | api56_{ts}@domain.com | chưa có | — thiếu trường — | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Bỏ hẳn khoá password khỏi body (A15). | AI |
+| TC-FR01-57 | Kiểm tra từ chối đăng ký qua API khi password là số JSON | EC38, EC48, EC50 | Nguyen Van A | api57_{ts}@domain.com | chưa có | số 12345678 | HTTP 4xx (không phải 2xx, không phải 5xx), body JSON có trường error (A11); so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa. | Số 8 chữ số: đủ độ dài nếu bị ép thành chuỗi, nên lỗi chỉ đến từ sai kiểu (A15). | AI |
+
+### TS-GUI — GUI — thuộc tính form (FR-22) và sự tồn tại trường (FR-01.9)
+| #TC | Tiêu đề | EC phủ | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|
+| TC-FR01-90 | Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của form Đăng ký |  | Cả 4 nhãn trường bắt buộc theo FR-01 đều có ký hiệu '*'. | FR-01 liệt kê 4 trường bắt buộc; FR-22.1 yêu cầu '*' cho mọi trường bắt buộc. | AI |
+| TC-FR01-91 | Kiểm tra thuộc tính type của ô Email khi mở form Đăng ký |  | Ô Email có type="email". | Kiểm trực tiếp thuộc tính mà FR-22.2 quy định. | AI |
+| TC-FR01-92 | Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký |  | Ô Mật khẩu và ô Xác nhận mật khẩu đều có type="password" và che ký tự đã nhập. | FR-22.3 quy định type=password; áp dụng cho cả ô Xác nhận mật khẩu theo A18. | AI |
+| TC-FR01-93 | Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa |  | Thông báo lỗi nằm phía trên nút 'Đăng Ký'. | Chọn dữ liệu vượt qua kiểm tra HTML5 để thông báo lỗi chắc chắn nằm trong DOM và đo được vị trí (A16). | AI |
+| TC-FR01-94 | Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở form Đăng ký |  | Form có trường Xác nhận mật khẩu (FR-01.9). | Case kiểm sự tồn tại của trường mà A17 nhắc tới; tách khỏi các case nhập liệu để kết luận riêng. | AI |
 
 ### Truy vết yêu cầu ↔ test case
 | Yêu cầu | Test case | Số TC |
 |---|---|---|
-| FR-01.1 | ⚠ | 0 |
-| FR-01.2 | ⚠ | 0 |
-| FR-01.3 | ⚠ | 0 |
-| FR-01.4 | ⚠ | 0 |
-| FR-01.5 | ⚠ | 0 |
-| FR-01.6 | ⚠ | 0 |
-| FR-01.7a | ⚠ | 0 |
-| FR-01.7b | ⚠ | 0 |
-| FR-01.7c | ⚠ | 0 |
-| FR-01.8 | ⚠ | 0 |
-| FR-01.9 | ⚠ | 0 |
-| FR-01.10 | ⚠ | 0 |
-| FR-22.1 | ⚠ | 0 |
-| FR-22.2 | ⚠ | 0 |
-| FR-22.3 | ⚠ | 0 |
-| FR-22.4 | ⚠ | 0 |
+| FR-01.1 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-05, TC-FR01-06, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-32, TC-FR01-33, TC-FR01-52, TC-FR01-53 | 14 |
+| FR-01.2 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-07, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-34, TC-FR01-54, TC-FR01-55 | 12 |
+| FR-01.3 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-08, TC-FR01-09, TC-FR01-10, TC-FR01-11, TC-FR01-12, TC-FR01-13, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-35, TC-FR01-36, TC-FR01-37, TC-FR01-38, TC-FR01-39, TC-FR01-40 | 20 |
+| FR-01.4 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-14, TC-FR01-15, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-41, TC-FR01-42 | 12 |
+| FR-01.5 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-17, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-44, TC-FR01-56, TC-FR01-57 | 12 |
+| FR-01.6 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-16, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-43 | 10 |
+| FR-01.7a | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-18, TC-FR01-19, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-45, TC-FR01-46 | 12 |
+| FR-01.7b | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-20, TC-FR01-21, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-47, TC-FR01-48 | 12 |
+| FR-01.7c | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-22, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-49 | 10 |
+| FR-01.8 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-23, TC-FR01-24, TC-FR01-28, TC-FR01-29, TC-FR01-30, TC-FR01-31, TC-FR01-50, TC-FR01-51 | 12 |
+| FR-01.9 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04, TC-FR01-25, TC-FR01-26, TC-FR01-27, TC-FR01-94 | 8 |
+| FR-01.10 | TC-FR01-01, TC-FR01-02, TC-FR01-03, TC-FR01-04 | 4 |
+| FR-22.1 | TC-FR01-90 | 1 |
+| FR-22.2 | TC-FR01-91 | 1 |
+| FR-22.3 | TC-FR01-92 | 1 |
+| FR-22.4 | TC-FR01-93 | 1 |
 
 ### Giả định khi đặc tả chưa nói rõ
 - A1 (Họ Tên): FR-01 chỉ nói 'phải cung cấp'. SRS không nêu độ dài tối thiểu/tối đa hay tập ký tự → chỉ coi 'rỗng' là không hợp lệ. Chuỗi chỉ gồm khoảng trắng: giả định bị coi như rỗng (bị từ chối). Không có cận trên → không sinh UB/MAX_UI cho Họ Tên trừ khi SV quyết định khác.
@@ -179,6 +275,8 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 - A14 (FR-22 thuộc tính form): ký hiệu '*', type="email", type="password", vị trí thông báo lỗi là thuộc tính tĩnh của form, không phải miền giá trị nhập → không phân lớp ở bước 2; kiểm bằng suite GUI riêng (SV chốt 2026-10-19).
 - A15 (Sai kiểu / thiếu trường ở tầng API): SRS không nói gì về body JSON. Giả định trường name/email/password bị thiếu, bằng null hoặc không phải chuỗi JSON (ví dụ số 123) là dữ liệu không hợp lệ → phải bị từ chối với 4xx, không tạo user (theo A9, A11). Các lớp này chỉ tạo được ở tầng API vì ô nhập trên UI luôn gửi chuỗi.
 - A16 (Thông báo kiểm tra HTML5): khi trình duyệt chặn submit bằng bong bóng kiểm tra của thuộc tính required/type, bong bóng đó được coi là 'thông báo lỗi trên form' trong oracle của V6. SRS không phân biệt cơ chế hiển thị (SV xác nhận 2026-10-19). Cách quan sát: bong bóng HTML5 không nằm trong DOM → oracle = form không gửi request POST /api/register + ô liên quan ở trạng thái :invalid / validationMessage không rỗng.
-- A17 (Thiếu ô Xác nhận mật khẩu): nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường → Fail; các case cần nhập V5 ở tầng UI → Blocked kèm mã bug. Không xoá case.
+- A17 (Thiếu ô Xác nhận mật khẩu): nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường (TC-FR01-94) → Fail; case có V5 = EC39 bỏ qua bước nhập V5 và ghi notes; chỉ các case EC40–EC42 → Blocked kèm mã bug. Không xoá case.
+- A18 (FR-22.3 cho ô Xác nhận mật khẩu): FR-22.3 chỉ nêu 'Trường Mật khẩu'. Giả định ô Xác nhận mật khẩu cũng là trường mật khẩu → cũng phải dùng type="password" (kiểm ở TC-FR01-92).
+- A19 (Độc lập giữa các case): tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi.
 
-**Tổng:** chưa có test case (bước 3–4).
+**Tổng:** 62 TC · Not run: 62 · Nguồn: AI 62
