@@ -2030,4 +2030,35 @@ Em đã làm xong cả ba phần; chưa commit phần 2 và 3. Có 17 case đổ
 
 ---
 
-**Tổng:** 31 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 29 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #32 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Hoàn tất verdict bước 6 HW02/A_FR01 theo SV duyệt:
+1. TC-02: giữ Fail; notes thêm "EC2 (Họ Tên có dấu) bị chặn bởi TC-FR01-01 (A20); EC2 đã kiểm ở API TC-FR01-29."
+2. TC-217: Blocked theo A20 (gốc TC-FR01-01), notes như 218; bỏ ghi chú "chờ SV kiểm tay". Bản API TC-231 giữ nguyên.
+3. TC-216: sửa thiết kế rồi ghi kết quả kiểm tay của SV:
+   - Thao tác riêng: "Tạo user qua POST /api/register (UI bị chặn, A20); đăng nhập web :5173 bằng tài khoản đó; quan sát nơi hiển thị Họ Tên sau đăng nhập (thanh điều hướng, App.jsx ~dòng 27) và trang Hồ sơ."
+   - Expected: "Họ Tên hiển thị nguyên văn dạng chữ ở mọi nơi; không chạy script, không render thẻ <img> (SEC-04)."
+   - notes: "SV sửa điểm quan sát ngày 2026-10-19: trang Quản lý Người dùng (admin) không hiển thị Họ Tên (chỉ id, email, mật khẩu) nên điểm quan sát cũ không tồn tại. Kiểm tay, không tự động hoá."
+   - actual_result (nguyên văn SV): "Ngay sau khi đăng nhập, trình duyệt bật hộp thoại 'localhost:5173 cho biết: 1' (alert(1) trong Họ Tên đã chạy), phải nhấn OK 2 lần mới tắt. Trên thanh điều hướng, sau chữ 'Chào,' hiện biểu tượng ảnh lỗi thay vì chuỗi Họ Tên. Trang Hồ sơ hiển thị nguyên văn dạng chữ."
+   - status Fail; auto_status để trống; evidence: evidence/TC-FR01-216_manual_alert.png, evidence/TC-FR01-216_manual_header.png, evidence/TC-FR01-216_manual_profile.png (kiểm cả 3 file tồn tại, thiếu thì báo).
+4. Mọi case UI có auto_status Pass, biến mục tiêu là Mật khẩu, bị từ chối bằng "Mật khẩu quá yếu!" (vd 16–24, 63, 67, 70, 73, 76 — tự rà đủ): giữ Pass, notes "Pass hộp đen: form từ chối mọi mật khẩu không có khoảng trắng (xem TC-FR01-01, TC-FR01-202) nên Pass này không chứng minh luật <tên luật> được cài đúng." Liệt kê các case đã thêm.
+5. render_md, summary.py --write HW02/README.md.
+6. Commit "HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216" gồm testcases.json/.md, evidence/, HW02/README.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận (số Pass/Fail/Blocked cuối theo suite).
+</pasted_content id="1f5a">
+```
+
+**Output:**
+```
+Có đủ 3 file ảnh kiểm tay của TC-216. Giờ ghi các thay đổi.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 32 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 30 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

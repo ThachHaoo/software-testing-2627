@@ -4712,11 +4712,11 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Fail",
-          "auto_status": "",
+          "auto_status": "Blocked",
           "actual_result": "Ngay sau khi đăng nhập, trình duyệt bật hộp thoại 'localhost:5173 cho biết: 1' (alert(1) trong Họ Tên đã chạy), phải nhấn OK 2 lần mới tắt. Trên thanh điều hướng, sau chữ 'Chào,' hiện biểu tượng ảnh lỗi thay vì chuỗi Họ Tên. Trang Hồ sơ hiển thị nguyên văn dạng chữ.",
-          "evidence": "evidence/TC-FR01-216_manual_alert.png, evidence/TC-FR01-216_manual_header.png, evidence/TC-FR01-216_manual_profile.png",
+          "evidence": "evidence/TC-FR01-216_ui.png, evidence/TC-FR01-216_manual_alert.png, evidence/TC-FR01-216_manual_header.png, evidence/TC-FR01-216_manual_profile.png, evidence/TC-FR01-216_manual_admin.png",
           "bug_id": "",
-          "notes": "Nguồn: SV-17 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu). SV gắn nhãn [EXP] (khám phá). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":16}`; tạo 1 user mới, Họ Tên lưu nguyên văn chuỗi `<img …>`; Admin UI: trang Quản lý Người dùng không hiển thị Họ Tên nên không quan sát được; Web UI: sau khi đăng nhập, header hiện \"Chào,\" kèm icon ảnh lỗi, tức là chuỗi bị render thành thẻ `<img>` thay vì chữ (App.jsx dòng 27 dùng `dangerouslySetInnerHTML`) → Fail (stored XSS, ghi nhận ngoài căn cứ FR-01) SV sửa điểm quan sát ngày 2026-10-19: trang Quản lý Người dùng (admin) không hiển thị Họ Tên (chỉ id, email, mật khẩu) nên điểm quan sát cũ không tồn tại. Kiểm tay, không tự động hoá."
+          "notes": "Nguồn: SV-17 trong sv_cases.md. Khớp EC1 (không rỗng, ký tự Latin không dấu). SV gắn nhãn [EXP] (khám phá). Quan sát thăm dò (SV chạy tay 19/10): API: HTTP 200, `{\"message\":\"User registered successfully\",\"id\":16}`; tạo 1 user mới, Họ Tên lưu nguyên văn chuỗi `<img …>`; Admin UI: trang Quản lý Người dùng không hiển thị Họ Tên nên không quan sát được; Web UI: sau khi đăng nhập, header hiện \"Chào,\" kèm icon ảnh lỗi, tức là chuỗi bị render thành thẻ `<img>` thay vì chữ (App.jsx dòng 27 dùng `dangerouslySetInnerHTML`) → Fail (stored XSS, ghi nhận ngoài căn cứ FR-01) SV sửa điểm quan sát ngày 2026-10-19: trang Quản lý Người dùng (admin :5174) chỉ có các cột ID, Email, Role, Số ĐT, Hành động — không hiển thị Họ Tên nên không dùng làm điểm quan sát (ảnh TC-FR01-216_manual_admin.png). Kiểm tay, không tự động hoá. Lần chạy tự động: form chặn do mật khẩu (A20) → kiểm tay qua API."
         },
         {
           "id": "TC-FR01-217",
