@@ -74,6 +74,7 @@ Skill dùng trong repo:
 - 2026-10-19 (A_FR01 review bước 1): email trùng so sánh **có phân biệt hoa/thường** và **cắt khoảng trắng đầu/cuối** (A3); expected của case tuân theo giả định này. Giữ A5 (tập ký tự đặc biệt đóng), A8 (xác nhận mật khẩu chỉ kiểm ở UI), A1/A4 (không có cận trên; MIN_UI/MAX_UI xét ở bước 4).
 - 2026-10-19 (A_FR01 phạm vi): giữ FR-22.1–22.4, kiểm bằng suite GUI riêng, không phân lớp; bỏ FR-21 và SEC-01 khỏi phạm vi.
 - 2026-10-19: SUT = `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã); ghi ở `meta.sut_version` và `HW02/env/environment.md`.
+- 2026-10-19: Dải mã TC mỗi feature — TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV (SV bổ sung) từ 200.
 - Transcript ghi nhận các lượt #1–#3 của session cloud ngày 12/10 do Claude Sonnet 4.6 trả lời, các lượt sau Claude Opus 5.5 → AI-03 khai cả hai.
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.

@@ -104,9 +104,39 @@ def render(data, h):
             body.append("**Dọn dẹp:** " + "; ".join(s["cleanup"]))
         return "\n\n".join(body + [table(hdr, rows)])
 
-    titles = {"TS-DOM": "Bước 3b — Minimum Set of Test Cases (Domain)", "TS-BVA": "Bước 4 — Boundary Value Test Cases", "TS-SV": "Bước 5 — Test case sinh viên bổ sung"}
+    def title_of(s):
+        sid, name = s["id"], s.get("name", "")
+        for prefix, label in (("TS-DOM", "Bước 3b — Minimum Set of Test Cases (Domain)"), ("TS-BVA", "Bước 4 — Boundary Value Test Cases"),
+                              ("TS-SV", "Bước 5 — Test case sinh viên bổ sung")):
+            if sid.startswith(prefix):
+                return f"{label} · {sid}" + (f" — {name}" if name else "")
+        return f"{sid} — {name}"
+
+    def steps_detail(s):
+        blocks = []
+        for c in s.get("cases", []):
+            if not c.get("steps"):
+                continue
+            b = [f"**{c['id']}** — {c.get('title', '')}", ""]
+            if c.get("preconditions"):
+                b.append("- Tiền điều kiện: " + "; ".join(as_list(c["preconditions"])))
+            if c.get("test_data"):
+                b.append("- Dữ liệu: " + cell(c["test_data"]))
+            b += [f"- Bước {i}: {st.get('action', '')} → {st.get('expected', '')}" for i, st in enumerate(c["steps"], 1)]
+            if c.get("cleanup"):
+                b.append("- Dọn dẹp: " + "; ".join(as_list(c["cleanup"])))
+            blocks.append("\n".join(b))
+        return "\n\n".join(blocks)
+
     for s in suites:
-        out += [f"{H} {titles.get(s['id'], s['id'] + ' — ' + s.get('name', ''))}", suite_table(s, bva=s["id"] == "TS-BVA" or any(c.get("bva_point") for c in s.get("cases", []))), ""]
+        body = [f"{H} {title_of(s)}"]
+        if s.get("notes"):
+            body.append("**Ghi chú suite:** " + cell(s["notes"]))
+        body.append(suite_table(s, bva=s["id"].startswith("TS-BVA") or any(c.get("bva_point") for c in s.get("cases", []))))
+        det = steps_detail(s)
+        if det:
+            body += ["", "**Các bước chi tiết:**", "", det]
+        out += body + [""]
 
     out += [f"{H} Truy vết yêu cầu ↔ test case"]
     req_cov = defaultdict(list)

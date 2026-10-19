@@ -36,7 +36,9 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
 - Ghi `guideline` (range/count/set/must-be/type/split) cho mỗi lớp. Dừng.
 
 ### Bước 3 — Test case Domain (minimum set)
-- Tạo suite `TS-DOM` (`format: "matrix"`, `procedure` viết một lần, `columns` = các biến đầu vào).
+- Tạo suite `TS-DOM` (`format: "matrix"`, `procedure` viết một lần, `columns` = các biến đầu vào). Tách suite theo tầng (UI / API) nếu quy trình khác nhau — mỗi suite một quy trình.
+- **Tiền điều kiện phải nêu trạng thái ban đầu quan sát được**: trang vừa tải xong, **mọi ô trống**, chưa đăng nhập/không còn phiên cũ, trình duyệt không tự điền (autofill), dữ liệu sẵn có trong CSDL. Không giả định ngầm.
+- **Quy trình phải nói rõ cách nhập từng loại giá trị**: thứ tự các ô; giá trị thường → gõ đúng chuỗi trong cột; "rỗng" → không nhập gì, để nguyên ô trống; khoảng trắng → gõ đúng số dấu cách ghi trong cột (bảng hiển thị `␣`); bấm nút submit đúng một lần; nêu chỗ quan sát kết quả (hộp lỗi, URL, phản hồi API, CSDL). Mỗi bước có một phản hồi quan sát được.
 - Quy tắc chọn: case **hợp lệ** phủ càng nhiều lớp hợp lệ càng tốt; mỗi case **không hợp lệ** phủ **đúng một** lớp không hợp lệ, các biến khác giữ giá trị hợp lệ.
 - Mỗi case có `covers` (danh sách EC), `technique: "EP"`, `rationale` (vì sao chọn giá trị này là đại diện tốt nhất), `expected_result` có oracle kiểm chứng được (đúng chữ thông báo nếu đặc tả nêu; nếu không, ghi giả định).
 - Chạy `check_domain.py` — mọi EC phải được phủ, không case nào phủ hai lớp không hợp lệ. Dừng.
