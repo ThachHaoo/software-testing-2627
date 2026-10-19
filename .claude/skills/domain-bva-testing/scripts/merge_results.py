@@ -5,10 +5,13 @@ Usage: python merge_results.py testcases.json results.json [--dry-run]
 - Test được nhận diện qua mã TC ở đầu tiêu đề (vd "TC-FR01-03 Kiểm tra …").
 - Actual lấy từ annotation type "actual"; bằng chứng lấy từ attachment có path.
 - Annotation type "verdict" (Pass/Fail/Blocked/Not run/Skipped) thay cho status của Playwright, vd Blocked theo A17/A20.
-- Ảnh/attachment có path được chép vào <thư mục feature>/evidence/ (Playwright xoá test-results mỗi lần chạy).
+- Ảnh/attachment có path được chép vào <thư mục feature>/evidence/ (Playwright xoá test-results mỗi lần chạy):
+  bỏ trace .zip, bỏ file trùng nội dung (sha256, giữ file đầu), tên theo file test đặt (TC-xx_ui.png, _api.png, _req.json, _res.json; ảnh Playwright tự chụp → _failed.png).
+- Ghi thêm "auto_status" (kết quả tự động gốc) cạnh "status"; testcases.json giữ nguyên định dạng phần trước "suites".
 - Không đụng tới expected_result.
 """
 import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -22,6 +25,39 @@ for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output b
 
 STATUS = {"passed": "Pass", "failed": "Fail", "timedOut": "Fail", "skipped": "Not run", "interrupted": "Blocked"}
 VERDICTS = {"Pass", "Fail", "Blocked", "Not run", "Skipped"}
+SKIP_EXT = (".zip",)          # trace Playwright: nặng, có token/payload → để lại test-results/, không chép vào evidence
+# Hậu tố tên file evidence theo tên file test tự đặt (<mã TC><hậu tố>.<đuôi>); ảnh Playwright tự chụp → _failed
+SUFFIX = {("", ".png"): "_ui", ("_request", ".json"): "_req", ("_response", ".json"): "_res"}
+
+
+def evidence_name(cid, src, used):
+    stem, ext = src.stem, src.suffix.lower()
+    rest = stem[len(cid):] if stem.startswith(cid) else None
+    if rest is not None and (rest == "" or rest.startswith("_")):
+        suf = SUFFIX.get((rest, ext), rest)
+    else:
+        suf = "_failed" if ext == ".png" else "_" + re.sub(r"[^A-Za-z0-9]+", "-", stem).strip("-").lower()
+    name, n = f"{cid}{suf}{ext}", 2
+    while name in used:
+        name, n = f"{cid}{suf}-{n}{ext}", n + 1
+    used.add(name)
+    return name
+
+
+def dump_like_source(original, data):
+    """Giữ nguyên phần trước khoá "suites" (định dạng do người/script khác viết), chỉ ghi lại khối suites
+    với indent 2 — cùng cách các script khác trong skill ghi file, để diff chỉ còn status/actual/evidence."""
+    i = original.find('"suites": [')
+    if i != -1:
+        body = json.dumps(data["suites"], ensure_ascii=False, indent=2)
+        body = "\n".join(("  " + line if k else line) for k, line in enumerate(body.split("\n")))
+        text = original[:i] + '"suites": ' + body + "\n}\n"
+        try:
+            if json.loads(text) == data:
+                return text
+        except json.JSONDecodeError:
+            pass
+    return json.dumps(data, ensure_ascii=False, indent=2) + "\n"
 ID_RE = re.compile(r"^(TC-[A-Z0-9]+(?:-[A-Z0-9]+)*-\d{2,4})\b")
 
 
@@ -52,7 +88,7 @@ def collect(results):
                     print(f"[WARN] {m.group(1)}: verdict '{verdict[-1]}' không thuộc {sorted(VERDICTS)} — dùng status của Playwright")
                     verdict = []
                 err = (last.get("error") or {}).get("message", "")
-                files = [a["path"] for a in last.get("attachments", []) if a.get("path")]
+                files = [a["path"] for a in last.get("attachments", []) if a.get("path") and not a["path"].lower().endswith(SKIP_EXT)]
                 found[m.group(1)] = {
                     "status": verdict[-1] if verdict else STATUS.get(last.get("status"), last.get("status")),
                     "actual": ann[-1] if ann else "",
@@ -70,25 +106,38 @@ def main():
     ap.add_argument("--evidence-dir", type=Path, help="mặc định <thư mục testcases>/evidence")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
-    data = json.loads(a.testcases.read_text(encoding="utf-8"))
+    original = a.testcases.read_text(encoding="utf-8")
+    data = json.loads(original)
     res = collect(json.loads(a.results.read_text(encoding="utf-8")))
     base = a.testcases.parent
     evdir = a.evidence_dir or base / "evidence"
-    hit = 0
+    hit = dup = 0
     for s in data.get("suites", []):
-        for c in s.get("cases", []):
+        for k, c in enumerate(s.get("cases", [])):
             r = res.get(c.get("id"))
             if not r:
                 continue
             hit += 1
-            c["status"] = r["status"]
+            # auto_status = kết quả tự động gốc (Playwright, hoặc annotation verdict của script); status có thể được SV chỉnh sau
+            c = {**{kk: vv for kk, vv in c.items() if kk != "auto_status"}}
+            items = list(c.items())
+            pos = next((j for j, (kk, _) in enumerate(items) if kk == "status"), len(items) - 1)
+            items = [(kk, vv) for kk, vv in items if kk != "status"]
+            items[pos:pos] = [("status", r["status"]), ("auto_status", r["status"])]
+            c = dict(items)
+            s["cases"][k] = c
             c["actual_result"] = r["actual"] or (f"(không ghi actual) {r['error']}" if r["error"] else "")
-            ev = []
-            for i, p in enumerate(r["evidence"], 1):
+            ev, used, seen = [], set(), set()
+            for p in r["evidence"]:
                 src = Path(p)
                 if not src.exists():
                     continue
-                dst = evdir / f"{c['id']}{'' if i == 1 else '_' + str(i)}{src.suffix}"
+                h = hashlib.sha256(src.read_bytes()).hexdigest()
+                if h in seen:          # trùng nội dung với attachment trước của cùng case → giữ file đầu
+                    dup += 1
+                    continue
+                seen.add(h)
+                dst = evdir / evidence_name(c["id"], src, used)
                 if not a.dry_run:
                     evdir.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(src, dst)
@@ -96,15 +145,16 @@ def main():
                     ev.append(str(dst.resolve().relative_to(base.resolve())).replace("\\", "/"))
                 except ValueError:
                     ev.append(str(dst))
-            if ev:
-                c["evidence"] = ", ".join(ev)
+            c["evidence"] = ", ".join(ev)
             print(f"{c['id']}: {r['status']}  {c['actual_result'][:80]}")
+    if dup:
+        print(f"Bỏ {dup} attachment trùng nội dung.")
     missing = set(res) - {c.get("id") for s in data.get("suites", []) for c in s.get("cases", [])}
     for m in sorted(missing):
         print(f"[WARN] {m} có trong kết quả nhưng không có trong {a.testcases.name}")
     print(f"Đã gộp {hit} test case.")
     if not a.dry_run:
-        a.testcases.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        a.testcases.write_text(dump_like_source(original, data), encoding="utf-8")
 
 
 if __name__ == "__main__":
