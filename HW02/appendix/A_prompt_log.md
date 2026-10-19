@@ -2155,4 +2155,41 @@ Tổng kết quả không đổi: 43 Pass, 65 Fail, 25 Blocked. check_domain 0 l
 
 ---
 
-**Tổng:** 33 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 31 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #34 | 23:34 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Bước 7 HW02/A_FR01 — lượt 1: chuẩn bị dữ kiện cho SV (theo AI-01 §11: KHÔNG viết/nháp mô tả bug, KHÔNG đặt tên bug, KHÔNG đề xuất severity/priority, KHÔNG kết luận nguyên nhân).
+
+1. Gom mọi case Fail (và Blocked có ghi case gốc) của testcases.json thành nhóm G1, G2… theo TRIỆU CHỨNG QUAN SÁT ĐƯỢC (tầng + mẫu actual + yêu cầu bị lệch). Nhãn nhóm chỉ mô tả quan sát, vd "UI · actual chứa 'Mật khẩu quá yếu!' · dữ liệu hợp lệ theo SRS". Mỗi nhóm: danh sách TC, requirements, 1 dòng actual tiêu biểu (chép nguyên văn), đường dẫn evidence tiêu biểu. Case Fail đứng riêng thì một nhóm riêng.
+2. Dữ kiện cô lập (chỉ chạy, không kết luận):
+   - Chạy lại TC-FR01-209 3 lần: npx playwright test -g "TC-FR01-209" --repeat-each=3, output JSON riêng HW02/tests/results/isolate_209.json (KHÔNG ghi đè A_FR01.json, KHÔNG merge). Ghi kết quả từng lần.
+   - Với mỗi nhóm, trích nguyên văn đoạn code liên quan (file + số dòng, ≤ 10 dòng): kiểm mật khẩu phía client trong Register.jsx, nơi hiển thị tên ở App.jsx, route POST /api/register trong server.js, cấu hình bodyParser, cột email trong database.js. Không bình luận đúng/sai.
+   - Nhắc SV restart backend trước khi chạy và sau khi chạy xong.
+3. Tạo HW02/bugs/README.md chỉ gồm: thang Severity (Critical/Major/Minor/Trivial) và Priority (High/Medium/Low) kèm định nghĩa chung theo ISTQB, quy ước đặt tên file BUG-xx.md, danh sách trường bắt buộc (ID, Tiêu đề, Severity, Priority, Môi trường, Tiền điều kiện, Các bước tái hiện, Expected (trích SRS), Actual, Bằng chứng, TC liên quan, Yêu cầu, Ghi chú cô lập, Link GitHub Issue). Không có ví dụ bug.
+4. Ghi bảng nhóm + dữ kiện cô lập vào HW02/bugs/_groups_A_FR01.md (đầu file: "Dữ kiện do AI gom, chưa phải bug report; SV quyết định gộp/tách."). Commit "HW02[A-FR01] 7/7a: gom dữ kiện Fail để SV viết bug report" kèm A_prompt_log.md.
+Báo cáo cho phiên thảo luận: số nhóm, TC mỗi nhóm, kết quả 3 lần chạy 209.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+```
+Backend và web đang chạy (do em bật). Chạy lại TC-209 ba lần, ghi ra file kết quả riêng.
+
+Đã trích xong code; các đoạn này giống commit `85af3ba`. Giờ sinh file nhóm và README thang đo.
+
+Script đã bị xoá sau lần lỗi. Viết lại bằng Write với bộ lọc mới.
+
+Đủ 65 case Fail, mỗi case nằm trong đúng một nhóm. Giờ viết `HW02/bugs/README.md` (chỉ thang đo, quy ước và danh sách trường).
+
+Bảng TC-209 có 2 lỗi: cột "Lần" đều ghi 1 (file JSON không có `repeatEachIndex`), và dấu `|` trong actual làm vỡ cột bảng. Sửa rồi commit bổ sung.
+```
+*File AI ghi/gửi trong lượt này:* `fr01_groups.py`, `README.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 34 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 32 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

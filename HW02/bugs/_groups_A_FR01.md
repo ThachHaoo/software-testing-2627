@@ -10,7 +10,7 @@
 
 | Nhóm | Số Fail | Số Blocked ghi case gốc | Yêu cầu |
 |---|---|---|---|
-| G1 | 14 | 18 | FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.9, FR-01.10 |
+| G1 | 14 | 22 | FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.9, FR-01.10 |
 | G2 | 5 | 0 | FR-01.1 |
 | G3 | 15 | 0 | FR-01.2, FR-01.3 |
 | G4 | 3 | 0 | FR-01.4 |
@@ -26,12 +26,12 @@
 | G14 | 1 | 0 | FR-22.2 |
 | G15 | 1 | 3 | FR-01.9 |
 
-Blocked không ghi case gốc (không đưa vào nhóm nào): 200, 203, 204, 208
+Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case gốc TC-FR01-01 ở commit 7/7b).
 
 ## G1 — UI · hộp lỗi 'Mật khẩu quá yếu!…', không gửi POST /api/register, ở lại /register · mật khẩu hợp lệ theo SRS · expected đăng ký thành công
 
 - **TC Fail (14):** 01, 02, 64, 65, 66, 68, 69, 71, 72, 74, 75, 77, 78, 211
-- **Blocked ghi case gốc (18):** 03, 04, 06, 08, 09, 10, 11, 12, 13, 14, 15, 61, 62, 205, 215, 217, 218, 223
+- **Blocked ghi case gốc (22):** 03, 04, 06, 08, 09, 10, 11, 12, 13, 14, 15, 61, 62, 200, 203, 204, 205, 208, 215, 217, 218, 223
 - **Yêu cầu:** FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.9, FR-01.10
 - **Actual tiêu biểu (TC-FR01-01, nguyên văn):** form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 (A17); URL=/register; POST /api/register gửi 0 lần; hộp lỗi="Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."; user mới=0
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-01_ui.png`
