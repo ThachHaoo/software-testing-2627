@@ -304,9 +304,9 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 ### TS-GUI — GUI — thuộc tính form (FR-22) và sự tồn tại trường (FR-01.9)
 | #TC | Tiêu đề | EC phủ | Expected | Lý do chọn input | Nguồn |
 |---|---|---|---|---|---|
-| TC-FR01-90 | Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của form Đăng ký |  | Cả 4 nhãn trường bắt buộc theo FR-01 đều có ký hiệu '*'. | FR-01 liệt kê 4 trường bắt buộc; FR-22.1 yêu cầu '*' cho mọi trường bắt buộc. | AI |
+| TC-FR01-90 | Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của form Đăng ký |  | 3 nhãn Họ Tên, Email, Mật khẩu (các trường bắt buộc FR-01 liệt kê) đều có ký hiệu '*' (FR-22.1). | FR-01 liệt kê 3 trường bắt buộc; FR-22.1 yêu cầu * cho mọi trường bắt buộc. | AI + SV sửa |
 | TC-FR01-91 | Kiểm tra thuộc tính type của ô Email khi mở form Đăng ký |  | Ô Email có type="email". | Kiểm trực tiếp thuộc tính mà FR-22.2 quy định. | AI |
-| TC-FR01-92 | Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký |  | Ô Mật khẩu và ô Xác nhận mật khẩu đều có type="password" và che ký tự đã nhập. | FR-22.3 quy định type=password; áp dụng cho cả ô Xác nhận mật khẩu theo A18. | AI |
+| TC-FR01-92 | Kiểm tra thuộc tính type của ô Mật khẩu khi mở form Đăng ký |  | Ô Mật khẩu có type="password" và che ký tự đã nhập. | Kiểm trực tiếp thuộc tính mà FR-22.3 quy định cho trường Mật khẩu. | AI + SV sửa |
 | TC-FR01-93 | Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa |  | Thông báo lỗi nằm phía trên nút 'Đăng Ký'. | Chọn dữ liệu vượt qua kiểm tra HTML5 để thông báo lỗi chắc chắn nằm trong DOM và đo được vị trí (A16). | AI |
 | TC-FR01-94 | Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở form Đăng ký |  | Form có trường Xác nhận mật khẩu (FR-01.9). | Case kiểm sự tồn tại của trường mà A17 nhắc tới; tách khỏi các case nhập liệu để kết luận riêng. | AI |
 
@@ -315,9 +315,9 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 **TC-FR01-90** — Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của form Đăng ký
 
 - Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
-- Dữ liệu: Nhãn: 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'
+- Dữ liệu: Nhãn: 'Họ Tên', 'Email', 'Mật khẩu'
 - Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
-- Bước 2: Đọc nhãn của 4 trường 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'. → Mỗi nhãn có ký tự '*' ngay bên cạnh tên trường.
+- Bước 2: Đọc nhãn của 3 trường 'Họ Tên', 'Email', 'Mật khẩu'. Nếu form có ô 'Xác nhận mật khẩu': ghi nhận nhãn này có '*' hay không. → Mỗi nhãn 'Họ Tên', 'Email', 'Mật khẩu' có ký tự '*' ngay bên cạnh tên trường.
 - Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
 
 **TC-FR01-91** — Kiểm tra thuộc tính type của ô Email khi mở form Đăng ký
@@ -328,14 +328,13 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 - Bước 2: Đọc thuộc tính type của thẻ input thuộc nhãn 'Email' (DevTools hoặc locator.getAttribute('type')). → Giá trị type là "email".
 - Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
 
-**TC-FR01-92** — Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký
+**TC-FR01-92** — Kiểm tra thuộc tính type của ô Mật khẩu khi mở form Đăng ký
 
 - Tiền điều kiện: Web http://localhost:5173 và backend http://localhost:3000 đang chạy.
 - Dữ liệu: Mật khẩu: 'Abcd1234!'
 - Bước 1: Mở http://localhost:5173/register. → Form 'Đăng Ký Tài Khoản' hiển thị.
 - Bước 2: Đọc thuộc tính type của thẻ input thuộc nhãn 'Mật khẩu'. → Giá trị type là "password".
 - Bước 3: Gõ 'Abcd1234!' vào ô 'Mật khẩu'. → Ô hiển thị ký tự che (•), không hiện chuỗi 'Abcd1234!'.
-- Bước 4: Đọc thuộc tính type của thẻ input thuộc nhãn 'Xác nhận mật khẩu' (A18). → Giá trị type là "password".
 - Dọn dẹp: Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu.
 
 **TC-FR01-93** — Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa
@@ -396,4 +395,4 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 - A18 (FR-22.3 cho ô Xác nhận mật khẩu): FR-22.3 chỉ nêu 'Trường Mật khẩu'. Giả định ô Xác nhận mật khẩu cũng là trường mật khẩu → cũng phải dùng type="password" (kiểm ở TC-FR01-92).
 - A19 (Độc lập giữa các case): tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi.
 
-**Tổng:** 100 TC · Not run: 100 · Nguồn: AI 100
+**Tổng:** 100 TC · Not run: 100 · Nguồn: AI 98, AI + SV sửa 2

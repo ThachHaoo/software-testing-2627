@@ -3868,28 +3868,28 @@
           "type": "GUI",
           "method": "Automated",
           "priority": "Medium",
-          "origin": "AI",
-          "rationale": "FR-01 liệt kê 4 trường bắt buộc; FR-22.1 yêu cầu '*' cho mọi trường bắt buộc.",
+          "origin": "Both",
+          "rationale": "FR-01 liệt kê 3 trường bắt buộc; FR-22.1 yêu cầu * cho mọi trường bắt buộc.",
           "preconditions": [
             "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
           ],
-          "test_data": "Nhãn: 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'",
+          "test_data": "Nhãn: 'Họ Tên', 'Email', 'Mật khẩu'",
           "steps": [
             {
               "action": "Mở http://localhost:5173/register.",
               "expected": "Form 'Đăng Ký Tài Khoản' hiển thị."
             },
             {
-              "action": "Đọc nhãn của 4 trường 'Họ Tên', 'Email', 'Mật khẩu', 'Xác nhận mật khẩu'.",
-              "expected": "Mỗi nhãn có ký tự '*' ngay bên cạnh tên trường."
+              "action": "Đọc nhãn của 3 trường 'Họ Tên', 'Email', 'Mật khẩu'. Nếu form có ô 'Xác nhận mật khẩu': ghi nhận nhãn này có '*' hay không.",
+              "expected": "Mỗi nhãn 'Họ Tên', 'Email', 'Mật khẩu' có ký tự '*' ngay bên cạnh tên trường."
             }
           ],
-          "expected_result": "Cả 4 nhãn trường bắt buộc theo FR-01 đều có ký hiệu '*'.",
+          "expected_result": "3 nhãn Họ Tên, Email, Mật khẩu (các trường bắt buộc FR-01 liệt kê) đều có ký hiệu '*' (FR-22.1).",
           "status": "Not run",
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": ""
+          "notes": "Nếu form có ô Xác nhận mật khẩu: ghi nhận thêm nhãn có '*' hay không, không dùng để kết luận case này. SV sửa: tránh một nguyên nhân (thiếu ô Xác nhận mật khẩu) làm fail nhiều case; FR-01 chỉ liệt kê 3 trường bắt buộc."
         },
         {
           "id": "TC-FR01-91",
@@ -3933,7 +3933,7 @@
           "cleanup": [
             "Không cần: case chỉ đọc thuộc tính giao diện, không gửi form, không tạo dữ liệu."
           ],
-          "title": "Kiểm tra thuộc tính type của ô Mật khẩu và Xác nhận mật khẩu khi mở form Đăng ký",
+          "title": "Kiểm tra thuộc tính type của ô Mật khẩu khi mở form Đăng ký",
           "layer": "UI",
           "requirements": [
             "FR-22.3"
@@ -3942,8 +3942,8 @@
           "type": "GUI",
           "method": "Automated",
           "priority": "Medium",
-          "origin": "AI",
-          "rationale": "FR-22.3 quy định type=password; áp dụng cho cả ô Xác nhận mật khẩu theo A18.",
+          "origin": "Both",
+          "rationale": "Kiểm trực tiếp thuộc tính mà FR-22.3 quy định cho trường Mật khẩu.",
           "preconditions": [
             "Web http://localhost:5173 và backend http://localhost:3000 đang chạy."
           ],
@@ -3960,18 +3960,14 @@
             {
               "action": "Gõ 'Abcd1234!' vào ô 'Mật khẩu'.",
               "expected": "Ô hiển thị ký tự che (•), không hiện chuỗi 'Abcd1234!'."
-            },
-            {
-              "action": "Đọc thuộc tính type của thẻ input thuộc nhãn 'Xác nhận mật khẩu' (A18).",
-              "expected": "Giá trị type là \"password\"."
             }
           ],
-          "expected_result": "Ô Mật khẩu và ô Xác nhận mật khẩu đều có type=\"password\" và che ký tự đã nhập.",
+          "expected_result": "Ô Mật khẩu có type=\"password\" và che ký tự đã nhập.",
           "status": "Not run",
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": ""
+          "notes": "Ô Xác nhận mật khẩu (A18): kiểm khi ô tồn tại; sự tồn tại do TC-FR01-94 kết luận (A17). SV sửa: tránh một nguyên nhân (thiếu ô Xác nhận mật khẩu) làm fail nhiều case; FR-01 chỉ liệt kê 3 trường bắt buộc."
         },
         {
           "id": "TC-FR01-93",

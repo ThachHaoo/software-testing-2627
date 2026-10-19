@@ -1273,17 +1273,110 @@ Báo cáo cho phiên thảo luận.
 ```
 
 **Output:**
-```
+````
 Thêm quyết định dải mã TC vào CLAUDE.md, commit (a), render lại và commit (b).
 
 TS-GUI giờ đã hiện đủ bước chi tiết. Commit (b).
 
 Giờ đến bước 4. Đọc lại SKILL.md (đã sửa) và kiểm UI có `maxlength` không.
+
+Xong cả bốn phần (a)–(d). Bước 4 có 38 case BVA. check_domain 0 lỗi, phủ 50/50 EC; lint 0 lỗi. Bản nháp bước 4 đã freeze, chưa commit. Em dừng ở đây; bước 5 là phần của em.
+
+**(a)–(c):** commit harness `1816c8a` (SKILL.md, render_md.py, dòng dải mã TC trong CLAUDE.md). Render lại và commit `1e5f539`: TS-GUI giờ hiện đủ bước, tiền điều kiện, dữ liệu, dọn dẹp; tiêu đề suite và ghi chú suite cũng đã hiện.
+
+**(d) Bước 4.** Tách thành hai suite theo tầng, giống TS-DOM:
+
+| Suite | Số TC | Mã |
+|---|---|---|
+| TS-BVA-UI | 19 | 60–78 |
+| TS-BVA-API | 19 | 79–89 rồi 100–107 (tràn theo quyết định dải mã) |
+
+Mỗi tầng xét 6 chiều. Các chiều này có thứ tự theo SRS; mọi biến khác giữ giá trị danh nghĩa.
+
+| Chiều | Điểm | Giá trị |
+|---|---|---|
+| Độ dài Họ Tên (≥ 1) | LB-1 / LB / LB+1 | `''` / `A` / `An` |
+| Độ dài Mật khẩu (≥ 8) | LB-1 / LB / LB+1 / NOM | 7 / 8 / 9 / 12 ký tự |
+| Số chữ hoa (≥ 1) | 0 / 1 / 2 | `abcd1234!` / `Abcd1234!` / `ABcd1234!` |
+| Số chữ thường (≥ 1) | 0 / 1 / 2 | `ABCD1234!` / `ABCd1234!` / `ABCde123!` |
+| Số chữ số (≥ 1) | 0 / 1 / 2 | `Abcdefgh!` / `Abcdefg1!` / `Abcdef12!` |
+| Số ký tự đặc biệt (≥ 1) | 0 / 1 / 2 | `Abcd12345` / `Abcd1234@` / `Abcd123!@` |
+
+- **Không có UB-1/UB/UB+1:** SRS không có cận trên (A1, A4). check_domain còn đúng 1 cảnh báo về chuyện này, đã giải thích trong notes của suite.
+- **Không có MIN_UI/MAX_UI:** Register.jsx dòng 37–63 không có `maxlength`/`minlength`. Lý do ghi trong notes.
+- **Email không có điểm biên:** SRS chỉ quy định định dạng (A2).
+- **Dùng lại từ TS-DOM:** preconditions, procedure, cleanup và oracle tương đối.
+- **Dữ liệu trùng:** các điểm LB-1 trùng dữ liệu với case EC3/23/26/29/32/35 của TS-DOM. Em giữ lại để bảng BVA đủ điểm, rationale có ghi rõ.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (a) vá harness + quyết định dải mã · (b) render lại bước 3 · (d) /domain-bva-testing HW02/A_FR01 4
+- File đã tạo/sửa:
+  - (a) .claude/skills/domain-bva-testing/SKILL.md, scripts/render_md.py, CLAUDE.md (dải mã TC)
+  - (b) HW02/A_FR01/testcases.md
+  - (d) testcases.json (thêm TS-BVA-UI 19 TC: 60–78; TS-BVA-API 19 TC: 79–89 + 100–107; các phần khác không đổi, diff chỉ có dòng thêm) · testcases.md · ai-outputs/A_FR01_step4_20261019-1719.{json,md} + INDEX.md
+- Số TC mỗi suite: TS-DOM-UI 27 · TS-DOM-API 30 · TS-BVA-UI 19 · TS-BVA-API 19 · TS-GUI 5 → tổng 100 (AI 100, Not run 100)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (thiếu UB do A4, đã ghi lý do) · 50/50 EC · lint 0 lỗi / 2 cảnh báo (TS-DOM > 25 dòng, đã ghi notes) · test Not run
+- Commit: 1816c8a HW02: vá harness (SKILL.md…; render_md…) · 1e5f539 HW02[A-FR01] 3/7: render lại (bước chi tiết TS-GUI, ghi chú suite) · bước 4: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 4/7: Test case BVA"
+- Cần quyết định / câu hỏi:
+  1. BVA cho số ký tự mỗi loại (count ≥ 1) có được tính là "lớp có thứ tự" không? Nếu bỏ thì còn 7 điểm/tầng (14 TC).
+  2. Điểm LB-1 trùng dữ liệu với case TS-DOM: giữ (bảng BVA đủ điểm) hay thay bằng tham chiếu tới TC của TS-DOM?
+  3. Mã TS-BVA-API tràn sang 100–107 theo quy tắc; nếu muốn liền mạch thì chỉ giữ BVA tầng API cho độ dài Mật khẩu.
+  4. Trường mới "bva_dimension" (chiều đang xét) không có trong schema của test-case-writing; render_md chưa hiện trường này (tên chiều đã ghi trong tiêu đề case).
+  5. A_prompt_log.md sẽ được hook tạo lại sau lượt này → đưa vào commit 4/7.
+```
+````
 *File AI ghi/gửi trong lượt này:* `fr01_step4_bva.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 22 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 20 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #23 | 17:25 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Áp dụng review bước 4 cho HW02/A_FR01 (KHÔNG freeze lại):
+- Với mỗi case LB-1 của TS-BVA-UI/API có dữ liệu trùng case TS-DOM, thêm notes: "Cùng giá trị với <mã TC TS-DOM>: điểm này vừa là đại diện lớp vừa là LB-1; giữ để bảng BVA đủ điểm theo slide."
+- Chạy check_domain, lint, render.
+- Commit "HW02[A-FR01] 4/7: Test case BVA" gồm testcases.json/.md, A_FR01_step4_20261019-1719.{json,md}, INDEX.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Em đã thêm notes cho 12 case LB-1 trùng dữ liệu với TS-DOM và commit bước 4 ở `b567dc2`. Không freeze lại.
+
+Mã TS-DOM được ghép theo cùng tầng, cùng lớp EC và cùng dữ liệu nhập (chỉ khác Email). Các case UI đã có sẵn note "bỏ qua V5 (A17)"; câu mới nối vào sau.
+
+| Lớp | TS-BVA-UI → TS-DOM-UI | TS-BVA-API → TS-DOM-API |
+|---|---|---|
+| EC3 (Họ Tên 0 ký tự) | 60 → 05 | 79 → 32 |
+| EC23 (Mật khẩu 7 ký tự) | 63 → 16 | 82 → 43 |
+| EC26 (0 chữ hoa) | 67 → 18 | 86 → 45 |
+| EC29 (0 chữ thường) | 70 → 20 | 89 → 47 |
+| EC32 (0 chữ số) | 73 → 22 | 102 → 49 |
+| EC35 (0 ký tự đặc biệt) | 76 → 23 | 105 → 50 |
+
+Phần thiết kế của AI (bước 1–4) đã xong. Bước 5 là phần em tự làm: thêm suite TS-SV, mã từ 200. Theo quy tắc mục 3, em không gợi ý thêm case cho tới khi em hỏi phần gap analysis.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: áp dụng review bước 4 HW02/A_FR01 (không freeze lại) + commit 4/7
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (notes cho 12 case LB-1: TC-FR01-60, 63, 67, 70, 73, 76, 79, 82, 86, 89, 102, 105) · testcases.md (render lại)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (thiếu UB do A4) · 50/50 EC · lint 0 lỗi / 2 cảnh báo (TS-DOM-UI/API > 25 dòng, đã ghi notes) · test Not run · tổng 100 TC (DOM-UI 27, DOM-API 30, BVA-UI 19, BVA-API 19, GUI 5)
+- Commit: b567dc2 HW02[A-FR01] 4/7: Test case BVA (testcases.json/.md, A_FR01_step4_20261019-1719.{json,md}, INDEX.md, A_prompt_log.md)
+- Cần quyết định / câu hỏi:
+  1. Bước 5 do SV làm 🔒: SV tự thêm TS-SV (TC-FR01-200…, origin Human), chạy check_domain rồi mới hỏi AI "vì sao bỏ sót"; so sánh với bản đóng băng bước 3 (A_FR01_step3_20261019-1656) và bước 4 (A_FR01_step4_20261019-1719).
+  2. A_prompt_log.md trong commit chưa có lượt này (hook chạy sau khi lượt kết thúc) → đưa vào commit 5/7.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 23 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 21 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
