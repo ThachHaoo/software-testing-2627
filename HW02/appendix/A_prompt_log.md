@@ -1602,15 +1602,121 @@ A23 (role khi đăng ký): tài khoản tạo qua đăng ký luôn có role user
 ```
 
 **Output:**
-```
+````
 Sửa toàn bộ trong một script. Phần meta/requirements/partitions sửa theo chuỗi để giữ nguyên định dạng; phần suites dump lại.
 
 Notes đang dính liền: "→ Fail Chỉnh Expected…". Em thêm dấu phân cách rồi commit.
+
+Em đã hoàn thiện TS-SV theo khối lệnh và commit ở `1cfa163`. Commit này gồm luôn phần B của lượt trước (tách UI/API, chuyển quan sát sang notes) vì phần đó chưa commit. check_domain 0 lỗi, phủ 52/52 EC; lint 0 lỗi.
+
+**Giả định:**
+- A3 đổi theo câu em chốt.
+- A20–A23 chép nguyên văn khối "Giả định mới", cuối mỗi dòng có "(AI đề xuất, SV duyệt 2026-10-19)". Chữ `е` trong A21 em đã kiểm là Cyrillic U+0435.
+- Trong A21 còn câu "Ý tưởng homoglyph **của bạn**…" vì chép nguyên văn; câu này đọc như lời nhắn cho SV chứ không phải giả định.
+
+**Lớp tương đương:**
+- EC19 thu hẹp thành "chỉ khác hoa/thường ở phần local". TC-04 (`Test@…`) và TC-31 (`TEST@…`) vẫn đúng lớp này.
+- Thêm EC51 (chỉ khác hoa/thường ở phần domain; TC-206 phủ) và EC52 (email có ký tự ngoài ASCII; TC-219 phủ).
+
+**Case:**
+- TC-219 và TC-223 có expected mới theo A21, A22; origin `Both`, notes ghi "Expected do AI đặt theo … theo yêu cầu SV".
+- Truy vết: thêm 4 yêu cầu API-REG, SEC-04, SEC-05, SEC-06*, rồi gán:
+  - 207 → FR-01.10
+  - 214 → API-REG
+  - 222 → SEC-06*
+  - 215 và 230: thêm SEC-05
+  - 216: thêm SEC-04
+  - 223: để trống, notes "ngoài FR-01 (A22)"
+- meta.scope đã thêm câu về kiểm thăm dò SEC.
+- Mỗi cặp UI/API giờ chỉ giữ quan sát của đúng tầng đó.
+
+**Expected bản API đã đổi** (notes có "Chỉnh Expected theo tầng API khi tách"):
+
+| Case | Expected cũ | Expected mới |
+|---|---|---|
+| 224, 228 | "Hệ thống báo mật khẩu thiếu ký tự đặc biệt…" | HTTP 4xx + trường error; không có user mới |
+| 225, 226 | "Hệ thống báo email không hợp lệ…" | HTTP 4xx + trường error; không có user mới |
+| 227 | "… chuyển tới /login …" | HTTP 200 + body; đúng 1 user mới với name/email đã nhập |
+| 231 | "… lưu và hiển thị đúng emoji" | HTTP 200 + body; đúng 1 user mới, name lưu đúng emoji |
+
+Giữ nguyên 229, 230, 232 vì expected không có yếu tố UI. Với 224, 225, 226, 228, em coi chữ "Hệ thống báo" là yếu tố UI nên đã đổi; nếu em không đồng ý thì báo để khôi phục.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: hoàn thiện TS-SV HW02/A_FR01 (A3, A20–A23, EC51/EC52, truy vết, expected tầng API) — không freeze
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (meta.assumptions A3 + A20–A23; meta.scope; requirements + API-REG, SEC-04, SEC-05, SEC-06*; EC19 thu hẹp; EC51, EC52; TS-SV) · testcases.md (render)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (UB do A4), EC 52 (17 hợp lệ / 35 không hợp lệ), phủ 52/52 · lint 0 lỗi / 4 cảnh báo (TC-223 không truy vết theo A22; 3 suite > 25 dòng) · 133 TC (AI 98, Both 4, Human 31), Not run 133
+- Commit: 1cfa163 HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết) (testcases.json/.md, A_prompt_log.md; gồm cả phần B của lượt trước)
+- Expected bản API đã đổi: 224, 225, 226, 228 (→ 4xx + error + không user mới), 227, 231 (→ 200 + body + đúng 1 user mới); giữ nguyên 229, 230, 232
+- Cần quyết định / câu hỏi:
+  1. TC-219 vẫn truy vết FR-01.4 (email duy nhất), nhưng theo A21 nay là lỗi định dạng → đổi/thêm FR-01.3?
+  2. 6 bản API có Expected do AI viết lại (224–228, 231) vẫn để origin Human → đổi thành Both cho đúng quy tắc nguồn?
+  3. A21 có câu "Ý tưởng homoglyph của bạn…" (chép nguyên văn) → giữ hay bỏ câu đó khỏi giả định?
+  4. EC51, EC52 do SV thêm sau bản đóng băng bước 2 → report ghi rõ là bổ sung ở bước 5.
+  5. Bước tiếp: bước 6 (AI viết script Playwright/API, SV chạy, merge_results.py).
+```
+````
 *File AI ghi/gửi trong lượt này:* `fr01_sv_final.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 27 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 25 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #28 | 22:09 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+PHẦN 1 — sửa nhỏ TS-SV, commit "HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV":
+- TC-219: requirements FR-01.4 → FR-01.3.
+- 224, 225, 226, 227, 228, 231: origin Both (notes đã ghi lý do).
+- A21: bỏ câu "Ý tưởng homoglyph của bạn…".
+- check_domain, lint, render.
+
+PHẦN 2 — vá harness, commit riêng "HW02: vá harness – merge_results nhận verdict Blocked":
+- merge_results.py: nếu test có annotation type "verdict" (vd "Blocked") thì dùng giá trị đó thay STATUS map; ghi lý do từ annotation "actual".
+- references/automation.md: thêm mẫu cho API (attach request/response JSON bằng path; tuỳ chọn page.setContent(<pre>response</pre>) rồi chụp, tên "TC-xx_api.png", ghi chú "render từ response thật") và mẫu Blocked theo A17/A20.
+
+PHẦN 3 — bước 6 HW02/A_FR01 theo skill domain-bva-testing (CHƯA chạy cả bộ, CHƯA commit):
+- Viết HW02/tests/A_FR01/*.spec.ts đọc trực tiếp testcases.json (không chép dữ liệu cứng), mỗi suite một describe; tiêu đề test bắt đầu bằng mã TC.
+- Helper: token admin, chụp danh sách user (oracle tương đối), xoá user mới ở afterEach, thay {ts}.
+- UI: context mới mỗi case; nhập theo procedure (rỗng = không gõ, ␣ = đúng số dấu cách, bấm 'Đăng Ký' đúng 1 lần); quan sát theo A16 (bắt request POST /api/register, :invalid/validationMessage), hộp lỗi đỏ, URL.
+- API: request fixture; attach request/response JSON.
+- A17/A20: case không kiểm được đúng mục đích → annotation verdict Blocked + mã case gây chặn; không dùng test.skip.
+- Case có thao tác riêng (208, 209, 212, 207, 211, 216, 222, 223): cài đúng mô tả trong cột Thao tác riêng.
+- Assertion lấy từ expected_result, KHÔNG chỉnh theo hành vi SUT. Chỗ expected không tự động hoá được → ghi rõ trong comment và báo cáo, không tự đổi expected.
+- playwright.config: screenshot on, trace retain-on-failure, video off, workers 1.
+- globalSetup: kiểm backend/web đang chạy, đăng nhập admin được, có test@eshop.com; thiếu thì dừng và nhắc SV restart backend.
+- Chỉ chạy `npx playwright test --list` và một lần thử TC-FR01-01 + TC-FR01-28 để kiểm script chạy được.
+Báo cáo cho phiên thảo luận: danh sách file, số test, các case không tự động hoá được, kết quả chạy thử.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+```
+Làm PHẦN 1 trước.
+
+Phần 2: đọc merge_results.py và automation.md.
+
+Phần 1 xong (`f3126b0`). Trước khi viết phần 2–3, đọc route admin/login của backend và trang Login, admin Users để lấy đúng selector.
+
+SUT đang tắt; chạy thử sẽ cần bật backend và web. Làm phần 2 (vá harness) trước.
+
+Phần 2 xong (`6a127ec`); dry-run xác nhận verdict Blocked được ghi đè đúng. Giờ phần 3: viết helper và spec.
+
+Giờ đến config, globalSetup và README.
+
+Nhận đủ 133 test, đúng bằng số case trong JSON. Giờ bật SUT để chạy thử: backend trước (CSDL seed sạch), rồi web.
+
+TC-01 fail, TC-28 pass. Trước khi kết luận cần kiểm xem fail đến từ SUT hay từ script: xem annotation actual và ảnh chụp.
+
+Cleanup đúng: chỉ còn 2 user seed. 133/133 expected đều nhận diện được oracle. Chạy thử merge ở chế độ dry-run trên kết quả chạy thử rồi tắt SUT.
+```
+*File AI ghi/gửi trong lượt này:* `lib.ts`, `A_FR01.spec.ts`, `playwright.config.ts`, `global-setup.ts`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 28 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 26 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
