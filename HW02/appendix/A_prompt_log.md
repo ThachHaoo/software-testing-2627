@@ -781,4 +781,229 @@ bạn bảo commit rồi làm bài nhưng mình chưa thấy CLAUDE.md nên mu�
 
 ---
 
-**Tổng:** 14 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 12 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #15 | 16:10 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<command-message>domain-bva-testing</command-message>
+<command-name>/domain-bva-testing</command-name>
+<command-args>HW02/A_FR01 0
+Xong bước 0 thì làm tiếp bước 1 cho cùng feature.
+
+Feature: FR-01 Đăng ký tài khoản (Pool A, HW02).
+Test basis: ../eshop-sut/README.md mục FR-01 (và FR-22 nếu liên quan tới form). SRS là oracle.
+Mã nguồn chỉ dùng để lấy đúng tên nhãn, trường, nút, thông báo, endpoint: ../eshop-sut/frontend-web/src/pages/Register.jsx, route POST /api/register trong ../eshop-sut/backend/server.js.
+Phạm vi tầng: UI + API  
+
+Yêu cầu:
+- Bước 0: tạo HW02/A_FR01/testcases.json. meta.sut_version = "eshop-sut 85af3ba"; meta.references ghi file + dòng đã đọc; tách FR-01 thành các yêu cầu có mã FR-01.1, FR-01.2…
+- Bước 1: domain.variables gồm cả biến đầu vào và biến đầu ra; cột source ghi đúng nơi biến xuất hiện.
+- Chỗ nào SRS không nói rõ thì ghi vào meta.assumptions, không tự quyết ngầm.
+- Chạy: freeze.py --step 1 --note "Claude Code bước 0-1", check_domain.py, render_md.py -o HW02/A_FR01/testcases.md.
+- KHÔNG làm bước 2 trở đi. KHÔNG commit, chờ em review.
+- Kết thúc bằng khối "Báo cáo cho phiên thảo luận".</command-args>
+```
+
+**Output:**
+````
+Đã đọc xong test basis (SRS FR-01/FR-22, Register.jsx, route backend, API spec). Giờ xem linter cần trường gì rồi viết JSON.
+
+Viết `testcases.json` (bước 0 + 1).
+
+Lỗi encoding console (cp1252), không phải lỗi dữ liệu. Chạy lại với `PYTHONIOENCODING=utf-8`.
+
+Xong bước 0 và 1 cho FR-01. Chưa commit, chờ em review.
+
+**Bước 0.** `testcases.json` đã có meta và 14 yêu cầu: FR-01.1→FR-01.10 tách từ FR-01, thêm FR-22.1→FR-22.4. `meta.references` ghi 9 nguồn, mỗi nguồn kèm file và dòng. Có 14 giả định A1→A14, tức là mỗi chỗ SRS không nói rõ.
+
+**Bước 1.** Có 9 biến:
+
+| Mã | Biến | Vào/Ra |
+|---|---|---|
+| V1 | Họ Tên | Vào |
+| V2 | Email | Vào |
+| V3 | Email đã tồn tại trong hệ thống (trạng thái CSDL) | Vào |
+| V4 | Mật khẩu | Vào |
+| V5 | Xác nhận mật khẩu | Vào |
+| V6 | Thông báo lỗi trên form | Ra |
+| V7 | Trang đích sau khi bấm "Đăng Ký" | Ra |
+| V8 | Phản hồi API (mã HTTP + body) | Ra |
+| V9 | Bản ghi tài khoản trong CSDL | Ra |
+
+Cột `source` chỉ ghi nơi biến xuất hiện. Riêng V5 ghi đúng điều đã đọc: form trong Register.jsx không có ô này, body API cũng không có. Em quyết định có tính là lỗi hay không ở bước 7.
+
+**Lưu ý môi trường:**
+- HEAD của repo SUT đang ở `de0f48f`, không phải `85af3ba`. So với `85af3ba` chỉ khác `.gitignore`, `database.sqlite` và `App.js` mobile (dòng `API_URL`). Mã web và backend không đổi, nên em vẫn ghi `sut_version = "eshop-sut 85af3ba"`.
+- Script in tiếng Việt ra console Windows bị lỗi `UnicodeEncodeError` (cp1252). Phải chạy với `PYTHONIOENCODING=utf-8`. Em nên thêm biến này vào lệnh mẫu trong CLAUDE.md.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 bước 0 + bước 1 (FR-01 Đăng ký, tầng UI + API)
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json (mới: meta, 14 yêu cầu FR-01.1–FR-01.10 + FR-22.1–FR-22.4, 14 giả định A1–A14, 9 biến V1–V9)
+  - HW02/A_FR01/testcases.md (sinh bằng render_md.py)
+  - HW02/appendix/ai-outputs/A_FR01_step1_20261019-1613.{json,md} + dòng mới trong INDEX.md (freeze, note "Claude Code bước 0-1")
+- Kết quả kiểm tra: check_domain 0 lỗi / 5 cảnh báo (cả 5 đều do chưa có partitions → bước 2) · lint 0 lỗi / 14 cảnh báo (chưa có TC phủ yêu cầu → bước 3) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 1/7: Phân tích biến vào/ra"
+- Cần quyết định / câu hỏi:
+  1. A3: email trùng có phân biệt hoa/thường không, có cắt khoảng trắng đầu/cuối không? (AI đang giả định: không phân biệt, có cắt)
+  2. A5: tập ký tự đặc biệt {@ $ ! % * ? &} có phải tập đóng không? Mật khẩu chỉ có '#' thì bị từ chối?
+  3. A8: yêu cầu "xác nhận mật khẩu" chỉ kiểm ở UI, không áp dụng cho API?
+  4. A14: FR-22 ('*', type=email, type=password, vị trí lỗi) để ngoài phân lớp, kiểm bằng case GUI riêng — có đưa vào phạm vi không? Có thêm FR-21 (màu nút submit) và SEC-01 (mật khẩu không lưu plaintext, có thể thêm thành biến đầu ra) không?
+  5. A1/A4: Họ Tên và Mật khẩu không có cận trên → bước 4 chỉ làm BVA quanh cận dưới. Đồng ý không?
+  6. HEAD của repo SUT là de0f48f (chỉ thêm .gitignore so với 85af3ba) → có cần ghi vào environment.md không?
+  7. Console Windows cần PYTHONIOENCODING=utf-8 mới chạy được script → đề xuất thêm vào lệnh mẫu trong CLAUDE.md.
+```
+````
+*File AI ghi/gửi trong lượt này:* `testcases.json`
+
+**Xử lý:** [...]
+
+---
+
+## #16 | 16:10 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<command-message>domain-bva-testing</command-message>
+<command-name>/domain-bva-testing</command-name>
+<command-args>HW02/A_FR01 0
+Xong bước 0 thì làm tiếp bước 1 cho cùng feature.
+
+Feature: FR-01 Đăng ký tài khoản (Pool A, HW02).
+Test basis: ../eshop-sut/README.md mục FR-01 (và FR-22 nếu liên quan tới form). SRS là oracle.
+Mã nguồn chỉ dùng để lấy đúng tên nhãn, trường, nút, thông báo, endpoint: ../eshop-sut/frontend-web/src/pages/Register.jsx, route POST /api/register trong ../eshop-sut/backend/server.js.
+Phạm vi tầng: UI + API  
+
+Yêu cầu:
+- Bước 0: tạo HW02/A_FR01/testcases.json. meta.sut_version = "eshop-sut 85af3ba"; meta.references ghi file + dòng đã đọc; tách FR-01 thành các yêu cầu có mã FR-01.1, FR-01.2…
+- Bước 1: domain.variables gồm cả biến đầu vào và biến đầu ra; cột source ghi đúng nơi biến xuất hiện.
+- Chỗ nào SRS không nói rõ thì ghi vào meta.assumptions, không tự quyết ngầm.
+- Chạy: freeze.py --step 1 --note "Claude Code bước 0-1", check_domain.py, render_md.py -o HW02/A_FR01/testcases.md.
+- KHÔNG làm bước 2 trở đi. KHÔNG commit, chờ em review.
+- Kết thúc bằng khối "Báo cáo cho phiên thảo luận".</command-args>
+```
+
+**Output:**
+````
+Đã đọc xong test basis (SRS FR-01/FR-22, Register.jsx, route backend, API spec). Giờ xem linter cần trường gì rồi viết JSON.
+
+Viết `testcases.json` (bước 0 + 1).
+
+Lỗi encoding console (cp1252), không phải lỗi dữ liệu. Chạy lại với `PYTHONIOENCODING=utf-8`.
+
+Xong bước 0 và 1 cho FR-01. Chưa commit, chờ em review.
+
+**Bước 0.** `testcases.json` đã có meta và 14 yêu cầu: FR-01.1→FR-01.10 tách từ FR-01, thêm FR-22.1→FR-22.4. `meta.references` ghi 9 nguồn, mỗi nguồn kèm file và dòng. Có 14 giả định A1→A14, tức là mỗi chỗ SRS không nói rõ.
+
+**Bước 1.** Có 9 biến:
+
+| Mã | Biến | Vào/Ra |
+|---|---|---|
+| V1 | Họ Tên | Vào |
+| V2 | Email | Vào |
+| V3 | Email đã tồn tại trong hệ thống (trạng thái CSDL) | Vào |
+| V4 | Mật khẩu | Vào |
+| V5 | Xác nhận mật khẩu | Vào |
+| V6 | Thông báo lỗi trên form | Ra |
+| V7 | Trang đích sau khi bấm "Đăng Ký" | Ra |
+| V8 | Phản hồi API (mã HTTP + body) | Ra |
+| V9 | Bản ghi tài khoản trong CSDL | Ra |
+
+Cột `source` chỉ ghi nơi biến xuất hiện. Riêng V5 ghi đúng điều đã đọc: form trong Register.jsx không có ô này, body API cũng không có. Em quyết định có tính là lỗi hay không ở bước 7.
+
+**Lưu ý môi trường:**
+- HEAD của repo SUT đang ở `de0f48f`, không phải `85af3ba`. So với `85af3ba` chỉ khác `.gitignore`, `database.sqlite` và `App.js` mobile (dòng `API_URL`). Mã web và backend không đổi, nên em vẫn ghi `sut_version = "eshop-sut 85af3ba"`.
+- Script in tiếng Việt ra console Windows bị lỗi `UnicodeEncodeError` (cp1252). Phải chạy với `PYTHONIOENCODING=utf-8`. Em nên thêm biến này vào lệnh mẫu trong CLAUDE.md.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 bước 0 + bước 1 (FR-01 Đăng ký, tầng UI + API)
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json (mới: meta, 14 yêu cầu FR-01.1–FR-01.10 + FR-22.1–FR-22.4, 14 giả định A1–A14, 9 biến V1–V9)
+  - HW02/A_FR01/testcases.md (sinh bằng render_md.py)
+  - HW02/appendix/ai-outputs/A_FR01_step1_20261019-1613.{json,md} + dòng mới trong INDEX.md (freeze, note "Claude Code bước 0-1")
+- Kết quả kiểm tra: check_domain 0 lỗi / 5 cảnh báo (cả 5 đều do chưa có partitions → bước 2) · lint 0 lỗi / 14 cảnh báo (chưa có TC phủ yêu cầu → bước 3) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 1/7: Phân tích biến vào/ra"
+- Cần quyết định / câu hỏi:
+  1. A3: email trùng có phân biệt hoa/thường không, có cắt khoảng trắng đầu/cuối không? (AI đang giả định: không phân biệt, có cắt)
+  2. A5: tập ký tự đặc biệt {@ $ ! % * ? &} có phải tập đóng không? Mật khẩu chỉ có '#' thì bị từ chối?
+  3. A8: yêu cầu "xác nhận mật khẩu" chỉ kiểm ở UI, không áp dụng cho API?
+  4. A14: FR-22 ('*', type=email, type=password, vị trí lỗi) để ngoài phân lớp, kiểm bằng case GUI riêng — có đưa vào phạm vi không? Có thêm FR-21 (màu nút submit) và SEC-01 (mật khẩu không lưu plaintext, có thể thêm thành biến đầu ra) không?
+  5. A1/A4: Họ Tên và Mật khẩu không có cận trên → bước 4 chỉ làm BVA quanh cận dưới. Đồng ý không?
+  6. HEAD của repo SUT là de0f48f (chỉ thêm .gitignore so với 85af3ba) → có cần ghi vào environment.md không?
+  7. Console Windows cần PYTHONIOENCODING=utf-8 mới chạy được script → đề xuất thêm vào lệnh mẫu trong CLAUDE.md.
+```
+````
+*File AI ghi/gửi trong lượt này:* `testcases.json`
+
+**Xử lý:** [...]
+
+---
+
+## #17 | 16:31 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Áp dụng quyết định review bước 1 cho HW02/A_FR01. Đây là phần em sửa trên bản nháp đã đóng băng: KHÔNG chạy freeze lại.
+1. Giả định: A3 = giả định có phân biệt hoa thường và cắt khoảng trắng đầu/cuối. Khi làm ghi rõ giả định và expected của case tuân theo các giả định này, giữ A5, A8; giữ A1/A4 (không có cận trên, MIN_UI/MAX_UI xét ở bước 4).
+2. Phạm vi: giữ FR-22.1–22.4, kiểm bằng suite GUI riêng, không phân lớp; bỏ FR-21 và SEC-01 khỏi phạm vi. Ghi lý do vào meta.scope.
+3. Tách FR-01.7 thành FR-01.7a (≥1 chữ hoa), FR-01.7b (≥1 chữ thường), FR-01.7c (≥1 chữ số).
+4. V6 và A10: bỏ điều kiện "đặt phía trên nút Đăng Ký" khỏi oracle của case nhập liệu; vị trí thông báo lỗi chỉ kiểm ở case FR-22.4.
+5. Thêm trường note cho V2 và V5: "Quan sát mã nguồn: [ô Email type=text | form không có ô Xác nhận mật khẩu]. Chưa kết luận lỗi, xác nhận khi thực thi (bước 6)."
+6. SUT = fork tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã): cập nhật meta.sut_version, HW02/env/environment.md và CLAUDE.md.
+7. CLAUDE.md, mục "Quyết định đã chốt": thêm dòng ngày 2026-10-19 cho các mục 1, 2, 6.
+8. Chạy check_domain.py và render_md.py. Commit "HW02[A-FR01] 1/7: Phân tích biến vào/ra" gồm testcases.json/.md, file đóng băng bước 1 trong ai-outputs/, CLAUDE.md, environment.md.
+Kết thúc bằng khối "Báo cáo cho phiên thảo luận".
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Áp dụng sửa vào `testcases.json`.
+
+Giờ cập nhật environment.md và CLAUDE.md.
+
+Note của V2/V5 có trong JSON nhưng `render_md.py` chưa xuất cột note → .md không hiện. Commit đúng danh sách file.
+
+Em đã áp dụng đủ 8 mục review bước 1 cho A_FR01 và commit `4e30b25`. Không chạy freeze lại, nên file đóng băng là bản nháp gốc của AI. check_domain 0 lỗi.
+
+Có 2 điểm em cần biết:
+- **Note của V2 và V5 không hiện trong `testcases.md`.** Trường `note` đã có trong JSON, nhưng bảng biến của `render_md.py` chỉ xuất các cột id, tên, Vào/Ra, source, type, constraint.
+- **Còn 7 file đã sửa trước đó mà em không đưa vào commit:** `.claude/settings.json`, 4 script trong `domain-bva-testing/scripts/`, `tools/summary.py`, `HW02/appendix/A_prompt_log.md`. Các file này không thuộc nhiệm vụ này, nên vẫn để chưa commit.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: áp dụng review bước 1 cho HW02/A_FR01 (không chạy freeze lại) + commit bước 1/7
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json:
+    - A3 viết lại: so sánh email trùng có phân biệt hoa/thường, có cắt khoảng trắng đầu/cuối; expected tuân theo giả định này
+    - A10 và V6: bỏ "phía trên nút Đăng Ký" khỏi oracle của case nhập liệu, vị trí lỗi chỉ kiểm ở FR-22.4
+    - A14: suite GUI riêng cho FR-22, không phân lớp
+    - meta.scope: giữ FR-22.1–22.4; bỏ FR-21, SEC-01 kèm lý do
+    - FR-01.7 tách thành 7a/7b/7c; constraint của V4 cập nhật theo
+    - thêm note cho V2 và V5
+    - sut_version = tkob-team/eshop-sut @ de0f48f
+    - giữ nguyên A1, A4, A5, A8
+  - HW02/A_FR01/testcases.md (render lại)
+  - HW02/env/environment.md (dòng SUT)
+  - CLAUDE.md (dòng SUT ở mục 1 + 3 dòng "Quyết định đã chốt" ngày 2026-10-19 cho các mục 1, 2, 6)
+- Kết quả kiểm tra: JSON hợp lệ · check_domain 0 lỗi / 5 cảnh báo (chưa có partitions → bước 2) · lint 0 lỗi / 16 cảnh báo (chưa có TC phủ yêu cầu; 16 vì FR-01.7 đã tách) · test Not run
+- Commit: 4e30b25 HW02[A-FR01] 1/7: Phân tích biến vào/ra (7 file: testcases.json/.md, A_FR01_step1_20261019-1613.json/.md, ai-outputs/INDEX.md, CLAUDE.md, environment.md)
+- Cần quyết định / câu hỏi:
+  1. render_md.py chưa xuất trường note của biến → note V2/V5 chỉ có trong JSON, không có trong .md. Có sửa render_md.py để thêm cột Ghi chú không? (đây là việc phụ, phải khai trong Audit)
+  2. ai-outputs/INDEX.md (sổ ghi freeze) đã đưa vào commit vì đi kèm file đóng băng. Nếu không muốn thì báo để tách ra.
+  3. 7 file đã sửa nằm ngoài nhiệm vụ này, chưa commit: .claude/settings.json, 4 script trong domain-bva-testing/scripts, tools/summary.py, A_prompt_log.md. Ai sửa, có commit riêng không?
+  4. Bước tiếp theo: /domain-bva-testing HW02/A_FR01 2 (phân lớp tương đương).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 17 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 15 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
