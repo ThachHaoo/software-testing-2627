@@ -418,6 +418,6 @@ Lệnh (trong `HW02/tests`): `npx playwright test A_FR01 -g "TC-FR01-209 " --rep
 
 | Lần | Playwright | Actual (nguyên văn) |
 |---|---|---|
-| 1 | failed | HTTP 200 {"message":"User registered successfully","id":4}; HTTP 200 {"message":"User registered successfully","id":5}; user mới=2 [hiep.sv10@domain.com | Lê Tấn Hiệp | user] [hiep.sv10@domain.com | Lê Tấn Hiệp | user] |
-| 1 | failed | HTTP 200 {"message":"User registered successfully","id":6}; HTTP 200 {"message":"User registered successfully","id":7}; user mới=2 [hiep.sv10@domain.com | Lê Tấn Hiệp | user] [hiep.sv10@domain.com | Lê Tấn Hiệp | user] |
-| 1 | failed | HTTP 200 {"message":"User registered successfully","id":8}; HTTP 200 {"message":"User registered successfully","id":9}; user mới=2 [hiep.sv10@domain.com | Lê Tấn Hiệp | user] [hiep.sv10@domain.com | Lê Tấn Hiệp | user] |
+| 1 | failed | HTTP 200 {"message":"User registered successfully","id":4}; HTTP 200 {"message":"User registered successfully","id":5}; user mới=2 [hiep.sv10@domain.com \| Lê Tấn Hiệp \| user] [hiep.sv10@domain.com \| Lê Tấn Hiệp \| user] |
+| 2 | failed | HTTP 200 {"message":"User registered successfully","id":6}; HTTP 200 {"message":"User registered successfully","id":7}; user mới=2 [hiep.sv10@domain.com \| Lê Tấn Hiệp \| user] [hiep.sv10@domain.com \| Lê Tấn Hiệp \| user] |
+| 3 | failed | HTTP 200 {"message":"User registered successfully","id":8}; HTTP 200 {"message":"User registered successfully","id":9}; user mới=2 [hiep.sv10@domain.com \| Lê Tấn Hiệp \| user] [hiep.sv10@domain.com \| Lê Tấn Hiệp \| user] |
