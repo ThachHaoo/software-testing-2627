@@ -37,10 +37,110 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 ### Bước 2 — Complete Set of Partitions
 | EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
 |---|---|---|---|---|---|
+| EC1 | Họ Tên | Không rỗng, chỉ chữ Latin không dấu và khoảng trắng (ví dụ 'Nguyen Van A') | ✔ | split | FR-01.1. Tách khỏi EC2 vì chuỗi ASCII và chuỗi Unicode có dấu đi qua mã hoá/lưu trữ khác nhau. |
+| EC2 | Họ Tên | Không rỗng, có chữ tiếng Việt có dấu (ví dụ 'Nguyễn Văn Ánh') | ✔ | split | FR-01.1. SRS không giới hạn tập ký tự (A1) → hợp lệ. |
+| EC3 | Họ Tên | Rỗng (0 ký tự) | ✘ | must-be | FR-01.1 bắt buộc. |
+| EC4 | Họ Tên | Chỉ gồm khoảng trắng (ví dụ '   ') | ✘ | split | A1: coi như rỗng. Tách khỏi EC3 vì thuộc tính required của HTML5 chặn '' nhưng không chặn chuỗi toàn khoảng trắng → hai lớp bị xử lý khác nhau. |
+| EC5 | Họ Tên | Tầng API: trường name thiếu trong body hoặc bằng null | ✘ | must-be | Chỉ tầng API (A15). |
+| EC6 | Họ Tên | Tầng API: name không phải chuỗi (ví dụ số 123) | ✘ | type | Chỉ tầng API (A15). |
+| EC7 | Email | Đúng định dạng <local>@<domain>.<tld> (ví dụ 'newuser@domain.com') | ✔ | must-be | FR-01.2, FR-01.3, A2. |
+| EC8 | Email | Đúng định dạng nhưng có khoảng trắng đầu/cuối (ví dụ '  newuser@domain.com  ') | ✔ | split | A3: khoảng trắng đầu/cuối được cắt → hợp lệ. Tách lớp vì phần cắt khoảng trắng có thể có hoặc không có ở UI/API. |
+| EC9 | Email | Rỗng (0 ký tự) | ✘ | must-be | FR-01.2 bắt buộc. |
+| EC10 | Email | Không có ký tự '@' (ví dụ 'newuserdomain.com') | ✘ | split | FR-01.3. Tách các lớp sai định dạng EC10–EC15 theo từng phần của mẫu user@domain.com bị vi phạm, vì mỗi kiểu lỗi có thể được bộ kiểm tra (HTML5 type=email, regex phía client, backend) xử lý khác nhau. |
+| EC11 | Email | Có nhiều hơn một '@' (ví dụ 'new@user@domain.com') | ✘ | split | FR-01.3, A2 (đúng một '@'). |
+| EC12 | Email | Phần local rỗng (ví dụ '@domain.com') | ✘ | split | FR-01.3, A2. |
+| EC13 | Email | Phần domain rỗng (ví dụ 'newuser@') | ✘ | split | FR-01.3, A2. |
+| EC14 | Email | Phần domain không có dấu '.' (ví dụ 'newuser@domain') | ✘ | split | A2: mẫu SRS có .tld. Tách riêng vì HTML5 type=email chấp nhận 'user@domain' → xử lý khác các lớp sai định dạng còn lại. |
+| EC15 | Email | Có khoảng trắng bên trong (ví dụ 'new user@domain.com') | ✘ | split | FR-01.3, A2. Khác EC8: khoảng trắng nằm giữa, không bị cắt. |
+| EC16 | Email | Tầng API: trường email thiếu trong body hoặc bằng null | ✘ | must-be | Chỉ tầng API (A15). |
+| EC17 | Email | Tầng API: email không phải chuỗi (ví dụ số 123) | ✘ | type | Chỉ tầng API (A15). |
+| EC18 | Email đã tồn tại trong hệ thống | Email chưa tồn tại trong bảng users | ✔ | set | FR-01.4. |
+| EC19 | Email đã tồn tại trong hệ thống | Chỉ khác email đã có ở chữ hoa/thường (ví dụ 'TEST@eshop.com' khi đã có 'test@eshop.com') | ✔ | split | A3 (SV chốt): so sánh phân biệt hoa/thường → coi là email mới, hợp lệ. |
+| EC20 | Email đã tồn tại trong hệ thống | Trùng chính xác email đã có (ví dụ 'test@eshop.com') | ✘ | set | FR-01.4. Dùng tài khoản seed (A13). |
+| EC21 | Email đã tồn tại trong hệ thống | Trùng email đã có sau khi cắt khoảng trắng đầu/cuối (ví dụ ' test@eshop.com ') | ✘ | split | A3 (SV chốt): cắt khoảng trắng rồi mới so sánh → trùng. Tách khỏi EC20 vì so khớp chuỗi nguyên văn sẽ không phát hiện trùng. |
+| EC22 | Mật khẩu | Độ dài ≥ 8 ký tự (các điều kiện khác thoả) | ✔ | range | FR-01.6. Miền chỉ có cận dưới LB = 8, không có UB (A4) → chỉ có một lớp không hợp lệ phía dưới (EC23); MIN_UI/MAX_UI xét ở bước 4. |
+| EC23 | Mật khẩu | Độ dài 1–7 ký tự (các điều kiện khác thoả) | ✘ | range | FR-01.6. |
+| EC24 | Mật khẩu | Rỗng (0 ký tự) | ✘ | must-be | FR-01.5 bắt buộc. Tách khỏi EC23 vì required của HTML5 chặn chuỗi rỗng trước khi chạy kiểm tra độ mạnh. |
+| EC25 | Mật khẩu | Có ≥ 1 chữ hoa A–Z | ✔ | must-be | FR-01.7a. |
+| EC26 | Mật khẩu | Không có chữ hoa nào (các điều kiện khác thoả) | ✘ | must-be | FR-01.7a. |
+| EC27 | Mật khẩu | Chữ hoa duy nhất là chữ có dấu tiếng Việt, ví dụ 'Ê' (các điều kiện khác thoả) | ✘ | split | A6: chỉ A–Z tính là chữ hoa. Tách khỏi EC26 vì bộ kiểm tra theo Unicode và theo [A-Z] cho kết quả khác nhau. |
+| EC28 | Mật khẩu | Có ≥ 1 chữ thường a–z | ✔ | must-be | FR-01.7b. |
+| EC29 | Mật khẩu | Không có chữ thường nào (các điều kiện khác thoả) | ✘ | must-be | FR-01.7b. |
+| EC30 | Mật khẩu | Chữ thường duy nhất là chữ có dấu tiếng Việt, ví dụ 'ê' (các điều kiện khác thoả) | ✘ | split | A6, cùng lý do EC27. |
+| EC31 | Mật khẩu | Có ≥ 1 chữ số 0–9 | ✔ | must-be | FR-01.7c. |
+| EC32 | Mật khẩu | Không có chữ số nào (các điều kiện khác thoả) | ✘ | must-be | FR-01.7c. |
+| EC33 | Mật khẩu | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | ✔ | set | FR-01.8. |
+| EC34 | Mật khẩu | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (ví dụ '!' và '#') | ✔ | split | A5: ký tự ngoài tập được phép xuất hiện thêm. Tách khỏi EC33 vì regex dạng whitelist sẽ từ chối lớp này. |
+| EC35 | Mật khẩu | Không có ký tự đặc biệt nào (các điều kiện khác thoả) | ✘ | set | FR-01.8. |
+| EC36 | Mật khẩu | Chỉ có ký tự đặc biệt ngoài tập, ví dụ '#', '^', '-', khoảng trắng (các điều kiện khác thoả) | ✘ | set | A5: tập đóng → coi như thiếu ký tự đặc biệt. Lớp 'ngoài tập' theo hướng dẫn set. |
+| EC37 | Mật khẩu | Tầng API: trường password thiếu trong body hoặc bằng null | ✘ | must-be | Chỉ tầng API (A15). |
+| EC38 | Mật khẩu | Tầng API: password không phải chuỗi (ví dụ số 12345678) | ✘ | type | Chỉ tầng API (A15). |
+| EC39 | Xác nhận mật khẩu | Khớp chính xác với Mật khẩu | ✔ | must-be | FR-01.9. Chỉ tầng UI (A8). |
+| EC40 | Xác nhận mật khẩu | Rỗng | ✘ | must-be | A7: rỗng coi như không khớp. Tách khỏi EC41 vì có thể bị chặn bởi required trước khi so sánh. |
+| EC41 | Xác nhận mật khẩu | Khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường) | ✘ | must-be | FR-01.9. |
+| EC42 | Xác nhận mật khẩu | Chỉ khác Mật khẩu ở chữ hoa/thường (ví dụ 'Abcd1234!' và 'abcd1234!') | ✘ | split | A7: so sánh phân biệt hoa/thường. Tách khỏi EC41 vì so sánh không phân biệt hoa/thường sẽ cho là khớp. |
+| EC43 | Thông báo lỗi trên form | Không có thông báo lỗi | ✔ | output | Khi mọi đầu vào hợp lệ. |
+| EC44 | Thông báo lỗi trên form | Có thông báo lỗi trên form (hộp lỗi hoặc bong bóng HTML5) | ✘ | output | A10, A16. Nội dung chữ ghi làm Actual; vị trí chỉ kiểm ở FR-22.4. |
+| EC45 | Trang đích sau khi bấm 'Đăng Ký' | Chuyển tới trang Đăng nhập /login | ✔ | output | FR-01.10. |
+| EC46 | Trang đích sau khi bấm 'Đăng Ký' | Ở lại trang /register | ✘ | output | A10. |
+| EC47 | Phản hồi API | HTTP 200, body {"message": "User registered successfully", "id": n} | ✔ | output | api_specification.md dòng 21. |
+| EC48 | Phản hồi API | HTTP 4xx, body có trường error | ✘ | output | A11. 5xx hoặc không phản hồi không thuộc lớp mong đợi nào → không đạt oracle. |
+| EC49 | Bản ghi tài khoản trong CSDL | Tạo đúng 1 bản ghi user mới với name/email đã nhập | ✔ | output | A12: quan sát qua GET /api/admin/users hoặc đăng nhập. |
+| EC50 | Bản ghi tài khoản trong CSDL | Không tạo bản ghi (số user không đổi) | ✘ | output | A12. |
 
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
+| EC1 | Không rỗng, chỉ chữ Latin không dấu và khoảng trắng (ví dụ 'Nguyen Van A') | ⚠ chưa phủ |
+| EC2 | Không rỗng, có chữ tiếng Việt có dấu (ví dụ 'Nguyễn Văn Ánh') | ⚠ chưa phủ |
+| EC3 | Rỗng (0 ký tự) | ⚠ chưa phủ |
+| EC4 | Chỉ gồm khoảng trắng (ví dụ '   ') | ⚠ chưa phủ |
+| EC5 | Tầng API: trường name thiếu trong body hoặc bằng null | ⚠ chưa phủ |
+| EC6 | Tầng API: name không phải chuỗi (ví dụ số 123) | ⚠ chưa phủ |
+| EC7 | Đúng định dạng <local>@<domain>.<tld> (ví dụ 'newuser@domain.com') | ⚠ chưa phủ |
+| EC8 | Đúng định dạng nhưng có khoảng trắng đầu/cuối (ví dụ '  newuser@domain.com  ') | ⚠ chưa phủ |
+| EC9 | Rỗng (0 ký tự) | ⚠ chưa phủ |
+| EC10 | Không có ký tự '@' (ví dụ 'newuserdomain.com') | ⚠ chưa phủ |
+| EC11 | Có nhiều hơn một '@' (ví dụ 'new@user@domain.com') | ⚠ chưa phủ |
+| EC12 | Phần local rỗng (ví dụ '@domain.com') | ⚠ chưa phủ |
+| EC13 | Phần domain rỗng (ví dụ 'newuser@') | ⚠ chưa phủ |
+| EC14 | Phần domain không có dấu '.' (ví dụ 'newuser@domain') | ⚠ chưa phủ |
+| EC15 | Có khoảng trắng bên trong (ví dụ 'new user@domain.com') | ⚠ chưa phủ |
+| EC16 | Tầng API: trường email thiếu trong body hoặc bằng null | ⚠ chưa phủ |
+| EC17 | Tầng API: email không phải chuỗi (ví dụ số 123) | ⚠ chưa phủ |
+| EC18 | Email chưa tồn tại trong bảng users | ⚠ chưa phủ |
+| EC19 | Chỉ khác email đã có ở chữ hoa/thường (ví dụ 'TEST@eshop.com' khi đã có 'test@eshop.com') | ⚠ chưa phủ |
+| EC20 | Trùng chính xác email đã có (ví dụ 'test@eshop.com') | ⚠ chưa phủ |
+| EC21 | Trùng email đã có sau khi cắt khoảng trắng đầu/cuối (ví dụ ' test@eshop.com ') | ⚠ chưa phủ |
+| EC22 | Độ dài ≥ 8 ký tự (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC23 | Độ dài 1–7 ký tự (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC24 | Rỗng (0 ký tự) | ⚠ chưa phủ |
+| EC25 | Có ≥ 1 chữ hoa A–Z | ⚠ chưa phủ |
+| EC26 | Không có chữ hoa nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC27 | Chữ hoa duy nhất là chữ có dấu tiếng Việt, ví dụ 'Ê' (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC28 | Có ≥ 1 chữ thường a–z | ⚠ chưa phủ |
+| EC29 | Không có chữ thường nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC30 | Chữ thường duy nhất là chữ có dấu tiếng Việt, ví dụ 'ê' (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC31 | Có ≥ 1 chữ số 0–9 | ⚠ chưa phủ |
+| EC32 | Không có chữ số nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC33 | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | ⚠ chưa phủ |
+| EC34 | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (ví dụ '!' và '#') | ⚠ chưa phủ |
+| EC35 | Không có ký tự đặc biệt nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC36 | Chỉ có ký tự đặc biệt ngoài tập, ví dụ '#', '^', '-', khoảng trắng (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC37 | Tầng API: trường password thiếu trong body hoặc bằng null | ⚠ chưa phủ |
+| EC38 | Tầng API: password không phải chuỗi (ví dụ số 12345678) | ⚠ chưa phủ |
+| EC39 | Khớp chính xác với Mật khẩu | ⚠ chưa phủ |
+| EC40 | Rỗng | ⚠ chưa phủ |
+| EC41 | Khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường) | ⚠ chưa phủ |
+| EC42 | Chỉ khác Mật khẩu ở chữ hoa/thường (ví dụ 'Abcd1234!' và 'abcd1234!') | ⚠ chưa phủ |
+| EC43 | Không có thông báo lỗi | ⚠ chưa phủ |
+| EC44 | Có thông báo lỗi trên form (hộp lỗi hoặc bong bóng HTML5) | ⚠ chưa phủ |
+| EC45 | Chuyển tới trang Đăng nhập /login | ⚠ chưa phủ |
+| EC46 | Ở lại trang /register | ⚠ chưa phủ |
+| EC47 | HTTP 200, body {"message": "User registered successfully", "id": n} | ⚠ chưa phủ |
+| EC48 | HTTP 4xx, body có trường error | ⚠ chưa phủ |
+| EC49 | Tạo đúng 1 bản ghi user mới với name/email đã nhập | ⚠ chưa phủ |
+| EC50 | Không tạo bản ghi (số user không đổi) | ⚠ chưa phủ |
 
 ### Truy vết yêu cầu ↔ test case
 | Yêu cầu | Test case | Số TC |
@@ -68,7 +168,7 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 - A3 (Email – duy nhất): SRS không nói so sánh có phân biệt hoa/thường và có cắt khoảng trắng đầu/cuối hay không. Giả định (SV chốt 2026-10-19): so sánh CÓ phân biệt hoa/thường (TEST@eshop.com khác test@eshop.com, coi là email mới) và khoảng trắng đầu/cuối được cắt trước khi so sánh (' test@eshop.com ' trùng test@eshop.com). Expected của các case liên quan email trùng tuân theo giả định này.
 - A4 (Mật khẩu – độ dài): chỉ có cận dưới 8 ký tự. SRS không có cận trên → không có UB; BVA độ dài chỉ quanh LB = 8 (7, 8, 9) và NOM.
 - A5 (Mật khẩu – ký tự đặc biệt): hiểu danh sách (@, $, !, %, *, ?, &) là tập ĐÓNG: mật khẩu chỉ chứa ký tự đặc biệt ngoài tập này (ví dụ #, ^, -, khoảng trắng) bị coi là thiếu ký tự đặc biệt → bị từ chối. SRS không nói ký tự ngoài tập có được phép xuất hiện thêm hay không → giả định được phép nếu đã có ít nhất một ký tự trong tập.
-- A6 (Mật khẩu – chữ hoa/thường): giả định chỉ tính chữ Latin A–Z / a–z; chữ có dấu tiếng Việt (Ă, ê…) không tính là chữ hoa/thường. SRS im lặng.
+- A6 (Mật khẩu – chữ hoa/thường): giả định chỉ tính chữ Latin A–Z / a–z; chữ có dấu tiếng Việt (Ă, ê…) không tính là chữ hoa/thường. SRS im lặng. Expected của EC27/EC30 phụ thuộc giả định này; kết quả lệch được phân tích là SRS mơ hồ trước khi kết luận lỗi.
 - A7 (Xác nhận mật khẩu): FR-01 yêu cầu trường này; so sánh phân biệt hoa/thường, khớp tuyệt đối với Mật khẩu. Bỏ trống trường này coi như không khớp → bị từ chối.
 - A8 (Xác nhận mật khẩu ở tầng API): api_specification.md dòng 14–19 không có trường xác nhận trong body. Giả định yêu cầu 'khớp hai trường' chỉ kiểm ở tầng UI; ở tầng API biến này không áp dụng. Cần SV xác nhận.
 - A9 (Kiểm ở tầng API): FR-01 là yêu cầu của hệ thống, không riêng giao diện → giả định API POST /api/register cũng phải từ chối dữ liệu vi phạm FR-01 khi gọi trực tiếp (bỏ qua UI).
@@ -77,5 +177,8 @@ Form 'Đăng Ký Tài Khoản' trên frontend-web (tầng UI) và endpoint POST 
 - A12 (Quan sát bản ghi): kiểm 'có/không tạo user' bằng GET /api/admin/users với token của admin@eshop.com / Admin123!, hoặc đăng nhập POST /api/login bằng tài khoản vừa tạo.
 - A13 (Dữ liệu sẵn có): email đã tồn tại dùng tài khoản seed test@eshop.com (database.js dòng 93). Backend khởi động lại → CSDL seed lại, tài khoản tạo trong lúc test mất; mỗi case dùng email mới (ví dụ gắn timestamp) để case độc lập.
 - A14 (FR-22 thuộc tính form): ký hiệu '*', type="email", type="password", vị trí thông báo lỗi là thuộc tính tĩnh của form, không phải miền giá trị nhập → không phân lớp ở bước 2; kiểm bằng suite GUI riêng (SV chốt 2026-10-19).
+- A15 (Sai kiểu / thiếu trường ở tầng API): SRS không nói gì về body JSON. Giả định trường name/email/password bị thiếu, bằng null hoặc không phải chuỗi JSON (ví dụ số 123) là dữ liệu không hợp lệ → phải bị từ chối với 4xx, không tạo user (theo A9, A11). Các lớp này chỉ tạo được ở tầng API vì ô nhập trên UI luôn gửi chuỗi.
+- A16 (Thông báo kiểm tra HTML5): khi trình duyệt chặn submit bằng bong bóng kiểm tra của thuộc tính required/type, bong bóng đó được coi là 'thông báo lỗi trên form' trong oracle của V6. SRS không phân biệt cơ chế hiển thị (SV xác nhận 2026-10-19). Cách quan sát: bong bóng HTML5 không nằm trong DOM → oracle = form không gửi request POST /api/register + ô liên quan ở trạng thái :invalid / validationMessage không rỗng.
+- A17 (Thiếu ô Xác nhận mật khẩu): nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường → Fail; các case cần nhập V5 ở tầng UI → Blocked kèm mã bug. Không xoá case.
 
 **Tổng:** chưa có test case (bước 3–4).
