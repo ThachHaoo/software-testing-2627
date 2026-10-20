@@ -7,6 +7,8 @@
 - Chụp màn hình cuối mỗi test và đính kèm (`testInfo.attach`) — đường dẫn được ghi vào `evidence`.
 - Reporter JSON: `npx playwright test --reporter=list,json` với `PLAYWRIGHT_JSON_OUTPUT_NAME=results/<feature>.json`.
 - Map trạng thái: `passed → Pass`, `failed/timedOut → Fail`, `skipped → Not run`, `interrupted → Blocked`.
+- Mỗi lượt chạy ghi results riêng có timestamp (`results/<feature>_<yyyyMMdd-HHmmss>.json`) để không ghi đè lượt trước.
+- Verdict SV đã chỉnh (status khác auto_status) được `merge_results.py` giữ nguyên; chỉ auto_status, actual_result, evidence được cập nhật. Ghi đè bằng `--force`.
 
 ## Khung spec đọc dữ liệu từ JSON (TypeScript)
 

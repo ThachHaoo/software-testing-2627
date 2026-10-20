@@ -8,6 +8,9 @@ Usage: python merge_results.py testcases.json results.json [--dry-run]
 - Ảnh/attachment có path được chép vào <thư mục feature>/evidence/ (Playwright xoá test-results mỗi lần chạy):
   bỏ trace .zip, bỏ file trùng nội dung (sha256, giữ file đầu), tên theo tên attachment (TC-xx_ui.png, _api.png, _req.json, _res.json; ảnh Playwright tự chụp → _failed.png).
 - Ghi thêm "auto_status" (kết quả tự động gốc) cạnh "status"; testcases.json giữ nguyên định dạng phần trước "suites".
+- Verdict thủ công được giữ: case đã có auto_status mà status khác auto_status (SV chỉnh theo A20) → chỉ cập nhật
+  auto_status, actual_result, evidence; status giữ nguyên trừ khi chạy với --force. "notes" không bao giờ bị đụng.
+- Mỗi lượt chạy nên ghi results riêng có timestamp (vd results/B_FR07_20261020-131400.json) để không ghi đè lượt trước.
 - Không đụng tới expected_result.
 """
 import argparse
@@ -114,13 +117,14 @@ def main():
     ap.add_argument("results", type=Path)
     ap.add_argument("--evidence-dir", type=Path, help="mặc định <thư mục testcases>/evidence")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--force", action="store_true", help="ghi đè cả status do SV chỉnh tay bằng kết quả tự động")
     a = ap.parse_args()
     original = a.testcases.read_text(encoding="utf-8")
     data = json.loads(original)
     res = collect(json.loads(a.results.read_text(encoding="utf-8")))
     base = a.testcases.parent
     evdir = a.evidence_dir or base / "evidence"
-    hit = dup = 0
+    hit = dup = kept = 0
     for s in data.get("suites", []):
         for k, c in enumerate(s.get("cases", [])):
             r = res.get(c.get("id"))
@@ -128,11 +132,17 @@ def main():
                 continue
             hit += 1
             # auto_status = kết quả tự động gốc (Playwright, hoặc annotation verdict của script); status có thể được SV chỉnh sau
+            old_status, old_auto = c.get("status"), c.get("auto_status")
+            manual = old_auto is not None and old_status not in (None, "", "Not run") and old_status != old_auto
+            status = old_status if manual and not a.force else r["status"]
+            if manual and not a.force:
+                kept += 1
+                print(f"[GIỮ] {c['id']}: status '{old_status}' do SV đặt (auto cũ '{old_auto}', auto mới '{r['status']}') — dùng --force để ghi đè")
             c = {**{kk: vv for kk, vv in c.items() if kk != "auto_status"}}
             items = list(c.items())
             pos = next((j for j, (kk, _) in enumerate(items) if kk == "status"), len(items) - 1)
             items = [(kk, vv) for kk, vv in items if kk != "status"]
-            items[pos:pos] = [("status", r["status"]), ("auto_status", r["status"])]
+            items[pos:pos] = [("status", status), ("auto_status", r["status"])]
             c = dict(items)
             s["cases"][k] = c
             c["actual_result"] = r["actual"] or (f"(không ghi actual) {r['error']}" if r["error"] else "")
@@ -155,13 +165,14 @@ def main():
                 except ValueError:
                     ev.append(str(dst))
             c["evidence"] = ", ".join(ev)
-            print(f"{c['id']}: {r['status']}  {c['actual_result'][:80]}")
+            note = "" if status == r["status"] else f" (auto {r['status']})"
+            print(f"{c['id']}: {status}{note}  {c['actual_result'][:80]}")
     if dup:
         print(f"Bỏ {dup} attachment trùng nội dung.")
     missing = set(res) - {c.get("id") for s in data.get("suites", []) for c in s.get("cases", [])}
     for m in sorted(missing):
         print(f"[WARN] {m} có trong kết quả nhưng không có trong {a.testcases.name}")
-    print(f"Đã gộp {hit} test case.")
+    print(f"Đã gộp {hit} test case." + (f" Giữ {kept} verdict thủ công." if kept else ""))
     if not a.dry_run:
         a.testcases.write_text(dump_like_source(original, data), encoding="utf-8")
 
