@@ -25,3 +25,5 @@
 - 11:10 20/10/2026 · `B_FR07_step4_20261020-111050.md` · bước 4 · Claude Code bước 4c (oracle tương đối) · sha256 e080e6a21bdc
 - 16:26 20/10/2026 · `C_FR15_step1_20261020-162618.json` · bước 1 · Claude Code bước 0–1 · sha256 dbb5e65f85da
 - 16:26 20/10/2026 · `C_FR15_step1_20261020-162618.md` · bước 1 · Claude Code bước 0–1 · sha256 4764e4ab0ec7
+- 16:39 20/10/2026 · `C_FR15_step2_20261020-163945.json` · bước 2 · Claude Code bước 2 · sha256 3930559993c8
+- 16:39 20/10/2026 · `C_FR15_step2_20261020-163945.md` · bước 2 · Claude Code bước 2 · sha256 e2c63197af74

@@ -38,14 +38,162 @@ SV chốt 2026-10-20 (C5=a, C6=a, C8=a, C12, C13). form 'Thêm sản phẩm mớ
 | V14 | Phản hồi trên UI khi lưu / xóa | Ra | UI: hộp alert (App.jsx dòng 115, 129, 138), form trở về trạng thái 'Thêm sản phẩm mới' (dòng 120–127), bong bóng kiểm tra HTML5 của ô có required | enum | Thành công: SRS im lặng – chấp nhận mọi cách hợp lý, không khẳng định nội dung (C13). Bị từ chối: oracle theo C7. Thuộc tính chung — vị trí thông báo lỗi trên nút 'Lưu sản phẩm' (FR-22.4) khẳng định ở đúng 1 case TS-GUI (C12). |  |
 
 ### Bước 2 — Complete Set of Partitions
-| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
-|---|---|---|---|---|---|
+| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Yêu cầu | Ghi chú |
+|---|---|---|---|---|---|---|
+| EC1 | Thao tác CRUD | Thêm | ✔ | set | FR-15.1 | 1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên. |
+| EC2 | Thao tác CRUD | Xem | ✔ | set | FR-15.1 | 1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên. |
+| EC3 | Thao tác CRUD | Sửa | ✔ | set | FR-15.1 | 1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên. |
+| EC4 | Thao tác CRUD | Xóa | ✔ | set | FR-15.1 | 1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên. |
+| EC5 | Tên sản phẩm | [Thêm] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | ✔ | range | FR-15.2 | Lớp hợp lệ của khoảng 1–255 (FR-15.2). UI + API (POST /api/products). Đếm ký tự theo C4. Tách theo thao tác (C8). |
+| EC6 | Tên sản phẩm | [Thêm] Rỗng — 0 ký tự | ✘ | range | FR-15.2 | Lớp không hợp lệ phía dưới (bắt buộc). UI: ô 'Tên sản phẩm' để trống; API: name = "". |
+| EC7 | Tên sản phẩm | [Thêm] Dài hơn 255 ký tự | ✘ | range | FR-15.2 | Lớp không hợp lệ phía trên. UI + API. |
+| EC8 | Tên sản phẩm | [Thêm] Chỉ gồm khoảng trắng (vd '   ') | ✘ | split | FR-15.2, C3 | C3 SV chốt: coi như trống. Tách khỏi lớp 'rỗng' vì độ dài > 0 — có lý do tin bị xử lý khác chuỗi rỗng. UI + API. |
+| EC9 | Tên sản phẩm | [Thêm] API: thiếu trường name hoặc name = null | ✘ | must-be | FR-15.2, C9 | Chỉ tầng API (C9). Đại diện thiếu/null chọn ở bước 3. |
+| EC10 | Tên sản phẩm | [Thêm] API: name không phải chuỗi (vd số 123) | ✘ | type | FR-15.2, C9 | Chỉ tầng API (C9). |
+| EC11 | Tên sản phẩm | [Sửa] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | ✔ | range | FR-15.2 | Lớp hợp lệ của khoảng 1–255 (FR-15.2). UI + API (PUT /api/products/:id). Đếm ký tự theo C4. Tách theo thao tác (C8). |
+| EC12 | Tên sản phẩm | [Sửa] Rỗng — 0 ký tự | ✘ | range | FR-15.2 | Lớp không hợp lệ phía dưới (bắt buộc). UI: ô 'Tên sản phẩm' để trống; API: name = "". |
+| EC13 | Tên sản phẩm | [Sửa] Dài hơn 255 ký tự | ✘ | range | FR-15.2 | Lớp không hợp lệ phía trên. UI + API. |
+| EC14 | Tên sản phẩm | [Sửa] Chỉ gồm khoảng trắng (vd '   ') | ✘ | split | FR-15.2, C3 | C3 SV chốt: coi như trống. Tách khỏi lớp 'rỗng' vì độ dài > 0 — có lý do tin bị xử lý khác chuỗi rỗng. UI + API. |
+| EC15 | Tên sản phẩm | [Sửa] API: thiếu trường name hoặc name = null | ✘ | must-be | FR-15.2, C9 | Chỉ tầng API (C9). Đại diện thiếu/null chọn ở bước 3. |
+| EC16 | Tên sản phẩm | [Sửa] API: name không phải chuỗi (vd số 123) | ✘ | type | FR-15.2, C9 | Chỉ tầng API (C9). |
+| EC17 | Giá | [Thêm] Số nguyên > 0 (vd 1500000) | ✔ | range | FR-15.3 | Lớp hợp lệ của miền > 0 (FR-15.3). Không có cận trên (C2) → miền một phía. UI + API (POST /api/products). |
+| EC18 | Giá | [Thêm] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | ✔ | split | FR-15.3, C1 | C1 SV chốt: số thực > 0 hợp lệ. Tách khỏi lớp số nguyên vì có lý do tin bị xử lý khác: đơn vị ₫ không có phần lẻ (FR-21.3); cột products.price kiểu INTEGER (database.js dòng 67, gray-box). UI + API. |
+| EC19 | Giá | [Thêm] Số ≤ 0 (vd 0; -1000) | ✘ | range | FR-15.3 | Lớp không hợp lệ phía dưới. Phía trên không có lớp không hợp lệ (C2). UI + API. |
+| EC20 | Giá | [Thêm] UI: ô 'Giá tiền' để trống | ✘ | must-be | FR-15.3 | Chỉ tầng UI (bắt buộc). Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp. Bản API tương ứng: lớp thiếu/null. |
+| EC21 | Giá | [Thêm] API: thiếu trường price hoặc price = null | ✘ | must-be | FR-15.3, C9 | Chỉ tầng API (C9). |
+| EC22 | Giá | [Thêm] API: price là chuỗi chữ (vd "abc") | ✘ | type | FR-15.3, C9 | Chỉ tầng API (C9). |
+| EC23 | Giá | [Thêm] API: price là chuỗi số (vd "100000") | ✘ | type | FR-15.3, C9 | Chỉ tầng API. C9 SV chốt: chuỗi số là sai kiểu. Tách khỏi chuỗi chữ vì giá trị số của nó hợp lệ — có lý do tin bị xử lý khác (chuyển kiểu ngầm). |
+| EC24 | Giá | [Sửa] Số nguyên > 0 (vd 1500000) | ✔ | range | FR-15.3 | Lớp hợp lệ của miền > 0 (FR-15.3). Không có cận trên (C2) → miền một phía. UI + API (PUT /api/products/:id). |
+| EC25 | Giá | [Sửa] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | ✔ | split | FR-15.3, C1 | C1 SV chốt: số thực > 0 hợp lệ. Tách khỏi lớp số nguyên vì có lý do tin bị xử lý khác: đơn vị ₫ không có phần lẻ (FR-21.3); cột products.price kiểu INTEGER (database.js dòng 67, gray-box). UI + API. |
+| EC26 | Giá | [Sửa] Số ≤ 0 (vd 0; -1000) | ✘ | range | FR-15.3 | Lớp không hợp lệ phía dưới. Phía trên không có lớp không hợp lệ (C2). UI + API. |
+| EC27 | Giá | [Sửa] UI: ô 'Giá tiền' để trống | ✘ | must-be | FR-15.3 | Chỉ tầng UI (bắt buộc). Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp. Bản API tương ứng: lớp thiếu/null. |
+| EC28 | Giá | [Sửa] API: thiếu trường price hoặc price = null | ✘ | must-be | FR-15.3, C9 | Chỉ tầng API (C9). |
+| EC29 | Giá | [Sửa] API: price là chuỗi chữ (vd "abc") | ✘ | type | FR-15.3, C9 | Chỉ tầng API (C9). |
+| EC30 | Giá | [Sửa] API: price là chuỗi số (vd "100000") | ✘ | type | FR-15.3, C9 | Chỉ tầng API. C9 SV chốt: chuỗi số là sai kiểu. Tách khỏi chuỗi chữ vì giá trị số của nó hợp lệ — có lý do tin bị xử lý khác (chuyển kiểu ngầm). |
+| EC31 | Danh mục | [Thêm] category_id thuộc danh sách danh mục có sẵn (vd 2) | ✔ | set | FR-15.4, C11 | C11: danh sách = bảng categories lúc lưu (seed id 1–3). Các danh mục xử lý như nhau → 1 lớp. UI (ô chọn) + API. |
+| EC32 | Danh mục | [Thêm] API: category_id không có trong danh sách (vd 999) | ✘ | set | FR-15.4, C11 | Chỉ tầng API — ô chọn trên UI chỉ có danh mục có sẵn (C11, gray-box). |
+| EC33 | Danh mục | [Thêm] API: thiếu trường category_id hoặc category_id = null | ✘ | must-be | FR-15.4, C9 | Chỉ tầng API (C9). |
+| EC34 | Danh mục | [Thêm] API: category_id là chuỗi chữ (vd "abc") | ✘ | type | FR-15.4, C9 | Chỉ tầng API (C9). |
+| EC35 | Danh mục | [Sửa] category_id thuộc danh sách danh mục có sẵn (vd 2) | ✔ | set | FR-15.4, C11 | C11: danh sách = bảng categories lúc lưu (seed id 1–3). Các danh mục xử lý như nhau → 1 lớp. UI (ô chọn) + API. |
+| EC36 | Danh mục | [Sửa] API: category_id không có trong danh sách (vd 999) | ✘ | set | FR-15.4, C11 | Chỉ tầng API — ô chọn trên UI chỉ có danh mục có sẵn (C11, gray-box). |
+| EC37 | Danh mục | [Sửa] API: thiếu trường category_id hoặc category_id = null | ✘ | must-be | FR-15.4, C9 | Chỉ tầng API (C9). |
+| EC38 | Danh mục | [Sửa] API: category_id là chuỗi chữ (vd "abc") | ✘ | type | FR-15.4, C9 | Chỉ tầng API (C9). |
+| EC39 | Mô tả | Chuỗi mô tả bất kỳ (nominal, vd 'Mô tả {ts}') | ✔ | set |  | SRS im lặng – chấp nhận mọi cách hợp lý (C13). Không có lớp không hợp lệ → cảnh báo giữ nguyên. |
+| EC40 | URL Ảnh | URL ảnh dạng http(s) (nominal, vd 'https://placehold.co/300') | ✔ | set |  | SRS im lặng – chấp nhận mọi cách hợp lý (C13). Không có lớp không hợp lệ → cảnh báo giữ nguyên. |
+| EC41 | Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa) | id sản phẩm tồn tại (sản phẩm do case tạo, C0) | ✔ | set | FR-15.1 | UI (dòng được bấm 'Sửa'/'Xóa') + API (:id). |
+| EC42 | Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa) | [Xem] API: GET /api/products/:id với id không tồn tại | ✘ | set | FR-15.1, C10 | Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8). |
+| EC43 | Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa) | [Sửa] API: PUT /api/products/:id với id không tồn tại | ✘ | set | FR-15.1, C10 | Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8). |
+| EC44 | Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa) | [Xóa] API: DELETE /api/products/:id với id không tồn tại | ✘ | set | FR-15.1, C10 | Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8). |
+| EC45 | Danh tính người gọi / token | Token hợp lệ, role admin | ✔ | set | FR-12.2 | UI luôn chạy trong phiên admin. API: Authorization: Bearer <token admin>. |
+| EC46 | Danh tính người gọi / token | [Thêm] API: POST không có header Authorization | ✘ | must-be | FR-12.2, SEC-02 | Chỉ tầng API (C5). |
+| EC47 | Danh tính người gọi / token | [Thêm] API: POST với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ✘ | must-be | FR-12.2, SEC-02 | Chỉ tầng API (C5). |
+| EC48 | Danh tính người gọi / token | [Thêm] API: POST với token hợp lệ của role user (test@eshop.com) | ✘ | set | FR-12.2, SEC-03 | Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03). |
+| EC49 | Danh tính người gọi / token | [Sửa] API: PUT không có header Authorization | ✘ | must-be | FR-12.2, SEC-02 | Chỉ tầng API (C5). |
+| EC50 | Danh tính người gọi / token | [Sửa] API: PUT với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ✘ | must-be | FR-12.2, SEC-02 | Chỉ tầng API (C5). |
+| EC51 | Danh tính người gọi / token | [Sửa] API: PUT với token hợp lệ của role user (test@eshop.com) | ✘ | set | FR-12.2, SEC-03 | Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03). |
+| EC52 | Danh tính người gọi / token | [Xóa] API: DELETE không có header Authorization | ✘ | must-be | FR-12.2, SEC-02 | Chỉ tầng API (C5). |
+| EC53 | Danh tính người gọi / token | [Xóa] API: DELETE với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ✘ | must-be | FR-12.2, SEC-02 | Chỉ tầng API (C5). |
+| EC54 | Danh tính người gọi / token | [Xóa] API: DELETE với token hợp lệ của role user (test@eshop.com) | ✘ | set | FR-12.2, SEC-03 | Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03). |
+| EC55 | Các sản phẩm khác trong CSDL (trạng thái) | Có ≥ 1 sản phẩm khác ngoài sản phẩm mục tiêu (5 sản phẩm seed + sản phẩm của case) | ✔ | count | FR-15.5 | Trạng thái dữ liệu cần để quan sát FR-15.5. Không có lớp không hợp lệ (0 sản phẩm khác không phải đầu vào sai) → cảnh báo giữ nguyên. |
+| EC56 | Bản ghi sản phẩm sau thao tác | Thêm hợp lệ: thêm đúng 1 bản ghi; name, price, category_id = giá trị gửi | ✔ | set | FR-15.1 | Quan sát GET /api/products trước/sau (C0). So price theo C15. |
+| EC57 | Bản ghi sản phẩm sau thao tác | Sửa hợp lệ: bản ghi mục tiêu có name, price, category_id = giá trị mới | ✔ | set | FR-15.1 | Quan sát GET /api/products/:id. So price theo C15. |
+| EC58 | Bản ghi sản phẩm sau thao tác | Xóa hợp lệ: bản ghi mục tiêu không còn trong GET /api/products | ✔ | set | FR-15.1 |  |
+| EC59 | Bản ghi sản phẩm sau thao tác | Xem: GET /api/products/:id trả bản ghi có các trường = giá trị đã lưu | ✔ | set | FR-15.1, C15 | C15 (chờ SV chốt): cách so kiểu dữ liệu của price. |
+| EC60 | Bản ghi sản phẩm sau thao tác | Tầng API bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | ✔ | set | C6 | C6; dùng chung cho từ chối do dữ liệu, id không tồn tại, không đủ quyền. |
+| EC61 | Bản ghi sản phẩm sau thao tác | Tầng UI bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | ✔ | set | C7 | C7. Quan sát bằng GET /api/products (C0). |
+| EC62 | Danh sách sản phẩm trên UI | Sau Thêm hợp lệ: bảng có thêm 1 dòng, 'Tên SP' và 'Giá' = giá trị nhập | ✔ | set | FR-15.1 | So giá trị số; định dạng ₫ kiểm riêng ở TS-GUI (C12). |
+| EC63 | Danh sách sản phẩm trên UI | Sau Sửa hợp lệ: dòng mục tiêu hiển thị giá trị mới | ✔ | set | FR-15.1 |  |
+| EC64 | Danh sách sản phẩm trên UI | Sau Xóa: dòng mục tiêu không còn trong bảng | ✔ | set | FR-15.1 |  |
+| EC65 | Danh sách sản phẩm trên UI | Xem: tab 'Sản phẩm' hiển thị đủ các sản phẩm có trong GET /api/products | ✔ | set | FR-15.1 |  |
+| EC66 | Danh sách sản phẩm trên UI | UI bị từ chối: bảng không đổi (SAU = TRƯỚC) | ✔ | set | C7 |  |
+| EC67 | Các sản phẩm khác sau khi Sửa | Các sản phẩm khác giữ nguyên sau khi Sửa (SAU = TRƯỚC) | ✔ | must-be | FR-15.5 | Áp cả UI (bảng) và API (GET /api/products); mỗi tầng một case. |
+| EC68 | Phản hồi API sản phẩm | API: 2xx khi thao tác hợp lệ | ✔ | set | API-PROD | Không khẳng định nội dung body (api_specification không quy định). |
+| EC69 | Phản hồi API sản phẩm | API: 4xx kèm trường error khi dữ liệu vi phạm FR-15.2–15.4 hoặc sai kiểu/thiếu trường | ✔ | set | C6 | Không 2xx, không 5xx; không cố định mã (C6). |
+| EC70 | Phản hồi API sản phẩm | API: 4xx khi id không tồn tại | ✔ | set | C10 | Không 2xx, không 5xx (C10). |
+| EC71 | Phản hồi API sản phẩm | API: 4xx khi không đủ quyền (thiếu/sai token, role user) | ✔ | set | FR-12.2 | C5; không cố định mã. |
+| EC72 | Phản hồi trên UI khi lưu / xóa | UI bị từ chối: có thông báo lỗi trên form (kể cả bong bóng kiểm tra HTML5) | ✔ | must-be | C7 | Nội dung chữ ghi làm Actual. Vị trí (FR-22.4) kiểm riêng ở TS-GUI (C12). |
+| EC73 | Phản hồi trên UI khi lưu / xóa | UI thành công: không hiển thị thông báo lỗi | ✔ | set | FR-15.1 | (ngầm định) Nội dung thông báo thành công không khẳng định (C13). |
 
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
+| EC1 | Thêm | ⚠ chưa phủ |
+| EC2 | Xem | ⚠ chưa phủ |
+| EC3 | Sửa | ⚠ chưa phủ |
+| EC4 | Xóa | ⚠ chưa phủ |
+| EC5 | [Thêm] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | ⚠ chưa phủ |
+| EC6 | [Thêm] Rỗng — 0 ký tự | ⚠ chưa phủ |
+| EC7 | [Thêm] Dài hơn 255 ký tự | ⚠ chưa phủ |
+| EC8 | [Thêm] Chỉ gồm khoảng trắng (vd '   ') | ⚠ chưa phủ |
+| EC9 | [Thêm] API: thiếu trường name hoặc name = null | ⚠ chưa phủ |
+| EC10 | [Thêm] API: name không phải chuỗi (vd số 123) | ⚠ chưa phủ |
+| EC11 | [Sửa] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | ⚠ chưa phủ |
+| EC12 | [Sửa] Rỗng — 0 ký tự | ⚠ chưa phủ |
+| EC13 | [Sửa] Dài hơn 255 ký tự | ⚠ chưa phủ |
+| EC14 | [Sửa] Chỉ gồm khoảng trắng (vd '   ') | ⚠ chưa phủ |
+| EC15 | [Sửa] API: thiếu trường name hoặc name = null | ⚠ chưa phủ |
+| EC16 | [Sửa] API: name không phải chuỗi (vd số 123) | ⚠ chưa phủ |
+| EC17 | [Thêm] Số nguyên > 0 (vd 1500000) | ⚠ chưa phủ |
+| EC18 | [Thêm] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | ⚠ chưa phủ |
+| EC19 | [Thêm] Số ≤ 0 (vd 0; -1000) | ⚠ chưa phủ |
+| EC20 | [Thêm] UI: ô 'Giá tiền' để trống | ⚠ chưa phủ |
+| EC21 | [Thêm] API: thiếu trường price hoặc price = null | ⚠ chưa phủ |
+| EC22 | [Thêm] API: price là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
+| EC23 | [Thêm] API: price là chuỗi số (vd "100000") | ⚠ chưa phủ |
+| EC24 | [Sửa] Số nguyên > 0 (vd 1500000) | ⚠ chưa phủ |
+| EC25 | [Sửa] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | ⚠ chưa phủ |
+| EC26 | [Sửa] Số ≤ 0 (vd 0; -1000) | ⚠ chưa phủ |
+| EC27 | [Sửa] UI: ô 'Giá tiền' để trống | ⚠ chưa phủ |
+| EC28 | [Sửa] API: thiếu trường price hoặc price = null | ⚠ chưa phủ |
+| EC29 | [Sửa] API: price là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
+| EC30 | [Sửa] API: price là chuỗi số (vd "100000") | ⚠ chưa phủ |
+| EC31 | [Thêm] category_id thuộc danh sách danh mục có sẵn (vd 2) | ⚠ chưa phủ |
+| EC32 | [Thêm] API: category_id không có trong danh sách (vd 999) | ⚠ chưa phủ |
+| EC33 | [Thêm] API: thiếu trường category_id hoặc category_id = null | ⚠ chưa phủ |
+| EC34 | [Thêm] API: category_id là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
+| EC35 | [Sửa] category_id thuộc danh sách danh mục có sẵn (vd 2) | ⚠ chưa phủ |
+| EC36 | [Sửa] API: category_id không có trong danh sách (vd 999) | ⚠ chưa phủ |
+| EC37 | [Sửa] API: thiếu trường category_id hoặc category_id = null | ⚠ chưa phủ |
+| EC38 | [Sửa] API: category_id là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
+| EC39 | Chuỗi mô tả bất kỳ (nominal, vd 'Mô tả {ts}') | ⚠ chưa phủ |
+| EC40 | URL ảnh dạng http(s) (nominal, vd 'https://placehold.co/300') | ⚠ chưa phủ |
+| EC41 | id sản phẩm tồn tại (sản phẩm do case tạo, C0) | ⚠ chưa phủ |
+| EC42 | [Xem] API: GET /api/products/:id với id không tồn tại | ⚠ chưa phủ |
+| EC43 | [Sửa] API: PUT /api/products/:id với id không tồn tại | ⚠ chưa phủ |
+| EC44 | [Xóa] API: DELETE /api/products/:id với id không tồn tại | ⚠ chưa phủ |
+| EC45 | Token hợp lệ, role admin | ⚠ chưa phủ |
+| EC46 | [Thêm] API: POST không có header Authorization | ⚠ chưa phủ |
+| EC47 | [Thêm] API: POST với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ⚠ chưa phủ |
+| EC48 | [Thêm] API: POST với token hợp lệ của role user (test@eshop.com) | ⚠ chưa phủ |
+| EC49 | [Sửa] API: PUT không có header Authorization | ⚠ chưa phủ |
+| EC50 | [Sửa] API: PUT với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ⚠ chưa phủ |
+| EC51 | [Sửa] API: PUT với token hợp lệ của role user (test@eshop.com) | ⚠ chưa phủ |
+| EC52 | [Xóa] API: DELETE không có header Authorization | ⚠ chưa phủ |
+| EC53 | [Xóa] API: DELETE với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ⚠ chưa phủ |
+| EC54 | [Xóa] API: DELETE với token hợp lệ của role user (test@eshop.com) | ⚠ chưa phủ |
+| EC55 | Có ≥ 1 sản phẩm khác ngoài sản phẩm mục tiêu (5 sản phẩm seed + sản phẩm của case) | ⚠ chưa phủ |
+| EC56 | Thêm hợp lệ: thêm đúng 1 bản ghi; name, price, category_id = giá trị gửi | ⚠ chưa phủ |
+| EC57 | Sửa hợp lệ: bản ghi mục tiêu có name, price, category_id = giá trị mới | ⚠ chưa phủ |
+| EC58 | Xóa hợp lệ: bản ghi mục tiêu không còn trong GET /api/products | ⚠ chưa phủ |
+| EC59 | Xem: GET /api/products/:id trả bản ghi có các trường = giá trị đã lưu | ⚠ chưa phủ |
+| EC60 | Tầng API bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | ⚠ chưa phủ |
+| EC61 | Tầng UI bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | ⚠ chưa phủ |
+| EC62 | Sau Thêm hợp lệ: bảng có thêm 1 dòng, 'Tên SP' và 'Giá' = giá trị nhập | ⚠ chưa phủ |
+| EC63 | Sau Sửa hợp lệ: dòng mục tiêu hiển thị giá trị mới | ⚠ chưa phủ |
+| EC64 | Sau Xóa: dòng mục tiêu không còn trong bảng | ⚠ chưa phủ |
+| EC65 | Xem: tab 'Sản phẩm' hiển thị đủ các sản phẩm có trong GET /api/products | ⚠ chưa phủ |
+| EC66 | UI bị từ chối: bảng không đổi (SAU = TRƯỚC) | ⚠ chưa phủ |
+| EC67 | Các sản phẩm khác giữ nguyên sau khi Sửa (SAU = TRƯỚC) | ⚠ chưa phủ |
+| EC68 | API: 2xx khi thao tác hợp lệ | ⚠ chưa phủ |
+| EC69 | API: 4xx kèm trường error khi dữ liệu vi phạm FR-15.2–15.4 hoặc sai kiểu/thiếu trường | ⚠ chưa phủ |
+| EC70 | API: 4xx khi id không tồn tại | ⚠ chưa phủ |
+| EC71 | API: 4xx khi không đủ quyền (thiếu/sai token, role user) | ⚠ chưa phủ |
+| EC72 | UI bị từ chối: có thông báo lỗi trên form (kể cả bong bóng kiểm tra HTML5) | ⚠ chưa phủ |
+| EC73 | UI thành công: không hiển thị thông báo lỗi | ⚠ chưa phủ |
 
 ### Truy vết yêu cầu ↔ test case
+Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.
+
 | Yêu cầu | Test case | Số TC |
 |---|---|---|
 | FR-15.1 | ⚠ | 0 |
@@ -79,5 +227,6 @@ SV chốt 2026-10-20 (C5=a, C6=a, C8=a, C12, C13). form 'Thêm sản phẩm mớ
 - C12 (GUI liên quan) [loại: phạm vi · truy vết: không · căn cứ: tiền lệ A14, B16 (SV chốt) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: thuộc tính tĩnh/hiển thị của form và bảng sản phẩm — FR-22.1 ('*' cạnh nhãn Tên, Giá, Danh mục), FR-22.4 (thông báo lỗi trên nút 'Lưu sản phẩm'), FR-21.3 (cột 'Giá' dùng ₫ + phân cách hàng nghìn), FR-24.4 (alt ảnh trong cột 'Ảnh'), SEC-04 (tên sản phẩm hiển thị an toàn) — kiểm bằng suite TS-GUI riêng, mỗi thuộc tính khẳng định ở đúng 1 case, không phân lớp. Quan sát: form chỉ có placeholder, không có phần tử nhãn (App.jsx dòng 491–543) — xử lý ở bước 3 theo A17.
 - C13 (ngoài phạm vi / SRS im lặng) [loại: phạm vi · truy vết: không · căn cứ: SRS · SV chốt 2026-10-20, chấp nhận đề xuất AI]: ngoài phạm vi — FR-16 (import CSV), FR-14 (Category CRUD, chỉ dùng 3 danh mục seed làm dữ liệu), FR-13, hiển thị sản phẩm trên frontend-web/mobile (FR-05, FR-06, FR-20). SRS im lặng – chấp nhận mọi cách hợp lý, không đặt Expected: tên trùng với sản phẩm khác; Mô tả và URL Ảnh (giữ giá trị nominal hợp lệ); hộp xác nhận trước khi Xóa sản phẩm (FR-24.2 chỉ nói giỏ hàng); nội dung thông báo khi lưu/xóa thành công; nút 'Hủy sửa'.
 - C14 (quy tắc verdict) [loại: quy trình · truy vết: không · căn cứ: quy ước đã chốt từ A_FR01/B_FR07 (A17, A20) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: lệch Expected do biến mục tiêu → Fail; bị chặn bởi lỗi đã có ở case khác → Blocked, ghi case gốc; trường SRS yêu cầu mà UI không có → case kiểm sự tồn tại Fail, case phụ thuộc Blocked; từ chối đúng nhưng lý do không chứng minh luật mục tiêu → 'Pass hộp đen' ghi trong notes.
+- C15 (kiểu dữ liệu price trong phản hồi GET) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; api_specification chỉ có ví dụ body gửi lên với price là số (dòng 95); C9 (SV chốt) coi price chuỗi là sai kiểu ở chiều gửi · đề xuất – chờ SV chốt]: (a) so theo giá trị số — "100000" và 100000 coi là bằng nhau; (b) price trong phản hồi phải là số JSON — price dạng chuỗi lệch Expected. Quan sát code (gray-box): GET /api/products/:id đổi price thành chuỗi khi id chẵn (server.js dòng 162).
 
 **Tổng:** chưa có test case (bước 3–4).

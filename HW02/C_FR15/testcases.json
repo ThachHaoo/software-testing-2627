@@ -6,7 +6,7 @@
     "feature": "FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products)",
     "feature_code": "C_FR15",
     "doc_id": "TCD-C_FR15",
-    "version": "0.2",
+    "version": "0.3",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -42,7 +42,8 @@
       "C11 (Danh mục – 'danh sách có sẵn') [loại: quyết định Expected · truy vết: có · căn cứ: FR-15.4 'phải chọn từ danh sách có sẵn' · SV chốt 2026-10-20, chấp nhận đề xuất AI]: danh sách có sẵn = các danh mục tồn tại trong bảng categories (GET /api/categories) tại thời điểm lưu. category_id không có trong danh sách hoặc thiếu → không hợp lệ. Quan sát (gray-box): ô chọn danh mục trên UI luôn có giá trị, mặc định category_id 1 (App.jsx dòng 101, 528–543) → lớp 'không chọn'/'ngoài danh sách' chỉ tạo được qua API.",
       "C12 (GUI liên quan) [loại: phạm vi · truy vết: không · căn cứ: tiền lệ A14, B16 (SV chốt) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: thuộc tính tĩnh/hiển thị của form và bảng sản phẩm — FR-22.1 ('*' cạnh nhãn Tên, Giá, Danh mục), FR-22.4 (thông báo lỗi trên nút 'Lưu sản phẩm'), FR-21.3 (cột 'Giá' dùng ₫ + phân cách hàng nghìn), FR-24.4 (alt ảnh trong cột 'Ảnh'), SEC-04 (tên sản phẩm hiển thị an toàn) — kiểm bằng suite TS-GUI riêng, mỗi thuộc tính khẳng định ở đúng 1 case, không phân lớp. Quan sát: form chỉ có placeholder, không có phần tử nhãn (App.jsx dòng 491–543) — xử lý ở bước 3 theo A17.",
       "C13 (ngoài phạm vi / SRS im lặng) [loại: phạm vi · truy vết: không · căn cứ: SRS · SV chốt 2026-10-20, chấp nhận đề xuất AI]: ngoài phạm vi — FR-16 (import CSV), FR-14 (Category CRUD, chỉ dùng 3 danh mục seed làm dữ liệu), FR-13, hiển thị sản phẩm trên frontend-web/mobile (FR-05, FR-06, FR-20). SRS im lặng – chấp nhận mọi cách hợp lý, không đặt Expected: tên trùng với sản phẩm khác; Mô tả và URL Ảnh (giữ giá trị nominal hợp lệ); hộp xác nhận trước khi Xóa sản phẩm (FR-24.2 chỉ nói giỏ hàng); nội dung thông báo khi lưu/xóa thành công; nút 'Hủy sửa'.",
-      "C14 (quy tắc verdict) [loại: quy trình · truy vết: không · căn cứ: quy ước đã chốt từ A_FR01/B_FR07 (A17, A20) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: lệch Expected do biến mục tiêu → Fail; bị chặn bởi lỗi đã có ở case khác → Blocked, ghi case gốc; trường SRS yêu cầu mà UI không có → case kiểm sự tồn tại Fail, case phụ thuộc Blocked; từ chối đúng nhưng lý do không chứng minh luật mục tiêu → 'Pass hộp đen' ghi trong notes."
+      "C14 (quy tắc verdict) [loại: quy trình · truy vết: không · căn cứ: quy ước đã chốt từ A_FR01/B_FR07 (A17, A20) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: lệch Expected do biến mục tiêu → Fail; bị chặn bởi lỗi đã có ở case khác → Blocked, ghi case gốc; trường SRS yêu cầu mà UI không có → case kiểm sự tồn tại Fail, case phụ thuộc Blocked; từ chối đúng nhưng lý do không chứng minh luật mục tiêu → 'Pass hộp đen' ghi trong notes.",
+      "C15 (kiểu dữ liệu price trong phản hồi GET) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; api_specification chỉ có ví dụ body gửi lên với price là số (dòng 95); C9 (SV chốt) coi price chuỗi là sai kiểu ở chiều gửi · đề xuất – chờ SV chốt]: (a) so theo giá trị số — \"100000\" và 100000 coi là bằng nhau; (b) price trong phản hồi phải là số JSON — price dạng chuỗi lệch Expected. Quan sát code (gray-box): GET /api/products/:id đổi price thành chuỗi khi id chẵn (server.js dòng 162)."
     ]
   },
   "requirements": [
@@ -225,7 +226,842 @@
         "constraint": "Thành công: SRS im lặng – chấp nhận mọi cách hợp lý, không khẳng định nội dung (C13). Bị từ chối: oracle theo C7. Thuộc tính chung — vị trí thông báo lỗi trên nút 'Lưu sản phẩm' (FR-22.4) khẳng định ở đúng 1 case TS-GUI (C12)."
       }
     ],
-    "partitions": []
+    "partitions": [
+      {
+        "id": "EC1",
+        "variable": "V1",
+        "class": "Thêm",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC2",
+        "variable": "V1",
+        "class": "Xem",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC3",
+        "variable": "V1",
+        "class": "Sửa",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC4",
+        "variable": "V1",
+        "class": "Xóa",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC5",
+        "variable": "V2",
+        "class": "[Thêm] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}')",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của khoảng 1–255 (FR-15.2). UI + API (POST /api/products). Đếm ký tự theo C4. Tách theo thao tác (C8).",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC6",
+        "variable": "V2",
+        "class": "[Thêm] Rỗng — 0 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới (bắt buộc). UI: ô 'Tên sản phẩm' để trống; API: name = \"\".",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC7",
+        "variable": "V2",
+        "class": "[Thêm] Dài hơn 255 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía trên. UI + API.",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC8",
+        "variable": "V2",
+        "class": "[Thêm] Chỉ gồm khoảng trắng (vd '   ')",
+        "valid": false,
+        "guideline": "split",
+        "note": "C3 SV chốt: coi như trống. Tách khỏi lớp 'rỗng' vì độ dài > 0 — có lý do tin bị xử lý khác chuỗi rỗng. UI + API.",
+        "requirements": [
+          "FR-15.2",
+          "C3"
+        ]
+      },
+      {
+        "id": "EC9",
+        "variable": "V2",
+        "class": "[Thêm] API: thiếu trường name hoặc name = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9). Đại diện thiếu/null chọn ở bước 3.",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC10",
+        "variable": "V2",
+        "class": "[Thêm] API: name không phải chuỗi (vd số 123)",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC11",
+        "variable": "V2",
+        "class": "[Sửa] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}')",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của khoảng 1–255 (FR-15.2). UI + API (PUT /api/products/:id). Đếm ký tự theo C4. Tách theo thao tác (C8).",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC12",
+        "variable": "V2",
+        "class": "[Sửa] Rỗng — 0 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới (bắt buộc). UI: ô 'Tên sản phẩm' để trống; API: name = \"\".",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC13",
+        "variable": "V2",
+        "class": "[Sửa] Dài hơn 255 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía trên. UI + API.",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC14",
+        "variable": "V2",
+        "class": "[Sửa] Chỉ gồm khoảng trắng (vd '   ')",
+        "valid": false,
+        "guideline": "split",
+        "note": "C3 SV chốt: coi như trống. Tách khỏi lớp 'rỗng' vì độ dài > 0 — có lý do tin bị xử lý khác chuỗi rỗng. UI + API.",
+        "requirements": [
+          "FR-15.2",
+          "C3"
+        ]
+      },
+      {
+        "id": "EC15",
+        "variable": "V2",
+        "class": "[Sửa] API: thiếu trường name hoặc name = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9). Đại diện thiếu/null chọn ở bước 3.",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC16",
+        "variable": "V2",
+        "class": "[Sửa] API: name không phải chuỗi (vd số 123)",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC17",
+        "variable": "V3",
+        "class": "[Thêm] Số nguyên > 0 (vd 1500000)",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của miền > 0 (FR-15.3). Không có cận trên (C2) → miền một phía. UI + API (POST /api/products).",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC18",
+        "variable": "V3",
+        "class": "[Thêm] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5)",
+        "valid": true,
+        "guideline": "split",
+        "note": "C1 SV chốt: số thực > 0 hợp lệ. Tách khỏi lớp số nguyên vì có lý do tin bị xử lý khác: đơn vị ₫ không có phần lẻ (FR-21.3); cột products.price kiểu INTEGER (database.js dòng 67, gray-box). UI + API.",
+        "requirements": [
+          "FR-15.3",
+          "C1"
+        ]
+      },
+      {
+        "id": "EC19",
+        "variable": "V3",
+        "class": "[Thêm] Số ≤ 0 (vd 0; -1000)",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới. Phía trên không có lớp không hợp lệ (C2). UI + API.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC20",
+        "variable": "V3",
+        "class": "[Thêm] UI: ô 'Giá tiền' để trống",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng UI (bắt buộc). Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp. Bản API tương ứng: lớp thiếu/null.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC21",
+        "variable": "V3",
+        "class": "[Thêm] API: thiếu trường price hoặc price = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC22",
+        "variable": "V3",
+        "class": "[Thêm] API: price là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC23",
+        "variable": "V3",
+        "class": "[Thêm] API: price là chuỗi số (vd \"100000\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API. C9 SV chốt: chuỗi số là sai kiểu. Tách khỏi chuỗi chữ vì giá trị số của nó hợp lệ — có lý do tin bị xử lý khác (chuyển kiểu ngầm).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC24",
+        "variable": "V3",
+        "class": "[Sửa] Số nguyên > 0 (vd 1500000)",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của miền > 0 (FR-15.3). Không có cận trên (C2) → miền một phía. UI + API (PUT /api/products/:id).",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC25",
+        "variable": "V3",
+        "class": "[Sửa] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5)",
+        "valid": true,
+        "guideline": "split",
+        "note": "C1 SV chốt: số thực > 0 hợp lệ. Tách khỏi lớp số nguyên vì có lý do tin bị xử lý khác: đơn vị ₫ không có phần lẻ (FR-21.3); cột products.price kiểu INTEGER (database.js dòng 67, gray-box). UI + API.",
+        "requirements": [
+          "FR-15.3",
+          "C1"
+        ]
+      },
+      {
+        "id": "EC26",
+        "variable": "V3",
+        "class": "[Sửa] Số ≤ 0 (vd 0; -1000)",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới. Phía trên không có lớp không hợp lệ (C2). UI + API.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC27",
+        "variable": "V3",
+        "class": "[Sửa] UI: ô 'Giá tiền' để trống",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng UI (bắt buộc). Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp. Bản API tương ứng: lớp thiếu/null.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC28",
+        "variable": "V3",
+        "class": "[Sửa] API: thiếu trường price hoặc price = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC29",
+        "variable": "V3",
+        "class": "[Sửa] API: price là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC30",
+        "variable": "V3",
+        "class": "[Sửa] API: price là chuỗi số (vd \"100000\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API. C9 SV chốt: chuỗi số là sai kiểu. Tách khỏi chuỗi chữ vì giá trị số của nó hợp lệ — có lý do tin bị xử lý khác (chuyển kiểu ngầm).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC31",
+        "variable": "V4",
+        "class": "[Thêm] category_id thuộc danh sách danh mục có sẵn (vd 2)",
+        "valid": true,
+        "guideline": "set",
+        "note": "C11: danh sách = bảng categories lúc lưu (seed id 1–3). Các danh mục xử lý như nhau → 1 lớp. UI (ô chọn) + API.",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC32",
+        "variable": "V4",
+        "class": "[Thêm] API: category_id không có trong danh sách (vd 999)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API — ô chọn trên UI chỉ có danh mục có sẵn (C11, gray-box).",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC33",
+        "variable": "V4",
+        "class": "[Thêm] API: thiếu trường category_id hoặc category_id = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC34",
+        "variable": "V4",
+        "class": "[Thêm] API: category_id là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC35",
+        "variable": "V4",
+        "class": "[Sửa] category_id thuộc danh sách danh mục có sẵn (vd 2)",
+        "valid": true,
+        "guideline": "set",
+        "note": "C11: danh sách = bảng categories lúc lưu (seed id 1–3). Các danh mục xử lý như nhau → 1 lớp. UI (ô chọn) + API.",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC36",
+        "variable": "V4",
+        "class": "[Sửa] API: category_id không có trong danh sách (vd 999)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API — ô chọn trên UI chỉ có danh mục có sẵn (C11, gray-box).",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC37",
+        "variable": "V4",
+        "class": "[Sửa] API: thiếu trường category_id hoặc category_id = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC38",
+        "variable": "V4",
+        "class": "[Sửa] API: category_id là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC39",
+        "variable": "V5",
+        "class": "Chuỗi mô tả bất kỳ (nominal, vd 'Mô tả {ts}')",
+        "valid": true,
+        "guideline": "set",
+        "note": "SRS im lặng – chấp nhận mọi cách hợp lý (C13). Không có lớp không hợp lệ → cảnh báo giữ nguyên.",
+        "requirements": []
+      },
+      {
+        "id": "EC40",
+        "variable": "V6",
+        "class": "URL ảnh dạng http(s) (nominal, vd 'https://placehold.co/300')",
+        "valid": true,
+        "guideline": "set",
+        "note": "SRS im lặng – chấp nhận mọi cách hợp lý (C13). Không có lớp không hợp lệ → cảnh báo giữ nguyên.",
+        "requirements": []
+      },
+      {
+        "id": "EC41",
+        "variable": "V7",
+        "class": "id sản phẩm tồn tại (sản phẩm do case tạo, C0)",
+        "valid": true,
+        "guideline": "set",
+        "note": "UI (dòng được bấm 'Sửa'/'Xóa') + API (:id).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC42",
+        "variable": "V7",
+        "class": "[Xem] API: GET /api/products/:id với id không tồn tại",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8).",
+        "requirements": [
+          "FR-15.1",
+          "C10"
+        ]
+      },
+      {
+        "id": "EC43",
+        "variable": "V7",
+        "class": "[Sửa] API: PUT /api/products/:id với id không tồn tại",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8).",
+        "requirements": [
+          "FR-15.1",
+          "C10"
+        ]
+      },
+      {
+        "id": "EC44",
+        "variable": "V7",
+        "class": "[Xóa] API: DELETE /api/products/:id với id không tồn tại",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8).",
+        "requirements": [
+          "FR-15.1",
+          "C10"
+        ]
+      },
+      {
+        "id": "EC45",
+        "variable": "V8",
+        "class": "Token hợp lệ, role admin",
+        "valid": true,
+        "guideline": "set",
+        "note": "UI luôn chạy trong phiên admin. API: Authorization: Bearer <token admin>.",
+        "requirements": [
+          "FR-12.2"
+        ]
+      },
+      {
+        "id": "EC46",
+        "variable": "V8",
+        "class": "[Thêm] API: POST không có header Authorization",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC47",
+        "variable": "V8",
+        "class": "[Thêm] API: POST với token không hợp lệ (chuỗi không phải JWT của hệ thống)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC48",
+        "variable": "V8",
+        "class": "[Thêm] API: POST với token hợp lệ của role user (test@eshop.com)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-03"
+        ]
+      },
+      {
+        "id": "EC49",
+        "variable": "V8",
+        "class": "[Sửa] API: PUT không có header Authorization",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC50",
+        "variable": "V8",
+        "class": "[Sửa] API: PUT với token không hợp lệ (chuỗi không phải JWT của hệ thống)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC51",
+        "variable": "V8",
+        "class": "[Sửa] API: PUT với token hợp lệ của role user (test@eshop.com)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-03"
+        ]
+      },
+      {
+        "id": "EC52",
+        "variable": "V8",
+        "class": "[Xóa] API: DELETE không có header Authorization",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC53",
+        "variable": "V8",
+        "class": "[Xóa] API: DELETE với token không hợp lệ (chuỗi không phải JWT của hệ thống)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC54",
+        "variable": "V8",
+        "class": "[Xóa] API: DELETE với token hợp lệ của role user (test@eshop.com)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-03"
+        ]
+      },
+      {
+        "id": "EC55",
+        "variable": "V9",
+        "class": "Có ≥ 1 sản phẩm khác ngoài sản phẩm mục tiêu (5 sản phẩm seed + sản phẩm của case)",
+        "valid": true,
+        "guideline": "count",
+        "note": "Trạng thái dữ liệu cần để quan sát FR-15.5. Không có lớp không hợp lệ (0 sản phẩm khác không phải đầu vào sai) → cảnh báo giữ nguyên.",
+        "requirements": [
+          "FR-15.5"
+        ]
+      },
+      {
+        "id": "EC56",
+        "variable": "V10",
+        "class": "Thêm hợp lệ: thêm đúng 1 bản ghi; name, price, category_id = giá trị gửi",
+        "valid": true,
+        "guideline": "set",
+        "note": "Quan sát GET /api/products trước/sau (C0). So price theo C15.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC57",
+        "variable": "V10",
+        "class": "Sửa hợp lệ: bản ghi mục tiêu có name, price, category_id = giá trị mới",
+        "valid": true,
+        "guideline": "set",
+        "note": "Quan sát GET /api/products/:id. So price theo C15.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC58",
+        "variable": "V10",
+        "class": "Xóa hợp lệ: bản ghi mục tiêu không còn trong GET /api/products",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC59",
+        "variable": "V10",
+        "class": "Xem: GET /api/products/:id trả bản ghi có các trường = giá trị đã lưu",
+        "valid": true,
+        "guideline": "set",
+        "note": "C15 (chờ SV chốt): cách so kiểu dữ liệu của price.",
+        "requirements": [
+          "FR-15.1",
+          "C15"
+        ]
+      },
+      {
+        "id": "EC60",
+        "variable": "V10",
+        "class": "Tầng API bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC",
+        "valid": true,
+        "guideline": "set",
+        "note": "C6; dùng chung cho từ chối do dữ liệu, id không tồn tại, không đủ quyền.",
+        "requirements": [
+          "C6"
+        ]
+      },
+      {
+        "id": "EC61",
+        "variable": "V10",
+        "class": "Tầng UI bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC",
+        "valid": true,
+        "guideline": "set",
+        "note": "C7. Quan sát bằng GET /api/products (C0).",
+        "requirements": [
+          "C7"
+        ]
+      },
+      {
+        "id": "EC62",
+        "variable": "V11",
+        "class": "Sau Thêm hợp lệ: bảng có thêm 1 dòng, 'Tên SP' và 'Giá' = giá trị nhập",
+        "valid": true,
+        "guideline": "set",
+        "note": "So giá trị số; định dạng ₫ kiểm riêng ở TS-GUI (C12).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC63",
+        "variable": "V11",
+        "class": "Sau Sửa hợp lệ: dòng mục tiêu hiển thị giá trị mới",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC64",
+        "variable": "V11",
+        "class": "Sau Xóa: dòng mục tiêu không còn trong bảng",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC65",
+        "variable": "V11",
+        "class": "Xem: tab 'Sản phẩm' hiển thị đủ các sản phẩm có trong GET /api/products",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC66",
+        "variable": "V11",
+        "class": "UI bị từ chối: bảng không đổi (SAU = TRƯỚC)",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "C7"
+        ]
+      },
+      {
+        "id": "EC67",
+        "variable": "V12",
+        "class": "Các sản phẩm khác giữ nguyên sau khi Sửa (SAU = TRƯỚC)",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "Áp cả UI (bảng) và API (GET /api/products); mỗi tầng một case.",
+        "requirements": [
+          "FR-15.5"
+        ]
+      },
+      {
+        "id": "EC68",
+        "variable": "V13",
+        "class": "API: 2xx khi thao tác hợp lệ",
+        "valid": true,
+        "guideline": "set",
+        "note": "Không khẳng định nội dung body (api_specification không quy định).",
+        "requirements": [
+          "API-PROD"
+        ]
+      },
+      {
+        "id": "EC69",
+        "variable": "V13",
+        "class": "API: 4xx kèm trường error khi dữ liệu vi phạm FR-15.2–15.4 hoặc sai kiểu/thiếu trường",
+        "valid": true,
+        "guideline": "set",
+        "note": "Không 2xx, không 5xx; không cố định mã (C6).",
+        "requirements": [
+          "C6"
+        ]
+      },
+      {
+        "id": "EC70",
+        "variable": "V13",
+        "class": "API: 4xx khi id không tồn tại",
+        "valid": true,
+        "guideline": "set",
+        "note": "Không 2xx, không 5xx (C10).",
+        "requirements": [
+          "C10"
+        ]
+      },
+      {
+        "id": "EC71",
+        "variable": "V13",
+        "class": "API: 4xx khi không đủ quyền (thiếu/sai token, role user)",
+        "valid": true,
+        "guideline": "set",
+        "note": "C5; không cố định mã.",
+        "requirements": [
+          "FR-12.2"
+        ]
+      },
+      {
+        "id": "EC72",
+        "variable": "V14",
+        "class": "UI bị từ chối: có thông báo lỗi trên form (kể cả bong bóng kiểm tra HTML5)",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "Nội dung chữ ghi làm Actual. Vị trí (FR-22.4) kiểm riêng ở TS-GUI (C12).",
+        "requirements": [
+          "C7"
+        ]
+      },
+      {
+        "id": "EC73",
+        "variable": "V14",
+        "class": "UI thành công: không hiển thị thông báo lỗi",
+        "valid": true,
+        "guideline": "set",
+        "note": "(ngầm định) Nội dung thông báo thành công không khẳng định (C13).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      }
+    ]
   },
   "suites": []
 }

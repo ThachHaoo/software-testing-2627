@@ -13216,7 +13216,10 @@ không hợp lệ; giả định MỚI chặn bước 3 (định dạng: mã | c
 Kiểm FR-22.4 trước khi áp C7, và xem cách B_FR07 phân lớp biến ra.
 
 FR-22.4 có nói về vị trí thông báo lỗi → căn cứ C7 hợp lệ. Áp quyết định SV (phần 1).
+
+Phần 1 xong. Giờ bước 2: dựng `domain.partitions`.
 ```
+*File AI ghi/gửi trong lượt này:* `c15_step2.py`
 
 **Xử lý:** [...]
 
