@@ -15,6 +15,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
     "partitions": [
       {"id": "EC1", "variable": "V1", "class": "mô tả lớp, ví dụ 1 ≤ x ≤ 999", "valid": true,  "guideline": "range", "note": ""},
       {"id": "EC2", "variable": "V1", "class": "x < 1",                        "valid": false, "guideline": "range", "note": ""}
+      // tuỳ chọn: "requirements": ["FR-01.6"] trên mỗi EC → render_md.py sinh bảng truy vết từ ánh xạ EC → yêu cầu
     ]
   },
 

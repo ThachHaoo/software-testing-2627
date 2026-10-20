@@ -78,8 +78,10 @@ def render(data, h):
                    + ([v.get("note", "")] if has_note else []) for v in variables]), ""]
 
     out += [f"{H} Bước 2 — Complete Set of Partitions"]
-    out += [table(["EC", "Biến", "Lớp tương đương", "Hợp lệ", "Hướng dẫn", "Ghi chú"],
-                  [[p["id"], vname.get(p.get("variable"), p.get("variable")), p.get("class"), "✔" if p.get("valid") else "✘", p.get("guideline"), p.get("note")] for p in parts]), ""]
+    has_req = any(p.get("requirements") for p in parts)
+    out += [table(["EC", "Biến", "Lớp tương đương", "Hợp lệ", "Hướng dẫn"] + (["Yêu cầu"] if has_req else []) + ["Ghi chú"],
+                  [[p["id"], vname.get(p.get("variable"), p.get("variable")), p.get("class"), "✔" if p.get("valid") else "✘", p.get("guideline")]
+                   + ([", ".join(as_list(p.get("requirements")))] if has_req else []) + [p.get("note")] for p in parts]), ""]
 
     covered = defaultdict(list)
     for s, c in cases:
@@ -140,9 +142,13 @@ def render(data, h):
         out += body + [""]
 
     out += [f"{H} Truy vết yêu cầu ↔ test case"]
+    ec_req = any(p.get("requirements") for p in parts)
+    if ec_req:
+        out += ["Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mà TC phủ (cột Yêu cầu ở bảng Bước 2) cộng với trường requirements của TC (dùng cho case GUI không gắn EC).", ""]
     req_cov = defaultdict(list)
     for s, c in cases:
-        for r in as_list(c.get("requirements")):
+        reqs = [r for e in as_list(c.get("covers")) for r in as_list(pmap.get(e, {}).get("requirements"))] if ec_req else []
+        for r in dict.fromkeys(reqs + as_list(c.get("requirements"))):
             req_cov[r].append(c["id"])
     out += [table(["Yêu cầu", "Test case", "Số TC"], [[r["id"], ", ".join(req_cov.get(r["id"], [])) or "⚠", len(req_cov.get(r["id"], []))] for r in data.get("requirements", [])]), ""]
 
