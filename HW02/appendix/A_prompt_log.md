@@ -1,5 +1,5 @@
 # Prompt Log – HW02
-**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude Opus 5.5, Claude Sonnet 4.6
+**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude (không rõ model), Claude Opus 5.5, Claude Sonnet 4.6
 
 > Prompt và output được trích tự động, nguyên văn, từ transcript của công cụ AI bằng script `tools/extract_prompt_log.py` (không qua AI). Section, Mục đích và Xử lý do em tự ghi.
 
@@ -6825,4 +6825,93 @@ Vậy còn gì nữa không nhỉ
 
 ---
 
-**Tổng:** 115 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 113 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #116 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc CLAUDE.md. Bắt đầu feature B: /domain-bva-testing HW02/B_FR07 0
+```
+
+**Output:**
+```
+Thư mục trống (listing trước là của `../eshop-sut`). Đọc test basis FR-07.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #117 | 10:14 20/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+[Request interrupted by user]
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #118 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – Hoàn tất tồn đọng A_FR01 (commit riêng, không đụng B)
+1. README summary HW02: tách cột "AI + SV sửa" (Both) khỏi "TC từ AI". Số liệu đếm
+   bằng script từ dữ liệu TC đã đóng băng, không đếm tay.
+2. Ghi bug_id (BUG-01…BUG-14) vào các TC Fail/Blocked của A_FR01 theo mapping trong
+   HW02/bugs/. TC Blocked ghi bug của case gốc gây chặn. TC nào không map được bug
+   → liệt kê trong báo cáo, KHÔNG tự gán.
+   Nếu render_md.py chưa hiển thị trường bug_id → vá harness, commit riêng
+   "HW02: vá harness – hiển thị bug_id".
+3. check_domain.py → linter thầy → render_md.py.
+   Commit: "HW02[A-FR01]: ghi bug_id + tách cột Both trong summary".
+   Không đổi verdict / expected / actual / auto_status.
+
+Nhiệm vụ 2 – B_FR07 Giỏ hàng, bước 0–1
+1. Chạy /domain-bva-testing HW02/B_FR07 0.
+2. Đầu output: trích NGUYÊN VĂN FR07 và mọi mục SRS liên quan giỏ hàng, kèm số mục/trang.
+3. Khảo sát SUT (chỉ để xác định điểm quan sát, KHÔNG dùng làm nguồn yêu cầu):
+   - endpoint giỏ hàng: method, path, body, có cần token không, mã lỗi trả về;
+   - userCarts: khoá theo gì, mất khi nào (restart backend);
+   - thao tác UI tương ứng trên web :5173 (trang, selector chính);
+   - dữ liệu sản phẩm seed: có trường tồn kho/giá/trạng thái không.
+4. Mọi điểm SRS không quy định (cận trên số lượng, ...) → mục riêng
+   "Giả định chờ SV chốt". Mỗi giả định nêu nguồn gợi ý (SRS / code / thông lệ).
+   KHÔNG tự chốt giá trị.
+5. Ghi nhận ràng buộc độc lập cho các bước sau: mỗi case dùng user riêng tạo qua API
+   với {ts}; oracle tương đối (giỏ trước/sau trong chính case); cleanup 2 lớp như A.
+6. freeze.py → check_domain.py → linter thầy → render_md.py.
+   Commit "HW02[B-FR07] 1/7: biến vào/ra" kèm HW02/appendix/A_prompt_log.md.
+7. DỪNG sau bước 1. Kết thúc bằng khối "Báo cáo cho phiên thảo luận" gồm:
+   commit hash (cả 2 nhiệm vụ), TC chưa map được bug_id (nếu có), trích SRS FR07,
+   bảng biến vào/ra, kết quả khảo sát SUT, danh sách giả định, cảnh báo check/linter.
+```
+
+**Output:**
+```
+Đang làm: kiểm Nhiệm vụ 1 — git log đã có commit `af48958` cùng tên. Xác minh nó đủ chưa.
+
+Nhiệm vụ 1: không còn gì để commit (tree sạch sau khi chạy lại, 90/90 TC Fail/Blocked có bug_id). Sang Nhiệm vụ 2 — khảo sát SUT tiếp.
+
+Đủ dữ kiện. Viết `testcases.json` (bước 0–1) bằng script.
+
+Freeze chạy trước render nên thiếu bản .md. Huỷ bản freeze vừa tạo (chưa commit) và freeze lại sau render.
+
+Hook chặn sửa `ai-outputs/` — đúng luật, không vượt. Dùng đường hợp lệ: freeze lần nữa (bổ sung bản json+md sau render).
+```
+*File AI ghi/gửi trong lượt này:* `init_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 118 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 115 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

@@ -1,0 +1,318 @@
+{
+  "meta": {
+    "language": "vi",
+    "title": "Domain Testing + BVA — FR-07 Giỏ hàng",
+    "project": "CS423 HW02 – Domain Testing on EShop",
+    "feature": "FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart)",
+    "feature_code": "B_FR07",
+    "doc_id": "TCD-B_FR07",
+    "version": "0.1",
+    "date": "2026-10-20",
+    "author": "Lê Tấn Hiệp – 23120255",
+    "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
+    "environment": "Windows (PowerShell), backend http://localhost:3000, web http://localhost:5173 (route /cart, /product/:id, /); chi tiết ở HW02/env/environment.md",
+    "scope": "DỰ THẢO — chờ SV chốt (B6, B7, B16). Đề xuất: trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web (tầng UI), endpoint GET/POST /api/cart (tầng API). Trong phạm vi đề xuất: FR-07 (phân lớp + BVA); ô 'Số lượng' và nút thêm của FR-06 vì là nguồn dữ liệu vào giỏ; thuộc tính GUI liên quan giỏ (FR-21 ₫, FR-23 badge/breadcrumb, FR-24) kiểm bằng suite GUI riêng, không phân lớp. Ngoài phạm vi đề xuất: thanh toán (FR-08, chỉ dùng FR-08 để suy ra khách chưa đăng nhập vẫn có giỏ), mã giảm giá (FR-09), giỏ hàng trên Mobile (FR-20).",
+    "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI)",
+    "references": [
+      "../eshop-sut/README.md §4 FR-07 dòng 93–100 — Giỏ hàng (oracle chính)",
+      "../eshop-sut/README.md §3 FR-06 dòng 83–87 — ô 'Số lượng' (nguyên dương, tối thiểu 1) và nút 'Thêm vào giỏ hàng'",
+      "../eshop-sut/README.md §4 FR-08 dòng 102–108 — chỉ thanh toán cần đăng nhập; giỏ được xoá sau thanh toán",
+      "../eshop-sut/README.md §8 FR-21 dòng 242–248 (₫ + phân cách hàng nghìn), FR-23 dòng 258–263 (badge, breadcrumb), FR-24 dòng 265–270 (phản hồi khi thêm, dialog xoá, empty state, alt)",
+      "../eshop-sut/README.md §9 dòng 274–284 — SEC-02 (API cần JWT), SEC-04 (escape dữ liệu hiển thị)",
+      "../eshop-sut/README.md dòng 20–23 — tài khoản seed",
+      "../eshop-sut/api_specification.md §4 dòng 110–127 — GET /api/cart, POST /api/cart body {id, name, price, quantity}, header Authorization: Bearer <token>; không có endpoint sửa/xoá dòng giỏ",
+      "../eshop-sut/api_specification.md §6.1 dòng 171–177 — GET/DELETE /api/admin/users (cleanup user test)",
+      "../eshop-sut/backend/server.js dòng 14 (userCarts = {} trong RAM), 100–110 (authenticateToken: thiếu token → 401 'Unauthorized', token sai → 403 'Forbidden'), 284–295 (GET/POST /api/cart), 159–165 (GET /api/products/:id)",
+      "../eshop-sut/backend/database.js dòng 64–71 (bảng products: id, name, price INTEGER, description, imageUrl, category_id), 98–102 (5 sản phẩm seed)",
+      "../eshop-sut/frontend-web/src/context/CartContext.jsx dòng 1–36 — giỏ web là state React (useState), addToCart/removeFromCart/cartTotal",
+      "../eshop-sut/frontend-web/src/pages/Cart.jsx dòng 1–79 — bảng giỏ, tiêu đề cột, nút 'Xóa', nhãn tổng, link '← Mua tiếp', trạng thái trống",
+      "../eshop-sut/frontend-web/src/pages/ProductDetail.jsx dòng 21–31, 54–69 — ô 'Số lượng' (input type=number), nút 'Thêm vào giỏ hàng'",
+      "../eshop-sut/frontend-web/src/pages/Home.jsx dòng 97–102 — nút 'Thêm vào giỏ' trên thẻ sản phẩm (số lượng 1)",
+      "../eshop-sut/frontend-web/src/App.jsx dòng 15–23 (link 'Giỏ hàng' trên navbar), 57 (route /cart)"
+    ],
+    "assumptions": [
+      "B0a (độc lập, đã chốt từ phiên thảo luận): mỗi case dùng user riêng tạo qua POST /api/register với email chứa {ts}, đăng nhập lấy token riêng → userCarts[userId] riêng (server.js dòng 14, 291–293). Case UI chạy trong browser context mới (giỏ web là state React, rỗng khi mở trang).",
+      "B0b (oracle tương đối, đã chốt): oracle so giỏ trước/sau trong chính case (số dòng, số lượng, Thành tiền, Tổng cộng) — không giả định giỏ rỗng tuyệt đối ngoài tiền điều kiện của case.",
+      "B0c (cleanup 2 lớp, như A19): lớp 1 — dữ liệu riêng {ts} + oracle tương đối nên case không phụ thuộc cleanup; lớp 2 — cuối suite xoá user test bằng DELETE /api/admin/users/:id (token admin); khởi động lại backend xoá toàn bộ userCarts và seed lại CSDL.",
+      "B0d (quan sát, không phải yêu cầu): giỏ web nằm trong state React, không gọi /api/cart và không lưu localStorage (CartContext.jsx dòng 6; grep 'api/cart' trong frontend-web không có kết quả) → tải lại trang/page.goto làm mất giỏ. Script UI phải điều hướng bằng link trong app sau khi đã thêm hàng.",
+      "B1 (cận trên Số lượng) (AI đề xuất, chờ SV chốt): SRS không nêu. Nguồn gợi ý — SRS: FR-06 chỉ có 'tối thiểu là 1'; code: input type=number không có min/max (ProductDetail.jsx dòng 56–61), bảng products không có cột tồn kho (database.js dòng 64–71); thông lệ: giới hạn theo tồn kho hoặc một hằng số (vd 99). Lựa chọn: (a) không có cận trên — BVA chỉ quanh LB=1, MAX_UI là giá trị lớn nhất gõ được; (b) SV đặt hằng số UB.",
+      "B2 (Số lượng không hợp lệ khi thêm) (AI đề xuất, chờ SV chốt): FR-06 nói 'chỉ nhận số nguyên dương, tối thiểu là 1' nhưng không nói cách từ chối. Nguồn gợi ý — thông lệ: không thêm vào giỏ + có thông báo, hoặc chặn nhập. Đề xuất oracle: giỏ trước/sau không đổi (số dòng và số lượng); nội dung thông báo chỉ ghi làm Actual.",
+      "B3 (nút '-' khi Số lượng = 1) (AI đề xuất, chờ SV chốt): SRS im lặng. Nguồn gợi ý — FR-06 'tối thiểu là 1'; thông lệ: (a) giữ 1 / nút bị vô hiệu, (b) xoá dòng (khi đó có cần dialog FR-07.4 không?).",
+      "B4 (Thành tiền và Tổng cộng) (AI đề xuất, chờ SV chốt): SRS không ghi công thức. Nguồn gợi ý — thông lệ: Thành tiền = Đơn giá × Số lượng; Tổng cộng = Σ Thành tiền các dòng; FR-08 'tổng tiền tính tự động từ giỏ hàng'.",
+      "B5 ('cùng một sản phẩm') (AI đề xuất, chờ SV chốt): SRS không định nghĩa. Nguồn gợi ý — code/API: sản phẩm định danh bằng id (body.id, products.id). Đề xuất: cùng id = cùng sản phẩm, kể cả thêm từ hai nơi khác nhau (Trang chủ 'Thêm vào giỏ' và trang chi tiết 'Thêm vào giỏ hàng').",
+      "B6 (phạm vi FR-06) (AI đề xuất, chờ SV chốt): ô 'Số lượng' và nút thêm thuộc FR-06, nhưng là nguồn dữ liệu duy nhất vào giỏ trên web. Lựa chọn: đưa FR-06.2/FR-06.3 vào phạm vi FR-07 (đề xuất), hoặc chỉ dùng làm thao tác chuẩn bị. Cần kiểm FR-06 có trùng feature của thành viên khác trong nhóm không.",
+      "B7 (tầng API) (AI đề xuất, chờ SV chốt): FR-07 không nhắc API; api_specification §4 có GET/POST /api/cart; web không gọi API này (B0d). Nguồn gợi ý — A9 của A_FR01: yêu cầu hệ thống áp cho cả API. Lựa chọn: (a) kiểm API như tầng riêng, áp FR-07.3 (gộp cùng id) và FR-06.2 (quantity nguyên dương) cho body; (b) chỉ dùng API làm điểm quan sát/thiết lập.",
+      "B8 (giá/tên do client gửi ở POST /api/cart) (AI đề xuất, chờ SV chốt): body chứa price, name (api_specification dòng 120–126). SRS FR-07 im lặng; FR-08 yêu cầu backend tự tính lại tổng, không nhận total_amount từ client. Lựa chọn: giỏ phải dùng giá theo CSDL (price trong body bị bỏ qua) hay chấp nhận giá client.",
+      "B9 (badge 'Giỏ hàng') (AI đề xuất, chờ SV chốt): FR-23 'badge số lượng sản phẩm trong giỏ' — mơ hồ giữa số dòng (số sản phẩm khác nhau) và tổng Số lượng. Nguồn gợi ý — thông lệ: đa số shop hiển thị tổng số lượng; cũng có nơi đếm dòng. Cần chốt để có oracle.",
+      "B10 (giữ giỏ khi tải lại trang / đăng nhập / đăng xuất) (AI đề xuất, chờ SV chốt): SRS im lặng. Nguồn gợi ý — FR-08 ngụ ý khách chưa đăng nhập có giỏ; thông lệ: giỏ giữ khi tải lại. Lựa chọn: đưa vào phạm vi (biến trạng thái phiên) hay ghi ngoài phạm vi.",
+      "B11 (khách chưa đăng nhập dùng giỏ ở UI) (AI đề xuất, chờ SV chốt): FR-08 chỉ yêu cầu đăng nhập khi thanh toán → đề xuất: khách chưa đăng nhập vẫn thêm/xem/sửa giỏ được. Tầng API: SEC-02 + api_specification §4 yêu cầu Bearer → thiếu/sai token bị từ chối 4xx.",
+      "B12 (nhãn chính xác) (AI đề xuất, chờ SV chốt): FR-07 in đậm 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác', 'Tiếp tục mua sắm', 'Tổng cộng'. Đề xuất: so khớp đúng chữ (không phân biệt hoa/thường). 'Nút Xóa sản phẩm' — chữ in đậm nhưng có thể là mô tả chức năng chứ không phải nhãn; cần chốt có so khớp chữ 'Xóa sản phẩm' hay không.",
+      "B13 (định dạng tiền) (AI đề xuất, chờ SV chốt): FR-21 '₫ với định dạng phân cách hàng nghìn' — không nói ký tự phân cách. Nguồn gợi ý — thông lệ vi-VN dùng '.', code dùng toLocaleString() theo locale trình duyệt (Cart.jsx dòng 46, 48, 63). Lựa chọn: chấp nhận '.' hoặc ','; hay bắt buộc '.'.",
+      "B14 (dialog xoá) (AI đề xuất, chờ SV chốt): FR-07/FR-24 chỉ yêu cầu có dialog. Đề xuất: chọn Hủy → giỏ giữ nguyên; chọn Đồng ý → dòng bị xoá, Tổng cộng cập nhật; dialog native (window.confirm) hay modal đều chấp nhận.",
+      "B15 (empty state) (AI đề xuất, chờ SV chốt): 'hình minh họa và thông báo rõ ràng' — oracle đề xuất: có phần tử ảnh/icon (img/svg) và có dòng chữ báo giỏ trống; không cố định nội dung chữ.",
+      "B16 (GUI liên quan) (AI đề xuất, chờ SV chốt): FR-21 (₫), FR-23 (badge, breadcrumb trang Giỏ hàng, highlight navbar), FR-24 (phản hồi khi thêm, alt ảnh) là thuộc tính tĩnh/phản hồi, không phải miền giá trị → đề xuất kiểm bằng suite TS-GUI riêng (như A14), không phân lớp.",
+      "B17 (mã lỗi API) (AI đề xuất, chờ SV chốt): api_specification §4 không mô tả lỗi. Đề xuất như A11: dữ liệu không hợp lệ → 4xx (không 2xx, không 5xx) kèm trường error; không cố định mã. Quan sát code: thiếu token → 401, token sai → 403 (server.js dòng 103, 106).",
+      "B18 (sai kiểu ở API) (AI đề xuất, chờ SV chốt): SRS im lặng về body JSON. Đề xuất như A15: quantity thiếu/null/chuỗi/số thực/0/âm; id thiếu hoặc không tồn tại trong products → bị từ chối 4xx, giỏ không đổi. Các lớp này chỉ tạo được ở tầng API."
+    ]
+  },
+  "requirements": [
+    {
+      "id": "FR-07.1",
+      "text": "Giỏ hàng hiển thị danh sách sản phẩm với các cột: Sản phẩm, Đơn giá, Số lượng, Thành tiền, Thao tác."
+    },
+    {
+      "id": "FR-07.2",
+      "text": "Cột Số lượng có nút +/- để chỉnh số lượng."
+    },
+    {
+      "id": "FR-07.3",
+      "text": "Thêm cùng một sản phẩm vào giỏ sẽ tăng số lượng, không tạo dòng mới."
+    },
+    {
+      "id": "FR-07.4",
+      "text": "Nút Xóa sản phẩm phải có dialog xác nhận trước khi thực hiện."
+    },
+    {
+      "id": "FR-07.5",
+      "text": "Có nút Tiếp tục mua sắm để quay về trang chủ."
+    },
+    {
+      "id": "FR-07.6",
+      "text": "Tổng tiền hiển thị nhãn chính xác \"Tổng cộng\" (không phải \"Tổng tạm tính\")."
+    },
+    {
+      "id": "FR-07.7",
+      "text": "Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng."
+    },
+    {
+      "id": "FR-06.2",
+      "text": "(liên quan, B6) Trang chi tiết có ô nhập Số lượng, chỉ nhận số nguyên dương, tối thiểu là 1."
+    },
+    {
+      "id": "FR-06.3",
+      "text": "(liên quan, B6) Nút Thêm vào giỏ hàng — sau khi bấm hiển thị phản hồi trực quan (toast notification hoặc badge cập nhật)."
+    },
+    {
+      "id": "FR-08.1",
+      "text": "(liên quan) Chỉ người dùng đã đăng nhập mới tiến hành thanh toán được — dùng để suy ra B11."
+    },
+    {
+      "id": "FR-21.3",
+      "text": "(GUI, B16) Luôn dùng ký hiệu ₫ với định dạng phân cách hàng nghìn."
+    },
+    {
+      "id": "FR-23.2",
+      "text": "(GUI, B16) Link \"Giỏ hàng\" phải hiển thị badge số lượng sản phẩm trong giỏ."
+    },
+    {
+      "id": "FR-23.4",
+      "text": "(GUI, B16) Breadcrumb bắt buộc có ở trang con Giỏ hàng."
+    },
+    {
+      "id": "FR-24.1",
+      "text": "(GUI, B16) Sau khi bấm \"Thêm vào giỏ\", phải có phản hồi trực quan (toast/badge)."
+    },
+    {
+      "id": "FR-24.2",
+      "text": "Khi xóa item khỏi giỏ phải có dialog xác nhận (trùng FR-07.4)."
+    },
+    {
+      "id": "FR-24.3",
+      "text": "Trang trống (Empty State) phải có icon/hình minh họa và message thân thiện (bổ sung FR-07.7)."
+    },
+    {
+      "id": "FR-24.4",
+      "text": "(GUI, B16) Tất cả ảnh sản phẩm phải có thuộc tính alt mô tả nội dung (không rỗng)."
+    },
+    {
+      "id": "API-CART",
+      "text": "GET /api/cart lấy giỏ; POST /api/cart body JSON {id, name, price, quantity}; yêu cầu header Authorization: Bearer <token> (api_specification.md dòng 110–127). Không có endpoint sửa/xoá dòng giỏ."
+    },
+    {
+      "id": "SEC-02",
+      "text": "Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ (README.md dòng 279)."
+    },
+    {
+      "id": "SEC-04",
+      "text": "Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng innerHTML trực tiếp (README.md dòng 281) — áp cho tên sản phẩm hiển thị trong giỏ."
+    }
+  ],
+  "domain": {
+    "variables": [
+      {
+        "id": "V1",
+        "name": "Số lượng khi thêm",
+        "io": "input",
+        "source": "UI: ô nhãn 'Số lượng:' (ProductDetail.jsx dòng 54–61, input type=\"number\", không có min/max/required); nút 'Thêm vào giỏ' ở Trang chủ luôn thêm 1 (Home.jsx dòng 97–102) · API: body.quantity (api_specification.md dòng 125)",
+        "type": "integer",
+        "constraint": "Nguyên dương, tối thiểu 1 (FR-06.2). Cận trên: SRS im lặng → B1. Cách từ chối giá trị sai → B2.",
+        "note": "Ô nhập trên UI nhận chuỗi; giá trị rỗng, thập phân, âm, ký tự e/E/+/- là chuỗi gõ được vào input number."
+      },
+      {
+        "id": "V2",
+        "name": "Sản phẩm được thêm (so với nội dung giỏ hiện có)",
+        "io": "input",
+        "source": "UI: nút 'Thêm vào giỏ hàng' (ProductDetail.jsx dòng 64–69) và 'Thêm vào giỏ' (Home.jsx dòng 97–102) · API: body.id (api_specification.md dòng 122)",
+        "type": "enum",
+        "constraint": "Chưa có trong giỏ → tạo dòng mới; đã có (cùng sản phẩm, B5) → tăng Số lượng, không tạo dòng mới (FR-07.3). API: id phải là sản phẩm tồn tại → B18."
+      },
+      {
+        "id": "V3",
+        "name": "Đơn giá sản phẩm",
+        "io": "input",
+        "source": "Dữ liệu: products.price INTEGER (database.js dòng 64–71); seed 4.000.000–45.000.000 (dòng 98–102) · API: body.price do client gửi (api_specification.md dòng 124)",
+        "type": "integer (₫)",
+        "constraint": "Không do người dùng nhập ở UI. Dùng tính Thành tiền/Tổng cộng (B4). Giá do client gửi ở API → B8.",
+        "note": "Quan sát code: GET /api/products/:id trả price dạng chuỗi khi id chẵn (server.js dòng 162). Chỉ ghi nhận, chưa kết luận; xác nhận ở bước 6."
+      },
+      {
+        "id": "V4",
+        "name": "Thao tác chỉnh Số lượng trong giỏ",
+        "io": "input",
+        "source": "UI: nút '+' / '-' trong cột Số lượng theo FR-07.2 (SRS) · API: không có endpoint sửa (API-CART)",
+        "type": "enum {+, -}",
+        "constraint": "'+' tăng 1, '-' giảm 1 (FR-07.2, bước nhảy 1 theo thông lệ). '-' tại Số lượng = 1 → B3; '+' tại cận trên → B1.",
+        "note": "Quan sát code: Cart.jsx dòng 47 hiển thị Số lượng dạng chữ, chưa thấy nút +/-. Chưa kết luận lỗi, xác nhận khi thực thi (bước 6); xử lý như A17 nếu thiếu."
+      },
+      {
+        "id": "V5",
+        "name": "Số lượng hiện tại của dòng (trước thao tác +/- hoặc thêm trùng)",
+        "io": "input",
+        "source": "Trạng thái giỏ trước thao tác (cột 'Số lượng', Cart.jsx dòng 47 · GET /api/cart)",
+        "type": "integer",
+        "constraint": "≥ 1 (FR-06.2). Điểm đặc biệt: = 1 (biên cho '-'), = cận trên (biên cho '+', B1)."
+      },
+      {
+        "id": "V6",
+        "name": "Thao tác xoá dòng và lựa chọn trong dialog",
+        "io": "input",
+        "source": "UI: nút xoá ở cột 'Thao tác' (Cart.jsx dòng 50–55, nhãn 'Xóa'); dialog xác nhận theo FR-07.4/FR-24.2",
+        "type": "enum {Xác nhận, Hủy}",
+        "constraint": "Phải có dialog trước khi xoá (FR-07.4). Hủy → giữ nguyên; Xác nhận → xoá dòng (B14).",
+        "note": "Quan sát code: onClick gọi removeFromCart(index) trực tiếp (Cart.jsx dòng 51). Chưa kết luận lỗi, xác nhận ở bước 6."
+      },
+      {
+        "id": "V7",
+        "name": "Số dòng trong giỏ (trạng thái)",
+        "io": "input",
+        "source": "Trạng thái giỏ trước thao tác (bảng Cart.jsx dòng 43–58; nhánh cart.length === 0 dòng 20–27 · GET /api/cart)",
+        "type": "integer",
+        "constraint": "0 → hiển thị empty state (FR-07.7); ≥ 1 → hiển thị bảng. Không có cận trên trong SRS."
+      },
+      {
+        "id": "V8",
+        "name": "Trạng thái đăng nhập / token",
+        "io": "input",
+        "source": "UI: có/không đăng nhập (AuthContext.jsx, token trong localStorage) · API: header Authorization: Bearer <token> (api_specification.md dòng 112; server.js dòng 100–110)",
+        "type": "enum",
+        "constraint": "UI: khách chưa đăng nhập vẫn dùng giỏ (suy từ FR-08.1, B11). API: thiếu/sai token → từ chối (SEC-02, B17)."
+      },
+      {
+        "id": "V9",
+        "name": "Tên sản phẩm trong body (API)",
+        "io": "input",
+        "source": "API: body.name (api_specification.md dòng 123)",
+        "type": "string",
+        "constraint": "SRS im lặng; client tự gửi tên → B8. Khi hiển thị phải escape (SEC-04)."
+      },
+      {
+        "id": "V10",
+        "name": "Thao tác 'Tiếp tục mua sắm'",
+        "io": "input",
+        "source": "UI: nút/link 'Tiếp tục mua sắm' (FR-07.5) — code có link '← Mua tiếp' (Cart.jsx dòng 66–68) và 'Tiếp tục mua sắm' ở trạng thái trống (dòng 24)",
+        "type": "enum {bấm}",
+        "constraint": "Bấm → quay về trang chủ (FR-07.5). Nhãn chính xác → B12."
+      },
+      {
+        "id": "V11",
+        "name": "Danh sách dòng trong giỏ",
+        "io": "output",
+        "source": "UI: bảng trang /cart (Cart.jsx dòng 32–60) · API: mảng JSON từ GET /api/cart (server.js dòng 284–288)",
+        "type": "list",
+        "constraint": "Đủ 5 cột Sản phẩm, Đơn giá, Số lượng, Thành tiền, Thao tác (FR-07.1); số dòng = số sản phẩm khác nhau (FR-07.3)."
+      },
+      {
+        "id": "V12",
+        "name": "Số lượng của dòng sau thao tác",
+        "io": "output",
+        "source": "UI: cột 'Số lượng' · API: phần tử .quantity trong GET /api/cart",
+        "type": "integer",
+        "constraint": "Thêm trùng → cộng dồn (FR-07.3); '+'/'-' → ±1 (FR-07.2); luôn ≥ 1 (FR-06.2, B3)."
+      },
+      {
+        "id": "V13",
+        "name": "Thành tiền của dòng",
+        "io": "output",
+        "source": "UI: cột 'Thành tiền' (Cart.jsx dòng 48)",
+        "type": "integer (₫)",
+        "constraint": "= Đơn giá × Số lượng (B4); hiển thị ₫ + phân cách hàng nghìn (FR-21.3, B13)."
+      },
+      {
+        "id": "V14",
+        "name": "Tổng cộng",
+        "io": "output",
+        "source": "UI: dòng tổng dưới bảng (Cart.jsx dòng 62–64)",
+        "type": "integer (₫)",
+        "constraint": "Nhãn đúng 'Tổng cộng' (FR-07.6); giá trị = Σ Thành tiền (B4); định dạng ₫ (FR-21.3)."
+      },
+      {
+        "id": "V15",
+        "name": "Badge số lượng trên link 'Giỏ hàng'",
+        "io": "output",
+        "source": "UI: navbar, link 'Giỏ hàng' (App.jsx dòng 23)",
+        "type": "integer",
+        "constraint": "Hiển thị badge số lượng sản phẩm trong giỏ (FR-23.2); nghĩa 'số lượng' → B9."
+      },
+      {
+        "id": "V16",
+        "name": "Phản hồi trực quan sau khi thêm",
+        "io": "output",
+        "source": "UI: toast hoặc badge cập nhật; code đổi chữ nút thành 'Đã thêm' trong 2 giây (ProductDetail.jsx dòng 28–30, 68)",
+        "type": "enum",
+        "constraint": "Có phản hồi trực quan (toast/badge) sau mỗi lần thêm (FR-06.3, FR-24.1)."
+      },
+      {
+        "id": "V17",
+        "name": "Dialog xác nhận xoá",
+        "io": "output",
+        "source": "UI: dialog sau khi bấm nút xoá",
+        "type": "enum {hiện, không hiện}",
+        "constraint": "Phải hiện trước khi xoá (FR-07.4, FR-24.2); kết quả theo lựa chọn ở V6 (B14)."
+      },
+      {
+        "id": "V18",
+        "name": "Trạng thái giỏ trống (empty state)",
+        "io": "output",
+        "source": "UI: nhánh giỏ trống (Cart.jsx dòng 20–27)",
+        "type": "enum",
+        "constraint": "Có hình minh hoạ/icon và thông báo rõ ràng (FR-07.7, FR-24.3, B15)."
+      },
+      {
+        "id": "V19",
+        "name": "Trang đích sau 'Tiếp tục mua sắm'",
+        "io": "output",
+        "source": "UI: URL trình duyệt",
+        "type": "string",
+        "constraint": "URL = trang chủ '/' (FR-07.5)."
+      },
+      {
+        "id": "V20",
+        "name": "Phản hồi API giỏ hàng",
+        "io": "output",
+        "source": "API: mã HTTP + body của POST /api/cart (thành công: {\"message\": \"Added to cart\"}, server.js dòng 294) và GET /api/cart",
+        "type": "HTTP",
+        "constraint": "Dữ liệu hợp lệ → 2xx và GET phản ánh thay đổi; dữ liệu/token không hợp lệ → 4xx, giỏ không đổi (B7, B17, B18)."
+      },
+      {
+        "id": "V21",
+        "name": "Thông báo lỗi khi Số lượng không hợp lệ",
+        "io": "output",
+        "source": "UI: trang chi tiết sản phẩm (chưa thấy phần tử thông báo trong ProductDetail.jsx)",
+        "type": "enum",
+        "constraint": "SRS không quy định nội dung → B2; oracle chính là giỏ không đổi."
+      }
+    ],
+    "partitions": []
+  },
+  "suites": []
+}
