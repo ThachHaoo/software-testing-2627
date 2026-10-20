@@ -1,9 +1,9 @@
 # BUG-20
 
 - **ID:** BUG-20
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Link 'Giỏ hàng' trên thanh điều hướng Navbar thiếu hoàn toàn badge hiển thị số lượng sản phẩm khi trong giỏ đã có hàng
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Người dùng đã thêm thành công ít nhất một sản phẩm vào giỏ hàng (ví dụ: đã có 2 dòng sản phẩm trong giỏ với tổng số lượng = 2).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang web http://localhost:5173/.
+
+2. Thêm sản phẩm bất kỳ vào giỏ hàng (ví dụ: thêm iPhone 15 Pro Max và Tai nghe AirPods Pro 2).
+
+3. Mắt quan sát khu vực thanh điều hướng (Navbar) ở góc trên bên phải trang web, tại vị trí link/chữ "Giỏ hàng".
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-23.2 (kèm giả định B9/B16): Khi trong giỏ hàng đã có chứa sản phẩm (số lượng ≥ 1), link "Giỏ hàng" trên Navbar bắt buộc phải hiển thị badge con số đếm số lượng sản phẩm (ví dụ: hiển thị badge số 2 trên hoặc bên cạnh chữ "Giỏ hàng").
 
 ## Actual
 
-`<SV viết>`
+Link "Giỏ hàng" trên Navbar luôn hiển thị dưới dạng thẻ văn bản thuần túy (Giỏ hàng). Hoàn toàn không có badge, icon con số hay phần tử hiển thị số lượng sản phẩm đi kèm, mặc dù kiểm tra trong trang /cart thì giỏ hàng thực tế đang chứa 2 dòng sản phẩm với tổng số lượng = 2.
 
 ## Bằng chứng
 
@@ -60,7 +66,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/App.jsx tại dòng 23, thẻ <Link> dẫn đến giỏ hàng được viết cứng hoàn toàn chỉ với đoạn text tĩnh:
+
+```jsx
+<Link to="/cart" className="hover:underline">Giỏ hàng</Link>
+```
+
+- Component App không sử dụng useContext(CartContext) để lấy danh sách sản phẩm trong giỏ, cũng như không tính toán tổng số lượng (cart.reduce(...)) để render thêm thẻ badge (ví dụ: <span className="badge">...</span>) bên cạnh chữ "Giỏ hàng".
+
+- Điều này khiến người dùng đứng ở bất kỳ trang nào cũng không thể biết được trong giỏ hàng của mình đang có bao nhiêu món đồ nếu không nhấp chuột mở trực tiếp trang /cart.
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-19
 
 - **ID:** BUG-19
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Bấm nút 'Xóa' ở trang giỏ hàng xóa ngay lập tức sản phẩm mà không hề hiển thị dialog xác nhận
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Giỏ hàng đã có sẵn ít nhất một sản phẩm (ví dụ: Tai nghe AirPods Pro 2).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang giỏ hàng http://localhost:5173/cart.
+
+2. Định vị dòng sản phẩm Tai nghe AirPods Pro 2 trong bảng giỏ hàng.
+
+3. Bấm nút "Xóa" nằm ở cột Thao tác trên dòng sản phẩm đó đúng 1 lần.
+
+4. Mắt quan sát xem giao diện có bật popup/dialog xác nhận hay không.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.4 và FR-24.2 (kèm giả định B14): Khi bấm nút xóa sản phẩm khỏi giỏ hàng, hệ thống bắt buộc phải hiển thị một dialog/popup xác nhận trước khi thực hiện. Nếu người dùng chọn Đồng ý thì mới xóa dòng, chọn Hủy thì giữ nguyên dòng sản phẩm trong giỏ.
 
 ## Actual
 
-`<SV viết>`
+Nút xóa hoàn toàn thiếu bước bật dialog xác nhận. Ngay khi bấm nút "Xóa", sản phẩm bị xóa lập tức khỏi giỏ hàng mà không cho người dùng cơ hội xác nhận hay hủy bỏ thao tác.
 
 ## Bằng chứng
 
@@ -79,7 +87,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở file frontend-web/src/pages/Cart.jsx (dòng 51), sự kiện onClick của nút Xóa được gán thẳng hàm removeFromCart(index) mà không hề gọi qua modal custom hay hàm xác nhận mặc định của trình duyệt (chẳng hạn như window.confirm()):
+
+```jsx
+onClick={() => removeFromCart(index)}
+```
+
+- Ở file frontend-web/src/context/CartContext.jsx (dòng 12–16), hàm removeFromCart lập tức cắt phần tử ra khỏi mảng cart bằng splice và cập nhật state luôn mà không hề chặn lại kiểm tra điều kiện xác nhận.
+
+- Việc thiếu hoàn toàn dialog xác nhận này làm cho case kiểm tra nút Hủy của dialog (TC-09) bị chặn (Blocked), đồng thời người dùng rất dễ bấm nhầm làm mất dữ liệu giỏ hàng mà không thể khôi phục.
 
 ## Link GitHub Issue
 

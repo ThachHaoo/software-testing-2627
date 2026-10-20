@@ -1,9 +1,9 @@
 # BUG-18
 
 - **ID:** BUG-18
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Trang giỏ hàng thiếu hoàn toàn hai nút '+' và '-' để điều chỉnh số lượng sản phẩm ở cột Số lượng
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Giỏ hàng đã có sẵn ít nhất một sản phẩm (thêm từ trang chủ hoặc trang chi tiết).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang chủ http://localhost:5173/.
+
+2. Bấm nút "Thêm vào giỏ" trên thẻ một sản phẩm bất kỳ (ví dụ: Tai nghe AirPods Pro 2).
+
+3. Bấm vào link "Giỏ hàng" trên navbar để điều hướng sang trang /cart.
+
+4. Quan sát ô hiển thị ở cột "Số lượng" trên dòng sản phẩm trong bảng giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.2: Tại bảng giỏ hàng, cột Số lượng bắt buộc phải có hai nút + và - đi kèm để người dùng có thể bấm điều chỉnh tăng hoặc giảm số lượng trực tiếp cho dòng sản phẩm đó.
 
 ## Actual
 
-`<SV viết>`
+Tại cột "Số lượng", giao diện chỉ hiển thị duy nhất một con số văn bản thuần túy (text tĩnh, ví dụ: 1). Hoàn toàn không có nút +, nút - hay bất kỳ ô input tương tác nào để chỉnh sửa số lượng sản phẩm ngay tại giỏ hàng.
 
 ## Bằng chứng
 
@@ -62,7 +70,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong frontend-web/src/pages/Cart.jsx tại dòng 47, developer chỉ render mỗi biến {item.quantity} ra thẻ <td> đơn thuần:
+
+```jsx
+<td>{item.quantity}</td>
+```
+
+- Code Frontend quên hẳn việc thiết kế giao diện UI và sự kiện nhấp chuột cho hai nút tăng/giảm số lượng (+ và -).
+
+- Do thiếu mất hai nút bấm này ở mức UI, toàn bộ các test case liên quan đến chức năng chỉnh sửa số lượng bằng nút +/- trong giỏ hàng (TC-05, TC-06, TC-07, TC-65) đều bị chặn (Blocked) không thể thực hiện thao tác được.
 
 ## Link GitHub Issue
 
