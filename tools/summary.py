@@ -39,7 +39,8 @@ def main():
         cases = [c for s in d.get("suites", []) for c in s.get("cases", [])]
         st = Counter(c.get("status") or "Not run" for c in cases)
         og = Counter(c.get("origin") or "?" for c in cases)
-        bugs = {b for c in cases for b in re.split(r"[,\s]+", c.get("bug_id") or "") if b}
+        # chỉ lấy mã BUG-xx: bug_id có thể kèm số issue, ghi chú ("BUG-51 (#197)", "không lập bug …")
+        bugs = set(re.findall(r"BUG-\d+", " ".join(c.get("bug_id") or "" for c in cases)))
         ids = {c.get("id") for c in cases}
         bugs |= {k for k, tcs in bug_tcs.items() if tcs & ids}
         r = Counter(designed=len(cases), executed=st["Pass"] + st["Fail"], passed=st["Pass"], failed=st["Fail"],
