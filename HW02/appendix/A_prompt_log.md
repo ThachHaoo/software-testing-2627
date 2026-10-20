@@ -18510,11 +18510,73 @@ Em đã đưa 9 case SV vào `testcases.json`, viết `ai_gap_answer.md` và com
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã đồng bộ case SV theo `sv_cases.md` mới và commit `57191a7` (5/7d). Kiểm đầu vào đạt: commit 5/7c `7a9f887` chỉ chạm `sv_cases.md`.
+
+### Báo cáo cho phiên thảo luận
+- **Case:** giữ 8 case (TC-FR20-200, 201, 203–206 trong TS-SV; 207, 208 trong TS-SV-GUI). Bỏ TC-202, giữ khoảng trống số và ghi vào notes của suite. SV không thêm giả định D16+.
+- **Thay đổi ngoài case SV:** em thêm `SEC-04` vào `requirements` của D, chép nguyên văn README.md dòng 281. Lý do: TC-200 dẫn SEC-04 làm căn cứ, nếu không thêm thì lint báo lỗi "unknown requirement". Muốn bỏ thì báo em.
+- **Lỗi nhất quán còn lại:**
+  - 203: quy trình suite TS-SV (chép từ TS-DOM) ghi "bấm 'Đăng Ký' đúng một lần", mâu thuẫn với thao tác chạm 10 lần của case.
+  - 205: tiêu đề ghi chỉ có chữ số full-width `１２３４５６７８`, nhưng giá trị nhập là `Abcd１２３４５６!`. D8 không nói tới chữ số full-width. `EC phủ` có cả EC17 lẫn EC18 của cùng biến.
+  - 207: FR-22.4 đã được khẳng định ở TC-93, nay khẳng định lần hai. Các bước không nhập Họ Tên.
+  - 208: FR-22.3 đã được khẳng định ở TC-92, nay khẳng định lần hai.
+  - 200, 201, 204, 206: không thấy lỗi.
+  - Chi tiết ở `HW02/D_FR20/ai_gap_answer.md`, mục cuối; phân nhóm gap giữ nguyên.
+- **Kiểm tra:** check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
+- **Tổng TC của D:** 35 (AI 27, SV 8).
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 308 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 216 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #309 | 23:32 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: đồng bộ case SV lần 2 → chuẩn bị bước 6 (chạy tay)
+
+### A. Đồng bộ
+0. HEAD có commit SV 5/7e chỉ chạm sv_cases.md (+ prompt log). Không đạt → DỪNG.
+1. Câu quy trình suite TS-SV "bấm đúng một lần": `git blame` / `git log -L`.
+   - Do AI viết (5/7b) → sửa thành "bấm đúng số lần ghi trong case (mặc định 1 lần)",
+     ghi Audit "AI sửa câu suite do AI viết".
+   - Do SV viết → không sửa, báo lại.
+2. Đồng bộ TS-SV theo sv_cases.md như lệnh trước: giữ nguyên chữ; case bỏ → giữ khoảng trống số;
+   D16+ → chép đúng chữ.
+   Mục cuối ai_gap_answer.md cập nhật lỗi còn lại; không đổi phân nhóm.
+3. render_md.py → check_domain.py → lint → prompt log → commit `HW02[D-FR20] 5/7f: đồng bộ case SV`.
+   Còn lỗi nhất quán → DỪNG ở đây, không làm B.
+
+### B. Chuẩn bị bước 6 (chỉ khi A sạch) — không chạy app
+- HW02/env/mobile_api_url.patch: `git -C ..\eshop-sut diff frontend-mobile/App.js`.
+- HW02/D_FR20/RUN.md cho chạy tay trên Android thật (Expo Go), theo D0, D10, D11, D14, D15:
+  - bước restart backend trước lượt;
+  - cách tính {ts} và email từng case;
+  - thứ tự case (gom các case cần xem trang admin);
+  - mỗi case: thao tác, ảnh cần chụp (tên `TC-FR20-xx_manual_<n>.png`), điểm quan sát,
+    chỗ SV ghi Actual nguyên văn;
+  - case Blocked theo case gốc thì ghi rõ "không chạy, đánh dấu Blocked nếu TC-94 Fail";
+  - nhật ký lượt (ngày, máy, locale, lượt chính thức).
+- File kết quả trống cho SV điền (theo định dạng merge_results.py đọc được), không điền sẵn
+  Actual/verdict.
+- render_md.py → lint → prompt log → commit `HW02[D-FR20] 6/7a: RUN.md chạy tay`.
+
+## Báo cáo (≤ 10 dòng)
+- A: câu suite (ai viết, sửa/không); case giữ/bỏ; lỗi còn lại; tổng TC (AI/SV).
+- B: số case cần chạy tay, số ảnh, ước tính thời gian, đường dẫn RUN.md + file kết quả.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+*File AI ghi/gửi trong lượt này:* `d_step5f.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 309 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 217 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

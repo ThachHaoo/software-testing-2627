@@ -45,14 +45,11 @@
 
 ## Rà nhất quán case SV (chỉ liệt kê, không sửa)
 
-Cập nhật ở 5/7d theo `sv_cases.md` commit `7a9f887`. TC-FR20-202 SV đã bỏ (giữ khoảng trống số). SV không thêm giả định D16+.
+Cập nhật ở 5/7f theo `sv_cases.md` commit `e067035`. SV đã bỏ TC-FR20-202 (5/7c) và TC-FR20-207, 208 (5/7e); giữ khoảng trống số. SV thêm D16.
 
-- TC-FR20-200: không thấy lỗi nhất quán. (SEC-04 được thêm vào `requirements` của D ở 5/7d để truy vết được căn cứ SV dẫn — README.md dòng 281.)
+- TC-FR20-200: không thấy lỗi nhất quán.
 - TC-FR20-201: không thấy lỗi nhất quán.
-- TC-FR20-203: quy trình của suite TS-SV (chép từ TS-DOM) ghi "bấm nút 'Đăng Ký' đúng một lần", mâu thuẫn với thao tác của case (chạm 10 lần).
+- TC-FR20-203: hết lỗi — câu quy trình TS-SV (do AI viết) đã sửa ở 5/7f thành "đúng số lần ghi trong case (mặc định 1 lần)"; Lý do chọn input của SV ghi 10 lần.
 - TC-FR20-204: không thấy lỗi nhất quán.
-- TC-FR20-205: tiêu đề "chỉ chứa các chữ số Full-width `１２３４５６７８`" khác giá trị nhập `Abcd１２３４５６!` (có chữ cái, '!', và chữ số full-width 1–6). Căn cứ D8 chỉ nói về chữ hoa/thường có dấu, không nói chữ số full-width; không có giả định D16+. `EC phủ` có cả EC17 (có ≥ 1 chữ số) và EC18 (không có chữ số) của cùng biến.
+- TC-FR20-205: tiêu đề "chỉ chứa các chữ số Full-width `Abcd１２３４５６７８`" khác giá trị nhập `Abcd１２３４５６!` (tiêu đề có `７８`, giá trị có `!`), và chuỗi trong tiêu đề có chữ cái nên không "chỉ chứa chữ số". D16 dẫn căn cứ "D8 (chữ số 0-9)", nhưng D8 chỉ nói về chữ hoa/thường (A–Z / a–z), không nói chữ số.
 - TC-FR20-206: không thấy lỗi nhất quán.
-- TC-FR20-207: FR-22.4 (vị trí thông báo lỗi) đã được khẳng định ở TC-FR20-93; khẳng định lần hai (quy ước "khẳng định một nơi"). Các bước không nhập Họ Tên.
-- TC-FR20-208: FR-22.3 (che ký tự ô Mật khẩu) đã được khẳng định ở TC-FR20-92; khẳng định lần hai.
-- Chung: cột "Các bước" của 207, 208 không có kết quả từng bước → ghi "(SV chưa ghi)".

@@ -40,7 +40,8 @@
       "D12 (cách nhập trên mobile) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; mobile có bàn phím ảo với tự viết hoa / tự sửa / gợi ý; ô Họ Tên và Mật khẩu không đặt autoCapitalize (App.js dòng 805–809, 818–823), ô Email đặt autoCapitalize=\"none\" (dòng 815) · SV chốt 2026-10-20, phương án a]: giá trị của case = chuỗi thực sự có trong ô ngay trước khi bấm 'Đăng Ký' (SV đọc lại, chụp màn hình; bàn phím tự sửa/tự viết hoa làm đổi chuỗi → sửa lại cho đúng giá trị case, ghi notes); gõ và dán cùng một chuỗi coi là cùng lớp, không thành biến riêng; khoảng trắng đầu/cuối là một phần giá trị (xử lý theo D3/D5) — lý do SV: mục tiêu ít case.",
       "D13 (yêu cầu GUI trên mobile) [loại: phạm vi + quyết định Expected · truy vết: có · căn cứ: FR-22 dòng 252–255 viết theo khái niệm web (type=\"email\", type=\"password\"); tiền lệ A14 (suite GUI riêng, không phân lớp) và phạm vi A (bỏ FR-21) · SV chốt 2026-10-20, phương án a]: FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi — lý do SV: nhất quán với A, giữ dòng so sánh web vs mobile (SRS không đủ căn cứ, SV quyết).",
       "D14 (verdict khi chạy tay) [loại: quy trình · truy vết: không · căn cứ: quyết định đã chốt A20/A17 (CLAUDE.md), quy tắc verdict của skill · SV chốt 2026-10-20, chấp nhận đề xuất AI]: chạy tay nên status do SV điền trực tiếp, auto_status để trống; lệch do biến mục tiêu → Fail; bị biến khác chặn → Blocked + case gốc; 'Pass hộp đen' khi bị từ chối đúng nhưng lý do không chứng minh luật mục tiêu. Evidence: ảnh chụp màn hình điện thoại TC-FR20-xx_manual_*.png (+ ảnh trang admin theo D11).",
-      "D15 (thiết bị, locale, bàn phím) [loại: môi trường · truy vết: không · căn cứ: P2 (SV chốt Android thật, Expo Go) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: SV ghi model, phiên bản Android, bản Expo Go, ngôn ngữ hệ thống, bàn phím (vd Gboard) khi chạy; ghi vào meta.environment và HW02/env/environment.md."
+      "D15 (thiết bị, locale, bàn phím) [loại: môi trường · truy vết: không · căn cứ: P2 (SV chốt Android thật, Expo Go) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: SV ghi model, phiên bản Android, bản Expo Go, ngôn ngữ hệ thống, bàn phím (vd Gboard) khi chạy; ghi vào meta.environment và HW02/env/environment.md.",
+      "D16 (Chữ số Full-width trong Mật khẩu) [loại: quyết định Expected · truy vết: có · căn cứ: FR-01.7c, D8 (chữ số 0-9) · SV chốt 2026-10-21 — giải quyết mơ hồ về tập ký tự Unicode]: Các chữ số dạng Full-width (như `１２３` U+FF11...U+FF19) gõ từ bộ gõ CJK không được tính là chữ số hợp lệ thuộc tập ASCII [0-9] theo FR-01.7c và D8; mật khẩu chỉ chứa chữ số Full-width sẽ bị coi là không có chữ số (rơi vào EC18 và bị từ chối)."
     ],
     "review_log": [
       "2/7c (721b852, 2026-10-20): SV chốt sau review — phân lớp 32 EC theo 2/7b (af52010), không đổi nội dung."
@@ -2149,7 +2150,7 @@
       "id": "TS-SV",
       "name": "SV bổ sung — tầng Mobile",
       "format": "matrix",
-      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit 7a9f887), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit e067035), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
       "preconditions": [
         "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
         "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
@@ -2175,7 +2176,7 @@
           "expected": "Ô Họ Tên và Email hiển thị đúng chuỗi trong cột; ô Mật khẩu hiển thị dạng che với số ký tự che bằng độ dài chuỗi trong cột. Chụp TC-FR20-xx_manual_input.png."
         },
         {
-          "action": "Ẩn bàn phím, bấm nút 'Đăng Ký' đúng một lần.",
+          "action": "Ẩn bàn phím, bấm nút 'Đăng Ký' đúng số lần ghi trong case (mặc định 1 lần).",
           "expected": "App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình)."
         },
         {
@@ -2201,7 +2202,7 @@
       "cleanup": [
         "Không xoá tài khoản giữa các case: mỗi case dùng email riêng và oracle tương đối (D0). Cuối lượt: khởi động lại backend để CSDL seed lại."
       ],
-      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR20-202: SV bỏ ở 5/7c (7a9f887).",
+      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR20-202: SV bỏ ở 5/7c (7a9f887). · TC-FR20-207, TC-FR20-208: SV bỏ ở 5/7e (e067035, mục GUI ghi 'Bỏ hết').",
       "cases": [
         {
           "id": "TC-FR20-200",
@@ -2351,7 +2352,7 @@
           "technique": "Concurrency / Double Tap",
           "bva_point": "",
           "approach": "gray-box",
-          "rationale": "UX Mobile: Người dùng mạng chậm/lag hay chạm nút 'Đăng Ký' nhiều lần liên tục. Kiểm tra tính toàn vẹn dữ liệu tránh nhân bản tài khoản.",
+          "rationale": "UX Mobile: Người dùng mạng chậm/lag hay chạm nút 'Đăng Ký' nhiều lần liên tục. Thao tác đè quy trình chung của TS-DOM: Bấm chạm liên tục 10 lần nút 'Đăng Ký' thay vì bấm 1 lần để kiểm tra xử lý đồng thời/spam click.",
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
@@ -2414,7 +2415,7 @@
         },
         {
           "id": "TC-FR20-205",
-          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ chứa các chữ số Full-width `１２３４５６７８`",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ chứa các chữ số Full-width `Abcd１２３４５６７８`",
           "layer": "Mobile",
           "method": "Manual",
           "inputs": {
@@ -2429,7 +2430,8 @@
             "FR-01.7c"
           ],
           "assumptions": [
-            "D8"
+            "D8",
+            "D16"
           ],
           "covers": [
             "EC1",
@@ -2438,7 +2440,6 @@
             "EC8",
             "EC11",
             "EC14",
-            "EC17",
             "EC18",
             "EC19",
             "EC23",
@@ -2463,7 +2464,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Căn cứ (SV): FR-01.7c, D8"
+          "notes": "Căn cứ (SV): FR-01.7c, D8, D16"
         },
         {
           "id": "TC-FR20-206",
@@ -2516,104 +2517,6 @@
           "evidence": "",
           "bug_id": "",
           "notes": "Căn cứ (SV): FR-01.1, D3"
-        }
-      ]
-    },
-    {
-      "id": "TS-SV-GUI",
-      "name": "SV bổ sung — GUI",
-      "format": "steps",
-      "description": "Case GUI SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit 7a9f887), giữ nguyên chữ của SV. Cột 'Các bước' của SV không có kết quả mong đợi từng bước → ghi '(SV chưa ghi)'. Tiền điều kiện lấy từ TS-GUI.",
-      "cases": [
-        {
-          "id": "TC-FR20-207",
-          "title": "Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi bàn phím ảo hiển thị trên màn Đăng ký mobile",
-          "layer": "Mobile",
-          "requirements": [
-            "FR-22.4"
-          ],
-          "assumptions": [
-            "D13"
-          ],
-          "technique": "GUI / Mobile Usability",
-          "approach": "black-box",
-          "type": "GUI",
-          "method": "Manual",
-          "priority": "Medium",
-          "origin": "Human",
-          "rationale": "UX Mobile: Bàn phím ảo chiếm diện tích màn hình. Cần bảo đảm thông báo lỗi xuất hiện đúng vị trí phía trên nút bấm theo FR-22.4.",
-          "preconditions": [
-            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
-          ],
-          "test_data": "",
-          "steps": [
-            {
-              "action": "Mở màn Đăng ký tài khoản trên app mobile.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Nhập Email 'm207_{ts}@domain.com', Mật khẩu thiếu chữ hoa 'abcd1234!'.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Giữ bàn phím ảo hiển thị và bấm nút 'Đăng Ký'.",
-              "expected": "(SV chưa ghi)"
-            }
-          ],
-          "expected_result": "Thông báo lỗi xuất hiện ở vị trí nằm phía trên nút 'Đăng Ký' (FR-22.4, D13).",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "Căn cứ (SV): FR-22.4, D13",
-          "cleanup": [
-            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
-          ]
-        },
-        {
-          "id": "TC-FR20-208",
-          "title": "Kiểm tra che ký tự của ô Mật khẩu khi mở màn Đăng ký trên mobile",
-          "layer": "Mobile",
-          "requirements": [
-            "FR-22.3"
-          ],
-          "assumptions": [
-            "D13"
-          ],
-          "technique": "GUI / Mobile Feature",
-          "approach": "black-box",
-          "type": "GUI",
-          "method": "Manual",
-          "priority": "Medium",
-          "origin": "Human",
-          "rationale": "Mobile Usability: Kiểm tra tính năng che mật khẩu bảo mật trên thiết bị di động theo đúng chuẩn yêu cầu FR-22.3 / D13.",
-          "preconditions": [
-            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
-          ],
-          "test_data": "",
-          "steps": [
-            {
-              "action": "Mở màn Đăng ký tài khoản trên app mobile.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Nhập chuỗi 'Abcd1234!' vào ô Mật khẩu.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Quan sát định dạng hiển thị của ô Mật khẩu.",
-              "expected": "(SV chưa ghi)"
-            }
-          ],
-          "expected_result": "Ô Mật khẩu che ký tự đã nhập (định dạng `••••••••` hoặc dấu chấm tròn) (FR-22.3, D13).",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "Căn cứ (SV): FR-22.3, D13",
-          "cleanup": [
-            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
-          ]
         }
       ]
     }

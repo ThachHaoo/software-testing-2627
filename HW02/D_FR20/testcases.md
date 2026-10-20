@@ -91,7 +91,7 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 | EC14 | Có ≥ 1 chữ thường a–z | TC-FR20-01, TC-FR20-02, TC-FR20-03, TC-FR20-04, TC-FR20-05, TC-FR20-06, TC-FR20-07, TC-FR20-09, TC-FR20-10, TC-FR20-13, TC-FR20-14, TC-FR20-15, TC-FR20-16, TC-FR20-17, TC-FR20-60, TC-FR20-61, TC-FR20-62, TC-FR20-63, TC-FR20-64, TC-FR20-200, TC-FR20-201, TC-FR20-203, TC-FR20-204, TC-FR20-205, TC-FR20-206 |
 | EC15 | Không có chữ thường nào (các điều kiện khác thoả) | TC-FR20-11 |
 | EC16 | Chữ thường duy nhất là chữ có dấu tiếng Việt, vd 'ê' (các điều kiện khác thoả) | TC-FR20-12 |
-| EC17 | Có ≥ 1 chữ số 0–9 | TC-FR20-01, TC-FR20-02, TC-FR20-03, TC-FR20-04, TC-FR20-05, TC-FR20-06, TC-FR20-07, TC-FR20-09, TC-FR20-10, TC-FR20-11, TC-FR20-12, TC-FR20-14, TC-FR20-15, TC-FR20-16, TC-FR20-17, TC-FR20-60, TC-FR20-61, TC-FR20-62, TC-FR20-63, TC-FR20-64, TC-FR20-200, TC-FR20-201, TC-FR20-203, TC-FR20-204, TC-FR20-205, TC-FR20-206 |
+| EC17 | Có ≥ 1 chữ số 0–9 | TC-FR20-01, TC-FR20-02, TC-FR20-03, TC-FR20-04, TC-FR20-05, TC-FR20-06, TC-FR20-07, TC-FR20-09, TC-FR20-10, TC-FR20-11, TC-FR20-12, TC-FR20-14, TC-FR20-15, TC-FR20-16, TC-FR20-17, TC-FR20-60, TC-FR20-61, TC-FR20-62, TC-FR20-63, TC-FR20-64, TC-FR20-200, TC-FR20-201, TC-FR20-203, TC-FR20-204, TC-FR20-206 |
 | EC18 | Không có chữ số nào (các điều kiện khác thoả) | TC-FR20-13, TC-FR20-205 |
 | EC19 | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | TC-FR20-01, TC-FR20-03, TC-FR20-04, TC-FR20-05, TC-FR20-06, TC-FR20-07, TC-FR20-09, TC-FR20-10, TC-FR20-11, TC-FR20-12, TC-FR20-13, TC-FR20-16, TC-FR20-17, TC-FR20-60, TC-FR20-61, TC-FR20-62, TC-FR20-63, TC-FR20-64, TC-FR20-200, TC-FR20-201, TC-FR20-203, TC-FR20-204, TC-FR20-205, TC-FR20-206 |
 | EC20 | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (vd '!' và '#') | TC-FR20-02 |
@@ -216,7 +216,7 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 - Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
 
 ### Bước 5 — Test case sinh viên bổ sung · TS-SV — SV bổ sung — tầng Mobile
-**Ghi chú suite:** Case đã bỏ (giữ khoảng trống số): TC-FR20-202: SV bỏ ở 5/7c (7a9f887).
+**Ghi chú suite:** Case đã bỏ (giữ khoảng trống số): TC-FR20-202: SV bỏ ở 5/7c (7a9f887). · TC-FR20-207, TC-FR20-208: SV bỏ ở 5/7e (e067035, mục GUI ghi 'Bỏ hết').
 **Tiền điều kiện:** Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).; Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).; Điện thoại Android, Expo Go (SDK 54), cùng mạng với máy; app EShop Mobile đã mở với API_URL = http://172.21.0.137:3000/api (D15).; {ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231). Email mẫu m01_2231@domain.com: đúng một '@', local 'm01_2231' không rỗng, domain 'domain.com' có '.' → thuộc EC3 (FR-01.3, D4) và, vì chưa có trong CSDL, EC6 (FR-01.4, D5). Email chỉ có thể trùng trong cùng một lượt chạy (khởi động lại backend xoá mọi tài khoản đã tạo, D0): chạy lại cùng case trong cùng lượt phải dùng HHmm khác (chờ sang phút mới), nếu không email rơi vào EC7 (đã tồn tại).; Trạng thái ban đầu của mỗi case: app vừa tải lại (Reload trong Expo Go), đang ở màn hình chủ, header hiển thị 'Đăng nhập' (chưa đăng nhập); sau khi vào màn 'Đăng Ký Tài Khoản' cả ba ô Họ Tên, Email, Mật khẩu đều trống, không có chữ lỗi (D0).
 
 **Quy trình chung:**
@@ -224,7 +224,7 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 2. Trên điện thoại: tải lại app trong Expo Go (Reload). → Màn hình chủ; header hiển thị 'Đăng nhập'.
 3. Bấm 'Đăng nhập' trên header, rồi bấm 'Đăng ký ngay'. → Màn 'Đăng Ký Tài Khoản' hiển thị; ba ô Họ Tên, Email, Mật khẩu trống; không có chữ lỗi.
 4. Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu (nếu có) bằng bàn phím ảo, gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không chạm vào ô, giữ trống. Giá trị có ␣: bấm phím cách đúng số lần đó. Bàn phím tự viết hoa/tự sửa/chèn gợi ý làm đổi chuỗi → xoá và gõ lại cho đúng, ghi notes (D12). Không có ô Xác nhận mật khẩu → làm theo notes của case (D9). → Ô Họ Tên và Email hiển thị đúng chuỗi trong cột; ô Mật khẩu hiển thị dạng che với số ký tự che bằng độ dài chuỗi trong cột. Chụp TC-FR20-xx_manual_input.png.
-5. Ẩn bàn phím, bấm nút 'Đăng Ký' đúng một lần. → App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình).
+5. Ẩn bàn phím, bấm nút 'Đăng Ký' đúng số lần ghi trong case (mặc định 1 lần). → App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình).
 6. Quan sát và chụp TC-FR20-xx_manual_result.png: mọi kênh thông báo (hộp thoại: ghi tiêu đề + nội dung rồi mới đóng; chữ trên màn hình; toast) và tiêu đề màn hình sau khi đóng hộp thoại. → Khớp phần app của cột Expected.
 7. Trên máy tính: tải lại trang admin, mở tab 'Người dùng'; so với ảnh ở bước 1, chụp TC-FR20-xx_manual_admin_after.png. → Số dòng và Email như cột Expected (oracle tương đối).
 8. Chỉ case hợp lệ: trên màn 'Đăng Nhập' của app, bảo đảm ô Email chứa đúng email của case (xoá và gõ lại nếu khác), nhập Mật khẩu của case, bấm 'Sign In'; chụp TC-FR20-xx_manual_login.png. → Header hiển thị 'Chào, <Họ Tên của case>' như cột Expected.
@@ -235,34 +235,10 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | TC-FR20-200 | Kiểm tra dán (paste) chuỗi XSS `<script>alert(1)</script>` từ Clipboard vào ô Họ Tên bằng menu ngữ cảnh mobile khi thông tin khác hợp lệ | EC1, EC3, EC6, EC8, EC11, EC14, EC17, EC19, EC23, EC26, EC27, EC29, EC31 | EC1, EC27, EC29, EC31 | <script>alert(1)</script> | m200_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi ở mọi kênh (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm200_{ts}@domain.com' (D11); đăng nhập trên app bằng email đó + 'Abcd1234!' thành công, header hiển thị 'Chào, <script>alert(1)</script>' dạng chữ (SEC-04). | Security: Dán chuỗi script vào ô Họ Tên. SRS A1/D3 cho phép mọi ký tự; kiểm tra việc lưu trữ và render chuỗi an toàn theo SEC-04, không bị đơ UI. | gray-box | SV |
 | TC-FR20-201 | Kiểm tra dán chuỗi Unicode Emoji 🐻 vào ô Họ Tên qua bàn phím di động khi thông tin khác hợp lệ | EC1, EC3, EC6, EC8, EC11, EC14, EC17, EC19, EC23, EC26, EC27, EC29, EC31 | EC1, EC27, EC29, EC31 | Lê 🐻 Hiệp | m201_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi ở mọi kênh (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm201_{ts}@domain.com' (D11); đăng nhập trên app thành công, header hiển thị 'Chào, Lê 🐻 Hiệp' (D11). | Mobile Keyboard: Bàn phím di động thường xuyên gõ emoji 4-byte UTF-8. Kiểm tra xem ký tự Emoji có bị hỏng khi hiển thị trên app/CSDL. | black-box | SV |
-| TC-FR20-203 | Kiểm tra bấm chạm liên tục 10 lần nút 'Đăng Ký' khi form hợp lệ | EC1, EC3, EC6, EC8, EC11, EC14, EC17, EC19, EC23, EC26, EC27, EC29, EC31 | EC1, EC27, EC29, EC31 | Nguyễn Văn Ánh | m203_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi ở mọi kênh (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU chỉ có đúng 1 dòng mới so với TRƯỚC, Email = 'm203_{ts}@domain.com', không tạo tài khoản trùng lặp (D11). | UX Mobile: Người dùng mạng chậm/lag hay chạm nút 'Đăng Ký' nhiều lần liên tục. Kiểm tra tính toàn vẹn dữ liệu tránh nhân bản tài khoản. | gray-box | SV |
+| TC-FR20-203 | Kiểm tra bấm chạm liên tục 10 lần nút 'Đăng Ký' khi form hợp lệ | EC1, EC3, EC6, EC8, EC11, EC14, EC17, EC19, EC23, EC26, EC27, EC29, EC31 | EC1, EC27, EC29, EC31 | Nguyễn Văn Ánh | m203_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi ở mọi kênh (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU chỉ có đúng 1 dòng mới so với TRƯỚC, Email = 'm203_{ts}@domain.com', không tạo tài khoản trùng lặp (D11). | UX Mobile: Người dùng mạng chậm/lag hay chạm nút 'Đăng Ký' nhiều lần liên tục. Thao tác đè quy trình chung của TS-DOM: Bấm chạm liên tục 10 lần nút 'Đăng Ký' thay vì bấm 1 lần để kiểm tra xử lý đồng thời/spam click. | gray-box | SV |
 | TC-FR20-204 | Kiểm tra từ chối đăng ký trên mobile khi Email chứa khoảng trắng ở giữa do bàn phím tự động chèn | EC1, EC5, EC6, EC8, EC11, EC14, EC17, EC19, EC23, EC26, EC28, EC30, EC32 | EC5, EC28, EC30, EC32 | Nguyễn Văn Ánh | m204_{ts} @domain.com | chưa có | Abcd1234! | Abcd1234! | Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11). | Mobile Keyboard: Auto-correct trên bàn phím di động dễ tự động chèn khoảng trắng sau ký tự đặc biệt. Khoảng trắng ở giữa vi phạm D4. | gray-box | SV |
-| TC-FR20-205 | Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ chứa các chữ số Full-width `１２３４５６７８` | EC1, EC3, EC6, EC8, EC11, EC14, EC17, EC18, EC19, EC23, EC26, EC28, EC30, EC32 | EC18, EC28, EC30, EC32 | Nguyễn Văn Ánh | m205_{ts}@domain.com | chưa có | Abcd１２３４５６! | Abcd１２３４５６! | Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11). | Mobile Keyboard: Chữ số Full-width CJK (U+FF11) không thuộc tập ASCII `[0-9]`, bị tính là thiếu chữ số theo D8. | black-box | SV |
+| TC-FR20-205 | Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ chứa các chữ số Full-width `Abcd１２３４５６７８` | EC1, EC3, EC6, EC8, EC11, EC14, EC18, EC19, EC23, EC26, EC28, EC30, EC32 | EC18, EC28, EC30, EC32 | Nguyễn Văn Ánh | m205_{ts}@domain.com | chưa có | Abcd１２３４５６! | Abcd１２３４５６! | Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11). | Mobile Keyboard: Chữ số Full-width CJK (U+FF11) không thuộc tập ASCII `[0-9]`, bị tính là thiếu chữ số theo D8. | black-box | SV |
 | TC-FR20-206 | Kiểm tra đăng ký thành công trên mobile khi Họ Tên có độ dài cực đại 10.000 ký tự dán từ bộ nhớ tạm | EC1, EC3, EC6, EC8, EC11, EC14, EC17, EC19, EC23, EC26, EC27, EC29, EC31 | EC1, EC27, EC29, EC31 | 10.000 chữ 'a' | m206_{ts}@domain.com | chưa có | Abcd1234! | Abcd1234! | Không có thông báo lỗi ở mọi kênh (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm206_{ts}@domain.com' (D11); đăng nhập trên app thành công. | Boundary/Performance: D3 không quy định cận trên độ dài Họ Tên. Dán chuỗi lớn để kiểm tra luồng gửi request và lưu trữ CSDL. | gray-box | SV |
-
-### Bước 5 — Test case sinh viên bổ sung · TS-SV-GUI — SV bổ sung — GUI
-| #TC | Tiêu đề | EC phủ | Expected | Lý do chọn input | Cách tiếp cận | Nguồn |
-|---|---|---|---|---|---|---|
-| TC-FR20-207 | Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi bàn phím ảo hiển thị trên màn Đăng ký mobile |  | Thông báo lỗi xuất hiện ở vị trí nằm phía trên nút 'Đăng Ký' (FR-22.4, D13). | UX Mobile: Bàn phím ảo chiếm diện tích màn hình. Cần bảo đảm thông báo lỗi xuất hiện đúng vị trí phía trên nút bấm theo FR-22.4. | black-box | SV |
-| TC-FR20-208 | Kiểm tra che ký tự của ô Mật khẩu khi mở màn Đăng ký trên mobile |  | Ô Mật khẩu che ký tự đã nhập (định dạng `••••••••` hoặc dấu chấm tròn) (FR-22.3, D13). | Mobile Usability: Kiểm tra tính năng che mật khẩu bảo mật trên thiết bị di động theo đúng chuẩn yêu cầu FR-22.3 / D13. | black-box | SV |
-
-**Các bước chi tiết:**
-
-**TC-FR20-207** — Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi bàn phím ảo hiển thị trên màn Đăng ký mobile
-
-- Tiền điều kiện: Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0).
-- Bước 1: Mở màn Đăng ký tài khoản trên app mobile. → (SV chưa ghi)
-- Bước 2: Nhập Email 'm207_{ts}@domain.com', Mật khẩu thiếu chữ hoa 'abcd1234!'. → (SV chưa ghi)
-- Bước 3: Giữ bàn phím ảo hiển thị và bấm nút 'Đăng Ký'. → (SV chưa ghi)
-- Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
-
-**TC-FR20-208** — Kiểm tra che ký tự của ô Mật khẩu khi mở màn Đăng ký trên mobile
-
-- Tiền điều kiện: Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0).
-- Bước 1: Mở màn Đăng ký tài khoản trên app mobile. → (SV chưa ghi)
-- Bước 2: Nhập chuỗi 'Abcd1234!' vào ô Mật khẩu. → (SV chưa ghi)
-- Bước 3: Quan sát định dạng hiển thị của ô Mật khẩu. → (SV chưa ghi)
-- Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
 
 ### Truy vết yêu cầu ↔ test case
 Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.
@@ -284,8 +260,8 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 | FR-01.10 | TC-FR20-01, TC-FR20-02, TC-FR20-61, TC-FR20-62, TC-FR20-63, TC-FR20-64, TC-FR20-200, TC-FR20-201, TC-FR20-203, TC-FR20-206 | 10 |
 | FR-22.1 | TC-FR20-90 | 1 |
 | FR-22.2 | TC-FR20-91 | 1 |
-| FR-22.3 | TC-FR20-92, TC-FR20-208 | 2 |
-| FR-22.4 | TC-FR20-93, TC-FR20-207 | 2 |
+| FR-22.3 | TC-FR20-92 | 1 |
+| FR-22.4 | TC-FR20-93 | 1 |
 | SEC-04 | TC-FR20-200 | 1 |
 | D3 (giả định) | TC-FR20-01, TC-FR20-03, TC-FR20-200, TC-FR20-201, TC-FR20-203, TC-FR20-206 | 6 |
 | D4 (giả định) | TC-FR20-01, TC-FR20-05, TC-FR20-204 | 3 |
@@ -298,7 +274,8 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 | D2 (giả định) | TC-FR20-01, TC-FR20-02, TC-FR20-03, TC-FR20-04, TC-FR20-05, TC-FR20-06, TC-FR20-07, TC-FR20-08, TC-FR20-09, TC-FR20-10, TC-FR20-11, TC-FR20-12, TC-FR20-13, TC-FR20-14, TC-FR20-15, TC-FR20-16, TC-FR20-17, TC-FR20-60, TC-FR20-61, TC-FR20-62, TC-FR20-63, TC-FR20-64, TC-FR20-90, TC-FR20-94 | 24 |
 | D7 (giả định) | TC-FR20-02, TC-FR20-15 | 2 |
 | D10 (giả định) | TC-FR20-03, TC-FR20-04, TC-FR20-05, TC-FR20-06, TC-FR20-07, TC-FR20-08, TC-FR20-09, TC-FR20-10, TC-FR20-11, TC-FR20-12, TC-FR20-13, TC-FR20-14, TC-FR20-15, TC-FR20-16, TC-FR20-17, TC-FR20-60, TC-FR20-93, TC-FR20-204, TC-FR20-205 | 19 |
-| D13 (giả định) | TC-FR20-90, TC-FR20-91, TC-FR20-92, TC-FR20-93, TC-FR20-207, TC-FR20-208 | 6 |
+| D13 (giả định) | TC-FR20-90, TC-FR20-91, TC-FR20-92, TC-FR20-93 | 4 |
+| D16 (giả định) | TC-FR20-205 | 1 |
 
 ### Giả định khi đặc tả chưa nói rõ
 - D0 (độc lập, trạng thái ban đầu, dữ liệu) [loại: quy trình · truy vết: không · căn cứ: CLAUDE.md (backend khởi động lại → CSDL seed lại), tiền lệ A13/A19 · SV chốt 2026-10-20, chấp nhận đề xuất AI]: đầu mỗi case tải lại app trong Expo Go (Reload) → màn hình chủ, chưa đăng nhập, rồi vào 'Đăng nhập' (header) → 'Đăng ký ngay'; ba ô trống. Lý do phải tải lại (gray-box, chỉ để viết quy trình): state của form nằm trong component App (App.js dòng 42–46), không thấy chỗ đặt lại khi rời/vào lại màn hình. Mỗi case dùng email riêng có hậu tố {ts}; email đã tồn tại dùng tài khoản seed test@eshop.com. Oracle tương đối (danh sách người dùng SAU so với TRƯỚC trong chính case). Restart backend xoá mọi tài khoản đã tạo.
@@ -317,5 +294,6 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 - D13 (yêu cầu GUI trên mobile) [loại: phạm vi + quyết định Expected · truy vết: có · căn cứ: FR-22 dòng 252–255 viết theo khái niệm web (type="email", type="password"); tiền lệ A14 (suite GUI riêng, không phân lớp) và phạm vi A (bỏ FR-21) · SV chốt 2026-10-20, phương án a]: FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi — lý do SV: nhất quán với A, giữ dòng so sánh web vs mobile (SRS không đủ căn cứ, SV quyết).
 - D14 (verdict khi chạy tay) [loại: quy trình · truy vết: không · căn cứ: quyết định đã chốt A20/A17 (CLAUDE.md), quy tắc verdict của skill · SV chốt 2026-10-20, chấp nhận đề xuất AI]: chạy tay nên status do SV điền trực tiếp, auto_status để trống; lệch do biến mục tiêu → Fail; bị biến khác chặn → Blocked + case gốc; 'Pass hộp đen' khi bị từ chối đúng nhưng lý do không chứng minh luật mục tiêu. Evidence: ảnh chụp màn hình điện thoại TC-FR20-xx_manual_*.png (+ ảnh trang admin theo D11).
 - D15 (thiết bị, locale, bàn phím) [loại: môi trường · truy vết: không · căn cứ: P2 (SV chốt Android thật, Expo Go) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: SV ghi model, phiên bản Android, bản Expo Go, ngôn ngữ hệ thống, bàn phím (vd Gboard) khi chạy; ghi vào meta.environment và HW02/env/environment.md.
+- D16 (Chữ số Full-width trong Mật khẩu) [loại: quyết định Expected · truy vết: có · căn cứ: FR-01.7c, D8 (chữ số 0-9) · SV chốt 2026-10-21 — giải quyết mơ hồ về tập ký tự Unicode]: Các chữ số dạng Full-width (như `１２３` U+FF11...U+FF19) gõ từ bộ gõ CJK không được tính là chữ số hợp lệ thuộc tập ASCII [0-9] theo FR-01.7c và D8; mật khẩu chỉ chứa chữ số Full-width sẽ bị coi là không có chữ số (rơi vào EC18 và bị từ chối).
 
-**Tổng:** 35 TC · Not run: 35 · Nguồn: AI 27, SV 8
+**Tổng:** 33 TC · Not run: 33 · Nguồn: AI 27, SV 6
