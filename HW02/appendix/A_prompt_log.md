@@ -6897,7 +6897,7 @@ Nhiệm vụ 2 – B_FR07 Giỏ hàng, bước 0–1
 ```
 
 **Output:**
-```
+````
 Đang làm: kiểm Nhiệm vụ 1 — git log đã có commit `af48958` cùng tên. Xác minh nó đủ chưa.
 
 Nhiệm vụ 1: không còn gì để commit (tree sạch sau khi chạy lại, 90/90 TC Fail/Blocked có bug_id). Sang Nhiệm vụ 2 — khảo sát SUT tiếp.
@@ -6907,11 +6907,250 @@ Nhiệm vụ 1: không còn gì để commit (tree sạch sau khi chạy lại, 
 Freeze chạy trước render nên thiếu bản .md. Huỷ bản freeze vừa tạo (chưa commit) và freeze lại sau render.
 
 Hook chặn sửa `ai-outputs/` — đúng luật, không vượt. Dùng đường hợp lệ: freeze lần nữa (bổ sung bản json+md sau render).
+
+Freeze từ chối ghi đè (cùng phút). Giữ bản JSON đóng băng; .md tái sinh được từ JSON bằng `render_md.py` — ghi vào báo cáo. Commit.
+
+Xong bước 0–1 cho B_FR07, dừng ở đây chờ em review. Nhiệm vụ 1 đã làm từ trước nên không có commit mới.
+
+**Nhiệm vụ 1:** commit `af48958` sáng nay (09:26) đã làm đủ phần này. Em chạy lại summary, check_domain, linter, render_md thì working tree vẫn sạch, nên không có gì để commit thêm. 90/90 TC Fail/Blocked đã có bug_id, không TC nào phải để trống. render_md đã có cột bug_id nên không cần vá harness.
+
+**Lệch nhỏ ở bước freeze:** em chạy `freeze.py` trước `render_md.py`, nên `ai-outputs/` chỉ có bản JSON (`B_FR07_step1_20261020-1018.json`), thiếu bản .md. Freeze lại thì script từ chối ghi đè, còn hook chặn sửa thư mục này, em không vượt. Bản .md sinh lại được từ JSON đã đóng băng. Từ bước 2, em render trước rồi mới freeze.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) Tồn đọng A_FR01 — đã có ở commit af48958, chạy lại không còn thay đổi. (2) B_FR07 bước 0–1.
+- File đã tạo/sửa: HW02/B_FR07/testcases.json, testcases.md (xoá .gitkeep); HW02/appendix/ai-outputs/B_FR07_step1_20261020-1018.json + INDEX.md; HW02/appendix/A_prompt_log.md
+- Kết quả kiểm tra:
+  · A_FR01: check_domain 0 errors/1 warn (TS-SV > 25 dòng); lint 0 errors/4 warn; Fail/Blocked 90/90 có bug_id
+  · B_FR07: check_domain 0 errors/12 warn (11 biến đầu ra chưa phân lớp + chưa có partitions → đúng, đó là việc của bước 2); lint 0 errors/20 warn (yêu cầu chưa có TC → bình thường ở bước 1); test Not run
+- Commit: af48958 HW02[A-FR01]: ghi bug_id + tách cột Both trong summary (đã có từ trước)
+          b48929e HW02[B-FR07] 1/7: biến vào/ra
+- Bản đóng băng bước 1 chỉ có JSON (freeze chạy trước render; script không ghi đè, hook chặn sửa ai-outputs). .md sinh lại được bằng render_md.py. Từ bước 2: render rồi mới freeze.
+- TC chưa map được bug_id: không có.
+```
+
+**Trích nguyên văn SRS** (`../eshop-sut/README.md`, SRS v2.0. File .md nên không có số trang, em ghi mục và dòng):
+
+```
+§4 FR-07 (dòng 93–100)
+### FR-07: Giỏ hàng (Shopping Cart)
+- Hiển thị danh sách sản phẩm với các cột: **Sản phẩm**, **Đơn giá**, **Số lượng** (có nút +/- để chỉnh), **Thành tiền**, **Thao tác**.
+- Thêm cùng một sản phẩm vào giỏ sẽ tăng số lượng, không tạo dòng mới.
+- Nút **Xóa sản phẩm** phải có dialog xác nhận trước khi thực hiện.
+- Có nút **Tiếp tục mua sắm** để quay về trang chủ.
+- Tổng tiền hiển thị nhãn chính xác: **"Tổng cộng"** (không phải "Tổng tạm tính").
+- Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.
+
+§3 FR-06 (dòng 85–87)
+- Có ô nhập **Số lượng** (chỉ nhận số nguyên dương, tối thiểu là 1).
+- Nút **Thêm vào giỏ hàng** — sau khi bấm hiển thị phản hồi trực quan (toast notification hoặc badge cập nhật).
+
+§4 FR-08 (dòng 104, 105, 108)
+- Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.
+- **Tổng tiền thanh toán** được tính tự động từ giỏ hàng và không cho phép người dùng chỉnh sửa trực tiếp.
+- Sau thanh toán thành công, giỏ hàng được xóa.
+
+§7 FR-20 (dòng 235)
+- Đầy đủ các chức năng: Xem sản phẩm, Đăng nhập, Đăng xuất, Đăng ký, Giỏ hàng, Thanh toán, Hồ sơ, Lịch sử đơn hàng.
+
+§8 FR-21 (dòng 246)
+- **Nhất quán đơn vị tiền**: Luôn dùng ký hiệu `₫` với định dạng phân cách hàng nghìn.
+§8 FR-23 (dòng 261, 263)
+- Link "Giỏ hàng" phải hiển thị **badge số lượng** sản phẩm trong giỏ.
+- Breadcrumb bắt buộc có ở các trang con (Giỏ hàng, Thanh toán, Chi tiết sản phẩm).
+§8 FR-24 (dòng 267–270)
+- Sau khi bấm "Thêm vào giỏ", phải có phản hồi trực quan (toast/badge).
+- Khi xóa item khỏi giỏ phải có dialog xác nhận.
+- Trang trống (Empty State) phải có icon/hình minh họa và message thân thiện.
+- Tất cả ảnh sản phẩm phải có thuộc tính `alt` mô tả nội dung ảnh (không để rỗng).
+
+§9 (dòng 279, 281)
+| SEC-02 | Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ. |
+| SEC-04 | Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng `innerHTML` trực tiếp. |
+```
+
+`api_specification.md` §4, dòng 110–127: GET và POST `/api/cart`, header `Authorization: Bearer <token>`, body `{id, name, price, quantity}`.
+
+**Bảng biến vào/ra** (đầy đủ trong `HW02/B_FR07/testcases.md`):
+
+| ID | Biến | Vào/Ra | Ràng buộc chính |
+|---|---|---|---|
+| V1 | Số lượng khi thêm (ô "Số lượng:" / body.quantity) | in | nguyên dương, ≥ 1 (FR-06); cận trên theo B1 |
+| V2 | Sản phẩm được thêm, so với giỏ hiện có | in | sản phẩm trùng thì tăng số lượng, không tạo dòng mới (FR-07.3, B5) |
+| V3 | Đơn giá (products.price / body.price) | in | dùng để tính tiền (B4, B8) |
+| V4 | Thao tác +/- | in | ±1 (FR-07.2, B1, B3) |
+| V5 | Số lượng hiện tại của dòng | in | ≥ 1; biên ở 1 và ở cận trên |
+| V6 | Xoá dòng + lựa chọn trong dialog | in | phải có dialog (FR-07.4, B14) |
+| V7 | Số dòng trong giỏ | in | 0 thì hiện empty state |
+| V8 | Đăng nhập / token | in | UI: khách vẫn dùng giỏ (B11); API: cần JWT (SEC-02) |
+| V9 | body.name (API) | in | B8, SEC-04 |
+| V10 | Bấm "Tiếp tục mua sắm" | in | quay về `/` |
+| V11 | Danh sách dòng trong giỏ | out | đủ 5 cột; mỗi sản phẩm một dòng |
+| V12 | Số lượng sau thao tác | out | cộng dồn / ±1 / ≥ 1 |
+| V13 | Thành tiền | out | Đơn giá × Số lượng, định dạng ₫ (B4, B13) |
+| V14 | Tổng cộng | out | nhãn "Tổng cộng", bằng tổng các Thành tiền |
+| V15 | Badge "Giỏ hàng" | out | FR-23 (B9) |
+| V16 | Phản hồi sau khi thêm | out | toast/badge |
+| V17 | Dialog xoá | out | hiện trước khi xoá |
+| V18 | Empty state | out | có hình + thông báo (B15) |
+| V19 | Trang đích sau "Tiếp tục mua sắm" | out | URL `/` |
+| V20 | Phản hồi API | out | dữ liệu đúng: 2xx; dữ liệu/token sai: 4xx, giỏ không đổi |
+| V21 | Thông báo lỗi khi số lượng sai | out | SRS không quy định nội dung (B2) |
+
+**Khảo sát SUT** (chỉ để biết điểm quan sát, không dùng làm nguồn yêu cầu):
+- **Endpoint giỏ hàng:**
+  - `GET /api/cart` và `POST /api/cart` (`server.js:284–295`) đều cần token.
+  - Thiếu token trả 401 `{"error":"Unauthorized"}`; token sai trả 403 `{"error":"Forbidden"}` (`server.js:100–110`).
+  - POST thành công trả 200 `{"message":"Added to cart"}`.
+  - Không có endpoint sửa hay xoá dòng giỏ.
+- **userCarts:** đối tượng trong RAM, khoá là `req.user.id` lấy từ JWT. Mất khi restart backend; restart cũng seed lại CSDL.
+- **Giỏ trên web:**
+  - Là state React trong `CartContext.jsx`, **không gọi `/api/cart`**, không lưu localStorage. Tải lại trang hoặc `page.goto` là mất giỏ, nên script UI phải điều hướng bằng link trong app.
+  - Có 3 điểm thêm vào giỏ:
+    - trang chủ `/`: nút "Thêm vào giỏ" (số lượng luôn là 1);
+    - `/product/:id`: ô "Số lượng:" (`input type=number`, không có min/max);
+    - `/product/:id`: nút "Thêm vào giỏ hàng".
+  - Trang `/cart` có:
+    - tiêu đề cột "Sản phẩm/Giá/Số lượng/Thành tiền/Thao tác";
+    - nút "Xóa", nhãn "Tổng tạm tính:", link "← Mua tiếp";
+    - khi giỏ trống: dòng "Giỏ hàng của bạn đang trống" và link "Tiếp tục mua sắm".
+  - Link navbar "Giỏ hàng" nằm ở `App.jsx:23`.
+  - Mã không có thuộc tính `data-testid`, nên selector phải dựa trên role và text.
+- **Sản phẩm seed:** bảng products có `id, name, price INTEGER, description, imageUrl, category_id`. **Không có tồn kho hay trạng thái.** 5 sản phẩm, giá từ 4.000.000 đến 45.000.000.
+- **Ghi nhận trung lập, chưa kết luận, chờ bước 6:**
+  - chưa thấy nút +/-;
+  - nút "Xóa" gọi xoá trực tiếp;
+  - lần bấm đầu ở trang chi tiết không gọi `addToCart` (`ProductDetail.jsx:21–31`);
+  - `GET /api/products/:id` trả giá dạng chuỗi với id chẵn (`server.js:162`).
+
+**Giả định:**
+- **Đã chốt** (theo khối lệnh): B0a mỗi case một user riêng có `{ts}` · B0b oracle so giỏ trước/sau trong chính case · B0c cleanup 2 lớp (dữ liệu riêng + `DELETE /api/admin/users/:id`, restart backend) · B0d giỏ web nằm trong state React (chỉ là quan sát).
+- **Chờ em chốt** (em chưa chọn giá trị nào):
+
+| Mã | Nội dung | Nguồn gợi ý |
+|---|---|---|
+| B1 | Cận trên số lượng | SRS chỉ ghi ≥ 1; code không có max, không có tồn kho; thông lệ: theo tồn kho hoặc 99 |
+| B2 | Cách từ chối số lượng sai | SRS không nói cách từ chối; đề xuất oracle: giỏ không đổi |
+| B3 | Nút "-" khi số lượng = 1 | SRS im lặng; thông lệ: giữ 1 hoặc xoá dòng |
+| B4 | Công thức Thành tiền / Tổng cộng | thông lệ; FR-08 |
+| B5 | Thế nào là "cùng sản phẩm" | code/API dùng `id` |
+| B6 | Đưa FR-06.2/06.3 vào phạm vi? | FR-06 là nguồn dữ liệu vào giỏ; cần kiểm nhóm có ai trùng không |
+| B7 | Kiểm `/api/cart` như một tầng riêng? | API spec có endpoint; A9 của A_FR01 |
+| B8 | Giá/tên do client gửi trong body có được chấp nhận? | FR-08 không tin total_amount từ client |
+| B9 | Badge đếm số dòng hay tổng số lượng? | FR-23 mơ hồ |
+| B10 | Giữ giỏ khi tải lại trang / đăng nhập / đăng xuất? | SRS im lặng |
+| B11 | Khách chưa đăng nhập dùng giỏ trên UI | suy ra từ FR-08 |
+| B12 | So khớp đúng chữ các nhãn; "Xóa sản phẩm" là nhãn hay chỉ là mô tả? | chữ in đậm trong SRS |
+| B13 | Ký tự phân cách hàng nghìn "." hay "," | FR-21; code dùng `toLocaleString()` |
+| B14 | Hành vi dialog (Hủy / Đồng ý) | thông lệ |
+| B15 | Oracle empty state | FR-07, FR-24 |
+| B16 | GUI (FR-21/23/24) kiểm bằng TS-GUI riêng? | như A14 |
+| B17 | Mã lỗi API: 4xx | như A11; code trả 401/403 |
+| B18 | Sai kiểu / id không tồn tại ở API | như A15 |
+
+**Cần quyết định trước bước 2:** B1, B3, B6, B7, B9. Năm điểm này đổi trực tiếp số lớp tương đương và điểm biên.
+````
 *File AI ghi/gửi trong lượt này:* `init_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 118 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 115 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #119 | 10:23 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+Trong CLAUDE.md, thay đoạn "**Kết thúc mỗi nhiệm vụ** … (hết khối mẫu)" bằng đúng
+nội dung sau, không sửa chỗ nào khác:
+
+**Kết thúc mỗi nhiệm vụ** bằng một khối ngắn (≤ 25 dòng) để người dùng dán ngược
+về phiên thảo luận:
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: …
+- File đã tạo/sửa: …
+- Kết quả kiểm tra: check_domain …, lint …, test … (Pass/Fail/Not run)
+- Commit: <hash> <message>
+- Cần quyết định / câu hỏi: …
+```
+
+Quy tắc cho khối báo cáo:
+- Nội dung dài (trích SRS, bảng biến/lớp/TC, khảo sát SUT, danh sách giả định)
+  ghi vào file trong thư mục feature; báo cáo chỉ nêu đường dẫn. Kể cả khi lệnh
+  yêu cầu "báo cáo X", hãy hiểu là ghi X vào file rồi trỏ tới.
+- "Cần quyết định" chỉ liệt kê điểm chặn bước kế tiếp, mỗi điểm 1 dòng:
+  mã – câu hỏi – các phương án. Điểm không chặn thì ghi số lượng + đường dẫn file.
+- Bất thường mới phát hiện (SUT, harness): mỗi điểm 1 dòng, kèm file:dòng.
+- Không dùng bảng kẻ khung (┌─┐); dùng gạch đầu dòng hoặc bảng markdown.
+
+Commit: "HW02: CLAUDE.md – giới hạn độ dài báo cáo".
+````
+
+**Output:**
+````
+Em đã thay đoạn đó trong CLAUDE.md đúng nguyên văn và commit. Đoạn mới vẫn thụt lề như một gạch đầu dòng giống phần xung quanh; ngoài đoạn này không đổi chỗ nào khác.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: thay đoạn "Kết thúc mỗi nhiệm vụ" trong CLAUDE.md bằng nội dung mới (≤ 25 dòng + 4 quy tắc)
+- File đã tạo/sửa: CLAUDE.md (dòng 11–29)
+- Kết quả kiểm tra: check_domain Not run, lint Not run, test Not run (chỉ sửa tài liệu)
+- Commit: b5c95b6 HW02: CLAUDE.md – giới hạn độ dài báo cáo
+- Cần quyết định / câu hỏi:
+  - Phần trích SRS FR-07, khảo sát SUT và danh sách giả định B1–B18 của lượt trước mới chỉ nằm trong chat – có ghi vào HW02/B_FR07/notes_step1.md (commit kèm bước 2) không? Có / Không
+- Bất thường: hook Stop sửa HW02/appendix/A_prompt_log.md sau mỗi lượt; file này chưa commit, sẽ đi cùng commit bước 2 của B_FR07.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #120 | 10:29 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – Lưu notes bước 1 (commit riêng)
+1. Kiểm testcases.json/md của B_FR07: phần trích SRS, khảo sát SUT, giả định
+   B0–B18 đã có chưa. Chỉ ghi phần CÒN THIẾU vào HW02/B_FR07/notes_step1.md
+   (nội dung lấy từ báo cáo bước 1 của lượt trước, không viết lại).
+2. Commit: "HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)"
+   kèm HW02/appendix/A_prompt_log.md.
+
+Nhiệm vụ 2 – Ghi 5 quyết định SV vào phần giả định của testcases.json
+(dùng trường sẵn có của schema; đánh dấu do SV chốt, kèm lý do):
+- B1 = không có cận trên (SRS chỉ quy định ≥ 1); BVA phía trên dùng 1 đại diện
+  "giá trị lớn" hợp lệ.
+- B3 = nút "−" ở số lượng 1 giữ nguyên 1 (SRS FR-06 "tối thiểu là 1"; xoá phải
+  qua dialog FR-07.4). Ghi chú: SUT chưa thấy nút +/− → xử lý theo quy tắc A17
+  ở bước 3.
+- B6 = có, FR-06 (ô số lượng, phản hồi khi thêm) trong phạm vi; bug thuộc FR-06
+  đặt tiêu đề [FR-06].
+- B7 = có, /api/cart là tầng riêng, suite riêng (UI / API).
+- B9 = badge đếm tổng số lượng. Giả định của SV, lý do: FR-23 "badge số lượng sản
+  phẩm trong giỏ". Ghi rõ câu SRS vẫn có thể hiểu là số dòng.
+
+Nhiệm vụ 3 – Bước 2 (lớp tương đương)
+1. /domain-bva-testing HW02/B_FR07 2, áp dụng 5 quyết định trên.
+2. Lớp dựa trên SRS + giả định đã chốt; code chỉ dùng cho điểm quan sát.
+3. Với các giả định chưa chốt (B2, B4, B5, B8, B10–B18): đề xuất phương án trong
+   file; chỉ đưa vào "Cần quyết định" những cái làm thay đổi số lớp hoặc chặn bước 3.
+4. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit: "HW02[B-FR07] 2/7: lớp tương đương" kèm prompt log.
+5. Dừng sau bước 2. Báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+Kiểm: json đã có giả định B0a–B18 và tham chiếu; thiếu trích SRS nguyên văn + khảo sát SUT chi tiết. Ghi phần thiếu.
+```
+*File AI ghi/gửi trong lượt này:* `notes_step1.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 120 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 117 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
