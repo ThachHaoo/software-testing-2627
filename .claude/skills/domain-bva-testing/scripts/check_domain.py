@@ -99,7 +99,8 @@ def check(data):
             if not bp:
                 add("WARN", cid, "case BVA thiếu bva_point")
             elif bp == "LARGE":
-                rvars = {parts[e]["variable"] for e in cov if e in parts and parts[e].get("guideline") == "range"}
+                # biến đang xét = lớp range trong ec_target (nếu có); covers còn chứa lớp danh nghĩa của biến khác
+                rvars = {parts[e]["variable"] for e in (tgt or cov) if e in parts and parts[e].get("guideline") == "range"}
                 if not rvars or not all(v in no_ub for v in rvars) or not (set(as_list(c.get("assumptions"))) & no_ub_codes):
                     add("ERROR", cid, "bva_point 'LARGE' chỉ dùng khi biến có giả định 'không có cận trên' được khai "
                                       "(domain.variables[].no_upper_bound = mã giả định, và mã đó nằm trong assumptions của case)")
