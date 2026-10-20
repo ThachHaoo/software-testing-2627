@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/products",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"SP API28 1792495392487\", \"price\": -1000, \"category_id\": 2, \"description\": \"Mô tả 28 1792495392487\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

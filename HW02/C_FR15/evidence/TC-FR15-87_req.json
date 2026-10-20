@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/products",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"Bàn phím cơ BVA 87 1792495496294\", \"price\": 1500000, \"category_id\": 2, \"description\": \"Mô tả 87 1792495496294\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

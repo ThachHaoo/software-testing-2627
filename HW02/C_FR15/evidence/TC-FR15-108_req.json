@@ -1,0 +1,9 @@
+{
+  "method": "PUT",
+  "url": "/api/products/95",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"AB\", \"price\": 2500000, \"category_id\": 3, \"description\": \"Mô tả 108 1792495501094\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

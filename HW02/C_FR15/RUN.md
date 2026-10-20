@@ -72,6 +72,15 @@ Chạy tay sau khi khởi động lại backend. Dùng **cửa sổ ẩn danh, t
 
 ## Nhật ký lượt chạy
 
-| Lượt | Thời điểm | Phạm vi | Results | Ghi chú |
+| Lượt | Thời điểm (20/10/2026) | Phạm vi | Results | Ghi chú |
 |---|---|---|---|---|
-| | | | | |
+| 1, 2, 4 | — | — | — | SV chưa cung cấp file results; không có trong `HW02/tests/results/` |
+| 3 | 18:22:15 | toàn bộ 117 test | `results/C_FR15_20261020-182214.json` | 47 passed, 70 failed. SV đã merge trước bước 6b |
+| 5 | 18:26:26 | TC-FR15-201, TC-FR15-205 | `results/C_FR15_20261020-182625.json` | Cả hai failed, cùng kết quả lượt 3. AI merge ở 6b (không `--force`) |
+| manual | 18:33–18:40 | TC-FR15-90…94 | `evidence/TC-FR15-9x_manual*.png` | SV chạy tay |
+
+- **Restart backend trước từng lượt:** chưa có xác nhận của SV.
+  - global-setup đạt ở cả lượt 3 và lượt 5, tức CSDL chỉ có sản phẩm id 1–5.
+  - Điều đó không chứng minh đã restart: cleanup sau lượt 3 cũng xoá hết sản phẩm test, để lại đúng id 1–5.
+- **Lượt chính thức = lượt 3** (chạy toàn bộ). Điều kiện là SV xác nhận đã restart backend ngay trước lượt 3.
+- **Evidence:** chỉ giữ của lượt mới nhất. TC-201 và TC-205 lấy từ lượt 5; merge bỏ 2 attachment trùng nội dung. Các case khác lấy từ lượt 3.

@@ -1,0 +1,8 @@
+{
+  "method": "GET",
+  "url": "/api/products/2",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": null
+}

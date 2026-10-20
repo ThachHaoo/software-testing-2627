@@ -1,0 +1,9 @@
+{
+  "method": "DELETE",
+  "url": "/api/products/57",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": null
+}

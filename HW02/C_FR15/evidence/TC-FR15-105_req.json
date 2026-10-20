@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/products",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"SP BVA 105 1792495499644\", \"price\": 1000000000000, \"category_id\": 2, \"description\": \"Mô tả 105 1792495499644\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

@@ -1,0 +1,9 @@
+{
+  "method": "PUT",
+  "url": "/api/products/100",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"Sua BVA 113 1792495503217\", \"price\": 0, \"category_id\": 3, \"description\": \"Mô tả 113 1792495503217\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

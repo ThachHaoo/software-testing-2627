@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/products",
+  "headers": {
+    "Content-Type": "text/plain",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"SP Mismatch Header 1792495525865\", \"price\": 1500000, \"category_id\": 2, \"description\": \"Mô tả\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

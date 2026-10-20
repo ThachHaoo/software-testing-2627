@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/products",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <token>"
+  },
+  "body": "{\"name\": \"SP Underflow Price 1792495527000\", \"price\": 1e-324, \"category_id\": 2, \"description\": \"Mô tả\", \"imageUrl\": \"https://placehold.co/300\"}"
+}

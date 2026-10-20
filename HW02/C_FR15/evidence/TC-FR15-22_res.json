@@ -1,0 +1,5 @@
+{
+  "status": 200,
+  "contentType": "application/json; charset=utf-8",
+  "body": "{\"id\":2,\"name\":\"Samsung Galaxy S24 Ultra\",\"price\":\"28000000\",\"description\":\"Màn hình hiển thị xuất sắc, camera siêu zoom\",\"imageUrl\":\"https://placehold.co/300x300/png?text=Samsung+S24\",\"category_id\":1}"
+}
