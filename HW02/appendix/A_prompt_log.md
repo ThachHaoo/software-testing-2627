@@ -13099,7 +13099,79 @@ Sau đó bạn đóng phiên này và mở phiên mới cho C.
 
 ---
 
-## #214 | 16:21 20/10/2026 | Claude Opus 5.5 | [...]
+## #214 | 16:19 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc `claude/HW02_handoff.md` trong Project. B_FR07 đã xong; bắt đầu C_FR15 (Product CRUD, admin).
+Viết cho mình khối "Lệnh cho Claude Code" để chạy bước 0–1 (/domain-bva-testing HW02/C_FR15 0), áp các quy ước ở mục 4 của handoff ngay từ đầu. Báo cáo của Claude Code chỉ cần liệt kê giả định chặn bước 2.
+Phiên này xuất transcript tên `claude-ai_session_HW02_p4.jsonl`.
+```
+
+**Output:**
+````
+Lưu ý trước khi chạy: lệnh có bước kiểm `CLAUDE.md` đã có bài học B chưa. Nếu chưa có, Claude Code sẽ dừng, vì ghi bài học B là việc riêng và phải xong trước khi `/clear`.
+
+---
+
+### Lệnh cho Claude Code
+
+```
+/domain-bva-testing HW02/C_FR15 0
+
+Nhiệm vụ: bước 0–1 (biến vào/ra) cho C_FR15 – Product CRUD (admin). Làm theo skill + CLAUDE.md; bổ sung/nhấn mạnh dưới đây.
+
+0. Kiểm tra trước (lỗi nào → dừng, không commit, báo lỗi đó):
+   - CLAUDE.md đã có mục bài học B_FR07 (commit sau 352a34d). Chưa có → dừng.
+   - `git -C ..\eshop-sut log -1 --format=%h` = 85af3ba; `git -C ..\eshop-sut diff --stat` chỉ được có
+     frontend-mobile/App.js và database.sqlite. Có diff mã khác → dừng.
+   - Không sửa gì trong ..\eshop-sut. Không chạy SUT ở bước này.
+
+1. Nguồn và căn cứ:
+   - Căn cứ Expected: SRS FR-15 (+ FR/NFR khác mà FR-15 dẫn chiếu) và giả định SV chốt. KHÔNG dùng
+     hành vi SUT hay logic trong code làm căn cứ. Code (backend server.js, frontend-admin) chỉ dùng để
+     lấy tên trường, endpoint, vị trí phần tử/điểm quan sát; ghi rõ dòng code đã đọc.
+   - Phạm vi giao diện: theo SRS FR-15 (admin UI :5174 + API phục vụ nó); suite tách UI / API / GUI.
+     Admin seed: admin@eshop.com / Admin123! (setup_guide ghi sai).
+   - SRS im lặng → ghi "SRS im lặng – chấp nhận mọi cách hợp lý", không tạo giả định quyết định Expected
+     trừ khi cần chốt để thiết kế được; khi đó đề xuất giả định cho SV chốt.
+
+2. Quy ước áp ngay từ bước này (handoff mục 4 = bài học A+B):
+   - Giả định mã C1, C2… Mỗi giả định ghi: loại (quyết định Expected / phạm vi / chọn đại diện),
+     căn cứ SRS (hoặc "SRS im lặng"), trạng thái "đề xuất – chờ SV chốt". Chỉ loại "quyết định Expected"
+     được đánh dấu đưa vào truy vết.
+   - Biến không có cận trên trong SRS: khai `no_upper_bound = <mã giả định>` (điểm LARGE ở bước 4).
+     Không tự bỏ/ẩn cảnh báo của check_domain (vd "thiếu UB"); cảnh báo còn lại → giữ nguyên, báo.
+   - Biến ra: nêu điểm quan sát cụ thể (trang/endpoint/trường) và đánh dấu thuộc tính chung (nhãn,
+     định dạng, thông báo) để bước 3 khẳng định ở đúng 1 case.
+   - Mỗi biến có trường technique (EP/BVA/EG/ST) và approach (black-box/gray-box/white-box) nếu skill
+     có trường đó; biến chỉ biết từ code → approach gray-box.
+   - Mã TC giữ dải: DOM 01–59, BVA 60–89, GUI 90–99, SV từ 200 (để bước 2+ dùng).
+
+3. Hoàn tất:
+   - Chỉnh xong toàn bộ assumptions TRƯỚC khi freeze. Mọi file AI viết ở bước này phải nằm trong bản
+     freeze (JSON + MD render) — không để file AI viết nằm ngoài ai-outputs/ mà không freeze.
+   - render_md.py → freeze.py → check_domain.py → linter thầy (đều sạch, trừ cảnh báo đã báo ở mục 2).
+   - Commit `HW02[C-FR15] 1/7: biến vào/ra` kèm HW02/appendix/A_prompt_log.md.
+
+Báo cáo cho phiên thảo luận (thay khung 5 mục, ≤ 25 dòng):
+   - Dòng 1: commit hash + "check_domain/linter: sạch" (hoặc cảnh báo còn lại).
+   - Sau đó CHỈ liệt kê giả định chặn bước 2: mã | câu hỏi 1 dòng | phương án a/b(/c) + hệ quả
+     Expected | khuyến nghị kèm căn cứ SRS (hoặc "SRS không đủ căn cứ – SV chọn").
+   - Giả định không chặn: để trong file, không báo.
+```
+
+---
+
+Bạn trả lời giả định theo mẫu `C1=a, C2=b…` là đủ để sang bước 2. Khi bạn nói "xuất transcript", mình sẽ xuất file `claude-ai_session_HW02_p4.jsonl`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #215 | 16:21 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13185,7 +13257,165 @@ Chạy render → check_domain → linter trước, freeze sau khi sạch.
 
 ---
 
-## #215 | 16:35 20/10/2026 | Claude Opus 5.5 | [...]
+## #216 | 16:28 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình gửi bạn báo cáo nhé:
+Báo cáo cho phiên thảo luận
+
+- 224f147 HW02[C-FR15] 1/7: biến vào/ra — check_domain: 0 lỗi, 7 cảnh báo (6 biến ra chưa phân lớp + chưa có partitions, đúng trạng thái bước 1); linter: 0 lỗi, 15 cảnh báo "requirement not covered" (chưa có case). Bản freeze: HW02/appendix/ai-outputs/C_FR15_step1_20261020-162618.{json,md}. Biến V1–V15 và giả định C0–C14 nằm trong HW02/C_FR15/testcases.json / testcases.md.
+- Bất thường: SUT HEAD = de0f48f thay vì 85af3ba (chỉ khác .gitignore, đã kiểm git diff 85af3ba de0f48f).
+- Mục technique/approach theo biến: schema của skill không có trường này, nên những biến chỉ biết từ code được ghi "(gray-box)" trong note.
+- Giả định chặn bước 2:
+  - C1 | Giá là số nguyên hay số thực? | a) số thực > 0 hợp lệ: 0.5 được chấp nhận, LB theo bước nhảy SV chọn (vd 0.01); b) chỉ nguyên dương: 0.5 không hợp lệ, LB = 1 | Khuyến nghị a: FR-15 chỉ ghi "số dương (> 0)"; b phải lấy căn cứ ngoài FR-15 (đơn vị ₫).
+  - C2 | Giá có cận trên không? | a) không có, dùng điểm LARGE (no_upper_bound = C2, đã khai); b) hằng số UB, thêm lớp x > UB | Khuyến nghị a: SRS chỉ có > 0, giống tiền lệ B1.
+  - C3 | Tên chỉ gồm khoảng trắng thì sao? | a) coi như trống, bị từ chối, tách thành lớp riêng; b) chấp nhận | Khuyến nghị a: FR-15 ghi "bắt buộc", tiền lệ A1.
+  - C5 | Có đưa kiểm quyền FR-12.2 (POST/PUT/DELETE /api/products) vào phạm vi không? | a) có, tầng API, biến V8 có 4 giá trị token; b) a + cổng 'Admin Login' với tài khoản user (V15); c) không | Khuyến nghị a: FR-12.2 nêu đích danh /api/products; b thì kiểm cả cổng đăng nhập chung của Admin, rộng hơn FR-15.
+  - C6 | API có phải là tầng riêng áp FR-15 không? | a) có: dữ liệu vi phạm → 4xx kèm error, dữ liệu không đổi; b) API chỉ dùng để quan sát/dựng dữ liệu | Khuyến nghị a: tiền lệ A9/A11/B7/
+  - C7 | Oracle khi UI từ chối? | a) dữ liệu không đổi + có thông báo lỗi trên form (bong bóng HTML5 cũng tính); b) chỉ dữ liệu không đổi, thông báo ghi làm Actual | Khuyến nghị a: FR-22.4 quy định vị trí thông báo lỗi, tức là form phải có thông báo lỗi. SRS không bắt buộc hẳn → SV chọn.
+  - C8 | Ràng buộc khi Sửa phân lớp thế nào? | a) tách lớp Thêm/Sửa, số lớp không hợp lệ ×2; b) chung lớp, Sửa lấy 1 đại diện không hợp lệ mỗi
+    biến; c) chỉ kiểm khi Thêm | SRS chỉ đủ căn cứ để áp (loại c); chọn a hay b là chuyện cỡ bộ test → SV chọn (AI nghiêng về a vì hai thao tác dùng hai endpoint khác nhau).
+  - C9 | Ở API, price là chuỗi số "100000" thì sao? | a)u theo giá trị số, chấp nhận như B23 | SRS không đủ căn cứ – SV chọn. Phần còn lại của C9 (thiếu trường, null, sai kiểu khác → 4xx) đã đề xuất trong file.
+```
+
+**Output:**
+````
+Báo cáo ổn. Có vài điểm cần sửa hoặc bạn cần biết trước khi chốt.
+
+**Về các mục không phải giả định**
+- HEAD `de0f48f` không phải bất thường. Theo handoff, đó là commit của fork nhóm (`tkob-team/eshop-sut`), còn `85af3ba` là upstream. Lệnh của mình ghi sai, bạn bỏ qua mục này.
+- Thiếu technique/approach là đúng. Hai trường đó thuộc test case (bước 3 trở đi), không thuộc biến. Ghi "(gray-box)" trong note là đủ.
+- Các giả định không chặn (C0, C4, C10–C14) vẫn đang ở trạng thái "đề xuất – chờ SV chốt". Bạn cần chốt cả nhóm này, nếu không chúng sẽ vào truy vết dưới dạng chưa có người chốt.
+
+**Về các giả định chặn**
+
+| Mã | Khuyến nghị | Ghi chú |
+|---|---|---|
+| C1 | a, kèm bước nhảy bạn chọn | Chọn a thì bắt buộc nêu bước nhảy (vd 0.01). Nếu không, bước 4 không có LB. |
+| C2 | a | Giống B1. |
+| C3 | a | Giống A1. |
+| C5 | a | b đi vào cổng đăng nhập Admin, rộng hơn FR-15. Lỗi tìm được vẫn gắn `[FR-15]` như quy ước. |
+| C6 | a | Theo tiền lệ A và B. |
+| C7 | a, nếu FR-22.4 thật sự quy định nơi hiển thị lỗi | Báo cáo vừa dẫn FR-22.4 vừa nói "SRS không bắt buộc hẳn", hai ý này mâu thuẫn. Bạn mở FR-22.4 xem: nếu có nói thông báo lỗi hiện ở đâu thì đó là căn cứ cho a, khớp với A16. Nếu chọn a thì mỗi case từ chối chỉ kiểm "có thông báo"; vị trí và chữ của thông báo chỉ khẳng định ở 1 case. |
+| C8 | Bạn chọn | Lý do AI nghiêng về a là "hai endpoint khác nhau", đó là căn cứ từ code (gray-box), không phải SRS. Nếu chọn a vì lý do này thì ghi rõ như vậy. Hệ quả: a làm số lớp không hợp lệ tăng gấp đôi, b nhẹ hơn. |
+| C9 | Bạn chọn | Báo cáo bị cắt, chỉ thấy phương án a và không có b. Nếu muốn nhất quán với B23 thì chọn a. |
+
+**Mẫu trả lời** (bạn sửa chỗ khác ý mình):
+`C1=a (bước 0.01), C2=a, C3=a, C5=a, C6=a, C7=a, C8=?, C9=a; C0, C4, C10–C14: chấp nhận đề xuất`
+
+Khi đã có dòng chốt, bạn dán vào chỗ `<DÒNG CHỐT>` trong lệnh dưới đây rồi chạy:
+
+```
+1) Áp quyết định của SV cho giả định C_FR15 (commit riêng, trước bước 2):
+   <DÒNG CHỐT>
+   - Mỗi giả định: trạng thái "SV chốt" + lý do. SV chọn đúng khuyến nghị → lý do = căn cứ trong khuyến nghị;
+     SV chọn khác → để "lý do: <SV điền>" và báo. C7: ghi điều khoản FR-22.4 làm căn cứ (nếu SV chọn a).
+     C8: nếu lý do dựa vào code thì ghi "(gray-box)".
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 1/7b: SV chốt giả định C0–C14`
+     kèm A_prompt_log.md. Không freeze (đây là sửa của SV, không phải output AI).
+
+2) /domain-bva-testing HW02/C_FR15 2  — theo skill + CLAUDE.md, quy ước như lệnh bước 1.
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 2/7: lớp tương đương`.
+
+Báo cáo cho phiên thảo luận (≤ 25 dòng): 2 commit hash + trạng thái checker/linter; bảng biến → số EC hợp lệ /
+không hợp lệ; giả định MỚI chặn bước 3 (cùng định dạng như lần trước); giả định thiếu lý do của SV.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #217 | 16:32 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+C1: a, bước nhảy 0.1, vì là đơn vị đồng nên luôn >= 1000
+C2: a
+C3: a
+C5: a, không cần làm thêm cái khác
+C6: a
+C7: a
+C8: a, sửa và thêm là 2 chuyện khác nhau hoàn toàn, không gộp được
+C9: a
+```
+
+**Output:**
+````
+Có 2 chỗ cần chốt lại trước khi chạy.
+
+**1. C1 đang mâu thuẫn với chính nó.** Phương án a nghĩa là mọi số thực > 0 đều hợp lệ. Với bước nhảy 0.1 thì LB = 0.1, và 0.5 là giá hợp lệ. Còn câu "đơn vị đồng nên luôn ≥ 1000" lại đặt ra cận dưới 1000. Đó là một giả định khác, quyết định Expected, và không có căn cứ trong FR-15. Thêm nữa, đồng không có đơn vị lẻ, nên lấy "đồng" làm lý do cho bước 0.1 thì không ổn. Bạn chọn một trong hai:
+- **C1=a, bước 0.1.** Lý do: FR-15 chỉ quy định > 0, bước 0.1 là đại diện SV chọn. Khi đó LB = 0.1.
+- **C1 mới: giá ≥ 1000.** Phải ghi rõ đây là giả định SV đặt ngoài FR-15, kèm lý do. Hệ quả: SUT chấp nhận giá 500 sẽ thành Fail, và bug đó dựa trên giả định của bạn chứ không dựa trên SRS.
+
+Mình khuyến nghị cách thứ nhất, vì Expected bám đúng chữ của SRS.
+
+**2. C0, C4, C10–C14 bạn chưa trả lời.** Các giả định này vẫn cần SV chốt. Bạn chấp nhận đề xuất của AI cho cả nhóm, hay muốn xem từng cái trước?
+
+Nếu bạn chọn cách thứ nhất cho C1 và chấp nhận cả nhóm, dòng chốt để dán vào lệnh lần trước là:
+
+```
+C1=a (SV chốt: FR-15 chỉ quy định > 0; bước nhảy 0.1 do SV chọn → LB = 0.1)
+C2=a, C3=a, C6=a, C9=a (SV chốt: theo khuyến nghị)
+C5=a (SV chốt: theo khuyến nghị; không mở rộng sang cổng Admin Login)
+C7=a (SV chốt: theo khuyến nghị; căn cứ FR-22.4 — nếu FR-22.4 không nói về vị trí/sự có mặt của thông báo lỗi thì DỪNG và báo, không tự sửa căn cứ)
+C8=a (SV chốt: Thêm và Sửa là hai thao tác khác nhau, không gộp lớp — lý do của SV, không phải gray-box)
+C0, C4, C10–C14: SV chấp nhận đề xuất của AI
+```
+
+Ngoài ra, ở mục 1 của lệnh lần trước, bạn bỏ câu "C8: nếu lý do dựa vào code thì ghi (gray-box)", vì lý do C8 của bạn không dựa vào code.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #218 | 16:35 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Ý mình là thực tế thì giá tiền thường là ngàn đồng nên >= 1000; nhưng vẫn chọn là bước nhảy 0.1
+Những cái còn lại chấp nhận đề xuất của AI, mình thấy ổn
+```
+
+**Output:**
+````
+Vậy C1 = a, bước 0.1, LB = 0.1. Ý "thực tế thường ≥ 1000" chỉ dùng để chọn đại diện hợp lệ điển hình (vd 100000), không thành cận dưới và không quyết định Expected. Mình ghi rõ điều này trong lệnh để Claude Code không biến nó thành cận dưới.
+
+Lệnh đầy đủ, đã điền sẵn:
+
+```
+1) Áp quyết định của SV cho giả định C_FR15 (commit riêng, trước bước 2):
+   C1=a (SV chốt: FR-15 chỉ quy định > 0; bước nhảy 0.1 do SV chọn → LB = 0.1. Ghi chú SV: thực tế giá
+         thường ≥ 1000 đồng — chỉ dùng để chọn đại diện hợp lệ điển hình, KHÔNG phải cận dưới,
+         KHÔNG quyết định Expected)
+   C2=a, C3=a, C6=a, C9=a (SV chốt: theo khuyến nghị)
+   C5=a (SV chốt: theo khuyến nghị; không mở rộng sang cổng Admin Login)
+   C7=a (SV chốt: theo khuyến nghị; căn cứ FR-22.4 — nếu FR-22.4 không nói về vị trí/sự có mặt của
+         thông báo lỗi thì DỪNG và báo, không tự sửa căn cứ)
+   C8=a (SV chốt: Thêm và Sửa là hai thao tác khác nhau, không gộp lớp — lý do của SV)
+   C0, C4, C10–C14: SV chấp nhận đề xuất của AI
+   - Mỗi giả định: trạng thái "SV chốt" + lý do như trên.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 1/7b: SV chốt giả định C0–C14`
+     kèm A_prompt_log.md. Không freeze (đây là sửa của SV, không phải output AI).
+
+2) /domain-bva-testing HW02/C_FR15 2  — theo skill + CLAUDE.md, quy ước như lệnh bước 1.
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 2/7: lớp tương đương`.
+
+Báo cáo cho phiên thảo luận (≤ 25 dòng): 2 commit hash + trạng thái checker/linter; bảng biến → số EC hợp lệ /
+không hợp lệ; giả định MỚI chặn bước 3 (định dạng: mã | câu hỏi | phương án + hệ quả | khuyến nghị + căn cứ).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #219 | 16:35 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13262,7 +13492,118 @@ Có một việc em làm thêm ngoài khối lệnh: vì C5 = a (không mở r�
 
 ---
 
-## #216 | 16:42 20/10/2026 | Claude Opus 5.5 | [...]
+## #220 | 16:40 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc báo cáo rồi xem làm gì tiếp nhé:
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - 1012f71 HW02[C-FR15] 1/7b: SV chốt giả định C0–C14 — check_domain: 0 lỗi, 6 cảnh báo; linter: 0 lỗi, 14 cảnh báo (đều là "chưa có case/lớp").
+  - d1e228a HW02[C-FR15] 2/7: lớp tương đương — check_domain: 0 lỗi, 79 cảnh báo; linter: 0 lỗi, 14 cảnh báo. Freeze: HW02/appendix/ai-outputs/C_FR15_step2_20261020-163945.{json,md}.
+- Cảnh báo giữ nguyên, không ẩn:
+  - 73 lớp chưa được case nào phủ (chờ bước 3).
+  - V2, V3 chưa có case BVA (chờ bước 4).
+  - V1, V5, V6, V9 không có lớp không hợp lệ: SRS không cho căn cứ đặt Expected (lý do ghi ở note của từng lớp).
+- Số lớp theo biến (tổng 73 = 35 hợp lệ / 38 không hợp lệ):
+
+| Biến              | Hợp lệ            | Không hợp lệ | Ghi chú                                                                                  |                                                                                                                                             |-------------------|-------------------|--------------|-------------------------------------------------------------|
+| V1 Thao tác       | 4                 | 0            |                                                                                          |
+| V2 Tên            | 2                 | 10           | Thêm/Sửa × (1 hợp lệ + rỗng, >255, chỉ khoảng trắng, API thiếu/null, API sai kiểu)       |
+| V3 Giá            | 4                 | 10           | Thêm/Sửa × (số nguyên, số thập phân + ≤0, UI trống, API thiếu/null, chuỗi chữ, chuỗi số) |                                                                                                                                         Danh mục       | 2                 | 6            |   |                                                                                                                                           Mô tả          | 1                 | 0            |   |                                                                                                                                           URL Ảnh        | 1                 | 0            |   |
+| V7 id mục tiêu    | 1                 | 3            | id không tồn tại × Xem/Sửa/Xóa                                                      
+| V8 Token          | 1                 | 9            | Thêm/Sửa/Xóa × (không token, token sai, role user)                                       |
+| V9 SP khác        | 1                 | 0            |                                                                                     
+| V10–V14 (biến ra) | 6 / 5 / 1 / 4 / 2 | 0            |                                                                                     
+                                                                                                                                             ch lớp có lý do (ghi trong note):
+  - Số thập phân tách khỏi số nguyên: đơn vị ₫ không có phần lẻ, cột price kiểu INTEGER (gray-box).                                          Chuỗi số tách khỏi chuỗi chữ: giá trị số của chuỗi s
+  - Role user tách khỏi token sai (theo SEC-03).
+  - V7 và V8 tách theo thao tác, cùng lý do với C8.                                                                                          ả định mới chặn bước 3:
+  - C15 | GET trả price dạng chuỗi ("100000" thay vì 100000) có tính là khớp Expected? | a) so theo giá trị số → chuỗi số vẫn khớp; b) price phải là số JSON → chuỗi là lệch Expected (Fail ở lớp EC59 và cách so trong EC56/EC57) | Khuyến nghị b: nhất quán với C9 (SV đã coi price chuỗi là sai kiểu ở chiều gửi) và ví dụ body trong ang số. SRS im lặng → SV chọn. Gray-box: server.js dòng 162 đổi price thành chuỗi khi id chẵn.
+```
+
+**Output:**
+````
+Báo cáo bước 2 có một lỗi dữ kiện so với quyết định của bạn, và C15 đang dựa trên chính lỗi đó.
+
+**1. Lớp "chuỗi số" của V3 trái với C9.** Bạn đã chốt C9 = a: price là chuỗi số như "100000" thì tính theo giá trị số và được chấp nhận, giống B23. Nhưng ở V3, "chuỗi số" lại nằm trong 10 lớp **không hợp lệ** (5 loại × Thêm/Sửa). Câu khuyến nghị C15 còn viết "SV đã coi price chuỗi là sai kiểu", tức là hiểu ngược quyết định của bạn. Claude Code cần đọc lại C9 trong file rồi sửa cho khớp.
+
+**2. Lý do tách lớp "số thập phân" trái với C1.** Lý do đang ghi là "₫ không có phần lẻ". Đây đúng là căn cứ bạn đã không chọn ở C1. Vẫn có thể tách lớp này, nhưng chỉ với lý do gray-box (cột kiểu INTEGER), và phải ghi rõ cả hai lớp đều hợp lệ, Expected là được chấp nhận.
+
+**3. Cần biết nguồn của hai chi tiết.** Mốc ">255" của V2 lấy từ đâu: từ SRS, hay từ code (độ dài cột)? Nếu chỉ có trong code thì Expected "từ chối" chưa có căn cứ SRS. Còn "ví dụ body…" trong khuyến nghị C15 bị cắt, chưa rõ là ví dụ nào. Hai chỗ này mình chỉ hỏi nguồn của các lớp đã có, không góp ý thêm hay bớt lớp.
+
+**4. C15.** Khi C9 đã sửa đúng, "nhất quán với C9" lại nghiêng về **a**: chuỗi số được chấp nhận ở chiều gửi, thì so theo giá trị ở chiều nhận. Thêm nữa, theo quy ước "SRS im lặng thì không tạo Fail", a là mặc định. Chỉ nên chọn b nếu SRS có ví dụ response ghi price là số JSON. Khi đó dùng ví dụ đó làm căn cứ, và kiểu dữ liệu của price chỉ khẳng định ở EC59; EC56 và EC57 vẫn so theo giá trị, đúng quy ước "khẳng định một nơi". Lưu ý thêm: C15 ở đây thực chất quyết định việc price trả về dạng chuỗi mà Claude Code thấy trong code có thành Fail hay không. Vì vậy căn cứ phải là SRS, không phải code.
+
+Bạn nên để Claude Code sửa và trích nguồn trước, rồi chốt C15 sau:
+
+```
+Sửa bước 2 C_FR15 theo review của SV (output AI → có freeze):
+1. Đọc lại C9 trong testcases.json. Nếu C9=a nghĩa là chuỗi số ở price được chấp nhận theo giá trị số:
+   chuyển lớp "chuỗi số" của V3 (Thêm và Sửa) sang HỢP LỆ, sửa note; sửa câu khuyến nghị C15
+   (bỏ ý "SV coi price chuỗi là sai kiểu"). Nếu C9 trong file ghi khác → DỪNG, chép nguyên văn C9 vào báo cáo.
+2. Lớp số thập phân của V3: bỏ lý do "đơn vị ₫ không có phần lẻ" (trái C1 SV chốt); chỉ giữ lý do gray-box
+   (cột price INTEGER, server.js/schema dòng …); ghi rõ cả số nguyên và số thập phân là lớp HỢP LỆ, Expected = chấp nhận.
+3. Không thêm/bớt lớp nào khác.
+4. render_md.py → freeze.py → check_domain.py → linter. Commit `HW02[C-FR15] 2/7b: sửa lớp V3 theo C1/C9`
+   kèm A_prompt_log.md.
+
+Báo cáo (≤ 15 dòng): commit + checker/linter; số lớp V3 sau sửa (hợp lệ/không hợp lệ);
+nguồn mốc 255 của V2 (trích SRS mục/câu, hoặc "chỉ có trong code: <file:dòng>");
+"ví dụ body" trong C15 là gì (trích SRS mục/câu, có ví dụ response chứa price không);
+C15 viết lại: mã | câu hỏi | phương án + hệ quả | khuyến nghị + căn cứ.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #221 | 16:42 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+ủa nãy C9 mình chọn a, tức là từ chối không chấp nhận chuỗi số mà nhỉ
+```
+
+**Output:**
+````
+Có thể bạn đúng, và mình đã đọc sai. Dòng C9 bạn dán từ báo cáo đầu bị cắt, chỉ còn: *"a)u theo giá trị số, chấp nhận như B23"*. Mình đã hiểu đó là nội dung phương án a. Nhưng chữ "a)u" cho thấy có đoạn bị mất ở giữa, kiểu "a) từ chối … b) so theo giá trị số, chấp nhận như B23". File của Claude Code cũng khớp với cách hiểu "a = từ chối": V3 xếp chuỗi số vào lớp không hợp lệ, và C15 ghi "SV coi price chuỗi là sai kiểu". Vậy nhiều khả năng file đúng, mình sai.
+
+Nếu C9 = a = từ chối thì:
+- **Điểm 1 của mình bỏ.** V3 xếp chuỗi số vào lớp không hợp lệ là đúng.
+- **Lý do của C9 cần sửa.** Dòng chốt mình viết cho bạn ghi "theo khuyến nghị", nhưng báo cáo đầu nói C9 là "SRS không đủ căn cứ – SV chọn", nên thực ra không có khuyến nghị nào. Bạn cần tự đưa một lý do. Lưu ý là cách này khác tiền lệ B23 (ở B chuỗi số được chấp nhận), nên lý do nên nói vì sao C khác B. Ví dụ: price là trường tiền của admin nên đòi đúng kiểu. Câu chữ là của bạn.
+- **C15 = b trở nên nhất quán**, và có thể chốt bằng giả định của bạn với lý do "nhất quán với C9". Kiểu dữ liệu chỉ khẳng định ở EC59.
+- Điểm 2 (lý do tách lớp số thập phân) và điểm 3 (nguồn mốc 255, nguồn "ví dụ body") vẫn giữ.
+
+Lệnh đã sửa:
+
+```
+Sửa bước 2 C_FR15 theo review của SV (output AI → có freeze):
+1. Chép nguyên văn C9 trong testcases.json vào báo cáo. Nếu C9=a nghĩa là chuỗi số ở price bị TỪ CHỐI:
+   giữ nguyên lớp "chuỗi số" không hợp lệ của V3; sửa lý do C9 thành "SV chốt: <SV điền>"
+   (bỏ "theo khuyến nghị" — báo cáo bước 1 ghi C9 là "SV chọn"). Nếu C9=a nghĩa là CHẤP NHẬN → DỪNG, báo.
+2. Lớp số thập phân của V3: bỏ lý do "đơn vị ₫ không có phần lẻ" (trái C1 SV chốt); chỉ giữ lý do gray-box
+   (cột price INTEGER, <file:dòng>); ghi rõ cả số nguyên và số thập phân là lớp HỢP LỆ, Expected = chấp nhận.
+3. Không thêm/bớt lớp nào khác.
+4. render_md.py → freeze.py → check_domain.py → linter. Commit `HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3`
+   kèm A_prompt_log.md.
+
+Báo cáo (≤ 15 dòng): commit + checker/linter; nguyên văn C9;
+nguồn mốc 255 của V2 (trích SRS mục/câu, hoặc "chỉ có trong code: <file:dòng>");
+"ví dụ body" trong C15 là gì (trích SRS mục/câu, có ví dụ response chứa price không).
+```
+
+Bạn chạy lệnh luôn cũng được, còn lý do C9 thì gửi sau. Khi có báo cáo, bạn chốt C15 và lý do C9 cùng lúc.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #222 | 16:42 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13305,7 +13646,112 @@ C9=a nghĩa là từ chối chuỗi số → làm tiếp.
 
 ---
 
-## #217 | 16:46 20/10/2026 | Claude Opus 5.5 | [...]
+## #223 | 16:43 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo:
+Báo cáo cho phiên thảo luận
+
+- Commit: f982e3b HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3. check_domain: 0 lỗi, 79 cảnh báo; linter: 0 lỗi, 14 cảnh báo (không đổi so với d1e228a). Freeze: C_FR15_step2_20261020-164315.{json,md}.
+- Đã sửa:
+  - Lý do C9 → "SV chốt: <SV điền>"; SV cần điền vào chỗ này.
+  - Ghi chú EC18/EC25: bỏ lý do "đơn vị ₫"; ghi rõ là lớp HỢP LỆ, Expected = chấp nhận; chỉ giữ lý do gray-box ../eshop-sut/backend/database.js:67 (price INTEGER). Không thêm/bớt lớp nào.
+- Nguyên văn C9 (sau sửa): "C9 (thiếu trường / sai kiểu ở API) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về body JSON; tiền lệ A15, B18 · SV chốt 2026-10-20, phương án a — SV chốt: <SV điền>]: name/price/category_id thiếu, null hoặc sai kiểu JSON (name là số; price là chuỗi — kể cả chuỗi số như "100000"; category_id là chuỗi chữ) → 4xx, không tạo/không đổi bản ghi."
+- Mốc 255 của V2: có trong SRS — ../eshop-sut/README.md §6 FR-15, dòng 195: "Tên sản phẩm: bắt buộc, tối đa 255 ký tự."
+- "Ví dụ body" trong C15:
+  - Không nằm trong SRS (README.md). Nguồn là ../eshop-sut/api_specification.md §3.3, dòng 91–100, khối "Body khi Thêm/Sửa (JSON)" với "price": 100000 (dòng 95). Đây là body gửi lên (request).
+  - Không có ví dụ response nào chứa price: §3.1/§3.2 (dòng 80–85, GET danh sách và chi tiết) không mô tả phản hồi.
+  - Vì vậy căn cứ của khuyến nghị C15 (b) chỉ là suy ra từ request, không có văn bản quy định response. C15 vẫn đang chờ SV chốt.
+```
+
+**Output:**
+````
+Báo cáo khớp với lệnh, phần sửa không có gì sai. Còn 2 chỗ bạn cần quyết.
+
+**Lý do C9.** File ghi căn cứ là "SRS im lặng về body JSON; tiền lệ A15, B18". Ngoài ra còn một nguồn có thể dùng: `api_specification.md` §3.3 có ví dụ request với `"price": 100000`, tức là số. Đây là tài liệu đặc tả đi kèm SUT, không phải hành vi SUT, nên có thể làm căn cứ phụ nếu bạn coi nó là tài liệu yêu cầu. Nhưng nó chỉ là ví dụ, không phải quy tắc. Lý do bạn điền nên nói rõ vì sao C9 khác B23 (ở B chuỗi số được chấp nhận).
+
+**C15.** Không có văn bản nào quy định response, nên đây hoàn toàn là quyết định của bạn:
+- **a) So theo giá trị.** Đây là mặc định theo quy ước "SRS im lặng thì không tạo Fail". Chuỗi "100000" vẫn khớp Expected.
+- **b) price trong response phải là số JSON.** Đây là giả định riêng của bạn, lý do có thể là "nhất quán với C9 và ví dụ request §3.3". Hệ quả:
+  - Theo code, GET trả price dạng chuỗi khi id chẵn, nên EC59 gần như chắc sẽ Fail.
+  - Bug đó sẽ có trường Yêu cầu là "C15 (giả định SV)", không phải FR-15.
+  - Kiểu dữ liệu chỉ khẳng định ở EC59; EC56 và EC57 vẫn so theo giá trị.
+
+Mình không khuyến nghị bên nào, vì SRS không đủ căn cứ cho cả hai.
+
+Khi bạn trả lời theo mẫu sau, mình sẽ ghép vào lệnh:
+`C9 lý do: … ; C15=a|b, lý do: …`
+
+Lệnh có sẵn chỗ trống, bạn tự điền rồi chạy luôn cũng được:
+
+```
+1) SV chốt (commit riêng, không freeze):
+   - C9: thay "<SV điền>" bằng: <LÝ DO C9>. Nếu SV dùng api_specification.md §3.3 làm căn cứ phụ → thêm vào
+     trường căn cứ: "api_specification.md §3.3 dòng 95 (ví dụ request, price là số)".
+   - C15=<a|b> (SV chốt: <LÝ DO C15>). Nếu b: loại "quyết định Expected", truy vết có; kiểu dữ liệu price chỉ
+     khẳng định ở EC59, EC56/EC57 so theo giá trị.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 2/7c: SV chốt C9, C15` kèm A_prompt_log.md.
+
+2) /domain-bva-testing HW02/C_FR15 3 — TC Domain (minimum set), theo skill + CLAUDE.md + quy ước handoff mục 4:
+   mã TS-DOM 01–59, suite tách UI/API/GUI; ec_target sinh truy vết, case không hợp lệ đúng 1 EC không hợp lệ
+   trong ec_target; Precondition nêu trạng thái quan sát được và có bước dựng trạng thái; Procedure ghi cách nhập
+   ('' , ␣, bấm 1 lần, chỗ quan sát); phần "không đổi" ghi tương đối (SAU = TRƯỚC); độc lập {ts}, cleanup 2 lớp;
+   A16, A17; UI và API tách 2 case; thuộc tính chung (nhãn, thông báo, định dạng, kiểu dữ liệu) khẳng định ở đúng 1 case;
+   Expected chỉ dựa SRS + giả định SV chốt, không dựa code/hành vi SUT; case dùng hiểu biết từ code → approach gray-box.
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 3/7: TC Domain`.
+
+Báo cáo (≤ 25 dòng): 2 commit + checker/linter; số case theo suite (UI/API/GUI) và số case hợp lệ/không hợp lệ;
+case gray-box (mã + 1 dòng lý do); giả định MỚI chặn bước 4 (mã | câu hỏi | phương án + hệ quả | khuyến nghị + căn cứ).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #224 | 16:46 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+C9 lý do: phân biệt rạch ròi giữa số và chuỗi
+C15 b: phải là số, lý do giống như C9, mình thường làm phân biệt rạch ròi giữa chuỗi và số chứ không chấp nhận ngoại lệ
+```
+
+**Output:**
+````
+Mình đã điền vào lệnh và dùng nguyên lời của bạn. `api_specification.md` không được thêm làm căn cứ phụ, vì bạn không nói muốn dùng.
+
+Một lưu ý cho phần Critique hoặc Audit sau này: ở B, bạn chấp nhận chuỗi số (B23), còn ở C thì từ chối. Lý do "phân biệt rạch ròi" giải thích được C, nhưng chưa giải thích vì sao B khác. Đây không phải lỗi, chỉ cần bạn chủ động nhắc tới thì người chấm sẽ không coi đó là thiếu nhất quán.
+
+```
+1) SV chốt (commit riêng, không freeze):
+   - C9: thay "<SV điền>" bằng: "phân biệt rạch ròi giữa số và chuỗi".
+   - C15=b (SV chốt: price trong response phải là số JSON; lý do giống C9 — SV phân biệt rạch ròi giữa chuỗi và số,
+     không chấp nhận ngoại lệ). Loại "quyết định Expected", truy vết có, căn cứ: "SRS im lặng về response; giả định SV".
+     Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so theo giá trị.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 2/7c: SV chốt C9, C15` kèm A_prompt_log.md.
+
+2) /domain-bva-testing HW02/C_FR15 3 — TC Domain (minimum set), theo skill + CLAUDE.md + quy ước handoff mục 4:
+   mã TS-DOM 01–59, suite tách UI/API/GUI; ec_target sinh truy vết, case không hợp lệ đúng 1 EC không hợp lệ
+   trong ec_target; Precondition nêu trạng thái quan sát được và có bước dựng trạng thái; Procedure ghi cách nhập
+   ('' , ␣, bấm 1 lần, chỗ quan sát); phần "không đổi" ghi tương đối (SAU = TRƯỚC); độc lập {ts}, cleanup 2 lớp;
+   A16, A17; UI và API tách 2 case; thuộc tính chung (nhãn, thông báo, định dạng, kiểu dữ liệu) khẳng định ở đúng 1 case;
+   Expected chỉ dựa SRS + giả định SV chốt, không dựa code/hành vi SUT; case dùng hiểu biết từ code → approach gray-box.
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 3/7: TC Domain`.
+
+Báo cáo (≤ 25 dòng): 2 commit + checker/linter; số case theo suite (UI/API/GUI) và số case hợp lệ/không hợp lệ;
+case gray-box (mã + 1 dòng lý do); giả định MỚI chặn bước 4 (mã | câu hỏi | phương án + hệ quả | khuyến nghị + căn cứ).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #225 | 16:46 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13374,7 +13820,141 @@ Xem cách A/B đã viết case GUI cho FR-22.4, FR-24.4, FR-21.3, SEC-04 để g
 
 ---
 
-## #218 | 16:56 20/10/2026 | Claude Opus 5.5 | [...]
+## #226 | 16:52 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo:
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - b889942 HW02[C-FR15] 2/7c: SV chốt C9, C15 — check_domain 0 lỗi/79 cảnh báo; linter 0 lỗi/14 cảnh báo (vẫn là "chưa có case").
+  - c3e971f HW02[C-FR15] 3/7: TC Domain — check_domain 0 lỗi, 6 cảnh báo, phủ 73/73 lớp; linter 0 lỗi, 1 cảnh báo.
+  - Freeze: C_FR15_step3_20261020-165215.{json,md}.
+- Cảnh báo giữ nguyên:
+  - V1, V5, V6, V9 không có lớp không hợp lệ (như bước 2).
+  - V2, V3 chưa có case BVA (chờ bước 4).
+  - Linter: TS-DOM-API có 42 dòng (> 25). Em không tách suite vì cả 42 case dùng chung một quy trình và đều là gọi API, chạy nhanh.
+- Số case:
+
+| Suite      | Mã    | Tổng | Hợp lệ    | Không hợp lệ |
+|------------|-------|------|-----------|--------------|
+| TS-DOM-UI  | 01–16 | 16   | 6         | 10           |
+| TS-DOM-API | 17–58 | 42   | 6         | 36           |
+| TS-GUI     | 90–94 | 5    | checklist | –            |
+  - API không hợp lệ gồm: 12 POST, 12 PUT, 3 id không tồ
+  - GUI kiểm: '*' (FR-22.1), vị trí thông báo lỗi (FR-22.4), định dạng ₫ (FR-21.3), alt ảnh (FR-24.4), SEC-04.
+- Case gray-box:
+  - TC-FR15-02, 04, 18, 20: lớp số thập phân tách khỏi số nguyên dựa trên cột price INTEGER (database.js:67).
+  - TC-FR15-22: chọn sản phẩm id chẵn (id 2) vì server.js:162 xử lý price khác nhau theo chẵn/lẻ. Expected chỉ dựa C15; đây là nơi duy nhất    khẳng định kiểu price.
+- Giả định mới chặn bước 4:                                                                                                                    C16 (đã ghi trong file) | Hộp thoại alert của trình ỗi trên form" theo C7 không? | a) có → riêng TC-91(FR-22.4) Fail nếu thông báo chỉ là hộp thoại, vì nó không nằm phía trên nút; b) không → mọi case UI bị từ chối Fail phần thông báo nếu chỉ có hộp thoại | Khuyến nghị a: FR-15 không quy định hình thức thông báo, còn vị trí đã có FR-22.4 kiểm riêng. SRS không đủ căn cứ → SV      chọn. Ảnh hưởng 10 case UI không hợp lệ ở bước 3 và ớc 4.
+  - BVA-phạm vi (chưa ghi vào file, chờ SV chốt rồi thêm làm C18) | BVA chạy cho Thêm và Sửa ở cả UI và API? | a) đủ cả 4 tổ hợp: Tên 7 điểm + Giá 5 điểm (LB−1 = 0, LB = 0.1, LB+1 = 0.2, NOM, LARGE), khoảng 48 case, mã 60–89 rồi tràn sang 100+; b) đủ điểm cho Thêm, còn Sửa chỉ     LB−1/LB/UB/UB+1, khoảng 36 case; c) chỉ Thêm, khoảngnhất quán với C8 = a. Đây là chuyện cỡ bộ test, SRS khôngđủ căn cứ → SV chọn.
+- Giả định không chặn: 1 (C17, định dạng tiền chấp nhận '.' hoặc ',', theo B13) — ở HW02/C_FR15/testcases.json.
+```
+
+**Output:**
+````
+Bước 3 ổn. Có 5 việc cần bạn quyết. Mình không góp ý về độ phủ, đúng quy ước cho các bước 0–4.
+
+**1. C16 (alert có tính là thông báo lỗi không): mình khuyến nghị a.** Lý do:
+- Cùng tinh thần với A16: bong bóng HTML5 cũng được tính là thông báo.
+- Đúng quy ước "khẳng định một nơi": hình thức và vị trí thông báo chỉ kiểm ở TC-91 (FR-22.4). Nếu chọn b, cùng một nguyên nhân sẽ làm Fail cả 10 case UI.
+- Lưu ý: C7 đang ghi "thông báo lỗi **trên form**", mà alert thì không nằm trên form. Nếu chọn a, câu C7 cần sửa thành: "có thông báo lỗi (bong bóng HTML5 hoặc hộp thoại đều tính); vị trí kiểm riêng ở TC-91".
+
+**2. C18 (phạm vi BVA): bạn chọn.**
+- **a** nhất quán với C8 = a: bạn đã coi Thêm và Sửa là hai chuyện khác nhau. Case API và UI đều chạy bằng Playwright nên chi phí thêm chủ yếu nằm ở thời gian chạy.
+- **b** hoặc **c** thì bạn cần một lý do vì sao Sửa được làm nhẹ hơn, trái với tinh thần C8.
+
+**3. Đánh số khi vượt dải 60–89.** Với a hoặc b, số case BVA sẽ quá 30. Quy ước hiện tại chỉ có DOM 01–59, BVA 60–89, GUI 90–99, SV từ 200. Báo cáo ghi "tràn sang 100+", nghĩa là đặt ra một quy ước mới. Bạn nên chốt rõ "BVA tràn dùng 100–199" để không đụng dải SV.
+
+**4. Suite TS-DOM-API có 42 dòng.** Linter của thầy cảnh báo suite dài hơn 25 dòng. Claude Code tự quyết định giữ nguyên. Mình khuyên tách thành 3 suite (POST / PUT / còn lại), giữ nguyên mã TC và không đổi nội dung case. Việc này cơ học, làm hết cảnh báo, và không đáng để bị trừ điểm.
+
+**5. C17 (định dạng tiền dùng '.' hoặc ',' theo B13)** vẫn đang ở trạng thái đề xuất, bạn cần chốt.
+
+Thêm một ghi chú cho phần Audit: TC-22 cố ý chọn sản phẩm id chẵn dựa trên `server.js:162`, và bạn chốt C15 sau khi đã biết thông tin gray-box này. Không có gì sai, nhưng nên khai minh bạch trong gap analysis hoặc Audit.
+
+**Mẫu trả lời:**
+`C16=a, C18=a|b|c (lý do nếu b/c: …), BVA tràn 100–199: đồng ý?, tách suite API: đồng ý?, C17: chấp nhận?`
+
+Lệnh có chỗ trống, chạy sau khi bạn điền:
+
+```
+1) Sửa bước 3 theo review SV (output AI → có freeze):
+   - Tách TS-DOM-API (17–58) thành TS-DOM-API-POST / TS-DOM-API-PUT / TS-DOM-API-OTHER (mỗi suite ≤ 25 dòng);
+     giữ nguyên mã TC, không đổi nội dung case. Cập nhật notes suite.
+   - render_md.py → freeze.py → check_domain.py → linter. Commit `HW02[C-FR15] 3/7b: tách suite API theo linter`.
+
+2) SV chốt (commit riêng, không freeze):
+   - C16=<a|b> (SV chốt: <lý do>). Nếu a: sửa câu C7 thành "có thông báo lỗi (bong bóng HTML5 hoặc hộp thoại
+     đều tính); vị trí kiểm riêng ở TC-91 theo FR-22.4" — giữ câu C7 cũ + đánh dấu "(đã thay)".
+   - C17: SV chấp nhận đề xuất (theo B13).
+   - C18=<a|b|c> (SV chốt: <lý do>) — ghi vào file làm giả định phạm vi.
+   - Quy ước đánh số: BVA 60–89, phần tràn dùng 100–199 (không đụng dải SV từ 200). Ghi vào notes C_FR15.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 3/7c: SV chốt C16–C18` kèm A_prompt_log.md.
+
+3) /domain-bva-testing HW02/C_FR15 4 — TC BVA theo C18, quy ước như bước 3 (UI/API tách case, suite ≤ 25 dòng,
+   ec_target, khẳng định một nơi, LARGE cho no_upper_bound = C2, Expected chỉ dựa SRS + giả định SV chốt).
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 4/7: TC BVA`.
+
+Báo cáo (≤ 20 dòng): 3 commit + checker/linter; số case BVA theo suite + dải mã đã dùng;
+bảng điểm BVA theo biến (giá trị cụ thể); giả định MỚI chặn bước 5 (nếu có).
+```
+
+Sau bước 4 là bước 5 🔒. Bạn tự thêm case và commit `sv_cases.md` trước, rồi mới hỏi AI.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #227 | 16:55 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. C16: a
+2. C18: a
+3. BVA được sử dụng cả 100-199 nhé
+4. tách thành 3 suite
+5. Chấp nhận cả . và , nhé. Vì mỗi quốc gia sử dụng khác nhau mà.
+```
+
+**Output:**
+````
+Mình đã điền hết. Bạn không ghi lý do cho C16 và C18, nên mình dùng căn cứ đã nêu trong review: C16 theo A16 và quy ước "khẳng định một nơi", C18 nhất quán với C8 = a. Nếu muốn dùng lý do khác thì bạn sửa trong lệnh trước khi chạy.
+
+```
+1) Sửa bước 3 theo review SV (output AI → có freeze):
+   - Tách TS-DOM-API (17–58) thành TS-DOM-API-POST / TS-DOM-API-PUT / TS-DOM-API-OTHER (mỗi suite ≤ 25 dòng);
+     giữ nguyên mã TC, không đổi nội dung case. Cập nhật notes suite.
+   - render_md.py → freeze.py → check_domain.py → linter. Commit `HW02[C-FR15] 3/7b: tách suite API theo linter`.
+
+2) SV chốt (commit riêng, không freeze):
+   - C16=a (SV chốt: hộp thoại alert tính là thông báo lỗi, như A16 với bong bóng HTML5; hình thức/vị trí chỉ
+     khẳng định ở TC-91 theo FR-22.4). Sửa câu C7 thành "có thông báo lỗi (bong bóng HTML5 hoặc hộp thoại đều tính);
+     vị trí kiểm riêng ở TC-91 theo FR-22.4" — giữ câu C7 cũ + đánh dấu "(đã thay)".
+   - C17 (SV chốt: chấp nhận cả '.' và ',' làm dấu phân cách — mỗi quốc gia dùng khác nhau; tiền lệ B13).
+   - C18=a (SV chốt: BVA đủ cho Thêm và Sửa, cả UI và API — nhất quán với C8 = a). Ghi vào file, loại phạm vi.
+   - Quy ước đánh số: BVA dùng 60–89 và 100–199 (không đụng dải SV từ 200). Ghi vào notes C_FR15.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 3/7c: SV chốt C16–C18` kèm A_prompt_log.md.
+
+3) /domain-bva-testing HW02/C_FR15 4 — TC BVA theo C18, quy ước như bước 3 (UI/API tách case, suite ≤ 25 dòng,
+   ec_target, khẳng định một nơi, LARGE cho no_upper_bound = C2, Expected chỉ dựa SRS + giả định SV chốt).
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 4/7: TC BVA`.
+
+Báo cáo (≤ 20 dòng): 3 commit + checker/linter; số case BVA theo suite + dải mã đã dùng;
+bảng điểm BVA theo biến (giá trị cụ thể); giả định MỚI chặn bước 5 (nếu có).
+```
+
+Sau bước 4, nếu báo cáo không còn giả định chặn thì bạn sang bước 5 🔒: tự viết `sv_cases.md`, commit `5/7` trước, rồi mới hỏi AI phần gap. Đây cũng là mốc hợp lý để xuất transcript `_p4`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #228 | 16:56 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13447,7 +14027,118 @@ Phần 3: BVA. Viết script sinh 48 case (4 suite × 12).
 
 ---
 
-## #219 | 17:07 20/10/2026 | Claude Opus 5.5 | [...]
+## #229 | 16:59 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo:
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - 65c4bf2 3/7b: tách suite API — linter: 0 lỗi, 0 cảnh báo (hết cảnh báo > 25 dòng).
+  - af3946f 3/7c: SV chốt C16–C18. Kèm theo: Expected của 10 case UI bị từ chối và lớp EC72 đổi sang "bong bóng/thông báo trên trang/hộp thoại đều tính".
+  - ba71912 HW02: check_domain – điểm LARGE xét biến trong ec_target.
+    - Lỗi: script xét mọi lớp khoảng trong covers, kể cả lớp Tên danh nghĩa (có cận trên 255) → 4 case LARGE bị báo lỗi sai.
+    - Sửa: case có ec_target thì chỉ xét biến trong ec_target (1 dòng). Chạy lại A_FR01/B_FR07: 0 lỗi.
+    - Phải khai trong Audit (sửa harness).
+  - 1593b82 4/7: TC BVA — check_domain: 0 lỗi, 4 cảnh báp không hợp lệ, như các bước trước); linter: 0 lỗi, 0 cảnh
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - 65c4bf2 3/7b: tách suite API — linter: 0 lỗi, 0 cảnh báo (hết cảnh báo > 25 dòng).
+  - af3946f 3/7c: SV chốt C16–C18. Kèm theo: Expected củp EC72 đổi sang "bong bóng/thông báo trên trang/hộp thoạiđều tính".
+  - ba71912 HW02: check_domain – điểm LARGE xét biến tro
+    - Lỗi: script xét mọi lớp khoảng trong covers, kể cả lớp Tên danh nghĩa (có cận trên 255) → 4 case LARGE bị báo lỗi sai.
+    - Sửa: case có ec_target thì chỉ xét biến trong ec_t01/B_FR07: 0 lỗi.
+    - Phải khai trong Audit (sửa harness).
+  - 1593b82 4/7: TC BVA — check_domain: 0 lỗi, 4 cảnh báo (V1, V5, V6, V9 không có lớp không hợp lệ, như các bước trước); linter: 0 lỗi, 0 cảnh
+    báo; tổng 111 case, phủ 73/73 lớp. Freeze: C_FR15_st.
+- Số case BVA theo suite (48 case, dùng mã 60–89 và 100–117):
+
+| Suite           | Số case | Mã             |
+|-----------------|---------|----------------|
+| TS-BVA-UI-THEM  | 12      | 60–71          |
+| TS-BVA-UI-SUA   | 12      | 72–83          |
+| TS-BVA-API-POST | 12      | 84–89, 100–105 |
+| TS-BVA-API-PUT  | 12      | 106–117        |
+
+- Điểm BVA (mỗi suite chạy đủ điểm của cả hai biến; biến khác giữ danh nghĩa):
+
+| Biến              | LB−1     | LB      | LB+1     | NOM                       | UB−1    | UB      | UB+1 / LARGE       |
+|-------------------|----------|---------|----------|---------------------------|---------|---------|--------------------|
+| V2 Tên (độ dài)   | '' (0) ✗ | 'A' (1) | 'AB' (2) | 'Bàn phím cơ BVA NN {ts}' | 'x'×254 | 'x'×255 | 'x'×256 ✗          |
+| V3 Giá (bước 0.1) | 0 ✗      | 0.1     | 0.2      | 1500000                   | –       | –       | LARGE = 10^12 (C2) |
+  - ✗ = điểm không hợp lệ.
+  - Không dùng MIN_UI/MAX_UI: ô Tên không giới hạn độ dài, ô trống trùng LB−1; ô Giá không có min/max. Lý do ghi trong mô tả suite.
+- Giả định mới chặn bước 5: không có.
+- Bước 5 là của SV (TS-SV từ mã 200). Em dừng ở đây, không gợi ý thêm case.
+```
+
+**Output:**
+````
+Bước 4 ổn: 111 case, phủ 73/73 lớp, linter sạch, điểm LARGE đúng theo C2, dải mã đúng quy ước bạn chốt. Có 2 điểm cần ghi lại cho phần Audit.
+
+**1. ba71912 là vá harness ngoài lệnh.** Claude Code tự sửa `check_domain` mà không có lệnh nào yêu cầu. Cách làm đúng quy ước: commit riêng, có giải thích lỗi, đã chạy lại A và B và cả hai vẫn 0 lỗi. Nội dung sửa cũng hợp lý: điểm LARGE chỉ nên xét theo biến trong ec_target. Nhưng việc này cùng loại với chuyện "Claude Code tự bỏ cảnh báo thiếu UB" ở B, nên khi khai Audit bạn cần ghi rõ "AI tự phát hiện và vá, SV duyệt sau". Danh sách vá harness của C hiện có một mục: ba71912.
+
+**2. Expected của 10 case UI bị đổi trong commit SV chốt (af3946f).** Commit này không freeze, nên bản freeze bước 3 vẫn là Expected cũ. Việc đổi xảy ra trước khi có Actual và là hệ quả trực tiếp của C16, nên không vi phạm. Bản freeze bước 4 đã chứa Expected mới, nên audit trail vẫn đủ, chỉ cần ghi một dòng trong Audit.
+
+**Tiếp theo là bước 5 🔒.** Bạn tự viết case vào `HW02/C_FR15/sv_cases.md` (mã từ 200), rồi commit `HW02[C-FR15] 5/7: SV tự thêm TC` **trước** khi đưa AI bất cứ thứ gì. Ở bước này mình cũng không gợi ý case nào. Sau khi commit xong, bạn chạy:
+
+```
+/domain-bva-testing HW02/C_FR15 5
+- Kiểm tra trước: commit `5/7` chứa sv_cases.md phải có trong git log và đứng TRƯỚC mọi file AI ở bước 5. Không có → DỪNG.
+- Làm theo skill như B: ai_gap_answer.md, phân loại "đã nghĩ tới nhưng không đưa vào" / "không nghĩ tới" /
+  "đã có nhưng bị gỡ theo quyết định SV" (dẫn mã giả định C… nếu là loại 3). Không gợi ý case mới.
+- Đưa case SV vào testcases.json: giữ nguyên chữ của SV. Trường SV bỏ trống → ghi "(SV chưa ghi)" và báo,
+  không tự điền Expected.
+- Commit theo skill (`5/7b`, `5/7c`) kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): commit; số case SV; bảng TC-SV → loại gap (1/2/3); trường SV chưa ghi (nếu có).
+```
+
+Đây cũng là mốc hợp lý để xuất transcript. Khi muốn, bạn chỉ cần nói "xuất transcript", mình sẽ xuất `claude-ai_session_HW02_p4.jsonl`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #230 | 17:06 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Giúp tôi viết format cho sv_cases của feature C nhé. Có thể viết prompt cho Claude Code viết nhé
+```
+
+**Output:**
+````
+Bạn có thể để AI viết **khung trống** cho `sv_cases.md`. Khung chỉ có cấu trúc, không gợi ý case, nên không vi phạm AI-01. Cần giữ 3 điều:
+- Khung không chứa ví dụ case, không chứa danh mục gợi ý kiểu "kiểm quyền", "ký tự đặc biệt"…, và không liệt kê sẵn các EC.
+- **Không commit khung riêng.** Nếu khung được commit trước thì sẽ có một file AI đứng trước commit `5/7`, trái với lệnh kiểm tra ở bước 5. Bạn điền xong rồi mới commit cả file là `5/7`.
+- Khai trong AI-03/Audit: "khung sv_cases.md do AI tạo (chép cấu trúc từ B), nội dung SV viết".
+
+```
+Tạo KHUNG TRỐNG HW02/C_FR15/sv_cases.md cho SV tự điền (bước 5 🔒). KHÔNG commit.
+- Nếu HW02/B_FR07/sv_cases.md tồn tại: chép đúng cấu trúc của nó (tiêu đề mục, trường, thứ tự), bỏ hết nội dung case.
+  Không có → dựng theo các trường của case trong HW02/C_FR15/testcases.json để bước 5 đưa vào được không phải đoán.
+- Phần đầu file (giữ ngắn): feature C_FR15 – Product CRUD (admin); mã TS-SV từ 200 (bỏ case thì giữ khoảng trống số);
+  suite UI / API / GUI; cách ghi '' = để trống, ␣ = đúng số dấu cách; tra mã EC/giả định ở testcases.md;
+  Expected phải có căn cứ SRS hoặc giả định SV chốt (giả định mới → ghi mã C19…, "SV chốt + lý do").
+- Thân file: đúng 1 khối case mẫu, mọi giá trị là chỗ trống trung tính dạng <...> (vd <TC-ID>, <tiêu đề>, <mã EC>,
+  <căn cứ>). Không ví dụ cụ thể, không danh mục loại case, không liệt kê EC/biến, không gợi ý kỹ thuật hay vùng cần kiểm.
+- Không ghi vào ai-outputs/, không freeze, không commit.
+Báo cáo (≤ 5 dòng): đường dẫn file; khung chép từ B hay dựng từ schema; danh sách trường.
+```
+
+Sau đó bạn nhân bản khối mẫu cho mỗi case, điền vào, rồi commit `HW02[C-FR15] 5/7: SV tự thêm TC`. Xong thì chạy lệnh bước 5 lần trước.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #231 | 17:07 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13485,7 +14176,7 @@ Báo cáo (≤ 5 dòng): đường dẫn file; khung chép từ B hay dựng t�
 
 ---
 
-## #220 | 17:16 20/10/2026 | Claude Opus 5.5 | [...]
+## #232 | 17:16 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13541,7 +14232,169 @@ Bước 5 mới xong phần `5/7b` (`d1c71d8`); `5/7c` chưa làm được vì c
 
 ---
 
-## #221 | 17:39 20/10/2026 | Claude Opus 5.5 | [...]
+## #233 | 17:21 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Well, do đã có kinh nghiệm ở Feature A và B nên tôi làm khá nhanh. Xem báo cáo:
+Báo cáo cho phiên thảo luận
+
+- Commit: d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer.
+  - Đã đưa 18 case SV (200–217) vào testcases.json, giữ nguyên chữ: TS-SV-UI 7, TS-SV-API 9, TS-SV-GUI 2.
+  - check_domain: 9 lỗi, đều do dữ liệu SV ghi — ô EC mục tiêu có mã không nằm trong ô EC phủ ở TC-207…215 (câu hỏi Q2). Em không tự sửa.
+  - linter: 0 lỗi, 17 cảnh báo (15 tiêu đề thiếu phần điều kiện, 3 case không truy vết được yêu cầu).
+  - 5/7c chờ SV trả lời Q1–Q5 trong HW02/C_FR15/sv_questions.md.
+- Phân loại gap (HW02/C_FR15/ai_gap_answer.md; mỗi case nhóm 1 có trích dẫn từ bản đóng băng):
+
+| Nhóm                                     | Case SV                                                                      |
+|------------------------------------------|------------------------------------------------------------------------------|
+| 1 – đã nghĩ tới nhưng không đưa vào      | 200 (TC-94), 204 (C10), 208 (EC19 / −1000), 215 (lý do chọn LARGE), 217 (C4) |
+| 2 – không nghĩ tới                       | 201, 202, 203, 205, 206, 207, 209, 210, 211, 212, 213, 214, 216              |
+| 3 – đã có nhưng bị gỡ theo quyết định SV | không có                                                                     |
+
+- Một điều AI tự nhận trong file trả lời: nhiều case nhóm 2 cùng kiểu với case SV của B_FR07 (1e5, Infinity, 1e-324, mảng, Content-Type, đồng thời…). Ở bước 1–4 của C_FR15, AI không đọc lại sv_cases.md và ai_gap_answer.md của B_FR07.
+- Trường SV chưa ghi (đã đánh "(SV chưa ghi)"):
+  - TC-216, 217: Expected của từng bước (linter bắt buộc) và Cleanup (hai case này tạo sản phẩm).
+  - Nội dung giả định C19 (TC-204 dẫn) và C20 (TC-209 dẫn): mục "Giả định mới" vẫn là dòng mẫu (Q1).
+- Câu hỏi chặn bước 6 (chi tiết trong HW02/C_FR15/sv_questions.md):
+  - Q1: nội dung C19/C20.
+  - Q2: 9 lỗi EC mục tiêu ngoài EC phủ.
+  - Q3: 7 case có phần Expected chưa có căn cứ.
+  - Q4: 5 case Expected nhiều nhánh; TC-211 cho phép HTTP 500, trái C6 (không 5xx).
+  - Q5: EC mục tiêu của TC-204.
+```
+
+**Output:**
+````
+Bước 5 có 18 case SV và 13 case thuộc nhóm "AI không nghĩ tới". Đây là chất liệu tốt cho gap analysis. Câu AI tự nhận "không đọc lại sv_cases/ai_gap_answer của B ở bước 1–4" là một phát hiện đáng viết vào Critique: AI không mang bài học từ các feature trước sang feature sau. Phần đó bạn tự viết.
+
+**Q1–Q5: chữ nào cũng phải là của bạn.** Mình chỉ có thể nêu phương án và hệ quả. Dưới đây là cách xử lý từng câu dựa trên những gì báo cáo cho biết:
+
+- **Q1 (C19, C20).** Bạn viết nội dung giả định theo mẫu: loại, căn cứ, "SV chốt + lý do". Nếu không muốn đặt giả định nữa thì sửa TC-204/209 để không dẫn tới chúng.
+- **Q2 (9 lỗi EC mục tiêu nằm ngoài EC phủ).** Đây là lỗi cơ học. Bạn chọn một trong hai cách: thêm mã đó vào EC phủ, hoặc đổi EC mục tiêu. Bạn có thể giao Claude Code làm hàng loạt bằng một câu như "Q2: thêm EC mục tiêu vào EC phủ cho cả 9 case". Đây là sửa dữ kiện theo quyết định của bạn, không phải viết hộ.
+- **Q3 (7 case có Expected chưa có căn cứ).** Theo quy ước, SRS im lặng thì không được tạo Fail. Mỗi case bạn chọn một cách:
+  - dẫn điều khoản SRS làm căn cứ,
+  - đặt giả định mới (C21…),
+  - hoặc nới Expected thành "chấp nhận mọi cách hợp lý".
+  
+  Câu Q3 này cũng chính là nguyên nhân của 3 cảnh báo "không truy vết được yêu cầu".
+- **Q4 (Expected nhiều nhánh).** Nhiều nhánh vẫn được chấp nhận nếu nhánh nào cũng có căn cứ. Riêng TC-211 thì Expected của bạn đang trái với C6 do chính bạn chốt (không được trả 5xx). Bạn chọn: bỏ nhánh 500, hoặc ghi rõ ngoại lệ cho C6 kèm lý do.
+- **Q5 (EC mục tiêu của TC-204).** Câu này phụ thuộc vào C19 ở Q1, nên trả lời cùng lúc.
+- **TC-216, 217.** Bạn tự viết Expected cho từng bước và phần Cleanup. Hai case này tạo sản phẩm, nên cần cleanup 2 lớp như quy ước.
+- **15 cảnh báo tiêu đề thiếu điều kiện** chỉ là cảnh báo. Bạn tự sửa hoặc để nguyên đều được. AI không sửa chữ của bạn.
+
+**Một chỗ nên hỏi lại Claude Code:** TC-200 bị xếp vào nhóm 1 với dẫn chiếu TC-94. Nếu TC-94 đã kiểm đúng điều TC-200 kiểm, thì TC-200 là case trùng chứ không phải gap, và bạn có thể bỏ (giữ khoảng trống số). Nếu TC-94 chỉ kiểm một phần thì cần ghi rõ phần TC-200 thêm vào là gì.
+
+Bạn có thể dán nội dung `sv_questions.md` vào đây để mình nêu phương án cụ thể cho từng câu. Hoặc trả lời thẳng trong file đó rồi chạy:
+
+```
+SV đã trả lời Q1–Q5 trong HW02/C_FR15/sv_questions.md và sửa sv_cases.md (TC-216/217, C19/C20).
+- Áp đúng câu trả lời của SV vào testcases.json; chữ của SV giữ nguyên. Chỗ SV trả lời chưa rõ → DỪNG, hỏi lại.
+- ai_gap_answer.md: làm rõ TC-200 so với TC-94 (trùng hoàn toàn / TC-200 thêm gì) — chỉ dữ kiện, không khuyên giữ/bỏ.
+- render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5` kèm A_prompt_log.md.
+Báo cáo (≤ 15 dòng): commit; check_domain/linter; TC-200 vs TC-94; câu hỏi còn chặn bước 6 (nếu có).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #234 | 17:35 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Q1:
+
+*  C19 (Xử lý bất đồng bộ đa tab):loại: quyết định Expected, truy vết: không, căn cứ: Trải nghiệm người dùng UI React . Đảm bảo tính ổn định của React State: Khi thao tác trên dữ liệu đã bị xóa từ một tab/phiên làm việc khác, UI phải xử lý lỗi 4xx từ API một cách mượt mà thông qua thông báo toast/alert, tuyệt đối không được crash ứng dụng dẫn đến màn hình trắng.
+*  C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: REST API Standard, C6. Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server.
+
+Q2: Ngoài EC phủ thì bỏ luôn nhé. Do mình nghĩ là lấy từ A và B á.
+Q3: vì bỏ từ 207-215 theo Q2 nên chỉ còn 203, 204, 216, 217. Còn 203 thì mình nghĩ nó là cách hoạt động của các app thường thấy. 216 và 217 cũng tương tự. Nếu không thể chấp nhận có thể bỏ case.
+Q4: Vì bỏ Q2 nên chỉ còn 200 và 201. 200: Expected: báo lỗi và không kích hoặc XSS. 201: Chặn, không cho thêm
+Q5: Hmm, mà trước đó hình như cũng refuse cái 2 tab thì phải, nên có lẽ là bỏ luôn nhỉ.
+===
+Bạn thấy câu trả lời của mình thế nào
+```
+
+**Output:**
+```
+Phần lớn câu trả lời đều dùng được. Có một quyết định nên cân nhắc lại (Q2), và vài chỗ chưa khớp với nhau.
+
+**1. Q2: bỏ 9 case (207–215) là cái giá lớn.**
+- Lỗi check_domain chỉ là lỗi cơ học: ô EC mục tiêu có mã không nằm trong ô EC phủ. Nếu nguyên nhân là bạn chép mã EC từ A/B sang, thì cách sửa là đổi sang đúng mã EC của C, không cần bỏ case.
+- Bỏ thì mất 7 case thuộc nhóm "AI không nghĩ tới" (207, 209–214). Đó là phần chất liệu tốt nhất cho gap analysis, đặc biệt là ý "AI không học từ B".
+- Bỏ 209 thì C20 không còn case nào dẫn tới, tức là bạn vừa viết C20 xong thì nó đã thừa.
+
+Nếu bạn vẫn muốn bỏ thì không sai quy ước, chỉ cần ghi rõ lý do. Nhưng mình khuyên: **giữ các case, giao Claude Code liệt kê mã EC sai, kèm EC của C có vẻ tương ứng, để bạn chọn.**
+
+**2. C19**
+- Bạn ghi "loại: quyết định Expected" nhưng "truy vết: không". Theo quy ước, giả định quyết định Expected thì phải vào truy vết.
+- Nếu Q5 bỏ TC-204 thì C19 không còn case nào dùng. Khi đó bỏ luôn C19, hoặc ghi "(không dùng – case đã bỏ)".
+
+**3. C20.** Căn cứ "REST API Standard" quá chung chung. `Infinity` và `NaN` không phải JSON hợp lệ theo **RFC 8259**, đây là chuẩn cụ thể nên dẫn. Phần dẫn C6 và B17/BUG-34 thì ổn.
+
+**4. Q3.** "Cách hoạt động của các app thường thấy" không phải căn cứ. Đây cũng chính là lý do ở B bạn bỏ TC-202 ("nghĩ theo web khác"). Với 203, 216, 217, mỗi case bạn chọn một cách:
+- đặt giả định SV chốt (C21…) với lý do đó. Cách này hợp lệ, nhưng nếu Fail thì bug sẽ dựa trên giả định của bạn;
+- nới Expected thành "SRS im lặng → chấp nhận mọi cách hợp lý" và chỉ ghi Actual;
+- bỏ case, giống tiền lệ B.
+
+**5. Q4, TC-200.** Phần "báo lỗi" không có căn cứ: FR-15 không cấm `<script>` trong tên. Phần "không kích hoạt XSS" thì có căn cứ (SEC-04), nhưng TC-94 đã kiểm SEC-04. Đây đúng là chỗ cần làm rõ "TC-200 vs TC-94". Bạn tự quyết sửa câu Expected thế nào. TC-201 giờ chỉ còn một nhánh, ổn nếu "chặn" có căn cứ.
+
+**6. Q5.** Bỏ TC-204 được. Còn chuyện "trước đó cũng đã bỏ case 2 tab" thì mình không chắc. Handoff chỉ ghi B bỏ 202, 204, 207 mà không nói nội dung. Không cần dựa vào tiền lệ, quyết định của bạn là đủ.
+
+Mẫu trả lời gọn:
+`Q2: giữ case, sửa mã EC | bỏ; C19: bỏ | sửa truy vết; C20: căn cứ RFC 8259; 203/216/217: giả định | nới | bỏ; TC-200: <Expected bạn sửa>`
+```
+
+**Xử lý:** [...]
+
+---
+
+## #235 | 17:38 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Q2: giữ case, sửa mã EC; C19: bỏ; C20: căn cứ RFC 8259; 203/216/217: bỏ; TC-200: mình nghĩ vẫn đúng, vì làm gì có sản phẩm nào tên như vậy. Mặc dù không yêu cầu trong SRS, nhưng kinh nghiệm của mình thì họ cũng sẽ không cho phép như vậy
+```
+
+**Output:**
+````
+Q2, C19, C20 và Q3 đều rõ.
+
+**TC-200** vẫn giữ được, với điều kiện có một giả định SV chốt (C21) làm căn cứ. Quy ước cho phép, vì Expected có thể dựa trên "SRS hoặc giả định SV đã chốt". Có 2 điều bạn nên biết:
+- Lý do "kinh nghiệm, họ cũng không cho phép" cùng loại với lý do bạn vừa dùng để **bỏ** 203/216/217. Nếu người chấm hỏi, bạn cần nói được vì sao giữ case này mà bỏ ba case kia. Ví dụ: case này liên quan đến bảo mật (SEC-04) nên bạn đặt ngưỡng chặt hơn. Câu chữ là của bạn.
+- Nếu SUT chấp nhận tên đó thì TC-200 Fail, và bug sẽ ghi trường Yêu cầu là "C21 (giả định SV)", không phải FR-15.
+
+Nếu bạn đồng ý, chạy lệnh sau (C21 đang dùng nguyên lời của bạn):
+
+```
+Áp trả lời SV cho bước 5 C_FR15:
+1. Q2 – giữ TC-207…215, sửa mã EC: các mã EC mục tiêu SV chép từ A/B → đổi sang EC tương ứng của C_FR15.
+   Chỉ đổi khi có ĐÚNG MỘT EC của C cùng nghĩa; không chắc → để nguyên, đưa vào báo cáo. Không đổi chữ khác của SV.
+2. C19: đánh dấu "(đã bỏ – SV bỏ TC-204)", giữ câu cũ. Bỏ TC-204 (giữ khoảng trống số).
+3. C20: căn cứ = "RFC 8259 (Infinity/NaN không phải JSON hợp lệ); C6; tiền lệ B17/BUG-34". Giữ nguyên phần còn lại SV viết.
+4. Bỏ TC-203, 216, 217 (giữ khoảng trống số), lý do "SV bỏ: Expected không có căn cứ SRS".
+5. TC-200: giữ Expected của SV. Thêm C21 (loại: quyết định Expected, truy vết: có, căn cứ: SRS im lặng; giả định SV.
+   SV chốt: không có sản phẩm thực tế nào đặt tên như vậy; theo kinh nghiệm SV, hệ thống sẽ không cho phép). TC-200 dẫn C21.
+6. ai_gap_answer.md: cập nhật theo case bị bỏ; làm rõ TC-200 so với TC-94 (trùng / TC-200 thêm gì) — chỉ dữ kiện.
+7. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5` kèm A_prompt_log.md.
+
+Báo cáo (≤ 15 dòng): commit; check_domain/linter; bảng mã EC đã đổi ở 207–215 (cũ → mới) + mã chưa đổi được;
+số case SV còn lại; TC-200 vs TC-94; câu hỏi còn chặn bước 6.
+```
+
+Bảng "mã EC cũ → mới" bạn nhớ xem lại, vì đó là lựa chọn thiết kế của bạn. Claude Code chỉ đổi những chỗ có tương ứng rõ ràng.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #236 | 17:39 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13602,7 +14455,238 @@ Cập nhật `ai_gap_answer.md` và trạng thái câu hỏi.
 
 ---
 
-## #222 | 17:59 20/10/2026 | Claude Opus 5.5 | [...]
+## #237 | 17:40 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo nhé: 
+Báo cáo cho phiên thảo luận
+
+- Commit: 078c5b0 HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5. check_domain: 9 lỗi, 4 cảnh báo; linter: 0 lỗi, 15 cảnh báo.
+- Q2 – không đổi mã EC nào. Lệnh giả định SV chép mã EC từ A/B, nhưng không đúng: ở 207–215, mã trong ô EC mục tiêu đều là mã của C_FR15 và đúng nghĩa với ý case. Lỗi thật là các mã này chưa nằm trong ô EC phủ.
+
+| Case     | Mã chưa có trong EC phủ | Lớp của C_FR15                    |
+|----------|-------------------------|-----------------------------------|
+| 207, 212 | EC68                    | API trả 2xx
+| 208, 211 | EC69                    | API trả 4xx kèm error             |
+| 209      | EC69, C20               | C20 là mã giả định, không phải EC |
+| 210      | EC34, EC69              | EC34 = category_id là chuỗi chữ   |
+| 213      | EC57                    | Sửa hợp lệ
+| 214      | EC19, EC69              | EC19 = giá ≤ 0                    |
+| 215      | EC17, EC68              | EC17 = giá số ngu
+  Mã nghĩa chưa khớp hẳn, SV cần xem: EC34 ở TC-210 (C_FR15 không có lớp kiểu mảng) và EC19 ở TC-214 (1e-324 là số dương, chỉ thành 0 sau khi
+  parse).
+- Số case SV còn lại: 14 (UI 5, API 9, GUI 0). Đã bỏ 203, 204, 216, 217, giữ khoảng trống số; lý do ghi trong notes của suite.
+- C19, C20, C21:
+  - C19: SV chưa từng ghi nội dung, nên không có "câu cũ" để giữ. Em ghi C19 là "(đã bỏ – SV bỏ TC-204)", nội dung "(SV chưa ghi)".
+  - C20: đã có căn cứ theo lệnh; chủ đề, loại, truy vết và nội dung vẫn "(SV chưa ghi)".
+  - C21: đã thêm, TC-200 đã dẫn C21.
+- TC-200 so với TC-94 (dữ kiện ở HW02/C_FR15/ai_gap_answer.md):
+  - Trùng: cả hai kiểm SEC-04 cho tên sản phẩm hiển thị
+  - TC-200 thêm: nhập qua form UI (TC-94 tạo qua API), payload <script> quan sát được bằng alert, và quan sát kết quả lưu (C21).
+  - TC-94 có mà TC-200 không ghi: kiểm ô tên không có ph
+- Còn chặn bước 6 (chi tiết ở HW02/C_FR15/sv_questions.md, mục "Trạng thái sau 5/7c"):
+  - Q2: 9 lỗi EC mục tiêu ngoài EC phủ. Phương án (a) cũã này vào EC phủ và chuyển C20 sang Căn cứ.
+  - Q1: nội dung C20.
+  - Q3: TC-207, 212, 213 có phần Expected chưa có căn cứ.
+  - Q4: TC-200 Expected có nhánh "Thêm thành công" trái sẽ không cho phép"); TC-201, 207, 211, 215 Expected nhiềunhánh; riêng TC-211 cho phép HTTP 500, trái C6.
+```
+
+**Output:**
+````
+Mình xin nhận lỗi trước: lệnh lần trước giả định sai rằng mã EC được chép từ A/B. Thực tế các mã đều là mã của C và đúng nghĩa. Ngoài ra lệnh còn **thiếu nội dung C20** mà bạn đã viết ở đây, nên Claude Code ghi "(SV chưa ghi)". Lỗi này do lệnh, không phải do bạn.
+
+Còn 5 việc chặn bước 6. Mục 1 và 2 là sửa cơ học, các mục còn lại là chữ của bạn.
+
+**1. Q2: thêm các mã đó vào EC phủ, chuyển C20 sang ô Căn cứ.** Đây là phương án (a), lỗi cơ học thật nên mình khuyên làm. Riêng hai mã chưa khớp nghĩa thì bạn chọn:
+- **TC-210 (mảng → EC34, "chuỗi chữ").** C không có lớp "mảng". Bạn chọn một trong hai:
+  - giữ EC34, ghi chú "đại diện khác của sai kiểu (C9)";
+  - thêm một EC mới cho kiểu mảng. Đây là quyết định thiết kế của bạn.
+- **TC-214 (1e-324 → EC19, "≤ 0").** Về mặt toán thì 1e-324 > 0, nên theo C1 nó thuộc lớp **hợp lệ**. Việc nó thành 0 sau khi parse là chuyện bên trong hệ thống. Bạn chọn một trong hai:
+  - đổi sang EC hợp lệ; khi đó Expected phải khớp C1, tức là chấp nhận;
+  - giữ ý "giá trị bị làm tròn thành 0", nhưng cần một căn cứ hoặc giả định riêng.
+
+**2. Nội dung C20:** áp đúng đoạn bạn đã viết, chỉ thay "REST API Standard" bằng RFC 8259. Mình đã đưa vào lệnh bên dưới.
+
+**3. Q3: TC-207, 212, 213 có Expected chưa có căn cứ.** Ba case này trước đó nằm trong nhóm bạn định bỏ, nên chưa được xử lý ở Q3. Mỗi case bạn chọn: có căn cứ SRS, giả định mới, nới thành "chấp nhận mọi cách hợp lý", hoặc bỏ.
+
+**4. Q4, TC-200:** Expected vẫn còn nhánh "Thêm thành công", trái với C21 ("không cho phép") do chính bạn chốt. Bạn bỏ nhánh đó.
+
+**5. Q4, các case còn lại:**
+- TC-201, 207, 211, 215 có Expected nhiều nhánh. Nhánh nào cũng phải có căn cứ, nếu không thì bỏ nhánh đó.
+- TC-211 cho phép HTTP 500, trái với C6. Bạn chọn bỏ nhánh 500, hoặc ghi ngoại lệ cho C6 kèm lý do.
+
+Cách nhanh nhất là bạn sửa trực tiếp mục 3–5 trong `sv_cases.md`, vì đó là chữ của bạn. Mục 1–2 thì giao Claude Code:
+
+```
+Áp tiếp trả lời SV bước 5 C_FR15:
+1. Q2(a): thêm các mã EC mục tiêu còn thiếu vào EC phủ ở TC-207…215; chuyển C20 từ EC mục tiêu sang ô Căn cứ của TC-209.
+   TC-210: <giữ EC34 + ghi chú "đại diện khác của sai kiểu (C9)" | SV thêm EC mới: <mô tả>>.
+   TC-214: <đổi sang EC hợp lệ <mã> | giữ, căn cứ: <...>>.
+2. C20 – chép nguyên văn SV (chỉ thay "REST API Standard" bằng "RFC 8259"):
+   "C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259, C6.
+   Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express
+   phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server."
+3. SV đã sửa trực tiếp sv_cases.md cho TC-200, 201, 207, 211, 212, 213, 215 → đưa vào testcases.json, giữ nguyên chữ SV.
+4. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7d: áp tiếp trả lời SV` kèm A_prompt_log.md.
+Báo cáo (≤ 10 dòng): commit; check_domain/linter; câu hỏi còn chặn bước 6 (nếu có).
+```
+
+Bạn điền 2 chỗ `<...>` ở mục 1 trước khi chạy.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #238 | 17:49 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Q3:
+207: Chống sql injection, vậy nên vẫn cho lưu tên nguyên văn như vậy. Và bảng products vẫn nguyên vẹn. Nếu không chống được thì mới báo lỗi.
+212: Mình nghĩ expected mình đưa đúng rồi mà nhỉ, srs không nói điều này, nhưng mà đây là trang của admin, giả sử admin thực hiện sai thì họ cũng có xoá lập tức. Hoặc vì một case đặc biệt gì đó mà họ tạo nhiều như vậy.
+213: mình nghĩ lại rồi, sẽ là 4xx, vì truyền sai trường, nên không cho phép
+Q4: Bỏ nhánh thêm thành công nhé. Nãy mình nói rồi mà nhỉ.
+201: Giữ nhánh bị chặn
+207: Giữ nhánh 4xx
+211: Giữ nhánh 4xx và không tạo sản phẩm
+215: Giữ nhánh 4xx, nếu đã lỗi thì chặn luôn.
+```
+
+**Output:**
+```
+Q4 TC-200: đúng là bạn đã nói bỏ nhánh "thêm thành công" từ trước. Lệnh lần trước của mình ghi "giữ Expected của SV" theo bản trong file nên nhánh đó vẫn còn. Lỗi này do lệnh, mình sẽ ghi rõ trong lệnh lần tới.
+
+TC-201 và 211 ổn. Còn 4 case có chỗ tự mâu thuẫn, bạn cần chốt:
+
+| Case | Mâu thuẫn | Bạn chọn |
+|---|---|---|
+| **207** | Q3 nói "lưu tên nguyên văn, bảng products nguyên vẹn", tức là chấp nhận (2xx), khớp EC mục tiêu EC68. Nhưng Q4 lại nói "giữ nhánh 4xx". Hai câu ngược nhau. | **2xx + lưu nguyên văn + bảng nguyên vẹn**: có căn cứ, vì chuỗi đó là tên hợp lệ theo FR-15 (bắt buộc, ≤ 255). Hoặc **4xx**: cần căn cứ hay giả định mới, và phải đổi EC mục tiêu. Câu "nếu không chống được thì báo lỗi" là điều kiện để Fail, không phải một nhánh Expected. |
+| **212** | SRS im lặng. Nếu Expected là "cho phép" mà SUT lại chặn thì sẽ thành Fail không có căn cứ. | Đặt **C22** với lý do của bạn (trang admin, admin tự xoá được, có trường hợp đặc biệt cần tạo nhiều). Lý do này dùng được. Hoặc nới thành "chấp nhận mọi cách hợp lý". |
+| **213** | EC mục tiêu là EC57 ("Sửa hợp lệ"), nhưng Expected giờ là 4xx. Thêm nữa, C9 chỉ nói về thiếu trường, null hoặc sai kiểu. Nếu "sai trường" nghĩa là gửi trường lạ hoặc sai tên thì C9 không phủ. | "Sai trường" ở đây là gì? Nếu thuộc C9 thì đổi EC mục tiêu sang lớp không hợp lệ tương ứng. Nếu không thuộc C9 thì cần giả định mới (C23) làm căn cứ cho 4xx. |
+| **215** | EC mục tiêu là EC17 (giá số nguyên, hợp lệ) và EC68 (2xx), nhưng Expected là 4xx. Bạn đã chốt C2 = a là giá không có cận trên, nên số lớn hợp lệ vẫn phải được chấp nhận. | **Giữ 4xx**: cần chỉ ra giá trị này *không hợp lệ* vì sao, ví dụ không còn là số hợp lệ sau khi parse, kèm căn cứ hoặc giả định, và đổi EC mục tiêu. Hoặc **theo C2**: chấp nhận. |
+
+Mẫu trả lời:
+`207: 2xx | 4xx (căn cứ …); 212: C22 | nới; 213: sai trường = … ; 215: 4xx vì … | theo C2`
+
+Ngoài ra, mục 1 lệnh lần trước còn 2 chỗ trống: TC-210 (giữ EC34 hay thêm EC mảng) và TC-214 (1e-324). Bạn trả lời cùng lúc để mình gộp tất cả vào một lệnh.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #239 | 17:52 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+207: 2xx; 212: xoá luôn; 213: sai trường tức là trong body không yêu cầu truyền id và role, mà lại muốn truyền vào để PUT nên sai; 215: 4xx, không có cận trên không có nghĩa giới hạn máy tính không có.
+```
+
+**Output:**
+````
+207, 212 và 213 rõ. 215 có lý. Có 2 điểm cần chốt thêm.
+
+- **213** không thuộc C9: C9 chỉ nói về thiếu trường, null hoặc sai kiểu, không nói về trường thừa. SRS cũng không nói gì về chuyện gửi thêm `id`/`role` vào body. Cách xử lý "bỏ qua trường lạ" cũng là một cách hợp lý, nên để Expected là 4xx thì cần giả định **C23** với lý do của bạn, cộng thêm một EC không hợp lệ mới ("body PUT chứa trường ngoài đặc tả"). Lệnh bên dưới đã làm việc này.
+- **215** cần giả định **C24**. Căn cứ có sẵn: **RFC 8259 §6** cho phép bên triển khai giới hạn phạm vi và độ chính xác của số. RFC không bắt buộc trả 4xx; chọn 4xx là quyết định của bạn. Có một điểm cần rõ: số trong case vượt giới hạn nào? Nếu vượt `Number.MAX_VALUE` (~1.8e308) thì số đó thành vô cực. Nếu chỉ vượt `MAX_SAFE_INTEGER` (2^53) thì số vẫn biểu diễn được nhưng mất độ chính xác. Hai trường hợp này dẫn tới lý do khác nhau. Lệnh sẽ bắt Claude Code báo giá trị cụ thể. C2 vẫn giữ nguyên: C2 nói không có cận trên **nghiệp vụ**, còn C24 là giới hạn **kỹ thuật**.
+
+**Bạn vẫn chưa trả lời TC-210 và TC-214** từ lần trước:
+- **TC-210**: giữ EC34 kèm ghi chú "đại diện khác của sai kiểu (C9)", hay thêm EC mới cho kiểu mảng?
+- **TC-214**: 1e-324 > 0 nên thuộc lớp hợp lệ theo C1. Bạn đổi sang EC hợp lệ và để Expected là chấp nhận, hay giữ ý "giá bị làm tròn thành 0" với một căn cứ riêng?
+
+Bạn điền 2 chỗ đó rồi chạy:
+
+```
+Áp tiếp trả lời SV bước 5 C_FR15 (chữ SV giữ nguyên; chỗ nào chưa rõ → DỪNG, hỏi):
+1. Q2(a): thêm mã EC mục tiêu còn thiếu vào EC phủ ở TC-207…215; chuyển C20 từ EC mục tiêu sang ô Căn cứ của TC-209.
+   TC-210: <giữ EC34 + ghi chú "đại diện khác của sai kiểu (C9)" | thêm EC mới "category_id kiểu mảng" (SV)>.
+   TC-214: <đổi sang EC hợp lệ tương ứng + Expected theo C1 | giữ, căn cứ: <...>>.
+2. C20 – chép nguyên văn SV (thay "REST API Standard" bằng "RFC 8259"):
+   "C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259, C6.
+   Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express
+   phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server."
+3. TC-200: BỎ nhánh "Thêm thành công" (SV đã quyết từ trước); Expected = báo lỗi, không kích hoạt XSS (C21).
+4. TC-201: chỉ giữ nhánh "bị chặn". TC-211: chỉ giữ nhánh "4xx, không tạo sản phẩm" (bỏ nhánh 500).
+5. TC-207: Expected chỉ còn "2xx; tên lưu nguyên văn; bảng products nguyên vẹn" (bỏ nhánh 4xx); căn cứ FR-15
+   (chuỗi là tên hợp lệ: bắt buộc, ≤ 255). Câu "nếu không chống được thì báo lỗi" → chuyển thành điều kiện Fail trong notes.
+6. TC-212: bỏ (giữ khoảng trống số), lý do "SV bỏ: Expected không có căn cứ SRS".
+7. TC-213: Expected 4xx. Thêm C23 (loại: quyết định Expected, truy vết: có, căn cứ: SRS im lặng; giả định SV.
+   SV chốt: body PUT không yêu cầu truyền id và role, truyền vào để PUT là sai nên không cho phép). Thêm EC không hợp lệ mới
+   "body PUT chứa trường ngoài đặc tả (vd id, role) – theo C23" (nguồn: SV, bước 5); TC-213 ec_target = EC mới đó thay EC57.
+8. TC-215: Expected 4xx. Thêm C24 (loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259 §6 (cho phép giới hạn phạm vi/độ
+   chính xác số); giả định SV. SV chốt: không có cận trên không có nghĩa là không có giới hạn của máy tính). Ghi chú: C2 = không có
+   cận trên nghiệp vụ, C24 = giới hạn kỹ thuật. Thêm EC không hợp lệ mới "giá vượt giới hạn biểu diễn số – theo C24" (nguồn: SV,
+   bước 5); TC-215 ec_target = EC mới đó thay EC17/EC68.
+9. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7d: áp tiếp trả lời SV` kèm A_prompt_log.md.
+
+Báo cáo (≤ 12 dòng): commit; check_domain/linter; giá trị price cụ thể ở TC-215 và nó vượt giới hạn nào
+(MAX_SAFE_INTEGER hay Number.MAX_VALUE); số case SV còn lại; câu hỏi còn chặn bước 6 (nếu có).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #240 | 17:59 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+213: thông thường ở ngoài người ta không xử lý sai trường, chỉ xử lý request có đúng các trường. Mà bỏ qua cũng hợp lý nhỉ. Vậy cứ việc bỏ qua các trường kia thôi.
+215: Khoan đã, ban đầu mình chia độ chia nhỏ nhất là 0.1 mà nhỉ, tức là số thực. Thôi mình nghĩ là bỏ luôn đi.
+TC-210: bỏ luôn
+TC-214: 4xx, do làm tròn thành 0, mà yêu cầu giá > 0
+```
+
+**Output:**
+````
+Đã nhận đủ. Cả 4 câu đều dùng được. Mình chỉ ghi lại cách áp vào file cho đúng quy ước:
+
+- **213, "bỏ qua trường lạ"**: SRS không nói gì về trường thừa. Theo quy ước, SRS im lặng thì không được tạo Fail. Vì vậy Expected nên chấp nhận cả hai cách: 2xx và bỏ qua `id`/`role`, hoặc 4xx. Điều kiện chung cho cả hai là **id sản phẩm không đổi**. Điều kiện này là ngầm định: id nằm trên URL thì body không được đổi id. Như vậy 213 không cần giả định riêng. Nếu bạn muốn chỉ chấp nhận "bỏ qua" thì sẽ cần một giả định riêng. Mình đã ghi theo cách thứ nhất trong lệnh; bạn sửa nếu khác ý.
+- **214, 4xx**: dùng được, nhưng phải có giả định **C23**, vì lập luận "làm tròn thành 0" dựa trên giới hạn độ chính xác của số. Căn cứ: RFC 8259 §6 cho phép giới hạn độ chính xác, cộng với FR-15 (giá > 0). Lưu ý: lý do này cùng loại với lý do "giới hạn máy tính" mà bạn vừa bỏ ở 215. Nếu người chấm hỏi vì sao giữ 214 mà bỏ 215, bạn cần trả lời được.
+- **210, 212, 215**: bỏ, giữ khoảng trống số.
+
+Lệnh lần trước bạn chưa chạy, nên đây là bản thay thế đầy đủ:
+
+```
+Áp trả lời SV bước 5 C_FR15 (chữ SV giữ nguyên; chỗ nào chưa rõ → DỪNG, hỏi):
+1. Q2(a): thêm mã EC mục tiêu còn thiếu vào EC phủ ở TC-207, 208, 209, 211, 213, 214; chuyển C20 từ EC mục tiêu
+   sang ô Căn cứ của TC-209.
+2. Bỏ TC-210, 212, 215 (giữ khoảng trống số), lý do "SV bỏ" (210: không có lớp tương ứng; 212: Expected không có căn cứ SRS;
+   215: SV bỏ sau khi xét lại C1/C2).
+3. C20 – chép nguyên văn SV (thay "REST API Standard" bằng "RFC 8259"):
+   "C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259, C6.
+   Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express
+   phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server."
+4. TC-200: BỎ nhánh "Thêm thành công"; Expected = báo lỗi, không kích hoạt XSS (C21).
+5. TC-201: chỉ giữ nhánh "bị chặn". TC-211: chỉ giữ nhánh "4xx, không tạo sản phẩm" (bỏ nhánh 500).
+6. TC-207: Expected chỉ còn "2xx; tên lưu nguyên văn; bảng products nguyên vẹn" (bỏ nhánh 4xx); căn cứ FR-15
+   (chuỗi là tên hợp lệ: bắt buộc, ≤ 255). Câu "nếu không chống được thì báo lỗi" → chuyển thành điều kiện Fail trong notes.
+7. TC-213: Expected = "SRS im lặng về trường ngoài đặc tả → chấp nhận: (a) 2xx, bỏ qua id/role, các trường hợp lệ được cập nhật;
+   hoặc (b) 4xx, bản ghi không đổi. Trong mọi trường hợp id sản phẩm không đổi (ngầm định: id xác định bằng URL)".
+   Không thêm giả định. Ghi notes: SV cân nhắc 4xx rồi chọn chấp nhận cả việc bỏ qua.
+8. TC-214: Expected 4xx, bản ghi không đổi. Thêm C23 (loại: quyết định Expected, truy vết: có, căn cứ: FR-15 (giá > 0),
+   RFC 8259 §6 (cho phép giới hạn độ chính xác số); giả định SV. SV chốt: 1e-324 bị làm tròn thành 0, mà yêu cầu giá > 0).
+   ec_target giữ EC19 + ghi chú "giá trị hiệu dụng = 0 sau khi parse (C23)".
+9. ai_gap_answer.md: cập nhật theo case bị bỏ.
+10. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7d: áp tiếp trả lời SV` kèm A_prompt_log.md.
+
+Báo cáo (≤ 10 dòng): commit; check_domain/linter; số case SV còn lại (UI/API/GUI); câu hỏi còn chặn bước 6 (nếu có).
+```
+
+Sau lệnh này, nếu check_domain hết lỗi thì bạn sang bước 6. Phiên này đã khá dài, nên bạn có thể nói "xuất transcript" ngay bây giờ để phòng trường hợp ngữ cảnh bị nén.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #241 | 17:59 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13654,7 +14738,104 @@ Cập nhật `ai_gap_answer.md` và trạng thái câu hỏi rồi commit.
 
 ---
 
-## #223 | 18:05 20/10/2026 | Claude Opus 5.5 | [...]
+## #242 | 18:04 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit: 7561a75 HW02[C-FR15] 5/7d: áp tiếp trả lời SV. check_domain: 0 lỗi, 4 cảnh báo (cũ); linter: 0 lỗi, 11 cảnh báo (9 tiêu đề thiếu phần điều kiện, 2 case không truy vết được yêu cầu: TC-209, TC-211).
+- Case SV còn lại: 11 (UI 5, API 6, GUI 0). Đã bỏ 203, 204, 210, 212, 215, 216, 217, giữ khoảng trống số.
+- TC-201 (đã hỏi trực tiếp, SV chọn): giữ nhánh "bị chặn", đổi EC mục tiêu từ EC17 sang EC20, thêm giả định C24.
+- Còn chặn bước 6: C24 (TC-201) vẫn "(SV chưa ghi)" cả căn cứ lẫn nội dung, trong khi Expected "Form chặn" trái với C1 (SV chốt: mọi số thực > 0 hợp lệ, mà 1e5 = 100000). SV cần ghi C24 kèm căn cứ.
+- Không chặn:
+  - Không có C22: SV đánh số nhảy từ C21 lên C23.
+  - TC-200 giờ chỉ còn nhánh báo lỗi, nên không còn quan sát tên hiển thị trong bảng; phần trùng với TC-94 hết. Đã ghi trong HW02/C_FR15/ai_gap_answer.md.
+```
+
+**Output:**
+````
+Bước 5 gần xong, chỉ còn **TC-201 / C24** chặn bước 6.
+
+**TC-201.** Bạn chốt C1 là "mọi số thực > 0 đều hợp lệ". 1e5 = 100000 nên về giá trị là hợp lệ. Muốn Expected là "form chặn" thì C24 phải nói về **cách viết số** (định dạng nhập), không phải giá trị. Bạn chọn:
+- **a) Giữ "chặn"** với C24 kiểu "ô giá trên UI không chấp nhận ký hiệu khoa học", kèm lý do của bạn (vd admin nhập giá tiền không bao giờ dùng dạng 1e5, cho phép dễ gây nhầm). Lý do đó cũng cần giải thích vì sao C24 không mâu thuẫn với C1: C1 nói về giá trị, C24 nói về cách viết. Hệ quả: nếu SUT chấp nhận "1e5" thì Fail, và bug dựa trên C24.
+- **b) Theo C1**: Expected là chấp nhận, giá lưu 100000. Không cần C24.
+- **c) Nới**: SRS không nói gì về định dạng nhập, nên chấp nhận cả hai. Không cần C24.
+- **d) Bỏ case.**
+
+**Không chặn nhưng nên biết:**
+- 2 cảnh báo "không truy vết được yêu cầu" (TC-209, 211) chỉ là cảnh báo, để nguyên được. Nếu muốn hết cảnh báo, hỏi Claude Code vì sao EC69 trong ec_target không tạo truy vết. Không gắn tay một FR nào vào để cho hết cảnh báo.
+- Bỏ trống C22 không sao, cùng quy tắc giữ khoảng trống số như khi bỏ case.
+
+Sau khi chốt C24, bạn chạy lệnh dưới để sang bước 6a (AI viết test, **bạn chạy**):
+
+```
+1) SV chốt TC-201: <a: C24 (loại: quyết định Expected, truy vết: có, căn cứ: SRS im lặng về định dạng nhập; giả định SV.
+   SV chốt: <lý do>; C1 nói về giá trị, C24 nói về cách viết) | b: Expected theo C1 (chấp nhận, lưu 100000), xoá C24 |
+   c: Expected chấp nhận cả chặn lẫn lưu 100000, xoá C24 | d: bỏ TC-201, xoá C24>.
+   render_md → check_domain → linter. Commit `HW02[C-FR15] 5/7e: SV chốt TC-201` kèm A_prompt_log.md.
+
+2) /domain-bva-testing HW02/C_FR15 6 — bước 6a: AI viết Playwright, KHÔNG chạy lượt chính thức (SV chạy).
+   Theo skill + CLAUDE.md + quy ước handoff mục 4 "Chạy test":
+   - Khoá oracle bằng sha1 của Expected; expect.soft; body thô gửi bằng Buffer; số vượt Number so trên text response.
+   - Độc lập {ts}; cleanup 2 lớp (sau mỗi case + quét cuối theo tiền tố {ts}); admin seed admin@eshop.com / Admin123!.
+   - Case GUI và case không tự động được → đánh dấu manual, ghi trong RUN.md cách SV chụp TC-xx_manual_*.png
+     (cửa sổ ẩn danh, không tiện ích).
+   - RUN.md: restart backend (`node server.js`) trước MỌI lượt; lệnh chạy cho SV; tên results file có timestamp;
+     merge_results.py không ghi đè status SV đặt (trừ --force).
+   - Chỉ được chạy kiểm cú pháp/liệt kê test (vd `--list`), không chạy vào SUT.
+   - Commit `HW02[C-FR15] 6/7a: Playwright + RUN.md` kèm A_prompt_log.md (freeze nếu skill yêu cầu).
+Báo cáo (≤ 12 dòng): 2 commit; số test tự động / manual theo suite; lệnh SV cần chạy (copy được); danh sách case manual.
+```
+
+Bạn nên **xuất transcript ngay bây giờ**, trước khi chạy test. Phiên đã dài, và đây là mốc lớn.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #243 | 18:05 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+C24: a
+```
+
+**Output:**
+````
+Bạn chưa ghi lý do cho C24. Mình tạm dùng lý do ví dụ đã nêu ở phương án a. Nếu không đúng ý bạn thì sửa phần trong ngoặc trước khi chạy:
+
+```
+1) SV chốt TC-201 = a: giữ Expected "Form chặn". Thêm C24 (loại: quyết định Expected, truy vết: có,
+   căn cứ: SRS im lặng về định dạng nhập; giả định SV. SV chốt: ô giá trên UI không chấp nhận ký hiệu khoa học (vd 1e5)
+   — admin nhập giá tiền không dùng dạng này, cho phép dễ gây nhầm. C1 nói về GIÁ TRỊ, C24 nói về CÁCH VIẾT nên không
+   mâu thuẫn). TC-201 dẫn C24.
+   render_md → check_domain → linter. Commit `HW02[C-FR15] 5/7e: SV chốt TC-201` kèm A_prompt_log.md.
+
+2) /domain-bva-testing HW02/C_FR15 6 — bước 6a: AI viết Playwright, KHÔNG chạy lượt chính thức (SV chạy).
+   Theo skill + CLAUDE.md + quy ước handoff mục 4 "Chạy test":
+   - Khoá oracle bằng sha1 của Expected; expect.soft; body thô gửi bằng Buffer; số vượt Number so trên text response.
+   - Độc lập {ts}; cleanup 2 lớp (sau mỗi case + quét cuối theo tiền tố {ts}); admin seed admin@eshop.com / Admin123!.
+   - Case GUI và case không tự động được → đánh dấu manual, ghi trong RUN.md cách SV chụp TC-xx_manual_*.png
+     (cửa sổ ẩn danh, không tiện ích).
+   - RUN.md: restart backend (`node server.js`) trước MỌI lượt; lệnh chạy cho SV; tên results file có timestamp;
+     merge_results.py không ghi đè status SV đặt (trừ --force).
+   - Chỉ được chạy kiểm cú pháp/liệt kê test (vd `--list`), không chạy vào SUT.
+   - Commit `HW02[C-FR15] 6/7a: Playwright + RUN.md` kèm A_prompt_log.md (freeze nếu skill yêu cầu).
+Báo cáo (≤ 12 dòng): 2 commit; số test tự động / manual theo suite; lệnh SV cần chạy (copy được); danh sách case manual.
+```
+
+Nhắc lại: bạn nên nói "xuất transcript" trước khi chạy test.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #244 | 18:05 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -13679,7 +14860,7 @@ Báo cáo (≤ 12 dòng): 2 commit; số test tự động / manual theo suite; 
 ```
 
 **Output:**
-```
+````
 Phần 2: bước 6a. Đọc hướng dẫn automation của skill và cấu trúc test B_FR07.
 
 Đủ quy ước. Sinh bảng oracle cho case AI từ Expected (có kiểm chéo với inputs), khoá bằng sha1.
@@ -13697,11 +14878,58 @@ Python escape hỏng; dùng Edit trực tiếp.
 117 test liệt kê được (106 AI + 11 SV). Kiểm nhanh phần SV_ORACLE sau khi sửa.
 
 Viết `RUN.md` cho SV.
-```
+
+Đã xong cả hai phần (`4c9655c` chốt TC-201, `ab466c8` Playwright + RUN.md); lượt chính thức chờ SV chạy. Em chỉ chạy `--list`: liệt kê được 117 test, chưa chạy vào SUT. Không có trình kiểm kiểu TypeScript nên lỗi lúc chạy chỉ lộ ra ở lượt đầu của SV.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `4c9655c` 5/7e: SV chốt TC-201 — thêm C24; check_domain 0 lỗi, linter 0 lỗi.
+  - `ab466c8` 6/7a: Playwright + RUN.md — spec, `lib.ts`, `oracle.ts`, project `C_FR15`, `global-setup.ts`, `HW02/C_FR15/RUN.md`. Không freeze: skill chỉ yêu cầu freeze khi AI sửa `testcases.json`.
+- **Số test:** 117 tự động, 5 manual.
+
+  | Suite | Tự động | Manual |
+  |---|---|---|
+  | TS-DOM-UI | 16 | 0 |
+  | TS-DOM-API-POST | 17 | 0 |
+  | TS-DOM-API-PUT | 18 | 0 |
+  | TS-DOM-API-OTHER | 7 | 0 |
+  | TS-BVA (UI-THEM, UI-SUA, API-POST, API-PUT) | 12 mỗi suite | 0 |
+  | TS-SV-UI | 5 | 0 |
+  | TS-SV-API | 6 | 0 |
+  | TS-GUI | 0 | 5 |
+
+- **Lệnh SV chạy** (khởi động lại backend trước mỗi lượt; `global-setup.ts` dừng nếu CSDL không đúng 5 sản phẩm seed):
+  ```powershell
+  cd HW02/tests; $ts = Get-Date -Format yyyyMMdd-HHmmss; $env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/C_FR15_$ts.json"; npx playwright test --project=C_FR15 --reporter=list,json; cd ../..; echo "results/C_FR15_$ts.json"
+  python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/C_FR15/testcases.json HW02/tests/results/C_FR15_<ts>.json
+  ```
+- **Case manual:** TC-FR15-90, 91, 92, 93, 94 (TS-GUI). Cách chụp `TC-FR15-9x_manual_<n>.png` trong cửa sổ ẩn danh không tiện ích ghi ở RUN.md.
+- **Cần SV xem lại** (đã ghi trong RUN.md):
+  - Cách AI hiểu TC-206: ở SP1 em tự sửa ô Tên thành `SP1 tạm {ts}`, vì SV không ghi SP1 sửa gì.
+  - Test phân biệt hộp thoại báo lỗi với hộp thoại báo thành công bằng regex (C16); SV xem lại Actual khi verdict phụ thuộc vào việc này.
+  - `global-setup.ts` nhận biết lượt C_FR15 qua tham số dòng lệnh `--project=C_FR15`.
+````
 *File AI ghi/gửi trong lượt này:* `c15_oracle_gen.py`, `lib.ts`, `C_FR15.spec.ts`, `global-setup.ts`, `RUN.md`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 223 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 160 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #223); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #245 | 18:06 20/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bạn giúp mình xuất transcript lượt 1 nhé. Sau khi xong feature C mình sẽ yêu cầu lại.
+```
+
+**Output:**
+```
+Mình xuất transcript phiên này ngay bây giờ (tên `claude-ai_session_HW02_p4.jsonl`). Khi xong feature C, bạn yêu cầu lại thì mình xuất bản lớn thêm cùng tên `_p4`; bản đó sẽ chứa trọn bản này, bạn chỉ cần thay file cũ.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 245 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 161 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
