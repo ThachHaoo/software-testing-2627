@@ -7292,17 +7292,93 @@ C. render_md.py → freeze.py → check_domain.py → linter thầy.
 ```
 
 **Output:**
-```
+````
 Đọc phần truy vết của `render_md.py` và grep SRS cho B11.
 
 A_FR01 render không đổi (EC chưa có `requirements` nên giữ cách cũ). Commit vá harness riêng.
 
 Giờ sửa testcases.json theo review.
+
+Em đã sửa xong bước 3 theo review và commit, dừng chờ SV duyệt. Số TC đổi từ 32 lên 34, check_domain và linter không báo lỗi. Có 1 điểm nên chốt trước bước 4: bảng truy vết đang bị nhiễu (mục cuối báo cáo).
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: sửa bước 3 B_FR07 theo review (A: quyết định SV; B: sửa thiết kế; vá harness truy vết)
+- File đã tạo/sửa: HW02/B_FR07/testcases.json/.md; render_md.py + schema-domain.md (vá harness); ai-outputs/B_FR07_step3_20261020-1050.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/8 warn (7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10; V1 chưa có case BVA), phủ 51/51 EC; lint 0 errors/0 warn; test Not run
+- Commit: 4fee1ad HW02: vá harness – truy vết sinh từ ánh xạ EC → yêu cầu
+          444474a HW02[B-FR07] 3/7b: sửa TC domain theo review
+- Số TC: 32 → 34 (UI 13 → 13, API 14 → 14, GUI 5 → 7); tỷ lệ TC domain/EC = 27/51 = 0,53
+  - Bỏ: TC-FR07-23 (để trống số)
+  - Thêm: TC-FR07-40 (thiếu id → EC53, tách từ EC13), TC-95 (nhãn FR-07), TC-96 (phản hồi nút 'Thêm vào giỏ' ở trang chủ)
+  - EC: bỏ EC32, thêm EC53 (không dùng số EC52 vì bản đóng băng bước 2 đã dùng số này cho lớp khác); mỗi EC có trường requirements
+- B11: SRS không có câu nào nói trực tiếp về giỏ của khách → ghi "suy luận từ FR-08.1", trích README.md:104; phần API trích api_specification.md:112 + README.md:279
+- Bất thường (harness): render_md.py trước đây lấy truy vết từ case.requirements → đã vá; A_FR01 render ra không đổi
+- Cần quyết định (chặn bước 4): không có
+- Không chặn (1 điểm, xem mục Truy vết trong HW02/B_FR07/testcases.md): truy vết theo EC bị nhiễu vì các EC trạng thái cũng gắn yêu cầu
+  - EC23 → FR-07.7 kéo TC-02 và TC-20 vào cột FR-07.7
+  - EC24/25 → FR-07.1 kéo 27 TC vào FR-07.1
+  - EC1 → FR-06.2 kéo 23 TC vào FR-06.2
+  - Phương án: (a) giữ nguyên; (b) EC trạng thái/tiền điều kiện không gắn yêu cầu, chỉ EC đầu ra và lớp của biến mục tiêu gắn
+```
+````
 *File AI ghi/gửi trong lượt này:* `step3b_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 122 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 119 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #123 | 10:55 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 – sửa bước 3 lần 2 (review). Không đụng ai-outputs.
+
+A. Vá harness (commit riêng "HW02: vá harness – ec_target + mã giả định trong truy vết"):
+1. Schema TC: thêm trường ec_target (mảng EC) = các EC case được thiết kế để kiểm
+   (lớp đầu vào cần thử + lớp đầu ra mà Expected khẳng định).
+   Truy vết sinh từ ec_target; cột "EC phủ" giữ nguyên cho độ phủ.
+   TC không có ec_target → dùng EC phủ như cũ (A_FR01 render ra không đổi; kiểm lại).
+2. Cột Yêu cầu của EC cho phép mã giả định (B4, B9…); bảng truy vết hiện dòng
+   giả định riêng, đánh dấu "(giả định)".
+3. check_domain: lỗi nếu ec_target ⊄ EC phủ; lỗi nếu case không hợp lệ không có
+   đúng 1 EC không hợp lệ trong ec_target; cảnh báo nếu TC domain thiếu ec_target.
+
+B. Sửa B_FR07 (commit "HW02[B-FR07] 3/7c: ec_target, tách nhãn, B21"):
+1. Điền ec_target cho mọi TC. Sửa cột Yêu cầu: EC41, EC42 → B4; EC43 → FR-23.2, B9;
+   EC40 bỏ FR-07.2. Rà các EC còn lại: yêu cầu phải khớp nội dung lớp hiện tại.
+2. Tách TC-95 thành 4 case: 95 tiêu đề 5 cột (FR-07.1), 96 'Xóa sản phẩm' (FR-07.4,
+   B12), 97 'Tiếp tục mua sắm' (FR-07.5, B12), 98 'Tổng cộng' (FR-07.6). Case phản
+   hồi nút trang chủ (TC-96 cũ) → TC-99. Ghi notes ánh xạ số cũ → mới.
+3. B21 (SV chốt): "phản hồi trực quan" hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1
+   ghi "(toast notification hoặc badge cập nhật)" như ví dụ minh hoạ, không phải danh
+   sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy
+   được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo
+   trên trang); ghi rõ loại phản hồi quan sát được vào Actual. Cập nhật Expected
+   TC-02, TC-99, V16, EC45.
+4. Lỗi vặt: B2 bỏ "badge" khỏi oracle; B18 "5 lớp" (thêm EC53); EC27 chỉ "user {ts}";
+   Phạm vi nhắc nhãn FR-07 và phản hồi khi thêm trong TS-GUI; TC-90/93/94 đổi
+   "link 'Giỏ hàng'" → "link tới /cart".
+
+C. render_md.py → freeze.py → check_domain.py → linter thầy. Dừng.
+   Báo cáo theo CLAUDE.md: số TC trước/sau, kết quả A_FR01 sau vá harness.
+```
+
+**Output:**
+```
+Đọc `check_domain.py` trước khi vá.
+
+Vá harness: `render_md.py` (ec_target, mã giả định trong truy vết), `check_domain.py` (3 kiểm tra), schema doc.
+
+A_FR01: render không đổi (diff rỗng), check_domain vẫn 0 errors/1 warn như trước. Commit harness.
+
+Giờ sửa B_FR07.
+```
+*File AI ghi/gửi trong lượt này:* `step3c_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 123 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 120 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

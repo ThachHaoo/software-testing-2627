@@ -13,3 +13,5 @@
 - 10:37 20/10/2026 · `B_FR07_step3_20261020-1037.md` · bước 3 · Claude Code bước 3 (kèm 6 quyết định SV B2/B5/B8/B10/B16/B18 + B19) · sha256 6592ac9709fc
 - 10:50 20/10/2026 · `B_FR07_step3_20261020-1050.json` · bước 3 · Claude Code bước 3b (sửa theo review SV) · sha256 49c422f2aa5a
 - 10:50 20/10/2026 · `B_FR07_step3_20261020-1050.md` · bước 3 · Claude Code bước 3b (sửa theo review SV) · sha256 c74e05e41160
+- 10:58 20/10/2026 · `B_FR07_step3_20261020-1058.json` · bước 3 · Claude Code bước 3c (review lần 2: ec_target, tách nhãn, B21) · sha256 6b6be61cffb2
+- 10:58 20/10/2026 · `B_FR07_step3_20261020-1058.md` · bước 3 · Claude Code bước 3c (review lần 2: ec_target, tách nhãn, B21) · sha256 ea8a23e75a26
