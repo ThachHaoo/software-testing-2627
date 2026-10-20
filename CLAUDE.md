@@ -50,6 +50,8 @@ Skill dùng trong repo:
 
 ## 1. HW02 – Domain Testing on EShop (đang làm)
 
+**Trạng thái:** A–D xong 7/7; giai đoạn hiện tại: báo cáo HW02 (report, Critique, AI-02…AI-06).
+
 **Đề:** với mỗi feature: (1) Domain Testing có AI hỗ trợ, giải thích từng bước; (2) BVA, giải thích từng bước; (3) AI gap analysis — case/bug AI bỏ sót và **vì sao** (prompt, giới hạn công cụ, độ phức tạp feature); (4) báo bug trong report **và** GitHub Issues của nhóm (có ảnh). Agent Skill + video YouTube demo end-to-end. Bloom-AI G9.2 + G9.3. Cấp độ AI: **Cấp 4**.
 
 **Bảng điểm:** A 25 · B 25 · C 25 · D (Mobile) 15 · Agent Skills 10 = 100.
@@ -139,6 +141,21 @@ Skill dùng trong repo:
   - Sắp compact → chép transcript phiên vào `.transcripts\` (tên mới) + `on_stop.py --manual` + commit prompt log trước khi `/compact`.
 - 2026-10-21 (D_FR20): Không chạy merge_results.py cho A/B/C nếu không có --dry-run: test-results/ đã mất → evidence bị xoá.
 - 2026-10-21 (D_FR20): Không amend commit; sửa gì cũng tạo commit mới (SV có thể đã push).
+- 2026-10-21 Bài học D_FR20:
+  - Chạy tay cả feature:
+    - `RUN.md` có thứ tự nhóm, cột ảnh (bắt buộc / khi khác Expected / không chụp), trần số ảnh.
+    - Oracle = ảnh admin TRƯỚC/SAU cả lượt, mỗi case một email riêng; "SAU = TRƯỚC" đọc theo email của case (D0).
+    - SV ghi kết quả tự do (`Check.md`) → AI chép nguyên văn sang file lượt.
+    - AI đổi tên + nén ảnh SV (`tools/compress_manual.py`), kèm bảng đổi tên.
+  - Procedure phải khớp cách chạy thật trước khi chạy (sửa + freeze, Expected không đổi).
+  - Gộp lớp theo tầng (gray-box): ghi tiền đề "giá trị trong ô = giá trị gửi" + dòng code.
+  - Bản vá chạy tay của `merge_results.py` ghi đè status từ file lượt → verdict SV đổi thì đồng bộ file lượt.
+  - Bug:
+    - Mapping theo điểm vào (Web UI / API / Mobile); có mục "Liên quan" khi cùng chỗ sửa với bug cũ.
+    - Lệnh "kiểm 7d" chỉ đọc, chạy trước khi tạo issue.
+    - 2 điểm dừng khi tạo issue: SV xác nhận bảng tiêu đề; SV báo đã kéo ảnh.
+    - Mobile 7c: AI chỉ tái hiện phần server.
+  - Kế thừa giả định của feature trước: lấy bản cuối của SV (tra git), mã mới ghi "(kế thừa Ax)".
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 
