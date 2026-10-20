@@ -27,6 +27,12 @@ def main():
     ap.add_argument("--write", type=Path)
     a = ap.parse_args()
 
+    bug_files = sorted((a.hw / "bugs").glob("BUG-*.md"))
+    bug_text = {b.stem: b.read_text(encoding="utf-8") for b in bug_files}
+    # mã TC trong mục "## TC liên quan" của từng BUG-xx.md → đếm bug theo feature khi testcases.json chưa ghi bug_id
+    bug_tcs = {k: set(re.findall(r"TC-[A-Z0-9]+-\d+", (re.search(r"(?ms)^## TC liên quan\s*$(.*?)(?=^## )", v) or [None, ""])[1]))
+               for k, v in bug_text.items()}
+
     rows, tot = [], Counter()
     for tc in sorted(a.hw.glob("*/testcases.json")):
         d = json.loads(tc.read_text(encoding="utf-8"))
@@ -34,15 +40,16 @@ def main():
         st = Counter(c.get("status") or "Not run" for c in cases)
         og = Counter(c.get("origin") or "?" for c in cases)
         bugs = {b for c in cases for b in re.split(r"[,\s]+", c.get("bug_id") or "") if b}
+        ids = {c.get("id") for c in cases}
+        bugs |= {k for k, tcs in bug_tcs.items() if tcs & ids}
         r = Counter(designed=len(cases), executed=st["Pass"] + st["Fail"], passed=st["Pass"], failed=st["Fail"],
                     blocked=st["Blocked"], notrun=st["Not run"] + st["Skipped"], ai=og["AI"] + og["Both"], sv=og["Human"], bugs=len(bugs))
         tot.update(r)
         rows.append((tc.parent.name, d.get("meta", {}).get("feature", ""), r))
 
-    bug_files = sorted((a.hw / "bugs").glob("BUG-*.md"))
     sev = Counter()
     for b in bug_files:
-        m = re.search(r"(?im)^\*\*Severity:?\*\*:?\s*(\w+)", b.read_text(encoding="utf-8"))
+        m = re.search(r"(?im)^(?:- )?\*\*Severity:?\*\*:?\s*(\w+)", bug_text[b.stem])
         sev[m.group(1) if m else "?"] += 1
 
     h = "| Feature | Chức năng | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC SV thêm | Bug |\n|---|---|---|---|---|---|---|---|---|---|---|"

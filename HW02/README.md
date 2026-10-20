@@ -18,8 +18,10 @@
 <!-- SUMMARY:START -->
 | Feature | Chức năng | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC SV thêm | Bug |
 |---|---|---|---|---|---|---|---|---|---|---|
-| A_FR01 | FR-01 Đăng ký tài khoản (web frontend-web + API POST /api/register) | 133 | 108 | 43 | 65 | 25 | 0 | 108 | 25 | 0 |
-| **Tổng** | **1 feature** | **133** | **108** | **43** | **65** | **25** | **0** | **108** | **25** | **0** |
+| A_FR01 | FR-01 Đăng ký tài khoản (web frontend-web + API POST /api/register) | 133 | 108 | 43 | 65 | 25 | 0 | 108 | 25 | 14 |
+| **Tổng** | **1 feature** | **133** | **108** | **43** | **65** | **25** | **0** | **108** | **25** | **14** |
+
+Bug theo severity: Critical 6, High 2, Medium 5, Low 1 (tổng 14 file trong `bugs/`).
 <!-- SUMMARY:END -->
 
 ## Video demo (YouTube)
