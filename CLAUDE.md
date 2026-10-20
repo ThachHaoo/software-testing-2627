@@ -118,10 +118,17 @@ Skill dùng trong repo:
     - File dữ kiện `bugs/_groups_<X_FRnn>.md`.
     - Tiền tố issue chỉ thêm trên GitHub = FR của feature đang kiểm (không ghi vào .md).
     - Ảnh trang Issues: `bugs/issues_page_<X_FRnn>.png`.
-    - BUG kế tiếp: **BUG-35**.
+    - BUG kế tiếp: **BUG-51**; issue kế tiếp ≥ **#197**.
   - Checklist bước tái hiện (AI chạy thật trước khi tạo issue):
     - Web: giỏ là state React → điều hướng bằng link navbar, không gõ URL/tải lại; tiền điều kiện có bước dựng dữ liệu.
     - Windows PowerShell 5.1: tài khoản seed `test@eshop.com`; `-ContentType` ở tham số (không trong `-Headers`); `-Body ([Text.Encoding]::UTF8.GetBytes($body))`; `Invoke-WebRequest -UseBasicParsing`; lỗi 4xx/5xx đọc body bằng `try/catch` + `GetResponseStream()` (đặt `Position = 0`).
+- 2026-10-20 (rút ra từ C_FR15):
+  - Khung bug = mẫu B (`d0d0e05:HW02/bugs/BUG-22.md`): chỗ SV viết ghi `` `<SV viết>` `` (trong backtick); Môi trường gạch đầu dòng giá trị thật; Yêu cầu do AI điền từ `_groups`; Dữ kiện chỉ gồm Actual nguyên văn + dòng "Lặp lại" + code trích; không chép Expected.
+  - 7a không soạn bước tái hiện thay SV; AI chỉ chạy bước SV viết ở 7c. Gặp bất thường ngoài bước SV → báo, ghi "AI phát hiện".
+  - Giả định phạm vi (vd C8) và giả định nới (vd C17) không bao giờ vào "yêu cầu bị vi phạm".
+  - Harness UI: đọc validity HTML5 ngay khi bấm (bài học H1); ghi mọi kênh thông báo (hộp thoại, bong bóng, chữ trên trang); không phân loại thông báo theo chữ của SUT.
+  - Vá harness → chạy lại toàn bộ thành **một** lượt chính thức; `merge --force` chỉ khi không có status SV đặt.
+  - Lệnh có chỗ `<...>` chưa điền → DỪNG, hỏi.
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 
