@@ -7504,14 +7504,71 @@ Dừng. Báo cáo theo CLAUDE.md.
 ```
 
 **Output:**
-```
+````
 Nhiệm vụ 2: rà ec_target. In ra các EC đầu ra có trong covers mà không nằm trong ec_target, để đối chiếu với Expected của từng case.
 
 Kết quả rà: TC-65 lệch như review nêu. Thêm 6 case nữa có Expected khẳng định giá trị Tổng nhưng thiếu EC42: TC-09, TC-10…13, TC-60.
+
+Nhiệm vụ 3: dựng khung trống (không commit).
+
+Xong 3 nhiệm vụ: vá freeze, sửa bước 4 theo review, dựng khung bước 5. check_domain và linter đều 0 lỗi. Em dừng ở đây vì bước 5 là phần SV làm 🔒.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) vá freeze.py: tên file có giây; (2) sửa bước 4 theo review; (3) khung bước 5 sv_cases.md
+- File đã tạo/sửa: freeze.py; HW02/B_FR07/testcases.json/.md; ai-outputs/B_FR07_step4_20261020-110812.{json,md}; A_prompt_log.md; HW02/B_FR07/sv_cases.md (mới, chưa commit)
+- Kết quả kiểm tra: check_domain 0 errors/10 warn; lint 0 errors/0 warn; test Not run
+  · 7 warn: biến không có lớp không hợp lệ (V3–V7, V9, V10)
+  · 1 warn: V1 thiếu UB/UB±1 (đúng theo B1)
+  · 2 warn mới: bva_point 'LARGE' không thuộc danh sách điểm của check_domain (TC-64, TC-74)
+- Commit: 2810443 HW02: vá harness – freeze timestamp có giây
+          2572dc9 HW02[B-FR07] 4/7b: sửa TC BVA theo review
+  · đính chính lượt trước: hash commit "vá harness – trường assumptions" là ae42067
+- Case đã sửa ec_target:
+  · TC-65: thêm EC41, EC42 vào ec_target
+  · TC-09, TC-10, TC-11, TC-12, TC-13, TC-60: Expected có khẳng định Tổng nhưng thiếu EC42 → thêm EC42 vào covers và ec_target (truy vết của các case này giờ có thêm B4)
+- TC-64/74: B1 đưa vào truy vết qua trường assumptions (linter không báo lỗi); meta.bva_model có thêm định nghĩa nhãn LARGE
+- Khung sv_cases.md: chỉ có tiêu đề cột, bảng UI và API tách riêng, ghi quy ước mã từ TC-FR07-200 và quy tắc tách UI/API; không có ví dụ hay gợi ý nào
+- Cần quyết định (không chặn bước 5):
+  - LARGE – thêm 'LARGE' vào danh sách điểm của check_domain.py để hết 2 cảnh báo? – Có (vá harness, commit riêng) / Không (giữ cảnh báo)
+```
+````
+*File AI ghi/gửi trong lượt này:* `sv_cases.md`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 125 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 122 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #126 | 11:09 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – Vá harness (commit riêng "HW02: vá harness – điểm LARGE có điều kiện")
+- check_domain.py: chấp nhận bva_point 'LARGE' CHỈ KHI biến của case có giả định
+  "không cận trên" được khai (vd B1 trong assumptions/biến); ngược lại vẫn báo lỗi.
+  Kiểm A_FR01 không đổi kết quả.
+
+Nhiệm vụ 2 – B_FR07 (commit "HW02[B-FR07] 4/7c: oracle tương đối cho phần không đổi")
+1. Ở case từ chối/huỷ (TC-09, TC-10…13, TC-60) và mọi case khác có phần giỏ
+   "không đổi": Expected ghi tương đối ("Tổng SAU = Tổng TRƯỚC", "Số lượng dòng
+   id k không đổi"), bỏ giá trị tuyệt đối cho phần không đổi. Gỡ EC42 khỏi
+   covers/ec_target của các case này nếu Expected không còn khẳng định công thức.
+2. Rà toàn bộ TC: giá trị tuyệt đối chỉ dùng cho đầu ra mà case thực sự kiểm.
+   Liệt kê case đã sửa.
+3. render_md.py → freeze.py → check_domain.py → linter thầy → commit. Dừng.
+```
+
+**Output:**
+```
+Nhiệm vụ 1: vá `check_domain.py`.
+
+Nhiệm vụ 2: khai `no_upper_bound` cho V1, đổi các Expected sang oracle tương đối.
+```
+*File AI ghi/gửi trong lượt này:* `step4c_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 126 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 123 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
