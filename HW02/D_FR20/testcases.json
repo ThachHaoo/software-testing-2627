@@ -1964,7 +1964,7 @@
               "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
             },
             {
-              "action": "Xem nhãn của từng trường bắt buộc theo FR-01 (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có); chụp TC-FR20-90_manual.png.",
+              "action": "Xem nhãn của từng trường bắt buộc theo FR-01 (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có); chụp TC-FR20-90_manual_1.png.",
               "expected": "Mỗi nhãn có ký hiệu '*' bên cạnh."
             }
           ],
@@ -2004,7 +2004,7 @@
               "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
             },
             {
-              "action": "Chạm vào ô Email; chụp TC-FR20-91_manual.png khi bàn phím hiện.",
+              "action": "Chạm vào ô Email; chụp TC-FR20-91_manual_1.png khi bàn phím hiện.",
               "expected": "Bàn phím email hiện ra (có phím '@' và '.' trên bàn phím chính)."
             }
           ],
@@ -2044,7 +2044,7 @@
               "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
             },
             {
-              "action": "Gõ 'Abcd1234!' vào ô Mật khẩu (và ô Xác nhận mật khẩu nếu có); chụp TC-FR20-92_manual.png.",
+              "action": "Gõ 'Abcd1234!' vào ô Mật khẩu (và ô Xác nhận mật khẩu nếu có); chụp TC-FR20-92_manual_1.png.",
               "expected": "Ký tự đã gõ hiển thị dạng che (không đọc được chuỗi)."
             }
           ],
@@ -2089,7 +2089,7 @@
               "expected": "Có thông báo lỗi (D10)."
             },
             {
-              "action": "Chụp TC-FR20-93_manual.png toàn màn hình; nếu thông báo là hộp thoại, ghi lại và đóng rồi xem còn chữ lỗi trên màn hình không.",
+              "action": "Chụp TC-FR20-93_manual_1.png toàn màn hình; nếu thông báo là hộp thoại, ghi lại và đóng rồi xem còn chữ lỗi trên màn hình không.",
               "expected": "Thông báo lỗi nằm phía trên nút 'Đăng Ký'."
             }
           ],
@@ -2130,7 +2130,7 @@
               "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
             },
             {
-              "action": "Xem toàn bộ màn hình (cuộn hết nếu cần); chụp TC-FR20-94_manual.png.",
+              "action": "Xem toàn bộ màn hình (cuộn hết nếu cần); chụp TC-FR20-94_manual_1.png.",
               "expected": "Có ô 'Xác nhận mật khẩu'."
             }
           ],

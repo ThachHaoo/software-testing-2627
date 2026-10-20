@@ -181,14 +181,14 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 
 - Tiền điều kiện: Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0).
 - Bước 1: Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'. → Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống.
-- Bước 2: Xem nhãn của từng trường bắt buộc theo FR-01 (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có); chụp TC-FR20-90_manual.png. → Mỗi nhãn có ký hiệu '*' bên cạnh.
+- Bước 2: Xem nhãn của từng trường bắt buộc theo FR-01 (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có); chụp TC-FR20-90_manual_1.png. → Mỗi nhãn có ký hiệu '*' bên cạnh.
 - Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
 
 **TC-FR20-91** — Kiểm tra loại bàn phím của ô Email khi chạm vào ô trên màn Đăng ký mobile
 
 - Tiền điều kiện: Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0).
 - Bước 1: Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'. → Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống.
-- Bước 2: Chạm vào ô Email; chụp TC-FR20-91_manual.png khi bàn phím hiện. → Bàn phím email hiện ra (có phím '@' và '.' trên bàn phím chính).
+- Bước 2: Chạm vào ô Email; chụp TC-FR20-91_manual_1.png khi bàn phím hiện. → Bàn phím email hiện ra (có phím '@' và '.' trên bàn phím chính).
 - Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
 
 **TC-FR20-92** — Kiểm tra che ký tự của ô Mật khẩu và Xác nhận mật khẩu khi nhập trên màn Đăng ký mobile
@@ -196,7 +196,7 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 - Tiền điều kiện: Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0).
 - Dữ liệu: Mật khẩu 'Abcd1234!'
 - Bước 1: Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'. → Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống.
-- Bước 2: Gõ 'Abcd1234!' vào ô Mật khẩu (và ô Xác nhận mật khẩu nếu có); chụp TC-FR20-92_manual.png. → Ký tự đã gõ hiển thị dạng che (không đọc được chuỗi).
+- Bước 2: Gõ 'Abcd1234!' vào ô Mật khẩu (và ô Xác nhận mật khẩu nếu có); chụp TC-FR20-92_manual_1.png. → Ký tự đã gõ hiển thị dạng che (không đọc được chuỗi).
 - Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
 
 **TC-FR20-93** — Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa trên mobile
@@ -205,14 +205,14 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 - Dữ liệu: Mật khẩu 'abcd1234!'
 - Bước 1: Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'. → Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống.
 - Bước 2: Nhập Họ Tên 'Nguyễn Văn Ánh', Email 'm93_{ts}@domain.com', Mật khẩu 'abcd1234!' (Xác nhận mật khẩu 'abcd1234!' nếu có), ẩn bàn phím, bấm 'Đăng Ký' một lần. → Có thông báo lỗi (D10).
-- Bước 3: Chụp TC-FR20-93_manual.png toàn màn hình; nếu thông báo là hộp thoại, ghi lại và đóng rồi xem còn chữ lỗi trên màn hình không. → Thông báo lỗi nằm phía trên nút 'Đăng Ký'.
+- Bước 3: Chụp TC-FR20-93_manual_1.png toàn màn hình; nếu thông báo là hộp thoại, ghi lại và đóng rồi xem còn chữ lỗi trên màn hình không. → Thông báo lỗi nằm phía trên nút 'Đăng Ký'.
 - Dọn dẹp: Nếu tài khoản m93_{ts}@domain.com bị tạo: ghi vào notes; không xoá giữa lượt, cuối lượt khởi động lại backend (D0).
 
 **TC-FR20-94** — Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở màn Đăng ký trên mobile
 
 - Tiền điều kiện: Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0).
 - Bước 1: Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'. → Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống.
-- Bước 2: Xem toàn bộ màn hình (cuộn hết nếu cần); chụp TC-FR20-94_manual.png. → Có ô 'Xác nhận mật khẩu'.
+- Bước 2: Xem toàn bộ màn hình (cuộn hết nếu cần); chụp TC-FR20-94_manual_1.png. → Có ô 'Xác nhận mật khẩu'.
 - Dọn dẹp: Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0).
 
 ### Bước 5 — Test case sinh viên bổ sung · TS-SV — SV bổ sung — tầng Mobile

@@ -51,3 +51,5 @@
 - 23:55 20/10/2026 · `D_FR20_step6_20261020-235519.md` · bước 6 · Claude Code 6/7a3 (procedure theo D0 mới) · sha256 9536d783898c
 - 23:58 20/10/2026 · `D_FR20_step6_20261020-235828.json` · bước 6 · Claude Code 6/7a4 (ảnh theo RUN.md + cách đọc TRƯỚC/SAU) · sha256 46e10f4d0ab4
 - 23:58 20/10/2026 · `D_FR20_step6_20261020-235828.md` · bước 6 · Claude Code 6/7a4 (ảnh theo RUN.md + cách đọc TRƯỚC/SAU) · sha256 6ba0271c9f3a
+- 23:59 20/10/2026 · `D_FR20_step6_20261020-235937.json` · bước 6 · Claude Code 6/7a5 (tên ảnh TS-GUI theo RUN.md) · sha256 7f23f82f4ddb
+- 23:59 20/10/2026 · `D_FR20_step6_20261020-235937.md` · bước 6 · Claude Code 6/7a5 (tên ảnh TS-GUI theo RUN.md) · sha256 7b660498c223
