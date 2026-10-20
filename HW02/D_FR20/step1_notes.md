@@ -126,3 +126,4 @@ Cơ sở: A có 52 EC; TS-DOM-UI 27, TS-BVA-UI 19, TS-GUI 5, TS-DOM-API 30, TS-B
 - 5/7f: AI sửa câu suite do AI viết — quy trình TS-SV bước 5 'bấm nút ''Đăng Ký'' đúng một lần' (AI chép từ TS-DOM ở 5/7b) → 'đúng số lần ghi trong case (mặc định 1 lần)'.
 - 6/7a2: case Pass không ảnh riêng; bằng chứng = Actual + ảnh admin SAU. Evidence chạy tay D được nén bằng tools/compress_manual.py (AI viết) trước khi merge (RUN.md).
 - 6/7a4: so ảnh admin cả lượt (D0) không phát hiện thay đổi ở dòng của tài khoản khác.
+- 6/7b: AI đổi tên/định dạng ảnh SV, không sửa nội dung (35 ảnh, .jpg → .png nén; bảng ở RUN.md mục "Đổi tên evidence"). AI chép Actual + verdict từ `results/Check.md` (SV viết) vào file kết quả lượt nguyên văn, điền nhật ký lượt và ghi chú lệch procedure của TC-FR20-203.

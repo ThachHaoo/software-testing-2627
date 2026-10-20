@@ -18902,11 +18902,101 @@ So procedure của 5 case TS-GUI với RUN.md (cột phân bổ ảnh, ảnh adm
 
 **Output:**
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- **Lệch, đã sửa cả 5 case** TC-FR20-90, 91, 92, 93, 94. Tên ảnh trong quy trình là `TC-FR20-9x_manual.png` (AI viết ở 3/7), nay đổi thành `_manual_1.png` cho khớp bảng phân bổ ảnh của RUN.md. Phần còn lại đã khớp: cả 5 case đều "bắt buộc" 1 ảnh, TC-93 kiểm "không có dòng `m93_`" ở ảnh admin của lượt.
+- **Commit:** `690e797` 6/7a5: quy trình TS-GUI theo RUN.md. check_domain 0 lỗi, 1 cảnh báo (V6); lint 0 lỗi, 0 cảnh báo.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 315 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 223 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #316 | 01:37 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20 bước 6b: gộp kết quả chạy tay (theo file SV đang có)
+
+- Lượt này chạy toàn bộ sau khi restart backend (= lượt chính thức): `có` (SV xác nhận đã restart backend trước lượt)
+
+Hiện trạng:
+- kết quả SV ghi ở HW02/D_FR20/results/Check.md;
+- ảnh admin ở HW02/D_FR20/evidence/;
+- ảnh điện thoại ở HW02/D_FR20/manual_raw/;
+- tên file theo kiểu của SV, vd `evidence/TC-FR20-203-admin_manual.png`,
+  `manual_raw/TC-FR20-203-admin_manual.jpg` (không theo quy ước RUN.md).
+
+### 0. Kiểm kê (chỉ đọc)
+- Liệt kê toàn bộ file trong evidence/ và manual_raw/ (tên, đuôi, kích thước, kích thước ảnh).
+- Mở từng ảnh (Read) để xác định: ảnh điện thoại hay ảnh PC; thuộc case nào; là ảnh admin hay
+  màn hình app.
+- Cặp cùng tên khác đuôi (vd 203 .png/.jpg): kiểm có phải cùng một ảnh không (nội dung, kích thước).
+- Đọc Check.md: định dạng, số case có Actual, số case có verdict, thông tin lượt
+  (giờ, máy, điện thoại, locale).
+- Không đoán được ảnh thuộc case nào → DỪNG, in danh sách ảnh đó.
+
+### 1. Đổi tên + nén (không xoá ảnh gốc)
+- Lập bảng ánh xạ tên cũ → tên mới:
+  - ảnh điện thoại: `TC-FR20-xx_manual_<n>.png`;
+  - ảnh admin cả lượt: `D_admin_truoc_<n>.png` / `D_admin_sau_<n>.png`;
+  - ảnh admin theo từng case: `TC-FR20-xx_admin_<n>.png`.
+  Ghi bảng vào RUN.md (mục "Đổi tên evidence") + Audit
+  ("AI đổi tên/định dạng ảnh SV, không sửa nội dung").
+- tools/compress_manual.py:
+  - cho đọc được .jpg, xuất .png đã nén vào evidence/ theo tên mới; ảnh trùng chỉ giữ 1 bản;
+  - gốc giữ nguyên ở manual_raw/;
+  - thêm manual_raw/ vào .gitignore (không commit ảnh gốc).
+  Script cần sửa → commit harness riêng `HW02: vá harness – nén ảnh .jpg + ảnh admin theo case`.
+- Đếm ảnh điện thoại: bắt buộc ?/11, khi khác Expected ?/9. Vượt 20 → không bỏ ảnh nào, báo lại.
+
+### 2. Chép kết quả
+- Chép TEMPLATE thành `results/D_FR20_manual_<yyyyMMdd-HHmmss>.json`, lấy giờ bắt đầu lượt từ
+  Check.md (không có → giờ của file Check.md, ghi rõ).
+- Chép Actual + verdict từ Check.md nguyên văn chữ SV; không sửa, không suy diễn.
+  Case thiếu → để trống, liệt kê.
+- Nhật ký lượt trong RUN.md: điền từ Check.md và theo SV điền ở trên (chính thức có/không).
+  Trường không có → để trống, liệt kê (SV bổ sung sau).
+- Không sửa Check.md (giữ làm bản ghi gốc của SV).
+
+### 3. Gộp + đối chiếu
+- merge_results.py cho D (không --force).
+- Đối chiếu từng case:
+  - Actual ↔ ảnh (điện thoại nếu có; admin theo cột "Kiểm ở ảnh admin SAU", hoặc ảnh admin theo
+    case nếu SV chụp từng case);
+  - verdict ↔ quy tắc D14/A20: lệch do biến mục tiêu → Fail; do biến khác → Blocked + case gốc;
+    Pass không chứng minh luật → "Pass hộp đen";
+  - TC-16/17 theo verdict TC-94.
+  Lệch → KHÔNG sửa của SV, chỉ liệt kê.
+- SV chụp admin theo từng case thay vì cả lượt → ghi notes "lệch nhỏ so với procedure (D0)",
+  không coi là lỗi.
+- render_md.py → check_domain.py → lint → prompt log → commit
+  `HW02[D-FR20] 6/7b: kết quả lượt chính thức` (lượt thử → `6/7b: kết quả lượt thử`).
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Commit (harness nếu có, 6/7b).
+- Kiểm kê: số ảnh điện thoại / admin; số cặp trùng; ảnh không xác định (nếu có).
+- Đếm ảnh điện thoại; dung lượng evidence D sau nén; ước tính zip HW02.
+- Pass / Fail / Blocked (+ Pass hộp đen).
+- Case thiếu Actual/verdict; case lệch Actual↔ảnh hoặc verdict↔quy tắc (mã + lý do ngắn).
+- Trường nhật ký lượt còn trống.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Đang kiểm kê ảnh điện thoại (gộp 4 ảnh/tờ để xem nhanh); sau đó đổi tên, nén, gộp kết quả.
+
+Đã sửa script nén (đọc .jpg, đổi tên chuẩn). Giờ vá merge_results cho tên `_admin_<n>`, chép ảnh admin gốc sang manual_raw, chạy nén.
+
+Đang chép Actual/verdict từ Check.md vào file kết quả lượt, rồi gộp vào testcases.json.
+
+Đã điền RUN.md (nhật ký, bảng đổi tên). Giờ thêm dòng Audit, rồi render/check/lint/prompt log và commit.
+```
+*File AI ghi/gửi trong lượt này:* `compress_manual.py`, `d_6b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 316 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 224 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

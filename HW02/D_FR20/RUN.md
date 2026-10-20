@@ -65,6 +65,11 @@ Tổng: 33 case (AI 27, SV 6). Ảnh điện thoại tối đa **20** (11 bắt 
 
 **Đếm ảnh đã dùng:** bắt buộc ___ / 11 · chỉ khi khác Expected ___ / 9 · tổng ___ / 20
 
+Lượt 1 (AI đếm theo ảnh, 6/7b): 31 ảnh, mỗi case đã chạy 1 ảnh `_manual_1`, vượt mức 20 (giữ hết, không bỏ ảnh nào).
+- Bắt buộc: 7/11 đúng nội dung (94, 90, 91, 92, 93, 01_1, 06_1). Thiếu `01_2` (ảnh 01_1 là hộp thoại trên nền màn 'Đăng Nhập') và `01_3`. Ảnh 200 và 201 có, nhưng chụp hộp thoại 'Thành công' chứ không chụp header.
+- Chỉ khi khác Expected: 6 ảnh của case lệch Expected (03, 04, 05, 15, 204, 203).
+- Ngoài phân bổ: 16 ảnh của case không lệch (02, 07–14, 60, 61–64, 205, 206).
+
 ## Thứ tự case
 
 ### Nhóm 1 — GUI (chạy TC-FR20-94 đầu tiên: quyết định TC-16, TC-17)
@@ -126,9 +131,22 @@ Xác nhận mật khẩu: TC-16 `Abcd1234?`, TC-17 `abcd1234!`; các case khác 
 
 | Lượt | Ngày giờ bắt đầu | Máy (OS) | Điện thoại (model, Android) | Expo Go | Locale / bàn phím | IP API_URL | Phạm vi | File kết quả | Ảnh admin TRƯỚC/SAU | Số ảnh điện thoại | Chính thức? | Ghi chú |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | | | | | | | | | | | | |
+| 1 | 2026-10-21 00:15 (giờ TC-FR20-94, cột Time của `results/Check.md`) | | | | | | 31/33 case (TC-16, TC-17 không chạy — Check.md dòng 35) | `results/D_FR20_manual_20261021-001500.json` (giây = 00: Check.md chỉ ghi HHmm) | `D_admin_truoc_1` / `D_admin_sau_1`, `_2` (+ `TC-FR20-203_admin_1`) | 31 | có (SV xác nhận đã restart backend trước lượt) | Bản ghi gốc của SV: `results/Check.md` (không sửa). Email gõ nguyên chuỗi `{ts}`, không thay HHmm (ảnh admin SAU, ảnh điện thoại) |
 
 Lượt chính thức = lượt chạy toàn bộ sau khi restart backend. Evidence chỉ giữ lượt mới nhất.
+
+## Đổi tên evidence (lượt 1, 6/7b)
+
+AI đổi tên và định dạng ảnh của SV, không sửa nội dung. Ảnh gốc giữ ở `manual_raw/` (gitignore); bản nén .png (rộng 720, 256 màu) nằm ở `evidence/`, do `tools/compress_manual.py` tạo. Ảnh admin gốc SV đặt ở `evidence/` đã chép sang `manual_raw/` trước khi đổi tên. Không có cặp ảnh trùng.
+
+| Tên gốc (SV) | Tên mới (evidence/) |
+|---|---|
+| `D_admin_truoc.png` | `D_admin_truoc_1.png` |
+| `D_admin_sau_1.png` | `D_admin_sau_1.png` (chỉ nén) |
+| `D_admin_sau_2.png` | `D_admin_sau_2.png` (chỉ nén) |
+| `TC-FR20-203-admin_manual.png` | `TC-FR20-203_admin_1.png` |
+| `TC-FR20-90-manual.jpg`, `TC-FR20-94-manual.jpg` | `TC-FR20-90_manual_1.png`, `TC-FR20-94_manual_1.png` |
+| `TC-FR20-<xx>_manual.jpg` (29 ảnh: 01–15, 60–64, 91–93, 200, 201, 203–206) | `TC-FR20-<xx>_manual_1.png` |
 
 ## Ghi chú harness
 
