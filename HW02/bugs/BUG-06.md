@@ -46,6 +46,7 @@ Cả 2 request gửi đồng thời đều lọt qua ngon ơ, đều nhận về
 
 - **FR-01.4:** Email phải là duy nhất trong hệ thống.
 - **A9** (giả định, SRS im lặng): A9 (Kiểm ở tầng API): FR-01 là yêu cầu của hệ thống, không riêng giao diện → giả định API POST /api/register cũng phải từ chối dữ liệu vi phạm FR-01 khi gọi trực tiếp (bỏ qua UI).
+- **A11** (giả định, SRS im lặng): A11 (Mã lỗi API): api_specification.md chỉ mô tả phản hồi thành công 200. Giả định dữ liệu không hợp lệ phải nhận mã 4xx (không phải 2xx, không phải 5xx) kèm trường error; không cố định mã cụ thể (400/409/422).
 
 ## Ghi chú cô lập
 

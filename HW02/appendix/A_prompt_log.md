@@ -8309,12 +8309,71 @@ Dừng, báo cáo theo CLAUDE.md.
 ```
 
 **Output:**
+````
+Phần 1 xong (`d8d60ff`). Sang phần 2: đọc trường Yêu cầu và Actual của BUG-01…14 và issue #17–#30.
+
+Đã đổi tên `bugs_facts.md` thành `HW02/bugs/_groups_B_FR07.md` (commit `d8d60ff`). Ở phần kiểm BUG-01…14, em thấy 5 khung ghi kèm yêu cầu mà Actual không cho thấy bị vi phạm. Em chỉ kiểm, không sửa file hay issue nào.
+
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) git mv bugs_facts.md → HW02/bugs/_groups_B_FR07.md, cập nhật tham chiếu; (2) chỉ kiểm trường "Yêu cầu" BUG-01…14 + issue #17–#30
+- File đã sửa: HW02/bugs/_groups_B_FR07.md (đổi tên), BUG-15…34.md (đổi đường dẫn tham chiếu); testcases.json/notes không có tham chiếu nên không đổi
+- Kết quả kiểm tra: grep "bugs_facts" trong HW02 = 0 (trừ prompt log); test: không chạy
+- Commit: d8d60ff HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+- Phần 2 – issue #17–#30: danh sách Yêu cầu GIỐNG HỆT BUG-01…14.md tương ứng, nên các nhận xét dưới đây áp cho cả issue.
+- Khung có yêu cầu KHÔNG bị vi phạm theo Actual (đang ghi → thực sự vi phạm):
+  · BUG-01: FR-01.6, 7a, 7b, 7c, 8, 10 → FR-01.10 (không chuyển /login, không tạo user) và việc chấp nhận mật khẩu thoả FR-01.6–01.8 (ngầm định)
+    - Actual chỉ có thông báo gộp nên không xác định được luật riêng nào bị cài sai
+  · BUG-08: A3, FR-01.4 → chỉ A3 (email lưu nguyên khoảng trắng). FR-01.4 không bị kiểm: chỉ tạo 1 user, không có trùng
+  · BUG-09: FR-01.6, A4 → chỉ A4 (413 với mật khẩu dài). FR-01.6 (tối thiểu 8) không liên quan
+  · BUG-10: API-REG, A11 → chỉ A11 (500 thay vì 4xx). API-REG chỉ mô tả phản hồi thành công
+    - Khác cách xếp G21 bên B (text/plain → 200: API-CART xếp là vi phạm)
+  · BUG-04: FR-01.1, FR-01.5 chỉ bị vi phạm do 1 case TC-213 (thiếu cả 3 trường), các TC còn lại chỉ sai Email → đúng nhưng nên ghi rõ "chỉ TC-213"
+- Thiếu (không hỏi nhưng thấy khi kiểm): BUG-06 – Expected dẫn A11 (request thứ 2 phải 4xx) nhưng Yêu cầu không có A11
+- Đã kiểm, khớp với Actual: BUG-02, 03 (A1 do TC-33), 05, 07 (A6 do TC-46/48, A5 do TC-51/224/228), 11, 12, 13, 14
+- Bất thường: file SV chưa commit HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png (em không đụng)
+- Cần quyết định: không chặn. Sửa BUG-01/04/06/08/09/10 và issue #17, 20, 22, 24, 25, 26 hay không → SV quyết
 ```
+````
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 137 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 134 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #138 | 13:47 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+A_FR01 – đính chính trường "Yêu cầu" (commit "HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm").
+Chỉ sửa trường Yêu cầu / phần Dữ kiện (AI chép); KHÔNG đụng câu chữ SV.
+1. BUG-01: → "FR-01.10; chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định — Actual
+   chỉ có thông báo gộp, không xác định được luật riêng nào bị cài sai)".
+   BUG-04: thêm "(FR-01.1, FR-01.5 chỉ do TC-213)". BUG-06: thêm A11.
+   BUG-08: chỉ A3. BUG-09: chỉ A4. BUG-10: chỉ A11.
+2. _groups_A_FR01.md: áp quy tắc "chỉ yêu cầu bị vi phạm" như _groups_B_FR07.md.
+3. Issue #17, 20, 22, 24, 25, 26: kiểm `gh auth status` = ThachHaoo; `gh issue edit`
+   chỉ thay dòng Yêu cầu trong body; thêm 1 comment mỗi issue:
+   "Đính chính 2026-10-20: trường Yêu cầu trước đây liệt kê cả yêu cầu không bị vi
+   phạm; nay chỉ giữ <…>. Bước/Actual/Expected không đổi."
+   In body trước/sau ra file HW02/bugs/_edit_log_A.md làm bằng chứng.
+4. Commit. Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+Đã sửa xong BUG và `_groups`. Kiểm lại định dạng BUG-01/04 rồi sang phần issue.
+
+Line ending lẫn CRLF do write_text trên Windows. Chuẩn hoá về LF như HEAD.
+
+Phần file xong. Giờ sửa body issue #17, 20, 22, 24, 25, 26 (tài khoản ThachHaoo) và ghi log trước/sau.
+
+Dry-run đúng. Thực hiện sửa trên GitHub.
+```
+*File AI ghi/gửi trong lượt này:* `fix7e.py`, `issues7e.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 138 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 135 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

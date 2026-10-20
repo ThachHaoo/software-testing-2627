@@ -45,7 +45,6 @@ Server backend, trả về mã **HTTP 500 Internal Server Error** cùng nguyên 
 
 ## Yêu cầu
 
-- **API-REG:** POST /api/register nhận body JSON {name, email, password}; thành công trả 200 {"message": "User registered successfully", "id": n} (api_specification.md dòng 14–21).
 - **A11** (giả định, SRS im lặng): A11 (Mã lỗi API): api_specification.md chỉ mô tả phản hồi thành công 200. Giả định dữ liệu không hợp lệ phải nhận mã 4xx (không phải 2xx, không phải 5xx) kèm trường error; không cố định mã cụ thể (400/409/422).
 
 ## Ghi chú cô lập

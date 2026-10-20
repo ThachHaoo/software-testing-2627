@@ -47,7 +47,6 @@ Backend văng ra lỗi **HTTP 413** kèm trả về nguyên cục trang web HTML
 
 ## Yêu cầu
 
-- **FR-01.6:** Mật khẩu tối thiểu 8 ký tự.
 - **A4** (giả định, SRS im lặng): A4 (Mật khẩu – độ dài): chỉ có cận dưới 8 ký tự. SRS không có cận trên → không có UB; BVA độ dài chỉ quanh LB = 8 (7, 8, 9) và NOM.
 
 ## Ghi chú cô lập

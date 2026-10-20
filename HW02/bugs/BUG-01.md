@@ -62,12 +62,8 @@ Hộp lỗi "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồ
 
 ## Yêu cầu
 
-- **FR-01.6:** Mật khẩu tối thiểu 8 ký tự.
-- **FR-01.7a:** Mật khẩu có ít nhất 1 chữ hoa.
-- **FR-01.7b:** Mật khẩu có ít nhất 1 chữ thường.
-- **FR-01.7c:** Mật khẩu có ít nhất 1 chữ số.
-- **FR-01.8:** Mật khẩu có ít nhất 1 ký tự đặc biệt thuộc tập @, $, !, %, *, ?, &.
 - **FR-01.10:** Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập.
+- **Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8** (ngầm định — Actual chỉ có thông báo gộp, không xác định được luật riêng nào bị cài sai)
 
 ## Ghi chú cô lập
 

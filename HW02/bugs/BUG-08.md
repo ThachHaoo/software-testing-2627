@@ -45,7 +45,6 @@ API trả về **HTTP 200** `{"message":"User registered successfully","id": 5}`
 ## Yêu cầu
 
 - **A3** (giả định, SRS im lặng): A3 (Email – duy nhất): Email so sánh sau khi cắt khoảng trắng đầu/cuối; phần local phân biệt hoa/thường, phần domain không phân biệt (RFC 5321 §2.4). SV sửa ở bước 5.
-- **FR-01.4:** Email phải là duy nhất trong hệ thống.
 
 ## Ghi chú cô lập
 

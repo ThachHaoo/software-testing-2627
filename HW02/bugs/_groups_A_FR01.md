@@ -2,26 +2,27 @@
 
 > Dữ kiện do AI gom, chưa phải bug report; SV quyết định gộp/tách.
 > Nhãn nhóm chỉ mô tả triệu chứng quan sát được (tầng + mẫu actual + yêu cầu lệch). Không có tên bug, severity, priority hay nguyên nhân.
+> Đính chính 7/7e (2026-10-20): cột/trường Yêu cầu chỉ giữ yêu cầu/giả định mà Actual cho thấy bị vi phạm; yêu cầu khác chuyển sang "Đạt" hoặc "Chưa đánh giá được".
 > Nguồn: `HW02/A_FR01/testcases.json` sau commit 6/7c. Đoạn code chỉ trích nguyên văn để SV đối chiếu, không bình luận.
 
 **Trước khi tái hiện:** khởi động lại backend (`node server.js`) để CSDL seed sạch; chạy xong cũng khởi động lại để xoá dữ liệu thử.
 
 ## Tổng hợp
 
-| Nhóm | Số Fail | Số Blocked ghi case gốc | Yêu cầu |
+| Nhóm | Số Fail | Số Blocked ghi case gốc | Yêu cầu / giả định bị vi phạm |
 |---|---|---|---|
-| G1 | 14 | 22 | FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.9, FR-01.10 |
-| G2 | 5 | 0 | FR-01.1 |
-| G3 | 15 | 0 | FR-01.2, FR-01.3 |
-| G4 | 3 | 0 | FR-01.4 |
-| G5 | 18 | 0 | FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8 |
-| G6 | 1 | 0 | FR-01.1, FR-01.2, FR-01.5 |
-| G7 | 1 | 0 | FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8 |
-| G8 | 1 | 0 | FR-01.4 |
-| G9 | 1 | 0 | FR-01.6 |
-| G10 | 1 | 0 | API-REG |
-| G11 | 1 | 0 | FR-01.8 |
-| G12 | 1 | 0 | FR-01.1, SEC-04 |
+| G1 | 14 | 22 | FR-01.10; chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định — Actual chỉ có thông báo gộp, không xác định được luật riêng nào bị cài sai) |
+| G2 | 5 | 0 | FR-01.1, A1 (TC-33), A9, A11, A15 (TC-52, TC-53) |
+| G3 | 15 | 0 | FR-01.2 (TC-34, TC-54), FR-01.3, A2, A9, A11, A15 (TC-54, TC-55), A21 (TC-219) |
+| G4 | 3 | 0 | FR-01.4, A3 (TC-42, TC-206), A9, A11 |
+| G5 | 18 | 0 | FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, A5, A6 (TC-46, TC-48), A9, A11, A15 |
+| G6 | 1 | 0 | FR-01.1, FR-01.2, FR-01.5, A9, A11, A15 |
+| G7 | 1 | 0 | A3 (email lưu nguyên khoảng trắng) |
+| G8 | 1 | 0 | FR-01.4, A9, A11 |
+| G9 | 1 | 0 | A4 (HTTP 413 với mật khẩu hợp lệ dài) |
+| G10 | 1 | 0 | A11 (HTTP 500 thay vì 4xx) |
+| G11 | 1 | 0 | FR-01.8, A5 |
+| G12 | 1 | 0 | SEC-04 |
 | G13 | 1 | 0 | FR-22.1 |
 | G14 | 1 | 0 | FR-22.2 |
 | G15 | 1 | 3 | FR-01.9 |
@@ -32,7 +33,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 
 - **TC Fail (14):** 01, 02, 64, 65, 66, 68, 69, 71, 72, 74, 75, 77, 78, 211
 - **Blocked ghi case gốc (22):** 03, 04, 06, 08, 09, 10, 11, 12, 13, 14, 15, 61, 62, 200, 203, 204, 205, 208, 215, 217, 218, 223
-- **Yêu cầu:** FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.9, FR-01.10
+- **Yêu cầu / giả định bị vi phạm:** FR-01.10; chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định — Actual chỉ có thông báo gộp, không xác định được luật riêng nào bị cài sai)
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** FR-01.1, FR-01.2, FR-01.3, FR-01.4 (form chặn trước khi gửi, không xét được); FR-01.9 (form không có ô, xem G15)
 - **Actual tiêu biểu (TC-FR01-01, nguyên văn):** form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 (A17); URL=/register; POST /api/register gửi 0 lần; hộp lỗi="Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."; user mới=0
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-01_ui.png`
 
@@ -52,7 +55,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G2 — API · expected từ chối · nhận HTTP 200 và tạo user · dữ liệu vi phạm luật Họ Tên
 
 - **TC Fail (5):** 32, 33, 52, 53, 79
-- **Yêu cầu:** FR-01.1
+- **Yêu cầu / giả định bị vi phạm:** FR-01.1, A1 (TC-33), A9, A11, A15 (TC-52, TC-53)
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-32, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":7}; user mới=1 [api32_1792424694242@domain.com |  | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-32_req.json`
 
@@ -76,7 +81,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G3 — API · expected từ chối · nhận HTTP 200 và tạo user · dữ liệu vi phạm luật Email (bắt buộc/định dạng)
 
 - **TC Fail (15):** 34, 35, 36, 37, 38, 39, 40, 54, 55, 201, 219, 220, 221, 225, 226
-- **Yêu cầu:** FR-01.2, FR-01.3
+- **Yêu cầu / giả định bị vi phạm:** FR-01.2 (TC-34, TC-54), FR-01.3, A2, A9, A11, A15 (TC-54, TC-55), A21 (TC-219)
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-34, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":9}; user mới=1 [ | Nguyen Van A | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-34_req.json`
 
@@ -100,7 +107,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G4 — API · expected từ chối · nhận HTTP 200 và tạo user · Email trùng tài khoản đã có
 
 - **TC Fail (3):** 41, 42, 206
-- **Yêu cầu:** FR-01.4
+- **Yêu cầu / giả định bị vi phạm:** FR-01.4, A3 (TC-42, TC-206), A9, A11
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-41, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":16}; user mới=1 [test@eshop.com | Nguyen Van A | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-41_req.json`
 
@@ -134,7 +143,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G5 — API · expected từ chối · nhận HTTP 200 và tạo user · dữ liệu vi phạm luật Mật khẩu
 
 - **TC Fail (18):** 43, 44, 45, 46, 47, 48, 49, 50, 51, 56, 57, 82, 86, 89, 102, 105, 224, 228
-- **Yêu cầu:** FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8
+- **Yêu cầu / giả định bị vi phạm:** FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, A5, A6 (TC-46, TC-48), A9, A11, A15
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-43, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":18}; user mới=1 [api43_1792424709996@domain.com | Nguyen Van A | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-43_req.json`
 
@@ -158,7 +169,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G6 — API · body JSON rỗng {} · nhận HTTP 200, tạo user có name/email null
 
 - **TC Fail (1):** 213
-- **Yêu cầu:** FR-01.1, FR-01.2, FR-01.5
+- **Yêu cầu / giả định bị vi phạm:** FR-01.1, FR-01.2, FR-01.5, A9, A11, A15
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-213, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":58}; user mới=1 [null | null | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-213_req.json`
 
@@ -182,7 +195,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G7 — API · email có khoảng trắng đầu/cuối · HTTP 200 · email lưu còn khoảng trắng
 
 - **TC Fail (1):** 30
-- **Yêu cầu:** FR-01.1, FR-01.2, FR-01.3, FR-01.4, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8
+- **Yêu cầu / giả định bị vi phạm:** A3 (email lưu nguyên khoảng trắng)
+- **Đạt trong cùng case:** FR-01.1, FR-01.2, FR-01.3, FR-01.5, FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8 (HTTP 200, tạo user với dữ liệu hợp lệ)
+- **Chưa đánh giá được trong cùng case:** FR-01.4 (chỉ tạo 1 user, không có trùng)
 - **Actual tiêu biểu (TC-FR01-30, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":5}; user mới=1 [  api30_1792424692167@domain.com   | Nguyen Van A | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-30_req.json`
 
@@ -206,7 +221,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G8 — API · 2 request đồng thời cùng email · cả hai HTTP 200, tạo 2 user cùng email
 
 - **TC Fail (1):** 209
-- **Yêu cầu:** FR-01.4
+- **Yêu cầu / giả định bị vi phạm:** FR-01.4, A9, A11
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-209, nguyên văn):** HTTP 200 {"message":"User registered successfully","id":56}; HTTP 200 {"message":"User registered successfully","id":57}; user mới=2 [hiep.sv10@domain.com | Lê Tấn Hiệp | user] [hiep.sv10@domain.com | Lê Tấn Hiệp | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-209_req.json`
 
@@ -240,7 +257,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G9 — API · mật khẩu hợp lệ dài 200.000 ký tự · HTTP 413, trang lỗi HTML
 
 - **TC Fail (1):** 212
-- **Yêu cầu:** FR-01.6
+- **Yêu cầu / giả định bị vi phạm:** A4 (HTTP 413 với mật khẩu hợp lệ dài)
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** FR-01.6 (luật cận dưới, không liên quan tới quan sát)
 - **Actual tiêu biểu (TC-FR01-212, nguyên văn):** HTTP 413 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -271,7 +290,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G10 — API · header Content-Type: text/plain · HTTP 500, trang lỗi HTML
 
 - **TC Fail (1):** 214
-- **Yêu cầu:** API-REG
+- **Yêu cầu / giả định bị vi phạm:** A11 (HTTP 500 thay vì 4xx)
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** API-REG (chỉ mô tả phản hồi thành công)
 - **Actual tiêu biểu (TC-FR01-214, nguyên văn):** HTTP 500 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -317,7 +338,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G11 — UI · mật khẩu 'Abcd 1234' (khoảng trắng, không có ký tự trong tập @$!%*?&) · form chấp nhận, chuyển /login, tạo user
 
 - **TC Fail (1):** 202
-- **Yêu cầu:** FR-01.8
+- **Yêu cầu / giả định bị vi phạm:** FR-01.8, A5
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-202, nguyên văn):** form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 (A17); URL=/login; POST /api/register gửi 1 lần (HTTP 200); hộp lỗi=không có; user mới=1 [hiep.sv03@domain.com | Lê Tấn Hiệp | user]
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-202_ui.png`
 
@@ -337,7 +360,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G12 — UI (kiểm tay) · Họ Tên chứa <img … onerror=alert(1)> · sau đăng nhập bật hộp thoại, thanh điều hướng hiện ảnh lỗi
 
 - **TC Fail (1):** 216
-- **Yêu cầu:** FR-01.1, SEC-04
+- **Yêu cầu / giả định bị vi phạm:** SEC-04
+- **Đạt trong cùng case:** FR-01.1 (Họ Tên được lưu, trang Hồ sơ hiển thị nguyên văn)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-216, nguyên văn):** Ngay sau khi đăng nhập, trình duyệt bật hộp thoại 'localhost:5173 cho biết: 1' (alert(1) trong Họ Tên đã chạy), phải nhấn OK 2 lần mới tắt. Trên thanh điều hướng, sau chữ 'Chào,' hiện biểu tượng ảnh lỗi thay vì chuỗi Họ Tên. Trang Hồ sơ hiển thị nguyên văn dạng chữ.
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-216_ui.png`
 
@@ -354,7 +379,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G13 — GUI · nhãn trường bắt buộc không có '*'
 
 - **TC Fail (1):** 90
-- **Yêu cầu:** FR-22.1
+- **Yêu cầu / giả định bị vi phạm:** FR-22.1
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-90, nguyên văn):** nhãn Họ Tên: "Họ Tên"; nhãn Email: "Email"; nhãn Mật khẩu: "Mật khẩu"
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-90_ui.png`
 
@@ -371,7 +398,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 ## G14 — GUI · ô Email có type="text"
 
 - **TC Fail (1):** 91
-- **Yêu cầu:** FR-22.2
+- **Yêu cầu / giả định bị vi phạm:** FR-22.2
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-91, nguyên văn):** type của ô Email="text"
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-91_ui.png`
 
@@ -391,7 +420,9 @@ Blocked không ghi case gốc: không còn (200, 203, 204, 208 đã ghi case g�
 
 - **TC Fail (1):** 94
 - **Blocked ghi case gốc (3):** 25, 26, 27
-- **Yêu cầu:** FR-01.9
+- **Yêu cầu / giả định bị vi phạm:** FR-01.9
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR01-94, nguyên văn):** số ô 'Xác nhận mật khẩu'=0
 - **Evidence tiêu biểu:** `HW02/A_FR01/evidence/TC-FR01-94_ui.png`
 
