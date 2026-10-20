@@ -6,7 +6,7 @@
     "feature": "FR-20 Tính năng Mobile — chức năng Đăng ký (frontend-mobile, Expo SDK 54, màn hình 'Đăng Ký Tài Khoản'), áp dụng FR-01",
     "feature_code": "D_FR20",
     "doc_id": "TCD-D_FR20",
-    "version": "0.6",
+    "version": "0.7",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã); thay đổi cục bộ duy nhất: frontend-mobile/App.js dòng 16 API_URL",
@@ -1585,6 +1585,344 @@
           "evidence": "",
           "bug_id": "",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → dừng ở bước nhập, status Blocked, case gốc TC-FR20-94."
+        }
+      ]
+    },
+    {
+      "id": "TS-BVA",
+      "name": "Boundary values — độ dài Mật khẩu, tầng Mobile, chạy tay",
+      "format": "matrix",
+      "description": "BVA theo D1 = a: chỉ độ dài Mật khẩu (biến client mobile xử lý trước khi gửi, gray-box App.js dòng 211–219). Các biến đếm khác (số chữ hoa/thường/số/ký tự đặc biệt ≥ 1) và Họ Tên không làm BVA ở tầng Mobile theo D1 = a. Điểm: LB−1, LB, LB+1, NOM, LARGE (no_upper_bound = D6). MIN_UI = 0 ký tự trùng lớp rỗng EC10 (TC-FR20-08), không lặp. Dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM.",
+      "preconditions": [
+        "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
+        "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
+        "Điện thoại Android, Expo Go (SDK 54), cùng mạng với máy; app EShop Mobile đã mở với API_URL = http://172.21.0.137:3000/api (D15).",
+        "{ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231). Email mẫu m01_2231@domain.com: đúng một '@', local 'm01_2231' không rỗng, domain 'domain.com' có '.' → thuộc EC3 (FR-01.3, D4) và, vì chưa có trong CSDL, EC6 (FR-01.4, D5). Email chỉ có thể trùng trong cùng một lượt chạy (khởi động lại backend xoá mọi tài khoản đã tạo, D0): chạy lại cùng case trong cùng lượt phải dùng HHmm khác (chờ sang phút mới), nếu không email rơi vào EC7 (đã tồn tại).",
+        "Trạng thái ban đầu của mỗi case: app vừa tải lại (Reload trong Expo Go), đang ở màn hình chủ, header hiển thị 'Đăng nhập' (chưa đăng nhập); sau khi vào màn 'Đăng Ký Tài Khoản' cả ba ô Họ Tên, Email, Mật khẩu đều trống, không có chữ lỗi (D0)."
+      ],
+      "procedure": [
+        {
+          "action": "Trên máy tính: tải lại trang admin (F5), mở tab 'Người dùng'; đếm số dòng, chụp ảnh TC-FR20-xx_manual_admin_before.png.",
+          "expected": "Bảng 'Quản lý Người dùng' hiển thị, có admin@eshop.com và test@eshop.com."
+        },
+        {
+          "action": "Trên điện thoại: tải lại app trong Expo Go (Reload).",
+          "expected": "Màn hình chủ; header hiển thị 'Đăng nhập'."
+        },
+        {
+          "action": "Bấm 'Đăng nhập' trên header, rồi bấm 'Đăng ký ngay'.",
+          "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị; ba ô Họ Tên, Email, Mật khẩu trống; không có chữ lỗi."
+        },
+        {
+          "action": "Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu (nếu có) bằng bàn phím ảo, gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không chạm vào ô, giữ trống. Giá trị có ␣: bấm phím cách đúng số lần đó. Bàn phím tự viết hoa/tự sửa/chèn gợi ý làm đổi chuỗi → xoá và gõ lại cho đúng, ghi notes (D12). Không có ô Xác nhận mật khẩu → làm theo notes của case (D9).",
+          "expected": "Ô Họ Tên và Email hiển thị đúng chuỗi trong cột; ô Mật khẩu hiển thị dạng che với số ký tự che bằng độ dài chuỗi trong cột. Chụp TC-FR20-xx_manual_input.png."
+        },
+        {
+          "action": "Ẩn bàn phím, bấm nút 'Đăng Ký' đúng một lần.",
+          "expected": "App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình)."
+        },
+        {
+          "action": "Quan sát và chụp TC-FR20-xx_manual_result.png: mọi kênh thông báo (hộp thoại: ghi tiêu đề + nội dung rồi mới đóng; chữ trên màn hình; toast) và tiêu đề màn hình sau khi đóng hộp thoại.",
+          "expected": "Khớp phần app của cột Expected."
+        },
+        {
+          "action": "Trên máy tính: tải lại trang admin, mở tab 'Người dùng'; so với ảnh ở bước 1, chụp TC-FR20-xx_manual_admin_after.png.",
+          "expected": "Số dòng và Email như cột Expected (oracle tương đối)."
+        },
+        {
+          "action": "Chỉ case hợp lệ: trên màn 'Đăng Nhập' của app, bảo đảm ô Email chứa đúng email của case (xoá và gõ lại nếu khác), nhập Mật khẩu của case, bấm 'Sign In'; chụp TC-FR20-xx_manual_login.png.",
+          "expected": "Header hiển thị 'Chào, <Họ Tên của case>' như cột Expected."
+        }
+      ],
+      "columns": [
+        "Họ Tên",
+        "Email",
+        "Email trong CSDL",
+        "Mật khẩu",
+        "Xác nhận mật khẩu"
+      ],
+      "cleanup": [
+        "Không xoá tài khoản giữa các case: mỗi case dùng email riêng và oracle tương đối (D0). Cuối lượt: khởi động lại backend để CSDL seed lại."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR20-60",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu dài 7 ký tự (LB-1)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m60_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!x",
+            "Xác nhận mật khẩu": "Abc12!x"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.6"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC9",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC9",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB-1",
+          "rationale": "LB = 8 (FR-01.6) → LB−1 = 7, bước nhảy 1 ký tự. Có đủ chữ hoa, chữ thường, chữ số và '!' để chỉ độ dài vi phạm. Cùng lớp EC9 với TC-FR20-07 (giá trị khác), giữ để bảng BVA đủ điểm.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-61",
+          "title": "Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 8 ký tự (LB)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m61_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!xy",
+            "Xác nhận mật khẩu": "Abc12!xy"
+          },
+          "expected_result": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm61_{ts}@domain.com'; đăng nhập trên app bằng email đó + mật khẩu của case thành công, header hiển thị 'Chào, Nguyễn Văn Ánh' (D11).",
+          "requirements": [
+            "FR-01.6",
+            "FR-20.1",
+            "FR-01.10"
+          ],
+          "assumptions": [
+            "D2",
+            "D6",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC8",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "LB = 8 ký tự: thêm 1 ký tự 'y' vào giá trị LB−1.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-62",
+          "title": "Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 9 ký tự (LB+1)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m62_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!xyz",
+            "Xác nhận mật khẩu": "Abc12!xyz"
+          },
+          "expected_result": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm62_{ts}@domain.com'; đăng nhập trên app bằng email đó + mật khẩu của case thành công, header hiển thị 'Chào, Nguyễn Văn Ánh' (D11).",
+          "requirements": [
+            "FR-01.6",
+            "FR-20.1",
+            "FR-01.10"
+          ],
+          "assumptions": [
+            "D2",
+            "D6",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC8",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB+1",
+          "rationale": "LB+1 = 9 ký tự: thêm 1 ký tự 'z' vào giá trị LB.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-63",
+          "title": "Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 12 ký tự (NOM)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m63_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!xyz345",
+            "Xác nhận mật khẩu": "Abc12!xyz345"
+          },
+          "expected_result": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm63_{ts}@domain.com'; đăng nhập trên app bằng email đó + mật khẩu của case thành công, header hiển thị 'Chào, Nguyễn Văn Ánh' (D11).",
+          "requirements": [
+            "FR-01.6",
+            "FR-20.1",
+            "FR-01.10"
+          ],
+          "assumptions": [
+            "D2",
+            "D6",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC8",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "technique": "BVA",
+          "bva_point": "NOM",
+          "rationale": "NOM: giá trị điển hình trong miền, cách xa LB; không có cận trên (D6) nên chọn 12 ký tự như A.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-64",
+          "title": "Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 64 ký tự (LARGE)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m64_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc12!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "Xác nhận mật khẩu": "Abc12!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          },
+          "expected_result": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm64_{ts}@domain.com'; đăng nhập trên app bằng email đó + mật khẩu của case thành công, header hiển thị 'Chào, Nguyễn Văn Ánh' (D11).",
+          "requirements": [
+            "FR-01.6",
+            "FR-20.1",
+            "FR-01.10"
+          ],
+          "assumptions": [
+            "D2",
+            "D6",
+            "D11",
+            "D12"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC8",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "technique": "BVA",
+          "bva_point": "LARGE",
+          "rationale": "LARGE: D6 không có cận trên (no_upper_bound = D6) → 1 đại diện giá trị lớn: 64 ký tự ('Abc12!' + 58 chữ 'x'), gấp 8 lần LB. Theo D12 có thể dán chuỗi từ bộ nhớ tạm; ô Mật khẩu che ký tự nên đếm số ký tự che trước khi bấm. Không có UB/UB±1; MAX_UI không xác định (ô không đặt maxLength, App.js dòng 818–823) nên không dùng.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
         }
       ]
     },
