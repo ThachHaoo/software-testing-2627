@@ -58,6 +58,7 @@ def check(data):
 
     covered = defaultdict(list)
     ids = Counter()
+    uses_target = any(c.get("ec_target") for _, c in all_cases(data))  # chỉ cảnh báo thiếu ec_target khi file đã dùng trường này
     for s, c in all_cases(data):
         cid = c.get("id", "?")
         ids[cid] += 1
@@ -73,6 +74,15 @@ def check(data):
                 invalid.append(e)
         if len(invalid) > 1:
             add("ERROR", cid, f"phủ {len(invalid)} lớp không hợp lệ cùng lúc {invalid} — mỗi case không hợp lệ chỉ nên phủ một lớp")
+        tgt = as_list(c.get("ec_target"))
+        if tgt:
+            outside = [e for e in tgt if e not in cov]
+            if outside:
+                add("ERROR", cid, f"ec_target có EC không nằm trong covers {outside}")
+            if invalid and len([e for e in tgt if e in invalid]) != 1:
+                add("ERROR", cid, "case không hợp lệ phải có đúng 1 EC không hợp lệ trong ec_target")
+        elif uses_target and s.get("id", "").startswith(("TS-DOM", "TS-BVA")):
+            add("WARN", cid, "TC domain thiếu ec_target")
         tech = c.get("technique")
         if not tech:
             add("WARN", cid, "thiếu technique (EP/BVA/EG/ST)")

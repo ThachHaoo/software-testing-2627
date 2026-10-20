@@ -15,7 +15,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
     "partitions": [
       {"id": "EC1", "variable": "V1", "class": "mô tả lớp, ví dụ 1 ≤ x ≤ 999", "valid": true,  "guideline": "range", "note": ""},
       {"id": "EC2", "variable": "V1", "class": "x < 1",                        "valid": false, "guideline": "range", "note": ""}
-      // tuỳ chọn: "requirements": ["FR-01.6"] trên mỗi EC → render_md.py sinh bảng truy vết từ ánh xạ EC → yêu cầu
+      // tuỳ chọn: "requirements": ["FR-01.6", "A4"] trên mỗi EC (cho phép mã giả định) → render_md.py sinh bảng truy vết từ ánh xạ EC → yêu cầu
     ]
   },
 
@@ -31,6 +31,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
           "expected_result": "oracle kiểm chứng được",
           "requirements": ["FR-01.1"],
           "covers": ["EC1", "EC5"],          // mảng mã EC (chuỗi "EC1, EC5" cũng được)
+          "ec_target": ["EC1"],             // tuỳ chọn: EC case được thiết kế để kiểm (lớp vào cần thử + lớp ra Expected khẳng định) ⊆ covers; truy vết sinh từ đây
           "technique": "EP",                // EP | BVA | EG (error guessing) | ST (state transition)
           "bva_point": "",                  // LB-1 | LB | LB+1 | NOM | UB-1 | UB | UB+1 | MIN_UI | MAX_UI
           "rationale": "vì sao chọn giá trị này",
@@ -58,4 +59,6 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
 | WARN | Biến đầu vào không có lớp không hợp lệ nào; biến đầu ra chưa phân lớp |
 | WARN | Case BVA thiếu `bva_point`; lớp `range` chưa có đủ LB/UB và hai láng giềng |
 | WARN | Case thiếu `rationale`, `origin`, `technique` |
+| ERROR | `ec_target` có EC không nằm trong `covers`; case không hợp lệ không có đúng 1 EC không hợp lệ trong `ec_target` |
+| WARN | TC trong suite TS-DOM*/TS-BVA* thiếu `ec_target` (chỉ khi file đã dùng trường này) |
 | INFO | Thống kê: số EC (hợp lệ/không), số case theo suite, theo origin, theo status |

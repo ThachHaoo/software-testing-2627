@@ -92,11 +92,13 @@ def render(data, h):
 
     def suite_table(s, bva=False):
         cols = s.get("columns", [])
-        hdr = ["#TC", "Tiêu đề", "EC phủ"] + (["Điểm biên"] if bva else []) + cols + ["Expected", "Lý do chọn input", "Nguồn"]
+        tgt = any(c.get("ec_target") for c in s.get("cases", []))
+        hdr = ["#TC", "Tiêu đề", "EC phủ"] + (["EC mục tiêu"] if tgt else []) + (["Điểm biên"] if bva else []) + cols + ["Expected", "Lý do chọn input", "Nguồn"]
         rows = []
         for c in s.get("cases", []):
             ins = c.get("inputs", {})
-            rows.append([c["id"], c.get("title"), ", ".join(as_list(c.get("covers")))] + ([c.get("bva_point")] if bva else [])
+            rows.append([c["id"], c.get("title"), ", ".join(as_list(c.get("covers")))]
+                        + ([", ".join(as_list(c.get("ec_target")))] if tgt else []) + ([c.get("bva_point")] if bva else [])
                         + [show(ins.get(k, "")) if k in input_names else ins.get(k, "") for k in cols] +[c.get("expected_result"), c.get("rationale"), ORIGIN.get(c.get("origin"), c.get("origin"))])
         body = []
         if s.get("preconditions"):
@@ -144,13 +146,19 @@ def render(data, h):
     out += [f"{H} Truy vết yêu cầu ↔ test case"]
     ec_req = any(p.get("requirements") for p in parts)
     if ec_req:
-        out += ["Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mà TC phủ (cột Yêu cầu ở bảng Bước 2) cộng với trường requirements của TC (dùng cho case GUI không gắn EC).", ""]
+        out += ["Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.", ""]
     req_cov = defaultdict(list)
     for s, c in cases:
-        reqs = [r for e in as_list(c.get("covers")) for r in as_list(pmap.get(e, {}).get("requirements"))] if ec_req else []
+        src = as_list(c.get("ec_target")) or as_list(c.get("covers"))
+        reqs = [r for e in src for r in as_list(pmap.get(e, {}).get("requirements"))] if ec_req else []
         for r in dict.fromkeys(reqs + as_list(c.get("requirements"))):
             req_cov[r].append(c["id"])
-    out += [table(["Yêu cầu", "Test case", "Số TC"], [[r["id"], ", ".join(req_cov.get(r["id"], [])) or "⚠", len(req_cov.get(r["id"], []))] for r in data.get("requirements", [])]), ""]
+    known = [r["id"] for r in data.get("requirements", [])]
+    acodes = {str(a).split(" ", 1)[0] for a in meta.get("assumptions", [])}
+    extra = [r for r in req_cov if r not in known]
+    label = lambda r: f"{r} (giả định)" if r in acodes else f"{r} (?)"
+    out += [table(["Yêu cầu", "Test case", "Số TC"], [[r, ", ".join(req_cov.get(r, [])) or "⚠", len(req_cov.get(r, []))] for r in known]
+                  + [[label(r), ", ".join(req_cov[r]), len(req_cov[r])] for r in extra]), ""]
 
     if meta.get("assumptions"):
         out += [f"{H} Giả định khi đặc tả chưa nói rõ"] + [f"- {a}" for a in meta["assumptions"]] + [""]
