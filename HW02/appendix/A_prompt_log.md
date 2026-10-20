@@ -13338,6 +13338,35 @@ Giờ bước 3. Xem cấu trúc suite/case của B_FR07 làm mẫu.
 Xem cách A/B đã viết case GUI cho FR-22.4, FR-24.4, FR-21.3, SEC-04 để giữ nhất quán.
 
 Đủ dữ kiện. Viết script sinh 3 suite (UI 16, API 42, GUI 5).
+
+Đã xong cả hai phần: chốt C9, C15 (`b889942`) và thiết kế TC Domain bước 3 (`c3e971f`). 63 case phủ đủ 73/73 lớp; checker và linter không có lỗi. Còn một cảnh báo linter em để nguyên: suite API có 42 dòng, quá ngưỡng 25 dòng.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `b889942` HW02[C-FR15] 2/7c: SV chốt C9, C15 — check_domain 0 lỗi/79 cảnh báo; linter 0 lỗi/14 cảnh báo (vẫn là "chưa có case").
+  - `c3e971f` HW02[C-FR15] 3/7: TC Domain — check_domain 0 lỗi, 6 cảnh báo, phủ 73/73 lớp; linter 0 lỗi, 1 cảnh báo.
+  - Freeze: `C_FR15_step3_20261020-165215.{json,md}`.
+- **Cảnh báo giữ nguyên:**
+  - V1, V5, V6, V9 không có lớp không hợp lệ (như bước 2).
+  - V2, V3 chưa có case BVA (chờ bước 4).
+  - Linter: TS-DOM-API có 42 dòng (> 25). Em không tách suite vì cả 42 case dùng chung một quy trình và đều là gọi API, chạy nhanh.
+- **Số case:**
+
+  | Suite | Mã | Tổng | Hợp lệ | Không hợp lệ |
+  |---|---|---|---|---|
+  | TS-DOM-UI | 01–16 | 16 | 6 | 10 |
+  | TS-DOM-API | 17–58 | 42 | 6 | 36 |
+  | TS-GUI | 90–94 | 5 | checklist | – |
+
+  - API không hợp lệ gồm: 12 POST, 12 PUT, 3 id không tồn tại, 9 thiếu quyền.
+  - GUI kiểm: '*' (FR-22.1), vị trí thông báo lỗi (FR-22.4), định dạng ₫ (FR-21.3), alt ảnh (FR-24.4), SEC-04.
+- **Case gray-box:**
+  - TC-FR15-02, 04, 18, 20: lớp số thập phân tách khỏi số nguyên dựa trên cột price INTEGER (`database.js:67`).
+  - TC-FR15-22: chọn sản phẩm id chẵn (id 2) vì `server.js:162` xử lý price khác nhau theo chẵn/lẻ. Expected chỉ dựa C15; đây là nơi duy nhất khẳng định kiểu price.
+- **Giả định mới chặn bước 4:**
+  - **C16** (đã ghi trong file) | Hộp thoại alert của trình duyệt có tính là "thông báo lỗi trên form" theo C7 không? | a) có → riêng TC-91 (FR-22.4) Fail nếu thông báo chỉ là hộp thoại, vì nó không nằm phía trên nút; b) không → mọi case UI bị từ chối Fail phần thông báo nếu chỉ có hộp thoại | Khuyến nghị a: FR-15 không quy định hình thức thông báo, còn vị trí đã có FR-22.4 kiểm riêng. SRS không đủ căn cứ → SV chọn. Ảnh hưởng 10 case UI không hợp lệ ở bước 3 và các case UI không hợp lệ ở bước 4.
+  - **BVA-phạm vi** (chưa ghi vào file, chờ SV chốt rồi thêm làm C18) | BVA chạy cho Thêm và Sửa ở cả UI và API? | a) đủ cả 4 tổ hợp: Tên 7 điểm + Giá 5 điểm (LB−1 = 0, LB = 0.1, LB+1 = 0.2, NOM, LARGE), khoảng 48 case, mã 60–89 rồi tràn sang 100+; b) đủ điểm cho Thêm, còn Sửa chỉ LB−1/LB/UB/UB+1, khoảng 36 case; c) chỉ Thêm, khoảng 24 case | Khuyến nghị a cho nhất quán với C8 = a. Đây là chuyện cỡ bộ test, SRS không đủ căn cứ → SV chọn.
+- Giả định không chặn: 1 (C17, định dạng tiền chấp nhận '.' hoặc ',', theo B13) — ở `HW02/C_FR15/testcases.json`.
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step3.py`
 
@@ -13345,4 +13374,40 @@ Xem cách A/B đã viết case GUI cho FR-22.4, FR-24.4, FR-21.3, SEC-04 để g
 
 ---
 
-**Tổng:** 217 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 154 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #218 | 16:56 20/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1) Sửa bước 3 theo review SV (output AI → có freeze):
+   - Tách TS-DOM-API (17–58) thành TS-DOM-API-POST / TS-DOM-API-PUT / TS-DOM-API-OTHER (mỗi suite ≤ 25 dòng);
+     giữ nguyên mã TC, không đổi nội dung case. Cập nhật notes suite.
+   - render_md.py → freeze.py → check_domain.py → linter. Commit `HW02[C-FR15] 3/7b: tách suite API theo linter`.
+
+2) SV chốt (commit riêng, không freeze):
+   - C16=a (SV chốt: hộp thoại alert tính là thông báo lỗi, như A16 với bong bóng HTML5; hình thức/vị trí chỉ
+     khẳng định ở TC-91 theo FR-22.4). Sửa câu C7 thành "có thông báo lỗi (bong bóng HTML5 hoặc hộp thoại đều tính);
+     vị trí kiểm riêng ở TC-91 theo FR-22.4" — giữ câu C7 cũ + đánh dấu "(đã thay)".
+   - C17 (SV chốt: chấp nhận cả '.' và ',' làm dấu phân cách — mỗi quốc gia dùng khác nhau; tiền lệ B13).
+   - C18=a (SV chốt: BVA đủ cho Thêm và Sửa, cả UI và API — nhất quán với C8 = a). Ghi vào file, loại phạm vi.
+   - Quy ước đánh số: BVA dùng 60–89 và 100–199 (không đụng dải SV từ 200). Ghi vào notes C_FR15.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 3/7c: SV chốt C16–C18` kèm A_prompt_log.md.
+
+3) /domain-bva-testing HW02/C_FR15 4 — TC BVA theo C18, quy ước như bước 3 (UI/API tách case, suite ≤ 25 dòng,
+   ec_target, khẳng định một nơi, LARGE cho no_upper_bound = C2, Expected chỉ dựa SRS + giả định SV chốt).
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 4/7: TC BVA`.
+
+Báo cáo (≤ 20 dòng): 3 commit + checker/linter; số case BVA theo suite + dải mã đã dùng;
+bảng điểm BVA theo biến (giá trị cụ thể); giả định MỚI chặn bước 5 (nếu có).
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 218 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 154 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217); Claude (không rõ model) 2 lượt (#118, #218). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
