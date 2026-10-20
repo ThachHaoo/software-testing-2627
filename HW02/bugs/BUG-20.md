@@ -41,9 +41,10 @@
 
 ## Yêu cầu
 
-- **FR-07.3:** Thêm cùng một sản phẩm vào giỏ sẽ tăng số lượng, không tạo dòng mới.
-- **FR-07.1:** Giỏ hàng hiển thị danh sách sản phẩm với các cột: Sản phẩm, Đơn giá, Số lượng, Thành tiền, Thao tác.
 - **FR-23.2:** (GUI, B16) Link "Giỏ hàng" phải hiển thị badge số lượng sản phẩm trong giỏ.
+
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: FR-07.3 (EC10/EC37: thêm từ trang chi tiết không vào giỏ, case gốc TC-61), FR-07.1 (nhãn cột kiểm ở TC-95)
 
 ## Ghi chú cô lập
 

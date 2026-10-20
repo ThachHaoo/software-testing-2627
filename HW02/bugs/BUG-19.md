@@ -44,7 +44,9 @@
 
 - **FR-07.4:** Nút Xóa sản phẩm phải có dialog xác nhận trước khi thực hiện.
 - **FR-24.2:** Khi xóa item khỏi giỏ phải có dialog xác nhận (trùng FR-07.4).
-- **FR-07.1:** Giỏ hàng hiển thị danh sách sản phẩm với các cột: Sản phẩm, Đơn giá, Số lượng, Thành tiền, Thao tác.
+
+- Đạt trong cùng case: B4 (Tổng SAU 4000000 = Thành tiền dòng còn lại), xoá dòng (dòng AirPods bị xoá, dòng Keychron không đổi)
+- Chưa đánh giá được trong cùng case: FR-07.1 (nhãn cột kiểm ở TC-95)
 
 ## Ghi chú cô lập
 

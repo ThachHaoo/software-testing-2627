@@ -44,6 +44,9 @@
 
 - **FR-07.2:** Cột Số lượng có nút +/- để chỉnh số lượng.
 
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: —
+
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)

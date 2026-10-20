@@ -8,30 +8,30 @@
 
 ## Tổng hợp
 
-| Nhóm | Khung | Số Fail | Số Blocked ghi case gốc | Yêu cầu / giả định |
+| Nhóm | Khung | Số Fail | Số Blocked ghi case gốc | Yêu cầu / giả định bị vi phạm |
 |---|---|---|---|---|
-| G1 | BUG-15 | 6 | 5 | FR-06.2, FR-07.1, FR-08.1, FR-07.5, FR-06.3, FR-24.1, B1, FR-07.3, B21 |
-| G2 | BUG-16 | 1 | 0 | FR-06.3, FR-24.1 |
-| G3 | BUG-17 | 1 | 0 | FR-07.3, B4 |
+| G1 | BUG-15 | 6 | 5 | FR-06.2 (Số lượng nguyên dương hợp lệ nhưng giỏ không có dòng mới), FR-06.3, FR-24.1, B21, B1 (TC-64: 1000 không được thêm) |
+| G2 | BUG-16 | 1 | 0 | FR-24.1, B21 |
+| G3 | BUG-17 | 1 | 0 | FR-07.3 |
 | G4 | BUG-18 | 1 | 4 | FR-07.2 |
-| G5 | BUG-19 | 1 | 1 | FR-07.4, FR-24.2, FR-07.1 |
-| G6 | BUG-20 | 1 | 0 | FR-07.3, FR-07.1, FR-23.2 |
-| G7 | BUG-21 | 1 | 0 | FR-07.7, FR-07.5, FR-23.2, FR-24.3 |
+| G5 | BUG-19 | 1 | 1 | FR-07.4, FR-24.2 |
+| G6 | BUG-20 | 1 | 0 | FR-23.2 |
+| G7 | BUG-21 | 1 | 0 | FR-07.7 (thiếu hình minh hoạ; có thông báo 'Giỏ hàng của bạn đang trống'), FR-24.3 (thiếu icon/hình minh hoạ) |
 | G8 | BUG-22 | 1 | 0 | FR-23.4 |
 | G9 | BUG-23 | 1 | 0 | FR-23.1 |
-| G10 | BUG-24 | 1 | 0 | FR-21.3, B13 |
-| G11 | BUG-25 | 1 | 0 | FR-24.4 |
-| G12 | BUG-26 | 1 | 0 | FR-07.1 |
+| G10 | BUG-24 | 1 | 0 | FR-21.3 (trang chủ dùng 'VND') |
+| G11 | BUG-25 | 1 | 0 | FR-24.4 (trang chủ: 5/5 alt rỗng) |
+| G12 | BUG-26 | 1 | 0 | FR-07.1, B12 |
 | G13 | BUG-27 | 1 | 0 | FR-07.4, B12 |
 | G14 | BUG-28 | 1 | 0 | FR-07.5, B12 |
 | G15 | BUG-29 | 1 | 0 | FR-07.6 |
-| G16 | BUG-30 | 1 | 1 | FR-07.3, API-CART |
-| G17 | BUG-31 | 2 | 0 | FR-08.2, API-CART, B8 |
-| G18 | BUG-32 | 8 | 0 | FR-06.2, API-CART |
-| G19 | BUG-33 | 5 | 0 | API-CART |
-| G20 | BUG-34 | 1 | 0 | API-CART |
-| G21 | BUG-35 | 1 | 0 | API-CART |
-| G22 | BUG-36 | 1 | 0 | FR-06.2, API-CART, B1 |
+| G16 | BUG-30 | 1 | 1 | FR-07.3 |
+| G17 | BUG-31 | 2 | 0 | FR-08.2, B8 |
+| G18 | BUG-32 | 8 | 0 | FR-06.2, B17, B18 (TC-34, TC-35) |
+| G19 | BUG-33 | 5 | 0 | B18, B17 |
+| G20 | BUG-34 | 1 | 0 | B17 (4xx nhưng body là trang HTML, không có trường error) |
+| G21 | BUG-35 | 1 | 0 | API-CART, B17 |
+| G22 | BUG-36 | 1 | 0 | API-CART (GET trả quantity khác giá trị đã gửi) |
 
 Tổng Fail: 39 (đủ, mỗi Fail đúng một nhóm). Blocked: TC-FR07-06 và 65 có hai case gốc (TC-61, TC-90) nên ghi ở G1 và G4.
 
@@ -46,13 +46,44 @@ Tổng Fail: 39 (đủ, mỗi Fail đúng một nhóm). Blocked: TC-FR07-06 và 
 | G1, G18 | #47 [BUG-D01] | Mobile (productDetail) nhận quantity không hợp lệ khi Add — nền tảng khác (frontend-mobile). |
 | G20, G21 | #25, #26 (BUG-09, BUG-10 của A_FR01) | Cùng dạng 'lỗi trả trang HTML' nhưng endpoint `/api/register`; #26 là text/plain → 500, G21 là text/plain → 200. |
 
+### #25, #26 — trích nguyên văn để SV so với G20, G21 (không kết luận trùng)
+
+So sánh nhanh (dữ kiện): #25 `POST /api/register` payload 200.000 ký tự → HTTP 413 HTML; #26 `POST /api/register` Content-Type: text/plain → HTTP 500 HTML. G20 `POST /api/cart` body không phải JSON hợp lệ → HTTP 400 HTML; G21 `POST /api/cart` Content-Type: text/plain → HTTP 200, lưu phần tử null.
+
+**#25 — mục "Actual" (nguyên văn):**
+
+> Backend văng ra lỗi **HTTP 413** kèm trả về nguyên cục trang web HTML lỗi: `PayloadTooLargeError: request entity too large`. Đương nhiên là không có user mới nào được tạo ra trong CSDL cả.
+
+**#25 — mục "Nhận định" (nguyên văn):**
+
+> - SRS không hề quy định độ dài tối đa của mật khẩu (A4) nên hệ thống lý thuyết phải chấp nhận mọi chuỗi dài.
+>
+> - Tuy nhiên trong server.js, dòng 12 dùng app.use(bodyParser.json()) nguyên bản không hề cấu hình limit độ lớn payload. Thư viện body-parser mặc định sẽ chặn và văng lỗi 413 nếu body JSON vượt quá ~100 KB.
+
+**#26 — mục "Actual" (nguyên văn):**
+
+> Server backend, trả về mã **HTTP 500 Internal Server Error** cùng nguyên cục trang HTML chứa lỗi code:
+> `<pre>TypeError: Cannot destructure property &#39;name&#39; of &#39;req.body&#39; as it is undefined.<br>…</pre>`
+
+**#26 — mục "Nhận định" (nguyên văn):**
+
+> Có lẽ thiếu do middleware catch lỗi hoặc validate Content-Type:
+> - bodyParser.json() chỉ parse body khi Header là application/json. Khi gửi text/plain, middleware bỏ qua làm cho req.body bị undefined.
+>
+> - Ở route handler dòng 21, code lại viết const { name, email, password } = req.body; (destructuring trực tiếp từ req.body).
+>
+> - Vì req.body bị undefined nên JS quăng ra TypeError và do không có try-catch bọc lại nên Express tự động trả về trang lỗi HTML 500 mặc định.
+
+
 Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, highlight navbar, breadcrumb, alt, 'VND', nhãn trang giỏ, nút +/-, dialog xoá, cộng dồn.
 
 ## G1 — UI · trang chi tiết: bấm 'Thêm vào giỏ hàng' một lần với Số lượng hợp lệ → giỏ không có dòng mới; không có phản hồi nhìn thấy được trong 2 s
 
 - **TC Fail (6):** 02, 61, 62, 63, 64, 205
 - **Blocked ghi case gốc (5):** 03, 06, 65, 203, 206
-- **Yêu cầu / giả định:** FR-06.2, FR-07.1, FR-08.1, FR-07.5, FR-06.3, FR-24.1, B1, FR-07.3, B21
+- **Yêu cầu / giả định bị vi phạm:** FR-06.2 (Số lượng nguyên dương hợp lệ nhưng giỏ không có dòng mới), FR-06.3, FR-24.1, B21, B1 (TC-64: 1000 không được thêm)
+- **Đạt trong cùng case:** FR-07.5 (TC-02: link về trang chủ → URL '/')
+- **Chưa đánh giá được trong cùng case:** FR-07.1 (không có bảng để xét cột), FR-07.3 (TC-205: lần 1 không thêm nên chưa xét cộng dồn), FR-08.1 (không liên quan tới quan sát)
 - **Actual tiêu biểu (TC-FR07-02, nguyên văn):** đăng nhập cart02_1792476866046@domain.com: navbar có tên user; TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "2": value="2"; không có phản hồi nhìn thấy được trong 2 s; SAU: không có bảng (giỏ trống); URL sau khi bấm link về trang chủ=http://localhost:5173/
 - **Actual các case còn lại (rút gọn 200 ký tự):**
   - TC-FR07-61: đăng nhập cart61_1792476918630@domain.com: navbar có tên user; TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "1": value="1"; không có phản hồi nhìn thấy được trong 2 s; SAU: không có bảng (g
@@ -87,7 +118,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 99
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-06.3, FR-24.1
+- **Yêu cầu / giả định bị vi phạm:** FR-24.1, B21
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** FR-06.3 (FR-06.3 nói nút 'Thêm vào giỏ hàng' ở trang chi tiết; TC-99 bấm nút ở trang chủ)
 - **Actual tiêu biểu (TC-FR07-99, nguyên văn):** không có phản hồi nhìn thấy được trong 2 s
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-99_failed.png`, `HW02/B_FR07/evidence/TC-FR07-99_feedback.png`
 
@@ -114,7 +147,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 201
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.3, B4
+- **Yêu cầu / giả định bị vi phạm:** FR-07.3
+- **Đạt trong cùng case:** B4 (mỗi dòng Thành tiền 6000000 = 1 × 6000000)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-201, nguyên văn):** TRƯỚC: không có bảng (giỏ trống); bấm 20 lần (element.click() trong trang) trong 410 ms [notes] thời gian thực tế 410 ms > 400 ms của cột Thao tác; SAU: 20 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe Ai
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-201_failed.png`, `HW02/B_FR07/evidence/TC-FR07-201_ui.png`
 - Thời gian bấm thực tế 405 ms (lượt 2), 410 ms (lượt 3) so với 400 ms của cột Thao tác; notes SV: không ảnh hưởng kết luận.
@@ -134,7 +169,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 90
 - **Blocked ghi case gốc (4):** 05, 06, 07, 65
-- **Yêu cầu / giả định:** FR-07.2
+- **Yêu cầu / giả định bị vi phạm:** FR-07.2
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-90, nguyên văn):** dòng: 1 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 6000000; không có badge; nút trong ô Số lượng: []
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-90_ui.png`
 
@@ -150,7 +187,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 08
 - **Blocked ghi case gốc (1):** 09
-- **Yêu cầu / giả định:** FR-07.4, FR-24.2, FR-07.1
+- **Yêu cầu / giả định bị vi phạm:** FR-07.4, FR-24.2
+- **Đạt trong cùng case:** B4 (Tổng SAU 4000000 = Thành tiền dòng còn lại), xoá dòng (dòng AirPods bị xoá, dòng Keychron không đổi)
+- **Chưa đánh giá được trong cùng case:** FR-07.1 (nhãn cột kiểm ở TC-95)
 - **Actual tiêu biểu (TC-FR07-08, nguyên văn):** đăng nhập cart08_1792476880905@domain.com: navbar có tên user; TRƯỚC: 2 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Bàn phím cơ Keychron Q1 | Đơn giá 4000000 | SL 1 | Thành tiền 4000000]; Tổng 10000000; không có badge; không có dialog; SAU: 1 dòng: [Bàn phím cơ Keychron Q1 | Đơn giá 4000000 | SL 1 | Thành tiền 4000000]; Tổng 4000000; không có badge
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-08_ui.png`
 
@@ -182,7 +221,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 04
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.3, FR-07.1, FR-23.2
+- **Yêu cầu / giả định bị vi phạm:** FR-23.2
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** FR-07.3 (EC10/EC37: thêm từ trang chi tiết không vào giỏ, case gốc TC-61), FR-07.1 (nhãn cột kiểm ở TC-95)
 - **Actual tiêu biểu (TC-FR07-04, nguyên văn):** đăng nhập cart04_1792476872458@domain.com: navbar có tên user; TRƯỚC: 2 dòng: [iPhone 15 Pro Max | Đơn giá 30000000 | SL 1 | Thành tiền 30000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 36000000; không có badge; ô Số lượng sau khi gõ "2": value="2"; không có phản hồi nhìn thấy được trong 2 s; SAU: 2 dòng: [iPhone 15 Pro Max | Đơn giá 30000000 | SL 1 | Thành tiền 30000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 36000000; không có badge
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-04_feedback.png`, `HW02/B_FR07/evidence/TC-FR07-04_ui.png`
 
@@ -198,7 +239,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 01
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.7, FR-07.5, FR-23.2, FR-24.3
+- **Yêu cầu / giả định bị vi phạm:** FR-07.7 (thiếu hình minh hoạ; có thông báo 'Giỏ hàng của bạn đang trống'), FR-24.3 (thiếu icon/hình minh hoạ)
+- **Đạt trong cùng case:** FR-07.5 (link về trang chủ → URL '/'), FR-23.2 (badge ẩn khi giỏ trống, chấp nhận theo B22)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-01, nguyên văn):** TRƯỚC: không có bảng (giỏ trống); trạng thái trống: bảng=không, ảnh/icon=không, chữ="Giỏ hàng của bạn đang trốngTiếp tục mua sắm"; URL sau thao tác=http://localhost:5173/
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-01_failed.png`, `HW02/B_FR07/evidence/TC-FR07-01_ui.png`
 - Cùng case: dòng chữ 'Giỏ hàng của bạn đang trống' có; link về trang chủ → URL '/' đạt.
@@ -222,7 +265,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 91
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-23.4
+- **Yêu cầu / giả định bị vi phạm:** FR-23.4
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-91, nguyên văn):** không tìm thấy breadcrumb ở vùng nội dung chính
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-91_ui.png`
 
@@ -240,7 +285,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 92
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-23.1
+- **Yêu cầu / giả định bị vi phạm:** FR-23.1
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-92, nguyên văn):** ở /cart: [{"href":"/cart","text":"Giỏ hàng","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/login","text":"Đăng nhập","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/register","text":"Đăng ký","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"}]; ở trang chủ: [{"href":"/cart","text":"Giỏ hàng","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/login","text":"Đăng nhập","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/register","text":
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-92_failed.png`, `HW02/B_FR07/evidence/TC-FR07-92_ui-cart.png`, `HW02/B_FR07/evidence/TC-FR07-92_ui-home.png`
 
@@ -259,7 +306,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 93
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-21.3, B13
+- **Yêu cầu / giả định bị vi phạm:** FR-21.3 (trang chủ dùng 'VND')
+- **Đạt trong cùng case:** B13 (có phân cách '.' ở cả 5 chỗ), FR-21.3 ở trang chi tiết, trang giỏ (dùng '₫')
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-93, nguyên văn):** locale trình duyệt=vi-VN; trang chủ (thẻ)="6.000.000 VND"; trang chi tiết="6.000.000 ₫"; giỏ: Đơn giá="6.000.000 ₫"; giỏ: Thành tiền="6.000.000 ₫"; giỏ: Tổng="6.000.000 ₫"
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-93_ui.png`
 - Cùng case: trang chi tiết và trang giỏ dùng '₫' (đạt).
@@ -278,7 +327,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 94
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-24.4
+- **Yêu cầu / giả định bị vi phạm:** FR-24.4 (trang chủ: 5/5 alt rỗng)
+- **Đạt trong cùng case:** FR-24.4 ở trang chi tiết (alt = tên sản phẩm)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-94, nguyên văn):** alt trang chủ=["","","","",""]; alt trang chi tiết=["Tai nghe AirPods Pro 2"]; trang giỏ không có ảnh sản phẩm (notes, không tính Fail); [kiểm tay] alt "mô tả nội dung ảnh": SV đối chiếu chữ alt với ảnh
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-94_ui.png`
 - Cùng case: trang chi tiết alt = tên sản phẩm (đạt); trang giỏ không có ảnh.
@@ -300,7 +351,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 95
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.1
+- **Yêu cầu / giả định bị vi phạm:** FR-07.1, B12
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-95, nguyên văn):** nhãn đọc được=["Sản phẩm","Giá","Số lượng","Thành tiền","Thao tác"]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-95_ui.png`
 
@@ -322,7 +375,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 96
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.4, B12
+- **Yêu cầu / giả định bị vi phạm:** FR-07.4, B12
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-96, nguyên văn):** nhãn đọc được=["Xóa"]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-96_ui.png`
 
@@ -343,7 +398,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 97
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.5, B12
+- **Yêu cầu / giả định bị vi phạm:** FR-07.5, B12
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-97, nguyên văn):** nhãn đọc được=["← Mua tiếp"]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-97_ui.png`
 - Trang giỏ trống có link 'Tiếp tục mua sắm' (Cart.jsx dòng 24); TC-FR07-97 kiểm khi giỏ có 1 dòng.
@@ -363,7 +420,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 98
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-07.6
+- **Yêu cầu / giả định bị vi phạm:** FR-07.6
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-98, nguyên văn):** nhãn đọc được=["Tổng tạm tính:"]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-98_ui.png`
 
@@ -381,7 +440,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 21
 - **Blocked ghi case gốc (1):** 213
-- **Yêu cầu / giả định:** FR-07.3, API-CART
+- **Yêu cầu / giả định bị vi phạm:** FR-07.3
+- **Đạt trong cùng case:** API-CART (HTTP 200, GET /api/cart trả mảng)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-21, nguyên văn):** POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":1}]; SAU: [{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":1},{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":3}]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-21_api.png`, `HW02/B_FR07/evidence/TC-FR07-21_req.json`, `HW02/B_FR07/evidence/TC-FR07-21_res.json`
 - TC-FR07-213: 50 POST song song → 50×HTTP 200, GET SAU 50 phần tử id 1 quantity 1 (Blocked, case gốc TC-FR07-21).
@@ -404,7 +465,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (2):** 22, 210
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-08.2, API-CART, B8
+- **Yêu cầu / giả định bị vi phạm:** FR-08.2, B8
+- **Đạt trong cùng case:** API-CART (HTTP 200, GET /api/cart trả mảng)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-22, nguyên văn):** POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":1},{"id":4,"name":"Tai nghe AirPods Pro 2","price":1,"quantity":1}]
 - **Actual các case còn lại (rút gọn 200 ký tự):**
   - TC-FR07-210: POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":2,"
@@ -427,7 +490,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (8):** 30, 31, 32, 33, 34, 35, 70, 208
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-06.2, API-CART
+- **Yêu cầu / giả định bị vi phạm:** FR-06.2, B17, B18 (TC-34, TC-35)
+- **Đạt trong cùng case:** API-CART (định dạng request/response của endpoint)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-30, nguyên văn):** POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":-3}]
 - **Actual các case còn lại (rút gọn 200 ký tự):**
   - TC-FR07-31: POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"
@@ -456,7 +521,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (5):** 36, 37, 40, 211, 212
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** API-CART
+- **Yêu cầu / giả định bị vi phạm:** B18, B17
+- **Đạt trong cùng case:** API-CART (định dạng request/response của endpoint)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-36, nguyên văn):** POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":99999,"name":"Không tồn tại","price":1000,"quantity":1}]
 - **Actual các case còn lại (rút gọn 200 ký tự):**
   - TC-FR07-37: POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":"ab
@@ -482,7 +549,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 209
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** API-CART
+- **Yêu cầu / giả định bị vi phạm:** B17 (4xx nhưng body là trang HTML, không có trường error)
+- **Đạt trong cùng case:** API-CART (body không phải JSON bị từ chối (400), giỏ không đổi)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-209, nguyên văn):** POST HTTP 400 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -507,7 +576,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 214
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** API-CART
+- **Yêu cầu / giả định bị vi phạm:** API-CART, B17
+- **Đạt trong cùng case:** —
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-214, nguyên văn):** POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [null]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-214_api.png`, `HW02/B_FR07/evidence/TC-FR07-214_req.json`, `HW02/B_FR07/evidence/TC-FR07-214_res.json`
 
@@ -534,7 +605,9 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 - **TC Fail (1):** 215
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định:** FR-06.2, API-CART, B1
+- **Yêu cầu / giả định bị vi phạm:** API-CART (GET trả quantity khác giá trị đã gửi)
+- **Đạt trong cùng case:** FR-06.2 (HTTP 2xx), B1 (giá trị lớn được nhận)
+- **Chưa đánh giá được trong cùng case:** —
 - **Actual tiêu biểu (TC-FR07-215, nguyên văn):** POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":9007199254740992}]
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-215_api.png`, `HW02/B_FR07/evidence/TC-FR07-215_req.json`, `HW02/B_FR07/evidence/TC-FR07-215_res.json`
 - SV ghi giả định B1 (không có cận trên) cho Expected của case.

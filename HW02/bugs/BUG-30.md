@@ -43,7 +43,9 @@
 ## Yêu cầu
 
 - **FR-07.3:** Thêm cùng một sản phẩm vào giỏ sẽ tăng số lượng, không tạo dòng mới.
-- **API-CART:** GET /api/cart lấy giỏ; POST /api/cart body JSON {id, name, price, quantity}; yêu cầu header Authorization: Bearer <token> (api_specification.md dòng 110–127). Không có endpoint sửa/xoá dòng giỏ.
+
+- Đạt trong cùng case: API-CART (HTTP 200, GET /api/cart trả mảng)
+- Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 

@@ -44,6 +44,9 @@
 - **FR-07.4:** Nút Xóa sản phẩm phải có dialog xác nhận trước khi thực hiện.
 - **B12 (giả định):** B12 (nhãn chính xác) (SV chốt 2026-10-20): các cụm in đậm trong FR-07 là nhãn — 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác', 'Xóa sản phẩm', 'Tiếp tục mua sắm', 'Tổng cộng'. So khớp đúng chữ, PHÂN BIỆT hoa/thường, chuẩn hoá Unicode NFC trước khi so; coi hai cách đặt dấu 'óa'/'oá' là như nhau (vd 'Xóa' = 'Xoá'). Chỉ kiểm ở TC-FR07-95…98; case chức năng định vị nút/link không dựa vào chữ.
 
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: —
+
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)

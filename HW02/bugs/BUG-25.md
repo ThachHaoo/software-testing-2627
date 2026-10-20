@@ -41,7 +41,10 @@
 
 ## Yêu cầu
 
-- **FR-24.4:** (GUI, B16) Tất cả ảnh sản phẩm phải có thuộc tính alt mô tả nội dung (không rỗng).
+- **FR-24.4:** (GUI, B16) Tất cả ảnh sản phẩm phải có thuộc tính alt mô tả nội dung (không rỗng). — vi phạm ở: trang chủ: 5/5 alt rỗng
+
+- Đạt trong cùng case: FR-24.4 ở trang chi tiết (alt = tên sản phẩm)
+- Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 

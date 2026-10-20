@@ -42,7 +42,9 @@
 ## Yêu cầu
 
 - **FR-07.3:** Thêm cùng một sản phẩm vào giỏ sẽ tăng số lượng, không tạo dòng mới.
-- **B4 (giả định):** B4 (Thành tiền và Tổng cộng) (SV chốt 2026-10-20, theo đề xuất AI): SRS không ghi công thức. Nguồn gợi ý — thông lệ: Thành tiền = Đơn giá × Số lượng; Tổng cộng = Σ Thành tiền các dòng; FR-08 'tổng tiền tính tự động từ giỏ hàng'.
+
+- Đạt trong cùng case: B4 (mỗi dòng Thành tiền 6000000 = 1 × 6000000)
+- Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 

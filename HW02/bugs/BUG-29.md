@@ -43,6 +43,9 @@
 
 - **FR-07.6:** Tổng tiền hiển thị nhãn chính xác "Tổng cộng" (không phải "Tổng tạm tính").
 
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: —
+
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)

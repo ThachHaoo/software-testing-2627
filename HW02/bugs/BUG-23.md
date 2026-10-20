@@ -43,6 +43,9 @@
 
 - **FR-23.1:** (GUI, B16) Thanh điều hướng (Navbar) phải highlight trang đang được chọn — xét trên trang Giỏ hàng.
 
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: —
+
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)

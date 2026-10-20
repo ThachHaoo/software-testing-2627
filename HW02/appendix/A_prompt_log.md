@@ -8129,17 +8129,79 @@ Nhiệm vụ 2 – Bước 7a: gom dữ kiện (AI-01 §11: KHÔNG viết bug re
 ```
 
 **Output:**
-```
+````
 Nhiệm vụ 1 xong (`4ba84b8`). Sang bước 7a: xem khung bug của A_FR01.
 
 Gom dữ kiện bug: lấy số dòng code liên quan và kiểm trùng issue.
 
 Không có issue trùng hẳn; #14 (FR-08) có dùng `/api/cart` với quantity/price sai. Lấy số dòng code còn thiếu rồi sinh file.
+
+Đã xong cả hai nhiệm vụ. 6/7b chốt ở commit `4ba84b8`. Bước 7a gom 39 case Fail thành 22 nhóm triệu chứng, dựng 22 khung trống BUG-15…36, commit `7f5b524`.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) chốt 6/7b; (2) bước 7a – gom dữ kiện bug, AI không viết bug report
+- File đã tạo/sửa:
+  · HW02/B_FR07/testcases.json, testcases.md, RUN.md
+  · HW02/B_FR07/evidence/ (137 file, 2.2 MB)
+  · HW02/tests/results/B_FR07.json (lượt 2), B_FR07_rerun.json (lượt 3)
+  · HW02/B_FR07/bugs_facts.md
+  · HW02/bugs/BUG-15…BUG-36.md (khung trống)
+- Kết quả kiểm tra: check_domain 0 errors/7 warn; lint 0 errors/10 warn; test: lượt chính thức = lượt 2 → Pass 14 · Fail 39 · Blocked 9
+- Commit: 4ba84b8 HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
+          7f5b524 HW02[B-FR07] 7/7a: dữ kiện bug (AI chép)
+- Nhiệm vụ 1:
+  · Lượt chính thức và lượt 3 ghi vào RUN.md + notes của 7 suite
+  · TC-201 Fail (SV chốt) kèm notes; TC-209 thêm notes evidence lượt 3
+  · Notes suite có dòng "evidence chỉ giữ lượt mới nhất, không vá"
+  · results nằm trong .gitignore → đã thêm bằng `git add -f` theo lệnh
+- Nhiệm vụ 2:
+  · 22 nhóm G1…G22 ↔ BUG-15…36, gồm 15 nhóm UI và 7 nhóm API; bảng tổng hợp ở đầu bugs_facts.md
+  · Đã kiểm: mỗi Fail nằm đúng một nhóm
+  · Blocked ghi kèm nhóm của case gốc; TC-06, 65 có 2 case gốc nên ghi ở G1 và G4
+  · Pass hộp đen (10–13, 60, 200) ghi thêm dưới G1 (case gốc TC-61)
+  · Khung: điền Môi trường, Bằng chứng, TC liên quan, Yêu cầu, Dữ kiện (AI chép), gồm Actual nguyên văn và đoạn code có số dòng
+  · Để trống: Tiêu đề, Severity, Priority, Tiền điều kiện, Bước, Expected, Actual, Nhận định, Link
+- Kiểm trùng (69 issue, mọi tác giả và trạng thái, cộng BUG-01…14):
+  · Không có issue trùng hẳn
+  · Có thể liên quan:
+    - #14 (FR-08, bước 1 POST /api/cart quantity/price sai) ↔ G18, G17
+    - #10 (total_amount ở checkout) ↔ G17
+    - #47 (mobile quantity) ↔ G1, G18
+    - #25/#26 (lỗi trả trang HTML ở /api/register) ↔ G20, G21
+- Bất thường: body HTML của TC-209 (evidence `_res.json`) có đường dẫn tuyệt đối trên máy chạy → cần bản che khi dán issue
+- Cần quyết định: không chặn. Gộp/tách 22 nhóm (vd 4 nhóm nhãn G12–G15; G3 với G16) → SV quyết khi viết bug, xem bugs_facts.md
+```
+````
 *File AI ghi/gửi trong lượt này:* `bugs7a.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 134 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 131 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #135 | 13:29 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 7a – sửa dữ kiện (commit "HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm").
+1. bugs_facts.md + khung BUG-15…36: cột/trường "Yêu cầu" chỉ giữ yêu cầu/giả định mà
+   Actual cho thấy BỊ VI PHẠM; yêu cầu đạt trong cùng case chuyển sang dòng "Đạt
+   trong cùng case: …". Rà cả 22 nhóm (đã thấy sai ở G1, G3, G5, G6, G7, G22).
+2. Đọc issue #25 và #26 (gh issue view): trích nguyên văn phần mô tả nguyên nhân/
+   Actual; ghi vào mục "Kiểm trùng" để SV so với G20, G21. Không kết luận trùng.
+3. Dừng. Báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+Phân loại lại yêu cầu theo Actual từng nhóm (vi phạm / đạt / chưa đánh giá được), rồi sinh lại file.
+
+Thêm trích nguyên văn #25, #26 vào mục Kiểm trùng.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 135 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 132 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

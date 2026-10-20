@@ -41,10 +41,11 @@
 
 ## Yêu cầu
 
-- **FR-07.7:** Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng.
-- **FR-07.5:** Có nút Tiếp tục mua sắm để quay về trang chủ.
-- **FR-23.2:** (GUI, B16) Link "Giỏ hàng" phải hiển thị badge số lượng sản phẩm trong giỏ.
-- **FR-24.3:** Trang trống (Empty State) phải có icon/hình minh họa và message thân thiện (bổ sung FR-07.7).
+- **FR-07.7:** Giỏ hàng trống phải có hình minh họa và thông báo rõ ràng. — vi phạm ở: thiếu hình minh hoạ; có thông báo 'Giỏ hàng của bạn đang trống'
+- **FR-24.3:** Trang trống (Empty State) phải có icon/hình minh họa và message thân thiện (bổ sung FR-07.7). — vi phạm ở: thiếu icon/hình minh hoạ
+
+- Đạt trong cùng case: FR-07.5 (link về trang chủ → URL '/'), FR-23.2 (badge ẩn khi giỏ trống, chấp nhận theo B22)
+- Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 

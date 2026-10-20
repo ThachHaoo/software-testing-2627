@@ -43,8 +43,10 @@
 ## Yêu cầu
 
 - **FR-08.2:** Tổng tiền thanh toán được tính tự động từ giỏ hàng và không cho phép người dùng chỉnh sửa trực tiếp (README.md dòng 105) — căn cứ của B8.
-- **API-CART:** GET /api/cart lấy giỏ; POST /api/cart body JSON {id, name, price, quantity}; yêu cầu header Authorization: Bearer <token> (api_specification.md dòng 110–127). Không có endpoint sửa/xoá dòng giỏ.
 - **B8 (giả định):** B8 (giá do client gửi ở POST /api/cart) (SV chốt 2026-10-20): giá lấy từ CSDL, không tin giá client — lý do: FR-08.2 'tổng tiền được tính tự động từ giỏ hàng và không cho phép người dùng chỉnh sửa trực tiếp'. EC16 hợp lệ, oracle = giá CSDL.
+
+- Đạt trong cùng case: API-CART (HTTP 200, GET /api/cart trả mảng)
+- Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 

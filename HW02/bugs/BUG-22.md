@@ -43,6 +43,9 @@
 
 - **FR-23.4:** (GUI, B16) Breadcrumb bắt buộc có ở trang con Giỏ hàng.
 
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: —
+
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)

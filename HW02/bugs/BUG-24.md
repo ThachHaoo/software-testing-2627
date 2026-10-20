@@ -41,8 +41,10 @@
 
 ## Yêu cầu
 
-- **FR-21.3:** (GUI, B16) Luôn dùng ký hiệu ₫ với định dạng phân cách hàng nghìn.
-- **B13 (giả định):** B13 (định dạng tiền) (SV chốt 2026-10-20): chấp nhận ký tự phân cách hàng nghìn '.' hoặc ','. Locale trình duyệt ghi trong meta.environment. Chỉ kiểm ở TC-FR07-93.
+- **FR-21.3:** (GUI, B16) Luôn dùng ký hiệu ₫ với định dạng phân cách hàng nghìn. — vi phạm ở: trang chủ dùng 'VND'
+
+- Đạt trong cùng case: B13 (có phân cách '.' ở cả 5 chỗ), FR-21.3 ở trang chi tiết, trang giỏ (dùng '₫')
+- Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 

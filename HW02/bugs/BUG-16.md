@@ -41,8 +41,11 @@
 
 ## Yêu cầu
 
-- **FR-06.3:** (B6 SV chốt) Nút Thêm vào giỏ hàng — sau khi bấm hiển thị phản hồi trực quan (toast notification hoặc badge cập nhật).
 - **FR-24.1:** (GUI, B16) Sau khi bấm "Thêm vào giỏ", phải có phản hồi trực quan (toast/badge).
+- **B21 (giả định):** B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual.
+
+- Đạt trong cùng case: —
+- Chưa đánh giá được trong cùng case: FR-06.3 (FR-06.3 nói nút 'Thêm vào giỏ hàng' ở trang chi tiết; TC-99 bấm nút ở trang chủ)
 
 ## Ghi chú cô lập
 
