@@ -26,7 +26,7 @@ def main():
     a = ap.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
     feature = a.json_path.parent.name
-    stamp = dt.datetime.now().strftime("%Y%m%d-%H%M")
+    stamp = dt.datetime.now().strftime("%Y%m%d-%H%M%S")
     written = []
     for src in [a.json_path, a.json_path.with_suffix(".md")]:
         if not src.exists():
