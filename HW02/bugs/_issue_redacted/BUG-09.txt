@@ -1,0 +1,12 @@
+# BUG-09: body phản hồi của TC-FR01-212 (HTTP 413), nguồn HW02/A_FR01/evidence/TC-FR01-212_res.json; đường dẫn tuyệt đối thay bằng <SUT_DIR>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>PayloadTooLargeError: request entity too large<br> &nbsp; &nbsp;at readStream (<SUT_DIR>\backend\node_modules\raw-body\index.js:163:17)<br> &nbsp; &nbsp;at getRawBody (<SUT_DIR>\backend\node_modules\raw-body\index.js:116:12)<br> &nbsp; &nbsp;at read (<SUT_DIR>\backend\node_modules\body-parser\lib\read.js:113:3)<br> &nbsp; &nbsp;at jsonParser (<SUT_DIR>\backend\node_modules\body-parser\lib\types\json.js:88:5)<br> &nbsp; &nbsp;at Layer.handleRequest (<SUT_DIR>\backend\node_modules\router\lib\layer.js:152:17)<br> &nbsp; &nbsp;at trimPrefix (<SUT_DIR>\backend\node_modules\router\index.js:342:13)<br> &nbsp; &nbsp;at <SUT_DIR>\backend\node_modules\router\index.js:297:9<br> &nbsp; &nbsp;at processParams (<SUT_DIR>\backend\node_modules\router\index.js:582:12)<br> &nbsp; &nbsp;at next (<SUT_DIR>\backend\node_modules\router\index.js:291:5)<br> &nbsp; &nbsp;at cors (<SUT_DIR>\backend\node_modules\cors\lib\index.js:188:7)</pre>
+</body>
+</html>

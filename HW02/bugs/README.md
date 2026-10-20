@@ -7,9 +7,9 @@ Bug report do SV tự viết (AI-01 §11). Thư mục này chỉ ghi thang đo, 
 | Mức | Định nghĩa chung |
 |---|---|
 | Critical | Chức năng chính không dùng được hoặc gây mất/hỏng dữ liệu, sập hệ thống, lỗ hổng bảo mật nghiêm trọng; không có cách làm vòng. |
-| Major | Chức năng chạy sai so với đặc tả ở phần quan trọng; có cách làm vòng nhưng khó hoặc không chấp nhận được với người dùng. |
-| Minor | Chức năng chạy sai ở phần ít quan trọng; có cách làm vòng dễ, ảnh hưởng hạn chế. |
-| Trivial | Sai lệch thẩm mỹ, chính tả, bố cục; không ảnh hưởng tới chức năng. |
+| High | Chức năng chạy sai so với đặc tả ở phần quan trọng; có cách làm vòng nhưng khó hoặc không chấp nhận được với người dùng. |
+| Medium | Chức năng chạy sai ở phần ít quan trọng; có cách làm vòng dễ, ảnh hưởng hạn chế. |
+| Low | Sai lệch thẩm mỹ, chính tả, bố cục; không ảnh hưởng tới chức năng. |
 
 ## Priority — mức khẩn cấp phải sửa (ISTQB: *level of business importance*)
 

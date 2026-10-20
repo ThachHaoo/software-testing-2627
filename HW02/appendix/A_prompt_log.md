@@ -2192,4 +2192,195 @@ Bảng TC-209 có 2 lỗi: cột "Lần" đều ghi 1 (file JSON không có `rep
 
 ---
 
-**Tổng:** 34 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 32 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #35 | 23:39 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+1. TC-200, 203, 204, 208: đọc actual_result; nếu là thông báo "Mật khẩu quá yếu!" thì notes thêm "Verdict theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — form từ chối mật khẩu trước khi xét biến mục tiêu." Nếu actual khác thì KHÔNG đổi, báo lại nguyên văn.
+2. Cập nhật _groups_A_FR01.md: đưa các case trên vào mục Blocked ghi case gốc của G1.
+3. render_md. Commit "HW02[A-FR01] 7/7b: ghi case gốc A20 cho 200, 203, 204, 208" kèm A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Cả 4 case đều có hộp lỗi "Mật khẩu quá yếu!…" nên áp notes cho cả 4.
+
+Em đã ghi case gốc A20 cho TC-200, 203, 204, 208 và commit ở `7aa33f8`.
+
+- **Actual của cả 4 case** đều có hộp lỗi "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT." và không gửi request nào. Vì vậy cả 4 đều nhận notes "Verdict theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — …". Status vẫn là Blocked.
+- **`_groups_A_FR01.md`:**
+  - Mục "Blocked ghi case gốc" của G1 tăng từ 18 lên 22 case.
+  - Bảng tổng hợp sửa `G1 | 14 | 22`.
+  - Dòng "Blocked không ghi case gốc" giờ ghi là không còn case nào.
+- **`render_md`** chạy xong nhưng `testcases.md` không đổi, vì bảng suite trong `.md` không có cột notes. Do đó commit chỉ có 3 file.
+
+check_domain 0 lỗi.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: ghi case gốc A20 cho TC-200, 203, 204, 208; cập nhật nhóm G1
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (notes 4 case) · HW02/bugs/_groups_A_FR01.md (G1 Blocked 18 → 22; bỏ danh sách "chưa ghi case gốc") · testcases.md không đổi (bảng .md không có cột notes)
+- Kết quả kiểm tra: cả 4 actual chứa "Mật khẩu quá yếu!…", POST gửi 0 lần · check_domain 0 lỗi / 1 cảnh báo (UB do A4) · tổng giữ Pass 43 / Fail 65 / Blocked 25
+- Commit: 7aa33f8 HW02[A-FR01] 7/7b: ghi case gốc A20 cho 200, 203, 204, 208
+- Cần quyết định / câu hỏi:
+  1. Tiếp theo: SV viết BUG-xx.md từ 15 nhóm (G1 hiện có 14 Fail + 22 Blocked); xong gửi để AI kiểm trường thiếu và chạy `gh issue create --body-file`.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #36 | 23:51 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Bước 7 lượt 2 — tạo khung bug report theo danh sách SV chốt (AI-01 §11: KHÔNG viết tiêu đề, tóm tắt, bước tái hiện, Expected, Actual, severity, priority).
+Danh sách: BUG-01: G1 · BUG-02: G11 · BUG-03: G2 · BUG-04: G3 (+G6 làm bằng chứng)
+BUG-05: G4 · BUG-06: G8 (ghi chú: liên quan BUG-05; trích database.js dòng 50–54) · BUG-07: G5
+BUG-08: G7 · BUG-09: G9 · BUG-10: G10 · BUG-11: G12 · BUG-12: G13 · BUG-13: G14 · BUG-14: G15
+TC-209 giữ Fail (không áp A20).
+(Nếu SV chọn 209 → Blocked theo A20 gốc TC-FR01-41: cập nhật testcases.json + notes, render, check.)
+Với mỗi BUG-xx.md trong HW02/bugs/: dùng đúng 14 trường trong bugs/README.md.
+- ĐIỀN SẴN (chỉ dữ kiện): ID; Môi trường (SUT ttbhanh/eshop-sut @85af3ba, Windows, trình duyệt + phiên bản Playwright Chromium, URL :5173/:3000, ngày chạy); TC liên quan (Fail + Blocked ghi case gốc, theo nhóm); Yêu cầu (mã + nguyên văn câu SRS/giả định từ testcases.json); Bằng chứng (đường dẫn evidence/); Ghi chú cô lập → chỉ chép dữ kiện đã có (vd 209 lặp 3/3, đoạn code file+dòng) dưới tiêu đề "Dữ kiện (AI chép)"; Link GitHub Issue để trống.
+- ĐỂ TRỐNG có chú thích "<!-- SV viết -->": Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước tái hiện, Expected, Actual, phần nhận định trong Ghi chú cô lập.
+- Thêm dòng cuối: "Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần dữ kiện."
+Không commit khung trống. Báo cáo danh sách file đã tạo.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+BUG-11 thiếu dòng "kiểm tay": `auto_status` của TC-216 đã được khôi phục thành Blocked nên script không nhận ra case kiểm tay. Sửa tay file này.
+
+Em đã tạo 14 khung `BUG-01.md` → `BUG-14.md` trong `HW02/bugs/`, chưa commit. Mỗi file theo đúng 14 trường của `bugs/README.md`. Em chỉ điền phần dữ kiện; 9 chỗ mỗi file để trống, ghi `<!-- SV viết -->`: Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước tái hiện, Expected, Actual, phần Nhận định, và Link GitHub Issue (để trống, không ghi chú).
+
+| File | Nhóm | TC Fail | Blocked ghi case gốc | Yêu cầu |
+|---|---|---|---|---|
+| BUG-01 | G1 | 14 | 22 (gốc TC-01) | FR-01.1 → FR-01.10 |
+| BUG-02 | G11 | 202 | — | FR-01.8 |
+| BUG-03 | G2 | 5 | — | FR-01.1 |
+| BUG-04 | G3 + G6 | 16 (gồm 213) | — | FR-01.1, .2, .3, .5 |
+| BUG-05 | G4 | 41, 42, 206 | — | FR-01.4 |
+| BUG-06 | G8 | 209 | — | FR-01.4 |
+| BUG-07 | G5 | 18 | — | FR-01.5 → FR-01.8 |
+| BUG-08 | G7 | 30 | — | FR-01.1 → FR-01.8 (+A3) |
+| BUG-09 | G9 | 212 | — | FR-01.6 |
+| BUG-10 | G10 | 214 | — | API-REG |
+| BUG-11 | G12 | 216 | — | FR-01.1, SEC-04 |
+| BUG-12 | G13 | 90 | — | FR-22.1 |
+| BUG-13 | G14 | 91 | — | FR-22.2 |
+| BUG-14 | G15 | 94 | 25, 26, 27 (gốc TC-94) | FR-01.9 |
+
+**Phần dữ kiện đã điền:**
+- **Môi trường:** SUT `ttbhanh/eshop-sut` @ `85af3ba`, kèm ghi chú là chạy từ fork `tkob-team` @ `de0f48f` cho khớp CLAUDE.md. Windows, Chromium 130.0.6723.31 (Playwright 1.48.2), URL :5173 và/hoặc :3000, ngày chạy 2026-10-19 lúc 22:42.
+- **Yêu cầu:** mã kèm câu nguyên văn trong `testcases.json`, cộng các giả định được nhắc trong expected (A3, A11, A21).
+- **Bằng chứng:** đường dẫn `evidence/` của từng case Fail.
+- **Dữ kiện (AI chép):**
+  - Vị trí đoạn code (file + dòng) theo nhóm.
+  - BUG-04: ghi rõ G6 dùng làm bằng chứng bổ sung.
+  - BUG-06: ghi chú "liên quan BUG-05", database.js dòng 50–54, và TC-209 lặp lại 3/3 lần đều failed.
+  - BUG-11: TC-216 chạy tự động bị Blocked, verdict Fail là do em kiểm tay.
+
+TC-209 giữ Fail, không đổi gì trong `testcases.json`.
+
+**Cần em xem:**
+- **BUG-11:** dòng "Trình duyệt" ghi Chromium của Playwright, nhưng phần kiểm tay TC-216 em làm trên trình duyệt của em. Em sửa lại tên và phiên bản trình duyệt nếu khác.
+- **BUG-01, BUG-08:** mục "Yêu cầu" dài vì gồm mọi yêu cầu của các case hợp lệ. Em có thể rút lại chỉ còn yêu cầu bị lệch.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: bước 7 lượt 2: tạo khung BUG-01…14 (chỉ dữ kiện; mô tả để SV viết)
+- File đã tạo: HW02/bugs/BUG-01.md … BUG-14.md (14 file; mỗi file 9 chỗ "<!-- SV viết -->")
+- Đã điền: ID, Môi trường, Bằng chứng, TC liên quan (Fail + Blocked ghi case gốc), Yêu cầu (+ giả định A3/A11/A21 khi expected nhắc), Dữ kiện (AI chép); Link GitHub Issue để trống
+- TC-209: giữ Fail, testcases.json không đổi
+- Kết quả kiểm tra: đủ 14 file, mỗi file 14 trường; BUG-11 bổ sung tay dòng kiểm tay (auto_status TC-216 = Blocked nên script không tự nhận)
+- Commit: chưa (theo yêu cầu: không commit khung trống)
+- Cần quyết định / câu hỏi:
+  1. BUG-11: trình duyệt dùng khi kiểm tay TC-216 → SV sửa dòng "Trình duyệt" nếu khác Chromium 130 (Playwright).
+  2. BUG-01/BUG-08: mục "Yêu cầu" dài vì lấy mọi yêu cầu của case hợp lệ → SV rút lại còn yêu cầu bị lệch?
+  3. Khi SV viết xong: gửi để AI kiểm trường thiếu, rồi `gh issue create --body-file` cho từng file và commit "HW02[A-FR01] 7/7c: bug report + GitHub Issues".
+```
+````
+*File AI ghi/gửi trong lượt này:* `fr01_bugs.py`
+
+**Xử lý:** [...]
+
+---
+
+## #37 | 23:54 19/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<pasted_content id="1f5a">
+Sửa khung BUG-01…14 (chỉ phần dữ kiện, không đụng chỗ <!-- SV viết -->), chưa commit:
+1. Mục "Yêu cầu": chỉ giữ yêu cầu/giả định mà Actual của các TC Fail đi ngược lại (không lấy mọi yêu cầu mà case hợp lệ phủ). Cụ thể:
+   - BUG-01: FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.10.
+   - BUG-08: A3 (ghi "giả định, SRS im lặng") + FR-01.4.
+   - BUG-11: SEC-04.
+   - Các file khác: tự rà theo quy tắc trên; liệt kê thay đổi trong báo cáo.
+2. Bug chỉ ở tầng API: thay dòng "Trình duyệt" bằng "Công cụ gửi request: Playwright 1.48.2 (APIRequestContext)".
+3. BUG-11 Môi trường: tách 2 dòng — "Lượt tự động: Chromium 130.0.6723.31 (Playwright 1.48.2) — Blocked (A20)" và "Kiểm tay (xác định verdict): <!-- SV điền trình duyệt + phiên bản -->". Sửa URL thành http://localhost:5173 (đăng nhập, trang chủ, /profile).
+4. Mục "Bằng chứng": thêm dòng đầu "Ảnh tiêu biểu đính kèm GitHub Issue: <!-- SV chọn 2–3 ảnh -->".
+Báo cáo cho phiên thảo luận.
+</pasted_content id="1f5a">
+```
+
+**Output:**
+````
+Em đã sửa phần dữ kiện của cả 14 khung `BUG-xx.md`, chưa commit. Các chỗ `<!-- SV viết -->` giữ nguyên; script kiểm số lượng trước và sau đều bằng nhau ở cả 14 file.
+
+**1. Mục "Yêu cầu"** giờ chỉ giữ yêu cầu và giả định mà Actual của các TC Fail đi ngược lại. Giả định ghi nhãn "(giả định, SRS im lặng)" cho tất cả file, không chỉ BUG-08; em không muốn thống nhất kiểu này thì báo.
+
+| File | Trước | Sau |
+|---|---|---|
+| BUG-01 | FR-01.1 → FR-01.10 | FR-01.6, FR-01.7a, FR-01.7b, FR-01.7c, FR-01.8, FR-01.10 (theo khối lệnh) |
+| BUG-02 | FR-01.8 | FR-01.8, **A5** (TC-202: chỉ có khoảng trắng, không có ký tự trong tập) |
+| BUG-03 | FR-01.1, A11 | FR-01.1, **A1** (TC-33 toàn khoảng trắng), **A9**, A11, **A15** (TC-52/53 thiếu trường, sai kiểu) |
+| BUG-04 | FR-01.1, .2, .3, .5, A11, A21 | giữ cả bốn FR (TC-213 body `{}` vi phạm .1/.2/.5) + **A2**, **A9**, A11, **A15**, A21 |
+| BUG-05 | FR-01.4, A11 | FR-01.4, **A3** (TC-42 trùng sau khi cắt khoảng trắng; TC-206 khác hoa/thường ở domain), **A9**, A11 |
+| BUG-06 | FR-01.4 | FR-01.4, **A9** |
+| BUG-07 | FR-01.5 → FR-01.8, A11 | giữ các FR + **A5** (36, 228), **A6** (46, 48), **A9**, A11, **A15** (56, 57) |
+| BUG-08 | FR-01.1 → FR-01.8, A3 | A3, FR-01.4 (theo khối lệnh) |
+| BUG-09 | FR-01.6 | FR-01.6, **A4** (không có cận trên) |
+| BUG-10 | API-REG, A11 | không đổi |
+| BUG-11 | FR-01.1, SEC-04 | SEC-04 (theo khối lệnh) |
+| BUG-12, 13, 14 | FR-22.1 / FR-22.2 / FR-01.9 | không đổi |
+
+A9 (API phải từ chối dữ liệu sai như UI) có mặt ở mọi bug tầng API mà expected là từ chối.
+
+**2. Bug chỉ ở tầng API** (BUG-03 → BUG-10): dòng "Trình duyệt" đã thay bằng "Công cụ gửi request: Playwright 1.48.2 (APIRequestContext)".
+
+**3. BUG-11, mục Môi trường:**
+- Tách thành 2 dòng: "Lượt tự động: Chromium 130.0.6723.31 (Playwright 1.48.2) — Blocked (A20)" và "Kiểm tay (xác định verdict): `<!-- SV điền trình duyệt + phiên bản -->`".
+- URL đổi thành `http://localhost:5173 (đăng nhập, trang chủ, /profile)`.
+
+**4. Mục "Bằng chứng"** của cả 14 file có thêm dòng đầu "Ảnh tiêu biểu đính kèm GitHub Issue: `<!-- SV chọn 2–3 ảnh -->`".
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: sửa phần dữ kiện của khung BUG-01…14 (Yêu cầu, công cụ, môi trường BUG-11, dòng ảnh tiêu biểu); chưa commit
+- File đã sửa: HW02/bugs/BUG-01.md … BUG-14.md (chưa theo dõi trong git)
+- Mục Yêu cầu: BUG-01 FR-01.6/7a/7b/7c/8/10 · BUG-02 FR-01.8+A5 · BUG-03 FR-01.1+A1/A9/A11/A15 · BUG-04 FR-01.1/2/3/5+A2/A9/A11/A15/A21 · BUG-05 FR-01.4+A3/A9/A11 · BUG-06 FR-01.4+A9 · BUG-07 FR-01.5→8+A5/A6/A9/A11/A15 · BUG-08 A3+FR-01.4 · BUG-09 FR-01.6+A4 · BUG-10 API-REG+A11 · BUG-11 SEC-04 · BUG-12 FR-22.1 · BUG-13 FR-22.2 · BUG-14 FR-01.9
+- Kết quả kiểm tra: số chỗ "<!-- SV viết -->" mỗi file không đổi (9); BUG-03…10 dùng dòng "Công cụ gửi request"; BUG-11 có 2 dòng môi trường + URL mới; 14 file có dòng "Ảnh tiêu biểu" ở đầu mục Bằng chứng
+- Commit: chưa
+- Cần quyết định / câu hỏi:
+  1. Đồng ý với phần AI tự rà (A5/A1/A9/A15/A2/A3/A6/A4 thêm vào các BUG-02…09)? Đặc biệt A9 có mặt ở mọi bug API.
+  2. Nhãn "(giả định, SRS im lặng)" đang dùng cho mọi giả định, không chỉ BUG-08 → giữ thống nhất?
+  3. SV viết các phần "<!-- SV viết -->" + chọn ảnh tiêu biểu + điền trình duyệt kiểm tay BUG-11 → gửi AI kiểm trường thiếu, rồi `gh issue create --body-file`.
+```
+````
+*File AI ghi/gửi trong lượt này:* `fr01_bugfix.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 37 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 35 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
