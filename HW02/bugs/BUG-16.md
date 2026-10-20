@@ -1,9 +1,9 @@
 # BUG-16
 
 - **ID:** BUG-16
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Trang chủ: Bấm 'Thêm vào giỏ' trên thẻ sản phẩm không có bất kỳ phản hồi trực quan nào trong vòng 2 giây
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+- Người dùng đang ở trang chủ `/` (chưa đăng nhập hoặc đã đăng nhập).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang chủ `http://localhost:5173/`.
+2. Tìm thẻ sản phẩm bất kỳ (ví dụ: `Tai nghe AirPods Pro 2`).
+3. Bấm nút "Thêm vào giỏ" nằm trên thẻ sản phẩm đúng 1 lần.
+4. Quan sát các phản hồi trên giao diện (toast, nút, badge giỏ hàng) trong vòng 2 giây.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-24.1 (kèm giả định B21): Ngay sau khi người dùng bấm nút "Thêm vào giỏ" ở trang chủ, giao diện phải xuất hiện ít nhất một phản hồi trực quan trong vòng 2 giây (chẳng hạn như bật thông báo toast, thay đổi chữ/trạng thái nút, hoặc nhảy badge đếm số lượng trên link "Giỏ hàng" ở navbar).
 
 ## Actual
 
-`<SV viết>`
+Giao diện hoàn toàn "im lặng". Nút bấm không thay đổi trạng thái, không xuất hiện thông báo toast, và link "Giỏ hàng" trên navbar cũng không hề xuất hiện badge cập nhật số lượng trong suốt 2 giây sau khi bấm (dù sản phẩm thực tế có được thêm vào giỏ khi mở `/cart`).
 
 ## Bằng chứng
 
@@ -73,7 +77,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Trong Home.jsx (dòng 98), sự kiện onClick của nút chỉ gọi đơn thuần hàm addToCart({ ...p, quantity: 1 }, 1) để cập nhật state giỏ hàng mà không hề gọi hàm hiển thị toast hay xử lý đổi trạng thái UI local nào cho nút.
+
+- Ở phía Navbar (App.jsx dòng 23), phần tử <Link to="/cart">Giỏ hàng</Link> được viết dạng text tĩnh hoàn toàn, không hề bọc hay tính toán badge số lượng sản phẩm từ CartContext.
+
+- Việc thiếu cả hiệu ứng phản hồi nút/toast lẫn badge trên Navbar khiến người dùng ở trang chủ không biết được thao tác bấm "Thêm vào giỏ" đã thành công hay chưa nếu không chủ động click sang trang /cart để kiểm tra.
 
 ## Link GitHub Issue
 

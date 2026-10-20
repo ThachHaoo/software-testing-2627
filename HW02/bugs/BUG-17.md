@@ -1,9 +1,9 @@
 # BUG-17
 
 - **ID:** BUG-17
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Thêm cùng một sản phẩm nhiều lần từ trang chủ không cộng dồn số lượng mà nhân bản thành nhiều dòng riêng biệt trong giỏ hàng
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -17,19 +17,26 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+- Trạng thái giỏ hàng ban đầu đang trống.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang chủ `http://localhost:5173/`.
+2. Tìm sản phẩm `Tai nghe AirPods Pro 2` (id 4).
+3. Bấm nút "Thêm vào giỏ" trên thẻ sản phẩm này 2 lần (hoặc spam click 20 lần nhanh).
+4. Bấm vào link "Giỏ hàng" trên navbar để điều hướng sang trang `/cart`.
+5. Kiểm tra danh sách các dòng sản phẩm hiển thị trong bảng giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.3: Khi thêm cùng một sản phẩm đã có trong giỏ hàng, hệ thống bắt buộc phải cộng dồn số lượng trên dòng sản phẩm đó chứ không được tạo thêm dòng mới (ví dụ: bấm nút thêm 2 lần thì giỏ hàng chỉ có đúng 1 dòng `Tai nghe AirPods Pro 2` với Số lượng = 2).
 
 ## Actual
 
-`<SV viết>`
+Giỏ hàng không hề cộng dồn số lượng mà tự động tạo thêm dòng mới trùng hệt cho mỗi lần bấm thêm:
+- Khi bấm 2 lần: Trong giỏ xuất hiện 2 dòng trùng nhau hoàn toàn (`Tai nghe AirPods Pro 2`), mỗi dòng đều có Số lượng = 1 và Thành tiền = 6.000.000 ₫.
+- Khi tự động hóa test spam click 20 lần: Trong giỏ văng ra đúng 20 dòng trùng nhau liệt kê liên tiếp.
 
 ## Bằng chứng
 
@@ -66,7 +73,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong frontend-web/src/context/CartContext.jsx (dòng 8–10), hàm addToCart xử lý cập nhật state giỏ hàng cực kỳ ngây thơ:
+```jsx
+const addToCart = (product, quantity) => {
+  setCart([...cart, { ...product, quantity }]);
+};
+```
+- Code không hề dùng find hay findIndex để kiểm tra xem product.id đã tồn tại trong mảng cart hay chưa. Mỗi lần hàm được gọi, nó chỉ đơn giản dùng Spread Operator ([...cart, newProduct]) để append (đẩy thêm) một object mới vào cuối mảng cart.
+
+- Điều này dẫn đến việc giỏ hàng bị nhân bản vô tội vạ các dòng trùng id, vi phạm trực tiếp quy tắc gộp/cộng dồn số lượng của FR-07.3.
 
 ## Link GitHub Issue
 

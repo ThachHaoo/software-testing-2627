@@ -1,9 +1,9 @@
 # BUG-15
 
 - **ID:** BUG-15
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Nút 'Thêm vào giỏ hàng' ở trang chi tiết sản phẩm bị nuốt lượt bấm đầu tiên, không thêm sản phẩm và không có phản hồi
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,28 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang hoạt động bình thường.
+- Người dùng truy cập dưới dạng khách hoặc đã đăng nhập tài khoản.
+- Trạng thái giỏ hàng ban đầu đang trống.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Ở trang chủ `/`, bấm nút "Xem chi tiết" trên một thẻ sản phẩm bất kỳ (ví dụ: `Samsung Galaxy S24 Ultra` - id 2).
+2. Tại trang chi tiết `/product/2`, xóa trắng ô nhập "Số lượng:" rồi gõ một số nguyên hợp lệ (ví dụ: gõ `2`).
+3. Bấm nút "Thêm vào giỏ hàng" đúng 1 lần và quan sát phản hồi trên giao diện trong 2 giây.
+4. Bấm vào link/icon "Giỏ hàng" trên thanh điều hướng (navbar) để điều hướng sang trang `/cart`.
+5. Kiểm tra danh sách sản phẩm trong giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo chức năng ngầm định của FR-06: Bấm nút "Thêm vào giỏ hàng" phải thêm sản phẩm vào giỏ với số lượng đã nhập. Khi chuyển sang trang giỏ hàng `/cart`, bảng danh sách phải xuất hiện dòng mới chứa sản phẩm tương ứng với Đơn giá, Số lượng và Thành tiền chính xác.
+- Theo FR-06.3 và FR-24.1 (kèm giả định B21): Trong vòng 2 giây ngay sau khi bấm nút thêm, hệ thống phải xuất hiện ít nhất một phản hồi trực quan (toast notification, badge giỏ hàng nhảy số, hoặc đổi trạng thái/chữ trên nút thành "Đã thêm").
 
 ## Actual
 
-`<SV viết>`
+- Ngay sau khi bấm nút "Thêm vào giỏ hàng" ở bước 3, giao diện hoàn toàn không có bất kỳ phản hồi nào trong 2 giây (không có toast, chữ trên nút không đổi, badge giỏ hàng không cập nhật).
+- Mở trang giỏ hàng `/cart` ở bước 4 thì giỏ hàng vẫn rỗng hoàn toàn, không xuất hiện bảng danh sách sản phẩm nào cả.
+- Sản phẩm chỉ thực sự được thêm vào giỏ nếu người dùng thao tác bấm thêm từ lần thứ 2 trở đi.
 
 ## Bằng chứng
 
@@ -86,7 +95,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Đoạn mã xử lý sự kiện click nút thêm vào giỏ trong component frontend-web/src/pages/ProductDetail.jsx (dòng 21–31) bị cài đặt sai logic State quản lý số lần bấm (clickCount).
+
+- Khai thác mã nguồn cho thấy hàm handleAddToCart kiểm tra điều kiện if (clickCount === 0) ở ngay bước đầu tiên. Do state khởi tạo của clickCount là 0, ở lần nhấp chuột đầu tiên hàm này lập tức cập nhật setClickCount(1) rồi thoát (return;) mà hoàn toàn không gọi hàm addToCart(product, parseInt(quantity)) cũng như không gọi setAdded(true) để đổi UI phản hồi.
+
+- Do lượt bấm đầu bị nuốt, logic thêm hàng chỉ bắt đầu chạy từ lượt bấm thứ 2 khi clickCount đã khác 0. Điều này giải thích chính xác lý do tại sao toàn bộ 6 test case thực hiện bấm thêm 1 lần từ trang chi tiết (TC-02, TC-61, TC-62, TC-63, TC-64, TC-205) đều thất bại đồng loạt.
 
 ## Link GitHub Issue
 
