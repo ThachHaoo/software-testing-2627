@@ -91,9 +91,37 @@ Skill dùng trong repo:
 - Case "UI+API" phải tách thành 2 case (mỗi tầng một case); expected của case API không chứa yếu tố UI.
 - Chỉ đổi Expected sau khi có Actual khi điểm quan sát không tồn tại; ghi lý do vào notes.
 - Evidence: tên `TC-xx_ui/_api/_req/_res/_failed/_manual_*`; bỏ trace .zip; evidence gốc không che đường dẫn (bản che để dán issue: `bugs/_issue_redacted/`).
-- Bug: `BUG-xx` đánh số liên tục toàn HW02 (kế tiếp **BUG-15**); Severity Critical/High/Medium/Low, Priority High/Medium/Low (`bugs/README.md`).
+- Bug: `BUG-xx` đánh số liên tục toàn HW02 (kế tiếp: xem dòng "BUG kế tiếp" ở cuối mục); Severity Critical/High/Medium/Low, Priority High/Medium/Low (`bugs/README.md`).
 - Bước 7: AI gom dữ kiện → SV chốt danh sách bug → AI dựng khung (chỉ dữ kiện) → SV viết → AI sửa dữ kiện theo evidence, đánh dấu "(chưa kiểm chứng)" → kiểm trùng issue → `gh issue create` bằng tài khoản SV, tiêu đề `[FR-xx] <tiêu đề>`, `--label bug`.
 - Tài khoản GitHub của SV: `ThachHaoo` (tên hiển thị TonKnight).
+- 2026-10-20 (rút ra từ B_FR07):
+  - Thiết kế TC:
+    - Thuộc tính chung (nhãn, định dạng tiền, badge, phản hồi khi thêm) chỉ khẳng định ở **một** case.
+    - `ec_target` ⊆ covers = lớp vào cần thử + lớp ra mà Expected khẳng định; truy vết sinh từ `ec_target`.
+    - Phần không đổi ghi tương đối (SAU = TRƯỚC); giá trị tuyệt đối chỉ cho đầu ra case thực sự kiểm.
+    - SRS im lặng và chưa có giả định → không đặt Expected/không tạo Fail; SV chốt giả định trước. Giả định quyết Expected mới → vào `assumptions` của case và truy vết.
+  - BVA: không có cận trên → biến khai `no_upper_bound: "<mã giả định>"`, dùng điểm `LARGE` (case phải có mã đó trong `assumptions`).
+  - Case SV: `technique` (EG…) + `approach: "gray-box"` khi chọn từ mã nguồn.
+  - A20 mở rộng:
+    - "Pass hộp đen" ghi case gốc khi đường thêm/nhập hỏng làm case từ chối đúng một cách ngẫu nhiên.
+    - Case có thể có 2 case gốc, ghi cả hai.
+  - Chạy test:
+    - `merge_results.py` không ghi đè status SV đã chỉnh (`--force` mới ghi đè).
+    - results mỗi lượt có timestamp.
+    - evidence chỉ giữ lượt mới nhất.
+    - Nhật ký lượt chạy ghi ở `RUN.md` + notes suite; lượt chính thức = lượt chạy toàn bộ sau restart backend.
+  - Bug:
+    - Format theo `bugs/BUG-14.md`.
+    - Mục **Yêu cầu chỉ ghi yêu cầu/giả định bị vi phạm theo Actual**, kèm dòng "Đạt trong cùng case" / "Chưa đánh giá được" / "Không áp dụng"; yêu cầu ngầm định ghi "(ngầm định)".
+    - Nhận định về tác động phải có dữ kiện (code/evidence).
+    - SV commit bản viết (`7/7b`) trước khi AI sửa dữ kiện (`7/7c`).
+    - File dữ kiện `bugs/_groups_<X_FRnn>.md`.
+    - Tiền tố issue chỉ thêm trên GitHub = FR của feature đang kiểm (không ghi vào .md).
+    - Ảnh trang Issues: `bugs/issues_page_<X_FRnn>.png`.
+    - BUG kế tiếp: **BUG-35**.
+  - Checklist bước tái hiện (AI chạy thật trước khi tạo issue):
+    - Web: giỏ là state React → điều hướng bằng link navbar, không gõ URL/tải lại; tiền điều kiện có bước dựng dữ liệu.
+    - Windows PowerShell 5.1: tài khoản seed `test@eshop.com`; `-ContentType` ở tham số (không trong `-Headers`); `-Body ([Text.Encoding]::UTF8.GetBytes($body))`; `Invoke-WebRequest -UseBasicParsing`; lỗi 4xx/5xx đọc body bằng `try/catch` + `GetResponseStream()` (đặt `Position = 0`).
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 

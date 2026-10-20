@@ -43,15 +43,20 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
 - **Quy trình phải nói rõ cách nhập từng loại giá trị**: thứ tự các ô; giá trị thường → gõ đúng chuỗi trong cột; "rỗng" → không nhập gì, để nguyên ô trống; khoảng trắng → gõ đúng số dấu cách ghi trong cột (bảng hiển thị `␣`); bấm nút submit đúng một lần; nêu chỗ quan sát kết quả (hộp lỗi, URL, phản hồi API, CSDL). Mỗi bước có một phản hồi quan sát được.
 - Quy tắc chọn: case **hợp lệ** phủ càng nhiều lớp hợp lệ càng tốt; mỗi case **không hợp lệ** phủ **đúng một** lớp không hợp lệ, các biến khác giữ giá trị hợp lệ.
 - Mỗi case có `covers` (danh sách EC), `technique: "EP"`, `rationale` (vì sao chọn giá trị này là đại diện tốt nhất), `expected_result` có oracle kiểm chứng được (đúng chữ thông báo nếu đặc tả nêu; nếu không, ghi giả định).
+- `ec_target` (⊆ `covers`) = lớp vào case cần thử + lớp ra mà Expected khẳng định; truy vết yêu cầu sinh từ `ec_target`. Giả định quyết định Expected ghi vào `assumptions` của case.
+- Thuộc tính chung (nhãn, định dạng, phản hồi trực quan…) chỉ khẳng định ở **một** case; các case khác không lặp lại.
+- Phần dữ liệu không thay đổi ghi **tương đối** (SAU = TRƯỚC); giá trị tuyệt đối chỉ dùng cho đầu ra case thực sự kiểm.
+- Đặc tả im lặng và chưa có giả định → không viết Expected cho điểm đó (không tạo Fail không căn cứ); hỏi người dùng chốt giả định trước.
 - Chạy `check_domain.py` — mọi EC phải được phủ, không case nào phủ hai lớp không hợp lệ. Dừng.
 
 ### Bước 4 — Test case BVA
 - Tạo suite `TS-BVA`. Với mỗi lớp có thứ tự (số, độ dài, ngày…), sinh các điểm theo mô hình 9 điểm của bài giảng: `LB-1, LB, LB+1, NOM, UB-1, UB, UB+1`, và `MIN_UI`/`MAX_UI` (giá trị nhỏ/lớn nhất nhập được qua giao diện) khi có ý nghĩa. Bước nhảy = đơn vị nhỏ nhất của miền (1 ký tự, 1 đơn vị tiền, 1 ngày).
 - Biến đang xét chạy qua các điểm biên; **các biến khác giữ nominal hợp lệ**.
+- Miền không có cận trên (theo giả định): khai `no_upper_bound: "<mã giả định>"` ở biến, dùng điểm `LARGE` cho đại diện giá trị lớn; case có mã giả định đó trong `assumptions` (`check_domain.py` báo lỗi nếu thiếu).
 - Mỗi case có `bva_point`, `covers`, `technique: "BVA"`, `rationale`. Chạy `check_domain.py`. **Dừng hẳn** — bước tiếp theo là của người dùng.
 
 ### Bước 5 — (Người dùng) bổ sung và gap analysis
-- Người dùng thêm suite `TS-SV` (`origin: "Human"`) và chạy `check_domain.py`.
+- Người dùng thêm suite `TS-SV` (`origin: "Human"`) và chạy `check_domain.py`. Mỗi case có `technique` (thường `EG`); case chọn từ hiểu biết mã nguồn ghi `approach: "gray-box"`.
 - Khi được hỏi, so sánh case người dùng thêm với bản đóng băng của bước 3–4 và trả lời theo quy tắc 5. Không viết hộ phần phân tích nguyên nhân trong report.
 
 ### Bước 6 — Thực thi
@@ -61,8 +66,10 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
   - Kết quả lệch Expected **vì biến mục tiêu** của case → `Fail`.
   - Case không đi tới được điểm kiểm **vì biến khác** (một lỗi đã có ở case khác chặn đường) → `Blocked`, ghi mã case gốc vào `notes`. Không tính là Fail lần hai.
   - Trường đặc tả yêu cầu nhưng không có trên giao diện → case kiểm sự tồn tại `Fail`; các case cần nhập trường đó → `Blocked` (case gốc = case kiểm sự tồn tại).
-  - Bị từ chối đúng như Expected nhưng thông báo/lý do không chứng minh được luật mục tiêu (lý do chung, hoặc do một luật khác) → vẫn `Pass` theo hộp đen, ghi "Pass hộp đen" + lý do vào `notes`.
-- `auto_status` giữ kết quả tự động gốc do `merge_results.py` ghi; người dùng chỉnh `status` theo quy tắc trên, không sửa `auto_status`.
+  - Bị từ chối đúng như Expected nhưng thông báo/lý do không chứng minh được luật mục tiêu (lý do chung, hoặc do một luật khác, hoặc chức năng nền hỏng nên giá trị nào cũng bị "từ chối") → vẫn `Pass` theo hộp đen, ghi "Pass hộp đen" + case gốc vào `notes`.
+  - Case bị chặn bởi hai lỗi khác nhau → ghi cả hai case gốc.
+- `auto_status` giữ kết quả tự động gốc do `merge_results.py` ghi; người dùng chỉnh `status` theo quy tắc trên, không sửa `auto_status`. `merge_results.py` không ghi đè `status` người dùng đã chỉnh (trừ `--force`).
+- Mỗi lượt chạy ghi results riêng có timestamp; evidence chỉ giữ lượt mới nhất. Ghi nhật ký lượt chạy (thời điểm, phạm vi, script) và chọn lượt chính thức (chạy toàn bộ sau khi dữ liệu được làm sạch).
 - Đường tự động bị chặn (Blocked) nhưng case vẫn kiểm được bằng đường khác (gọi API tạo dữ liệu, thao tác tay): người dùng kiểm tay, ghi bước và quan sát vào `notes`, ảnh `TC-xx_manual_*.png`; `status` theo kết quả kiểm tay, `auto_status` giữ Blocked.
 - Evidence đặt tên `TC-xx_ui/_api/_req/_res/_failed/_manual_*`; không chép trace; giữ nguyên bản gốc (bản cần che thông tin để đăng công khai tạo riêng).
 
@@ -71,10 +78,11 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
 - Phần AI được làm, theo thứ tự, mỗi bước chờ người dùng duyệt:
   1. **Gom dữ kiện**: nhóm các case Fail/Blocked theo triệu chứng và đoạn mã liên quan (trích nguyên văn, số dòng), chạy lại case nghi flaky; không đặt tên bug, không đề xuất severity/priority, không kết luận nguyên nhân.
   2. Người dùng chốt danh sách bug.
-  3. **Dựng khung** `BUG-xx.md`: chỉ điền dữ kiện (môi trường, bằng chứng, TC liên quan, yêu cầu/giả định bị vi phạm, trích dẫn nguồn); để trống tiêu đề, bước, Expected, Actual, nhận định, severity, priority.
-  4. Người dùng viết mô tả.
+  3. **Dựng khung** `BUG-xx.md`: chỉ điền dữ kiện (môi trường, bằng chứng, TC liên quan, yêu cầu/giả định bị vi phạm, trích dẫn nguồn); để trống tiêu đề, bước, Expected, Actual, nhận định, severity, priority. Mục Yêu cầu **chỉ** ghi yêu cầu/giả định mà Actual cho thấy bị vi phạm, thêm dòng "Đạt trong cùng case" / "Chưa đánh giá được" / "Không áp dụng"; yêu cầu không có câu đặc tả riêng ghi "(ngầm định)".
+  4. Người dùng viết mô tả và commit bản viết trước khi AI sửa dữ kiện. Nhận định về tác động phải dựa trên dữ kiện (mã/evidence).
   5. **Sửa dữ kiện**: đối chiếu payload/Actual với evidence (`_req`/`_res`, `actual_result`, ảnh) và sửa chỗ sai; khẳng định chưa có bằng chứng → thêm "(chưa kiểm chứng)"; không sửa văn phong, severity, priority.
-  6. Kiểm issue trùng trên tracker trước khi tạo; tạo issue bằng tài khoản của người dùng từ file người dùng đã viết; ghi URL vào file.
+  6. **Chạy thật bước tái hiện** trước khi tạo issue: lệnh/thao tác phải chạy được trên môi trường của người dùng (điều hướng không làm mất trạng thái; tiền điều kiện có bước dựng dữ liệu; lệnh shell đặt đúng content-type, mã hoá body, đọc được body lỗi); dán output vào dữ kiện; output lệch Actual → báo, không sửa Actual.
+  7. Kiểm issue trùng trên tracker trước khi tạo; tạo issue bằng tài khoản của người dùng từ file người dùng đã viết; tiền tố tiêu đề (nếu có) chỉ thêm trên tracker; ghi URL vào file.
 
 ## Lệnh
 
