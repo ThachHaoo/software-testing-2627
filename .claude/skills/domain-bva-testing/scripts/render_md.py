@@ -93,13 +93,14 @@ def render(data, h):
     def suite_table(s, bva=False):
         cols = s.get("columns", [])
         tgt = any(c.get("ec_target") for c in s.get("cases", []))
-        hdr = ["#TC", "Tiêu đề", "EC phủ"] + (["EC mục tiêu"] if tgt else []) + (["Điểm biên"] if bva else []) + cols + ["Expected", "Lý do chọn input", "Nguồn"]
+        appr = any(c.get("approach") for c in s.get("cases", []))
+        hdr = ["#TC", "Tiêu đề", "EC phủ"] + (["EC mục tiêu"] if tgt else []) + (["Điểm biên"] if bva else []) + cols + ["Expected", "Lý do chọn input"] + (["Cách tiếp cận"] if appr else []) + ["Nguồn"]
         rows = []
         for c in s.get("cases", []):
             ins = c.get("inputs", {})
             rows.append([c["id"], c.get("title"), ", ".join(as_list(c.get("covers")))]
                         + ([", ".join(as_list(c.get("ec_target")))] if tgt else []) + ([c.get("bva_point")] if bva else [])
-                        + [show(ins.get(k, "")) if k in input_names else ins.get(k, "") for k in cols] +[c.get("expected_result"), c.get("rationale"), ORIGIN.get(c.get("origin"), c.get("origin"))])
+                        + [show(ins.get(k, "")) if k in input_names else ins.get(k, "") for k in cols] +[c.get("expected_result"), c.get("rationale")] + ([c.get("approach") or "black-box"] if appr else []) + [ORIGIN.get(c.get("origin"), c.get("origin"))])
         body = []
         if s.get("preconditions"):
             body.append("**Tiền điều kiện:** " + "; ".join(s["preconditions"]))

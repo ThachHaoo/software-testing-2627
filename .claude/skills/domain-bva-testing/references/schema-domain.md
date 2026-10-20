@@ -36,6 +36,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
           "assumptions": ["B12"],           // tuỳ chọn: mã giả định quyết định Expected của case không gắn EC (GUI); không đặt mã giả định trong requirements vì linter giảng viên báo lỗi
           "technique": "EP",                // EP | BVA | EG (error guessing) | ST (state transition)
           "bva_point": "",                  // LB-1 | LB | LB+1 | NOM | UB-1 | UB | UB+1 | MIN_UI | MAX_UI
+          "approach": "gray-box",           // tuỳ chọn: black-box (mặc định khi vắng) | gray-box | white-box — case được chọn dựa trên hiểu biết về mã/cấu trúc SUT
           "rationale": "vì sao chọn giá trị này",
           "layer": "UI",                    // UI | API | Mobile
           "origin": "AI",                   // AI | Human | Both
@@ -67,6 +68,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
 | WARN | Biến đầu vào không có lớp không hợp lệ nào; biến đầu ra chưa phân lớp |
 | WARN | Case BVA thiếu `bva_point`; lớp `range` chưa có đủ LB/UB và hai láng giềng |
 | WARN | Case thiếu `rationale`, `origin`, `technique` |
+| WARN | `approach` có giá trị ngoài black-box/gray-box/white-box |
 | ERROR | `ec_target` có EC không nằm trong `covers`; case không hợp lệ không có đúng 1 EC không hợp lệ trong `ec_target` |
 | WARN | TC trong suite TS-DOM*/TS-BVA* thiếu `ec_target` (chỉ khi file đã dùng trường này) |
 | ERROR | `bva_point: "LARGE"` khi biến khoảng của case không có `no_upper_bound` trỏ tới giả định có thật, hoặc mã đó không nằm trong `assumptions` của case; `no_upper_bound` trỏ tới giả định không tồn tại |

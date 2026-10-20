@@ -15,6 +15,7 @@ for _s in (_sys.stdout, _sys.stderr):  # Windows: in tiếng Việt khi output b
         pass
 
 BVA_POINTS = {"LB-1", "LB", "LB+1", "NOM", "UB-1", "UB", "UB+1", "MIN_UI", "MAX_UI"}
+APPROACHES = {"black-box", "gray-box", "white-box"}
 
 
 def as_list(v):
@@ -104,6 +105,8 @@ def check(data):
                                       "(domain.variables[].no_upper_bound = mã giả định, và mã đó nằm trong assumptions của case)")
             elif bp not in BVA_POINTS:
                 add("WARN", cid, f"bva_point '{bp}' không thuộc {sorted(BVA_POINTS)}")
+        if c.get("approach") and c["approach"] not in APPROACHES:
+            add("WARN", cid, f"approach '{c['approach']}' không thuộc {sorted(APPROACHES)}")
         for f in ("rationale", "origin"):
             if not c.get(f):
                 add("WARN", cid, f"thiếu {f}")
