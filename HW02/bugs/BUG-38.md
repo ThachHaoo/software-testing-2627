@@ -1,9 +1,9 @@
 # BUG-38
 
 - **ID:** BUG-38
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Sửa sản phẩm (UI Admin) không kiểm tra điều kiện Giá tiền (> 0 và bắt buộc), cho phép cập nhật giá âm, bằng 0 hoặc để trống và đè tên sản phẩm vừa sửa lên toàn bộ danh sách
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,47 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở trang http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
+
+- Đã truy cập vào trang Admin tại http://localhost:5174, chọn mục "Sản phẩm" và bấm nút "Sửa" tại một sản phẩm bất kỳ để mở form "Sửa sản phẩm".
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".
+
+2. Tại bảng danh sách sản phẩm, chọn một sản phẩm bất kỳ và bấm nút "Sửa".
+
+3. Nhập dữ liệu vi phạm vào ô "Giá tiền" theo một trong các trường hợp sau:
+  + Nhập số âm: -1000 (TC-FR15-15)
+  + Nhập số 0: 0 (TC-FR15-79)
+  + Để trống ô giá tiền: "" (TC-FR15-16)
+
+4. Bấm nút "Lưu sản phẩm" (hoặc "Cập nhật sản phẩm").
+
+5. Quan sát thông báo hiển thị trên màn hình, đồng thời kiểm tra lại giá tiền của sản phẩm được sửa và toàn bộ danh sách sản phẩm hiển thị trên bảng UI cũng như trong CSDL qua API GET /api/products.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu FR-15.3, Giá tiền là trường bắt buộc và phải là số dương (> 0).
+
+- Hệ thống phải chặn không cho lưu khi sửa giá thành số âm, số 0 hoặc để trống, đồng thời phải xuất hiện thông báo lỗi (bong bóng HTML5 hoặc alert/thông báo trên trang).
+
+- Dữ liệu trong CSDL và trên bảng UI không được thay đổi.
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không hề phát ra thông báo lỗi nào, ngược lại vẫn báo alert "Cập nhật thành công!".
+
+- Dưới CSDL, giá tiền của sản phẩm được chọn vẫn bị cập nhật thành công thành giá trị vi phạm:
+  + TC-FR15-15 (giá -1000): Cập nhật giá sản phẩm thành -1000.
+  + TC-FR15-79 (giá 0): Cập nhật giá sản phẩm thành 0.
+  + TC-FR15-16 (giá rỗng ""): Cập nhật giá sản phẩm thành chuỗi rỗng "".
+
+- Đồng thời trên giao diện UI Admin, do dính bug cập nhật state chung (App.jsx), tên của sản phẩm đang sửa bị đè lên tên của tất cả các sản phẩm khác trên bảng danh sách.
 
 ## Bằng chứng
 
@@ -88,7 +116,13 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx):
+  + Ô nhập Giá tiền ở form sửa tuy để type="number" nhưng thiếu thuộc tính required và min="1", dẫn đến việc không chặn submit khi người dùng nhập số âm, số 0 hoặc xóa trống giá tiền.
+  + Vẫn bị ảnh hưởng bởi lỗi logic state products.map(...) ở hàm handleProductSubmit, khiến cho giao diện ghi đè tên của sản phẩm vừa sửa lên toàn bộ danh sách sản phẩm hiển thị trên bảng.
+
+- Ở Backend (backend/server.js, dòng 179–189): Endpoint PUT /api/products/:id thực hiện cập nhật thẳng vào CSDL mà không có bước validate kiểm tra giá trị của trường price phải là số dương.
+
+- Lỗi này gây sai lệch dữ liệu giá sản phẩm trong hệ thống (cho phép lưu sản phẩm giá âm, giá 0đ hoặc không có giá) và làm hỏng giao diện hiển thị danh sách sản phẩm trên trang quản trị.
 
 ## Link GitHub Issue
 

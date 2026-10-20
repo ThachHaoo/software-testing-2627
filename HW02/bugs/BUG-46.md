@@ -1,9 +1,9 @@
 # BUG-46
 
 - **ID:** BUG-46
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Các API GET, PUT, DELETE /api/products/:id trả về HTTP 200 OK giả thay vì 44xx (Not Found / Client Error) khi thao tác với product id không tồn tại trong CSDL
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Người dùng/Client có khả năng gửi HTTP Request trực tiếp tới các API endpoint GET, PUT, DELETE /api/products/:id (ví dụ sử dụng Postman, cURL hoặc Scripts).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Chuẩn bị một :id không tồn tại trong CSDL (ví dụ: id = 999).
+
+2. Lần lượt gửi các HTTP Request tới backend với :id không tồn tại:
+  + Gửi request GET http://localhost:3000/api/products/999 (TC-FR15-47).
+  + Gửi request PUT http://localhost:3000/api/products/999 với payload cập nhật hợp lệ (TC-FR15-48).
+  + Gửi request DELETE http://localhost:3000/api/products/999 (TC-FR15-49).
+
+3. Kiểm tra HTTP Status Code và nội dung Response Body trả về ở từng request.
+
+4. Thực hiện gửi request GET /api/products để kiểm tra dữ liệu sản phẩm trong CSDL.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo quy định C10, khi người dùng gọi các API GET, PUT, DELETE /api/products/:id với :id không tồn tại trong CSDL, hệ thống phải trả về mã lỗi 4xx (ví dụ 404 Not Found) kèm thông báo lỗi cụ thể dạng JSON.
+
+- Hệ thống không được trả về mã thành công HTTP 200 OK.
+
+- Dữ liệu các sản phẩm khác trong CSDL không bị thay đổi hay bị tác động.
 
 ## Actual
 
-`<SV viết>`
+- Mặc dù dữ liệu các sản phẩm khác trong CSDL giữ nguyên không đổi, nhưng cả 3 API đều trả về mã thành công HTTP 200 OK:
+  + GET /api/products/999: Trả về HTTP 200 OK kèm body rỗng {}.
+  + PUT /api/products/999: Trả về HTTP 200 OK kèm message {"message":"Product updated"}.
+  + DELETE /api/products/999: Trả về HTTP 200 OK kèm message {"message":"Product deleted"}.
+
+- Server báo xóa/cập nhật thành công mặc dù không hề có bản ghi nào bị thay đổi hay bị xóa trong CSDL.
 
 ## Bằng chứng
 
@@ -92,7 +114,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Backend (backend/server.js, dòng 159–196):
+  + Endpoint GET: dòng 161 khi !row lại chủ động return res.status(200).json({}) thay vì trả về status 404.
+  + Endpoint PUT và DELETE: không kiểm tra this.changes trong callback của SQLite db.run. Khi :id không tồn tại, câu lệnh UPDATE hoặc DELETE thực thi bình thường nhưng ảnh hưởng 0 dòng (this.changes === 0). Do code không kiểm tra biến này nên vẫn mặc nhiên trả về HTTP 200 kèm response báo "Product updated" hay "Product deleted".
+
+- Việc trả về HTTP 200 OK cho tài nguyên không tồn tại làm sai lệch chuẩn REST API, khiến Client/Frontend nhận thông tin sai là đã xóa hoặc cập nhật thành công sản phẩm.
 
 ## Link GitHub Issue
 

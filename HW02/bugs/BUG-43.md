@@ -1,9 +1,9 @@
 # BUG-43
 
 - **ID:** BUG-43
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** API POST /api/products trả về phản hồi lỗi dạng HTML thay vì JSON khi nhận payload chứa giá trị không đúng chuẩn JSON (như Infinity)
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,33 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Người dùng/Client có khả năng gửi HTTP Request trực tiếp tới API endpoint POST /api/products (ví dụ sử dụng Postman, cURL hoặc Scripts).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Thực hiện gửi request POST tới URL http://localhost:3000/api/products với body chứa giá trị không hợp lệ theo chuẩn JSON RFC 8259, cụ thể là truyền "price": Infinity (TC-FR15-209).
+
+2. Kiểm tra HTTP Status Code, Header Content-Type và Response Body nhận được từ Server.
+
+3. Thực hiện gửi request GET /api/products để kiểm tra lại dữ liệu trong CSDL.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo quy định C20 (dựa trên chuẩn JSON RFC 8259 và C6), khi API nhận request chứa dữ liệu không đúng chuẩn JSON (như Infinity, NaN), hệ thống phải trả về phản hồi chuẩn dạng JSON với mã lỗi 4xx.
+
+- Response body phải mang định dạng JSON có chứa thông tin báo lỗi (ví dụ {"error": ...}).
+
+- Dữ liệu trong CSDL không được thay đổi.
 
 ## Actual
 
-`<SV viết>`
+- Mặc dù CSDL không bị thay đổi và server trả về mã HTTP Status 400, nhưng nội dung Response Body trả về lại là một trang HTML tĩnh chứa thẻ <pre> hiển thị lỗi SyntaxError: Unexpected token 'I' ... do middleware mặc định sinh ra.
+
+- API trả về chuỗi HTML thay vì cấu trúc JSON đồng nhất theo chuẩn thiết kế REST API.
 
 ## Bằng chứng
 
@@ -68,7 +82,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Backend (backend/server.js, dòng 11–12): Express app chỉ sử dụng bodyParser.json() mà không cấu hình Custom Error Handler Middleware cho việc parse JSON lỗi.
+
+- Khi bodyParser.json() bắt gặp một giá trị không hợp lệ chuẩn JSON như Infinity, nó tự động throw SyntaxError và đẩy thẳng ra Error Handler mặc định của Express. Handler mặc định này render lỗi ra một trang HTML web.
+
+- Việc trả về trang HTML khi client gọi REST API làm gãy cấu trúc giao tiếp hệ thống, gây ra lỗi parse JSON phía Client (như các ứng dụng frontend hoặc ứng dụng mobile kỳ vọng nhận JSON response).
 
 ## Link GitHub Issue
 

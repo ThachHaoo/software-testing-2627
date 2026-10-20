@@ -1,9 +1,9 @@
 # BUG-41
 
 - **ID:** BUG-41
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** API POST /api/products không kiểm tra validation dữ liệu đầu vào, trả về HTTP 200 OK và tạo sản phẩm không hợp lệ khi truyền sai name, price hoặc category_id
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,53 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.   
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.   
+
+- Người dùng/Client có khả năng gửi HTTP Request trực tiếp tới API endpoint POST /api/products (ví dụ sử dụng Postman, cURL hoặc Scripts).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Thực hiện gửi request POST tới URL http://localhost:3000/api/products với các payload vi phạm dữ liệu theo một trong các trường hợp sau:
+
+- Vi phạm trường name:
+  + Chuỗi rỗng "" (TC-FR15-23, TC-FR15-84)
+  + Chuỗi quá 255 ký tự (256 ký tự ở TC-FR15-100; 300 ký tự ở TC-FR15-24)
+  + Chuỗi chỉ gồm khoảng trắng "   " (TC-FR15-25)
+  + Truyền null (TC-FR15-26)
+  + Truyền sai kiểu dữ liệu kiểu số 123 (TC-FR15-27)
+
+- Vi phạm trường price:
+  + Giá âm như -1000, -999999999999 (TC-FR15-28, TC-FR15-208)
+  + Giá bằng 0 hoặc giá quá nhỏ bị underflow về 0 (TC-FR15-101, TC-FR15-214)
+  + Truyền null (TC-FR15-29)
+  + Truyền sai kiểu dữ liệu là chuỗi chữ "abc" hoặc chuỗi số "100000" (TC-FR15-30, TC-FR15-31)
+
+- Vi phạm trường category_id:
+  + Danh mục không tồn tại trong CSDL như 999 (TC-FR15-32)
+  + Truyền null (TC-FR15-33)
+  + Truyền sai kiểu dữ liệu là chuỗi chữ "abc" (TC-FR15-34)
+
+2. Kiểm tra HTTP Status Code và Response nhận được từ Server.
+
+3. Thực hiện gửi request GET /api/products để kiểm tra danh sách sản phẩm trong CSDL.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo các yêu cầu FR-15.2, FR-15.3, FR-15.4 và các quy định C6, C9, C11, API phải kiểm tra validation chặt chẽ dữ liệu đầu vào ở tầng backend.
+
+- Khi dữ liệu gửi lên bị thiếu, sai kiểu, vi phạm độ dài, là giá trị âm/0 hoặc chứa category_id không tồn tại, API phải từ chối request, trả về mã lỗi 4xx (Client Error) cùng phản hồi chứa thông tin lỗi (error).
+
+- Hệ thống tuyệt đối không được chèn bản ghi hỏng/không hợp lệ nào vào CSDL.
 
 ## Actual
 
-`<SV viết>`
+- Backend không kiểm tra validation bất kỳ trường dữ liệu nào, luôn trả về HTTP Status Code 200 OK cùng message {"message":"Product created","id": ...}.
+
+- Tất cả các payload vi phạm (tên rỗng, tên quá 255 ký tự, tên null, giá âm, giá null, giá chuỗi, category_id không tồn tại,...) đều tạo thành công bản ghi mới và lưu trực tiếp vào CSDL.
+
+- Số lượng bản ghi trong CSDL sau mỗi request tăng từ 5 lên 6.
 
 ## Bằng chứng
 
@@ -109,7 +143,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Backend (backend/server.js, dòng 167–177): Endpoint POST /api/products chỉ đơn thuần bóc tách req.body và đẩy thẳng các biến vào câu lệnh INSERT INTO products của SQLite mà không có bất cứ dòng code nào để validate kiểu dữ liệu, độ dài hay sự tồn tại của khóa ngoại category_id.
+
+- Đây là lỗi rất nghiêm trọng ở tầng API Backend. Mặc dù ở Frontend có thể có một số bước chặn cơ bản, việc Backend hoàn toàn bỏ ngỏ validation sẽ cho phép kẻ gian bypass qua UI (dùng Postman, cURL, script) để bơm dữ liệu rác, phá hoại CSDL và gây sai lệch toàn bộ hệ thống.
 
 ## Link GitHub Issue
 

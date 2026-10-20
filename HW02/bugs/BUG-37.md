@@ -1,9 +1,9 @@
 # BUG-37
 
 - **ID:** BUG-37
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Sửa sản phẩm (UI Admin) không kiểm tra độ dài và chuỗi khoảng trắng của Tên sản phẩm, cho phép cập nhật tên quá 255 ký tự hoặc chỉ chứa khoảng trắng và cập nhật nhầm tên cho tất cả sản phẩm trên giao diện
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,49 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.   
+
+- Backend node server.js đang chạy bình thường ở trang http://localhost:3000.   
+
+- Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.   
+
+- Đã truy cập vào trang Admin tại http://localhost:5174, chọn mục "Sản phẩm" và bấm nút "Sửa" tại một sản phẩm bất kỳ để mở form "Sửa sản phẩm".   
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".   
+
+2. Tại bảng danh sách sản phẩm, chọn một sản phẩm bất kỳ và bấm nút "Sửa".   
+
+3. Nhập dữ liệu vi phạm vào ô "Tên sản phẩm" theo một trong các trường hợp sau:   
+  + Nhập chuỗi 300 ký tự 'x' (TC-FR15-13)   
+  + Nhập chuỗi chỉ có 3 dấu cách '   ' (TC-FR15-14)   
+  + Nhập chuỗi 256 ký tự 'x' (TC-FR15-78)   
+
+4. Bấm nút "Lưu sản phẩm" (hoặc "Cập nhật sản phẩm").   
+
+5. Quan sát thông báo hiển thị trên màn hình, đồng thời kiểm tra lại tên của sản phẩm được sửa và toàn bộ danh sách sản phẩm hiển thị trên bảng UI cũng như trong CSDL qua API GET /api/products.   
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu FR-15.2, Tên sản phẩm là bắt buộc và chỉ được tối đa 255 ký tự.   
+
+- Theo C3, Tên sản phẩm nếu chỉ chứa toàn khoảng trắng thì coi như để trống và hệ thống phải từ chối.   
+
+- Hệ thống phải chặn không cho lưu và hiển thị thông báo lỗi rõ ràng (qua bong bóng HTML5, alert báo lỗi hoặc thông báo trên trang).   
+
+- Dữ liệu trong CSDL và trên bảng UI không được thay đổi.   
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không hiển thị bất kỳ thông báo lỗi nào, ngược lại lại hiện alert báo "Cập nhật thành công!".   
+
+- Dưới CSDL, bản ghi sản phẩm chọn sửa vẫn bị cập nhật thành công với tên không hợp lệ:   
+  + TC-FR15-13: Tên sản phẩm đổi thành 300 ký tự 'x'.   
+  + TC-FR15-14: Tên sản phẩm đổi thành 3 dấu cách '   '.   
+  + TC-FR15-78: Tên sản phẩm đổi thành 256 ký tự 'x'.   
+
+- Đặc biệt trên giao diện Admin, sau khi bấm lưu thì TOÀN BỘ các sản phẩm khác trên bảng danh sách đều bị ghi đè hiển thị tên thành Tên sản phẩm vừa nhập ở form sửa (ví dụ: tất cả dòng trên bảng đều biến thành tên 'x' x300 hoặc toàn dấu cách).   
 
 ## Bằng chứng
 
@@ -93,7 +123,13 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx, dòng 105–116):
+  + Thiếu logic validate độ dài maxLength và trim khoảng trắng cho ô tên sản phẩm ở form sửa.   
+  + Bị lỗi logic cập nhật state UI nghiêm trọng tại dòng 110–114: khi sửa 1 sản phẩm, code lại dùng products.map((p) => ({ ...p, name: productForm.name })) để gán tên mới cho TẤT CẢ sản phẩm trong state products, làm giao diện hiển thị sai toàn bộ danh sách.   
+
+- Ở Backend (backend/server.js, dòng 179–189): Endpoint PUT /api/products/:id thực hiện câu lệnh UPDATE trực tiếp mà không hề kiểm tra độ dài hay chuỗi khoảng trắng của name.   
+
+- Lỗi này vừa làm hỏng tính toàn vẹn dữ liệu trong CSDL (lưu tên vi phạm 255 ký tự / tên toàn khoảng trắng), vừa gây ra lỗi bug UI nghiêm trọng làm sai lệch hiển thị của tất cả sản phẩm khác trên trang quản trị.   
 
 ## Link GitHub Issue
 

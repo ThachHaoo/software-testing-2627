@@ -1,9 +1,9 @@
 # BUG-39
 
 - **ID:** BUG-39
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Thêm sản phẩm (UI Admin) không kiểm tra và chặn Tên sản phẩm chứa thẻ script, cho phép lưu chuỗi XSS <script>alert(1)</script> vào hệ thống mà không có thông báo lỗi
+- **Severity:** Major
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở trang http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
+
+- Đã truy cập vào trang Admin tại http://localhost:5174 và chuyển sang mục "Sản phẩm" để mở form "Thêm sản phẩm mới".
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".
+
+2. Tại form "Thêm sản phẩm mới", nhập mã script vào ô "Tên sản phẩm": <script>alert(1)</script>.
+
+3. Nhập Giá tiền hợp lệ (ví dụ: 1500000) và chọn Danh mục hợp lệ (ví dụ: Laptop).
+
+4. Bấm nút "Lưu sản phẩm".
+
+5. Quan sát phản hồi trên giao diện (xem có thông báo lỗi hay không) và kiểm tra lại danh sách sản phẩm hiển thị trên bảng UI cũng như dữ liệu chèn vào CSDL qua API GET /api/products.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu C21 (quy định xử lý tên sản phẩm chứa mã script), hệ thống phải từ chối không cho lưu sản phẩm có tên chứa đoạn script nguy hiểm.
+
+- Hệ thống phải hiển thị thông báo lỗi rõ ràng (qua bong bóng HTML5, alert báo lỗi hoặc thông báo trên trang) để cảnh báo dữ liệu không hợp lệ.
+
+- Dữ liệu trong CSDL và trên bảng UI không được thay đổi (không chèn thêm bản ghi mới).
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không hề đưa ra bất kỳ thông báo lỗi nào (không alert, không bong bóng HTML5 validation, không thông báo trên trang).
+
+- Tạo mới thành công sản phẩm và lưu trực tiếp đoạn mã script vào CSDL với id mới: {id: 105, name: "<script>alert(1)</script>", price: 1500000, category_id: 2}.
+
+- Bảng danh sách sản phẩm trên giao diện tăng từ 5 lên 6 dòng và hiển thị tên sản phẩm là <script>alert(1)</script> (mặc dù React đã encode chuỗi nên chưa kích hoạt lệnh alert(1) ngay trên UI nhưng bản ghi XSS vẫn được lưu thành công vào CSDL).
 
 ## Bằng chứng
 
@@ -85,7 +107,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx, dòng 491–499): Ô nhập Tên sản phẩm chỉ có thuộc tính required, không có bất kỳ cơ chế sanitize, validate hoặc regex nào để lọc/chặn các đoạn script nguy hiểm trước khi gửi request về server.
+
+- Ở Backend (backend/server.js, dòng 167–177): Endpoint POST /api/products nhận dữ liệu từ req.body và lưu thẳng vào CSDL SQLite bằng lệnh INSERT INTO products mà không hề kiểm tra hay loại bỏ mã script nguy hiểm trong chuỗi name.
+
+- Lỗi này tạo tiền đề cho lỗ hổng Stored XSS (Stored Cross-Site Scripting) trong CSDL, cực kỳ nguy hiểm nếu các giao diện khác (như trang Web bán hàng Client, ứng dụng Mobile, hay báo cáo Admin) lấy tên sản phẩm này ra render bằng innerHTML/dangerouslySetInnerHTML mà không escape kỹ.
 
 ## Link GitHub Issue
 

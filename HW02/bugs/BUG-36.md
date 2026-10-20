@@ -1,9 +1,9 @@
 # BUG-36
 
 - **ID:** BUG-36
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Thêm sản phẩm (UI Admin) không kiểm tra điều kiện Giá tiền (> 0 và bắt buộc), cho phép nhập giá âm, giá bằng 0 hoặc để trống mà vẫn tạo sản phẩm thành công
+- **Severity:** Major
+- **Priority:** Major
 
 ## Môi trường
 
@@ -16,19 +16,47 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở trang http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
+
+- Đã truy cập vào trang Admin tại http://localhost:5174 và chuyển sang mục "Sản phẩm" để mở form "Thêm sản phẩm mới".
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".
+
+2. Nhập Tên sản phẩm hợp lệ (ví dụ: Tai nghe UI10).
+
+3. Nhập dữ liệu vi phạm vào ô "Giá tiền" theo một trong các trường hợp sau:
+  + Nhập số âm: -1000 (TC-FR15-10)
+  + Nhập số 0: 0 (TC-FR15-67)
+  + Để trống ô giá tiền: "" (TC-FR15-11, TC-FR15-205)
+
+4. Chọn Danh mục bất kỳ rồi bấm nút "Lưu sản phẩm".
+
+5. Quan sát màn hình xem có báo lỗi không và check lại danh sách sản phẩm hiển thị trên bảng cũng như CSDL qua API GET /api/products.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu FR-15.3, Giá tiền là trường bắt buộc và phải là số dương (> 0).
+
+- Hệ thống phải chặn không cho lưu khi nhập giá âm, giá bằng 0 hoặc để trống, đồng thời phải xuất hiện thông báo lỗi (bong bóng HTML5 hoặc alert/thông báo trên trang).
+
+- Dữ liệu trong CSDL và trên bảng không thay đổi (không được tạo thêm bản ghi mới).
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống hoàn toàn không phát ra bất kỳ thông báo lỗi nào (không có alert, không có bong bóng HTML5, cũng không có thông báo trên trang).
+
+- Vẫn tạo thành công sản phẩm mới và chèn trực tiếp vào CSDL:
+  + TC-FR15-10 (giá -1000): Tạo bản ghi mới {id: 13, price: -1000}.
+  + TC-FR15-67 (giá 0): Tạo bản ghi mới {id: 64, price: 0}.
+  + TC-FR15-11 & TC-FR15-205 (giá rỗng ""): Tạo bản ghi mới với price để rỗng {id: 14/108, price: ""}.
+
+- Bảng danh sách sản phẩm tự động tăng thêm 1 dòng hiển thị giá tiền âm, 0 ₫ hoặc trống ₫.
 
 ## Bằng chứng
 
@@ -90,7 +118,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Frontend (frontend-admin/src/App.jsx, dòng 500–507) tuy có để type="number" nhưng lại thiếu thuộc tính required và thiếu thuộc tính min="1" (hoặc min="0.01"), dẫn đến trình duyệt không chặn submit khi để trống hay nhập số âm/số 0.
+
+- Backend (backend/server.js, dòng 167–177) khi nhận request POST /api/products cũng bỏ qua bước validation trường price, cứ thế nhét thẳng vào câu lệnh SQL INSERT INTO products.
+
+- Việc này làm dữ liệu trong CSDL bị sai lệch nghiêm trọng, cho phép bán sản phẩm với giá âm, giá 0 đồng hoặc không có giá.
 
 ## Link GitHub Issue
 

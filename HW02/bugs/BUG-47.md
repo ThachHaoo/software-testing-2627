@@ -1,9 +1,9 @@
 # BUG-47
 
 - **ID:** BUG-47
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Các API POST, PUT, DELETE /api/products hoàn toàn không có cơ chế xác thực JWT và phân quyền Admin, cho phép người dùng ẩn danh hoặc user thường thực hiện thêm, sửa, xóa sản phẩm
+- **Severity:** Critical
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,48 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Người dùng/Client có khả năng gửi HTTP Request trực tiếp tới các API endpoint POST /api/products, PUT /api/products/:id, DELETE /api/products/:id (ví dụ sử dụng Postman, cURL hoặc Scripts).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Chuẩn bị các dạng Token/Header vi phạm để kiểm tra tính bảo mật của API:
+  + Trường hợp 1: Không gửi Header Authorization (truy cập ẩn danh)
+  + Trường hợp 2: Gửi Header Authorization với Token không hợp lệ / sai Chữ ký / Token hết hạn
+  + Trường hợp 3: Gửi Header Authorization với Token JWT hợp lệ của tài khoản người dùng thông thường (role: 'user')
+
+2. Lần lượt gửi request tới các API quản lý sản phẩm với một trong các dạng Token/Header vi phạm nêu trên:
+  + Gửi request POST http://localhost:3000/api/products tạo sản phẩm mới (TC-FR15-50, TC-FR15-51, TC-FR15-52).
+  + Gửi request PUT http://localhost:3000/api/products/:id sửa thông tin sản phẩm (TC-FR15-53, TC-FR15-54, TC-FR15-55).
+  + Gửi request DELETE http://localhost:3000/api/products/:id xóa sản phẩm (TC-FR15-56, TC-FR15-57, TC-FR15-58).
+
+3. Kiểm tra HTTP Status Code và nội dung Response Body trả về ở từng request.
+
+4. Thực hiện gửi request GET /api/products để kiểm tra sự thay đổi dữ liệu trong CSDL.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu FR-12.2, SEC-02, SEC-03 và quy định C5:
+  + Các API thay đổi dữ liệu (POST, PUT, DELETE /api/products) bắt buộc phải yêu cầu xác thực Token JWT hợp lệ.
+  + Phải kiểm tra phân quyền tài khoản, chỉ cho phép Token có role = 'admin' mới được thực hiện thao tác.
+
+- Nếu không có Token hoặc Token không hợp lệ, API phải trả về lỗi 401 Unauthorized.
+
+- Nếu Token thuộc tài khoản thường (role = 'user'), API phải từ chối truy cập và trả về lỗi 403 Forbidden.
+
+- Dữ liệu trong CSDL không được phép thay đổi khi chưa được xác thực và phân quyền hợp lệ.
 
 ## Actual
 
-`<SV viết>`
+- Tất cả các request POST, PUT, DELETE không truyền Token, truyền Token sai hoặc Token của user thường đều trả về HTTP Status Code 200 OK thành công.
+
+- Dữ liệu trong CSDL bị thay đổi trực tiếp:
+  + Request POST không Token/sai Token/user thường vẫn tạo thành công bản ghi mới trong CSDL.
+  + Request PUT không Token/sai Token/user thường vẫn sửa thành công thông tin sản phẩm trong CSDL.
+  + Request DELETE không Token/sai Token/user thường vẫn xóa vĩnh viễn sản phẩm khỏi CSDL.
 
 ## Bằng chứng
 
@@ -103,7 +132,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Backend (backend/server.js): Mặc dù file server có định nghĩa sẵn middleware xác thực authenticateToken (dòng 100–110), nhưng tại các khai báo endpoint POST /api/products (dòng 167), PUT /api/products/:id (dòng 179) và DELETE /api/products/:id (dòng 191), dev lại không gắn middleware authenticateToken cũng như không có bất kỳ logic kiểm tra req.user.role === 'admin' nào.
+
+- Đây là lỗi hổng bảo mật đặc biệt nghiêm trọng (Broken Access Control / Unauthenticated API access). Bất kỳ ai trên Internet cũng có thể gọi trực tiếp API để thêm, sửa, xóa dữ liệu sản phẩm trong CSDL hệ thống mà không cần đăng nhập hay có quyền Admin.
 
 ## Link GitHub Issue
 

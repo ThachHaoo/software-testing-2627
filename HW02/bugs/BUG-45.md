@@ -1,9 +1,9 @@
 # BUG-45
 
 - **ID:** BUG-45
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Sửa sản phẩm (UI Admin) cập nhật đè tên của sản phẩm vừa sửa lên toàn bộ các sản phẩm khác trên bảng danh sách UI và không cập nhật lại Giá tiền mới trên bảng
+- **Severity:** Major
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
+
+- Đã truy cập vào trang Admin tại http://localhost:5174, chọn mục "Sản phẩm" và bấm nút "Sửa" tại một sản phẩm bất kỳ để mở form "Sửa sản phẩm".
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".
+
+2. Tại bảng danh sách sản phẩm, chọn một sản phẩm mục tiêu (ví dụ sản phẩm id = 8) và bấm nút "Sửa".
+
+3. Nhập dữ liệu hợp lệ mới để cập nhật cho sản phẩm (ví dụ đổi Tên sản phẩm thành Sửa UI03 và Giá tiền thành 2500000).
+
+4. Bấm nút "Lưu sản phẩm" (hoặc "Cập nhật sản phẩm").
+
+5. Quan sát dữ liệu hiển thị trên bảng danh sách sản phẩm ở giao diện UI Admin và đối chiếu với dữ liệu thực tế lưu trong CSDL.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu FR-15.5, khi sửa một sản phẩm thì chỉ sản phẩm đó bị thay đổi thông tin, tất cả các sản phẩm khác phải giữ nguyên.
+
+- Bảng danh sách sản phẩm trên giao diện phải hiển thị đúng tên mới và giá tiền mới của riêng sản phẩm vừa sửa, thông tin của các sản phẩm còn lại không bị ảnh hưởng.
+
+- Dữ liệu trong CSDL và dữ liệu hiển thị trên bảng UI phải đồng nhất với nhau.
 
 ## Actual
 
-`<SV viết>`
+- Trong CSDL thì dữ liệu sản phẩm mục tiêu đã được cập nhật đúng tên mới và giá mới (name = "Sửa UI03", price = 2500000).
+
+- Tuy nhiên trên giao diện bảng sản phẩm UI Admin bị lỗi hiển thị nghiêm trọng:
+  + Tất cả các sản phẩm khác trong danh sách đều bị đè tên thành Tên sản phẩm vừa sửa (Sửa UI03).
+  + Dòng hiển thị của sản phẩm vừa sửa không cập nhật lại Giá tiền mới (2500000) mà vẫn giữ nguyên giá cũ trên bảng UI (1000000 ₫).
 
 ## Bằng chứng
 
@@ -79,7 +101,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx, dòng 105–116): Trong hàm handleProductSubmit xử lý khi sửa sản phẩm (luồng if (productForm.id)), code cập nhật state bị viết sai logic trầm trọng tại dòng 110–114:
+  + Code dùng products.map((p) => ({ ...p, name: productForm.name })) để duyệt qua toàn bộ danh sách và gán lại name mới cho MỌI sản phẩm thay vì chỉ tìm đúng sản phẩm có id === productForm.id để cập nhật.
+  + Đồng thời code hoàn toàn không cập nhật lại price mới vào state products, khiến cho giá tiền trên bảng hiển thị vẫn bị giữ nguyên giá cũ.
+
+- Mặc dù CSDL được lưu đúng nhưng giao diện quản trị bị hỏng hoàn toàn hiển thị sau thao tác sửa, làm sai lệch tên toàn bộ danh sách và hiển thị sai giá thực tế của sản phẩm.
 
 ## Link GitHub Issue
 

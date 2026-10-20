@@ -1,9 +1,9 @@
 # BUG-40
 
 - **ID:** BUG-40
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Thêm sản phẩm (UI Admin) cho phép nhập Giá tiền dưới dạng ký hiệu khoa học (E-notation như 1e5) mà không chặn hoặc báo lỗi
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở trang http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
+
+- Đã truy cập vào trang Admin tại http://localhost:5174 và chuyển sang mục "Sản phẩm" để mở form "Thêm sản phẩm mới"
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".
+
+2. Nhập Tên sản phẩm hợp lệ (ví dụ: Sản phẩm E-Notation).
+
+3. Nhập giá tiền dạng ký hiệu khoa học vào ô "Giá tiền": 1e5 (TC-FR15-201).
+
+4. Chọn Danh mục hợp lệ rồi bấm nút "Lưu sản phẩm".
+
+5. Quan sát phản hồi trên giao diện (xem ô input có chặn/báo lỗi không) và kiểm tra lại danh sách sản phẩm hiển thị trên bảng UI cũng như dữ liệu chèn vào CSDL qua API GET /api/products.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo quy định C24, ô "Giá tiền" trên giao diện UI phải chặn và không cho phép nhập hay gửi dữ liệu giá tiền viết dưới dạng ký hiệu khoa học (E-notation).
+
+- Hệ thống phải hiển thị thông báo lỗi hoặc không cho submit khi phát hiện định dạng ký hiệu khoa học.
+
+- Dữ liệu trong CSDL và trên bảng UI không được thay đổi.
 
 ## Actual
 
-`<SV viết>`
+- Giao diện UI không hề chặn hay hiển thị bất kỳ thông báo lỗi nào (không alert, không bong bóng HTML5).
+
+- Form vẫn gửi request thành công và CSDL tự động chuyển đổi 1e5 thành số 100000 để lưu vào bản ghi mới: {id: 106, name: "Sản phẩm E-Notation...", price: 100000, category_id: 2}.
+
+- Bảng danh sách sản phẩm trên UI tự động thêm 1 dòng mới hiển thị giá 100000 ₫.
 
 ## Bằng chứng
 
@@ -67,7 +89,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx, dòng 500–507): Ô nhập Giá tiền sử dụng thẻ <input type="number">. Theo chuẩn mặc định của HTML5, type="number" vẫn chấp nhận ký tự e / E để đại diện cho số mũ/ký hiệu khoa học (E-notation). Code frontend chưa xử lý chặn phím e (sự kiện onKeyDown) hoặc chưa thêm thuộc tính/regex validation để ngăn người dùng nhập dạng 1e5.
+
+- Do không có cơ chế chặn định dạng E-notation ở UI theo đúng quy định C24, người dùng có thể vô tình hoặc cố ý nhập các chuỗi dạng 1e5, 2e6 làm sai lệch trải nghiệm nhập liệu tiêu chuẩn trên trang quản trị.
 
 ## Link GitHub Issue
 

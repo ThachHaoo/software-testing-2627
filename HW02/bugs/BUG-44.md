@@ -1,9 +1,9 @@
 # BUG-44
 
 - **ID:** BUG-44
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** API POST /api/products bị lỗi server 500 (Unhandled Exception) và trả về trang HTML khi request thiếu Content-Type application/json làm req.body bị undefined
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,33 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Người dùng/Client có khả năng gửi HTTP Request trực tiếp tới API endpoint POST /api/products (ví dụ sử dụng Postman, cURL hoặc Scripts).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Thực hiện gửi request POST tới URL http://localhost:3000/api/products với payload bất kỳ nhưng cố tình không truyền Header Content-Type: application/json (TC-FR15-211).
+
+2. Kiểm tra HTTP Status Code và Response Body trả về từ Server.
+
+3. Thực hiện gửi request GET /api/products để kiểm tra lại dữ liệu trong CSDL.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo các quy định C6 và C9, khi API nhận request thiếu Header Content-Type: application/json hoặc request không hợp lệ dẫn đến không parse được body, tầng API Backend phải xử lý an toàn và trả về mã lỗi 4xx (Client Error) cùng phản hồi định dạng JSON có chứa trường error.
+
+- Server tuyệt đối không được crash hoặc quăng lỗi server 500 (Internal Server Error) ra giao diện HTML.
+
+- Dữ liệu trong CSDL không được thay đổi.
 
 ## Actual
 
-`<SV viết>`
+- Mặc dù dữ liệu CSDL không bị thay đổi, nhưng server đã quăng ra lỗi HTTP 500 Internal Server Error.
+
+- Response body trả về là một trang HTML báo lỗi unhandled exception: TypeError: Cannot destructure property 'name' of 'req.body' as it is undefined..
 
 ## Bằng chứng
 
@@ -74,7 +88,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Backend (backend/server.js, dòng 11–12 và dòng 167–168): Express app sử dụng bodyParser.json(). Khi request không gửi kèm header Content-Type: application/json, middleware này không parse body và để req.body thành undefined.
+
+- Ngay sau đó tại handler của endpoint POST /api/products, code lại thực hiện destructuring trực tiếp const { name, price, description, imageUrl, category_id } = req.body; mà không kiểm tra if (!req.body) trước.
+
+- Việc destructuring một biến undefined khiến Node.js ném ra ngoại lệ TypeError, làm crash luồng xử lý của request và nhảy vào Error Handler mặc định của Express, dẫn tới việc trả về lỗi HTTP 500 kèm giao diện trang HTML cho client.
 
 ## Link GitHub Issue
 

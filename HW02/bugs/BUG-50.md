@@ -1,34 +1,46 @@
 # BUG-50
 
 - **ID:** BUG-50
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Bảng danh sách sản phẩm (UI Admin) hiển thị Cột 'Giá' không có dấu phân cách hàng nghìn (hiển thị 30000000 ₫ thay vì 30.000.000 ₫)
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
 - SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
 - Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
-- Trình duyệt: `<SV điền>` (chạy tay, cửa sổ ẩn danh), locale en-US
+- Trình duyệt: Cốc Cốc / Chromium (chạy tay, cửa sổ ẩn danh), locale en-US
 - Admin http://localhost:5174 — mục 'Sản phẩm', bảng sản phẩm (frontend-admin)
 - Ngày chạy: 2026-10-20 (chạy tay, bắt đầu 18:36, Asia/Saigon)
 - Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở cổng http://localhost:5174.
+
+- Người dùng đã mở trang Admin tại http://localhost:5174 và chọn mục "Sản phẩm" để hiển thị bảng danh sách sản phẩm.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập giao diện Admin tại link http://localhost:5174 và chọn mục "Sản phẩm".
+
+2. Quan sát cột "Giá" trên bảng danh sách sản phẩm (ví dụ dòng sản phẩm iPhone 15 Pro Max).
+
+3. Kiểm tra định dạng hiển thị giá tiền xem có dấu phân cách hàng nghìn (dấu chấm hoặc dấu phẩy) hay không.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-21.3 (quy định định dạng hiển thị GUI, C12): Cột giá tiền phải luôn có ký hiệu ₫ đi kèm định dạng phân cách hàng nghìn rõ ràng (ví dụ: 30.000.000 ₫ hoặc 30,000,000 ₫).
 
 ## Actual
 
-`<SV viết>`
+- Cột "Giá" trên bảng sản phẩm hiển thị ký hiệu ₫ ở cuối nhưng chuỗi số giá tiền hoàn toàn không có dấu phân cách hàng nghìn.
+
+- Ví dụ: Dòng sản phẩm iPhone 15 Pro Max hiển thị nguyên văn là 30000000 ₫ thay vì có dấu định dạng phân cách.
 
 ## Bằng chứng
 
@@ -60,7 +72,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx, dòng 590): Giá tiền được render trực tiếp dạng chuỗi/số thô từ API mà không qua hàm định dạng số tiền: <td className="p-3">{p.price} ₫</td>.
+
+- Code frontend thiếu bước format giá tiền (chưa dùng toLocaleString() hoặc hàm định dạng tiền tệ chuyên dụng), khiến chuỗi số giá tiền lớn bị dính liền nhau, vi phạm quy định thiết kế GUI FR-21.3 và làm người dùng khó đọc/dễ nhìn nhầm số lượng chữ số 0 của giá sản phẩm.
 
 ## Link GitHub Issue
 

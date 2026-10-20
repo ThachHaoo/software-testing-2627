@@ -1,9 +1,9 @@
 # BUG-35
 
 - **ID:** BUG-35
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Không kiểm tra độ dài tối đa (255 ký tự) và chuỗi khoảng trắng của Tên sản phẩm, cho phép tạo bản ghi không hợp lệ mà không báo lỗi
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,47 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã được khởi tạo/seed lại dữ liệu ban đầu thành công.
+
+- Hệ thống Backend (`node server.js`) đang chạy tại `http://localhost:3000`.
+
+- Hệ thống Frontend Admin (`frontend-admin`) đang chạy tại `http://localhost:5174`.
+
+- Người dùng đã truy cập trang Admin `http://localhost:5174` và điều hướng đến mục "Sản phẩm" (hiển thị form "Thêm sản phẩm mới").
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trang Admin tại `http://localhost:5174` và chọn mục "Sản phẩm" ở menu bên.
+
+2. Tại form "Thêm sản phẩm mới", nhập dữ liệu vi phạm ràng buộc vào ô "Tên sản phẩm":
+   + Thao tác A (TC-FR15-08): Nhập chuỗi 300 ký tự 'x'.
+   + Thao tác B (TC-FR15-09): Nhập chuỗi 3 dấu cách '   '.
+   + Thao tác C (TC-FR15-66): Nhập chuỗi 256 ký tự 'x'.
+
+3. Nhập số hợp lệ vào ô "Giá tiền" (ví dụ: `1500000`) và chọn một danh mục (ví dụ: `Laptop`).
+
+4. Bấm nút "Lưu sản phẩm".
+
+5. Quan sát phản hồi trên giao diện (hộp thoại, bong bóng HTML5, thông báo lỗi trên trang) và kiểm tra danh sách sản phẩm hiển thị trên bảng cũng như trong CSDL qua API `GET /api/products`.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống từ chối lưu sản phẩm vi phạm ràng buộc dữ liệu đầu vào.
+
+- Hiển thị thông báo lỗi rõ ràng cho người dùng (qua bong bóng HTML5, thông báo trên trang hoặc hộp thoại alert).
+
+- Dữ liệu sản phẩm trên giao diện bảng và trong CSDL không thay đổi (số lượng bản ghi giữ nguyên, không tạo bản ghi mới).
 
 ## Actual
 
-`<SV viết>`
+- Không xuất hiện bất kỳ thông báo lỗi nào trên giao diện (không có hộp thoại alert, không có bong bóng HTML5 validation, không có thông báo mới trên trang).
+
+- Hệ thống thực hiện tạo sản phẩm mới thành công và chèn vào CSDL:
+  + Với TC-FR15-08 (300 ký tự 'x'): Tạo bản ghi mới `{id: 11, name: "x"×300, price: 1500000, category_id: 2}`.
+  + Với TC-FR15-09 (3 dấu cách): Tạo bản ghi mới `{id: 12, name: "   ", price: 1500000, category_id: 2}`.
+  + Với TC-FR15-66 (256 ký tự 'x'): Tạo bản ghi mới `{id: 63, name: "x"×256, price: 1500000, category_id: 2}`.
+
+- Số lượng bản ghi trong CSDL và trên bảng danh sách tăng từ 5 lên 6.
 
 ## Bằng chứng
 
@@ -90,7 +118,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân Frontend: Ô `<input>` tên sản phẩm (`frontend-admin/src/App.jsx`, dòng 491–499) chỉ thiết lập thuộc tính `required`, hoàn toàn thiếu thuộc tính `maxLength="255"` để giới hạn độ dài nhập liệu, đồng thời không thực hiện `.trim()` hoặc validate chuỗi khoảng trắng trước khi gửi request.
+
+- Nguyên nhân Backend: Endpoint `POST /api/products` (`backend/server.js`, dòng 167–177) nhận trực tiếp dữ liệu từ `req.body` và thực hiện truy vấn `INSERT INTO products` mà không thực hiện kiểm tra độ dài hay kiểm tra chuỗi rỗng/khoảng trắng của trường `name`.
+
+- Đánh giá tác động: Cho phép lưu trữ dữ liệu không hợp lệ vào CSDL, làm phá vỡ tính toàn vẹn dữ liệu (Data Integrity) theo yêu cầu SRS (FR-15.2, C3, C7) và có thể gây lỗi vỡ giao diện UI khi hiển thị các sản phẩm có tên quá dài hoặc tên chỉ chứa khoảng trắng.
 
 ## Link GitHub Issue
 

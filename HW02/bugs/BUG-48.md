@@ -1,9 +1,9 @@
 # BUG-48
 
 - **ID:** BUG-48
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** API GET /api/products/:id trả về trường price dạng chuỗi (String) thay vì kiểu số (Number) đối với các sản phẩm có id là số chẵn
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,31 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Người dùng/Client có khả năng gửi HTTP Request trực tiếp tới API endpoint GET /api/products/:id (ví dụ sử dụng Postman, cURL hoặc Scripts).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Chọn một sản phẩm có :id là số chẵn trong CSDL (ví dụ sản phẩm Samsung Galaxy S24 Ultra có id = 2).
+
+2. Thực hiện gửi request GET tới URL http://localhost:3000/api/products/2 (TC-FR15-22).
+
+3. Kiểm tra HTTP Status Code, Response Body và kiểu dữ liệu của trường price nhận được từ Server.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo quy định C15, trong phản hồi JSON của API GET /api/products/:id, trường price phải luôn có kiểu dữ liệu là số (Number, ví dụ: "price": 28000000).
+
+- Giá trị price trả về dạng chuỗi (như "price": "28000000") là không hợp lệ và không đúng thiết kế chuẩn API.
 
 ## Actual
 
-`<SV viết>`
+- Response body trả về HTTP Status Code 200 OK.
+
+- Tuy nhiên, đối với sản phẩm có id = 2 (số chẵn), trường price trong JSON phản hồi bị chuyển thành kiểu chuỗi: {"id":2, "name":"Samsung Galaxy S24 Ultra", "price":"28000000", ...}.
 
 ## Bằng chứng
 
@@ -66,7 +78,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Backend (backend/server.js, dòng 159–165): Trong handler của endpoint GET /api/products/:id, code cố tình chứa câu lệnh ép kiểu không hợp lý ở dòng 162: if (row.id % 2 === 0) row.price = row.price.toString();.
+
+- Logic này khiến tất cả các sản phẩm có id chẵn bị ép kiểu giá tiền từ số thành chuỗi trước khi trả về client.
+
+- Việc trả về không đồng nhất kiểu dữ liệu (id lẻ là Number, id chẵn là String) gây ra lỗi không nhất quán dữ liệu API (Data Inconsistency), có thể khiến các ứng dụng Client (Mobile/Frontend) bị crash hoặc tính toán toán học sai khi parse JSON.
 
 ## Link GitHub Issue
 

@@ -1,34 +1,48 @@
 # BUG-49
 
 - **ID:** BUG-49
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Form Thêm sản phẩm (UI Admin) thiếu nhãn (label) và dấu sao bắt buộc (*) bên cạnh các trường nhập liệu bắt buộc (Tên sản phẩm, Giá tiền, Danh mục)
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
 - SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
 - Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
-- Trình duyệt: `<SV điền>` (chạy tay, cửa sổ ẩn danh), locale en-US
+- Trình duyệt: Cốc Cốc / Chromium (chạy tay, cửa sổ ẩn danh), locale en-US
 - Admin http://localhost:5174 — mục 'Sản phẩm', form 'Thêm sản phẩm mới' (frontend-admin)
 - Ngày chạy: 2026-10-20 (chạy tay, bắt đầu 18:33, Asia/Saigon)
 - Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- CSDL đã khởi tạo lại dữ liệu gốc ban đầu thành công.
+
+- Backend node server.js đang chạy bình thường ở cổng http://localhost:3000.
+
+- Frontend Admin frontend-admin đang chạy ở cổng http://localhost:5174.
+
+- Người dùng đã mở trang Admin tại http://localhost:5174 và chuyển sang mục "Sản phẩm" để hiển thị form "Thêm sản phẩm mới".
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập giao diện Admin tại link http://localhost:5174 và chọn mục "Sản phẩm".
+
+2. Quan sát giao diện form "Thêm sản phẩm mới", đặc biệt chú ý quan sát phía trên hoặc bên cạnh các ô nhập liệu: Tên sản phẩm, Giá tiền, Danh mục.
+
+3. Kiểm tra sự xuất hiện của các nhãn (label) mô tả trường và ký hiệu bắt buộc * đi kèm.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Theo yêu cầu FR-22.1 (quy định thiết kế GUI, C12): Tất cả các trường thông tin bắt buộc phải có nhãn (label) tên trường và phải hiển thị dấu sao màu đỏ hoặc ký hiệu * ngay bên cạnh nhãn đó.
+
+- Áp dụng cụ thể cho các trường bắt buộc của sản phẩm gồm: Tên sản phẩm (*), Giá tiền (*), Danh mục (*).
 
 ## Actual
 
-`<SV viết>`
+- Trên giao diện form "Thêm sản phẩm mới", các ô nhập liệu chỉ có thuộc tính placeholder (như "Tên sản phẩm", "Giá tiền", "URL Ảnh", "Mô tả") và ô chọn Danh mục.
+
+- Form hoàn toàn không có thẻ nhãn (label) hiển thị tên trường và hoàn toàn thiếu ký hiệu * bên cạnh để đánh dấu các trường bắt buộc nhập theo đúng chuẩn GUI.
 
 ## Bằng chứng
 
@@ -77,7 +91,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Ở Frontend (frontend-admin/src/App.jsx, dòng 490–507): Giao diện chỉ đặt trực tiếp các thẻ <input> có placeholder nằm trong grid layout mà không thiết kế thẻ <label> bọc bên ngoài hoặc đứng trước input để hiển thị ký hiệu *.
+
+- Mặc dù đây là lỗi giao diện UI/UX ở mức độ nhẹ, việc thiếu nhãn và ký hiệu * đánh dấu trường bắt buộc vi phạm tiêu chuẩn thiết kế GUI (FR-22.1), làm giảm trải nghiệm người dùng và khiến người quản trị khó nhận biết trường nào là bắt buộc phải điền.
 
 ## Link GitHub Issue
 
