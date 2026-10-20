@@ -13635,10 +13635,56 @@ Báo cáo (≤ 10 dòng): commit; check_domain/linter; số case SV còn lại (
 **Output:**
 ```
 Trước khi áp, có một chỗ mâu thuẫn ở TC-201 cần SV quyết.
+
+Cập nhật `ai_gap_answer.md` và trạng thái câu hỏi rồi commit.
+
+Đã áp trả lời SV và commit `7561a75`; check_domain hết lỗi. Còn một chỗ chặn bước 6: giả định C24 của TC-201 chưa có căn cứ và nội dung.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `7561a75` HW02[C-FR15] 5/7d: áp tiếp trả lời SV. check_domain: 0 lỗi, 4 cảnh báo (cũ); linter: 0 lỗi, 11 cảnh báo (9 tiêu đề thiếu phần điều kiện, 2 case không truy vết được yêu cầu: TC-209, TC-211).
+- **Case SV còn lại: 11** (UI 5, API 6, GUI 0). Đã bỏ 203, 204, 210, 212, 215, 216, 217, giữ khoảng trống số.
+- **TC-201** (đã hỏi trực tiếp, SV chọn): giữ nhánh "bị chặn", đổi EC mục tiêu từ EC17 sang EC20, thêm giả định C24.
+- **Còn chặn bước 6:** C24 (TC-201) vẫn "(SV chưa ghi)" cả căn cứ lẫn nội dung, trong khi Expected "Form chặn" trái với C1 (SV chốt: mọi số thực > 0 hợp lệ, mà `1e5` = 100000). SV cần ghi C24 kèm căn cứ.
+- **Không chặn:**
+  - Không có C22: SV đánh số nhảy từ C21 lên C23.
+  - TC-200 giờ chỉ còn nhánh báo lỗi, nên không còn quan sát tên hiển thị trong bảng; phần trùng với TC-94 hết. Đã ghi trong `HW02/C_FR15/ai_gap_answer.md`.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 222 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 159 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #223 | 18:05 20/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1) SV chốt TC-201 = a: giữ Expected "Form chặn". Thêm C24 (loại: quyết định Expected, truy vết: có,
+   căn cứ: SRS im lặng về định dạng nhập; giả định SV. SV chốt: ô giá trên UI không chấp nhận ký hiệu khoa học (vd 1e5)
+   — admin nhập giá tiền không dùng dạng này, cho phép dễ gây nhầm. C1 nói về GIÁ TRỊ, C24 nói về CÁCH VIẾT nên không
+   mâu thuẫn). TC-201 dẫn C24.
+   render_md → check_domain → linter. Commit `HW02[C-FR15] 5/7e: SV chốt TC-201` kèm A_prompt_log.md.
+
+2) /domain-bva-testing HW02/C_FR15 6 — bước 6a: AI viết Playwright, KHÔNG chạy lượt chính thức (SV chạy).
+   Theo skill + CLAUDE.md + quy ước handoff mục 4 "Chạy test":
+   - Khoá oracle bằng sha1 của Expected; expect.soft; body thô gửi bằng Buffer; số vượt Number so trên text response.
+   - Độc lập {ts}; cleanup 2 lớp (sau mỗi case + quét cuối theo tiền tố {ts}); admin seed admin@eshop.com / Admin123!.
+   - Case GUI và case không tự động được → đánh dấu manual, ghi trong RUN.md cách SV chụp TC-xx_manual_*.png
+     (cửa sổ ẩn danh, không tiện ích).
+   - RUN.md: restart backend (`node server.js`) trước MỌI lượt; lệnh chạy cho SV; tên results file có timestamp;
+     merge_results.py không ghi đè status SV đặt (trừ --force).
+   - Chỉ được chạy kiểm cú pháp/liệt kê test (vd `--list`), không chạy vào SUT.
+   - Commit `HW02[C-FR15] 6/7a: Playwright + RUN.md` kèm A_prompt_log.md (freeze nếu skill yêu cầu).
+Báo cáo (≤ 12 dòng): 2 commit; số test tự động / manual theo suite; lệnh SV cần chạy (copy được); danh sách case manual.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 223 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 159 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222); Claude (không rõ model) 2 lượt (#118, #223). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

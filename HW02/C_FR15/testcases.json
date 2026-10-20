@@ -51,7 +51,7 @@
       "C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259, C6. Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server.",
       "C21 (tên sản phẩm chứa mã script — TC-FR15-200) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; giả định SV · SV chốt 2026-10-20 — không có sản phẩm thực tế nào đặt tên như vậy; theo kinh nghiệm SV, hệ thống sẽ không cho phép]: (SV chưa ghi nội dung riêng; Expected nằm ở TC-FR15-200).",
       "C23 (giá cực nhỏ bị làm tròn về 0 khi parse) [loại: quyết định Expected · truy vết: có · căn cứ: FR-15 (giá > 0), RFC 8259 §6 (cho phép giới hạn độ chính xác số); giả định SV · SV chốt 2026-10-20 — 1e-324 bị làm tròn thành 0, mà yêu cầu giá > 0]: dùng ở TC-FR15-214.",
-      "C24 (cách nhập giá dạng ký hiệu số mũ ở UI — TC-FR15-201) [loại: quyết định Expected · truy vết: có · căn cứ: (SV chưa ghi) · SV chốt 2026-10-20: giữ Expected 'bị chặn', xếp '1e5' vào EC20]: (SV chưa ghi)."
+      "C24 (cách viết giá dạng ký hiệu khoa học ở UI — TC-FR15-201) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về định dạng nhập; giả định SV · SV chốt 2026-10-20 — ô giá trên UI không chấp nhận ký hiệu khoa học (vd 1e5): admin nhập giá tiền không dùng dạng này, cho phép dễ gây nhầm. C1 nói về GIÁ TRỊ, C24 nói về CÁCH VIẾT nên không mâu thuẫn]: ô 'Giá tiền' trên UI chặn giá trị viết dạng ký hiệu khoa học. Dùng ở TC-FR15-201."
     ]
   },
   "requirements": [
@@ -7086,7 +7086,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "5/7d: SV giữ nhánh 'bị chặn', xếp '1e5' vào EC20 (C24). EC mục tiêu cũ EC17."
+          "notes": "5/7d–5/7e: SV giữ nhánh 'bị chặn', xếp '1e5' vào EC20 (C24, SV chốt). EC mục tiêu cũ EC17."
         },
         {
           "id": "TC-FR15-202",
