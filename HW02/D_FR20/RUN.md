@@ -1,10 +1,10 @@
 # D_FR20 – Hướng dẫn chạy tay (Android thật, Expo Go)
 
-SV chạy; AI không chạy app. Căn cứ: D0 (trạng thái ban đầu, dữ liệu), D10/D11 (oracle), D14 (verdict), D15 (thiết bị). Expected ở `testcases.md`; bảng này chỉ là trình tự chạy.
+SV chạy; AI không chạy app. Căn cứ: D0 (trạng thái ban đầu, dữ liệu), D10/D11 (oracle), D14 (verdict), D15 (thiết bị). Expected ở `testcases.md`; file này chỉ là trình tự chạy.
 
-Tổng: 33 case (AI 27, SV 6). Ảnh: tối đa 128 ảnh. Ước tính ≈ 2 giờ (≈ 3,5 phút/case nhập liệu, ≈ 1,5 phút/case GUI; chưa tính chuẩn bị).
+Tổng: 33 case (AI 27, SV 6). Ảnh điện thoại tối đa **20** (11 bắt buộc + tối đa 9 'chỉ khi khác Expected'); ảnh trang admin trên PC tính riêng. Ước tính ≈ 1,5–2 giờ.
 
-## Trước mỗi lượt
+## Môi trường, trước mỗi lượt
 
 1. **Khởi động lại backend** (CSDL seed lại; mọi tài khoản tạo ở lượt trước mất — D0):
 
@@ -12,108 +12,124 @@ Tổng: 33 case (AI 27, SV 6). Ảnh: tối đa 128 ảnh. Ước tính ≈ 2 gi
    cd ..\eshop-sut\backend; node server.js
    ```
 
-2. Web admin (cửa sổ khác): `cd ..\eshop-sut\frontend-admin; npm run dev` → http://localhost:5174, đăng nhập `admin@eshop.com` / `Admin123!`, mở tab 'Người dùng'.
-3. Kiểm IP LAN của máy (`ipconfig`) vẫn là `172.21.0.137` (App.js dòng 16, `HW02/env/mobile_api_url.patch`). Khác → sửa App.js, tạo lại patch, ghi vào nhật ký lượt.
-4. Expo (cửa sổ khác): `cd ..\eshop-sut\frontend-mobile; npx expo start` → quét QR bằng Expo Go (SDK 54). Điện thoại và máy cùng Wi-Fi/hotspot.
-5. Chuẩn bị sẵn trên điện thoại (vd một ghi chú) các chuỗi cần dán: mật khẩu 64 ký tự của TC-FR20-64, chuỗi của TC-FR20-200, 201, 205, 206 (D12: dán và gõ cùng lớp).
-6. Chép `HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json` thành `HW02/D_FR20/results/D_FR20_manual_<yyyyMMdd-HHmmss>.json` cho lượt này.
+2. Web admin (cửa sổ khác): `cd ..\eshop-sut\frontend-admin; npm run dev` → http://localhost:5174, đăng nhập `admin@eshop.com` / `Admin123!`, tab 'Người dùng'.
+3. **Ảnh admin TRƯỚC** (ngay sau restart backend, trước case đầu tiên): chụp trang 'Quản lý Người dùng', cuộn đủ trang → `D_admin_truoc_1.png`, `_2.png`… (D11).
+4. Áp patch API_URL nếu SUT chưa có (`git -C ..\eshop-sut apply --ignore-whitespace ..\software-testing-2627\HW02\env\mobile_api_url.patch`). Cần `--ignore-whitespace` vì git chuyển patch sang CRLF khi checkout trên Windows, còn App.js dùng LF. Kiểm `ipconfig` vẫn là `172.21.0.137`; khác → sửa App.js dòng 16, tạo lại patch, ghi nhật ký.
+5. Expo (cửa sổ khác): `cd ..\eshop-sut\frontend-mobile; npx expo start` → quét QR bằng Expo Go (SDK 54). Điện thoại và máy cùng Wi-Fi/hotspot.
+6. Chuẩn bị sẵn trên điện thoại (vd một ghi chú) các chuỗi cần dán: mật khẩu 64 ký tự của TC-FR20-64, chuỗi của TC-FR20-200, 201, 205, 206 (D12).
+7. Chép `HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json` thành `HW02/D_FR20/results/D_FR20_manual_<yyyyMMdd-HHmmss>.json`.
+
+## Sau lượt
+
+1. **Ảnh admin SAU** (sau case cuối): tải lại trang 'Quản lý Người dùng', cuộn đủ trang → `D_admin_sau_1.png`, `_2.png`…; đối chiếu cột 'Kiểm ở ảnh admin SAU' của từng case.
+2. Chép ảnh điện thoại vào `HW02/D_FR20/manual_raw/`, ảnh admin vào `HW02/D_FR20/evidence/`.
+3. Nén: `py -3.12 tools/compress_manual.py` (Pillow; chỉ đụng `*_manual_*.png`, `D_admin_*.png` của D; in kích thước trước/sau).
+4. Gộp: `py -3.12 .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/D_FR20/testcases.json HW02/D_FR20/results/D_FR20_manual_<ts>.json` (status = verdict SV, không ghi auto_status — D14).
 
 ## {ts} và email
 
-- `{ts}` = 4 chữ số giờ-phút lúc **bắt đầu** case (HHmm, vd 2231). Email của case = thay `{ts}` trong cột Email, vd TC-FR20-01 → `m01_2231@domain.com`, TC-FR20-204 → `m204_2231 @domain.com` (có dấu cách).
-- Email chỉ có thể trùng trong cùng một lượt (restart backend xoá dữ liệu). Chạy lại một case trong cùng lượt → chờ sang phút mới để HHmm khác; nếu không, email rơi vào EC7 (đã tồn tại).
+- `{ts}` = HHmm lúc **bắt đầu** case. Vd TC-FR20-01 → `m01_2231@domain.com`; TC-FR20-204 → `m204_2231 @domain.com` (có dấu cách). Ghi HHmm đã dùng vào Actual để đối chiếu ảnh admin SAU.
+- Email chỉ có thể trùng trong cùng một lượt. Chạy lại một case trong cùng lượt → chờ sang phút mới.
 - TC-FR20-06 dùng `test@eshop.com` (tài khoản seed).
 
-## Quy trình chung mỗi case nhập liệu (TS-DOM, TS-BVA, TS-SV)
+## Quy trình mỗi case nhập liệu (rút gọn cho chạy tay, oracle dữ liệu theo ảnh admin của lượt)
 
-1. Trên máy tính: tải lại trang admin (F5), mở tab 'Người dùng'; đếm số dòng, chụp ảnh TC-FR20-xx_manual_admin_before.png. → *Bảng 'Quản lý Người dùng' hiển thị, có admin@eshop.com và test@eshop.com.*
-2. Trên điện thoại: tải lại app trong Expo Go (Reload). → *Màn hình chủ; header hiển thị 'Đăng nhập'.*
-3. Bấm 'Đăng nhập' trên header, rồi bấm 'Đăng ký ngay'. → *Màn 'Đăng Ký Tài Khoản' hiển thị; ba ô Họ Tên, Email, Mật khẩu trống; không có chữ lỗi.*
-4. Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu (nếu có) bằng bàn phím ảo, gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không chạm vào ô, giữ trống. Giá trị có ␣: bấm phím cách đúng số lần đó. Bàn phím tự viết hoa/tự sửa/chèn gợi ý làm đổi chuỗi → xoá và gõ lại cho đúng, ghi notes (D12). Không có ô Xác nhận mật khẩu → làm theo notes của case (D9). → *Ô Họ Tên và Email hiển thị đúng chuỗi trong cột; ô Mật khẩu hiển thị dạng che với số ký tự che bằng độ dài chuỗi trong cột. Chụp TC-FR20-xx_manual_input.png.*
-5. Ẩn bàn phím, bấm nút 'Đăng Ký' đúng một lần. → *App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình).*
-6. Quan sát và chụp TC-FR20-xx_manual_result.png: mọi kênh thông báo (hộp thoại: ghi tiêu đề + nội dung rồi mới đóng; chữ trên màn hình; toast) và tiêu đề màn hình sau khi đóng hộp thoại. → *Khớp phần app của cột Expected.*
-7. Trên máy tính: tải lại trang admin, mở tab 'Người dùng'; so với ảnh ở bước 1, chụp TC-FR20-xx_manual_admin_after.png. → *Số dòng và Email như cột Expected (oracle tương đối).*
-8. Chỉ case hợp lệ: trên màn 'Đăng Nhập' của app, bảo đảm ô Email chứa đúng email của case (xoá và gõ lại nếu khác), nhập Mật khẩu của case, bấm 'Sign In'; chụp TC-FR20-xx_manual_login.png. → *Header hiển thị 'Chào, <Họ Tên của case>' như cột Expected.*
+1. Tải lại app (Reload) → màn hình chủ, header 'Đăng nhập'.
+2. 'Đăng nhập' → 'Đăng ký ngay' → màn 'Đăng Ký Tài Khoản', ba ô trống, không có chữ lỗi.
+3. Nhập Họ Tên → Email → Mật khẩu theo bảng (`''` = không chạm ô; ␣ = phím cách đúng số lần; bàn phím tự sửa → xoá, gõ lại — D12). Không có ô Xác nhận mật khẩu → bỏ (D9).
+4. Ẩn bàn phím, bấm 'Đăng Ký' (đúng số lần ghi trong case, mặc định 1).
+5. Ghi Actual nguyên văn: mọi kênh thông báo (hộp thoại: tiêu đề + nội dung trước khi đóng; chữ trên màn hình; toast) và tiêu đề màn hình sau đó. Chụp theo cột 'Ảnh điện thoại'.
+6. Case hợp lệ: ở màn 'Đăng Nhập', bảo đảm ô Email đúng email case, nhập mật khẩu, bấm 'Sign In'; ghi nguyên văn header.
 
-TS-SV: bấm 'Đăng Ký' đúng số lần ghi trong case (mặc định 1 lần; TC-FR20-203: 10 lần liên tục).
+## Ảnh điện thoại (tối đa 20)
 
-## Ảnh
+- Tên `TC-FR20-xx_manual_<n>.png`, n đánh từ 1 trong mỗi case.
+- **bắt buộc**: chụp đúng nội dung ghi trong bảng dưới.
+- **chỉ khi khác Expected**: chụp 1 ảnh `_manual_1` màn hình lúc lệch; hết ngân sách → không chụp, ghi Actual nguyên văn chữ trên màn hình.
+- **không chụp**: chỉ ghi Actual nguyên văn.
+- Case Pass không có ảnh riêng: bằng chứng = Actual + ảnh admin SAU.
 
-- Chụp trên điện thoại / máy, đặt tên `TC-FR20-xx_manual_<n>.png`, lưu vào `HW02/D_FR20/manual_raw/` (bản gốc, không che).
-- n: 1 = admin TRƯỚC · 2 = ô sau khi nhập · 3 = kết quả sau khi bấm · 4 = admin SAU · 5 = header sau khi đăng nhập thử (chỉ case hợp lệ). Case GUI: 1 (và 2 cho TC-93).
-- Hộp thoại: ghi tiêu đề + nội dung nguyên văn **trước** khi đóng.
+| Ảnh bắt buộc | Nội dung |
+|---|---|
+| `TC-FR20-94_manual_1.png` | màn hình theo bước của case (GUI) |
+| `TC-FR20-90_manual_1.png` | màn hình theo bước của case (GUI) |
+| `TC-FR20-91_manual_1.png` | màn hình theo bước của case (GUI) |
+| `TC-FR20-92_manual_1.png` | màn hình theo bước của case (GUI) |
+| `TC-FR20-93_manual_1.png` | thông báo lỗi + nút 'Đăng Ký' (đại diện kiểu thông báo lỗi do mật khẩu yếu) |
+| `TC-FR20-01_manual_1.png` | kết quả ngay sau khi bấm (hộp thoại/thông báo nếu có) — đại diện kiểu đăng ký thành công |
+| `TC-FR20-01_manual_2.png` | màn hình sau khi đóng hộp thoại (đại diện màn 'Đăng Nhập') |
+| `TC-FR20-01_manual_3.png` | header sau khi đăng nhập thử (đại diện 'Chào, <Họ Tên>') |
+| `TC-FR20-06_manual_1.png` | thông báo sau khi bấm — đại diện kiểu từ chối do server (email đã tồn tại) |
+| `TC-FR20-200_manual_1.png` | header sau khi đăng nhập thử: chuỗi <script> hiển thị dạng chữ (SEC-04) |
+| `TC-FR20-201_manual_1.png` | header sau khi đăng nhập thử: emoji hiển thị |
 
-## Ghi kết quả
-
-- File lượt (`results/D_FR20_manual_<ts>.json`): với mỗi case, điền annotation `actual` (Actual nguyên văn: mọi kênh thông báo, tiêu đề màn hình, số dòng admin TRƯỚC → SAU, email dòng mới, header sau đăng nhập) và annotation `verdict` (`Pass` / `Fail` / `Blocked` / `Not run`). Không sửa `expected_result`.
-- Case Blocked/Pass hộp đen: ghi case gốc vào `notes` của case trong `testcases.json` sau khi gộp (D14).
-- Gộp: `python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/D_FR20/testcases.json HW02/D_FR20/results/D_FR20_manual_<ts>.json` (chạy từ thư mục repo).
+**Đếm ảnh đã dùng:** bắt buộc ___ / 11 · chỉ khi khác Expected ___ / 9 · tổng ___ / 20
 
 ## Thứ tự case
 
-### Nhóm 1 — GUI, không cần trang admin (chạy TC-FR20-94 đầu tiên: quyết định TC-16, TC-17)
+### Nhóm 1 — GUI (chạy TC-FR20-94 đầu tiên: quyết định TC-16, TC-17)
 
-| TC | Suite | Họ Tên | Email | Mật khẩu | Xác nhận MK | Ảnh | Quan sát chính | Actual / verdict |
-|---|---|---|---|---|---|---|---|---|
-| TC-FR20-94 | TS-GUI | — | — | — | — | `_1` | Màn 'Đăng Ký Tài Khoản' có trường Xác nhận mật khẩu (FR-01.9). | file lượt, test `TC-FR20-94` |
-| TC-FR20-90 | TS-GUI | — | — | — | — | `_1` | Mỗi nhãn trường bắt buộc theo FR-01 có ký hiệu '*' bên cạnh. | file lượt, test `TC-FR20-90` |
-| TC-FR20-91 | TS-GUI | — | — | — | — | `_1` | Chạm vào ô Email hiện bàn phím email (keyboardType email-address theo D13). | file lượt, test `TC-FR20-91` |
-| TC-FR20-92 | TS-GUI | — | — | — | — | `_1` | Ô Mật khẩu (và ô Xác nhận mật khẩu nếu có) che ký tự đã nhập. | file lượt, test `TC-FR20-92` |
-| TC-FR20-93 | TS-GUI | — | — | — | — | `_1` · `_2` | Thông báo lỗi nằm phía trên nút 'Đăng Ký' (không nằm bên dưới). | file lượt, test `TC-FR20-93` |
+| TC | Suite | Họ Tên | Email | Mật khẩu | Ảnh điện thoại | Kiểm ở ảnh admin SAU | Actual / verdict |
+|---|---|---|---|---|---|---|---|
+| TC-FR20-94 | TS-GUI | — | — | — | bắt buộc | — | file lượt, test `TC-FR20-94` |
+| TC-FR20-90 | TS-GUI | — | — | — | bắt buộc | — | file lượt, test `TC-FR20-90` |
+| TC-FR20-91 | TS-GUI | — | — | — | bắt buộc | — | file lượt, test `TC-FR20-91` |
+| TC-FR20-92 | TS-GUI | — | — | — | bắt buộc | — | file lượt, test `TC-FR20-92` |
+| TC-FR20-93 | TS-GUI | — | — | — | bắt buộc | không có dòng `m93_…` | file lượt, test `TC-FR20-93` |
 
-### Nhóm 2 — case bị từ chối (trang admin TRƯỚC/SAU)
+### Nhóm 2 — case bị từ chối
 
-| TC | Suite | Họ Tên | Email | Mật khẩu | Xác nhận MK | Ảnh | Quan sát chính | Actual / verdict |
-|---|---|---|---|---|---|---|---|---|
-| TC-FR20-03 | TS-DOM | `''` (không chạm vào ô) | `m03_{ts}@domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-03` |
-| TC-FR20-04 | TS-DOM | `Nguyễn Văn Ánh` | `''` (không chạm vào ô) | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-04` |
-| TC-FR20-05 | TS-DOM | `Nguyễn Văn Ánh` | `m05_{ts}domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-05` |
-| TC-FR20-06 | TS-DOM | `Nguyễn Văn Ánh` | `test@eshop.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-06` |
-| TC-FR20-07 | TS-DOM | `Nguyễn Văn Ánh` | `m07_{ts}@domain.com` | `Abc123!` | `Abc123!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-07` |
-| TC-FR20-08 | TS-DOM | `Nguyễn Văn Ánh` | `m08_{ts}@domain.com` | `''` (không chạm vào ô) | `''` (không chạm vào ô) | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-08` |
-| TC-FR20-09 | TS-DOM | `Nguyễn Văn Ánh` | `m09_{ts}@domain.com` | `abcd1234!` | `abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-09` |
-| TC-FR20-10 | TS-DOM | `Nguyễn Văn Ánh` | `m10_{ts}@domain.com` | `Êbcd1234!` | `Êbcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-10` |
-| TC-FR20-11 | TS-DOM | `Nguyễn Văn Ánh` | `m11_{ts}@domain.com` | `ABCD1234!` | `ABCD1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-11` |
-| TC-FR20-12 | TS-DOM | `Nguyễn Văn Ánh` | `m12_{ts}@domain.com` | `ABCê1234!` | `ABCê1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-12` |
-| TC-FR20-13 | TS-DOM | `Nguyễn Văn Ánh` | `m13_{ts}@domain.com` | `Abcdefgh!` | `Abcdefgh!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-13` |
-| TC-FR20-14 | TS-DOM | `Nguyễn Văn Ánh` | `m14_{ts}@domain.com` | `Abcd12345` | `Abcd12345` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-14` |
-| TC-FR20-15 | TS-DOM | `Nguyễn Văn Ánh` | `m15_{ts}@domain.com` | `Abcd1234#` | `Abcd1234#` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-15` |
-| TC-FR20-60 | TS-BVA | `Nguyễn Văn Ánh` | `m60_{ts}@domain.com` | `Abc12!x` | `Abc12!x` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-60` |
-| TC-FR20-204 | TS-SV | `Nguyễn Văn Ánh` | `m204_{ts} @domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-204` |
-| TC-FR20-205 | TS-SV | `Nguyễn Văn Ánh` | `m205_{ts}@domain.com` | `Abcd１２３４５６!` | `Abcd１２３４５６!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC | file lượt, test `TC-FR20-205` |
+| TC | Suite | Họ Tên | Email | Mật khẩu | Ảnh điện thoại | Kiểm ở ảnh admin SAU | Actual / verdict |
+|---|---|---|---|---|---|---|---|
+| TC-FR20-03 | TS-DOM | `''` (không chạm) | `m03_{ts}@domain.com` | `Abcd1234!` | chỉ khi khác Expected | không có dòng `m03_<HHmm>@domain.com` | file lượt, test `TC-FR20-03` |
+| TC-FR20-04 | TS-DOM | `Nguyễn Văn Ánh` | `''` (không chạm) | `Abcd1234!` | chỉ khi khác Expected | không có dòng `''` | file lượt, test `TC-FR20-04` |
+| TC-FR20-05 | TS-DOM | `Nguyễn Văn Ánh` | `m05_{ts}domain.com` | `Abcd1234!` | chỉ khi khác Expected | không có dòng `m05_<HHmm>domain.com` | file lượt, test `TC-FR20-05` |
+| TC-FR20-06 | TS-DOM | `Nguyễn Văn Ánh` | `test@eshop.com` | `Abcd1234!` | bắt buộc | `test@eshop.com` có đúng 1 dòng | file lượt, test `TC-FR20-06` |
+| TC-FR20-07 | TS-DOM | `Nguyễn Văn Ánh` | `m07_{ts}@domain.com` | `Abc123!` | chỉ khi khác Expected | không có dòng `m07_<HHmm>@domain.com` | file lượt, test `TC-FR20-07` |
+| TC-FR20-08 | TS-DOM | `Nguyễn Văn Ánh` | `m08_{ts}@domain.com` | `''` (không chạm) | chỉ khi khác Expected | không có dòng `m08_<HHmm>@domain.com` | file lượt, test `TC-FR20-08` |
+| TC-FR20-09 | TS-DOM | `Nguyễn Văn Ánh` | `m09_{ts}@domain.com` | `abcd1234!` | chỉ khi khác Expected | không có dòng `m09_<HHmm>@domain.com` | file lượt, test `TC-FR20-09` |
+| TC-FR20-10 | TS-DOM | `Nguyễn Văn Ánh` | `m10_{ts}@domain.com` | `Êbcd1234!` | chỉ khi khác Expected | không có dòng `m10_<HHmm>@domain.com` | file lượt, test `TC-FR20-10` |
+| TC-FR20-11 | TS-DOM | `Nguyễn Văn Ánh` | `m11_{ts}@domain.com` | `ABCD1234!` | chỉ khi khác Expected | không có dòng `m11_<HHmm>@domain.com` | file lượt, test `TC-FR20-11` |
+| TC-FR20-12 | TS-DOM | `Nguyễn Văn Ánh` | `m12_{ts}@domain.com` | `ABCê1234!` | chỉ khi khác Expected | không có dòng `m12_<HHmm>@domain.com` | file lượt, test `TC-FR20-12` |
+| TC-FR20-13 | TS-DOM | `Nguyễn Văn Ánh` | `m13_{ts}@domain.com` | `Abcdefgh!` | chỉ khi khác Expected | không có dòng `m13_<HHmm>@domain.com` | file lượt, test `TC-FR20-13` |
+| TC-FR20-14 | TS-DOM | `Nguyễn Văn Ánh` | `m14_{ts}@domain.com` | `Abcd12345` | chỉ khi khác Expected | không có dòng `m14_<HHmm>@domain.com` | file lượt, test `TC-FR20-14` |
+| TC-FR20-15 | TS-DOM | `Nguyễn Văn Ánh` | `m15_{ts}@domain.com` | `Abcd1234#` | chỉ khi khác Expected | không có dòng `m15_<HHmm>@domain.com` | file lượt, test `TC-FR20-15` |
+| TC-FR20-60 | TS-BVA | `Nguyễn Văn Ánh` | `m60_{ts}@domain.com` | `Abc12!x` | chỉ khi khác Expected | không có dòng `m60_<HHmm>@domain.com` | file lượt, test `TC-FR20-60` |
+| TC-FR20-204 | TS-SV | `Nguyễn Văn Ánh` | `m204_{ts} @domain.com` | `Abcd1234!` | chỉ khi khác Expected | không có dòng `m204_<HHmm> @domain.com` | file lượt, test `TC-FR20-204` |
+| TC-FR20-205 | TS-SV | `Nguyễn Văn Ánh` | `m205_{ts}@domain.com` | `Abcd１２３４５６!` | chỉ khi khác Expected | không có dòng `m205_<HHmm>@domain.com` | file lượt, test `TC-FR20-205` |
 
-### Nhóm 3 — case hợp lệ (trang admin TRƯỚC/SAU + đăng nhập thử)
+### Nhóm 3 — case hợp lệ (đăng nhập thử)
 
-| TC | Suite | Họ Tên | Email | Mật khẩu | Xác nhận MK | Ảnh | Quan sát chính | Actual / verdict |
-|---|---|---|---|---|---|---|---|---|
-| TC-FR20-01 | TS-DOM | `Nguyễn Văn Ánh` | `m01_{ts}@domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-01` |
-| TC-FR20-02 | TS-DOM | `Trần Thị Bình` | `m02_{ts}@domain.com` | `Abcd1234!#` | `Abcd1234!#` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-02` |
-| TC-FR20-61 | TS-BVA | `Nguyễn Văn Ánh` | `m61_{ts}@domain.com` | `Abc12!xy` | `Abc12!xy` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-61` |
-| TC-FR20-62 | TS-BVA | `Nguyễn Văn Ánh` | `m62_{ts}@domain.com` | `Abc12!xyz` | `Abc12!xyz` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-62` |
-| TC-FR20-63 | TS-BVA | `Nguyễn Văn Ánh` | `m63_{ts}@domain.com` | `Abc12!xyz345` | `Abc12!xyz345` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-63` |
-| TC-FR20-64 | TS-BVA | `Nguyễn Văn Ánh` | `m64_{ts}@domain.com` | `Abc12!xxxxxxxxxxxxxx…` (64 ký tự) | `Abc12!xxxxxxxxxxxxxx…` (64 ký tự) | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-64` |
-| TC-FR20-200 | TS-SV | `<script>alert(1)</script>` | `m200_{ts}@domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-200` |
-| TC-FR20-201 | TS-SV | `Lê 🐻 Hiệp` | `m201_{ts}@domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-201` |
-| TC-FR20-203 | TS-SV | `Nguyễn Văn Ánh` | `m203_{ts}@domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' · bấm 10 lần | file lượt, test `TC-FR20-203` |
-| TC-FR20-206 | TS-SV | `10.000 chữ 'a'` | `m206_{ts}@domain.com` | `Abcd1234!` | `Abcd1234!` | `_1` · `_2` · `_3` · `_4` · `_5` | màn 'Đăng Nhập' + đúng 1 dòng admin mới + header 'Chào, …' | file lượt, test `TC-FR20-206` |
+| TC | Suite | Họ Tên | Email | Mật khẩu | Ảnh điện thoại | Kiểm ở ảnh admin SAU | Actual / verdict |
+|---|---|---|---|---|---|---|---|
+| TC-FR20-01 | TS-DOM | `Nguyễn Văn Ánh` | `m01_{ts}@domain.com` | `Abcd1234!` | bắt buộc | có đúng 1 dòng `m01_<HHmm>@domain.com` | file lượt, test `TC-FR20-01` |
+| TC-FR20-02 | TS-DOM | `Trần Thị Bình` | `m02_{ts}@domain.com` | `Abcd1234!#` | chỉ khi khác Expected | có đúng 1 dòng `m02_<HHmm>@domain.com` | file lượt, test `TC-FR20-02` |
+| TC-FR20-61 | TS-BVA | `Nguyễn Văn Ánh` | `m61_{ts}@domain.com` | `Abc12!xy` | chỉ khi khác Expected | có đúng 1 dòng `m61_<HHmm>@domain.com` | file lượt, test `TC-FR20-61` |
+| TC-FR20-62 | TS-BVA | `Nguyễn Văn Ánh` | `m62_{ts}@domain.com` | `Abc12!xyz` | chỉ khi khác Expected | có đúng 1 dòng `m62_<HHmm>@domain.com` | file lượt, test `TC-FR20-62` |
+| TC-FR20-63 | TS-BVA | `Nguyễn Văn Ánh` | `m63_{ts}@domain.com` | `Abc12!xyz345` | chỉ khi khác Expected | có đúng 1 dòng `m63_<HHmm>@domain.com` | file lượt, test `TC-FR20-63` |
+| TC-FR20-64 | TS-BVA | `Nguyễn Văn Ánh` | `m64_{ts}@domain.com` | `Abc12!xxxxxxxxxx…` (64 ký tự) | chỉ khi khác Expected | có đúng 1 dòng `m64_<HHmm>@domain.com` | file lượt, test `TC-FR20-64` |
+| TC-FR20-200 | TS-SV | `<script>alert(1)</script>` | `m200_{ts}@domain.com` | `Abcd1234!` | bắt buộc | có đúng 1 dòng `m200_<HHmm>@domain.com` | file lượt, test `TC-FR20-200` |
+| TC-FR20-201 | TS-SV | `Lê 🐻 Hiệp` | `m201_{ts}@domain.com` | `Abcd1234!` | bắt buộc | có đúng 1 dòng `m201_<HHmm>@domain.com` | file lượt, test `TC-FR20-201` |
+| TC-FR20-203 | TS-SV | `Nguyễn Văn Ánh` | `m203_{ts}@domain.com` | `Abcd1234!` | chỉ khi khác Expected · bấm 10 lần | có đúng 1 dòng `m203_<HHmm>@domain.com` | file lượt, test `TC-FR20-203` |
+| TC-FR20-206 | TS-SV | 10.000 chữ 'a' | `m206_{ts}@domain.com` | `Abcd1234!` | chỉ khi khác Expected | có đúng 1 dòng `m206_<HHmm>@domain.com` | file lượt, test `TC-FR20-206` |
 
 ### Nhóm 4 — phụ thuộc ô Xác nhận mật khẩu
 
-| TC | Suite | Họ Tên | Email | Mật khẩu | Xác nhận MK | Ảnh | Quan sát chính | Actual / verdict |
-|---|---|---|---|---|---|---|---|---|
-| TC-FR20-16 | TS-DOM | `Nguyễn Văn Ánh` | `m16_{ts}@domain.com` | `Abcd1234!` | `Abcd1234?` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC · **không chạy, đánh dấu Blocked nếu TC-94 Fail** (case gốc TC-FR20-94, D9) | file lượt, test `TC-FR20-16` |
-| TC-FR20-17 | TS-DOM | `Nguyễn Văn Ánh` | `m17_{ts}@domain.com` | `Abcd1234!` | `abcd1234!` | `_1` · `_2` · `_3` · `_4` | thông báo lỗi (mọi kênh) + ở lại màn Đăng ký + admin SAU = TRƯỚC · **không chạy, đánh dấu Blocked nếu TC-94 Fail** (case gốc TC-FR20-94, D9) | file lượt, test `TC-FR20-17` |
+| TC | Suite | Họ Tên | Email | Mật khẩu | Ảnh điện thoại | Kiểm ở ảnh admin SAU | Actual / verdict |
+|---|---|---|---|---|---|---|---|
+| TC-FR20-16 | TS-DOM | `Nguyễn Văn Ánh` | `m16_{ts}@domain.com` | `Abcd1234!` | không chụp (Blocked nếu TC-94 Fail); TC-94 Pass → chỉ khi khác Expected | không có dòng `m16_<HHmm>@domain.com` | file lượt, test `TC-FR20-16` |
+| TC-FR20-17 | TS-DOM | `Nguyễn Văn Ánh` | `m17_{ts}@domain.com` | `Abcd1234!` | không chụp (Blocked nếu TC-94 Fail); TC-94 Pass → chỉ khi khác Expected | không có dòng `m17_<HHmm>@domain.com` | file lượt, test `TC-FR20-17` |
 
-Ô 'Xác nhận mật khẩu' không có trên màn hình → mọi case trừ TC-16, TC-17 bỏ bước nhập ô này và ghi notes (D9).
+Xác nhận mật khẩu: TC-16 `Abcd1234?`, TC-17 `abcd1234!`; các case khác = Mật khẩu (ô không có → bỏ, D9).
 
 ## Nhật ký lượt
 
-| Lượt | Ngày giờ bắt đầu | Máy (OS) | Điện thoại (model, Android) | Expo Go | Locale / bàn phím | IP API_URL | Phạm vi | File kết quả | Chính thức? | Ghi chú |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | | | | | | | | | | |
+| Lượt | Ngày giờ bắt đầu | Máy (OS) | Điện thoại (model, Android) | Expo Go | Locale / bàn phím | IP API_URL | Phạm vi | File kết quả | Ảnh admin TRƯỚC/SAU | Số ảnh điện thoại | Chính thức? | Ghi chú |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | | | | | | | | | | | | |
 
 Lượt chính thức = lượt chạy toàn bộ sau khi restart backend. Evidence chỉ giữ lượt mới nhất.
-## Hạn chế harness khi gộp kết quả chạy tay (chưa vá, chờ SV quyết)
 
-- `merge_results.py` đổi tên ảnh theo tên attachment qua `slug()`: `TC-FR20-xx_manual_1` → `evidence/TC-FR20-xx_manual-1.png` (gạch ngang thay gạch dưới).
-- `merge_results.py` ghi `auto_status` = verdict SV điền trong file lượt, trong khi D14 ghi "auto_status để trống" khi chạy tay.
+## Ghi chú harness
+
+- Quy trình trong `testcases.json` (TS-DOM/TS-BVA/TS-SV bước 1 và 7) vẫn ghi chụp admin TRƯỚC/SAU **mỗi case**; RUN.md thay bằng ảnh admin của lượt theo D0 (bản sửa, chờ SV chốt).
