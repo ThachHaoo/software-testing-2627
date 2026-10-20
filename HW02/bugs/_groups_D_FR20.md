@@ -9,13 +9,20 @@
 
 | Nhóm | BUG | Issue |
 |---|---|---|
-| G1 | | |
-| G2 | | |
-| G3 | | |
-| G4 | | |
-| G5 | | |
-| G6 | | |
-| G7 | | |
+| G1 | BUG-51 | |
+| G2 | BUG-52 | |
+| G3 | BUG-53 | |
+| G4 | BUG-54 | |
+| G5 | BUG-55 | |
+| G6 | BUG-56 | |
+| G7 | BUG-57 | |
+
+## SV quyết mapping (21/10/2026)
+
+- G1 → BUG-51, G2 → BUG-52, G3 → BUG-53, G4 → BUG-54, G5 → BUG-55, G6 → BUG-56, G7 → BUG-57: cả 7 đều là bug mới.
+- Tiêu chí: tách theo điểm vào (Web UI / API / Mobile). Khác tiêu chí "vị trí cần sửa" của C.
+- Lý do SV: "Web, API và Mobile là các điểm vào khác nhau; bug trên Mobile được tái hiện độc lập trên app mobile."
+- Khung BUG-51–53 (G1–G3) có mục "Liên quan": BUG A cùng vị trí code server + dòng code chung (AI điền dữ kiện, không nhận định).
 
 ## Tổng hợp
 

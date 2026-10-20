@@ -118,7 +118,7 @@ Skill dùng trong repo:
     - File dữ kiện `bugs/_groups_<X_FRnn>.md`.
     - Tiền tố issue chỉ thêm trên GitHub = FR của feature đang kiểm (không ghi vào .md).
     - Ảnh trang Issues: `bugs/issues_page_<X_FRnn>.png`.
-    - BUG kế tiếp: **BUG-51**; issue kế tiếp ≥ **#197**.
+    - BUG kế tiếp: **BUG-58** (BUG-51–57 đã cấp cho D_FR20); issue kế tiếp ≥ **#197**.
   - Checklist bước tái hiện (AI chạy thật trước khi tạo issue):
     - Web: giỏ là state React → điều hướng bằng link navbar, không gõ URL/tải lại; tiền điều kiện có bước dựng dữ liệu.
     - Windows PowerShell 5.1: tài khoản seed `test@eshop.com`; `-ContentType` ở tham số (không trong `-Headers`); `-Body ([Text.Encoding]::UTF8.GetBytes($body))`; `Invoke-WebRequest -UseBasicParsing`; lỗi 4xx/5xx đọc body bằng `try/catch` + `GetResponseStream()` (đặt `Position = 0`).
