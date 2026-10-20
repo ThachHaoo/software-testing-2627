@@ -16,11 +16,11 @@
 
 ## Tiền điều kiện
 
-- Backend đã bật và chạy ở máy máy tính.
+- Backend đã được khởi động lại (`node server.js`) để CSDL khôi phục trạng thái dữ liệu seed sạch.
 
-- Trang web Admin đã đăng nhập tài khoản admin@eshop.com và mở sẵn tab Quản lý Người dùng để theo dõi dữ liệu.
+- Web Admin đã đăng nhập bằng tài khoản `admin@eshop.com` và đang mở sẵn tab 'Quản lý Người dùng' để theo dõi dữ liệu.
 
-- App EShop trên điện thoại Android đã bật lên, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
+- App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
@@ -47,7 +47,7 @@
 
 - Giao diện app giữ nguyên người dùng ở màn 'Đăng Ký Tài Khoản'.
 
-- Server phải từ chối request, không được tạo thêm dòng tài khoản mới nào trong CSDL (danh sách bên web admin giữ nguyên).
+- Hệ thống từ chối đăng ký, không được tạo thêm dòng tài khoản mới nào trong CSDL (danh sách bên web admin giữ nguyên).
 
 Trích SRS (AI chép nguyên văn): README.md dòng 32: "Người dùng phải cung cấp: **Họ Tên**, **Email**, **Mật khẩu**."
 Trích SRS (AI chép nguyên văn): README.md dòng 33: "Email phải có định dạng hợp lệ (`user@domain.com`) và là duy nhất trong hệ thống."

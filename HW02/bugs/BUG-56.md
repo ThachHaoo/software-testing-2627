@@ -1,7 +1,7 @@
 # BUG-56
 
 - **ID:** BUG-56
-- **Tiêu đề:** `Ô nhập Email trên màn hình Đăng ký mobile không kích hoạt bàn phím định dạng Email (thiếu phím @)
+- **Tiêu đề:** Ô nhập Email trên màn hình Đăng ký mobile không kích hoạt bàn phím định dạng Email (thiếu phím @)
 - **Severity:** Medium
 - **Priority:** Medium
 
@@ -16,9 +16,9 @@
 
 ## Tiền điều kiện
 
-- Backend đã khởi động.
+- Backend đã khởi động (`node server.js`).
 
-- App EShop trên điện thoại Android đã bật và đang ở màn hình chưa đăng nhập.
+- App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
@@ -32,7 +32,7 @@
 
 ## Expected (trích SRS)
 
-Ô nhập Email phải mở bàn phím ảo được tối ưu riêng cho việc gõ email (chứa sẵn phím @ và phím dấu chấm . ngay trên bàn phím chính) theo tương đương yêu cầu FR-22.2 (D13 quy định thuộc tính keyboardType="email-address").
+Ô nhập Email phải mở bàn phím ảo được tối ưu riêng cho việc gõ email (chứa sẵn phím `@` ngay trên bàn phím chính) theo tương đương yêu cầu FR-22.2 (với thuộc tính `keyboardType="email-address"`).
 
 Trích SRS (AI chép nguyên văn): README.md dòng 253: "Trường Email phải dùng `type="email"`."
 
@@ -52,7 +52,7 @@ Bàn phím ảo bật lên chỉ là bàn phím văn bản thông thường (tex
 
 ## Yêu cầu
 
-- **FR-22.2:** Trường Email phải dùng type="email" (mobile: cách hiểu theo D13). [D13]
+- **FR-22.2:** Trường Email phải dùng type="email".
 - Đạt trong cùng case: —
 - Chưa đánh giá được: —
 

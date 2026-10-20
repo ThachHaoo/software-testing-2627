@@ -16,11 +16,11 @@
 
 ## Tiền điều kiện
 
-- Backend đã khởi động và seed sẵn dữ liệu sạch.
+- Backend đã được khởi động lại (`node server.js`) để CSDL khôi phục trạng thái dữ liệu seed sạch.
 
-- Web Admin đã đăng nhập tài khoản admin@eshop.com và mở sẵn tab Quản lý Người dùng để kiểm tra dữ liệu.
+- Web Admin đã đăng nhập bằng tài khoản `admin@eshop.com` và đang mở sẵn tab 'Quản lý Người dùng' để kiểm tra dữ liệu.
 
-- App EShop trên điện thoại Android đã bật, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
+- App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
@@ -38,13 +38,13 @@
 
 ## Expected (trích SRS)
 
-- Mật khẩu bắt buộc phải chứa ít nhất 1 ký tự đặc biệt thuộc tập đóng @, $, !, %, *, ?, & theo quy định FR-01.8 (D7).
+- Mật khẩu bắt buộc phải chứa ít nhất 1 ký tự đặc biệt thuộc tập đóng `@, $, !, %, *, ?, &` theo quy định FR-01.8 (D7).
 
-- Ký tự # không nằm trong tập ký tự đặc biệt cho phép, do đó hệ thống phải tính là thiếu ký tự đặc biệt, chặn đăng ký và hiển thị thông báo lỗi ở ít nhất một kênh (chữ hiển thị trên màn hình, hộp thoại alert hoặc toast).
+- Ký tự `#` không nằm trong tập ký tự đặc biệt cho phép, do đó hệ thống phải tính là thiếu ký tự đặc biệt, chặn đăng ký và hiển thị thông báo lỗi ở ít nhất một kênh (chữ hiển thị trên màn hình, hộp thoại alert hoặc toast).
 
 - Giao diện app phải giữ người dùng ở lại màn 'Đăng Ký Tài Khoản'.
 
-- Phía server phải từ chối request, không tạo tài khoản mới trong CSDL (danh sách bên web admin giữ nguyên).
+- Hệ thống từ chối đăng ký, không tạo tài khoản mới trong CSDL (danh sách bên web admin giữ nguyên).
 
 Trích SRS (AI chép nguyên văn): README.md dòng 34: "**Yêu cầu mật khẩu mạnh**: Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)."
 
@@ -123,7 +123,7 @@ Trích SRS (AI chép nguyên văn): README.md dòng 34: "**Yêu cầu mật kh�
 
 - Nguyên nhân đầu tiên là do biểu thức chính quy strongPasswordRegex trong file App.js (dòng 211–212) được viết dạng mở [^A-Za-z\d]. Đoạn regex này chỉ kiểm tra xem chuỗi có tồn tại bất kỳ ký tự nào không phải là chữ cái và chữ số hay không, chứ không giới hạn đúng tập ký tự đặc biệt @, $, !, %, *, ?, & theo yêu cầu của SRS. Vì vậy ký tự # vẫn lọt qua bộ kiểm soát ở client.
 
-- guyên nhân thứ hai là phía backend ở file server.js cũng hoàn toàn không validate độ mạnh hay tập ký tự của mật khẩu trước khi lưu vào CSDL, làm cho request chứa mật khẩu không hợp lệ vẫn được thực thi và tạo tài khoản thành công.
+- Nguyên nhân thứ hai là phía backend ở file server.js cũng hoàn toàn không validate độ mạnh hay tập ký tự của mật khẩu trước khi lưu vào CSDL, làm cho request chứa mật khẩu không hợp lệ vẫn được thực thi và tạo tài khoản thành công.
 
 ## Link GitHub Issue
 

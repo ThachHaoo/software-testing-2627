@@ -16,9 +16,9 @@
 
 ## Tiền điều kiện
 
-- Backend đã khởi động.
+- Backend đã khởi động (`node server.js`).
 
-- App EShop trên điện thoại Android đã mở và đang ở trạng thái chưa đăng nhập.
+- App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 

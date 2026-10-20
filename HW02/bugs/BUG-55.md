@@ -16,9 +16,9 @@
 
 ## Tiền điều kiện
 
-- Backend đã khởi động.
+- Backend đã khởi động (`node server.js`).
 
-- App EShop trên điện thoại Android đã mở và đang ở trạng thái chưa đăng nhập.
+- App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
@@ -84,7 +84,7 @@ Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là
 
 ### Nhận định
 
-Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Khi khai báo thẻ <Text style="{styles.label}">, lập trình viên giao diện chỉ gõ chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu chứ không thêm ký tự * (hoặc <Text style="{styles.required}">*</Text>) ở phía sau nhãn để đáp ứng yêu cầu FR-22.1.
+Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Khi khai báo thẻ <Text style={styles.label}>, lập trình viên giao diện chỉ gõ chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu chứ không thêm ký tự * (hoặc <Text style="{styles.required}">*</Text>) ở phía sau nhãn để đáp ứng yêu cầu FR-22.1.
 
 ## Link GitHub Issue
 

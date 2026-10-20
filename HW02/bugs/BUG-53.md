@@ -16,11 +16,11 @@
 
 ## Tiền điều kiện
 
-- Backend đã khởi động và seed sẵn dữ liệu mẫu, có sẵn tài khoản test@eshop.com.
+- Backend đã được khởi động lại (`node server.js`) để CSDL khôi phục trạng thái dữ liệu seed sạch (có sẵn tài khoản `test@eshop.com`).
 
-- Web Admin đã đăng nhập bằng tài khoản admin@eshop.com và đang mở sẵn tab Quản lý Người dùng để theo dõi dữ liệu CSDL.
+- Web Admin đã đăng nhập bằng tài khoản `admin@eshop.com` và đang mở sẵn tab 'Quản lý Người dùng' trên máy tính để theo dõi dữ liệu.
 
-- App EShop trên điện thoại Android đã bật, kết nối chung mạng với backend và đang ở trạng thái ban đầu chưa đăng nhập.
+- App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
