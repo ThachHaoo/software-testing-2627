@@ -7759,12 +7759,97 @@ B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
 ```
 
 **Output:**
+````
+Đã commit 5/7c (`21a989a`). Cả check_domain lẫn linter của thầy đều 0 ERROR.
+
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 5/7c – áp trả lời SV (gộp mục 1–10 lượt trước, Q7, B23, SEC-04, notes TC-213)
+- File đã tạo/sửa: HW02/B_FR07/testcases.json (v0.11), testcases.md, sv_questions.md, A_prompt_log.md
+- Thay đổi lượt này:
+  · Q7: bỏ EC5 khỏi covers của TC-203; ec_target giữ EC1
+  · B23 (SV chốt): thêm vào meta.assumptions nguyên văn kèm lý do; gắn assumptions của TC-203 và TC-206
+  · SEC-04 đưa lại vào test basis:
+    - nội dung trích nguyên văn README.md:281;
+    - phạm vi: "giá trị người dùng nhập ở ô Số lượng hiển thị trong giỏ";
+    - thêm vào meta.references;
+    - gắn requirements của TC-200.
+  · TC-213: notes = "Expected suy từ FR-07.3 áp cho từng request."
+- Kết quả kiểm tra:
+  · check_domain: 0 errors / 7 warn (đều là cảnh báo biến cũ không có lớp không hợp lệ); EC 55/55 đã phủ
+  · lint: 62 TC, 0 errors / 10 warn (tiêu đề thiếu CONDITION, giữ nguyên văn SV)
+  · test: Not run
+  · Truy vết: SEC-04 → TC-200; B23 → TC-203, TC-206
+- Commit: 82be2bc HW02: vá harness – trường approach (gray-box) (lượt trước)
+          21a989a HW02[B-FR07] 5/7c: áp trả lời SV
+- Case SV còn thiếu căn cứ SRS/giả định trong Expected: không còn
+- Cần quyết định: không có
 ```
+````
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 129 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 126 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #130 | 12:44 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 bước 6a – viết Playwright (KHÔNG chạy test; SV chạy). Commit
+"HW02[B-FR07] 6/7a: Playwright".
+
+Chung:
+- Theo quy ước A_FR01 trong CLAUDE.md: evidence B_FR07/evidence/TC-xx_{ui,api,req,
+  res,failed}.{png,json}; không giữ trace .zip; giữ auto_status; mỗi case 1 browser
+  context mới; user riêng {ts}; afterEach DELETE user (lỗi xoá → notes, không đổi verdict).
+- Đặt locale trình duyệt cố định, ghi vào meta.environment (B13 chấp nhận '.' và ',').
+- Case nhiều khẳng định: expect.soft, ghi mọi chỗ lệch vào Actual.
+- Bước 3 của procedure (giỏ ban đầu không khớp) → đánh dấu Blocked theo B20, ghi
+  case gốc nếu xác định được.
+
+UI:
+- Đúng 1 page.goto mỗi case; sau đó chỉ điều hướng bằng link trong app (B0d).
+- Định vị phần tử theo procedure (không dựa vào đúng chữ nhãn), trừ TC-95…98.
+- Dialog native: page.on('dialog'). TC-08: kiểm dòng vẫn còn TRONG lúc dialog mở,
+  rồi mới accept. Case không chờ dialog (TC-66, TC-07): có dialog thì xử lý theo
+  notes của case và ghi Actual.
+- Phản hồi khi thêm (B21): theo dõi ≤ 2 s sau click (toast, badge đổi, chữ/trạng
+  thái nút, thông báo); ghi loại phản hồi vào Actual; chụp ảnh.
+- TC-200: gõ bằng keyboard (fill bị chặn ở type=number); ghi value thực tế của ô;
+  bắt sự kiện dialog để phát hiện alert.
+- TC-201: click 20 lần cách 20 ms; đo tổng thời gian thực tế, ghi Actual; > 0,4 s
+  → notes.
+- TC-92: so computed style link tới /cart với link khác; chụp ảnh 2 trang.
+
+API:
+- Body gửi dạng CHUỖI THÔ cho TC-208, 209, 215 (không JSON.stringify từ object).
+- TC-215: so quantity trên TEXT response GET (không JSON.parse).
+- TC-213: 50 POST song song (Promise.all); TC-214: Content-Type: text/plain.
+- Lưu req/res JSON mỗi case làm evidence.
+
+Kiểm tra trước commit:
+- npx playwright test --list: liệt kê đủ 62 TC, khớp mã trong testcases.json.
+- Case nào không tự động hoá được → đánh dấu manual + procedure chạy tay, liệt kê.
+- Ghi HW02/B_FR07/RUN.md: các lệnh SV chạy (restart backend → web → test →
+  merge_results.py), không gì khác.
+Dừng. Báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+Đang đọc mã SUT và toàn bộ 62 case để viết spec.
+
+Đã nắm đủ dữ liệu. Giờ viết `tests/B_FR07/lib.ts` (helper) và spec.
+
+Config chưa được vá (escape sai). Sửa bằng Edit.
+
+62 test, mã khớp. Điền dấu vân tay vào bảng oracle.
+```
+*File AI ghi/gửi trong lượt này:* `lib.ts`, `B_FR07.spec.ts`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 130 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 127 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
