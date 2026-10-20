@@ -15345,11 +15345,58 @@ cho bug UI). Không sửa mục khác. Commit `HW02[C-FR15] 7/7a3: chép môi tr
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã chép mục "Môi trường" nguyên văn từ `HW02/env/environment.md` vào BUG-35…50, thêm dòng commit SUT `de0f48f` cho mọi bug và locale en-US cho 9 bug UI (35–40, 45, 49, 50); commit `f57323e`.
+
+Lưu ý: chính `environment.md` còn 7 chỗ `[...]` chưa điền (máy, Node.js, trình duyệt, điện thoại, Expo Go, IP LAN, Playwright), nên các file BUG cũng mang theo các chỗ trống đó. SV cần điền `environment.md` rồi chép lại vào các bug.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 253 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 169 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #254 | 19:34 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Định dạng lại khung BUG-35…50 theo đúng khung ban đầu của B (AI-01 §11: AI chỉ dựng khung + chép dữ kiện):
+0. Kiểm `git diff --stat HW02/bugs/BUG-22.md`: nếu có thay đổi chưa commit → DỪNG, báo SV (không tự khôi phục file của SV).
+   Mẫu khung = `git show <commit 7/7a của B_FR07>:HW02/bugs/BUG-22.md` (tìm commit qua git log). Theo đúng thứ tự mục, cách ghi
+   và độ dài của mẫu.
+1. Chỗ trống: mọi `<SV viết>` để trong backtick (`` `<SV viết>` ``); Link GitHub Issue = `` `<sau khi tạo issue>` ``.
+   Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước tái hiện, Expected (trích SRS), Actual, Nhận định = `<SV viết>`.
+2. Môi trường: gạch đầu dòng như mẫu, giá trị THẬT, không chép bảng environment.md, không ô `[...]`, không dòng mobile/tài khoản:
+   - SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+   - Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
+   - Trình duyệt: Chromium <phiên bản> (Playwright <phiên bản>), locale en-US — lấy từ results/RUN.md/`npx playwright --version`;
+     bug chỉ API → thay bằng "Client: PowerShell 5.1 Invoke-WebRequest" (nếu bug có cả UI và API thì ghi cả hai)
+   - Trang/endpoint: Admin http://localhost:5174 <màn hình> hoặc API <method + path>
+   - Ngày chạy: 2026-10-20 (lượt chính thức = lượt 6, bắt đầu <giờ>, Asia/Saigon)
+   - Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
+   Không tìm được giá trị thật → ghi `<SV điền>` và báo, không đoán.
+3. Bằng chứng: "Ảnh tiêu biểu: `<tên file>`" + mỗi TC một dòng "TC-FR15-xx: `<đường dẫn evidence>`".
+4. TC liên quan: như mẫu (Fail (n): …; Blocked liên quan nếu có, kèm case gốc; Nhóm dữ kiện: Gx trong `_groups_C_FR15.md`).
+5. Yêu cầu: điền từ cột "yêu cầu bị vi phạm" của _groups_C_FR15.md (đã bỏ C8, C17), dạng mẫu
+   "**<mã>:** (<loại/nguồn>) <diễn giải ngắn đúng SRS/giả định>"; thêm "Đạt trong cùng case: —", "Chưa đánh giá được: —"
+   (điền nếu _groups có dữ kiện). Giả định SV ghi mã C… và nêu rõ là giả định SV.
+6. Dữ kiện (AI chép), như mẫu:
+   - "Actual nguyên văn (TC-FR15-xx): `…`" cho từng TC. KHÔNG chép Expected. Chuỗi một ký tự lặp > 20 lần → viết `"x"×N`
+     và ghi "(rút gọn ký tự lặp; nguyên văn ở testcases.json)".
+   - "Lặp lại: …" chỉ khi có dữ kiện (so auto_status các lượt còn results file); không có → "chỉ có kết quả lượt 6".
+   - "Đoạn code trích nguyên văn: `<file>` dòng a–b" + khối code có số dòng, lấy theo vị trí code trong _groups (gray-box).
+7. Giữ dòng cuối "Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần dữ kiện."
+8. Commit `HW02[C-FR15] 7/7a4: định dạng khung BUG-35–50 theo mẫu B` kèm A_prompt_log.md.
+Báo cáo (≤ 6 dòng): commit; chỗ ghi `<SV điền>` (nếu có); bug nào có Blocked liên quan.
+```
+
+**Output:**
+```
+Mẫu = `d0d0e05:HW02/bugs/BUG-22.md` (khung 7/7a5 của B). Phiên bản thật: Playwright 1.48.2 / Chromium 130.0.6723.31; lượt 6 bắt đầu 18:53. Dựng lại 16 file theo mẫu.
+```
+*File AI ghi/gửi trong lượt này:* `c15_bugfmt.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 254 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 170 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

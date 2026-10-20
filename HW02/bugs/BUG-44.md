@@ -1,51 +1,39 @@
 # BUG-44
 
 - **ID:** BUG-44
-- **Tiêu đề:** <SV viết>
-- **Severity:** <SV viết>
-- **Priority:** <SV viết>
+- **Tiêu đề:** `<SV viết>`
+- **Severity:** `<SV viết>`
+- **Priority:** `<SV viết>`
 
 ## Môi trường
 
-Chép nguyên văn từ `HW02/env/environment.md`:
-
-| Mục | Giá trị |
-|---|---|
-| SUT | EShop, fork nhóm `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã) |
-| Máy | [...] (OS, CPU/RAM) |
-| Node.js | [...] (`node -v`) |
-| Trình duyệt | [...] (tên + phiên bản) |
-| Backend / Web / Admin | http://localhost:3000 · :5173 · :5174 |
-| Điện thoại | [...] (model, Android/iOS + phiên bản) |
-| Expo Go | [...] (bản cho SDK 54) |
-| Thay đổi SUT | `frontend-mobile/App.js` dòng 16 `API_URL` → IP LAN `[...]` (xem `mobile_api_url.patch`) |
-| Playwright | [...] (`npx playwright --version`) |
-
-**Đặc điểm môi trường ảnh hưởng thiết kế test**
-- Backend xoá và seed lại CSDL mỗi lần khởi động; giỏ hàng lưu trong RAM.
-- Tài khoản seed: admin `admin@eshop.com` / `Admin123!`, user `test@eshop.com` / `Test1234!` (setup_guide ghi `admin123`, không khớp seed).
-
-- Commit SUT: `de0f48f`
+- SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+- Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
+- Client: Playwright 1.48.2 APIRequestContext (lượt 6); kiểm tái hiện bằng PowerShell 5.1 Invoke-WebRequest (7/7a)
+- API POST http://localhost:3000/api/products
+- Ngày chạy: 2026-10-20 (lượt chính thức = lượt 6, bắt đầu 18:53, Asia/Saigon)
+- Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
 
 ## Tiền điều kiện
 
-<SV viết>
+`<SV viết>`
 
 ## Các bước tái hiện
 
-<SV viết>
+`<SV viết>`
 
 ## Expected (trích SRS)
 
-<SV viết>
+`<SV viết>`
 
 ## Actual
 
-<SV viết>
+`<SV viết>`
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu: `HW02/C_FR15/evidence/TC-FR15-211_api.png`
+- Ảnh tiêu biểu: `TC-FR15-211_api.png`
+- TC-FR15-211: `HW02/C_FR15/evidence/TC-FR15-211_req.json`, `HW02/C_FR15/evidence/TC-FR15-211_res.json`, `HW02/C_FR15/evidence/TC-FR15-211_api.png`
 
 ## TC liên quan
 
@@ -54,34 +42,43 @@ Chép nguyên văn từ `HW02/env/environment.md`:
 
 ## Yêu cầu
 
-<SV viết>
+- **C6 (giả định SV chốt):** (tầng API áp FR-15) API là tầng riêng, suite riêng: POST/PUT gọi trực tiếp với dữ liệu vi phạm FR-15.2–15.4 → 4xx (không 2xx, không 5xx) kèm trường error, không tạo/không đổi bản ghi; không cố định mã cụ thể. — (không 5xx; SV ghi căn cứ C6, C9)
+- Đạt trong cùng case: Không tạo sản phẩm
+- Chưa đánh giá được: —
 
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)
 
-Expected / Actual chép nguyên văn từ `HW02/C_FR15/testcases.json` (lượt chính thức = lượt 6; case manual theo ảnh SV).
-
-#### TC-FR15-211 (Fail)
-
-- **Expected:** HTTP 4xx (400 hoặc 415); CSDL không tạo sản phẩm.
-- **Actual:** HTTP 500 <!DOCTYPE html>
+- Actual nguyên văn (TC-FR15-211): `HTTP 500 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Error</title>
 </head>
 <body>
-<pre>TypeError: Cannot destructure property &#39;name&#39; of &#39;req.body&#39; as it is undefined.<; bản ghi TRƯỚC → SAU: 5 → 5
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-211_req.json`, `HW02/C_FR15/evidence/TC-FR15-211_res.json`, `HW02/C_FR15/evidence/TC-FR15-211_api.png`
+<pre>TypeError: Cannot destructure property &#39;name&#39; of &#39;req.body&#39; as it is undefined.<; bản ghi TRƯỚC → SAU: 5 → 5`
+- Lặp lại: auto_status giống nhau ở lượt 3 (lượt thử, harness lỗi H1–H4) và lượt 6 (chính thức, restart backend trước lượt); tái hiện lại ở 7/7a (`_groups_C_FR15.md`).
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 11–12
+
+  ```js
+    11  app.use(cors());
+    12  app.use(bodyParser.json());
+  ```
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 167–168
+
+  ```js
+   167  app.post("/api/products", (req, res) => {
+   168    const { name, price, description, imageUrl, category_id } = req.body;
+  ```
 
 ### Nhận định
 
-<SV viết>
+`<SV viết>`
 
 ## Link GitHub Issue
 
-(điền sau khi tạo issue)
+`<sau khi tạo issue>`
 
 ---
 

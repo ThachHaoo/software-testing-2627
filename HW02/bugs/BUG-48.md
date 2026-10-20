@@ -1,51 +1,39 @@
 # BUG-48
 
 - **ID:** BUG-48
-- **Tiêu đề:** <SV viết>
-- **Severity:** <SV viết>
-- **Priority:** <SV viết>
+- **Tiêu đề:** `<SV viết>`
+- **Severity:** `<SV viết>`
+- **Priority:** `<SV viết>`
 
 ## Môi trường
 
-Chép nguyên văn từ `HW02/env/environment.md`:
-
-| Mục | Giá trị |
-|---|---|
-| SUT | EShop, fork nhóm `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã) |
-| Máy | [...] (OS, CPU/RAM) |
-| Node.js | [...] (`node -v`) |
-| Trình duyệt | [...] (tên + phiên bản) |
-| Backend / Web / Admin | http://localhost:3000 · :5173 · :5174 |
-| Điện thoại | [...] (model, Android/iOS + phiên bản) |
-| Expo Go | [...] (bản cho SDK 54) |
-| Thay đổi SUT | `frontend-mobile/App.js` dòng 16 `API_URL` → IP LAN `[...]` (xem `mobile_api_url.patch`) |
-| Playwright | [...] (`npx playwright --version`) |
-
-**Đặc điểm môi trường ảnh hưởng thiết kế test**
-- Backend xoá và seed lại CSDL mỗi lần khởi động; giỏ hàng lưu trong RAM.
-- Tài khoản seed: admin `admin@eshop.com` / `Admin123!`, user `test@eshop.com` / `Test1234!` (setup_guide ghi `admin123`, không khớp seed).
-
-- Commit SUT: `de0f48f`
+- SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+- Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
+- Client: Playwright 1.48.2 APIRequestContext (lượt 6); kiểm tái hiện bằng PowerShell 5.1 Invoke-WebRequest (7/7a)
+- API GET http://localhost:3000/api/products/:id
+- Ngày chạy: 2026-10-20 (lượt chính thức = lượt 6, bắt đầu 18:53, Asia/Saigon)
+- Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
 
 ## Tiền điều kiện
 
-<SV viết>
+`<SV viết>`
 
 ## Các bước tái hiện
 
-<SV viết>
+`<SV viết>`
 
 ## Expected (trích SRS)
 
-<SV viết>
+`<SV viết>`
 
 ## Actual
 
-<SV viết>
+`<SV viết>`
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu: `HW02/C_FR15/evidence/TC-FR15-22_api.png`
+- Ảnh tiêu biểu: `TC-FR15-22_api.png`
+- TC-FR15-22: `HW02/C_FR15/evidence/TC-FR15-22_req.json`, `HW02/C_FR15/evidence/TC-FR15-22_res.json`, `HW02/C_FR15/evidence/TC-FR15-22_api.png`
 
 ## TC liên quan
 
@@ -54,27 +42,35 @@ Chép nguyên văn từ `HW02/env/environment.md`:
 
 ## Yêu cầu
 
-<SV viết>
+- **C15 (giả định SV chốt):** (kiểu dữ liệu price trong phản hồi GET) price trong phản hồi GET /api/products/:id phải là số JSON; price dạng chuỗi (kể cả chuỗi số) lệch Expected. Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so price theo giá trị số.
+- Đạt trong cùng case: name, category_id đúng giá trị seed
+- Chưa đánh giá được: —
 
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)
 
-Expected / Actual chép nguyên văn từ `HW02/C_FR15/testcases.json` (lượt chính thức = lượt 6; case manual theo ảnh SV).
+- Actual nguyên văn (TC-FR15-22): `HTTP 200 {"id":2,"name":"Samsung Galaxy S24 Ultra","price":"28000000","description":"Màn hình hiển thị xuất sắc, camera siêu zoom","imageUrl":"https://placehold.co/300x300/png?text=Samsung+S24","category_id":1; bản ghi TRƯỚC → SAU: 5 → 5`
+- Lặp lại: auto_status giống nhau ở lượt 3 (lượt thử, harness lỗi H1–H4) và lượt 6 (chính thức, restart backend trước lượt); tái hiện lại ở 7/7a (`_groups_C_FR15.md`).
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 159–165
 
-#### TC-FR15-22 (Fail)
-
-- **Expected:** HTTP 2xx; body là bản ghi id 2 với name = 'Samsung Galaxy S24 Ultra', category_id = 1 và price = 28000000 là số JSON (không phải chuỗi) (C15). Nơi duy nhất khẳng định kiểu dữ liệu price.
-- **Actual:** HTTP 200 {"id":2,"name":"Samsung Galaxy S24 Ultra","price":"28000000","description":"Màn hình hiển thị xuất sắc, camera siêu zoom","imageUrl":"https://placehold.co/300x300/png?text=Samsung+S24","category_id":1; bản ghi TRƯỚC → SAU: 5 → 5
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-22_req.json`, `HW02/C_FR15/evidence/TC-FR15-22_res.json`, `HW02/C_FR15/evidence/TC-FR15-22_api.png`
+  ```js
+   159  app.get("/api/products/:id", (req, res) => {
+   160    db.get("SELECT * FROM products WHERE id = ?", [req.params.id], (err, row) => {
+   161      if (!row) return res.status(200).json({});
+   162      if (row.id % 2 === 0) row.price = row.price.toString();
+   163      res.json(row);
+   164    });
+   165  });
+  ```
 
 ### Nhận định
 
-<SV viết>
+`<SV viết>`
 
 ## Link GitHub Issue
 
-(điền sau khi tạo issue)
+`<sau khi tạo issue>`
 
 ---
 

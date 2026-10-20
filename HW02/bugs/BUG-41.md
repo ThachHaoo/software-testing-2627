@@ -1,51 +1,55 @@
 # BUG-41
 
 - **ID:** BUG-41
-- **Tiêu đề:** <SV viết>
-- **Severity:** <SV viết>
-- **Priority:** <SV viết>
+- **Tiêu đề:** `<SV viết>`
+- **Severity:** `<SV viết>`
+- **Priority:** `<SV viết>`
 
 ## Môi trường
 
-Chép nguyên văn từ `HW02/env/environment.md`:
-
-| Mục | Giá trị |
-|---|---|
-| SUT | EShop, fork nhóm `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã) |
-| Máy | [...] (OS, CPU/RAM) |
-| Node.js | [...] (`node -v`) |
-| Trình duyệt | [...] (tên + phiên bản) |
-| Backend / Web / Admin | http://localhost:3000 · :5173 · :5174 |
-| Điện thoại | [...] (model, Android/iOS + phiên bản) |
-| Expo Go | [...] (bản cho SDK 54) |
-| Thay đổi SUT | `frontend-mobile/App.js` dòng 16 `API_URL` → IP LAN `[...]` (xem `mobile_api_url.patch`) |
-| Playwright | [...] (`npx playwright --version`) |
-
-**Đặc điểm môi trường ảnh hưởng thiết kế test**
-- Backend xoá và seed lại CSDL mỗi lần khởi động; giỏ hàng lưu trong RAM.
-- Tài khoản seed: admin `admin@eshop.com` / `Admin123!`, user `test@eshop.com` / `Test1234!` (setup_guide ghi `admin123`, không khớp seed).
-
-- Commit SUT: `de0f48f`
+- SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+- Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
+- Client: Playwright 1.48.2 APIRequestContext (lượt 6); kiểm tái hiện bằng PowerShell 5.1 Invoke-WebRequest (7/7a)
+- API POST http://localhost:3000/api/products
+- Ngày chạy: 2026-10-20 (lượt chính thức = lượt 6, bắt đầu 18:53, Asia/Saigon)
+- Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
 
 ## Tiền điều kiện
 
-<SV viết>
+`<SV viết>`
 
 ## Các bước tái hiện
 
-<SV viết>
+`<SV viết>`
 
 ## Expected (trích SRS)
 
-<SV viết>
+`<SV viết>`
 
 ## Actual
 
-<SV viết>
+`<SV viết>`
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu: `HW02/C_FR15/evidence/TC-FR15-23_api.png`
+- Ảnh tiêu biểu: `TC-FR15-23_api.png`
+- TC-FR15-23: `HW02/C_FR15/evidence/TC-FR15-23_req.json`, `HW02/C_FR15/evidence/TC-FR15-23_res.json`, `HW02/C_FR15/evidence/TC-FR15-23_api.png`
+- TC-FR15-24: `HW02/C_FR15/evidence/TC-FR15-24_req.json`, `HW02/C_FR15/evidence/TC-FR15-24_res.json`, `HW02/C_FR15/evidence/TC-FR15-24_api.png`, `HW02/C_FR15/evidence/TC-FR15-24_failed.png`
+- TC-FR15-25: `HW02/C_FR15/evidence/TC-FR15-25_req.json`, `HW02/C_FR15/evidence/TC-FR15-25_res.json`, `HW02/C_FR15/evidence/TC-FR15-25_api.png`
+- TC-FR15-26: `HW02/C_FR15/evidence/TC-FR15-26_req.json`, `HW02/C_FR15/evidence/TC-FR15-26_res.json`, `HW02/C_FR15/evidence/TC-FR15-26_api.png`
+- TC-FR15-27: `HW02/C_FR15/evidence/TC-FR15-27_req.json`, `HW02/C_FR15/evidence/TC-FR15-27_res.json`, `HW02/C_FR15/evidence/TC-FR15-27_api.png`
+- TC-FR15-84: `HW02/C_FR15/evidence/TC-FR15-84_req.json`, `HW02/C_FR15/evidence/TC-FR15-84_res.json`, `HW02/C_FR15/evidence/TC-FR15-84_api.png`
+- TC-FR15-100: `HW02/C_FR15/evidence/TC-FR15-100_req.json`, `HW02/C_FR15/evidence/TC-FR15-100_res.json`, `HW02/C_FR15/evidence/TC-FR15-100_api.png`, `HW02/C_FR15/evidence/TC-FR15-100_failed.png`
+- TC-FR15-28: `HW02/C_FR15/evidence/TC-FR15-28_req.json`, `HW02/C_FR15/evidence/TC-FR15-28_res.json`, `HW02/C_FR15/evidence/TC-FR15-28_api.png`
+- TC-FR15-29: `HW02/C_FR15/evidence/TC-FR15-29_req.json`, `HW02/C_FR15/evidence/TC-FR15-29_res.json`, `HW02/C_FR15/evidence/TC-FR15-29_api.png`
+- TC-FR15-30: `HW02/C_FR15/evidence/TC-FR15-30_req.json`, `HW02/C_FR15/evidence/TC-FR15-30_res.json`, `HW02/C_FR15/evidence/TC-FR15-30_api.png`
+- TC-FR15-31: `HW02/C_FR15/evidence/TC-FR15-31_req.json`, `HW02/C_FR15/evidence/TC-FR15-31_res.json`, `HW02/C_FR15/evidence/TC-FR15-31_api.png`
+- TC-FR15-101: `HW02/C_FR15/evidence/TC-FR15-101_req.json`, `HW02/C_FR15/evidence/TC-FR15-101_res.json`, `HW02/C_FR15/evidence/TC-FR15-101_api.png`
+- TC-FR15-208: `HW02/C_FR15/evidence/TC-FR15-208_req.json`, `HW02/C_FR15/evidence/TC-FR15-208_res.json`, `HW02/C_FR15/evidence/TC-FR15-208_api.png`
+- TC-FR15-214: `HW02/C_FR15/evidence/TC-FR15-214_req.json`, `HW02/C_FR15/evidence/TC-FR15-214_res.json`, `HW02/C_FR15/evidence/TC-FR15-214_api.png`
+- TC-FR15-32: `HW02/C_FR15/evidence/TC-FR15-32_req.json`, `HW02/C_FR15/evidence/TC-FR15-32_res.json`, `HW02/C_FR15/evidence/TC-FR15-32_api.png`
+- TC-FR15-33: `HW02/C_FR15/evidence/TC-FR15-33_req.json`, `HW02/C_FR15/evidence/TC-FR15-33_res.json`, `HW02/C_FR15/evidence/TC-FR15-33_api.png`
+- TC-FR15-34: `HW02/C_FR15/evidence/TC-FR15-34_req.json`, `HW02/C_FR15/evidence/TC-FR15-34_res.json`, `HW02/C_FR15/evidence/TC-FR15-34_api.png`
 
 ## TC liên quan
 
@@ -54,123 +58,62 @@ Chép nguyên văn từ `HW02/env/environment.md`:
 
 ## Yêu cầu
 
-<SV viết>
+- **FR-15.2:** (SRS) Tên sản phẩm: bắt buộc, tối đa 255 ký tự. — (name: 23, 24, 25, 26, 27, 84, 100)
+- **FR-15.3:** (SRS) Giá: bắt buộc, phải là số dương (> 0). — (price: 28, 29, 30, 31, 101, 208, 214)
+- **FR-15.4:** (SRS) Danh mục: bắt buộc, phải chọn từ danh sách có sẵn. — (category_id: 32, 33, 34)
+- **C6 (giả định SV chốt):** (tầng API áp FR-15) API là tầng riêng, suite riêng: POST/PUT gọi trực tiếp với dữ liệu vi phạm FR-15.2–15.4 → 4xx (không 2xx, không 5xx) kèm trường error, không tạo/không đổi bản ghi; không cố định mã cụ thể.
+- **C9 (giả định SV chốt):** (thiếu trường / sai kiểu ở API) name/price/category_id thiếu, null hoặc sai kiểu JSON (name là số; price là chuỗi — kể cả chuỗi số như "100000"; category_id là chuỗi chữ) → 4xx, không tạo/không đổi bản ghi. — (26, 27, 29, 30, 31, 33, 34)
+- **C3 (giả định SV chốt):** (Tên – chuỗi chỉ gồm khoảng trắng) chuỗi chỉ gồm khoảng trắng coi như trống → bị từ chối; tách lớp riêng với chuỗi rỗng. — (25)
+- **C11 (giả định SV chốt):** (Danh mục – 'danh sách có sẵn') danh sách có sẵn = các danh mục tồn tại trong bảng categories (GET /api/categories) tại thời điểm lưu. category_id không có trong danh sách hoặc thiếu → không hợp lệ. Quan sát (gray-box): ô chọn danh mục trên UI luôn có … — (32)
+- **C23 (giả định SV chốt):** (giá cực nhỏ bị làm tròn về 0 khi parse) dùng ở TC-FR15-214. — (214)
+- Đạt trong cùng case: —
+- Chưa đánh giá được: —
 
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)
 
-Expected / Actual chép nguyên văn từ `HW02/C_FR15/testcases.json` (lượt chính thức = lượt 6; case manual theo ảnh SV).
+- Actual nguyên văn (TC-FR15-23): `HTTP 200 {"message":"Product created","id":22}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 22, name "", price 1500000, category_id 2}`
+- Actual nguyên văn (TC-FR15-24): `HTTP 200 {"message":"Product created","id":23}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 23, name ""x"×300", price 1500000, category_id 2}` (rút gọn ký tự lặp; nguyên văn ở testcases.json)
+- Actual nguyên văn (TC-FR15-25): `HTTP 200 {"message":"Product created","id":24}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 24, name "   ", price 1500000, category_id 2}`
+- Actual nguyên văn (TC-FR15-26): `HTTP 200 {"message":"Product created","id":25}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 25, name null, price 1500000, category_id 2}`
+- Actual nguyên văn (TC-FR15-27): `HTTP 200 {"message":"Product created","id":26}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 26, name "123", price 1500000, category_id 2}`
+- Actual nguyên văn (TC-FR15-84): `HTTP 200 {"message":"Product created","id":81}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 81, name "", price 1500000, category_id 2}`
+- Actual nguyên văn (TC-FR15-100): `HTTP 200 {"message":"Product created","id":87}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 87, name ""x"×256", price 1500000, category_id 2}` (rút gọn ký tự lặp; nguyên văn ở testcases.json)
+- Actual nguyên văn (TC-FR15-28): `HTTP 200 {"message":"Product created","id":27}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 27, name "SP API28 1792497292506", price -1000, category_id 2}`
+- Actual nguyên văn (TC-FR15-29): `HTTP 200 {"message":"Product created","id":28}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 28, name "SP API29 1792497293415", price null, category_id 2}`
+- Actual nguyên văn (TC-FR15-30): `HTTP 200 {"message":"Product created","id":29}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 29, name "SP API30 1792497294325", price "abc", category_id 2}`
+- Actual nguyên văn (TC-FR15-31): `HTTP 200 {"message":"Product created","id":30}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 30, name "SP API31 1792497295222", price 100000, category_id 2}`
+- Actual nguyên văn (TC-FR15-101): `HTTP 200 {"message":"Product created","id":88}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 88, name "SP BVA 101 1792497398040", price 0, category_id 2}`
+- Actual nguyên văn (TC-FR15-208): `HTTP 200 {"message":"Product created","id":112}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 112, name "SP Giá Âm Cực Đại 1792497423262", price -999999999999, category_id 2}`
+- Actual nguyên văn (TC-FR15-214): `HTTP 200 {"message":"Product created","id":114}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 114, name "SP Underflow Price 1792497426240", price 0, category_id 2}`
+- Actual nguyên văn (TC-FR15-32): `HTTP 200 {"message":"Product created","id":31}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 31, name "SP API32 1792497296103", price 1500000, category_id 999}`
+- Actual nguyên văn (TC-FR15-33): `HTTP 200 {"message":"Product created","id":32}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 32, name "SP API33 1792497297046", price 1500000, category_id null}`
+- Actual nguyên văn (TC-FR15-34): `HTTP 200 {"message":"Product created","id":33}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 33, name "SP API34 1792497297969", price 1500000, category_id "abc"}`
+- Lặp lại: auto_status giống nhau ở lượt 3 (lượt thử, harness lỗi H1–H4) và lượt 6 (chính thức, restart backend trước lượt); tái hiện lại ở 7/7a (`_groups_C_FR15.md`).
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 167–177
 
-#### TC-FR15-23 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":22}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 22, name "", price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-23_req.json`, `HW02/C_FR15/evidence/TC-FR15-23_res.json`, `HW02/C_FR15/evidence/TC-FR15-23_api.png`
-
-#### TC-FR15-24 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":23}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 23, name "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-24_req.json`, `HW02/C_FR15/evidence/TC-FR15-24_res.json`, `HW02/C_FR15/evidence/TC-FR15-24_api.png`, `HW02/C_FR15/evidence/TC-FR15-24_failed.png`
-
-#### TC-FR15-25 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":24}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 24, name "   ", price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-25_req.json`, `HW02/C_FR15/evidence/TC-FR15-25_res.json`, `HW02/C_FR15/evidence/TC-FR15-25_api.png`
-
-#### TC-FR15-26 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":25}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 25, name null, price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-26_req.json`, `HW02/C_FR15/evidence/TC-FR15-26_res.json`, `HW02/C_FR15/evidence/TC-FR15-26_api.png`
-
-#### TC-FR15-27 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":26}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 26, name "123", price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-27_req.json`, `HW02/C_FR15/evidence/TC-FR15-27_res.json`, `HW02/C_FR15/evidence/TC-FR15-27_api.png`
-
-#### TC-FR15-84 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":81}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 81, name "", price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-84_req.json`, `HW02/C_FR15/evidence/TC-FR15-84_res.json`, `HW02/C_FR15/evidence/TC-FR15-84_api.png`
-
-#### TC-FR15-100 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":87}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 87, name "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", price 1500000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-100_req.json`, `HW02/C_FR15/evidence/TC-FR15-100_res.json`, `HW02/C_FR15/evidence/TC-FR15-100_api.png`, `HW02/C_FR15/evidence/TC-FR15-100_failed.png`
-
-#### TC-FR15-28 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":27}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 27, name "SP API28 1792497292506", price -1000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-28_req.json`, `HW02/C_FR15/evidence/TC-FR15-28_res.json`, `HW02/C_FR15/evidence/TC-FR15-28_api.png`
-
-#### TC-FR15-29 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":28}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 28, name "SP API29 1792497293415", price null, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-29_req.json`, `HW02/C_FR15/evidence/TC-FR15-29_res.json`, `HW02/C_FR15/evidence/TC-FR15-29_api.png`
-
-#### TC-FR15-30 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":29}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 29, name "SP API30 1792497294325", price "abc", category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-30_req.json`, `HW02/C_FR15/evidence/TC-FR15-30_res.json`, `HW02/C_FR15/evidence/TC-FR15-30_api.png`
-
-#### TC-FR15-31 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":30}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 30, name "SP API31 1792497295222", price 100000, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-31_req.json`, `HW02/C_FR15/evidence/TC-FR15-31_res.json`, `HW02/C_FR15/evidence/TC-FR15-31_api.png`
-
-#### TC-FR15-101 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":88}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 88, name "SP BVA 101 1792497398040", price 0, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-101_req.json`, `HW02/C_FR15/evidence/TC-FR15-101_res.json`, `HW02/C_FR15/evidence/TC-FR15-101_api.png`
-
-#### TC-FR15-208 (Fail)
-
-- **Expected:** HTTP 4xx kèm trường error; CSDL không tạo sản phẩm mới.
-- **Actual:** HTTP 200 {"message":"Product created","id":112}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 112, name "SP Giá Âm Cực Đại 1792497423262", price -999999999999, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-208_req.json`, `HW02/C_FR15/evidence/TC-FR15-208_res.json`, `HW02/C_FR15/evidence/TC-FR15-208_api.png`
-
-#### TC-FR15-214 (Fail)
-
-- **Expected:** HTTP 4xx kèm trường error (do JS parse `1e-324` ngầm thành `0`, vi phạm giá > 0); CSDL không đổi.
-- **Actual:** HTTP 200 {"message":"Product created","id":114}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 114, name "SP Underflow Price 1792497426240", price 0, category_id 2}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-214_req.json`, `HW02/C_FR15/evidence/TC-FR15-214_res.json`, `HW02/C_FR15/evidence/TC-FR15-214_api.png`
-
-#### TC-FR15-32 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":31}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 31, name "SP API32 1792497296103", price 1500000, category_id 999}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-32_req.json`, `HW02/C_FR15/evidence/TC-FR15-32_res.json`, `HW02/C_FR15/evidence/TC-FR15-32_api.png`
-
-#### TC-FR15-33 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":32}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 32, name "SP API33 1792497297046", price 1500000, category_id null}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-33_req.json`, `HW02/C_FR15/evidence/TC-FR15-33_res.json`, `HW02/C_FR15/evidence/TC-FR15-33_api.png`
-
-#### TC-FR15-34 (Fail)
-
-- **Expected:** HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.
-- **Actual:** HTTP 200 {"message":"Product created","id":33}; bản ghi TRƯỚC → SAU: 5 → 6; bản ghi mới: {id 33, name "SP API34 1792497297969", price 1500000, category_id "abc"}
-- **Evidence:** `HW02/C_FR15/evidence/TC-FR15-34_req.json`, `HW02/C_FR15/evidence/TC-FR15-34_res.json`, `HW02/C_FR15/evidence/TC-FR15-34_api.png`
+  ```js
+   167  app.post("/api/products", (req, res) => {
+   168    const { name, price, description, imageUrl, category_id } = req.body;
+   169    db.run(
+   170      "INSERT INTO products (name, price, description, imageUrl, category_id) VALUES (?, ?, ?, ?, ?)",
+   171      [name, price, description, imageUrl, category_id],
+   172      function (err) {
+   173        if (err) return res.status(500).json({ error: err.message });
+   174        res.json({ message: "Product created", id: this.lastID });
+   175      },
+   176    );
+   177  });
+  ```
 
 ### Nhận định
 
-<SV viết>
+`<SV viết>`
 
 ## Link GitHub Issue
 
-(điền sau khi tạo issue)
+`<sau khi tạo issue>`
 
 ---
 
