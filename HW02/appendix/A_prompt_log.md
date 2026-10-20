@@ -19130,8 +19130,16 @@ render_md.py → check_domain.py → lint → prompt log → commit
 Đồng bộ verdict trong file lượt với status SV chốt, chép header đăng nhập thử từ ảnh, rồi dry-run merge để so.
 
 Now TC-01 notes + meta.environment.
+
+Phần A đã commit. Sang B: đọc mẫu `_groups_C_FR15.md`, mã đăng ký mobile/backend, danh sách bug A/B/C.
+
+Đang gom dữ kiện bug: đối chiếu BUG của A/B/C (mã, issue, vị trí code) với các Fail của D.
+
+Đang dựng bảng web vs mobile: lấy mã Register.jsx (web) để ghi tầng xử lý từng lớp.
+
+Đã kiểm trùng issue (151 issue, không có issue nào về màn Đăng ký mobile). Đang sinh `_groups_D_FR20.md`.
 ```
-*File AI ghi/gửi trong lượt này:* `d_6b3.py`, `d_6b3b.py`
+*File AI ghi/gửi trong lượt này:* `d_6b3.py`, `d_6b3b.py`, `d_cmp.py`, `d_groups.py`
 
 **Xử lý:** [...]
 
