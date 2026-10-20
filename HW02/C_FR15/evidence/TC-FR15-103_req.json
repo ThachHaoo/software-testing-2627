@@ -5,5 +5,5 @@
     "Content-Type": "application/json",
     "Authorization": "Bearer <token>"
   },
-  "body": "{\"name\": \"SP BVA 103 1792495499164\", \"price\": 0.2, \"category_id\": 2, \"description\": \"Mô tả 103 1792495499164\", \"imageUrl\": \"https://placehold.co/300\"}"
+  "body": "{\"name\": \"SP BVA 103 1792497399152\", \"price\": 0.2, \"category_id\": 2, \"description\": \"Mô tả 103 1792497399152\", \"imageUrl\": \"https://placehold.co/300\"}"
 }

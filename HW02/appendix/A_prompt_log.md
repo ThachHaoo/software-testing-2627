@@ -15037,6 +15037,50 @@ Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào;
 ```
 
 **Output:**
+````
+Đã vá harness H1–H4 và commit `1ddb10f`; `--list` vẫn nạp đủ 117 test. Em chưa chạy vào SUT.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `1ddb10f` HW02: vá harness – C_FR15 H1–H4. Không đổi Expected hay sha1 của oracle.
+  - H1: ô không hợp lệ giờ lấy từ sự kiện `invalid` ngay trong lần bấm, không đọc lại sau 1,2 giây.
+  - H2: đọc đủ 3 danh mục (đã kiểm: Điện thoại = 1, Laptop = 2, Phụ kiện = 3).
+  - H3: thông báo mới hiện trên trang được ghi vào Actual.
+- **H4:** regex `ERR` có tham gia verdict. Nó quyết định "có thông báo lỗi" (`errShown`) cho các case UI bị từ chối (C7), TC-01 (EC73), TC-200 và TC-205.
+  - Đã bỏ regex. "Có thông báo" giờ là có ô HTML5 không hợp lệ, hoặc hộp thoại, hoặc thông báo trên trang, không phân loại nội dung; chữ ghi nguyên văn vào Actual.
+  - Hệ quả: một hộp thoại báo thành công cũng được tính là "có thông báo". Case nào verdict phụ thuộc việc chữ đó là lỗi hay không (vd TC-01) thì SV quyết theo C16.
+- **RUN.md:** lượt 3 và 5 ghi là lượt thử; lượt chính thức sẽ là lượt 6.
+- **Lệnh SV chạy lượt 6** (restart backend `node server.js` trước, web admin :5174 đang chạy):
+  ```powershell
+  cd HW02/tests; $ts = Get-Date -Format yyyyMMdd-HHmmss; $env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/C_FR15_$ts.json"; npx playwright test --project=C_FR15 --reporter=list,json; cd ../..; echo "results/C_FR15_$ts.json"
+  python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/C_FR15/testcases.json HW02/tests/results/C_FR15_<ts>.json
+  ```
+  Trước khi merge lượt 6 cần chạy lại với `--force`, hoặc xoá status 6b, vì merge không ghi đè các status đã chỉnh ở 6b (TC-04, 80–83, 90–94 và 5 case để trống).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #248 | 18:57 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 6c C_FR15: lượt 6 chính thức (results/C_FR15_20261020-185355.json), backend đã restart trước lượt.
+1. Liệt kê status do SV tự đặt (nếu có). Không có → merge lượt 6 bằng --force để bỏ verdict lượt 3/5, ghi lý do vào RUN.md.
+   Có → DỪNG, báo.
+2. Chốt verdict như 6b (A20 mở rộng; Pass hộp đen; Blocked ghi case gốc; không đổi Expected).
+   TC-202: Fail — notes "lỗi thiết kế TC: Expected SV ghi 7000000, giá trị số của 00700000 là 700000; Actual 700000.
+   Không phải lỗi SUT, không lập bug."
+3. Manual TC-90…94: trích nguyên văn yêu cầu ảnh của từng case trong RUN.md; liệt kê ảnh TC-FR15-9x_manual_* đang có.
+   Báo cáo 6b ghi "TC-94 thiếu ảnh DevTools" — kiểm lại: RUN.md có yêu cầu DevTools cho TC-94 không, hay chỉ TC-93?
+   Nếu báo cáo 6b nhầm → ghi đính chính vào RUN.md và chốt TC-94 theo ảnh hiện có. Nếu RUN.md thật sự yêu cầu → để trống, báo.
+4. Evidence chỉ giữ lượt 6. render_md → check_domain → linter. Commit `HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức)` kèm A_prompt_log.md.
+Báo cáo (≤ 25 dòng): như 6b, thêm cột "đổi so với lượt 3/5" cho case có verdict khác; kết quả mục 3.
+KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
+```
+
+**Output:**
 ```
 (không có output dạng văn bản)
 ```
@@ -15045,4 +15089,4 @@ Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào;
 
 ---
 
-**Tổng:** 247 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 163 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 248 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 164 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

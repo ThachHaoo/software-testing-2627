@@ -5,5 +5,5 @@
     "Content-Type": "application/json",
     "Authorization": "Bearer <token>"
   },
-  "body": "{\"name\": \"\", \"price\": 2500000, \"category_id\": 3, \"description\": \"Mô tả 106 1792495499876\", \"imageUrl\": \"https://placehold.co/300\"}"
+  "body": "{\"name\": \"\", \"price\": 2500000, \"category_id\": 3, \"description\": \"Mô tả 106 1792497399830\", \"imageUrl\": \"https://placehold.co/300\"}"
 }

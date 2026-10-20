@@ -5,5 +5,5 @@
     "Content-Type": "application/json",
     "Authorization": "Bearer <token>"
   },
-  "body": "{\"name\": \"SP Giá Âm Cực Đại 1792495524065\", \"price\": -999999999999, \"category_id\": 2, \"description\": \"Mô tả\", \"imageUrl\": \"https://placehold.co/300\"}"
+  "body": "{\"name\": \"SP Giá Âm Cực Đại 1792497423262\", \"price\": -999999999999, \"category_id\": 2, \"description\": \"Mô tả\", \"imageUrl\": \"https://placehold.co/300\"}"
 }

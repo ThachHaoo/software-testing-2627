@@ -5,5 +5,5 @@
     "Content-Type": "application/json",
     "Authorization": "Bearer <token>"
   },
-  "body": "{\"name\": \"Bàn phím cơ BVA 109 1792495501351\", \"price\": 2500000, \"category_id\": 3, \"description\": \"Mô tả 109 1792495501351\", \"imageUrl\": \"https://placehold.co/300\"}"
+  "body": "{\"name\": \"Bàn phím cơ BVA 109 1792497401300\", \"price\": 2500000, \"category_id\": 3, \"description\": \"Mô tả 109 1792497401300\", \"imageUrl\": \"https://placehold.co/300\"}"
 }

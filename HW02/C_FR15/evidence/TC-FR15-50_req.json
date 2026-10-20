@@ -4,5 +4,5 @@
   "headers": {
     "Content-Type": "application/json"
   },
-  "body": "{\"name\": \"SP API50 1792495398788\", \"price\": 1500000, \"category_id\": 2, \"description\": \"Mô tả 50 1792495398788\", \"imageUrl\": \"https://placehold.co/300\"}"
+  "body": "{\"name\": \"SP API50 1792497298877\", \"price\": 1500000, \"category_id\": 2, \"description\": \"Mô tả 50 1792497298877\", \"imageUrl\": \"https://placehold.co/300\"}"
 }

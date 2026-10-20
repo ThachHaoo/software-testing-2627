@@ -5,5 +5,5 @@
     "Content-Type": "application/json",
     "Authorization": "Bearer <token>"
   },
-  "body": "{\"name\": \"SP API28 1792495392487\", \"price\": -1000, \"category_id\": 2, \"description\": \"Mô tả 28 1792495392487\", \"imageUrl\": \"https://placehold.co/300\"}"
+  "body": "{\"name\": \"SP API28 1792497292506\", \"price\": -1000, \"category_id\": 2, \"description\": \"Mô tả 28 1792497292506\", \"imageUrl\": \"https://placehold.co/300\"}"
 }

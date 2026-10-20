@@ -5,5 +5,5 @@
     "Content-Type": "application/json",
     "Authorization": "Bearer <token>"
   },
-  "body": "{\"name\": \"SP Mass Assignment 1792495526740\", \"price\": 2000000, \"category_id\": 3, \"description\": \"Mô tả\", \"imageUrl\": \"https://placehold.co/300\", \"id\": 1, \"role\": \"admin\"}"
+  "body": "{\"name\": \"SP Mass Assignment 1792497425987\", \"price\": 2000000, \"category_id\": 3, \"description\": \"Mô tả\", \"imageUrl\": \"https://placehold.co/300\", \"id\": 1, \"role\": \"admin\"}"
 }
