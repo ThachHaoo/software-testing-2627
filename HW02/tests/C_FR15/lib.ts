@@ -32,9 +32,11 @@ export const BAD_TOKEN = /'sai' = '(Bearer [^']+)'/.exec(suites['TS-DOM-API-POST
 // Procedure bước 1 (dựng M): "body {name: 'Muc tieu NN {ts}', price: 1000000, description: '…', imageUrl: '…', category_id: 1}"
 const mb = /name: '(.+?)', price: (\d+), description: '(.+?)', imageUrl: '(.+?)', category_id: (\d+)/.exec(suites['TS-DOM-UI'].procedure[0].action)!;
 export const M_TEMPLATE = { name: mb[1], price: Number(mb[2]), description: mb[3], imageUrl: mb[4], category_id: Number(mb[5]) };
-// Procedure TS-DOM-UI bước 5: danh mục chọn theo tên; seed (database.js dòng 84–88) ghi trong preconditions
+// Procedure TS-DOM-UI bước 5: danh mục chọn theo tên; seed (database.js dòng 84–88) ghi trong preconditions:
+// "… 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' …" — đọc mọi cặp số + tên sau chữ 'danh mục' (H2)
 export const CATEGORY: Record<string, number> = {};
-for (const m of pre[0].matchAll(/id (\d+) '([^']+)'/g)) CATEGORY[m[2]] = Number(m[1]);
+for (const m of pre[0].slice(pre[0].indexOf('danh mục')).matchAll(/(\d+) '([^']+)'/g)) CATEGORY[m[2]] = Number(m[1]);
+if (Object.keys(CATEGORY).length < 3) throw new Error(`Không đọc đủ danh mục seed từ preconditions: ${JSON.stringify(CATEGORY)}`);
 
 /** Thay {ts} và NN (số TC) trong giá trị lấy từ JSON. */
 export const fill = (s: string, ts: string, nn: string) => s.split('{ts}').join(ts).split('NN').join(nn);
@@ -148,7 +150,6 @@ export function sameNumber(actual: any, expected: number) {
 }
 
 // ---------------- UI admin ----------------
-export const ERR = /lỗi|error|không hợp lệ|invalid|bắt buộc|required|please|vui lòng/i;
 
 export async function uiLogin(page: Page) {
   await page.goto(ADMIN_UI);
@@ -188,19 +189,38 @@ export async function setField(page: Page, field: 'Tên sản phẩm' | 'Giá' |
   await box.pressSequentially(v);
 }
 
-/** Bấm nút một lần rồi thu: hộp thoại trình duyệt (chấp nhận), ô không hợp lệ HTML5 (validationMessage). */
+/** Vùng thông báo trên trang (H3): phần tử alert/status/aria-live hoặc class gợi ý thông báo — chỉ ghi chữ, không phân loại. */
+const MSG_SEL = '[role="alert"],[role="status"],[aria-live],[class*="error" i],[class*="alert" i],[class*="toast" i],[class*="notif" i],[class*="message" i]';
+const pageMessages = (page: Page) => page.evaluate((sel: string) =>
+  [...document.querySelectorAll(sel)].map(e => (e.textContent ?? '').replace(/\s+/g, ' ').trim()).filter(Boolean), MSG_SEL);
+
+/**
+ * Bấm nút một lần rồi thu, KHÔNG phân loại nội dung (H4): hộp thoại trình duyệt (chấp nhận), ô không hợp lệ HTML5,
+ * thông báo mới trên trang. Ô không hợp lệ lấy từ sự kiện 'invalid' trình duyệt bắn ra ngay trong lần bấm (H1) —
+ * không đọc lại sau delay, vì form có thể đã reset sau khi lưu thành công.
+ */
 export async function clickAndObserve(page: Page, click: () => Promise<void>) {
   const dialogs: string[] = [];
   const onDialog = (d: any) => { dialogs.push(d.message()); d.accept().catch(() => {}); };
   page.on('dialog', onDialog);
-  const invalid = await (async () => {
-    await click();
-    await page.waitForTimeout(1200);
-    return productForm(page).evaluate((f: HTMLFormElement) =>
-      [...f.elements].filter((e: any) => e.willValidate && !e.checkValidity()).map((e: any) => `${e.placeholder || e.tagName}: ${e.validationMessage}`));
-  })();
+  await page.evaluate(() => {
+    const w = window as any;
+    w.__inv = [];
+    if (!w.__invHooked) {
+      document.addEventListener('invalid', (e: Event) => {
+        const el = e.target as HTMLInputElement;
+        w.__inv.push(`${el.placeholder || el.tagName}: ${el.validationMessage}`);
+      }, true);
+      w.__invHooked = true;
+    }
+  });
+  const msgBefore = await pageMessages(page);
+  await click();
+  const invalid: string[] = await page.evaluate(() => [...(window as any).__inv]);   // ngay sau lần bấm
+  await page.waitForTimeout(1200);                                                   // chờ hộp thoại / phản hồi mạng
+  const pageMsgs = (await pageMessages(page)).filter(m => !msgBefore.includes(m));
   page.off('dialog', onDialog);
-  return { dialogs, invalid };
+  return { dialogs, invalid, pageMsgs };
 }
 
 // ---------------- Kết thúc case ----------------

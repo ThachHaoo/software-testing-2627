@@ -10,7 +10,7 @@ import { APIRequestContext, Page, TestInfo } from '@playwright/test';
 import { ORACLE, Oracle } from './oracle';
 import {
   test, expect, data, hashOf, API, ADMIN_UI, USER, BAD_TOKEN, CATEGORY, fill, nameOf, repeatOf, SetupError, login, listProducts, getProduct,
-  createM, sweep, shot, attachJson, renderResponse, money, sameNumber, ERR, uiLogin, productForm, readTable, rowByName, setField,
+  createM, sweep, shot, attachJson, renderResponse, money, sameNumber, uiLogin, productForm, readTable, rowByName, setField,
   clickAndObserve, finish, Product,
 } from './lib';
 
@@ -67,7 +67,7 @@ async function runUi(c: any, page: Page, request: APIRequestContext, env: Env, i
   const mRowIdx = M ? tBefore.findIndex(r => r.name === M!.body.name) : -1;
 
   // ---- thao tác (procedure bước 5–6) ----
-  let r = { dialogs: [] as string[], invalid: [] as string[] };
+  let r = { dialogs: [] as string[], invalid: [] as string[], pageMsgs: [] as string[] };
   const fields = ['Tên sản phẩm', 'Giá', 'Danh mục', 'URL Ảnh', 'Mô tả'] as const;
   const value = (f: string) => { const v = inp[f]; return v === undefined ? '(giữ)' : fill(v, ts, nn); };
   let formShowsSp2: string | undefined;
@@ -96,9 +96,12 @@ async function runUi(c: any, page: Page, request: APIRequestContext, env: Env, i
   const mAfter = M ? (await getProduct(request, M.id)) : null;
   await shot(page, info, `${c.id}_ui`);
 
-  const errShown = r.invalid.length > 0 || r.dialogs.some(d => ERR.test(d));
+  // Có thông báo = có ô không hợp lệ HTML5 lúc bấm, hoặc hộp thoại, hoặc thông báo mới trên trang. Không phân loại nội dung (H4):
+  // chữ ghi nguyên văn vào Actual; verdict phụ thuộc việc chữ đó là lỗi hay không thì SV quyết (C16).
+  const errShown = r.invalid.length > 0 || r.dialogs.length > 0 || r.pageMsgs.length > 0;
   obs.push(`hộp thoại: ${r.dialogs.length ? r.dialogs.map(d => JSON.stringify(d)).join(', ') : 'không có'}`);
-  obs.push(`ô không hợp lệ (HTML5): ${r.invalid.length ? r.invalid.join(' | ') : 'không có'}`);
+  obs.push(`ô không hợp lệ HTML5 lúc bấm: ${r.invalid.length ? r.invalid.join(' | ') : 'không có'}`);
+  obs.push(`thông báo mới trên trang: ${r.pageMsgs.length ? r.pageMsgs.map(m => JSON.stringify(m)).join(', ') : 'không có'}`);
   obs.push(`bản ghi TRƯỚC → SAU: ${before.length} → ${after.length}`);
   const added = after.filter(p => !before.some(b => b.id === p.id));
   if (added.length) obs.push(`bản ghi mới: ${added.map(fmt).join(', ')}`);

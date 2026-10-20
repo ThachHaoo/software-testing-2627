@@ -14959,10 +14959,90 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
 SV đã merge lượt 3 (không sửa gì ngoài các trường merge). Merge tiếp lượt 5 (không `--force`).
 
 Harness lỗi thêm ở TC-206: `CATEGORY` chỉ đọc được 'Điện thoại', nên 'Laptop' → undefined (dữ liệu SUT thực ra khớp). Xem ảnh manual 90–94.
+
+Kết quả lượt 3 và lượt 5 đã gộp, verdict đã chốt, commit `e4945b3`. Có hai việc chặn trước khi chốt lượt chính thức: harness có 2 lỗi, và 5 case đang để trống status chờ SV quyết.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `e4945b3` HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5. check_domain: 0 lỗi; linter: 0 lỗi.
+  - Lượt 3 SV đã merge từ trước; em merge thêm lượt 5 (không `--force`). Lượt 1, 2, 4 không có file results.
+  - Chưa xác nhận được việc restart backend trước lượt 3, vì global-setup đạt không đủ để chứng minh. Lượt chính thức = lượt 3 nếu SV xác nhận đã restart.
+- **Tổng:** Pass 48 · Fail 64 · Blocked 5 · trống 5.
+
+  | Suite | Pass/Fail/Blocked/trống |
+  |---|---|
+  | DOM-UI | 5/9/1/1 |
+  | DOM-API-POST | 2/15 |
+  | DOM-API-PUT | 2/16 |
+  | DOM-API-OTHER | 1/6 |
+  | BVA-UI-THEM | 10/2 |
+  | BVA-UI-SUA | 6/2/4 |
+  | BVA-API-POST | 9/3 |
+  | BVA-API-PUT | 9/3 |
+  | GUI | 2/2/0/1 |
+  | SV-UI | 0/2/0/3 |
+  | SV-API | 2/4 |
+
+- **Fail** (biến lệch là biến mục tiêu của từng case):
+
+  | TC | Biến lệch | Expected vs Actual |
+  |---|---|---|
+  | 08, 09, 10, 11, 66, 67 (UI Thêm) | Tên/Giá không hợp lệ | dữ liệu không đổi vs bản ghi được tạo |
+  | 13, 14, 15, 16, 78, 79 (UI Sửa) | Tên/Giá không hợp lệ | M không đổi vs M bị ghi đè |
+  | 03 | Sửa (EC63, EC67) | dòng M hiện giá mới, dòng khác không đổi vs giá cũ, mọi dòng đổi tên |
+  | 23–34, 84, 100, 101, 208, 214 (POST) | dữ liệu không hợp lệ | 4xx kèm error vs 200, bản ghi được tạo |
+  | 35–46, 106, 112, 113 (PUT) | dữ liệu không hợp lệ | 4xx vs 200, M bị ghi đè |
+  | 47, 48, 49 | id không tồn tại | 4xx vs 200 (GET trả `{}`) |
+  | 50–58 | token thiếu/sai/role user | 4xx vs 200, dữ liệu đổi |
+  | 22 | kiểu price (C15) | số JSON vs `"28000000"` (chuỗi) |
+  | 209 | Infinity (C20) | JSON 4xx kèm error vs 400 trang HTML |
+  | 211 | Content-Type text/plain | 400/415 vs 500 trang HTML |
+  | 201, 205 | cách nhập giá (C24) | bị chặn, dữ liệu không đổi vs lưu 100000 / lưu price "" |
+  | 90 (manual) | nhãn '*' (FR-22.1) | có '*' vs không có nhãn |
+  | 92 (manual) | định dạng tiền (FR-21.3) | có phân cách vs "30000000 ₫" |
+
+- **Blocked:** TC-04, 80, 81, 82, 83 — case gốc TC-03. Dữ liệu các case này đạt; chỉ lệch ô 'Giá' trên bảng sau Sửa, cùng triệu chứng đã kết luận ở TC-03.
+- **Pass hộp đen:** không có.
+- **Chờ SV quyết (status để trống):**
+  - TC-01, TC-200: phụ thuộc lỗi harness H1 (dưới). TC-200 thực tế: không có hộp thoại, sản phẩm tên `<script>` vẫn được tạo.
+  - TC-202: Expected ghi 7000000, nhưng `00700000` có giá trị số 700000; Actual lưu 700000.
+  - TC-206: lỗi harness H2; dữ liệu thật khớp Expected.
+  - TC-94: thiếu ảnh DevTools như RUN.md yêu cầu.
+  - Chữ hộp thoại duy nhất xuất hiện: "Cập nhật thành công!" (các case UI Sửa). Không verdict nào phụ thuộc việc nó là thông báo lỗi hay không.
+- **Kiểm harness (mục 1):**
+  - Đạt: case UI bị từ chối dùng "dữ liệu không đổi (GET /api/products SAU = TRƯỚC)" làm oracle chính (`C_FR15.spec.ts:114–118`); chữ hộp thoại và `validationMessage` được ghi nguyên văn vào Actual (`C_FR15.spec.ts:100–101`).
+  - **H1:** `lib.ts:197–200` đọc trạng thái HTML5 sau 1,2 giây. Lúc đó form đã reset sau khi lưu thành công, nên "Please fill out this field." xuất hiện ở mọi case UI và `errShown` (`spec:99`) luôn đúng.
+  - **H2:** `lib.ts:36–37` chỉ đọc được danh mục 'Điện thoại', nên 'Laptop' không có id (chỉ ảnh hưởng TC-206).
+  - **H3:** thông báo hiện trên trang (không phải hộp thoại, không phải bong bóng) không được ghi lại.
+  - **H4:** regex phân loại thông báo lỗi ở `lib.ts:151` là heuristic.
+  - Chưa sửa harness nào; cần SV đồng ý rồi vá ở commit riêng.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 246 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 162 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #247 | 18:51 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Vá harness C_FR15 (SV đồng ý H1–H4), commit riêng `HW02: vá harness – C_FR15 H1–H4`:
+- H1: đọc trạng thái HTML5 validity/validationMessage NGAY sau lần bấm Lưu, trước khi form có thể reset; không đọc sau delay cố định.
+- H2: đọc đủ mọi danh mục (không chỉ 'Điện thoại').
+- H3: ghi lại thông báo hiện trên trang (text vùng thông báo) vào Actual, như hộp thoại và bong bóng.
+- H4: báo regex ở lib.ts dùng làm gì. Nếu tham gia verdict → bỏ khỏi verdict, chỉ ghi chữ vào Actual.
+- Không đổi Expected/oracle sha1. Chạy `--list` để chắc file nạp được. Không chạy vào SUT.
+- RUN.md: ghi lượt 3, 5 là lượt thử (harness lỗi H1–H4), lượt chính thức sẽ là lượt 6.
+Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào; lệnh SV chạy lượt 6.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 247 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 163 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

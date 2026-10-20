@@ -50,8 +50,9 @@ Lượt chính thức = lượt chạy **toàn bộ** ngay sau khi khởi độn
   - Case nhiều khẳng định dùng `expect.soft`; mọi chỗ lệch nằm trong Actual.
 - **Body API:** gửi thô bằng `Buffer` đúng như cột (để `Infinity`, `1e-324`, khoá thiếu, chuỗi số giữ nguyên). Số nguyên vượt `Number.MAX_SAFE_INTEGER` được so trên chuỗi.
 - **Thông báo lỗi trên UI (C7, C16):** test ghi lại hộp thoại trình duyệt (nội dung đủ trong Actual; ảnh không chụp được hộp thoại native) và ô HTML5 không hợp lệ (`validationMessage`).
-  - Để tự động phân biệt hộp thoại báo lỗi với hộp thoại báo thành công, test dùng regex `lỗi|error|không hợp lệ|invalid|bắt buộc|required|please|vui lòng`.
-  - **SV xem lại Actual** khi verdict phụ thuộc vào việc phân loại này.
+  - Test ghi nguyên văn vào Actual ba nguồn: ô HTML5 không hợp lệ (lấy từ sự kiện `invalid` ngay trong lần bấm), hộp thoại trình duyệt, thông báo mới trên trang.
+  - **Không phân loại nội dung (H4).** "Có thông báo" nghĩa là có ít nhất một trong ba nguồn trên.
+  - Verdict phụ thuộc việc chữ đó là lỗi hay không (vd hộp thoại "Cập nhật thành công!" ở case Sửa bị từ chối, hoặc EC73 ở TC-01) → SV quyết theo C16.
 - **Cách AI hiểu TC-206** (SV xem lại): dựng SP1 và SP2. Bấm 'Sửa' SP1, sửa ô Tên thành `SP1 tạm {ts}`, rồi bấm 'Sửa' SP2 (không bấm 'Hủy sửa'). Ghi giá trị form. Nhập các cột của case cho SP2 rồi bấm 'Lưu sản phẩm' một lần.
 - **TC-205:** chữ số full-width được đưa vào ô bằng `keyboard.insertText`, mô phỏng thao tác dán.
 
@@ -77,10 +78,14 @@ Chạy tay sau khi khởi động lại backend. Dùng **cửa sổ ẩn danh, t
 | 1, 2, 4 | — | — | — | SV chưa cung cấp file results; không có trong `HW02/tests/results/` |
 | 3 | 18:22:15 | toàn bộ 117 test | `results/C_FR15_20261020-182214.json` | 47 passed, 70 failed. SV đã merge trước bước 6b |
 | 5 | 18:26:26 | TC-FR15-201, TC-FR15-205 | `results/C_FR15_20261020-182625.json` | Cả hai failed, cùng kết quả lượt 3. AI merge ở 6b (không `--force`) |
+| 6 (chính thức) | | toàn bộ 117 test, sau restart backend | `results/C_FR15_<ts>.json` | harness đã vá H1–H4 |
 | manual | 18:33–18:40 | TC-FR15-90…94 | `evidence/TC-FR15-9x_manual*.png` | SV chạy tay |
 
-- **Restart backend trước từng lượt:** chưa có xác nhận của SV.
-  - global-setup đạt ở cả lượt 3 và lượt 5, tức CSDL chỉ có sản phẩm id 1–5.
-  - Điều đó không chứng minh đã restart: cleanup sau lượt 3 cũng xoá hết sản phẩm test, để lại đúng id 1–5.
-- **Lượt chính thức = lượt 3** (chạy toàn bộ). Điều kiện là SV xác nhận đã restart backend ngay trước lượt 3.
+- **Lượt 3 và lượt 5 là lượt thử.** Harness của hai lượt này có lỗi H1–H4, đã vá ở commit "HW02: vá harness – C_FR15 H1–H4":
+  - H1: trạng thái HTML5 được đọc sau 1,2 giây, lúc form đã reset sau khi lưu thành công.
+  - H2: chỉ đọc được danh mục 'Điện thoại'.
+  - H3: không ghi lại thông báo hiện trên trang.
+  - H4: dùng regex phân loại chữ hộp thoại để ra verdict.
+  - Verdict 6b dựa trên lượt 3/5 chỉ để tham khảo.
+- **Lượt chính thức sẽ là lượt 6:** chạy toàn bộ ngay sau khi restart backend, bằng harness đã vá. SV ghi giờ chạy và xác nhận đã restart vào bảng.
 - **Evidence:** chỉ giữ của lượt mới nhất. TC-201 và TC-205 lấy từ lượt 5; merge bỏ 2 attachment trùng nội dung. Các case khác lấy từ lượt 3.
