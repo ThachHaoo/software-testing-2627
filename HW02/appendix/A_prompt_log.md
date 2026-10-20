@@ -7560,15 +7560,70 @@ Nhiệm vụ 2 – B_FR07 (commit "HW02[B-FR07] 4/7c: oracle tương đối cho 
 ```
 
 **Output:**
-```
+````
 Nhiệm vụ 1: vá `check_domain.py`.
 
 Nhiệm vụ 2: khai `no_upper_bound` cho V1, đổi các Expected sang oracle tương đối.
+
+Xong cả 2 nhiệm vụ: `check_domain` không còn lỗi, các cảnh báo LARGE và cảnh báo thiếu UB của V1 đã hết. Em dừng ở đây.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) vá harness – điểm LARGE có điều kiện; (2) oracle tương đối cho phần giỏ không đổi
+- File đã tạo/sửa: check_domain.py, schema-domain.md; HW02/B_FR07/testcases.json/.md; ai-outputs/B_FR07_step4_20261020-111050.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra:
+  · B_FR07: check_domain 0 errors/7 warn (7 biến không có lớp không hợp lệ; hết cảnh báo LARGE và cảnh báo thiếu UB của V1); lint 0 errors/0 warn; test Not run
+  · A_FR01: output check_domain trước/sau vá giống hệt (diff rỗng)
+- Commit: 263d3e8 HW02: vá harness – điểm LARGE có điều kiện
+          1519b82 HW02[B-FR07] 4/7c: oracle tương đối cho phần không đổi
+- Cách khai "không cận trên": biến có domain.variables[].no_upper_bound = mã giả định có thật trong meta.assumptions, và mã đó phải nằm trong trường assumptions của case
+  · V1: no_upper_bound = B1
+  · Thiếu một trong hai điều kiện thì LARGE báo ERROR
+  · Biến khai no_upper_bound chỉ bị kiểm thiếu điểm LB-1/LB/LB+1 (thay đổi thêm ngoài khối lệnh, để bỏ cảnh báo thiếu UB)
+- Case đã sửa (24):
+  · Phần giỏ không đổi chuyển sang ghi tương đối (SAU = TRƯỚC), gỡ EC42: TC-07, 09, 10, 11, 12, 13, 60
+  · API từ chối, chuyển sang "số phần tử SAU = TRƯỚC, phần tử id 1 không đổi": TC-30…40, 70
+  · Bỏ giá trị TRƯỚC không được kiểm, dòng không đổi ghi tương đối: TC-04, 05, 06, 08, 65
+- Không cần sửa: TC-02, 03, 21, 22, 61–64, 66, 71–74 (giá trị tuyệt đối đều là đầu ra được kiểm hoặc đã ghi tương đối)
+- HW02/B_FR07/sv_cases.md (khung bước 5) vẫn chưa commit, đúng lệnh lượt trước
+- Cần quyết định: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `step4c_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 126 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 123 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #127 | 12:10 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 bước 5 – phần sau khi SV đã commit sv_cases.md.
+0. Kiểm commit "HW02[B-FR07] 5/7: SV thêm TC" đã có và sv_cases.md không đổi sau
+   commit đó; nếu chưa → dừng, báo lại.
+1. Chuẩn hoá các case trong sv_cases.md vào testcases.json (origin Human, giữ nguyên
+   ý SV; chỗ mơ hồ/thiếu Expected → hỏi lại, không tự điền). Giả định mới SV ghi
+   trong case → gán mã B tiếp theo, đánh dấu "SV chốt".
+2. Viết HW02/B_FR07/ai_gap_answer.md: với từng case SV, trả lời vì sao bản AI (bản
+   đóng băng bước 3–4) không có, tách 2 nhóm "đã nghĩ tới nhưng không đưa vào"
+   (dẫn chứng trong bản đóng băng) / "không nghĩ tới". Không đánh giá chất lượng
+   case SV, không đề xuất thêm case.
+3. render_md.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer". Dừng.
+```
+
+**Output:**
+```
+Step 0 OK. Read SV cases.
+
+Đang đối chiếu case SV với bản đóng băng bước 3–4 để lấy dẫn chứng.
+```
+*File AI ghi/gửi trong lượt này:* `step5_sv.py`, `sv_questions.md`, `ai_gap_answer.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 127 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 124 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
