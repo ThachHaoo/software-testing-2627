@@ -41,7 +41,7 @@
 | G9 | 15 | 0 | FR-15.2 (35–39, 106, 112), FR-15.3 (40–43, 113), FR-15.4 (44–46), C6, C9 (38, 39, 41, 42, 43, 45, 46), C3 (37), C11 (44) |
 | G10 | 3 | 0 | C10 |
 | G11 | 9 | 0 | FR-12.2, SEC-02 (thiếu/sai token: 50, 51, 53, 54, 56, 57), SEC-03 (role user: 52, 55, 58) |
-| G12 | 1 | 0 | C15; phần sập backend (7c, ngoài TC): ổn định tiến trình backend (ngầm định), API spec §3.2 — chưa đánh giá: FR-06 |
+| G12 | 1 | 0 | C15; phần sập backend (7c, ngoài TC): ổn định tiến trình backend (ngầm định) — chưa đánh giá: FR-06 |
 | G13 | 1 | 0 | C20 |
 | G14 | 1 | 0 | C6 (không 5xx; SV ghi căn cứ C6, C9) |
 | G15 | 1 | 0 | FR-22.1 |
@@ -773,7 +773,7 @@ Output:
 
 - **TC Fail (1):** 22
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định bị vi phạm:** C15; phần sập backend (7c, ngoài TC — AI đề xuất ở 7e, chờ SV duyệt): ổn định tiến trình backend (ngầm định — SRS không có điều khoản; lỗi một request không được dừng tiến trình), API spec §3.2 (`api_specification.md` dòng 84–85, GET /api/products/:id). Chưa đánh giá được: FR-06 (web `ProductDetail.jsx` dòng 16, mobile `App.js` dòng 120 gọi endpoint này; chưa kiểm qua UI)
+- **Yêu cầu / giả định bị vi phạm:** C15; phần sập backend (7c, ngoài TC — AI đề xuất ở 7e, chờ SV duyệt): ổn định tiến trình backend (ngầm định — SRS không có điều khoản; lỗi một request không được dừng tiến trình). Chưa đánh giá được: FR-06 (web `ProductDetail.jsx` dòng 16, mobile `App.js` dòng 120 gọi endpoint này; chưa kiểm qua UI)
 - **Đạt trong cùng case:** name, category_id đúng giá trị seed
 - **Chưa đánh giá được trong cùng case:** —
 - **Actual (lượt 6 / manual, rút gọn 260 ký tự):**
@@ -1293,3 +1293,10 @@ Log sửa dữ kiện 7e (trước → sau): không sửa chữ SV. Đối chi�
 | 48 | Yêu cầu | `<SV viết: phần sập backend>` | 2 dòng yêu cầu bị vi phạm (ổn định tiến trình backend — ngầm định; API spec §3.2) + 1 dòng "Chưa đánh giá được: FR-06" | lệnh 7e mục 1 — AI đề xuất, chờ SV duyệt |
 
 Kiểm trùng 7e (`gh issue list -R tkob-team/eshop-sut --state all --limit 1000`, mọi tác giả): 135 issue (lớn nhất #180); issue mới từ sau 7a (20/10/2026 19:11): 0. Từ khoá crash/sập/dừng/server dừng/tiến trình/toString/DoS/unhandled/uncaught/connection refused/"Cannot read properties of null" trên tiêu đề + nội dung: khớp #25, #26, #28 — cả ba của FR-01 (#25: HTTP 413, "tiến trình backend không dừng"; #26: POST /api/register text/plain → HTTP 500, "tiến trình backend không dừng"; #28: nhãn '*', "không gây sập app"). Không trùng.
+
+### Log sửa 7f0 (trước → sau)
+
+| BUG / nhóm | Mục | Trước | Sau | Căn cứ |
+|---|---|---|---|---|
+| BUG-48 | Yêu cầu | có dòng "- **API spec §3.2:** (`api_specification.md` dòng 84–85) `GET /api/products/:id` — Xem chi tiết một sản phẩm. — (sập backend: request không nhận được phản hồi nào)" | bỏ dòng này; giữ dòng "Ổn định tiến trình backend (ngầm định)" và "Chưa đánh giá được: FR-06" | SV quyết: dòng "ngầm định" đã đủ căn cứ cho phần sập backend |
+| G12 | Tổng hợp + "Yêu cầu / giả định bị vi phạm" | "…ổn định tiến trình backend (ngầm định), API spec §3.2…" | bỏ "API spec §3.2" | như trên |

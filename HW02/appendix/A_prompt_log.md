@@ -15611,6 +15611,19 @@ Báo cáo (≤ 10 dòng): commit; các dòng Yêu cầu đã điền cho phần 
 Bước 4a–4c tái hiện được: stderr giống 7c2, tiến trình dừng. Đang kiểm trùng issue.
 
 Đang sửa hai dòng đường dẫn bị lỗi ký tự điều khiển trong `_groups_C_FR15.md`, rồi commit.
+
+Đã commit `b6c7d12 HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend`. Em dừng ở đây, chờ SV duyệt mục Yêu cầu trước khi tạo issue.
+
+Các dòng Yêu cầu đã điền cho phần sập backend (BUG-48, nguyên văn):
+- **Ổn định tiến trình backend (ngầm định):** (SRS v2.0 không có điều khoản về độ ổn định/xử lý lỗi; lý do ngầm định: lỗi khi xử lý một request chỉ được ảnh hưởng request đó — server phải trả phản hồi lỗi, không dừng tiến trình phục vụ mọi endpoint) — (sập backend: GET /api/products/6 làm `node server.js` dừng; request kế tiếp bị từ chối kết nối)
+- **API spec §3.2:** (`api_specification.md` dòng 84–85) `GET /api/products/:id` — Xem chi tiết một sản phẩm. — (sập backend: request không nhận được phản hồi nào)
+- Chưa đánh giá được (phần sập backend): FR-06 Xem chi tiết sản phẩm — `frontend-web/src/pages/ProductDetail.jsx` dòng 16 và `frontend-mobile/App.js` dòng 120 gọi endpoint này; chưa kiểm qua UI
+
+**Mục 2 – tái hiện:** Bước 4a–4c SV viết chạy lại được, có restart backend trước và sau. POST trả id 6, GET không có phản hồi, tiến trình `node server.js` dừng, stderr giống 7c2. Em không sửa chữ nào của SV vì các dữ kiện đều khớp. Lần này PowerShell báo "Unable to connect to the remote server" và không đọc được mã thoát, nhưng mã thoát 1 đã đọc được ở 7c2.
+
+**Mục 3 – kiểm trùng:** Không trùng. Repo có 135 issue, không có issue mới nào từ sau 7a. Từ khoá crash/sập/dừng chỉ khớp #25, #26, #28, cả ba thuộc FR-01 và đều ghi rõ backend không bị dừng hay không sập.
+
+`origin/main` đang ở `cf57743` (7/7d), tức commit 7/7d đã được push lên remote. Em không push, trong khi CLAUDE.md quy định chỉ push sau hạn nộp — SV kiểm lại.
 ```
 *File AI ghi/gửi trong lượt này:* `fixpaths.py`
 
@@ -15618,4 +15631,32 @@ Bước 4a–4c tái hiện được: stderr giống 7c2, tiến trình dừng. 
 
 ---
 
-**Tổng:** 259 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 175 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #260 | 21:40 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 7f C_FR15 – tạo GitHub Issues BUG-35…50 (SV đã duyệt; SV đồng ý đăng):
+0. BUG-48 Yêu cầu: BỎ dòng "API spec §3.2 …" (SV quyết: dòng "ngầm định" đã đủ căn cứ cho phần sập backend). Giữ nguyên các dòng khác.
+   Sửa tương ứng cột yêu cầu của G12 trong _groups_C_FR15.md. Log trước/sau.
+   Commit riêng `HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV` kèm A_prompt_log.md.
+   (Ghi chú: lần push 7/7d lên origin là do SV tự push — không phải AI.)
+1. `gh api user` = ThachHaoo. AI không push git.
+2. Evidence có đường dẫn máy → bản che ở HW02/bugs/_issue_redacted/ (gốc giữ nguyên).
+3. Tạo TUẦN TỰ BUG-35 → 50 trên tkob-team/eshop-sut: tiêu đề = "[FR-15] " + tiêu đề trong .md (tiền tố CHỈ trên GitHub); label `bug`;
+   body = nội dung .md (bỏ dòng "Link GitHub Issue"); mục "Bằng chứng" ghi tên file SV cần kéo (alt = tên file).
+   Ghi số issue vào "Link GitHub Issue" từng .md và cột issue trong bảng G → BUG → issue của _groups_C_FR15.md.
+4. Commit `HW02[C-FR15] 7/7f: tạo issue BUG-35–50` kèm A_prompt_log.md. Không push.
+Báo cáo (≤ 20 dòng): 2 commit; bảng BUG → issue #; ảnh SV cần kéo vào từng issue (bản che nếu có).
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 260 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 176 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
