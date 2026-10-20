@@ -132,4 +132,4 @@ Lượt chính thức = lượt chạy toàn bộ sau khi restart backend. Evide
 
 ## Ghi chú harness
 
-- Quy trình trong `testcases.json` (TS-DOM/TS-BVA/TS-SV bước 1 và 7) vẫn ghi chụp admin TRƯỚC/SAU **mỗi case**; RUN.md thay bằng ảnh admin của lượt theo D0 (bản sửa, chờ SV chốt).
+- Quy trình trong `testcases.json` (TS-DOM/TS-BVA/TS-SV bước 1 và 7) đã khớp D0 (SV chốt): so ảnh admin TRƯỚC/SAU của lượt (6/7a3). Chữ Expected 'so với TRƯỚC' giữ nguyên, đọc theo ảnh admin của lượt.

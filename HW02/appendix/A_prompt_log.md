@@ -18784,6 +18784,31 @@ render_md.py → lint → prompt log → commit `HW02[D-FR20] 6/7a2: RUN.md gi�
 Đang viết `tools/compress_manual.py`. Máy chưa có Pillow, nên em cài tạm Pillow vào scratchpad để chạy thử, không cài vào Python của máy.
 
 Python 3.12 của máy đã có sẵn Pillow 12.2.0, nên không phải cài thêm. Nén thử 1 ảnh: 254 KB xuống 51 KB. Giờ viết lại RUN.md với giới hạn 20 ảnh điện thoại.
+
+Em đã vá harness, viết lại RUN.md với tối đa 20 ảnh điện thoại, thêm script nén ảnh và commit cả ba. Còn D0 cần SV chốt (không chặn 6b) và một chỗ lệch giữa RUN.md và `testcases.json`.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `79209f6` HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay (kèm dòng CLAUDE.md).
+  - `ead7314` HW02: vá harness – nén ảnh chạy tay D.
+  - `fdbef12` HW02[D-FR20] 6/7a2: RUN.md giới hạn 20 ảnh.
+- **git status A/B/C:** không file nào bị đổi (hồi quy chỉ chạy trên bản chép trong scratchpad).
+- **Dry-run D bằng bản vá:** gộp được 33/33 case. Case chạy tay không ghi `auto_status`. Ô verdict còn trống nên mỗi case in 1 cảnh báo và tạm để "Not run".
+- **Phân bổ ảnh điện thoại:**
+  - 9 case "bắt buộc", tổng 11 ảnh: GUI 90–94, TC-01 (3 ảnh), TC-06, TC-200, TC-201.
+  - 22 case "chỉ khi khác Expected", dùng chung tối đa 9 ảnh.
+  - 2 case "không chụp": TC-16, TC-17.
+  - Tổng tối đa 20 ảnh. Ảnh admin trên PC (`D_admin_truoc_<n>`, `D_admin_sau_<n>`) tính riêng. RUN.md có ô đếm ảnh đã dùng và cột "Kiểm ở ảnh admin SAU" cho từng case.
+- **D0:** đã giữ câu oracle cũ kèm "(đã thay)" và thêm câu mới; ô "SV chốt + lý do" để trống, chờ SV chốt.
+- **Dung lượng:**
+  - Evidence hiện có: A 3,26 MB, B 2,00 MB, C 3,61 MB.
+  - Em zip thử các file đã commit trong `HW02/`: 9,6 MB, nên còn khoảng 10 MB trước giới hạn 20 MB. Phần dư này còn phải chứa PDF, skill và D. Em chưa đối chiếu với cách đóng gói của skill `hw-submission-audit`.
+  - Ảnh chụp màn hình điện thoại để nguyên PNG có thể tới khoảng 1 MB/ảnh, nên có rủi ro vượt giới hạn → **có nén**.
+  - Python 3.12 trên máy đã có sẵn Pillow (lệnh `python` mặc định của msys thì không có), nên RUN.md dùng `py -3.12`.
+  - Nén thử 1 ảnh mẫu: 254 KB → 51 KB (thu về rộng 720 px, 256 màu).
+- **Cần quyết định (không chặn 6b):** quy trình trong `testcases.json` (bước 1 và 7 của TS-DOM/BVA/SV) vẫn ghi chụp admin TRƯỚC/SAU **cho từng case**, còn RUN.md đã đổi sang ảnh admin của cả lượt. Em đã ghi điều này cuối RUN.md.
+  - a) Sửa quy trình trong `testcases.json` cho khớp D0 mới.
+  - b) Giữ nguyên quy trình, chỉ ghi chú.
 ```
 *File AI ghi/gửi trong lượt này:* `compress_manual.py`, `d_run2.py`
 
@@ -18791,4 +18816,30 @@ Python 3.12 của máy đã có sẵn Pillow 12.2.0, nên không phải cài th�
 
 ---
 
-**Tổng:** 312 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 220 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #313 | 23:54 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: khớp procedure với D0 mới (trước khi chạy)
+1. D0: ô "SV chốt + lý do" = "SV chốt 2026-10-20: chấp nhận đề xuất AI — giới hạn 20 ảnh điện
+   thoại; mỗi case dùng email riêng nên so ảnh admin TRƯỚC/SAU của cả lượt tương đương so từng case."
+2. Procedure bước chụp admin (bước 1 và 7) → "so ảnh admin TRƯỚC/SAU của lượt (D0), kiểm theo
+   cột 'Kiểm ở ảnh admin SAU' của RUN.md". Expected KHÔNG đổi.
+   - Sửa: TS-DOM, TS-BVA, câu quy trình chung của suite TS-SV — chỉ chỗ `git blame` cho thấy AI viết.
+   - Chữ SV trong từng case TS-SV: không sửa; liệt kê mã case + câu còn ghi theo từng case.
+3. render_md.py → freeze.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 6/7a3: procedure theo D0 mới`.
+## Báo cáo (≤ 6 dòng): commit; số case đã sửa; case SV còn lệch (mã); check/lint.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 313 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 221 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
