@@ -8708,7 +8708,7 @@ Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6, 7).
 ````
 
 **Output:**
-```
+````
 `/api/login`: body nhận `{email, password}`, phản hồi có `token`. `/api/checkout` không đọc `userCarts`. Giờ sửa các bước trong file.
 
 Giờ restart backend và chạy thật các lệnh PowerShell (5.1) lấy từ chính file BUG.
@@ -8716,11 +8716,64 @@ Giờ restart backend và chạy thật các lệnh PowerShell (5.1) lấy từ 
 Lệnh GET trong lệnh (Invoke-WebRequest không có `-UseBasicParsing`) lỗi NullReferenceException trên PS 5.1. Thêm `-UseBasicParsing` rồi chạy lại.
 
 Output khớp Actual của cả hai bug. Ghi dữ kiện vào file.
+
+Đã sửa bước tái hiện BUG-30 và BUG-31 rồi chạy thật trên Windows PowerShell 5.1, commit `7c3026b`. Output của cả hai bug khớp Actual. Em phải thêm `-UseBasicParsing` vào lệnh GET thì lệnh mới chạy được, chi tiết ở dưới.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa bước tái hiện BUG-30, 31 + chạy thật (sau commit SV 404a6bb "7/7b: SV viết BUG-29–31")
+- File đã sửa: HW02/bugs/BUG-30.md, BUG-31.md; A_prompt_log.md
+- Kết quả kiểm tra: chạy thật bằng Windows PowerShell 5.1.26100; test Playwright: không chạy
+- Commit: 7c3026b HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31
+- Mục 1 – /api/login:
+  · Body nhận `email`, `password`; phản hồi có `token` (kèm `message`, `user`)
+  · Đã trích nguyên văn api_specification.md dòng 23–32 và server.js dòng 32–33, 51–52 vào Dữ kiện cả 2 bug
+- Đã sửa:
+  · Bước 1: dùng test@eshop.com / Test1234! (README.md dòng 24, database.js dòng 93); $headers chỉ còn Authorization; mọi POST có -ContentType "application/json"
+  · Bước GET: đổi sang `(Invoke-WebRequest -UseBasicParsing … ).Content`
+  · BUG-30: thêm bước 2 (POST id 2, quantity 1), đánh số lại 3, 4; khối code Nhận định đổi ```jsx → ```js
+  · BUG-31: JSON trong Actual còn phần tử id 4, thêm dòng "(evidence TC-FR07-22 có thêm id 1, id 5 do bước dựng giỏ của test)"
+  · Câu Nhận định của SV không đổi
+- Mục 6 – chạy thật (output nguyên văn dán vào Dữ kiện, có ghi "AI chạy kiểm bước tái hiện 2026-10-20"):
+  · Lần 1, đúng lệnh như lệnh giao: GET lỗi "Invoke-WebRequest : Object reference not set to an instance of an object." (PS 5.1 thiếu -UseBasicParsing) → thêm -UseBasicParsing, chạy lại
+  · Restart backend trước MỖI bug, vì test@eshop.com dùng chung giỏ RAM
+  · BUG-30: 2×"Added to cart"; GET `[{"id":2,…,"quantity":1},{"id":2,…,"quantity":3}]` → khớp Actual
+  · BUG-31: "Added to cart"; GET `[{"id":4,"name":"Tai nghe AirPods Pro 2","price":1,"quantity":1}]` → khớp Actual
+  · Chạy xong đã restart backend thêm 1 lần để CSDL và giỏ sạch
+- Mục 7 – /api/checkout: server.js dòng 297–309 chỉ đọc `total_amount`, `shipping_address` từ req.body; trong đoạn này không có `userCarts`. Đã trích vào Dữ kiện BUG-31, không kết luận.
+- Bất thường: Tiền điều kiện BUG-30 (chữ SV) vẫn ghi "giỏ đã có sẵn 1 sản phẩm id 2", trong khi bước 2 mới tự dựng giỏ → hai chỗ lặp ý, em không sửa
+- Cần quyết định: không có (thêm -UseBasicParsing là ngoài lệnh, cần SV duyệt)
+```
+````
 *File AI ghi/gửi trong lượt này:* `fix7c3.py`, `facts7c3.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 143 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 140 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #144 | 15:13 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Thu dữ kiện cho BUG-30…34 (chỉ đọc code, không sửa câu SV).
+1. Grep "/api/cart" và "api/cart" trong ../eshop-sut/frontend-mobile và
+   ../eshop-sut/frontend-admin (và mọi thư mục client khác nếu có): liệt kê file:dòng,
+   trích nguyên văn đoạn gọi (GET/POST, dữ liệu gửi, dữ liệu dùng từ phản hồi).
+2. Nếu có client dùng giá/quantity từ GET /api/cart để hiển thị hoặc gửi checkout →
+   trích đoạn đó. Không kết luận tác động.
+3. Thêm kết quả vào Dữ kiện (AI chép) của BUG-30, 31, 32, 33, 34 dưới dòng
+   "Client dùng /api/cart: …" (không có → ghi "không tìm thấy trong <thư mục>").
+Commit "HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart". Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 144 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 141 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

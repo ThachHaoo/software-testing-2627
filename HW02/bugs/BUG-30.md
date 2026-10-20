@@ -139,6 +139,7 @@ Theo yêu cầu FR-07.3: Khi thêm một sản phẩm đã tồn tại trong gi�
   ```
 - Output khớp mục Actual (2 phần tử id 2, quantity 1 và 3).
 - Sửa bước tái hiện 2026-10-20: tài khoản `user@domain.com`/`Password123!` (không có trong seed) → `test@eshop.com`/`Test1234!` (README.md dòng 24; backend/database.js dòng 93); `$headers` bỏ `Content-Type`, các lệnh POST thêm `-ContentType "application/json"`; bước GET đổi sang `Invoke-WebRequest … .Content` để in JSON thô và thêm `-UseBasicParsing` (Windows PowerShell 5.1 báo `Object reference not set to an instance of an object.` khi thiếu). Thêm bước 2 (POST id 2 quantity 1) để dựng giỏ ban đầu; đánh số lại bước 3, 4. Khối code mục Nhận định: ```jsx → ```js.
+- Client dùng /api/cart: không tìm thấy trong `frontend-mobile`, `frontend-admin`, `frontend-web` (grep "api/cart", bỏ node_modules; SUT @ de0f48f, 2026-10-20). Không có client nào đọc giá/quantity từ GET /api/cart. Hai client gọi `/api/checkout` gửi `items`, `total_amount` lấy từ giỏ state phía client: `frontend-web/src/pages/Checkout.jsx` dòng 45–48 (`axios.post('http://localhost:3000/api/checkout', { items: cart, total_amount: finalAmount, …`), `frontend-mobile/App.js` dòng 384–392 (`` fetch(`${API_URL}/checkout`, … body: JSON.stringify({ items: cart.length > 1 ? cart.slice(0, -1) : cart, total_amount: finalAmount, … ``).
 
 ### Nhận định
 
