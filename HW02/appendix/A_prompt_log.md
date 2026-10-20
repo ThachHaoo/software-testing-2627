@@ -19138,6 +19138,30 @@ Phần A đã commit. Sang B: đọc mẫu `_groups_C_FR15.md`, mã đăng ký m
 Đang dựng bảng web vs mobile: lấy mã Register.jsx (web) để ghi tầng xử lý từng lớp.
 
 Đã kiểm trùng issue (151 issue, không có issue nào về màn Đăng ký mobile). Đang sinh `_groups_D_FR20.md`.
+
+### Báo cáo cho phiên thảo luận
+- **Không có dừng hay lỗi.** **Bất thường:** IP lúc chạy là `192.168.2.12` (App.js dòng 16, sửa lúc 2026-10-20 23:51, trước lượt), nhưng `HW02/env/mobile_api_url.patch` vẫn ghi `172.21.0.137`. Patch chưa tạo lại vì ngoài phạm vi lệnh; SV quyết.
+- **Commit:**
+  - A: `f5c893e` 6/7b3: đồng bộ file lượt + Actual đăng nhập thử. Nhật ký lượt nằm luôn trong commit này, không cần 6/7b4. Đã xoá file lượt `0010` (giống TEMPLATE).
+  - B: `3db7ddb` 7/7a: gom dữ kiện bug + bảng web vs mobile.
+  - check_domain 0 lỗi, 1 cảnh báo (V6); lint 0/0; prompt log 318 lượt.
+- **Dry-run D sau đồng bộ:** status giống hệt 33/33 case. Đã bỏ cảnh báo "không merge lại lượt 1" trong RUN.md và thêm bảng verdict trước/sau. Nhãn "Pass hộp đen" / "Fail do lỗi thiết kế" ghi ở annotation `label` của file lượt; merge không đọc trường này.
+- **Hai dòng Audit đã thêm** (`step1_notes.md` §6): merge ghi đè status, trái quy ước; AI chép Actual từ ảnh SV cho 9 case.
+- **7 nhóm G cho 9 case Fail** (TC-203 loại riêng). Không nhóm nào trùng vị trí code mobile với BUG cũ; mọi trùng vị trí đều ở tầng server.
+
+| Nhóm | TC | BUG A/B/C cùng vị trí/yêu cầu | Issue cùng triệu chứng |
+|---|---|---|---|
+| G1 | 03 | BUG-03 | #19 |
+| G2 | 04, 05, 204 | BUG-04, BUG-08 | #20, #4 |
+| G3 | 06 | BUG-05, BUG-06 | #21, #22 |
+| G4 | 15 | BUG-07, BUG-02, BUG-01 | #23, #18 |
+| G5 | 90 | BUG-12, BUG-49 | #28, #7, #152, #195 |
+| G6 | 91 | BUG-13 | #29, #4, #121 |
+| G7 | 94 (Blocked 16, 17) | BUG-14 | #30 |
+
+- **Kiểm trùng:** 151 issue, không có issue nào về màn Đăng ký mobile. #153–#160 thuộc giỏ hàng/chi tiết sản phẩm mobile.
+- **Bảng web vs mobile** (`HW02/D_FR20/compare_web_mobile.md`): 25 lớp vào, so với case UI web của A — cùng verdict 10, khác 15. 5 cặp GUI cùng verdict cả 5.
+- **Còn ngoài lệnh:** chưa ghi thông tin thiết bị/locale (D15) vào `HW02/env/environment.md` (D15 yêu cầu); mới điền `meta.environment`.
 ```
 *File AI ghi/gửi trong lượt này:* `d_6b3.py`, `d_6b3b.py`, `d_cmp.py`, `d_groups.py`
 
@@ -19145,4 +19169,48 @@ Phần A đã commit. Sang B: đọc mẫu `_groups_C_FR15.md`, mã đăng ký m
 
 ---
 
-**Tổng:** 318 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 226 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #319 | 02:19 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: sửa môi trường + dữ kiện "vị trí cần sửa" theo G
+
+### A. Môi trường (commit harness/env riêng)
+- Tạo lại HW02/env/mobile_api_url.patch từ `git -C ..\eshop-sut diff frontend-mobile/App.js`
+  (IP 192.168.2.12 = lượt chính thức).
+- RUN.md bước 4: đổi IP kiểm thành 192.168.2.12. Giữ câu cũ + "(đã thay: IP đổi trước lượt 1,
+  App.js sửa 2026-10-20 23:51)".
+- HW02/env/environment.md: thêm mục D_FR20 theo D15, dùng đúng các giá trị trong nhật ký lượt 1
+  (điện thoại, Android, Expo Go, locale/bàn phím, IP, máy).
+Commit `HW02: cập nhật env – mobile_api_url.patch + thiết bị D_FR20`.
+
+### B. Dữ kiện cho SV quyết mapping (không commit nếu chỉ in; nếu ghi file → thêm vào cuối
+_groups_D_FR20.md, commit `HW02[D-FR20] 7/7a2: dữ kiện vị trí cần sửa`)
+Với mỗi G1–G7, in:
+- Đường đi của dữ liệu: ô mobile → App.js (dòng) → POST /api/register → server.js (dòng).
+- Mỗi chỗ code có thể phải đổi để triệu chứng của TC trong G mất, ghi tầng (mobile/server)
+  + dòng.
+- Chỗ code mà BUG A/B/C liên quan đã chỉ ra (lấy từ HW02/bugs/BUG-xx.md): trùng / không trùng
+  với từng chỗ ở trên.
+- Sửa riêng chỗ của BUG A thì triệu chứng của TC trong G có mất không:
+  - suy ra từ code: có / không / không suy ra được;
+  - kèm 1 câu lý do dựa trên code.
+KHÔNG đề xuất gộp/tách, không kết luận "trùng bug".
+
+## Báo cáo (≤ 12 dòng)
+- Commit A.
+- Bảng G1–G7: tầng + dòng code phải đổi | chỗ của BUG A trùng? | sửa BUG A → triệu chứng mất?
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Commit A xong. Sang B: đọc chỗ code mà từng BUG A/B/C chỉ ra.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 319 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 227 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
