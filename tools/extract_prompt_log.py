@@ -16,6 +16,8 @@ Cách dùng:
 
   # Liệt kê lượt (không ghi file) để biết số #n trước khi viết ghi chú:
   python extract_prompt_log.py SESSION.jsonl --list
+  # Kèm commit đầu tiên sau mỗi lượt, ghi ra file (-o) để gom khoá khoảng:
+  python extract_prompt_log.py SESSION.jsonl --list --commits -o HW02/appendix/prompt_log_turns.txt
 
 Transcript của Claude Code nằm ở:
   Windows : %USERPROFILE%\\.claude\\projects\\<thư-mục-dự-án>\\<session-id>.jsonl
@@ -30,6 +32,9 @@ lượt thứ k trong cùng phút thêm "#k"), hoặc số thứ tự [n] (cách
   xu_ly    = "Đọc và gửi tiếp đề bài"
   ai_output_file = "appendix/ai-outputs/xxx.md"   # tuỳ chọn
   dinh_kem = "file đề bài"                         # tuỳ chọn, ghi đè tên file tự nhận
+Khoá khoảng (hai đầu tính cả, theo phút) áp cho mọi lượt trong khoảng; khoá giờ/số ghi đè từng trường:
+  ["2026-10-19 16:00 .. 2026-10-19 17:30"]
+  section  = "A_FR01 bước 1"
 
 File lượt ngoài Claude Code (Gemini, ChatGPT…), cùng được đánh số theo thời gian:
   [[entry]]
@@ -186,9 +191,55 @@ def time_keys(turns):
     return keys
 
 
-def note_for(notes, keys, i):
-    """Ưu tiên khoá giờ, sau đó số thứ tự (1-based)."""
-    return notes.get(keys[i - 1]) or notes.get(str(i), {})
+RANGE_SEP = ".."
+
+
+def parse_ranges(notes):
+    """Khoá khoảng "YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM" → [(đầu, cuối, ghi chú)], hai đầu tính cả."""
+    ranges = []
+    for k, v in notes.items():
+        if RANGE_SEP not in k:
+            continue
+        try:
+            a, b = (dt.datetime.strptime(x.strip(), "%Y-%m-%d %H:%M") for x in k.split(RANGE_SEP))
+        except ValueError:
+            sys.exit(f'Khoá khoảng sai cú pháp: ["{k}"] — cần "YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"')
+        if a > b:
+            sys.exit(f'Khoá khoảng ngược: ["{k}"]')
+        ranges.append((a, b, v))
+    return ranges
+
+
+def note_for(notes, keys, i, turns=None, ranges=()):
+    """Ưu tiên khoá giờ, sau đó số thứ tự (1-based). Khoá khoảng cho giá trị mặc định từng trường;
+    khoá giờ/số ghi đè từng trường. Nhiều khoảng chứa cùng lượt → khoảng hẹp nhất (bằng nhau: khoảng ghi trước)."""
+    single = notes.get(keys[i - 1]) or notes.get(str(i), {})
+    if not ranges:
+        return single
+    t = turns[i - 1]["time"].replace(tzinfo=None, second=0, microsecond=0)
+    hits = [r for r in ranges if r[0] <= t <= r[1]]
+    if not hits:
+        return single
+    return {**min(hits, key=lambda r: r[1] - r[0])[2], **single}
+
+
+def commits_after(turns, repo="."):
+    """Với mỗi lượt: commit đầu tiên có giờ commit sau giờ lượt → (hash ngắn, message) hoặc None."""
+    import subprocess
+    r = subprocess.run(["git", "-C", repo, "log", "--all", "--format=%h%x09%cI%x09%s"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode:
+        sys.exit(f"git log lỗi: {r.stderr.strip()}")
+    cs = []
+    for line in r.stdout.splitlines():
+        h, ts, msg = line.split("\t", 2)
+        cs.append((dt.datetime.fromisoformat(ts).astimezone(LOCAL_TZ), h, msg))
+    cs.sort()
+    out = []
+    for t in turns:
+        nxt = next((c for c in cs if c[0] > t["time"]), None)
+        out.append((nxt[1], f"{nxt[0]:%H:%M %d/%m}", nxt[2]) if nxt else None)
+    return out
 
 
 def migrate_notes(path, turns):
@@ -209,6 +260,7 @@ def migrate_notes(path, turns):
 
 def render(turns, notes, args):
     keys = time_keys(turns)
+    ranges = parse_ranges(notes)
     tools = sorted({m for t in turns for m in t["tool"].split(" + ")})
     out = [f"# {args.title}",
            f"**Họ tên:** {args.name} | **MSSV:** {args.mssv} | **Công cụ AI:** {', '.join(tools)}",
@@ -217,7 +269,7 @@ def render(turns, notes, args):
            "`tools/extract_prompt_log.py` (không qua AI). Section, Mục đích và Xử lý do em tự ghi.",
            "", "---", ""]
     for i, t in enumerate(turns, 1):
-        n = note_for(notes, keys, i)
+        n = note_for(notes, keys, i, turns, ranges)
         out.append(f"## #{i} | {t['time']:%H:%M %d/%m/%Y} | {t['tool']} | {n.get('section', '[...]')}")
         if t.get("source"):
             out.append(f"*Nguồn:* {t['source']}")
@@ -261,7 +313,8 @@ def main():
     ap.add_argument("--name", default="Lê Tấn Hiệp")
     ap.add_argument("--mssv", default="23120255")
     ap.add_argument("--list", action="store_true", help="chỉ liệt kê lượt (kèm khoá giờ dùng trong notes)")
-    ap.add_argument("--migrate-notes", action="store_true", help="đổi khoá [n] trong --notes sang khoá giờ rồi thoát")
+    ap.add_argument("--commits", action="store_true", help="cùng --list: in kèm commit đầu tiên sau mỗi lượt")
+    ap.add_argument("--migrate-notes",action="store_true", help="đổi khoá [n] trong --notes sang khoá giờ rồi thoát")
     ap.add_argument("-o", "--out")
     args = ap.parse_args()
 
@@ -292,10 +345,26 @@ def main():
         migrate_notes(args.notes, turns)
         return
 
+    if args.commits and not args.list:
+        sys.exit("--commits chỉ dùng cùng --list")
     if args.list:
-        for i, (t, k) in enumerate(zip(turns, time_keys(turns)), 1):
+        cms = commits_after(turns) if args.commits else [None] * len(turns)
+        lines = []
+        for i, (t, k, c) in enumerate(zip(turns, time_keys(turns), cms), 1):
             first = t["prompt"].splitlines()[0][:80] if t["prompt"] else ""
-            print(f'#{i:<3} ["{k}"]  {t["tool"]:<16} {first}')
+            line = f'#{i:<3} ["{k}"]  {t["tool"]:<16} {first}'
+            if args.commits:
+                line += f"\n      → commit kế tiếp: {c[0]} ({c[1]}) {c[2]}" if c else "\n      → commit kế tiếp: (chưa có)"
+            lines.append(line)
+        txt = "\n".join(lines) + "\n"
+        if args.out:
+            hdr = ("# Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list"
+                   + (" --commits" if args.commits else "") + "). Dùng để gom khoá khoảng trong prompt_log_notes.toml.\n"
+                   "# Commit kế tiếp = commit đầu tiên có giờ commit sau giờ lượt (git log --all).\n\n")
+            Path(args.out).write_text(hdr + txt, encoding="utf-8")
+            print(f"Đã ghi danh sách {len(turns)} lượt vào {args.out}")
+        else:
+            sys.stdout.write(txt)
         return
 
     md = render(turns, {str(k): v for k, v in load_toml(args.notes).items() if k != "entry"}, args)

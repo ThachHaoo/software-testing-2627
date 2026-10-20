@@ -1,0 +1,731 @@
+# Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list --commits). Dùng để gom khoá khoảng trong prompt_log_notes.toml.
+# Commit kế tiếp = commit đầu tiên có giờ commit sau giờ lượt (git log --all).
+
+#1   ["2026-10-12 21:20"]  Claude Sonnet 4.6 Đọc context và kinh nghiệm rút ra từ session khác của homework môn software test
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#2   ["2026-10-12 21:25"]  Claude Sonnet 4.6 Đọc yêu cầu đề giúp mình nhé
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#3   ["2026-10-12 21:26"]  Claude Sonnet 4.6 + Claude Opus 5.5 https://github.com/ttbhanh/eshop-sut
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#4   ["2026-10-12 21:28"]  Claude Opus 5.5  Hiện tại trong nhóm mình đã có người chọn:
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#5   ["2026-10-12 21:30"]  Claude Opus 5.5  mình thấy trước đó Pool C bạn backup FR-17 mà, tại sao lại đổi sang FR-15 vậy?
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#6   ["2026-10-12 21:31"]  Claude Opus 5.5  Vậy mình ghi Pool D của mình tương tự A được không nhỉ?
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#7   ["2026-10-12 21:31#2"]  Claude Opus 5.5  Nhưng tại sao không làm FR-15 nhỉ?
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#8   ["2026-10-12 21:33"]  Claude Opus 5.5  ủa vậy FR-14 kia có trên mobile không nhỉ?
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#9   ["2026-10-19 14:06"]  Claude Opus 5.5  Lần trước, khi tôi thực hiện HW01, tôi đặt file HW01 vào trong repo này: https:/
+      → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
+#10  ["2026-10-19 14:53"]  Claude Opus 5.5  Tôi đã tự fork về group của nhóm và chạy ra:
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#11  ["2026-10-19 15:07"]  Claude Opus 5.5  1. H1: Có thể dùng để trích xuất, xong rồi điền theo format trước đó của mình đư
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#12  ["2026-10-19 15:20"]  Claude Opus 5.5  Được, giúp mình đổi AI không viết prompt log, và đổi lại nhé (vì viết prompt log
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#13  ["2026-10-19 15:40"]  Claude Opus 5.5  Vậy giờ mình tải file zip này về, extract ra rồi đặt từng file ở đâu nhỉ? Mà esh
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#14  ["2026-10-19 15:55"]  Claude Opus 5.5  PS D:\HK7\Testing\Exercise\HW\software-testing-2627> git status            # phả
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#15  ["2026-10-19 16:04"]  Claude Opus 5.5  PS D:\HK7\Testing\Exercise\HW\software-testing-2627> python tools/hooks/on_stop.
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#16  ["2026-10-19 16:07"]  Claude Opus 5.5  PS D:\HK7\Testing\Exercise\HW\software-testing-2627> python tools/hooks/on_stop.
+      → commit kế tiếp: d81747d (16:08 19/10) HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+#17  ["2026-10-19 16:10"]  Claude Opus 5.5  /domain-bva-testing HW02/A_FR01 0
+      → commit kế tiếp: 4e30b25 (16:33 19/10) HW02[A-FR01] 1/7: Phân tích biến vào/ra
+#18  ["2026-10-19 16:18"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 4e30b25 (16:33 19/10) HW02[A-FR01] 1/7: Phân tích biến vào/ra
+#19  ["2026-10-19 16:31"]  Claude Opus 5.5  Áp dụng quyết định review bước 1 cho HW02/A_FR01. Đây là phần em sửa trên bản nh
+      → commit kế tiếp: 4e30b25 (16:33 19/10) HW02[A-FR01] 1/7: Phân tích biến vào/ra
+#20  ["2026-10-19 16:36"]  Claude Opus 5.5  Có 2 điểm em cần biết:
+      → commit kế tiếp: aa770dc (16:38 19/10) HW02: vá harness (UTF-8 trên Windows, cột Ghi chú cho biến, render khi chưa có TC)
+#21  ["2026-10-19 16:39"]  Claude Opus 5.5  /domain-bva-testing HW02/A_FR01 2
+      → commit kế tiếp: d799b74 (16:48 19/10) HW02[A-FR01] 2/7: Phân lớp tương đương
+#22  ["2026-10-19 16:43"]  Claude Opus 5.5  Mình đã tự commit theo lệnh của bạn, sau đây là "Báo cáo cho phiên thảo luận" sa
+      → commit kế tiếp: d799b74 (16:48 19/10) HW02[A-FR01] 2/7: Phân lớp tương đương
+#23  ["2026-10-19 16:47"]  Claude Opus 5.5  Áp dụng review bước 2 cho HW02/A_FR01 (em sửa trên bản đóng băng, KHÔNG freeze l
+      → commit kế tiếp: d799b74 (16:48 19/10) HW02[A-FR01] 2/7: Phân lớp tương đương
+#24  ["2026-10-19 16:51"]  Claude Opus 5.5  /domain-bva-testing HW02/A_FR01 3
+      → commit kế tiếp: 31f42ad (17:09 19/10) HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+#25  ["2026-10-19 16:58"]  Claude Opus 5.5  Báo cáo cho bước 3 cùng với testcases.md: 
+      → commit kế tiếp: 31f42ad (17:09 19/10) HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+#26  ["2026-10-19 17:04"]  Claude Opus 5.5  Trước khi tôi dùng lệnh 1. Cho tôi hỏi, hiện tại bạn đã đảm bảo 1 testcase, chỉ 
+      → commit kế tiếp: 31f42ad (17:09 19/10) HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+#27  ["2026-10-19 17:07"]  Claude Opus 5.5  mình nhớ lúc dạy, thầy còn nói rõ precondition: các ô ban đầu phải trống. Và khi
+      → commit kế tiếp: 31f42ad (17:09 19/10) HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+#28  ["2026-10-19 17:09"]  Claude Opus 5.5  Commit riêng trước: "HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắn
+      → commit kế tiếp: 31f42ad (17:09 19/10) HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+#29  ["2026-10-19 17:14"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 1816c8a (17:17 19/10) HW02: vá harness (SKILL.md: quy tắc tiền điều kiện/cách nhập; render_md: bước chi tiết, ghi chú suite, tiêu đề suite)
+#30  ["2026-10-19 17:17"]  Claude Opus 5.5  (a) Commit riêng "HW02: vá harness (SKILL.md: quy tắc tiền điều kiện/cách nhập; 
+      → commit kế tiếp: 1816c8a (17:17 19/10) HW02: vá harness (SKILL.md: quy tắc tiền điều kiện/cách nhập; render_md: bước chi tiết, ghi chú suite, tiêu đề suite)
+#31  ["2026-10-19 17:22"]  Claude Opus 5.5  Check giúp mình nhé:
+      → commit kế tiếp: b567dc2 (17:25 19/10) HW02[A-FR01] 4/7: Test case BVA
+#32  ["2026-10-19 17:25"]  Claude Opus 5.5  Áp dụng review bước 4 cho HW02/A_FR01 (KHÔNG freeze lại):
+      → commit kế tiếp: b567dc2 (17:25 19/10) HW02[A-FR01] 4/7: Test case BVA
+#33  ["2026-10-19 17:41"]  Claude Opus 5.5  Trước khi tự viết test case, mình xác nhận lại rằng form đăng ký chỉ có 3 trường
+      → commit kế tiếp: 6a5a17e (17:46 19/10) HW02[A-FR01] 4/7b: SV sửa TC-90, TC-92 cô lập nguyên nhân thiếu ô Xác nhận mật khẩu
+#34  ["2026-10-19 17:45"]  Claude Opus 5.5  Sửa HW02/A_FR01/testcases.json theo review của SV (KHÔNG freeze, đây là chỉnh sử
+      → commit kế tiếp: 6a5a17e (17:46 19/10) HW02[A-FR01] 4/7b: SV sửa TC-90, TC-92 cô lập nguyên nhân thiếu ô Xác nhận mật khẩu
+#35  ["2026-10-19 19:14"]  Claude Opus 5.5  Chép các case trong HW02/A_FR01/sv_cases.md vào suite TS-SV (mã từ TC-FR01-200, 
+      → commit kế tiếp: 8d837f1 (19:20 19/10) HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả lời gap analysis của AI
+#36  ["2026-10-19 19:26"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 85458ad (19:28 19/10) HW02: vá harness – render_md chỉ đánh dấu rỗng cho biến đầu vào
+#37  ["2026-10-19 19:28"]  Claude Opus 5.5  A. Vá harness (commit riêng "HW02: vá harness – render_md chỉ đánh dấu rỗng cho 
+      → commit kế tiếp: 85458ad (19:28 19/10) HW02: vá harness – render_md chỉ đánh dấu rỗng cho biến đầu vào
+#38  ["2026-10-19 19:33"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 1cfa163 (19:41 19/10) HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết)
+#39  ["2026-10-19 19:36"]  Claude Opus 5.5  Phần chờ mình bạn cứ giúp mình hoàn thiện đi. Và oracle thì gắn Expected theo gi
+      → commit kế tiếp: 1cfa163 (19:41 19/10) HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết)
+#40  ["2026-10-19 19:39"]  Claude Opus 5.5  Vậy prompt này có cần dùng chung với prompt trước đó không?
+      → commit kế tiếp: 1cfa163 (19:41 19/10) HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết)
+#41  ["2026-10-19 19:39#2"]  Claude Opus 5.5  Hoàn thiện TS-SV HW02/A_FR01 (KHÔNG freeze). SV đã duyệt nội dung dưới đây.
+      → commit kế tiếp: 1cfa163 (19:41 19/10) HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết)
+#42  ["2026-10-19 19:42"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f3126b0 (22:10 19/10) HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV
+#43  ["2026-10-19 22:09"]  Claude Opus 5.5  PHẦN 1 — sửa nhỏ TS-SV, commit "HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV":
+      → commit kế tiếp: f3126b0 (22:10 19/10) HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV
+#44  ["2026-10-19 22:38"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: d840b73 (22:40 19/10) HW02[A-FR01] 6/7a: script Playwright đọc testcases.json
+#45  ["2026-10-19 22:39"]  Claude Opus 5.5  TC-93 giữ nguyên. playwright.config: screenshot 'only-on-failure'. Kiểm lại tên 
+      → commit kế tiếp: d840b73 (22:40 19/10) HW02[A-FR01] 6/7a: script Playwright đọc testcases.json
+#46  ["2026-10-19 22:52"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f64f135 (23:07 19/10) HW02: vá harness – merge_results gọn evidence
+#47  ["2026-10-19 22:56"]  Claude Opus 5.5  SV vừa chạy cả bộ A_FR01 + merge_results + render + summary → git báo 421 file t
+      → commit kế tiếp: f64f135 (23:07 19/10) HW02: vá harness – merge_results gọn evidence
+#48  ["2026-10-19 23:03"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f64f135 (23:07 19/10) HW02: vá harness – merge_results gọn evidence
+#49  ["2026-10-19 23:05"]  Claude Opus 5.5  PHẦN 1 — vá harness, commit riêng "HW02: vá harness – merge_results gọn evidence
+      → commit kế tiếp: f64f135 (23:07 19/10) HW02: vá harness – merge_results gọn evidence
+#50  ["2026-10-19 23:11"]  Claude Opus 5.5  Xem nhé
+      → commit kế tiếp: 32390b1 (23:25 19/10) HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216
+#51  ["2026-10-19 23:18"]  Claude Opus 5.5  quản lý người dùng không hiện tên, chỉ hiện id, mail, mật khẩu nên không check đ
+      → commit kế tiếp: 32390b1 (23:25 19/10) HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216
+#52  ["2026-10-19 23:21"]  Claude Opus 5.5  Hiển thị dạng ảnh lỗi, vào profile thì nó hiển thị dạng chữ
+      → commit kế tiếp: 32390b1 (23:25 19/10) HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216
+#53  ["2026-10-19 23:24"]  Claude Opus 5.5  tôi đã lưu nahr xong. Lúc đăng nhập xong, nó hiển thị cái này, phải nhấn ok 2 lầ
+      → commit kế tiếp: 32390b1 (23:25 19/10) HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216
+#54  ["2026-10-19 23:24#2"]  Claude Opus 5.5  Hoàn tất verdict bước 6 HW02/A_FR01 theo SV duyệt:
+      → commit kế tiếp: 32390b1 (23:25 19/10) HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216
+#55  ["2026-10-19 23:26"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: a6cd0ef (23:29 19/10) HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 theo quan sát trang admin
+#56  ["2026-10-19 23:28"]  Claude Opus 5.5  Không có cột Họ và Tên
+      → commit kế tiếp: a6cd0ef (23:29 19/10) HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 theo quan sát trang admin
+#57  ["2026-10-19 23:29"]  Claude Opus 5.5  Chỉnh TC-FR01-216 và dọn repo, theo quan sát của SV:
+      → commit kế tiếp: a6cd0ef (23:29 19/10) HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 theo quan sát trang admin
+#58  ["2026-10-19 23:31"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e899e06 (23:36 19/10) HW02[A-FR01] 7/7a: gom dữ kiện Fail để SV viết bug report
+#59  ["2026-10-19 23:33"]  Claude Opus 5.5  Được, hỗ trợ mình nhé. Vì mình muốn AI hỗ trợ nhiều nhất có thể như thầy đã nói
+      → commit kế tiếp: e899e06 (23:36 19/10) HW02[A-FR01] 7/7a: gom dữ kiện Fail để SV viết bug report
+#60  ["2026-10-19 23:34"]  Claude Opus 5.5  Bước 7 HW02/A_FR01 — lượt 1: chuẩn bị dữ kiện cho SV (theo AI-01 §11: KHÔNG viết
+      → commit kế tiếp: e899e06 (23:36 19/10) HW02[A-FR01] 7/7a: gom dữ kiện Fail để SV viết bug report
+#61  ["2026-10-19 23:38"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7aa33f8 (23:40 19/10) HW02[A-FR01] 7/7b: ghi case gốc A20 cho 200, 203, 204, 208
+#62  ["2026-10-19 23:39"]  Claude Opus 5.5  1. TC-200, 203, 204, 208: đọc actual_result; nếu là thông báo "Mật khẩu quá yếu!
+      → commit kế tiếp: 7aa33f8 (23:40 19/10) HW02[A-FR01] 7/7b: ghi case gốc A20 cho 200, 203, 204, 208
+#63  ["2026-10-19 23:46"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#64  ["2026-10-19 23:50"]  Claude Opus 5.5  Giờ mới để ý, nhưng mà mình vẫn quyết định tách cả G4 và G8, bởi vì thực tế thì 
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#65  ["2026-10-19 23:51"]  Claude Opus 5.5  Bước 7 lượt 2 — tạo khung bug report theo danh sách SV chốt (AI-01 §11: KHÔNG vi
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#66  ["2026-10-19 23:53"]  Claude Opus 5.5  Cần em xem:
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#67  ["2026-10-19 23:54"]  Claude Opus 5.5  Sửa khung BUG-01…14 (chỉ phần dữ kiện, không đụng chỗ <!-- SV viết -->), chưa co
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#68  ["2026-10-19 23:56"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#69  ["2026-10-20 00:16"]  Claude Opus 5.5  Xem thử viết vậy ổn chưa
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#70  ["2026-10-20 00:17"]  Claude Opus 5.5  hmm, 1 số lỗi do viết tay đó, có thể giúp mình sửa không?
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#71  ["2026-10-20 00:18"]  Claude Opus 5.5  Sửa HW02/bugs/BUG-01.md — CHỈ phần dữ kiện (AI-01 §11), KHÔNG sửa câu chữ của SV
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#72  ["2026-10-20 00:20"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#73  ["2026-10-20 00:22"]  Claude Opus 5.5  Xem ổn chưa nhé. MÌnh chỉ sợ sai sự thật, chứ văn nói vẫn oke mà
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#74  ["2026-10-20 00:41"]  Claude Opus 5.5  Mình mới viết xong 3 file này. Check giúp mình nhé
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#75  ["2026-10-20 00:43"]  Claude Opus 5.5  hmm, có gì sai fact dữ quá so với thông tin mình có không, nếu có thì có thể giú
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#76  ["2026-10-20 00:45"]  Claude Opus 5.5  Sửa SỰ THẬT trong HW02/bugs/BUG-02.md, BUG-03.md, BUG-04.md theo bằng chứng (AI-
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#77  ["2026-10-20 00:47"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#78  ["2026-10-20 01:02"]  Claude Opus 5.5  Xem giúp mình 4 bug tiếp theo có sai fact gì không nhé
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#79  ["2026-10-20 01:03"]  Claude Opus 5.5  Sửa SỰ THẬT trong HW02/bugs/BUG-05…08.md theo evidence (AI-01 §11: không sửa văn
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#80  ["2026-10-20 01:11"]  Claude Opus 5.5  Xem giúp mình 3 file này đã ổn chưa nhé
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#81  ["2026-10-20 01:12"]  Claude Opus 5.5  Sửa DỮ KIỆN BUG-09, 10, 11 (AI-01 §11: không sửa câu chữ/severity của SV):
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#82  ["2026-10-20 01:18"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#83  ["2026-10-20 01:39"]  Claude Opus 5.5  Kiểm cuối HW02/bugs/BUG-01…14.md (AI-01 §11: không sửa văn phong/severity của SV
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#84  ["2026-10-20 01:45"]  Claude Opus 5.5  Xem đã ổn chưa nhé: ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#85  ["2026-10-20 01:46"]  Claude Opus 5.5  SV đã sửa BUG-09, 10, 11 (và chọn thang severity (b)).
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#86  ["2026-10-20 02:22"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#87  ["2026-10-20 07:19"]  Claude Opus 5.5  Mình thấy 9, 10, 11 từ lúc mình đưa bạn xong có sửa gì đâu nhỉ? Thử check lại BU
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#88  ["2026-10-20 07:23"]  Claude Opus 5.5  Xem giúp tôi 3 file này sửa đã được chưa nhé
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#89  ["2026-10-20 07:26"]  Claude Opus 5.5  Thật ra mấy cái "Dòng khai báo AI-01 §11 ở cuối" tôi tưởng không cần nên đã bỏ h
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#90  ["2026-10-20 07:26#2"]  Claude Opus 5.5  Kiểm toàn bộ HW02/bugs/BUG-01.md … BUG-14.md và thêm dòng khai báo. KHÔNG commit
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#91  ["2026-10-20 07:28"]  Claude Opus 5.5  Cả 14 file giờ kết thúc giống nhau: ## Link GitHub Issue, một dòng trống, ---, m
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#92  ["2026-10-20 07:29"]  Claude Opus 5.5  1. BUG-01 dòng 23: thay `<ts>` bằng email thật của TC-FR01-01 trong lượt chạy (l
+      → commit kế tiếp: 7b9c972 (07:29 20/10) HW02[A-FR01] 7/7c: bug report BUG-01…14
+#93  ["2026-10-20 07:30"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#94  ["2026-10-20 07:31"]  Claude Opus 5.5  1. Tài khoản gh: chạy `gh auth status` và `gh api user --jq .login`; báo tài kho
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#95  ["2026-10-20 07:33"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#96  ["2026-10-20 07:34"]  Claude Opus 5.5  SV xác nhận ThachHaoo là tài khoản GitHub của SV (tên hiển thị TonKnight).
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#97  ["2026-10-20 07:38"]  Claude Opus 5.5  Xem thử Issues đầu tiên của tôi kéo ảnh  đúng chưa nhé: https://github.com/tkob-
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#98  ["2026-10-20 07:48"]  Claude Opus 5.5  Giờ giúp tôi check lại hết các issues trên github, xem đính kèm ảnh đúng chưa nh
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#99  ["2026-10-20 09:16"]  Claude Opus 5.5  Đã thực hiện sửa chữ thành Ảnh tiêu biểu và đổi alt tất cả các ảnh của các Issue
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#100 ["2026-10-20 09:18"]  Claude Opus 5.5  1. Đồng bộ 14 file BUG-xx.md với issue: đổi "Ảnh tiêu biểu đính kèm GitHub Issue
+      → commit kế tiếp: 27da576 (09:19 20/10) HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+#101 ["2026-10-20 09:21"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: af48958 (09:26 20/10) HW02[A-FR01]: ghi bug_id + tách cột Both trong summary
+#102 ["2026-10-20 09:24"]  Claude Opus 5.5  Vậy Claude Code cũng kết thúc phiên luôn nhỉ, có cần prompt gì trước cho phiên m
+      → commit kế tiếp: af48958 (09:26 20/10) HW02[A-FR01]: ghi bug_id + tách cột Both trong summary
+#103 ["2026-10-20 09:26"]  Claude Opus 5.5  Việc cuối trước khi kết thúc phiên:
+      → commit kế tiếp: af48958 (09:26 20/10) HW02[A-FR01]: ghi bug_id + tách cột Both trong summary
+#104 ["2026-10-20 09:28"]  Claude Opus 5.5  Tại sao lại gỡ domain-bva-testing khỏi bản web nhỉ? Cái đó chỉ dùng để làm execu
+      → commit kế tiếp: b812d33 (09:40 20/10) HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command
+#105 ["2026-10-20 09:34"]  Claude Opus 5.5  PS D:\HK7\Testing\Exercise\HW\software-testing-2627> python tools/extract_prompt
+      → commit kế tiếp: b812d33 (09:40 20/10) HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command
+#106 ["2026-10-20 09:38"]  Claude Opus 5.5  Sửa prompt log (vá harness, commit riêng):
+      → commit kế tiếp: b812d33 (09:40 20/10) HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command
+#107 ["2026-10-20 09:41"]  Claude Opus 5.5  Đã vá extract_prompt_log.py và commit, nhưng không có lượt nào để khôi phục nên 
+      → commit kế tiếp: 5bf0287 (09:45 20/10) HW02: vá harness – notes theo khoá giờ
+#108 ["2026-10-20 09:44"]  Claude Opus 5.5  1. extract_prompt_log.py: cho phép prompt_log_notes.toml dùng khoá theo giờ ("20
+      → commit kế tiếp: 5bf0287 (09:45 20/10) HW02: vá harness – notes theo khoá giờ
+#109 ["2026-10-20 09:46"]  Claude Opus 5.5  Sau khi chạy prompt trên: ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 8e2498c (10:07 20/10) HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+#110 ["2026-10-20 09:49"]  Claude Opus 5.5  Khôi phục ~10 lượt claude.ai bị thiếu (19/10 15:56–17:40 giờ VN = 08:56–10:40 UT
+      → commit kế tiếp: 8e2498c (10:07 20/10) HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+#111 ["2026-10-20 09:53"]  Claude Opus 5.5  Ủa, tôi up nhầm file Conversation của người khác, nên bỏ nó ra khỏi memory giúp 
+      → commit kế tiếp: 8e2498c (10:07 20/10) HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+#112 ["2026-10-20 09:55"]  Claude Opus 5.5  d:\HK7\Testing\Exercise\HW\software-testing-2627\context\private\export_2026-10-
+      → commit kế tiếp: 8e2498c (10:07 20/10) HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+#113 ["2026-10-20 10:05"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 8e2498c (10:07 20/10) HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+#114 ["2026-10-20 10:06"]  Claude Opus 5.5  Chuyển context/private/conthieu.md (SV chép tay từ giao diện claude.ai) thành [[
+      → commit kế tiếp: 8e2498c (10:07 20/10) HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+#115 ["2026-10-20 10:08"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7b30b58 (10:11 20/10) Update A_prompt_log.md after finish pool A
+#116 ["2026-10-20 10:13"]  Claude Sonnet 4.6 Đọc `claude/HW02_handoff.md` trong Project. Tiếp tục HW02 với feature B_FR07 Giỏ
+      → commit kế tiếp: b48929e (10:18 20/10) HW02[B-FR07] 1/7: biến vào/ra
+#117 ["2026-10-20 10:14"]  Claude Opus 5.5  Đọc CLAUDE.md. Bắt đầu feature B: /domain-bva-testing HW02/B_FR07 0
+      → commit kế tiếp: b48929e (10:18 20/10) HW02[B-FR07] 1/7: biến vào/ra
+#118 ["2026-10-20 10:14#2"]  Claude (không rõ model) [Request interrupted by user]
+      → commit kế tiếp: b48929e (10:18 20/10) HW02[B-FR07] 1/7: biến vào/ra
+#119 ["2026-10-20 10:14#3"]  Claude Opus 5.5  Nhiệm vụ 1 – Hoàn tất tồn đọng A_FR01 (commit riêng, không đụng B)
+      → commit kế tiếp: b48929e (10:18 20/10) HW02[B-FR07] 1/7: biến vào/ra
+#120 ["2026-10-20 10:20"]  Claude Sonnet 4.6 Sao báo cáo dài thế nhỉ
+      → commit kế tiếp: b5c95b6 (10:23 20/10) HW02: CLAUDE.md – giới hạn độ dài báo cáo
+#121 ["2026-10-20 10:22"]  Claude Sonnet 4.6 Để tôi gửi bạn một số báo cáo ở session cũ nhé:
+      → commit kế tiếp: b5c95b6 (10:23 20/10) HW02: CLAUDE.md – giới hạn độ dài báo cáo
+#122 ["2026-10-20 10:23"]  Claude Sonnet 4.6 Đây là trong file CLAUDE.md. Vậy mình nên dùng prompt gì nhỉ - **Kết thúc mỗi nh
+      → commit kế tiếp: b5c95b6 (10:23 20/10) HW02: CLAUDE.md – giới hạn độ dài báo cáo
+#123 ["2026-10-20 10:23#2"]  Claude Opus 5.5  Trong CLAUDE.md, thay đoạn "**Kết thúc mỗi nhiệm vụ** … (hết khối mẫu)" bằng đún
+      → commit kế tiếp: b5c95b6 (10:23 20/10) HW02: CLAUDE.md – giới hạn độ dài báo cáo
+#124 ["2026-10-20 10:24"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e9ca12c (10:30 20/10) HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)
+#125 ["2026-10-20 10:28"]  Claude Sonnet 4.6 B1: a
+      → commit kế tiếp: e9ca12c (10:30 20/10) HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)
+#126 ["2026-10-20 10:29"]  Claude Opus 5.5  Nhiệm vụ 1 – Lưu notes bước 1 (commit riêng)
+      → commit kế tiếp: e9ca12c (10:30 20/10) HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)
+#127 ["2026-10-20 10:32"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 4c69716 (10:37 20/10) HW02[B-FR07] 3/7: TC domain
+#128 ["2026-10-20 10:32#2"]  Claude Sonnet 4.6 - Thứ tự đúng render→freeze đã áp dụng; bản freeze bước 1 vẫn thiếu .md (đã báo 
+      → commit kế tiếp: 4c69716 (10:37 20/10) HW02[B-FR07] 3/7: TC domain
+#129 ["2026-10-20 10:33"]  Claude Opus 5.5  Nhiệm vụ 1 – Ghi 6 quyết định SV vào giả định trong testcases.json (đánh dấu SV 
+      → commit kế tiếp: 4c69716 (10:37 20/10) HW02[B-FR07] 3/7: TC domain
+#130 ["2026-10-20 10:38"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 4fee1ad (10:49 20/10) HW02: vá harness – truy vết sinh từ ánh xạ EC → yêu cầu
+#131 ["2026-10-20 10:39"]  Claude Sonnet 4.6 Chắc hẳn bạn cũng biết là mình muốn brainstorm với chat và review lại những gì C
+      → commit kế tiếp: 4fee1ad (10:49 20/10) HW02: vá harness – truy vết sinh từ ánh xạ EC → yêu cầu
+#132 ["2026-10-20 10:46"]  Claude Sonnet 4.6 1. EC32: a, vì nếu TC không kiểm được thì không cần viết.
+      → commit kế tiếp: 4fee1ad (10:49 20/10) HW02: vá harness – truy vết sinh từ ánh xạ EC → yêu cầu
+#133 ["2026-10-20 10:47"]  Claude Opus 5.5  B_FR07 – sửa bước 3 theo review. Sửa testcases.json, không đụng ai-outputs.
+      → commit kế tiếp: 4fee1ad (10:49 20/10) HW02: vá harness – truy vết sinh từ ánh xạ EC → yêu cầu
+#134 ["2026-10-20 10:51"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 3f47dfd (10:57 20/10) HW02: vá harness – ec_target + mã giả định trong truy vết
+#135 ["2026-10-20 10:55"]  Claude Sonnet 4.6 trace: c, đúng thật là mình thấy a và b chưa xử lý được đúng gốc, và mình thấy c
+      → commit kế tiếp: 3f47dfd (10:57 20/10) HW02: vá harness – ec_target + mã giả định trong truy vết
+#136 ["2026-10-20 10:55#2"]  Claude Opus 5.5  B_FR07 – sửa bước 3 lần 2 (review). Không đụng ai-outputs.
+      → commit kế tiếp: 3f47dfd (10:57 20/10) HW02: vá harness – ec_target + mã giả định trong truy vết
+#137 ["2026-10-20 10:59"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ae42067 (11:02 20/10) HW02: vá harness – trường assumptions của TC trong truy vết
+#138 ["2026-10-20 11:00"]  Claude Opus 5.5  Nhiệm vụ 1 – B_FR07 sửa bước 3 lần 3 (commit "HW02[B-FR07] 3/7d: làm sạch truy v
+      → commit kế tiếp: ae42067 (11:02 20/10) HW02: vá harness – trường assumptions của TC trong truy vết
+#139 ["2026-10-20 11:06"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 2810443 (11:07 20/10) HW02: vá harness – freeze timestamp có giây
+#140 ["2026-10-20 11:07"]  Claude Opus 5.5  Nhiệm vụ 1 – Vá harness (commit riêng "HW02: vá harness – freeze timestamp có gi
+      → commit kế tiếp: 2810443 (11:07 20/10) HW02: vá harness – freeze timestamp có giây
+#141 ["2026-10-20 11:08"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 263d3e8 (11:10 20/10) HW02: vá harness – điểm LARGE có điều kiện
+#142 ["2026-10-20 11:09"]  Claude Opus 5.5  Nhiệm vụ 1 – Vá harness (commit riêng "HW02: vá harness – điểm LARGE có điều kiệ
+      → commit kế tiếp: 263d3e8 (11:10 20/10) HW02: vá harness – điểm LARGE có điều kiện
+#143 ["2026-10-20 11:11"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 3d0cbca (12:10 20/10) HW02[B-FR07] 5/7: SV thêm TC
+#144 ["2026-10-20 12:10"]  Claude Opus 5.5  B_FR07 bước 5 – phần sau khi SV đã commit sv_cases.md.
+      → commit kế tiếp: 897a7c8 (12:14 20/10) HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+#145 ["2026-10-20 12:15"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 82be2bc (12:38 20/10) HW02: vá harness – trường approach (gray-box)
+#146 ["2026-10-20 12:29"]  Claude Sonnet 4.6 Q1: Vì không có SRS về đồng bộ Tab, nên có lẽ là mình sẽ bỏ đi cái này, chắc do 
+      → commit kế tiếp: 82be2bc (12:38 20/10) HW02: vá harness – trường approach (gray-box)
+#147 ["2026-10-20 12:36"]  Claude Sonnet 4.6 201: à, vậy đổi thành số lượng chính xác. 20 lần trong vòng 0.4s. Bỏ cả Console 
+      → commit kế tiếp: 82be2bc (12:38 20/10) HW02: vá harness – trường approach (gray-box)
+#148 ["2026-10-20 12:37"]  Claude Opus 5.5  B_FR07 – áp câu trả lời SV cho bước 5 (commit "HW02[B-FR07] 5/7c: áp trả lời SV"
+      → commit kế tiếp: 82be2bc (12:38 20/10) HW02: vá harness – trường approach (gray-box)
+#149 ["2026-10-20 12:40"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 21a989a (12:41 20/10) HW02[B-FR07] 5/7c: áp trả lời SV
+#150 ["2026-10-20 12:41"]  Claude Opus 5.5  B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
+      → commit kế tiếp: 21a989a (12:41 20/10) HW02[B-FR07] 5/7c: áp trả lời SV
+#151 ["2026-10-20 12:43"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 1abe0a1 (12:54 20/10) HW02[B-FR07] 6/7a: Playwright
+#152 ["2026-10-20 12:44"]  Claude Opus 5.5  B_FR07 bước 6a – viết Playwright (KHÔNG chạy test; SV chạy). Commit
+      → commit kế tiếp: 1abe0a1 (12:54 20/10) HW02[B-FR07] 6/7a: Playwright
+#153 ["2026-10-20 12:54"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#154 ["2026-10-20 13:07"]  Claude Sonnet 4.6 TC-94: 
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#155 ["2026-10-20 13:08"]  Claude Opus 5.5  B_FR07 bước 6b – đề xuất verdict theo A20 (giữ auto_status; chưa commit cho tới 
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#156 ["2026-10-20 13:11"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#157 ["2026-10-20 13:12"]  Claude Opus 5.5  B_FR07 6b – hoàn tất (chưa commit cho tới khi có kết quả chạy lại).
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#158 ["2026-10-20 13:18"]  Claude Sonnet 4.6 ```markdown
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#159 ["2026-10-20 13:20"]  Claude Opus 5.5  B_FR07 6b – xử lý chạy nhầm (chưa commit).
+      → commit kế tiếp: e4625d5 (13:21 20/10) HW02: vá harness – merge không ghi đè verdict thủ công
+#160 ["2026-10-20 13:22"]  Claude Sonnet 4.6 Có hết nhé, trước mỗi lần chạy mình đều restart backend.
+      → commit kế tiếp: 4ba84b8 (13:23 20/10) HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
+#161 ["2026-10-20 13:23"]  Claude Opus 5.5  Nhiệm vụ 1 – chốt 6/7b
+      → commit kế tiếp: 4ba84b8 (13:23 20/10) HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
+#162 ["2026-10-20 13:29"]  Claude Opus 5.5  B_FR07 7a – sửa dữ kiện (commit "HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi p
+      → commit kế tiếp: 103c8ec (13:31 20/10) HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm
+#163 ["2026-10-20 13:32"]  Claude Sonnet 4.6 G12-15: a
+      → commit kế tiếp: d72d863 (13:35 20/10) HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV
+#164 ["2026-10-20 13:33"]  Claude Opus 5.5  B_FR07 7a – dựng lại khung theo quyết định SV
+      → commit kế tiếp: d72d863 (13:35 20/10) HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV
+#165 ["2026-10-20 13:36"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: d8d60ff (13:45 20/10) HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+#166 ["2026-10-20 13:41"]  Claude Sonnet 4.6 G3: ra 2 dòng. (ảnh 1)
+      → commit kế tiếp: d8d60ff (13:45 20/10) HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+#167 ["2026-10-20 13:44"]  Claude Sonnet 4.6 Lần này không viết file tương tự như này sao
+      → commit kế tiếp: d8d60ff (13:45 20/10) HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+#168 ["2026-10-20 13:45"]  Claude Opus 5.5  1. Đổi tên/vị trí bugs_facts.md của B cho khớp quy ước _groups_A_FR01.md (cùng t
+      → commit kế tiếp: d8d60ff (13:45 20/10) HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+#169 ["2026-10-20 13:46"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ddb74cf (13:50 20/10) HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm
+#170 ["2026-10-20 13:47"]  Claude Opus 5.5  A_FR01 – đính chính trường "Yêu cầu" (commit "HW02[A-FR01] 7/7e: đính chính yêu 
+      → commit kế tiếp: ddb74cf (13:50 20/10) HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm
+#171 ["2026-10-20 13:51"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: d0d0e05 (14:01 20/10) HW02[B-FR07] 7/7a5: khung bug theo format BUG-14
+#172 ["2026-10-20 13:58"]  Claude Sonnet 4.6 hmm, thấy format mấy cái bug hiện tại chưa tốt nhỉ. Giúp mình điền trước format 
+      → commit kế tiếp: d0d0e05 (14:01 20/10) HW02[B-FR07] 7/7a5: khung bug theo format BUG-14
+#173 ["2026-10-20 13:59"]  Claude Opus 5.5  B_FR07 7a – điền khung BUG-15…34 theo đúng format HW02/bugs/BUG-14.md
+      → commit kế tiếp: d0d0e05 (14:01 20/10) HW02[B-FR07] 7/7a5: khung bug theo format BUG-14
+#174 ["2026-10-20 14:01"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ac34ea0 (14:19 20/10) HW02[B-FR07] 7/7b: SV viết BUG-15–17
+#175 ["2026-10-20 14:14"]  Claude Sonnet 4.6 Có thể giúp tôi check trước 3 bug này không. Bạn chỉ cần tìm fact/số liệu mà sai
+      → commit kế tiếp: ac34ea0 (14:19 20/10) HW02[B-FR07] 7/7b: SV viết BUG-15–17
+#176 ["2026-10-20 14:15"]  Claude Sonnet 4.6 đúng rồi, trang chi tiết bấm 3 lần liên tiếp chỉ ra 1 dòng thôi
+      → commit kế tiếp: ac34ea0 (14:19 20/10) HW02[B-FR07] 7/7b: SV viết BUG-15–17
+#177 ["2026-10-20 14:16"]  Claude Opus 5.5  BUG-15 – cập nhật theo kiểm tay của SV (gộp với lệnh sửa BUG-15/17 nếu chưa chạy
+      → commit kế tiếp: ac34ea0 (14:19 20/10) HW02[B-FR07] 7/7b: SV viết BUG-15–17
+#178 ["2026-10-20 14:17"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ac34ea0 (14:19 20/10) HW02[B-FR07] 7/7b: SV viết BUG-15–17
+#179 ["2026-10-20 14:19"]  Claude Opus 5.5  Sửa dữ kiện BUG-15, BUG-17 theo evidence. Chạy SAU commit "7/7b: SV viết BUG-15–
+      → commit kế tiếp: 8b52204 (14:20 20/10) HW02[B-FR07] 7/7c: sửa dữ kiện BUG-15, 17 theo evidence
+#180 ["2026-10-20 14:21"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: bfafa61 (14:36 20/10) HW02[B-FR07] 7/7b: SV viết BUG-18–20
+#181 ["2026-10-20 14:34"]  Claude Sonnet 4.6 tiếp tục check giúp mình 3 cái này nhé
+      → commit kế tiếp: bfafa61 (14:36 20/10) HW02[B-FR07] 7/7b: SV viết BUG-18–20
+#182 ["2026-10-20 14:45"]  Claude Sonnet 4.6 Kiểm tra giúp mình 21-24 nhé
+      → commit kế tiếp: 88a2a02 (14:47 20/10) HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24
+#183 ["2026-10-20 14:46"]  Claude Opus 5.5  Sửa bước tái hiện BUG-22, BUG-24 (giỏ web là state React, B0d: gõ URL /cart → gi
+      → commit kế tiếp: 88a2a02 (14:47 20/10) HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24
+#184 ["2026-10-20 14:47"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f03edcd (14:56 20/10) HW02[B-FR07] 7/7b: SV viết BUG-25–28
+#185 ["2026-10-20 14:56"]  Claude Sonnet 4.6 Check giúp tôi 4 BUG này nhé
+      → commit kế tiếp: adb033d (14:59 20/10) HW02[B-FR07] 7/7c: sửa chi tiết nhỏ BUG-25, 27
+#186 ["2026-10-20 15:06"]  Claude Sonnet 4.6 Tiếp tục check giúp mình 3 file này nhé. đặc biệt là cú pháp xem có sai gì không
+      → commit kế tiếp: 7c3026b (15:10 20/10) HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31
+#187 ["2026-10-20 15:07"]  Claude Opus 5.5  BUG-30, BUG-31 – sửa để bước tái hiện chạy được (sau commit SV "7/7b: SV viết
+      → commit kế tiếp: 7c3026b (15:10 20/10) HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31
+#188 ["2026-10-20 15:11"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e4ef048 (15:13 20/10) HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart
+#189 ["2026-10-20 15:13"]  Claude Opus 5.5  Thu dữ kiện cho BUG-30…34 (chỉ đọc code, không sửa câu SV).
+      → commit kế tiếp: e4ef048 (15:13 20/10) HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart
+#190 ["2026-10-20 15:15"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f5a5363 (15:19 20/10) HW02[B-FR07] 7/7c: xoá nhận định BUG-31
+#191 ["2026-10-20 15:17"]  Claude Sonnet 4.6 hmm, giả sử mình Test blackbox, thì mình đâu biết code như thế nào, chỉ đưa ra n
+      → commit kế tiếp: f5a5363 (15:19 20/10) HW02[B-FR07] 7/7c: xoá nhận định BUG-31
+#192 ["2026-10-20 15:18"]  Claude Sonnet 4.6 Vậy mình bỏ nhận định này đi luôn nehs
+      → commit kế tiếp: f5a5363 (15:19 20/10) HW02[B-FR07] 7/7c: xoá nhận định BUG-31
+#193 ["2026-10-20 15:30"]  Claude Sonnet 4.6 Kiểm tra giúp mình 3 bug cuối nhé
+      → commit kế tiếp: a2ee5d4 (15:30 20/10) HW02[B-FR07] 7/7b: SV viết BUG-32–34
+#194 ["2026-10-20 15:31"]  Claude Opus 5.5  BUG-32, 33, 34 – sửa bước tái hiện để chạy được (sau commit SV "7/7b: SV viết
+      → commit kế tiếp: b42d56d (15:33 20/10) HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-32–34
+#195 ["2026-10-20 15:34"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#196 ["2026-10-20 15:35"]  Claude Sonnet 4.6 Lạ nhỉ, tiền tố issues trong BUG-01 đến BUG-14 có viết đâu?
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#197 ["2026-10-20 15:37"]  Claude Sonnet 4.6 PS D:\HK7\Testing\Exercise\HW\software-testing-2627> gh issue list -R tkob-team/
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#198 ["2026-10-20 15:37#2"]  Claude Opus 5.5  B_FR07 – kiểm cuối trước khi tạo issue (chỉ kiểm, không sửa, không tạo issue).
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#199 ["2026-10-20 15:38"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#200 ["2026-10-20 15:40"]  Claude Opus 5.5  B_FR07 bước 7 – tạo issue (SV đã duyệt Q16 = a). Làm như A_FR01.
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#201 ["2026-10-20 15:42"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#202 ["2026-10-20 15:53"]  Claude Sonnet 4.6 Tôi đã up ảnh lên hết các issues. Tại sao tôi lại có FR-06 đó nhỉ?
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#203 ["2026-10-20 15:55"]  Claude Sonnet 4.6 Mình không muốn đụng FR của người khác, nên đổi thành FR07 giúp mình nhé. Còn nế
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#204 ["2026-10-20 15:56"]  Claude Opus 5.5  #161 (BUG-15) – SV đổi tiền tố [FR-06] → [FR-07] (theo tiền lệ A: tiền tố = FR c
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#205 ["2026-10-20 15:57"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#206 ["2026-10-20 15:59"]  Claude Opus 5.5  1. B6 trong testcases.json: sau câu "Bug thuộc FR-06 đặt tiêu đề [FR-06]." thêm
+      → commit kế tiếp: 352a34d (16:00 20/10) HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+#207 ["2026-10-20 16:02"]  Claude Sonnet 4.6 ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 9520bd5 (16:07 20/10) HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07
+#208 ["2026-10-20 16:04"]  Claude Sonnet 4.6 Rồi, giờ mình sẽ làm C. Mà bạn giúp mình  viết prompt log ra với nhé. Cả ở sessi
+      → commit kế tiếp: 9520bd5 (16:07 20/10) HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07
+#209 ["2026-10-20 16:06"]  Claude Opus 5.5  Chuẩn bị chuyển sang C_FR15 (phiên Claude Code mới sẽ /clear sau lệnh này).
+      → commit kế tiếp: 9520bd5 (16:07 20/10) HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07
+#210 ["2026-10-20 16:10"]  Claude Sonnet 4.6 Đọc `claude/HW02_handoff.md` trong Project và giúp mình xuất transcript
+      → commit kế tiếp: 422f9cc (16:14 20/10) HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10
+#211 ["2026-10-20 16:11"]  Claude Opus 5.5  Đọc `claude/HW02_handoff.md` trong Project và giúp mình xuất transcript
+      → commit kế tiếp: 422f9cc (16:14 20/10) HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10
+#212 ["2026-10-20 16:14"]  Claude Opus 5.5  Chuẩn bị chuyển sang C_FR15 (phiên Claude Code mới sẽ /clear sau lệnh này).
+      → commit kế tiếp: 422f9cc (16:14 20/10) HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10
+#213 ["2026-10-20 16:15"]  Claude Opus 5.5  ### Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ea82c96 (16:16 20/10) HW02: cập nhật prompt log – p3 đầy đủ
+#214 ["2026-10-20 16:19"]  Claude Sonnet 4.6 Đọc `claude/HW02_handoff.md` trong Project. B_FR07 đã xong; bắt đầu C_FR15 (Prod
+      → commit kế tiếp: 224f147 (16:26 20/10) HW02[C-FR15] 1/7: biến vào/ra
+#215 ["2026-10-20 16:21"]  Claude Opus 5.5  /domain-bva-testing HW02/C_FR15 0
+      → commit kế tiếp: 224f147 (16:26 20/10) HW02[C-FR15] 1/7: biến vào/ra
+#216 ["2026-10-20 16:28"]  Claude Sonnet 4.6 Mình gửi bạn báo cáo nhé:
+      → commit kế tiếp: 1012f71 (16:37 20/10) HW02[C-FR15] 1/7b: SV chốt giả định C0–C14
+#217 ["2026-10-20 16:32"]  Claude Sonnet 4.6 C1: a, bước nhảy 0.1, vì là đơn vị đồng nên luôn >= 1000
+      → commit kế tiếp: 1012f71 (16:37 20/10) HW02[C-FR15] 1/7b: SV chốt giả định C0–C14
+#218 ["2026-10-20 16:35"]  Claude Sonnet 4.6 Ý mình là thực tế thì giá tiền thường là ngàn đồng nên >= 1000; nhưng vẫn chọn l
+      → commit kế tiếp: 1012f71 (16:37 20/10) HW02[C-FR15] 1/7b: SV chốt giả định C0–C14
+#219 ["2026-10-20 16:35#2"]  Claude Opus 5.5  1) Áp quyết định của SV cho giả định C_FR15 (commit riêng, trước bước 2):
+      → commit kế tiếp: 1012f71 (16:37 20/10) HW02[C-FR15] 1/7b: SV chốt giả định C0–C14
+#220 ["2026-10-20 16:40"]  Claude Sonnet 4.6 Đọc báo cáo rồi xem làm gì tiếp nhé:
+      → commit kế tiếp: f982e3b (16:43 20/10) HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3
+#221 ["2026-10-20 16:42"]  Claude Sonnet 4.6 ủa nãy C9 mình chọn a, tức là từ chối không chấp nhận chuỗi số mà nhỉ
+      → commit kế tiếp: f982e3b (16:43 20/10) HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3
+#222 ["2026-10-20 16:42#2"]  Claude Opus 5.5  Sửa bước 2 C_FR15 theo review của SV (output AI → có freeze):
+      → commit kế tiếp: f982e3b (16:43 20/10) HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3
+#223 ["2026-10-20 16:43"]  Claude Sonnet 4.6 Xem báo cáo:
+      → commit kế tiếp: b889942 (16:46 20/10) HW02[C-FR15] 2/7c: SV chốt C9, C15
+#224 ["2026-10-20 16:46"]  Claude Sonnet 4.6 C9 lý do: phân biệt rạch ròi giữa số và chuỗi
+      → commit kế tiếp: b889942 (16:46 20/10) HW02[C-FR15] 2/7c: SV chốt C9, C15
+#225 ["2026-10-20 16:46#2"]  Claude Opus 5.5  1) SV chốt (commit riêng, không freeze):
+      → commit kế tiếp: b889942 (16:46 20/10) HW02[C-FR15] 2/7c: SV chốt C9, C15
+#226 ["2026-10-20 16:52"]  Claude Sonnet 4.6 Xem báo cáo:
+      → commit kế tiếp: 65c4bf2 (16:57 20/10) HW02[C-FR15] 3/7b: tách suite API theo linter
+#227 ["2026-10-20 16:55"]  Claude Sonnet 4.6 1. C16: a
+      → commit kế tiếp: 65c4bf2 (16:57 20/10) HW02[C-FR15] 3/7b: tách suite API theo linter
+#228 ["2026-10-20 16:56"]  Claude Opus 5.5  1) Sửa bước 3 theo review SV (output AI → có freeze):
+      → commit kế tiếp: 65c4bf2 (16:57 20/10) HW02[C-FR15] 3/7b: tách suite API theo linter
+#229 ["2026-10-20 16:59"]  Claude Sonnet 4.6 Xem báo cáo:
+      → commit kế tiếp: c22e3da (17:16 20/10) HW02[C-FR15] 5/7: SV tự thêm TC
+#230 ["2026-10-20 17:06"]  Claude Sonnet 4.6 Giúp tôi viết format cho sv_cases của feature C nhé. Có thể viết prompt cho Clau
+      → commit kế tiếp: c22e3da (17:16 20/10) HW02[C-FR15] 5/7: SV tự thêm TC
+#231 ["2026-10-20 17:07"]  Claude Opus 5.5  Tạo KHUNG TRỐNG HW02/C_FR15/sv_cases.md cho SV tự điền (bước 5 🔒). KHÔNG commit.
+      → commit kế tiếp: c22e3da (17:16 20/10) HW02[C-FR15] 5/7: SV tự thêm TC
+#232 ["2026-10-20 17:16"]  Claude Opus 5.5  /domain-bva-testing HW02/C_FR15 5
+      → commit kế tiếp: d1c71d8 (17:20 20/10) HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+#233 ["2026-10-20 17:21"]  Claude Sonnet 4.6 Well, do đã có kinh nghiệm ở Feature A và B nên tôi làm khá nhanh. Xem báo cáo:
+      → commit kế tiếp: 078c5b0 (17:40 20/10) HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5
+#234 ["2026-10-20 17:35"]  Claude Sonnet 4.6 Q1:
+      → commit kế tiếp: 078c5b0 (17:40 20/10) HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5
+#235 ["2026-10-20 17:38"]  Claude Sonnet 4.6 Q2: giữ case, sửa mã EC; C19: bỏ; C20: căn cứ RFC 8259; 203/216/217: bỏ; TC-200:
+      → commit kế tiếp: 078c5b0 (17:40 20/10) HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5
+#236 ["2026-10-20 17:39"]  Claude Opus 5.5  Áp trả lời SV cho bước 5 C_FR15:
+      → commit kế tiếp: 078c5b0 (17:40 20/10) HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5
+#237 ["2026-10-20 17:40"]  Claude Sonnet 4.6 Xem báo cáo nhé: 
+      → commit kế tiếp: 7561a75 (18:03 20/10) HW02[C-FR15] 5/7d: áp tiếp trả lời SV
+#238 ["2026-10-20 17:49"]  Claude Sonnet 4.6 Q3:
+      → commit kế tiếp: 7561a75 (18:03 20/10) HW02[C-FR15] 5/7d: áp tiếp trả lời SV
+#239 ["2026-10-20 17:52"]  Claude Sonnet 4.6 207: 2xx; 212: xoá luôn; 213: sai trường tức là trong body không yêu cầu truyền 
+      → commit kế tiếp: 7561a75 (18:03 20/10) HW02[C-FR15] 5/7d: áp tiếp trả lời SV
+#240 ["2026-10-20 17:59"]  Claude Sonnet 4.6 213: thông thường ở ngoài người ta không xử lý sai trường, chỉ xử lý request có 
+      → commit kế tiếp: 7561a75 (18:03 20/10) HW02[C-FR15] 5/7d: áp tiếp trả lời SV
+#241 ["2026-10-20 17:59#2"]  Claude Opus 5.5  Áp trả lời SV bước 5 C_FR15 (chữ SV giữ nguyên; chỗ nào chưa rõ → DỪNG, hỏi):
+      → commit kế tiếp: 7561a75 (18:03 20/10) HW02[C-FR15] 5/7d: áp tiếp trả lời SV
+#242 ["2026-10-20 18:04"]  Claude Sonnet 4.6 Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 4c9655c (18:05 20/10) HW02[C-FR15] 5/7e: SV chốt TC-201
+#243 ["2026-10-20 18:05"]  Claude Sonnet 4.6 C24: a
+      → commit kế tiếp: 4c9655c (18:05 20/10) HW02[C-FR15] 5/7e: SV chốt TC-201
+#244 ["2026-10-20 18:05#2"]  Claude Opus 5.5  1) SV chốt TC-201 = a: giữ Expected "Form chặn". Thêm C24 (loại: quyết định Expe
+      → commit kế tiếp: 4c9655c (18:05 20/10) HW02[C-FR15] 5/7e: SV chốt TC-201
+#245 ["2026-10-20 18:06"]  Claude Sonnet 4.6 + Claude Opus 5.5 Bạn giúp mình xuất transcript lượt 1 nhé. Sau khi xong feature C mình sẽ yêu cầu
+      → commit kế tiếp: ab466c8 (18:12 20/10) HW02[C-FR15] 6/7a: Playwright + RUN.md
+#246 ["2026-10-20 18:14"]  Claude Opus 5.5  Đã thêm xong rồi nhé. Có cần bảo Claude Code trích luôn không?
+      → commit kế tiếp: e4945b3 (18:46 20/10) HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5
+#247 ["2026-10-20 18:17"]  Claude Opus 5.5  1. Chấp nhận cách AI hiểu, do lúc nãy tôi không ghi cụ thể, chứ cố định 1 cái cụ
+      → commit kế tiếp: e4945b3 (18:46 20/10) HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5
+#248 ["2026-10-20 18:42"]  Claude Opus 5.5  Bước 6b C_FR15: SV đã chạy lượt 5 (results/C_FR15_20261020-182625.json), còn kết
+      → commit kế tiếp: e4945b3 (18:46 20/10) HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5
+#249 ["2026-10-20 18:47"]  Claude Opus 5.5  Đọc báo cáo:
+      → commit kế tiếp: 1ddb10f (18:52 20/10) HW02: vá harness – C_FR15 H1–H4
+#250 ["2026-10-20 18:50"]  Claude Opus 5.5  TC-202: fail do lỗi thiết kế TC
+      → commit kế tiếp: 1ddb10f (18:52 20/10) HW02: vá harness – C_FR15 H1–H4
+#251 ["2026-10-20 18:51"]  Claude Opus 5.5  Vá harness C_FR15 (SV đồng ý H1–H4), commit riêng `HW02: vá harness – C_FR15 H1–
+      → commit kế tiếp: 1ddb10f (18:52 20/10) HW02: vá harness – C_FR15 H1–H4
+#252 ["2026-10-20 18:57"]  Claude Opus 5.5  Bước 6c C_FR15: lượt 6 chính thức (results/C_FR15_20261020-185355.json), backend
+      → commit kế tiếp: 4979732 (18:58 20/10) HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức)
+#253 ["2026-10-20 19:03"]  Claude Opus 5.5  Xem báo cáo: 
+      → commit kế tiếp: afa074e (19:05 20/10) HW02[C-FR15] 6/7d: chốt TC-92, TC-94
+#254 ["2026-10-20 19:05"]  Claude Opus 5.5  1) Đóng bước 6 C_FR15:
+      → commit kế tiếp: afa074e (19:05 20/10) HW02[C-FR15] 6/7d: chốt TC-92, TC-94
+#255 ["2026-10-20 19:12"]  Claude Opus 5.5  Đọc báo cáo nhé:
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#256 ["2026-10-20 19:14"]  Claude Opus 5.5  Vậy là giờ viết tất cả BUG nhỉ
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#257 ["2026-10-20 19:16"]  Claude Opus 5.5  hmm, sao mình nhớ mấy feature A và B viết nhiều lắm mà nhỉ, còn viết cả Severity
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#258 ["2026-10-20 19:17"]  Claude Opus 5.5  Bước 7 C_FR15 – khung bug (AI-01 §11: bug 100% SV viết; AI chỉ dựng khung + chép
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#259 ["2026-10-20 19:19"]  Claude Opus 5.5  Em dừng ở đây, chưa sửa file và chưa commit gì: khối lệnh còn hai chỗ chưa điền.
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#260 ["2026-10-20 19:20"]  Claude Opus 5.5  Chưa dựng khung bug. Trước đó in cho SV bảng dữ kiện để SV tự quyết mapping (KHÔ
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#261 ["2026-10-20 19:21"]  Claude Opus 5.5  Xem bảng nhé
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#262 ["2026-10-20 19:25"]  Claude Opus 5.5  G1-35; G2-36; G3-37; G4-38; G6-39; G7-40; G8-41; G9-42; G13-43; G14-44; G5-45; G
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#263 ["2026-10-20 19:26"]  Claude Opus 5.5  Bước 7 C_FR15 – khung bug (AI-01 §11: bug 100% SV viết; AI chỉ dựng khung + chép
+      → commit kế tiếp: 2431b79 (19:26 20/10) HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+#264 ["2026-10-20 19:27"]  Claude Opus 5.5  Xem báo cáo
+      → commit kế tiếp: f57323e (19:28 20/10) HW02[C-FR15] 7/7a3: chép môi trường vào khung bug
+#265 ["2026-10-20 19:27#2"]  Claude Opus 5.5  Chép mục "Môi trường" vào BUG-35…50 từ HW02/env/environment.md (nguyên văn; thêm
+      → commit kế tiếp: f57323e (19:28 20/10) HW02[C-FR15] 7/7a3: chép môi trường vào khung bug
+#266 ["2026-10-20 19:33"]  Claude Opus 5.5  Mình vừa Ctrl Z cho BUG-22 về lúc ban đầu được tạo. Bạn xem. Giờ thấy BUG-35 lạ 
+      → commit kế tiếp: 1a35775 (19:36 20/10) HW02[C-FR15] 7/7a4: định dạng khung BUG-35–50 theo mẫu B
+#267 ["2026-10-20 19:34"]  Claude Opus 5.5  Định dạng lại khung BUG-35…50 theo đúng khung ban đầu của B (AI-01 §11: AI chỉ d
+      → commit kế tiếp: 1a35775 (19:36 20/10) HW02[C-FR15] 7/7a4: định dạng khung BUG-35–50 theo mẫu B
+#268 ["2026-10-20 19:36"]  Claude Opus 5.5  Đã định dạng lại BUG-35…50 theo khung của B và commit 1a35775; còn 2 chỗ <SV điề
+      → commit kế tiếp: b06a775 (20:30 20/10) HW02[C-FR15] 7/7b: SV viết BUG-35–50
+#269 ["2026-10-20 20:30"]  Claude Opus 5.5  Bước 7c C_FR15 – soát dữ kiện bug SV viết (AI-01 §11):
+      → commit kế tiếp: 8260da3 (20:41 20/10) HW02[C-FR15] 7/7c: soát dữ kiện BUG-35–50
+#270 ["2026-10-20 20:42"]  Claude Opus 5.5  Con Claude Code của mình vừa định compact, giúp mình viết prompt để nó xuất log 
+      → commit kế tiếp: a1ca0cd (20:43 20/10) HW02: cập nhật prompt log (trước compact)
+#271 ["2026-10-20 20:42#2"]  Claude Opus 5.5  Trước khi compact: lưu transcript phiên Claude Code này và cập nhật prompt log. 
+      → commit kế tiếp: a1ca0cd (20:43 20/10) HW02: cập nhật prompt log (trước compact)
+#272 ["2026-10-20 20:44"]  Claude (không rõ model) Xem báo cáo nhé:
+      → commit kế tiếp: 1f91e5f (21:22 20/10) HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend
+#273 ["2026-10-20 21:14"]  Claude Opus 5.5  Xem báo cáo nhé:
+      → commit kế tiếp: 1f91e5f (21:22 20/10) HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend
+#274 ["2026-10-20 21:19"]  Claude Opus 5.5  1. Mình đã tự sửa hết
+      → commit kế tiếp: 1f91e5f (21:22 20/10) HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend
+#275 ["2026-10-20 21:20"]  Claude Opus 5.5  Theo quyết định SV sau 7c:
+      → commit kế tiếp: 1f91e5f (21:22 20/10) HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend
+#276 ["2026-10-20 21:29"]  Claude Opus 5.5  Ủa sao yêu cầu lại là tôi viết nhỉ. Không phải AI viết hả?
+      → commit kế tiếp: cf57743 (21:31 20/10) HW02[C-FR15] 7/7d: SV sửa chữ theo 7c + viết phần sập backend BUG-48
+#277 ["2026-10-20 21:31"]  Claude Opus 5.5  Bước 7e C_FR15:
+      → commit kế tiếp: 8f97991 (21:32 20/10) HW02[C-FR15] 7/7d2: SV sửa chữ theo 7c (bổ sung)
+#278 ["2026-10-20 21:32"]  Claude Opus 5.5  Bước 7e C_FR15:
+      → commit kế tiếp: b6c7d12 (21:35 20/10) HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend
+#279 ["2026-10-20 21:36"]  Claude Opus 5.5  Xem báo cáo:
+      → commit kế tiếp: 4800a3c (21:40 20/10) HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV
+#280 ["2026-10-20 21:39"]  Claude Opus 5.5  vậy chỗ nào cần quyết chỗ nào cần kiểm?
+      → commit kế tiếp: 4800a3c (21:40 20/10) HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV
+#281 ["2026-10-20 21:39#2"]  Claude Opus 5.5  bỏ; tôi push
+      → commit kế tiếp: 4800a3c (21:40 20/10) HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV
+#282 ["2026-10-20 21:40"]  Claude Opus 5.5  Bước 7f C_FR15 – tạo GitHub Issues BUG-35…50 (SV đã duyệt; SV đồng ý đăng):
+      → commit kế tiếp: 4800a3c (21:40 20/10) HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV
+#283 ["2026-10-20 21:52"]  Claude Opus 5.5  Đã thêm ảnh xong hết
+      → commit kế tiếp: 4d816d8 (21:57 20/10) HW02[C-FR15] 7/7g: ảnh trang issue + README
+#284 ["2026-10-20 21:55"]  Claude Opus 5.5  Đóng C_FR15:
+      → commit kế tiếp: 4d816d8 (21:57 20/10) HW02[C-FR15] 7/7g: ảnh trang issue + README
+#285 ["2026-10-20 21:59"]  Claude Opus 5.5  Mình sẽ không sửa. Làm vậy là ổn rồi.
+      → commit kế tiếp: 502e59f (22:04 20/10) HW02: log thay ảnh #189 #190 (README không đổi: 10 TC A_FR01 origin Both)
+#286 ["2026-10-20 22:03"]  Claude Opus 5.5  1. Issue #189, #190: SV đã thay ảnh bằng bản che + comment. Ghi log trước/sau và
+      → commit kế tiếp: 502e59f (22:04 20/10) HW02: log thay ảnh #189 #190 (README không đổi: 10 TC A_FR01 origin Both)
+#287 ["2026-10-20 22:04"]  Claude Opus 5.5  Đã ghi log thay ảnh vào _groups_C_FR15.md và commit 502e59f, chưa push. README k
+      → commit kế tiếp: 65d8135 (22:05 20/10) HW02[C-FR15]: link comment đính chính #189 #190
+#288 ["2026-10-20 22:05"]  Claude Opus 5.5  SV đồng ý đăng comment đính chính trên #189 và #190 (tkob-team/eshop-sut, gh = T
+      → commit kế tiếp: 65d8135 (22:05 20/10) HW02[C-FR15]: link comment đính chính #189 #190
+#289 ["2026-10-20 22:06"]  Claude Opus 5.5  Trước khi xuất transcript, nếu session này không compact lần nào thì có thể xuất
+      → commit kế tiếp: 6ffde86 (22:09 20/10) HW02: cập nhật prompt log (đóng C_FR15)
+#290 ["2026-10-20 22:08"]  Claude Opus 5.5  Đóng prompt log C_FR15 (không sửa tay prompt log):
+      → commit kế tiếp: 6ffde86 (22:09 20/10) HW02: cập nhật prompt log (đóng C_FR15)
+#291 ["2026-10-20 22:11"]  Claude Opus 5.5  Kiểm CLAUDE.md sau a7cd868 (không amend — đã có commit sau):
+      → commit kế tiếp: dad5865 (22:11 20/10) HW02: CLAUDE.md – bổ sung bài học C_FR15
+#292 ["2026-10-20 22:12"]  Claude Opus 5.5  Đóng prompt log C_FR15 (không sửa tay prompt log):
+      → commit kế tiếp: c678fa4 (22:13 20/10) HW02: cập nhật prompt log (đóng C_FR15)
+#293 ["2026-10-20 22:16"]  Claude Sonnet 4.6 Đọc `claude/HW02_handoff.md` trong Project. C_FR15 đã xong; bắt đầu D_FR20 (Đăng
+      → commit kế tiếp: c266570 (22:28 20/10) HW02[D-FR20] 1/7: Phân tích biến vào/ra
+#294 ["2026-10-20 22:20"]  Claude Sonnet 4.6 P1: Có
+      → commit kế tiếp: c266570 (22:28 20/10) HW02[D-FR20] 1/7: Phân tích biến vào/ra
+#295 ["2026-10-20 22:23"]  Claude Opus 5.5  ## Lệnh cho Claude Code — HW02 D_FR20, bước 0–1
+      → commit kế tiếp: c266570 (22:28 20/10) HW02[D-FR20] 1/7: Phân tích biến vào/ra
+#296 ["2026-10-20 22:29"]  Claude Sonnet 4.6 Xem báo cáo nhé
+      → commit kế tiếp: ea3cc1f (22:39 20/10) HW02: sửa CLAUDE.md – A3
+#297 ["2026-10-20 22:31"]  Claude Opus 5.5  ## Lệnh cho Claude Code — HW02 D_FR20: SV chốt bước 1 (1/7b) → bước 2
+      → commit kế tiếp: ea3cc1f (22:39 20/10) HW02: sửa CLAUDE.md – A3
+#298 ["2026-10-20 22:38"]  Claude Sonnet 4.6 Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ea3cc1f (22:39 20/10) HW02: sửa CLAUDE.md – A3
+#299 ["2026-10-20 22:39"]  Claude Opus 5.5  ## Lệnh cho Claude Code — tiếp tục từ chỗ DỪNG (D5)
+      → commit kế tiếp: ea3cc1f (22:39 20/10) HW02: sửa CLAUDE.md – A3
+#300 ["2026-10-20 22:43"]  Claude Sonnet 4.6 Xem báo cáo:
+      → commit kế tiếp: 721b852 (22:46 20/10) HW02[D-FR20] 2/7c: SV chốt phân lớp
+#301 ["2026-10-20 22:44"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: sửa bước 2 (2/7b) → SV chốt (2/7c) → bước 3
+      → commit kế tiếp: 721b852 (22:46 20/10) HW02[D-FR20] 2/7c: SV chốt phân lớp
+#302 ["2026-10-20 22:49"]  Claude Sonnet 4.6 Xem báo cáo:
+      → commit kế tiếp: de46981 (22:51 20/10) HW02[D-FR20] 3/7b: sửa theo review
+#303 ["2026-10-20 22:50"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: rà bước 3 → bước 4 → khung bước 5
+      → commit kế tiếp: de46981 (22:51 20/10) HW02[D-FR20] 3/7b: sửa theo review
+#304 ["2026-10-20 22:53"]  Claude Sonnet 4.6 Xem báo cáo:
+      → commit kế tiếp: f66b32f (23:12 20/10) HW02[D-FR20] 5/7: case SV
+#305 ["2026-10-20 23:12"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20 bước 5 (sau khi SV đã commit sv_cases.md)
+      → commit kế tiếp: b975f90 (23:15 20/10) HW02[D-FR20] 5/7b: đưa case SV vào TS-SV + gap answer
+#306 ["2026-10-20 23:13"]  Claude Sonnet 4.6 + Claude Opus 5.5 Đã viết xong rồi, trong lúc chờ Claude Code chạy prompt trên, bạn xuất transcrip
+      → commit kế tiếp: b975f90 (23:15 20/10) HW02[D-FR20] 5/7b: đưa case SV vào TS-SV + gap answer
+#307 ["2026-10-20 23:17"]  Claude Opus 5.5  Xem báo cáo
+      → commit kế tiếp: 0523610 (23:19 20/10) Update A_prompt_log.md
+#308 ["2026-10-20 23:19"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: tra 2 dữ kiện cho SV (chỉ đọc, không commit)
+      → commit kế tiếp: 7a9f887 (23:24 20/10) HW02[D-FR20] 5/7c: SV sửa case SV
+#309 ["2026-10-20 23:20"]  Claude Opus 5.5  Báo cáo lệnh 1:
+      → commit kế tiếp: 7a9f887 (23:24 20/10) HW02[D-FR20] 5/7c: SV sửa case SV
+#310 ["2026-10-20 23:24"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: đồng bộ case SV sau khi SV sửa
+      → commit kế tiếp: 57191a7 (23:25 20/10) HW02[D-FR20] 5/7d: đồng bộ case SV
+#311 ["2026-10-20 23:25"]  Claude Opus 5.5  Báo cáo lệnh 2:
+      → commit kế tiếp: e067035 (23:32 20/10) HW02[D-FR20] 5/7e: SV sửa case SV (lần 2)
+#312 ["2026-10-20 23:32"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: đồng bộ case SV lần 2 → chuẩn bị bước 6 (chạy 
+      → commit kế tiếp: c32baff (23:33 20/10) HW02[D-FR20] 5/7f: đồng bộ case SV
+#313 ["2026-10-20 23:34"]  Claude Opus 5.5  Xem báo cáo mới:
+      → commit kế tiếp: c177a09 (23:38 20/10) HW02[D-FR20] 5/7g: SV sửa TC-205, D16
+#314 ["2026-10-20 23:38"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: đồng bộ lần 3 → bước 6a
+      → commit kế tiếp: 12b9cda (23:39 20/10) HW02[D-FR20] 5/7h: đồng bộ case SV
+#315 ["2026-10-20 23:41"]  Claude Opus 5.5  Báo cáo mới:
+      → commit kế tiếp: ff29af2 (23:43 20/10) HW02[D-FR20] 5/7i: SV bỏ dẫn D8 ở TC-205
+#316 ["2026-10-20 23:44"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: đồng bộ 5/7i → vá harness → kiểm dung lượng
+      → commit kế tiếp: cc61c0b (23:45 20/10) HW02[D-FR20] 5/7j: đồng bộ case SV
+#317 ["2026-10-20 23:47"]  Claude Opus 5.5  Báo cáo cho lệnh trên:
+      → commit kế tiếp: 79209f6 (23:50 20/10) HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay
+#318 ["2026-10-20 23:49"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: chốt hồi quy → vá harness → RUN.md ≤ 20 ảnh
+      → commit kế tiếp: 79209f6 (23:50 20/10) HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay
+#319 ["2026-10-20 23:53"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 21b4a24 (23:55 20/10) HW02[D-FR20] 6/7a3: procedure theo D0 mới
+#320 ["2026-10-20 23:54"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: khớp procedure với D0 mới (trước khi chạy)
+      → commit kế tiếp: 21b4a24 (23:55 20/10) HW02[D-FR20] 6/7a3: procedure theo D0 mới
+#321 ["2026-10-20 23:56"]  Claude Opus 5.5  Báo cáo prompt lượt 1:
+      → commit kế tiếp: 644d982 (23:58 20/10) HW02[D-FR20] 6/7a4: ảnh theo RUN.md + cách đọc TRƯỚC/SAU
+#322 ["2026-10-20 23:57"]  Claude Opus 5.5  Hiện tại đang yêu cầu 3 ảnh cho tất cả các case sao? Tôi muốn chỉ chụp ảnh cho c
+      → commit kế tiếp: 644d982 (23:58 20/10) HW02[D-FR20] 6/7a4: ảnh theo RUN.md + cách đọc TRƯỚC/SAU
+#323 ["2026-10-20 23:57#2"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: khớp ảnh + cách đọc TRƯỚC/SAU (trước khi chạy)
+      → commit kế tiếp: 644d982 (23:58 20/10) HW02[D-FR20] 6/7a4: ảnh theo RUN.md + cách đọc TRƯỚC/SAU
+#324 ["2026-10-20 23:58"]  Claude Opus 5.5  Báo cáo prompt trên:
+      → commit kế tiếp: 690e797 (23:59 20/10) HW02[D-FR20] 6/7a5: quy trình TS-GUI theo RUN.md
+#325 ["2026-10-20 23:59"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: rà quy trình TS-GUI (TC-90–94) so với RUN.md
+      → commit kế tiếp: 690e797 (23:59 20/10) HW02[D-FR20] 6/7a5: quy trình TS-GUI theo RUN.md
+#326 ["2026-10-20 23:59#2"]  Claude Opus 5.5  Báo cáo:
+      → commit kế tiếp: 16e39d4 (01:41 21/10) HW02: vá harness – nén ảnh .jpg + ảnh admin theo case
+#327 ["2026-10-21 00:05"]  Claude Opus 5.5  1. Chép `HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json` thành `HW02/D_FR20/res
+      → commit kế tiếp: 16e39d4 (01:41 21/10) HW02: vá harness – nén ảnh .jpg + ảnh admin theo case
+#328 ["2026-10-21 00:10"]  Claude Opus 5.5  Rồi sao thứ tự làm các test ở đâu không thấy nhỉ?
+      → commit kế tiếp: 16e39d4 (01:41 21/10) HW02: vá harness – nén ảnh .jpg + ảnh admin theo case
+#329 ["2026-10-21 01:33"]  Claude Opus 5.5  Hiện tại, kết quả test mình đặt trong D_FR20/results/Check.md; screenshot admin 
+      → commit kế tiếp: 16e39d4 (01:41 21/10) HW02: vá harness – nén ảnh .jpg + ảnh admin theo case
+#330 ["2026-10-21 01:37"]  Claude Opus 5.5  Mình có restart backend trước khi chạy nhé
+      → commit kế tiếp: 16e39d4 (01:41 21/10) HW02: vá harness – nén ảnh .jpg + ảnh admin theo case
+#331 ["2026-10-21 01:37#2"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20 bước 6b: gộp kết quả chạy tay (theo file SV đan
+      → commit kế tiếp: 16e39d4 (01:41 21/10) HW02: vá harness – nén ảnh .jpg + ảnh admin theo case
+#332 ["2026-10-21 01:44"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f644140 (02:04 21/10) HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhập thử
+#333 ["2026-10-21 02:00"]  Claude Opus 5.5  1. 9 case này mình vừa chụp lại và thêm vào manual_raw, với thêm số _2 ở sau. Ng
+      → commit kế tiếp: f644140 (02:04 21/10) HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhập thử
+#334 ["2026-10-21 02:02"]  Claude Opus 5.5  ### SV quyết (áp vào status, ghi "SV chốt 2026-10-21" + lý do vào notes)
+      → commit kế tiếp: f644140 (02:04 21/10) HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhập thử
+#335 ["2026-10-21 02:04"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f5c893e (02:11 21/10) HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăng nhập thử
+#336 ["2026-10-21 02:08"]  Claude Opus 5.5  Device Name: POCO F5; OS Version (for POCO): 1.0.5.0 UMRTWXM; Android Version: 1
+      → commit kế tiếp: f5c893e (02:11 21/10) HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăng nhập thử
+#337 ["2026-10-21 02:09"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: dọn 6/7b3 → 7/7a
+      → commit kế tiếp: f5c893e (02:11 21/10) HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăng nhập thử
+#338 ["2026-10-21 02:19"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: sửa môi trường + dữ kiện "vị trí cần sửa" theo
+      → commit kế tiếp: 3ad5c8f (02:20 21/10) HW02: cập nhật env – mobile_api_url.patch + thiết bị D_FR20
+#339 ["2026-10-21 02:23"]  Claude Opus 5.5  Mình thì muốn viết bug mới hơn. Và cũng đổi IP lại nhé. Do ip trước đó là ở ngoà
+      → commit kế tiếp: 3b8131c (02:33 21/10) HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57
+#340 ["2026-10-21 02:28"]  Claude Opus 5.5  hmm, theo lý thì sau khi sang bước 7 thì bạn bắt đầu chia các BUG rồi viết forma
+      → commit kế tiếp: 3b8131c (02:33 21/10) HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57
+#341 ["2026-10-21 02:29"]  Claude Opus 5.5  Nói mình kĩ hơn về G1, G2, G3 để mình quyết nhé
+      → commit kế tiếp: 3b8131c (02:33 21/10) HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57
+#342 ["2026-10-21 02:31"]  Claude Opus 5.5  hmm, mình thì lại muốn chọn mới cho cả G1, G2, G3. Vì mình làm UI (Web), API và 
+      → commit kế tiếp: 3b8131c (02:33 21/10) HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57
+#343 ["2026-10-21 02:32"]  Claude Opus 5.5  SV quyết:
+      → commit kế tiếp: 3b8131c (02:33 21/10) HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57
+#344 ["2026-10-21 02:34"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 40052e9 (02:37 21/10) HW02[D-FR20] 7/7a4: Liên quan BUG-54 + trường bug TC + bản che
+#345 ["2026-10-21 02:36"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20 7/7a4: bổ sung khung
+      → commit kế tiếp: 40052e9 (02:37 21/10) HW02[D-FR20] 7/7a4: Liên quan BUG-54 + trường bug TC + bản che
+#346 ["2026-10-21 02:37"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 6d16d98 (02:51 21/10) HW02[D-FR20] 7/7b: SV viết BUG-51–57
+#347 ["2026-10-21 02:54"]  Claude Opus 5.5  Đã viết xong các bug và commit rồi. Giờ mình làm gì nữa nhỉ. Bạn viết prompt cho
+      → commit kế tiếp: 90f974b (02:58 21/10) HW02[D-FR20] 7/7c: AI kiểm tái hiện + sửa dữ kiện
+#348 ["2026-10-21 02:54#2"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20 7/7c: kiểm tái hiện + dữ kiện BUG-51…57
+      → commit kế tiếp: 90f974b (02:58 21/10) HW02[D-FR20] 7/7c: AI kiểm tái hiện + sửa dữ kiện
+#349 ["2026-10-21 03:02"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20 7/7c2: sửa dữ kiện + quy ước (trước khi SV sửa 
+      → commit kế tiếp: c589c54 (03:03 21/10) HW02[D-FR20] 7/7c2: dữ kiện TC-204 + Yêu cầu BUG-55/56 + trích SRS
+#350 ["2026-10-21 03:04"]  Claude Opus 5.5  Giờ làm gi tiếp nhỉ:
+      → commit kế tiếp: e2a7210 (03:15 21/10) HW02[D-FR20] 7/7d: SV sửa chữ BUG-51–57
+#351 ["2026-10-21 03:15"]  Claude Opus 5.5  Sửa xong rồi. Giúp mình viết prompt check trước khi sử dụng prompt để tạo issue 
+      → commit kế tiếp: 9ff87a7 (03:25 21/10) HW02[D-FR20] 7/7d2: SV sửa tiền điều kiện + BUG-55/56
+#352 ["2026-10-21 03:16"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: kiểm 7d trước khi tạo issue (chỉ đọc, không sử
+      → commit kế tiếp: 9ff87a7 (03:25 21/10) HW02[D-FR20] 7/7d2: SV sửa tiền điều kiện + BUG-55/56
+#353 ["2026-10-21 03:17"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 9ff87a7 (03:25 21/10) HW02[D-FR20] 7/7d2: SV sửa tiền điều kiện + BUG-55/56
+#354 ["2026-10-21 03:26"]  Claude Opus 5.5  ## Lệnh cho Claude Code — D_FR20: kiểm 7d trước khi tạo issue (chỉ đọc, không sử
+      → commit kế tiếp: 02cd393 (03:29 21/10) HW02[D-FR20] 7/7d3: AI sửa dữ kiện code trích BUG-55
+#355 ["2026-10-21 03:27"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 02cd393 (03:29 21/10) HW02[D-FR20] 7/7d3: AI sửa dữ kiện code trích BUG-55
+#356 ["2026-10-21 03:28"]  Claude Opus 5.5  ### 0a. Sửa dữ kiện BUG-55 (AI, có log)
+      → commit kế tiếp: 02cd393 (03:29 21/10) HW02[D-FR20] 7/7d3: AI sửa dữ kiện code trích BUG-55
+#357 ["2026-10-21 03:31"]  Claude Opus 5.5  BUG-56, đã xem là không có '@' ở phím chính, phải đổi sang phím số mới có nhé.
+      → commit kế tiếp: 279a0f8 (03:32 21/10) HW02[D-FR20] 7/7d4: SV sửa tiêu đề BUG-56
+#358 ["2026-10-21 03:32"]  Claude Opus 5.5  Đồng ý, nhưng BUG-56: SV sửa tiêu đề phần trong ngoặc thành "(không có phím @ ở 
+      → commit kế tiếp: 279a0f8 (03:32 21/10) HW02[D-FR20] 7/7d4: SV sửa tiêu đề BUG-56
+#359 ["2026-10-21 03:40"]  Claude Opus 5.5  đã kéo xong ảnh
+      → commit kế tiếp: 4a13a76 (03:42 21/10) HW02: vá harness – summary.py đếm bug_id theo mã BUG-xx
+#360 ["2026-10-21 03:49"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: a8704ff (06:35 21/10) Update A_prompt_log.md
+#361 ["2026-10-21 06:36"]  Claude Opus 5.5  ## Lệnh cho Claude Code — kiểm đóng D_FR20 (chỉ đọc)
+      → commit kế tiếp: 015505b (06:38 21/10) HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo
+#362 ["2026-10-21 06:38"]  Claude Opus 5.5  ## Lệnh cho Claude Code — CLAUDE.md: bài học D + chuyển giai đoạn
+      → commit kế tiếp: 015505b (06:38 21/10) HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo
+#363 ["2026-10-21 06:43"]  Claude Opus 5.5  NHIỆM VỤ: HW02 – liệt kê form/mục phải nộp + dựng KHUNG report (chưa điền nội du
+      → commit kế tiếp: d8627c7 (06:48 21/10) HW02: kế hoạch nộp bài + khung report
+#364 ["2026-10-21 06:49"]  Claude Opus 5.5  Sửa: đổi tên khung report thành `HW02/23120255_HW02_Report.md` (theo CLAUDE.md §
+      → commit kế tiếp: 6f3b791 (06:49 21/10) HW02: đổi tên khung report thành 23120255_HW02_Report.md

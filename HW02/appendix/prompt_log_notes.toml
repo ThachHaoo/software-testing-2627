@@ -2,6 +2,14 @@
 # Xem số #n: python tools/extract_prompt_log.py .transcripts/*.jsonl --since 2026-10-12 --list
 # Mỗi lượt: section, muc_dich, xu_ly; tuỳ chọn ai_output_file, dinh_kem.
 # Số #n đổi nếu thêm session cũ hơn vào .transcripts/ — chép đủ transcript trước rồi mới ghi chú.
+#
+# Cú pháp khoá:
+#   ["YYYY-MM-DD HH:MM"]                        một lượt (lượt thứ k cùng phút: "YYYY-MM-DD HH:MM#k")
+#   ["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]    mọi lượt trong khoảng, hai đầu tính cả (theo phút)
+# Khoá giờ đơn ưu tiên hơn khoá khoảng, ghi đè TỪNG TRƯỜNG (trường không ghi ở khoá đơn lấy từ khoảng).
+# Một lượt nằm trong nhiều khoảng → dùng khoảng hẹp nhất (bằng nhau: khoảng ghi trước trong file).
+# Gom khoảng theo commit: python tools/extract_prompt_log.py ".transcripts/*.jsonl" --since 2026-10-12 \
+#     --extra HW02/appendix/prompt_log_extra.toml --list --commits -o HW02/appendix/prompt_log_turns.txt
 
 ["2026-10-12 21:20"]
 section  = "Toàn bài"
