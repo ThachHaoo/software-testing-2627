@@ -110,50 +110,50 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
-| EC1 | Số nguyên ≥ 1 (vd 2) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40 |
-| EC2 | Số nguyên ≤ 0 (vd 0, -3) | TC-FR07-10, TC-FR07-30 |
+| EC1 | Số nguyên ≥ 1 (vd 2) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
+| EC2 | Số nguyên ≤ 0 (vd 0, -3) | TC-FR07-10, TC-FR07-30, TC-FR07-60, TC-FR07-70 |
 | EC3 | Số không nguyên (vd 1.5) | TC-FR07-11, TC-FR07-31 |
 | EC4 | Rỗng (không nhập gì) | TC-FR07-12, TC-FR07-32 |
 | EC5 | Không phải số (vd 'abc') | TC-FR07-13, TC-FR07-33 |
 | EC6 | API: quantity là chuỗi số (vd "2") | TC-FR07-34 |
 | EC7 | API: thiếu trường quantity hoặc null | TC-FR07-35 |
-| EC8 | UI: sản phẩm chưa có trong giỏ | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13 |
-| EC55 | API: id chưa có trong giỏ | TC-FR07-20, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39 |
+| EC8 | UI: sản phẩm chưa có trong giỏ | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64 |
+| EC55 | API: id chưa có trong giỏ | TC-FR07-20, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC9 | Sản phẩm đã có trong giỏ, thêm lại từ cùng một trang | TC-FR07-03 |
 | EC10 | Sản phẩm đã có trong giỏ, thêm lại từ trang khác (Trang chủ ↔ Chi tiết) | TC-FR07-04 |
 | EC11 | API: id đã có trong giỏ (POST lần 2 cùng id) | TC-FR07-21 |
 | EC12 | API: id không tồn tại trong products (vd 99999) | TC-FR07-36 |
 | EC13 | API: id sai kiểu (vd "abc") | TC-FR07-37 |
 | EC53 | API: thiếu trường id hoặc id = null | TC-FR07-40 |
-| EC14 | UI: sản phẩm seed, đơn giá nguyên dương (4.000.000–45.000.000) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08, TC-FR07-09, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13 |
-| EC15 | API: body.price khớp giá CSDL | TC-FR07-20, TC-FR07-21, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39 |
+| EC14 | UI: sản phẩm seed, đơn giá nguyên dương (4.000.000–45.000.000) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08, TC-FR07-09, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65, TC-FR07-66 |
+| EC15 | API: body.price khớp giá CSDL | TC-FR07-20, TC-FR07-21, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC16 | API: body.price khác giá CSDL (khác số, ≤ 0, sai kiểu, thiếu) | TC-FR07-22 |
 | EC17 | Bấm '+' | TC-FR07-05 |
-| EC18 | Bấm '-' | TC-FR07-06, TC-FR07-07 |
+| EC18 | Bấm '-' | TC-FR07-06, TC-FR07-07, TC-FR07-65 |
 | EC19 | Số lượng hiện tại = 1 | TC-FR07-05, TC-FR07-07 |
-| EC20 | Số lượng hiện tại ≥ 2 | TC-FR07-06 |
-| EC21 | Bấm nút xoá rồi chọn Xác nhận trong dialog | TC-FR07-08 |
+| EC20 | Số lượng hiện tại ≥ 2 | TC-FR07-06, TC-FR07-65 |
+| EC21 | Bấm nút xoá rồi chọn Xác nhận trong dialog | TC-FR07-08, TC-FR07-66 |
 | EC22 | Bấm nút xoá rồi chọn Hủy trong dialog | TC-FR07-09 |
-| EC23 | Giỏ có 0 dòng | TC-FR07-01, TC-FR07-02, TC-FR07-20 |
-| EC24 | Giỏ có đúng 1 dòng | TC-FR07-03, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-09, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-21, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40 |
+| EC23 | Giỏ có 0 dòng | TC-FR07-01, TC-FR07-02, TC-FR07-20, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
+| EC24 | Giỏ có đúng 1 dòng | TC-FR07-03, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-09, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-21, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-60, TC-FR07-65, TC-FR07-66, TC-FR07-70 |
 | EC25 | Giỏ có ≥ 2 dòng | TC-FR07-04, TC-FR07-08, TC-FR07-22 |
 | EC26 | UI: chưa đăng nhập | TC-FR07-01, TC-FR07-03, TC-FR07-05, TC-FR07-07, TC-FR07-09 |
-| EC27 | UI: đã đăng nhập (user {ts}) | TC-FR07-02, TC-FR07-04, TC-FR07-06, TC-FR07-08, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13 |
-| EC28 | API: token hợp lệ | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-40 |
+| EC27 | UI: đã đăng nhập (user {ts}) | TC-FR07-02, TC-FR07-04, TC-FR07-06, TC-FR07-08, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65, TC-FR07-66 |
+| EC28 | API: token hợp lệ | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC29 | API: thiếu header Authorization | TC-FR07-38 |
 | EC30 | API: token sai/giả mạo | TC-FR07-39 |
-| EC31 | API: body.name khớp tên CSDL | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39 |
+| EC31 | API: body.name khớp tên CSDL | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC33 | Bấm 'Tiếp tục mua sắm' | TC-FR07-01, TC-FR07-02 |
 | EC34 | Bảng giỏ có 5 cột với nhãn 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác' | TC-FR07-95 |
-| EC35 | Không có bảng (giỏ trống) | TC-FR07-01 |
+| EC35 | Không có bảng (giỏ trống) | TC-FR07-01, TC-FR07-66 |
 | EC36 | API: GET /api/cart trả mảng, mỗi id một phần tử, chỉ chứa hàng của user sở hữu token | TC-FR07-20, TC-FR07-21 |
 | EC37 | Số lượng tăng đúng bằng số lượng thêm (cộng dồn) | TC-FR07-03, TC-FR07-04, TC-FR07-21 |
 | EC38 | Số lượng tăng 1 | TC-FR07-05 |
-| EC39 | Số lượng giảm 1 | TC-FR07-06 |
+| EC39 | Số lượng giảm 1 | TC-FR07-06, TC-FR07-65 |
 | EC40 | Số lượng giữ nguyên do bấm '-' tại Số lượng 1 | TC-FR07-07 |
-| EC54 | Số lượng/giỏ giữ nguyên do lần thêm bị từ chối | TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13 |
-| EC41 | Thành tiền = Đơn giá × Số lượng (so giá trị số) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06 |
-| EC42 | Tổng = Σ Thành tiền các dòng (so giá trị số) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08 |
+| EC54 | Số lượng/giỏ giữ nguyên do lần thêm bị từ chối | TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60 |
+| EC41 | Thành tiền = Đơn giá × Số lượng (so giá trị số) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65 |
+| EC42 | Tổng = Σ Thành tiền các dòng (so giá trị số) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65 |
 | EC43 | Badge = tổng Số lượng trong giỏ (≥ 1) | TC-FR07-04 |
 | EC44 | Giỏ trống: badge ẩn hoặc hiển thị 0 | TC-FR07-01 |
 | EC45 | Trong ≤ 2 giây sau lần thêm hợp lệ có ít nhất một phản hồi nhìn thấy được (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang) | TC-FR07-02, TC-FR07-99 |
@@ -161,8 +161,8 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | EC47 | Dialog xác nhận hiện ra trước khi xoá | TC-FR07-08, TC-FR07-09 |
 | EC48 | Empty state có hình minh hoạ/icon và thông báo giỏ trống | TC-FR07-01 |
 | EC49 | URL sau khi bấm là trang chủ '/' | TC-FR07-01, TC-FR07-02 |
-| EC50 | API: 2xx và GET /api/cart phản ánh thay đổi | TC-FR07-20, TC-FR07-21, TC-FR07-22 |
-| EC51 | API: 4xx kèm trường error, giỏ không đổi | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40 |
+| EC50 | API: 2xx và GET /api/cart phản ánh thay đổi | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
+| EC51 | API: 4xx kèm trường error, giỏ không đổi | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70 |
 
 ### Bước 3b — Minimum Set of Test Cases (Domain) · TS-DOM-UI — Domain — minimum set, tầng UI (FR-07, FR-06)
 **Ghi chú suite:** Giỏ web là state React (B0d): chỉ mở URL trực tiếp ở bước 1, sau đó điều hướng bằng link trong app.
@@ -224,6 +224,52 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | TC-FR07-38 | Kiểm tra thêm qua API khi thiếu header Authorization | EC1, EC55, EC29, EC24, EC15, EC31, EC51 | EC29, EC51 | thiếu | id 1 × 1 | 5 | CSDL | CSDL | 1 | HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5. | SEC-02; GET ở bước 6 dùng token T hợp lệ để thấy giỏ của user không đổi. | AI |
 | TC-FR07-39 | Kiểm tra thêm qua API khi token sai | EC1, EC55, EC30, EC24, EC15, EC31, EC51 | EC30, EC51 | sai | id 1 × 1 | 5 | CSDL | CSDL | 1 | HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5. | Token sai định dạng/chữ ký. | AI |
 | TC-FR07-40 | Kiểm tra thêm qua API khi thiếu trường id | EC1, EC24, EC28, EC51, EC53 | EC53, EC51 | T | id 1 × 1 | — thiếu — | CSDL của id 5 | CSDL của id 5 | 1 | HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có phần tử mới. | Đại diện EC53 (B18): bỏ khoá id khỏi body — dạng thiếu phổ biến nhất; null cùng lớp. | AI |
+
+### Bước 4 — Boundary Value Test Cases · TS-BVA-UI — Boundary values — tầng UI (FR-06.2, FR-07)
+**Ghi chú suite:** Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán MAX_UI; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).
+**Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).; Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).; Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.; Web http://localhost:5173 đang chạy.; Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill (chạy tay); localStorage không có token; giỏ web rỗng.
+
+**Quy trình chung:**
+1. Nếu cột 'Đăng nhập' = 'user {ts}': gọi POST /api/register {name: 'Cart Tester', email: 'cartNN_{ts}@domain.com', password: 'Abcd1234!'} (NN = số TC), rồi mở http://localhost:5173/login, nhập ô 'Username' = email đó, ô 'Mật khẩu' = 'Abcd1234!', bấm nút đăng nhập. Nếu = 'khách': mở http://localhost:5173/. Đây là lần mở URL trực tiếp DUY NHẤT của case (giỏ web là state React, B0d). → Trang chủ 'Danh sách sản phẩm' hiển thị; navbar có 'Chào, Cart Tester' (user) hoặc link 'Đăng nhập' (khách).
+2. Dựng 'Giỏ ban đầu' theo đúng thứ tự trong cột. 'TC: <id>' = ở trang chủ bấm 'Thêm vào giỏ' trên thẻ sản phẩm đó đúng một lần. 'CT: <id> × n' = bấm 'Xem chi tiết' trên thẻ, xoá trắng ô 'Số lượng:', gõ n, bấm 'Thêm vào giỏ hàng' đúng một lần, rồi bấm link 'EShop' trên navbar để về trang chủ. '—' = không thêm gì. Chỉ điều hướng bằng link trong app, không tải lại trang. → Không đánh giá ở bước này (phản hồi khi thêm chỉ kiểm ở case có mục tiêu EC45); giỏ được đối chiếu ở bước 3.
+3. Bấm link tới /cart trên navbar. Ghi trạng thái TRƯỚC: số dòng; với mỗi dòng: tên sản phẩm, Đơn giá, Số lượng, Thành tiền; Tổng; badge. Số tiền ghi dạng giá trị số (bỏ ký hiệu tiền và dấu phân cách). Cách định vị (không dựa vào đúng chữ của nhãn): dòng sản phẩm = dòng của bảng giỏ có chứa tên sản phẩm; cột theo thứ tự FR-07.1 (1 Sản phẩm, 2 Đơn giá, 3 Số lượng, 4 Thành tiền, 5 Thao tác) — thứ tự khác thì xác định theo tiêu đề gần nghĩa và ghi notes; nút '+'/'-' = hai nút trong ô cột Số lượng của dòng (nút tăng/giảm); nút xoá = nút trong ô cột Thao tác của dòng; link về trang chủ = phần tử a[href='/'] trong vùng nội dung chính của trang giỏ (không tính navbar và logo 'EShop'); Tổng = số tiền ở phần tổng bên dưới bảng; badge = con số hiển thị trên/cạnh link tới /cart trên navbar. → Giỏ khớp cột 'Giỏ ban đầu' (sản phẩm, số lượng). Không khớp → dừng, Blocked, ghi case gốc gây chặn (B20).
+4. Thực hiện cột 'Thao tác' đúng một lần, định vị phần tử như bước 3. Thao tác ở trang chi tiết: từ trang giỏ bấm link 'EShop' trên navbar → link 'Xem chi tiết' trên thẻ sản phẩm → ô 'Số lượng:' xoá trắng rồi gõ đúng chuỗi trong cột ('' = để trống) → bấm nút thêm vào giỏ của trang đúng một lần. Thao tác '+', '-', xoá: bấm nút trên dòng sản phẩm ghi trong cột; dialog: chọn nút xác nhận hoặc nút huỷ như cột ghi. → Hệ thống phản hồi (phản hồi trực quan, dialog, đổi số, chuyển trang hoặc không đổi gì).
+5. Quan sát ngay sau thao tác: toast/badge, dialog, URL trên thanh địa chỉ. → Khớp phần phản hồi trong cột Expected.
+6. Nếu không ở trang giỏ: bấm link tới /cart trên navbar (trừ khi Expected yêu cầu quan sát trang khác). Ghi trạng thái SAU như bước 3, so với TRƯỚC. → Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, B0b).
+
+**Dọn dẹp:** Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user.
+
+| #TC | Tiêu đề | EC phủ | EC mục tiêu | Điểm biên | Đăng nhập | Giỏ ban đầu | Thao tác | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR07-60 | Kiểm tra thêm từ trang chi tiết khi số lượng bằng 0 | EC2, EC8, EC14, EC24, EC27, EC54 | EC2, EC54 | LB-1 | user {ts} | TC: id 1 | CT: id 5 × 0 | TRƯỚC → SAU: giỏ không đổi — 1 dòng 'iPhone 15 Pro Max' Số lượng 1, không có dòng 'Bàn phím cơ Keychron Q1', Tổng 30000000 (B2). | Ngay dưới biên dưới LB = 1 (FR-06.2 'tối thiểu là 1'); bước nhảy 1 đơn vị. | AI |
+| TC-FR07-61 | Kiểm tra thêm từ trang chi tiết khi số lượng bằng 1 và giỏ rỗng | EC1, EC8, EC14, EC23, EC27, EC41, EC42 | EC1, EC41, EC42 | LB | user {ts} | — | CT: id 5 × 1 | TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1, Thành tiền 4000000; Tổng 4000000. | Biên dưới LB = 1, cũng là giá trị mặc định của ô — vẫn xoá trắng rồi gõ '1' theo quy trình. | AI |
+| TC-FR07-62 | Kiểm tra thêm từ trang chi tiết khi số lượng bằng 2 và giỏ rỗng | EC1, EC8, EC14, EC23, EC27, EC41, EC42 | EC1, EC41, EC42 | LB+1 | user {ts} | — | CT: id 5 × 2 | TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 2, Thành tiền 8000000; Tổng 8000000. | Ngay trên biên dưới. | AI |
+| TC-FR07-63 | Kiểm tra thêm từ trang chi tiết khi số lượng ở giá trị danh nghĩa 5 | EC1, EC8, EC14, EC23, EC27, EC41, EC42 | EC1, EC41, EC42 | NOM | user {ts} | — | CT: id 5 × 5 | TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 5, Thành tiền 20000000; Tổng 20000000. | Giá trị danh nghĩa nằm hẳn trong miền, xa biên dưới. | AI |
+| TC-FR07-64 | Kiểm tra thêm từ trang chi tiết khi số lượng là giá trị lớn 1000 | EC1, EC8, EC14, EC23, EC27, EC41, EC42 | EC1, EC41, EC42 | MAX_UI | user {ts} | — | CT: id 5 × 1000 | TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1000, Thành tiền 4000000000; Tổng 4000000000 (B1: hợp lệ). | Đại diện giá trị lớn phía trên (B1 SV chốt); Thành tiền 4 tỷ kiểm phép nhân với số lớn. | AI |
+| TC-FR07-65 | Kiểm tra nút '-' khi dòng có số lượng 2 | EC14, EC18, EC20, EC24, EC27, EC39, EC41, EC42 | EC20, EC39 | LB | user {ts} | CT: id 5 × 2 | Bấm '-' trên dòng id 5 | TRƯỚC → SAU: vẫn 1 dòng; Số lượng 2 → 1; Thành tiền 8000000 → 4000000; Tổng 4000000. | Biên dưới của lớp 'Số lượng hiện tại ≥ 2' (EC20): '-' đưa Số lượng về đúng giá trị tối thiểu 1. LB-1 (Số lượng 1) = TC-FR07-07; LB+1 (Số lượng 3) = TC-FR07-06. | AI |
+| TC-FR07-66 | Kiểm tra xoá và xác nhận dòng cuối cùng khi giỏ có đúng 1 dòng | EC14, EC21, EC24, EC27, EC35 | EC24, EC35 | LB | user {ts} | TC: id 4 | Bấm nút xoá trên dòng id 4 → dialog (nếu có): chọn xác nhận | TRƯỚC → SAU: 1 → 0 dòng; trang giỏ không còn bảng sản phẩm và chuyển sang trạng thái giỏ trống. | Biên dưới của lớp 'giỏ có ≥ 1 dòng': xoá dòng cuối chuyển giỏ từ trạng thái có bảng sang trạng thái trống (1 → 0). Chiều 0 → 1 = TC-FR07-02; 2 → 1 = TC-FR07-08. | AI |
+
+### Bước 4 — Boundary Value Test Cases · TS-BVA-API — Boundary values — tầng API /api/cart (FR-06.2)
+**Ghi chú suite:** Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán MAX_UI; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).
+**Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).; Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).; Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.
+
+**Quy trình chung:**
+1. Gọi POST /api/register {name: 'Cart Tester', email: 'apiNN_{ts}@domain.com', password: 'Abcd1234!'} (NN = số TC), rồi POST /api/login cùng email/mật khẩu → lưu token T. → HTTP 200 cho cả hai; phản hồi login có token.
+2. Dựng 'Giỏ ban đầu': mỗi mục 'id k × n' → POST /api/cart, header Authorization: Bearer T, body {id: k, name: <tên CSDL>, price: <giá CSDL>, quantity: n}. '—' = không gửi. → HTTP 200 cho mỗi request.
+3. GET /api/cart (Bearer T) → lưu TRƯỚC. → HTTP 200; mảng khớp cột 'Giỏ ban đầu'. Không khớp → dừng, Blocked, ghi case gốc (B20).
+4. Gửi đúng một POST /api/cart, Content-Type: application/json. Header theo cột 'Token': 'T' = Bearer T; 'thiếu' = không gửi header Authorization; 'sai' = 'Bearer abc.def.ghi'. Body lấy từ các cột id/name/price/quantity: 'CSDL' = giá trị trong bảng sản phẩm seed; '— thiếu —' = bỏ khoá khỏi body; "…" = chuỗi JSON; số không ngoặc = số JSON; `""` = chuỗi rỗng. → Nhận được phản hồi HTTP.
+5. Ghi lại HTTP status và body JSON. → Khớp phần phản hồi trong cột Expected.
+6. GET /api/cart (Bearer T) → SAU; so với TRƯỚC. → Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, B0b).
+
+**Dọn dẹp:** Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user.
+
+| #TC | Tiêu đề | EC phủ | EC mục tiêu | Điểm biên | Token | Giỏ ban đầu | id | name | price | quantity | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR07-70 | Kiểm tra thêm qua API khi quantity bằng 0 | EC2, EC55, EC15, EC24, EC28, EC31, EC51 | EC2, EC51 | LB-1 | T | id 1 × 1 | 5 | CSDL | CSDL | 0 | HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có phần tử mới. | Ngay dưới biên dưới LB = 1. | AI |
+| TC-FR07-71 | Kiểm tra thêm qua API khi quantity bằng 1 | EC1, EC55, EC15, EC23, EC28, EC31, EC50 | EC1, EC50 | LB | T | — | 5 | CSDL | CSDL | 1 | HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 1. | Biên dưới. | AI |
+| TC-FR07-72 | Kiểm tra thêm qua API khi quantity bằng 2 | EC1, EC55, EC15, EC23, EC28, EC31, EC50 | EC1, EC50 | LB+1 | T | — | 5 | CSDL | CSDL | 2 | HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 2. | Ngay trên biên dưới. | AI |
+| TC-FR07-73 | Kiểm tra thêm qua API khi quantity ở giá trị danh nghĩa 5 | EC1, EC55, EC15, EC23, EC28, EC31, EC50 | EC1, EC50 | NOM | T | — | 5 | CSDL | CSDL | 5 | HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 5. | Giá trị danh nghĩa xa biên. | AI |
+| TC-FR07-74 | Kiểm tra thêm qua API khi quantity là giá trị lớn 1000 | EC1, EC55, EC15, EC23, EC28, EC31, EC50 | EC1, EC50 | MAX_UI | T | — | 5 | CSDL | CSDL | 1000 | HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 1000. (B1: hợp lệ). | Cùng giá trị lớn với TC-FR07-64 để so UI ↔ API. | AI |
 
 ### TS-GUI — GUI — trang giỏ và các điểm thêm vào giỏ (nút +/-, nhãn FR-07, FR-21, FR-23, FR-24)
 | #TC | Tiêu đề | EC phủ | EC mục tiêu | Expected | Lý do chọn input | Nguồn |
@@ -337,14 +383,14 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 
 | Yêu cầu | Test case | Số TC |
 |---|---|---|
-| FR-07.1 | TC-FR07-02, TC-FR07-04, TC-FR07-08, TC-FR07-95 | 4 |
-| FR-07.2 | TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-90 | 4 |
+| FR-07.1 | TC-FR07-02, TC-FR07-04, TC-FR07-08, TC-FR07-66, TC-FR07-95 | 5 |
+| FR-07.2 | TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-65, TC-FR07-90 | 5 |
 | FR-07.3 | TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21 | 4 |
 | FR-07.4 | TC-FR07-08, TC-FR07-09, TC-FR07-96 | 3 |
 | FR-07.5 | TC-FR07-01, TC-FR07-02, TC-FR07-97 | 3 |
 | FR-07.6 | TC-FR07-98 | 1 |
-| FR-07.7 | TC-FR07-01 | 1 |
-| FR-06.2 | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-20, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35 | 12 |
+| FR-07.7 | TC-FR07-01, TC-FR07-66 | 2 |
+| FR-06.2 | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-20, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 | 22 |
 | FR-06.3 | TC-FR07-02, TC-FR07-99 | 2 |
 | FR-08.1 | TC-FR07-02, TC-FR07-03 | 2 |
 | FR-08.2 | TC-FR07-22 | 1 |
@@ -356,20 +402,20 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 | FR-24.2 | TC-FR07-08, TC-FR07-09 | 2 |
 | FR-24.3 | TC-FR07-01 | 1 |
 | FR-24.4 | TC-FR07-94 | 1 |
-| API-CART | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40 | 14 |
+| API-CART | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 | 19 |
 | SEC-02 | TC-FR07-20, TC-FR07-38, TC-FR07-39 | 3 |
 | B22 (giả định) | TC-FR07-01 | 1 |
 | B15 (giả định) | TC-FR07-01 | 1 |
 | B11 (giả định) | TC-FR07-02, TC-FR07-03 | 2 |
-| B4 (giả định) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08 | 7 |
+| B4 (giả định) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64 | 11 |
 | B21 (giả định) | TC-FR07-02, TC-FR07-99 | 2 |
 | B5 (giả định) | TC-FR07-03, TC-FR07-04 | 2 |
 | B9 (giả định) | TC-FR07-04 | 1 |
 | B3 (giả định) | TC-FR07-07 | 1 |
 | B14 (giả định) | TC-FR07-08, TC-FR07-09 | 2 |
-| B2 (giả định) | TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13 | 4 |
+| B2 (giả định) | TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60 | 5 |
 | B8 (giả định) | TC-FR07-22 | 1 |
-| B17 (giả định) | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40 | 11 |
+| B17 (giả định) | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70 | 12 |
 | B18 (giả định) | TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-40 | 5 |
 | B13 (giả định) | TC-FR07-93 | 1 |
 | B12 (giả định) | TC-FR07-95, TC-FR07-96, TC-FR07-97 | 3 |
@@ -402,4 +448,4 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 - B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual.
 - B22 (badge khi giỏ trống) (SV chốt 2026-10-20): badge ẩn hoặc hiển thị 0 đều chấp nhận — lý do: SRS im lặng. Gắn EC44.
 
-**Tổng:** 37 TC · Not run: 37 · Nguồn: AI 37
+**Tổng:** 49 TC · Not run: 49 · Nguồn: AI 49

@@ -6,7 +6,7 @@
     "feature": "FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart)",
     "feature_code": "B_FR07",
     "doc_id": "TCD-B_FR07",
-    "version": "0.6",
+    "version": "0.7",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -2162,6 +2162,588 @@
             "EC53",
             "EC51"
           ]
+        }
+      ]
+    },
+    {
+      "id": "TS-BVA-UI",
+      "name": "Boundary values — tầng UI (FR-06.2, FR-07)",
+      "format": "matrix",
+      "description": "Boundary values; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-UI.",
+      "notes": "Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán MAX_UI; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
+        "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
+        "Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).",
+        "Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.",
+        "Web http://localhost:5173 đang chạy.",
+        "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill (chạy tay); localStorage không có token; giỏ web rỗng."
+      ],
+      "procedure": [
+        {
+          "action": "Nếu cột 'Đăng nhập' = 'user {ts}': gọi POST /api/register {name: 'Cart Tester', email: 'cartNN_{ts}@domain.com', password: 'Abcd1234!'} (NN = số TC), rồi mở http://localhost:5173/login, nhập ô 'Username' = email đó, ô 'Mật khẩu' = 'Abcd1234!', bấm nút đăng nhập. Nếu = 'khách': mở http://localhost:5173/. Đây là lần mở URL trực tiếp DUY NHẤT của case (giỏ web là state React, B0d).",
+          "expected": "Trang chủ 'Danh sách sản phẩm' hiển thị; navbar có 'Chào, Cart Tester' (user) hoặc link 'Đăng nhập' (khách)."
+        },
+        {
+          "action": "Dựng 'Giỏ ban đầu' theo đúng thứ tự trong cột. 'TC: <id>' = ở trang chủ bấm 'Thêm vào giỏ' trên thẻ sản phẩm đó đúng một lần. 'CT: <id> × n' = bấm 'Xem chi tiết' trên thẻ, xoá trắng ô 'Số lượng:', gõ n, bấm 'Thêm vào giỏ hàng' đúng một lần, rồi bấm link 'EShop' trên navbar để về trang chủ. '—' = không thêm gì. Chỉ điều hướng bằng link trong app, không tải lại trang.",
+          "expected": "Không đánh giá ở bước này (phản hồi khi thêm chỉ kiểm ở case có mục tiêu EC45); giỏ được đối chiếu ở bước 3."
+        },
+        {
+          "action": "Bấm link tới /cart trên navbar. Ghi trạng thái TRƯỚC: số dòng; với mỗi dòng: tên sản phẩm, Đơn giá, Số lượng, Thành tiền; Tổng; badge. Số tiền ghi dạng giá trị số (bỏ ký hiệu tiền và dấu phân cách). Cách định vị (không dựa vào đúng chữ của nhãn): dòng sản phẩm = dòng của bảng giỏ có chứa tên sản phẩm; cột theo thứ tự FR-07.1 (1 Sản phẩm, 2 Đơn giá, 3 Số lượng, 4 Thành tiền, 5 Thao tác) — thứ tự khác thì xác định theo tiêu đề gần nghĩa và ghi notes; nút '+'/'-' = hai nút trong ô cột Số lượng của dòng (nút tăng/giảm); nút xoá = nút trong ô cột Thao tác của dòng; link về trang chủ = phần tử a[href='/'] trong vùng nội dung chính của trang giỏ (không tính navbar và logo 'EShop'); Tổng = số tiền ở phần tổng bên dưới bảng; badge = con số hiển thị trên/cạnh link tới /cart trên navbar.",
+          "expected": "Giỏ khớp cột 'Giỏ ban đầu' (sản phẩm, số lượng). Không khớp → dừng, Blocked, ghi case gốc gây chặn (B20)."
+        },
+        {
+          "action": "Thực hiện cột 'Thao tác' đúng một lần, định vị phần tử như bước 3. Thao tác ở trang chi tiết: từ trang giỏ bấm link 'EShop' trên navbar → link 'Xem chi tiết' trên thẻ sản phẩm → ô 'Số lượng:' xoá trắng rồi gõ đúng chuỗi trong cột ('' = để trống) → bấm nút thêm vào giỏ của trang đúng một lần. Thao tác '+', '-', xoá: bấm nút trên dòng sản phẩm ghi trong cột; dialog: chọn nút xác nhận hoặc nút huỷ như cột ghi.",
+          "expected": "Hệ thống phản hồi (phản hồi trực quan, dialog, đổi số, chuyển trang hoặc không đổi gì)."
+        },
+        {
+          "action": "Quan sát ngay sau thao tác: toast/badge, dialog, URL trên thanh địa chỉ.",
+          "expected": "Khớp phần phản hồi trong cột Expected."
+        },
+        {
+          "action": "Nếu không ở trang giỏ: bấm link tới /cart trên navbar (trừ khi Expected yêu cầu quan sát trang khác). Ghi trạng thái SAU như bước 3, so với TRƯỚC.",
+          "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, B0b)."
+        }
+      ],
+      "columns": [
+        "Đăng nhập",
+        "Giỏ ban đầu",
+        "Thao tác"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR07-60",
+          "title": "Kiểm tra thêm từ trang chi tiết khi số lượng bằng 0",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "TC: id 1",
+            "Thao tác": "CT: id 5 × 0"
+          },
+          "expected_result": "TRƯỚC → SAU: giỏ không đổi — 1 dòng 'iPhone 15 Pro Max' Số lượng 1, không có dòng 'Bàn phím cơ Keychron Q1', Tổng 30000000 (B2).",
+          "requirements": [
+            "FR-06.2"
+          ],
+          "covers": [
+            "EC2",
+            "EC8",
+            "EC14",
+            "EC24",
+            "EC27",
+            "EC54"
+          ],
+          "ec_target": [
+            "EC2",
+            "EC54"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB-1",
+          "rationale": "Ngay dưới biên dưới LB = 1 (FR-06.2 'tối thiểu là 1'); bước nhảy 1 đơn vị.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR07-61",
+          "title": "Kiểm tra thêm từ trang chi tiết khi số lượng bằng 1 và giỏ rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "—",
+            "Thao tác": "CT: id 5 × 1"
+          },
+          "expected_result": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1, Thành tiền 4000000; Tổng 4000000.",
+          "requirements": [
+            "FR-06.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC8",
+            "EC14",
+            "EC23",
+            "EC27",
+            "EC41",
+            "EC42"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC41",
+            "EC42"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "Biên dưới LB = 1, cũng là giá trị mặc định của ô — vẫn xoá trắng rồi gõ '1' theo quy trình.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR07-62",
+          "title": "Kiểm tra thêm từ trang chi tiết khi số lượng bằng 2 và giỏ rỗng",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "—",
+            "Thao tác": "CT: id 5 × 2"
+          },
+          "expected_result": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 2, Thành tiền 8000000; Tổng 8000000.",
+          "requirements": [
+            "FR-06.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC8",
+            "EC14",
+            "EC23",
+            "EC27",
+            "EC41",
+            "EC42"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC41",
+            "EC42"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB+1",
+          "rationale": "Ngay trên biên dưới.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Cùng giá trị Số lượng với TC-FR07-02 (khác sản phẩm): điểm này vừa là đại diện lớp ở bước 3 vừa là LB+1."
+        },
+        {
+          "id": "TC-FR07-63",
+          "title": "Kiểm tra thêm từ trang chi tiết khi số lượng ở giá trị danh nghĩa 5",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "—",
+            "Thao tác": "CT: id 5 × 5"
+          },
+          "expected_result": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 5, Thành tiền 20000000; Tổng 20000000.",
+          "requirements": [
+            "FR-06.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC8",
+            "EC14",
+            "EC23",
+            "EC27",
+            "EC41",
+            "EC42"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC41",
+            "EC42"
+          ],
+          "technique": "BVA",
+          "bva_point": "NOM",
+          "rationale": "Giá trị danh nghĩa nằm hẳn trong miền, xa biên dưới.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR07-64",
+          "title": "Kiểm tra thêm từ trang chi tiết khi số lượng là giá trị lớn 1000",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "—",
+            "Thao tác": "CT: id 5 × 1000"
+          },
+          "expected_result": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1000, Thành tiền 4000000000; Tổng 4000000000 (B1: hợp lệ).",
+          "requirements": [
+            "FR-06.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC8",
+            "EC14",
+            "EC23",
+            "EC27",
+            "EC41",
+            "EC42"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC41",
+            "EC42"
+          ],
+          "technique": "BVA",
+          "bva_point": "MAX_UI",
+          "rationale": "Đại diện giá trị lớn phía trên (B1 SV chốt); Thành tiền 4 tỷ kiểm phép nhân với số lớn.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo B1: không có cận trên nên không có UB-1/UB/UB+1. Điểm này là 1 đại diện 'giá trị lớn' hợp lệ; gán nhãn MAX_UI vì là giá trị lớn nhất chọn kiểm, KHÔNG phải giới hạn của giao diện (ô input type=number không có max)."
+        },
+        {
+          "id": "TC-FR07-65",
+          "title": "Kiểm tra nút '-' khi dòng có số lượng 2",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "CT: id 5 × 2",
+            "Thao tác": "Bấm '-' trên dòng id 5"
+          },
+          "expected_result": "TRƯỚC → SAU: vẫn 1 dòng; Số lượng 2 → 1; Thành tiền 8000000 → 4000000; Tổng 4000000.",
+          "requirements": [
+            "FR-07.2"
+          ],
+          "covers": [
+            "EC14",
+            "EC18",
+            "EC20",
+            "EC24",
+            "EC27",
+            "EC39",
+            "EC41",
+            "EC42"
+          ],
+          "ec_target": [
+            "EC20",
+            "EC39"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "Biên dưới của lớp 'Số lượng hiện tại ≥ 2' (EC20): '-' đưa Số lượng về đúng giá trị tối thiểu 1. LB-1 (Số lượng 1) = TC-FR07-07; LB+1 (Số lượng 3) = TC-FR07-06.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Nếu trang giỏ không có nút +/-: dừng ở bước 4, Blocked, case gốc TC-FR07-90 (A17, B20)."
+        },
+        {
+          "id": "TC-FR07-66",
+          "title": "Kiểm tra xoá và xác nhận dòng cuối cùng khi giỏ có đúng 1 dòng",
+          "layer": "UI",
+          "inputs": {
+            "Đăng nhập": "user {ts}",
+            "Giỏ ban đầu": "TC: id 4",
+            "Thao tác": "Bấm nút xoá trên dòng id 4 → dialog (nếu có): chọn xác nhận"
+          },
+          "expected_result": "TRƯỚC → SAU: 1 → 0 dòng; trang giỏ không còn bảng sản phẩm và chuyển sang trạng thái giỏ trống.",
+          "requirements": [
+            "FR-07.1",
+            "FR-07.7"
+          ],
+          "covers": [
+            "EC14",
+            "EC21",
+            "EC24",
+            "EC27",
+            "EC35"
+          ],
+          "ec_target": [
+            "EC24",
+            "EC35"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "Biên dưới của lớp 'giỏ có ≥ 1 dòng': xoá dòng cuối chuyển giỏ từ trạng thái có bảng sang trạng thái trống (1 → 0). Chiều 0 → 1 = TC-FR07-02; 2 → 1 = TC-FR07-08.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Dialog không phải mục tiêu của case (kiểm ở TC-FR07-08/09): không có dialog thì vẫn quan sát kết quả xoá, ghi notes."
+        }
+      ]
+    },
+    {
+      "id": "TS-BVA-API",
+      "name": "Boundary values — tầng API /api/cart (FR-06.2)",
+      "format": "matrix",
+      "description": "Boundary values; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-API.",
+      "notes": "Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán MAX_UI; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
+        "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
+        "Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).",
+        "Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id."
+      ],
+      "procedure": [
+        {
+          "action": "Gọi POST /api/register {name: 'Cart Tester', email: 'apiNN_{ts}@domain.com', password: 'Abcd1234!'} (NN = số TC), rồi POST /api/login cùng email/mật khẩu → lưu token T.",
+          "expected": "HTTP 200 cho cả hai; phản hồi login có token."
+        },
+        {
+          "action": "Dựng 'Giỏ ban đầu': mỗi mục 'id k × n' → POST /api/cart, header Authorization: Bearer T, body {id: k, name: <tên CSDL>, price: <giá CSDL>, quantity: n}. '—' = không gửi.",
+          "expected": "HTTP 200 cho mỗi request."
+        },
+        {
+          "action": "GET /api/cart (Bearer T) → lưu TRƯỚC.",
+          "expected": "HTTP 200; mảng khớp cột 'Giỏ ban đầu'. Không khớp → dừng, Blocked, ghi case gốc (B20)."
+        },
+        {
+          "action": "Gửi đúng một POST /api/cart, Content-Type: application/json. Header theo cột 'Token': 'T' = Bearer T; 'thiếu' = không gửi header Authorization; 'sai' = 'Bearer abc.def.ghi'. Body lấy từ các cột id/name/price/quantity: 'CSDL' = giá trị trong bảng sản phẩm seed; '— thiếu —' = bỏ khoá khỏi body; \"…\" = chuỗi JSON; số không ngoặc = số JSON; `\"\"` = chuỗi rỗng.",
+          "expected": "Nhận được phản hồi HTTP."
+        },
+        {
+          "action": "Ghi lại HTTP status và body JSON.",
+          "expected": "Khớp phần phản hồi trong cột Expected."
+        },
+        {
+          "action": "GET /api/cart (Bearer T) → SAU; so với TRƯỚC.",
+          "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, B0b)."
+        }
+      ],
+      "columns": [
+        "Token",
+        "Giỏ ban đầu",
+        "id",
+        "name",
+        "price",
+        "quantity"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR07-70",
+          "title": "Kiểm tra thêm qua API khi quantity bằng 0",
+          "layer": "API",
+          "inputs": {
+            "Token": "T",
+            "Giỏ ban đầu": "id 1 × 1",
+            "id": "5",
+            "name": "CSDL",
+            "price": "CSDL",
+            "quantity": "0"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có phần tử mới.",
+          "requirements": [
+            "FR-06.2",
+            "API-CART"
+          ],
+          "covers": [
+            "EC2",
+            "EC55",
+            "EC15",
+            "EC24",
+            "EC28",
+            "EC31",
+            "EC51"
+          ],
+          "ec_target": [
+            "EC2",
+            "EC51"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB-1",
+          "rationale": "Ngay dưới biên dưới LB = 1.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR07-71",
+          "title": "Kiểm tra thêm qua API khi quantity bằng 1",
+          "layer": "API",
+          "inputs": {
+            "Token": "T",
+            "Giỏ ban đầu": "—",
+            "id": "5",
+            "name": "CSDL",
+            "price": "CSDL",
+            "quantity": "1"
+          },
+          "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 1.",
+          "requirements": [
+            "FR-06.2",
+            "API-CART"
+          ],
+          "covers": [
+            "EC1",
+            "EC55",
+            "EC15",
+            "EC23",
+            "EC28",
+            "EC31",
+            "EC50"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC50"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "Biên dưới.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR07-72",
+          "title": "Kiểm tra thêm qua API khi quantity bằng 2",
+          "layer": "API",
+          "inputs": {
+            "Token": "T",
+            "Giỏ ban đầu": "—",
+            "id": "5",
+            "name": "CSDL",
+            "price": "CSDL",
+            "quantity": "2"
+          },
+          "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 2.",
+          "requirements": [
+            "FR-06.2",
+            "API-CART"
+          ],
+          "covers": [
+            "EC1",
+            "EC55",
+            "EC15",
+            "EC23",
+            "EC28",
+            "EC31",
+            "EC50"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC50"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB+1",
+          "rationale": "Ngay trên biên dưới.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Cùng giá trị quantity với TC-FR07-20 (khác sản phẩm): vừa là đại diện lớp ở bước 3 vừa là LB+1."
+        },
+        {
+          "id": "TC-FR07-73",
+          "title": "Kiểm tra thêm qua API khi quantity ở giá trị danh nghĩa 5",
+          "layer": "API",
+          "inputs": {
+            "Token": "T",
+            "Giỏ ban đầu": "—",
+            "id": "5",
+            "name": "CSDL",
+            "price": "CSDL",
+            "quantity": "5"
+          },
+          "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 5.",
+          "requirements": [
+            "FR-06.2",
+            "API-CART"
+          ],
+          "covers": [
+            "EC1",
+            "EC55",
+            "EC15",
+            "EC23",
+            "EC28",
+            "EC31",
+            "EC50"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC50"
+          ],
+          "technique": "BVA",
+          "bva_point": "NOM",
+          "rationale": "Giá trị danh nghĩa xa biên.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR07-74",
+          "title": "Kiểm tra thêm qua API khi quantity là giá trị lớn 1000",
+          "layer": "API",
+          "inputs": {
+            "Token": "T",
+            "Giỏ ban đầu": "—",
+            "id": "5",
+            "name": "CSDL",
+            "price": "CSDL",
+            "quantity": "1000"
+          },
+          "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 5, quantity 1000. (B1: hợp lệ).",
+          "requirements": [
+            "FR-06.2",
+            "API-CART"
+          ],
+          "covers": [
+            "EC1",
+            "EC55",
+            "EC15",
+            "EC23",
+            "EC28",
+            "EC31",
+            "EC50"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC50"
+          ],
+          "technique": "BVA",
+          "bva_point": "MAX_UI",
+          "rationale": "Cùng giá trị lớn với TC-FR07-64 để so UI ↔ API.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo B1: không có cận trên nên không có UB-1/UB/UB+1. Điểm này là 1 đại diện 'giá trị lớn' hợp lệ; gán nhãn MAX_UI vì là giá trị lớn nhất chọn kiểm, KHÔNG phải giới hạn của giao diện (ô input type=number không có max). Ở tầng API nhãn MAX_UI chỉ để ghép cặp với TC-FR07-64."
         }
       ]
     },

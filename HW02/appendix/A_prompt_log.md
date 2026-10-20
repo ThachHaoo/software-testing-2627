@@ -7437,8 +7437,10 @@ Báo cáo theo CLAUDE.md, kèm danh sách biến đã làm BVA và lý do bỏ b
 **Output:**
 ```
 Nhiệm vụ 1: làm sạch truy vết.
+
+Nhiệm vụ 2: BVA. Viết script bước 4.
 ```
-*File AI ghi/gửi trong lượt này:* `step3d_b.py`
+*File AI ghi/gửi trong lượt này:* `step3d_b.py`, `step4_b.py`
 
 **Xử lý:** [...]
 
