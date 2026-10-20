@@ -2150,7 +2150,7 @@
       "id": "TS-SV",
       "name": "SV bổ sung — tầng Mobile",
       "format": "matrix",
-      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c177a09), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit ff29af2), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
       "preconditions": [
         "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
         "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
@@ -2430,7 +2430,6 @@
             "FR-01.7c"
           ],
           "assumptions": [
-            "D8",
             "D16"
           ],
           "covers": [
@@ -2457,14 +2456,14 @@
           "technique": "Unicode / Type Confusion",
           "bva_point": "",
           "approach": "black-box",
-          "rationale": "Mobile Keyboard: Chữ số Full-width CJK (U+FF11) không thuộc tập ASCII `[0-9]`, bị tính là thiếu chữ số theo D8.",
+          "rationale": "Mobile Keyboard: Chữ số Full-width CJK (U+FF11) không thuộc tập ASCII `[0-9]`",
           "origin": "Human",
           "priority": "Medium",
           "status": "Not run",
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Căn cứ (SV): FR-01.7c, D8, D16"
+          "notes": "Căn cứ (SV): FR-01.7c, D16"
         },
         {
           "id": "TC-FR20-206",

@@ -18619,6 +18619,29 @@ và báo cáo theo khung cũ.
 Đã commit 5/7h. Giờ phần B: xem `merge_results.py` đọc định dạng nào để dựng file kết quả trống.
 
 Định dạng merge_results là JSON reporter của Playwright; em dựng file kết quả theo đúng khung đó. Giờ viết RUN.md, file kết quả trống và patch.
+
+Đã đồng bộ case SV (5/7h) và chuẩn bị xong bước 6a (6/7a). Em không chạy app.
+
+### Báo cáo cho phiên thảo luận
+- **Ghi đầu báo cáo, không chặn:** TC-205 đã hết lỗi ở tiêu đề và D16. Còn 1 chi tiết: cột Căn cứ vẫn ghi D8 và Lý do chọn input vẫn viết "theo D8", trong khi D8 chỉ nói về chữ hoa/thường. Expected vẫn có đủ căn cứ (FR-01.7c + D16), nên em coi phần A là sạch và làm tiếp B. Nếu chị/anh muốn sửa thì cần SV sửa `sv_cases.md`.
+- **A:**
+  - Commit `12b9cda` 5/7h: đồng bộ case SV.
+  - Câu "bấm đúng số lần" trong suite TS-SV đã sửa ở `c32baff`, lần này không đụng.
+  - Giữ 6 case SV: TC-FR20-200, 201, 203, 204, 205, 206. Đã bỏ 202, 207, 208 (giữ khoảng trống số). D16 chép đúng chữ SV.
+  - Tổng TC của D: 33 (AI 27, SV 6).
+  - Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
+- **B (`06f4d14` 6/7a):**
+  - 33 case cần chạy tay. TC-16 và TC-17 ghi "không chạy, đánh dấu Blocked nếu TC-94 Fail", và TC-94 được xếp chạy đầu tiên.
+  - Thứ tự: GUI trước, rồi nhóm bị từ chối, nhóm hợp lệ, cuối cùng TC-16/17.
+  - Tối đa 128 ảnh, ước tính khoảng 2 giờ.
+  - File:
+    - `HW02/D_FR20/RUN.md`
+    - File kết quả trống: `HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json`. Định dạng giống JSON của Playwright; em đã chạy thử `merge_results.py --dry-run` và gộp được cả 33 case.
+    - `HW02/env/mobile_api_url.patch`
+- **Harness chưa vá, chờ SV quyết** (đã ghi cuối `RUN.md`):
+  - `merge_results.py` đổi tên ảnh thành `TC-FR20-xx_manual-1.png` (gạch ngang), không phải `_manual_1` như quy ước.
+  - `merge_results.py` ghi `auto_status` bằng đúng verdict SV điền, trái với D14 ("auto_status để trống" khi chạy tay).
+- **Lưu ý nhỏ:** git báo `mobile_api_url.patch` sẽ bị đổi sang CRLF khi checkout, nên có thể phải apply bằng `git apply --ignore-whitespace`.
 ```
 *File AI ghi/gửi trong lượt này:* `d_run.py`
 
@@ -18626,4 +18649,58 @@ và báo cáo theo khung cũ.
 
 ---
 
-**Tổng:** 310 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 218 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #311 | 23:44 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: đồng bộ 5/7i → vá harness → kiểm dung lượng
+
+### A. Đồng bộ
+HEAD có commit SV 5/7i chỉ chạm sv_cases.md (+ prompt log). Không đạt → DỪNG.
+Đồng bộ TS-SV (giữ nguyên chữ) → render_md.py → check_domain.py → lint → prompt log → commit
+`HW02[D-FR20] 5/7j: đồng bộ case SV`.
+
+### B. Vá harness (commit riêng)
+merge_results.py:
+- giữ tên ảnh chạy tay đúng quy ước `TC-FRnn-xx_manual_<n>.png`, không đổi gạch dưới thành gạch ngang;
+- case chạy tay (theo D14): auto_status để trống/null; verdict SV điền chỉ ghi vào status.
+Kiểm hồi quy: chạy merge_results.py --dry-run cho A_FR01, B_FR07, C_FR15.
+- Kết quả phải giống hệt bản đã commit.
+- Có khác → DỪNG, không commit, báo case nào khác.
+Chạy lại --dry-run cho D (33 case).
+Commit `HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay`.
+
+### C. Dung lượng
+1. Đo dung lượng hiện tại:
+   - evidence A, B, C;
+   - ước tính zip nộp bài (theo cách hw-submission-audit đóng gói, nếu skill có ghi).
+   Tính phần dung lượng còn lại cho D.
+2. Nếu 128 ảnh × ~0,5 MB không vừa:
+   - viết tools/compress_manual.py (Pillow): resize + nén, giữ tên .png, chỉ đụng ảnh
+     `*_manual_*.png` của D;
+   - in kích thước trước/sau;
+   - ghi trong RUN.md: chạy script sau khi chép ảnh, trước khi merge;
+   - đề xuất có giảm số ảnh tối đa trong RUN.md không (liệt kê case nào chụp > 3 ảnh, không tự giảm).
+   Thêm dòng Audit "evidence chạy tay D đã nén bằng tools/compress_manual.py".
+3. RUN.md mục môi trường: thêm `git apply --ignore-whitespace HW02/env/mobile_api_url.patch` + lý do CRLF.
+Có thay đổi → commit `HW02: vá harness – nén ảnh chạy tay D` (hoặc gộp vào commit B nếu chỉ sửa RUN.md).
+
+## Báo cáo (≤ 10 dòng)
+- Commit A, B, C.
+- Hồi quy A/B/C: giống/khác.
+- Dung lượng hiện tại, phần còn lại cho D, kết quả nén thử nếu có (1 ảnh mẫu bất kỳ).
+- Đề xuất số ảnh (nếu có).
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 311 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 219 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

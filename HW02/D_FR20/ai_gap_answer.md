@@ -45,7 +45,6 @@
 
 ## Rà nhất quán case SV (chỉ liệt kê, không sửa)
 
-Cập nhật ở 5/7h theo `sv_cases.md` commit `c177a09`. SV đã bỏ TC-FR20-202 (5/7c) và TC-FR20-207, 208 (5/7e); giữ khoảng trống số. D16 SV sửa căn cứ ở 5/7g.
+Cập nhật ở 5/7j theo `sv_cases.md` commit `ff29af2`. SV đã bỏ TC-FR20-202 (5/7c) và TC-FR20-207, 208 (5/7e); giữ khoảng trống số. D16 SV sửa căn cứ ở 5/7g; TC-205 bỏ dẫn D8 ở 5/7i.
 
-- TC-FR20-200, 201, 203, 204, 206: không thấy lỗi nhất quán.
-- TC-FR20-205: tiêu đề và D16 hết lỗi. Ghi chú (không ảnh hưởng Expected): cột Căn cứ vẫn có D8 và Lý do chọn input ghi "bị tính là thiếu chữ số theo D8"; D8 chỉ nói chữ hoa/thường. Căn cứ của Expected đủ nhờ FR-01.7c + D16.
+- TC-FR20-200, 201, 203, 204, 205, 206: không thấy lỗi nhất quán.
