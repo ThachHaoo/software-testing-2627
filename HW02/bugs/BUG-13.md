@@ -33,7 +33,7 @@ Theo **FR-22.2**, trường Email phải sử dụng thuộc tính `type="email"
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-91_ui.png`
+- Ảnh tiêu biểu: `TC-FR01-91_ui.png`
 - TC-FR01-91: `HW02/A_FR01/evidence/TC-FR01-91_ui.png`
 
 ## TC liên quan
@@ -50,6 +50,7 @@ Theo **FR-22.2**, trường Email phải sử dụng thuộc tính `type="email"
 ### Dữ kiện (AI chép)
 
 - Đoạn code trích nguyên văn (xem `_groups_A_FR01.md`, nhóm G14): `frontend-web/src/pages/Register.jsx dòng 45–49`
+- Issue cùng loại ở trang khác: #4 — [BUG-FR02-04] Ô email form đăng nhập Web là `type="text"`, không kiểm tra định dạng
 
 ### Nhận định
 
@@ -62,6 +63,8 @@ Theo **FR-22.2**, trường Email phải sử dụng thuộc tính `type="email"
 + Người dùng trên điện thoại/máy tính bảng khi bấm vào ô Email sẽ không hiện bàn phím ảo chuyên dụng có sẵn ký tự @ và domain .com, làm giảm trải nghiệm người dùng (UX) (chưa kiểm chứng).
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/29
 
 ---
 

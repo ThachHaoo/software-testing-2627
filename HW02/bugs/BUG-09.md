@@ -37,7 +37,7 @@ Backend văng ra lỗi **HTTP 413** kèm trả về nguyên cục trang web HTML
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-212_api.png`
+- Ảnh tiêu biểu: `TC-FR01-212_api.png`
 - TC-FR01-212: `HW02/A_FR01/evidence/TC-FR01-212_req.json`, `HW02/A_FR01/evidence/TC-FR01-212_res.json`, `HW02/A_FR01/evidence/TC-FR01-212_api.png`
 
 ## TC liên quan
@@ -66,6 +66,8 @@ Backend văng ra lỗi **HTTP 413** kèm trả về nguyên cục trang web HTML
 - Tuy nhiên trong server.js, dòng 12 dùng app.use(bodyParser.json()) nguyên bản không hề cấu hình limit độ lớn payload. Thư viện body-parser mặc định sẽ chặn và văng lỗi 413 nếu body JSON vượt quá ~100 KB.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/25
 
 ---
 

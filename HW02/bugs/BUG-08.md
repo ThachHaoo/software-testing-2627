@@ -34,7 +34,7 @@ API trả về **HTTP 200** `{"message":"User registered successfully","id": 5}`
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-30_api.png`
+- Ảnh tiêu biểu: `TC-FR01-30_api.png`
 - TC-FR01-30: `HW02/A_FR01/evidence/TC-FR01-30_req.json`, `HW02/A_FR01/evidence/TC-FR01-30_res.json`, `HW02/A_FR01/evidence/TC-FR01-30_api.png`
 
 ## TC liên quan
@@ -60,6 +60,8 @@ API trả về **HTTP 200** `{"message":"User registered successfully","id": 5}`
 - Tạo kẽ hở cho phép đăng ký trùng email ảo (một email có khoảng trắng và một email không có khoảng trắng được coi là 2 bản ghi khác nhau) (xem TC-FR01-42, BUG-05).
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/24
 
 ---
 

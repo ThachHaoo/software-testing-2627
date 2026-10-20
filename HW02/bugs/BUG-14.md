@@ -33,7 +33,7 @@ Form Đăng ký trên giao diện hiện tại chỉ có đúng 3 ô nhập li�
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-94_ui.png`
+- Ảnh tiêu biểu: `TC-FR01-94_ui.png`
 - TC-FR01-94: `HW02/A_FR01/evidence/TC-FR01-94_ui.png`
 
 ## TC liên quan
@@ -64,6 +64,8 @@ Form Đăng ký trên giao diện hiện tại chỉ có đúng 3 ô nhập li�
 + Người dùng khi gõ nhầm mật khẩu ở ô Mật khẩu chính sẽ không có bước xác nhận lại, dẫn tới việc tạo tài khoản với mật khẩu không đúng ý muốn và gặp khó khăn khi đăng nhập sau này.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/30
 
 ---
 

@@ -36,7 +36,7 @@ API phớt lờ hết, vẫn báo **HTTP 200** `{"message":"User registered succ
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-41_api.png`, `TC-FR01-206_api.png`
+- Ảnh tiêu biểu: `TC-FR01-41_api.png`, `TC-FR01-206_api.png`
 - TC-FR01-41: `HW02/A_FR01/evidence/TC-FR01-41_req.json`, `HW02/A_FR01/evidence/TC-FR01-41_res.json`, `HW02/A_FR01/evidence/TC-FR01-41_api.png`
 - TC-FR01-42: `HW02/A_FR01/evidence/TC-FR01-42_req.json`, `HW02/A_FR01/evidence/TC-FR01-42_res.json`, `HW02/A_FR01/evidence/TC-FR01-42_api.png`
 - TC-FR01-206: `HW02/A_FR01/evidence/TC-FR01-206_req.json`, `HW02/A_FR01/evidence/TC-FR01-206_res.json`, `HW02/A_FR01/evidence/TC-FR01-206_api.png`
@@ -66,6 +66,8 @@ API phớt lờ hết, vẫn báo **HTTP 200** `{"message":"User registered succ
 - Trên Backend code: server.js không thèm chạy lệnh SELECT kiểm tra xem email có tồn tại chưa, mà cứ thế phang thẳng lệnh INSERT INTO.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/21
 
 ---
 

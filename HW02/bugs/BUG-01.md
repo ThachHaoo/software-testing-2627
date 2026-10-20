@@ -33,7 +33,7 @@ Hộp lỗi "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồ
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-01_ui.png`, `TC-FR01-64_ui.png`
+- Ảnh tiêu biểu: `TC-FR01-01_ui.png`, `TC-FR01-64_ui.png`
 
 <details>
 <summary>Ảnh từng TC (14)</summary>
@@ -90,6 +90,8 @@ Hộp lỗi "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồ
 Lỗi ở kiểm tra phía client (0 POST). Ngược lại, `Abcd 1234` (không có ký tự đặc biệt) lại được chấp nhận (TC-202) (xem BUG-02). 22 case Blocked vì cần mật khẩu hợp lệ để qua bước này. 
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/17
 
 ---
 

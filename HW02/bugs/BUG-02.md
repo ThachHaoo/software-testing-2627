@@ -33,7 +33,7 @@ Form chấp nhận mật khẩu, chuyển hướng sang /login, gửi `POST /api
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-202_ui.png`
+- Ảnh tiêu biểu: `TC-FR01-202_ui.png`
 - TC-FR01-202: `HW02/A_FR01/evidence/TC-FR01-202_ui.png`
 
 ## TC liên quan
@@ -59,6 +59,8 @@ Form chấp nhận mật khẩu, chuyển hướng sang /login, gửi `POST /api
 - Lỗi này ngược hoàn toàn với BUG-01: mật khẩu thực sự hợp lệ theo SRS như Abcd1234! (dùng !) thì lại bị Regex chặn và báo lỗi "Mật khẩu quá yếu!", trong khi mật khẩu vi phạm SRS như Abcd 1234 (dùng khoảng trắng) thì lại lọt qua.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/18
 
 ---
 

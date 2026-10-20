@@ -35,7 +35,7 @@ Server backend, trả về mã **HTTP 500 Internal Server Error** cùng nguyên 
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-214_api.png` 
+- Ảnh tiêu biểu: `TC-FR01-214_api.png` 
 - TC-FR01-214: `HW02/A_FR01/evidence/TC-FR01-214_req.json`, `HW02/A_FR01/evidence/TC-FR01-214_res.json`, `HW02/A_FR01/evidence/TC-FR01-214_api.png`
 
 ## TC liên quan
@@ -66,6 +66,8 @@ Có lẽ thiếu do middleware catch lỗi hoặc validate Content-Type:
 - Vì req.body bị undefined nên JS quăng ra TypeError và do không có try-catch bọc lại nên Express tự động trả về trang lỗi HTML 500 mặc định.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/26
 
 ---
 

@@ -33,7 +33,7 @@ Cả 3 nhãn trường bắt buộc trên form đăng ký hoàn toàn trơn rụ
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-90_ui.png`
+- Ảnh tiêu biểu: `TC-FR01-90_ui.png`
 - TC-FR01-90: `HW02/A_FR01/evidence/TC-FR01-90_ui.png`
 
 ## TC liên quan
@@ -50,6 +50,7 @@ Cả 3 nhãn trường bắt buộc trên form đăng ký hoàn toàn trơn rụ
 ### Dữ kiện (AI chép)
 
 - Đoạn code trích nguyên văn (xem `_groups_A_FR01.md`, nhóm G13): `frontend-web/src/pages/Register.jsx dòng 35–37`
+- Issue cùng loại ở trang khác: #7 — [BUG-FR02-07] Trường bắt buộc của form đăng nhập không có ký hiệu `*`
 
 ### Nhận định
 
@@ -58,6 +59,8 @@ Cả 3 nhãn trường bắt buộc trên form đăng ký hoàn toàn trơn rụ
 - Lỗi này tuy nhỏ (GUI bug) không gây sập app nhưng vi phạm trực tiếp yêu cầu thiết kế giao diện FR-22.1 và làm người dùng khó nhận biết trường nào bắt buộc phải điền.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/28
 
 ---
 

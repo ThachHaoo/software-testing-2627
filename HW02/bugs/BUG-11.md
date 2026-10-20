@@ -38,7 +38,7 @@ Theo **SEC-04** (README.md dòng 281), mọi dữ liệu do người dùng nhậ
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-216_manual_alert.png`, `TC-FR01-216_manual_header.png`
+- Ảnh tiêu biểu: `TC-FR01-216_manual_alert.png`, `TC-FR01-216_manual_header.png`
 - TC-FR01-216: `HW02/A_FR01/evidence/TC-FR01-216_ui.png`, `HW02/A_FR01/evidence/TC-FR01-216_manual_alert.png`, `HW02/A_FR01/evidence/TC-FR01-216_manual_header.png`, `HW02/A_FR01/evidence/TC-FR01-216_manual_profile.png`, `HW02/A_FR01/evidence/TC-FR01-216_manual_admin.png`
 
 ## TC liên quan
@@ -56,6 +56,7 @@ Theo **SEC-04** (README.md dòng 281), mọi dữ liệu do người dùng nhậ
 
 - Đoạn code trích nguyên văn (xem `_groups_A_FR01.md`, nhóm G12): `frontend-web/src/App.jsx dòng 26–28`
 - TC-FR01-216: lần chạy tự động Blocked theo A20 (auto_status Blocked, ảnh `TC-FR01-216_ui.png`); verdict Fail do SV kiểm tay qua API + web :5173 (notes TC-216, ảnh `_manual_*.png`).
+- Issue cùng loại ở trang khác: #16 — [BUG-FR08-07] Địa chỉ giao hàng chứa HTML được thực thi ở Web Admin (stored XSS)
 
 ### Nhận định
 
@@ -65,6 +66,8 @@ Code React mặc định đã tự sanitize phòng chống XSS rồi, nhưng dev
 - Hậu quả: Bất kỳ ai chèn mã JS/HTML vào trường Họ Tên lúc đăng ký thì mỗi lần người dùng đó đăng nhập vào web là đoạn mã độc sẽ tự động thực thi trong trình duyệt, vô cùng nguy hiểm.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/27
 
 ---
 

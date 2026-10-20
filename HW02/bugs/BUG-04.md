@@ -43,7 +43,7 @@ API đều trả về **HTTP 200** `{"message":"User registered successfully","i
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-34_api.png`, `TC-FR01-35_api.png`
+- Ảnh tiêu biểu: `TC-FR01-34_api.png`, `TC-FR01-35_api.png`
 - TC-FR01-34: `HW02/A_FR01/evidence/TC-FR01-34_req.json`, `HW02/A_FR01/evidence/TC-FR01-34_res.json`, `HW02/A_FR01/evidence/TC-FR01-34_api.png`
 - TC-FR01-35: `HW02/A_FR01/evidence/TC-FR01-35_req.json`, `HW02/A_FR01/evidence/TC-FR01-35_res.json`, `HW02/A_FR01/evidence/TC-FR01-35_api.png`
 - TC-FR01-36: `HW02/A_FR01/evidence/TC-FR01-36_req.json`, `HW02/A_FR01/evidence/TC-FR01-36_res.json`, `HW02/A_FR01/evidence/TC-FR01-36_api.png`
@@ -92,6 +92,8 @@ API đều trả về **HTTP 200** `{"message":"User registered successfully","i
 - Việc cho phép tạo tài khoản với email rỗng hoặc sai định dạng khiến dữ liệu CSDL bị rác, đồng thời người dùng sẽ không thể dùng tài khoản này để đăng nhập lại sau đó (chưa kiểm chứng).
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/20
 
 ---
 

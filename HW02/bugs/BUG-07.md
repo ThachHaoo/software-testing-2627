@@ -44,7 +44,7 @@ API phớt lờ toàn bộ luật mật khẩu, trả về **HTTP 200** `{"messa
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-43_api.png`, `TC-FR01-44_api.png`
+- Ảnh tiêu biểu: `TC-FR01-43_api.png`, `TC-FR01-44_api.png`
 - TC-FR01-43: `HW02/A_FR01/evidence/TC-FR01-43_req.json`, `HW02/A_FR01/evidence/TC-FR01-43_res.json`, `HW02/A_FR01/evidence/TC-FR01-43_api.png`
 - TC-FR01-44: `HW02/A_FR01/evidence/TC-FR01-44_req.json`, `HW02/A_FR01/evidence/TC-FR01-44_res.json`, `HW02/A_FR01/evidence/TC-FR01-44_api.png`
 - TC-FR01-45: `HW02/A_FR01/evidence/TC-FR01-45_req.json`, `HW02/A_FR01/evidence/TC-FR01-45_res.json`, `HW02/A_FR01/evidence/TC-FR01-45_api.png`
@@ -96,6 +96,8 @@ API phớt lờ toàn bộ luật mật khẩu, trả về **HTTP 200** `{"messa
 - Mọi logic validate mật khẩu hiện tại chỉ nằm độc nhất ở Frontend (Register.jsx). Khi bị bypass UI, backend chấp nhận lưu mọi loại mật khẩu yếu, mật khẩu rỗng, thậm chí plaintext không đúng quy chuẩn vào CSDL. Điều này gây nguy cơ bảo mật nghiêm trọng cho toàn bộ hệ thống.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/23
 
 ---
 

@@ -34,7 +34,7 @@ Cả 2 request gửi đồng thời đều lọt qua ngon ơ, đều nhận về
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-209_api.png`
+- Ảnh tiêu biểu: `TC-FR01-209_api.png`
 - TC-FR01-209: `HW02/A_FR01/evidence/TC-FR01-209_req.json`, `HW02/A_FR01/evidence/TC-FR01-209_res.json`, `HW02/A_FR01/evidence/TC-FR01-209_api.png`
 
 ## TC liên quan
@@ -62,6 +62,8 @@ Cả 2 request gửi đồng thời đều lọt qua ngon ơ, đều nhận về
 - Không có Check-Then-Act hay Transaction: Kể cả backend sau này có viết thêm câu lệnh SELECT kiểm tra email trước khi INSERT, nếu không dùng Transaction/Lock DB hoặc UNIQUE constraint ở tầng database thì khi 2 request tới cùng thời điểm, cả 2 đều SELECT ra "chưa tồn tại" rồi cùng INSERT xuống.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/22
 
 ---
 

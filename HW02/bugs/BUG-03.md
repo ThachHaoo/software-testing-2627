@@ -38,7 +38,7 @@ API đều trả lời **HTTP 200** `{"message":"User registered successfully","
 
 ## Bằng chứng
 
-- Ảnh tiêu biểu đính kèm GitHub Issue: `TC-FR01-32_api.png`, `TC-FR01-52_api.png`
+- Ảnh tiêu biểu: `TC-FR01-32_api.png`, `TC-FR01-52_api.png`
 - TC-FR01-32: `HW02/A_FR01/evidence/TC-FR01-32_req.json`, `HW02/A_FR01/evidence/TC-FR01-32_res.json`, `HW02/A_FR01/evidence/TC-FR01-32_api.png`
 - TC-FR01-33: `HW02/A_FR01/evidence/TC-FR01-33_req.json`, `HW02/A_FR01/evidence/TC-FR01-33_res.json`, `HW02/A_FR01/evidence/TC-FR01-33_api.png`
 - TC-FR01-52: `HW02/A_FR01/evidence/TC-FR01-52_req.json`, `HW02/A_FR01/evidence/TC-FR01-52_res.json`, `HW02/A_FR01/evidence/TC-FR01-52_api.png`
@@ -71,6 +71,8 @@ API đều trả lời **HTTP 200** `{"message":"User registered successfully","
 - Vì backend không validate, nếu người dùng bỏ qua giao diện Frontend và gọi trực tiếp API (qua Postman, curl hay script), hệ thống sẽ vô tư tạo các tài khoản rác với Họ Tên bị trống hoặc null trong CSDL.
 
 ## Link GitHub Issue
+
+https://github.com/tkob-team/eshop-sut/issues/19
 
 ---
 
