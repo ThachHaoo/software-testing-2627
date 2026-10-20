@@ -26,20 +26,20 @@
 
 1. Đăng nhập lấy token:
 ```powershell
-$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"test@eshop.com","password":"Test1234!"}'
 $token = $loginRes.token
-$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+$headers = @{ "Authorization" = "Bearer $token" }
 ```
 
 2. Gửi request POST /api/cart với quantity là số nguyên cực lớn 9007199254740993 (vượt 2^53 - 1):
 ```powershell
 $body = '{"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 9007199254740993}'
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body ([Text.Encoding]::UTF8.GetBytes($body))
 ```
 
 3. Kiểm tra dữ liệu giỏ hàng bằng GET /api/cart:
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+(Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:3000/api/cart" -Headers $headers).Content
 ```
 
 ## Expected (trích SRS)
@@ -95,6 +95,16 @@ Theo giả định B1 (không quy định cận trên cho số lượng): Hệ t
    295  });
   ```
 - Client dùng /api/cart: không tìm thấy trong `frontend-mobile`, `frontend-admin`, `frontend-web` (grep "api/cart", bỏ node_modules; SUT @ de0f48f, 2026-10-20). Không có client nào đọc giá/quantity từ GET /api/cart. Hai client gọi `/api/checkout` gửi `items`, `total_amount` lấy từ giỏ state phía client: `frontend-web/src/pages/Checkout.jsx` dòng 45–48 (`axios.post('http://localhost:3000/api/checkout', { items: cart, total_amount: finalAmount, …`), `frontend-mobile/App.js` dòng 384–392 (`` fetch(`${API_URL}/checkout`, … body: JSON.stringify({ items: cart.length > 1 ? cart.slice(0, -1) : cart, total_amount: finalAmount, … ``).
+- AI chạy kiểm bước tái hiện 2026-10-20: restart backend (`node server.js`) ngay trước khi chạy; chạy đúng các khối PowerShell ở mục "Các bước tái hiện" bằng Windows PowerShell 5.1.26100. Output nguyên văn:
+
+  ```text
+  message
+  -------
+  Added to cart
+  [{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":9007199254740992}]
+  ```
+- Output khớp mục Actual (quantity 9007199254740992).
+- Sửa bước tái hiện 2026-10-20: tài khoản `user@domain.com`/`Password123!` → `test@eshop.com`/`Test1234!`; `$headers` chỉ còn `Authorization`; mọi POST có `-ContentType` và `-Body ([Text.Encoding]::UTF8.GetBytes(...))` (Windows PowerShell 5.1 mã hoá chuỗi -Body theo ISO-8859-1); GET đổi sang `(Invoke-WebRequest -UseBasicParsing … ).Content`.
 
 ### Nhận định
 

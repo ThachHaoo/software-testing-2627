@@ -24,35 +24,34 @@
 
 1. Đăng nhập lấy token:
 ```powershell
-$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"test@eshop.com","password":"Test1234!"}'
 $token = $loginRes.token
-$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+$headers = @{ "Authorization" = "Bearer $token" }
 ```
 
 2. Tái hiện nhóm G18 (quantity không hợp lệ - âm, thập phân, thiếu, sai kiểu):
 ```powershell
 # Gửi quantity = -3
 $body1 = '{"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": -3}'
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body1
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body ([Text.Encoding]::UTF8.GetBytes($body1))
 ```
 
 3. Tái hiện nhóm G19 (id không hợp lệ - id 99999 không tồn tại, sai kiểu):
 ```powershell
 # Gửi id = 99999
 $body2 = '{"id": 99999, "name": "Không tồn tại", "price": 1000, "quantity": 1}'
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body2
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body ([Text.Encoding]::UTF8.GetBytes($body2))
 ```
 
 4. Tái hiện nhóm G21 (Content-Type: text/plain):
 ```powershell
-$headersText = @{ "Authorization" = "Bearer $token"; "Content-Type" = "text/plain" }
 $body3 = '{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 1}'
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headersText -Body $body3
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "text/plain" -Body ([Text.Encoding]::UTF8.GetBytes($body3))
 ```
 
 5.Kiểm tra kết quả giỏ hàng bằng GET /api/cart:
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+(Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:3000/api/cart" -Headers $headers).Content
 ```
 
 ## Expected (trích SRS)
@@ -194,11 +193,23 @@ Theo quy định validate dữ liệu hệ thống (FR-06.2) và các giả đ�
    295  });
   ```
 - Client dùng /api/cart: không tìm thấy trong `frontend-mobile`, `frontend-admin`, `frontend-web` (grep "api/cart", bỏ node_modules; SUT @ de0f48f, 2026-10-20). Không có client nào đọc giá/quantity từ GET /api/cart. Hai client gọi `/api/checkout` gửi `items`, `total_amount` lấy từ giỏ state phía client: `frontend-web/src/pages/Checkout.jsx` dòng 45–48 (`axios.post('http://localhost:3000/api/checkout', { items: cart, total_amount: finalAmount, …`), `frontend-mobile/App.js` dòng 384–392 (`` fetch(`${API_URL}/checkout`, … body: JSON.stringify({ items: cart.length > 1 ? cart.slice(0, -1) : cart, total_amount: finalAmount, … ``).
+- AI chạy kiểm bước tái hiện 2026-10-20: restart backend (`node server.js`) ngay trước khi chạy; chạy đúng các khối PowerShell ở mục "Các bước tái hiện" bằng Windows PowerShell 5.1.26100. Output nguyên văn:
+
+  ```text
+  message
+  -------
+  Added to cart
+  Added to cart
+  Added to cart
+  [{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":-3},{"id":99999,"name":"Không tồn tại","price":1000,"quantity":1},null]
+  ```
+- Output khớp mục Actual (phần tử quantity -3, phần tử id 99999, phần tử `null`).
+- Sửa bước tái hiện 2026-10-20: tài khoản `user@domain.com`/`Password123!` → `test@eshop.com`/`Test1234!`; `$headers` chỉ còn `Authorization`; mọi POST có `-ContentType` và `-Body ([Text.Encoding]::UTF8.GetBytes(...))` (Windows PowerShell 5.1 mã hoá chuỗi -Body theo ISO-8859-1); GET đổi sang `(Invoke-WebRequest -UseBasicParsing … ).Content`. Bước 4 (G21): bỏ `$headersText`, đặt `-ContentType "text/plain"` ở tham số (không trong `-Headers`). Khối code mục Nhận định: ```jsx → ```js.
 
 ### Nhận định
 
 - Nguyên nhân: Trong backend/server.js (dòng 290–295), route POST /api/cart hoàn toàn không có bất kỳ dòng code validation nào đối với req.body:
-```jsx
+```js
 app.post("/api/cart", authenticateToken, (req, res) => {
   const userId = req.user.id;
   if (!userCarts[userId]) userCarts[userId] = [];

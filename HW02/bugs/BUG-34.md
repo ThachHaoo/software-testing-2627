@@ -1,7 +1,7 @@
 # BUG-34
 
 - **ID:** BUG-34
-- **Tiêu đề:** Endpoint POST /api/cart khi nhận JSON không hợp lệ (Infinity) trả về trang lỗi HTML 400 kèm stack trace văng ra ngoài thay vì JSON chuẩn chứa trường
+- **Tiêu đề:** Endpoint POST /api/cart khi nhận JSON không hợp lệ (Infinity) trả về trang lỗi HTML 400 kèm stack trace văng ra ngoài thay vì JSON chuẩn chứa trường error
 - **Severity:** Low
 - **Priority:** Low
 
@@ -24,16 +24,26 @@
 
 1. Đăng nhập lấy token:
 ```powershell
-$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"test@eshop.com","password":"Test1234!"}'
 $token = $loginRes.token
-$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+$headers = @{ "Authorization" = "Bearer $token" }
 ```
 
 2. Gửi request POST /api/cart chứa giá trị quantity: Infinity trong chuỗi body JSON thô (JSON không hợp lệ vì chuẩn JSON không hỗ trợ Infinity):
 ```powershell
 # Gửi chuỗi thô không chuẩn JSON
 $bodyRaw = '{"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": Infinity}'
-$response = Invoke-WebRequest -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $bodyRaw
+try {
+  $response = Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body ([Text.Encoding]::UTF8.GetBytes($bodyRaw))
+  "StatusCode: $($response.StatusCode)"; "ContentType: $($response.Headers['Content-Type'])"; $response.Content
+} catch {
+  $r = $_.Exception.Response
+  "StatusCode: $([int]$r.StatusCode)"
+  "ContentType: $($r.ContentType)"
+  $reader = New-Object System.IO.StreamReader($r.GetResponseStream())
+  $reader.BaseStream.Position = 0; $reader.DiscardBufferedData()   # PS 5.1 đã đọc stream khi ném lỗi
+  $reader.ReadToEnd()
+}
 ```
 
 3. Quan sát Content-Type và body trả về từ phản hồi của server.
@@ -81,6 +91,25 @@ Theo quy định thiết kế REST API (kèm giả định B17): Khi client gử
     12  app.use(bodyParser.json());
   ```
 - Client dùng /api/cart: không tìm thấy trong `frontend-mobile`, `frontend-admin`, `frontend-web` (grep "api/cart", bỏ node_modules; SUT @ de0f48f, 2026-10-20). Không có client nào đọc giá/quantity từ GET /api/cart. Hai client gọi `/api/checkout` gửi `items`, `total_amount` lấy từ giỏ state phía client: `frontend-web/src/pages/Checkout.jsx` dòng 45–48 (`axios.post('http://localhost:3000/api/checkout', { items: cart, total_amount: finalAmount, …`), `frontend-mobile/App.js` dòng 384–392 (`` fetch(`${API_URL}/checkout`, … body: JSON.stringify({ items: cart.length > 1 ? cart.slice(0, -1) : cart, total_amount: finalAmount, … ``).
+- AI chạy kiểm bước tái hiện 2026-10-20: restart backend (`node server.js`) ngay trước khi chạy; chạy đúng các khối PowerShell ở mục "Các bước tái hiện" bằng Windows PowerShell 5.1.26100. Output nguyên văn:
+
+  ```text
+  StatusCode: 400
+  ContentType: text/html; charset=utf-8
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <title>Error</title>
+  </head>
+  <body>
+  <pre>SyntaxError: Unexpected token &#39;I&#39;, ...&quot;uantity&quot;: Infinity}&quot; is not valid JSON<br> &nbsp; &nbsp;at JSON.parse (&lt;anonymous&gt;)<br> &nbsp; &nbsp;at parse (<SUT_DIR>\backend\node_modules\body-parser\lib\types\json.js:72:19)<br> &nbsp; &nbsp;at <SUT_DIR>\backend\node_modules\body-parser\lib\read.js:162:18<br> &nbsp; &nbsp;at AsyncResource.runInAsyncScope (node:async_hooks:227:14)<br> &nbsp; &nbsp;at invokeCallback (<SUT_DIR>\backend\node_modules\raw-body\index.js:238:16)<br> &nbsp; &nbsp;at done (<SUT_DIR>\backend\node_modules\raw-body\index.js:227:7)<br> &nbsp; &nbsp;at IncomingMessage.onEnd (<SUT_DIR>\backend\node_modules\raw-body\index.js:287:7)<br> &nbsp; &nbsp;at IncomingMessage.emit (node:events:509:28)<br> &nbsp; &nbsp;at endReadableNT (node:internal/streams/readable:1729:12)<br> &nbsp; &nbsp;at process.processTicksAndRejections (node:internal/process/task_queues:90:21)</pre>
+  </body>
+  </html>
+  ```
+- Output khớp mục Actual (HTTP 400, body trang HTML, `SyntaxError: Unexpected token 'I'`). Bước tái hiện không có GET nên phần "giỏ hàng không bị thay đổi" của Actual không được kiểm trong lượt này.
+- Đường dẫn tuyệt đối trong output thay bằng `<SUT_DIR>` (giống `HW02/bugs/_issue_redacted/BUG-34.txt`).
+- Sửa bước tái hiện 2026-10-20: tài khoản `user@domain.com`/`Password123!` → `test@eshop.com`/`Test1234!`; `$headers` chỉ còn `Authorization`; mọi POST có `-ContentType` và `-Body ([Text.Encoding]::UTF8.GetBytes(...))` (Windows PowerShell 5.1 mã hoá chuỗi -Body theo ISO-8859-1); GET đổi sang `(Invoke-WebRequest -UseBasicParsing … ).Content`. Bước 2: bọc `try/catch`, thêm `-UseBasicParsing`; trong `catch` in StatusCode, ContentType và body đọc từ `$_.Exception.Response.GetResponseStream()` (thêm `BaseStream.Position = 0; DiscardBufferedData()` vì lần chạy đầu đọc ra rỗng). Tiêu đề: thêm "error" vào cuối (SV duyệt; thay đổi đã có sẵn trong working tree trước khi AI sửa).
 
 ### Nhận định
 

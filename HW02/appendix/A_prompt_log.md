@@ -8768,12 +8768,72 @@ Commit "HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart". Dừng, báo cá
 ```
 
 **Output:**
+````
+Đoạn trích mobile có backtick lồng làm hỏng inline code. Sửa bằng dấu `` `` `` rồi amend commit vừa tạo.
+
+Không có client nào gọi `/api/cart`. Em đã ghi kết quả này vào phần Dữ kiện của BUG-30…34, commit `e4ef048`. Commit đầu bị lỗi hiển thị do dấu backtick lồng trong đoạn trích, em đã sửa rồi amend (chưa push).
+
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – thu dữ kiện client dùng /api/cart cho BUG-30…34 (chỉ đọc code)
+- File đã sửa: HW02/bugs/BUG-30…34.md (mỗi file thêm 1 dòng "Client dùng /api/cart: …" cuối mục Dữ kiện); A_prompt_log.md
+- Kết quả kiểm tra: test: không chạy
+  · grep "api/cart" (bỏ node_modules) trong frontend-mobile, frontend-admin, frontend-web: 0 kết quả
+  · Grep rộng hơn (fetch/axios kèm "cart", "/cart"): chỉ có điều hướng giao diện (App.js:435, 978 – setView("cart"); route /cart của web), không có lời gọi API giỏ
+  · SUT chỉ có 3 thư mục client trên, không có client nào khác
+- Commit: e4ef048 HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart
+- Mục 2: không có client nào đọc giá/quantity từ GET /api/cart → không có đoạn để trích theo đúng câu hỏi
+  · Ghi thêm dữ kiện liên quan: cả hai client gọi /api/checkout đều gửi items + total_amount lấy từ giỏ state phía client
+    - frontend-web/src/pages/Checkout.jsx dòng 45–48 (`items: cart`)
+    - frontend-mobile/App.js dòng 384–392 (`items: cart.length > 1 ? cart.slice(0, -1) : cart`)
+    - Đã trích nguyên văn, không kết luận tác động
+- Bất thường:
+  · Working tree của SUT (../eshop-sut) có thay đổi chưa commit: backend/database.sqlite (M), frontend-mobile/App.js (M – có thể là bản vá API_URL theo CLAUDE.md), và các file chưa theo dõi actual_results.md, reset_db.ps1, run_sv_cases.ps1
+  · Em không tạo và không sửa các file này; SUT đang ghi @ de0f48f nên SV nên kiểm lại
+- Cần quyết định: không có
 ```
+````
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 144 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 141 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #145 | 15:31 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+BUG-32, 33, 34 – sửa bước tái hiện để chạy được (sau commit SV "7/7b: SV viết
+BUG-32–34"; chưa có → dừng). Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-32–34".
+Chỉ sửa lệnh/bước + dữ kiện; không đụng câu SV ngoài các mục ghi rõ dưới đây.
+
+1. Bước đăng nhập + $headers + GET: sửa y như BUG-30/31 (test@eshop.com/Test1234!;
+   $headers chỉ Authorization; GET = (Invoke-WebRequest … -UseBasicParsing).Content).
+2. Mọi POST có body: -ContentType "application/json" và
+   -Body ([Text.Encoding]::UTF8.GetBytes($body)) (PS 5.1 mã hoá chuỗi theo ISO-8859-1).
+3. BUG-32 bước 4: -ContentType "text/plain" (không đặt trong -Headers); body gửi
+   bằng UTF8 bytes như mục 2.
+4. BUG-34 bước 2: bọc try/catch; trong catch in StatusCode, ContentType và body đọc
+   từ $_.Exception.Response.GetResponseStream(); thêm -UseBasicParsing.
+5. BUG-34 tiêu đề: khôi phục chữ bị cắt — thêm "error" vào cuối (SV đã duyệt việc
+   này); không đổi chữ khác.
+6. Restart backend trước MỖI bug, chạy thật các lệnh đã sửa trên Windows PowerShell
+   5.1, dán output vào Dữ kiện ("AI chạy kiểm bước tái hiện 2026-10-20"). Output
+   không khớp Actual → báo, không sửa Actual. Chạy xong restart backend lần nữa.
+7. Khối code Nhận định BUG-32: ```jsx → ```js.
+Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6).
+````
+
+**Output:**
+```
+Mục 5 (thêm "error" vào tiêu đề BUG-34) đã có sẵn trong working tree, chưa commit. Em giữ nguyên thay đổi đó. Giờ xem Actual của 3 bug để đối chiếu.
+
+Output của cả 3 bug khớp Actual. Ghi output vào Dữ kiện; đường dẫn máy trong BUG-34 thay bằng `<SUT_DIR>`.
+```
+*File AI ghi/gửi trong lượt này:* `fix7c4.py`, `facts7c4.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 145 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 142 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
