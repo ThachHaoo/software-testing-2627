@@ -60,8 +60,16 @@ SKIP_PREFIXES = (
     "Base directory for this skill",                     # nội dung skill được nạp
     "The files from earlier in this conversation",       # thông báo hệ thống giao file
     "Caveat: The messages below were generated",
-    "<command-name>", "<local-command-stdout>",
+    "<command-name>", "<local-command-stdout>",          # lệnh cục bộ (/add-dir, /compact…): không gửi cho AI
+    "This session is being continued from a previous conversation",  # tóm tắt do hệ thống nén ngữ cảnh tạo
 )
+NO_MODEL = "Claude (không rõ model)"
+# skill/slash command gửi cho AI: <command-message>x</command-message><command-name>/x</command-name><command-args>y</command-args>
+CMD_RE = re.compile(r"<command-message>.*?</command-message>\s*<command-name>(?P<name>[^<]*)</command-name>"
+                    r"\s*(?:<command-args>(?P<args>.*?)</command-args>)?", re.S)
+PASTE_TAG = re.compile(r"</?pasted_content\b[^>]*>")
+# lệnh dựng sẵn của Claude Code chạy cục bộ, không phải prompt gửi cho AI (dạng <command-message> cũng có)
+LOCAL_CMD = re.compile(r"^/(compact|clear|add-dir|model|config|cost|help|status|memory|resume|exit|login|logout|context|skills|fast)\b")
 
 
 def model_label(model_id: str) -> str:
@@ -91,12 +99,14 @@ def text_of(content):
 
 
 def clean_prompt(raw: str):
-    """Bỏ khối hệ thống; tách tên file đính kèm."""
+    """Bỏ khối hệ thống; tách tên file đính kèm; slash command → "/x y"; bỏ thẻ pasted_content, giữ nội dung."""
     attachments = [m.group("name") for m in ATTACH_RE.finditer(raw) if m.group("name")]
     attachments += [m.group("name") for m in UPLOAD_RE.finditer(raw)]
     txt = SYS_BLOCK.sub("", raw)
     txt = ATTACH_RE.sub("", txt)
     txt = UPLOAD_RE.sub("", txt)
+    txt = CMD_RE.sub(lambda m: " ".join(x for x in (m.group("name").strip(), (m.group("args") or "").strip()) if x), txt)
+    txt = PASTE_TAG.sub("", txt)
     return txt.strip(), attachments
 
 
@@ -118,10 +128,12 @@ def load_session(path: Path):
             if d.get("isMeta") or raw.lstrip().startswith(SKIP_PREFIXES):
                 continue
             prompt, att = clean_prompt(raw)
+            if LOCAL_CMD.match(prompt):
+                continue
             if not prompt:  # tin nhắn chỉ để giao file: giữ tên file cho lượt kế tiếp
                 pending_attach += att
                 continue
-            cur = {"time": parse_ts(d["timestamp"]), "tool": None, "models": [], "prompt": prompt,
+            cur = {"time": parse_ts(d["timestamp"]), "tool": NO_MODEL, "models": [], "prompt": prompt,
                    "attachments": pending_attach + att, "output": [], "files": []}
             pending_attach = []
             turns.append(cur)
@@ -130,7 +142,7 @@ def load_session(path: Path):
             label = model_label(msg.get("model", ""))
             if msg.get("model") and not msg["model"].startswith("<") and label not in cur["models"]:
                 cur["models"].append(label)
-            cur["tool"] = " + ".join(cur["models"]) or "Claude"
+            cur["tool"] = " + ".join(cur["models"]) or NO_MODEL
             for b in msg.get("content", []):
                 if b.get("type") == "text" and b.get("text", "").strip():
                     cur["output"].append(b["text"].strip())
@@ -220,6 +232,15 @@ def main():
         turns.append({"time": dt.datetime.fromisoformat(e["time"]).replace(tzinfo=LOCAL_TZ),
                       "tool": e["tool"], "prompt": e["prompt"].strip(), "attachments": e.get("attachments", []),
                       "output": [e["output"].strip()], "files": []})
+    for t in turns:
+        t["tool"] = t.get("tool") or NO_MODEL
+    # phiên tiếp nối (resume/fork) chép lại lịch sử phiên cũ → bỏ lượt trùng giờ + prompt, giữ bản có nhiều output hơn
+    uniq = {}
+    for t in turns:
+        k = (t["time"], t["prompt"])
+        if k not in uniq or len("".join(t["output"])) > len("".join(uniq[k]["output"])):
+            uniq[k] = t
+    turns = list(uniq.values())
     turns.sort(key=lambda t: t["time"])
     if args.since:
         turns = [t for t in turns if t["time"].date() >= dt.date.fromisoformat(args.since)]
