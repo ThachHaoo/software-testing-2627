@@ -47,14 +47,14 @@
 
 ## Yêu cầu
 
-- **FR-06.2:** (B6 SV chốt) Trang chi tiết có ô nhập Số lượng, chỉ nhận số nguyên dương, tối thiểu là 1. — vi phạm ở: Số lượng nguyên dương hợp lệ nhưng giỏ không có dòng mới
+- **chức năng thêm của nút 'Thêm vào giỏ hàng'** — ngầm định trong FR-06, không có câu SRS riêng
 - **FR-06.3:** (B6 SV chốt) Nút Thêm vào giỏ hàng — sau khi bấm hiển thị phản hồi trực quan (toast notification hoặc badge cập nhật).
 - **FR-24.1:** (GUI, B16) Sau khi bấm "Thêm vào giỏ", phải có phản hồi trực quan (toast/badge).
 - **B21 (giả định):** B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual.
 - **B1 (giả định):** B1 (cận trên Số lượng) (SV chốt 2026-10-20): KHÔNG có cận trên. Lý do: SRS chỉ quy định ≥ 1 (FR-06). BVA phía trên dùng 1 đại diện 'giá trị lớn' hợp lệ thay cho UB/UB±1. — vi phạm ở: TC-64: 1000 không được thêm
 
 - Đạt trong cùng case: FR-07.5 (TC-02: link về trang chủ → URL '/')
-- Chưa đánh giá được trong cùng case: FR-07.1 (không có bảng để xét cột), FR-07.3 (TC-205: lần 1 không thêm nên chưa xét cộng dồn), FR-08.1 (không liên quan tới quan sát)
+- Chưa đánh giá được trong cùng case: FR-06.2 (Số lượng hợp lệ không được thêm nên chưa xét được ô nhận/chặn giá trị), FR-07.1 (không có bảng để xét cột), FR-07.3 (TC-205: lần 1 không thêm nên chưa xét cộng dồn), FR-08.1 (không liên quan tới quan sát)
 
 ## Ghi chú cô lập
 

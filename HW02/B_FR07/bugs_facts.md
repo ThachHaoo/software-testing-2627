@@ -4,13 +4,40 @@
 > Nhãn nhóm chỉ mô tả triệu chứng quan sát được (tầng + quan sát). Không có tên bug, severity, priority hay nguyên nhân.
 > Nguồn: `HW02/B_FR07/testcases.json` sau commit 6/7b (lượt chính thức = lượt 2). Đoạn code chỉ trích nguyên văn để SV đối chiếu, không bình luận.
 
+## Ánh xạ nhóm → khung bug (SV gộp ở 7/7a3)
+
+| Khung | Nhóm |
+|---|---|
+| BUG-15 | G1 |
+| BUG-16 | G2 |
+| BUG-17 | G3 |
+| BUG-18 | G4 |
+| BUG-19 | G5 |
+| BUG-20 | G6 |
+| BUG-21 | G7 |
+| BUG-22 | G8 |
+| BUG-23 | G9 |
+| BUG-24 | G10 |
+| BUG-25 | G11 |
+| BUG-26 | G12 |
+| BUG-27 | G13 |
+| BUG-28 | G14 |
+| BUG-29 | G15 |
+| BUG-30 | G16 |
+| BUG-31 | G17 |
+| BUG-32 | G18 + G19 + G21 |
+| BUG-33 | G22 |
+| BUG-34 | G20 |
+
+G20 đặt ở số cuối vì SV còn quyết định có trùng #25 hay không.
+
 **Trước khi tái hiện:** khởi động lại backend (`node server.js`); giỏ web là state React — không tải lại trang giữa các bước.
 
 ## Tổng hợp
 
 | Nhóm | Khung | Số Fail | Số Blocked ghi case gốc | Yêu cầu / giả định bị vi phạm |
 |---|---|---|---|---|
-| G1 | BUG-15 | 6 | 5 | FR-06.2 (Số lượng nguyên dương hợp lệ nhưng giỏ không có dòng mới), FR-06.3, FR-24.1, B21, B1 (TC-64: 1000 không được thêm) |
+| G1 | BUG-15 | 6 | 5 | chức năng thêm của nút 'Thêm vào giỏ hàng' (ngầm định trong FR-06, không có câu SRS riêng), FR-06.3, FR-24.1, B21, B1 (TC-64: 1000 không được thêm) |
 | G2 | BUG-16 | 1 | 0 | FR-24.1, B21 |
 | G3 | BUG-17 | 1 | 0 | FR-07.3 |
 | G4 | BUG-18 | 1 | 4 | FR-07.2 |
@@ -28,10 +55,10 @@
 | G16 | BUG-30 | 1 | 1 | FR-07.3 |
 | G17 | BUG-31 | 2 | 0 | FR-08.2, B8 |
 | G18 | BUG-32 | 8 | 0 | FR-06.2, B17, B18 (TC-34, TC-35) |
-| G19 | BUG-33 | 5 | 0 | B18, B17 |
+| G19 | BUG-32 | 5 | 0 | B18, B17 |
 | G20 | BUG-34 | 1 | 0 | B17 (4xx nhưng body là trang HTML, không có trường error) |
-| G21 | BUG-35 | 1 | 0 | API-CART, B17 |
-| G22 | BUG-36 | 1 | 0 | API-CART (GET trả quantity khác giá trị đã gửi) |
+| G21 | BUG-32 | 1 | 0 | API-CART, B17 |
+| G22 | BUG-33 | 1 | 0 | API-CART (GET trả quantity khác giá trị đã gửi) |
 
 Tổng Fail: 39 (đủ, mỗi Fail đúng một nhóm). Blocked: TC-FR07-06 và 65 có hai case gốc (TC-61, TC-90) nên ghi ở G1 và G4.
 
@@ -79,11 +106,12 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G1 — UI · trang chi tiết: bấm 'Thêm vào giỏ hàng' một lần với Số lượng hợp lệ → giỏ không có dòng mới; không có phản hồi nhìn thấy được trong 2 s
 
+- **Khung:** BUG-15
 - **TC Fail (6):** 02, 61, 62, 63, 64, 205
 - **Blocked ghi case gốc (5):** 03, 06, 65, 203, 206
-- **Yêu cầu / giả định bị vi phạm:** FR-06.2 (Số lượng nguyên dương hợp lệ nhưng giỏ không có dòng mới), FR-06.3, FR-24.1, B21, B1 (TC-64: 1000 không được thêm)
+- **Yêu cầu / giả định bị vi phạm:** chức năng thêm của nút 'Thêm vào giỏ hàng' (ngầm định trong FR-06, không có câu SRS riêng), FR-06.3, FR-24.1, B21, B1 (TC-64: 1000 không được thêm)
 - **Đạt trong cùng case:** FR-07.5 (TC-02: link về trang chủ → URL '/')
-- **Chưa đánh giá được trong cùng case:** FR-07.1 (không có bảng để xét cột), FR-07.3 (TC-205: lần 1 không thêm nên chưa xét cộng dồn), FR-08.1 (không liên quan tới quan sát)
+- **Chưa đánh giá được trong cùng case:** FR-06.2 (Số lượng hợp lệ không được thêm nên chưa xét được ô nhận/chặn giá trị), FR-07.1 (không có bảng để xét cột), FR-07.3 (TC-205: lần 1 không thêm nên chưa xét cộng dồn), FR-08.1 (không liên quan tới quan sát)
 - **Actual tiêu biểu (TC-FR07-02, nguyên văn):** đăng nhập cart02_1792476866046@domain.com: navbar có tên user; TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "2": value="2"; không có phản hồi nhìn thấy được trong 2 s; SAU: không có bảng (giỏ trống); URL sau khi bấm link về trang chủ=http://localhost:5173/
 - **Actual các case còn lại (rút gọn 200 ký tự):**
   - TC-FR07-61: đăng nhập cart61_1792476918630@domain.com: navbar có tên user; TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "1": value="1"; không có phản hồi nhìn thấy được trong 2 s; SAU: không có bảng (g
@@ -116,11 +144,13 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G2 — UI · trang chủ: bấm 'Thêm vào giỏ' trên thẻ sản phẩm → không có phản hồi nhìn thấy được trong 2 s (toast, badge, chữ/trạng thái nút, thông báo)
 
+- **Khung:** BUG-16
 - **TC Fail (1):** 99
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-24.1, B21
 - **Đạt trong cùng case:** —
-- **Chưa đánh giá được trong cùng case:** FR-06.3 (FR-06.3 nói nút 'Thêm vào giỏ hàng' ở trang chi tiết; TC-99 bấm nút ở trang chủ)
+- **Chưa đánh giá được trong cùng case:** —
+- **Không áp dụng:** FR-06.3 (nút ở trang chủ thuộc FR-24.1)
 - **Actual tiêu biểu (TC-FR07-99, nguyên văn):** không có phản hồi nhìn thấy được trong 2 s
 - **Evidence:** `HW02/B_FR07/evidence/TC-FR07-99_failed.png`, `HW02/B_FR07/evidence/TC-FR07-99_feedback.png`
 
@@ -145,6 +175,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G3 — UI · trang chủ: bấm 'Thêm vào giỏ' cùng sản phẩm 20 lần → trang giỏ có 20 dòng riêng, mỗi dòng Số lượng 1 (không cộng dồn)
 
+- **Khung:** BUG-17
 - **TC Fail (1):** 201
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-07.3
@@ -167,6 +198,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G4 — UI · trang giỏ: ô Số lượng của dòng không có nút '+' / '-'
 
+- **Khung:** BUG-18
 - **TC Fail (1):** 90
 - **Blocked ghi case gốc (4):** 05, 06, 07, 65
 - **Yêu cầu / giả định bị vi phạm:** FR-07.2
@@ -185,6 +217,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G5 — UI · trang giỏ: bấm nút xoá → không có dialog xác nhận, dòng bị xoá ngay
 
+- **Khung:** BUG-19
 - **TC Fail (1):** 08
 - **Blocked ghi case gốc (1):** 09
 - **Yêu cầu / giả định bị vi phạm:** FR-07.4, FR-24.2
@@ -219,6 +252,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G6 — UI · navbar: không có badge số lượng trên/cạnh link tới /cart khi giỏ có hàng
 
+- **Khung:** BUG-20
 - **TC Fail (1):** 04
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-23.2
@@ -237,6 +271,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G7 — UI · trang giỏ trống: không có hình minh hoạ/icon (img/svg)
 
+- **Khung:** BUG-21
 - **TC Fail (1):** 01
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-07.7 (thiếu hình minh hoạ; có thông báo 'Giỏ hàng của bạn đang trống'), FR-24.3 (thiếu icon/hình minh hoạ)
@@ -263,6 +298,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G8 — UI · trang giỏ: không có breadcrumb ở vùng nội dung chính
 
+- **Khung:** BUG-22
 - **TC Fail (1):** 91
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-23.4
@@ -283,6 +319,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G9 — UI · navbar: link tới /cart có kiểu hiển thị giống các link khác khi đang ở /cart (không highlight)
 
+- **Khung:** BUG-23
 - **TC Fail (1):** 92
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-23.1
@@ -304,6 +341,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G10 — UI · trang chủ: giá trên thẻ sản phẩm hiển thị đơn vị 'VND' thay vì '₫'
 
+- **Khung:** BUG-24
 - **TC Fail (1):** 93
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-21.3 (trang chủ dùng 'VND')
@@ -325,6 +363,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G11 — UI · trang chủ: ảnh sản phẩm có alt rỗng (5/5 ảnh)
 
+- **Khung:** BUG-25
 - **TC Fail (1):** 94
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-24.4 (trang chủ: 5/5 alt rỗng)
@@ -349,6 +388,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G12 — UI · trang giỏ: tiêu đề cột thứ 2 là 'Giá' (SRS: 'Đơn giá')
 
+- **Khung:** BUG-26
 - **TC Fail (1):** 95
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-07.1, B12
@@ -373,6 +413,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G13 — UI · trang giỏ: nút xoá trên dòng có chữ 'Xóa' (SRS: 'Xóa sản phẩm')
 
+- **Khung:** BUG-27
 - **TC Fail (1):** 96
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-07.4, B12
@@ -396,6 +437,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G14 — UI · trang giỏ: link về trang chủ có chữ '← Mua tiếp' (SRS: 'Tiếp tục mua sắm')
 
+- **Khung:** BUG-28
 - **TC Fail (1):** 97
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-07.5, B12
@@ -418,6 +460,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G15 — UI · trang giỏ: nhãn dòng tổng là 'Tổng tạm tính:' (SRS: 'Tổng cộng')
 
+- **Khung:** BUG-29
 - **TC Fail (1):** 98
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-07.6
@@ -438,6 +481,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G16 — API · POST /api/cart cùng id đã có trong giỏ → HTTP 200, GET có thêm phần tử mới thay vì cộng quantity
 
+- **Khung:** BUG-30
 - **TC Fail (1):** 21
 - **Blocked ghi case gốc (1):** 213
 - **Yêu cầu / giả định bị vi phạm:** FR-07.3
@@ -463,6 +507,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G17 — API · POST /api/cart với price khác giá CSDL → HTTP 200, GET lưu đúng price client gửi
 
+- **Khung:** BUG-31
 - **TC Fail (2):** 22, 210
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-08.2, B8
@@ -488,6 +533,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G18 — API · POST /api/cart với quantity không hợp lệ (≤ 0, thập phân, chuỗi, thiếu) → HTTP 200, GET có phần tử mới mang quantity đó
 
+- **Khung:** BUG-32
 - **TC Fail (8):** 30, 31, 32, 33, 34, 35, 70, 208
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** FR-06.2, B17, B18 (TC-34, TC-35)
@@ -519,6 +565,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G19 — API · POST /api/cart với id không hợp lệ (không tồn tại, chuỗi, mảng, object, thiếu) → HTTP 200, GET có phần tử mới mang id đó
 
+- **Khung:** BUG-32
 - **TC Fail (5):** 36, 37, 40, 211, 212
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** B18, B17
@@ -547,6 +594,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G20 — API · POST /api/cart body không phải JSON hợp lệ (quantity: Infinity) → HTTP 400 trả trang HTML (stack trace), không có trường error; giỏ không đổi
 
+- **Khung:** BUG-34
 - **TC Fail (1):** 209
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** B17 (4xx nhưng body là trang HTML, không có trường error)
@@ -574,6 +622,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G21 — API · POST /api/cart với Content-Type: text/plain (body JSON hợp lệ) → HTTP 200, GET có phần tử null
 
+- **Khung:** BUG-32
 - **TC Fail (1):** 214
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** API-CART, B17
@@ -603,6 +652,7 @@ Không thấy issue nào về: trang chi tiết không thêm vào giỏ, badge, 
 
 ## G22 — API · POST /api/cart quantity 9007199254740993 → HTTP 200, GET trả quantity 9007199254740992
 
+- **Khung:** BUG-33
 - **TC Fail (1):** 215
 - **Blocked ghi case gốc (0):** —
 - **Yêu cầu / giả định bị vi phạm:** API-CART (GET trả quantity khác giá trị đã gửi)

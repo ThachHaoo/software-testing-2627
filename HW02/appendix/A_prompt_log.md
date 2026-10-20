@@ -8194,14 +8194,76 @@ B_FR07 7a – sửa dữ kiện (commit "HW02[B-FR07] 7/7a2: sửa dữ kiện y
 ```
 
 **Output:**
-```
+````
 Phân loại lại yêu cầu theo Actual từng nhóm (vi phạm / đạt / chưa đánh giá được), rồi sinh lại file.
 
 Thêm trích nguyên văn #25, #26 vào mục Kiểm trùng.
+
+Đã sửa dữ kiện yêu cầu bị vi phạm cho cả 22 nhóm, commit `103c8ec`. Mỗi nhóm giờ có 3 dòng: yêu cầu bị vi phạm, yêu cầu đạt trong cùng case, và yêu cầu chưa đánh giá được — dòng thứ ba là em thêm ngoài lệnh.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7a2 – sửa dữ kiện "yêu cầu bị vi phạm" (22 nhóm) + trích #25, #26
+- File đã sửa: HW02/B_FR07/bugs_facts.md; HW02/bugs/BUG-15…36.md (chỉ phần Yêu cầu, bảng tổng hợp, mục Kiểm trùng); A_prompt_log.md
+  · BUG-01…14 không đổi
+- Kết quả kiểm tra: Fail 39/39 vẫn mỗi case đúng một nhóm; test: không chạy
+- Commit: 103c8ec HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm
+- Cách sửa:
+  · Cột "Yêu cầu" đổi thành "Yêu cầu / giả định bị vi phạm"
+  · Thêm 2 dòng mỗi nhóm: "Đạt trong cùng case", "Chưa đánh giá được trong cùng case"
+  · Dòng "Chưa đánh giá được" do AI thêm, để yêu cầu không xét được thì không xếp nhầm vào "đạt" hay "vi phạm"
+- Nhóm đã đổi, kể cả các nhóm thầy/SV chỉ ra:
+  · G1: bỏ FR-07.1, FR-07.3, FR-08.1 (→ chưa đánh giá được), FR-07.5 → đạt; thêm B1 (TC-64)
+  · G2: FR-06.3 → chưa đánh giá được (TC-99 bấm ở trang chủ), thêm B21
+  · G3: B4 → đạt
+  · G5: FR-07.1 → chưa đánh giá được; B4 → đạt
+  · G6: FR-07.3, FR-07.1 → chưa đánh giá được (case gốc TC-61)
+  · G7: FR-07.5, FR-23.2 (B22) → đạt
+  · G10: B13 → đạt
+  · G16, G17: API-CART → đạt
+  · G18, G19, G20: thêm B17/B18 (Expected 4xx dựa trên hai giả định này), API-CART → đạt
+  · G22: FR-06.2, B1 → đạt; vi phạm là API-CART (GET trả quantity khác giá trị đã gửi)
+- Mục 2: bugs_facts.md có mục "#25, #26 — trích nguyên văn" (mục Actual + Nhận định của từng issue) và một dòng so sánh dữ kiện endpoint/HTTP với G20, G21. Không kết luận trùng.
+- Cần quyết định (không chặn, cần SV xác nhận):
+  · Q11 – thêm B17/B18/B21 vào nhóm vi phạm (trước đây không nằm trong requirements của case vì là mã giả định): (a) giữ (b) bỏ
+  · Q12 – G1 xếp FR-06.2 là "vi phạm" vì Số lượng hợp lệ không được nhận: (a) giữ (b) chuyển sang chưa đánh giá được
+```
+````
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 135 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 132 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #136 | 13:33 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 7a – dựng lại khung theo quyết định SV
+(commit "HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV").
+1. Q11 = giữ B17/B18/B21 trong "vi phạm". Q12: G1 FR-06.2 → "chưa đánh giá được";
+   thêm vào "vi phạm": "chức năng thêm của nút 'Thêm vào giỏ hàng' (ngầm định trong
+   FR-06, không có câu SRS riêng)". G2: FR-06.3 → "không áp dụng (nút ở trang chủ
+   thuộc FR-24.1)".
+2. Gộp G18 + G19 + G21 thành 1 khung; giữ mục con theo từng triệu chứng, đủ TC và
+   evidence. Các nhóm còn lại 1 nhóm = 1 khung (G12–15 tách 4, G2/G6 tách, G3, G16,
+   G17, G22 riêng).
+3. Đánh số lại liên tục từ BUG-15, G20 ở SỐ CUỐI (SV còn quyết trùng #25). Xoá khung
+   thừa. Thêm bảng ánh xạ G → BUG vào đầu bugs_facts.md.
+4. Khung của G3: dòng "Tái hiện tối thiểu với 2 lần bấm cách nhau: (chưa kiểm
+   chứng) — SV kiểm tay, evidence TC-FR07-201_manual_2lan.png".
+5. Không điền tiêu đề / severity / priority / nhận định. Dừng, báo cáo theo CLAUDE.md
+   (kèm bảng ánh xạ).
+```
+
+**Output:**
+```
+Lỗi quoting của shell. Ghi đoạn vá ra file rồi chạy.
+```
+*File AI ghi/gửi trong lượt này:* `tail7a3.py`, `patch7a3.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 136 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 133 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

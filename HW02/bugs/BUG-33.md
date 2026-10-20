@@ -29,36 +29,32 @@
 ## Bằng chứng
 
 <details>
-<summary>Evidence từng TC (5)</summary>
+<summary>Evidence từng TC (1)</summary>
 
-- TC-FR07-36: `HW02/B_FR07/evidence/TC-FR07-36_api.png`, `HW02/B_FR07/evidence/TC-FR07-36_req.json`, `HW02/B_FR07/evidence/TC-FR07-36_res.json`
-- TC-FR07-37: `HW02/B_FR07/evidence/TC-FR07-37_api.png`, `HW02/B_FR07/evidence/TC-FR07-37_req.json`, `HW02/B_FR07/evidence/TC-FR07-37_res.json`
-- TC-FR07-40: `HW02/B_FR07/evidence/TC-FR07-40_api.png`, `HW02/B_FR07/evidence/TC-FR07-40_req.json`, `HW02/B_FR07/evidence/TC-FR07-40_res.json`
-- TC-FR07-211: `HW02/B_FR07/evidence/TC-FR07-211_api.png`, `HW02/B_FR07/evidence/TC-FR07-211_req.json`, `HW02/B_FR07/evidence/TC-FR07-211_res.json`
-- TC-FR07-212: `HW02/B_FR07/evidence/TC-FR07-212_api.png`, `HW02/B_FR07/evidence/TC-FR07-212_req.json`, `HW02/B_FR07/evidence/TC-FR07-212_res.json`
+- TC-FR07-215: `HW02/B_FR07/evidence/TC-FR07-215_api.png`, `HW02/B_FR07/evidence/TC-FR07-215_req.json`, `HW02/B_FR07/evidence/TC-FR07-215_res.json`
 </details>
 
 ## TC liên quan
 
-- Fail (5): TC-FR07-36, TC-FR07-37, TC-FR07-40, TC-FR07-211, TC-FR07-212
-- Nhóm dữ kiện: G19 trong `HW02/B_FR07/bugs_facts.md`
+- Fail (1): TC-FR07-215
+- Nhóm dữ kiện: G22 trong `HW02/B_FR07/bugs_facts.md`
 
 ## Yêu cầu
 
-- **B18 (giả định):** B18 (sai kiểu / id không tồn tại ở API) (SV chốt 2026-10-20): giữ 5 lớp chỉ có ở tầng API — EC6, EC7 (quantity) và EC12, EC13, EC53 (id) — phải bị từ chối 4xx, giỏ không đổi. EC53 tách từ EC13 ở review bước 3.
-- **B17 (giả định):** B17 (mã lỗi API) (SV chốt 2026-10-20, theo đề xuất AI): api_specification §4 không mô tả lỗi. Đề xuất như A11: dữ liệu không hợp lệ → 4xx (không 2xx, không 5xx) kèm trường error; không cố định mã. Quan sát code: thiếu token → 401, token sai → 403 (server.js dòng 103, 106).
+- **API-CART:** GET /api/cart lấy giỏ; POST /api/cart body JSON {id, name, price, quantity}; yêu cầu header Authorization: Bearer <token> (api_specification.md dòng 110–127). Không có endpoint sửa/xoá dòng giỏ. — vi phạm ở: GET trả quantity khác giá trị đã gửi
 
-- Đạt trong cùng case: API-CART (định dạng request/response của endpoint)
+- Đạt trong cùng case: FR-06.2 (HTTP 2xx), B1 (giá trị lớn được nhận)
 - Chưa đánh giá được trong cùng case: —
 
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)
 
-- Triệu chứng nhóm G19: API · POST /api/cart với id không hợp lệ (không tồn tại, chuỗi, mảng, object, thiếu) → HTTP 200, GET có phần tử mới mang id đó
+- Triệu chứng nhóm G22: API · POST /api/cart quantity 9007199254740993 → HTTP 200, GET trả quantity 9007199254740992
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
-- Actual tiêu biểu (TC-FR07-36, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":99999,"name":"Không tồn tại","price":1000,"quantity":1}]
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G19)
+- Actual tiêu biểu (TC-FR07-215, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":9007199254740992}]
+- SV ghi giả định B1 (không có cận trên) cho Expected của case.
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 12; `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G22)
 
 ### Nhận định
 
