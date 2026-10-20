@@ -30,7 +30,10 @@
 
 3. Kiểm tra HTTP Status Code, Response Body và kiểu dữ liệu của trường price nhận được từ Server.
 
-`<SV viết: phần sập backend>`
+4. Trường hợp sập Backend (AI phát hiện):
+   + Bước 4a: Gửi request POST /api/products tạo một sản phẩm mới có giá trị "price": null (kết hợp với lỗ hổng BUG-41) để hệ thống sinh ra một sản phẩm mới có id là số chẵn (ví dụ: id = 6).
+   + Bước 4b: Gửi tiếp request GET http://localhost:3000/api/products/6.
+   + Bước 4c: Quan sát kết quả trả về từ request GET và kiểm tra trạng thái tiến trình `node server.js` của Backend.
 
 ## Expected (trích SRS)
 
@@ -44,8 +47,7 @@
 
 - Tuy nhiên, đối với sản phẩm có id = 2 (số chẵn), trường price trong JSON phản hồi bị chuyển thành kiểu chuỗi: {"id":2, "name":"Samsung Galaxy S24 Ultra", "price":"28000000", ...}.
 
-`<SV viết: phần sập backend>`
-
+- Trường hợp sập Backend: Khi gửi request GET /api/products/6 (id chẵn có price = null), Backend không trả về bất kỳ phản hồi nào cho Client. Tiến trình `node server.js` lập tức bị crash và dừng hoạt động với mã thoát 1, báo lỗi Unhandled Exception: `TypeError: Cannot read properties of null (reading 'toString')` tại dòng 162. Các request tiếp theo tới server đều bị chối bỏ kết nối (Connection refused).
 ## Bằng chứng
 
 - Ảnh tiêu biểu: `TC-FR15-22_api.png`
@@ -119,7 +121,7 @@
 
 - Việc trả về không đồng nhất kiểu dữ liệu (id lẻ là Number, id chẵn là String) gây ra lỗi không nhất quán dữ liệu API (Data Inconsistency), có thể khiến các ứng dụng Client (Mobile/Frontend) bị crash hoặc tính toán toán học sai khi parse JSON.
 
-`<SV viết: phần sập backend>`
+- Trường hợp sập Backend: Tại dòng 162 (`row.price.toString()`), code hoàn toàn không kiểm tra xem `row.price` có bị `null` hay không trước khi gọi phương thức `.toString()`. Khi sản phẩm có `id` chẵn chứa `price = null` (do lỗ hổng thiếu validation từ BUG-41), lệnh `null.toString()` ném ra ngoại lệ `TypeError`. Vì không có khối `try-catch` bọc lại, ngoại lệ này làm sập toàn bộ tiến trình Node.js Backend, gây từ chối dịch vụ (DoS) cho toàn bộ hệ thống.
 
 ## Link GitHub Issue
 
