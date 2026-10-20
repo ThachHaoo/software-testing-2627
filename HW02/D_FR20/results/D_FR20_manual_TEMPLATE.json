@@ -1,0 +1,1474 @@
+{
+  "suites": [
+    {
+      "title": "D_FR20 chạy tay",
+      "specs": [
+        {
+          "title": "TC-FR20-94 Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở màn Đăng ký trên mobile",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-94_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-94_manual_1.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-90 Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của màn Đăng ký trên mobile",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-90_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-90_manual_1.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-91 Kiểm tra loại bàn phím của ô Email khi chạm vào ô trên màn Đăng ký mobile",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-91_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-91_manual_1.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-92 Kiểm tra che ký tự của ô Mật khẩu và Xác nhận mật khẩu khi nhập trên màn Đăng ký mobile",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-92_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-92_manual_1.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-93 Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa trên mobile",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-93_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-93_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-93_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-93_manual_2.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-03 Kiểm tra từ chối đăng ký trên mobile khi Họ Tên rỗng",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-03_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-03_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-03_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-03_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-03_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-03_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-03_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-03_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-04 Kiểm tra từ chối đăng ký trên mobile khi Email rỗng",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-04_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-04_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-04_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-04_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-04_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-04_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-04_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-04_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-05 Kiểm tra từ chối đăng ký trên mobile khi Email không có ký tự '@'",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-05_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-05_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-05_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-05_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-05_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-05_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-05_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-05_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-06 Kiểm tra từ chối đăng ký trên mobile khi Email đã tồn tại",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-06_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-06_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-06_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-06_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-06_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-06_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-06_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-06_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-07 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu 7 ký tự",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-07_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-07_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-07_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-07_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-07_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-07_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-07_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-07_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-08 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu rỗng",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-08_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-08_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-08_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-08_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-08_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-08_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-08_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-08_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-09 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có chữ hoa",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-09_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-09_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-09_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-09_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-09_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-09_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-09_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-09_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-10 Kiểm tra từ chối đăng ký trên mobile khi chữ hoa duy nhất của Mật khẩu là chữ có dấu",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-10_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-10_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-10_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-10_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-10_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-10_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-10_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-10_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-11 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có chữ thường",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-11_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-11_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-11_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-11_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-11_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-11_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-11_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-11_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-12 Kiểm tra từ chối đăng ký trên mobile khi chữ thường duy nhất của Mật khẩu là chữ có dấu",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-12_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-12_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-12_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-12_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-12_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-12_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-12_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-12_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-13 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có chữ số",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-13_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-13_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-13_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-13_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-13_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-13_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-13_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-13_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-14 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có ký tự đặc biệt",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-14_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-14_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-14_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-14_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-14_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-14_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-14_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-14_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-15 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ có ký tự đặc biệt ngoài tập",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-15_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-15_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-15_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-15_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-15_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-15_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-15_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-15_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-60 Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu dài 7 ký tự (LB-1)",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-60_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-60_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-60_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-60_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-60_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-60_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-60_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-60_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-204 Kiểm tra từ chối đăng ký trên mobile khi Email chứa khoảng trắng ở giữa do bàn phím tự động chèn",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-204_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-204_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-204_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-204_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-204_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-204_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-204_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-204_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-205 Kiểm tra từ chối đăng ký trên mobile khi chữ số duy nhất trong Mật khẩu là các chữ số Full-width `１２３４５６`",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-205_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-205_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-205_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-205_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-205_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-205_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-205_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-205_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-01 Kiểm tra đăng ký thành công trên mobile khi Họ Tên có dấu, email mới và mật khẩu mạnh",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-01_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-01_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-01_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-01_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-01_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-01_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-01_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-01_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-01_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-01_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-02 Kiểm tra đăng ký thành công trên mobile khi mật khẩu có thêm ký tự đặc biệt ngoài tập",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-02_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-02_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-02_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-02_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-02_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-02_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-02_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-02_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-02_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-02_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-61 Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 8 ký tự (LB)",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-61_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-61_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-61_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-61_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-61_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-61_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-61_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-61_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-61_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-61_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-62 Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 9 ký tự (LB+1)",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-62_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-62_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-62_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-62_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-62_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-62_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-62_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-62_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-62_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-62_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-63 Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 12 ký tự (NOM)",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-63_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-63_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-63_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-63_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-63_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-63_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-63_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-63_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-63_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-63_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-64 Kiểm tra đăng ký thành công trên mobile khi Mật khẩu dài 64 ký tự (LARGE)",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-64_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-64_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-64_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-64_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-64_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-64_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-64_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-64_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-64_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-64_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-200 Kiểm tra dán (paste) chuỗi XSS `<script>alert(1)</script>` từ Clipboard vào ô Họ Tên bằng menu ngữ cảnh mobile khi thông tin khác hợp lệ",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-200_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-200_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-200_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-200_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-200_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-200_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-200_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-200_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-200_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-200_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-201 Kiểm tra dán chuỗi Unicode Emoji 🐻 vào ô Họ Tên qua bàn phím di động khi thông tin khác hợp lệ",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-201_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-201_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-201_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-201_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-201_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-201_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-201_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-201_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-201_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-201_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-203 Kiểm tra bấm chạm liên tục 10 lần nút 'Đăng Ký' khi form hợp lệ",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-203_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-203_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-203_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-203_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-203_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-203_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-203_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-203_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-203_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-203_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-206 Kiểm tra đăng ký thành công trên mobile khi Họ Tên có độ dài cực đại 10.000 ký tự dán từ bộ nhớ tạm",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-206_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-206_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-206_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-206_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-206_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-206_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-206_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-206_manual_4.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-206_manual_5",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-206_manual_5.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-16 Kiểm tra từ chối đăng ký trên mobile khi Xác nhận mật khẩu khác Mật khẩu",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-16_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-16_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-16_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-16_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-16_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-16_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-16_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-16_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "TC-FR20-17 Kiểm tra từ chối đăng ký trên mobile khi Xác nhận mật khẩu chỉ khác hoa/thường",
+          "tests": [
+            {
+              "projectName": "D_FR20-manual",
+              "annotations": [
+                {
+                  "type": "actual",
+                  "description": ""
+                },
+                {
+                  "type": "verdict",
+                  "description": ""
+                }
+              ],
+              "results": [
+                {
+                  "status": "skipped",
+                  "attachments": [
+                    {
+                      "name": "TC-FR20-17_manual_1",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-17_manual_1.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-17_manual_2",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-17_manual_2.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-17_manual_3",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-17_manual_3.png",
+                      "contentType": "image/png"
+                    },
+                    {
+                      "name": "TC-FR20-17_manual_4",
+                      "path": "HW02/D_FR20/manual_raw/TC-FR20-17_manual_4.png",
+                      "contentType": "image/png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
