@@ -7144,7 +7144,7 @@ Nhiệm vụ 3 – Bước 2 (lớp tương đương)
 ```
 
 **Output:**
-```
+````
 Kiểm: json đã có giả định B0a–B18 và tham chiếu; thiếu trích SRS nguyên văn + khảo sát SUT chi tiết. Ghi phần thiếu.
 
 Nhiệm vụ 2+3: ghi 5 quyết định, dựng lớp tương đương.
@@ -7152,11 +7152,74 @@ Nhiệm vụ 2+3: ghi 5 quyết định, dựng lớp tương đương.
 Sửa số EC tham chiếu cho khớp thứ tự thật trước khi chạy.
 
 Đúng thứ tự: render → freeze → check → lint.
+
+Xong cả 3 nhiệm vụ: đã ghi notes bước 1, ghi 5 quyết định SV, và làm xong bước 2 với 52 lớp tương đương. Em dừng ở đây chờ chốt 6 điểm dưới trước khi sang bước 3.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) notes bước 1; (2) ghi 5 quyết định SV B1/B3/B6/B7/B9; (3) bước 2 lớp tương đương
+- File đã tạo/sửa: HW02/B_FR07/notes_step1.md (chỉ thêm trích SRS + khảo sát SUT, vì B0–B18 đã có trong json); HW02/B_FR07/testcases.json/.md (bảng EC + giả định); HW02/appendix/ai-outputs/B_FR07_step2_20261020-1031.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/60 warn (52 EC chưa có TC, V1 chưa có case BVA, 7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10); lint 0 errors/20 warn (chưa có TC); test Not run
+- Commit: e9ca12c HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)
+          5badc45 HW02[B-FR07] 2/7: lớp tương đương (quyết định SV nằm chung commit này)
+- Cần quyết định (chặn bước 3):
+  - B2 – Lần thêm bị từ chối có bắt buộc phải có thông báo lỗi không? – có (EC52, đề xuất) / chỉ cần giỏ không đổi (bỏ EC52)
+  - B5 – Thêm lại sản phẩm đã có từ trang khác có tách lớp riêng không? – tách EC9/EC10 (đề xuất) / gộp làm 1
+  - B8 – Giá/tên client gửi trong POST /api/cart xử lý thế nào? – bỏ qua, dùng giá trị CSDL (EC16/EC32 hợp lệ, đề xuất) / chấp nhận giá client (+3 lớp không hợp lệ cho price)
+  - B10 – Giữ giỏ khi tải lại trang / đăng nhập / đăng xuất? – ngoài phạm vi (đề xuất) / trong phạm vi (+1 biến, 3 lớp)
+  - B16 – Có lập suite TS-GUI riêng (breadcrumb, highlight, alt, ₫)? – có (đề xuất) / không
+  - B18 – Có kiểm sai kiểu và id không tồn tại ở tầng API không? – có, EC6/7/12/13 (đề xuất) / bỏ 4 lớp này
+  - 7 giả định không chặn (B4, B11–B15, B17): đề xuất nằm trong HW02/B_FR07/testcases.md, mục Giả định
+- Bất thường:
+  - Đơn giá: em không tách lớp theo id chẵn/lẻ (server.js:162, chỉ dùng làm điểm quan sát); SV chọn có lấy đại diện cả hai ở bước 3 hay không – ghi ở note EC14
+  - Thứ tự đúng render→freeze đã áp dụng; bản freeze bước 1 vẫn thiếu .md (đã báo lượt trước)
+```
+````
 *File AI ghi/gửi trong lượt này:* `notes_step1.md`, `step2_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 120 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 117 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #121 | 10:33 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – Ghi 6 quyết định SV vào giả định trong testcases.json (đánh dấu SV chốt + lý do):
+- B2 = bỏ EC52; oracle từ chối = giỏ không đổi (FR-06 không yêu cầu thông báo).
+- B5 = tách EC9/EC10 (2 điểm thêm vào giỏ đều thấy được trên UI).
+- B8 = giá lấy từ CSDL, không tin giá client (FR-08: tổng tiền tính tự động, không cho chỉnh).
+- B10 = ngoài phạm vi (SRS im lặng).
+- B16 = có suite TS-GUI riêng, giới hạn trang giỏ và các điểm thêm vào giỏ.
+- B18 = giữ 4 lớp sai kiểu / id không tồn tại ở API.
+- EC14: suite API lấy đại diện cả id chẵn và lẻ; notes "đại diện chọn theo code
+  server.js:162 (gray-box)".
+
+Nhiệm vụ 2 – Bước 3 (TC Domain, minimum set)
+1. /domain-bva-testing HW02/B_FR07 3.
+2. Suite tách UI / API / GUI. Mỗi case dùng user riêng {ts}, oracle tương đối,
+   precondition nêu trạng thái quan sát được. Giỏ web là state React: procedure
+   điều hướng bằng link trong app, không goto/reload giữa chừng.
+3. Nút +/−: theo A17 (1 case kiểm tồn tại; case phụ thuộc vẫn thiết kế đầy đủ).
+4. Minimum set: case hợp lệ gộp nhiều lớp; case không hợp lệ đúng 1 lớp. Báo cáo
+   ghi tỷ lệ số TC / số EC.
+5. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 3/7: TC domain" kèm prompt log. Dừng sau bước 3.
+```
+
+**Output:**
+```
+Xem cấu trúc suite A_FR01 làm mẫu.
+
+Viết script bước 3 (quyết định SV + 3 suite).
+
+Sửa tiêu đề 93/94 (thiếu phần điều kiện) trực tiếp trong json, rồi render → freeze → check → lint.
+```
+*File AI ghi/gửi trong lượt này:* `step3_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 121 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 118 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
