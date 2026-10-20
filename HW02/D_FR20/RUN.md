@@ -69,6 +69,7 @@ Lượt 1 (AI đếm theo ảnh, 6/7b): 31 ảnh, mỗi case đã chạy 1 ảnh
 - Bắt buộc: 7/11 đúng nội dung (94, 90, 91, 92, 93, 01_1, 06_1). Thiếu `01_2` (ảnh 01_1 là hộp thoại trên nền màn 'Đăng Nhập') và `01_3`. Ảnh 200 và 201 có, nhưng chụp hộp thoại 'Thành công' chứ không chụp header.
 - Chỉ khi khác Expected: 6 ảnh của case lệch Expected (03, 04, 05, 15, 204, 203).
 - Ngoài phân bổ: 16 ảnh của case không lệch (02, 07–14, 60, 61–64, 205, 206).
+- Bổ sung sau lượt (đăng nhập thử, cùng lượt, chưa restart backend): 9 ảnh `_manual_2` (header sau đăng nhập) của 01, 02, 61–64, 200, 201, 206 → tổng **40/20**. Bắt buộc thành 10/11: header của 01 nằm ở `01_manual_2` (phân bổ ghi `01_3`), header của 200/201 nằm ở `_manual_2` (phân bổ ghi `_1`); còn thiếu ảnh 'màn hình sau khi đóng hộp thoại' của 01.
 
 ## Thứ tự case
 
@@ -147,6 +148,9 @@ AI đổi tên và định dạng ảnh của SV, không sửa nội dung. Ảnh
 | `TC-FR20-203-admin_manual.png` | `TC-FR20-203_admin_1.png` |
 | `TC-FR20-90-manual.jpg`, `TC-FR20-94-manual.jpg` | `TC-FR20-90_manual_1.png`, `TC-FR20-94_manual_1.png` |
 | `TC-FR20-<xx>_manual.jpg` (29 ảnh: 01–15, 60–64, 91–93, 200, 201, 203–206) | `TC-FR20-<xx>_manual_1.png` |
+| `TC-FR20-<xx>_manual_2.jpg` (9 ảnh đăng nhập thử: 01, 02, 61–64, 200, 201, 206) | `TC-FR20-<xx>_manual_2.png` (chỉ đổi định dạng) |
+
+Status SV chốt 2026-10-21 (Blocked 16/17, Fail TC-203, Pass hộp đen) được đặt thẳng trong `testcases.json`, còn file kết quả lượt vẫn giữ verdict chép từ Check.md. Với project `-manual`, `merge_results.py` ghi đè status bằng verdict trong file lượt → **không merge lại lượt 1**; nếu bắt buộc phải merge lại thì đặt lại status theo notes "SV chốt".
 
 ## Ghi chú harness
 

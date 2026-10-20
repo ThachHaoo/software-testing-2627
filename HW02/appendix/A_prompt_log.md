@@ -18992,6 +18992,25 @@ Hiện trạng:
 Đang chép Actual/verdict từ Check.md vào file kết quả lượt, rồi gộp vào testcases.json.
 
 Đã điền RUN.md (nhật ký, bảng đổi tên). Giờ thêm dòng Audit, rồi render/check/lint/prompt log và commit.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** harness `16e39d4` (nén ảnh .jpg, đổi tên chuẩn, giữ tên `_admin_<n>` khi merge, manual_raw/ vào gitignore) và `74ecbb3` 6/7b: kết quả lượt chính thức. check_domain 0 lỗi, 1 cảnh báo (V6); lint 0/0; prompt log 316 lượt. Không dừng, không lỗi.
+- **Kiểm kê:** 31 ảnh điện thoại (.jpg, mỗi case đã chạy 1 ảnh) và 4 ảnh admin trên PC (TRƯỚC, SAU_1, SAU_2, TC-203 theo case). Không có cặp trùng; ảnh nào cũng xác định được case. Bảng đổi tên ở `HW02/D_FR20/RUN.md`, mục "Đổi tên evidence".
+- **Ảnh điện thoại: 31/20, vượt mức, giữ hết.**
+  - Bắt buộc: 7/11 đúng nội dung. Thiếu 01_2, 01_3; ảnh 200 và 201 chụp hộp thoại thay vì header.
+  - Khi khác Expected: 6/9. Ngoài phân bổ: 16 ảnh.
+  - Evidence D sau nén 2,55 MB; ước tính zip HW02 ≈ 12,1 MB.
+- **Kết quả:** Pass 22 / Fail 9 / Blocked 0 / Not run 2. Chưa case nào ghi "Pass hộp đen".
+- **Thiếu verdict:** TC-16, TC-17 có Actual (Check.md dòng 35) nhưng verdict trống, merge ghi Not run. Theo notes và RUN.md thì là Blocked, case gốc TC-94 (đã Fail); SV đặt.
+- **TC-203:** SV ghi Pass, nhưng Actual và ảnh cho thấy app về "Danh sách sản phẩm", trong khi Expected là màn "Đăng Nhập".
+- **01, 02, 61–64, 200, 201, 206:** SV ghi Pass, nhưng Actual và ảnh không có bước đăng nhập thử và header mà Expected yêu cầu (riêng 200 là phần SEC-04).
+- **07–14, 60, 205:** bị từ chối, nhưng thông báo giống hệt nhau, nêu chung mọi luật mật khẩu. Theo A20, SV xét có phải "Pass hộp đen" không.
+- **9 case Fail khớp ảnh và admin SAU:** 03, 04, 05, 06, 15, 204, 90, 91, 94.
+- **Lệch procedure (không coi là lỗi):**
+  - Email gõ nguyên chuỗi `{ts}`; vẫn không trùng vì tiền tố mã case khác nhau.
+  - TC-203 có thêm ảnh admin theo case; đã ghi notes "lệch nhỏ so với procedure (D0)".
+- **Nhật ký lượt còn trống:** Máy (OS), Điện thoại (model, Android), Expo Go, Locale/bàn phím, IP API_URL. Giờ bắt đầu lấy từ Check.md (00:15, giây ghi 00).
+- **Không đụng:** file `results/D_FR20_manual_20261021-0010.json` của SV giống hệt TEMPLATE, chưa điền, chưa commit, để nguyên.
 ```
 *File AI ghi/gửi trong lượt này:* `compress_manual.py`, `d_6b.py`
 
@@ -18999,4 +19018,34 @@ Hiện trạng:
 
 ---
 
-**Tổng:** 316 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 224 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #317 | 02:02 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### SV quyết (áp vào status, ghi "SV chốt 2026-10-21" + lý do vào notes)
+- TC-16, TC-17 = Blocked, case gốc TC-94 (màn hình không có ô Xác nhận).
+- TC-203 = "Fail do lỗi thiết kế TC, không lập bug". Lý do SV: các lần chạm sau rơi vào màn kế
+  tiếp; procedure không quy định khi màn hình đổi → phần màn hình không đánh giá được.
+  Notes ghi kết quả phần "đúng 1 tài khoản" theo ảnh admin TC-203.
+- TC-07–14, 60, 205 = Pass hộp đen. Lý do: thông báo chung liệt kê mọi luật mật khẩu, không chứng
+  minh luật mục tiêu được kiểm (A20).
+- TC-206: đối chiếu Expected với Actual SV ghi.
+  - Expected không yêu cầu bố cục → Pass, notes "quan sát ngoài Expected: tên tràn che màn hình,
+    không cuộn được; SRS im lặng → không tạo Fail".
+  - Expected có yêu cầu bị Actual vi phạm → DỪNG, in Expected.
+- 9 case đăng nhập thử bổ sung (ảnh `_2`): notes "đăng nhập thử làm sau, cùng lượt, chưa restart
+  backend". Verdict theo Actual SV ghi trong Check.md.
+```
+
+**Output:**
+```
+Ảnh và status đã cập nhật. Giờ sửa RUN.md (đếm ảnh, bảng đổi tên, cảnh báo merge lại), chạy kiểm tra và commit.
+```
+*File AI ghi/gửi trong lượt này:* `d_6c.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 317 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 225 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
