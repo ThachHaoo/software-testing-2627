@@ -52,7 +52,7 @@ Nguồn: đề §6, §7, §9, §10, §12, §14, §17 + Homework Policies (skill 
 
 | # | Mục | Căn cứ | Đường dẫn | Trạng thái |
 |---|---|---|---|---|
-| 1 | Report chính .md (Domain + BVA) | đề §14 | `HW02/report.md` (tên tạm, khung) | **CẦN CẬP NHẬT** – khung tạo ở commit này; README đang ghi `23120255_HW02_Report.md` |
+| 1 | Report chính .md (Domain + BVA) | đề §14 | `HW02/23120255_HW02_Report.md` (khung) | **CẦN CẬP NHẬT** – khung, chưa điền nội dung |
 | 2 | Report chính PDF | đề §14 | — | **THIẾU** |
 | 3 | Bảng TC từng feature (nguồn cho report) | đề §6.1–6.2 | `HW02/{A_FR01,B_FR07,C_FR15,D_FR20}/testcases.md` + `.json` | ĐÃ CÓ |
 | 4 | Giải thích từng bước Domain + BVA | đề §6.1–6.2 | trong report | **THIẾU** |
@@ -88,7 +88,7 @@ Nguồn: đề §6, §7, §9, §10, §12, §14, §17 + Homework Policies (skill 
 5. §14 "Bug report, with screenshots of the bugs on the GitHub Issues page": đọc được hai nghĩa (ảnh trang Issues / ảnh lỗi trong từng issue) → đã có cả hai.
 6. Homework Policies: "bản PDF cho **mỗi** file .md"; đề §14 chỉ đòi PDF cho report chính và Critique + Audit → cần chốt có xuất PDF cho `BUG-xx.md`, `testcases.md`, prompt log (1,6 MB) hay không.
 7. §7 Agent Skill "encouraged" nhưng rubric cho **10 điểm**; đề nói "demonstration videos" (số nhiều), video phải có trong README (§14) → thiếu video = mất điểm, có thể bị coi là thiếu tài liệu bắt buộc (§17: thiếu = 0).
-8. Đề không quy định tên report chính → khung tạm `HW02/report.md`; README + CLAUDE.md §6 dùng `23120255_HW02_Report.md` → phải thống nhất một tên.
+8. Đề không quy định tên report chính → chốt `HW02/23120255_HW02_Report.md` (theo CLAUDE.md §6 và README; khung ban đầu tên tạm `report.md`, đổi ở commit sau).
 9. §6.4 "bug trong Markdown report": bảng bug trong report do SV viết (AI-01 §11) — AI chỉ dựng cột.
 10. §11 Anti-AI-cheat "None": không cần ảnh thẻ SV / hostname watermark; video vẫn do SV tự quay, tự thuyết minh.
 11. §13 vấn đáp ngẫu nhiên 30% (AI-01 ghi 10–30%) → chuẩn bị giải thích từng bước, lý do chọn input.

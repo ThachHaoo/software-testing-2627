@@ -21922,4 +21922,98 @@ Commit `HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo`.
 
 ---
 
-**Tổng:** 362 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 270 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #363 | 06:43 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: HW02 – liệt kê form/mục phải nộp + dựng KHUNG report (chưa điền nội dung).
+
+0. Nạp skill `cs423-ai-first-homework` và làm theo §0, §1, §4 bước 1–2, §6.
+   Kiểm `git status`. Nếu nhánh còn commit chưa push thì chỉ ghi vào báo cáo, KHÔNG push.
+
+1. Đọc đề HW02 trong repo (tìm file đề/rubric. Không thấy → DỪNG, hỏi SV đường dẫn).
+   Lập trong `HW02/report_plan.md`:
+   a) Bảng biểu mẫu AI-01→AI-06 cho HW02 (bắt buộc?, nộp khi nào, AI làm phần nào, SV làm phần nào).
+      Đề khác bảng mặc định của skill → theo đề và ghi chỗ khác.
+      AI-04: chỉ đưa vào nếu đề yêu cầu.
+      AI-06: ghi "SV xác nhận đã nộp tuần 1?".
+   b) Bảng điểm/rubric của đề + cấp độ AI + ánh xạ từng requirement sang G9.x.
+   c) Danh sách MỌI file/mục phải nộp theo đề và Homework Policies:
+      - report .md + PDF
+      - Critique 200–300 từ
+      - Mandatory Disclosure
+      - Tự đánh giá
+      - AI-02, AI-03, AI-05 (.md + PDF ký)
+      - prompt log
+      - commit log
+      - ảnh trang Issues (`issues_page_*.png`)
+      - video demo skill (link)
+      - README
+      - tên zip theo mẫu đề, ≤ 20 file, ≤ 20 MB
+      Mỗi mục ghi trạng thái: ĐÃ CÓ (đường dẫn) / THIẾU / CẦN CẬP NHẬT.
+      Kiểm thật bằng ls/glob, không đoán.
+   d) Chỗ mâu thuẫn hoặc dễ sót trong đề (điểm mô tả ≠ rubric, yêu cầu chỉ có ở bảng CLO, file bắt buộc ẩn…).
+   e) Vị trí file form gốc (docx AI-02/03/05) nếu có trong repo. CHƯA chuyển đổi.
+
+2. Dựng khung report.
+   Tên file: theo đề. Đề không quy định → `HW02/report.md` (ghi rõ là tạm).
+   Khung theo §4 bước 2 của skill:
+   - Mục lục theo đúng thứ tự rubric; mỗi feature A_FR01, B_FR07, C_FR15, D_FR20 có mục con theo 7 bước.
+   - Bảng vẽ sẵn, ô cần điền ghi `[...]`.
+   - Chỗ cần số liệu: ghi `[số liệu: summary.py]`. KHÔNG gõ số tay.
+   - Placeholder ảnh `![...](đường_dẫn_thật_đang_có)`.
+   - Gắn 🔒 cho phần SV tự viết: Critique, gap analysis từng feature, verdict Audit, nội dung bug.
+     Bảng bug trong report: chỉ dựng cột trống.
+   - Khối 📝 hướng dẫn (xoá trước khi nộp).
+     Ở mỗi mục 🔒 gap analysis, 📝 chỉ được ghi đường dẫn tới dữ kiện có sẵn
+     (`sv_cases.md`, `ai_gap_answer.md`, `sv_questions.md`, `_groups_*.md`, RUN.md, `compare_web_mobile.md`).
+     KHÔNG viết nhận xét, KHÔNG tóm tắt.
+   - Có mục "Biểu mẫu AI" (danh sách file trong `ai-forms/`) và cây thư mục nộp bài.
+
+3. Ràng buộc:
+   - Không viết Critique, gap analysis, verdict Audit, mô tả bug.
+   - Không sửa `appendix/ai-outputs/`.
+   - Không sửa tay prompt log.
+   - Không đổi file của A–D.
+   - Không amend, không push.
+   - Chạy linter thầy nếu có áp dụng cho .md.
+
+4. Commit `HW02: kế hoạch nộp bài + khung report`
+   (gồm `report_plan.md`, file report khung, `HW02/appendix/A_prompt_log.md`).
+
+5. Báo cáo cho phiên thảo luận (≤ 25 dòng):
+   - đường dẫn đề đã đọc
+   - bảng form rút gọn (mã | bắt buộc | trạng thái)
+   - các mục THIẾU / CẦN CẬP NHẬT
+   - chỗ mâu thuẫn trong đề
+   - tên file report + số mục 🔒
+   - tên zip dự kiến
+   - hash commit
+   - commit chưa push (nếu có)
+
+
+ /cs423-ai-first-homework
+```
+
+**Output:**
+```
+Đang kiểm kê file HW02 và đọc mẫu report của skill để dựng khung.
+
+Kiểm kê xong; đang ước lượng dung lượng zip rồi viết `report_plan.md` và khung report.
+
+Đủ dữ kiện. Viết `report_plan.md`.
+
+Viết khung report bằng script sinh (4 feature cùng cấu trúc, tránh chép tay lệch).
+
+Heredoc lỗi trên Git Bash; ghi script bằng Write.
+
+Linter thầy (`lint_testcases.py`) chỉ đọc JSON → không áp dụng cho .md. Commit.
+```
+*File AI ghi/gửi trong lượt này:* `report_plan.md`, `gen_report.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 363 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 271 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
