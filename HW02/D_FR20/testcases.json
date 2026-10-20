@@ -6,7 +6,7 @@
     "feature": "FR-20 Tính năng Mobile — chức năng Đăng ký (frontend-mobile, Expo SDK 54, màn hình 'Đăng Ký Tài Khoản'), áp dụng FR-01",
     "feature_code": "D_FR20",
     "doc_id": "TCD-D_FR20",
-    "version": "0.4",
+    "version": "0.5",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã); thay đổi cục bộ duy nhất: frontend-mobile/App.js dòng 16 API_URL",
@@ -575,5 +575,1230 @@
       }
     ]
   },
-  "suites": []
+  "suites": [
+    {
+      "id": "TS-DOM",
+      "name": "Domain — minimum set, tầng Mobile (FR-20 áp FR-01), chạy tay",
+      "format": "matrix",
+      "description": "Minimum set tầng Mobile theo D1 = a: 2 case hợp lệ phủ mọi lớp hợp lệ đầu vào; mỗi case không hợp lệ phủ đúng một lớp không hợp lệ đầu vào, các biến khác giữ danh nghĩa (Họ Tên 'Nguyễn Văn Ánh', Email mới 'mNN_{ts}@domain.com', Mật khẩu 'Abcd1234!', Xác nhận mật khẩu = Mật khẩu). Lớp gộp (gray-box) lấy 1 đại diện, rationale ghi mã TC API của A được tham chiếu.",
+      "preconditions": [
+        "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
+        "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
+        "Điện thoại Android, Expo Go (SDK 54), cùng mạng với máy; app EShop Mobile đã mở với API_URL = http://172.21.0.137:3000/api (D15).",
+        "{ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231) — email mỗi case là duy nhất trong một lượt chạy (D0).",
+        "Trạng thái ban đầu của mỗi case: app vừa tải lại (Reload trong Expo Go), đang ở màn hình chủ, header hiển thị 'Đăng nhập' (chưa đăng nhập); sau khi vào màn 'Đăng Ký Tài Khoản' cả ba ô Họ Tên, Email, Mật khẩu đều trống, không có chữ lỗi (D0)."
+      ],
+      "procedure": [
+        {
+          "action": "Trên máy tính: tải lại trang admin (F5), mở tab 'Người dùng'; đếm số dòng, chụp ảnh TC-FR20-xx_manual_admin_before.png.",
+          "expected": "Bảng 'Quản lý Người dùng' hiển thị, có admin@eshop.com và test@eshop.com."
+        },
+        {
+          "action": "Trên điện thoại: tải lại app trong Expo Go (Reload).",
+          "expected": "Màn hình chủ; header hiển thị 'Đăng nhập'."
+        },
+        {
+          "action": "Bấm 'Đăng nhập' trên header, rồi bấm 'Đăng ký ngay'.",
+          "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị; ba ô Họ Tên, Email, Mật khẩu trống; không có chữ lỗi."
+        },
+        {
+          "action": "Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu (nếu có) bằng bàn phím ảo, gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không chạm vào ô, giữ trống. Giá trị có ␣: bấm phím cách đúng số lần đó. Bàn phím tự viết hoa/tự sửa/chèn gợi ý làm đổi chuỗi → xoá và gõ lại cho đúng, ghi notes (D12). Không có ô Xác nhận mật khẩu → làm theo notes của case (D9).",
+          "expected": "Ô Họ Tên và Email hiển thị đúng chuỗi trong cột; ô Mật khẩu hiển thị dạng che với số ký tự che bằng độ dài chuỗi trong cột. Chụp TC-FR20-xx_manual_input.png."
+        },
+        {
+          "action": "Ẩn bàn phím, bấm nút 'Đăng Ký' đúng một lần.",
+          "expected": "App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình)."
+        },
+        {
+          "action": "Quan sát và chụp TC-FR20-xx_manual_result.png: mọi kênh thông báo (hộp thoại: ghi tiêu đề + nội dung rồi mới đóng; chữ trên màn hình; toast) và tiêu đề màn hình sau khi đóng hộp thoại.",
+          "expected": "Khớp phần app của cột Expected."
+        },
+        {
+          "action": "Trên máy tính: tải lại trang admin, mở tab 'Người dùng'; so với ảnh ở bước 1, chụp TC-FR20-xx_manual_admin_after.png.",
+          "expected": "Số dòng và Email như cột Expected (oracle tương đối)."
+        },
+        {
+          "action": "Chỉ case hợp lệ: trên màn 'Đăng Nhập' của app, bảo đảm ô Email chứa đúng email của case (xoá và gõ lại nếu khác), nhập Mật khẩu của case, bấm 'Sign In'; chụp TC-FR20-xx_manual_login.png.",
+          "expected": "Header hiển thị 'Chào, <Họ Tên của case>' như cột Expected."
+        }
+      ],
+      "columns": [
+        "Họ Tên",
+        "Email",
+        "Email trong CSDL",
+        "Mật khẩu",
+        "Xác nhận mật khẩu"
+      ],
+      "cleanup": [
+        "Không xoá tài khoản giữa các case: mỗi case dùng email riêng và oracle tương đối (D0). Cuối lượt: khởi động lại backend để CSDL seed lại."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR20-01",
+          "title": "Kiểm tra đăng ký thành công trên mobile khi Họ Tên có dấu, email mới và mật khẩu mạnh",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m01_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm01_{ts}@domain.com'; đăng nhập trên app bằng email đó + 'Abcd1234!' thành công, header hiển thị 'Chào, Nguyễn Văn Ánh' (D11).",
+          "requirements": [
+            "FR-01.1",
+            "FR-01.2",
+            "FR-01.3",
+            "FR-01.4",
+            "FR-01.6",
+            "FR-01.7a",
+            "FR-01.7b",
+            "FR-01.7c",
+            "FR-01.8",
+            "FR-01.9",
+            "FR-20.1",
+            "FR-01.10"
+          ],
+          "assumptions": [
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D8",
+            "D9",
+            "D11",
+            "D12"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ thứ nhất: giá trị danh nghĩa của mọi lớp hợp lệ có căn cứ SRS. Họ Tên có dấu để đi qua bộ gõ tiếng Việt của bàn phím ảo. EC1, EC3, EC6 là lớp gộp (gray-box) — tham chiếu A: TC-FR01-28, TC-FR01-29 (Họ Tên, Email, email mới), TC-FR01-30 (khoảng trắng đầu/cuối email), TC-FR01-31 (khác hoa/thường phần local).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-02",
+          "title": "Kiểm tra đăng ký thành công trên mobile khi mật khẩu có thêm ký tự đặc biệt ngoài tập",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Trần Thị Bình",
+            "Email": "m02_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!#",
+            "Xác nhận mật khẩu": "Abcd1234!#"
+          },
+          "expected_result": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) (D11); app chuyển sang màn 'Đăng Nhập' (FR-01.10); trang admin 'Quản lý Người dùng' SAU có đúng 1 dòng mới so với TRƯỚC, Email = 'm02_{ts}@domain.com'; đăng nhập trên app bằng email đó + 'Abcd1234!#' thành công, header hiển thị 'Chào, Trần Thị Bình' (D11).",
+          "requirements": [
+            "FR-01.8",
+            "FR-20.1",
+            "FR-01.10"
+          ],
+          "assumptions": [
+            "D2",
+            "D7",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC20",
+            "EC23",
+            "EC26",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC20",
+            "EC27",
+            "EC29",
+            "EC31"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ thứ hai: phủ lớp hợp lệ còn lại EC20 (D7: ký tự ngoài tập '#' đi kèm '!' trong tập); các biến khác giữ danh nghĩa.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-03",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Họ Tên rỗng",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "''",
+            "Email": "m03_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "assumptions": [
+            "D2",
+            "D3",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC2",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC2",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp gộp EC2 (gray-box): chọn '' vì căn cứ trực tiếp FR-01.1 (không phụ thuộc D3). Tham chiếu A: TC-FR01-32 (rỗng), TC-FR01-33 (chỉ khoảng trắng), TC-FR01-79 (API).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-04",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Email rỗng",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "''",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.2"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC4",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC4",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp rỗng của Email (FR-01.2). Tham chiếu A: TC-FR01-34 (API).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-05",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Email không có ký tự '@'",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m05_{ts}domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "assumptions": [
+            "D2",
+            "D4",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC5",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp gộp EC5 (gray-box): đại diện thiếu '@' — vi phạm rõ nhất mẫu user@domain.com, giữ nguyên các phần khác. Tham chiếu A: TC-FR01-35, 36, 37, 38, 39, 40 (API).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-06",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Email đã tồn tại",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "test@eshop.com",
+            "Email trong CSDL": "đã có (tài khoản seed)",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.4"
+          ],
+          "assumptions": [
+            "D2",
+            "D5",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC7",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC7",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp gộp EC7 (gray-box): đại diện trùng chính xác tài khoản seed (D0) — không phụ thuộc cách so sánh của D5. Tham chiếu A: TC-FR01-41 (trùng chính xác), TC-FR01-42 (trùng sau cắt khoảng trắng) (API).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-07",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu 7 ký tự",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m07_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abc123!",
+            "Xác nhận mật khẩu": "Abc123!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.6"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC9",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC9",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đủ hoa/thường/số/ký tự đặc biệt, chỉ thiếu độ dài. Điểm 7 ký tự trùng LB−1 của bước 4; ở bước 3 là đại diện lớp 1–7.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-08",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu rỗng",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m08_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "''",
+            "Xác nhận mật khẩu": "''"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.5"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC10",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC10",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp rỗng của Mật khẩu (FR-01.5). Ô Xác nhận mật khẩu (nếu có) cũng để trống để V5 vẫn khớp V4. Tham chiếu A: TC-FR01-44 (API).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-09",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có chữ hoa",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m09_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "abcd1234!",
+            "Xác nhận mật khẩu": "abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.7a"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC12",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC12",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Mật khẩu danh nghĩa đổi 'A' thành 'a': chỉ vi phạm FR-01.7a.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-10",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi chữ hoa duy nhất của Mật khẩu là chữ có dấu",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m10_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Êbcd1234!",
+            "Xác nhận mật khẩu": "Êbcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.7a"
+          ],
+          "assumptions": [
+            "D2",
+            "D8",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC13",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC13",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay 'A' bằng 'Ê' (D8): chỉ vi phạm luật chữ hoa A–Z.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-11",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có chữ thường",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m11_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "ABCD1234!",
+            "Xác nhận mật khẩu": "ABCD1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.7b"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC15",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC15",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Mật khẩu danh nghĩa viết hoa toàn bộ: chỉ vi phạm FR-01.7b.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-12",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi chữ thường duy nhất của Mật khẩu là chữ có dấu",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m12_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "ABCê1234!",
+            "Xác nhận mật khẩu": "ABCê1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.7b"
+          ],
+          "assumptions": [
+            "D2",
+            "D8",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC16",
+            "EC17",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC16",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chỉ còn một chữ thường và là 'ê' (D8): chỉ vi phạm luật chữ thường a–z.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-13",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có chữ số",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m13_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcdefgh!",
+            "Xác nhận mật khẩu": "Abcdefgh!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.7c"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC18",
+            "EC19",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC18",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay chữ số bằng chữ thường, giữ độ dài 9: chỉ vi phạm FR-01.7c.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-14",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu không có ký tự đặc biệt",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m14_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd12345",
+            "Xác nhận mật khẩu": "Abcd12345"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "assumptions": [
+            "D2",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC21",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC21",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay '!' bằng chữ số, giữ độ dài 9: chỉ vi phạm FR-01.8.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-15",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ có ký tự đặc biệt ngoài tập",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m15_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234#",
+            "Xác nhận mật khẩu": "Abcd1234#"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "assumptions": [
+            "D2",
+            "D7",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC22",
+            "EC23",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC22",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thay '!' bằng '#' (ngoài tập, D7): chỉ vi phạm FR-01.8 theo tập đóng.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
+        },
+        {
+          "id": "TC-FR20-16",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Xác nhận mật khẩu khác Mật khẩu",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m16_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234?"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "assumptions": [
+            "D2",
+            "D9",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC24",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC24",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Khác đúng một ký tự cuối ('?' thay '!'), cả hai chuỗi đều hợp lệ theo luật mật khẩu: lỗi chỉ đến từ không khớp. Lớp gộp theo D9 (bỏ trống = không khớp); đại diện 'khác một ký tự' vì căn cứ trực tiếp FR-01.9.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → dừng ở bước nhập, status Blocked, case gốc TC-FR20-94."
+        },
+        {
+          "id": "TC-FR20-17",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi Xác nhận mật khẩu chỉ khác hoa/thường",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m17_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "abcd1234!"
+          },
+          "expected_result": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại hoặc toast; nội dung chữ chỉ ghi Actual) (D10); app vẫn ở màn 'Đăng Ký Tài Khoản' (D10); danh sách ở trang admin 'Quản lý Người dùng' SAU = TRƯỚC (D10, D11).",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "assumptions": [
+            "D2",
+            "D9",
+            "D10",
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8",
+            "EC11",
+            "EC14",
+            "EC17",
+            "EC19",
+            "EC25",
+            "EC26",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "ec_target": [
+            "EC25",
+            "EC28",
+            "EC30",
+            "EC32"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Chỉ khác chữ đầu 'A'/'a' (D9: so khớp phân biệt hoa/thường).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → dừng ở bước nhập, status Blocked, case gốc TC-FR20-94."
+        }
+      ]
+    },
+    {
+      "id": "TS-GUI",
+      "name": "GUI — thuộc tính màn Đăng ký mobile (FR-22, D13) và sự tồn tại trường (FR-01.9)",
+      "format": "steps",
+      "description": "Kiểm tĩnh thuộc tính màn hình theo checklist, không gắn lớp tương đương (D13). Mỗi thuộc tính khẳng định ở đúng 1 case.",
+      "cases": [
+        {
+          "id": "TC-FR20-90",
+          "title": "Kiểm tra ký hiệu * bên cạnh nhãn khi xem các trường bắt buộc của màn Đăng ký trên mobile",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-22.1"
+          ],
+          "assumptions": [
+            "D2",
+            "D13"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "FR-01 liệt kê các trường bắt buộc; FR-22.1 yêu cầu '*' cho mọi trường bắt buộc; áp cho mobile theo D13.",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'.",
+              "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
+            },
+            {
+              "action": "Xem nhãn của từng trường bắt buộc theo FR-01 (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có); chụp TC-FR20-90_manual.png.",
+              "expected": "Mỗi nhãn có ký hiệu '*' bên cạnh."
+            }
+          ],
+          "expected_result": "Mỗi nhãn trường bắt buộc theo FR-01 có ký hiệu '*' bên cạnh.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
+          ]
+        },
+        {
+          "id": "TC-FR20-91",
+          "title": "Kiểm tra loại bàn phím của ô Email khi chạm vào ô trên màn Đăng ký mobile",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-22.2"
+          ],
+          "assumptions": [
+            "D13"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "D13 hiểu FR-22.2 trên mobile là bàn phím email; quan sát trực tiếp được khi chạm ô.",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'.",
+              "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
+            },
+            {
+              "action": "Chạm vào ô Email; chụp TC-FR20-91_manual.png khi bàn phím hiện.",
+              "expected": "Bàn phím email hiện ra (có phím '@' và '.' trên bàn phím chính)."
+            }
+          ],
+          "expected_result": "Chạm vào ô Email hiện bàn phím email (keyboardType email-address theo D13).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
+          ]
+        },
+        {
+          "id": "TC-FR20-92",
+          "title": "Kiểm tra che ký tự của ô Mật khẩu và Xác nhận mật khẩu khi nhập trên màn Đăng ký mobile",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-22.3"
+          ],
+          "assumptions": [
+            "D13"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "D13 hiểu FR-22.3 trên mobile là che ký tự (secureTextEntry); ô Xác nhận mật khẩu là trường mật khẩu (như A18).",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "Mật khẩu 'Abcd1234!'",
+          "steps": [
+            {
+              "action": "Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'.",
+              "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
+            },
+            {
+              "action": "Gõ 'Abcd1234!' vào ô Mật khẩu (và ô Xác nhận mật khẩu nếu có); chụp TC-FR20-92_manual.png.",
+              "expected": "Ký tự đã gõ hiển thị dạng che (không đọc được chuỗi)."
+            }
+          ],
+          "expected_result": "Ô Mật khẩu (và ô Xác nhận mật khẩu nếu có) che ký tự đã nhập.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
+          ]
+        },
+        {
+          "id": "TC-FR20-93",
+          "title": "Kiểm tra vị trí thông báo lỗi so với nút 'Đăng Ký' khi mật khẩu thiếu chữ hoa trên mobile",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-22.4"
+          ],
+          "assumptions": [
+            "D10",
+            "D13"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Chọn dữ liệu chỉ vi phạm một luật (thiếu chữ hoa) để chắc chắn có thông báo lỗi; vị trí thông báo chỉ khẳng định ở case này (D13).",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "Mật khẩu 'abcd1234!'",
+          "steps": [
+            {
+              "action": "Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'.",
+              "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
+            },
+            {
+              "action": "Nhập Họ Tên 'Nguyễn Văn Ánh', Email 'm93_{ts}@domain.com', Mật khẩu 'abcd1234!' (Xác nhận mật khẩu 'abcd1234!' nếu có), ẩn bàn phím, bấm 'Đăng Ký' một lần.",
+              "expected": "Có thông báo lỗi (D10)."
+            },
+            {
+              "action": "Chụp TC-FR20-93_manual.png toàn màn hình; nếu thông báo là hộp thoại, ghi lại và đóng rồi xem còn chữ lỗi trên màn hình không.",
+              "expected": "Thông báo lỗi nằm phía trên nút 'Đăng Ký'."
+            }
+          ],
+          "expected_result": "Thông báo lỗi nằm phía trên nút 'Đăng Ký' (không nằm bên dưới).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Nếu tài khoản m93_{ts}@domain.com bị tạo: ghi vào notes; không xoá giữa lượt, cuối lượt khởi động lại backend (D0)."
+          ]
+        },
+        {
+          "id": "TC-FR20-94",
+          "title": "Kiểm tra sự tồn tại của trường Xác nhận mật khẩu khi mở màn Đăng ký trên mobile",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-01.9"
+          ],
+          "assumptions": [
+            "D2",
+            "D9"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "High",
+          "origin": "AI",
+          "rationale": "Case kiểm sự tồn tại mà D9 nhắc tới; tách khỏi case nhập liệu để kết luận riêng (TC-FR20-16, 17 dựa vào case này).",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Tải lại app, bấm 'Đăng nhập' trên header rồi 'Đăng ký ngay'.",
+              "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị, các ô trống."
+            },
+            {
+              "action": "Xem toàn bộ màn hình (cuộn hết nếu cần); chụp TC-FR20-94_manual.png.",
+              "expected": "Có ô 'Xác nhận mật khẩu'."
+            }
+          ],
+          "expected_result": "Màn 'Đăng Ký Tài Khoản' có trường Xác nhận mật khẩu (FR-01.9).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
+          ]
+        }
+      ]
+    }
+  ]
 }

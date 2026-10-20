@@ -17633,8 +17633,10 @@ render_md.py → freeze.py → check_domain.py → lint → prompt log → commi
 **Output:**
 ```
 Giờ sửa phân lớp theo review (2/7b): ghi tiền đề gray-box theo từng ô, EC24 chỉ dẫn D9.
+
+2/7b, 2/7c đã commit. Giờ bước 3: dựng minimum set chạy tay.
 ```
-*File AI ghi/gửi trong lượt này:* `d_step2b.py`
+*File AI ghi/gửi trong lượt này:* `d_step2b.py`, `d_step3.py`
 
 **Xử lý:** [...]
 
