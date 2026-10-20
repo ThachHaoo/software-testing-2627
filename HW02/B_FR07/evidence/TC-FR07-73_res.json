@@ -1,0 +1,12 @@
+{
+  "responses": [
+    {
+      "status": 200,
+      "body": "{\"message\":\"Added to cart\"}"
+    }
+  ],
+  "get_after": {
+    "status": 200,
+    "body_text": "[{\"id\":5,\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"quantity\":5}]"
+  }
+}

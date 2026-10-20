@@ -7837,7 +7837,7 @@ Dừng. Báo cáo theo CLAUDE.md.
 ```
 
 **Output:**
-```
+````
 Đang đọc mã SUT và toàn bộ 62 case để viết spec.
 
 Đã nắm đủ dữ liệu. Giờ viết `tests/B_FR07/lib.ts` (helper) và spec.
@@ -7845,11 +7845,296 @@ Dừng. Báo cáo theo CLAUDE.md.
 Config chưa được vá (escape sai). Sửa bằng Edit.
 
 62 test, mã khớp. Điền dấu vân tay vào bảng oracle.
+
+Đã viết xong spec, `--list` ra đúng 62 TC. Giờ render, kiểm và commit.
+
+Đã viết script Playwright cho B_FR07 và commit `1abe0a1`. Chưa chạy test nào, theo đúng lệnh; các lệnh SV chạy nằm trong `HW02/B_FR07/RUN.md`.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 bước 6a – viết Playwright (không chạy test)
+- File đã tạo/sửa:
+  · HW02/tests/B_FR07/B_FR07.spec.ts + lib.ts
+  · HW02/tests/playwright.config.ts (thêm project B_FR07)
+  · HW02/B_FR07/RUN.md
+  · testcases.json (meta.environment: locale vi-VN, timezone Asia/Ho_Chi_Minh)
+  · A_prompt_log.md
+- Kết quả kiểm tra:
+  · npx playwright test --project=B_FR07 --list: 62 test, mã khớp đúng 62 TC trong testcases.json
+  · tsc: chỉ báo thiếu kiểu node (fs/path/__dirname), A_FR01 cũng vậy
+  · check_domain: 0 errors / 7 warn; lint: 0 errors / 10 warn; test: Not run
+- Commit: 1abe0a1 HW02[B-FR07] 6/7a: Playwright
+- Cách làm:
+  · Oracle từng case nằm trong bảng UI_ORACLE / API_ORACLE / GUI_H, kèm dấu vân tay sha1 của expected_result. Expected trong JSON đổi → test báo lỗi, không chạy theo oracle cũ.
+  · Mỗi case UI/GUI: 1 browser context mới, 1 page.goto; user riêng {ts}, xoá sau case. Xoá lỗi → annotation "cleanup" như A_FR01; merge_results không đưa annotation này vào notes.
+  · Giỏ ban đầu không khớp → Blocked theo B20:
+    - nếu giỏ dựng từ trang chi tiết: ghi "nghi case gốc TC-FR07-61, SV xác nhận";
+    - không có nút +/- → case gốc TC-FR07-90.
+  · B21: theo dõi 2 s sau click (badge, chữ/trạng thái nút, toast/aria-live, chữ "đã thêm"), ghi loại phản hồi và thời điểm vào Actual, chụp ảnh `_feedback`.
+  · TC-08: đọc DOM qua CDP trong lúc dialog native đang mở. Không đọc được → "[kiểm tay]" trong Actual, không kết luận.
+  · API: body gửi dạng chuỗi JSON thô cho mọi case (gồm 208, 209, 215); TC-215 so trên text của GET; TC-213 dùng Promise.all 50 request; TC-214 gửi text/plain.
+- Case phải chạy tay hoàn toàn: không có. Phần kiểm tay:
+  · TC-94 – alt có "mô tả nội dung ảnh" không (code chỉ kiểm alt không rỗng)
+  · TC-08 – dòng khi dialog đang mở, chỉ khi CDP không đọc được DOM
+- Diễn giải AI tự chọn (chưa có lệnh):
+  · TC-211/212: name/price "CSDL" lấy theo sản phẩm id 1 (số đầu tiên trong cột id)
+  · TC-213: "xử lý xong" kiểm là cả 50 request trả 2xx
+- Cần quyết định: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `lib.ts`, `B_FR07.spec.ts`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 130 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 127 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #131 | 13:08 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 bước 6b – đề xuất verdict theo A20 (giữ auto_status; chưa commit cho tới khi
+SV xác nhận).
+1. Pass hộp đen: TC-10, 11, 12, 13, 60 giữ Pass + notes "Pass hộp đen: lần bấm đầu ở
+   trang chi tiết không thêm cả giá trị hợp lệ (TC-61) → không chứng minh ô Số lượng
+   chặn giá trị sai". TC-200: notes tương tự cho phần giỏ không đổi; phần alert là
+   Pass thật.
+2. Đọc Actual đầy đủ TC-203, TC-206: nếu sản phẩm KHÔNG được thêm → Blocked, case gốc
+   TC-61; nếu được thêm nhưng sai Số lượng → giữ Fail. Báo lại cách xếp.
+3. TC-09 → Blocked, case gốc TC-08 (A17: không có dialog để chọn Hủy).
+4. TC-06, TC-65: case gốc = TC-61 (dựng giỏ) và TC-90 (thiếu nút '-').
+5. TC-213: đọc SAU. 50 phần tử quantity 1 → Blocked, case gốc TC-21 (không cộng dồn);
+   1 phần tử quantity < 50 → giữ Fail. Ghi diễn giải "xử lý xong = 50×2xx" (SV đã
+   xác nhận) vào notes.
+6. TC-201: sửa script click trong trang (element.click() cách 20 ms) để đạt ≤ 0,4 s;
+   chạy lại RIÊNG TC-201 (SV chạy, lệnh ghi vào RUN.md); giữ kết quả lượt 1 trong
+   notes. Chưa chốt verdict TC-201.
+7. TC-94: verdict Fail (alt rỗng ở 5 ảnh trang chủ, FR-24.4); trang chi tiết đạt.
+   Ghi chú evidence kiểm tay cần chụp lại trong cửa sổ ẩn danh không tiện ích.
+8. Rà mọi Fail còn lại: case nào lệch do biến KHÔNG nằm trong ec_target → liệt kê
+   (không tự đổi), kèm biến gây lệch và case gốc đề xuất.
+Báo cáo: bảng Pass/Fail/Blocked trước/sau, danh sách thay đổi, danh sách mục 8.
+```
+
+**Output:**
+````
+Sửa script: TC-201 dùng `element.click()` trong trang, body API gửi dạng Buffer.
+
+Đã áp xong mục 1–7 vào `testcases.json` (`status` và `notes`; `auto_status` giữ nguyên). Chưa commit, chờ SV xác nhận. Có một lỗi script ở TC-209 cần anh/chị quyết định trước khi chốt verdict case đó.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 6b – đề xuất verdict theo A20 (CHƯA commit)
+- File đã sửa:
+  · HW02/B_FR07/testcases.json, testcases.md: status + notes "6b: …"
+  · HW02/tests/B_FR07/B_FR07.spec.ts: TC-201 click; body API gửi dạng Buffer
+  · HW02/B_FR07/RUN.md: thêm lệnh chạy lại riêng TC-201, TC-209
+- Kết quả kiểm tra: check_domain 0 errors/7 warn; lint 0 errors/10 warn; --list 62 test
+- Số verdict trước → sau: Pass 14 → 14 · Fail 43 → 39 · Blocked 5 → 9
+- Thay đổi:
+  · TC-10, 11, 12, 13, 60: giữ Pass, thêm notes "Pass hộp đen"
+  · TC-200: giữ Pass; notes ghi phần giỏ không đổi là Pass hộp đen, phần không bật alert là Pass thật
+  · TC-203, 206: Fail → Blocked, case gốc TC-61. Cả hai đều SAU giỏ trống, tức sản phẩm không được thêm
+  · TC-09: Fail → Blocked, case gốc TC-08 (không có dialog để chọn Hủy)
+  · TC-06, 65: giữ Blocked; notes case gốc TC-61 + TC-90
+  · TC-213: Fail → Blocked, case gốc TC-21
+    - SAU có 50 phần tử id 1, mỗi phần tử quantity 1 (lấy từ evidence _res.json)
+    - notes ghi diễn giải "xử lý xong = 50×2xx"
+  · TC-201: giữ Fail (auto), verdict chưa chốt
+    - notes giữ lượt 1: mouse.click, 873 ms, SAU giỏ trống
+    - script mới: element.click() trong trang, cách 20 ms
+  · TC-94: giữ Fail; notes alt rỗng 5 ảnh trang chủ (FR-24.4), trang chi tiết đạt, evidence kiểm tay cần chụp lại
+- Mục 8 – Fail lệch do biến KHÔNG nằm trong ec_target (chưa đổi verdict):
+  · TC-04 – thêm từ trang chi tiết không vào giỏ (SAU = TRƯỚC) → phần cộng dồn EC37/EC10 bị chặn, đề xuất case gốc TC-61
+    - Riêng badge (EC43, mục tiêu) vẫn lệch vì không có badge → có thể giữ Fail cho phần này
+  · TC-205 – lần 1 không thêm được → phần cộng dồn EC9/EC37 bị chặn, đề xuất case gốc TC-61
+    - EC45 (không có phản hồi, mục tiêu) vẫn lệch → SV chọn giữ Fail hay Blocked
+  · TC-209 – lệch do script, không do SUT:
+    - Playwright tự JSON.stringify body không phải JSON hợp lệ, nên server nhận một chuỗi JSON chứ không phải Infinity thô (evidence TC-FR07-209_res.json: Unexpected token '"')
+    - Đã sửa sang Buffer, cần chạy lại
+  · TC-62, 63, 64: cùng nguyên nhân với TC-61, nhưng biến mục tiêu EC1 nằm trong ec_target → giữ Fail, không liệt kê
+- Bất thường mới:
+  · tests/B_FR07/B_FR07.spec.ts (hàm send của runApi) – lỗi body TC-209 ở trên
+  · Lượt 1 TC-201 dùng mouse.click theo toạ độ → SAU giỏ trống, chưa rõ có click trúng nút không. Chờ lượt chạy lại.
+- Cần quyết định:
+  · Q8 TC-209 – chạy lại với script đã sửa? (a) chạy lại, lệnh trong RUN.md (b) giữ Fail lượt 1
+  · Q9 TC-04, TC-205 – (a) giữ Fail theo biến mục tiêu còn lệch (badge/EC45) (b) Blocked, case gốc TC-61
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #132 | 13:12 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 6b – hoàn tất (chưa commit cho tới khi có kết quả chạy lại).
+1. Q9: TC-04 giữ Fail; notes "EC10 chưa đánh giá được (thêm từ trang chi tiết không
+   vào giỏ, case gốc TC-61); Fail do EC43 – không có badge". TC-205 giữ Fail; notes
+   "Fail do chính thao tác mục tiêu (thêm 2 lần ở trang chi tiết): lần 1 không thêm,
+   khớp giả thuyết gray-box ProductDetail.jsx:21–31".
+2. Kiểm req.json của TC-208, TC-215: body thô có đúng 1e-324 và 9007199254740993
+   không? Nếu sai → thêm vào danh sách chạy lại.
+3. Cập nhật RUN.md: lượt chạy lại gồm TC-201, TC-209 (+ 208/215 nếu mục 2 sai);
+   restart backend trước lượt chạy lại.
+Dừng, báo cáo kết quả mục 2.
+```
+
+**Output:**
+````
+TC-208 và TC-215 không cần chạy lại: body thô gửi đúng `1e-324` và `9007199254740993`. Lượt chạy lại chỉ gồm TC-201 và TC-209. Chưa commit.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 6b – hoàn tất notes Q9, kiểm body TC-208/215, cập nhật RUN.md (chưa commit)
+- File đã sửa:
+  · HW02/B_FR07/testcases.json, testcases.md: notes 6b cho TC-04, TC-205; status không đổi
+  · HW02/B_FR07/RUN.md: mục "Lượt chạy lại (bước 6b)" thay cho 2 mục riêng
+- Kết quả mục 2 – body đã gửi đúng, KHÔNG cần chạy lại:
+  · TC-208: req.json body_raw có "quantity": 1e-324, là JSON hợp lệ. POST 200; GET SAU có phần tử id 5 với quantity 0
+  · TC-215: req.json body_raw có "quantity": 9007199254740993, là JSON hợp lệ. POST 200; GET SAU có quantity 9007199254740992
+  · Vì sao tin là body đến server đúng:
+    - req.json ghi chuỗi do script dựng, không phải bản chụp gói tin;
+    - Playwright chỉ tự JSON.stringify chuỗi KHÔNG hợp lệ JSON, như TC-209;
+    - nếu body bị bọc thành chuỗi, server sẽ trả 400 như TC-209, còn ở đây server parse ra đúng object.
+- Lượt chạy lại: TC-201, TC-209; restart backend trước khi chạy; 1 lệnh test + 1 lệnh merge vào results/B_FR07_rerun.json
+  · Đã kiểm: --list với bộ lọc ra đúng 2 test
+- Kết quả kiểm tra: check_domain 0 errors/7 warn; test lượt chạy lại: Not run (SV chạy)
+- Commit: chưa (chờ kết quả chạy lại)
+- Cần quyết định: không có
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #133 | 13:20 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 6b – xử lý chạy nhầm (chưa commit).
+Bối cảnh: SV đã chạy (lượt 2) toàn bộ 62 case bằng script mới + merge, rồi (lượt 3)
+chạy lại TC-201, 209 + merge. Lượt 1 bị ghi đè (results + evidence).
+
+1. Kiểm testcases.json: các chỉnh sửa 6b còn không? (status Blocked của TC-09, 203,
+   206, 213; notes "6b: …" của TC-04, 06, 10–13, 60, 65, 94, 200, 201, 205, 213).
+   Báo cái nào mất.
+2. So auto_status lượt 2 với lượt 1 (lượt 1, SV chép từ output merge):
+   Pass: 10,11,12,13,20,38,39,60,66,71,72,73,74,200
+   Blocked: 03,05,06,07,65
+   Fail: mọi case còn lại.
+   Liệt kê case khác kết quả (ngoài 201, 209) → nghi flaky, chưa kết luận.
+3. Áp lại quyết định 6b bị mất, NHƯNG kiểm lại điều kiện trên Actual lượt 2 trước
+   khi áp (203/206 SAU giỏ trống? 213 SAU 50 phần tử quantity 1? TC-61 vẫn Fail?).
+   Điều kiện không còn đúng → không áp, báo lại.
+4. Báo kết quả TC-201, TC-209 lượt 2 và lượt 3; khác nhau → báo, chưa chốt.
+   Kèm kết quả kiểm req.json TC-208, 215 (lệnh trước, mục 2).
+5. Ghi nhật ký lượt chạy vào RUN.md (cuối file) và notes suite: lượt 1 (chính thức
+   ban đầu, bị ghi đè do chạy nhầm), lượt 2 (toàn bộ, script đã sửa), lượt 3 (201,
+   209). Đề xuất lượt chính thức theo câu trả lời SV về restart backend.
+6. Harness: nếu merge_results.py ghi đè status/notes do SV chỉnh → vá (chỉ ghi
+   auto_status + Actual; status do SV đặt giữ nguyên trừ khi --force), và file
+   results có timestamp để không ghi đè lượt trước. Commit riêng
+   "HW02: vá harness – merge không ghi đè verdict thủ công".
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+````
+Ghi chú `6b:` còn nguyên. Mất 4 status Blocked (TC-09, 203, 206, 213), merge đã ghi đè thành Fail. Kiểm Actual lượt 2/3.
+
+Lượt 2 và lượt 3 cho kết quả giống nhau, các điều kiện 6b vẫn đúng. Tiếp: áp lại status, ghi nhật ký lượt chạy, vá merge.
+
+Vá `merge_results.py`: không ghi đè status do SV đặt.
+
+That print line is ugly; clean it.
+
+Vá xong và đã thử trên bản sao. Cập nhật automation.md rồi commit riêng phần harness.
+
+Đã khôi phục 4 status Blocked bị merge ghi đè, ghi nhật ký 3 lượt chạy, và vá harness để merge không ghi đè verdict SV đặt nữa. Lượt 2 không có case nào lệch lượt 1 nên không nghi flaky. Phần B_FR07 chưa commit; còn thiếu câu trả lời của SV về restart backend để chốt lượt chính thức.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 6b – xử lý chạy nhầm (chưa commit phần B_FR07) + vá harness merge
+- File đã sửa:
+  · HW02/B_FR07/testcases.json, testcases.md: status, notes case, notes suite (nhật ký)
+  · HW02/B_FR07/RUN.md: nhật ký lượt + lệnh results có timestamp
+  · .claude/skills/domain-bva-testing/scripts/merge_results.py, references/automation.md (đã commit)
+- Mục 1 – sửa đổi 6b bị mất:
+  · Mất: status Blocked của TC-09, 203, 206, 213 (merge lượt 2 ghi đè thành Fail)
+  · Còn nguyên: mọi notes "6b: …" (merge không ghi notes)
+- Mục 2 – auto_status lượt 2 so với lượt 1: giống nhau ở mọi case ngoài 201/209 (Pass 14, Blocked 5, còn lại Fail). Không có case nghi flaky.
+- Mục 3 – đã kiểm điều kiện trên Actual lượt 2 rồi mới áp lại Blocked cho cả 4 case:
+  · TC-203, 206: SAU giỏ trống
+  · TC-213: 50×HTTP 200, SAU 50 phần tử id 1, mỗi phần tử quantity 1
+  · TC-61: vẫn Fail
+  · TC-09: vẫn không có dialog
+  · Tổng hiện tại: Pass 14 · Fail 39 · Blocked 9
+- Mục 4:
+  · TC-201: lượt 2 = 405 ms, lượt 3 = 410 ms (đều > 400 ms, đã ghi notes); cả hai lượt SAU có 20 dòng AirPods, mỗi dòng SL 1 → auto Fail. Hai lượt giống nhau; verdict chưa chốt.
+  · TC-209: lượt 2 và lượt 3 giống nhau: body thô đã gửi đúng (server báo "Unexpected token 'I'"), HTTP 400 dạng HTML, không có trường error, giỏ không đổi → auto Fail
+  · TC-208, 215 (kiểm lại trên evidence lượt 2): body_raw đúng 1e-324 / 9007199254740993, đều là JSON hợp lệ; GET SAU lần lượt có quantity 0 / 9007199254740992 → không cần chạy lại
+- Mục 5 – nhật ký lượt chạy (cuối RUN.md + notes của 7 suite):
+  · lượt 1 ≈ 12:56: toàn bộ 62 case; results và evidence đã bị ghi đè
+  · lượt 2 13:14: toàn bộ 62 case, script đã sửa
+  · lượt 3 13:17: TC-201, TC-209
+- Mục 6 – vá merge_results.py:
+  · Case đã có auto_status mà status khác auto_status thì giữ status, in [GIỮ]; chỉ cập nhật auto_status, Actual, evidence; ghi đè được bằng --force
+  · Đã thử trên bản sao: giữ được Blocked, --force ghi đè được
+  · Lệnh chạy trong RUN.md giờ ghi results có timestamp
+- Commit: e4625d5 HW02: vá harness – merge không ghi đè verdict thủ công
+- Bất thường mới: evidence/ vẫn bị ghi đè mỗi lượt vì merge chép cùng tên file (merge_results.py, evidence_name). Lệnh này chưa yêu cầu vá.
+- Cần quyết định:
+  · Q10 – Lượt chính thức: lệnh nói "theo câu trả lời SV về restart backend" nhưng em chưa nhận được câu trả lời đó → SV có restart backend trước lượt 2 không? (a) có → lượt 2 chính thức, lượt 3 ghi là lượt chạy lại (b) không → chạy lại toàn bộ sau khi restart
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #134 | 13:23 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – chốt 6/7b
+1. Lượt chính thức = lượt 2 (SV xác nhận restart backend trước mọi lượt); lượt 3 =
+   chạy lại TC-201, 209. Ghi vào nhật ký RUN.md + notes suite.
+2. TC-201: verdict Fail (SV chốt); notes "lệch thời gian 405–410 ms so với 400 ms
+   (~1–2%), không ảnh hưởng kết luận: 20 dòng riêng, mỗi dòng SL 1 = không cộng dồn
+   (FR-07.3)". Evidence TC-201/209 từ lượt 3, kết quả trùng lượt 2.
+3. Không vá evidence ghi đè (giới hạn 20 MB); ghi một dòng vào notes suite.
+4. render_md.py → check_domain.py → linter thầy →
+   commit "HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20" (kèm evidence,
+   results lượt 2 + 3, prompt log).
+
+Nhiệm vụ 2 – Bước 7a: gom dữ kiện (AI-01 §11: KHÔNG viết bug report)
+1. Gom mọi TC Fail theo TRIỆU CHỨNG quan sát được (không gộp theo phỏng đoán nguyên
+   nhân); mỗi nhóm: danh sách TC, yêu cầu/giả định bị vi phạm, Actual tóm tắt, đường
+   dẫn evidence. Case Blocked ghi kèm vào nhóm của case gốc.
+2. Kiểm trùng: gh issue list trên tkob-team/eshop-sut (mọi tác giả, kể cả đã đóng)
+   tìm issue về giỏ hàng / /api/cart / trang chi tiết / badge / alt / ₫ / breadcrumb;
+   đối chiếu cả BUG-01…14 của A_FR01. Liệt kê nhóm nào có thể trùng, kèm số issue.
+3. Ghi HW02/B_FR07/bugs_facts.md (chỉ dữ kiện). Dựng sẵn khung trống BUG-15… theo
+   số nhóm triệu chứng (14 trường như A, mục "Dữ kiện (AI chép)" điền sẵn; mục
+   "Nhận định", tiêu đề, severity, priority để TRỐNG).
+4. Không chọn gộp/tách, không đề xuất severity. Commit
+   "HW02[B-FR07] 7/7a: dữ kiện bug (AI chép)". Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 134 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 131 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

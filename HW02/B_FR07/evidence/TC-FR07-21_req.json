@@ -1,0 +1,18 @@
+{
+  "method": "POST",
+  "url": "/api/cart",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <T>"
+  },
+  "count": 1,
+  "body_raw": "{\"id\": 2, \"name\": \"Samsung Galaxy S24 Ultra\", \"price\": 28000000, \"quantity\": 3}",
+  "before": [
+    {
+      "id": 2,
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": 28000000,
+      "quantity": 1
+    }
+  ]
+}

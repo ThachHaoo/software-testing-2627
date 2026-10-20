@@ -1,0 +1,11 @@
+{
+  "method": "POST",
+  "url": "/api/cart",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <T>"
+  },
+  "count": 1,
+  "body_raw": "{\"id\": 5, \"name\": \"Bàn phím cơ Keychron Q1\", \"price\": 4000000, \"quantity\": 2}",
+  "before": []
+}

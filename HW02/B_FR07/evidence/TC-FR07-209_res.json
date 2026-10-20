@@ -1,0 +1,12 @@
+{
+  "responses": [
+    {
+      "status": 400,
+      "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>SyntaxError: Unexpected token &#39;I&#39;, ...&quot;uantity&quot;: Infinity}&quot; is not valid JSON<br> &nbsp; &nbsp;at JSON.parse (&lt;anonymous&gt;)<br> &nbsp; &nbsp;at parse (D:\\HK7\\Testing\\Exercise\\HW\\eshop-sut\\backend\\node_modules\\body-parser\\lib\\types\\json.js:72:19)<br> &nbsp; &nbsp;at D:\\HK7\\Testing\\Exercise\\HW\\eshop-sut\\backend\\node_modules\\body-parser\\lib\\read.js:162:18<br> &nbsp; &nbsp;at AsyncResource.runInAsyncScope (node:async_hooks:227:14)<br> &nbsp; &nbsp;at invokeCallback (D:\\HK7\\Testing\\Exercise\\HW\\eshop-sut\\backend\\node_modules\\raw-body\\index.js:238:16)<br> &nbsp; &nbsp;at done (D:\\HK7\\Testing\\Exercise\\HW\\eshop-sut\\backend\\node_modules\\raw-body\\index.js:227:7)<br> &nbsp; &nbsp;at IncomingMessage.onEnd (D:\\HK7\\Testing\\Exercise\\HW\\eshop-sut\\backend\\node_modules\\raw-body\\index.js:287:7)<br> &nbsp; &nbsp;at IncomingMessage.emit (node:events:509:28)<br> &nbsp; &nbsp;at endReadableNT (node:internal/streams/readable:1729:12)<br> &nbsp; &nbsp;at process.processTicksAndRejections (node:internal/process/task_queues:90:21)</pre>\n</body>\n</html>\n"
+    }
+  ],
+  "get_after": {
+    "status": 200,
+    "body_text": "[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"quantity\":1}]"
+  }
+}

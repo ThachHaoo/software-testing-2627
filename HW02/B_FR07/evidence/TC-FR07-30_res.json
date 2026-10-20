@@ -1,0 +1,12 @@
+{
+  "responses": [
+    {
+      "status": 200,
+      "body": "{\"message\":\"Added to cart\"}"
+    }
+  ],
+  "get_after": {
+    "status": 200,
+    "body_text": "[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"quantity\":1},{\"id\":5,\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"quantity\":-3}]"
+  }
+}

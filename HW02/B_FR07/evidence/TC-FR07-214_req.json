@@ -1,0 +1,11 @@
+{
+  "method": "POST",
+  "url": "/api/cart",
+  "headers": {
+    "Content-Type": "text/plain",
+    "Authorization": "Bearer <T>"
+  },
+  "count": 1,
+  "body_raw": "{\"id\": 1, \"name\": \"iPhone 15 Pro Max\", \"price\": 30000000, \"quantity\": 1}",
+  "before": []
+}

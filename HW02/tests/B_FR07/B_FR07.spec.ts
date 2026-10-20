@@ -230,15 +230,16 @@ async function runUi(c: any, { browser, accounts }: Ctx, info: TestInfo) {
       if (o.rowWhileDialog && whileDialog) obs.push(`dòng ${probeName} khi dialog đang mở: ${whileDialog}`);
     } else if (op.kind === 'spam') {
       await toHome(page);
-      const btn = homeAddBtn(page, op.id);
-      const box = (await btn.boundingBox())!;
-      const t0 = Date.now();
-      for (let i = 0; i < op.n; i++) {
-        await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-        if (i < op.n - 1) await page.waitForTimeout(op.gap);
-      }
-      const dt = Date.now() - t0;
-      obs.push(`bấm ${op.n} lần trong ${dt} ms${dt > (op.n * op.gap) ? ` [notes] thời gian thực tế ${dt} ms > ${op.n * op.gap} ms của cột Thao tác` : ''}`);
+      // element.click() trong trang, cách nhau `gap` ms (đo bằng performance.now() của trang) — để đạt nhịp của cột Thao tác
+      const dt = Math.round(await homeAddBtn(page, op.id).evaluate(async (b: HTMLButtonElement, a: { n: number; gap: number }) => {
+        const t0 = performance.now();
+        for (let i = 0; i < a.n; i++) {
+          b.click();
+          if (i < a.n - 1) await new Promise(r => setTimeout(r, a.gap));
+        }
+        return performance.now() - t0;
+      }, { n: op.n, gap: op.gap }));
+      obs.push(`bấm ${op.n} lần (element.click() trong trang) trong ${dt} ms${dt > (op.n * op.gap) ? ` [notes] thời gian thực tế ${dt} ms > ${op.n * op.gap} ms của cột Thao tác` : ''}`);
       await page.waitForTimeout(500);
     }
     if (o.dialog === 'none' && op.kind !== 'del') obs.push(dialogs.length ? `dialog: ${dialogs.join(' | ')}` : 'không có dialog');
@@ -463,7 +464,8 @@ async function runApi(c: any, { request, page, accounts }: Ctx, info: TestInfo) 
     else if (inp.Token === 'sai') headers.Authorization = BAD_TOKEN;
     const body = rawBody(inp);
     const n = Number(/gửi (\d+) request song song/.exec(how)?.[1] ?? 1);
-    const send = () => request.post(`${API}/api/cart`, { headers, data: body });
+    // Buffer: gửi đúng chuỗi thô. Với data là string + Content-Type JSON, Playwright tự JSON.stringify chuỗi không phải JSON hợp lệ (vd Infinity).
+    const send = () => request.post(`${API}/api/cart`, { headers, data: Buffer.from(body, 'utf-8') });
     const raw = n > 1 ? await Promise.all(Array.from({ length: n }, send)) : [await send()];
     const res: Res[] = await Promise.all(raw.map(async r => {
       const text = await r.text();

@@ -1,0 +1,324 @@
+{
+  "config": {
+    "configFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\playwright.config.ts",
+    "rootDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 15000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "A_FR01",
+        "name": "A_FR01",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/A_FR01[\\\\/].*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "B_FR07",
+        "name": "B_FR07",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/B_FR07[\\\\/].*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "web",
+        "name": "web",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/specs[\\\\/]B_FR07\\..*spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "admin",
+        "name": "admin",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/specs[\\\\/]C_FR15\\..*spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "api",
+        "name": "api",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW02/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/specs[\\\\/].*\\.api\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "version": "1.48.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "B_FR07\\B_FR07.spec.ts",
+      "file": "B_FR07/B_FR07.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TS-SV-UI SV bổ sung — tầng UI",
+          "file": "B_FR07/B_FR07.spec.ts",
+          "line": 657,
+          "column": 8,
+          "specs": [
+            {
+              "title": "TC-FR07-201 Kiểm tra bấm liên tục 20 lần nút 'Thêm vào giỏ' của cùng sản phẩm ở Trang chủ",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "actual",
+                      "description": "TRƯỚC: không có bảng (giỏ trống); bấm 20 lần (element.click() trong trang) trong 410 ms [notes] thời gian thực tế 410 ms > 400 ms của cột Thao tác; SAU: 20 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 120000000; không có badge; có 20 dòng 'Tai nghe AirPods Pro 2' (so dòng đầu tiên)"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "B_FR07",
+                  "projectName": "B_FR07",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "failed",
+                      "duration": 2179,
+                      "error": {
+                        "message": "Error: đúng 1 dòng\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m20\u001b[39m",
+                        "stack": "Error: đúng 1 dòng\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m20\u001b[39m\n    at runUi (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:274:95)",
+                        "location": {
+                          "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                          "column": 95,
+                          "line": 274
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 272 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mrows[\u001b[35m1\u001b[39m])\u001b[33m;\u001b[39m\n \u001b[90m 273 |\u001b[39m     }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 274 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mexactRows \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m`đúng ${o.exactRows} dòng`\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mexactRows)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 275 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39msame) {\n \u001b[90m 276 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU = TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength)\u001b[33m;\u001b[39m\n \u001b[90m 277 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m [r\u001b[33m.\u001b[39mname\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mline])\u001b[33m,\u001b[39m \u001b[32m'các dòng SAU = TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m [r\u001b[33m.\u001b[39mname\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mline]))\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                            "column": 95,
+                            "line": 274
+                          },
+                          "message": "Error: đúng 1 dòng\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m20\u001b[39m\n\n\u001b[0m \u001b[90m 272 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mrows[\u001b[35m1\u001b[39m])\u001b[33m;\u001b[39m\n \u001b[90m 273 |\u001b[39m     }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 274 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mexactRows \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m`đúng ${o.exactRows} dòng`\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mexactRows)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 275 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39msame) {\n \u001b[90m 276 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU = TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength)\u001b[33m;\u001b[39m\n \u001b[90m 277 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m [r\u001b[33m.\u001b[39mname\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mline])\u001b[33m,\u001b[39m \u001b[32m'các dòng SAU = TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m [r\u001b[33m.\u001b[39mname\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m r\u001b[33m.\u001b[39mline]))\u001b[33m;\u001b[39m\u001b[0m\n\n\u001b[2m    at runUi (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:274:95)\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                            "column": 100,
+                            "line": 292
+                          },
+                          "message": "Error: Số lượng của 'Tai nghe AirPods Pro 2'\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m20\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\n\u001b[0m \u001b[90m 290 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(b\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m \u001b[32m`Số lượng TRƯỚC của '${PRODUCTS[t.id].name}'`\u001b[39m)\u001b[33m.\u001b[39mtoBe(t\u001b[33m.\u001b[39mqty[\u001b[35m0\u001b[39m])\u001b[33m;\u001b[39m\n \u001b[90m 291 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m \u001b[32m`Số lượng SAU của '${PRODUCTS[t.id].name}'`\u001b[39m)\u001b[33m.\u001b[39mtoBe(t\u001b[33m.\u001b[39mqty[\u001b[35m1\u001b[39m])\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 292 |\u001b[39m       } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (t\u001b[33m.\u001b[39mqty \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mqty\u001b[33m,\u001b[39m \u001b[32m`Số lượng của '${PRODUCTS[t.id].name}'`\u001b[39m)\u001b[33m.\u001b[39mtoBe(t\u001b[33m.\u001b[39mqty)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 293 |\u001b[39m       \u001b[36mif\u001b[39m (t\u001b[33m.\u001b[39mqtyText \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mqtyText\u001b[33m,\u001b[39m \u001b[32m'Số lượng hiển thị'\u001b[39m)\u001b[33m.\u001b[39mtoBe(t\u001b[33m.\u001b[39mqtyText)\u001b[33m;\u001b[39m\n \u001b[90m 294 |\u001b[39m       \u001b[36mif\u001b[39m (t\u001b[33m.\u001b[39mprice \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mprice\u001b[33m,\u001b[39m \u001b[32m'Đơn giá'\u001b[39m)\u001b[33m.\u001b[39mtoBe(t\u001b[33m.\u001b[39mprice)\u001b[33m;\u001b[39m\n \u001b[90m 295 |\u001b[39m       \u001b[36mif\u001b[39m (t\u001b[33m.\u001b[39mline \u001b[33m===\u001b[39m \u001b[32m'qty×price'\u001b[39m) {\u001b[0m\n\n\u001b[2m    at runUi (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:292:100)\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                            "column": 84,
+                            "line": 297
+                          },
+                          "message": "Error: Thành tiền = 20 × Đơn giá hiển thị (6000000)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m120000000\u001b[39m\nReceived: \u001b[31m6000000\u001b[39m\n\n\u001b[0m \u001b[90m 295 |\u001b[39m       \u001b[36mif\u001b[39m (t\u001b[33m.\u001b[39mline \u001b[33m===\u001b[39m \u001b[32m'qty×price'\u001b[39m) {\n \u001b[90m 296 |\u001b[39m         \u001b[36mconst\u001b[39m q \u001b[33m=\u001b[39m \u001b[36mtypeof\u001b[39m t\u001b[33m.\u001b[39mqty \u001b[33m===\u001b[39m \u001b[32m'number'\u001b[39m \u001b[33m?\u001b[39m t\u001b[33m.\u001b[39mqty \u001b[33m:\u001b[39m \u001b[33mNumber\u001b[39m(t\u001b[33m.\u001b[39mqtyText)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 297 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mline\u001b[33m,\u001b[39m \u001b[32m`Thành tiền = ${q} × Đơn giá hiển thị (${a?.price})`\u001b[39m)\u001b[33m.\u001b[39mtoBe(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mprice \u001b[33m==\u001b[39m \u001b[36mnull\u001b[39m \u001b[33m?\u001b[39m \u001b[33mNaN\u001b[39m \u001b[33m:\u001b[39m q \u001b[33m*\u001b[39m a\u001b[33m.\u001b[39mprice)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 298 |\u001b[39m       } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (t\u001b[33m.\u001b[39mline \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(a\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mline\u001b[33m,\u001b[39m \u001b[32m'Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(t\u001b[33m.\u001b[39mline)\u001b[33m;\u001b[39m\n \u001b[90m 299 |\u001b[39m     }\n \u001b[90m 300 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'same'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\u001b[0m\n\n\u001b[2m    at runUi (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:297:84)\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T06:17:20.237Z",
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-UI-SV--a32fb-a-cùng-sản-phẩm-ở-Trang-chủ-B-FR07\\attachments\\screenshot-e73bb033567e651f02932112753d39f97256256d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-UI-SV--a32fb-a-cùng-sản-phẩm-ở-Trang-chủ-B-FR07\\test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-UI-SV--a32fb-a-cùng-sản-phẩm-ở-Trang-chủ-B-FR07\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                        "column": 95,
+                        "line": 274
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "5be93a4cd060bd3a0220-6f7a58654361c9def20d",
+              "file": "B_FR07/B_FR07.spec.ts",
+              "line": 662,
+              "column": 16
+            }
+          ]
+        },
+        {
+          "title": "TS-SV-API SV bổ sung — tầng API /api/cart",
+          "file": "B_FR07/B_FR07.spec.ts",
+          "line": 657,
+          "column": 8,
+          "specs": [
+            {
+              "title": "TC-FR07-209 Kiểm tra thêm qua API khi quantity = Infinity",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "actual",
+                      "description": "POST HTTP 400 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>SyntaxError: Unexpected token &#39;I&#39;, ...&quot;uant; TRƯỚC: [{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"quantity\":1}]; SAU: [{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"quantity\":1}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "B_FR07",
+                  "projectName": "B_FR07",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "status": "failed",
+                      "duration": 321,
+                      "error": {
+                        "message": "Error: body có trường error (B17)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: body có trường error (B17)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.check (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:360:115)\n    at runApi (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:489:7)",
+                        "location": {
+                          "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                          "column": 115,
+                          "line": 360
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 358 |\u001b[39m \u001b[36mconst\u001b[39m reject\u001b[33m:\u001b[39m \u001b[33mApiCheck\u001b[39m \u001b[33m=\u001b[39m (r\u001b[33m,\u001b[39m b\u001b[33m,\u001b[39m a) \u001b[33m=>\u001b[39m {\n \u001b[90m 359 |\u001b[39m   expect\u001b[33m.\u001b[39msoft(r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mstatus \u001b[33m>=\u001b[39m \u001b[35m400\u001b[39m \u001b[33m&&\u001b[39m r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mstatus \u001b[33m<\u001b[39m \u001b[35m500\u001b[39m\u001b[33m,\u001b[39m \u001b[32m`HTTP 4xx (nhận ${r[0].status})`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 360 |\u001b[39m   expect\u001b[33m.\u001b[39msoft(\u001b[33m!\u001b[39m\u001b[33m!\u001b[39mr[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mjson \u001b[33m&&\u001b[39m \u001b[36mtypeof\u001b[39m r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mjson \u001b[33m===\u001b[39m \u001b[32m'object'\u001b[39m \u001b[33m&&\u001b[39m \u001b[32m'error'\u001b[39m \u001b[36min\u001b[39m r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mjson\u001b[33m,\u001b[39m \u001b[32m'body có trường error (B17)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 361 |\u001b[39m   expect\u001b[33m.\u001b[39msoft(a\u001b[33m,\u001b[39m \u001b[32m'GET /api/cart không đổi (SAU = TRƯỚC)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(b)\u001b[33m;\u001b[39m\n \u001b[90m 362 |\u001b[39m }\u001b[33m;\u001b[39m\n \u001b[90m 363 |\u001b[39m \u001b[36mconst\u001b[39m addOne \u001b[33m=\u001b[39m (q\u001b[33m:\u001b[39m number)\u001b[33m:\u001b[39m \u001b[33mApiCheck\u001b[39m \u001b[33m=>\u001b[39m (r\u001b[33m,\u001b[39m b\u001b[33m,\u001b[39m a) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                            "column": 115,
+                            "line": 360
+                          },
+                          "message": "Error: body có trường error (B17)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 358 |\u001b[39m \u001b[36mconst\u001b[39m reject\u001b[33m:\u001b[39m \u001b[33mApiCheck\u001b[39m \u001b[33m=\u001b[39m (r\u001b[33m,\u001b[39m b\u001b[33m,\u001b[39m a) \u001b[33m=>\u001b[39m {\n \u001b[90m 359 |\u001b[39m   expect\u001b[33m.\u001b[39msoft(r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mstatus \u001b[33m>=\u001b[39m \u001b[35m400\u001b[39m \u001b[33m&&\u001b[39m r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mstatus \u001b[33m<\u001b[39m \u001b[35m500\u001b[39m\u001b[33m,\u001b[39m \u001b[32m`HTTP 4xx (nhận ${r[0].status})`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 360 |\u001b[39m   expect\u001b[33m.\u001b[39msoft(\u001b[33m!\u001b[39m\u001b[33m!\u001b[39mr[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mjson \u001b[33m&&\u001b[39m \u001b[36mtypeof\u001b[39m r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mjson \u001b[33m===\u001b[39m \u001b[32m'object'\u001b[39m \u001b[33m&&\u001b[39m \u001b[32m'error'\u001b[39m \u001b[36min\u001b[39m r[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39mjson\u001b[33m,\u001b[39m \u001b[32m'body có trường error (B17)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 361 |\u001b[39m   expect\u001b[33m.\u001b[39msoft(a\u001b[33m,\u001b[39m \u001b[32m'GET /api/cart không đổi (SAU = TRƯỚC)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(b)\u001b[33m;\u001b[39m\n \u001b[90m 362 |\u001b[39m }\u001b[33m;\u001b[39m\n \u001b[90m 363 |\u001b[39m \u001b[36mconst\u001b[39m addOne \u001b[33m=\u001b[39m (q\u001b[33m:\u001b[39m number)\u001b[33m:\u001b[39m \u001b[33mApiCheck\u001b[39m \u001b[33m=>\u001b[39m (r\u001b[33m,\u001b[39m b\u001b[33m,\u001b[39m a) \u001b[33m=>\u001b[39m {\u001b[0m\n\n\u001b[2m    at Object.check (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:360:115)\u001b[22m\n\u001b[2m    at runApi (D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts:489:7)\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T06:17:23.054Z",
+                      "attachments": [
+                        {
+                          "name": "TC-FR07-209_request",
+                          "contentType": "application/json",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-API-SV-77489-a-API-khi-quantity-Infinity-B-FR07\\attachments\\TC-FR07-209-request-e0c725533fa33f3ce31b937bc1612edd908b09bd.json"
+                        },
+                        {
+                          "name": "TC-FR07-209_response",
+                          "contentType": "application/json",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-API-SV-77489-a-API-khi-quantity-Infinity-B-FR07\\attachments\\TC-FR07-209-response-207c1f45fcdd41db1b27a07b8f7fd8f569e91edf.json"
+                        },
+                        {
+                          "name": "render từ response thật",
+                          "contentType": "image/png",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-API-SV-77489-a-API-khi-quantity-Infinity-B-FR07\\attachments\\render-từ-response-thật-e0ee85ad7a4d27973da8cca2f45b2df6dafda34e.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-API-SV-77489-a-API-khi-quantity-Infinity-B-FR07\\test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\test-results\\B_FR07-B_FR07-TS-SV-API-SV-77489-a-API-khi-quantity-Infinity-B-FR07\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW02\\tests\\B_FR07\\B_FR07.spec.ts",
+                        "column": 115,
+                        "line": 360
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "5be93a4cd060bd3a0220-90f10fde7867e9553eda",
+              "file": "B_FR07/B_FR07.spec.ts",
+              "line": 661,
+              "column": 39
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-20T06:17:19.768Z",
+    "duration": 3822.1659999999997,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
