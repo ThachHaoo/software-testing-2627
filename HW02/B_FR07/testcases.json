@@ -6,7 +6,7 @@
     "feature": "FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart)",
     "feature_code": "B_FR07",
     "doc_id": "TCD-B_FR07",
-    "version": "0.5",
+    "version": "0.6",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -47,16 +47,17 @@
       "B9 (badge 'Giỏ hàng') (SV chốt 2026-10-20): badge đếm TỔNG Số lượng. Giả định của SV, lý do: FR-23 'badge số lượng sản phẩm trong giỏ'. Câu SRS vẫn có thể hiểu là số dòng (số sản phẩm khác nhau) — ghi nhận độ mơ hồ.",
       "B10 (giữ giỏ khi tải lại trang / đăng nhập / đăng xuất) (SV chốt 2026-10-20): NGOÀI phạm vi — lý do: SRS im lặng. Không phân lớp; procedure UI vẫn tránh tải lại trang giữa chừng (B0d).",
       "B11 (khách chưa đăng nhập dùng giỏ) (SV chốt 2026-10-20): chấp nhận. UI: khách thêm/xem/sửa giỏ được — suy luận từ FR-08.1. Căn cứ trích nguyên văn: \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\" (README.md dòng 104). Grep README.md và api_specification.md ('khách', 'đăng nhập', 'guest', 'login', 'token'): không có câu nào nói trực tiếp về giỏ hàng của khách. API: thiếu/sai token bị từ chối — căn cứ: \"*Yêu cầu Header: `Authorization: Bearer <token>`*\" (api_specification.md dòng 112) và \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\" (README.md dòng 279, SEC-02). Không dùng hành vi SUT làm căn cứ.",
-      "B12 (nhãn chính xác) (SV chốt 2026-10-20): các cụm in đậm trong FR-07 là nhãn — 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác', 'Xóa sản phẩm', 'Tiếp tục mua sắm', 'Tổng cộng'. So khớp đúng chữ, PHÂN BIỆT hoa/thường, chuẩn hoá Unicode NFC trước khi so; coi hai cách đặt dấu 'óa'/'oá' là như nhau (vd 'Xóa' = 'Xoá'). Chỉ kiểm ở TC-FR07-95; case chức năng định vị nút/link không dựa vào chữ.",
+      "B12 (nhãn chính xác) (SV chốt 2026-10-20): các cụm in đậm trong FR-07 là nhãn — 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác', 'Xóa sản phẩm', 'Tiếp tục mua sắm', 'Tổng cộng'. So khớp đúng chữ, PHÂN BIỆT hoa/thường, chuẩn hoá Unicode NFC trước khi so; coi hai cách đặt dấu 'óa'/'oá' là như nhau (vd 'Xóa' = 'Xoá'). Chỉ kiểm ở TC-FR07-95…98; case chức năng định vị nút/link không dựa vào chữ.",
       "B13 (định dạng tiền) (SV chốt 2026-10-20): chấp nhận ký tự phân cách hàng nghìn '.' hoặc ','. Locale trình duyệt ghi trong meta.environment. Chỉ kiểm ở TC-FR07-93.",
       "B14 (dialog xoá) (SV chốt 2026-10-20, theo đề xuất AI): FR-07/FR-24 chỉ yêu cầu có dialog. Đề xuất: chọn Hủy → giỏ giữ nguyên; chọn Đồng ý → dòng bị xoá, Tổng cộng cập nhật; dialog native (window.confirm) hay modal đều chấp nhận.",
       "B15 (empty state) (SV chốt 2026-10-20, theo đề xuất AI): 'hình minh họa và thông báo rõ ràng' — oracle đề xuất: có phần tử ảnh/icon (img/svg) và có dòng chữ báo giỏ trống; không cố định nội dung chữ.",
-      "B16 (GUI liên quan) (SV chốt 2026-10-20): có suite TS-GUI riêng, giới hạn trang Giỏ hàng (/cart) và các điểm thêm vào giỏ (Trang chủ /, Chi tiết /product/:id): sự tồn tại nút +/- (A17), breadcrumb, highlight navbar, ký hiệu ₫ + phân cách hàng nghìn, alt ảnh. Không phân lớp.",
+      "B16 (GUI liên quan) (SV chốt 2026-10-20): có suite TS-GUI riêng, giới hạn trang Giỏ hàng (/cart) và các điểm thêm vào giỏ (Trang chủ /, Chi tiết /product/:id): sự tồn tại nút +/- (A17), nhãn chính xác của FR-07 (B12), phản hồi khi bấm 'Thêm vào giỏ' ở trang chủ (B21), breadcrumb, highlight navbar, ký hiệu ₫ + phân cách hàng nghìn, alt ảnh. Không phân lớp.",
       "B17 (mã lỗi API) (SV chốt 2026-10-20, theo đề xuất AI): api_specification §4 không mô tả lỗi. Đề xuất như A11: dữ liệu không hợp lệ → 4xx (không 2xx, không 5xx) kèm trường error; không cố định mã. Quan sát code: thiếu token → 401, token sai → 403 (server.js dòng 103, 106).",
       "B18 (sai kiểu / id không tồn tại ở API) (SV chốt 2026-10-20): giữ 5 lớp chỉ có ở tầng API — EC6, EC7 (quantity) và EC12, EC13, EC53 (id) — phải bị từ chối 4xx, giỏ không đổi. EC53 tách từ EC13 ở review bước 3.",
       "B19 (đại diện id chẵn/lẻ ở API) (SV chốt 2026-10-20): suite TS-DOM-API lấy đại diện cả sản phẩm id chẵn và id lẻ. Đại diện chọn theo code server.js:162 (gray-box), không phải lớp mới.",
       "B20 (A17/A20 áp cho B_FR07) (AI đề xuất theo quy ước đã chốt từ A_FR01): nút +/- thiếu → TC-FR07-90 (kiểm sự tồn tại) Fail; các case cần bấm +/- → Blocked, case gốc TC-FR07-90. Giỏ ban đầu không dựng được đúng như cột (do lỗi đã có ở case khác) → Blocked, ghi case gốc.",
-      "B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual."
+      "B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual.",
+      "B22 (badge khi giỏ trống) (SV chốt 2026-10-20): badge ẩn hoặc hiển thị 0 đều chấp nhận — lý do: SRS im lặng. Gắn EC44."
     ]
   },
   "requirements": [
@@ -397,13 +398,24 @@
       {
         "id": "EC8",
         "variable": "V2",
-        "class": "Sản phẩm chưa có trong giỏ",
+        "class": "UI: sản phẩm chưa có trong giỏ",
         "valid": true,
         "guideline": "set",
-        "note": "→ tạo dòng mới (FR-07.3 suy ngược). UI + API.",
+        "note": "→ tạo dòng mới (FR-07.1). Lớp API tương ứng: EC55.",
         "requirements": [
           "FR-07.1"
         ]
+      },
+      {
+        "id": "EC55",
+        "variable": "V2",
+        "class": "API: id chưa có trong giỏ",
+        "valid": true,
+        "guideline": "set",
+        "requirements": [
+          "API-CART"
+        ],
+        "note": "Tách từ EC8 ở review bước 3 lần 3 để yêu cầu khớp tầng (FR-07.1 chỉ là yêu cầu hiển thị ở UI)."
       },
       {
         "id": "EC9",
@@ -438,8 +450,7 @@
         "note": "Tầng API của FR-07.3: GET /api/cart phải có 1 phần tử, quantity cộng dồn.",
         "requirements": [
           "FR-07.3",
-          "API-CART",
-          "B7"
+          "API-CART"
         ]
       },
       {
@@ -497,8 +508,7 @@
         "guideline": "set",
         "note": "B8.",
         "requirements": [
-          "API-CART",
-          "B8"
+          "API-CART"
         ]
       },
       {
@@ -543,8 +553,7 @@
         "guideline": "split",
         "note": "Điểm đặc biệt cho '-': giữ 1 (B3 SV chốt). Biến trạng thái, không có lớp không hợp lệ.",
         "requirements": [
-          "FR-07.2",
-          "B3"
+          "FR-07.2"
         ]
       },
       {
@@ -770,15 +779,26 @@
       {
         "id": "EC40",
         "variable": "V12",
-        "class": "Số lượng giữ nguyên",
+        "class": "Số lượng giữ nguyên do bấm '-' tại Số lượng 1",
         "valid": true,
         "guideline": "set",
-        "note": "'-' khi = 1 (B3), hoặc lần thêm bị từ chối (B2).",
+        "note": "B3 SV chốt. Tách khỏi lớp 'giữ nguyên do lần thêm bị từ chối' (EC54) ở review bước 3 lần 3.",
         "requirements": [
-          "FR-06.2",
-          "B2",
+          "FR-07.2",
           "B3"
         ]
+      },
+      {
+        "id": "EC54",
+        "variable": "V12",
+        "class": "Số lượng/giỏ giữ nguyên do lần thêm bị từ chối",
+        "valid": true,
+        "guideline": "set",
+        "requirements": [
+          "FR-06.2",
+          "B2"
+        ],
+        "note": "B2 SV chốt. Tách từ EC40 ở review bước 3 lần 3."
       },
       {
         "id": "EC41",
@@ -820,9 +840,10 @@
         "class": "Giỏ trống: badge ẩn hoặc hiển thị 0",
         "valid": true,
         "guideline": "set",
-        "note": "SRS im lặng; đề xuất chấp nhận cả hai.",
+        "note": "B22 SV chốt: ẩn hoặc 0 đều chấp nhận.",
         "requirements": [
-          "FR-23.2"
+          "FR-23.2",
+          "B22"
         ]
       },
       {
@@ -1242,8 +1263,7 @@
           },
           "expected_result": "Không có dialog xoá. TRƯỚC → SAU: vẫn 1 dòng; Số lượng giữ 1; Tổng 4000000 (B3).",
           "requirements": [
-            "FR-07.2",
-            "FR-06.2"
+            "FR-07.2"
           ],
           "covers": [
             "EC14",
@@ -1369,7 +1389,7 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC40",
+            "EC54",
             "EC46"
           ],
           "technique": "EP",
@@ -1385,7 +1405,7 @@
           "notes": "",
           "ec_target": [
             "EC2",
-            "EC40",
+            "EC54",
             "EC46"
           ]
         },
@@ -1408,7 +1428,7 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC40",
+            "EC54",
             "EC46"
           ],
           "technique": "EP",
@@ -1424,7 +1444,7 @@
           "notes": "",
           "ec_target": [
             "EC3",
-            "EC40",
+            "EC54",
             "EC46"
           ]
         },
@@ -1447,7 +1467,7 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC40",
+            "EC54",
             "EC46"
           ],
           "technique": "EP",
@@ -1463,7 +1483,7 @@
           "notes": "",
           "ec_target": [
             "EC4",
-            "EC40",
+            "EC54",
             "EC46"
           ]
         },
@@ -1486,7 +1506,7 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC40",
+            "EC54",
             "EC46"
           ],
           "technique": "EP",
@@ -1502,7 +1522,7 @@
           "notes": "Ô input type=number có thể không nhận chữ: nếu ô vẫn trống sau khi gõ thì ghi notes 'không nhập được', vẫn bấm thêm và so giỏ; verdict theo Expected.",
           "ec_target": [
             "EC5",
-            "EC40",
+            "EC54",
             "EC46"
           ]
         }
@@ -1573,14 +1593,13 @@
           "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 1, name 'iPhone 15 Pro Max', price 30000000, quantity 2.",
           "requirements": [
             "FR-06.2",
-            "FR-07.1",
             "API-CART",
             "SEC-02",
             "FR-07.3"
           ],
           "covers": [
             "EC1",
-            "EC8",
+            "EC55",
             "EC15",
             "EC23",
             "EC28",
@@ -1601,7 +1620,7 @@
           "notes": "",
           "ec_target": [
             "EC1",
-            "EC8",
+            "EC55",
             "EC15",
             "EC28",
             "EC31",
@@ -1674,7 +1693,7 @@
           ],
           "covers": [
             "EC1",
-            "EC8",
+            "EC55",
             "EC16",
             "EC25",
             "EC28",
@@ -1716,7 +1735,7 @@
           ],
           "covers": [
             "EC2",
-            "EC8",
+            "EC55",
             "EC24",
             "EC15",
             "EC31",
@@ -1757,7 +1776,7 @@
           ],
           "covers": [
             "EC3",
-            "EC8",
+            "EC55",
             "EC24",
             "EC15",
             "EC31",
@@ -1798,7 +1817,7 @@
           ],
           "covers": [
             "EC4",
-            "EC8",
+            "EC55",
             "EC24",
             "EC15",
             "EC31",
@@ -1839,7 +1858,7 @@
           ],
           "covers": [
             "EC5",
-            "EC8",
+            "EC55",
             "EC24",
             "EC15",
             "EC31",
@@ -1880,7 +1899,7 @@
           ],
           "covers": [
             "EC6",
-            "EC8",
+            "EC55",
             "EC24",
             "EC15",
             "EC31",
@@ -1921,7 +1940,7 @@
           ],
           "covers": [
             "EC7",
-            "EC8",
+            "EC55",
             "EC24",
             "EC15",
             "EC31",
@@ -2040,7 +2059,7 @@
           ],
           "covers": [
             "EC1",
-            "EC8",
+            "EC55",
             "EC29",
             "EC24",
             "EC15",
@@ -2082,7 +2101,7 @@
           ],
           "covers": [
             "EC1",
-            "EC8",
+            "EC55",
             "EC30",
             "EC24",
             "EC15",
@@ -2242,7 +2261,7 @@
         },
         {
           "id": "TC-FR07-92",
-          "title": "Kiểm tra highlight link 'Giỏ hàng' trên navbar khi đang ở trang Giỏ hàng",
+          "title": "Kiểm tra highlight link tới /cart trên navbar khi đang ở trang Giỏ hàng",
           "layer": "UI",
           "requirements": [
             "FR-23.1"
@@ -2326,6 +2345,9 @@
           "notes": "Ghi locale trình duyệt khi chạy (B13).",
           "cleanup": [
             "Không cần: không tạo user; giỏ web mất khi đóng context."
+          ],
+          "assumptions": [
+            "B13"
           ]
         },
         {
@@ -2458,6 +2480,9 @@
           "notes": "Tách từ TC-FR07-95 cũ (bản 3/7b, case gom 4 nhóm nhãn) ở review bước 3 lần 2.",
           "cleanup": [
             "Không cần: không tạo user; giỏ web mất khi đóng context."
+          ],
+          "assumptions": [
+            "B12"
           ]
         },
         {
@@ -2500,6 +2525,9 @@
           "notes": "Tách từ TC-FR07-95 cũ (bản 3/7b, case gom 4 nhóm nhãn) ở review bước 3 lần 2.",
           "cleanup": [
             "Không cần: không tạo user; giỏ web mất khi đóng context."
+          ],
+          "assumptions": [
+            "B12"
           ]
         },
         {

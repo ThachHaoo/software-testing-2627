@@ -7366,7 +7366,7 @@ C. render_md.py → freeze.py → check_domain.py → linter thầy. Dừng.
 ```
 
 **Output:**
-```
+````
 Đọc `check_domain.py` trước khi vá.
 
 Vá harness: `render_md.py` (ec_target, mã giả định trong truy vết), `check_domain.py` (3 kiểm tra), schema doc.
@@ -7374,11 +7374,74 @@ Vá harness: `render_md.py` (ec_target, mã giả định trong truy vết), `ch
 A_FR01: render không đổi (diff rỗng), check_domain vẫn 0 errors/1 warn như trước. Commit harness.
 
 Giờ sửa B_FR07.
+
+Em đã sửa xong bước 3 lần 2 và vá harness: số TC từ 34 lên 37, check_domain 0 errors, linter 0 warn. Vá harness không làm đổi gì ở A_FR01.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá harness ec_target + mã giả định trong truy vết; sửa bước 3 lần 2 (ec_target, tách nhãn, B21, lỗi vặt)
+- File đã tạo/sửa: check_domain.py, render_md.py, schema-domain.md; HW02/B_FR07/testcases.json/.md; ai-outputs/B_FR07_step3_20261020-1058.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra:
+  · B_FR07: check_domain 0 errors/8 warn (7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10; V1 chưa có BVA), phủ 51/51 EC; lint 0 errors/0 warn; test Not run
+  · A_FR01 sau vá harness: testcases.md render lại không đổi (diff rỗng); check_domain 0 errors/1 warn, như trước
+- Commit: 3f47dfd HW02: vá harness – ec_target + mã giả định trong truy vết
+          3013c2f HW02[B-FR07] 3/7c: ec_target, tách nhãn, B21
+- Số TC: 34 → 37 (UI 13, API 14 không đổi; GUI 7 → 10)
+  - TC-95 cũ tách thành 95 (nhãn 5 cột), 96 (nhãn 'Xóa sản phẩm'), 97 (nhãn 'Tiếp tục mua sắm'), 98 (nhãn 'Tổng cộng')
+  - TC-96 cũ (phản hồi nút ở trang chủ) → TC-99; ánh xạ số cũ → mới ghi trong notes của từng case
+- Harness: chỉ cảnh báo "TC domain thiếu ec_target" khi file đã dùng trường này, để A_FR01 không bị thêm cảnh báo
+- Bất thường mới:
+  - check_domain mới bắt được TC-07: Expected khẳng định Tổng nhưng covers thiếu EC42 → đã thêm EC42 vào covers
+  - Tiêu đề TC-92 vẫn ghi "link 'Giỏ hàng'" (ngoài danh sách 90/93/94; các bước đã đổi sang "link tới /cart") — testcases.json:2244
+- Cần quyết định (chặn bước 4): không có
+- Không chặn (1 điểm, xem mục Truy vết trong HW02/B_FR07/testcases.md): EC40 gộp hai tình huống ('-' tại Số lượng 1 — B3; lần thêm bị từ chối — B2), nên truy vết gắn nhầm B3 cho TC-10…13 (case Số lượng sai) và B2 cho TC-07 (case nút '-')
+  - Phương án: (a) giữ nguyên; (b) tách EC40 thành 2 lớp đầu ra, mỗi lớp một giả định
+```
+````
 *File AI ghi/gửi trong lượt này:* `step3c_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 123 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 120 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #124 | 11:00 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – B_FR07 sửa bước 3 lần 3 (commit "HW02[B-FR07] 3/7d: làm sạch truy vết")
+1. Tách EC40 thành 2 lớp đầu ra: "giữ nguyên do '-' tại Số lượng 1" (FR-07.2, B3)
+   và "giữ nguyên do lần thêm bị từ chối" (FR-06.2, B2). Cập nhật covers/ec_target
+   TC-07, TC-10…13. Mã mới tiếp sau EC53.
+2. EC19 bỏ B3. EC15 chỉ gắn API-CART (bỏ B8). EC8: yêu cầu phải khớp cả UI lẫn API
+   (không gắn FR-07.1 cho tầng API — tách lớp hoặc đổi yêu cầu, chọn cách ít thay đổi hơn).
+3. Quy tắc (ghi vào schema-domain.md): cột Yêu cầu chỉ chứa mã giả định quyết định
+   Expected; giả định phạm vi (B6, B7, B10, B16) và chọn đại diện (B19) không vào
+   truy vết. Rà toàn bộ EC/TC theo quy tắc này.
+4. TC-96, TC-97 thêm B12; TC-93 thêm B13.
+5. B22 (SV chốt): giỏ trống — badge ẩn hoặc hiển thị 0 đều chấp nhận; lý do: SRS
+   im lặng. Gắn EC44.
+6. B12 sửa "chỉ kiểm ở TC-95…98"; B16 nhắc nhãn FR-07 và phản hồi khi thêm;
+   tiêu đề TC-92 đổi "link tới /cart".
+7. render_md.py → freeze.py → check_domain.py → linter thầy → commit.
+
+Nhiệm vụ 2 – Bước 4 (BVA)
+1. /domain-bva-testing HW02/B_FR07 4. Áp B1 (không cận trên). Mã TS-BVA 60–89.
+   Mỗi TC có ec_target; tuân theo quy tắc khẳng định một nơi (nhãn/định dạng/badge/
+   phản hồi không khẳng định lại trong case BVA).
+2. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 4/7: TC BVA". Dừng.
+Báo cáo theo CLAUDE.md, kèm danh sách biến đã làm BVA và lý do bỏ biến nào (nếu có).
+```
+
+**Output:**
+```
+Nhiệm vụ 1: làm sạch truy vết.
+```
+*File AI ghi/gửi trong lượt này:* `step3d_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 124 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 121 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
