@@ -15165,7 +15165,20 @@ bước tái hiện G nào chưa chạy được. KHÔNG đề xuất gộp/tác
 **Output:**
 ```
 Ảnh mới SV đặt tên `C-FR15-94_manual_2.png` (thiếu "T"). Em đổi thành `TC-FR15-94_manual_2.png` theo đúng tên SV nêu, rồi xem ảnh.
+
+Bước 7a. Xem format `_groups` của B_FR07 và môi trường SUT.
+
+Kiểm SUT đang chạy và tài khoản GitHub.
+
+SUT đang chạy, `gh` là ThachHaoo. Kiểm trùng issue.
+
+Toàn bộ tái hiện API đã khớp kết quả lượt 6. Giờ tái hiện nhóm UI bằng một script Playwright chạy tay (headless).
+
+Mọi nhóm UI tái hiện đúng như lượt 6. Giờ restart backend theo yêu cầu.
+
+Dựng `HW02/bugs/_groups_C_FR15.md` (dữ kiện, có trích Actual/evidence từ JSON) và lưu script tái hiện vào `HW02/bugs/_repro_C_FR15/`.
 ```
+*File AI ghi/gửi trong lượt này:* `prelude.ps1`, `ui_repro.js`, `c15_groups.py`
 
 **Xử lý:** [...]
 

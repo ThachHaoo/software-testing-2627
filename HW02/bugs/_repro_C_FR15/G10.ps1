@@ -1,0 +1,6 @@
+﻿. "$PSScriptRoot\prelude.ps1"
+"Số bản ghi TRƯỚC: $(((Invoke-WebRequest -UseBasicParsing "$base/api/products").Content | ConvertFrom-Json).Count)"
+"GET    /api/products/999999 -> $(Send 'GET' "$base/api/products/999999" $null @{})"
+"PUT    /api/products/999999 -> $(Send 'PUT' "$base/api/products/999999" '{"name": "repro G10", "price": 2500000, "category_id": 3, "description": "repro", "imageUrl": "https://placehold.co/300"}' $headers)"
+"DELETE /api/products/999999 -> $(Send 'DELETE' "$base/api/products/999999" $null $headers)"
+"Số bản ghi SAU: $(((Invoke-WebRequest -UseBasicParsing "$base/api/products").Content | ConvertFrom-Json).Count)"
