@@ -6,7 +6,7 @@
     "feature": "FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart)",
     "feature_code": "B_FR07",
     "doc_id": "TCD-B_FR07",
-    "version": "0.10",
+    "version": "0.11",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -29,7 +29,8 @@
       "../eshop-sut/frontend-web/src/pages/ProductDetail.jsx dòng 21–31, 54–69 — ô 'Số lượng' (input type=number), nút 'Thêm vào giỏ hàng'",
       "../eshop-sut/frontend-web/src/pages/Home.jsx dòng 97–102 — nút 'Thêm vào giỏ' trên thẻ sản phẩm (số lượng 1)",
       "../eshop-sut/frontend-web/src/App.jsx dòng 15–23 (link 'Giỏ hàng' trên navbar), 57 (route /cart)",
-      "../eshop-sut/README.md §4 FR-08 dòng 105 — FR-08.2 tổng tiền tính tự động (căn cứ B8)"
+      "../eshop-sut/README.md §4 FR-08 dòng 105 — FR-08.2 tổng tiền tính tự động (căn cứ B8)",
+      "../eshop-sut/README.md §9 dòng 281 — SEC-04 (escape dữ liệu người dùng nhập khi hiển thị; đưa lại ở 5/7c cho TC-FR07-200)"
     ],
     "assumptions": [
       "B0a (độc lập, đã chốt từ phiên thảo luận): mỗi case dùng user riêng tạo qua POST /api/register với email chứa {ts}, đăng nhập lấy token riêng → userCarts[userId] riêng (server.js dòng 14, 291–293). Case UI chạy trong browser context mới (giỏ web là state React, rỗng khi mở trang).",
@@ -57,7 +58,8 @@
       "B19 (đại diện id chẵn/lẻ ở API) (SV chốt 2026-10-20): suite TS-DOM-API lấy đại diện cả sản phẩm id chẵn và id lẻ. Đại diện chọn theo code server.js:162 (gray-box), không phải lớp mới.",
       "B20 (A17/A20 áp cho B_FR07) (AI đề xuất theo quy ước đã chốt từ A_FR01): nút +/- thiếu → TC-FR07-90 (kiểm sự tồn tại) Fail; các case cần bấm +/- → Blocked, case gốc TC-FR07-90. Giỏ ban đầu không dựng được đúng như cột (do lỗi đã có ở case khác) → Blocked, ghi case gốc.",
       "B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual.",
-      "B22 (badge khi giỏ trống) (SV chốt 2026-10-20): badge ẩn hoặc hiển thị 0 đều chấp nhận — lý do: SRS im lặng. Gắn EC44."
+      "B22 (badge khi giỏ trống) (SV chốt 2026-10-20): badge ẩn hoặc hiển thị 0 đều chấp nhận — lý do: SRS im lặng. Gắn EC44.",
+      "B23 (cách viết số nguyên dương) (SV chốt 2026-10-20): Chuỗi biểu diễn một số nguyên dương theo cách khác (ký hiệu số mũ, số 0 đứng đầu) được hiểu theo giá trị số của nó; Số lượng hiển thị và tính tiền theo giá trị đó. Lý do: FR-06.2 chỉ nói \"số nguyên dương\", không quy định cách viết. Gắn TC-FR07-203, TC-FR07-206."
     ]
   },
   "requirements": [
@@ -144,6 +146,10 @@
     {
       "id": "SEC-02",
       "text": "Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ (README.md dòng 279)."
+    },
+    {
+      "id": "SEC-04",
+      "text": "Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng `innerHTML` trực tiếp. (README.md dòng 281) — Phạm vi B_FR07 (SV chốt 5/7c): giá trị người dùng nhập ở ô Số lượng hiển thị trong giỏ."
     }
   ],
   "domain": {
@@ -312,6 +318,15 @@
         "source": "API: mã HTTP + body của POST /api/cart (thành công: {\"message\": \"Added to cart\"}, server.js dòng 294) và GET /api/cart",
         "type": "HTTP",
         "constraint": "Dữ liệu hợp lệ → 2xx và GET phản ánh thay đổi; dữ liệu/token không hợp lệ → 4xx, giỏ không đổi (B7, B17, B18)."
+      },
+      {
+        "id": "V22",
+        "name": "Định dạng request POST /api/cart (API)",
+        "io": "input",
+        "source": "API: header Content-Type và body thô của POST /api/cart",
+        "type": "HTTP request",
+        "constraint": "api_specification.md §4.2 dòng 119: 'Body (JSON)'. SRS không nói cách xử lý request sai định dạng → 4xx (B17).",
+        "note": "SV thêm ở 5/7c (TC-FR07-209, TC-FR07-214). Mã V21 bỏ trống (đã gỡ ở bước trước)."
       }
     ],
     "partitions": [
@@ -926,6 +941,32 @@
         "valid": true,
         "guideline": "set",
         "note": "B17. Không 2xx, không 5xx.",
+        "requirements": [
+          "API-CART",
+          "B17"
+        ]
+      },
+      {
+        "id": "EC56",
+        "variable": "V22",
+        "class": "API: body không phải JSON hợp lệ",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "SV thêm ở 5/7c (TC-FR07-209).",
+        "origin": "Human",
+        "requirements": [
+          "API-CART",
+          "B17"
+        ]
+      },
+      {
+        "id": "EC57",
+        "variable": "V22",
+        "class": "API: Content-Type không phải application/json",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "SV thêm ở 5/7c (TC-FR07-214).",
+        "origin": "Human",
         "requirements": [
           "API-CART",
           "B17"
@@ -3267,7 +3308,8 @@
           },
           "expected_result": "Ngay khi gõ/paste: ô input chặn hoặc không thực thi script. Bấm thêm: không bật alert XSS, giỏ không đổi.",
           "requirements": [
-            "FR-06.2"
+            "FR-06.2",
+            "SEC-04"
           ],
           "assumptions": [],
           "covers": [
@@ -3276,7 +3318,7 @@
           "ec_target": [
             "EC5"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Security: Thử chèn Script Injection vào input form UI để xem React/Browser có chuẩn không.",
           "origin": "Human",
@@ -3293,9 +3335,9 @@
           "inputs": {
             "Đăng nhập": "khách",
             "Giỏ ban đầu": "—",
-            "Thao tác": "Ở Trang chủ, double-click/spam click nút 'Thêm vào giỏ' id 4 20 lần nhanh nhất có thể"
+            "Thao tác": "bấm 'Thêm vào giỏ' id 4 đúng 20 lần trong 0,4 giây (cách nhau 20 ms)"
           },
-          "expected_result": "/cart có đúng 1 dòng id 4, Số lượng = 20, Thành tiền = 20 × Đơn giá (FR-07.3, B4). Console không có lỗi.",
+          "expected_result": "/cart có đúng 1 dòng id 4, Số lượng = 20, Thành tiền = 20 × Đơn giá (FR-07.3, B4).",
           "requirements": [
             "FR-07.3"
           ],
@@ -3309,7 +3351,7 @@
           "ec_target": [
             "EC37"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Race Condition: Người dùng cố tình spam click nút mua hàng do mạng chậm hoặc hành vi phá hoại UI.",
           "origin": "Human",
@@ -3318,40 +3360,6 @@
           "evidence": "",
           "bug_id": "",
           "notes": ""
-        },
-        {
-          "id": "TC-FR07-202",
-          "title": "Kiểm tra mở 2 tab trình duyệt cùng lúc, Tab 1 xoá sản phẩm X, Tab 2 bấm '+' tăng số lượng sản phẩm X",
-          "layer": "UI",
-          "inputs": {
-            "Đăng nhập": "user {ts}",
-            "Giỏ ban đầu": "TC: id 5",
-            "Thao tác": "Tab 1: bấm Xoá id 5 (xác nhận); Tab 2: chuyển sang bấm '+' trên id 5"
-          },
-          "expected_result": "Tab 2 thấy id 5",
-          "requirements": [
-            "FR-07.2",
-            "FR-07.4",
-            "FR-24.2"
-          ],
-          "assumptions": [],
-          "covers": [
-            "EC17",
-            "EC21"
-          ],
-          "ec_target": [
-            "EC17",
-            "EC21"
-          ],
-          "technique": "",
-          "bva_point": "",
-          "rationale": "Concurrency: State của giỏ hàng nằm trên RAM React State (`CartContext`), mở 2 tab cùng user sẽ sinh ra sai lệch state UI giữa 2 tab.",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "CHỜ SV làm rõ (Q1, sv_questions.md)."
         },
         {
           "id": "TC-FR07-203",
@@ -3366,15 +3374,16 @@
           "requirements": [
             "FR-06.2"
           ],
-          "assumptions": [],
+          "assumptions": [
+            "B23"
+          ],
           "covers": [
-            "EC1",
-            "EC5"
+            "EC1"
           ],
           "ec_target": [
-            "EC5"
+            "EC1"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "JS Type: Thẻ HTML5 `<input type=\"number\">` cho phép gõ ký tự `e`/`E` đại diện cho số mũ, dễ làm văng lỗi `parseInt`/`NaN` ở Frontend.",
           "origin": "Human",
@@ -3382,37 +3391,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "CHỜ SV làm rõ (Q2, sv_questions.md)."
-        },
-        {
-          "id": "TC-FR07-204",
-          "title": "Kiểm tra trang web khi token trong localStorage là chuỗi rác",
-          "layer": "UI",
-          "inputs": {
-            "Đăng nhập": "user {ts}",
-            "Giỏ ban đầu": "TC: id 2",
-            "Thao tác": "Vào DevTools > Application > localStorage, sửa token/cart thành {{{invalid_json, F5 lại trang /cart"
-          },
-          "expected_result": "App không bị màn hình trắng (White Screen of Death); tự động xóa storage hỏng, đăng xuất hoặc đưa về giỏ trống an toàn.",
-          "requirements": [
-            "FR-08.1"
-          ],
-          "assumptions": [],
-          "covers": [
-            "EC26"
-          ],
-          "ec_target": [
-            "EC26"
-          ],
-          "technique": "",
-          "bva_point": "",
-          "rationale": "Fault Injection: Khai thác đoạn code đọc `localStorage.getItem()` trong `AuthContext`/`CartContext` nếu thiếu try-catch `JSON.parse`.",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "CHỜ SV làm rõ (Q3, sv_questions.md)."
+          "notes": ""
         },
         {
           "id": "TC-FR07-205",
@@ -3444,7 +3423,7 @@
             "EC37",
             "EC45"
           ],
-          "technique": "GB",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "ProductDetail.jsx dòng 21–31 bỏ qua lần bấm đầu và lấy Số lượng **tại lần bấm thứ hai** → nghi giỏ ra id 5 × 5 thay vì 7.",
           "origin": "Human",
@@ -3452,7 +3431,8 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "CHỜ SV làm rõ (Q4, sv_questions.md)."
+          "notes": "",
+          "approach": "gray-box"
         },
         {
           "id": "TC-FR07-206",
@@ -3467,7 +3447,9 @@
           "requirements": [
             "FR-06.2"
           ],
-          "assumptions": [],
+          "assumptions": [
+            "B23"
+          ],
           "covers": [
             "EC1",
             "EC8",
@@ -3486,7 +3468,8 @@
           "bug_id": "",
           "notes": ""
         }
-      ]
+      ],
+      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR07-202: SRS không quy định đồng bộ giữa các tab (SV bỏ ở 5/7c). · TC-FR07-204: Kiểm AuthContext/token hỏng, không thuộc giỏ hàng; dựa vào tải lại trang (B10 ngoài phạm vi) (SV bỏ ở 5/7c)."
     },
     {
       "id": "TS-SV-API",
@@ -3531,49 +3514,13 @@
         "id",
         "name",
         "price",
-        "quantity"
+        "quantity",
+        "Cách thực hiện"
       ],
       "cleanup": [
         "Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user."
       ],
       "cases": [
-        {
-          "id": "TC-FR07-207",
-          "title": "Kiểm tra chèn chuỗi HTML/XSS <b onmouseover=alert(1)> vào trường name khi POST /api/cart",
-          "layer": "API",
-          "inputs": {
-            "Token": "T",
-            "Giỏ ban đầu": "—",
-            "id": "1",
-            "name": "<b onmouseover=alert(1)>",
-            "price": "CSDL",
-            "quantity": "1"
-          },
-          "expected_result": "HTTP 2xx/4xx; khi GET /api/cart, trường `name` phải được sanitize/escape, không chứa script/HTML độc hại.",
-          "requirements": [
-            "SEC-02",
-            "API-CART"
-          ],
-          "assumptions": [],
-          "covers": [
-            "EC1",
-            "EC28",
-            "EC50"
-          ],
-          "ec_target": [
-            "EC28",
-            "EC50"
-          ],
-          "technique": "",
-          "bva_point": "",
-          "rationale": "Security: Client gửi name tùy ý ở body JSON API. Kiểm tra backend có lưu nguyên văn payload độc hại vào giỏ RAM/CSDL hay không.",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": ""
-        },
         {
           "id": "TC-FR07-208",
           "title": "Kiểm tra thêm qua API khi quantity = 1e-324 (JSON đọc thành 0)",
@@ -3584,7 +3531,8 @@
             "id": "5",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "1e-324"
+            "quantity": "1e-324",
+            "Cách thực hiện": ""
           },
           "expected_result": "HTTP 4xx kèm trường error; giỏ không đổi.",
           "requirements": [
@@ -3600,7 +3548,7 @@
             "EC2",
             "EC51"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "JS Math: Injected floating point số quá nhỏ gây ra hiện tượng `0` ngầm trong phép toán Node.js.",
           "origin": "Human",
@@ -3620,7 +3568,8 @@
             "id": "5",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "Infinity (gửi thô, không ngoặc kép)"
+            "quantity": "Infinity (gửi thô, không ngoặc kép)",
+            "Cách thực hiện": ""
           },
           "expected_result": "HTTP 4xx kèm trường error; giỏ không đổi.",
           "requirements": [
@@ -3628,12 +3577,14 @@
           ],
           "assumptions": [],
           "covers": [
-            "EC51"
+            "EC51",
+            "EC56"
           ],
           "ec_target": [
-            "EC51"
+            "EC51",
+            "EC56"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "JS Math: Infinity không phải giá trị json, nhưng nó là một giá trị trong phép toán Node.js.",
           "origin": "Human",
@@ -3653,7 +3604,8 @@
             "id": "2",
             "name": "CSDL",
             "price": "-999999999999",
-            "quantity": "1"
+            "quantity": "1",
+            "Cách thực hiện": ""
           },
           "expected_result": "HTTP 2xx; khi GET /api/cart, backend BẮT BUỘC dùng giá từ CSDL (28.000.000 ₫), phớt lờ hoàn toàn giá âm client gửi (B8).",
           "requirements": [
@@ -3671,7 +3623,7 @@
             "EC16",
             "EC50"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Business Logic: Đánh giá tính đóng cọc của giả định B8. Nếu backend tin `body.price` âm từ client, user sẽ lợi dụng hacker giỏ hàng để shop phải trả lại tiền!",
           "origin": "Human",
@@ -3691,7 +3643,8 @@
             "id": "[1, 2, 3]",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "1"
+            "quantity": "1",
+            "Cách thực hiện": ""
           },
           "expected_result": "HTTP 4xx kèm trường error; giỏ không đổi.",
           "requirements": [
@@ -3706,7 +3659,7 @@
             "EC13",
             "EC51"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Type Confusion: Express `req.body` tự động parse mảng/object. Nếu backend dùng `userCart.find(item => item.id === id)` mà `id` là Array sẽ sinh ra hành vi không lường trước.",
           "origin": "Human",
@@ -3714,7 +3667,8 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": ""
+          "notes": "",
+          "approach": "gray-box"
         },
         {
           "id": "TC-FR07-212",
@@ -3723,10 +3677,11 @@
           "inputs": {
             "Token": "T",
             "Giỏ ban đầu": "id 1 × 1",
-            "id": "[1, 2, 3]",
+            "id": "{\"id\": 1}",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "1"
+            "quantity": "1",
+            "Cách thực hiện": ""
           },
           "expected_result": "HTTP 4xx kèm trường error; giỏ không đổi.",
           "requirements": [
@@ -3741,7 +3696,7 @@
             "EC13",
             "EC51"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Type Confusion: Express `req.body` tự động parse mảng/object. Nếu backend dùng `userCart.find(item => item.id === id)` mà `id` là Object sẽ sinh ra hành vi không lường trước.",
           "origin": "Human",
@@ -3749,7 +3704,8 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "CHỜ SV làm rõ (Q5, sv_questions.md)."
+          "notes": "",
+          "approach": "gray-box"
         },
         {
           "id": "TC-FR07-213",
@@ -3761,7 +3717,8 @@
             "id": "1",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "1"
+            "quantity": "1",
+            "Cách thực hiện": "gửi 50 request song song"
           },
           "expected_result": "Cả 50 request xử lý xong; GET /api/cart trả đúng 1 phần tử với `quantity = 50` (hoặc tính đúng tổng dồn), không làm mất mát request (Lost Updates).",
           "requirements": [
@@ -3778,7 +3735,7 @@
             "EC37",
             "EC50"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Concurrency: Đánh giá việc thao tác cập nhật mảng `userCarts[userId]` trong RAM Node.js khi nhận nhiều request bất đồng bộ cùng lúc.",
           "origin": "Human",
@@ -3786,7 +3743,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Ngoại lệ quy trình TS-DOM-API bước 4: gửi 50 POST song song thay vì đúng một POST (theo cột Thao tác của SV)."
+          "notes": "Expected suy từ FR-07.3 áp cho từng request."
         },
         {
           "id": "TC-FR07-214",
@@ -3798,7 +3755,8 @@
             "id": "1",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "1"
+            "quantity": "1",
+            "Cách thực hiện": "header Content-Type: text/plain"
           },
           "expected_result": "HTTP 4xx (400 hoặc 415); giỏ không đổi.",
           "requirements": [
@@ -3806,12 +3764,14 @@
           ],
           "assumptions": [],
           "covers": [
-            "EC51"
+            "EC51",
+            "EC57"
           ],
           "ec_target": [
-            "EC51"
+            "EC51",
+            "EC57"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Express Middleware: `express.json()` mặc định chỉ parse khi Header là `application/json`. Kiểm tra backend xử lý thế nào khi Mismatch Content-Type.",
           "origin": "Human",
@@ -3819,7 +3779,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Ngoại lệ quy trình TS-DOM-API bước 4: header Content-Type: text/plain thay vì application/json (theo tiêu đề case của SV)."
+          "notes": ""
         },
         {
           "id": "TC-FR07-215",
@@ -3831,14 +3791,17 @@
             "id": "5",
             "name": "CSDL",
             "price": "CSDL",
-            "quantity": "9007199254740993"
+            "quantity": "9007199254740993",
+            "Cách thực hiện": ""
           },
-          "expected_result": "HTTP 2xx hoặc 4xx; nếu nhận thì khi tính toán Thành tiền không bị tràn số gây hỏng giá trị (Integer Overflow).",
+          "expected_result": "HTTP 2xx và GET /api/cart trả quantity đúng bằng giá trị đã gửi (9007199254740993)",
           "requirements": [
             "FR-06.2",
             "API-CART"
           ],
-          "assumptions": [],
+          "assumptions": [
+            "B1"
+          ],
           "covers": [
             "EC1",
             "EC50"
@@ -3847,7 +3810,7 @@
             "EC1",
             "EC50"
           ],
-          "technique": "",
+          "technique": "EG",
           "bva_point": "",
           "rationale": "Boundary Value: Vượt ngưỡng tính toán an toàn của JavaScript Number (`2^53 + 1`).",
           "origin": "Human",
@@ -3855,9 +3818,10 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "CHỜ SV làm rõ (Q6, sv_questions.md)."
+          "notes": ""
         }
-      ]
+      ],
+      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR07-207: Không có điểm quan sát / căn cứ SRS (SV bỏ ở 5/7c, cùng lý do EC32)."
     }
   ]
 }

@@ -25,6 +25,7 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | FR-24.4 | (GUI, B16) Tất cả ảnh sản phẩm phải có thuộc tính alt mô tả nội dung (không rỗng). |
 | API-CART | GET /api/cart lấy giỏ; POST /api/cart body JSON {id, name, price, quantity}; yêu cầu header Authorization: Bearer <token> (api_specification.md dòng 110–127). Không có endpoint sửa/xoá dòng giỏ. |
 | SEC-02 | Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ (README.md dòng 279). |
+| SEC-04 | Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng `innerHTML` trực tiếp. (README.md dòng 281) — Phạm vi B_FR07 (SV chốt 5/7c): giá trị người dùng nhập ở ô Số lượng hiển thị trong giỏ. |
 
 ### Bước 1 — Biến vào/ra
 | Mã | Biến | Vào/Ra | Nguồn | Kiểu | Ràng buộc (đặc tả) | Ghi chú |
@@ -49,6 +50,7 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | V18 | Trạng thái giỏ trống (empty state) | Ra | UI: nhánh giỏ trống (Cart.jsx dòng 20–27) | enum | Có hình minh hoạ/icon và thông báo rõ ràng (FR-07.7, FR-24.3, B15). |  |
 | V19 | Trang đích sau 'Tiếp tục mua sắm' | Ra | UI: URL trình duyệt | string | URL = trang chủ '/' (FR-07.5). |  |
 | V20 | Phản hồi API giỏ hàng | Ra | API: mã HTTP + body của POST /api/cart (thành công: {"message": "Added to cart"}, server.js dòng 294) và GET /api/cart | HTTP | Dữ liệu hợp lệ → 2xx và GET phản ánh thay đổi; dữ liệu/token không hợp lệ → 4xx, giỏ không đổi (B7, B17, B18). |  |
+| V22 | Định dạng request POST /api/cart (API) | Vào | API: header Content-Type và body thô của POST /api/cart | HTTP request | api_specification.md §4.2 dòng 119: 'Body (JSON)'. SRS không nói cách xử lý request sai định dạng → 4xx (B17). | SV thêm ở 5/7c (TC-FR07-209, TC-FR07-214). Mã V21 bỏ trống (đã gỡ ở bước trước). |
 
 ### Bước 2 — Complete Set of Partitions
 | EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Yêu cầu | Ghi chú |
@@ -106,15 +108,17 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | EC49 | Trang đích sau 'Tiếp tục mua sắm' | URL sau khi bấm là trang chủ '/' | ✔ | must-be | FR-07.5 | FR-07.5. |
 | EC50 | Phản hồi API giỏ hàng | API: 2xx và GET /api/cart phản ánh thay đổi | ✔ | set | API-CART |  |
 | EC51 | Phản hồi API giỏ hàng | API: 4xx kèm trường error, giỏ không đổi | ✔ | set | API-CART, B17 | B17. Không 2xx, không 5xx. |
+| EC56 | Định dạng request POST /api/cart (API) | API: body không phải JSON hợp lệ | ✘ | must-be | API-CART, B17 | SV thêm ở 5/7c (TC-FR07-209). |
+| EC57 | Định dạng request POST /api/cart (API) | API: Content-Type không phải application/json | ✘ | must-be | API-CART, B17 | SV thêm ở 5/7c (TC-FR07-214). |
 
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
-| EC1 | Số nguyên ≥ 1 (vd 2) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-201, TC-FR07-203, TC-FR07-205, TC-FR07-206, TC-FR07-207, TC-FR07-213, TC-FR07-215 |
+| EC1 | Số nguyên ≥ 1 (vd 2) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-201, TC-FR07-203, TC-FR07-205, TC-FR07-206, TC-FR07-213, TC-FR07-215 |
 | EC2 | Số nguyên ≤ 0 (vd 0, -3) | TC-FR07-10, TC-FR07-30, TC-FR07-60, TC-FR07-70, TC-FR07-208 |
 | EC3 | Số không nguyên (vd 1.5) | TC-FR07-11, TC-FR07-31 |
 | EC4 | Rỗng (không nhập gì) | TC-FR07-12, TC-FR07-32 |
-| EC5 | Không phải số (vd 'abc') | TC-FR07-13, TC-FR07-33, TC-FR07-200, TC-FR07-203 |
+| EC5 | Không phải số (vd 'abc') | TC-FR07-13, TC-FR07-33, TC-FR07-200 |
 | EC6 | API: quantity là chuỗi số (vd "2") | TC-FR07-34 |
 | EC7 | API: thiếu trường quantity hoặc null | TC-FR07-35 |
 | EC8 | UI: sản phẩm chưa có trong giỏ | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-205, TC-FR07-206 |
@@ -128,18 +132,18 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | EC14 | UI: sản phẩm seed, đơn giá nguyên dương (4.000.000–45.000.000) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08, TC-FR07-09, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65, TC-FR07-66 |
 | EC15 | API: body.price khớp giá CSDL | TC-FR07-20, TC-FR07-21, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC16 | API: body.price khác giá CSDL (khác số, ≤ 0, sai kiểu, thiếu) | TC-FR07-22, TC-FR07-210 |
-| EC17 | Bấm '+' | TC-FR07-05, TC-FR07-202 |
+| EC17 | Bấm '+' | TC-FR07-05 |
 | EC18 | Bấm '-' | TC-FR07-06, TC-FR07-07, TC-FR07-65 |
 | EC19 | Số lượng hiện tại = 1 | TC-FR07-05, TC-FR07-07 |
 | EC20 | Số lượng hiện tại ≥ 2 | TC-FR07-06, TC-FR07-65 |
-| EC21 | Bấm nút xoá rồi chọn Xác nhận trong dialog | TC-FR07-08, TC-FR07-66, TC-FR07-202 |
+| EC21 | Bấm nút xoá rồi chọn Xác nhận trong dialog | TC-FR07-08, TC-FR07-66 |
 | EC22 | Bấm nút xoá rồi chọn Hủy trong dialog | TC-FR07-09 |
 | EC23 | Giỏ có 0 dòng | TC-FR07-01, TC-FR07-02, TC-FR07-20, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC24 | Giỏ có đúng 1 dòng | TC-FR07-03, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-09, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-21, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-60, TC-FR07-65, TC-FR07-66, TC-FR07-70 |
 | EC25 | Giỏ có ≥ 2 dòng | TC-FR07-04, TC-FR07-08, TC-FR07-22 |
-| EC26 | UI: chưa đăng nhập | TC-FR07-01, TC-FR07-03, TC-FR07-05, TC-FR07-07, TC-FR07-09, TC-FR07-204 |
+| EC26 | UI: chưa đăng nhập | TC-FR07-01, TC-FR07-03, TC-FR07-05, TC-FR07-07, TC-FR07-09 |
 | EC27 | UI: đã đăng nhập (user {ts}) | TC-FR07-02, TC-FR07-04, TC-FR07-06, TC-FR07-08, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65, TC-FR07-66 |
-| EC28 | API: token hợp lệ | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-207 |
+| EC28 | API: token hợp lệ | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-36, TC-FR07-37, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
 | EC29 | API: thiếu header Authorization | TC-FR07-38 |
 | EC30 | API: token sai/giả mạo | TC-FR07-39 |
 | EC31 | API: body.name khớp tên CSDL | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-38, TC-FR07-39, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 |
@@ -161,8 +165,10 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 | EC47 | Dialog xác nhận hiện ra trước khi xoá | TC-FR07-08, TC-FR07-09 |
 | EC48 | Empty state có hình minh hoạ/icon và thông báo giỏ trống | TC-FR07-01 |
 | EC49 | URL sau khi bấm là trang chủ '/' | TC-FR07-01, TC-FR07-02 |
-| EC50 | API: 2xx và GET /api/cart phản ánh thay đổi | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-207, TC-FR07-210, TC-FR07-213, TC-FR07-215 |
+| EC50 | API: 2xx và GET /api/cart phản ánh thay đổi | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-210, TC-FR07-213, TC-FR07-215 |
 | EC51 | API: 4xx kèm trường error, giỏ không đổi | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70, TC-FR07-208, TC-FR07-209, TC-FR07-211, TC-FR07-212, TC-FR07-214 |
+| EC56 | API: body không phải JSON hợp lệ | TC-FR07-209 |
+| EC57 | API: Content-Type không phải application/json | TC-FR07-214 |
 
 ### Bước 3b — Minimum Set of Test Cases (Domain) · TS-DOM-UI — Domain — minimum set, tầng UI (FR-07, FR-06)
 **Ghi chú suite:** Giỏ web là state React (B0d): chỉ mở URL trực tiếp ở bước 1, sau đó điều hướng bằng link trong app.
@@ -379,6 +385,7 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 - Dọn dẹp: Không cần: không tạo user; giỏ web mất khi đóng context.
 
 ### Bước 5 — Test case sinh viên bổ sung · TS-SV-UI — SV bổ sung — tầng UI
+**Ghi chú suite:** Case đã bỏ (giữ khoảng trống số): TC-FR07-202: SRS không quy định đồng bộ giữa các tab (SV bỏ ở 5/7c). · TC-FR07-204: Kiểm AuthContext/token hỏng, không thuộc giỏ hàng; dựa vào tải lại trang (B10 ngoài phạm vi) (SV bỏ ở 5/7c).
 **Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).; Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).; Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.; Web http://localhost:5173 đang chạy.; Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill (chạy tay); localStorage không có token; giỏ web rỗng.
 
 **Quy trình chung:**
@@ -391,17 +398,16 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 
 **Dọn dẹp:** Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user.
 
-| #TC | Tiêu đề | EC phủ | EC mục tiêu | Đăng nhập | Giỏ ban đầu | Thao tác | Expected | Lý do chọn input | Nguồn |
-|---|---|---|---|---|---|---|---|---|---|
-| TC-FR07-200 | Kiểm tra nhập payload XSS <script>alert(1)</script> vào ô Số lượng ở trang chi tiết sản phẩm | EC5 | EC5 | khách | — | CT: id 1 × <script>alert(1)</script> | Ngay khi gõ/paste: ô input chặn hoặc không thực thi script. Bấm thêm: không bật alert XSS, giỏ không đổi. | Security: Thử chèn Script Injection vào input form UI để xem React/Browser có chuẩn không. | SV |
-| TC-FR07-201 | Kiểm tra bấm liên tục 20 lần nút 'Thêm vào giỏ' của cùng sản phẩm ở Trang chủ | EC1, EC37 | EC37 | khách | — | Ở Trang chủ, double-click/spam click nút 'Thêm vào giỏ' id 4 20 lần nhanh nhất có thể | /cart có đúng 1 dòng id 4, Số lượng = 20, Thành tiền = 20 × Đơn giá (FR-07.3, B4). Console không có lỗi. | Race Condition: Người dùng cố tình spam click nút mua hàng do mạng chậm hoặc hành vi phá hoại UI. | SV |
-| TC-FR07-202 | Kiểm tra mở 2 tab trình duyệt cùng lúc, Tab 1 xoá sản phẩm X, Tab 2 bấm '+' tăng số lượng sản phẩm X | EC17, EC21 | EC17, EC21 | user {ts} | TC: id 5 | Tab 1: bấm Xoá id 5 (xác nhận); Tab 2: chuyển sang bấm '+' trên id 5 | Tab 2 thấy id 5 | Concurrency: State của giỏ hàng nằm trên RAM React State (`CartContext`), mở 2 tab cùng user sẽ sinh ra sai lệch state UI giữa 2 tab. | SV |
-| TC-FR07-203 | Kiểm tra nhập số lượng dạng Exponential/E-notation 1e5 vào ô Số lượng ở trang chi tiết | EC1, EC5 | EC5 | khách | — | CT: id 3 × 1e5 | Số lượng = 100000, Thành tiền = 100000 × Đơn giá. Fail nếu Số lượng khác 100000 (ví dụ 1) hoặc NaN. | JS Type: Thẻ HTML5 `<input type="number">` cho phép gõ ký tự `e`/`E` đại diện cho số mũ, dễ làm văng lỗi `parseInt`/`NaN` ở Frontend. | SV |
-| TC-FR07-204 | Kiểm tra trang web khi token trong localStorage là chuỗi rác | EC26 | EC26 | user {ts} | TC: id 2 | Vào DevTools > Application > localStorage, sửa token/cart thành {{{invalid_json, F5 lại trang /cart | App không bị màn hình trắng (White Screen of Death); tự động xóa storage hỏng, đăng xuất hoặc đưa về giỏ trống an toàn. | Fault Injection: Khai thác đoạn code đọc `localStorage.getItem()` trong `AuthContext`/`CartContext` nếu thiếu try-catch `JSON.parse`. | SV |
-| TC-FR07-205 | Kiểm tra đổi Số lượng giữa hai lần bấm 'Thêm vào giỏ hàng' ở trang chi tiết | EC1, EC8, EC9, EC37, EC45 | EC9, EC37, EC45 | khách | — | CT: id 5, nhập 2, bấm 'Thêm' **1 lần**, mở /cart (ghi giỏ); quay lại, nhập 5, bấm 'Thêm' **1 lần**, mở /cart | Sau lần 1: id 5 × 2 và có phản hồi trong ≤ 2 s (B21). Sau lần 2: 1 dòng id 5 × 7 (FR-07.3). | ProductDetail.jsx dòng 21–31 bỏ qua lần bấm đầu và lấy Số lượng **tại lần bấm thứ hai** → nghi giỏ ra id 5 × 5 thay vì 7. | SV |
-| TC-FR07-206 | Kiểm tra nhập Số lượng có số 0 đứng đầu 007 | EC1, EC8, EC41 | EC1 | khách | — | CT: id 2 × 007, bấm 'Thêm', mở /cart | 1 dòng id 2, Số lượng hiển thị `7`, Thành tiền = 7 × Đơn giá. | Chuỗi số có 0 đứng đầu là giá trị nguyên hợp lệ nhưng dễ bị hiển thị nguyên chuỗi hoặc hiểu sai hệ cơ số. | SV |
+| #TC | Tiêu đề | EC phủ | EC mục tiêu | Đăng nhập | Giỏ ban đầu | Thao tác | Expected | Lý do chọn input | Cách tiếp cận | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR07-200 | Kiểm tra nhập payload XSS <script>alert(1)</script> vào ô Số lượng ở trang chi tiết sản phẩm | EC5 | EC5 | khách | — | CT: id 1 × <script>alert(1)</script> | Ngay khi gõ/paste: ô input chặn hoặc không thực thi script. Bấm thêm: không bật alert XSS, giỏ không đổi. | Security: Thử chèn Script Injection vào input form UI để xem React/Browser có chuẩn không. | black-box | SV |
+| TC-FR07-201 | Kiểm tra bấm liên tục 20 lần nút 'Thêm vào giỏ' của cùng sản phẩm ở Trang chủ | EC1, EC37 | EC37 | khách | — | bấm 'Thêm vào giỏ' id 4 đúng 20 lần trong 0,4 giây (cách nhau 20 ms) | /cart có đúng 1 dòng id 4, Số lượng = 20, Thành tiền = 20 × Đơn giá (FR-07.3, B4). | Race Condition: Người dùng cố tình spam click nút mua hàng do mạng chậm hoặc hành vi phá hoại UI. | black-box | SV |
+| TC-FR07-203 | Kiểm tra nhập số lượng dạng Exponential/E-notation 1e5 vào ô Số lượng ở trang chi tiết | EC1 | EC1 | khách | — | CT: id 3 × 1e5 | Số lượng = 100000, Thành tiền = 100000 × Đơn giá. Fail nếu Số lượng khác 100000 (ví dụ 1) hoặc NaN. | JS Type: Thẻ HTML5 `<input type="number">` cho phép gõ ký tự `e`/`E` đại diện cho số mũ, dễ làm văng lỗi `parseInt`/`NaN` ở Frontend. | black-box | SV |
+| TC-FR07-205 | Kiểm tra đổi Số lượng giữa hai lần bấm 'Thêm vào giỏ hàng' ở trang chi tiết | EC1, EC8, EC9, EC37, EC45 | EC9, EC37, EC45 | khách | — | CT: id 5, nhập 2, bấm 'Thêm' **1 lần**, mở /cart (ghi giỏ); quay lại, nhập 5, bấm 'Thêm' **1 lần**, mở /cart | Sau lần 1: id 5 × 2 và có phản hồi trong ≤ 2 s (B21). Sau lần 2: 1 dòng id 5 × 7 (FR-07.3). | ProductDetail.jsx dòng 21–31 bỏ qua lần bấm đầu và lấy Số lượng **tại lần bấm thứ hai** → nghi giỏ ra id 5 × 5 thay vì 7. | gray-box | SV |
+| TC-FR07-206 | Kiểm tra nhập Số lượng có số 0 đứng đầu 007 | EC1, EC8, EC41 | EC1 | khách | — | CT: id 2 × 007, bấm 'Thêm', mở /cart | 1 dòng id 2, Số lượng hiển thị `7`, Thành tiền = 7 × Đơn giá. | Chuỗi số có 0 đứng đầu là giá trị nguyên hợp lệ nhưng dễ bị hiển thị nguyên chuỗi hoặc hiểu sai hệ cơ số. | black-box | SV |
 
 ### Bước 5 — Test case sinh viên bổ sung · TS-SV-API — SV bổ sung — tầng API /api/cart
+**Ghi chú suite:** Case đã bỏ (giữ khoảng trống số): TC-FR07-207: Không có điểm quan sát / căn cứ SRS (SV bỏ ở 5/7c, cùng lý do EC32).
 **Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).; Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).; Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).; Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.
 
 **Quy trình chung:**
@@ -414,17 +420,16 @@ Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web
 
 **Dọn dẹp:** Sau mỗi case, kể cả khi Fail: nếu case đã tạo user {ts}, xoá bằng DELETE /api/admin/users/:id (token admin). Xoá thất bại: ghi notes, không đổi verdict (B0c). Giỏ của user đó nằm trong RAM tới lần khởi động lại backend kế tiếp — không ảnh hưởng case khác vì mỗi case một user.
 
-| #TC | Tiêu đề | EC phủ | EC mục tiêu | Token | Giỏ ban đầu | id | name | price | quantity | Expected | Lý do chọn input | Nguồn |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| TC-FR07-207 | Kiểm tra chèn chuỗi HTML/XSS <b onmouseover=alert(1)> vào trường name khi POST /api/cart | EC1, EC28, EC50 | EC28, EC50 | T | — | 1 | <b onmouseover=alert(1)> | CSDL | 1 | HTTP 2xx/4xx; khi GET /api/cart, trường `name` phải được sanitize/escape, không chứa script/HTML độc hại. | Security: Client gửi name tùy ý ở body JSON API. Kiểm tra backend có lưu nguyên văn payload độc hại vào giỏ RAM/CSDL hay không. | SV |
-| TC-FR07-208 | Kiểm tra thêm qua API khi quantity = 1e-324 (JSON đọc thành 0) | EC2, EC51 | EC2, EC51 | T | id 1 × 1 | 5 | CSDL | CSDL | 1e-324 | HTTP 4xx kèm trường error; giỏ không đổi. | JS Math: Injected floating point số quá nhỏ gây ra hiện tượng `0` ngầm trong phép toán Node.js. | SV |
-| TC-FR07-209 | Kiểm tra thêm qua API khi quantity = Infinity | EC51 | EC51 | T | id 1 × 1 | 5 | CSDL | CSDL | Infinity (gửi thô, không ngoặc kép) | HTTP 4xx kèm trường error; giỏ không đổi. | JS Math: Infinity không phải giá trị json, nhưng nó là một giá trị trong phép toán Node.js. | SV |
-| TC-FR07-210 | Kiểm tra gửi price là số âm cực đại -999999999999 để cố tình làm âm Tổng tiền giỏ hàng | EC16, EC50 | EC16, EC50 | T | id 1 × 1 | 2 | CSDL | -999999999999 | 1 | HTTP 2xx; khi GET /api/cart, backend BẮT BUỘC dùng giá từ CSDL (28.000.000 ₫), phớt lờ hoàn toàn giá âm client gửi (B8). | Business Logic: Đánh giá tính đóng cọc của giả định B8. Nếu backend tin `body.price` âm từ client, user sẽ lợi dụng hacker giỏ hàng để shop phải trả lại tiền! | SV |
-| TC-FR07-211 | Kiểm tra gửi id dạng mảng [1, 2, 3] thay vì số nguyên | EC13, EC51 | EC13, EC51 | T | id 1 × 1 | [1, 2, 3] | CSDL | CSDL | 1 | HTTP 4xx kèm trường error; giỏ không đổi. | Type Confusion: Express `req.body` tự động parse mảng/object. Nếu backend dùng `userCart.find(item => item.id === id)` mà `id` là Array sẽ sinh ra hành vi không lường trước. | SV |
-| TC-FR07-212 | Kiểm tra gửi id dạng object {"id": 1} thay vì số nguyên | EC13, EC51 | EC13, EC51 | T | id 1 × 1 | [1, 2, 3] | CSDL | CSDL | 1 | HTTP 4xx kèm trường error; giỏ không đổi. | Type Confusion: Express `req.body` tự động parse mảng/object. Nếu backend dùng `userCart.find(item => item.id === id)` mà `id` là Object sẽ sinh ra hành vi không lường trước. | SV |
-| TC-FR07-213 | Kiểm tra bắn 50 request POST /api/cart song song đồng thời | EC1, EC37, EC50 | EC37, EC50 | T | — | 1 | CSDL | CSDL | 1 | Cả 50 request xử lý xong; GET /api/cart trả đúng 1 phần tử với `quantity = 50` (hoặc tính đúng tổng dồn), không làm mất mát request (Lost Updates). | Concurrency: Đánh giá việc thao tác cập nhật mảng `userCarts[userId]` trong RAM Node.js khi nhận nhiều request bất đồng bộ cùng lúc. | SV |
-| TC-FR07-214 | Kiểm tra gửi Header Content-Type: text/plain nhưng body chứa chuỗi JSON hợp lệ | EC51 | EC51 | T | — | 1 | CSDL | CSDL | 1 | HTTP 4xx (400 hoặc 415); giỏ không đổi. | Express Middleware: `express.json()` mặc định chỉ parse khi Header là `application/json`. Kiểm tra backend xử lý thế nào khi Mismatch Content-Type. | SV |
-| TC-FR07-215 | Kiểm tra gửi quantity dưới dạng số nguyên vượt giới hạn Number.MAX_SAFE_INTEGER (9007199254740993) | EC1, EC50 | EC1, EC50 | T | — | 5 | CSDL | CSDL | 9007199254740993 | HTTP 2xx hoặc 4xx; nếu nhận thì khi tính toán Thành tiền không bị tràn số gây hỏng giá trị (Integer Overflow). | Boundary Value: Vượt ngưỡng tính toán an toàn của JavaScript Number (`2^53 + 1`). | SV |
+| #TC | Tiêu đề | EC phủ | EC mục tiêu | Token | Giỏ ban đầu | id | name | price | quantity | Cách thực hiện | Expected | Lý do chọn input | Cách tiếp cận | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR07-208 | Kiểm tra thêm qua API khi quantity = 1e-324 (JSON đọc thành 0) | EC2, EC51 | EC2, EC51 | T | id 1 × 1 | 5 | CSDL | CSDL | 1e-324 |  | HTTP 4xx kèm trường error; giỏ không đổi. | JS Math: Injected floating point số quá nhỏ gây ra hiện tượng `0` ngầm trong phép toán Node.js. | black-box | SV |
+| TC-FR07-209 | Kiểm tra thêm qua API khi quantity = Infinity | EC51, EC56 | EC51, EC56 | T | id 1 × 1 | 5 | CSDL | CSDL | Infinity (gửi thô, không ngoặc kép) |  | HTTP 4xx kèm trường error; giỏ không đổi. | JS Math: Infinity không phải giá trị json, nhưng nó là một giá trị trong phép toán Node.js. | black-box | SV |
+| TC-FR07-210 | Kiểm tra gửi price là số âm cực đại -999999999999 để cố tình làm âm Tổng tiền giỏ hàng | EC16, EC50 | EC16, EC50 | T | id 1 × 1 | 2 | CSDL | -999999999999 | 1 |  | HTTP 2xx; khi GET /api/cart, backend BẮT BUỘC dùng giá từ CSDL (28.000.000 ₫), phớt lờ hoàn toàn giá âm client gửi (B8). | Business Logic: Đánh giá tính đóng cọc của giả định B8. Nếu backend tin `body.price` âm từ client, user sẽ lợi dụng hacker giỏ hàng để shop phải trả lại tiền! | black-box | SV |
+| TC-FR07-211 | Kiểm tra gửi id dạng mảng [1, 2, 3] thay vì số nguyên | EC13, EC51 | EC13, EC51 | T | id 1 × 1 | [1, 2, 3] | CSDL | CSDL | 1 |  | HTTP 4xx kèm trường error; giỏ không đổi. | Type Confusion: Express `req.body` tự động parse mảng/object. Nếu backend dùng `userCart.find(item => item.id === id)` mà `id` là Array sẽ sinh ra hành vi không lường trước. | gray-box | SV |
+| TC-FR07-212 | Kiểm tra gửi id dạng object {"id": 1} thay vì số nguyên | EC13, EC51 | EC13, EC51 | T | id 1 × 1 | {"id": 1} | CSDL | CSDL | 1 |  | HTTP 4xx kèm trường error; giỏ không đổi. | Type Confusion: Express `req.body` tự động parse mảng/object. Nếu backend dùng `userCart.find(item => item.id === id)` mà `id` là Object sẽ sinh ra hành vi không lường trước. | gray-box | SV |
+| TC-FR07-213 | Kiểm tra bắn 50 request POST /api/cart song song đồng thời | EC1, EC37, EC50 | EC37, EC50 | T | — | 1 | CSDL | CSDL | 1 | gửi 50 request song song | Cả 50 request xử lý xong; GET /api/cart trả đúng 1 phần tử với `quantity = 50` (hoặc tính đúng tổng dồn), không làm mất mát request (Lost Updates). | Concurrency: Đánh giá việc thao tác cập nhật mảng `userCarts[userId]` trong RAM Node.js khi nhận nhiều request bất đồng bộ cùng lúc. | black-box | SV |
+| TC-FR07-214 | Kiểm tra gửi Header Content-Type: text/plain nhưng body chứa chuỗi JSON hợp lệ | EC51, EC57 | EC51, EC57 | T | — | 1 | CSDL | CSDL | 1 | header Content-Type: text/plain | HTTP 4xx (400 hoặc 415); giỏ không đổi. | Express Middleware: `express.json()` mặc định chỉ parse khi Header là `application/json`. Kiểm tra backend xử lý thế nào khi Mismatch Content-Type. | black-box | SV |
+| TC-FR07-215 | Kiểm tra gửi quantity dưới dạng số nguyên vượt giới hạn Number.MAX_SAFE_INTEGER (9007199254740993) | EC1, EC50 | EC1, EC50 | T | — | 5 | CSDL | CSDL | 9007199254740993 |  | HTTP 2xx và GET /api/cart trả quantity đúng bằng giá trị đã gửi (9007199254740993) | Boundary Value: Vượt ngưỡng tính toán an toàn của JavaScript Number (`2^53 + 1`). | black-box | SV |
 
 ### Truy vết yêu cầu ↔ test case
 Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.
@@ -432,42 +437,44 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 | Yêu cầu | Test case | Số TC |
 |---|---|---|
 | FR-07.1 | TC-FR07-02, TC-FR07-04, TC-FR07-08, TC-FR07-66, TC-FR07-95 | 5 |
-| FR-07.2 | TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-65, TC-FR07-90, TC-FR07-202 | 6 |
+| FR-07.2 | TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-65, TC-FR07-90 | 5 |
 | FR-07.3 | TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21, TC-FR07-201, TC-FR07-205, TC-FR07-213 | 7 |
-| FR-07.4 | TC-FR07-08, TC-FR07-09, TC-FR07-96, TC-FR07-202 | 4 |
+| FR-07.4 | TC-FR07-08, TC-FR07-09, TC-FR07-96 | 3 |
 | FR-07.5 | TC-FR07-01, TC-FR07-02, TC-FR07-97 | 3 |
 | FR-07.6 | TC-FR07-98 | 1 |
 | FR-07.7 | TC-FR07-01, TC-FR07-66 | 2 |
 | FR-06.2 | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-20, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-200, TC-FR07-203, TC-FR07-206, TC-FR07-208, TC-FR07-215 | 27 |
 | FR-06.3 | TC-FR07-02, TC-FR07-99, TC-FR07-205 | 3 |
-| FR-08.1 | TC-FR07-02, TC-FR07-03, TC-FR07-204 | 3 |
+| FR-08.1 | TC-FR07-02, TC-FR07-03 | 2 |
 | FR-08.2 | TC-FR07-22, TC-FR07-210 | 2 |
 | FR-21.3 | TC-FR07-93 | 1 |
 | FR-23.1 | TC-FR07-92 | 1 |
 | FR-23.2 | TC-FR07-01, TC-FR07-04 | 2 |
 | FR-23.4 | TC-FR07-91 | 1 |
 | FR-24.1 | TC-FR07-02, TC-FR07-99, TC-FR07-205 | 3 |
-| FR-24.2 | TC-FR07-08, TC-FR07-09, TC-FR07-202 | 3 |
+| FR-24.2 | TC-FR07-08, TC-FR07-09 | 2 |
 | FR-24.3 | TC-FR07-01 | 1 |
 | FR-24.4 | TC-FR07-94 | 1 |
-| API-CART | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-207, TC-FR07-208, TC-FR07-209, TC-FR07-210, TC-FR07-211, TC-FR07-212, TC-FR07-213, TC-FR07-214, TC-FR07-215 | 28 |
-| SEC-02 | TC-FR07-20, TC-FR07-38, TC-FR07-39, TC-FR07-207 | 4 |
+| API-CART | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74, TC-FR07-208, TC-FR07-209, TC-FR07-210, TC-FR07-211, TC-FR07-212, TC-FR07-213, TC-FR07-214, TC-FR07-215 | 27 |
+| SEC-02 | TC-FR07-20, TC-FR07-38, TC-FR07-39 | 3 |
+| SEC-04 | TC-FR07-200 | 1 |
 | B22 (giả định) | TC-FR07-01 | 1 |
 | B15 (giả định) | TC-FR07-01 | 1 |
-| B11 (giả định) | TC-FR07-02, TC-FR07-03, TC-FR07-204 | 3 |
+| B11 (giả định) | TC-FR07-02, TC-FR07-03 | 2 |
 | B4 (giả định) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-08, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-65, TC-FR07-201 | 12 |
 | B21 (giả định) | TC-FR07-02, TC-FR07-99, TC-FR07-205 | 3 |
 | B5 (giả định) | TC-FR07-03, TC-FR07-04, TC-FR07-205 | 3 |
 | B9 (giả định) | TC-FR07-04 | 1 |
 | B3 (giả định) | TC-FR07-07 | 1 |
-| B14 (giả định) | TC-FR07-08, TC-FR07-09, TC-FR07-202 | 3 |
+| B14 (giả định) | TC-FR07-08, TC-FR07-09 | 2 |
 | B2 (giả định) | TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60 | 5 |
 | B8 (giả định) | TC-FR07-22, TC-FR07-210 | 2 |
 | B17 (giả định) | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70, TC-FR07-208, TC-FR07-209, TC-FR07-211, TC-FR07-212, TC-FR07-214 | 17 |
 | B18 (giả định) | TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-40, TC-FR07-211, TC-FR07-212 | 7 |
-| B1 (giả định) | TC-FR07-64, TC-FR07-74 | 2 |
+| B1 (giả định) | TC-FR07-64, TC-FR07-74, TC-FR07-215 | 3 |
 | B13 (giả định) | TC-FR07-93 | 1 |
 | B12 (giả định) | TC-FR07-95, TC-FR07-96, TC-FR07-97 | 3 |
+| B23 (giả định) | TC-FR07-203, TC-FR07-206 | 2 |
 
 ### Giả định khi đặc tả chưa nói rõ
 - B0a (độc lập, đã chốt từ phiên thảo luận): mỗi case dùng user riêng tạo qua POST /api/register với email chứa {ts}, đăng nhập lấy token riêng → userCarts[userId] riêng (server.js dòng 14, 291–293). Case UI chạy trong browser context mới (giỏ web là state React, rỗng khi mở trang).
@@ -496,5 +503,6 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 - B20 (A17/A20 áp cho B_FR07) (AI đề xuất theo quy ước đã chốt từ A_FR01): nút +/- thiếu → TC-FR07-90 (kiểm sự tồn tại) Fail; các case cần bấm +/- → Blocked, case gốc TC-FR07-90. Giỏ ban đầu không dựng được đúng như cột (do lỗi đã có ở case khác) → Blocked, ghi case gốc.
 - B21 (phản hồi trực quan khi thêm) (SV chốt 2026-10-20): hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1 ghi '(toast notification hoặc badge cập nhật)' như ví dụ minh hoạ, không phải danh sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo trên trang); ghi rõ loại phản hồi quan sát được vào Actual.
 - B22 (badge khi giỏ trống) (SV chốt 2026-10-20): badge ẩn hoặc hiển thị 0 đều chấp nhận — lý do: SRS im lặng. Gắn EC44.
+- B23 (cách viết số nguyên dương) (SV chốt 2026-10-20): Chuỗi biểu diễn một số nguyên dương theo cách khác (ký hiệu số mũ, số 0 đứng đầu) được hiểu theo giá trị số của nó; Số lượng hiển thị và tính tiền theo giá trị đó. Lý do: FR-06.2 chỉ nói "số nguyên dương", không quy định cách viết. Gắn TC-FR07-203, TC-FR07-206.
 
-**Tổng:** 65 TC · Not run: 65 · Nguồn: AI 49, SV 16
+**Tổng:** 62 TC · Not run: 62 · Nguồn: AI 49, SV 13

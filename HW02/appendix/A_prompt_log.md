@@ -7615,15 +7615,156 @@ B_FR07 bước 5 – phần sau khi SV đã commit sv_cases.md.
 ```
 
 **Output:**
-```
+````
 Step 0 OK. Read SV cases.
 
 Đang đối chiếu case SV với bản đóng băng bước 3–4 để lấy dẫn chứng.
+
+Xong bước 5b, commit `897a7c8`. Còn 6 case SV có chỗ mơ hồ cần anh/chị trả lời trước bước 6. Em đã chép nguyên văn 6 case đó vào file và gắn notes "CHỜ SV làm rõ", không tự điền gì.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 bước 5b – chuẩn hoá 16 case SV vào testcases.json + ai_gap_answer
+- Bước 0: commit 3d0cbca "5/7: SV thêm TC" có; sv_cases.md không đổi sau commit đó → OK
+- File đã tạo/sửa: HW02/B_FR07/testcases.json (v0.10, thêm suite TS-SV-UI 7 case, TS-SV-API 9 case, origin Human), testcases.md, ai_gap_answer.md, sv_questions.md (mới), A_prompt_log.md
+- Cách chuẩn hoá:
+  · Tiêu đề, EC, Expected, Lý do giữ nguyên văn SV
+  · requirements suy từ ec_target
+  · assumptions lấy từ mã B mà SV nhắc trong Expected (TC-201 B4, 205 B21, 210 B8)
+  · SV không ghi giả định mới nào → không gán mã B mới (mã kế tiếp nếu cần: B23)
+- Kết quả kiểm tra:
+  · check_domain: 0 errors / 21 warn = 14 case thiếu technique (SV để trống) + 7 cảnh báo biến cũ
+  · lint: 65 TC, 0 errors / 13 warn = 11 tiêu đề thiếu CONDITION (tiêu đề giữ nguyên văn SV) + 2 cặp dữ liệu trùng: 211/212, 213/214
+  · test: Not run
+- ai_gap_answer.md:
+  · Nhóm "đã nghĩ tới" (3 case, có dẫn chứng):
+    - 205: notes_step1.md:74;
+    - 207: EC32/TC-23 bản step3-1037, đã gỡ ở vòng sửa 1;
+    - 210: tên lớp EC16 có "≤ 0".
+  · Nhóm "không nghĩ tới" (13 case), kèm lớp gần nhất của bản AI
+- Commit: 897a7c8 HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+- Cần quyết định (chặn bước 6 cho case tương ứng; chi tiết + phương án: HW02/B_FR07/sv_questions.md):
+  · Q1 TC-202 – Expected "Tab 2 thấy id 5" thiếu Số lượng sau '+', và Tab 1 quan sát gì?
+  · Q2 TC-203 – ec_target là EC5 (không hợp lệ) nhưng Expected là chấp nhận 100000 → (a) EC1 (b) EC5, đổi Expected?
+  · Q3 TC-204 – covers EC26 nhưng đăng nhập là user {ts}; sửa khoá localStorage nào (giỏ không lưu localStorage, B0d); F5 làm mất giỏ ban đầu?
+  · Q4 TC-205 – technique "GB" ngoài EP/BVA/EG/ST → (a) EG (b) giá trị khác?
+  · Q5 TC-212 – cột id ghi [1, 2, 3] trùng TC-211, tiêu đề nói {"id": 1} → (a) đổi thành {"id": 1} (b) giữ?
+  · Q6 TC-215 – API không trả Thành tiền (server.js:284–288) → (a) quan sát quantity (b) giá trị khác?
+- Không chặn: 2 điểm (technique trống ở 14 case; 5 Expected chưa có nguồn SRS hoặc mã giả định) → sv_questions.md
+```
+````
 *File AI ghi/gửi trong lượt này:* `step5_sv.py`, `sv_questions.md`, `ai_gap_answer.md`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 127 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 124 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #128 | 12:37 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 – áp câu trả lời SV cho bước 5 (commit "HW02[B-FR07] 5/7c: áp trả lời SV").
+Chỉ sửa theo đúng câu trả lời dưới đây; không tự sửa câu chữ khác của SV.
+
+1. TC-202: bỏ case (giữ khoảng trống số). Notes: "SRS không quy định đồng bộ giữa
+   các tab (SV bỏ ở 5/7c)".
+2. TC-203: ec_target EC5 → EC1 (Expected coi 1e5 là hợp lệ).
+3. TC-204: bỏ khỏi B_FR07; notes: "kiểm AuthContext/token hỏng, không thuộc giỏ hàng;
+   dựa vào tải lại trang (B10 ngoài phạm vi)". Ghi vào sv_questions.md: "ý thuộc phần
+   xác thực, xem xét ở feature khác".
+4. TC-207: bỏ case. Notes: "không có điểm quan sát / căn cứ SRS (SV bỏ ở 5/7c, cùng
+   lý do EC32)".
+5. TC-212: cột id = {"id": 1} (SV điền nhầm mảng ở 5/7).
+6. TC-215: Expected = "HTTP 2xx và GET /api/cart trả quantity đúng bằng giá trị đã
+   gửi (9007199254740993)"; bỏ phần Thành tiền. Assumptions: B1.
+7. TC-209, TC-214: thêm 2 EC không hợp lệ mới (origin Human, tầng API):
+   "body không phải JSON hợp lệ" (TC-209), "Content-Type không phải
+   application/json" (TC-214); đưa vào covers + ec_target.
+8. TC-213, TC-214: thêm dòng "Cách thực hiện" (213: gửi 50 request song song;
+   214: header Content-Type: text/plain).
+9. TC-201: Thao tác = "bấm 'Thêm vào giỏ' id 4 đúng 20 lần trong 0,4 giây (cách
+   nhau 20 ms)"; bỏ "Console không có lỗi" khỏi Expected.
+10. Technique: mọi case SV = EG. TC-205, TC-211, TC-212 thêm approach = "gray-box"
+    (schema chưa có trường này → vá harness commit riêng; linter không được báo lỗi).
+11. render_md.py → check_domain.py → linter thầy → commit. Dừng.
+Báo cáo theo CLAUDE.md; liệt kê case còn thiếu căn cứ SRS/giả định trong Expected (nếu có).
+```
+
+**Output:**
+````
+Status: vá harness trường `approach` trước, rồi áp trả lời SV.
+
+Đã áp xong JSON. Giờ cập nhật sv_questions.md, render, kiểm, commit.
+
+Commit `5/7c` chưa làm. Lý do: `check_domain` báo 1 lỗi, và để sửa thì phải đổi `covers` của SV, nằm ngoài câu trả lời. Commit vá harness thì đã xong. Toàn bộ thay đổi 5/7c đang nằm trong working tree, chưa commit.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 5/7c – áp trả lời SV (mục 1–10) + vá harness trường approach
+- File đã tạo/sửa (chưa commit): HW02/B_FR07/testcases.json (v0.11), testcases.md, sv_questions.md (thêm mục "Trả lời của SV (áp ở 5/7c)")
+- Đã áp:
+  · Bỏ TC-202, 204, 207 (giữ khoảng trống số); lý do ghi ở notes của suite TS-SV-UI/API; ý xác thực của 204 ghi vào sv_questions.md
+  · TC-203: ec_target đổi EC5 → EC1
+  · TC-212: cột id = {"id": 1}
+  · TC-215: Expected mới, assumptions B1
+  · TC-201: đổi Thao tác; bỏ "Console không có lỗi"
+  · Biến mới V22 "Định dạng request POST /api/cart"; V21 để trống vì mã này đã gỡ trước đó
+  · EC mới (origin Human, requirements API-CART + B17):
+    - EC56 = body không phải JSON hợp lệ → TC-209
+    - EC57 = Content-Type không phải application/json → TC-214
+  · TS-SV-API thêm cột "Cách thực hiện": 213 = gửi 50 request song song; 214 = header Content-Type: text/plain
+  · Mọi case SV: technique EG; TC-205, 211, 212 thêm approach gray-box
+- Kết quả kiểm tra:
+  · check_domain: 1 ERROR / 7 warn (đều là cảnh báo biến cũ), EC 55/55 đã phủ
+    - ERROR: TC-FR07-203 – case không hợp lệ phải có đúng 1 EC không hợp lệ trong ec_target
+  · lint: 62 TC, 0 errors / 10 warn (tiêu đề thiếu CONDITION, giữ nguyên văn SV)
+  · test: Not run
+- Commit: 82be2bc HW02: vá harness – trường approach (gray-box)
+  · approach chỉ nhận black-box/gray-box/white-box, giá trị khác thì WARN
+  · Bảng suite có thêm cột "Cách tiếp cận"
+  · Render và check của A_FR01, B_FR07 không đổi; linter thầy không báo lỗi với trường mới
+  · 5/7c chưa commit, chờ trả lời Q7
+- Cần quyết định:
+  · Q7 TC-203 – covers vẫn có EC5 (không hợp lệ) trong khi ec_target là EC1 → (a) bỏ EC5 khỏi covers (b) giữ EC5, Expected đổi sang bị từ chối
+- Case còn thiếu căn cứ SRS/giả định trong Expected:
+  · TC-200 – "không bật alert XSS": SEC-04 đã ra ngoài phạm vi
+  · TC-203 – coi 1e5 là số nguyên hợp lệ: SRS không nói về cách viết số
+  · TC-206 – hiển thị "007" thành "7": SRS không nói định dạng hiển thị
+  · TC-213 – "không mất request" khi gửi song song: FR-07.3 chỉ nói cộng dồn, không nói đồng thời
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #129 | 12:41 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
+1. Q7: TC-203 bỏ EC5 khỏi covers (giữ ec_target EC1).
+2. B23 (SV chốt): "Chuỗi biểu diễn một số nguyên dương theo cách khác (ký hiệu số mũ,
+   số 0 đứng đầu) được hiểu theo giá trị số của nó; Số lượng hiển thị và tính tiền
+   theo giá trị đó." Lý do: FR-06.2 chỉ nói "số nguyên dương", không quy định cách
+   viết. Gắn assumptions B23 cho TC-203, TC-206.
+3. SEC-04: đưa lại vào test basis (trích nguyên văn README.md:281), phạm vi ghi
+   "giá trị người dùng nhập ở ô Số lượng hiển thị trong giỏ"; gắn requirements cho
+   TC-200.
+4. TC-213: notes "Expected suy từ FR-07.3 áp cho từng request".
+5. render_md.py → check_domain.py → linter thầy (phải 0 ERROR) →
+   commit "HW02[B-FR07] 5/7c: áp trả lời SV". Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 129 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 126 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

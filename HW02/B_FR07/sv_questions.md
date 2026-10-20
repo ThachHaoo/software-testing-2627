@@ -27,3 +27,15 @@ Case SV đã chép vào `testcases.json` (suite TS-SV-UI, TS-SV-API), giữ nguy
 - Ghi chú thêm (không phải câu hỏi):
   - TC-213 và TC-214 khác nhau ở cách gửi (50 request song song, Content-Type: text/plain) chứ không ở cột dữ liệu, nên linter báo "identical data". Ngoại lệ quy trình đã ghi trong notes của từng case.
   - Linter báo 11 WARN "title thiếu CONDITION". Tiêu đề giữ nguyên văn SV.
+
+## Trả lời của SV (áp ở 5/7c)
+
+| Mã | Trả lời |
+|---|---|
+| Q1 | TC-FR07-202 bỏ: SRS không quy định đồng bộ giữa các tab. |
+| Q2 | TC-FR07-203: ec_target đổi EC5 → EC1 (Expected coi `1e5` là hợp lệ). |
+| Q3 | TC-FR07-204 bỏ khỏi B_FR07: ý thuộc phần xác thực, xem xét ở feature khác. |
+| Q4 | Mọi case SV technique = EG; TC-205, 211, 212 thêm `approach: gray-box`. |
+| Q5 | TC-FR07-212: cột id = `{"id": 1}` (SV điền nhầm mảng ở 5/7). |
+| Q6 | TC-FR07-215: Expected = HTTP 2xx và GET /api/cart trả quantity đúng bằng giá trị đã gửi; assumptions B1. |
+| — | TC-FR07-207 bỏ: không có điểm quan sát / căn cứ SRS (cùng lý do EC32). |
