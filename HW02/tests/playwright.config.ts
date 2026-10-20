@@ -18,6 +18,7 @@ export default defineConfig({
   projects: [
     { name: 'A_FR01', use: { baseURL: 'http://localhost:5173' }, testMatch: /A_FR01[\\/].*\.spec\.ts$/ },
     { name: 'B_FR07', use: { baseURL: 'http://localhost:5173' }, testMatch: /B_FR07[\\/].*\.spec\.ts$/ },
+    { name: 'C_FR15', use: { baseURL: 'http://localhost:5174' }, testMatch: /C_FR15[\\/].*\.spec\.ts$/ },
     { name: 'web',  use: { baseURL: 'http://localhost:5173' }, testMatch: /specs[\\/]B_FR07\..*spec\.ts$/ },
     { name: 'admin', use: { baseURL: 'http://localhost:5174' }, testMatch: /specs[\\/]C_FR15\..*spec\.ts$/ },
     { name: 'api',   use: { baseURL: 'http://localhost:3000' }, testMatch: /specs[\\/].*\.api\.spec\.ts$/ },
