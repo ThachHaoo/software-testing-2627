@@ -13284,6 +13284,53 @@ nguồn mốc 255 của V2 (trích SRS mục/câu, hoặc "chỉ có trong code:
 
 **Output:**
 ```
+C9=a nghĩa là từ chối chuỗi số → làm tiếp.
+
+Đã sửa xong bước 2: commit `f982e3b`. Theo C9=a, chuỗi số ở price bị **từ chối**, nên lớp "chuỗi số" của V3 giữ nguyên là không hợp lệ.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `f982e3b` HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3. check_domain: 0 lỗi, 79 cảnh báo; linter: 0 lỗi, 14 cảnh báo (không đổi so với `d1e228a`). Freeze: `C_FR15_step2_20261020-164315.{json,md}`.
+- **Đã sửa:**
+  - Lý do C9 → "SV chốt: <SV điền>"; SV cần điền vào chỗ này.
+  - Ghi chú EC18/EC25: bỏ lý do "đơn vị ₫"; ghi rõ là lớp HỢP LỆ, Expected = chấp nhận; chỉ giữ lý do gray-box `../eshop-sut/backend/database.js:67` (price INTEGER). Không thêm/bớt lớp nào.
+- **Nguyên văn C9 (sau sửa):** "C9 (thiếu trường / sai kiểu ở API) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về body JSON; tiền lệ A15, B18 · SV chốt 2026-10-20, phương án a — SV chốt: <SV điền>]: name/price/category_id thiếu, null hoặc sai kiểu JSON (name là số; price là chuỗi — kể cả chuỗi số như "100000"; category_id là chuỗi chữ) → 4xx, không tạo/không đổi bản ghi."
+- **Mốc 255 của V2:** có trong SRS — `../eshop-sut/README.md` §6 FR-15, dòng 195: "Tên sản phẩm: bắt buộc, tối đa 255 ký tự."
+- **"Ví dụ body" trong C15:**
+  - Không nằm trong SRS (README.md). Nguồn là `../eshop-sut/api_specification.md` §3.3, dòng 91–100, khối "Body khi Thêm/Sửa (JSON)" với `"price": 100000` (dòng 95). Đây là body **gửi lên** (request).
+  - Không có ví dụ response nào chứa price: §3.1/§3.2 (dòng 80–85, GET danh sách và chi tiết) không mô tả phản hồi.
+  - Vì vậy căn cứ của khuyến nghị C15 (b) chỉ là suy ra từ request, không có văn bản quy định response. C15 vẫn đang chờ SV chốt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #217 | 16:46 20/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1) SV chốt (commit riêng, không freeze):
+   - C9: thay "<SV điền>" bằng: "phân biệt rạch ròi giữa số và chuỗi".
+   - C15=b (SV chốt: price trong response phải là số JSON; lý do giống C9 — SV phân biệt rạch ròi giữa chuỗi và số,
+     không chấp nhận ngoại lệ). Loại "quyết định Expected", truy vết có, căn cứ: "SRS im lặng về response; giả định SV".
+     Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so theo giá trị.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 2/7c: SV chốt C9, C15` kèm A_prompt_log.md.
+
+2) /domain-bva-testing HW02/C_FR15 3 — TC Domain (minimum set), theo skill + CLAUDE.md + quy ước handoff mục 4:
+   mã TS-DOM 01–59, suite tách UI/API/GUI; ec_target sinh truy vết, case không hợp lệ đúng 1 EC không hợp lệ
+   trong ec_target; Precondition nêu trạng thái quan sát được và có bước dựng trạng thái; Procedure ghi cách nhập
+   ('' , ␣, bấm 1 lần, chỗ quan sát); phần "không đổi" ghi tương đối (SAU = TRƯỚC); độc lập {ts}, cleanup 2 lớp;
+   A16, A17; UI và API tách 2 case; thuộc tính chung (nhãn, thông báo, định dạng, kiểu dữ liệu) khẳng định ở đúng 1 case;
+   Expected chỉ dựa SRS + giả định SV chốt, không dựa code/hành vi SUT; case dùng hiểu biết từ code → approach gray-box.
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 3/7: TC Domain`.
+
+Báo cáo (≤ 25 dòng): 2 commit + checker/linter; số case theo suite (UI/API/GUI) và số case hợp lệ/không hợp lệ;
+case gray-box (mã + 1 dòng lý do); giả định MỚI chặn bước 4 (mã | câu hỏi | phương án + hệ quả | khuyến nghị + căn cứ).
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -13291,4 +13338,4 @@ nguồn mốc 255 của V2 (trích SRS mục/câu, hoặc "chỉ có trong code:
 
 ---
 
-**Tổng:** 216 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 153 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 217 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 153 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216); Claude (không rõ model) 2 lượt (#118, #217). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
