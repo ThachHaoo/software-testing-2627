@@ -37,6 +37,8 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
 
 ### Bước 3 — Test case Domain (minimum set)
 - Tạo suite `TS-DOM` (`format: "matrix"`, `procedure` viết một lần, `columns` = các biến đầu vào). Tách suite theo tầng (UI / API) nếu quy trình khác nhau — mỗi suite một quy trình.
+- **Mỗi case thuộc đúng một tầng** (`layer: "UI"` hoặc `"API"`). Ý "kiểm cả UI lẫn API" → hai case riêng, mỗi case nằm trong suite của tầng đó. Expected của case API chỉ nói về phản hồi (mã HTTP, body) và dữ liệu lưu; không nhắc thông báo, chuyển trang hay yếu tố giao diện.
+- Trường đặc tả yêu cầu mà giao diện có thể không có (ví dụ ô xác nhận): viết **một** case kiểm sự tồn tại của trường; các case khác ghi trong `notes` cách xử lý khi trường vắng mặt (bỏ bước nhập, verdict theo Bước 6).
 - **Tiền điều kiện phải nêu trạng thái ban đầu quan sát được**: trang vừa tải xong, **mọi ô trống**, chưa đăng nhập/không còn phiên cũ, trình duyệt không tự điền (autofill), dữ liệu sẵn có trong CSDL. Không giả định ngầm.
 - **Quy trình phải nói rõ cách nhập từng loại giá trị**: thứ tự các ô; giá trị thường → gõ đúng chuỗi trong cột; "rỗng" → không nhập gì, để nguyên ô trống; khoảng trắng → gõ đúng số dấu cách ghi trong cột (bảng hiển thị `␣`); bấm nút submit đúng một lần; nêu chỗ quan sát kết quả (hộp lỗi, URL, phản hồi API, CSDL). Mỗi bước có một phản hồi quan sát được.
 - Quy tắc chọn: case **hợp lệ** phủ càng nhiều lớp hợp lệ càng tốt; mỗi case **không hợp lệ** phủ **đúng một** lớp không hợp lệ, các biến khác giữ giá trị hợp lệ.
@@ -54,10 +56,25 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
 
 ### Bước 6 — Thực thi
 - Sinh khung test tự động từ `testcases.json` (Playwright cho web/API; xem `references/automation.md`): mỗi test có tiêu đề bắt đầu bằng mã TC, ghi `actual` bằng annotation và chụp màn hình. Mobile (Expo) chạy tay: điền `actual_result`/`status` trực tiếp.
-- Người dùng chạy trên máy của họ; sau đó `merge_results.py` gộp kết quả vào `testcases.json`. Không tự đổi Expected sau khi đã có Actual.
+- Người dùng chạy trên máy của họ; sau đó `merge_results.py` gộp kết quả vào `testcases.json`. Không tự đổi Expected sau khi đã có Actual — ngoại lệ duy nhất: điểm quan sát trong Expected không tồn tại trên hệ thống; khi đó ghi lý do vào `notes`.
+- **Quy tắc verdict** (ghi thành giả định trong `meta.assumptions` trước khi chạy):
+  - Kết quả lệch Expected **vì biến mục tiêu** của case → `Fail`.
+  - Case không đi tới được điểm kiểm **vì biến khác** (một lỗi đã có ở case khác chặn đường) → `Blocked`, ghi mã case gốc vào `notes`. Không tính là Fail lần hai.
+  - Trường đặc tả yêu cầu nhưng không có trên giao diện → case kiểm sự tồn tại `Fail`; các case cần nhập trường đó → `Blocked` (case gốc = case kiểm sự tồn tại).
+  - Bị từ chối đúng như Expected nhưng thông báo/lý do không chứng minh được luật mục tiêu (lý do chung, hoặc do một luật khác) → vẫn `Pass` theo hộp đen, ghi "Pass hộp đen" + lý do vào `notes`.
+- `auto_status` giữ kết quả tự động gốc do `merge_results.py` ghi; người dùng chỉnh `status` theo quy tắc trên, không sửa `auto_status`.
+- Đường tự động bị chặn (Blocked) nhưng case vẫn kiểm được bằng đường khác (gọi API tạo dữ liệu, thao tác tay): người dùng kiểm tay, ghi bước và quan sát vào `notes`, ảnh `TC-xx_manual_*.png`; `status` theo kết quả kiểm tay, `auto_status` giữ Blocked.
+- Evidence đặt tên `TC-xx_ui/_api/_req/_res/_failed/_manual_*`; không chép trace; giữ nguyên bản gốc (bản cần che thông tin để đăng công khai tạo riêng).
 
 ### Bước 7 — (Người dùng) bug report
 - Với case Fail: cô lập nguyên nhân (chạy lại, reset dữ liệu, so UI với API) trước khi kết luận là bug. Mô tả bug do người dùng viết; AI chỉ kiểm tra trường còn thiếu.
+- Phần AI được làm, theo thứ tự, mỗi bước chờ người dùng duyệt:
+  1. **Gom dữ kiện**: nhóm các case Fail/Blocked theo triệu chứng và đoạn mã liên quan (trích nguyên văn, số dòng), chạy lại case nghi flaky; không đặt tên bug, không đề xuất severity/priority, không kết luận nguyên nhân.
+  2. Người dùng chốt danh sách bug.
+  3. **Dựng khung** `BUG-xx.md`: chỉ điền dữ kiện (môi trường, bằng chứng, TC liên quan, yêu cầu/giả định bị vi phạm, trích dẫn nguồn); để trống tiêu đề, bước, Expected, Actual, nhận định, severity, priority.
+  4. Người dùng viết mô tả.
+  5. **Sửa dữ kiện**: đối chiếu payload/Actual với evidence (`_req`/`_res`, `actual_result`, ảnh) và sửa chỗ sai; khẳng định chưa có bằng chứng → thêm "(chưa kiểm chứng)"; không sửa văn phong, severity, priority.
+  6. Kiểm issue trùng trên tracker trước khi tạo; tạo issue bằng tài khoản của người dùng từ file người dùng đã viết; ghi URL vào file.
 
 ## Lệnh
 
