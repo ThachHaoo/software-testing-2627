@@ -49,6 +49,12 @@
 - Đạt trong cùng case: —
 - Chưa đánh giá được: —
 
+## Liên quan
+
+- BUG cùng vị trí code server (A_FR01): BUG-07 (#23)
+- Dòng code chung: `backend/server.js` dòng 20–29
+- Dòng code mobile (riêng, không có ở BUG A): `frontend-mobile/App.js` dòng 211–212
+
 ## Ghi chú cô lập
 
 ### Dữ kiện (AI chép)
