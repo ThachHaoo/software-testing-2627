@@ -20,9 +20,10 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | A_FR01 | FR-01 Đăng ký tài khoản (web frontend-web + API POST /api/register) | 133 | 108 | 43 | 65 | 25 | 0 | 98 | 10 | 25 | 14 |
 | B_FR07 | FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart) | 62 | 53 | 14 | 39 | 9 | 0 | 49 | 0 | 13 | 20 |
-| **Tổng** | **2 feature** | **195** | **161** | **57** | **104** | **34** | **0** | **147** | **10** | **38** | **34** |
+| C_FR15 | FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products) | 122 | 117 | 51 | 66 | 5 | 0 | 111 | 0 | 11 | 16 |
+| **Tổng** | **3 feature** | **317** | **278** | **108** | **170** | **39** | **0** | **258** | **10** | **49** | **50** |
 
-Bug theo severity: Critical 6, High 9, Medium 8, Low 11 (tổng 34 file trong `bugs/`).
+Bug theo severity: Critical 11, High 15, Medium 11, Low 13 (tổng 50 file trong `bugs/`).
 <!-- SUMMARY:END -->
 
 ## Video demo (YouTube)

@@ -15661,6 +15661,37 @@ Bước 0: bỏ dòng "API spec §3.2" ở BUG-48 và G12.
 Bản che ổn. Đang dựng body cho 16 issue: lấy từ file .md, bỏ mục Link, thêm dòng chờ kéo ảnh, che đường dẫn ở BUG-48.
 
 Body đã sẵn sàng. Bắt đầu tạo tuần tự 16 issue BUG-35 → 50 bằng tài khoản ThachHaoo.
+
+Đã tạo 16 issue #181–#196 trên `tkob-team/eshop-sut`, tác giả ThachHaoo, label `bug`, tiêu đề có tiền tố "[FR-15] ". Em không push git. Mỗi issue có sẵn một dòng `[SV kéo ảnh … vào đây]` để SV kéo ảnh vào, rồi xoá dòng đó.
+
+**2 commit:**
+- `4800a3c HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV` — bỏ dòng "API spec §3.2" ở BUG-48 và ở G12, có log trước/sau.
+- `9e34128 HW02[C-FR15] 7/7f: tạo issue BUG-35–50` — số issue đã ghi vào mục "Link GitHub Issue" của từng .md và vào bảng ánh xạ trong `_groups_C_FR15.md`; kèm bản che và script tạo bản che.
+
+**Ảnh SV cần kéo vào từng issue** (ảnh nằm ở `HW02/C_FR15/evidence/`; ảnh của #189, #190 nằm ở `HW02/bugs/_issue_redacted/`):
+
+| BUG | Issue | Ảnh kéo vào |
+|---|---|---|
+| 35 | #181 | `TC-FR15-08_ui.png` |
+| 36 | #182 | `TC-FR15-10_ui.png` |
+| 37 | #183 | `TC-FR15-13_ui.png` |
+| 38 | #184 | `TC-FR15-15_ui.png` |
+| 39 | #185 | `TC-FR15-200_ui.png` |
+| 40 | #186 | `TC-FR15-201_ui.png` |
+| 41 | #187 | `TC-FR15-23_api.png` |
+| 42 | #188 | `TC-FR15-35_api.png` |
+| 43 | #189 | `TC-FR15-209_api_redacted.png` (bản che) |
+| 44 | #190 | `TC-FR15-211_api_redacted.png` (bản che) |
+| 45 | #191 | `TC-FR15-03_ui.png` |
+| 46 | #192 | `TC-FR15-47_api.png` |
+| 47 | #193 | `TC-FR15-50_api.png` |
+| 48 | #194 | `TC-FR15-22_api.png` |
+| 49 | #195 | `TC-FR15-90_manual.png` |
+| 50 | #196 | `TC-FR15-92_manual.png` |
+
+**Che đường dẫn máy:** ảnh gốc TC-209/211 hiện đường dẫn `D:\HK7\…` trong stack trace, nên em tạo bản che thay bằng `<SUT_DIR>`; ảnh gốc giữ nguyên. Body issue #194 (BUG-48) cũng đã thay đường dẫn trong stderr bằng `<SUT_DIR>`; file `BUG-48.md` vẫn giữ nguyên văn. Các ảnh còn lại em đã xem, không có đường dẫn máy hay tên người dùng.
+
+Còn lại cho SV: kéo ảnh vào 16 issue, rồi chụp trang Issues lưu thành `bugs/issues_page_C_FR15.png`.
 ```
 *File AI ghi/gửi trong lượt này:* `f0.py`, `redact_7f.js`, `bodies_7f.py`
 
@@ -15668,4 +15699,38 @@ Body đã sẵn sàng. Bắt đầu tạo tuần tự 16 issue BUG-35 → 50 b�
 
 ---
 
-**Tổng:** 260 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 176 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #261 | 21:55 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đóng C_FR15:
+0. <Nếu SV sửa tiêu đề BUG-48/37/38: cập nhật issue tương ứng bằng `gh issue edit` + comment đính chính, log trước/sau vào
+   _groups_C_FR15.md; không sửa chữ ngoài phần SV đã sửa trong .md>.
+1. Kiểm HW02/bugs/issues_page_C_FR15.png có hiện #181–#196. Kiểm mỗi issue #181–#196 có ảnh trong mục "Bằng chứng"
+   (gh issue view --json body); ảnh nào là bản gốc có đường dẫn máy thay vì bản che → báo, không tự sửa.
+2. README HW02 (summary): cập nhật số feature, số TC (C_FR15: AI + SV), số bug toàn HW02 và phân bố Severity — tính từ các file BUG-*.md,
+   không ước lượng. BUG kế tiếp: BUG-51; issue kế tiếp ≥ #197.
+3. Commit `HW02[C-FR15] 7/7g: ảnh trang issue + README` kèm A_prompt_log.md. Không push.
+4. Ghi bài học C vào CLAUDE.md (commit riêng `HW02: CLAUDE.md – bài học C_FR15`), ngắn gọn:
+   - Khung bug = mẫu B (d0d0e05:HW02/bugs/BUG-22.md): `<SV viết>` trong backtick; Môi trường gạch đầu dòng giá trị thật;
+     Yêu cầu do AI điền từ _groups; Dữ kiện chỉ Actual nguyên văn + "Lặp lại" + code trích; không chép Expected.
+   - 7a không soạn bước tái hiện thay SV; AI chỉ chạy bước SV viết ở 7c. Gặp bất thường ngoài bước SV → báo, ghi "AI phát hiện".
+   - Giả định phạm vi (vd C8) và giả định nới (vd C17) không bao giờ vào "yêu cầu bị vi phạm".
+   - Harness UI: đọc validity HTML5 ngay khi bấm (bài học H1); ghi mọi kênh thông báo (hộp thoại, bong bóng, chữ trên trang);
+     không phân loại thông báo theo chữ của SUT.
+   - Vá harness → chạy lại toàn bộ thành MỘT lượt chính thức; merge --force chỉ khi không có status SV đặt.
+   - Lệnh có chỗ `<...>` chưa điền → DỪNG, hỏi (đã đúng ở C).
+Báo cáo (≤ 10 dòng): 2 commit; kết quả mục 1; số liệu README (TC, bug, Severity).
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 261 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 177 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
