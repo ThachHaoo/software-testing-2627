@@ -17205,6 +17205,95 @@ Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
 
 **Output:**
 ```
+Đang kiểm một header `#138` xuất hiện hai lần trong log, xem có phải lượt trùng không.
+
+Đã chép transcript, sinh lại prompt log và commit `6ffde86 HW02: cập nhật prompt log (đóng C_FR15)`, chỉ gồm `A_prompt_log.md`, chưa push.
+
+- **File đã chép:** `.transcripts\claude-code_session_HW02_C_20261020-2209.jsonl` (file mới; bản `…_C_20261020-2043.jsonl` chép trước compact vẫn giữ nguyên). Phiên này có 29 lượt user, lượt đầu 16:21, lượt cuối 22:08 (giờ VN, 20/10/2026).
+- **Tổng lượt:** prompt log có 290 lượt — Opus 5.5: 203, Sonnet 4.6: 83, ghi "Sonnet 4.6 + Opus 5.5": 2, không rõ model: 2.
+- **Lượt cuối:** lượt claude.ai cuối là #289 lúc 22:06, lượt Claude Code cuối là #290 lúc 22:08 (chính lệnh này). Không có lượt nào trùng giờ và nội dung.
+- **Header `#138` xuất hiện hai lần:** một ở 11:00, một ở 13:47 (nằm sau #171). Bản đã commit trước đó cũng có y như vậy, nên không do lần chép này gây ra. Theo em, header thứ hai là văn bản trích nằm trong một prompt chứ không phải lượt riêng, vì script báo 290 lượt khớp với số header trừ cái này. Chưa kiểm chứng sâu hơn.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #291 | 22:11 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Kiểm CLAUDE.md sau a7cd868 (không amend — đã có commit sau):
+1. In nguyên văn mục bài học C_FR15 trong CLAUDE.md.
+2. Bổ sung (nếu chưa có), ngắn gọn, vào mục bài học C:
+   - Linter thầy: suite ≤ 25 dòng → tách suite (vd TS-DOM-API-POST/PUT/OTHER), giữ nguyên mã TC.
+   - BVA tràn dải 60–89 → dùng 100–199 (không đụng dải SV từ 200).
+   - api_specification.md: SV không dùng làm căn cứ Expected/Yêu cầu.
+   - Trường "Yêu cầu" trong BUG do AI điền từ _groups (SV duyệt); bất thường AI tìm thấy ngoài bước SV → ghi "AI phát hiện", SV quyết.
+   - Khung sv_cases.md: AI được tạo khung trống (không ví dụ, không danh mục), KHÔNG commit riêng trước 5/7.
+   - Expected SV viết sai sau khi có Actual → không sửa; verdict "Fail do lỗi thiết kế TC, không lập bug".
+   - Ảnh kéo vào issue phải là bản che: kiểm sau khi SV kéo ảnh (C: #189, #190 lỡ dùng bản gốc).
+   - README: nguồn TC có 3 cột AI / Both / SV.
+   - Push: SV tự push (hợp lệ); AI không push.
+   - Sắp compact → chép transcript phiên vào .transcripts\ (tên mới) + on_stop.py --manual + commit prompt log trước khi /compact.
+3. Commit `HW02: CLAUDE.md – bổ sung bài học C_FR15`. Không push.
+Báo cáo (≤ 8 dòng): commit; mục nào đã có sẵn, mục nào vừa thêm.
+```
+
+**Output:**
+````
+Đã bổ sung mục bài học C_FR15 và commit `dad5865 HW02: CLAUDE.md – bổ sung bài học C_FR15`, chưa push. `A_prompt_log.md` đã sinh lại nhưng không nằm trong commit này vì lệnh không yêu cầu.
+
+**Nguyên văn mục bài học C trước khi sửa:**
+```
+- 2026-10-20 (rút ra từ C_FR15):
+  - Khung bug = mẫu B (`d0d0e05:HW02/bugs/BUG-22.md`): chỗ SV viết ghi `` `<SV viết>` `` (trong backtick); Môi trường gạch đầu dòng giá trị thật; Yêu cầu do AI điền từ `_groups`; Dữ kiện chỉ gồm Actual nguyên văn + dòng "Lặp lại" + code trích; không chép Expected.
+  - 7a không soạn bước tái hiện thay SV; AI chỉ chạy bước SV viết ở 7c. Gặp bất thường ngoài bước SV → báo, ghi "AI phát hiện".
+  - Giả định phạm vi (vd C8) và giả định nới (vd C17) không bao giờ vào "yêu cầu bị vi phạm".
+  - Harness UI: đọc validity HTML5 ngay khi bấm (bài học H1); ghi mọi kênh thông báo (hộp thoại, bong bóng, chữ trên trang); không phân loại thông báo theo chữ của SUT.
+  - Vá harness → chạy lại toàn bộ thành **một** lượt chính thức; `merge --force` chỉ khi không có status SV đặt.
+  - Lệnh có chỗ `<...>` chưa điền → DỪNG, hỏi.
+```
+
+**Đã có sẵn, không thêm:** BVA tràn dải — CLAUDE.md dòng 87 đã ghi "TS-BVA 60–89 (tràn thì từ 100) … TS-SV từ 200". Dòng này chưa nêu rõ cận 199. SV muốn ghi tường minh thì báo em.
+
+**Đã có một phần, chỉ sửa chữ:** "Yêu cầu do AI điền từ `_groups`" thêm "(SV duyệt)"; "ghi 'AI phát hiện'" thêm ", SV quyết".
+
+**Vừa thêm 8 dòng:**
+- Linter thầy: suite ≤ 25 dòng thì tách suite, giữ nguyên mã TC.
+- `api_specification.md` không dùng làm căn cứ Expected/Yêu cầu.
+- Khung `sv_cases.md`: chỉ khung trống, không commit riêng trước 5/7.
+- Expected SV viết sai phát hiện sau khi có Actual: không sửa, verdict "Fail do lỗi thiết kế TC".
+- Ảnh kéo vào issue phải là bản che, AI kiểm sau khi SV kéo.
+- README: 3 cột nguồn TC AI / Both / SV.
+- SV tự push, AI không push.
+- Trước `/compact`: chép transcript, chạy `on_stop.py --manual`, commit prompt log.
+
+Lưu ý: ở 7e em có dùng `api_specification.md` làm căn cứ Yêu cầu cho BUG-48. Dòng đó đã bỏ ở 7f0, nên các file hiện tại không còn mâu thuẫn với quy tắc mới.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #292 | 22:12 20/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đóng prompt log C_FR15 (không sửa tay prompt log):
+1. SV đã đặt claude-ai_session_HW02_p4.jsonl mới vào .transcripts\ (ghi đè bản cũ — bản mới chứa trọn bản cũ).
+2. Chép transcript phiên Claude Code hiện tại sang .transcripts\ với tên MỚI (không đè file đã chép trước compact),
+   theo quy ước tên đã dùng. Kiểm nhanh: số lượt user, giờ lượt đầu/cuối (giờ VN).
+3. Chạy `python tools/hooks/on_stop.py --manual`. Kiểm HW02/appendix/A_prompt_log.md có: lượt claude.ai cuối (22:06 20/10)
+   và lượt Claude Code cuối của phiên này; không trùng lượt.
+4. Commit `HW02: cập nhật prompt log (đóng C_FR15)` chỉ gồm A_prompt_log.md. Không push.
+Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -17212,4 +17301,4 @@ Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
 
 ---
 
-**Tổng:** 290 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 205 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 292 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 206 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291); Claude (không rõ model) 3 lượt (#118, #272, #292). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
