@@ -128,7 +128,7 @@
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/184
 
 ---
 

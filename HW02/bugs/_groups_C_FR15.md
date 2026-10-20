@@ -9,22 +9,22 @@
 
 | Nhóm | BUG | Issue |
 |---|---|---|
-| G1 | BUG-35 | |
-| G2 | BUG-36 | |
-| G3 | BUG-37 | |
-| G4 | BUG-38 | |
-| G5 | BUG-45 | |
-| G6 | BUG-39 | |
-| G7 | BUG-40 | |
-| G8 | BUG-41 | |
-| G9 | BUG-42 | |
-| G10 | BUG-46 | |
-| G11 | BUG-47 | |
-| G12 | BUG-48 | |
-| G13 | BUG-43 | |
-| G14 | BUG-44 | |
-| G15 | BUG-49 | |
-| G16 | BUG-50 | |
+| G1 | BUG-35 | [#181](https://github.com/tkob-team/eshop-sut/issues/181) |
+| G2 | BUG-36 | [#182](https://github.com/tkob-team/eshop-sut/issues/182) |
+| G3 | BUG-37 | [#183](https://github.com/tkob-team/eshop-sut/issues/183) |
+| G4 | BUG-38 | [#184](https://github.com/tkob-team/eshop-sut/issues/184) |
+| G5 | BUG-45 | [#191](https://github.com/tkob-team/eshop-sut/issues/191) |
+| G6 | BUG-39 | [#185](https://github.com/tkob-team/eshop-sut/issues/185) |
+| G7 | BUG-40 | [#186](https://github.com/tkob-team/eshop-sut/issues/186) |
+| G8 | BUG-41 | [#187](https://github.com/tkob-team/eshop-sut/issues/187) |
+| G9 | BUG-42 | [#188](https://github.com/tkob-team/eshop-sut/issues/188) |
+| G10 | BUG-46 | [#192](https://github.com/tkob-team/eshop-sut/issues/192) |
+| G11 | BUG-47 | [#193](https://github.com/tkob-team/eshop-sut/issues/193) |
+| G12 | BUG-48 | [#194](https://github.com/tkob-team/eshop-sut/issues/194) |
+| G13 | BUG-43 | [#189](https://github.com/tkob-team/eshop-sut/issues/189) |
+| G14 | BUG-44 | [#190](https://github.com/tkob-team/eshop-sut/issues/190) |
+| G15 | BUG-49 | [#195](https://github.com/tkob-team/eshop-sut/issues/195) |
+| G16 | BUG-50 | [#196](https://github.com/tkob-team/eshop-sut/issues/196) |
 
 ## Tổng hợp
 
@@ -1300,3 +1300,10 @@ Kiểm trùng 7e (`gh issue list -R tkob-team/eshop-sut --state all --limit 1000
 |---|---|---|---|---|
 | BUG-48 | Yêu cầu | có dòng "- **API spec §3.2:** (`api_specification.md` dòng 84–85) `GET /api/products/:id` — Xem chi tiết một sản phẩm. — (sập backend: request không nhận được phản hồi nào)" | bỏ dòng này; giữ dòng "Ổn định tiến trình backend (ngầm định)" và "Chưa đánh giá được: FR-06" | SV quyết: dòng "ngầm định" đã đủ căn cứ cho phần sập backend |
 | G12 | Tổng hợp + "Yêu cầu / giả định bị vi phạm" | "…ổn định tiến trình backend (ngầm định), API spec §3.2…" | bỏ "API spec §3.2" | như trên |
+
+## 7f — tạo issue (20/10/2026)
+
+- Tài khoản `gh api user` = ThachHaoo; tạo tuần tự BUG-35 → 50 trên `tkob-team/eshop-sut`, label `bug`, tiêu đề = "[FR-15] " + tiêu đề trong .md → #181–#196 (bảng ánh xạ ở đầu file).
+- Body = nội dung .md, bỏ mục "Link GitHub Issue"; dưới "Ảnh tiêu biểu" thêm dòng `[SV kéo ảnh … vào đây — alt = …]` để SV kéo ảnh.
+- Bản che (gốc giữ nguyên), sinh bằng `_repro_C_FR15/7c/redact_7f.js`: `_issue_redacted/TC-FR15-209_api_redacted.png`, `BUG-43.txt` (TC-209); `_issue_redacted/TC-FR15-211_api_redacted.png`, `BUG-44.txt` (TC-211); `_issue_redacted/BUG-48.txt` (stderr). Body issue BUG-48: đường dẫn máy trong stderr thay bằng `<SUT_DIR>` (file .md giữ nguyên văn). BUG-43, 44, 48 .md: thêm dòng "Bản che dùng cho issue" trong mục Bằng chứng.
+- Ảnh còn lại (UI, API JSON, ảnh chạy tay TC-90/92) không chứa đường dẫn máy/tên người dùng (đã xem).

@@ -48,6 +48,7 @@
 
 - Ảnh tiêu biểu: `TC-FR15-209_api.png`
 - TC-FR15-209: `HW02/C_FR15/evidence/TC-FR15-209_req.json`, `HW02/C_FR15/evidence/TC-FR15-209_res.json`, `HW02/C_FR15/evidence/TC-FR15-209_api.png`
+- Bản che dùng cho issue: `HW02/bugs/_issue_redacted/TC-FR15-209_api_redacted.png`, `HW02/bugs/_issue_redacted/BUG-43.txt`
 
 ## TC liên quan
 
@@ -90,7 +91,7 @@
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/189
 
 ---
 

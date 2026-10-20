@@ -1,0 +1,12 @@
+# BUG-48: stderr của tiến trình node server.js khi dừng (GET /api/products/6, id chẵn, price null), nguồn HW02/bugs/BUG-48.md mục "Sập backend"; đường dẫn tuyệt đối thay bằng <SUT_DIR>
+
+<SUT_DIR>\backend\server.js:162
+    if (row.id % 2 === 0) row.price = row.price.toString();
+                                                ^
+
+TypeError: Cannot read properties of null (reading 'toString')
+    at Statement.<anonymous> (<SUT_DIR>\backend\server.js:162:49)
+    at Statement.replacement (<SUT_DIR>\backend\node_modules\sqlite3\lib\trace.js:25:27)
+    at Statement.replacement (<SUT_DIR>\backend\node_modules\sqlite3\lib\trace.js:25:27)
+
+Node.js v24.15.0

@@ -80,7 +80,7 @@ Theo yêu cầu FR-21.3 (quy định định dạng hiển thị GUI, C12): Cộ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/196
 
 ---
 

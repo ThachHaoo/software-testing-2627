@@ -52,6 +52,7 @@
 
 - Ảnh tiêu biểu: `TC-FR15-22_api.png`
 - TC-FR15-22: `HW02/C_FR15/evidence/TC-FR15-22_req.json`, `HW02/C_FR15/evidence/TC-FR15-22_res.json`, `HW02/C_FR15/evidence/TC-FR15-22_api.png`
+- Bản che dùng cho issue: `HW02/bugs/_issue_redacted/BUG-48.txt` (stderr trong mục "Sập backend" của issue đã thay đường dẫn máy bằng `<SUT_DIR>`)
 
 ## TC liên quan
 
@@ -126,7 +127,7 @@
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/194
 
 ---
 
