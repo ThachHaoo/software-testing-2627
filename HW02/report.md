@@ -1,0 +1,669 @@
+# HW02 – Domain Testing on EShop
+
+> 📝 **Khung report (tạm).** Tên file `report.md` là tạm: đề không quy định tên report chính; README và CLAUDE.md đang ghi `23120255_HW02_Report.md` → chốt một tên trước khi nộp. Xoá mọi khối 📝 trước khi xuất PDF.
+> 📝 Ký hiệu: `[...]` = ô cần điền · `[số liệu: summary.py]` = lấy từ `python tools/summary.py HW02` (không gõ tay) · 🔒 = em tự viết, AI không viết/nháp.
+
+| Mục | Nội dung |
+|---|---|
+| Họ tên / MSSV / Lớp | Lê Tấn Hiệp – 23120255 – Software Testing 23_3 |
+| Bài | HW02-AI – Domain Testing on EShop |
+| Cấp độ AI | Cấp 4 (AI hỗ trợ sản xuất; em thiết kế, audit, tích hợp) |
+| Bloom-AI | G9.2 (Apply), G9.3 (Analyse) |
+| Công cụ AI | [...] |
+| SUT | `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`) |
+| Ngày nộp | [...] |
+
+**Tuyên bố sử dụng AI (đề §9):** I use AI tools for the following tasks, [...]
+
+> 📝 Câu tuyên bố phải giữ nguyên văn theo đề §9; phần sau dấu phẩy liệt kê việc AI làm (khớp Mandatory Disclosure ở mục 12).
+
+## Mục lục
+
+1. Môi trường và SUT
+2. Phương pháp chung
+3. Feature A – FR-01 Đăng ký tài khoản (25 điểm)
+4. Feature B – FR-07 Giỏ hàng (25 điểm)
+5. Feature C – FR-15 Quản lý sản phẩm – CRUD admin (25 điểm)
+6. Feature D – FR-20 Đăng ký trên Mobile (15 điểm)
+7. Agent Skill (10 điểm)
+8. Test summary
+9. Bug report tổng hợp 🔒
+10. AI Audit Report
+11. AI Critique 🔒
+12. Mandatory Disclosure
+13. Tự đánh giá
+14. Biểu mẫu AI
+15. Phụ lục
+
+> 📝 Thứ tự mục 3–7 theo rubric đề §15 (A 25 · B 25 · C 25 · D 15 · Agent Skills 10). Mỗi feature có 7 mục con theo 7 bước.
+
+## 1. Môi trường và SUT
+
+| Thành phần | Giá trị |
+|---|---|
+| SUT | `tkob-team/eshop-sut` @ `de0f48f` |
+| Test basis | SRS v2.0 (`eshop-sut/README.md`): [...] |
+| OS / shell | [...] |
+| Backend / web / admin | :3000 / :5173 / :5174 |
+| Trình duyệt / Playwright | [...] |
+| Mobile | Expo SDK 54, Expo Go [...], thiết bị [...] |
+| Tài khoản | admin `admin@eshop.com`, user `test@eshop.com` |
+| Đặc điểm ảnh hưởng test | [...] |
+
+> 📝 Nguồn: `env/environment.md`, `env/mobile_api_url.patch`.
+
+## 2. Phương pháp chung
+
+### 2.1 Quy trình 7 bước, mỗi bước một commit
+
+| Bước | Ai làm | Việc | Artifact |
+|---|---|---|---|
+| 1 | AI → em review | Biến vào/ra | [...] |
+| 2 | AI → em review | Lớp tương đương (Complete Set of Partitions) | [...] |
+| 3 | AI → em review | TC Domain (coverage + minimum set) | [...] |
+| 4 | AI → em review | TC BVA | [...] |
+| 5 | Em 🔒 rồi hỏi AI | Em bổ sung TC (`TS-SV`) trước, sau đó hỏi AI vì sao bỏ sót | [...] |
+| 6 | AI viết script, em chạy | Playwright/API; mobile chạy tay | [...] |
+| 7 | Em 🔒 | Bug report + GitHub Issues | [...] |
+
+### 2.2 Mô hình BVA 9 điểm
+
+| Điểm | Ý nghĩa | Ghi chú |
+|---|---|---|
+| LB−1 | [...] | [...] |
+| LB | [...] | [...] |
+| LB+1 | [...] | [...] |
+| NOM | [...] | [...] |
+| UB−1 | [...] | [...] |
+| UB | [...] | [...] |
+| UB+1 | [...] | [...] |
+| MIN_UI | [...] | [...] |
+| MAX_UI | [...] | [...] |
+| LARGE | [...] | dùng khi biến không có cận trên (`no_upper_bound`) |
+
+### 2.3 Quy ước test case, verdict, bằng chứng
+
+| Quy ước | Nội dung |
+|---|---|
+| Dải mã TC | TS-DOM 01–59 · TS-BVA 60–89 (tràn từ 100) · TS-GUI 90–99 · TS-SV từ 200 |
+| Nguồn TC | AI / Both (AI + em sửa) / SV |
+| Verdict | [...] |
+| Expected | [...] |
+| Evidence | `TC-xx_ui/_api/_req/_res/_failed/_manual_*` |
+| Severity / Priority | theo `bugs/README.md` |
+
+> 📝 Nguồn: CLAUDE.md "Quyết định đã chốt", `bugs/README.md`, `.claude/skills/domain-bva-testing/SKILL.md`.
+
+## 3. Feature A – FR-01
+
+**Chức năng:** Đăng ký tài khoản (web + API `POST /api/register`) · **Thư mục:** `A_FR01/` · **Điểm:** 25
+
+> 📝 Bảng đầy đủ sinh tự động trong `A_FR01/testcases.md` (từ `A_FR01/testcases.json`, `render_md.py`). Chép/nhúng bảng từ đó, không gõ tay.
+
+### 3.0 Phạm vi và test basis
+
+| Mã yêu cầu | Nội dung (trích SRS) | Trong phạm vi? |
+|---|---|---|
+| [...] | [...] | [...] |
+
+| Mã giả định | Nội dung | Ai chốt |
+|---|---|---|
+| [...] | [...] | [...] |
+
+### 3.1 Bước 1 – Biến vào/ra
+
+[giải thích bước: ...]
+
+| Mã | Biến | Vào/Ra | Nguồn | Kiểu | Ràng buộc (đặc tả) | Ghi chú |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 3.2 Bước 2 – Lớp tương đương (Complete Set of Partitions)
+
+[giải thích bước: ...]
+
+| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
+|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 3.3 Bước 3 – Test case Domain
+
+[giải thích bước: ...]
+
+**3a. Test Cases Providing Coverage of Partitions**
+
+| EC | Lớp | Test case phủ |
+|---|---|---|
+| [...] | [...] | [...] |
+
+**3b. Minimum Set of Test Cases**
+
+| #TC | Tiêu đề | EC phủ | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC Domain: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 3.4 Bước 4 – Boundary Value Analysis
+
+[giải thích bước: ...]
+
+| Biến | LB−1 | LB | LB+1 | NOM | UB−1 | UB | UB+1 | MIN_UI | MAX_UI |
+|---|---|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+| #TC | Tiêu đề | EC phủ | Điểm biên | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC BVA: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 3.5 Bước 5 – Em bổ sung TC + AI gap analysis 🔒
+
+| #TC | Tiêu đề | EC phủ | Tầng | Kỹ thuật | Expected | Lý do chọn input |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC em bổ sung: [số liệu: summary.py]
+
+**Vì sao AI bỏ sót** 🔒
+
+| Case/bug AI bỏ sót | Loại nguyên nhân (prompt / giới hạn công cụ / độ phức tạp feature) | AI đã nghĩ tới nhưng không đưa vào? | Giải thích |
+|---|---|---|---|
+| [...] | [...] | [...] | [...] |
+
+> 📝 Dữ kiện: `A_FR01/sv_cases.md`, `A_FR01/ai_gap_answer.md`.
+
+### 3.6 Bước 6 – Thực thi
+
+[cách chạy: ...]
+
+| Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy |
+|---|---|---|---|---|---|
+| [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+
+![Ví dụ bằng chứng chạy test A_FR01](A_FR01/evidence/TC-FR01-01_ui.png)
+
+> 📝 Bảng "Kết quả thực thi" đầy đủ ở `A_FR01/testcases.md`.
+
+### 3.7 Bước 7 – Bug report 🔒
+
+| Bug ID | TC liên quan | Tóm tắt | Severity | Priority | GitHub Issue |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
+Số bug: [số liệu: summary.py]
+
+![Trang GitHub Issues – A_FR01](bugs/issues_page_A_FR01.png)
+
+> 📝 Dữ kiện: `bugs/_groups_A_FR01.md`, `bugs/BUG-xx.md`.
+
+## 4. Feature B – FR-07
+
+**Chức năng:** Giỏ hàng (web + API `/api/cart`) · **Thư mục:** `B_FR07/` · **Điểm:** 25
+
+> 📝 Bảng đầy đủ sinh tự động trong `B_FR07/testcases.md` (từ `B_FR07/testcases.json`, `render_md.py`). Chép/nhúng bảng từ đó, không gõ tay.
+> 📝 Ghi chú bước 1 có sẵn: `B_FR07/notes_step1.md`.
+
+### 4.0 Phạm vi và test basis
+
+| Mã yêu cầu | Nội dung (trích SRS) | Trong phạm vi? |
+|---|---|---|
+| [...] | [...] | [...] |
+
+| Mã giả định | Nội dung | Ai chốt |
+|---|---|---|
+| [...] | [...] | [...] |
+
+### 4.1 Bước 1 – Biến vào/ra
+
+[giải thích bước: ...]
+
+| Mã | Biến | Vào/Ra | Nguồn | Kiểu | Ràng buộc (đặc tả) | Ghi chú |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 4.2 Bước 2 – Lớp tương đương (Complete Set of Partitions)
+
+[giải thích bước: ...]
+
+| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
+|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 4.3 Bước 3 – Test case Domain
+
+[giải thích bước: ...]
+
+**3a. Test Cases Providing Coverage of Partitions**
+
+| EC | Lớp | Test case phủ |
+|---|---|---|
+| [...] | [...] | [...] |
+
+**3b. Minimum Set of Test Cases**
+
+| #TC | Tiêu đề | EC phủ | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC Domain: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 4.4 Bước 4 – Boundary Value Analysis
+
+[giải thích bước: ...]
+
+| Biến | LB−1 | LB | LB+1 | NOM | UB−1 | UB | UB+1 | MIN_UI | MAX_UI |
+|---|---|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+| #TC | Tiêu đề | EC phủ | Điểm biên | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC BVA: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 4.5 Bước 5 – Em bổ sung TC + AI gap analysis 🔒
+
+| #TC | Tiêu đề | EC phủ | Tầng | Kỹ thuật | Expected | Lý do chọn input |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC em bổ sung: [số liệu: summary.py]
+
+**Vì sao AI bỏ sót** 🔒
+
+| Case/bug AI bỏ sót | Loại nguyên nhân (prompt / giới hạn công cụ / độ phức tạp feature) | AI đã nghĩ tới nhưng không đưa vào? | Giải thích |
+|---|---|---|---|
+| [...] | [...] | [...] | [...] |
+
+> 📝 Dữ kiện: `B_FR07/sv_cases.md`, `B_FR07/sv_questions.md`, `B_FR07/ai_gap_answer.md`.
+
+### 4.6 Bước 6 – Thực thi
+
+[cách chạy: ...]
+
+| Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy |
+|---|---|---|---|---|---|
+| [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+
+![Ví dụ bằng chứng chạy test B_FR07](B_FR07/evidence/TC-FR07-01_failed.png)
+
+> 📝 Bảng "Kết quả thực thi" đầy đủ ở `B_FR07/testcases.md`. Dữ kiện: `B_FR07/RUN.md`.
+
+### 4.7 Bước 7 – Bug report 🔒
+
+| Bug ID | TC liên quan | Tóm tắt | Severity | Priority | GitHub Issue |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
+Số bug: [số liệu: summary.py]
+
+![Trang GitHub Issues – B_FR07](bugs/issues_page_B_FR07.png)
+
+> 📝 Dữ kiện: `bugs/_groups_B_FR07.md`, `bugs/BUG-xx.md`.
+
+## 5. Feature C – FR-15
+
+**Chức năng:** Quản lý sản phẩm – CRUD admin (`frontend-admin` + API `/api/products`) · **Thư mục:** `C_FR15/` · **Điểm:** 25
+
+> 📝 Bảng đầy đủ sinh tự động trong `C_FR15/testcases.md` (từ `C_FR15/testcases.json`, `render_md.py`). Chép/nhúng bảng từ đó, không gõ tay.
+
+### 5.0 Phạm vi và test basis
+
+| Mã yêu cầu | Nội dung (trích SRS) | Trong phạm vi? |
+|---|---|---|
+| [...] | [...] | [...] |
+
+| Mã giả định | Nội dung | Ai chốt |
+|---|---|---|
+| [...] | [...] | [...] |
+
+### 5.1 Bước 1 – Biến vào/ra
+
+[giải thích bước: ...]
+
+| Mã | Biến | Vào/Ra | Nguồn | Kiểu | Ràng buộc (đặc tả) | Ghi chú |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 5.2 Bước 2 – Lớp tương đương (Complete Set of Partitions)
+
+[giải thích bước: ...]
+
+| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
+|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 5.3 Bước 3 – Test case Domain
+
+[giải thích bước: ...]
+
+**3a. Test Cases Providing Coverage of Partitions**
+
+| EC | Lớp | Test case phủ |
+|---|---|---|
+| [...] | [...] | [...] |
+
+**3b. Minimum Set of Test Cases**
+
+| #TC | Tiêu đề | EC phủ | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC Domain: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 5.4 Bước 4 – Boundary Value Analysis
+
+[giải thích bước: ...]
+
+| Biến | LB−1 | LB | LB+1 | NOM | UB−1 | UB | UB+1 | MIN_UI | MAX_UI |
+|---|---|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+| #TC | Tiêu đề | EC phủ | Điểm biên | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC BVA: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 5.5 Bước 5 – Em bổ sung TC + AI gap analysis 🔒
+
+| #TC | Tiêu đề | EC phủ | Tầng | Kỹ thuật | Expected | Lý do chọn input |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC em bổ sung: [số liệu: summary.py]
+
+**Vì sao AI bỏ sót** 🔒
+
+| Case/bug AI bỏ sót | Loại nguyên nhân (prompt / giới hạn công cụ / độ phức tạp feature) | AI đã nghĩ tới nhưng không đưa vào? | Giải thích |
+|---|---|---|---|
+| [...] | [...] | [...] | [...] |
+
+> 📝 Dữ kiện: `C_FR15/sv_cases.md`, `C_FR15/sv_questions.md`, `C_FR15/ai_gap_answer.md`.
+
+### 5.6 Bước 6 – Thực thi
+
+[cách chạy: ...]
+
+| Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy |
+|---|---|---|---|---|---|
+| [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+
+![Ví dụ bằng chứng chạy test C_FR15](C_FR15/evidence/TC-FR15-01_ui.png)
+
+> 📝 Bảng "Kết quả thực thi" đầy đủ ở `C_FR15/testcases.md`. Dữ kiện: `C_FR15/RUN.md`.
+
+### 5.7 Bước 7 – Bug report 🔒
+
+| Bug ID | TC liên quan | Tóm tắt | Severity | Priority | GitHub Issue |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
+Số bug: [số liệu: summary.py]
+
+![Trang GitHub Issues – C_FR15](bugs/issues_page_C_FR15.png)
+
+> 📝 Dữ kiện: `bugs/_groups_C_FR15.md`, `bugs/BUG-xx.md`.
+
+## 6. Feature D – FR-20
+
+**Chức năng:** Đăng ký trên Mobile (Expo SDK 54, áp dụng FR-01) · **Thư mục:** `D_FR20/` · **Điểm:** 15
+
+> 📝 Bảng đầy đủ sinh tự động trong `D_FR20/testcases.md` (từ `D_FR20/testcases.json`, `render_md.py`). Chép/nhúng bảng từ đó, không gõ tay.
+> 📝 Ghi chú bước 1 có sẵn: `D_FR20/step1_notes.md`.
+
+### 6.0 Phạm vi và test basis
+
+| Mã yêu cầu | Nội dung (trích SRS) | Trong phạm vi? |
+|---|---|---|
+| [...] | [...] | [...] |
+
+| Mã giả định | Nội dung | Ai chốt |
+|---|---|---|
+| [...] | [...] | [...] |
+
+### 6.1 Bước 1 – Biến vào/ra
+
+[giải thích bước: ...]
+
+| Mã | Biến | Vào/Ra | Nguồn | Kiểu | Ràng buộc (đặc tả) | Ghi chú |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 6.2 Bước 2 – Lớp tương đương (Complete Set of Partitions)
+
+[giải thích bước: ...]
+
+| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
+|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] |
+
+Em review/sửa: [...]
+
+### 6.3 Bước 3 – Test case Domain
+
+[giải thích bước: ...]
+
+**3a. Test Cases Providing Coverage of Partitions**
+
+| EC | Lớp | Test case phủ |
+|---|---|---|
+| [...] | [...] | [...] |
+
+**3b. Minimum Set of Test Cases**
+
+| #TC | Tiêu đề | EC phủ | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC Domain: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 6.4 Bước 4 – Boundary Value Analysis
+
+[giải thích bước: ...]
+
+| Biến | LB−1 | LB | LB+1 | NOM | UB−1 | UB | UB+1 | MIN_UI | MAX_UI |
+|---|---|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+| #TC | Tiêu đề | EC phủ | Điểm biên | [biến vào …] | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC BVA: [số liệu: summary.py] · Em review/sửa: [...]
+
+### 6.5 Bước 5 – Em bổ sung TC + AI gap analysis 🔒
+
+| #TC | Tiêu đề | EC phủ | Tầng | Kỹ thuật | Expected | Lý do chọn input |
+|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+Số TC em bổ sung: [số liệu: summary.py]
+
+**Vì sao AI bỏ sót** 🔒
+
+| Case/bug AI bỏ sót | Loại nguyên nhân (prompt / giới hạn công cụ / độ phức tạp feature) | AI đã nghĩ tới nhưng không đưa vào? | Giải thích |
+|---|---|---|---|
+| [...] | [...] | [...] | [...] |
+
+> 📝 Dữ kiện: `D_FR20/sv_cases.md`, `D_FR20/ai_gap_answer.md`, `D_FR20/compare_web_mobile.md`.
+
+### 6.6 Bước 6 – Thực thi
+
+[cách chạy: ...]
+
+| Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy |
+|---|---|---|---|---|---|
+| [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+
+![Ví dụ bằng chứng chạy test D_FR20](D_FR20/evidence/TC-FR20-01_manual_1.png)
+
+> 📝 Bảng "Kết quả thực thi" đầy đủ ở `D_FR20/testcases.md`. Dữ kiện: `D_FR20/RUN.md`.
+
+### 6.7 Bước 7 – Bug report 🔒
+
+| Bug ID | TC liên quan | Tóm tắt | Severity | Priority | GitHub Issue |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
+Số bug: [số liệu: summary.py]
+
+![Trang GitHub Issues – D_FR20](bugs/issues_page_D_FR20.png)
+
+> 📝 Dữ kiện: `bugs/_groups_D_FR20.md`, `bugs/BUG-xx.md`.
+
+### 6.8 So sánh web (A_FR01) ↔ mobile (D_FR20)
+
+| EC D | Lớp | EC A | Verdict web (UI) | Verdict API | Verdict mobile | So verdict | Xử lý theo tầng |
+|---|---|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+
+![Admin trước lượt chạy](D_FR20/evidence/D_admin_truoc_1.png)
+
+> 📝 Dữ kiện: `D_FR20/compare_web_mobile.md`, `D_FR20/RUN.md`.
+
+## 7. Agent Skill
+
+| Mục | Nội dung |
+|---|---|
+| Tên skill | `domain-bva-testing` |
+| Vị trí trong bài nộp | `skills/domain-bva-testing/` |
+| Các bước skill hỗ trợ | [...] |
+| Script đi kèm | [...] |
+| Feature demo trong video | [...] |
+| Video YouTube | [...] |
+| Hạn chế đã biết | [...] |
+
+[mô tả cách dùng: ...]
+
+> 📝 Nguồn: `.claude/skills/domain-bva-testing/SKILL.md`. Chép sang `HW02/skills/` khi nộp; thêm `skills/VideoLinks.md`.
+
+## 8. Test summary
+
+| Feature | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC AI + SV sửa | TC SV thêm | Bug |
+|---|---|---|---|---|---|---|---|---|---|---|
+| A_FR01 | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+| B_FR07 | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+| C_FR15 | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+| D_FR20 | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+| **Tổng** | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] | [số liệu: summary.py] |
+
+Bug theo severity: [số liệu: summary.py]
+
+> 📝 Khối này phải trùng khối `SUMMARY` trong `README.md` (cùng lệnh `summary.py`).
+
+## 9. Bug report tổng hợp 🔒
+
+| Bug ID | Feature | TC liên quan | Tóm tắt | Severity | Priority | GitHub Issue |
+|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |
+
+> 📝 Bug report đầy đủ: `bugs/BUG-xx.md`; thang đo: `bugs/README.md`. Ảnh trang Issues ở mục x.7 của từng feature.
+
+## 10. AI Audit Report
+
+> 📝 Bản đầy đủ: `ai-forms/AI-02_Audit_Report_23120255.md` / `.pdf`. Mục này chỉ tóm tắt. Cột Verdict, Lý do và Kết luận em tự viết.
+
+| # | Artifact | Mã lượt (#n) | Tool | Verdict 🔒 | Lý do 🔒 |
+|---|---|---|---|---|---|
+| [...] | [...] | [...] | [...] |  |  |
+
+| VALID | INVALID | INCOMPLETE | Tổng artifact |
+|---|---|---|---|
+| [...] | [...] | [...] | [...] |
+
+**Kết luận khi nào nên/không nên dùng AI** 🔒
+
+## 11. AI Critique 🔒
+
+> 📝 200–300 từ (đề §10): AI sai/bias/thiếu ở đâu · vì sao không bắt được · nguyên tắc rút ra khi làm việc với AI. Em tự viết; AI chỉ đếm từ và chỉ chỗ khẳng định quá mức.
+
+Số từ: [...]
+
+## 12. Mandatory Disclosure
+
+| Mục | Nội dung |
+|---|---|
+| Phần AI tạo bản đầu (kể cả script/harness/skill) | [...] |
+| Phần em xem xét và sửa | [...] |
+| Case em tự bổ sung | [...] |
+| Phần em tự viết hoàn toàn | [...] |
+| Cách tạo prompt log | [...] |
+| Danh mục cấm (AI không làm) | [...] |
+
+> 📝 Dán nguyên văn giống nhau ở đây và trong AI-02.
+
+## 13. Tự đánh giá
+
+| No. | Tiêu chí | Điểm | Tự đánh giá | Căn cứ |
+|---|---|---|---|---|
+| 1 | Feature A – FR-01 (Domain + Boundary) | 25 | [...] | [...] |
+| 2 | Feature B – FR-07 (Domain + Boundary) | 25 | [...] | [...] |
+| 3 | Feature C – FR-15 (Domain + Boundary) | 25 | [...] | [...] |
+| 4 | Feature D – FR-20 Mobile (Domain + Boundary) | 15 | [...] | [...] |
+| 5 | Agent Skills | 10 | [...] | [...] |
+|  | **Tổng** | **100** | **[...]** | |
+
+> 📝 Phải khớp bảng trong `README.md` và số `ggg` trong tên zip.
+
+## 14. Biểu mẫu AI
+
+| Mã | File | Trạng thái |
+|---|---|---|
+| AI-02 | `ai-forms/AI-02_Audit_Report_23120255.md` + `.pdf` (ký) | [...] |
+| AI-03 | `ai-forms/AI-03_Disclosure_Form_23120255.md` + `.pdf` (ký) | [...] |
+| AI-05 | `ai-forms/AI-05_Privacy_Checklist_23120255.md` + `.pdf` (ký) | [...] |
+| AI-06 | Đã nộp tuần 1 | [...] |
+
+> 📝 AI-04 không áp dụng (đề không yêu cầu). Thứ tự làm: AI-02 → AI-03 → AI-05.
+
+## 15. Phụ lục
+
+### A. Prompt log
+
+`appendix/A_prompt_log.md` – số lượt: [...] · dải mã: [...]
+
+### B. Output AI gốc
+
+`appendix/ai-outputs/` – [...]
+
+### C. Git commit log
+
+`appendix/commit_log.txt`
+
+### D. Cây thư mục nộp bài
+
+```
+23120255_HW02_AI_DomainTesting_<ggg>.zip
+└── HW02/
+    ├── README.md                     # tự đánh giá + test summary + link video
+    ├── report.md / .pdf              # tên tạm – chốt tên trước khi nộp
+    ├── A_FR01/ B_FR07/ C_FR15/ D_FR20/
+    │   ├── testcases.json, testcases.md
+    │   ├── sv_cases.md, ai_gap_answer.md, (sv_questions.md, RUN.md, compare_web_mobile.md)
+    │   └── evidence/
+    ├── bugs/                         # BUG-xx.md, issues_page_<feature>.png, README.md
+    ├── tests/                        # Playwright (không gồm node_modules)
+    ├── env/                          # environment.md, mobile_api_url.patch
+    ├── skills/domain-bva-testing/    # + VideoLinks.md
+    ├── ai-forms/                     # AI-02, AI-03, AI-05 (.md + .pdf ký)
+    └── appendix/                     # A_prompt_log.md, prompt_log_*.toml, ai-outputs/, commit_log.txt
+```
+
+> 📝 Zip thử hiện tại ≈ 35,6 MB > 20 MB (xem `report_plan.md` mục c.26) → nén ảnh hoặc split-and-zip.
