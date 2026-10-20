@@ -5580,14 +5580,73 @@ Báo cáo cho phiên thảo luận.
 ```
 
 **Output:**
-```
+````
 Giờ vá `extract_prompt_log.py`.
 
 Chạy `--list` trên toàn bộ transcript.
+
+Đã vá `extract_prompt_log.py` và commit, nhưng không có lượt nào để khôi phục nên em không tạo commit thứ hai. Khoảng 15:56–17:40 ngày 19/10 không mất lượt: lúc đó SV đang làm ở Claude Code (8 lượt, đã có trong log), chứ không phải ở claude.ai.
+
+**1. Vá script** (cả 4 mục a–d)
+- **a.** Lượt không có model hiện là "Claude (không rõ model)"; `--list` và render không còn crash khi tool rỗng.
+- **b.** Tin nhắn "This session is being continued…" bị bỏ; output sau đó gộp vào lượt trước.
+- **c.** `<command-message>…<command-name>/x</command-name><command-args>y</command-args>` hiện là `/x y`.
+- **d.** Thẻ `pasted_content` bị bỏ, nội dung giữ nguyên.
+
+Em sửa thêm 2 lỗi `--list` vừa lộ ra (ngoài lệnh):
+- **Lượt trùng:** transcript `580f5fe0` (phiên cũ) và `820baaa9` (phiên tiếp nối) cùng có lượt 16:10 `/domain-bva-testing HW02/A_FR01 0`. Lượt này bị đếm 2 lần ở cả log đã commit trước đây (#15 và #16). Giờ script bỏ lượt trùng giờ + prompt.
+- **`/compact`:** lệnh cục bộ này từng bị tính là prompt (chính là lượt "không rõ model" duy nhất). Giờ script bỏ các lệnh cục bộ như `/compact`, `/add-dir`…
+
+**2. `--list`** (sau khi vá, tính từ 12/10):
+
+| file | lượt | đầu | cuối |
+|---|---|---|---|
+| claude-ai_session_HW02_p1 | 14 | 21:20 12/10 | 15:55 19/10 |
+| claude-ai_session_HW02_p2 | 47 | 17:41 19/10 | 09:34 20/10 |
+| 820baaa9 (Claude Code) | 34 | 16:10 19/10 | lượt hiện tại 20/10 |
+| 580f5fe0 (Claude Code) | 1 | 16:10 19/10 | 16:10 19/10 (trùng với 820baaa9) |
+
+Khoảng trống > 30 phút giữa các lượt claude.ai: 12/10 21:33→19/10 14:06; 14:06→14:53; **15:55→17:41**; 17:41→19:26; 19:42→22:38; 01:45→02:22; 02:22→07:19; 07:48→09:16. Các khoảng này trùng với lúc SV làm ở Claude Code.
+
+**3. Khôi phục từ git:** em đối chiếu A_prompt_log.md của 16 commit (`git log --follow`). Mọi phiên bản đều chỉ có 8 lượt khác nhau trong khoảng 15:56–17:40 (16:10, 16:31, 16:39, 16:47, 16:51, 17:09, 17:17, 17:25), tất cả là lượt Claude Code. Sau khi làm sạch thẻ, cả 8 khớp transcript `820baaa9`. Vì vậy không thêm `[[entry]]` nào vào `prompt_log_extra.toml`.
+
+**4. `on_stop.py --manual`:** log có 96 lượt (Sonnet 4.6: 3, Opus 5.5: 94; #3 có output từ cả hai model nên được đếm ở cả hai). Không còn lượt "không rõ model". Khoảng trống > 30 phút khi gộp mọi nguồn: 12/10→19/10; 14:06→14:53; 17:45→19:14; 19:42→22:09; 01:46→02:22; 02:22→07:19; 07:48→09:16. Khoảng 15:55→17:41 đã được lượt Claude Code lấp kín.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá extract_prompt_log (a–d), liệt kê lượt và khoảng trống, khôi phục 15:56–17:40 từ git, trích lại log
+- File đã sửa: tools/extract_prompt_log.py; HW02/appendix/A_prompt_log.md (tạo lại bằng script)
+- Kết quả kiểm tra: 96 lượt, 0 lượt không rõ model; bỏ 1 lượt trùng (16:10) và 1 lượt /compact; khoảng 15:56–17:40 có 8 lượt Claude Code đủ trong transcript; git không chứa lượt claude.ai nào trong khoảng đó
+- Commit: b812d33 HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command (gồm A_prompt_log.md); KHÔNG tạo commit "khôi phục…" vì không có lượt nào để khôi phục
+- Cần quyết định / câu hỏi:
+  1. SV xác nhận trong 15:55–17:41 ngày 19/10 không chat ở claude.ai. Nếu có thì đó là transcript tải về bị thiếu → tải lại phiên claude.ai, không dựng lại từ trí nhớ.
+  2. Số lượt đổi (bỏ lượt trùng và /compact) → số # trong prompt_log_notes.toml có thể lệch; SV kiểm lại ghi chú Section/Mục đích/Xử lý theo số mới.
+  3. Lệnh cũ ghi "A_prompt_log.md đi với commit khôi phục"; em đưa nó vào commit harness vì không có commit khôi phục.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #97 | 09:44 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. extract_prompt_log.py: cho phép prompt_log_notes.toml dùng khoá theo giờ ("2026-10-19 16:10") bên cạnh số thứ tự; ưu tiên khoá giờ. Nếu file notes đang có khoá số, chuyển sang khoá giờ theo danh sách hiện tại (script, không sửa tay nội dung). --list in thêm khoá giờ để SV dùng.
+2. Ghi nhận: khoảng 15:56–17:40 ngày 19/10 THIẾU ~10 lượt claude.ai (phiên thảo luận review bước 0–4); không có trong git. SV sẽ khôi phục từ bản export claude.ai hoặc chép tay vào prompt_log_extra.toml. Chưa làm gì thêm.
+3. Commit "HW02: vá harness – notes theo khoá giờ".
+Báo cáo cho phiên thảo luận.
+```
+
+**Output:**
+```
+Cập nhật docstring cho khớp, rồi chuyển khoá trong file notes.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 96 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 94 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 97 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 95 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

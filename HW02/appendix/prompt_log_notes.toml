@@ -3,7 +3,7 @@
 # Mỗi lượt: section, muc_dich, xu_ly; tuỳ chọn ai_output_file, dinh_kem.
 # Số #n đổi nếu thêm session cũ hơn vào .transcripts/ — chép đủ transcript trước rồi mới ghi chú.
 
-[1]
+["2026-10-12 21:20"]
 section  = "Toàn bài"
 muc_dich = "[...]"
 xu_ly    = "[...]"

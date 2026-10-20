@@ -21,8 +21,10 @@ Transcript của Claude Code nằm ở:
   Windows : %USERPROFILE%\\.claude\\projects\\<thư-mục-dự-án>\\<session-id>.jsonl
   macOS/Linux: ~/.claude/projects/<thư-mục-dự-án>/<session-id>.jsonl
 
-File ghi chú (TOML, Python 3.11+ đọc được không cần cài thêm):
-  [1]
+File ghi chú (TOML, Python 3.11+ đọc được không cần cài thêm). Khoá là giờ của lượt (in bởi --list;
+lượt thứ k trong cùng phút thêm "#k"), hoặc số thứ tự [n] (cách cũ; khoá giờ được ưu tiên).
+Đổi khoá số sang khoá giờ: thêm --migrate-notes.
+  ["2026-10-12 21:20"]
   section  = "Toàn bài"
   muc_dich = "Đưa context bài tập cho AI"
   xu_ly    = "Đọc và gửi tiếp đề bài"
@@ -172,7 +174,40 @@ def fence(body: str) -> str:
     return f"{f}\n{body}\n{f}"
 
 
+def time_keys(turns):
+    """Khoá giờ cho ghi chú: "2026-10-19 16:10"; lượt thứ k trong cùng phút → "2026-10-19 16:10#k".
+    Không đổi khi thêm/bớt lượt ở chỗ khác, khác với số thứ tự #n."""
+    keys, seen = [], {}
+    for t in turns:
+        base = f"{t['time']:%Y-%m-%d %H:%M}"
+        seen[base] = seen.get(base, 0) + 1
+        keys.append(base if seen[base] == 1 else f"{base}#{seen[base]}")
+    return keys
+
+
+def note_for(notes, keys, i):
+    """Ưu tiên khoá giờ, sau đó số thứ tự (1-based)."""
+    return notes.get(keys[i - 1]) or notes.get(str(i), {})
+
+
+def migrate_notes(path, turns):
+    """Đổi tiêu đề bảng [n] trong file notes thành ["<khoá giờ>"]; giữ nguyên nội dung và chú thích."""
+    keys = time_keys(turns)
+    p = Path(path)
+    txt = p.read_text(encoding="utf-8")
+
+    def sub(m):
+        n = int(m.group(1))
+        if not 1 <= n <= len(keys):
+            sys.exit(f"[{n}] vượt quá {len(keys)} lượt hiện có — không đổi file")
+        return f'["{keys[n - 1]}"]'
+    new, cnt = re.subn(r"(?m)^\[(\d+)\]\s*$", sub, txt)
+    p.write_text(new, encoding="utf-8")
+    print(f"Đổi {cnt} khoá số sang khoá giờ trong {path}")
+
+
 def render(turns, notes, args):
+    keys = time_keys(turns)
     tools = sorted({m for t in turns for m in t["tool"].split(" + ")})
     out = [f"# {args.title}",
            f"**Họ tên:** {args.name} | **MSSV:** {args.mssv} | **Công cụ AI:** {', '.join(tools)}",
@@ -181,7 +216,7 @@ def render(turns, notes, args):
            "`tools/extract_prompt_log.py` (không qua AI). Section, Mục đích và Xử lý do em tự ghi.",
            "", "---", ""]
     for i, t in enumerate(turns, 1):
-        n = notes.get(str(i), {})
+        n = note_for(notes, keys, i)
         out.append(f"## #{i} | {t['time']:%H:%M %d/%m/%Y} | {t['tool']} | {n.get('section', '[...]')}")
         out.append(f"**Mục đích:** {n.get('muc_dich', '[...]')}")
         out += ["", "**Prompt:**", fence(t["prompt"])]
@@ -222,7 +257,8 @@ def main():
     ap.add_argument("--title", default="Prompt Log")
     ap.add_argument("--name", default="Lê Tấn Hiệp")
     ap.add_argument("--mssv", default="23120255")
-    ap.add_argument("--list", action="store_true", help="chỉ liệt kê lượt")
+    ap.add_argument("--list", action="store_true", help="chỉ liệt kê lượt (kèm khoá giờ dùng trong notes)")
+    ap.add_argument("--migrate-notes", action="store_true", help="đổi khoá [n] trong --notes sang khoá giờ rồi thoát")
     ap.add_argument("-o", "--out")
     args = ap.parse_args()
 
@@ -247,10 +283,16 @@ def main():
     if args.until:
         turns = [t for t in turns if t["time"].date() <= dt.date.fromisoformat(args.until)]
 
+    if args.migrate_notes:
+        if not args.notes:
+            sys.exit("Cần --notes")
+        migrate_notes(args.notes, turns)
+        return
+
     if args.list:
-        for i, t in enumerate(turns, 1):
-            first = t["prompt"].splitlines()[0][:90]
-            print(f"#{i:<3} {t['time']:%H:%M %d/%m/%Y}  {t['tool']:<16} {first}")
+        for i, (t, k) in enumerate(zip(turns, time_keys(turns)), 1):
+            first = t["prompt"].splitlines()[0][:80] if t["prompt"] else ""
+            print(f'#{i:<3} ["{k}"]  {t["tool"]:<16} {first}')
         return
 
     md = render(turns, {str(k): v for k, v in load_toml(args.notes).items() if k != "entry"}, args)
