@@ -8,7 +8,8 @@ Việc thảo luận, lên kế hoạch, review và hướng dẫn diễn ra ở
 
 - Nhiệm vụ thường đến dưới dạng khối **"Lệnh cho Claude Code"** dán từ phiên thảo luận. Làm đúng phạm vi khối lệnh; gặp chỗ mơ hồ hoặc quyết định không đảo ngược được thì hỏi lại, không tự mở rộng phạm vi.
 - Quyết định mới từ phiên thảo luận được ghi vào mục "Quyết định đã chốt" bên dưới; đọc lại mục này đầu mỗi phiên.
-- **Kết thúc mỗi nhiệm vụ** bằng một khối ngắn để người dùng dán ngược về phiên thảo luận:
+- **Kết thúc mỗi nhiệm vụ** bằng một khối ngắn (≤ 25 dòng) để người dùng dán ngược
+  về phiên thảo luận:
 
   ```
   ### Báo cáo cho phiên thảo luận
@@ -18,6 +19,15 @@ Việc thảo luận, lên kế hoạch, review và hướng dẫn diễn ra ở
   - Commit: <hash> <message>
   - Cần quyết định / câu hỏi: …
   ```
+
+  Quy tắc cho khối báo cáo:
+  - Nội dung dài (trích SRS, bảng biến/lớp/TC, khảo sát SUT, danh sách giả định)
+    ghi vào file trong thư mục feature; báo cáo chỉ nêu đường dẫn. Kể cả khi lệnh
+    yêu cầu "báo cáo X", hãy hiểu là ghi X vào file rồi trỏ tới.
+  - "Cần quyết định" chỉ liệt kê điểm chặn bước kế tiếp, mỗi điểm 1 dòng:
+    mã – câu hỏi – các phương án. Điểm không chặn thì ghi số lượng + đường dẫn file.
+  - Bất thường mới phát hiện (SUT, harness): mỗi điểm 1 dòng, kèm file:dòng.
+  - Không dùng bảng kẻ khung (┌─┐); dùng gạch đầu dòng hoặc bảng markdown.
 
 ## 0. Đọc gì trước khi làm
 
