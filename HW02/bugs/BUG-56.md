@@ -1,7 +1,7 @@
 # BUG-56
 
 - **ID:** BUG-56
-- **Tiêu đề:** Ô nhập Email trên màn hình Đăng ký mobile không kích hoạt bàn phím định dạng Email (thiếu phím @)
+- **Tiêu đề:** Ô nhập Email trên màn hình Đăng ký mobile không kích hoạt bàn phím định dạng Email (không có phím @ ở bàn phím chính)
 - **Severity:** Medium
 - **Priority:** Medium
 
