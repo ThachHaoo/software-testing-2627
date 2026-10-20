@@ -13159,6 +13159,25 @@ Giờ đọc UI admin phần sản phẩm.
 Đủ dữ kiện. Viết `testcases.json` (meta, requirements, biến vào/ra, giả định C0–C14).
 
 Chạy render → check_domain → linter trước, freeze sau khi sạch.
+
+Đã xong bước 0–1 cho C_FR15 và commit `224f147`. Có một điểm lệch so với khối lệnh: SUT đang ở commit `de0f48f`, không phải `85af3ba`.
+
+- `de0f48f` là commit kế tiếp ngay sau `85af3ba` và chỉ thêm `.gitignore`. Đây đúng là bản SUT CLAUDE.md đã chốt, nên em vẫn làm tiếp. Lệnh kiểm tra trong khối lệnh nên sửa thành `de0f48f`.
+- `git diff --stat` của SUT chỉ có `frontend-mobile/App.js` và `database.sqlite`. Em không sửa gì trong `..\eshop-sut` và không chạy SUT.
+
+### Báo cáo cho phiên thảo luận
+- **`224f147` HW02[C-FR15] 1/7: biến vào/ra** — check_domain: 0 lỗi, 7 cảnh báo (6 biến ra chưa phân lớp + chưa có partitions, đúng trạng thái bước 1); linter: 0 lỗi, 15 cảnh báo "requirement not covered" (chưa có case). Bản freeze: `HW02/appendix/ai-outputs/C_FR15_step1_20261020-162618.{json,md}`. Biến V1–V15 và giả định C0–C14 nằm trong `HW02/C_FR15/testcases.json` / `testcases.md`.
+- Bất thường: SUT HEAD = `de0f48f` thay vì `85af3ba` (chỉ khác `.gitignore`, đã kiểm `git diff 85af3ba de0f48f`).
+- Mục `technique`/`approach` theo biến: schema của skill không có trường này, nên những biến chỉ biết từ code được ghi "(gray-box)" trong `note`.
+- Giả định chặn bước 2:
+  - **C1** | Giá là số nguyên hay số thực? | a) số thực > 0 hợp lệ: 0.5 được chấp nhận, LB theo bước nhảy SV chọn (vd 0.01); b) chỉ nguyên dương: 0.5 không hợp lệ, LB = 1 | Khuyến nghị a: FR-15 chỉ ghi "số dương (> 0)"; b phải lấy căn cứ ngoài FR-15 (đơn vị ₫).
+  - **C2** | Giá có cận trên không? | a) không có, dùng điểm LARGE (`no_upper_bound` = C2, đã khai); b) hằng số UB, thêm lớp x > UB | Khuyến nghị a: SRS chỉ có > 0, giống tiền lệ B1.
+  - **C3** | Tên chỉ gồm khoảng trắng thì sao? | a) coi như trống, bị từ chối, tách thành lớp riêng; b) chấp nhận | Khuyến nghị a: FR-15 ghi "bắt buộc", tiền lệ A1.
+  - **C5** | Có đưa kiểm quyền FR-12.2 (POST/PUT/DELETE /api/products) vào phạm vi không? | a) có, tầng API, biến V8 có 4 giá trị token; b) a + cổng 'Admin Login' với tài khoản user (V15); c) không | Khuyến nghị a: FR-12.2 nêu đích danh /api/products; b thì kiểm cả cổng đăng nhập chung của Admin, rộng hơn FR-15.
+  - **C6** | API có phải là tầng riêng áp FR-15 không? | a) có: dữ liệu vi phạm → 4xx kèm error, dữ liệu không đổi; b) API chỉ dùng để quan sát/dựng dữ liệu | Khuyến nghị a: tiền lệ A9/A11/B7/B17.
+  - **C7** | Oracle khi UI từ chối? | a) dữ liệu không đổi + có thông báo lỗi trên form (bong bóng HTML5 cũng tính); b) chỉ dữ liệu không đổi, thông báo ghi làm Actual | Khuyến nghị a: FR-22.4 quy định vị trí thông báo lỗi, tức là form phải có thông báo lỗi. SRS không bắt buộc hẳn → SV chọn.
+  - **C8** | Ràng buộc khi Sửa phân lớp thế nào? | a) tách lớp Thêm/Sửa, số lớp không hợp lệ ×2; b) chung lớp, Sửa lấy 1 đại diện không hợp lệ mỗi biến; c) chỉ kiểm khi Thêm | SRS chỉ đủ căn cứ để áp ràng buộc cho cả Thêm và Sửa (loại c); chọn a hay b là chuyện cỡ bộ test → SV chọn (AI nghiêng về a vì hai thao tác dùng hai endpoint khác nhau).
+  - **C9** | Ở API, price là chuỗi số "100000" thì sao? | a) sai kiểu, bị từ chối; b) hiểu theo giá trị số, chấp nhận như B23 | SRS không đủ căn cứ – SV chọn. Phần còn lại của C9 (thiếu trường, null, sai kiểu khác → 4xx) đã đề xuất trong file.
 ```
 *File AI ghi/gửi trong lượt này:* `testcases.json`
 
@@ -13166,4 +13185,41 @@ Chạy render → check_domain → linter trước, freeze sau khi sạch.
 
 ---
 
-**Tổng:** 214 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 151 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #215 | 16:35 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1) Áp quyết định của SV cho giả định C_FR15 (commit riêng, trước bước 2):
+   C1=a (SV chốt: FR-15 chỉ quy định > 0; bước nhảy 0.1 do SV chọn → LB = 0.1. Ghi chú SV: thực tế giá
+         thường ≥ 1000 đồng — chỉ dùng để chọn đại diện hợp lệ điển hình, KHÔNG phải cận dưới,
+         KHÔNG quyết định Expected)
+   C2=a, C3=a, C6=a, C9=a (SV chốt: theo khuyến nghị)
+   C5=a (SV chốt: theo khuyến nghị; không mở rộng sang cổng Admin Login)
+   C7=a (SV chốt: theo khuyến nghị; căn cứ FR-22.4 — nếu FR-22.4 không nói về vị trí/sự có mặt của
+         thông báo lỗi thì DỪNG và báo, không tự sửa căn cứ)
+   C8=a (SV chốt: Thêm và Sửa là hai thao tác khác nhau, không gộp lớp — lý do của SV)
+   C0, C4, C10–C14: SV chấp nhận đề xuất của AI
+   - Mỗi giả định: trạng thái "SV chốt" + lý do như trên.
+   - render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 1/7b: SV chốt giả định C0–C14`
+     kèm A_prompt_log.md. Không freeze (đây là sửa của SV, không phải output AI).
+
+2) /domain-bva-testing HW02/C_FR15 2  — theo skill + CLAUDE.md, quy ước như lệnh bước 1.
+   Freeze sau khi chỉnh xong. Commit `HW02[C-FR15] 2/7: lớp tương đương`.
+
+Báo cáo cho phiên thảo luận (≤ 25 dòng): 2 commit hash + trạng thái checker/linter; bảng biến → số EC hợp lệ /
+không hợp lệ; giả định MỚI chặn bước 3 (định dạng: mã | câu hỏi | phương án + hệ quả | khuyến nghị + căn cứ).
+```
+
+**Output:**
+```
+Kiểm FR-22.4 trước khi áp C7, và xem cách B_FR07 phân lớp biến ra.
+
+FR-22.4 có nói về vị trí thông báo lỗi → căn cứ C7 hợp lệ. Áp quyết định SV (phần 1).
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 215 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 152 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
