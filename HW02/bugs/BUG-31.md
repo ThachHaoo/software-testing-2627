@@ -156,7 +156,7 @@ Theo yêu cầu FR-08.2 và giả định B8: Backend phải tự tra cứu và 
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/177
 
 ---
 

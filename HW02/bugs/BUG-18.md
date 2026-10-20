@@ -82,7 +82,7 @@ Tại cột "Số lượng", giao diện chỉ hiển thị duy nhất một con
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/164
 
 ---
 

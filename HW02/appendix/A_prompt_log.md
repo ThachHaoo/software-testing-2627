@@ -8825,15 +8825,240 @@ Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6).
 ````
 
 **Output:**
-```
+````
 Mục 5 (thêm "error" vào tiêu đề BUG-34) đã có sẵn trong working tree, chưa commit. Em giữ nguyên thay đổi đó. Giờ xem Actual của 3 bug để đối chiếu.
 
 Output của cả 3 bug khớp Actual. Ghi output vào Dữ kiện; đường dẫn máy trong BUG-34 thay bằng `<SUT_DIR>`.
+
+Em đã sửa bước tái hiện BUG-32, 33, 34 và chạy thật trên Windows PowerShell 5.1, commit `b42d56d`. Output của cả 3 bug khớp mục Actual.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa bước tái hiện BUG-32–34 + chạy thật (sau commit SV a2ee5d4 "7/7b: SV viết BUG-32–34")
+- File đã sửa: HW02/bugs/BUG-32.md, BUG-33.md, BUG-34.md; A_prompt_log.md
+- Kết quả kiểm tra: Windows PowerShell 5.1.26100, restart backend trước mỗi bug và sau khi chạy xong; test Playwright: không chạy
+- Commit: b42d56d HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-32–34
+- Đã sửa:
+  · Cả 3 bug:
+    - Tài khoản test@eshop.com/Test1234!
+    - $headers chỉ còn Authorization
+    - Mọi POST: -ContentType + -Body ([Text.Encoding]::UTF8.GetBytes(...))
+    - GET: (Invoke-WebRequest -UseBasicParsing …).Content
+  · BUG-32:
+    - Bước 4: bỏ $headersText, dùng -ContentType "text/plain", body gửi dạng UTF8 bytes
+    - Khối code Nhận định: ```jsx → ```js
+  · BUG-34:
+    - Bước 2: bọc try/catch, thêm -UseBasicParsing
+    - Trong catch: in StatusCode, ContentType và body đọc từ GetResponseStream()
+    - Tiêu đề: chữ "error" đã có sẵn trong working tree (SV sửa, chưa commit) → em giữ nguyên, commit cùng
+- Mục 6 – output (dán nguyên văn vào Dữ kiện, có dòng "AI chạy kiểm bước tái hiện 2026-10-20"):
+  · BUG-32: 3×"Added to cart"; GET `[{…"quantity":-3},{"id":99999,…},null]` → khớp
+  · BUG-33: GET quantity 9007199254740992 → khớp
+  · BUG-34: StatusCode 400, ContentType text/html; charset=utf-8, body HTML "SyntaxError: Unexpected token &#39;I&#39;…" → khớp
+    - Bước của SV không có GET, nên ý "giỏ không đổi" trong Actual chưa kiểm ở lượt này
+- Ngoài lệnh:
+  · BUG-34: lần chạy đầu, body đọc từ GetResponseStream() ra rỗng (PS 5.1 đã đọc stream khi ném lỗi) → thêm `BaseStream.Position = 0; DiscardBufferedData()` rồi chạy lại
+  · Output BUG-34 có đường dẫn máy → thay bằng <SUT_DIR> khi dán vào BUG file, đã ghi chú trong Dữ kiện
+- Cần quyết định: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `fix7c4.py`, `facts7c4.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 145 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 142 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #146 | 15:37 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 – kiểm cuối trước khi tạo issue (chỉ kiểm, không sửa, không tạo issue).
+1. Quét BUG-15…34: liệt kê file còn `<SV viết`, `<SV viết thêm nếu muốn>`,
+   "(chưa kiểm chứng)", Severity/Priority trống hoặc ngoài thang, mục rỗng, khối code
+   thiếu đóng.
+2. Tiền tố tiêu đề issue (SV chốt, theo tiền lệ A: tiền tố = FR của feature, chỉ thêm
+   khi tạo issue, KHÔNG ghi vào .md): BUG-15 → [FR-06]; BUG-16…34 → [FR-07]. In bảng
+   BUG | tiêu đề issue đầy đủ (tiền tố + tiêu đề trong .md) để SV duyệt.
+3. Kiểm trùng lần cuối: gh issue list -R tkob-team/eshop-sut --state all (mọi tác
+   giả); liệt kê issue mới so với lần kiểm trước.
+4. gh auth status = ThachHaoo.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+````
+Kiểm cuối xong, chưa thấy gì chặn việc tạo issue. Em chỉ kiểm, không sửa file nào, cũng không tạo issue.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 – kiểm cuối BUG-15…34 trước khi tạo issue
+- File đã tạo/sửa: không
+- Kết quả kiểm tra: test không chạy
+  · Mục 1 (quét 20 file):
+    - Không còn `<SV viết>`, `<SV viết thêm nếu muốn>`, "(chưa kiểm chứng)"
+    - Severity/Priority đủ cả 20 file, đều thuộc thang (High/Medium/Low)
+    - Số dấu ``` ở mọi file đều chẵn
+    - Tiêu đề không trống
+    - Còn `<sau khi tạo issue>` ở mục Link của cả 20 file → đúng, chờ tạo issue
+    - BUG-32 bị báo "rỗng" ở "## Yêu cầu" và "### Dữ kiện" là báo nhầm: hai mục này chỉ chứa mục con G18/G19/G21
+  · Mục 4: gh auth = ThachHaoo (active)
+- Commit: không
+- Mục 2 – tiêu đề issue cần SV duyệt (tiền tố chỉ thêm khi tạo issue, không ghi vào .md):
+  | BUG | Tiêu đề issue |
+  |---|---|
+  | 15 | [FR-06] Nút 'Thêm vào giỏ hàng' ở trang chi tiết sản phẩm bị nuốt lượt bấm đầu tiên, không thêm sản phẩm và không có phản hồi |
+  | 16…34 | [FR-07] + tiêu đề trong .md (bảng đủ 19 dòng ở output lệnh kiểm của lượt này; SV có thể yêu cầu ghi ra file) |
+- Mục 3 – kiểm trùng (--state all, mọi tác giả): repo nay có 115 issue (lần trước 69)
+  · Mới: 64 issue #97–#160 của henry-banana (FR04, FR09, FR17, FR20), tất cả OPEN
+  · Không thấy issue nào số #70–#96
+  · #31–#48 (henry-banana, có trong lần kiểm trước) nay không còn trong danh sách
+  · Liên quan giỏ: #153–#158, #160 (mobile Add to Cart, FR-20) và #159 (mobile product detail) đều thuộc frontend-mobile, không trùng nhóm web/API nào của B
+  · Không có issue mới nào nhắc /api/cart, CartContext, badge, breadcrumb, alt hay nhãn trang giỏ
+- Cần quyết định:
+  · Q16 – Duyệt 20 tiêu đề issue (tiền tố [FR-06] cho BUG-15, [FR-07] cho BUG-16…34): (a) duyệt, AI tạo issue theo quy trình bước 7 (b) sửa tiêu đề trước
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #147 | 15:40 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 bước 7 – tạo issue (SV đã duyệt Q16 = a). Làm như A_FR01.
+1. gh auth = ThachHaoo; repo tkob-team/eshop-sut; label bug.
+2. Tạo lần lượt BUG-15 → BUG-34 (đúng thứ tự để số issue liên tục):
+   - title = tiền tố đã duyệt + tiêu đề trong .md;
+   - body = nội dung .md theo đúng cách đã dùng cho A (BUG-01…14); BUG-34 dùng bản
+     che HW02/bugs/_issue_redacted/BUG-34.txt cho phần có đường dẫn máy;
+   - KHÔNG upload ảnh (SV kéo thả sau).
+3. Ghi URL issue vào mục "Link GitHub Issue" của từng BUG-xx.md; cập nhật bảng ánh xạ
+   G → BUG → issue trong _groups_B_FR07.md.
+4. In danh sách cho SV: BUG | số issue | ảnh tiêu biểu cần kéo vào mục "Bằng chứng".
+5. Chưa commit; chờ SV kéo ảnh + chụp issues_page.png.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+````
+Kiểm trước xong: đã đăng nhập ThachHaoo, label `bug` có, chưa có issue [FR-06]/[FR-07] nào, các BUG không chứa đường dẫn máy. Viết script tạo issue (dry-run trước).
+
+Dry-run ổn, tất cả body dưới giới hạn 65536 ký tự của GitHub. Tạo issue thật.
+
+Đã tạo 20 issue liên tục #161–#180. Cập nhật bảng ánh xạ trong `_groups_B_FR07.md`.
+
+Đã tạo 20 issue trên `tkob-team/eshop-sut`, số liên tục từ #161 đến #180. URL đã ghi vào từng BUG-15…34.md và bảng ánh xạ trong `_groups_B_FR07.md`. Chưa commit, đang chờ SV kéo ảnh vào và chụp `issues_page.png`.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 bước 7 – tạo issue BUG-15…34 (Q16 = a), làm như A_FR01
+- File đã sửa (CHƯA commit):
+  · HW02/bugs/BUG-15…34.md: mục Link = URL issue
+  · HW02/bugs/_groups_B_FR07.md: bảng ánh xạ thêm cột Issue
+  · A_prompt_log.md
+- Kết quả kiểm tra:
+  · gh auth = ThachHaoo; label bug có sẵn
+  · Trước khi tạo: chưa có issue [FR-06]/[FR-07] nào; 20 file không còn `<SV viết`, không có đường dẫn máy
+  · Dry-run 20 tiêu đề; body dài nhất 14.753 ký tự (BUG-32)
+  · test: không chạy
+- Commit: chưa (theo lệnh)
+- Cách tạo:
+  · title = tiền tố đã duyệt + tiêu đề trong .md
+  · body = nội dung .md, mục Link để trống như A; không upload ảnh
+  · --label bug; tạo tuần tự BUG-15 → 34
+  · BUG-34: body không chứa đường dẫn máy (output đã thay bằng <SUT_DIR> từ 7/7c), mục Bằng chứng trỏ bản che _issue_redacted/BUG-34.txt
+- Danh sách cho SV (BUG → issue: ảnh tiêu biểu kéo vào mục "Bằng chứng", ảnh ở HW02/B_FR07/evidence/):
+  · 15→#161 TC-FR07-02_ui · 16→#162 TC-FR07-99_feedback · 17→#163 TC-FR07-201_manual_2lan · 18→#164 TC-FR07-90_ui
+  · 19→#165 TC-FR07-08_ui · 20→#166 TC-FR07-04_ui · 21→#167 TC-FR07-01_ui · 22→#168 TC-FR07-91_ui
+  · 23→#169 TC-FR07-92_failed · 24→#170 TC-FR07-93_ui · 25→#171 TC-FR07-94_ui · 26→#172 TC-FR07-95_ui
+  · 27→#173 TC-FR07-96_ui · 28→#174 TC-FR07-97_ui · 29→#175 TC-FR07-98_ui · 30→#176 TC-FR07-21_api
+  · 31→#177 TC-FR07-22_api · 32→#178 TC-FR07-30_api + 36_api + 214_api (G18/G19/G21) · 33→#179 TC-FR07-215_api · 34→#180 TC-FR07-209_api
+  · (tất cả là .png)
+- Bất thường:
+  · BUG-23: ảnh tiêu biểu là `_failed.png` vì script không nhận ra tên `TC-FR07-92_ui-cart.png` / `_ui-home.png`; hai ảnh này cho thấy cả 2 trang, có thể hợp hơn
+  · BUG-15: ảnh tiêu biểu TC-FR07-02_ui.png chụp trang giỏ trống; ảnh kiểm tay TC-FR07-205_manual_3lan.png là lựa chọn khác
+  · SV chọn ảnh khi kéo vào
+- Cần quyết định: không chặn. Sau khi SV kéo ảnh và chụp issues_page.png → ra lệnh commit
+```
+````
+*File AI ghi/gửi trong lượt này:* `create7.py`
+
+**Xử lý:** [...]
+
+---
+
+## #148 | 15:56 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+#161 (BUG-15) – SV đổi tiền tố [FR-06] → [FR-07] (theo tiền lệ A: tiền tố = FR của
+feature đang kiểm). KHÔNG xoá issue.
+1. gh auth = ThachHaoo; gh issue edit 161 -R tkob-team/eshop-sut --title "[FR-07] <tiêu
+   đề hiện tại bỏ tiền tố>".
+2. Comment #161: "Đính chính 2026-10-20: đổi tiền tố tiêu đề [FR-06] → [FR-07] cho
+   thống nhất cách đặt tiền tố theo feature đang kiểm (FR-07 Giỏ hàng). Nội dung không
+   đổi."
+3. testcases.json: ghi chú vào B6 "Tiền tố issue: theo feature đang kiểm ([FR-07]) —
+   SV đổi 2026-10-20, thay quy ước '[FR-06]' ban đầu"; render_md.py.
+4. _groups_B_FR07.md: cập nhật tiêu đề issue #161 nếu bảng có ghi.
+Gộp vào commit 7/7d (chưa commit riêng). Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+````
+Đã đổi tiêu đề #161 và thêm comment. Giờ ghi chú vào giả định B6 và kiểm `_groups`.
+
+Issue #161 đã đổi tiền tố thành [FR-07] và có comment đính chính. Ghi chú vào B6 đã thêm. Chưa commit, để gộp vào 7/7d theo lệnh.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: #161 (BUG-15) – đổi tiền tố tiêu đề [FR-06] → [FR-07], không xoá issue
+- File đã sửa (CHƯA commit, gộp vào 7/7d):
+  · HW02/B_FR07/testcases.json (ghi chú cuối giả định B6), testcases.md
+  · Các thay đổi chờ từ lượt trước vẫn còn: BUG-15…34.md, _groups_B_FR07.md, A_prompt_log.md
+- Kết quả kiểm tra:
+  · gh auth = ThachHaoo; đọc lại #161: tiêu đề mới đúng
+  · check_domain 0 errors/7 warn; lint 0 errors/10 warn; test: không chạy
+- Commit: chưa
+- Đã làm:
+  · Tiêu đề #161 = "[FR-07] Nút 'Thêm vào giỏ hàng' ở trang chi tiết sản phẩm bị nuốt lượt bấm đầu tiên, không thêm sản phẩm và không có phản hồi"
+  · Comment đúng nguyên văn lệnh: https://github.com/tkob-team/eshop-sut/issues/161#issuecomment-6287293169
+  · B6: nối thêm "Tiền tố issue: theo feature đang kiểm ([FR-07]) — SV đổi 2026-10-20, thay quy ước '[FR-06]' ban đầu."
+    - Câu cũ "Bug thuộc FR-06 đặt tiêu đề [FR-06]." vẫn giữ, nên trong B6 có cả quy ước cũ lẫn ghi chú đổi
+  · _groups_B_FR07.md: bảng ánh xạ chỉ có số issue, không ghi tiêu đề → không cần sửa
+- Bất thường: không
+- Cần quyết định: không chặn. Có xoá câu cũ "Bug thuộc FR-06 đặt tiêu đề [FR-06]." trong B6 không → SV quyết
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #149 | 15:59 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. B6 trong testcases.json: sau câu "Bug thuộc FR-06 đặt tiêu đề [FR-06]." thêm
+   " (quy ước ban đầu, đã thay — xem ghi chú dưới)"; render_md.py.
+2. Làm tiếp lệnh hoàn tất bước 7 (git mv issues_page.png → issues_page_A_FR01.png +
+   sửa tham chiếu; kiểm issues_page_B_FR07.png; kiểm ảnh trong #161…#180; summary
+   README; commit "HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png").
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 149 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 146 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

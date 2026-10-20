@@ -85,7 +85,7 @@ Giao diện hoàn toàn "im lặng". Nút bấm không thay đổi trạng thái
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/162
 
 ---
 

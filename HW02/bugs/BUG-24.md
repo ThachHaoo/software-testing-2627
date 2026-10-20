@@ -84,7 +84,7 @@ Theo yêu cầu FR-21.3 (kèm giả định B16): Hệ thống bắt buộc ph�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/170
 
 ---
 

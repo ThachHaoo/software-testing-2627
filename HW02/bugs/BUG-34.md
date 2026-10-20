@@ -121,7 +121,7 @@ Theo quy định thiết kế REST API (kèm giả định B17): Khi client gử
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/180
 
 ---
 

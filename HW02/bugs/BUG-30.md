@@ -160,7 +160,7 @@ app.post("/api/cart", authenticateToken, (req, res) => {
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/176
 
 ---
 

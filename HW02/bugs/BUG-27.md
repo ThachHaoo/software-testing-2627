@@ -89,7 +89,7 @@ Nút bấm ở cột Thao tác chỉ hiển thị nhãn ngắn gọn là Xóa (h
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/173
 
 ---
 

@@ -114,7 +114,7 @@ Theo giả định B1 (không quy định cận trên cho số lượng): Hệ t
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/179
 
 ---
 

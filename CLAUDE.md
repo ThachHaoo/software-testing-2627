@@ -155,7 +155,7 @@ HW02/
 │   ├── testcases.json           # nguồn dữ liệu duy nhất
 │   ├── testcases.md             # sinh từ JSON
 │   └── evidence/                # ảnh chạy test
-├── bugs/BUG-xx.md + issues_page.png   # SV viết 🔒
+├── bugs/BUG-xx.md + issues_page_<feature>.png   # SV viết 🔒
 ├── tests/                       # Playwright (SV chạy trên máy mình)
 ├── env/environment.md, mobile_api_url.patch
 ├── skills/domain-bva-testing/   # chép từ .claude/skills/ khi nộp + VideoLinks.md

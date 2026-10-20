@@ -24,7 +24,7 @@ Severity và Priority độc lập với nhau.
 ## Tên file
 
 - `BUG-xx.md`, `xx` là số thứ tự hai chữ số, đánh liên tục cho cả HW02 (không theo feature): `BUG-01.md`, `BUG-02.md`, …
-- Ảnh đính kèm đặt cạnh file: `BUG-xx_<mô tả ngắn>.png`. Ảnh trang GitHub Issues: `issues_page.png`.
+- Ảnh đính kèm đặt cạnh file: `BUG-xx_<mô tả ngắn>.png`. Ảnh trang GitHub Issues: `issues_page_<feature>.png` (vd `issues_page_A_FR01.png`, `issues_page_B_FR07.png`).
 
 ## Trường bắt buộc
 

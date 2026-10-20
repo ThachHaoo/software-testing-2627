@@ -85,7 +85,7 @@ Tại tiêu đề cột thứ 2 của bảng giỏ hàng, nhãn hiển thị b�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/172
 
 ---
 

@@ -90,7 +90,7 @@ Theo yêu cầu FR-24.4 (kèm giả định B16): Tất cả các thẻ ảnh s�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/171
 
 ---
 

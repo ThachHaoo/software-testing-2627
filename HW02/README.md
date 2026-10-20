@@ -19,9 +19,10 @@
 | Feature | Chức năng | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC AI + SV sửa | TC SV thêm | Bug |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | A_FR01 | FR-01 Đăng ký tài khoản (web frontend-web + API POST /api/register) | 133 | 108 | 43 | 65 | 25 | 0 | 98 | 10 | 25 | 14 |
-| **Tổng** | **1 feature** | **133** | **108** | **43** | **65** | **25** | **0** | **98** | **10** | **25** | **14** |
+| B_FR07 | FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart) | 62 | 53 | 14 | 39 | 9 | 0 | 49 | 0 | 13 | 20 |
+| **Tổng** | **2 feature** | **195** | **161** | **57** | **104** | **34** | **0** | **147** | **10** | **38** | **34** |
 
-Bug theo severity: Critical 6, High 2, Medium 5, Low 1 (tổng 14 file trong `bugs/`).
+Bug theo severity: Critical 6, High 9, Medium 8, Low 11 (tổng 34 file trong `bugs/`).
 <!-- SUMMARY:END -->
 
 ## Video demo (YouTube)

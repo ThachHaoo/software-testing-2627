@@ -85,7 +85,7 @@ Khi giỏ hàng có chứa sản phẩm, nút quay về trang chủ chỉ hiển
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/174
 
 ---
 

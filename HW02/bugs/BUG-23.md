@@ -81,7 +81,7 @@ Link "Giỏ hàng" trên Navbar khi người dùng đứng ở trang /cart có k
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/169
 
 ---
 

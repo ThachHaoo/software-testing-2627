@@ -78,7 +78,7 @@ Link "Giỏ hàng" trên Navbar luôn hiển thị dưới dạng thẻ văn b�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/166
 
 ---
 

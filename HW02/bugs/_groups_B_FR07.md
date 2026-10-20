@@ -6,28 +6,28 @@
 
 ## Ánh xạ nhóm → khung bug (SV gộp ở 7/7a3)
 
-| Khung | Nhóm |
-|---|---|
-| BUG-15 | G1 |
-| BUG-16 | G2 |
-| BUG-17 | G3 |
-| BUG-18 | G4 |
-| BUG-19 | G5 |
-| BUG-20 | G6 |
-| BUG-21 | G7 |
-| BUG-22 | G8 |
-| BUG-23 | G9 |
-| BUG-24 | G10 |
-| BUG-25 | G11 |
-| BUG-26 | G12 |
-| BUG-27 | G13 |
-| BUG-28 | G14 |
-| BUG-29 | G15 |
-| BUG-30 | G16 |
-| BUG-31 | G17 |
-| BUG-32 | G18 + G19 + G21 |
-| BUG-33 | G22 |
-| BUG-34 | G20 |
+| Khung | Nhóm | Issue |
+|---|---|---|
+| BUG-15 | G1 | [#161](https://github.com/tkob-team/eshop-sut/issues/161) |
+| BUG-16 | G2 | [#162](https://github.com/tkob-team/eshop-sut/issues/162) |
+| BUG-17 | G3 | [#163](https://github.com/tkob-team/eshop-sut/issues/163) |
+| BUG-18 | G4 | [#164](https://github.com/tkob-team/eshop-sut/issues/164) |
+| BUG-19 | G5 | [#165](https://github.com/tkob-team/eshop-sut/issues/165) |
+| BUG-20 | G6 | [#166](https://github.com/tkob-team/eshop-sut/issues/166) |
+| BUG-21 | G7 | [#167](https://github.com/tkob-team/eshop-sut/issues/167) |
+| BUG-22 | G8 | [#168](https://github.com/tkob-team/eshop-sut/issues/168) |
+| BUG-23 | G9 | [#169](https://github.com/tkob-team/eshop-sut/issues/169) |
+| BUG-24 | G10 | [#170](https://github.com/tkob-team/eshop-sut/issues/170) |
+| BUG-25 | G11 | [#171](https://github.com/tkob-team/eshop-sut/issues/171) |
+| BUG-26 | G12 | [#172](https://github.com/tkob-team/eshop-sut/issues/172) |
+| BUG-27 | G13 | [#173](https://github.com/tkob-team/eshop-sut/issues/173) |
+| BUG-28 | G14 | [#174](https://github.com/tkob-team/eshop-sut/issues/174) |
+| BUG-29 | G15 | [#175](https://github.com/tkob-team/eshop-sut/issues/175) |
+| BUG-30 | G16 | [#176](https://github.com/tkob-team/eshop-sut/issues/176) |
+| BUG-31 | G17 | [#177](https://github.com/tkob-team/eshop-sut/issues/177) |
+| BUG-32 | G18 + G19 + G21 | [#178](https://github.com/tkob-team/eshop-sut/issues/178) |
+| BUG-33 | G22 | [#179](https://github.com/tkob-team/eshop-sut/issues/179) |
+| BUG-34 | G20 | [#180](https://github.com/tkob-team/eshop-sut/issues/180) |
 
 G20 đặt ở số cuối vì SV còn quyết định có trùng #25 hay không.
 
