@@ -17277,7 +17277,7 @@ Lưu ý: ở 7e em có dùng `api_specification.md` làm căn cứ Yêu cầu ch
 
 ---
 
-## #292 | 22:12 20/10/2026 | Claude (không rõ model) | [...]
+## #292 | 22:12 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -17294,11 +17294,99 @@ Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã chép transcript, sinh lại prompt log và commit `c678fa4 HW02: cập nhật prompt log (đóng C_FR15)`, chỉ gồm `A_prompt_log.md`, chưa push.
+
+- **File đã chép:** `.transcripts\claude-code_session_HW02_C_20261020-2213.jsonl` (file mới, không đè hai bản 2043 và 2209). Phiên này có 31 lượt user, lượt đầu 16:21, lượt cuối 22:12 (giờ VN, 20/10/2026). File `claude-ai_session_HW02_p4.jsonl` vẫn là bản lúc 22:08 như lần trước.
+- **Tổng lượt:** 292 — Opus 5.5: 204, Sonnet 4.6: 83, ghi "Sonnet 4.6 + Opus 5.5": 2, không rõ model: 3. Em đã trừ header `#138` lặp (văn bản trích trong một prompt, có từ trước) khỏi số Opus.
+- **Lượt cuối:**
+  - Lượt claude.ai cuối vẫn là #289 lúc 22:06.
+  - Lượt Claude Code cuối là #292 lúc 22:12, tức chính lệnh này. Lượt này hiện ghi "không rõ model" vì lúc chép transcript em chưa trả lời xong.
+  - Không có lượt nào trùng.
+- **Cần làm thêm:** chạy lại `python tools/hooks/on_stop.py --manual` và commit thêm một lần nữa thì #292 sẽ ghi đúng Opus 5.5. Hook Stop cũng tự sinh lại log sau lượt này, nhưng phần thay đổi đó chưa commit.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 292 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 206 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291); Claude (không rõ model) 3 lượt (#118, #272, #292). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #293 | 22:23 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — HW02 D_FR20, bước 0–1
+
+Bối cảnh: C_FR15 xong (7/7g 4d816d8). Feature mới D_FR20 = FR-20 Đăng ký trên Mobile
+(frontend-mobile, Expo SDK 54). Chạy tay; mã TC `TC-FR20-xx`; giả định mã `D0, D1, …`.
+Áp toàn bộ quy ước trong CLAUDE.md (bài học A, B, C) ngay từ bước này.
+
+SV đã chốt:
+- P1 = b: AI KHÔNG đọc sv_cases.md / ai_gap_answer.md / sv_questions.md của A, B, C ở bước 1–4.
+  Lý do SV: giữ bước 5 đo được; SV tự mang ý từ case SV của A sang ở bước 5.
+- P2 = Android thật (Expo Go). Locale: SV bổ sung khi chạy (không chặn).
+- Mục tiêu: ít case vì chạy tay.
+
+### 0. Kiểm đầu vào
+- `git status` sạch, HEAD chứa 4d816d8. Không đúng → DỪNG.
+- `git -C ..\eshop-sut diff --stat` chỉ có frontend-mobile/App.js + database.sqlite. Khác → DỪNG.
+  Ghi API_URL (App.js dòng 16) + P2 vào ghi chú môi trường của D.
+
+### 1. Đọc
+- SRS README.md §6: FR-20 nguyên văn, cùng mọi FR/NFR mà FR-20 dẫn tới hoặc áp chung cho
+  mobile/đăng ký. Chép nguyên văn kèm số dòng vào notes bước 1.
+- Code frontend-mobile, màn hình đăng ký: CHỈ dùng để lấy tên trường, loại ô (keyboardType,
+  secureTextEntry…), nút, điểm quan sát (Alert, chữ trên màn hình, điều hướng), endpoint gọi.
+  Không lấy logic validate hay hành vi làm căn cứ Expected.
+- A_FR01, chỉ phần AI và giả định: biến vào/ra, giả định A đã chốt, oracle A10/A16/A17.
+  Dùng để đặt tên biến D tương ứng, phục vụ bảng so sánh web vs mobile.
+- KHÔNG: dùng api_specification.md làm căn cứ; đọc issue #153–#160 hay bug của A về hành vi SUT
+  (chỉ dùng ở bước 7 để kiểm trùng); chạy app.
+
+### 2. Chạy `/domain-bva-testing HW02/D_FR20 0` (bước 0–1)
+- Biến vào: các trường của form mobile, cách nhập (bàn phím ảo, dán, khoảng trắng), trạng thái
+  ban đầu (vd email đã tồn tại) nếu SRS có liên quan.
+- Biến ra / điểm quan sát:
+  - thông báo trên app (mọi kênh) và điều hướng sau khi bấm;
+  - dữ liệu phía server mà SV quan sát được khi chạy tay (đăng nhập thử qua API, hoặc trang admin
+    Quản lý Người dùng: cột ID, Email, Role, Số ĐT).
+  - Case bị từ chối: oracle chính = dữ liệu không đổi.
+- Giả định đề xuất ghi mã D…, loại, căn cứ, ô "SV chốt + lý do" để trống. Bắt buộc có:
+  - Giả định PHẠM VI, tối thiểu 2 phương án, trong đó 1 phương án gọn. Mỗi phương án ghi:
+    - tầng kiểm (chỉ UI mobile / thêm API);
+    - mức BVA (đủ / chỉ biến mà tầng client mobile xử lý);
+    - số EC + TC ước tính;
+    - thời gian chạy tay ước tính.
+    Nếu code cho thấy mobile gọi cùng endpoint với web thì nêu dữ kiện đó (gray-box, chỉ để
+    chọn đại diện) và tham chiếu case API của A thay vì lặp lại.
+  - Mỗi giả định của A muốn dùng lại: mã D mới ghi "(kế thừa Ax)", SV chốt lại.
+  - Mọi chỗ FR-20 im lặng mà sẽ quyết định Expected.
+- Không đề xuất case hay điểm biên ở bước này.
+
+### 3. Sau bước
+render_md.py → freeze.py → check_domain.py → linter thầy → cập nhật prompt log như các bước
+trước → commit `HW02[D-FR20] 1/7` kèm HW02/appendix/A_prompt_log.md. Không push.
+Nếu skill/harness vướng giả định web/Playwright: không vá trong commit này, báo lại.
+
+## Báo cáo cho phiên thảo luận (chỉ phần này)
+Liệt kê giả định CHẶN bước 2. Mỗi giả định ghi:
+- `Dn` – loại – câu hỏi 1 dòng
+- a) … → hệ quả; b) … → hệ quả (c nếu cần). Riêng giả định phạm vi: thêm số TC + thời gian.
+- Khuyến nghị: … kèm điều khoản SRS; hoặc "SRS không đủ căn cứ — SV quyết"
+Ngoại lệ: nếu dừng, kiểm tra lỗi hoặc harness vướng → ghi 1–3 dòng ở đầu báo cáo.
+```
+
+**Output:**
+```
+Now SRS + A_FR01 step-1 structure. Look at how C_FR15 step1 committed (files & freeze).
+
+Read C_FR15 step1 frozen JSON as structural template (meta/variables/assumptions shape).
+
+Đã đọc SRS, code màn Đăng ký mobile, biến/giả định A. Giờ xem header/điều hướng mobile rồi viết `testcases.json`.
+```
+*File AI ghi/gửi trong lượt này:* `testcases.json`, `step1_notes.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 293 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 208 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
