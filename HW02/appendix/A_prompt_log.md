@@ -7146,8 +7146,14 @@ Nhiệm vụ 3 – Bước 2 (lớp tương đương)
 **Output:**
 ```
 Kiểm: json đã có giả định B0a–B18 và tham chiếu; thiếu trích SRS nguyên văn + khảo sát SUT chi tiết. Ghi phần thiếu.
+
+Nhiệm vụ 2+3: ghi 5 quyết định, dựng lớp tương đương.
+
+Sửa số EC tham chiếu cho khớp thứ tự thật trước khi chạy.
+
+Đúng thứ tự: render → freeze → check → lint.
 ```
-*File AI ghi/gửi trong lượt này:* `notes_step1.md`
+*File AI ghi/gửi trong lượt này:* `notes_step1.md`, `step2_b.py`
 
 **Xử lý:** [...]
 

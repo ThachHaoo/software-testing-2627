@@ -7,3 +7,5 @@
 - 17:19 19/10/2026 · `A_FR01_step4_20261019-1719.json` · bước 4 · Claude Code bước 4 · sha256 2c346b6bc3f3
 - 17:19 19/10/2026 · `A_FR01_step4_20261019-1719.md` · bước 4 · Claude Code bước 4 · sha256 1e94f9826553
 - 10:18 20/10/2026 · `B_FR07_step1_20261020-1018.json` · bước 1 · Claude Code bước 0-1 · sha256 5be60e314e09
+- 10:31 20/10/2026 · `B_FR07_step2_20261020-1031.json` · bước 2 · Claude Code bước 2 (kèm 5 quyết định SV B1/B3/B6/B7/B9) · sha256 ec212a799046
+- 10:31 20/10/2026 · `B_FR07_step2_20261020-1031.md` · bước 2 · Claude Code bước 2 (kèm 5 quyết định SV B1/B3/B6/B7/B9) · sha256 2f16839de0a6
