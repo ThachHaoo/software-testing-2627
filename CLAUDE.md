@@ -123,12 +123,20 @@ Skill dùng trong repo:
     - Web: giỏ là state React → điều hướng bằng link navbar, không gõ URL/tải lại; tiền điều kiện có bước dựng dữ liệu.
     - Windows PowerShell 5.1: tài khoản seed `test@eshop.com`; `-ContentType` ở tham số (không trong `-Headers`); `-Body ([Text.Encoding]::UTF8.GetBytes($body))`; `Invoke-WebRequest -UseBasicParsing`; lỗi 4xx/5xx đọc body bằng `try/catch` + `GetResponseStream()` (đặt `Position = 0`).
 - 2026-10-20 (rút ra từ C_FR15):
-  - Khung bug = mẫu B (`d0d0e05:HW02/bugs/BUG-22.md`): chỗ SV viết ghi `` `<SV viết>` `` (trong backtick); Môi trường gạch đầu dòng giá trị thật; Yêu cầu do AI điền từ `_groups`; Dữ kiện chỉ gồm Actual nguyên văn + dòng "Lặp lại" + code trích; không chép Expected.
-  - 7a không soạn bước tái hiện thay SV; AI chỉ chạy bước SV viết ở 7c. Gặp bất thường ngoài bước SV → báo, ghi "AI phát hiện".
+  - Khung bug = mẫu B (`d0d0e05:HW02/bugs/BUG-22.md`): chỗ SV viết ghi `` `<SV viết>` `` (trong backtick); Môi trường gạch đầu dòng giá trị thật; Yêu cầu do AI điền từ `_groups` (SV duyệt); Dữ kiện chỉ gồm Actual nguyên văn + dòng "Lặp lại" + code trích; không chép Expected.
+  - 7a không soạn bước tái hiện thay SV; AI chỉ chạy bước SV viết ở 7c. Gặp bất thường ngoài bước SV → báo, ghi "AI phát hiện", SV quyết.
   - Giả định phạm vi (vd C8) và giả định nới (vd C17) không bao giờ vào "yêu cầu bị vi phạm".
   - Harness UI: đọc validity HTML5 ngay khi bấm (bài học H1); ghi mọi kênh thông báo (hộp thoại, bong bóng, chữ trên trang); không phân loại thông báo theo chữ của SUT.
   - Vá harness → chạy lại toàn bộ thành **một** lượt chính thức; `merge --force` chỉ khi không có status SV đặt.
   - Lệnh có chỗ `<...>` chưa điền → DỪNG, hỏi.
+  - Linter thầy: suite ≤ 25 dòng → tách suite (vd TS-DOM-API-POST/PUT/OTHER), giữ nguyên mã TC.
+  - `api_specification.md`: SV không dùng làm căn cứ Expected/Yêu cầu.
+  - Khung `sv_cases.md`: AI được tạo khung trống (không ví dụ, không danh mục), không commit riêng trước 5/7.
+  - Expected SV viết sai phát hiện sau khi có Actual → không sửa; verdict "Fail do lỗi thiết kế TC, không lập bug".
+  - Ảnh kéo vào issue phải là bản che: AI kiểm sau khi SV kéo ảnh (C: #189, #190 lỡ dùng bản gốc).
+  - README: nguồn TC có 3 cột AI / Both (AI + SV sửa) / SV.
+  - Push: SV tự push (hợp lệ); AI không push.
+  - Sắp compact → chép transcript phiên vào `.transcripts\` (tên mới) + `on_stop.py --manual` + commit prompt log trước khi `/compact`.
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 
