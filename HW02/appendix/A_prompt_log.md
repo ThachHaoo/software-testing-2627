@@ -14926,13 +14926,125 @@ Bạn giúp mình xuất transcript lượt 1 nhé. Sau khi xong feature C mình
 **Output:**
 ```
 Mình xuất transcript phiên này ngay bây giờ (tên `claude-ai_session_HW02_p4.jsonl`). Khi xong feature C, bạn yêu cầu lại thì mình xuất bản lớn thêm cùng tên `_p4`; bản đó sẽ chứa trọn bản này, bạn chỉ cần thay file cũ.
+
+Mình đã gửi file `claude-ai_session_HW02_p4.jsonl`. File chứa 22 lượt, từ 16:19 đến 18:06 hôm nay. Lượt đầu tiên trùng với lúc phiên bắt đầu, nên phiên chưa bị nén ngữ cảnh và không thiếu lượt nào.
+
+Việc bạn cần làm:
+1. Đặt file vào `.transcripts/`, giữ nguyên các file `_p1` đến `_p3`.
+2. Chạy `python tools/hooks/on_stop.py --manual`.
+3. Commit `HW02/appendix/A_prompt_log.md`, có thể kèm commit `5/7e` hoặc commit riêng `HW02: cập nhật prompt log`.
+
+Khi xong feature C và bạn yêu cầu lại, mình sẽ xuất bản lớn hơn vẫn tên `_p4`. Bản đó chứa trọn bản này, nên bạn chỉ cần ghi đè file cũ.
 ```
+*File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p4.jsonl`
 
 **Xử lý:** [...]
 
 ---
 
-## #246 | 18:42 20/10/2026 | Claude Opus 5.5 | [...]
+## #246 | 18:14 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã thêm xong rồi nhé. Có cần bảo Claude Code trích luôn không?
+Xem báo cáo:
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+````
+**Prompt log:** không cần bảo Claude Code trích nữa. Dòng "Tổng: 223 lượt…" trong file bạn gửi chính là output của `on_stop.py`, tức là việc trích đã chạy xong. Script in ra hai lần, có thể do bạn chạy `--manual` và hook cũng tự chạy khi dừng; bản sau là bản cuối. Bạn chỉ cần kiểm `git status` thấy `HW02/appendix/A_prompt_log.md` đã đổi, rồi commit `HW02: cập nhật prompt log`. Log có cả lượt của Sonnet 4.6 và Opus 5.5, nên nhớ khai cả hai model trong AI-03.
+
+**Báo cáo 6/7a: số liệu khớp.** 117 test tự động và 5 manual, đúng tổng 111 case thiết kế cộng 11 case SV. Có 2 việc bạn cần xử lý trước khi chạy:
+
+**1. TC-206: AI đã tự điền phần procedure trong case của bạn.** Claude Code tự đặt "SP1 sửa Tên thành `SP1 tạm {ts}`" vì bạn không ghi SP1 sửa gì. Case SV là chữ của bạn, nên bạn chọn một trong hai:
+- tự viết lại bước đó trong `sv_cases.md`;
+- ghi rõ "SV chấp nhận cách AI hiểu" (trong sv_cases hoặc notes). Đây là một dòng cần khai trong Audit.
+
+**2. Cách phân biệt hộp thoại báo lỗi với hộp thoại báo thành công.** Đây đúng là chỗ đã sinh Pass giả ở A (oracle A10 chỉ kiểm "có từ chối"). Bạn cần hỏi Claude Code dựa vào đâu để phân biệt, ví dụ danh sách từ khoá. Mục tiêu là "dữ liệu không đổi" phải là oracle chính, còn hộp thoại chỉ là oracle phụ. Bạn có thể ghép câu hỏi này vào lệnh 6/7b bên dưới.
+
+**Chạy lượt chính thức:**
+1. Khởi động lại backend (`node server.js`).
+2. Bật admin :5174, vì case UI cần.
+3. Chạy lệnh trong RUN.md. Bản báo cáo bạn dán bị cắt ở dòng `merge_results`, nên lấy lệnh từ RUN.md, đừng lấy từ báo cáo.
+
+Nếu lượt đầu lỗi harness (do không có bộ kiểm kiểu TS) thì sửa bằng commit `HW02: vá harness – …`, ghi lượt đó vào RUN.md, rồi chạy lại. 5 case GUI bạn tự chụp ảnh theo RUN.md.
+
+Sau khi chạy xong, gửi Claude Code lệnh sau:
+
+```
+Bước 6b C_FR15: SV đã chạy lượt <n> (results/C_FR15_<ts>.json); ảnh manual TC-FR15-90…94 ở <thư mục>.
+0. TC-206: <SV đã sửa sv_cases.md | SV chấp nhận cách AI hiểu: "SP1 sửa Tên thành SP1 tạm {ts}" — ghi vào notes TC-206>.
+1. Trả lời trước: test phân biệt hộp thoại lỗi/thành công bằng cách nào (file:dòng)? Có case nào Pass chỉ nhờ hộp thoại mà
+   KHÔNG kiểm "dữ liệu không đổi" không? Có → liệt kê, không tự sửa.
+2. merge_results.py (không --force). Chốt verdict theo A20 mở rộng: lệch do biến mục tiêu → Fail; do biến khác → Blocked (ghi case gốc);
+   Pass không chứng minh luật mục tiêu → Pass + "Pass hộp đen"; giữ auto_status. Không đổi Expected.
+   Case manual: verdict theo ảnh SV; ảnh không khớp chữ/thiếu → để trống status, báo.
+3. RUN.md: nhật ký lượt (giờ, restart backend, lượt chính thức). Evidence chỉ giữ lượt mới nhất.
+4. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 6/7b: kết quả lượt <n>` kèm A_prompt_log.md.
+Báo cáo (≤ 25 dòng): commit; Pass/Fail/Blocked (tổng + theo suite); bảng Fail: TC | biến lệch | Expected vs Actual (1 dòng);
+Blocked: TC | case gốc; case "Pass hộp đen"; trả lời mục 1. KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #247 | 18:17 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Chấp nhận cách AI hiểu, do lúc nãy tôi không ghi cụ thể, chứ cố định 1 cái cụ thể rồi thì test ổn rồi
+2. Không thể check nội dung sao?
+```
+
+**Output:**
+````
+**1. TC-206:** ổn, mình đã điền vào lệnh bên dưới.
+
+**2. Đọc được nội dung, nhưng không có gì để so.** Playwright đọc được chữ trong hộp thoại (`dialog.message()`). Cái thiếu là chuẩn để so:
+- SRS không quy định nội dung thông báo lỗi.
+- Nếu lấy chữ từ code hoặc từ màn hình SUT làm Expected, thì Expected đang dựa vào hành vi SUT. Quy ước cấm điều này, vì như vậy SUT luôn "đúng với chính nó".
+- Nó cũng trái quy ước "khẳng định một nơi": chữ của thông báo chỉ được khẳng định ở 1 case. Trong C, case đó là TC-91 theo FR-22.4.
+
+**Cách làm đúng quy ước:**
+- **Oracle chính là dữ liệu không đổi**, so sánh SAU = TRƯỚC qua API. Nếu dữ liệu đổi thì Fail, bất kể hộp thoại nói gì.
+- **Oracle phụ là có thông báo** (C16).
+- **Mọi case đều ghi nguyên văn chữ của hộp thoại vào Actual.** Khi verdict phụ thuộc vào câu "đây có phải thông báo lỗi không", bạn đọc chữ rồi quyết. Việc này chỉ phát sinh ở các case UI bị từ chối, số lượng ít.
+
+Nếu muốn máy tự phân biệt lỗi với thành công, bạn phải chốt thêm một giả định, ví dụ "thông báo lỗi không được chứa từ 'thành công'". Mình không khuyên làm vậy: giả định đó thực chất dựng từ chữ của SUT, lại thêm một thứ cần bảo vệ trong Audit.
+
+Lệnh 6b đã cập nhật:
+
+```
+Bước 6b C_FR15: SV đã chạy lượt <n> (results/C_FR15_<ts>.json); ảnh manual TC-FR15-90…94 ở <thư mục>.
+0. TC-206: SV chấp nhận cách AI hiểu — ghi vào notes TC-206: "SP1 sửa Tên thành 'SP1 tạm {ts}' — SV chấp nhận cách AI
+   hiểu (SV không ghi cụ thể; giá trị cố định là đủ cho mục đích case)".
+1. Hộp thoại: kiểm tra (file:dòng) rằng mọi case UI bị từ chối dùng "dữ liệu không đổi (SAU = TRƯỚC qua API)" làm oracle chính
+   và ghi NGUYÊN VĂN chữ hộp thoại/thông báo vào Actual. Không dùng chữ của SUT làm Expected. Case nào chưa đạt → liệt kê,
+   không tự sửa (sửa là vá harness, commit riêng sau khi SV đồng ý).
+2. merge_results.py (không --force). Chốt verdict theo A20 mở rộng: lệch do biến mục tiêu → Fail; do biến khác → Blocked (ghi case gốc);
+   Pass không chứng minh luật mục tiêu → Pass + "Pass hộp đen"; giữ auto_status. Không đổi Expected.
+   Case có hộp thoại mà verdict phụ thuộc việc nó là thông báo lỗi hay không → để trống status, đưa chữ hộp thoại vào báo cáo cho SV quyết.
+   Case manual: verdict theo ảnh SV; ảnh không khớp chữ/thiếu → để trống status, báo.
+3. RUN.md: nhật ký lượt (giờ, restart backend, lượt chính thức). Evidence chỉ giữ lượt mới nhất.
+4. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 6/7b: kết quả lượt <n>` kèm A_prompt_log.md.
+Báo cáo (≤ 25 dòng): commit; Pass/Fail/Blocked (tổng + theo suite); bảng Fail: TC | biến lệch | Expected vs Actual (1 dòng);
+Blocked: TC | case gốc; case "Pass hộp đen"; case chờ SV quyết (TC | chữ hộp thoại); kết quả mục 1.
+KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
+```
+
+Bạn điền `<n>`, `<ts>` và thư mục ảnh sau khi chạy xong.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #248 | 18:42 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15021,7 +15133,188 @@ Kết quả lượt 3 và lượt 5 đã gộp, verdict đã chốt, commit `e49
 
 ---
 
-## #247 | 18:51 20/10/2026 | Claude Opus 5.5 | [...]
+## #249 | 18:47 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc báo cáo:
+Báo cáo cho phiên thảo luận
+
+- Commit: e4945b3 HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5. check_domain: 0 lỗi; linter: 0 lỗi.
+  - Lượt 3 SV đã merge từ trước; em merge thêm lượt 5 (không --force). Lượt 1, 2, 4 không có file results.
+  - Chưa xác nhận được việc restart backend trước lượt 3, vì global-setup đạt không đủ để chứng minh. Lượt chính thức = lượt 3 nếu SV xác nhận đã restart.
+- Tổng: Pass 48 · Fail 64 · Blocked 5 · trống 5.
+
+| Suite         | Pass/Fail/Blocked/trống |
+|---------------|-------------------------|
+| DOM-UI        | 5/9/1/1                 |
+| DOM-API-POST  | 2/15                    |
+| DOM-API-PUT   | 2/16                    |
+| DOM-API-OTHER | 1/6                     |
+| BVA-UI-THEM   | 10/2                    |
+| BVA-UI-SUA    | 6/2/4                   |
+| BVA-API-POST  | 9/3                     |
+| BVA-API-PUT   | 9/3                     |
+| GUI           | 2/2/0/1                 |
+| SV-UI         | 0/2/0/3                 |
+| SV-API        | 2/4                     |
+
+- Fail (biến lệch là biến mục tiêu của từng case):
+
+| TC                                   | Biến lệch                 | Expected vs Actual
+          |
+|--------------------------------------|---------------------------|-----------------------------------------------------------
+-----------|
+| 08, 09, 10, 11, 66, 67 (UI Thêm)     | Tên/Giá không hợp lệ      | dữ liệu không đổi vs bản ghi được tạo
+          |
+| 13, 14, 15, 16, 78, 79 (UI Sửa)      | Tên/Giá không hợp lệ      | M không đổi vs M bị ghi đè                                           |
+| 03                                   | Sửa (ECiện giá mới, dòng khác không đổi vs giá cũ, mọidòng đổi tên |
+| 23–34, 84, 100, 101, 208, 214 (POST) | dữ liệu không hợp lệ      | 4xx kèm error vs 200, bản ghi được tạo
+          |
+| 35–46, 106, 112, 113 (PUT)           | dữ liệu không hợp lệ      | 4xx vs 200, M bị ghi đè                                              |
+| 47, 48, 49                           | id không tồn tại          | 4xx vs 200 (GET trả {})
+          |
+| 50–58                                | token thiếu/sai/role user | 4xx vs 200, dữ liệu đổi
+          |
+| 22                                   | kiểu price (C15)          | số JSON vs "28000000" (chuỗi)
+          |
+| 209                                  | Infinity (C20)            | JSON 4xx kèm error vs 400 trang HTML
+          |
+| 211                                  | Content-Type text/plain   | 400/415 vs 500 trang HTML                                            |
+| 201, 205                             | cách nh dữ liệu không đổi vs lưu 100000 / lưu price ""           |
+| 90 (manual)                          | nhãn '*' (FR-22.1)        | có '*' vs không có nhãn                                              |
+| 92 (manual)                          | định dạcách vs "30000000 ₫"           |
+
+- Blocked: TC-04, 80, 81, 82, 83 — case gốc TC-03. Dữ liệu các case này đạt; chỉ lệch ô 'Giá' trên bảng sau Sửa, cùng triệu
+  chứng đã kết luận ở TC-03.
+- Pass hộp đen: không có.
+- Chờ SV quyết (status để trống):
+  - TC-01, TC-200: phụ thuộc lỗi harness H1 (dướhộp thoại, sản phẩm tên <script> vẫn được tạo.
+  - TC-202: Expected ghi 7000000, nhưng 00700000 có giá trị số 700000; Actual lưu 700000.
+  - TC-206: lỗi harness H2; dữ liệu thật khớp Expected.
+  - TC-94: thiếu ảnh DevTools như RUN.md yêu cầu
+  - Chữ hộp thoại duy nhất xuất hiện: "Cập nhật thành công!" (các case UI Sửa). Không verdict nào phụ thuộc việc nó là thông báo lỗi hay không.
+- Kiểm harness (mục 1):
+  - Đạt: case UI bị từ chối dùng "dữ liệu không đổi (GET /api/products SAU = TRƯỚC)" làm oracle chính (C_FR15.spec.ts:114–118);
+    chữ hộp thoại và validationMessage được ghi .spec.ts:100–101).
+  - H1: lib.ts:197–200 đọc trạng thái HTML5 sau 1,2 giây. Lúc đó form đã reset sau khi lưu thành công, nên "Please fill out
+    this field." xuất hiện ở mọi case UI và errS
+  - H2: lib.ts:36–37 chỉ đọc được danh mục 'Điện thoại', nên 'Laptop' không có id (chỉ ảnh hưởng TC-206).
+  - H3: thông báo hiện trên trang (không phải hộp thoại, không phải bong bóng) không được ghi lại.
+  - H4: regex phân loại thông báo lỗi ở lib.ts:1
+  - Chưa sửa harness nào; cần SV đồng ý rồi vá ở commit riêng.
+```
+
+**Output:**
+````
+Kết quả phần lớn rõ ràng: SUT gần như không validate gì, giống A. Nhưng **chưa nên chốt lượt 3 + 5**, vì những lý do sau:
+
+**1. Phải chạy lại sau khi vá harness, lấy lượt mới làm lượt chính thức.**
+- **H1 làm hỏng oracle phụ ở mọi case UI.** Chữ "Please fill out this field." bị đọc sau khi form đã reset, nên mọi case UI đều được ghi là "có thông báo". Đây đúng kiểu Pass giả đã gặp ở A. Các case Fail vẫn đúng, vì oracle chính là dữ liệu bị đổi. Nhưng các case Pass ở UI, và TC-01, TC-200, chưa tin được.
+- **H3**: C16 tính cả thông báo hiện trên trang, nhưng harness không ghi lại loại này. Hệ quả có thể là Fail sai ở phần thông báo.
+- **H4**: bạn cần hỏi regex này dùng để làm gì. Nếu nó tham gia vào verdict thì đó là phân loại theo chữ của SUT, đúng điều mình vừa khuyên tránh. Regex chỉ được dùng để ghi lại.
+- Kết quả hiện tại trộn hai lượt (3 và 5), và cũng chưa xác nhận được backend đã restart trước lượt 3. Quy ước là một lượt chính thức, evidence chỉ giữ lượt mới nhất. Chạy lượt 6 sau khi vá thì giải quyết được cả hai vấn đề này.
+
+**2. TC-202: Expected của bạn bị sai số.** `00700000` có giá trị 700000, nhưng Expected ghi 7000000. Quy ước không cho sửa Expected sau khi đã có Actual, và oracle cũng đã bị khoá bằng sha1. Bạn chọn:
+- **a) Pass, kèm notes** "Expected SV ghi nhầm 7000000; ý định của case là lưu theo giá trị số; Actual = 700000 khớp ý định". Cách này cần khai trong Audit.
+- **b) Fail do lỗi thiết kế TC, không lập bug.** Ghi rõ đây không phải lỗi SUT.
+
+Cả hai cách đều là chất liệu tốt cho phần gap analysis/Critique: lỗi do người viết, không phải do AI.
+
+**3. Bạn tự làm:** chụp ảnh DevTools cho TC-94 theo RUN.md, đặt tên `TC-FR15-94_manual_<n>.png`.
+
+TC-03 trông nghiêm trọng: sửa giá thì giá không đổi, mà mọi dòng lại bị đổi tên. Còn việc gộp hay tách bug, và chọn severity, là việc của bước 7, do bạn quyết.
+
+**Lệnh 1 (vá harness):**
+
+```
+Vá harness C_FR15 (SV đồng ý H1–H4), commit riêng `HW02: vá harness – C_FR15 H1–H4`:
+- H1: đọc trạng thái HTML5 validity/validationMessage NGAY sau lần bấm Lưu, trước khi form có thể reset; không đọc sau delay cố định.
+- H2: đọc đủ mọi danh mục (không chỉ 'Điện thoại').
+- H3: ghi lại thông báo hiện trên trang (text vùng thông báo) vào Actual, như hộp thoại và bong bóng.
+- H4: báo regex ở lib.ts dùng làm gì. Nếu tham gia verdict → bỏ khỏi verdict, chỉ ghi chữ vào Actual.
+- Không đổi Expected/oracle sha1. Chạy `--list` để chắc file nạp được. Không chạy vào SUT.
+- RUN.md: ghi lượt 3, 5 là lượt thử (harness lỗi H1–H4), lượt chính thức sẽ là lượt 6.
+Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào; lệnh SV chạy lượt 6.
+```
+
+Sau đó bạn **restart backend**, chạy lượt 6, rồi gửi:
+
+**Lệnh 2 (merge lượt 6):**
+
+```
+Bước 6c C_FR15: lượt 6 chính thức (results/C_FR15_<ts>.json), backend đã restart trước lượt.
+1. Liệt kê status do SV tự đặt (nếu có). Không có → merge lượt 6 bằng --force để bỏ verdict lượt 3/5, ghi lý do vào RUN.md.
+   Có → DỪNG, báo.
+2. Chốt verdict như 6b (A20 mở rộng; Pass hộp đen; Blocked ghi case gốc; không đổi Expected).
+   TC-202: <a: Pass + notes "Expected SV ghi nhầm 7000000; ý định = lưu theo giá trị số; Actual 700000 khớp ý định" |
+   b: Fail do lỗi thiết kế TC (Expected sai), không phải lỗi SUT, không lập bug>.
+   TC-94: ảnh DevTools ở <đường dẫn>.
+3. Evidence chỉ giữ lượt 6. render_md → check_domain → linter. Commit `HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức)` kèm A_prompt_log.md.
+Báo cáo (≤ 25 dòng): như 6b, thêm cột "đổi so với lượt 3/5" cho case có verdict khác.
+KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #250 | 18:50 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+TC-202: fail do lỗi thiết kế TC
+RUN.md làm gì yêu cầu chụp DevTool TC94, chỉ yêu cầu TC93 thôi mà. Và mình đã chụp DevTool cho TC93 rồi
+Mình chưa dùng các prompt bạn vừa đưa đâu nhé
+```
+
+**Output:**
+````
+Mình đã cập nhật 2 lệnh theo các điểm bạn nêu:
+- **TC-202**: ghi là Fail do lỗi thiết kế TC, không lập bug.
+- **TC-94**: mình đã nhắc lại câu "thiếu ảnh DevTools" từ báo cáo của Claude Code mà không kiểm. Có thể Claude Code nhầm 93 với 94, hoặc RUN.md viết khác với điều bạn nhớ. Lệnh 2 bắt Claude Code trích nguyên văn RUN.md và liệt kê các ảnh đang có trước khi chốt verdict TC-93/94, nên bạn chưa cần chụp thêm gì.
+
+**Lệnh 1 (vá harness), chạy trước:**
+
+```
+Vá harness C_FR15 (SV đồng ý H1–H4), commit riêng `HW02: vá harness – C_FR15 H1–H4`:
+- H1: đọc trạng thái HTML5 validity/validationMessage NGAY sau lần bấm Lưu, trước khi form có thể reset; không đọc sau delay cố định.
+- H2: đọc đủ mọi danh mục (không chỉ 'Điện thoại').
+- H3: ghi lại thông báo hiện trên trang (text vùng thông báo) vào Actual, như hộp thoại và bong bóng.
+- H4: báo regex ở lib.ts dùng làm gì. Nếu tham gia verdict → bỏ khỏi verdict, chỉ ghi chữ vào Actual.
+- Không đổi Expected/oracle sha1. Chạy `--list` để chắc file nạp được. Không chạy vào SUT.
+- RUN.md: ghi lượt 3, 5 là lượt thử (harness lỗi H1–H4), lượt chính thức sẽ là lượt 6.
+Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào; lệnh SV chạy lượt 6.
+```
+
+Sau đó bạn restart backend và chạy lượt 6.
+
+**Lệnh 2 (merge lượt 6):**
+
+```
+Bước 6c C_FR15: lượt 6 chính thức (results/C_FR15_<ts>.json), backend đã restart trước lượt.
+1. Liệt kê status do SV tự đặt (nếu có). Không có → merge lượt 6 bằng --force để bỏ verdict lượt 3/5, ghi lý do vào RUN.md.
+   Có → DỪNG, báo.
+2. Chốt verdict như 6b (A20 mở rộng; Pass hộp đen; Blocked ghi case gốc; không đổi Expected).
+   TC-202: Fail — notes "lỗi thiết kế TC: Expected SV ghi 7000000, giá trị số của 00700000 là 700000; Actual 700000.
+   Không phải lỗi SUT, không lập bug."
+3. Manual TC-90…94: trích nguyên văn yêu cầu ảnh của từng case trong RUN.md; liệt kê ảnh TC-FR15-9x_manual_* đang có.
+   Báo cáo 6b ghi "TC-94 thiếu ảnh DevTools" — kiểm lại: RUN.md có yêu cầu DevTools cho TC-94 không, hay chỉ TC-93?
+   Nếu báo cáo 6b nhầm → ghi đính chính vào RUN.md và chốt TC-94 theo ảnh hiện có. Nếu RUN.md thật sự yêu cầu → để trống, báo.
+4. Evidence chỉ giữ lượt 6. render_md → check_domain → linter. Commit `HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức)` kèm A_prompt_log.md.
+Báo cáo (≤ 25 dòng): như 6b, thêm cột "đổi so với lượt 3/5" cho case có verdict khác; kết quả mục 3.
+KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #251 | 18:51 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15061,7 +15354,7 @@ Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào;
 
 ---
 
-## #248 | 18:57 20/10/2026 | Claude Opus 5.5 | [...]
+## #252 | 18:57 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15135,7 +15428,112 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
 
 ---
 
-## #249 | 19:05 20/10/2026 | Claude Opus 5.5 | [...]
+## #253 | 19:03 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo: 
+Báo cáo cho phiên thảo luận
+
+- Commit: 4979732 HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức). check_domain: 0 lỗi; linter: 0 lỗi.
+  - Merge bằng --force: không có status nào do SV tự đặt (status chỉnh ở 6b đều do AI đặt theo lệnh). Lý do ghi ở RUN.md.
+  - Evidence chỉ còn lượt 6: đã xoá 278 file tự động cũ, giữ 6 ảnh manual.
+- Tổng: Pass 50 · Fail 66 · Blocked 5 · trống 1.
+
+| Suite         | Pass/Fail/Blocked/trống |
+|---------------|-------------------------|
+| DOM-UI        | 6/9/1                   |
+| DOM-API-POST  | 2/15                    |
+| DOM-API-PUT   | 2/16                    |
+| DOM-API-OTHER | 1/6                     |
+| BVA-UI-THEM   | 10/2                    |
+| BVA-UI-SUA    | 6/2/4                   |
+| BVA-API-POST  | 9/3                     |
+| BVA-API-PUT   | 9/3                     |
+| GUI           | 2/2/0/1                 |
+| SV-UI         | 1/4                     |
+| SV-API        | 2/4                     |
+
+- Fail: giữ nguyên như bảng 6b. Thêm TC-200 và TC-202 (bảng dưới). Biến lệch đều là biến mục tiêu của từng case.
+- Case có verdict khác lượt 3/5:
+
+| TC     | Lượt 3/5 → lượt 6 | Ghi chú
+                   |
+|--------|-------------------|-------------------------------------------------------------------------------------------------
+--------------------|
+| TC-01  | trống → Pass      | Không có thông báo nào; dữ liệu và bảng đúng. Hết lỗi H1
+                   |
+| TC-206 | trống → Pass      | SP2 được cập nhật, SP1 không đổi, form hiện đúng SP2. Hết lỗi H2                                                    |
+| TC-200 | trống → Fail      | Không có thông bálert(1)</script> vẫn được tạo; không có hộp thoại"1"                 |
+| TC-202 | trống → Fail      | Lỗi thiết kế TC, không phải lỗi SUT, không lập bug: Expected SV ghi 7000000, nhưng 00700000 =
+700000; Actual 700000 |
+
+- Blocked: TC-04, 80, 81, 82, 83 — case gốc TC-03. Lượt 6 chỉ lệch ô 'Giá' của dòng M trên bảng sau Sửa; dữ liệu đạt.
+- Pass hộp đen: không có.
+- Chờ SV quyết:
+  - Không còn case nào chờ phân loại chữ hộp thoại. Hộp thoại duy nhất xuất hiện là "Cập nhật thành công!" ở các case Sửa; những case Sửa bị từ chối đã Fail vì dữ liệu bị ghi đè.
+  - TC-94 vẫn để trống (mục 3).
+- Mục 3 – ảnh manual hiện có: TC-FR15-90_manual.al_2.png, 92_manual.png, 93_manual.png,94_manual.png.
+  - Yêu cầu chụp ảnh trích nguyên văn từ RUN.md:
+    - 90: "Form 'Thêm sản phẩm mới' với 3 trường Tên, Giá, Danh mục (thấy có/không có nhãn và dấu '*')".
+    - 91: "Ngay sau khi bấm 'Lưu sản phẩm' với Tỗi và nút 'Lưu sản phẩm' trong cùng ảnh. Thông báo là hộp thoại trình duyệt thì chụp hộp thoại và ghi nội dung (C16)".
+    - 92: "Ô 'Giá' của dòng 'iPhone 15 Pro Max'. Ghi locale trình duyệt vào notes (C17)".
+    - 93: "DevTools (Elements) chọn thẻ <img> củalt. Mỗi ảnh một tấm, hoặc Console:[...document.querySelectorAll('table img')].map(i => i.alt)".
+    - 94: "Ô 'Tên SP' của dòng <i>SEC04 {ts}</i> và DevTools (Elements) của ô đó (có/không có phần tử <i>)".
+  - RUN.md yêu cầu DevTools cho cả TC-93 lẫn TC-94, nên báo cáo 6b không nhầm và không cần đính chính.
+  - TC-94 vẫn để trống: ảnh hiện có chỉ thấy chữguyên văn, chưa có ảnh DevTools.
+  - Verdict 90–93 giữ như 6b: 90 Fail, 91 Pass, 92 Fail, 93 Pass. Riêng TC-92: RUN.md yêu cầu ghi locale trình duyệt vào notes,
+    nhưng SV chưa ghi.
+===
+Tôi đã bổ sung thêm 94_2 và đổi 94 thành 94_1 rồi nhé. 94_2 là DevTool á
+```
+
+**Output:**
+````
+Lần trước mình đoán sai: RUN.md đúng là yêu cầu DevTools cho cả TC-93 lẫn TC-94, nên báo cáo 6b không nhầm. Bạn đã bổ sung `94_2` thì đủ ảnh rồi.
+
+Lượt 6 ổn. Kết quả: Pass 50, Fail 66, Blocked 5, trống 1. Các lỗi harness H1 và H2 đã hết, TC-01 và TC-206 chuyển sang Pass. Còn 2 việc nhỏ trước khi đóng bước 6:
+
+**1. Locale cho TC-92.** Mở lại đúng cửa sổ ẩn danh đã dùng để chụp ảnh, gõ vào Console:
+`navigator.language`
+rồi điền kết quả vào lệnh bên dưới. Verdict của TC-92 không phụ thuộc locale: C17 chấp nhận '.' hoặc ',' làm dấu phân cách, nhưng Actual "30000000 ₫" không có dấu phân cách nào, nên Fail. Locale chỉ để đủ hồ sơ theo yêu cầu của RUN.md.
+
+**2. Đổi tên ảnh 94 → 94_1.** Claude Code cần sửa mọi chỗ đang trỏ tới tên cũ.
+
+Sau bước 6 là **bước 7 🔒: bug report do bạn viết.** AI chỉ gom dữ kiện, dựng khung theo format BUG-14, và chạy thử các bước tái hiện. Việc gộp hay tách bug, chọn severity, và câu chữ đều do bạn quyết. Trong lệnh dưới, mục 1 đóng bước 6, mục 2 là 7/7a:
+
+```
+1) Đóng bước 6 C_FR15:
+   - Ảnh TC-94: SV đổi tên 94_manual.png → TC-FR15-94_manual_1.png, thêm TC-FR15-94_manual_2.png (DevTools). Sửa mọi tham chiếu
+     tên cũ. Chốt TC-94 theo Expected dựa trên 2 ảnh; ảnh không đủ để kết luận → để trống, báo.
+   - TC-92 notes: "locale trình duyệt: <kết quả navigator.language>". Verdict giữ Fail.
+   - render_md → check_domain → linter. Commit `HW02[C-FR15] 6/7d: chốt TC-92, TC-94` kèm A_prompt_log.md.
+
+2) Bước 7a C_FR15 — AI CHỈ gom dữ kiện (AI-01 §11), KHÔNG gộp/tách bug, KHÔNG severity/priority, KHÔNG câu chữ nhận định:
+   - Tạo HW02/bugs/_groups_C_FR15.md: mỗi case Fail → TC | Expected | Actual | evidence | yêu cầu/giả định BỊ VI PHẠM
+     (FR/SEC/C… — chỉ cái bị vi phạm; "(ngầm định)" nếu có) | vị trí code liên quan (gray-box, nếu biết).
+     Nhóm G theo TRIỆU CHỨNG QUAN SÁT GIỐNG HỆT (chỉ là nhóm dữ kiện, ghi rõ "SV quyết G nào thành BUG nào").
+     Loại riêng: TC-202 (lỗi thiết kế TC, không lập bug). Blocked 04, 80–83 ghi kèm G của TC-03.
+     Bảng G → BUG → issue để trống cột BUG/issue. Đánh số BUG tiếp theo từ BUG-35, issue ≥ #181.
+   - Kiểm trùng trên tkob-team/eshop-sut: mọi issue (mọi tác giả, cả đã đóng) có triệu chứng giống từng G →
+     liệt kê số issue + tác giả + tiêu đề. `gh api user` phải là ThachHaoo.
+   - Bước tái hiện: viết nháp cho mỗi G và CHẠY THẬT để kiểm (quy ước handoff mục 4: admin admin@eshop.com/Admin123!,
+     PS 5.1: $headers chỉ Authorization, -ContentType riêng, body UTF-8 bytes, 4xx/5xx bọc try/catch; tiền điều kiện có trạng thái
+     → có bước dựng). Ghi lệnh + output đã chạy vào _groups. Restart backend sau khi kiểm.
+   - Commit `HW02[C-FR15] 7/7a: dữ kiện bug` kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): 2 commit; TC-94 verdict; bảng G | số TC | triệu chứng 1 dòng | yêu cầu bị vi phạm | issue có thể trùng;
+bước tái hiện G nào chưa chạy được. KHÔNG đề xuất gộp/tách, severity, câu chữ.
+```
+
+Khi có báo cáo 7a, bạn quyết G nào thành BUG nào và severity bao nhiêu, rồi tự viết các file BUG theo format BUG-14. Bạn commit `7/7b: SV viết BUG-35–xx` **trước**, sau đó AI mới được soát dữ kiện ở `7/7c`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #254 | 19:05 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15221,7 +15619,159 @@ Dựng `HW02/bugs/_groups_C_FR15.md` (dữ kiện, có trích Actual/evidence t�
 
 ---
 
-## #250 | 19:17 20/10/2026 | Claude Opus 5.5 | [...]
+## #255 | 19:12 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc báo cáo nhé:
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - afa074e 6/7d: chốt TC-92, TC-94 — TC-92 ghi notes "locale trình duyệt: en-US", giữ Fail.
+  - ea4cfd6 7/7a: dữ kiện bug — HW02/bugs/_groups_C_FR15.md và script tái hiện ở HW02/bugs/_repro_C_FR15/.
+  - check_domain và linter: 0 lỗi.
+- TC-94: Pass.
+  - Ảnh 1: ô 'Tên SP' hiển thị nguyên văn <i>SEC04 {ts}</i>. Ảnh 2 (DevTools): ô <td> chỉ chứa chữ, không có phần tử <i> con.
+  - File SV thêm có tên C-FR15-94_manual_2.png (thiếu chữ "T"); em đã đổi thành TC-FR15-94_manual_2.png. Không còn chỗ nào tham chiếu tên cũ 94_manual.png.
+- Nhóm dữ kiện (SV quyết nhóm nào thành bug nào; BUG kế tiếp BUG-35, issue mới từ #181). Bảng gồm 65 case Fail; TC-202 xếp riêng, không lập bug (lỗi thiết kế TC):
+
+| G   | Số TC         | Triệu chứng                                                                  | Yêu cầu bị vi phạm                | Issue có thể trùng             |
+|-----|---------------|------------------------------------------------------------------------------|-----------------------------------|--------------------------------|
+| G1  | 3             | UI Thêm: Tên > 255 ký tự hoặc chỉ khoảng trắng vẫn được lưu, không thông báo | FR-15.2, C3, C7/C16               | #66 (import)                   |
+| G2  | 4             | UI Thêm: Giá ≤ 0 hoặc để trống vẫn được lưu                                  | FR-15.3, C7/C16                   | #51 (import)                   |
+| G3  | 3             | UI Sửa: Tên vi phạm ghi đè M, hộp thoại "Cập nhật thành công!"               | FR-15.2, C3, C8, C7               | —                              |
+| G4  | 3             | U
+| G12 | 1             | GET id chẵn trả price dạng chuỗi                                             | C15                               | —                              |
+| G13 | 1             | Body có Infinity → 400 trang HTML                                            | C20                               | #180 (/api/cart)               |
+| G14 | 1             | Content-Type text/plain → 500 trang HTML                                     | C6                                | #26 (/api/register)            |
+| G15 | 1             | Form không có nhãn, không có '*'                                             | FR-22.1                           | #7, #28, #152 (form khác)      |
+| G16 | 1             | Giá không có phân cách hàng nghìn                                            | FR-21.3, C17                      | —                              |
+
+- Kiểm trùng: đã kiểm cả 135 issue (mọi tác giả, gồm đã đóng; gh api user = ThachHaoo). Không issue nào trùng /api/products hay màn hình sản phẩm admin; các issue liệt kê trên chỉ cùng dạng ở endpoint/màn hình khác.
+- Tái hiện:
+  - API: chạy bằng PowerShell 5.1; UI: chạy bằng script Playwright ui_repro.js theo đúng các bước nháp. Kết quả khớp lượt 6; lệnh và output ghi trong HW02/bugs/_groups_C_FR15.md.
+  - Lần chạy đầu G9 lỗi do lệnh của em ("" trong "$(...)" làm hỏng JSON), không phải do SUT. Đã sửa và chạy lại; ghi chú trong file.
+- Backend: em đã dừng tiến trình node server.js cũ của SV và chạy lại trong một cửa sổ thu nhỏ mới. CSDL về 5 sản phẩm seed (id 1–5).
+```
+
+**Output:**
+````
+Báo cáo 7a ổn: dữ kiện đã có, bước tái hiện đã chạy thật, kiểm trùng xong. Có một lỗi dữ kiện cần sửa, và vài điều bạn nên biết trước khi viết bug.
+
+**1. Cột "Yêu cầu bị vi phạm" ghi thừa giả định.** Theo quy ước, trường Yêu cầu chỉ ghi những yêu cầu hoặc giả định **bị vi phạm**.
+- **G3 ghi C8.** C8 là giả định phạm vi (Thêm và Sửa tách lớp riêng). SUT không thể "vi phạm" một giả định phạm vi, nên phải bỏ C8.
+- **G16 ghi C17.** C17 là giả định nới: chấp nhận '.' hoặc ',' làm dấu phân cách. Actual không có dấu phân cách nào, nên cái bị vi phạm là FR-21.3, không phải C17. Mình khuyên bỏ C17; nếu bạn thấy khác thì giữ.
+
+**2. Thông tin cho việc gộp hay tách** (bạn quyết):
+- **G13** (Infinity → 400 HTML) và **G14** (text/plain → 500 HTML) cùng loại với phát hiện ở A: app không có error handler trả JSON. Tiền lệ của bạn ở B là giữ BUG-34 tách riêng khỏi #25, dù cùng triệu chứng trả HTML.
+- Các issue "có thể trùng" (#66, #51, #26, #7, #28, #152) đều ở **endpoint hoặc màn hình khác**, nên không trùng với /api/products.
+
+**3. Hai việc Claude Code tự làm**, đều hợp lệ:
+- Đổi tên ảnh `C-FR15-94_manual_2.png` của bạn thành `TC-FR15-94_manual_2.png` (bạn gõ thiếu chữ "T").
+- Restart backend theo lệnh.
+
+Bảng G bạn dán bị cắt từ G4 đến G11, nên bạn xem đủ trong `_groups_C_FR15.md`.
+
+**Bước 7 🔒, cách nhanh nhưng vẫn đúng AI-01:**
+1. **Bạn quyết** G nào thành BUG nào, và severity/priority của từng BUG. Trả lời theo mẫu:
+   `BUG-35 = G1 (High/High); BUG-36 = G2+G4 (…); …`
+2. **AI dựng khung** các file BUG theo format BUG-14 và chép sẵn phần "Dữ kiện (AI chép)". Tiêu đề và Nhận định để trống.
+3. **Bạn viết** tiêu đề và Nhận định, rồi commit `7/7b: SV viết BUG-35–xx`.
+4. **AI soát dữ kiện** (`7/7c`), rồi tạo issue (`7/7d`).
+
+Khi đã có mapping, dán vào lệnh sau:
+
+```
+Bước 7 C_FR15 – dựng khung bug (AI-01 §11: AI chỉ chép dữ kiện, không viết tiêu đề/nhận định):
+0. Sửa dữ kiện _groups_C_FR15.md: G3 bỏ C8 khỏi "yêu cầu bị vi phạm" (giả định phạm vi, không thể bị vi phạm);
+   G16 <bỏ | giữ> C17.
+1. SV quyết mapping + severity/priority: <DÁN MAPPING>.
+   Đúng mapping này; G nào chưa có trong mapping → DỪNG, hỏi.
+2. Tạo HW02/bugs/BUG-35.md … theo format BUG-14: ảnh tiêu biểu, TC liên quan, Yêu cầu (chỉ cái bị vi phạm; thêm
+   "Đạt trong cùng case" / "Chưa đánh giá được" / "Không áp dụng" nếu có), Dữ kiện (AI chép: bước tái hiện đã chạy + Expected/Actual
+   + evidence), Severity/Priority theo SV. Tiêu đề và Nhận định: để "<SV viết>". Dòng cuối AI-01 §11.
+   Không tiền tố [FR-15] trong .md.
+3. Bảng G → BUG trong _groups_C_FR15.md điền cột BUG; cột issue để trống.
+4. Commit `HW02[C-FR15] 7/7a2: khung bug + chép dữ kiện` kèm A_prompt_log.md.
+Báo cáo (≤ 8 dòng): commit; danh sách file BUG tạo ra; chỗ dữ kiện thiếu (nếu có).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #256 | 19:14 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Vậy là giờ viết tất cả BUG nhỉ
+```
+
+**Output:**
+```
+Đúng, nhưng phần bạn phải tự viết ít hơn bạn nghĩ. Thứ tự như sau:
+
+**1. Bạn quyết mapping và severity.** Có 16 nhóm G. Mỗi G có thể thành 1 BUG, hoặc bạn gộp/tách theo nguyên nhân gốc hay theo yêu cầu bị vi phạm, nên số BUG không nhất thiết là 16. Gửi theo mẫu:
+`BUG-35 = G1 (High/High); BUG-36 = G2 (…); …`
+
+**2. AI dựng khung** cho tất cả file BUG: ảnh, TC liên quan, trường Yêu cầu, Dữ kiện (bước tái hiện đã chạy, Expected/Actual, evidence), severity/priority theo bạn.
+
+**3. Bạn chỉ viết 2 phần cho mỗi BUG:**
+- **Tiêu đề**
+- **Nhận định**: vì sao đây là lỗi, và tác động. Tác động phải có dữ kiện; nếu không có thì ghi "(chưa kiểm chứng)" hoặc bỏ.
+
+**4.** Bạn commit `7/7b: SV viết BUG-35–xx`. Sau đó AI soát dữ kiện (`7/7c`) và tạo issue (`7/7d`).
+
+Bạn có thể bắt đầu từ bước 1 ngay bây giờ. Nếu muốn, bạn dán bảng G đầy đủ từ `_groups_C_FR15.md` vào đây. Mình chỉ ra những G có cùng nguyên nhân gốc hoặc cùng yêu cầu bị vi phạm, để bạn tự quyết gộp hay tách. Mình không gợi ý severity.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #257 | 19:16 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+hmm, sao mình nhớ mấy feature A và B viết nhiều lắm mà nhỉ, còn viết cả Severity, Priority, tiền điều kiện, các bước thực hiện, expected, actual mà nhỉ. Trong khi đó tạo _groups_C_FR15.md và tạo các khung file BUG trước cho mình. Xem lại có nhầm không
+```
+
+**Output:**
+````
+Bạn nhớ đúng, mình đã nhầm ở hai chỗ so với quy ước A/B trong handoff:
+
+- **Bug report là 100% SV viết** (AI-01 §11). Phần của bạn gồm: tiêu đề, Severity, Priority, tiền điều kiện, các bước tái hiện, Expected, Actual, Nhận định. Ở B, bạn viết trước (`7/7b`), sau đó AI mới **chạy thử bước tái hiện của bạn và sửa dữ kiện** (`7/7c`). Lệnh dựng khung của mình định để AI điền sẵn bước tái hiện, Expected/Actual và cả severity theo lời bạn, tức là đảo ngược thứ tự đó. **Bạn bỏ lệnh dựng khung lần trước.**
+- **Ở 7a, mình đã bắt AI viết nháp bước tái hiện rồi chạy thử.** Việc kiểm tái hiện được thì không sai, nhưng các lệnh đó là output của AI. Bạn **đừng chép chúng vào bug**. Hãy tự viết bước tái hiện, rồi để AI chạy kiểm ở `7c` như B. Trong Audit, khai một dòng: "_groups_C_FR15.md chứa lệnh tái hiện AI soạn để kiểm khả năng tái hiện; bước tái hiện trong BUG do SV viết". Phần còn lại của `_groups` (Expected/Actual chép từ testcases, evidence, kiểm trùng) là dữ kiện thuần, bạn dùng thoải mái.
+
+**AI vẫn được làm**, đúng như handoff: dựng khung theo format BUG-14 và chép phần **"Dữ kiện (AI chép)"** (đường dẫn evidence, TC liên quan, Expected/Actual nguyên văn từ testcases). Mọi trường còn lại để trống cho bạn.
+
+Lệnh dựng khung đã sửa. Lệnh này chỉ cần mapping G → BUG, không cần severity:
+
+```
+Bước 7 C_FR15 – khung bug (AI-01 §11: bug 100% SV viết; AI chỉ dựng khung + chép dữ kiện):
+0. Sửa dữ kiện _groups_C_FR15.md: G3 bỏ C8 khỏi "yêu cầu bị vi phạm" (giả định phạm vi); G16 <bỏ | giữ> C17.
+   Thêm ghi chú đầu mục tái hiện: "Lệnh tái hiện do AI soạn để kiểm khả năng tái hiện; không dùng làm bước tái hiện trong BUG."
+1. Mapping SV quyết: <DÁN MAPPING G → BUG>. G nào chưa có trong mapping → DỪNG, hỏi.
+2. Tạo HW02/bugs/BUG-35.md … theo format BUG-14. AI CHỈ điền: TC liên quan; ảnh tiêu biểu (đường dẫn evidence);
+   mục "Dữ kiện (AI chép)" = Expected/Actual NGUYÊN VĂN từ testcases.json + đường dẫn evidence; dòng cuối AI-01 §11.
+   MỌI trường khác (tiêu đề, Severity, Priority, Yêu cầu, tiền điều kiện, bước tái hiện, Expected, Actual, Nhận định) = "<SV viết>".
+   Không chép lệnh tái hiện từ _groups. Không tiền tố [FR-15].
+3. Commit `HW02[C-FR15] 7/7a2: khung bug (trống) + chép dữ kiện` kèm A_prompt_log.md.
+Báo cáo (≤ 5 dòng): commit; danh sách file BUG.
+```
+
+Bạn cũng có thể bỏ qua bước dựng khung và tự chép file BUG-14 làm mẫu. Như vậy chỉ mất thêm vài phút, đổi lại phần AI tham gia ít hơn nữa.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #258 | 19:17 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15252,7 +15802,45 @@ Các phần còn lại của mục 0 (bỏ C8 khỏi G3, thêm ghi chú đầu m
 
 ---
 
-## #251 | 19:20 20/10/2026 | Claude Opus 5.5 | [...]
+## #259 | 19:19 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Em dừng ở đây, chưa sửa file và chưa commit gì: khối lệnh còn hai chỗ chưa điền.
+
+1. Mapping G → BUG: mục 1 vẫn là <DÁN MAPPING G → BUG>. Lệnh yêu cầu dừng khi G nào chưa có trong mapping, mà hiện cả 16 nhóm (G1–G16) đều chưa có. Cần SV dán mapping, ví dụ G1 → BUG-35, G2 → BUG-35, G3 → BUG-36, …. Số bắt đầu từ BUG-35; nếu có nhóm không lập bug thì ghi rõ.
+2. G16 – C17: mục 0 vẫn là <bỏ | giữ>. Cần SV chọn bỏ hay giữ C17 trong "yêu cầu bị vi phạm" của G16.
+
+Các phần còn lại của mục 0 (bỏ C8 khỏi G3, thêm ghi chú đầu mục tái hiện) đã rõ; em sẽ làm cùng lúc khi nhận đủ hai điểm trên.
+===
+Vậy có lẽ cứ hỗ trợ mình mapping trước, điền hết những gì mà AI làm, rồi mình sẽ tự điền những cái còn lại như những feature kia
+```
+
+**Output:**
+````
+Mapping (gộp hay tách G nào thành BUG nào) thì mình không làm hộ được. AI-01 §11 và handoff đều ghi rõ AI không được chọn gộp/tách, vì đây là phần nhận định của bạn trong bug report. Thứ mình làm được là đưa đủ dữ kiện để bạn quyết nhanh: G nào cùng nguyên nhân gốc trong code, G nào cùng yêu cầu bị vi phạm. Đó là hai tiêu chí gộp/tách đã dùng ở A và B.
+
+Bảng G bạn dán bị cắt mất G4–G11, nên mình nhờ Claude Code in lại dưới dạng dễ quyết:
+
+```
+Chưa dựng khung bug. Trước đó in cho SV bảng dữ kiện để SV tự quyết mapping (KHÔNG đề xuất gộp/tách):
+- Đủ G1–G16, mỗi dòng: G | màn hình/endpoint | thao tác (Thêm/Sửa/Xem/Xóa) | triệu chứng 1 dòng | yêu cầu bị vi phạm |
+  vị trí code gây ra (file:dòng, gray-box) | các G khác có CÙNG vị trí code | các G khác có CÙNG yêu cầu bị vi phạm.
+- Không sửa file, không commit. Báo cáo chỉ gồm bảng này (≤ 25 dòng).
+```
+
+Khi có bảng, bạn trả lời theo mẫu:
+`G1 → BUG-35; G2 → BUG-35; G3 → BUG-36; … ; Gx → không lập bug (lý do)`
+
+Bạn cũng chưa chốt **G16 – C17**. Mình khuyên **bỏ**: C17 là giả định nới (chấp nhận '.' hoặc ','), nên SUT không vi phạm C17; cái bị vi phạm là FR-21.3. Bạn trả lời "bỏ" hay "giữ" cùng lúc với mapping. Sau đó mình điền cả hai vào lệnh dựng khung.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #260 | 19:20 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15294,7 +15882,106 @@ Chưa dựng khung bug. Trước đó in cho SV bảng dữ kiện để SV tự
 
 ---
 
-## #252 | 19:26 20/10/2026 | Claude Opus 5.5 | [...]
+## #261 | 19:21 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem bảng nhé
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+```
+Mình không chọn mapping thay bạn. Dưới đây là các dữ kiện trong bảng ảnh hưởng tới việc gộp/tách, theo hai tiêu chí bạn đã dùng: **cùng nguyên nhân gốc** hoặc **cùng yêu cầu bị vi phạm**, và mỗi bug phải tái hiện/sửa được độc lập.
+
+**Sửa dữ kiện trước:** C8 không chỉ có ở G3 mà còn ở **G4 và G9**. Cả ba chỗ đều phải bỏ, vì C8 là giả định phạm vi.
+
+**Cụm 1: validation khi Thêm/Sửa (G1, G2, G3, G4, G6, G7, G8, G9).**
+- Có 2 lớp code: phía UI (App.jsx:491–507) và phía server (server.js:167–177 cho POST, 179–189 cho PUT).
+- G1–G4, G6, G7 là lỗi quan sát qua UI. Chúng Fail vì **cả UI không chặn lẫn server không validate**. Nếu chỉ sửa một lớp thì triệu chứng UI vẫn còn hoặc thay đổi. Claude Code cũng lưu ý: trùng khoảng dòng server.js chỉ vì cùng đi qua route chung, chưa chắc cùng nguyên nhân.
+- G8, G9 là lỗi qua API: chỉ thuộc lớp server, có thêm C6, C9, C11.
+- Các cách chia có thể nghĩ tới: theo **lớp** (UI / API), theo **thao tác** (Thêm / Sửa), hoặc theo **trường** (Tên / Giá). Mỗi cách cho ra số bug khác nhau. Bạn chọn một cách và áp nhất quán.
+- G6 (`<script>`) vi phạm **C21**, giả định riêng của bạn, khác với FR-15.2/15.3 của các G còn lại.
+- C7/C16 (UI không có thông báo lỗi) có mặt ở G1–G4 và G6.
+
+**Cụm 2: lỗi xử lý body thành trang HTML (G13, G14).** Hai G này cùng dòng 12 (không có error handler JSON), nhưng điểm hỏng khác nhau:
+- G13: body-parser báo lỗi cú pháp → 400 HTML.
+- G14: text/plain → body-parser bỏ qua → handler lỗi ở **server.js:168** → 500 HTML.
+
+Vì vậy sửa một chỗ chưa chắc hết cả hai.
+
+**Các G đứng riêng** (khác vị trí code và khác yêu cầu):
+- G5: sửa hợp lệ nhưng mọi dòng bị đổi tên, App.jsx:110–114.
+- G10: id không tồn tại, C10, nằm ở 3 handler GET/PUT/DELETE.
+- G11: thiếu `authenticateToken`, FR-12.2/SEC-02/SEC-03.
+- G12: C15.
+- G15: FR-22.1.
+- G16: FR-21.3.
+
+Bảng bạn dán bị mất G7, và mất phần vị trí code của G4. Bạn xem lại trong file trước khi quyết.
+
+**Mẫu trả lời:**
+`G1 → BUG-35; G2 → BUG-35; …; G16 → BUG-xx; G16-C17: bỏ | giữ`
+
+Khi có mapping, mình điền vào lệnh dựng khung (đã thêm việc bỏ C8 ở G3, G4, G9).
+```
+
+**Xử lý:** [...]
+
+---
+
+## #262 | 19:25 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+G1-35; G2-36; G3-37; G4-38; G6-39; G7-40; G8-41; G9-42; G13-43; G14-44; G5-45; G10-46; G11-47; G12-48; G15-49; G16-50
+===
+xem giúp mình đã hợp lý chưa nhé
+```
+
+**Output:**
+````
+Mapping của bạn là 1 G thành 1 BUG, ra 16 bug (BUG-35 đến BUG-50). Cách này **hợp lý và tự nhất quán nếu bạn lấy tiêu chí "vị trí cần sửa"**. Bảng dữ kiện ủng hộ cách hiểu đó:
+
+- **UI tách theo trường:** ô Tên và ô Giá có code riêng (App.jsx:491–499 và 500–507), nên G1 tách G2, G3 tách G4 là đúng tiêu chí.
+- **API không tách theo trường:** mỗi thao tác chỉ có một handler (POST 167–177, PUT 179–189), nên G8 và G9 mỗi cái là một bug.
+- **G13 và G14 tách nhau:** điểm hỏng khác nhau (body-parser ở dòng 12, handler ở dòng 168).
+- **G6 tách riêng:** vi phạm C21, không phải FR-15.2.
+- **Các G còn lại:** khác vị trí code và khác yêu cầu.
+
+Có 3 điểm cần lưu ý:
+
+1. **Bạn ghi lý do tách vào Nhận định.** Người chấm nhìn thấy UI chia theo trường mà API thì không, nên cần câu kiểu "tách theo vị trí cần sửa". Câu chữ là của bạn. Nếu không ghi, cách chia trông như "tách để tăng số".
+2. **Tính độc lập của bug UI chưa kiểm chứng.** G1–G4 cũng đi qua server. Nếu sửa G8/G9 (server validate), có thể triệu chứng ở UI cũng đổi theo. Nếu bạn nhắc chuyện này trong Nhận định thì gắn "(chưa kiểm chứng)".
+3. **G7 bị mất trong bảng bạn dán.** Bạn xem lại G7 trong file để chắc nó đáng thành một bug riêng (BUG-40).
+
+**G16 – C17:** bạn chưa trả lời, nên mình điền "bỏ" theo lập luận lần trước: C17 là giả định nới, SUT không vi phạm nó. Đây là sửa dữ kiện, AI được phép làm. Muốn giữ thì sửa trong lệnh.
+
+```
+Bước 7 C_FR15 – khung bug (AI-01 §11: bug 100% SV viết; AI chỉ dựng khung + chép dữ kiện):
+0. Sửa dữ kiện _groups_C_FR15.md: bỏ C8 khỏi "yêu cầu bị vi phạm" ở G3, G4, G9 (giả định phạm vi, không thể bị vi phạm);
+   G16 bỏ C17 (giả định nới, không bị vi phạm; vi phạm là FR-21.3).
+   Thêm ghi chú đầu mục tái hiện: "Lệnh tái hiện do AI soạn để kiểm khả năng tái hiện; không dùng làm bước tái hiện trong BUG."
+1. Mapping SV quyết (1 G = 1 BUG): G1→BUG-35, G2→36, G3→37, G4→38, G6→39, G7→40, G8→41, G9→42, G13→43, G14→44,
+   G5→45, G10→46, G11→47, G12→48, G15→49, G16→50. Điền cột BUG trong bảng G → BUG → issue; cột issue để trống.
+2. Tạo HW02/bugs/BUG-35.md … BUG-50.md theo format BUG-14. AI CHỈ điền: TC liên quan; ảnh tiêu biểu (đường dẫn evidence);
+   mục "Dữ kiện (AI chép)" = Expected/Actual NGUYÊN VĂN từ testcases.json + đường dẫn evidence; dòng cuối AI-01 §11.
+   MỌI trường khác (tiêu đề, Severity, Priority, Yêu cầu, tiền điều kiện, bước tái hiện, Expected, Actual, Nhận định) = "<SV viết>".
+   Không chép lệnh tái hiện từ _groups. Không tiền tố [FR-15].
+3. Commit `HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện` kèm A_prompt_log.md.
+Báo cáo (≤ 5 dòng): commit; danh sách file BUG; G nào thiếu dữ kiện để chép (nếu có).
+```
+
+Sau lệnh này bạn viết 16 file, commit `7/7b: SV viết BUG-35–50`, rồi quay lại đây để lấy lệnh soát dữ kiện (`7/7c`).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #263 | 19:26 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15334,7 +16021,63 @@ Giờ dựng khung BUG-35…50 (chỉ điền TC, ảnh tiêu biểu, dữ kiệ
 
 ---
 
-## #253 | 19:27 20/10/2026 | Claude Opus 5.5 | [...]
+## #264 | 19:27 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo
+Báo cáo cho phiên thảo luận
+
+- Commit: 2431b79 HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện.
+  - _groups_C_FR15.md: đã bỏ C8 ở G3, G4, G9 và C17 ở G16; thêm ghi chú lệnh tái hiện chỉ để AI kiểm; điền cột BUG theo mapping, cột issue để trống.
+- File BUG (16 file, mỗi G một BUG): HW02/bugs/BUG-35.md … HW02/bugs/BUG-50.md.
+  - Mapping: G1→35, G2→36, G3→37, G4→38, G6→39, G7→40, G8→41, G9→42, G13→43, G14→44, G5→45, G10→46, G11→47, G12→48, G15→49, G16→50.
+  - AI chỉ điền TC liên quan, ảnh tiêu biểu, mục "Dữ kiện (AI chép)" (Expected/Actual nguyên văn từ testcases.json + evidence) và dòng cuối AI-01 §11.
+  - Mọi trường khác để <SV viết>; mục Link GitHub Issue ghi "(điền sau khi tạo issue)". Không có tiền tố [FR-15], không chép lệnh tái hiện.
+- Thiếu dữ kiện: không G nào thiếu. Mọi đường dẫn evidence đã kiểm có tồn tại.
+- Mục cần SV xem: "Môi trường" em cũng để <SV viết> vì lệnh không liệt kê nó trong phần AI được điền (BUG-14 có ghi môi trường). Nếu SV muốn AI chép môi trường từ HW02/env/environment.md thì báo em.
+```
+
+**Output:**
+````
+Khung đã xong. Về mục **Môi trường**: đó là dữ kiện thuần (OS, trình duyệt, commit SUT, cổng chạy…), nên nằm trong phạm vi "AI chép dữ kiện" theo handoff. Mình khuyên để AI chép từ `HW02/env/environment.md` cho đỡ việc; bạn chỉ cần soát lại. Lệnh nhỏ:
+
+```
+Chép mục "Môi trường" vào BUG-35…50 từ HW02/env/environment.md (nguyên văn; thêm commit SUT de0f48f và locale trình duyệt en-US
+cho bug UI). Không sửa mục khác. Commit `HW02[C-FR15] 7/7a3: chép môi trường vào khung bug` kèm A_prompt_log.md. Báo cáo 2 dòng.
+```
+
+**Khi viết 16 bug, bạn soát lại theo các quy ước đã chốt ở A/B:**
+- **Yêu cầu:** chỉ ghi cái **bị vi phạm**. Thêm "Đạt trong cùng case", "Chưa đánh giá được", "Không áp dụng" nếu có. Yêu cầu ngầm định thì ghi "(ngầm định)". Bug dựa trên giả định của bạn (C15, C20, C21, C23, C24…) thì ghi mã giả định đó.
+- **Tác động** trong Nhận định phải có dữ kiện. Không có thì ghi "(chưa kiểm chứng)" hoặc bỏ. Với BUG-35–38, nếu nhắc tới quan hệ với BUG-41/42, nhớ điểm "độc lập chưa kiểm chứng". Lý do tách theo vị trí sửa cũng nên ghi.
+- **Bước tái hiện phải chạy được:**
+  - UI: đăng nhập admin `admin@eshop.com` / `Admin123!`.
+  - API: chạy trên PS 5.1; `$headers` chỉ chứa Authorization; `-ContentType` để riêng; body tiếng Việt chuyển sang UTF-8 bytes; phản hồi 4xx/5xx thì bọc try/catch.
+  - Tiền điều kiện có trạng thái thì phải có bước dựng trạng thái đó.
+- **Thang đo:** Severity dùng Critical/High/Medium/Low, Priority dùng High/Medium/Low.
+
+Viết xong, bạn commit `HW02[C-FR15] 7/7b: SV viết BUG-35–50` **trước**, rồi chạy:
+
+```
+Bước 7c C_FR15 – soát dữ kiện bug SV viết (AI-01 §11):
+0. Kiểm commit `7/7b: SV viết BUG-35–50` có trong git log, đứng trước mọi sửa đổi của bước này. Không có → DỪNG.
+1. Với từng BUG-35…50: CHẠY THẬT bước tái hiện SV viết (UI bằng Playwright theo đúng bước; API bằng PowerShell 5.1),
+   restart backend trước và sau. Ghi lệnh + output vào _groups_C_FR15.md mục "Kiểm 7c".
+2. AI chỉ được: sửa DỮ KIỆN sai so với evidence/kết quả chạy (giá trị, mã HTTP, tên trường, tài khoản, cú pháp PS 5.1, bước thiếu
+   làm không tái hiện được); xoá câu sai dữ kiện; gắn "(chưa kiểm chứng)" cho khẳng định tác động không có dữ kiện; kiểm thang
+   Severity/Priority đúng giá trị cho phép. KHÔNG sửa câu chữ, tiêu đề, nhận định, severity/priority SV chọn, không gộp/tách.
+   Trường "Yêu cầu" liệt kê yêu cầu KHÔNG bị vi phạm → báo, không tự xoá.
+3. Log trước/sau từng chỗ sửa vào _groups_C_FR15.md. Commit `HW02[C-FR15] 7/7c: soát dữ kiện BUG-35–50` kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): commit; BUG | tái hiện được? | chỗ đã sửa dữ kiện (1 dòng) | điểm cần SV tự sửa (chữ của SV).
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #265 | 19:27 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15354,7 +16097,65 @@ Lưu ý: chính `environment.md` còn 7 chỗ `[...]` chưa điền (máy, Node.
 
 ---
 
-## #254 | 19:34 20/10/2026 | Claude Opus 5.5 | [...]
+## #266 | 19:33 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình vừa Ctrl Z cho BUG-22 về lúc ban đầu được tạo. Bạn xem. Giờ thấy BUG-35 lạ quá. Giúp mình viết prompt cho Claude Code chỉnh lại format tương tự như vậy nhé
+```
+*Đính kèm:* `BUG-22.md`, `BUG-35.md`
+
+**Output:**
+````
+Mình thấy BUG-35 khác bản khung của BUG-22 (khung ở B) ở 6 chỗ:
+
+1. **Chỗ trống không có backtick.** BUG-35 ghi `<SV viết>` trần. Markdown hiểu đó là thẻ HTML nên khi xem bản render thì chỗ trống **biến mất**. Đây là lý do chính khiến file trông lạ.
+2. **Môi trường bị chép nguyên bảng mẫu** từ `environment.md`, gồm cả các ô `[...]` chưa điền và các dòng không liên quan (điện thoại, Expo Go, bản vá mobile, tài khoản). BUG-22 chỉ có vài gạch đầu dòng với giá trị thật: SUT, máy, Chromium + Playwright + locale, trang đang test, ngày và lượt chính thức, link tới env và RUN.md.
+3. **Yêu cầu:** BUG-22 điền sẵn yêu cầu bị vi phạm, kèm "Đạt trong cùng case" và "Chưa đánh giá được". BUG-35 để trống. Lỗi này do lệnh của mình bắt AI để trống; ở B, trường này là dữ kiện do AI chép.
+4. **Dữ kiện (AI chép) quá dài.** BUG-35 chép cả Expected, cùng chuỗi `x` dài 300 ký tự. BUG-22 chỉ có Actual nguyên văn, dòng "Lặp lại", và đoạn code trích kèm số dòng. Expected thuộc phần bạn viết.
+5. **Bằng chứng:** BUG-22 liệt kê ảnh tiêu biểu và đường dẫn evidence của từng TC. BUG-35 chỉ có một ảnh.
+6. **Link GitHub Issue** ở BUG-22 dùng `` `<sau khi tạo issue>` ``.
+
+**Quan trọng:** BUG-22 là bug bạn đã viết xong và đã đăng issue. Nếu bạn đã **lưu** bản vừa Ctrl Z thì phải khôi phục ngay, bằng Ctrl+Y hoặc `git checkout -- HW02/bugs/BUG-22.md`. Lệnh dưới đây lấy khung BUG-22 từ lịch sử git, nên không cần bạn để file đó ở bản cũ.
+
+```
+Định dạng lại khung BUG-35…50 theo đúng khung ban đầu của B (AI-01 §11: AI chỉ dựng khung + chép dữ kiện):
+0. Kiểm `git diff --stat HW02/bugs/BUG-22.md`: nếu có thay đổi chưa commit → DỪNG, báo SV (không tự khôi phục file của SV).
+   Mẫu khung = `git show <commit 7/7a của B_FR07>:HW02/bugs/BUG-22.md` (tìm commit qua git log). Theo đúng thứ tự mục, cách ghi
+   và độ dài của mẫu.
+1. Chỗ trống: mọi `<SV viết>` để trong backtick (`` `<SV viết>` ``); Link GitHub Issue = `` `<sau khi tạo issue>` ``.
+   Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước tái hiện, Expected (trích SRS), Actual, Nhận định = `<SV viết>`.
+2. Môi trường: gạch đầu dòng như mẫu, giá trị THẬT, không chép bảng environment.md, không ô `[...]`, không dòng mobile/tài khoản:
+   - SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+   - Máy: Windows (PowerShell), backend `node server.js` (CSDL seed lại mỗi lần khởi động)
+   - Trình duyệt: Chromium <phiên bản> (Playwright <phiên bản>), locale en-US — lấy từ results/RUN.md/`npx playwright --version`;
+     bug chỉ API → thay bằng "Client: PowerShell 5.1 Invoke-WebRequest" (nếu bug có cả UI và API thì ghi cả hai)
+   - Trang/endpoint: Admin http://localhost:5174 <màn hình> hoặc API <method + path>
+   - Ngày chạy: 2026-10-20 (lượt chính thức = lượt 6, bắt đầu <giờ>, Asia/Saigon)
+   - Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/C_FR15/RUN.md`
+   Không tìm được giá trị thật → ghi `<SV điền>` và báo, không đoán.
+3. Bằng chứng: "Ảnh tiêu biểu: `<tên file>`" + mỗi TC một dòng "TC-FR15-xx: `<đường dẫn evidence>`".
+4. TC liên quan: như mẫu (Fail (n): …; Blocked liên quan nếu có, kèm case gốc; Nhóm dữ kiện: Gx trong `_groups_C_FR15.md`).
+5. Yêu cầu: điền từ cột "yêu cầu bị vi phạm" của _groups_C_FR15.md (đã bỏ C8, C17), dạng mẫu
+   "**<mã>:** (<loại/nguồn>) <diễn giải ngắn đúng SRS/giả định>"; thêm "Đạt trong cùng case: —", "Chưa đánh giá được: —"
+   (điền nếu _groups có dữ kiện). Giả định SV ghi mã C… và nêu rõ là giả định SV.
+6. Dữ kiện (AI chép), như mẫu:
+   - "Actual nguyên văn (TC-FR15-xx): `…`" cho từng TC. KHÔNG chép Expected. Chuỗi một ký tự lặp > 20 lần → viết `"x"×N`
+     và ghi "(rút gọn ký tự lặp; nguyên văn ở testcases.json)".
+   - "Lặp lại: …" chỉ khi có dữ kiện (so auto_status các lượt còn results file); không có → "chỉ có kết quả lượt 6".
+   - "Đoạn code trích nguyên văn: `<file>` dòng a–b" + khối code có số dòng, lấy theo vị trí code trong _groups (gray-box).
+7. Giữ dòng cuối "Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần dữ kiện."
+8. Commit `HW02[C-FR15] 7/7a4: định dạng khung BUG-35–50 theo mẫu B` kèm A_prompt_log.md.
+Báo cáo (≤ 6 dòng): commit; chỗ ghi `<SV điền>` (nếu có); bug nào có Blocked liên quan.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #267 | 19:34 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15406,7 +16207,42 @@ Mẫu = `d0d0e05:HW02/bugs/BUG-22.md` (khung 7/7a5 của B). Phiên bản thật
 
 ---
 
-## #255 | 20:30 20/10/2026 | Claude Opus 5.5 | [...]
+## #268 | 19:36 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã định dạng lại BUG-35…50 theo khung của B và commit 1a35775; còn 2 chỗ <SV điền>. BUG-22.md không có thay đổi chưa commit; mẫu lấy từ d0d0e05:HW02/bugs/BUG-22.md (B_FR07 7/7a5 "khung bug theo format BUG-14").
+
+- <SV điền>: BUG-49 (TC-90) và BUG-50 (TC-92) — tên và phiên bản trình duyệt SV dùng khi chạy tay. Em không tìm được giá trị này trong repo.
+- Lệch so với lệnh: với 7 bug chỉ có API (41–44, 46–48), em không ghi "Client: PowerShell 5.1 Invoke-WebRequest" như lệnh. Lượt 6 thực tế chạy bằng Playwright 1.48.2 APIRequestContext; PowerShell 5.1 chỉ dùng khi AI kiểm tái hiện ở 7/7a. Em ghi cả hai cho đúng. Nếu SV vẫn muốn chỉ ghi PowerShell thì báo em sửa.
+- Bug có Blocked liên quan: chỉ BUG-45 (G5) — TC-04, 80, 81, 82, 83, case gốc TC-FR15-03.
+- Ngoài ra BUG-39 (TC-200) có dòng "Lặp lại" ghi rõ lượt 3 passed, lượt 6 failed (lượt 3 là lượt thử, harness lỗi).
+===
+ổn rồi nhỉ
+```
+
+**Output:**
+````
+Ổn rồi. Claude Code làm lệch lệnh ở mục môi trường của bug API, nhưng lệch đúng: lượt chính thức chạy bằng Playwright APIRequestContext, PowerShell chỉ dùng khi AI kiểm tái hiện, nên ghi cả hai là chính xác. Lệnh của mình ghi thiếu chỗ đó.
+
+Còn 2 việc nhỏ:
+- **BUG-49 và BUG-50:** điền tên và phiên bản trình duyệt bạn dùng khi chạy tay TC-90/92. Mở `chrome://version` (hoặc `edge://version`) trong trình duyệt đó, lấy dòng đầu.
+- **BUG-39, dòng "Lặp lại":** lượt 3 "passed" là do lỗi harness H1 đọc nhầm thông báo, không phải hành vi của SUT. Bạn kiểm xem dòng đó đã nêu rõ "do lỗi harness H1, không tính" chưa. Nếu chỉ ghi chung chung "harness lỗi", người đọc có thể nghĩ bug lúc có lúc không. Đây là sửa dữ kiện, nên để Claude Code sửa ở bước `7c` cũng được.
+
+Giờ bạn viết 16 bug. Viết xong, commit `HW02[C-FR15] 7/7b: SV viết BUG-35–50` **trước**, rồi chạy lệnh `7c` mình đưa lần trước. Nếu muốn gộp việc sửa dòng BUG-39 vào `7c`, thêm vào mục 2 của lệnh đó:
+
+```
+   BUG-39 dòng "Lặp lại": nêu rõ lượt 3 auto_status passed là do lỗi harness H1 (đọc thông báo HTML5 sau khi form reset), không phải
+   hành vi SUT; lượt 6 (chính thức) failed.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #269 | 20:30 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15472,7 +16308,41 @@ UI: cả 9 bug tái hiện được (bước đăng nhập là em tự thêm vì
 
 ---
 
-## #256 | 20:42 20/10/2026 | Claude Opus 5.5 | [...]
+## #270 | 20:42 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Con Claude Code của mình vừa định compact, giúp mình viết prompt để nó xuất log trước đã nhé
+```
+
+**Output:**
+````
+Đây là lệnh để Claude Code tự lưu transcript và cập nhật prompt log trước khi compact. Bạn dán vào **ngay**, trước khi nó tự compact:
+
+```
+Trước khi compact: lưu transcript phiên Claude Code này và cập nhật prompt log. Không sửa tay prompt log.
+1. Tìm transcript phiên hiện tại:
+   Get-ChildItem "$env:USERPROFILE\.claude\projects\*\*.jsonl" | Sort-Object LastWriteTime -Descending | Select-Object -First 3 FullName, LastWriteTime, Length
+   Chọn file có tên là session-id của phiên này.
+2. Chép sang .transcripts\ với tên MỚI (không đè file nào đã có). Theo quy ước tên các file Claude Code đã có trong .transcripts\;
+   chưa có quy ước → `claude-code_session_HW02_C_<yyyyMMdd-HHmm>.jsonl`.
+3. Kiểm nhanh (python inline): số lượt user (bỏ isMeta, tool_result), giờ lượt đầu và lượt cuối (giờ VN).
+   Lượt đầu muộn hơn lúc phiên bắt đầu → phiên đã từng bị compact, báo SV.
+4. Chạy `python tools/hooks/on_stop.py --manual`; kiểm HW02/appendix/A_prompt_log.md có lượt mới nhất của phiên này.
+5. Commit `HW02: cập nhật prompt log (trước compact)` chỉ gồm HW02/appendix/A_prompt_log.md
+   (không thêm .transcripts\ nếu thư mục đó không được theo dõi trong git).
+Báo cáo (≤ 5 dòng): tên file đã chép; số lượt + giờ đầu/cuối; commit.
+```
+
+Sau khi nó báo xong, bạn chạy `/compact`. Sau compact, lệnh `7c` vẫn dùng được như cũ, vì lệnh đó tự chứa đủ thông tin và không phụ thuộc vào ngữ cảnh trước compact.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #271 | 20:42 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15510,7 +16380,140 @@ No response requested.
 
 ---
 
-## #257 | 21:20 20/10/2026 | Claude Opus 5.5 | [...]
+## #272 | 20:44 20/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo nhé:
+```
+*Đính kèm:* `_groups_C_FR15.md`, `attachment.txt`
+
+**Output:**
+```
+You've hit your session limit · resets 9:10pm (Asia/Ho_Chi_Minh)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #273 | 21:14 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo nhé:
+```
+*Đính kèm:* `_groups_C_FR15.md`, `attachment.txt`
+
+**Output:**
+````
+Bước 7c làm đúng phạm vi. Các chỗ AI sửa đều là dữ kiện, có căn cứ, có log trước/sau: thêm bước đăng nhập, TC-205 là chuỗi chữ số full-width chứ không phải "để trống", ví dụ id 8 không tồn tại sau seed, nút "Cập nhật sản phẩm" không có trên giao diện, và các tag "(chưa kiểm chứng)". Còn 3 việc bạn cần làm.
+
+**1. Sáu chỗ chữ bạn tự sửa** (danh sách ở mục "Điểm SV tự sửa"):
+- Severity/Priority "Major" ở BUG-36, 39, 45 nằm ngoài thang đo. Thang Severity là Critical/High/Medium/Low, Priority là High/Medium/Low.
+- BUG-46: tiêu đề ghi "44xx". Expected đòi "body JSON" nhưng C10 chỉ nói 4xx: bạn bỏ vế đó, hoặc dẫn đúng căn cứ nếu có.
+- BUG-47: Expected ghi cố định 401/403, trong khi căn cứ chỉ nói 4xx. Bạn sửa thành 4xx, hoặc ghi "vd 401/403".
+- BUG-49: "màu đỏ" không có trong FR-22.1.
+
+**2. BUG-47, "token hết hạn".** Bạn có ghi trường hợp này trong bước tái hiện, nhưng không có TC nào cho nó. AI phải tự ký một JWT bằng `SECRET_KEY` lấy từ code (gray-box) để kiểm, kết quả vẫn trả 200. Bạn chọn:
+- giữ, và thêm vào Dữ kiện một dòng "token hết hạn: ngoài TC, AI kiểm ở 7c bằng JWT ký với SECRET_KEY (gray-box)";
+- hoặc bỏ khỏi bước tái hiện.
+
+**3. Bất thường mới: một request làm sập backend.**
+- Dữ kiện: POST với `price: null` được chấp nhận (đã thuộc BUG-41), và tạo ra bản ghi có id chẵn. Sau đó GET id đó làm tiến trình node dừng hẳn. Theo báo cáo, chỗ hỏng là đoạn đổi price sang chuỗi khi id chẵn, cùng vị trí code với BUG-48 (server.js:162).
+- Lưu ý: lỗi này do **AI phát hiện ngoài bước của bạn**, nên dù chọn cách nào cũng phải khai trong Audit.
+- Bạn chọn:
+  - **a) Lập bug mới BUG-51**, ghi rõ "AI phát hiện ở 7c, ngoài TC". Bạn viết bug như bình thường, AI chạy kiểm.
+  - **b) Bổ sung vào BUG-48** như một hệ quả nặng hơn ở cùng dòng code. Nhưng triệu chứng (sập tiến trình) và mức nghiêm trọng khác hẳn, nên cách này khó "sửa độc lập" theo tiêu chí của bạn.
+  - **c) Không lập bug**, chỉ ghi vào gap analysis/Audit làm chất liệu ("AI tìm thêm lỗi khi chạy tái hiện").
+
+Sửa xong mục 1 và 2, bạn commit `HW02[C-FR15] 7/7d: SV sửa chữ theo 7c`. Nếu chọn **a** thì viết BUG-51 trong cùng commit, và nói mình để thêm bước kiểm BUG-51 vào lệnh dưới. Sau đó tạo issue:
+
+```
+Bước 7e C_FR15 – tạo GitHub Issues cho BUG-35…50 (SV đã đồng ý đăng):
+0. Kiểm commit `7/7d: SV sửa chữ theo 7c` có trong git log. Không có → DỪNG. `gh api user` phải là ThachHaoo.
+   Kiểm trùng lại trên tkob-team/eshop-sut (mọi tác giả, cả đã đóng, issue mới từ sau 7a) → trùng → DỪNG, báo.
+1. Evidence có đường dẫn máy → tạo bản che ở HW02/bugs/_issue_redacted/ (evidence gốc giữ nguyên).
+2. Tạo TUẦN TỰ BUG-35 → 50: tiêu đề GitHub = "[FR-15] " + tiêu đề trong .md (tiền tố CHỈ trên GitHub); label `bug`;
+   body = nội dung .md (bỏ dòng "Link GitHub Issue"), mục "Bằng chứng" để chỗ cho SV kéo ảnh (ghi tên file cần kéo, alt = tên file).
+   Ghi số issue vào "Link GitHub Issue" của từng .md và cột issue trong bảng G → BUG → issue của _groups_C_FR15.md.
+3. Không sửa chữ của SV. Commit `HW02[C-FR15] 7/7e: tạo issue BUG-35–50` kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): commit; bảng BUG → issue #; danh sách ảnh SV cần kéo vào từng issue (bản che nếu có).
+```
+
+Sau đó bạn kéo ảnh vào từng issue, rồi chụp trang issue (lọc `author:@me`, sắp Newest), lưu thành `bugs/issues_page_C_FR15.png`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #274 | 21:19 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Mình đã tự sửa hết
+2. Bỏ khỏi bước tái hiện
+3. b bổ sung vào BUG-48 nhé. Mình sẽ tăng mức độ nó lên Critical và Priority High
+
+Mình chưa dùng prompt của bạn đâu nhé
+```
+
+**Output:**
+````
+Đã ghi nhận lựa chọn của bạn. Với phương án **b** có 2 điểm bạn nên biết:
+- **Phần sập backend phải do bạn viết**: bước tái hiện, Actual, Nhận định, và dòng Yêu cầu bị vi phạm. Nếu không có điều khoản nào, bạn ghi yêu cầu "(ngầm định)", ví dụ: server không được dừng khi nhận một request. AI chỉ chép dữ kiện và ghi rõ "AI phát hiện ở 7c, ngoài TC".
+- **Bước tái hiện phụ thuộc BUG-41.** Muốn có bản ghi `price: null` thì POST với null phải được chấp nhận, đó chính là BUG-41. Nếu sửa BUG-41 trước, lỗi sập vẫn còn trong code ở dòng 162 nhưng không tái hiện được qua cách này nữa. Đây là dữ kiện để bạn cân nhắc khi viết Nhận định.
+
+Thứ tự 3 lệnh:
+
+**Lệnh 1: AI thêm dữ kiện, chạy ngay bây giờ.**
+
+```
+Theo quyết định SV sau 7c:
+1. BUG-47: bỏ trường hợp "token hết hạn" khỏi Các bước tái hiện (SV quyết). Chỉ xoá đúng phần đó, không sửa chữ khác.
+   Log trước/sau vào _groups_C_FR15.md mục "Log sửa dữ kiện 7c" (căn cứ: "SV quyết bỏ, không có TC").
+2. BUG-48 – SV quyết gộp lỗi sập backend vào bug này:
+   - Severity = Critical, Priority = High (SV chọn).
+   - TC liên quan: thêm dòng "Ngoài TC: GET /api/products/:id (id chẵn, price null) làm dừng tiến trình backend — AI phát hiện khi kiểm 7c".
+   - Dữ kiện (AI chép): thêm mục "Sập backend (AI phát hiện ở 7c, ngoài bước của SV)": request POST đã gửi (body), phản hồi + id;
+     request GET tiếp theo; output/stack trace khi tiến trình dừng (nguyên văn); đoạn code trích nguyên văn có số dòng (server.js quanh dòng 162).
+     Ghi: "Tái hiện qua API cần POST price null được chấp nhận (BUG-41)".
+   - Các bước tái hiện, Actual, Nhận định, Yêu cầu: thêm chỗ trống `<SV viết: phần sập backend>` cuối mỗi mục. Không viết hộ.
+3. Commit `HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend` kèm A_prompt_log.md.
+Báo cáo (≤ 5 dòng): commit; stack trace 1 dòng chính.
+```
+
+**Lệnh 2: bạn viết.** Điền các chỗ `<SV viết: phần sập backend>` ở BUG-48, rồi commit `HW02[C-FR15] 7/7d: SV sửa chữ theo 7c + viết phần sập backend BUG-48` (gộp luôn 6 chỗ bạn đã sửa ở mục 1).
+
+**Lệnh 3: kiểm BUG-48 rồi tạo issue.**
+
+```
+Bước 7e C_FR15:
+0. Kiểm commit `7/7d` có trong git log. Không có → DỪNG. `gh api user` phải là ThachHaoo.
+1. Chạy thật phần bước tái hiện "sập backend" SV viết ở BUG-48 (restart backend trước và sau). Chỉ sửa DỮ KIỆN sai như 7c,
+   log trước/sau; không sửa chữ SV. Không tái hiện được → DỪNG, báo.
+2. Kiểm trùng lại trên tkob-team/eshop-sut (mọi tác giả, cả đã đóng, issue mới từ sau 7a; thêm từ khoá crash/sập/server dừng)
+   → trùng → DỪNG, báo.
+3. Evidence có đường dẫn máy → bản che ở HW02/bugs/_issue_redacted/ (gốc giữ nguyên).
+4. Tạo TUẦN TỰ BUG-35 → 50: tiêu đề GitHub = "[FR-15] " + tiêu đề trong .md (tiền tố CHỈ trên GitHub); label `bug`;
+   body = nội dung .md (bỏ dòng "Link GitHub Issue"); mục "Bằng chứng" ghi tên file SV cần kéo (alt = tên file).
+   Ghi số issue vào "Link GitHub Issue" từng .md và cột issue trong bảng G → BUG → issue của _groups_C_FR15.md.
+5. Commit `HW02[C-FR15] 7/7e: tạo issue BUG-35–50` kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): commit; kết quả mục 1; bảng BUG → issue #; ảnh SV cần kéo vào từng issue (bản che nếu có).
+```
+
+Sau lệnh 3, bạn kéo ảnh vào từng issue và chụp `bugs/issues_page_C_FR15.png`. Phần BUG-48 do AI phát hiện, nhớ khai trong Audit.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #275 | 21:20 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15546,7 +16549,53 @@ SV có sửa chưa commit ở 7 file BUG (severity, BUG-46 tiêu đề, BUG-47/4
 
 ---
 
-## #258 | 21:31 20/10/2026 | Claude Opus 5.5 | [...]
+## #276 | 21:29 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Ủa sao yêu cầu lại là tôi viết nhỉ. Không phải AI viết hả?
+Tôi đã viết xong 3 mục kia, ngoại trừ ở phần yêu cầu. Đồng thời Response lệnh 1:
+Đã commit 1f91e5f HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend.
+- Stack trace (dòng chính): TypeError: Cannot read properties of null (reading 'toString') at Statement.<anonymous> (backend\server.js:162:49). Tiến trình backend dừng với mã thoát 1. Trace đầy đủ nằm ở BUG-48 và mục "Kiểm 7c2".
+- BUG-48: Critical/High lấy từ bản SV đã sửa trong working tree. Đã thêm dòng "Ngoài TC", mục dữ kiện sập backend và 4 chỗ trống <SV viết: phần sập backend>. Script tái hiện: _repro_C_FR15/7c/crash_48.ps1. Backend đã restart về dữ liệu seed.
+- Chưa commit: các chỗ SV tự sửa (severity BUG-36/39/45, tiêu đề BUG-46, Expected BUG-47/49) em để nguyên, chưa đưa vào commit. Riêng BUG-47, commit chỉ có phần bỏ "Token hết hạn"; dòng Expected 401 SV sửa vẫn nằm ngoài commit. SV tự commit các chỗ này.
+```
+
+**Output:**
+````
+Bạn đúng, mình nói sai. Ở B, trường **Yêu cầu** do AI điền từ cột "yêu cầu bị vi phạm" trong `_groups`, giống khung BUG-22 và lệnh 7a4. Bạn chỉ soát lại. Cho phần sập backend cũng vậy: AI điền dựa trên dữ kiện, bạn duyệt.
+
+Một ghi chú nhỏ cho Audit: Critical/High là lựa chọn của bạn, nhưng đang nằm trong commit AI `7c2`, vì Claude Code lấy từ working tree của bạn. Bạn khai một dòng là đủ.
+
+**Thứ tự tiếp theo:**
+1. **Bạn commit ngay** những gì đã viết, gồm 6 chỗ sửa ở mục 1 và phần sập backend của BUG-48. Riêng chỗ trống Yêu cầu của phần sập backend thì cứ để nguyên.
+   `HW02[C-FR15] 7/7d: SV sửa chữ theo 7c + viết phần sập backend BUG-48`
+2. Chạy lệnh 3 (đã thêm bước điền Yêu cầu):
+
+```
+Bước 7e C_FR15:
+0. Kiểm commit `7/7d` có trong git log; working tree HW02/bugs/ sạch. Không đạt → DỪNG. `gh api user` phải là ThachHaoo.
+1. BUG-48 – Yêu cầu: thay chỗ trống `<SV viết: phần sập backend>` ở mục Yêu cầu bằng yêu cầu/giả định BỊ VI PHẠM bởi phần sập backend,
+   dạng như các dòng khác ("**<mã>:** (<nguồn>) <diễn giải ngắn>"); không có điều khoản → ghi rõ "(ngầm định)". Mỗi dòng nêu căn cứ
+   (điều khoản SRS/giả định C… hoặc lý do ngầm định). Ghi thêm vào _groups_C_FR15.md (cột yêu cầu bị vi phạm của G12). SV sẽ duyệt.
+2. Chạy thật phần bước tái hiện "sập backend" SV viết ở BUG-48 (restart backend trước và sau). Chỉ sửa DỮ KIỆN sai như 7c,
+   log trước/sau; không sửa chữ SV. Không tái hiện được → DỪNG, báo.
+3. Kiểm trùng lại trên tkob-team/eshop-sut (mọi tác giả, cả đã đóng, issue mới từ sau 7a; thêm từ khoá crash/sập/server dừng)
+   → trùng → DỪNG, báo.
+4. Commit `HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend` kèm A_prompt_log.md. DỪNG, chờ SV duyệt mục 1
+   trước khi tạo issue.
+Báo cáo (≤ 10 dòng): commit; các dòng Yêu cầu đã điền cho phần sập backend (nguyên văn); kết quả mục 2, 3.
+```
+
+Lệnh dừng trước khi tạo issue, để bạn duyệt trường Yêu cầu của BUG-48. Bạn gửi báo cáo, mình soát xong rồi đưa lệnh tạo issue.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #277 | 21:31 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15585,7 +16634,7 @@ Sáu file còn thay đổi chưa commit. Đây đúng là các chỗ SV đã s�
 
 ---
 
-## #259 | 21:32 20/10/2026 | Claude Opus 5.5 | [...]
+## #278 | 21:32 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15631,7 +16680,134 @@ Các dòng Yêu cầu đã điền cho phần sập backend (BUG-48, nguyên vă
 
 ---
 
-## #260 | 21:40 20/10/2026 | Claude Opus 5.5 | [...]
+## #279 | 21:36 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo:
+Đã commit b6c7d12 HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend. Em dừng ở đây, chờ SV duyệt mục Yêu cầu trước khi tạo issue.
+
+Các dòng Yêu cầu đã điền cho phần sập backend (BUG-48, nguyên văn):
+- Ổn định tiến trình backend (ngầm định): (SRS v2.0 không có điều khoản về độ ổn định/xử lý lỗi; lý do ngầm định: lỗi khi xử lý một request chỉ được ảnh hưởng request đó — server phải trả phản hồi lỗi, không dừng tiến trình phục vụ mọi endpoint) — (sập backend: GET /api/products/6 làm node server.js dừng; request kế tiếp bị từ chối kết nối)
+- API spec §3.2: (api_specification.md dòng 84–85) GET /api/products/:id — Xem chi tiết một sản phẩm. — (sập backend: request không nhận được phản hồi nào)
+- Chưa đánh giá được (phần sập backend): FR-06 Xem chi tiết sản phẩm — frontend-web/src/pages/ProductDetail.jsx dòng 16 và frontend-mobile/App.js dòng 120 gọi endpoint này; chưa kiểm qua UI
+
+Mục 2 – tái hiện: Bước 4a–4c SV viết chạy lại được, có restart backend trước và sau. POST trả id 6, GET không có phản hồi, tiến trình node server.js dừng, stderr giống 7c2. Em ác dữ kiện đều khớp. Lần này PowerShell báo"Unable to connect to the remote server" và không đọc được mã thoát, nhưng mã thoát 1 đã đọc được ở 7c2.
+
+Mục 3 – kiểm trùng: Không trùng. Repo có 135 iss sau 7a. Từ khoá crash/sập/dừng chỉ khớp #25, #26, #28, cả ba thuộc FR-01 và đều ghi rõ backend không bị dừng hay không sập.
+
+origin/main đang ở cf57743 (7/7d), tức commit 7/m không push, trong khi CLAUDE.md quy định chỉpush sau hạn nộp — SV kiểm lại.
+```
+
+**Output:**
+````
+Trường Yêu cầu của phần sập backend dùng được. Có 1 chỗ bạn cần quyết, và 1 chuyện cần kiểm.
+
+**Duyệt Yêu cầu BUG-48:**
+- **Dòng "ngầm định" (ổn định tiến trình):** ổn. Lý do rõ, có dữ kiện: request kế tiếp bị từ chối kết nối.
+- **Dòng "API spec §3.2": bạn cần quyết.** Đây là **lần đầu** `api_specification.md` được dùng làm căn cứ yêu cầu. Ở C9 bạn đã không thêm nó làm căn cứ phụ. Bạn chọn:
+  - **giữ**: chấp nhận api_specification là tài liệu yêu cầu. Khi đó bạn cần nhất quán nếu người chấm hỏi vì sao C9 không dùng nó;
+  - **thay bằng FR-15.1 (Xem)**, nếu FR-15.1 trong SRS có phủ xem chi tiết. G5 đã dùng FR-15.1, nên Claude Code kiểm được ngay;
+  - **bỏ**, vì dòng ngầm định đã đủ.
+- **Dòng "Chưa đánh giá được: FR-06":** ổn. Đây là dữ kiện (đã grep thấy web và mobile gọi endpoint này). Ghi FR-06 ở đây không trái với chuyện bạn không gắn FR của người khác lên **tiêu đề issue**.
+
+**Chuyện push:** câu cuối báo cáo bị cắt, nhưng ý là `origin/main` đã có commit `7/7d`, trong khi CLAUDE.md quy định chỉ push sau hạn nộp. Bạn kiểm xem ai đã push:
+- **Nếu là bạn, và bạn cố ý:** không sao. Bạn sửa câu trong CLAUDE.md cho khớp với cách bạn làm.
+- **Nếu là Claude Code tự push:** đó là làm ngoài quy định. Ghi vào Audit.
+- **Dù trường hợp nào cũng đừng force-push** để "xoá" lần push đó. Làm vậy sẽ hỏng lịch sử commit log mà bạn phải nộp.
+
+Khi đã quyết dòng API spec, chạy lệnh tạo issue:
+
+```
+Bước 7f C_FR15 – tạo GitHub Issues BUG-35…50 (SV đã duyệt; SV đồng ý đăng):
+0. BUG-48 Yêu cầu, dòng "API spec §3.2": <giữ | thay bằng FR-15.1 nếu SRS FR-15.1 phủ xem chi tiết (trích dòng SRS; không phủ → DỪNG, báo) | bỏ>.
+   Log trước/sau. Commit riêng `HW02[C-FR15] 7/7f0: BUG-48 chốt Yêu cầu theo SV` nếu có thay đổi.
+1. `gh api user` = ThachHaoo. Không push git.
+2. Evidence có đường dẫn máy → bản che ở HW02/bugs/_issue_redacted/ (gốc giữ nguyên).
+3. Tạo TUẦN TỰ BUG-35 → 50 trên tkob-team/eshop-sut: tiêu đề = "[FR-15] " + tiêu đề trong .md (tiền tố CHỈ trên GitHub); label `bug`;
+   body = nội dung .md (bỏ dòng "Link GitHub Issue"); mục "Bằng chứng" ghi tên file SV cần kéo (alt = tên file).
+   Ghi số issue vào "Link GitHub Issue" từng .md và cột issue trong bảng G → BUG → issue của _groups_C_FR15.md.
+4. Commit `HW02[C-FR15] 7/7f: tạo issue BUG-35–50` kèm A_prompt_log.md. Không push.
+Báo cáo (≤ 20 dòng): commit; bảng BUG → issue #; ảnh SV cần kéo vào từng issue (bản che nếu có).
+```
+
+Sau lệnh này bạn kéo ảnh vào từng issue, rồi chụp `bugs/issues_page_C_FR15.png` (lọc `author:@me`, sắp Newest).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #280 | 21:39 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+vậy chỗ nào cần quyết chỗ nào cần kiểm?
+```
+
+**Output:**
+````
+**Cần quyết (1 chỗ):** dòng "API spec §3.2" trong trường Yêu cầu của BUG-48. Bạn chọn **giữ**, **thay bằng FR-15.1**, hoặc **bỏ**, rồi điền vào mục 0 của lệnh 7f.
+
+Mình nghiêng về **bỏ**. Dòng "ngầm định" đã đủ căn cứ cho phần sập backend, và bỏ đi thì không phát sinh câu hỏi vì sao C9 không dùng api_specification.
+
+**Cần kiểm (1 chỗ):** ai đã push `7/7d` lên `origin/main`. Chạy:
+
+```
+git reflog show origin/main -5
+```
+
+Bạn cũng có thể nhớ lại mình có gõ `git push` không.
+- **Nếu là bạn:** sửa câu "chỉ push sau hạn nộp" trong CLAUDE.md cho khớp với cách bạn làm.
+- **Nếu là Claude Code:** ghi một dòng vào Audit.
+- **Không force-push** trong cả hai trường hợp.
+
+Trả lời mẫu: `API spec: bỏ; push: tôi | Claude Code`
+````
+
+**Xử lý:** [...]
+
+---
+
+## #281 | 21:39 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+bỏ; tôi push
+```
+
+**Output:**
+````
+Mình đã điền "bỏ" vào lệnh.
+
+Về chuyện push: nếu câu trong CLAUDE.md chỉ nhằm cấm **Claude Code** tự push thì không cần sửa gì, vì bạn tự push là hợp lệ. Nếu câu đó đặt ra cho cả bạn thì bạn sửa lại cho khớp với cách bạn đang làm.
+
+```
+Bước 7f C_FR15 – tạo GitHub Issues BUG-35…50 (SV đã duyệt; SV đồng ý đăng):
+0. BUG-48 Yêu cầu: BỎ dòng "API spec §3.2 …" (SV quyết: dòng "ngầm định" đã đủ căn cứ cho phần sập backend). Giữ nguyên các dòng khác.
+   Sửa tương ứng cột yêu cầu của G12 trong _groups_C_FR15.md. Log trước/sau.
+   Commit riêng `HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV` kèm A_prompt_log.md.
+   (Ghi chú: lần push 7/7d lên origin là do SV tự push — không phải AI.)
+1. `gh api user` = ThachHaoo. AI không push git.
+2. Evidence có đường dẫn máy → bản che ở HW02/bugs/_issue_redacted/ (gốc giữ nguyên).
+3. Tạo TUẦN TỰ BUG-35 → 50 trên tkob-team/eshop-sut: tiêu đề = "[FR-15] " + tiêu đề trong .md (tiền tố CHỈ trên GitHub); label `bug`;
+   body = nội dung .md (bỏ dòng "Link GitHub Issue"); mục "Bằng chứng" ghi tên file SV cần kéo (alt = tên file).
+   Ghi số issue vào "Link GitHub Issue" từng .md và cột issue trong bảng G → BUG → issue của _groups_C_FR15.md.
+4. Commit `HW02[C-FR15] 7/7f: tạo issue BUG-35–50` kèm A_prompt_log.md. Không push.
+Báo cáo (≤ 20 dòng): 2 commit; bảng BUG → issue #; ảnh SV cần kéo vào từng issue (bản che nếu có).
+```
+
+Sau lệnh này bạn kéo ảnh vào từng issue, rồi chụp `bugs/issues_page_C_FR15.png` (lọc `author:@me`, sắp Newest).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #282 | 21:40 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15699,7 +16875,54 @@ Còn lại cho SV: kéo ảnh vào 16 issue, rồi chụp trang Issues lưu thà
 
 ---
 
-## #261 | 21:55 20/10/2026 | Claude Opus 5.5 | [...]
+## #283 | 21:52 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã thêm ảnh xong hết
+```
+
+**Output:**
+````
+16 issue **#181–#196** đã đăng đủ, đều có tiền tố `[FR-15]`, label `bug`, tác giả ThachHaoo. Mình soát tiêu đề và thấy 2 điểm. Đây là chữ của bạn nên bạn tự quyết có sửa không:
+
+1. **#194 (BUG-48) là bug Critical nhưng tiêu đề chỉ nói "price dạng chuỗi".** Người đọc danh sách issue sẽ không biết bug này làm sập backend. Nếu muốn sửa, bạn đổi tiêu đề trong .md, rồi để Claude Code `gh issue edit`, thêm comment đính chính và ghi log trước/sau như quy ước.
+2. **#183 (BUG-37) và #184 (BUG-38) có ghi triệu chứng "đè tên lên toàn bộ danh sách".** Đó là triệu chứng của **BUG-45 (#191)**, do App.jsx:110–114 gây ra ở mọi lần sửa. Ghi vào tiêu đề 37/38 làm ba bug trông chồng lấn nhau. Không sai dữ kiện, nhưng trái với tiêu chí "tách theo vị trí sửa" mà bạn đã chọn.
+
+Ảnh trang issue bạn gửi dùng được làm `issues_page_C_FR15.png`: lọc `author:@me`, đủ #181–#196, phần đầu bị cắt giống như B.
+
+**Đóng feature C:** bạn lưu ảnh vào `HW02/bugs/issues_page_C_FR15.png`, rồi chạy:
+
+```
+Đóng C_FR15:
+0. <Nếu SV sửa tiêu đề BUG-48/37/38: cập nhật issue tương ứng bằng `gh issue edit` + comment đính chính, log trước/sau vào
+   _groups_C_FR15.md; không sửa chữ ngoài phần SV đã sửa trong .md>.
+1. Kiểm HW02/bugs/issues_page_C_FR15.png có hiện #181–#196. Kiểm mỗi issue #181–#196 có ảnh trong mục "Bằng chứng"
+   (gh issue view --json body); ảnh nào là bản gốc có đường dẫn máy thay vì bản che → báo, không tự sửa.
+2. README HW02 (summary): cập nhật số feature, số TC (C_FR15: AI + SV), số bug toàn HW02 và phân bố Severity — tính từ các file BUG-*.md,
+   không ước lượng. BUG kế tiếp: BUG-51; issue kế tiếp ≥ #197.
+3. Commit `HW02[C-FR15] 7/7g: ảnh trang issue + README` kèm A_prompt_log.md. Không push.
+4. Ghi bài học C vào CLAUDE.md (commit riêng `HW02: CLAUDE.md – bài học C_FR15`), ngắn gọn:
+   - Khung bug = mẫu B (d0d0e05:HW02/bugs/BUG-22.md): `<SV viết>` trong backtick; Môi trường gạch đầu dòng giá trị thật;
+     Yêu cầu do AI điền từ _groups; Dữ kiện chỉ Actual nguyên văn + "Lặp lại" + code trích; không chép Expected.
+   - 7a không soạn bước tái hiện thay SV; AI chỉ chạy bước SV viết ở 7c. Gặp bất thường ngoài bước SV → báo, ghi "AI phát hiện".
+   - Giả định phạm vi (vd C8) và giả định nới (vd C17) không bao giờ vào "yêu cầu bị vi phạm".
+   - Harness UI: đọc validity HTML5 ngay khi bấm (bài học H1); ghi mọi kênh thông báo (hộp thoại, bong bóng, chữ trên trang);
+     không phân loại thông báo theo chữ của SUT.
+   - Vá harness → chạy lại toàn bộ thành MỘT lượt chính thức; merge --force chỉ khi không có status SV đặt.
+   - Lệnh có chỗ `<...>` chưa điền → DỪNG, hỏi (đã đúng ở C).
+Báo cáo (≤ 10 dòng): 2 commit; kết quả mục 1; số liệu README (TC, bug, Severity).
+```
+
+Khi bạn gửi báo cáo, mình sẽ cập nhật `HW02_handoff.md` trong Project với trạng thái C: số liệu, các giả định C0–C24, chất liệu gap analysis, các ghi chú cần khai trong Audit. Sau đó mình xuất transcript `_p4` bản đầy đủ. Phiên D sẽ đọc handoff mới mà không cần đọc lại phiên này.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #284 | 21:55 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15755,7 +16978,90 @@ Lần sửa thứ hai thất bại (chữ hoa "GetResponseStream"), nên commit 
 
 ---
 
-## #262 | 22:03 20/10/2026 | Claude Opus 5.5 | [...]
+## #285 | 21:59 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình sẽ không sửa. Làm vậy là ổn rồi.
+report:
+- Commit:
+  - 4d816d8 HW02[C-FR15] 7/7g: ảnh trang issue + README — gồm issues_page_C_FR15.png, README và A_prompt_log.md.
+  - a7cd868 HW02: CLAUDE.md – bài học C_FR15 — 6 bài học, và đổi "BUG kế tiếp" thành BUG-51, issue kế tiếp ≥ #197. Lần sửa đầu tiên trượt nên commit này chỉ có dòng BUG kế tiếp; em đã sửa lại và amend vào chính commit cục bộ đó.
+- Mục 0: SV không sửa tiêu đề BUG-37/38/48. Tiêu đề cả 16 issue khớp với file .md, nên không chạy gh issue edit.
+- Mục 1:
+  - issues_page_C_FR15.png hiện đủ #181–#196, tác giả ThachHaoo, label bug.
+  - Cả 16 issue đều có ảnh trong mục "Bằng chứng".
+  - Em đã tải ảnh của #189 và #190 về xem: đó là ảnh gốc TC-FR15-209_api / TC-FR15-211_api, lộ đường dẫn D:\HK7\Testing\Exercise\HW\eshop-sut\…. Ảnh cần dùng là bản che _issue_redacted/TC-FR15-209_api_redacted.png / TC-FR15-211_api_redacted.png. Theo lệnh em không tự sửa — SV thay ảnh trên GitHub.
+- README (tính từ testcases.json và các file BUG-*.md):
+
+|                       | Thiết kế | Đã chạy | Pass | Fail | Blocked | TC từ AI | SV thêm | Bug |
+|-----------------------|----------|---------|------|------|---------|----------|---------|-----|
+| C_FR15                | 122      | 117     | 51   | 66   | 5       | 111      | 11      | 16  |
+| Toàn HW02 (3 feature) | 317      | 278     | 1   | 49      | 50  |
+  - Severity toàn HW02 (50 bug): Critical 11, High 15, Medium 11, Low 13. Riêng C: Critical 5, High 6, Medium 3, Low 2.
+- BUG/issue kế tiếp: em chỉ ghi vào CLAUDE.md, không ghi vào README nộp bài vì đó là số đếm nội bộ.
+
+
+Đã đóng C_FR15 với 2 commit, chưa push. Có một vấn đề cần SV xử lý: issue #189 và #190 đang dùng ảnh gốc có đường dẫn máy, không phải bản che.
+
+- Commit:
+  - 4d816d8 HW02[C-FR15] 7/7g: ảnh trang issue + README — gồm issues_page_C_FR15.png, README và A_prompt_log.md.
+  - a7cd868 HW02: CLAUDE.md – bài học C_FR15 — 6" thành BUG-51, issue kế tiếp ≥ #197. Lần sửa đầutiên trượt nên commit này chỉ có dòng BUG kế tiếp; em đã sửa lại và amend vào chính commit cục bộ đó.
+- Mục 0: SV không sửa tiêu đề BUG-37/38/48. Tiêu .md, nên không chạy gh issue edit.
+- Mục 1:
+  - issues_page_C_FR15.png hiện đủ #181–#196, tá
+  - Cả 16 issue đều có ảnh trong mục "Bằng chứng".
+  - Em đã tải ảnh của #189 và #190 về xem: đó là ảnh gốc TC-FR15-209_api / TC-FR15-211_api, lộ đường dẫn
+    D:\HK7\Testing\Exercise\HW\eshop-sut\…. Ảnh dacted/TC-FR15-209_api_redacted.png /TC-FR15-211_api_redacted.png. Theo lệnh em không tự sửa — SV thay ảnh trên GitHub.
+- README (tính từ testcases.json và các file BUG-*.md):
+
+|                       | Thiết kế | Đã chạy | PAI | SV thêm | Bug |
+|-----------------------|----------|---------|------|------|---------|----------|---------|-----|
+| C_FR15                | 122      | 117     | 5   | 11      | 16  |
+| Toàn HW02 (3 feature) | 317      | 278     | 108  | 170  | 39      | 258      | 49      | 50  |
+  - Severity toàn HW02 (50 bug): Critical 11, Hing C: Critical 5, High 6, Medium 3, Low 2.
+- BUG/issue kế tiếp: em chỉ ghi vào CLAUDE.md, không ghi vào README nộp bài vì đó là số đếm nội bộ.
+```
+
+**Output:**
+````
+Lần chạy này tốt. Còn 2 chỗ cần xử lý:
+
+**1. #189 và #190 đang dùng ảnh gốc, lộ đường dẫn máy.** Bạn sửa issue trên GitHub: xoá 2 ảnh cũ, kéo bản `_issue_redacted/…_redacted.png` vào, rồi thêm comment "thay ảnh bằng bản che đường dẫn". Theo quy ước, việc sửa issue đã đăng phải ghi log trước/sau, nên nhờ Claude Code ghi vào `_groups_C_FR15.md`. Cần biết thêm: GitHub **không xoá file đã tải lên**, ảnh cũ vẫn mở được nếu ai có link. Thứ bị lộ chỉ là đường dẫn `D:\HK7\…`, mức nhạy cảm thấp, nhưng bạn nên biết.
+
+**2. README lệch 10 TC.** Cột "TC từ AI" là 258, "SV thêm" là 49, cộng lại 307, trong khi "Thiết kế" là 317. Riêng B (49 + 13) và C (111 + 11) thì khớp, nên phần thiếu nằm ở A: tính ra A thiếu 10 TC chưa được xếp vào AI hay SV. Nhờ Claude Code kiểm.
+
+Cách đếm "Đã chạy" (122 − 5 Blocked = 117) thì đúng: theo ISTQB, Blocked là chưa thực thi.
+
+```
+1. Issue #189, #190: SV đã thay ảnh bằng bản che + comment. Ghi log trước/sau vào _groups_C_FR15.md (ảnh cũ → ảnh che, link comment).
+2. README: "TC từ AI" + "SV thêm" = 307 ≠ "Thiết kế" 317. Tìm 10 TC của A_FR01 chưa được xếp AI/SV (liệt kê mã), xếp theo dữ kiện
+   (trường nguồn trong testcases.json / sv_cases.md của A); không xác định được → DỪNG, báo.
+3. Commit `HW02: README – sửa số TC theo nguồn; log thay ảnh #189 #190` kèm A_prompt_log.md. Không push.
+Báo cáo (≤ 6 dòng): commit; 10 mã TC + nguồn; bảng README sau sửa.
+```
+
+Giờ mình cập nhật handoff trong Project để phiên D bắt đầu từ đó.
+
+Mình đã cập nhật `claude/HW02_handoff.md` trong Project, ghi trạng thái lúc 22:00. Những gì đã thêm:
+- quy ước rút ra từ C: thứ tự các bước bug, khung theo mẫu B, oracle cho case UI, suite ≤ 25 dòng, BVA tràn sang 100–199;
+- các sự thật về SUT phần admin sản phẩm;
+- các giả định C0–C24;
+- chất liệu gap analysis của C;
+- ghi chú cho Audit;
+- 2 việc còn treo: ảnh #189/#190 và lệch 10 TC trong README;
+- tên transcript cho phiên D là `_p5`.
+
+Khi bạn nói "xuất transcript", mình sẽ xuất bản đầy đủ `_p4` để bạn ghi đè bản 18:06.
+````
+*File AI ghi/gửi trong lượt này:* `HW02_handoff.md`
+
+**Xử lý:** [...]
+
+---
+
+## #286 | 22:03 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15783,7 +17089,51 @@ Báo cáo (≤ 6 dòng): commit; 10 mã TC + nguồn; bảng README sau sửa.
 
 ---
 
-## #263 | 22:05 20/10/2026 | Claude Opus 5.5 | [...]
+## #287 | 22:04 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã ghi log thay ảnh vào _groups_C_FR15.md và commit 502e59f, chưa push. README không có lỗi số TC nên em không sửa và đổi message commit cho đúng thực tế.
+- 10 TC: đã được xếp từ trước, nằm ở cột "TC AI + SV sửa" (origin: "Both" trong A_FR01/testcases.json): TC-FR01-90, 92, 219, 223, 224, 225, 226, 227, 228, 231. Tổng khớp: 258 AI + 10 Both + 49 SV = 317. Phép tính 307 đã bỏ sót cột này.
+- Bảng README sau sửa: giữ nguyên — A 98/10/25 (AI/Both/SV, tổng 133), B 49/0/13 (62), C 111/0/11 (122), tổng 317.
+- #189, #190 – ảnh: em đã tải ảnh mới về xem, đúng là bản che, đường dẫn đã thành <SUT_DIR>. Alt vẫn là tên ảnh gốc ("TC-FR15-209_api" / "TC-FR15-211_api").
+- #189, #190 – comment: cả hai issue chưa có comment nào (API trả về 0), nên chỗ link comment trong log để <SV bổ sung sau khi comment>.
+- Ảnh gốc vẫn còn: link asset cũ vẫn mở được, và ảnh còn trong lịch sử chỉnh sửa của issue. Muốn ẩn hẳn, SV xoá bản sửa cũ trong lịch sử chỉnh sửa của từng issue.
+===
+xem phản hồi này đã xong chưa nhé
+```
+
+**Output:**
+````
+Mình tính sai: README có cột "Both" (10 TC của A do cả AI và SV sửa). Bảng bạn dán ở lần trước bị cắt mất cột này nên mình đã cộng thiếu. README đúng, Claude Code không sửa là đúng.
+
+Còn **một việc chưa xong**: #189 và #190 chưa có comment đính chính, mà quy ước "sửa issue đã đăng" yêu cầu phải có comment. Hai điểm còn lại là tuỳ chọn:
+- **Alt ảnh** vẫn là tên ảnh gốc, không phải tên bản `_redacted`. Đây là lệch nhỏ so với quy ước "alt = tên file". Sửa thì tốt, không sửa cũng được.
+- **Xoá bản cũ trong lịch sử chỉnh sửa** của issue để ẩn hẳn ảnh gốc. Thứ bị lộ chỉ là đường dẫn `D:\HK7\…`, nên việc này tuỳ bạn.
+
+Bạn có thể tự viết comment trên GitHub, hoặc cho phép Claude Code đăng giúp bằng lệnh:
+
+```
+SV đồng ý đăng comment đính chính trên #189 và #190 (tkob-team/eshop-sut, gh = ThachHaoo):
+  "Đính chính: thay ảnh bằng chứng bằng bản che đường dẫn máy (<tên file _redacted>). Nội dung bug không đổi."
+<Tuỳ chọn: sửa alt ảnh trong body thành tên file _redacted bằng `gh issue edit`.>
+Ghi link 2 comment vào chỗ <SV bổ sung sau khi comment> trong _groups_C_FR15.md (và log alt nếu có sửa).
+Commit `HW02[C-FR15]: link comment đính chính #189 #190` kèm A_prompt_log.md. Không push. Báo cáo 3 dòng.
+```
+
+Xong lệnh này là C đóng hẳn. Mình cập nhật handoff luôn cho khớp.
+
+Handoff trong Project đã cập nhật: số liệu README đúng (có cột Both), và việc còn treo chỉ còn comment đính chính trên #189 và #190.
+
+Sau khi chạy lệnh comment, feature C đóng hẳn. Lúc đó bạn nói "xuất transcript", mình sẽ xuất bản đầy đủ `_p4` để ghi đè bản 18:06.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #288 | 22:05 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -15797,6 +17147,64 @@ Commit `HW02[C-FR15]: link comment đính chính #189 #190` kèm A_prompt_log.md
 
 **Output:**
 ```
+- Đã đăng comment đính chính bằng tài khoản ThachHaoo: #189 (https://github.com/tkob-team/eshop-sut/issues/189#issuecomment-6294042564) ghi tên bản che `TC-FR15-209_api_redacted.png`; #190 (https://github.com/tkob-team/eshop-sut/issues/190#issuecomment-6294043115) ghi `TC-FR15-211_api_redacted.png`.
+- Em không sửa alt ảnh vì đó là bước tuỳ chọn mà SV chưa chọn. Alt vẫn là "TC-FR15-209_api" / "TC-FR15-211_api"; nếu SV muốn đổi thì báo em chạy `gh issue edit`.
+- Đã ghi link 2 comment vào `_groups_C_FR15.md` thay cho chỗ `<SV bổ sung sau khi comment>`, commit `65d8135 HW02[C-FR15]: link comment đính chính #189 #190` kèm `A_prompt_log.md`, chưa push.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #289 | 22:06 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trước khi xuất transcript, nếu session này không compact lần nào thì có thể xuất _p4, còn nếu có thì xuất _p5 nhé. Và Claude Code có cần xuất prompt log gì không nhỉ
+```
+
+**Output:**
+````
+Phiên này **không bị compact lần nào**: lượt đầu 16:19 trùng lúc bắt đầu phiên, không có dấu compact nào, tổng 48 lượt đến 22:06. Vì vậy mình xuất **`_p4`** bản đầy đủ, bạn ghi đè file `_p4` cũ (bản đến 18:06).
+
+**Về Claude Code: có, nên chạy một lần cuối để đóng C.** Lần lưu trước là lúc nó sắp compact. Sau đó nó còn làm 7c → đóng C, nên cần chép thêm transcript phần sau compact và trích lại prompt log, gộp cả file `_p4` mới:
+
+```
+Đóng prompt log C_FR15 (không sửa tay prompt log):
+1. SV đã đặt claude-ai_session_HW02_p4.jsonl mới vào .transcripts\ (ghi đè bản cũ — bản mới chứa trọn bản cũ).
+2. Chép transcript phiên Claude Code hiện tại sang .transcripts\ với tên MỚI (không đè file đã chép trước compact),
+   theo quy ước tên đã dùng. Kiểm nhanh: số lượt user, giờ lượt đầu/cuối (giờ VN).
+3. Chạy `python tools/hooks/on_stop.py --manual`. Kiểm HW02/appendix/A_prompt_log.md có: lượt claude.ai cuối (22:06 20/10)
+   và lượt Claude Code cuối của phiên này; không trùng lượt.
+4. Commit `HW02: cập nhật prompt log (đóng C_FR15)` chỉ gồm A_prompt_log.md. Không push.
+Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
+```
+
+Lệnh comment #189/#190 vẫn chạy trước hoặc sau lệnh này đều được. Nếu chạy sau thì prompt log sẽ thiếu lượt đó; muốn đủ thì chạy lệnh comment trước.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #290 | 22:08 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đóng prompt log C_FR15 (không sửa tay prompt log):
+1. SV đã đặt claude-ai_session_HW02_p4.jsonl mới vào .transcripts\ (ghi đè bản cũ — bản mới chứa trọn bản cũ).
+2. Chép transcript phiên Claude Code hiện tại sang .transcripts\ với tên MỚI (không đè file đã chép trước compact),
+   theo quy ước tên đã dùng. Kiểm nhanh: số lượt user, giờ lượt đầu/cuối (giờ VN).
+3. Chạy `python tools/hooks/on_stop.py --manual`. Kiểm HW02/appendix/A_prompt_log.md có: lượt claude.ai cuối (22:06 20/10)
+   và lượt Claude Code cuối của phiên này; không trùng lượt.
+4. Commit `HW02: cập nhật prompt log (đóng C_FR15)` chỉ gồm A_prompt_log.md. Không push.
+Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -15804,4 +17212,4 @@ Commit `HW02[C-FR15]: link comment đính chính #189 #190` kèm A_prompt_log.md
 
 ---
 
-**Tổng:** 263 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 179 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 290 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 205 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
