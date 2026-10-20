@@ -13099,4 +13099,71 @@ Sau đó bạn đóng phiên này và mở phiên mới cho C.
 
 ---
 
-**Tổng:** 213 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 150 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #214 | 16:21 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+/domain-bva-testing HW02/C_FR15 0
+
+Nhiệm vụ: bước 0–1 (biến vào/ra) cho C_FR15 – Product CRUD (admin). Làm theo skill + CLAUDE.md; bổ sung/nhấn mạnh dưới đây.
+
+0. Kiểm tra trước (lỗi nào → dừng, không commit, báo lỗi đó):
+   - CLAUDE.md đã có mục bài học B_FR07 (commit sau 352a34d). Chưa có → dừng.
+   - `git -C ..\eshop-sut log -1 --format=%h` = 85af3ba; `git -C ..\eshop-sut diff --stat` chỉ được có
+     frontend-mobile/App.js và database.sqlite. Có diff mã khác → dừng.
+   - Không sửa gì trong ..\eshop-sut. Không chạy SUT ở bước này.
+
+1. Nguồn và căn cứ:
+   - Căn cứ Expected: SRS FR-15 (+ FR/NFR khác mà FR-15 dẫn chiếu) và giả định SV chốt. KHÔNG dùng
+     hành vi SUT hay logic trong code làm căn cứ. Code (backend server.js, frontend-admin) chỉ dùng để
+     lấy tên trường, endpoint, vị trí phần tử/điểm quan sát; ghi rõ dòng code đã đọc.
+   - Phạm vi giao diện: theo SRS FR-15 (admin UI :5174 + API phục vụ nó); suite tách UI / API / GUI.
+     Admin seed: admin@eshop.com / Admin123! (setup_guide ghi sai).
+   - SRS im lặng → ghi "SRS im lặng – chấp nhận mọi cách hợp lý", không tạo giả định quyết định Expected
+     trừ khi cần chốt để thiết kế được; khi đó đề xuất giả định cho SV chốt.
+
+2. Quy ước áp ngay từ bước này (handoff mục 4 = bài học A+B):
+   - Giả định mã C1, C2… Mỗi giả định ghi: loại (quyết định Expected / phạm vi / chọn đại diện),
+     căn cứ SRS (hoặc "SRS im lặng"), trạng thái "đề xuất – chờ SV chốt". Chỉ loại "quyết định Expected"
+     được đánh dấu đưa vào truy vết.
+   - Biến không có cận trên trong SRS: khai `no_upper_bound = <mã giả định>` (điểm LARGE ở bước 4).
+     Không tự bỏ/ẩn cảnh báo của check_domain (vd "thiếu UB"); cảnh báo còn lại → giữ nguyên, báo.
+   - Biến ra: nêu điểm quan sát cụ thể (trang/endpoint/trường) và đánh dấu thuộc tính chung (nhãn,
+     định dạng, thông báo) để bước 3 khẳng định ở đúng 1 case.
+   - Mỗi biến có trường technique (EP/BVA/EG/ST) và approach (black-box/gray-box/white-box) nếu skill
+     có trường đó; biến chỉ biết từ code → approach gray-box.
+   - Mã TC giữ dải: DOM 01–59, BVA 60–89, GUI 90–99, SV từ 200 (để bước 2+ dùng).
+
+3. Hoàn tất:
+   - Chỉnh xong toàn bộ assumptions TRƯỚC khi freeze. Mọi file AI viết ở bước này phải nằm trong bản
+     freeze (JSON + MD render) — không để file AI viết nằm ngoài ai-outputs/ mà không freeze.
+   - render_md.py → freeze.py → check_domain.py → linter thầy (đều sạch, trừ cảnh báo đã báo ở mục 2).
+   - Commit `HW02[C-FR15] 1/7: biến vào/ra` kèm HW02/appendix/A_prompt_log.md.
+
+Báo cáo cho phiên thảo luận (thay khung 5 mục, ≤ 25 dòng):
+   - Dòng 1: commit hash + "check_domain/linter: sạch" (hoặc cảnh báo còn lại).
+   - Sau đó CHỈ liệt kê giả định chặn bước 2: mã | câu hỏi 1 dòng | phương án a/b(/c) + hệ quả
+     Expected | khuyến nghị kèm căn cứ SRS (hoặc "SRS không đủ căn cứ – SV chọn").
+   - Giả định không chặn: để trong file, không báo.
+```
+
+**Output:**
+```
+Đang đọc mã backend/admin để lấy tên trường; tiếp theo xem schema skill + mẫu B_FR07.
+
+Giờ đọc UI admin phần sản phẩm.
+
+Đọc schema skill + bản step1 của B_FR07 làm mẫu cấu trúc.
+
+Đủ dữ kiện. Viết `testcases.json` (meta, requirements, biến vào/ra, giả định C0–C14).
+
+Chạy render → check_domain → linter trước, freeze sau khi sạch.
+```
+*File AI ghi/gửi trong lượt này:* `testcases.json`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 214 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 151 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
