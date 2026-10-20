@@ -1210,6 +1210,10 @@ BUG-50: ô Giá dòng 'iPhone 15 Pro Max' = "30000000 ₫"
 | 41 | Nhận định | `…gây sai lệch toàn bộ hệ thống.` | `…gây sai lệch toàn bộ hệ thống (chưa kiểm chứng).` | evidence chỉ cho thấy bản ghi products bị tạo; không có dữ kiện về phần khác |
 | 43 | Nhận định | `…kỳ vọng nhận JSON response).` | `…kỳ vọng nhận JSON response) (chưa kiểm chứng).` | không có case cho client (web/admin/mobile) nhận phản hồi này |
 | 47 | Nhận định | `Bất kỳ ai trên Internet cũng…` | `Bất kỳ ai trên Internet (chưa kiểm chứng) cũng…` | chỉ kiểm trên localhost; phần "không cần đăng nhập/quyền Admin" có dữ kiện (lượt 6 + 7c) |
+| 47 | Bước 1, Trường hợp 2 | `…Token không hợp lệ / sai Chữ ký / Token hết hạn` | `…Token không hợp lệ / sai Chữ ký` | SV quyết bỏ, không có TC |
+| 48 | TC liên quan | (không có) | thêm dòng "Ngoài TC: GET /api/products/:id (id chẵn, price null) làm dừng tiến trình backend — AI phát hiện khi kiểm 7c" | SV quyết gộp lỗi sập backend vào BUG-48 (7c2) |
+| 48 | Dữ kiện (AI chép) | (không có) | thêm mục "Sập backend (AI phát hiện ở 7c, ngoài bước của SV)": request, phản hồi, stderr nguyên văn, code `server.js` 159–165 | output `crash_48.ps1` (mục "Kiểm 7c2") |
+| 48 | Các bước tái hiện, Actual, Yêu cầu, Nhận định | (không có) | thêm chỗ trống `<SV viết: phần sập backend>` cuối mỗi mục | SV viết |
 
 ### Điểm SV tự sửa (chữ của SV — AI không sửa)
 
@@ -1219,3 +1223,32 @@ BUG-50: ô Giá dòng 'iPhone 15 Pro Max' = "30000000 ₫"
 - BUG-47 Expected: "401 Unauthorized" / "403 Forbidden" — FR-12.2, SEC-02, SEC-03, C5 không nêu mã; C6: "không cố định mã cụ thể".
 - BUG-49 Expected: "dấu sao màu đỏ hoặc ký hiệu *" — FR-22.1 chỉ nêu "ký hiệu *" (vế "hoặc" vẫn đúng; SV xem lại).
 - Mục "Yêu cầu": không thấy yêu cầu nào được liệt kê mà Actual không vi phạm.
+
+## Kiểm 7c2 — sập backend (gộp vào BUG-48 theo quyết định SV)
+
+Script `HW02/bugs/_repro_C_FR15/7c/crash_48.ps1` (Windows PowerShell 5.1): dừng backend, chạy lại `node server.js` với stderr ghi ra file, POST `price: null`, GET bản ghi vừa tạo, in stderr, restart backend bình thường.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File HW02\bugs\_repro_C_FR15\7c\crash_48.ps1
+```
+
+Output (20/10/2026):
+
+```text
+POST /api/products body: {"name": "SP 7c null", "price": null, "category_id": 2, "description": "Mô tả 7c", "imageUrl": "https://placehold.co/300"}
+-> HTTP 200 {"message":"Product created","id":6}
+GET /api/products/6 -> lỗi: An error occurred while sending the request.
+tiến trình đã dừng: True; mã thoát: 1
+--- stderr ---
+D:\HK7\Testing\Exercise\HW\eshop-sut\backend\server.js:162
+    if (row.id % 2 === 0) row.price = row.price.toString();
+                                                ^
+
+TypeError: Cannot read properties of null (reading 'toString')
+    at Statement.<anonymous> (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\server.js:162:49)
+    at Statement.replacement (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\node_modules\sqlite3\lib\trace.js:25:27)
+    at Statement.replacement (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\node_modules\sqlite3\lib\trace.js:25:27)
+
+Node.js v24.15.0
+backend restart xong: 5 sản phẩm
+```

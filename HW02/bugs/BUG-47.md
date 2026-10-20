@@ -26,7 +26,7 @@
 
 1. Chuẩn bị các dạng Token/Header vi phạm để kiểm tra tính bảo mật của API:
   + Trường hợp 1: Không gửi Header Authorization (truy cập ẩn danh)
-  + Trường hợp 2: Gửi Header Authorization với Token không hợp lệ / sai Chữ ký / Token hết hạn
+  + Trường hợp 2: Gửi Header Authorization với Token không hợp lệ / sai Chữ ký
   + Trường hợp 3: Gửi Header Authorization với Token JWT hợp lệ của tài khoản người dùng thông thường (role: 'user')
 
 2. Lần lượt gửi request tới các API quản lý sản phẩm với một trong các dạng Token/Header vi phạm nêu trên:

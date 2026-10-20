@@ -2,8 +2,8 @@
 
 - **ID:** BUG-48
 - **Tiêu đề:** API GET /api/products/:id trả về trường price dạng chuỗi (String) thay vì kiểu số (Number) đối với các sản phẩm có id là số chẵn
-- **Severity:** Low
-- **Priority:** Low
+- **Severity:** Critical
+- **Priority:** High
 
 ## Môi trường
 
@@ -30,6 +30,8 @@
 
 3. Kiểm tra HTTP Status Code, Response Body và kiểu dữ liệu của trường price nhận được từ Server.
 
+`<SV viết: phần sập backend>`
+
 ## Expected (trích SRS)
 
 - Theo quy định C15, trong phản hồi JSON của API GET /api/products/:id, trường price phải luôn có kiểu dữ liệu là số (Number, ví dụ: "price": 28000000).
@@ -42,6 +44,8 @@
 
 - Tuy nhiên, đối với sản phẩm có id = 2 (số chẵn), trường price trong JSON phản hồi bị chuyển thành kiểu chuỗi: {"id":2, "name":"Samsung Galaxy S24 Ultra", "price":"28000000", ...}.
 
+`<SV viết: phần sập backend>`
+
 ## Bằng chứng
 
 - Ảnh tiêu biểu: `TC-FR15-22_api.png`
@@ -50,6 +54,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR15-22
+- Ngoài TC: GET /api/products/:id (id chẵn, price null) làm dừng tiến trình backend — AI phát hiện khi kiểm 7c
 - Nhóm dữ kiện: G12 trong `HW02/bugs/_groups_C_FR15.md`
 
 ## Yêu cầu
@@ -57,6 +62,8 @@
 - **C15 (giả định SV chốt):** (kiểu dữ liệu price trong phản hồi GET) price trong phản hồi GET /api/products/:id phải là số JSON; price dạng chuỗi (kể cả chuỗi số) lệch Expected. Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so price theo giá trị số.
 - Đạt trong cùng case: name, category_id đúng giá trị seed
 - Chưa đánh giá được: —
+
+`<SV viết: phần sập backend>`
 
 ## Ghi chú cô lập
 
@@ -75,6 +82,34 @@
    164    });
    165  });
   ```
+- **Sập backend (AI phát hiện ở 7c, ngoài bước của SV).** Tái hiện qua API cần POST price null được chấp nhận (BUG-41). Chạy 20/10/2026 sau restart backend, Windows PowerShell 5.1, không gửi token; backend chạy bằng `Start-Process node server.js -RedirectStandardError` để lấy stderr (lệnh ở `_groups_C_FR15.md`, mục "Kiểm 7c2").
+  - Request 1: `POST http://localhost:3000/api/products`, `Content-Type: application/json`, body `{"name": "SP 7c null", "price": null, "category_id": 2, "description": "Mô tả 7c", "imageUrl": "https://placehold.co/300"}` → `HTTP 200 {"message":"Product created","id":6}`
+  - Request 2: `GET http://localhost:3000/api/products/6` → không nhận được phản hồi; PowerShell báo `An error occurred while sending the request.`; tiến trình `node server.js` dừng, mã thoát 1. Lần chạy 7c trước: request kế tiếp `GET /api/products` → `No connection could be made because the target machine actively refused it. (localhost:3000)`.
+  - stderr của tiến trình backend khi dừng (nguyên văn):
+
+  ```text
+  D:\HK7\Testing\Exercise\HW\eshop-sut\backend\server.js:162
+      if (row.id % 2 === 0) row.price = row.price.toString();
+                                                  ^
+
+  TypeError: Cannot read properties of null (reading 'toString')
+      at Statement.<anonymous> (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\server.js:162:49)
+      at Statement.replacement (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\node_modules\sqlite3\lib\trace.js:25:27)
+      at Statement.replacement (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\node_modules\sqlite3\lib\trace.js:25:27)
+
+  Node.js v24.15.0
+  ```
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 159–165 (dòng gây lỗi: 162)
+
+  ```js
+   159  app.get("/api/products/:id", (req, res) => {
+   160    db.get("SELECT * FROM products WHERE id = ?", [req.params.id], (err, row) => {
+   161      if (!row) return res.status(200).json({});
+   162      if (row.id % 2 === 0) row.price = row.price.toString();
+   163      res.json(row);
+   164    });
+   165  });
+  ```
 
 ### Nhận định
 
@@ -83,6 +118,8 @@
 - Logic này khiến tất cả các sản phẩm có id chẵn bị ép kiểu giá tiền từ số thành chuỗi trước khi trả về client.
 
 - Việc trả về không đồng nhất kiểu dữ liệu (id lẻ là Number, id chẵn là String) gây ra lỗi không nhất quán dữ liệu API (Data Inconsistency), có thể khiến các ứng dụng Client (Mobile/Frontend) bị crash hoặc tính toán toán học sai khi parse JSON.
+
+`<SV viết: phần sập backend>`
 
 ## Link GitHub Issue
 
