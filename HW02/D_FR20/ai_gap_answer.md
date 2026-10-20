@@ -45,11 +45,7 @@
 
 ## Rà nhất quán case SV (chỉ liệt kê, không sửa)
 
-Cập nhật ở 5/7f theo `sv_cases.md` commit `e067035`. SV đã bỏ TC-FR20-202 (5/7c) và TC-FR20-207, 208 (5/7e); giữ khoảng trống số. SV thêm D16.
+Cập nhật ở 5/7h theo `sv_cases.md` commit `c177a09`. SV đã bỏ TC-FR20-202 (5/7c) và TC-FR20-207, 208 (5/7e); giữ khoảng trống số. D16 SV sửa căn cứ ở 5/7g.
 
-- TC-FR20-200: không thấy lỗi nhất quán.
-- TC-FR20-201: không thấy lỗi nhất quán.
-- TC-FR20-203: hết lỗi — câu quy trình TS-SV (do AI viết) đã sửa ở 5/7f thành "đúng số lần ghi trong case (mặc định 1 lần)"; Lý do chọn input của SV ghi 10 lần.
-- TC-FR20-204: không thấy lỗi nhất quán.
-- TC-FR20-205: tiêu đề "chỉ chứa các chữ số Full-width `Abcd１２３４５６７８`" khác giá trị nhập `Abcd１２３４５６!` (tiêu đề có `７８`, giá trị có `!`), và chuỗi trong tiêu đề có chữ cái nên không "chỉ chứa chữ số". D16 dẫn căn cứ "D8 (chữ số 0-9)", nhưng D8 chỉ nói về chữ hoa/thường (A–Z / a–z), không nói chữ số.
-- TC-FR20-206: không thấy lỗi nhất quán.
+- TC-FR20-200, 201, 203, 204, 206: không thấy lỗi nhất quán.
+- TC-FR20-205: tiêu đề và D16 hết lỗi. Ghi chú (không ảnh hưởng Expected): cột Căn cứ vẫn có D8 và Lý do chọn input ghi "bị tính là thiếu chữ số theo D8"; D8 chỉ nói chữ hoa/thường. Căn cứ của Expected đủ nhờ FR-01.7c + D16.

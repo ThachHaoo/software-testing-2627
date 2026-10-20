@@ -41,7 +41,7 @@
       "D13 (yêu cầu GUI trên mobile) [loại: phạm vi + quyết định Expected · truy vết: có · căn cứ: FR-22 dòng 252–255 viết theo khái niệm web (type=\"email\", type=\"password\"); tiền lệ A14 (suite GUI riêng, không phân lớp) và phạm vi A (bỏ FR-21) · SV chốt 2026-10-20, phương án a]: FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi — lý do SV: nhất quán với A, giữ dòng so sánh web vs mobile (SRS không đủ căn cứ, SV quyết).",
       "D14 (verdict khi chạy tay) [loại: quy trình · truy vết: không · căn cứ: quyết định đã chốt A20/A17 (CLAUDE.md), quy tắc verdict của skill · SV chốt 2026-10-20, chấp nhận đề xuất AI]: chạy tay nên status do SV điền trực tiếp, auto_status để trống; lệch do biến mục tiêu → Fail; bị biến khác chặn → Blocked + case gốc; 'Pass hộp đen' khi bị từ chối đúng nhưng lý do không chứng minh luật mục tiêu. Evidence: ảnh chụp màn hình điện thoại TC-FR20-xx_manual_*.png (+ ảnh trang admin theo D11).",
       "D15 (thiết bị, locale, bàn phím) [loại: môi trường · truy vết: không · căn cứ: P2 (SV chốt Android thật, Expo Go) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: SV ghi model, phiên bản Android, bản Expo Go, ngôn ngữ hệ thống, bàn phím (vd Gboard) khi chạy; ghi vào meta.environment và HW02/env/environment.md.",
-      "D16 (Chữ số Full-width trong Mật khẩu) [loại: quyết định Expected · truy vết: có · căn cứ: FR-01.7c, D8 (chữ số 0-9) · SV chốt 2026-10-21 — giải quyết mơ hồ về tập ký tự Unicode]: Các chữ số dạng Full-width (như `１２３` U+FF11...U+FF19) gõ từ bộ gõ CJK không được tính là chữ số hợp lệ thuộc tập ASCII [0-9] theo FR-01.7c và D8; mật khẩu chỉ chứa chữ số Full-width sẽ bị coi là không có chữ số (rơi vào EC18 và bị từ chối)."
+      "D16 (Chữ số Full-width trong Mật khẩu) [loại: quyết định Expected · truy vết: có · căn cứ: FR-01.7c · SV chốt 2026-10-21 — giải quyết mơ hồ về tập ký tự Unicode]: Các chữ số dạng Full-width (như `１２３` U+FF11...U+FF19) gõ từ bộ gõ CJK không được tính là chữ số hợp lệ thuộc tập ASCII [0-9] theo FR-01.7c; mật khẩu chỉ chứa chữ số Full-width sẽ bị coi là không có chữ số (rơi vào EC18 và bị từ chối)."
     ],
     "review_log": [
       "2/7c (721b852, 2026-10-20): SV chốt sau review — phân lớp 32 EC theo 2/7b (af52010), không đổi nội dung."
@@ -2150,7 +2150,7 @@
       "id": "TS-SV",
       "name": "SV bổ sung — tầng Mobile",
       "format": "matrix",
-      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit e067035), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c177a09), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
       "preconditions": [
         "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
         "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
@@ -2415,7 +2415,7 @@
         },
         {
           "id": "TC-FR20-205",
-          "title": "Kiểm tra từ chối đăng ký trên mobile khi Mật khẩu chỉ chứa các chữ số Full-width `Abcd１２３４５６７８`",
+          "title": "Kiểm tra từ chối đăng ký trên mobile khi chữ số duy nhất trong Mật khẩu là các chữ số Full-width `１２３４５６`",
           "layer": "Mobile",
           "method": "Manual",
           "inputs": {
