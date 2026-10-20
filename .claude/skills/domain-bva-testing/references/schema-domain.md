@@ -32,6 +32,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
           "requirements": ["FR-01.1"],
           "covers": ["EC1", "EC5"],          // mảng mã EC (chuỗi "EC1, EC5" cũng được)
           "ec_target": ["EC1"],             // tuỳ chọn: EC case được thiết kế để kiểm (lớp vào cần thử + lớp ra Expected khẳng định) ⊆ covers; truy vết sinh từ đây
+          "assumptions": ["B12"],           // tuỳ chọn: mã giả định quyết định Expected của case không gắn EC (GUI); không đặt mã giả định trong requirements vì linter giảng viên báo lỗi
           "technique": "EP",                // EP | BVA | EG (error guessing) | ST (state transition)
           "bva_point": "",                  // LB-1 | LB | LB+1 | NOM | UB-1 | UB | UB+1 | MIN_UI | MAX_UI
           "rationale": "vì sao chọn giá trị này",
@@ -48,6 +49,12 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
   ]
 }
 ```
+
+## Quy tắc cột Yêu cầu của EC
+
+- Chứa mã yêu cầu đặc tả mà lớp kiểm, và **chỉ những mã giả định quyết định Expected** của lớp (vd giả định về công thức, cách hiểu nhãn, mã lỗi).
+- **Không** đưa vào: giả định phạm vi (đưa feature/tầng/suite nào vào kiểm — vd B6, B7, B10, B16 của B_FR07) và giả định chọn đại diện (vd B19). Các giả định này vẫn nằm ở `meta.assumptions`.
+- Yêu cầu của lớp phải đúng cho mọi tầng mà lớp áp dụng; yêu cầu chỉ đúng ở một tầng thì tách lớp theo tầng.
 
 ## Quy tắc `check_domain.py` kiểm
 

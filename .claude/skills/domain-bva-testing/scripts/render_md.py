@@ -146,12 +146,12 @@ def render(data, h):
     out += [f"{H} Truy vết yêu cầu ↔ test case"]
     ec_req = any(p.get("requirements") for p in parts)
     if ec_req:
-        out += ["Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.", ""]
+        out += ["Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.", ""]
     req_cov = defaultdict(list)
     for s, c in cases:
         src = as_list(c.get("ec_target")) or as_list(c.get("covers"))
         reqs = [r for e in src for r in as_list(pmap.get(e, {}).get("requirements"))] if ec_req else []
-        for r in dict.fromkeys(reqs + as_list(c.get("requirements"))):
+        for r in dict.fromkeys(reqs + as_list(c.get("requirements")) + as_list(c.get("assumptions"))):
             req_cov[r].append(c["id"])
     known = [r["id"] for r in data.get("requirements", [])]
     acodes = {str(a).split(" ", 1)[0] for a in meta.get("assumptions", [])}
