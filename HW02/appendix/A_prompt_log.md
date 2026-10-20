@@ -8361,7 +8361,7 @@ Chỉ sửa trường Yêu cầu / phần Dữ kiện (AI chép); KHÔNG đụng
 ```
 
 **Output:**
-```
+````
 Đã sửa xong BUG và `_groups`. Kiểm lại định dạng BUG-01/04 rồi sang phần issue.
 
 Line ending lẫn CRLF do write_text trên Windows. Chuẩn hoá về LF như HEAD.
@@ -8369,11 +8369,109 @@ Line ending lẫn CRLF do write_text trên Windows. Chuẩn hoá về LF như HE
 Phần file xong. Giờ sửa body issue #17, 20, 22, 24, 25, 26 (tài khoản ThachHaoo) và ghi log trước/sau.
 
 Dry-run đúng. Thực hiện sửa trên GitHub.
+
+Log hiện mới ghi mục Yêu cầu. Thêm toàn văn body trước/sau vào log cho đúng yêu cầu "in body".
+
+Đã đính chính trường Yêu cầu ở BUG-01/04/06/08/09/10 và `_groups_A_FR01.md`, commit `ddb74cf`. Sáu issue #17, 20, 22, 24, 25, 26 cũng đã sửa body và có comment đính chính, đăng bằng tài khoản ThachHaoo.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: A_FR01 7/7e – đính chính trường "Yêu cầu" (file + issue GitHub)
+- File đã sửa:
+  · HW02/bugs/BUG-01, 04, 06, 08, 09, 10.md: chỉ mục "## Yêu cầu"
+  · HW02/bugs/_groups_A_FR01.md
+  · HW02/bugs/_edit_log_A.md (mới)
+  · A_prompt_log.md
+- Kết quả kiểm tra:
+  · gh auth = ThachHaoo
+  · Sau khi sửa, đọc lại từng issue bằng gh issue view: mục Yêu cầu khớp file. Script cũng kiểm phần ngoài mục Yêu cầu không đổi.
+  · test: không chạy
+- Commit: ddb74cf HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm
+- BUG đã sửa:
+  · BUG-01: FR-01.10 + "chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định…)"
+  · BUG-04: thêm "(FR-01.1, FR-01.5 chỉ do TC-213)"
+  · BUG-06: thêm A11
+  · BUG-08: chỉ A3 · BUG-09: chỉ A4 · BUG-10: chỉ A11
+- _groups_A_FR01.md (cùng cách làm với _groups_B_FR07.md):
+  · Cột bảng đổi thành "Yêu cầu / giả định bị vi phạm"
+  · Mỗi nhóm có 3 dòng: vi phạm / đạt / chưa đánh giá được
+  · Thêm mã giả định A… như các file BUG
+  · Thêm 1 dòng đính chính 7/7e ở đầu file
+  · G7, G9, G10, G12 chuyển yêu cầu không bị vi phạm sang "đạt" hoặc "chưa đánh giá được"
+- Issue: mỗi issue có 1 comment đúng mẫu; URL từng comment ghi trong _edit_log_A.md
+  · _edit_log_A.md: mục Yêu cầu trước/sau + toàn văn body trước/sau (trong thẻ <details>)
+- Bất thường:
+  · Lần ghi đầu (write_text trên Windows) làm 7 file trộn CRLF; đã chuẩn hoá về LF như HEAD trước commit
+  · Còn CRLF sẵn từ trước ở BUG-11…14, _groups_B_FR07.md, B_FR07/RUN.md, testcases.md (không sửa)
+  · HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png của SV vẫn chưa commit
+- Cần quyết định: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `fix7e.py`, `issues7e.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 138 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 135 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #139 | 13:59 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 7a – điền khung BUG-15…34 theo đúng format HW02/bugs/BUG-14.md
+(commit "HW02[B-FR07] 7/7a5: khung bug theo format BUG-14").
+
+0. Đọc BUG-14.md làm mẫu: giữ ĐÚNG thứ tự và tên mục (ID, Tiêu đề, Severity, Priority,
+   Môi trường, Tiền điều kiện, Các bước tái hiện, Expected (trích SRS), Actual,
+   Bằng chứng, TC liên quan, Yêu cầu, Ghi chú cô lập › Dữ kiện (AI chép) / Nhận định,
+   Link GitHub Issue, dòng cuối "Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần
+   dữ kiện."). Nếu file BUG nào SV đã bắt đầu viết (git diff có nội dung SV) → chỉ
+   bổ sung mục AI, không đụng chữ SV; báo lại file đó.
+
+AI điền:
+1. ID.
+2. Môi trường: cùng mẫu BUG-14 nhưng dữ kiện của B (SUT/fork như cũ; trình duyệt +
+   Playwright theo meta.environment của B_FR07, locale vi-VN; trang/endpoint liên quan;
+   ngày + giờ bắt đầu lượt chính thức = lượt 2; với kiểm tay thì ghi "kiểm tay").
+3. Bằng chứng: dòng "Ảnh tiêu biểu: `<tên file>`" = evidence (.png) của case Actual
+   tiêu biểu trong _groups_B_FR07.md; rồi liệt kê evidence theo từng TC như BUG-14.
+   BUG-17 (G3): ảnh tiêu biểu = TC-FR07-201_manual_2lan.png (kiểm tay, SV chụp) +
+   bỏ "(chưa kiểm chứng)" ở dòng tái hiện 2 lần, ghi "SV kiểm tay 2026-10-20: 2 lần
+   bấm → 2 dòng". BUG-32: Bằng chứng chia mục con G18 / G19 / G21.
+   Bug API có evidence chứa đường dẫn máy (TC-209) → ghi thêm dòng "Bản che dùng cho
+   issue: bugs/_issue_redacted/…" (tạo bản che nếu chưa có).
+4. TC liên quan: Fail / Blocked ghi case gốc / Pass hộp đen (nếu có) / Nhóm dữ kiện.
+5. Yêu cầu: chỉ yêu cầu/giả định BỊ VI PHẠM, mỗi dòng "**Mã:** nội dung" chép từ
+   test basis (yêu cầu) hoặc meta.assumptions (giả định, ghi "(giả định SV chốt)");
+   yêu cầu ngầm định ghi "(ngầm định)". Thêm 2 dòng "Đạt trong cùng case" và "Chưa
+   đánh giá được" như _groups_B_FR07.md.
+6. Ghi chú cô lập › Dữ kiện (AI chép): Actual nguyên văn của case tiêu biểu; bug API:
+   payload từ req.json + status/body từ res.json (rút gọn > 300 ký tự, ghi "(rút gọn)");
+   đoạn code trích nguyên văn có số dòng; case Blocked/Pass hộp đen ghi case gốc.
+
+Để trống, đúng chỗ, dạng `<SV viết>`: Tiêu đề, Severity, Priority, Tiền điều kiện,
+Các bước tái hiện, Expected (trích SRS), Actual, Nhận định. Link: `<sau khi tạo issue>`.
+KHÔNG gợi ý tiêu đề, severity, câu chữ, nguyên nhân.
+
+7. Kiểm: 20 file đủ mục theo thứ tự BUG-14; mọi đường dẫn evidence tồn tại; ảnh
+   tiêu biểu có thật. Commit (kèm TC-FR07-201_manual_2lan.png). Dừng, báo cáo theo
+   CLAUDE.md.
+```
+
+**Output:**
+```
+Không có BUG-15…34 nào SV đã sửa. Viết script điền khung theo format BUG-14, dùng lại dữ liệu nhóm của script trước.
+
+Sửa 2 chỗ: Actual/body nhiều dòng làm vỡ danh sách markdown, và giả định bị mất tiêu đề.
+
+Heredoc làm hỏng escape. Sửa trực tiếp bằng Edit.
+
+Actual chứa HTML thô nằm ngoài backtick sẽ bị markdown render. Bọc Actual nguyên văn trong backtick.
+```
+*File AI ghi/gửi trong lượt này:* `bugs7a5.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 139 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 136 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

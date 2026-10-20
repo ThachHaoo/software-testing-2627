@@ -1,0 +1,13 @@
+# BUG-34: body phản hồi của TC-FR07-209 (HTTP 400), nguồn HW02/B_FR07/evidence/TC-FR07-209_res.json; đường dẫn tuyệt đối thay bằng <SUT_DIR>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>SyntaxError: Unexpected token &#39;I&#39;, ...&quot;uantity&quot;: Infinity}&quot; is not valid JSON<br> &nbsp; &nbsp;at JSON.parse (&lt;anonymous&gt;)<br> &nbsp; &nbsp;at parse (<SUT_DIR>\backend\node_modules\body-parser\lib\types\json.js:72:19)<br> &nbsp; &nbsp;at <SUT_DIR>\backend\node_modules\body-parser\lib\read.js:162:18<br> &nbsp; &nbsp;at AsyncResource.runInAsyncScope (node:async_hooks:227:14)<br> &nbsp; &nbsp;at invokeCallback (<SUT_DIR>\backend\node_modules\raw-body\index.js:238:16)<br> &nbsp; &nbsp;at done (<SUT_DIR>\backend\node_modules\raw-body\index.js:227:7)<br> &nbsp; &nbsp;at IncomingMessage.onEnd (<SUT_DIR>\backend\node_modules\raw-body\index.js:287:7)<br> &nbsp; &nbsp;at IncomingMessage.emit (node:events:509:28)<br> &nbsp; &nbsp;at endReadableNT (node:internal/streams/readable:1729:12)<br> &nbsp; &nbsp;at process.processTicksAndRejections (node:internal/process/task_queues:90:21)</pre>
+</body>
+</html>
+
