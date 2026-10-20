@@ -6825,7 +6825,66 @@ Vậy còn gì nữa không nhỉ
 
 ---
 
-## #116 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
+## #116 | 10:13 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc `claude/HW02_handoff.md` trong Project. Tiếp tục HW02 với feature B_FR07 Giỏ hàng.” Khi cần xuất transcript của phiên đó, đặt tên `…_p3.jsonl`
+```
+
+**Output:**
+````
+Đã nắm handoff. Trước khi mở B, nên dọn hai việc A còn treo (bug_id, tách cột Both) trong một commit riêng. Làm sau thì phải render lại cả A lẫn B.
+
+Lưu ý cho B trước khi chạy:
+- **Giỏ trong RAM theo user.** Nếu nhiều case dùng chung `test@eshop.com` thì chúng phụ thuộc lẫn nhau. Mỗi case phải có user riêng. Ràng buộc này ảnh hưởng Precondition từ bước 3, nên cần ghi nhận ngay từ bước 1.
+- **Cận trên số lượng:** SRS không nêu, nên phải tách thành mục "Giả định chờ SV chốt". Bạn tự chốt khi review. Mình cố ý không đề xuất giá trị, vì nó quyết định điểm BVA và sẽ làm nhiễu phần so sánh ở bước 5.
+- **Nguồn yêu cầu là SRS.** Code chỉ dùng để tìm endpoint, selector và điểm quan sát. Ở A, việc trộn hai nguồn này đã gây khó cho gap analysis.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – Hoàn tất tồn đọng A_FR01 (commit riêng, không đụng B)
+1. README summary HW02: tách cột "AI + SV sửa" (Both) khỏi "TC từ AI". Số liệu đếm
+   bằng script từ dữ liệu TC đã đóng băng, không đếm tay.
+2. Ghi bug_id (BUG-01…BUG-14) vào các TC Fail/Blocked của A_FR01 theo mapping trong
+   HW02/bugs/. TC Blocked ghi bug của case gốc gây chặn. TC nào không map được bug
+   → liệt kê trong báo cáo, KHÔNG tự gán.
+   Nếu render_md.py chưa hiển thị trường bug_id → vá harness, commit riêng
+   "HW02: vá harness – hiển thị bug_id".
+3. check_domain.py → linter thầy → render_md.py.
+   Commit: "HW02[A-FR01]: ghi bug_id + tách cột Both trong summary".
+   Không đổi verdict / expected / actual / auto_status.
+
+Nhiệm vụ 2 – B_FR07 Giỏ hàng, bước 0–1
+1. Chạy /domain-bva-testing HW02/B_FR07 0.
+2. Đầu output: trích NGUYÊN VĂN FR07 và mọi mục SRS liên quan giỏ hàng, kèm số mục/trang.
+3. Khảo sát SUT (chỉ để xác định điểm quan sát, KHÔNG dùng làm nguồn yêu cầu):
+   - endpoint giỏ hàng: method, path, body, có cần token không, mã lỗi trả về;
+   - userCarts: khoá theo gì, mất khi nào (restart backend);
+   - thao tác UI tương ứng trên web :5173 (trang, selector chính);
+   - dữ liệu sản phẩm seed: có trường tồn kho/giá/trạng thái không.
+4. Mọi điểm SRS không quy định (cận trên số lượng, ...) → mục riêng
+   "Giả định chờ SV chốt". Mỗi giả định nêu nguồn gợi ý (SRS / code / thông lệ).
+   KHÔNG tự chốt giá trị.
+5. Ghi nhận ràng buộc độc lập cho các bước sau: mỗi case dùng user riêng tạo qua API
+   với {ts}; oracle tương đối (giỏ trước/sau trong chính case); cleanup 2 lớp như A.
+6. freeze.py → check_domain.py → linter thầy → render_md.py.
+   Commit "HW02[B-FR07] 1/7: biến vào/ra" kèm HW02/appendix/A_prompt_log.md.
+7. DỪNG sau bước 1. Kết thúc bằng khối "Báo cáo cho phiên thảo luận" gồm:
+   commit hash (cả 2 nhiệm vụ), TC chưa map được bug_id (nếu có), trích SRS FR07,
+   bảng biến vào/ra, kết quả khảo sát SUT, danh sách giả định, cảnh báo check/linter.
+```
+
+Khi có báo cáo, gửi lại đây. Mình sẽ review bảng biến trước, rồi cùng bạn chốt các giả định trước khi sang bước 2. Transcript phiên này sẽ đặt tên `claude-ai_session_HW02_p3.jsonl`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #117 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6842,7 +6901,7 @@ Thư mục trống (listing trước là của `../eshop-sut`). Đọc test basi
 
 ---
 
-## #117 | 10:14 20/10/2026 | Claude (không rõ model) | [...]
+## #118 | 10:14 20/10/2026 | Claude (không rõ model) | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6859,7 +6918,7 @@ Thư mục trống (listing trước là của `../eshop-sut`). Đọc test basi
 
 ---
 
-## #118 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
+## #119 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7056,7 +7115,176 @@ Xong bước 0–1 cho B_FR07, dừng ở đây chờ em review. Nhiệm vụ 1 
 
 ---
 
-## #119 | 10:23 20/10/2026 | Claude Opus 5.5 | [...]
+## #120 | 10:20 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sao báo cáo dài thế nhỉ
+```
+
+**Output:**
+````
+Một phần lỗi nằm ở lệnh của mình: nó đòi trích SRS nguyên văn, khảo sát SUT và liệt kê giả định ngay trong báo cáo, nên báo cáo dài là phải. Ngoài ra còn ba chỗ phình không cần thiết:
+
+- **Lặp nội dung đã có trong file.** Bảng 21 biến đã nằm trong `testcases.md`, đoạn trích SRS cũng vậy. Báo cáo chỉ cần trỏ đến file.
+- **Bảng kẻ khung từ terminal** bị vỡ khi dán sang đây (cột lệch, chữ bị cắt), nên vừa dài vừa khó đọc.
+- **Không lọc theo mức cần quyết.** Có 18 giả định, nhưng chỉ 5 cái (B1, B3, B6, B7, B9) chặn bước 2. 13 cái còn lại có thể chốt dần khi review bước 2–3.
+
+Thứ thật sự cần đọc trong báo cáo này chỉ khoảng 10 dòng: 2 commit, kết quả check, 5 quyết định, và 4 ghi nhận bất thường của SUT.
+
+Để các lần sau gọn hơn, nên thêm quy ước báo cáo vào `CLAUDE.md`:
+
+**Lệnh cho Claude Code**
+
+```
+Thêm vào CLAUDE.md mục "Báo cáo cho phiên thảo luận" (thay quy ước cũ nếu có):
+- Tối đa ~25 dòng. Chỉ gồm: commit hash + tiêu đề; kết quả check/lint (chỉ số
+  errors/warn, giải thích warn nếu bất thường); quyết định chờ SV (chỉ những
+  điểm chặn bước kế tiếp, mỗi điểm 1 dòng: mã – câu hỏi – các phương án);
+  bất thường/rủi ro mới phát hiện.
+- Nội dung đã có trong file (bảng biến, lớp, TC, trích SRS) → chỉ ghi đường dẫn,
+  không chép lại.
+- Không dùng bảng kẻ khung (┌─┐). Dùng danh sách gạch đầu dòng hoặc bảng markdown.
+- Chỉ dài hơn khi lệnh yêu cầu rõ nội dung cụ thể.
+Commit riêng: "HW02: vá harness – quy ước báo cáo ngắn".
+```
+
+Lượt sau mình sẽ bàn 5 quyết định B1, B3, B6, B7, B9. Nếu bạn muốn, mình có thể đưa sẵn phương án và hệ quả của từng cái để bạn chọn nhanh.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #121 | 10:22 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Để tôi gửi bạn một số báo cáo ở session cũ nhé:
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: đồng bộ BUG-xx.md với issue; kiểm issues_page.png; commit 7/7d; cập nhật test summary
+- File đã sửa: HW02/bugs/BUG-01…14.md ("Ảnh tiêu biểu:"); HW02/README.md (SUMMARY); tools/summary.py (đọc severity dạng "- **Severity:**", đếm bug theo feature qua mục "TC liên quan")
+- Kết quả kiểm tra: 14/14 URL đúng thứ tự (#17–#30); nội dung 14 issue đã có "Ảnh tiêu biểu:"; issues_page.png có, hiện đủ 14 issue đang mở; summary: 133 thiết kế, 108 đã chạy, 43 Pass, 65 Fail, 25 Blocked, 0 chưa chạy, 14 bug (Critical 6, High 2, Medium 5, Low 1)
+- Commit: 27da576 HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png; d4f0de1 HW02: cập nhật test summary
+- Cần quyết định / câu hỏi:
+  1. Cột "TC SV thêm" = 25 chỉ đếm origin Human; TS-SV có 33 case (8 case Both được tính vào "TC từ AI" = 108). Giữ cách đếm này hay tách thêm cột Both?
+  2. bug_id trong testcases.json vẫn trống; ghi BUG-xx vào bug_id của các TC Fail/Blocked (để bảng truy vết trong testcases.md có cột bug) không? Việc này đổi JSON → phải render lại testcases.md.
+  3. A_FR01 đã xong 7/7. Bước tiếp: B_FR07 (bước 1) hay report chính, AI-02 Audit cho A_FR01?
+===
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: bug_id + tách cột Both; ghi quy ước A_FR01 vào CLAUDE.md; vá SKILL.md (bước 3/6/7)
+- File đã sửa: HW02/A_FR01/testcases.json, testcases.md, HW02/README.md, tools/summary.py; CLAUDE.md; .claude/skills/domain-bva-testing/SKILL.md
+- Kết quả kiểm tra: bug_id 90/90 TC Fail/Blocked, không TC nào thiếu hay trùng bug; check_domain 0 lỗi/1 cảnh báo; lint 0 lỗi/4 cảnh báo; render OK; summary AI 98 / Both 10 / Human 25 / Bug 14; SKILL.md không nhắc EShop
+- Commit: af48958 HW02[A-FR01]: ghi bug_id + tách cột Both trong summary; 5009d08 HW02: CLAUDE.md – ghi quy ước đã chốt từ A_FR01; cb43a1d HW02: vá harness – SKILL.md bổ sung bài học từ A_FR01
+- Cần quyết định / câu hỏi:
+  1. CLAUDE.md được commit riêng (lệnh không nói commit) → nếu muốn gộp vào commit harness thì báo em.
+  2. Phiên sau: B_FR07 bước 0–1, hay report chính và AI-02 Audit cho A_FR01? Harness (summary.py, SKILL.md, merge_results.py) đã sửa nhiều lần do AI hỗ trợ → nhớ khai trong Audit.
+===
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: notes theo khoá giờ; ghi nhận khoảng thiếu 15:56–17:40 (chưa xử lý)
+- File đã sửa: tools/extract_prompt_log.py; HW02/appendix/prompt_log_notes.toml (chỉ đổi tiêu đề [1] bằng --migrate-notes); HW02/appendix/A_prompt_log.md (trích lại, 97 lượt)
+- Kết quả kiểm tra: --list in khoá giờ (4 khoá có #k); ghi chú #1 vẫn hiện đúng sau khi đổi khoá; on_stop --manual chạy OK
+- Commit: 5bf0287 HW02: vá harness – notes theo khoá giờ
+- Cần quyết định / câu hỏi:
+  1. Đầu file notes (phần SV viết) vẫn ghi "Xem số #n… Số #n đổi nếu thêm session…"; em không sửa → SV đổi thành hướng dẫn dùng khoá giờ nếu muốn.
+  2. Khoảng 15:56–17:40 (~10 lượt claude.ai) chờ SV khôi phục từ bản export claude.ai vào prompt_log_extra.toml. Mỗi entry cần time, tool (vd "Claude Opus 5.5"), prompt, output nguyên văn; khai trong AI-03 rằng các lượt này chép từ export.
+===
+xem có giống như yêu cầu Claude Code hiện tại mà bạn đang viết không?
+```
+
+**Output:**
+````
+Về khung thì giống: cả ba báo cáo cũ đều theo đúng 5 mục (Nhiệm vụ / File đã sửa / Kết quả kiểm tra / Commit / Cần quyết định), mỗi mục vài dòng. Vậy là `CLAUDE.md` đã có quy ước báo cáo ngắn, và lệnh mình đề xuất ở lượt trước phần lớn bị thừa.
+
+Báo cáo vừa rồi dài là do **lệnh của mình**: nó bắt chép trích SRS, kết quả khảo sát SUT, bảng biến và danh sách giả định vào báo cáo. Claude Code làm đúng lệnh, không phải do quy ước thiếu.
+
+Điều chỉnh:
+- **Nếu chưa chạy lệnh "quy ước báo cáo ngắn":** bỏ nó, thay bằng phần bổ sung nhỏ dưới đây. Phần này chỉ thêm hai điều mà khung cũ chưa có: nội dung dài thì ghi vào file, và không dùng bảng kẻ khung.
+- **Nếu đã chạy:** kiểm tra xem nó có thay mất khung 5 mục cũ không. Nếu có thì revert, rồi chạy lệnh dưới.
+- **Phía mình:** từ giờ lệnh sẽ không yêu cầu chép nội dung vào báo cáo nữa, chỉ yêu cầu đường dẫn file.
+
+**Lệnh cho Claude Code**
+
+```
+Bổ sung vào mục "Báo cáo cho phiên thảo luận" hiện có trong CLAUDE.md (giữ nguyên
+khung 5 mục cũ), thêm 2 dòng:
+- Nội dung dài (trích SRS, bảng biến/lớp/TC, khảo sát SUT, danh sách giả định) →
+  ghi vào file trong thư mục feature, báo cáo chỉ nêu đường dẫn; mục "Cần quyết
+  định" chỉ liệt kê điểm chặn bước kế tiếp, mỗi điểm 1 dòng.
+- Không dùng bảng kẻ khung (┌─┐); dùng gạch đầu dòng hoặc bảng markdown.
+Commit: "HW02: CLAUDE.md – bổ sung quy ước báo cáo".
+```
+
+Sau đó mình sẽ quay lại 5 quyết định B1, B3, B6, B7, B9.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #122 | 10:23 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+Đây là trong file CLAUDE.md. Vậy mình nên dùng prompt gì nhỉ - **Kết thúc mỗi nhiệm vụ** bằng một khối ngắn để người dùng dán ngược về phiên thảo luận:
+
+  ```
+  ### Báo cáo cho phiên thảo luận
+  - Nhiệm vụ: …
+  - File đã tạo/sửa: …
+  - Kết quả kiểm tra: check_domain …, lint …, test … (Pass/Fail/Not run)
+  - Commit: <hash> <message>
+  - Cần quyết định / câu hỏi: …
+  ```
+````
+
+**Output:**
+`````
+Quy ước hiện có đã đủ khung, chỉ thiếu ràng buộc độ dài. Lệnh dưới đây sửa đúng đoạn đó, đưa sẵn nguyên văn để Claude Code chỉ việc thay, không phải tự diễn giải.
+
+**Lệnh cho Claude Code**
+
+````
+Trong CLAUDE.md, thay đoạn "**Kết thúc mỗi nhiệm vụ** … (hết khối mẫu)" bằng đúng
+nội dung sau, không sửa chỗ nào khác:
+
+**Kết thúc mỗi nhiệm vụ** bằng một khối ngắn (≤ 25 dòng) để người dùng dán ngược
+về phiên thảo luận:
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: …
+- File đã tạo/sửa: …
+- Kết quả kiểm tra: check_domain …, lint …, test … (Pass/Fail/Not run)
+- Commit: <hash> <message>
+- Cần quyết định / câu hỏi: …
+```
+
+Quy tắc cho khối báo cáo:
+- Nội dung dài (trích SRS, bảng biến/lớp/TC, khảo sát SUT, danh sách giả định)
+  ghi vào file trong thư mục feature; báo cáo chỉ nêu đường dẫn. Kể cả khi lệnh
+  yêu cầu "báo cáo X", hãy hiểu là ghi X vào file rồi trỏ tới.
+- "Cần quyết định" chỉ liệt kê điểm chặn bước kế tiếp, mỗi điểm 1 dòng:
+  mã – câu hỏi – các phương án. Điểm không chặn thì ghi số lượng + đường dẫn file.
+- Bất thường mới phát hiện (SUT, harness): mỗi điểm 1 dòng, kèm file:dòng.
+- Không dùng bảng kẻ khung (┌─┐); dùng gạch đầu dòng hoặc bảng markdown.
+
+Commit: "HW02: CLAUDE.md – giới hạn độ dài báo cáo".
+````
+
+Dòng "Kể cả khi lệnh yêu cầu…" là để chặn đúng lỗi vừa rồi: lệnh của mình đòi nội dung, và Claude Code chép hết vào báo cáo.
+
+Nội dung bước 1 của B hiện chỉ nằm trong báo cáo đã gửi, chưa có file riêng. Trích SRS và khảo sát SUT sẽ mất nếu không lưu lại. Nếu muốn giữ, thêm vào cùng lệnh một dòng: *"Ghi phần trích SRS, khảo sát SUT và giả định B0–B18 của bước 1 vào `HW02/B_FR07/step1_notes.md` (nếu testcases.md chưa có)."*
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #123 | 10:23 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7108,7 +7336,115 @@ Em đã thay đoạn đó trong CLAUDE.md đúng nguyên văn và commit. Đoạ
 
 ---
 
-## #120 | 10:29 20/10/2026 | Claude Opus 5.5 | [...]
+## #124 | 10:24 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: thay đoạn "Kết thúc mỗi nhiệm vụ" trong CLAUDE.md bằng nội dung mới (≤ 25 dòng + 4 quy tắc)
+- File đã tạo/sửa: CLAUDE.md (dòng 11–29)
+- Kết quả kiểm tra: check_domain Not run, lint Not run, test Not run (chỉ sửa tài liệu)
+- Commit: b5c95b6 HW02: CLAUDE.md – giới hạn độ dài báo cáo
+- Cần quyết định / câu hỏi:
+  - Phần trích SRS FR-07, khảo sát SUT và danh sách giả định B1–B18 của lượt trước mới chỉ nằm trong chat – có ghi vào HW02/B_FR07/notes_step1.md (commit kèm bước 2) không? Có / Không
+- Bất thường: hook Stop sửa HW02/appendix/A_prompt_log.md sau mỗi lượt; file này chưa commit, sẽ đi cùng commit bước 2 của B_FR07.
+```
+
+**Output:**
+```
+**Câu hỏi notes:** chọn **Có**, nhưng commit ngay bây giờ chứ không đợi gộp vào bước 2. Đây là sản phẩm của bước 1; gộp vào commit 2/7 sẽ làm lệch truy vết trong commit log. Trước khi ghi, kiểm `testcases.json/md` xem giả định B0–B18 đã có chưa, chỉ ghi phần còn thiếu. Prompt log để đi cùng commit đó là đúng quy ước.
+
+**5 quyết định chặn bước 2.** Mình nêu phương án và hệ quả, có khuyến nghị khi SRS đủ căn cứ; giá trị cụ thể do bạn chọn.
+
+**B1 – Cận trên số lượng**
+- (a) Không có cận trên, vì SRS chỉ nói ≥ 1. BVA phía trên chỉ còn một đại diện "giá trị lớn" hợp lệ.
+- (b) Tự đặt một con số theo thông lệ. Khi đó mọi Fail ở biên trên đều dựa trên giả định, không có câu SRS nào làm căn cứ, nên bug sẽ yếu.
+- Khuyến nghị: (a). Nó trung thực với SRS và khớp với ghi chú trong handoff.
+
+**B3 – Nút "−" khi số lượng = 1**
+- Khảo sát cho thấy SUT **không có nút +/−**. Theo quy tắc A17: 1 case kiểm sự tồn tại → Fail; các case phụ thuộc → Blocked. Như vậy B3 chỉ ảnh hưởng Expected của các case Blocked.
+- (a) Giữ nguyên 1. (b) Xoá dòng.
+- Khuyến nghị: (a). SRS ghi "tối thiểu là 1", và việc xoá bắt buộc qua dialog (FR-07.4). Nếu chọn (b), nút "−" sẽ thành đường xoá không cần xác nhận.
+
+**B6 – Đưa FR-06 (ô số lượng, phản hồi khi thêm) vào phạm vi?**
+- Nếu không đưa vào, V1 mất nguồn ràng buộc số (≥ 1, nguyên dương). B_FR07 gần như không còn biến số để làm BVA.
+- Khuyến nghị: **Có**. Bug thuộc FR-06 thì đặt tiêu đề `[FR-06]`. Trước khi tạo issue, kiểm trùng trên fork nhóm.
+
+**B7 – Kiểm `/api/cart` thành tầng riêng?**
+- Giỏ trên web là state React, không gọi API. Vậy `/api/cart` là một cài đặt khác hẳn, kiểm UI không phủ được nó.
+- API chỉ có GET và POST, không có sửa/xoá.
+- Khuyến nghị: **Có**, tách suite riêng như A (quy ước: mỗi tầng một suite). SEC-02 và B8 (giá do client gửi) chỉ kiểm được ở tầng này.
+
+**B9 – Badge đếm gì?**
+- (a) Tổng số lượng. (b) Số dòng.
+- FR-23 mơ hồ, mình không khuyến nghị bên nào. Chọn bên nào thì ghi rõ là giả định.
+- Lưu ý: giả định này chỉ có ý nghĩa khi có case mà số dòng ≠ tổng số lượng. Nếu không có case như vậy, chọn gì cũng ra cùng kết quả.
+
+Trả lời gọn kiểu `B1=a, B3=a, B6=có, B7=có, B9=?`. Mình sẽ gộp vào một lệnh: commit notes bước 1, ghi 5 quyết định, rồi chạy bước 2. Các giả định còn lại (B2, B4, B5, B8, B10–B18) để Claude Code đề xuất trong bước 2, bạn chốt khi review.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #125 | 10:28 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B1: a
+B3: a
+B6: có
+B7: có
+B9: a vì: "Link "Giỏ hàng" phải hiển thị badge số lượng sản phẩm trong giỏ."
+```
+
+**Output:**
+````
+Ghi nhận. Riêng B9: câu SRS vẫn còn đọc được theo nghĩa "số sản phẩm" (tức số dòng), nên khi ghi vẫn để là **giả định của SV**, kèm câu trích làm lý do. Đừng ghi như thể SRS đã quy định.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – Lưu notes bước 1 (commit riêng)
+1. Kiểm testcases.json/md của B_FR07: phần trích SRS, khảo sát SUT, giả định
+   B0–B18 đã có chưa. Chỉ ghi phần CÒN THIẾU vào HW02/B_FR07/notes_step1.md
+   (nội dung lấy từ báo cáo bước 1 của lượt trước, không viết lại).
+2. Commit: "HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)"
+   kèm HW02/appendix/A_prompt_log.md.
+
+Nhiệm vụ 2 – Ghi 5 quyết định SV vào phần giả định của testcases.json
+(dùng trường sẵn có của schema; đánh dấu do SV chốt, kèm lý do):
+- B1 = không có cận trên (SRS chỉ quy định ≥ 1); BVA phía trên dùng 1 đại diện
+  "giá trị lớn" hợp lệ.
+- B3 = nút "−" ở số lượng 1 giữ nguyên 1 (SRS FR-06 "tối thiểu là 1"; xoá phải
+  qua dialog FR-07.4). Ghi chú: SUT chưa thấy nút +/− → xử lý theo quy tắc A17
+  ở bước 3.
+- B6 = có, FR-06 (ô số lượng, phản hồi khi thêm) trong phạm vi; bug thuộc FR-06
+  đặt tiêu đề [FR-06].
+- B7 = có, /api/cart là tầng riêng, suite riêng (UI / API).
+- B9 = badge đếm tổng số lượng. Giả định của SV, lý do: FR-23 "badge số lượng sản
+  phẩm trong giỏ". Ghi rõ câu SRS vẫn có thể hiểu là số dòng.
+
+Nhiệm vụ 3 – Bước 2 (lớp tương đương)
+1. /domain-bva-testing HW02/B_FR07 2, áp dụng 5 quyết định trên.
+2. Lớp dựa trên SRS + giả định đã chốt; code chỉ dùng cho điểm quan sát.
+3. Với các giả định chưa chốt (B2, B4, B5, B8, B10–B18): đề xuất phương án trong
+   file; chỉ đưa vào "Cần quyết định" những cái làm thay đổi số lớp hoặc chặn bước 3.
+4. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit: "HW02[B-FR07] 2/7: lớp tương đương" kèm prompt log.
+5. Dừng sau bước 2. Báo cáo theo CLAUDE.md.
+```
+
+Khi có báo cáo bước 2, mình sẽ review danh sách lớp trong `testcases.md`. Bạn dán bảng lớp hoặc cho mình đường dẫn, kèm báo cáo.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #126 | 10:29 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7181,7 +7517,96 @@ Xong cả 3 nhiệm vụ: đã ghi notes bước 1, ghi 5 quyết định SV, v�
 
 ---
 
-## #121 | 10:33 20/10/2026 | Claude Opus 5.5 | [...]
+## #127 | 10:32 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) notes bước 1; (2) ghi 5 quyết định SV B1/B3/B6/B7/B9; (3) bước 2 lớp tương đương
+- File đã tạo/sửa: HW02/B_FR07/notes_step1.md (chỉ thêm trích SRS + khảo sát SUT, vì B0–B18 đã có trong json); HW02/B_FR07/testcases.json/.md (bảng EC + giả định); HW02/appendix/ai-outputs/B_FR07_step2_20261020-1031.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/60 warn (52 EC chưa có TC, V1 chưa có case BVA, 7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10); lint 0 errors/20 warn (chưa có TC); test Not run
+- Commit: e9ca12c HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)
+          5badc45 HW02[B-FR07] 2/7: lớp tương đương (quyết định SV nằm chung commit này)
+- Cần quyết định (chặn bước 3):
+  - B2 – Lần thêm bị từ chối có bắt buộc phải có thông báo lỗi không? – có (EC52, đề xuất) / chỉ cần giỏ không đổi (bỏ EC52)
+  - B5 – Thêm lại sản phẩm đã có từ trang khác có tách lớp riêng không? – tách EC9/EC10 (đề xuất) / gộp làm 1
+  - B8 – Giá/tên client gửi trong POST /api/cart xử lý tị CSDL (EC16/EC32 hợp lệ, đề xuất) / chấp nhận giá client(+3 lớp không hợp lệ cho price)
+  - B10 – Giữ giỏ khi tải lại trang / đăng nhập / đăng xuất? – ngoài phạm vi (đề xuất) / trong phạm vi (+1 biến, 3 lớp)
+  - B16 – Có lập suite TS-GUI riêng (breadcrumb, highlight, alt, ₫)? – có (đề xuất) / không                                                       - B18 – Có kiểm sai kiểu và id không tồn tại ở tầng APề xuất) / bỏ 4 lớp này
+  - 7 giả định không chặn (B4, B11–B15, B17): đề xuất nằm trong HW02/B_FR07/testcases.md, mục Giả định                                          - Bất thường:
+  - Đơn giá: em không tách lớp theo id chẵn/lẻ (server.js:162, chỉ dùng làm điểm quan sát); SV chọn có lấy đại diện cả hai ở bước 3 hay không – ghi ở note EC14
+  - Thứ t
+```
+
+**Output:**
+````
+Báo cáo bị cắt ở cuối, đoạn "Bất thường" dừng ở chữ "Thứ t…". Bạn gửi nốt phần đó. Nếu nó không chặn bước 3 thì dùng luôn lệnh bên dưới.
+
+**6 quyết định.** Mình áp cùng một nguyên tắc như B1: Expected phải có căn cứ trong SRS, nếu không thì Fail sẽ chỉ dựa trên giả định.
+
+- **B2 → bỏ EC52**, oracle là "giỏ không đổi". FR-06 chỉ nói "chỉ nhận số nguyên dương", không bắt buộc phải có thông báo lỗi. Giữ EC52 nghĩa là sinh Fail từ giả định.
+- **B5 → tách EC9/EC10.** Hai điểm thêm vào giỏ (trang chủ, trang chi tiết) đều thấy được trên UI, nên tách là hợp lệ theo hộp đen. Chi phí chỉ thêm 1 lớp.
+- **B8 → theo đề xuất: giá lấy từ CSDL.** FR-08 nói tổng tiền "tính tự động, không cho người dùng chỉnh". Nếu server tin giá do client gửi thì vi phạm câu này. Đây là căn cứ SRS, không phải thông lệ.
+- **B10 → ngoài phạm vi.** SRS không nói gì về chuyện này.
+- **B16 → có TS-GUI riêng**, như A14. Chỉ giới hạn ở trang giỏ và các điểm thêm vào giỏ.
+- **B18 → giữ 4 lớp.** Vì đã chọn B8 (giá lấy từ CSDL), trường hợp "id không tồn tại" có Expected rõ ràng.
+- **Đại diện id chẵn/lẻ (EC14) → lấy cả hai ở suite API.** Ghi notes là "đại diện chọn theo code server.js:162 (gray-box)". Ở A, AI biết code nhưng không dùng nó để chọn đại diện; lần này nên dùng, và khai minh bạch.
+
+7 giả định không chặn: bạn lướt qua mục Giả định trong `testcases.md` trước khi review bước 3 là đủ.
+
+Thêm một chuyện: "52 EC" là con số lớn. Khi review bước 3, xem minimum set có thật sự gộp nhiều lớp hợp lệ vào một case không. Nếu gần như mỗi lớp một case thì phải xem lại.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – Ghi 6 quyết định SV vào giả định trong testcases.json (đánh dấu SV chốt + lý do):
+- B2 = bỏ EC52; oracle từ chối = giỏ không đổi (FR-06 không yêu cầu thông báo).
+- B5 = tách EC9/EC10 (2 điểm thêm vào giỏ đều thấy được trên UI).
+- B8 = giá lấy từ CSDL, không tin giá client (FR-08: tổng tiền tính tự động, không cho chỉnh).
+- B10 = ngoài phạm vi (SRS im lặng).
+- B16 = có suite TS-GUI riêng, giới hạn trang giỏ và các điểm thêm vào giỏ.
+- B18 = giữ 4 lớp sai kiểu / id không tồn tại ở API.
+- EC14: suite API lấy đại diện cả id chẵn và lẻ; notes "đại diện chọn theo code
+  server.js:162 (gray-box)".
+
+Nhiệm vụ 2 – Bước 3 (TC Domain, minimum set)
+1. /domain-bva-testing HW02/B_FR07 3.
+2. Suite tách UI / API / GUI. Mỗi case dùng user riêng {ts}, oracle tương đối,
+   precondition nêu trạng thái quan sát được. Giỏ web là state React: procedure
+   điều hướng bằng link trong app, không goto/reload giữa chừng.
+3. Nút +/−: theo A17 (1 case kiểm tồn tại; case phụ thuộc vẫn thiết kế đầy đủ).
+4. Minimum set: case hợp lệ gộp nhiều lớp; case không hợp lệ đúng 1 lớp. Báo cáo
+   ghi tỷ lệ số TC / số EC.
+5. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 3/7: TC domain" kèm prompt log. Dừng sau bước 3.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #128 | 10:32 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+- Thứ tự đúng render→freeze đã áp dụng; bản freeze bước 1 vẫn thiếu .md (đã báo lượt trước)
+```
+
+**Output:**
+```
+Phần đó không chặn bước 3, bạn chạy luôn lệnh ở lượt trước.
+
+Về bản freeze bước 1 thiếu `.md`: nên để nguyên, không bổ sung. `ai-outputs/` là vùng không được sửa, kể cả thêm file sinh sau, vì như vậy bản đóng băng mất ý nghĩa "đúng thời điểm đó". JSON đóng băng đã chứa đủ nội dung, `.md` chỉ là bản render lại. Bạn chỉ cần ghi một dòng vào ghi chú cho AI-02 Audit: *"B_FR07 bước 1: bản đóng băng chỉ có JSON (freeze chạy trước render); .md tái tạo bằng render_md.py từ JSON đóng băng. Từ bước 2 đã sửa thứ tự."* Câu này khai luôn cả việc harness từng chạy sai thứ tự, một điểm có lợi khi viết Audit.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #129 | 10:33 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7246,7 +7671,194 @@ Bước 3 xong: 27 TC Domain phủ đủ 51/51 lớp tương đương, cộng th
 
 ---
 
-## #122 | 10:47 20/10/2026 | Claude Opus 5.5 | [...]
+## #130 | 10:38 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) ghi 6 quyết định B2/B5/B8/B10/B16/B18 + đại diện id chẵn/lẻ (ghi thành giả định mới B19); (2) bước 3 TC domain
+- File đã tạo/sửa: HW02/B_FR07/testcases.json/.md; HW02/appendix/ai-outputs/B_FR07_step3_20261020-1037.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/8 warn (7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10; V1 chưa có case BVA); lint 0 errors/0 warn; test Not run
+- Commit: 4c69716 HW02[B-FR07] 3/7: TC domain
+- Minimum set: 27 TC / 51 EC = 0,53 TC mỗi EC
+  - UI 13 TC (01–13): 9 hợp lệ, 4 không hợp lệ
+  - API 14 TC (20–23, 30–39): 4 hợp lệ, 10 không hợp lệ
+  - GUI 5 TC (90–94): không gắn EC
+- Thay đổi ngoài khối lệnh:
+  - Bỏ biến V21: bỏ EC52 thì V21 không còn lớp nào
+  - Thêm yêu cầu FR-23.1 (highlight navbar) để TC-92 tru
+  - B20: áp quy tắc A17/A20 của A_FR01 vào B_FR07 — thiếu nút +/- thì TC-90 Fail, TC-05/06/07 Blocked
+  - Sửa tiêu đề TC-93/94 theo cảnh báo của linter
+- Cần quyết định (chặn bước 4): không có
+- Không chặn, cần SV xác nhận khi review (2 điểm, xem HW02/B_FR07/testcases.md):                                                               - EC32/TC-23: em suy rộng B8 sang tên sản phẩm (tên cl)
+  - Dựng giỏ ban đầu qua trang chi tiết (TC-03, TC-06) phụ thuộc nút "Thêm vào giỏ hàng"; nếu nút lỗi thì các case này Blocked theo B20, chỗ nào được thì dựng qua trang chủ
+- Bất thường mới: không có
+===
+Bạn cần xem testcases.md chưa nhỉ
+```
+
+**Output:**
+```
+Có, cần xem. Bước 3 là chỗ dễ sai nhất: Expected, oracle và cách gộp lớp đều nằm trong file, báo cáo không đủ để review. Bạn đính kèm thẳng `HW02/B_FR07/testcases.md` vào chat, đừng dán qua terminal vì bảng sẽ vỡ.
+
+Trong lúc đó, ngay từ báo cáo đã thấy 3 điểm cần xem lại:
+
+1. **B20 đã gán verdict trước khi chạy.** Câu "TC-90 Fail, TC-05/06/07 Blocked" là đoán kết quả từ khảo sát code. Ở bước 3, case chỉ cần Expected theo SRS. A17/A20 là quy tắc chốt verdict ở bước 6, sau khi có Actual. Nếu nút +/− thật sự không có, kết quả vẫn sẽ ra như vậy, nhưng phải đến từ lần chạy, không phải từ thiết kế. Cần sửa: B20 chỉ ghi "áp dụng khi chốt verdict ở bước 6", và bỏ mọi verdict hoặc nhãn Blocked đang có trong TC.
+
+2. **EC32/TC-23 suy rộng B8 sang tên sản phẩm là thiếu căn cứ.** B8 dựa vào FR-08, và câu đó nói về tiền. Với tên sản phẩm, SRS không yêu cầu server bỏ tên do client gửi, nên Expected "dùng tên từ CSDL" lại thành giả định sinh Fail. Phần tên chỉ có căn cứ ở SEC-04 (escape khi hiển thị). Mình đề nghị không suy rộng: lớp của V9 bám vào SEC-04, không bám vào B8.
+
+3. **Dựng giỏ ban đầu qua trang chủ thì được, nhưng lý do phải đúng.** Lý do nên ghi là "setup dùng thao tác đơn giản nhất, không phải biến mục tiêu". Không ghi là "vì nút ở trang chi tiết có thể lỗi". Theo A20, setup lệch vì biến khác thì mới là Blocked, và việc đó chỉ xét được khi đã có kết quả chạy.
+
+Khi có file, mình sẽ tập trung vào: 9 case hợp lệ của UI có thật sự gộp lớp không (với minimum set thì con số này hơi nhiều), oracle của từng case API, và mục Giả định B4, B11–B15, B17.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #131 | 10:39 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Chắc hẳn bạn cũng biết là mình muốn brainstorm với chat và review lại những gì Claude Code thực hiện mà nhỉ
+```
+*Đính kèm:* `testcases.md`
+
+**Output:**
+```
+Đúng vậy, và bước 3 là chỗ đáng review kỹ nhất. Mình đã đọc hết file.
+
+Trước tiên, một đính chính: lượt trước mình nói B20 "gán verdict trước khi chạy". Trong file, B20 viết dạng điều kiện ("nút +/- thiếu → …") và nằm ở procedure như một quy tắc chốt verdict, không gắn sẵn kết quả vào TC nào. Như vậy là ổn, mình đã đánh giá sai dựa trên câu chữ trong báo cáo.
+
+## Vấn đề cần sửa
+
+**1. Các case hợp lệ khẳng định chéo quá nhiều, dễ gây Blocked dây chuyền. Đây là vấn đề lớn nhất.**
+
+Hầu như mọi case UI có hàng (TC-02 → 08) đều kiểm cùng lúc nhãn "Tổng cộng" (EC42), badge (EC43), phản hồi sau khi thêm (EC45) và định dạng ₫ (EC41). Khảo sát đã thấy SUT ghi "Tổng tạm tính". Theo A20, lệch do biến khác thì verdict là Blocked. Kết quả là TC-03 (cộng dồn), TC-05 (+), TC-06 (−), TC-08 (xoá) đều có thể bị Blocked vì cái nhãn, và bạn mất luôn thông tin về chính biến mục tiêu của từng case.
+
+Cách sửa: thuộc tính nào không đổi giữa các case (nhãn, định dạng, badge, phản hồi) thì chỉ khẳng định ở **một** case. Các case còn lại chỉ kiểm đầu ra của biến mục tiêu, tức là số lượng, số dòng và giá trị Tổng (con số, không kiểm nhãn). Ở A, quy tắc "case hợp lệ phủ nhiều lớp" chưa gặp chuyện này vì đầu ra của A không có thuộc tính chung kiểu đó.
+
+**2. EC32 / TC-23 / SEC-04: không có điểm quan sát.**
+
+Giỏ trên web là state React, không bao giờ hiển thị dữ liệu từ `/api/cart`. Tức là tên do client gửi qua API không xuất hiện trên UI nào, nên SEC-04 không kiểm được qua đường này. Dòng truy vết SEC-04 → TC-23 là sai. Còn Expected "tên = tên CSDL" thì không có căn cứ SRS (như đã nói ở lượt trước). Phần này cần bạn quyết định, xem mục bên dưới.
+
+**3. Expected của TC-91 và TC-92 có ý không có bước quan sát tương ứng.**
+- TC-92 ghi "ở trang chủ thì không (highlight)", nhưng procedure không có bước nào xem trang chủ.
+- TC-91 ghi "mục trang chủ bấm được", nhưng procedure không có bước bấm.
+
+Cần làm một trong hai: thêm bước quan sát, hoặc bỏ ý đó khỏi Expected.
+
+**4. Độ mịn của lớp không nhất quán.**
+
+Với quantity, rỗng/không phải số/thiếu được tách thành 3 lớp (EC4/5/7). Với id, "thiếu id" và "sai kiểu" lại gộp vào một lớp EC13. Ngoài ra TC-37 có câu "thiếu id … để bước 5/BVA nếu cần". Câu này phải xoá: AI không được gợi trước việc cho bước 5.
+
+**5. Truy vết sai hoặc lệch với cột EC phủ.**
+- B8 dựa vào câu "tổng tiền tính tự động" của FR-08, nhưng bảng yêu cầu chỉ có FR-08.1 (đăng nhập). TC-22 đang bị gán vào FR-08.1, trong khi đúng ra phải là FR-08.2. Cần thêm FR-08.2.
+- FR-07.6 không có TC-03, nhưng EC42 lại ghi TC-03 phủ. Tương tự với FR-06.3 / FR-24.1 và TC-03 / TC-04.
+
+Bảng truy vết nên sinh tự động từ ánh xạ EC → yêu cầu, không ghi tay.
+
+## Phần ổn
+
+- **9 case hợp lệ của UI là hợp lý, không thừa.** Mỗi case một thao tác, và các thao tác (thêm mới, thêm trùng ×2, +, − ở ≥2, − ở 1, xoá xác nhận, xoá huỷ, giỏ trống) loại trừ nhau. Mối lo ở lượt trước về con số này là không cần thiết.
+- Suite API gọn, mỗi case không hợp lệ phủ đúng 1 lớp, oracle tương đối rõ. B19 được ghi minh bạch là gray-box.
+- Precondition và procedure đã tính tới chuyện giỏ nằm trong state React: chỉ mở URL đúng một lần mỗi case, sau đó điều hướng bằng link trong app.
+
+## Cần bạn quyết định
+
+1. **EC32 (tên do client gửi):**
+   - (a) Bỏ EC32. V9 chỉ còn lớp hợp lệ, gỡ SEC-04 khỏi truy vết.
+   - (b) Giữ EC32 nhưng Expected chỉ là "2xx, giỏ thêm 1 phần tử", không khẳng định gì về tên.
+
+   Mình nghiêng về (a): giữ (b) chỉ để có số TC mà không kiểm được điều gì.
+2. **B11 (khách dùng giỏ):** có 5 case UI chạy với khách. Nếu chưa chốt B11 thì Expected của 5 case này chưa có căn cứ. Lý do đề xuất (FR-08.1 chỉ yêu cầu đăng nhập khi thanh toán) là suy luận được từ SRS, nên chấp nhận là hợp lý.
+3. **B12 (nhãn chính xác):** quyết định này đổi verdict của TC-02, vì SUT dùng nhãn "← Mua tiếp" chứ không phải "Tiếp tục mua sắm". SRS in đậm cả "Tiếp tục mua sắm" lẫn "Xóa sản phẩm", và chỉ riêng "Tổng cộng" có ghi "nhãn chính xác". Bạn chọn:
+   - (a) Mọi cụm in đậm đều là nhãn.
+   - (b) Chỉ "Tổng cộng" là nhãn bắt buộc, các cụm khác là tên chức năng.
+4. **B13 (dấu phân cách hàng nghìn):** `toLocaleString()` phụ thuộc locale của trình duyệt. Playwright mặc định chạy en-US nên sẽ ra dấu ",". Nếu bắt buộc dùng ".", verdict sẽ phụ thuộc môi trường chạy test. Khuyến nghị: chấp nhận cả hai (SRS chỉ nói "có phân cách"), và ghi locale vào mục môi trường.
+5. **B4, B14, B15, B17:** chấp nhận theo đề xuất. B17 nhất quán với A11.
+
+Trả lời kiểu `EC32=a, B11=ok, B12=?, B13=cả hai, còn lại ok`. Mình sẽ gộp quyết định và 5 điểm sửa vào một lệnh. Sau khi sửa, commit `3/7b`, chưa sang bước 4.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #132 | 10:46 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. EC32: a, vì nếu TC không kiểm được thì không cần viết.
+2. B11: Được nhé, mình test hiện tại thì được, xem lại SRS có nói không nhé.
+3. B12: Có so khớp chữ, và phân biệt hoa thường luôn nhé. Vì nếu không phân biệt hoa thường như "xoá Sản phẩm" thì rất là khó chịu.
+4. B13: Chấp nhận cả 2, vì mỗi nước đều khác nhau mà.
+5. Chấp nhận
+```
+
+**Output:**
+````
+Ghi nhận cả 5. Có hai chỗ cần làm rõ thêm trước khi đưa vào lệnh:
+
+- **B11:** việc bạn thử thấy khách dùng được giỏ là Actual, không phải căn cứ để viết Expected. Expected vẫn phải dựa trên SRS. Lệnh dưới đây yêu cầu Claude Code tìm trong SRS mọi câu nói về khách hoặc đăng nhập. Nếu không có câu nào, B11 ghi là suy luận từ FR-08.1.
+- **B12, khớp chữ phân biệt hoa thường:** tiếng Việt có hai cách đặt dấu đều chuẩn: "Xóa" (kiểu cũ) và "Xoá" (kiểu mới). Nếu so khớp tuyệt đối, "Xoá sản phẩm" sẽ bị tính là sai nhãn. Lệnh dưới đây mặc định **coi hai cách đặt dấu là như nhau** và chuẩn hoá Unicode NFC trước khi so. Nếu bạn muốn khắt khe hơn thì xoá dòng đó.
+
+Vì B12 đã chọn khớp chữ, vấn đề 1 càng cần sửa. Nếu không, mọi case chức năng sẽ hỏng ngay ở bước tìm nút theo nhãn. Lệnh tách hẳn hai việc: kiểm nhãn (một case riêng) và kiểm chức năng (tìm nút không phụ thuộc đúng chữ).
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – sửa bước 3 theo review. Sửa testcases.json, không đụng ai-outputs.
+
+A. Ghi quyết định SV (đánh dấu SV chốt + lý do):
+- EC32: bỏ (không có điểm quan sát: giỏ web không hiển thị dữ liệu /api/cart).
+  V9 chỉ còn lớp hợp lệ EC31; bỏ TC-FR07-23 (giữ khoảng trống số, không đánh số lại);
+  gỡ SEC-04 khỏi truy vết. Sửa ghi chú B8: bỏ phần suy rộng sang tên.
+- B11: chấp nhận. Grep SRS (README.md, api_specification.md) mọi câu về khách /
+  đăng nhập / giỏ; có thì trích nguyên văn làm căn cứ, không có thì ghi
+  "suy luận từ FR-08.1". Không dùng hành vi SUT quan sát được làm căn cứ.
+- B12: các cụm in đậm trong FR-07 là nhãn; so khớp đúng chữ, PHÂN BIỆT hoa thường,
+  chuẩn hoá Unicode NFC trước khi so; coi hai cách đặt dấu "óa"/"oá" là như nhau.
+- B13: chấp nhận "." hoặc ","; thêm locale trình duyệt vào mục môi trường.
+- B4, B14, B15, B17: SV chốt theo đề xuất.
+
+B. Sửa thiết kế:
+1. Thuộc tính chung chỉ khẳng định ở MỘT nơi:
+   - Nhãn (5 tiêu đề cột FR-07.1, "Tiếp tục mua sắm", "Tổng cộng", "Xóa sản phẩm"):
+     gom vào 1 case mới trong TS-GUI (mã 95+). Bỏ EC34 khỏi TC-02/08.
+   - Định dạng ₫: chỉ TC-93.
+   - Badge (EC43): 1 case có số dòng ≠ tổng số lượng (vd TC-04); EC44 giữ ở TC-01.
+   - Phản hồi sau khi thêm (EC45): mỗi nút thêm 1 lần, quan sát ngay sau thao tác
+     chính của case (không khẳng định trên bước dựng giỏ); nút nào không có case
+     phù hợp thì thêm vào TS-GUI.
+   - Các case còn lại: Expected chỉ gồm đầu ra của biến mục tiêu (số dòng, Số lượng,
+     Thành tiền và Tổng dạng số, không kiểm nhãn/định dạng/badge).
+   - Case chức năng tìm nút/link không dựa vào đúng chữ (vd link về '/' trên trang
+     giỏ, nút xoá trên dòng); ghi cách định vị trong procedure.
+2. TC-91, TC-92: Expected và procedure phải khớp — mỗi ý trong Expected có bước
+   quan sát tương ứng (thêm bước hoặc bỏ ý).
+3. EC13: tách "thiếu id" và "id sai kiểu" như cách tách quantity; thêm case cho lớp
+   mới. Xoá mọi câu "để bước 5" trong toàn file (AI không gợi việc cho bước 5).
+4. Truy vết: thêm FR-08.2 ("Tổng tiền thanh toán được tính tự động…") vào test
+   basis; TC-22 → FR-08.2. Bảng truy vết sinh tự động từ ánh xạ EC → yêu cầu
+   (nếu render_md.py đang lấy từ chỗ khác → vá harness, commit riêng).
+
+C. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 3/7b: sửa TC domain theo review" kèm prompt log.
+   Dừng. Báo cáo theo CLAUDE.md, ghi số TC trước/sau và danh sách TC bị bỏ/thêm.
+```
+
+Khi có báo cáo, bạn gửi lại `testcases.md` mới. Mình sẽ soát lại 5 điểm đã sửa trước khi sang bước 4.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #133 | 10:47 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7328,7 +7940,147 @@ Em đã sửa xong bước 3 theo review và commit, dừng chờ SV duyệt. S�
 
 ---
 
-## #123 | 10:55 20/10/2026 | Claude Opus 5.5 | [...]
+## #134 | 10:51 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: sửa bước 3 B_FR07 theo review (A: quyết định SV; B: sửa thiết kế; vá harness truy vết)
+- File đã tạo/sửa: HW02/B_FR07/testcases.json/.md; render_md.py + schema-domain.md (vá harness); ai-outputs/B_FR07_step3_20261020-1050.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/8 warn (7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10; V1 chưa có case BVA), phủ 51/51 EC; lint 0 errors/0 warn; test Not run
+- Commit: 4fee1ad HW02: vá harness – truy vết sinh từ ánh xạ EC → yêu cầu
+          444474a HW02[B-FR07] 3/7b: sửa TC domain theo
+- Số TC: 32 → 34 (UI 13 → 13, API 14 → 14, GUI 5 → 7); tỷ lệ TC domain/EC = 27/51 = 0,53
+  - Bỏ: TC-FR07-23 (để trống số)
+  - Thêm: TC-FR07-40 (thiếu id → EC53, tách từ EC13), TC-95 (nhãn FR-07), TC-96 (phản hồi nút 'Thêm vào giỏ' ở trang chủ)
+  - EC: bỏ EC32, thêm EC53 (không dùng số EC52 vì bản đóng băng bước 2 đã dùng số này cho lớp khác); mỗi EC có trường requirements
+- B11: SRS không có câu nào nói trực tiếp về giỏ của khá", trích README.md:104; phần API tríchapi_specification.md:112 + README.md:279
+- Bất thường (harness): render_md.py trước đây lấy truy  vá; A_FR01 render ra không đổi
+- Cần quyết định (chặn bước 4): không có
+- Không chặn (1 điểm, xem mục Truy vết trong HW02/B_FR07 EC bị nhiễu vì các EC trạng thái cũng gắn yêu cầu
+  - EC23 → FR-07.7 kéo TC-02 và TC-20 vào cột FR-07.7
+  - EC24/25 → FR-07.1 kéo 27 TC vào FR-07.1
+  - EC1 → FR-06.2 kéo 23 TC vào FR-06.2
+  - Phương án: (a) giữ nguyên; (b) EC trạng thái/tiền điều kiện không gắn yêu cầu, chỉ EC đầu ra và lớp của biến mục tiêu gắn
+===
+Xem lại giúp mình cả testcases.md nhé
+```
+*Đính kèm:* `testcases.md`
+
+**Output:**
+```
+Đã soát lại cả file. 5 điểm của lượt trước đã sửa đúng, các quyết định cũng đã ghi đủ. Còn 1 vấn đề chính, 1 quyết định mới và vài lỗi vặt.
+
+## Đã sửa đúng
+- Khẳng định chéo: nhãn chỉ kiểm ở TC-95, định dạng ₫ ở TC-93, badge ở TC-04 (đây là case có số dòng ≠ tổng số lượng, chọn rất đúng), phản hồi ở TC-02 và TC-96. Bước dựng giỏ ghi rõ "Không đánh giá". Các case chức năng định vị phần tử không dựa vào đúng chữ.
+- EC32 đã bỏ, SEC-04 đã gỡ khỏi truy vết. TC-91/92 đã khớp giữa Expected và procedure. EC53 đã tách. FR-08.2 đã thêm và gắn với TC-22.
+- Ở B11, căn cứ trích từ SRS, ghi rõ là suy luận, không dùng hành vi SUT. Đúng như yêu cầu.
+
+## 1. Truy vết vẫn nhiễu, và có chỗ sai chứ không chỉ nhiễu
+
+Claude Code đã nêu được triệu chứng, nhưng cả hai phương án (a) và (b) đều chưa xử lý đúng gốc:
+
+- **EC42 → FR-07.6 là sai.** EC42 giờ chỉ là phép tính Σ (con số), còn FR-07.6 nói về nhãn "Tổng cộng", và nhãn đã chuyển sang TC-95. Hệ quả là TC-03…08 bị gán vào FR-07.6. Phép tính tổng thật ra dựa trên giả định B4, không phải yêu cầu nào trong SRS.
+- **EC40 → FR-07.2** kéo TC-10…13 (thêm với số lượng sai) vào yêu cầu về nút +/−. EC40 đang gộp hai nguyên nhân khác nhau.
+- **Phương án (b)** ("EC trạng thái không gắn yêu cầu") không giải quyết được trường hợp EC1. EC1 không phải EC trạng thái, chỉ là giá trị danh nghĩa được mang theo trong các case API không hợp lệ, vậy mà vẫn kéo 23 TC vào FR-06.2.
+
+Mình đề xuất **phương án (c):**
+- Mỗi TC có thêm trường `ec_target`: các EC mà case được thiết kế để kiểm (lớp đầu vào cần thử và lớp đầu ra mà Expected khẳng định). Bảng truy vết lấy từ `ec_target`. Cột "EC phủ" giữ nguyên để tính độ phủ.
+- check_domain kiểm thêm hai điều: `ec_target ⊆ EC phủ`, và case không hợp lệ có đúng 1 EC không hợp lệ trong `ec_target`.
+- Cột Yêu cầu của EC được phép ghi mã giả định: EC41, EC42 → `B4`; EC43 → `FR-23.2, B9`. Bỏ FR-07.2 khỏi EC40. Bảng truy vết hiện các dòng giả định riêng. Như vậy test nào dựa trên giả định thì truy vết về đúng giả định đó; điều này có ích khi viết Audit.
+
+## 2. Quyết định mới: B21, "phản hồi trực quan" gồm những gì?
+
+FR-06.3 và FR-24.1 ghi "(toast notification hoặc badge cập nhật)". Từ khảo sát, nút thêm của SUT đổi chữ thành "Đã thêm" trong 2 giây. Câu hỏi là phần trong ngoặc là danh sách đóng hay chỉ là ví dụ:
+- (a) Danh sách đóng: chỉ toast hoặc badge mới tính.
+- (b) Ví dụ: mọi thay đổi nhìn thấy được đều tính, kể cả chữ trên nút.
+
+Quyết định này đổi verdict của TC-02 và TC-96. Mình không khuyến nghị bên nào, vì câu SRS đọc theo cả hai cách đều được.
+
+## 3. Nên tách TC-95
+
+TC-95 gộp 4 nhãn (FR-07.1, 07.4, 07.5, 07.6) vào một verdict. Trong đó, "Tổng cộng" là yêu cầu SRS ghi rõ chữ "nhãn chính xác", còn ba nhãn kia dựa vào B12 (quyết định của bạn). Gộp chung thì một bug report sẽ trộn căn cứ mạnh với căn cứ yếu. Đề xuất tách thành 4 case:
+- 95: tiêu đề cột
+- 96: "Xóa sản phẩm"
+- 97: "Tiếp tục mua sắm"
+- 98: "Tổng cộng"
+
+Case phản hồi ở trang chủ chuyển sang 99. Vẫn vừa dải TS-GUI 90–99, và chưa chạy nên đổi số không ảnh hưởng gì.
+
+## 4. Lỗi vặt (không cần quyết, sửa luôn)
+- B2 vẫn ghi oracle gồm "badge", trong khi TC-10…13 đã bỏ phần này.
+- B18 ghi "4 lớp", nay là 5 lớp (thêm EC53).
+- EC27 ghi "test@eshop.com hoặc user {ts}", trái với B0a. Chỉ để user {ts}.
+- Đoạn Phạm vi chưa nhắc nhãn FR-07 và phản hồi khi thêm trong TS-GUI.
+- TC-90, 93, 94 vẫn ghi "link 'Giỏ hàng'". Cần đổi thành "link tới /cart" cho thống nhất với B12.
+
+Trả lời kiểu `trace=c, B21=?, tách 95=có`. Mình sẽ gộp tất cả vào lệnh `3/7c`.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #135 | 10:55 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+trace: c, đúng thật là mình thấy a và b chưa xử lý được đúng gốc, và mình thấy c của bạn đang tối ưu nhất.
+B21: mình nghĩ b sẽ bao quát hơn, vì một số sẽ không code toast hoặc badge
+Tách TC-95. Vì mình thấy nếu không tách sẽ gộp nhiều chức năng cần test vào 1
+```
+
+**Output:**
+````
+Ghi nhận cả ba. Riêng B21: lý do "một số nơi không làm toast/badge" là nói về cách cài đặt, không phải cách đọc SRS. Khi ghi vào file, nên lấy lý do từ câu chữ: phần trong ngoặc mở đầu bằng "toast notification **hoặc** badge", và cách liệt kê này đọc như ví dụ minh hoạ cho "phản hồi trực quan" chứ không phải danh sách đóng.
+
+Ngoài ra, chọn (b) thì phải định nghĩa oracle cho chặt, nếu không "thay đổi nhìn thấy được" sẽ thành tiêu chí cảm tính. Lệnh dưới đây yêu cầu định nghĩa có thể quan sát được.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – sửa bước 3 lần 2 (review). Không đụng ai-outputs.
+
+A. Vá harness (commit riêng "HW02: vá harness – ec_target + mã giả định trong truy vết"):
+1. Schema TC: thêm trường ec_target (mảng EC) = các EC case được thiết kế để kiểm
+   (lớp đầu vào cần thử + lớp đầu ra mà Expected khẳng định).
+   Truy vết sinh từ ec_target; cột "EC phủ" giữ nguyên cho độ phủ.
+   TC không có ec_target → dùng EC phủ như cũ (A_FR01 render ra không đổi; kiểm lại).
+2. Cột Yêu cầu của EC cho phép mã giả định (B4, B9…); bảng truy vết hiện dòng
+   giả định riêng, đánh dấu "(giả định)".
+3. check_domain: lỗi nếu ec_target ⊄ EC phủ; lỗi nếu case không hợp lệ không có
+   đúng 1 EC không hợp lệ trong ec_target; cảnh báo nếu TC domain thiếu ec_target.
+
+B. Sửa B_FR07 (commit "HW02[B-FR07] 3/7c: ec_target, tách nhãn, B21"):
+1. Điền ec_target cho mọi TC. Sửa cột Yêu cầu: EC41, EC42 → B4; EC43 → FR-23.2, B9;
+   EC40 bỏ FR-07.2. Rà các EC còn lại: yêu cầu phải khớp nội dung lớp hiện tại.
+2. Tách TC-95 thành 4 case: 95 tiêu đề 5 cột (FR-07.1), 96 'Xóa sản phẩm' (FR-07.4,
+   B12), 97 'Tiếp tục mua sắm' (FR-07.5, B12), 98 'Tổng cộng' (FR-07.6). Case phản
+   hồi nút trang chủ (TC-96 cũ) → TC-99. Ghi notes ánh xạ số cũ → mới.
+3. B21 (SV chốt): "phản hồi trực quan" hiểu theo nghĩa rộng — lý do: FR-06.3/FR-24.1
+   ghi "(toast notification hoặc badge cập nhật)" như ví dụ minh hoạ, không phải danh
+   sách đóng. Oracle: trong ≤ 2 giây sau khi bấm, có ít nhất một thay đổi nhìn thấy
+   được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút thêm đổi; thông báo
+   trên trang); ghi rõ loại phản hồi quan sát được vào Actual. Cập nhật Expected
+   TC-02, TC-99, V16, EC45.
+4. Lỗi vặt: B2 bỏ "badge" khỏi oracle; B18 "5 lớp" (thêm EC53); EC27 chỉ "user {ts}";
+   Phạm vi nhắc nhãn FR-07 và phản hồi khi thêm trong TS-GUI; TC-90/93/94 đổi
+   "link 'Giỏ hàng'" → "link tới /cart".
+
+C. render_md.py → freeze.py → check_domain.py → linter thầy. Dừng.
+   Báo cáo theo CLAUDE.md: số TC trước/sau, kết quả A_FR01 sau vá harness.
+```
+
+Khi có kết quả, bạn gửi lại bảng truy vết và mục Giả định là đủ. Phần còn lại mình đã soát, trừ khi báo cáo cho thấy có thay đổi ngoài lệnh.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #136 | 10:55 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7404,7 +8156,89 @@ Em đã sửa xong bước 3 lần 2 và vá harness: số TC từ 34 lên 37, c
 
 ---
 
-## #124 | 11:00 20/10/2026 | Claude Opus 5.5 | [...]
+## #137 | 10:59 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá harness ec_target + mã giả định trong truy vết; sửa bước 3 lần 2 (ec_target, tách nhãn, B21, lỗi vặt)
+- File đã tạo/sửa: check_domain.py, render_md.py, schema-domain.md; HW02/B_FR07/testcases.json/.md; ai-outputs/B_FR07_step3_20261020-1058.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra:
+  · B_FR07: check_domain 0 errors/8 warn (7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10; V1 chưa có BVA), phủ 51/51 EC; lint 0 errors/0 warn; test Not run
+  · A_FR01 sau vá harness: testcases.md render lại không đổi (diff rỗng); check_domain 0 errors/1 warn, như trước
+- Commit: 3f47dfd HW02: vá harness – ec_target + mã giả
+          3013c2f HW02[B-FR07] 3/7c: ec_target, tách nhãn, B21
+- Số TC: 34 → 37 (UI 13, API 14 không đổi; GUI 7 → 10)
+  - TC-95 cũ tách thành 95 (nhãn 5 cột), 96 (nhãn 'Xóa sản phẩm'), 97 (nhãn 'Tiếp tục mua sắm'), 98 (nhãn 'Tổng cộng')
+  - TC-96 cũ (phản hồi nút ở trang chủ) → TC-99; ánh xạ ủa từng case
+- Harness: chỉ cảnh báo "TC domain thiếu ec_target" khi file đã dùng trường này, để A_FR01 không bị thêm cảnh báo
+- Bất thường mới:
+  - check_domain mới bắt được TC-07: Expected khẳng định Tổng nhưng covers thiếu EC42 → đã thêm EC42 vào covers
+  - Tiêu đề TC-92 vẫn ghi "link 'Giỏ hàng'" (ngoài danh i sang "link tới /cart") — testcases.json:2244
+- Cần quyết định (chặn bước 4): không có
+- Không chặn (1 điểm, xem mục Truy vết trong HW02/B_FR07/testcases.md): EC40 gộp hai tình huống ('-' tại Số lượng 1 — B3; lần thêm bị từ chối — B2), nên truy vết gắn nhầm B3 cho TC-10…13 (case Số lượnnút '-')
+  - Phương án: (a) giữ nguyên; (b) tách EC40 thành 2 lớp đầu ra, mỗi lớp một giả định
+===
+```
+
+**Output:**
+````
+Truy vết đã sạch hơn nhiều: FR-07.6 chỉ còn TC-98, FR-06.2 không còn bị case API kéo vào. Phần còn lại vẫn cùng một gốc: **EC mang theo một giả định chỉ đúng với một vài thao tác**. Danh sách:
+
+**Gắn sai giả định / yêu cầu**
+- **EC40 → chọn (b), tách.** Đây chính là gốc mình đã nêu, Claude Code đề xuất đúng hướng.
+- **EC19 → B3** kéo TC-05 (nút "+") vào B3, trong khi B3 chỉ nói về "−". Sau khi tách EC40, B3 sẽ đến TC-07 qua lớp "giữ nguyên do '−' tại 1", nên EC19 bỏ B3.
+- **EC15 → B8** kéo TC-20 (giá gửi đúng bằng giá CSDL) vào B8. B8 chỉ có tác dụng khi giá khác CSDL, tức EC16. EC15 chỉ cần gắn API-CART.
+- **EC8 → FR-07.1** kéo TC-20 (API) vào yêu cầu hiển thị cột trên UI.
+- **B7 xuất hiện trong truy vết là sai loại.** B7 là quyết định phạm vi, không quyết định Expected của case nào. Cùng nhóm này có B6, B10, B16 (phạm vi) và B19 (chọn đại diện). Chỉ giả định nào quyết định Expected mới được vào cột Yêu cầu.
+
+**Thiếu**
+- TC-96, TC-97 phải gắn B12, vì đây là hai nhãn dựa vào quyết định của bạn. Hiện B12 chỉ gắn TC-95.
+- TC-93 phải gắn B13.
+
+**Một giả định chưa được chốt:** EC44 "giỏ trống: badge ẩn hoặc 0, đề xuất chấp nhận cả hai" là đề xuất của AI, chưa có mã B và bạn chưa duyệt. Mình đề nghị đặt là **B22 = chấp nhận cả hai**, cùng nguyên tắc với B13: SRS không nói thì không tạo Fail. Nếu bạn muốn khác thì sửa dòng đó trong lệnh.
+
+**Lỗi vặt:** B12 vẫn ghi "Chỉ kiểm ở TC-95" (nay là 95–98). B16 chưa nhắc nhãn và phản hồi khi thêm. Tiêu đề TC-92 vẫn ghi "link 'Giỏ hàng'".
+
+Sau đợt sửa này, bước 3 đủ chắc để sang bước 4, nên lệnh dưới gộp luôn bước 4 và dừng ở đó.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – B_FR07 sửa bước 3 lần 3 (commit "HW02[B-FR07] 3/7d: làm sạch truy vết")
+1. Tách EC40 thành 2 lớp đầu ra: "giữ nguyên do '-' tại Số lượng 1" (FR-07.2, B3)
+   và "giữ nguyên do lần thêm bị từ chối" (FR-06.2, B2). Cập nhật covers/ec_target
+   TC-07, TC-10…13. Mã mới tiếp sau EC53.
+2. EC19 bỏ B3. EC15 chỉ gắn API-CART (bỏ B8). EC8: yêu cầu phải khớp cả UI lẫn API
+   (không gắn FR-07.1 cho tầng API — tách lớp hoặc đổi yêu cầu, chọn cách ít thay đổi hơn).
+3. Quy tắc (ghi vào schema-domain.md): cột Yêu cầu chỉ chứa mã giả định quyết định
+   Expected; giả định phạm vi (B6, B7, B10, B16) và chọn đại diện (B19) không vào
+   truy vết. Rà toàn bộ EC/TC theo quy tắc này.
+4. TC-96, TC-97 thêm B12; TC-93 thêm B13.
+5. B22 (SV chốt): giỏ trống — badge ẩn hoặc hiển thị 0 đều chấp nhận; lý do: SRS
+   im lặng. Gắn EC44.
+6. B12 sửa "chỉ kiểm ở TC-95…98"; B16 nhắc nhãn FR-07 và phản hồi khi thêm;
+   tiêu đề TC-92 đổi "link tới /cart".
+7. render_md.py → freeze.py → check_domain.py → linter thầy → commit.
+
+Nhiệm vụ 2 – Bước 4 (BVA)
+1. /domain-bva-testing HW02/B_FR07 4. Áp B1 (không cận trên). Mã TS-BVA 60–89.
+   Mỗi TC có ec_target; tuân theo quy tắc khẳng định một nơi (nhãn/định dạng/badge/
+   phản hồi không khẳng định lại trong case BVA).
+2. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 4/7: TC BVA". Dừng.
+Báo cáo theo CLAUDE.md, kèm danh sách biến đã làm BVA và lý do bỏ biến nào (nếu có).
+```
+
+Khi có kết quả, bạn gửi bảng TC BVA và bảng truy vết. Mục Giả định chỉ cần gửi nếu báo cáo có giả định mới.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #138 | 11:00 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7476,7 +8310,145 @@ Xong cả hai nhiệm vụ: làm sạch truy vết (3/7d) và bước 4 BVA vớ
 
 ---
 
-## #125 | 11:07 20/10/2026 | Claude Opus 5.5 | [...]
+## #139 | 11:06 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) bước 3 lần 3 – làm sạch truy vết; (2) bư
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) bước 3 lần 3 – làm sạch truy vết; (2) bước 4 BVA
+- File đã tạo/sửa: HW02/B_FR07/testcases.json/.md; render_md.py, schema-domain.md (vá harness + ghi quy tắc cột Yêu cầu);
+ai-outputs/B_FR07_step3_20261020-1102.*, B_FR07_step4_20d
+- Kết quả kiểm tra: check_domain 0 errors/8 warn (7 biến không có lớp không hợp lệ: V3–V7, V9, V10; V1 thiếu UB/UB±1 — đúng theo B1), phủ 53/53
+EC; lint 0 errors/0 warn; test Not run
+- Commit: 8c72dcc HW02[B-FR07] 3/7d: làm sạch truy vết
+          3a1c… → ae3… (xem git log): HW02: vá harness –ong truy vết
+          7dcb0a7 HW02[B-FR07] 4/7: TC BVA
+- Số TC: 37 → 49 (+12 BVA: UI 60–66, API 70–74)
+- Biến đã làm BVA:
+  - V1 Số lượng khi thêm: LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 (gán nhãn MAX_UI theo B1) — làm ở cả UI và API
+  - V5 Số lượng hiện tại khi bấm '-': LB = 2 (TC-65); LB-1 trùng TC-07, LB+1 trùng TC-06
+  - V7 Số dòng: xoá dòng cuối 1 → 0 (TC-66)
+- Biến bỏ BVA và lý do:
+  - V3 Đơn giá: không do người dùng nhập, giá seed cố định; giá client bị bỏ qua (B8)
+  - V2 id: là tập định danh, SRS không cho thứ tự
+  - V4, V6, V8, V9, V10: tập giá trị hoặc thao tác, không có thứ tự
+  - Nút '+': không có cận trên (B1)
+- Bất thường (harness):
+  - Linter của thầy báo lỗi khi requirements chứa mã giả định → chuyển B12/B13 sang trường riêng assumptions của case; render_md gộp trường này
+vào truy vết; A_FR01 render không đổi
+  - Bản đóng băng B_FR07_step3_20261020-1102 chụp trước khi sửa lỗi này (freeze cùng phút nên không ghi đè được)
+- Thay đổi ngoài khối lệnh: EC8 tách theo tầng (EC8 UI, EC55 API) vì không có yêu cầu nào đúng cho cả hai tầng; bỏ B7 khỏi EC11 theo quy tắc mới
+- Cần quyết định (chặn bước 5): không có
+- Không chặn: TC-64/74 gán nhãn MAX_UI cho "giá trị lớn" có nhãn phù hợp hơn (giải thích trong notes của case) —giữ, hoặc đổi nhãn khác
+
+Ở dòng Commit, em không chép được hash của commit vá harness. Đây là commit nằm giữa 8c72dcc và 7dcb0a7; xem bằng git log --oneline -4.
+===
+
+```markdown
+### Truy vết yêu cầu ↔ test case
+Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.
+
+| Yêu cầu | Test case | Số TC |
+|---|---|---|
+| FR-07.1 | TC-FR07-02, TC-FR07-04, TC-FR07-08, TC-FR07-66, TC-FR07-95 | 5 |
+| FR-07.2 | TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-65, TC-FR07-90 | 5 |
+| FR-07.3 | TC-FR07-03, TC-FR07-04, TC-FR07-20, TC-FR07-21 | 4 |
+| FR-07.4 | TC-FR07-08, TC-FR07-09, TC-FR07-96 | 3 |
+| FR-07.5 | TC-FR07-01, TC-FR07-02, TC-FR07-97 | 3 |
+| FR-07.6 | TC-FR07-98 | 1 |
+| FR-07.7 | TC-FR07-01, TC-FR07-66 | 2 |
+| FR-06.2 | TC-FR07-02, TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-20, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-60, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 | 22 |
+| FR-06.3 | TC-FR07-02, TC-FR07-99 | 2 |
+| FR-08.1 | TC-FR07-02, TC-FR07-03 | 2 |
+| FR-08.2 | TC-FR07-22 | 1 |
+| FR-21.3 | TC-FR07-93 | 1 |
+| FR-23.1 | TC-FR07-92 | 1 |
+| FR-23.2 | TC-FR07-01, TC-FR07-04 | 2 |
+| FR-23.4 | TC-FR07-91 | 1 |
+| FR-24.1 | TC-FR07-02, TC-FR07-99 | 2 |
+| FR-24.2 | TC-FR07-08, TC-FR07-09 | 2 |
+| FR-24.3 | TC-FR07-01 | 1 |
+| FR-24.4 | TC-FR07-94 | 1 |
+| API-CART | TC-FR07-20, TC-FR07-21, TC-FR07-22, TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70, TC-FR07-71, TC-FR07-72, TC-FR07-73, TC-FR07-74 | 19 |
+| SEC-02 | TC-FR07-20, TC-FR07-38, TC-FR07-39 | 3 |
+| B22 (giả định) | TC-FR07-01 | 1 |
+| B15 (giả định) | TC-FR07-01 | 1 |
+| B11 (giả định) | TC-FR07-02, TC-FR07-03 | 2 |
+| B4 (giả định) | TC-FR07-02, TC-FR07-03, TC-FR07-04, TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-08, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64 | 11 |
+| B21 (giả định) | TC-FR07-02, TC-FR07-99 | 2 |
+| B5 (giả định) | TC-FR07-03, TC-FR07-04 | 2 |
+| B9 (giả định) | TC-FR07-04 | 1 |
+| B3 (giả định) | TC-FR07-07 | 1 |
+| B14 (giả định) | TC-FR07-08, TC-FR07-09 | 2 |
+| B2 (giả định) | TC-FR07-10, TC-FR07-11, TC-FR07-12, TC-FR07-13, TC-FR07-60 | 5 |
+| B8 (giả định) | TC-FR07-22 | 1 |
+| B17 (giả định) | TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-38, TC-FR07-39, TC-FR07-40, TC-FR07-70 | 12 |
+| B18 (giả định) | TC-FR07-34, TC-FR07-35, TC-FR07-36, TC-FR07-37, TC-FR07-40 | 5 |
+| B13 (giả định) | TC-FR07-93 | 1 |
+| B12 (giả định) | TC-FR07-95, TC-FR07-96, TC-FR07-97 | 3 |
+
+```
+
+===
+Xem nhé
+````
+
+**Output:**
+````
+Bước 4 nhìn chung ổn. Các điểm biên của V1 (0/1/2/5/1000) đúng với B1. V5 dùng lại TC-06/07 làm LB±1 thay vì viết case trùng. V7 phủ đủ ba chiều 0→1, 2→1, 1→0. Quy tắc "khẳng định một nơi" được giữ đúng.
+
+Mình **cố ý không nhận xét chuyện còn thiếu điểm biên nào**. Bước tiếp theo là bước 5 🔒: bạn tự thêm case trước, rồi mới hỏi AI. Nếu mình chỉ ra chỗ thiếu bây giờ, bước 5 và phần gap analysis sẽ mất giá trị. Dưới đây chỉ là lỗi trong những gì đã có.
+
+## Cần sửa
+
+1. **Nhãn MAX_UI → đổi tên.** "MAX_UI" ngụ ý UI có giới hạn trên, trái với B1. Nên đổi thành `LARGE` và notes ghi "đại diện giá trị lớn thay UB/UB±1 (B1)".
+2. **B1 vắng mặt trong truy vết.** Expected của TC-64 và TC-74 ("1000 hợp lệ") chỉ đúng vì B1 quy định không có cận trên. B1 quyết định Expected, nên phải có trong truy vết.
+3. **ec_target của TC-65 thiếu EC41/EC42.** Expected khẳng định Thành tiền 8000000→4000000 và Tổng 4000000, nhưng ec_target chỉ có EC20, EC39, nên B4 không được truy vết. check_domain không bắt được lỗi này vì nó chỉ kiểm `⊆`. Nên rà lại mọi TC theo đúng định nghĩa: lớp đầu ra mà Expected khẳng định phải nằm trong ec_target.
+4. **TC-66 ghi "dialog (nếu có)" là đúng ý, nhưng cần nói rõ lý do.** Thêm notes: "dialog không khẳng định ở đây (EC47 kiểm ở TC-08/09); có thì xác nhận, không có thì ghi Actual".
+5. **Ghi chú suite của TS-BVA-API bị chép nguyên từ suite UI**, nên có cả V5, V7, TC-06/07 vốn chỉ thuộc UI. Phần ghi chú cần viết riêng cho API.
+6. **Harness: freeze đặt tên theo phút nên bị trùng.** Đã có một lần bản đóng băng chụp trước khi sửa. Cần thêm giây vào timestamp, và commit riêng. Bản `step3_…1102` lệch so với 3/7d thì ghi vào ghi chú cho AI-02 Audit, cùng chỗ với chuyện bản freeze bước 1 thiếu `.md`.
+
+## Sau đó là bước 5 🔒
+
+Theo quy trình đã chốt: bạn tự viết case vào `sv_cases.md`, **commit trước**, rồi mới hỏi AI vì sao bỏ sót. Mình có thể nhờ Claude Code dựng khung trống (chỉ cột, quy ước, không có nội dung) để bạn điền nhanh hơn. Mình cũng sẽ không gợi ý case nào ở phiên này cho tới khi bạn commit xong `5/7`.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – Vá harness (commit riêng "HW02: vá harness – freeze timestamp có giây")
+- freeze.py: timestamp tên file thêm giây (YYYYMMDD-HHMMSS); không đổi tên file cũ.
+
+Nhiệm vụ 2 – B_FR07 sửa bước 4 (commit "HW02[B-FR07] 4/7b: sửa TC BVA theo review")
+1. TC-64, TC-74: nhãn điểm biên MAX_UI → LARGE; notes "đại diện giá trị lớn thay
+   UB/UB±1 (B1)". Thêm B1 vào truy vết của 2 case (cơ chế assumptions hoặc gắn
+   EC — chọn cách hợp với linter).
+2. Rà ec_target của MỌI TC (domain + BVA): lớp đầu ra mà Expected khẳng định phải
+   nằm trong ec_target. Sửa TC-65 (thêm EC41, EC42) và bất kỳ case nào khác lệch;
+   liệt kê các case đã sửa trong báo cáo.
+3. TC-66 notes: "dialog không khẳng định ở đây (EC47 kiểm ở TC-08/09); có thì xác
+   nhận, không có thì ghi Actual".
+4. Ghi chú suite TS-BVA-API: viết riêng cho API (chỉ V1 tầng API), bỏ phần V5/V7.
+5. render_md.py → freeze.py → check_domain.py → linter thầy → commit.
+
+Nhiệm vụ 3 – Dựng khung trống cho bước 5 (không commit, không điền nội dung)
+- Tạo HW02/B_FR07/sv_cases.md: chỉ tiêu đề cột giống bảng TC domain (UI và API
+  tách 2 bảng), quy ước mã TS-SV từ TC-FR07-200, nhắc quy tắc "UI+API phải tách 2
+  case". KHÔNG thêm ví dụ, KHÔNG gợi ý biến/lớp/giá trị nào.
+Dừng. Báo cáo theo CLAUDE.md.
+```
+
+Bạn điền `sv_cases.md`, commit `HW02[B-FR07] 5/7: SV thêm TC`, rồi quay lại đây. Lúc đó mình mới cùng bạn xem phần AI trả lời vì sao bỏ sót.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #140 | 11:07 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7539,7 +8511,66 @@ Xong 3 nhiệm vụ: vá freeze, sửa bước 4 theo review, dựng khung bư�
 
 ---
 
-## #126 | 11:09 20/10/2026 | Claude Opus 5.5 | [...]
+## #141 | 11:08 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) vá freeze.py: tên file có giây; (2) sửa bước 4 theo review; (3) khung bước 5 sv_cases.md
+- File đã tạo/sửa: freeze.py; HW02/B_FR07/testcases.json/.md; ai-outputs/B_FR07_step4_20261020-110812.{json,md}; A_prompt_log.md; HW02/B_FR07/sv_cases.md (mới, chưa commit)
+- Kết quả kiểm tra: check_domain 0 errors/10 warn; lint 0 errors/0 warn; test Not run
+  · 7 warn: biến không có lớp không hợp lệ (V3–V7, V9, V10)
+  · 1 warn: V1 thiếu UB/UB±1 (đúng theo B1)
+  · 2 warn mới: bva_point 'LARGE' không thuộc danh sách điểm của check_domain (TC-64, TC-74)
+- Commit: 2810443 HW02: vá harness – freeze timestamp có giây
+          2572dc9 HW02[B-FR07] 4/7b: sửa TC BVA theo review
+  · đính chính lượt trước: hash commit "vá harness – trường assumptions" là ae42067
+- Case đã sửa ec_target:
+  · TC-65: thêm EC41, EC42 vào ec_target
+  · TC-09, TC-10, TC-11, TC-12, TC-13, TC-60: Expected có khẳng định Tổng nhưng thiếu EC42 → thêm EC42 vào covers và ec_target (truy vết của các case này giờ có thêm B4)
+- TC-64/74: B1 đưa vào truy vết qua trường assumptions (va_model có thêm định nghĩa nhãn LARGE
+- Khung sv_cases.md: chỉ có tiêu đề cột, bảng UI và API tách riêng, ghi quy ước mã từ TC-FR07-200 và quy tắc tách UI/API; không có ví dụ hay gợi ý nào
+- Cần quyết định (không chặn bước 5):
+  - LARGE – thêm 'LARGE' vào danh sách điểm của check_domain.py để hết 2 cảnh báo? – Có (vá harness, commit riêng) / Không (giữ cảnh báo)
+```
+
+**Output:**
+````
+Có hai điểm cần chỉnh.
+
+**1. Cách sửa TC-09…13 và TC-60 làm nhiễu lại truy vết.** Ở các case từ chối/huỷ, Tổng không đổi chỉ là một phần của "giỏ không đổi" (EC54), case không hề kiểm công thức B4. Nhưng Expected đang ghi con số tuyệt đối ("Tổng 30000000"). Kết quả là B4 bị gắn vào 6 case, và nếu SUT tính tổng sai thì cả 6 case sẽ lệch vì một biến không phải mục tiêu, tức là lặp lại đúng vấn đề khẳng định chéo.
+
+Cách sửa đúng là dùng oracle tương đối, vốn đã là quy ước B0b: **"Tổng SAU = Tổng TRƯỚC"**, bỏ con số tuyệt đối, rồi gỡ EC42 khỏi các case này. Claude Code đã làm đúng định nghĩa ec_target, chỉ là Expected của các case này không nên khẳng định Tổng tuyệt đối ngay từ đầu.
+
+**2. LARGE → Có, nhưng phải có điều kiện.** Nếu chấp nhận LARGE vô điều kiện thì linter mất tác dụng: case nào cũng gắn được nhãn này. Chỉ chấp nhận LARGE khi biến đó có giả định "không có cận trên" (như B1). Trường hợp khác vẫn báo lỗi.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – Vá harness (commit riêng "HW02: vá harness – điểm LARGE có điều kiện")
+- check_domain.py: chấp nhận bva_point 'LARGE' CHỈ KHI biến của case có giả định
+  "không cận trên" được khai (vd B1 trong assumptions/biến); ngược lại vẫn báo lỗi.
+  Kiểm A_FR01 không đổi kết quả.
+
+Nhiệm vụ 2 – B_FR07 (commit "HW02[B-FR07] 4/7c: oracle tương đối cho phần không đổi")
+1. Ở case từ chối/huỷ (TC-09, TC-10…13, TC-60) và mọi case khác có phần giỏ
+   "không đổi": Expected ghi tương đối ("Tổng SAU = Tổng TRƯỚC", "Số lượng dòng
+   id k không đổi"), bỏ giá trị tuyệt đối cho phần không đổi. Gỡ EC42 khỏi
+   covers/ec_target của các case này nếu Expected không còn khẳng định công thức.
+2. Rà toàn bộ TC: giá trị tuyệt đối chỉ dùng cho đầu ra mà case thực sự kiểm.
+   Liệt kê case đã sửa.
+3. render_md.py → freeze.py → check_domain.py → linter thầy → commit. Dừng.
+```
+
+Sau lệnh này, phần AI của B_FR07 (bước 0–4) đã xong. File `sv_cases.md` khung trống đang nằm sẵn, chưa commit. Bước 5 là việc của bạn: điền case, commit `HW02[B-FR07] 5/7: SV thêm TC`, rồi quay lại đây.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #142 | 11:09 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7595,7 +8626,76 @@ Xong cả 2 nhiệm vụ: `check_domain` không còn lỗi, các cảnh báo LAR
 
 ---
 
-## #127 | 12:10 20/10/2026 | Claude Opus 5.5 | [...]
+## #143 | 11:11 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) vá harness – điểm LARGE có điều kiện; (2) oracle tương đối cho phần giỏ không đổi
+- File đã tạo/sửa: check_domain.py, schema-domain.md; HW02/B_FR07/testcases.json/.md; ai-outputs/B_FR07_step4_20261020-111050.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra:
+  · B_FR07: check_domain 0 errors/7 warn (7 biến không có lớp không hợp lệ; hết cảnh báo LARGE và cảnh báo thiếu UB của V1); lint 0 errors/0 warn; test Not run
+  · A_FR01: output check_domain trước/sau vá giống hệt (diff rỗng)
+- Commit: 263d3e8 HW02: vá harness – điểm LARGE có điều kiện
+          1519b82 HW02[B-FR07] 4/7c: oracle tương đối ch
+- Cách khai "không cận trên": biến có domain.variables[].no_upper_bound = mã giả định có thật trong meta.assumptions, và mã đó phải nằm trong trường assumptions của case
+  · V1: no_upper_bound = B1
+  · Thiếu một trong hai điều kiện thì LARGE báo ERROR
+  · Biến khai no_upper_bound chỉ bị kiểm thiếu điểm LB-1 khối lệnh, để bỏ cảnh báo thiếu UB)
+- Case đã sửa (24):
+  · Phần giỏ không đổi chuyển sang ghi tương đối (SAU = 0, 11, 12, 13, 60
+  · API từ chối, chuyển sang "số phần tử SAU = TRƯỚC, phần tử id 1 không đổi": TC-30…40, 70
+  · Bỏ giá trị TRƯỚC không được kiểm, dòng không đổi ghi, 65
+- Không cần sửa: TC-02, 03, 21, 22, 61–64, 66, 71–74 (giá trị tuyệt đối đều là đầu ra được kiểm hoặc đã ghi tương đối)
+- HW02/B_FR07/sv_cases.md (khung bước 5) vẫn chưa commit
+- Cần quyết định: không có
+===
+Vậy giờ mình sang bước 5 được chưa nhỉ
+```
+
+**Output:**
+````
+Được rồi. Phần AI của bước 0–4 đã sạch. Có một việc ngoài lệnh: Claude Code tự bỏ cảnh báo "thiếu UB" cho biến khai `no_upper_bound`. Thay đổi này hợp lý, nhưng nhớ ghi nó vào danh sách harness do AI sửa cho phần AI-02 Audit.
+
+## Bước 5 🔒: bạn tự làm
+
+- Điền vào `HW02/B_FR07/sv_cases.md`. Viết văn nói cũng được, Claude Code sẽ chuẩn hoá sau.
+- Trong lúc viết, **không hỏi** mình hay Claude Code xem nên thêm case gì. Bạn có thể đọc lại `testcases.md` và SRS, và tự mở SUT để thử.
+- Các quy ước vẫn áp dụng: mã từ TC-FR07-200, case UI và case API tách riêng, case không hợp lệ phủ đúng 1 lớp không hợp lệ, Expected dựa trên SRS hoặc giả định đã chốt. Nếu case của bạn cần một giả định mới, cứ ghi ngay trong case. Claude Code sẽ gán mã B khi chuẩn hoá.
+- Viết xong thì commit **chỉ file đó**:
+  ```
+  git add HW02/B_FR07/sv_cases.md
+  git commit -m "HW02[B-FR07] 5/7: SV thêm TC"
+  ```
+
+## Sau khi commit (chưa chạy trước)
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 bước 5 – phần sau khi SV đã commit sv_cases.md.
+0. Kiểm commit "HW02[B-FR07] 5/7: SV thêm TC" đã có và sv_cases.md không đổi sau
+   commit đó; nếu chưa → dừng, báo lại.
+1. Chuẩn hoá các case trong sv_cases.md vào testcases.json (origin Human, giữ nguyên
+   ý SV; chỗ mơ hồ/thiếu Expected → hỏi lại, không tự điền). Giả định mới SV ghi
+   trong case → gán mã B tiếp theo, đánh dấu "SV chốt".
+2. Viết HW02/B_FR07/ai_gap_answer.md: với từng case SV, trả lời vì sao bản AI (bản
+   đóng băng bước 3–4) không có, tách 2 nhóm "đã nghĩ tới nhưng không đưa vào"
+   (dẫn chứng trong bản đóng băng) / "không nghĩ tới". Không đánh giá chất lượng
+   case SV, không đề xuất thêm case.
+3. render_md.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer". Dừng.
+```
+
+Khi xong, bạn gửi `ai_gap_answer.md` lên đây. Mình sẽ giúp bạn soát xem các khẳng định "đã nghĩ tới" có thật sự có dẫn chứng trong bản đóng băng không. Ở A, việc kiểm 3–4 câu này đã từng được đề xuất là phần SV nên tự làm.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #144 | 12:10 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7659,7 +8759,225 @@ Xong bước 5b, commit `897a7c8`. Còn 6 case SV có chỗ mơ hồ cần anh/c
 
 ---
 
-## #128 | 12:37 20/10/2026 | Claude Opus 5.5 | [...]
+## #145 | 12:15 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 bước 5b – chuẩn hoá 16 case SV vào testcases.json + ai_gap_answer
+- Bước 0: commit 3d0cbca "5/7: SV thêm TC" có; sv_cases.md không đổi sau commit đó → OK
+- File đã tạo/sửa: HW02/B_FR07/testcases.json (v0.10, thêm suite TS-SV-UI 7 case, TS-SV-API 9 case, origin Human), testcases.md, ai_gap_answer.md, sv_questions.md (mới), A_prompt_log.md
+- Cách chuẩn hoá:
+  · Tiêu đề, EC, Expected, Lý do giữ nguyên văn SV
+  · requirements suy từ ec_target
+  · assumptions lấy từ mã B mà SV nhắc trong Expected (T
+  · SV không ghi giả định mới nào → không gán mã B mới (mã kế tiếp nếu cần: B23)
+- Kết quả kiểm tra:
+  · check_domain: 0 errors / 21 warn = 14 case thiếu technique (SV để trống) + 7 cảnh báo biến cũ
+  · lint: 65 TC, 0 errors / 13 warn = 11 tiêu đề thiếu Cvăn SV) + 2 cặp dữ liệu trùng: 211/212, 213/214
+  · test: Not run
+- ai_gap_answer.md:
+  · Nhóm "đã nghĩ tới" (3 case, có dẫn chứng):
+    - 205: notes_step1.md:74;
+    - 207: EC32/TC-23 bản step3-1037, đã gỡ ở vòng sửa 1;
+    - 210: tên lớp EC16 có "≤ 0".
+  · Nhóm "không nghĩ tới" (13 case), kèm lớp gần nhất củ
+- Commit: 897a7c8 HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+- Cần quyết định (chặn bước 6 cho case tương ứng; chi tiết + phương án: HW02/B_FR07/sv_questions.md):
+  · Q1 TC-202 – Expected "Tab 2 thấy id 5" thiếu Số lượng sau '+', và Tab 1 quan sát gì?
+  · Q2 TC-203 – ec_target là EC5 (không hợp lệ) nhưng Ex(a) EC1 (b) EC5, đổi Expected?
+  · Q3 TC-204 – covers EC26 nhưng đăng nhập là user {ts}; sửa khoá localStorage nào (giỏ không lưu localStorage, B0d); F5 làm mất giỏ ban đầu?
+  · Q4 TC-205 – technique "GB" ngoài EP/BVA/EG/ST → (a)
+  · Q5 TC-212 – cột id ghi [1, 2, 3] trùng TC-211, tiêu đề nói {"id": 1} → (a) đổi thành {"id": 1} (b) giữ?
+  · Q6 TC-215 – API không trả Thành tiền (server.js:284–(b) giá trị khác?
+- Không chặn: 2 điểm (technique trống ở 14 case; 5 Expected chưa có nguồn SRS hoặc mã giả định) → sv_questions.md
+===
+Giúp mình xem có hợp lý không nhé
+```
+*Đính kèm:* `sv_cases.md`, `ai_gap_answer.md`
+
+**Output:**
+````
+Nhìn chung là hợp lý. Claude Code giữ nguyên văn của bạn, và chỗ nào mơ hồ thì ghi câu hỏi vào `sv_questions.md` thay vì tự điền, đúng tinh thần AI-01. Bạn đã commit 5/7 nên giờ mình nhận xét thẳng vào case được. Mình chỉ nêu vấn đề và phương án; câu trả lời cuối cùng là của bạn.
+
+## 6 câu hỏi của Claude Code (ý kiến của mình)
+
+- **Q1 – TC-202:** câu hỏi đúng, nhưng vấn đề nằm sâu hơn Expected. Giỏ web là state React **của từng tab** (B0d), nên hai tab hoàn toàn độc lập. Xoá ở tab 1 không ảnh hưởng tab 2, và "Tab 2 vẫn thấy id 5" chính là hành vi bình thường, không phải sai lệch. SRS cũng không nói gì về đồng bộ giữa các tab. Ngoài ra case cần nút "+", nên nếu TC-90 Fail thì case này Blocked. Bạn nên xem lại tiền đề của case: giữ thì phải có một giả định mới (mã B23) về đồng bộ tab, nếu không thì bỏ.
+- **Q2 – TC-203:** chọn **(a) EC1**. Expected của bạn coi `1e5` = 100000 là hợp lệ, vậy lớp mục tiêu phải là lớp hợp lệ.
+- **Q3 – TC-204:** giỏ không lưu trong localStorage, mà F5 lại xoá luôn giỏ ban đầu. Như vậy thực chất case này kiểm AuthContext (token hỏng), không phải giỏ hàng. Nó cũng dựa vào việc tải lại trang, thứ mà B10 đã đưa ra ngoài phạm vi. Có hai hướng: (a) bỏ khỏi B_FR07, ghi lại như một ý thuộc phần đăng nhập/xác thực; (b) giữ và sửa thành kiểm token hỏng, kèm một giả định mới vì SRS không nói gì về "màn hình trắng".
+- **Q4 – TC-205:** "GB" là gì? Nếu ý bạn là gray-box (Lý do có dẫn `ProductDetail.jsx`), thì nên gán **EG** và ghi notes "dẫn từ code (gray-box)", vì harness chỉ nhận EP/BVA/EG/ST.
+- **Q5 – TC-212:** chọn **(a)**, đây chỉ là lỗi chép dữ liệu.
+- **Q6 – TC-215:** API không trả Thành tiền, nên phần "không tràn Thành tiền" không có điểm quan sát. Vấn đề lớn hơn là Expected đang ghi "2xx **hoặc** 4xx", tức case chỉ Fail khi gặp 5xx. Theo B1 (không có cận trên), giá trị này hợp lệ, nên Expected nhất quán sẽ là "2xx và GET trả đúng quantity đã gửi". Bạn chọn một vế; không nên để cả hai.
+
+## Vấn đề Claude Code chưa nêu
+
+- **TC-207 mâu thuẫn với quyết định EC32 của chính bạn.** Lúc đó bạn bỏ EC32 với lý do "TC không kiểm được thì không cần viết". SEC-04 nói về escape khi **hiển thị**, không yêu cầu backend làm sạch dữ liệu khi lưu. Oracle "GET trả name đã sanitize" không có căn cứ SRS, và Expected cũng có hai vế 2xx/4xx. Nếu giữ case này, bạn cần lý do khác với lý do đã dùng để bỏ EC32.
+- **TC-209 và TC-214 không có lớp đầu vào không hợp lệ.** ec_target chỉ có EC51, mà đó là lớp đầu ra. "Body không phải JSON hợp lệ" và "Content-Type sai" chưa có lớp nào trong mô hình. Cần thêm 2 EC mới (đánh dấu origin Human); nếu không thì check_domain sẽ không bắt được, và truy vết sẽ thiếu.
+- **TC-201:** "nhanh nhất có thể" không tái hiện được, nên đổi thành "bấm 20 lần liên tiếp". "Console không có lỗi" không có căn cứ SRS, nên bỏ hoặc gán giả định.
+- **TC-213/214 bị linter báo trùng dữ liệu** vì phần khác nhau (song song, header) không nằm trong cột nào. Nên thêm một dòng ghi chú cách thực hiện cho từng case.
+- **14 case thiếu technique:** bạn tự gán. Phần lớn sẽ là EG.
+
+## ai_gap_answer.md
+
+Nhìn chung trung thực, và cách tách nhóm đúng như yêu cầu. Có hai sắc thái bạn nên để ý khi viết gap analysis:
+
+- **TC-207** không hẳn là "AI nghĩ tới nhưng không đưa vào". AI **đã đưa vào** (TC-23), rồi bị gỡ theo quyết định của bạn ở phiên thảo luận. Đây là một loại thứ ba: đã có, bị loại theo quyết định của SV.
+- **TC-204** cũng gần với loại đó, vì việc tải lại trang đã bị loại theo B10.
+
+Ba khẳng định ở nhóm "đã nghĩ tới" là phần handoff ghi rằng bạn nên tự kiểm. Có thể kiểm nhanh như sau:
+
+```
+git show e9ca12c:HW02/B_FR07/notes_step1.md | Select-String -Pattern "ProductDetail"
+Select-String -Path HW02/appendix/ai-outputs/B_FR07_step3_20261020-1037.json -Pattern "Hack"
+Select-String -Path HW02/appendix/ai-outputs/B_FR07_step4_20261020-111050.json -Pattern "≤ 0"
+```
+
+## Tiếp theo
+
+Bạn trả lời Q1–Q6 cùng 4 điểm ở trên, ghi thẳng vào `sv_questions.md` hoặc gửi ở đây. Sau đó mình sẽ đưa lệnh để Claude Code áp đúng câu trả lời của bạn (commit `5/7c`), rồi sang bước 6 (Playwright).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #146 | 12:29 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Q1: Vì không có SRS về đồng bộ Tab, nên có lẽ là mình sẽ bỏ đi cái này, chắc do mình nghĩ nhiều quá ở như ở web khác.
+Q2: a
+Q3: a
+Q4: Gray Box
+Q5: a
+Q6: 2xx và GET trả đúng Quantity đã gửi.
+Còn EG là Error Guessing.
+===
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627> git show e9ca12c:HW02/B_FR07/notes_step1.md | Select-String -Pattern "ProductDetail"
+>> Select-String -Path HW02/appendix/ai-outputs/B_FR07_step3_20261020-1037.json -Pattern "Hack"
+>> Select-String -Path HW02/appendix/ai-outputs/B_FR07_step4_20261020-111050.json -Pattern "≤ 0"
+
+  - lß║ºn bß║Ñm ─æß║ºu ß╗ƒ trang chi tiß║┐t kh├┤ng gß╗ìi `addToCart` (`ProductDetail.jsx:21ΓÇô31`);
+HW02\appendix\ai-outputs\B_FR07_step3_20261020-1037.json:1432:            "name": "\"<b>Hack</b>\"",
+HW02\appendix\ai-outputs\B_FR07_step4_20261020-111050.json:332:        "class": "Số nguyên ≤ 0 (vd 0, -3)",
+HW02\appendix\ai-outputs\B_FR07_step4_20261020-111050.json:518:        "class": "API: body.price khác giá CSDL (khác số, ≤ 0, sai kiểu, thiếu)",
+HW02\appendix\ai-outputs\B_FR07_step4_20261020-111050.json:1396:          "rationale": "Đại diện giữa lớp ≤ 0 (−3), không trùng điểm biên 0. 
+Giỏ ban đầu có hàng khác để 'giỏ không đổi' quan sát được.",
+HW02\appendix\ai-outputs\B_FR07_step4_20261020-111050.json:1745:          "rationale": "Đại diện giữa lớp ≤ 0; 0 để bước 4.",
+```
+
+**Output:**
+````
+Cả ba dẫn chứng trong nhóm "đã nghĩ tới" đều có thật. Dòng đầu bị lỗi font chỉ vì PowerShell hiển thị output UTF-8 của `git` sai bảng mã; nội dung vẫn đúng là câu về `ProductDetail.jsx:21–31`. Để lần sau đọc được, chạy dòng này trước:
+
+```
+[Console]::OutputEncoding = [Text.UTF8Encoding]::new()
+```
+
+Một lưu ý cho Audit: dẫn chứng của TC-205 nằm trong `notes_step1.md`, file do AI viết và đã commit, nhưng **không** nằm trong `ai-outputs/`. Khi viết, bạn nên nói rõ chỗ này.
+
+**Q4 – Gray Box:** gray-box là một cách tiếp cận (tester được nhìn vào code), chứ không phải kỹ thuật thiết kế case cùng cấp với EP/BVA/EG/ST. Kỹ thuật bạn thực sự dùng ở TC-205 là đoán lỗi dựa trên code. Vì vậy nên ghi `technique = EG`, kèm trường riêng `approach = gray-box`. Cách này vẫn khai đúng ý bạn, không phải vá linter, và nhất quán với B19 (cũng là gray-box).
+
+**Q1:** việc bạn tự nhận "nghĩ theo các web khác" là chất liệu tốt cho gap analysis. Nó cho thấy kinh nghiệm thực tế có thể kéo case ra ngoài phạm vi SRS.
+
+Còn 3 điểm chưa trả lời. Mình để chỗ trống trong lệnh, bạn điền thẳng vào rồi dán cho Claude Code:
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – áp câu trả lời SV cho bước 5 (commit "HW02[B-FR07] 5/7c: áp trả lời SV").
+Chỉ sửa theo đúng câu trả lời dưới đây; không tự sửa câu chữ khác của SV.
+
+1. TC-202: bỏ case (giữ khoảng trống số). Lý do ghi notes: "SRS không quy định đồng
+   bộ giữa các tab (SV bỏ ở 5/7c)".
+2. TC-203: ec_target EC5 → EC1 (Expected coi 1e5 là hợp lệ).
+3. TC-204: bỏ khỏi B_FR07; notes: "kiểm AuthContext/token hỏng, không thuộc giỏ hàng;
+   dựa vào tải lại trang (B10 ngoài phạm vi)". Ghi thêm vào sv_questions.md dòng
+   "ý thuộc phần xác thực, xem xét ở feature khác".
+4. TC-205: technique = EG; thêm trường approach = "gray-box" (nếu schema chưa có →
+   vá harness commit riêng, linter không được báo lỗi).
+5. TC-212: cột id = {"id": 1}.
+6. TC-215: Expected = "HTTP 2xx và GET /api/cart trả quantity đúng bằng giá trị đã
+   gửi (9007199254740993)"; bỏ phần Thành tiền. Assumptions: B1.
+7. TC-209, TC-214: thêm 2 EC không hợp lệ mới (origin Human, tầng API):
+   "body không phải JSON hợp lệ" (TC-209) và "Content-Type không phải
+   application/json" (TC-214); đưa vào covers + ec_target.
+8. TC-213, TC-214: thêm dòng "Cách thực hiện" (213: gửi 50 request song song;
+   214: header Content-Type: text/plain) để hết cảnh báo trùng dữ liệu.
+9. TC-201: <SV điền — vd: "đổi Thao tác thành 'bấm 20 lần liên tiếp'; bỏ 'Console
+   không có lỗi'" hoặc giữ nguyên>
+10. TC-207: <SV điền — bỏ / giữ với lý do: ...>
+11. Technique các case còn trống: <SV điền, vd "200 EG, 201 EG, 203 EG, ...">
+
+render_md.py → check_domain.py → linter thầy → commit. Dừng.
+Báo cáo theo CLAUDE.md; nếu còn case thiếu căn cứ SRS/giả định trong Expected thì liệt kê.
+```
+
+Sau 5/7c là sang bước 6. Ở bước đó AI viết Playwright, **bạn chạy**, rồi chạy `merge_results.py`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #147 | 12:36 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+201: à, vậy đổi thành số lượng chính xác. 20 lần trong vòng 0.4s. Bỏ cả Console không có lỗi
+207: bỏ luôn, vì không kiểm được gì thì bỏ cho đỡ tốn thời gian.
+Các technique: EG hết, còn 2 cái gửi id đồng thời thì là GB
+---
+Trước đó mình điền nhầm giá trị mảng cho object {"id": 1}. Không biết đã sửa chưa nhỉ
+```
+
+**Output:**
+````
+Chưa sửa. Lệnh ở lượt trước (mục 5: `TC-212: cột id = {"id": 1}`) chưa chạy, nên trong `testcases.json` vẫn đang là `[1, 2, 3]`. Chạy lệnh dưới là sửa luôn. File `sv_cases.md` trong commit 5/7 vẫn giữ bản điền nhầm, như vậy là đúng: lịch sử ghi lại bạn viết gì lúc đó, còn bản sửa nằm ở 5/7c.
+
+Có một chỗ mình cần bạn xác nhận: "2 cái gửi id đồng thời". Mình hiểu là **TC-211 và TC-212** (id dạng mảng/object), vì Lý do của hai case này dẫn code `userCart.find(...)`. Nếu ý bạn là TC-201 và TC-213 (hai case thao tác dồn dập/song song) thì sửa lại số ở mục 11 trước khi chạy. Cũng như TC-205, những case này ghi `technique = EG` cộng `approach = gray-box`.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – áp câu trả lời SV cho bước 5 (commit "HW02[B-FR07] 5/7c: áp trả lời SV").
+Chỉ sửa theo đúng câu trả lời dưới đây; không tự sửa câu chữ khác của SV.
+
+1. TC-202: bỏ case (giữ khoảng trống số). Notes: "SRS không quy định đồng bộ giữa
+   các tab (SV bỏ ở 5/7c)".
+2. TC-203: ec_target EC5 → EC1 (Expected coi 1e5 là hợp lệ).
+3. TC-204: bỏ khỏi B_FR07; notes: "kiểm AuthContext/token hỏng, không thuộc giỏ hàng;
+   dựa vào tải lại trang (B10 ngoài phạm vi)". Ghi vào sv_questions.md: "ý thuộc phần
+   xác thực, xem xét ở feature khác".
+4. TC-207: bỏ case. Notes: "không có điểm quan sát / căn cứ SRS (SV bỏ ở 5/7c, cùng
+   lý do EC32)".
+5. TC-212: cột id = {"id": 1} (SV điền nhầm mảng ở 5/7).
+6. TC-215: Expected = "HTTP 2xx và GET /api/cart trả quantity đúng bằng giá trị đã
+   gửi (9007199254740993)"; bỏ phần Thành tiền. Assumptions: B1.
+7. TC-209, TC-214: thêm 2 EC không hợp lệ mới (origin Human, tầng API):
+   "body không phải JSON hợp lệ" (TC-209), "Content-Type không phải
+   application/json" (TC-214); đưa vào covers + ec_target.
+8. TC-213, TC-214: thêm dòng "Cách thực hiện" (213: gửi 50 request song song;
+   214: header Content-Type: text/plain).
+9. TC-201: Thao tác = "bấm 'Thêm vào giỏ' id 4 đúng 20 lần trong 0,4 giây (cách
+   nhau 20 ms)"; bỏ "Console không có lỗi" khỏi Expected.
+10. Technique: mọi case SV = EG. TC-205, TC-211, TC-212 thêm approach = "gray-box"
+    (schema chưa có trường này → vá harness commit riêng; linter không được báo lỗi).
+11. render_md.py → check_domain.py → linter thầy → commit. Dừng.
+Báo cáo theo CLAUDE.md; liệt kê case còn thiếu căn cứ SRS/giả định trong Expected (nếu có).
+```
+
+Sau lệnh này, TS-SV còn 13 case (bỏ 202, 204, 207). Tiếp theo là bước 6.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #148 | 12:37 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7739,7 +9057,79 @@ Commit `5/7c` chưa làm. Lý do: `check_domain` báo 1 lỗi, và để sửa t
 
 ---
 
-## #129 | 12:41 20/10/2026 | Claude Opus 5.5 | [...]
+## #149 | 12:40 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 5/7c – áp trả lời SV (mục 1–10) + vá harness trường approach
+- File đã tạo/sửa (chưa commit): HW02/B_FR07/testcases.json (v0.11), testcases.md, sv_questions.md (thêm mục "Trả lời của SV (áp ở 5/7c)")
+- Đã áp:
+  · Bỏ TC-202, 204, 207 (giữ khoảng trống số); lý do ghi ở notes của suite TS-SV-UI/API; ý xác thực của 204 ghi vào sv_questions.md
+  · TC-203: ec_target đổi EC5 → EC1
+  · TC-212: cột id = {"id": 1}
+  · TC-215: Expected mới, assumptions B1
+  · TC-201: đổi Thao tác; bỏ "Console không có lỗi"
+  · Biến mới V22 "Định dạng request POST /api/cart"; V21ớc đó
+  · EC mới (origin Human, requirements API-CART + B17):
+    - EC56 = body không phải JSON hợp lệ → TC-209
+    - EC57 = Content-Type không phải application/json → TC-214
+  · TS-SV-API thêm cột "Cách thực hiện": 213 = gửi 50 re Content-Type: text/plain
+  · Mọi case SV: technique EG; TC-205, 211, 212 thêm approach gray-box
+- Kết quả kiểm tra:
+  · check_domain: 1 ERROR / 7 warn (đều là cảnh báo biến cũ), EC 55/55 đã phủ
+    - ERROR: TC-FR07-203 – case không hợp lệ phải có đúntarget
+  · lint: 62 TC, 0 errors / 10 warn (tiêu đề thiếu CONDITION, giữ nguyên văn SV)
+  · test: Not run
+- Commit: 82be2bc HW02: vá harness – trường approach (gray-box)
+  · approach chỉ nhận black-box/gray-box/white-box, giá trị khác thì WARN
+  · Bảng suite có thêm cột "Cách tiếp cận"
+  · Render và check của A_FR01, B_FR07 không đổi; linter thầy không báo lỗi với trường mới
+  · 5/7c chưa commit, chờ trả lời Q7
+- Cần quyết định:
+  · Q7 TC-203 – covers vẫn có EC5 (không hợp lệ) trong kEC5 khỏi covers (b) giữ EC5, Expected đổi sang bị từ chối
+- Case còn thiếu căn cứ SRS/giả định trong Expected:
+  · TC-200 – "không bật alert XSS": SEC-04 đã ra ngoài p
+  · TC-203 – coi 1e5 là số nguyên hợp lệ: SRS không nói về cách viết số
+  · TC-206 – hiển thị "007" thành "7": SRS không nói địn
+  · TC-213 – "không mất request" khi gửi song song: FR-07.3 chỉ nói cộng dồn, không nói đồng thời
+```
+
+**Output:**
+````
+Mọi thứ đã áp đúng. Còn lại câu Q7 và 4 case thiếu căn cứ. Mình đề xuất như sau; bạn đồng ý thì chạy lệnh luôn, không đồng ý chỗ nào thì sửa dòng đó.
+
+- **Q7 → (a), bỏ EC5 khỏi covers của TC-203.** Lý do giống Q2: Expected của bạn coi `1e5` là hợp lệ, vậy case không thể đồng thời phủ lớp "không phải số".
+- **TC-203 và TC-206 → dùng chung một giả định mới, B23.** Hai case cùng một câu hỏi: một số nguyên dương viết theo cách khác (`1e5`, `007`) có được hiểu theo giá trị số hay không. SRS chỉ nói "số nguyên dương", không nói gì về cách viết. Đề xuất nội dung B23: *"Chuỗi biểu diễn một số nguyên dương theo cách khác (ký hiệu số mũ, số 0 đứng đầu) được hiểu theo giá trị số của nó; Số lượng hiển thị và tính tiền theo giá trị đó."*
+- **TC-200 → đưa SEC-04 trở lại test basis, gắn riêng cho case này.** Lúc trước SEC-04 bị gỡ vì không có điểm quan sát cho *tên gửi qua API*. Ô Số lượng thì khác: người dùng nhập trên UI, và nếu được chấp nhận thì giá trị đó được hiển thị trong giỏ. Như vậy SEC-04 áp đúng cho case này.
+- **TC-213 → không cần giả định.** Mỗi request là một lần "thêm cùng sản phẩm", nên FR-07.3 áp cho từng lần. Kết quả 50 suy thẳng từ yêu cầu này, chỉ cần ghi FR-07.3 vào notes.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
+1. Q7: TC-203 bỏ EC5 khỏi covers (giữ ec_target EC1).
+2. B23 (SV chốt): "Chuỗi biểu diễn một số nguyên dương theo cách khác (ký hiệu số mũ,
+   số 0 đứng đầu) được hiểu theo giá trị số của nó; Số lượng hiển thị và tính tiền
+   theo giá trị đó." Lý do: FR-06.2 chỉ nói "số nguyên dương", không quy định cách
+   viết. Gắn assumptions B23 cho TC-203, TC-206.
+3. SEC-04: đưa lại vào test basis (trích nguyên văn README.md:281), phạm vi ghi
+   "giá trị người dùng nhập ở ô Số lượng hiển thị trong giỏ"; gắn requirements cho
+   TC-200.
+4. TC-213: notes "Expected suy từ FR-07.3 áp cho từng request".
+5. render_md.py → check_domain.py → linter thầy (phải 0 ERROR) →
+   commit "HW02[B-FR07] 5/7c: áp trả lời SV". Dừng, báo cáo theo CLAUDE.md.
+```
+
+Khi 5/7c xong, sang bước 6. Mình sẽ đưa lệnh để AI viết Playwright cho cả 3 tầng (UI, API, GUI) cùng các case SV, theo quy ước đã chốt ở A: evidence, `auto_status`, một browser context mỗi case, và restart backend trước mỗi lượt chạy.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #150 | 12:41 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7791,7 +9181,98 @@ B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
 
 ---
 
-## #130 | 12:44 20/10/2026 | Claude Opus 5.5 | [...]
+## #151 | 12:43 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 5/7c – áp trả lời SV (gộp mục 1–10 lượt trước, Q7, B23, SEC-04, notes TC-213)
+- File đã tạo/sửa: HW02/B_FR07/testcases.json (v0.11), t A_prompt_log.md
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 5/7c – áp trả lời SV (gộp mục 1–10 lượt trước, Q7, B23, SEC-04, notes TC-213)
+- File đã tạo/sửa: HW02/B_FR07/testcases.json (v0.11), testcases.md, sv_questions.md, A_prompt_log.md
+- Thay đổi lượt này:
+  · Q7: bỏ EC5 khỏi covers của TC-203; ec_target giữ EC1
+  · B23 (SV chốt): thêm vào meta.assumptions nguyên văn kèm lý do; gắn assumptions của TC-203 và TC-206
+  · SEC-04 đưa lại vào test basis:
+    - nội dung trích nguyên văn README.md:281;
+    - phạm vi: "giá trị người dùng nhập ở ô Số lượng hiể
+    - thêm vào meta.references;
+    - gắn requirements của TC-200.
+  · TC-213: notes = "Expected suy từ FR-07.3 áp cho từng
+- Kết quả kiểm tra:
+  · check_domain: 0 errors / 7 warn (đều là cảnh báo biến cũ không có lớp không hợp lệ); EC 55/55 đã phủ
+  · lint: 62 TC, 0 errors / 10 warn (tiêu đề thiếu CONDITION, giữ nguyên văn SV)
+  · test: Not run
+  · Truy vết: SEC-04 → TC-200; B23 → TC-203, TC-206
+- Commit: 82be2bc HW02: vá harness – trường approach (gr
+          21a989a HW02[B-FR07] 5/7c: áp trả lời SV
+- Case SV còn thiếu căn cứ SRS/giả định trong Expected:
+- Cần quyết định: không có
+```
+
+**Output:**
+````
+5/7c đã sạch: 0 lỗi, mọi case đều có căn cứ. Sang bước 6.
+
+Bước này có vài chỗ đặc thù của B mà nếu không nói trước, script dễ sai một cách âm thầm:
+
+- **Số không biểu diễn được bằng Number của JS** (TC-208 `1e-324`, TC-209 `Infinity`, TC-215 `9007199254740993`): nếu script dựng body bằng object JS rồi `JSON.stringify`, giá trị đã bị đổi trước khi gửi đi. Phải gửi body dạng **chuỗi thô**. Riêng TC-215, việc so quantity phải làm trên **text** của response GET, vì `JSON.parse` sẽ làm tròn và case trông như Pass dù thực ra sai.
+- **TC-201 (20 lần/0,4s):** mỗi lệnh click của Playwright có chờ, nên rất dễ vượt 0,4 giây. Script phải đo thời gian thực tế và ghi vào Actual. Nếu vượt quá thì ghi notes, không âm thầm coi như đạt.
+- **Case khẳng định nhiều ý** cần dùng `expect.soft`, để Actual ghi đủ mọi chỗ lệch. Thiếu thông tin này thì bạn không chia được Fail/Blocked theo A20.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 bước 6a – viết Playwright (KHÔNG chạy test; SV chạy). Commit
+"HW02[B-FR07] 6/7a: Playwright".
+
+Chung:
+- Theo quy ước A_FR01 trong CLAUDE.md: evidence B_FR07/evidence/TC-xx_{ui,api,req,
+  res,failed}.{png,json}; không giữ trace .zip; giữ auto_status; mỗi case 1 browser
+  context mới; user riêng {ts}; afterEach DELETE user (lỗi xoá → notes, không đổi verdict).
+- Đặt locale trình duyệt cố định, ghi vào meta.environment (B13 chấp nhận '.' và ',').
+- Case nhiều khẳng định: expect.soft, ghi mọi chỗ lệch vào Actual.
+- Bước 3 của procedure (giỏ ban đầu không khớp) → đánh dấu Blocked theo B20, ghi
+  case gốc nếu xác định được.
+
+UI:
+- Đúng 1 page.goto mỗi case; sau đó chỉ điều hướng bằng link trong app (B0d).
+- Định vị phần tử theo procedure (không dựa vào đúng chữ nhãn), trừ TC-95…98.
+- Dialog native: page.on('dialog'). TC-08: kiểm dòng vẫn còn TRONG lúc dialog mở,
+  rồi mới accept. Case không chờ dialog (TC-66, TC-07): có dialog thì xử lý theo
+  notes của case và ghi Actual.
+- Phản hồi khi thêm (B21): theo dõi ≤ 2 s sau click (toast, badge đổi, chữ/trạng
+  thái nút, thông báo); ghi loại phản hồi vào Actual; chụp ảnh.
+- TC-200: gõ bằng keyboard (fill bị chặn ở type=number); ghi value thực tế của ô;
+  bắt sự kiện dialog để phát hiện alert.
+- TC-201: click 20 lần cách 20 ms; đo tổng thời gian thực tế, ghi Actual; > 0,4 s
+  → notes.
+- TC-92: so computed style link tới /cart với link khác; chụp ảnh 2 trang.
+
+API:
+- Body gửi dạng CHUỖI THÔ cho TC-208, 209, 215 (không JSON.stringify từ object).
+- TC-215: so quantity trên TEXT response GET (không JSON.parse).
+- TC-213: 50 POST song song (Promise.all); TC-214: Content-Type: text/plain.
+- Lưu req/res JSON mỗi case làm evidence.
+
+Kiểm tra trước commit:
+- npx playwright test --list: liệt kê đủ 62 TC, khớp mã trong testcases.json.
+- Case nào không tự động hoá được → đánh dấu manual + procedure chạy tay, liệt kê.
+- Ghi HW02/B_FR07/RUN.md: các lệnh SV chạy (restart backend → web → test →
+  merge_results.py), không gì khác.
+Dừng. Báo cáo theo CLAUDE.md.
+```
+
+Sau đó **bạn tự chạy** theo `RUN.md` (nhớ restart backend trước mỗi lượt), rồi chạy `merge_results.py`. Gửi lại đây báo cáo kèm danh sách Fail/Blocked, mình sẽ cùng bạn rà verdict theo A20 trước khi commit 6/7b.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #152 | 12:44 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7888,7 +9369,221 @@ Config chưa được vá (escape sai). Sửa bằng Edit.
 
 ---
 
-## #131 | 13:08 20/10/2026 | Claude Opus 5.5 | [...]
+## #153 | 12:54 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 bước 6a – viết Playwright (không chạy test)
+- File đã tạo/sửa:
+  · HW02/tests/B_FR07/B_FR07.spec.ts + lib.ts
+  · HW02/tests/playwright.config.ts (thêm project B_FR07)
+  · HW02/B_FR07/RUN.md
+  · testcases.json (meta.environment: locale vi-VN, timezone Asia/Ho_Chi_Minh)
+  · A_prompt_log.md
+- Kết quả kiểm tra:
+  · npx playwright test --project=B_FR07 --list: 62 test, mã khớp đúng 62 TC trong testcases.json
+  · tsc: chỉ báo thiếu kiểu node (fs/path/__dirname), A_FR01 cũng vậy
+  · check_domain: 0 errors / 7 warn; lint: 0 errors / 10 warn; test: Not run
+- Commit: 1abe0a1 HW02[B-FR07] 6/7a: Playwright
+- Cách làm:
+  · Oracle từng case nằm trong bảng UI_ORACLE / API_ORACha1 của expected_result. Expected trong JSON đổi → testbáo lỗi, không chạy theo oracle cũ.
+  · Mỗi case UI/GUI: 1 browser context mới, 1 page.goto; user riêng {ts}, xoá sau case. Xoá lỗi → annotation "cleanup" như A_FR01;
+merge_results không đưa annotation này vào notes.
+  · Giỏ ban đầu không khớp → Blocked theo B20:
+    - nếu giỏ dựng từ trang chi tiết: ghi "nghi case gốc TC-FR07-61, SV xác nhận";
+    - không có nút +/- → case gốc TC-FR07-90.
+  · B21: theo dõi 2 s sau click (badge, chữ/trạng thái nút, toast/aria-live, chữ "đã thêm"), ghi loại phản hồi và thời điểm vào Actual, chụp ảnh `_feedback`.
+  · TC-08: đọc DOM qua CDP trong lúc dialog native đang ay]" trong Actual, không kết luận.
+  · API: body gửi dạng chuỗi JSON thô cho mọi case (gồm 208, 209, 215); TC-215 so trên text của GET; TC-213 dùng Promise.all 50 request; TC-214 gửi text/plain.
+- Case phải chạy tay hoàn toàn: không có. Phần kiểm tay:
+  · TC-94 – alt có "mô tả nội dung ảnh" không (code chỉ
+  · TC-08 – dòng khi dialog đang mở, chỉ khi CDP không đọc được DOM
+- Diễn giải AI tự chọn (chưa có lệnh):
+  · TC-211/212: name/price "CSDL" lấy theo sản phẩm id 1 (số đầu tiên trong cột id)
+  · TC-213: "xử lý xong" kiểm là cả 50 request trả 2xx
+- Cần quyết định: không có
+```
+
+**Output:**
+```
+Bản này ổn. Hai điểm làm rất tốt:
+
+- **Oracle khoá bằng sha1 của Expected:** nếu ai đó sửa Expected sau khi đã có Actual, test sẽ báo lỗi chứ không lặng lẽ chạy theo oracle mới. Đây đúng là cơ chế bảo vệ quy tắc "không đổi Expected sau khi có Actual".
+- **Blocked chỉ ghi "nghi case gốc …, SV xác nhận"**, không tự kết luận. Như vậy đúng với A20.
+
+Về 2 diễn giải AI tự chọn:
+- **TC-211/212 lấy name/price theo id 1:** chấp nhận được. Hai case này kiểm *kiểu* của id, nên chọn sản phẩm nào cũng không ảnh hưởng.
+- **TC-213 hiểu "xử lý xong" = cả 50 request trả 2xx:** đây là cách đọc Expected *của bạn*, nên bạn phải xác nhận. Mình thấy hợp lý, vì "xử lý xong" mà có request lỗi 5xx hoặc timeout thì không thể gọi là xong. Nếu đồng ý, nhờ Claude Code ghi câu diễn giải này vào notes của TC-213 khi merge, để Audit thấy được ai đã quyết.
+
+Lỗi `tsc` thiếu kiểu node không ảnh hưởng gì, vì Playwright tự biên dịch. Muốn hết báo thì cài thêm `@types/node`; không cũng được.
+
+## Bạn chạy
+
+1. Làm theo `RUN.md`. **Restart backend ngay trước lượt chạy chính thức.** Lượt này là lượt dùng để chốt verdict.
+2. Trong lúc chạy, đừng thao tác trên trình duyệt hay đổi cửa sổ, vì TC-201 và TC-92 nhạy với việc đó.
+3. Kiểm tay sau khi chạy:
+   - **TC-94:** xem alt của từng ảnh có mô tả đúng nội dung không. Lưu ảnh chụp thành `TC-94_manual_*.png`.
+   - **TC-08:** chỉ phải kiểm tay nếu Actual ghi là CDP không đọc được DOM.
+4. Chạy `merge_results.py`. **Chưa commit.**
+5. Gửi lại đây: tổng Pass/Fail/Blocked, danh sách các case Fail/Blocked kèm một dòng Actual mỗi case, và các case kiểm tay.
+
+Lúc đó mình sẽ cùng bạn rà từng case Fail/Blocked theo A20: lệch do chính biến mục tiêu thì Fail, lệch do biến khác thì Blocked. Chốt xong mới commit 6/7b.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #154 | 13:07 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+TC-94: 
+trang sản phẩm: lia vào thì không thấy, F12 thì có: "<img alt="" class="w-full h-48 object-cover mb-4 rounded" src="https://placehold.co/300x300/png?text=iPhone+15" savior-scanned-img="http://localhost:5173/">"
+trang chi tiết: lia vào thì không thấy, F12 thì có: "<img alt="Tai nghe AirPods Pro 2" class="w-full h-auto rounded" src="https://placehold.co/300x300/png?text=AirPods+Pro" savior-scanned-img="http://localhost:5173/product/4">"
+===
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627> python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/B_FR07/testcases.json HW02/tests/results/B_FR07.json
+TC-FR07-01: Fail  TRƯỚC: không có bảng (giỏ trống); trạng thái trống: bảng=không, ảnh/icon=không, 
+TC-FR07-02: Fail  đăng nhập cart02_1792475780724@domain.com: navbar có tên user; TRƯỚC: không có b
+TC-FR07-03: Blocked  Blocked: giỏ ban đầu không khớp: cần [Bàn phím cơ Keychron Q1 × 1], thấy [] (B20
+TC-FR07-04: Fail  đăng nhập cart04_1792475787115@domain.com: navbar có tên user; TRƯỚC: 2 dòng: [i
+TC-FR07-05: Blocked  Blocked: ô Số lượng của dòng không có nút '+'/'-' (0 nút) — case gốc TC-FR07-90 
+TC-FR07-06: Blocked  Blocked: giỏ ban đầu không khớp: cần [Bàn phím cơ Keychron Q1 × 3], thấy [] (B20
+TC-FR07-07: Blocked  Blocked: ô Số lượng của dòng không có nút '+'/'-' (0 nút) — case gốc TC-FR07-90 
+TC-FR07-08: Fail  đăng nhập cart08_1792475795503@domain.com: navbar có tên user; TRƯỚC: 2 dòng: [T
+TC-FR07-09: Fail  TRƯỚC: 1 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 600
+TC-FR07-10: Pass  đăng nhập cart10_1792475801387@domain.com: navbar có tên user; TRƯỚC: 1 dòng: [i
+TC-FR07-11: Pass  đăng nhập cart11_1792475805382@domain.com: navbar có tên user; TRƯỚC: 1 dòng: [i
+TC-FR07-12: Pass  đăng nhập cart12_1792475809226@domain.com: navbar có tên user; TRƯỚC: 1 dòng: [i
+TC-FR07-13: Pass  đăng nhập cart13_1792475813066@domain.com: navbar có tên user; TRƯỚC: 1 dòng: [i
+TC-FR07-20: Pass  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":1,"name":"iPho
+TC-FR07-21: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":2,"name":"Samsung Galax
+TC-FR07-22: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-30: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-31: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-32: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-33: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-34: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-35: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-36: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-37: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-38: Pass  POST HTTP 401 {"error":"Unauthorized"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Ma
+TC-FR07-39: Pass  POST HTTP 403 {"error":"Forbidden"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max",
+TC-FR07-40: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-60: Pass  đăng nhập cart60_1792475827330@domain.com: navbar có tên user; TRƯỚC: 1 dòng: [i
+TC-FR07-61: Fail  đăng nhập cart61_1792475831386@domain.com: navbar có tên user; TRƯỚC: không có b
+TC-FR07-62: Fail  đăng nhập cart62_1792475835915@domain.com: navbar có tên user; TRƯỚC: không có b
+TC-FR07-63: Fail  đăng nhập cart63_1792475840202@domain.com: navbar có tên user; TRƯỚC: không có b
+TC-FR07-64: Fail  đăng nhập cart64_1792475844578@domain.com: navbar có tên user; TRƯỚC: không có b
+TC-FR07-65: Blocked  Blocked: giỏ ban đầu không khớp: cần [Bàn phím cơ Keychron Q1 × 2], thấy [] (B20
+TC-FR07-66: Pass  đăng nhập cart66_1792475850660@domain.com: navbar có tên user; TRƯỚC: 1 dòng: [T
+TC-FR07-70: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-71: Pass  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn 
+TC-FR07-72: Pass  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn 
+TC-FR07-73: Pass  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn 
+TC-FR07-74: Pass  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn 
+TC-FR07-90: Fail  dòng: 1 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000
+TC-FR07-91: Fail  không tìm thấy breadcrumb ở vùng nội dung chính
+TC-FR07-92: Fail  ở /cart: [{"href":"/cart","text":"Giỏ hàng","style":"rgb(255, 255, 255) | none |
+TC-FR07-93: Fail  locale trình duyệt=vi-VN; trang chủ (thẻ)="6.000.000 VND"; trang chi tiết="6.000
+TC-FR07-94: Fail  alt trang chủ=["","","","",""]; alt trang chi tiết=["Tai nghe AirPods Pro 2"]; t
+TC-FR07-95: Fail  nhãn đọc được=["Sản phẩm","Giá","Số lượng","Thành tiền","Thao tác"]
+TC-FR07-96: Fail  nhãn đọc được=["Xóa"]
+TC-FR07-97: Fail  nhãn đọc được=["← Mua tiếp"]
+TC-FR07-98: Fail  nhãn đọc được=["Tổng tạm tính:"]
+TC-FR07-99: Fail  không có phản hồi nhìn thấy được trong 2 s
+TC-FR07-200: Pass  TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "<script>alert(1)</scrip
+TC-FR07-201: Fail  TRƯỚC: không có bảng (giỏ trống); bấm 20 lần trong 873 ms [notes] thời gian thực
+TC-FR07-203: Fail  TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "1e5": value="1e5"; khôn
+TC-FR07-205: Fail  TRƯỚC: không có bảng (giỏ trống); lần 1: value="2"; lần 1: không có phản hồi nhì
+TC-FR07-206: Fail  TRƯỚC: không có bảng (giỏ trống); ô Số lượng sau khi gõ "007": value="007"; khôn
+TC-FR07-208: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-209: Fail  POST HTTP 400 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<ti
+TC-FR07-210: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-211: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-212: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro
+TC-FR07-213: Fail  POST 50 request song song: 50×HTTP 200; TRƯỚC: []; SAU: [{"id":1,"name":"iPhone 
+TC-FR07-214: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [null]
+TC-FR07-215: Fail  POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn 
+Bỏ 41 attachment trùng nội dung.
+Đã gộp 62 test case.
+```
+
+**Output:**
+````
+Đã xem hết. Kết quả thô: **Pass 14 / Fail 43 / Blocked 5**. Phần lớn Fail là lỗi thật, nhưng có vài case cần chỉnh theo A20, và một nhóm Pass là **Pass giả**. Nhóm này đúng kiểu đã gặp ở A.
+
+## Phát hiện then chốt: lần bấm đầu ở trang chi tiết không thêm gì
+
+Nhiều kết quả cùng chỉ về một hướng:
+- TC-03, 06, 65: giỏ ban đầu dựng từ trang chi tiết đều ra rỗng.
+- TC-61…64: thêm mới từ trang chi tiết đều Fail.
+- TC-205: "lần 1: không có phản hồi".
+
+Đây là ghi nhận `ProductDetail.jsx:21–31` từ bước 1, giờ đã có evidence. Hệ quả kéo theo ba nhóm case:
+
+**1. Pass hộp đen (giữ Pass, thêm notes): TC-10, 11, 12, 13, 60.** Lần bấm đầu không thêm gì kể cả khi số lượng hợp lệ (TC-61), nên kết quả "giỏ không đổi" không chứng minh được ô Số lượng thật sự chặn giá trị sai. Áp đúng quy tắc trong handoff. TC-200 cũng vậy ở phần "giỏ không đổi"; phần "không bật alert" thì là Pass thật.
+
+**2. Chuyển sang Blocked: TC-203 và TC-206, case gốc TC-61.** Mục tiêu của hai case là *cách viết số* (`1e5`, `007`), nhưng lệch do cơ chế thêm ở trang chi tiết. Đó là biến khác, nên theo A20 là Blocked. Cần đọc lại Actual đầy đủ để chắc: nếu sản phẩm *được* thêm nhưng sai số lượng thì vẫn là Fail.
+
+**3. TC-205 giữ Fail.** Đây chính là case nhắm vào lỗi này, nên Fail là đúng biến mục tiêu.
+
+## Các chỉnh khác
+
+- **TC-09 → Blocked, case gốc TC-08.** Không có dialog thì không có nút Hủy để bấm. Theo A17: TC-08 kiểm sự tồn tại của dialog (Fail), còn TC-09 kiểm nhánh Hủy, phụ thuộc vào dialog nên là Blocked.
+- **TC-06, TC-65:** ghi cả hai case gốc, TC-61 (dựng giỏ) và TC-90 (thiếu nút −).
+- **TC-213: cần xem Actual.** Nếu SAU có 50 phần tử, mỗi phần tử quantity 1, thì lỗi là *không cộng dồn* (đã lộ ở TC-21 khi gửi tuần tự), chứ không phải mất request do đồng thời. Khi đó case là Blocked, case gốc TC-21. Nếu SAU có 1 phần tử với quantity < 50 thì mới là Fail do đồng thời.
+- **TC-201: 873 ms > 0,4 s.** Nếu chỗ lệch duy nhất là thời gian, thì đó là script không làm đúng procedure, không phải lỗi SUT, nên không được tính Fail. Cần sửa cách click (gọi click ngay trong trang, cách nhau 20 ms) rồi chạy lại riêng TC-201, ghi cả hai lượt chạy.
+
+## TC-94 (kiểm tay)
+
+- **"Lia chuột không thấy" không phải là lỗi.** Alt không hiện khi rê chuột; thứ hiện khi rê chuột là thuộc tính `title`. Alt dành cho trình đọc màn hình và hiển thị khi ảnh không tải được. Kiểm bằng F12 như bạn đã làm là đúng cách.
+- **Verdict: Fail.** Ở trang chủ, cả 5 ảnh có `alt=""`, vi phạm FR-24.4 (không rỗng). Trang chi tiết thì đạt, vì alt là tên sản phẩm.
+- **Thuộc tính `savior-scanned-img` không phải của SUT**, mà do một tiện ích trình duyệt (Savior) chèn vào. Ảnh chụp kiểm tay nên làm lại trong cửa sổ ẩn danh không có tiện ích, để evidence không lẫn thứ của bên thứ ba.
+
+Các Fail còn lại khớp với biến mục tiêu. Ví dụ: TC-93 hiển thị "VND" thay vì "₫"; TC-98 ghi "Tổng tạm tính:"; TC-214 trả `SAU: [null]`; TC-209 trả trang lỗi HTML, không có trường `error` như B17 yêu cầu.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 bước 6b – đề xuất verdict theo A20 (giữ auto_status; chưa commit cho tới khi
+SV xác nhận).
+1. Pass hộp đen: TC-10, 11, 12, 13, 60 giữ Pass + notes "Pass hộp đen: lần bấm đầu ở
+   trang chi tiết không thêm cả giá trị hợp lệ (TC-61) → không chứng minh ô Số lượng
+   chặn giá trị sai". TC-200: notes tương tự cho phần giỏ không đổi; phần alert là
+   Pass thật.
+2. Đọc Actual đầy đủ TC-203, TC-206: nếu sản phẩm KHÔNG được thêm → Blocked, case gốc
+   TC-61; nếu được thêm nhưng sai Số lượng → giữ Fail. Báo lại cách xếp.
+3. TC-09 → Blocked, case gốc TC-08 (A17: không có dialog để chọn Hủy).
+4. TC-06, TC-65: case gốc = TC-61 (dựng giỏ) và TC-90 (thiếu nút '-').
+5. TC-213: đọc SAU. 50 phần tử quantity 1 → Blocked, case gốc TC-21 (không cộng dồn);
+   1 phần tử quantity < 50 → giữ Fail. Ghi diễn giải "xử lý xong = 50×2xx" (SV đã
+   xác nhận) vào notes.
+6. TC-201: sửa script click trong trang (element.click() cách 20 ms) để đạt ≤ 0,4 s;
+   chạy lại RIÊNG TC-201 (SV chạy, lệnh ghi vào RUN.md); giữ kết quả lượt 1 trong
+   notes. Chưa chốt verdict TC-201.
+7. TC-94: verdict Fail (alt rỗng ở 5 ảnh trang chủ, FR-24.4); trang chi tiết đạt.
+   Ghi chú evidence kiểm tay cần chụp lại trong cửa sổ ẩn danh không tiện ích.
+8. Rà mọi Fail còn lại: case nào lệch do biến KHÔNG nằm trong ec_target → liệt kê
+   (không tự đổi), kèm biến gây lệch và case gốc đề xuất.
+Báo cáo: bảng Pass/Fail/Blocked trước/sau, danh sách thay đổi, danh sách mục 8.
+```
+
+Sau khi bạn chạy lại TC-201 và xác nhận danh sách ở mục 8, commit `6/7b`. Tiếp theo là bước 7 (bug report 🔒). Ở bước đó Claude Code chỉ gom dữ kiện theo triệu chứng; phần gộp/tách bug và câu chữ là của bạn.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #155 | 13:08 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -7966,7 +9661,88 @@ Sửa script: TC-201 dùng `element.click()` trong trang, body API gửi dạng 
 
 ---
 
-## #132 | 13:12 20/10/2026 | Claude Opus 5.5 | [...]
+## #156 | 13:11 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 6b – đề xuất verdict theo A20 (CHƯA commit)
+- File đã sửa:
+  · HW02/B_FR07/testcases.json, testcases.md: status + notes "6b: …"
+  · HW02/tests/B_FR07/B_FR07.spec.ts: TC-201 click; body API gửi dạng Buffer
+  · HW02/B_FR07/RUN.md: thêm lệnh chạy lại riêng TC-201, TC-209
+- Kết quả kiểm tra: check_domain 0 errors/7 warn; lint 0 errors/10 warn; --list 62 test
+- Số verdict trước → sau: Pass 14 → 14 · Fail 43 → 39 · Blocked 5 → 9
+- Thay đổi:
+  · TC-10, 11, 12, 13, 60: giữ Pass, thêm notes "Pass hộp đen"
+  · TC-200: giữ Pass; notes ghi phần giỏ không đổi là Pass hộp đen, phần không bật alert là Pass thật
+  · TC-203, 206: Fail → Blocked, case gốc TC-61. Cả hai đều SAU giỏ trống, tức sản phẩm không được thêm
+  · TC-09: Fail → Blocked, case gốc TC-08 (không có dialog để chọn Hủy)
+  · TC-06, 65: giữ Blocked; notes case gốc TC-61 + TC-90
+  · TC-213: Fail → Blocked, case gốc TC-21
+    - SAU có 50 phần tử id 1, mỗi phần tử quantity 1 (lấ
+    - notes ghi diễn giải "xử lý xong = 50×2xx"
+  · TC-201: giữ Fail (auto), verdict chưa chốt
+    - notes giữ lượt 1: mouse.click, 873 ms, SAU giỏ trống
+    - script mới: element.click() trong trang, cách 20 ms
+  · TC-94: giữ Fail; notes alt rỗng 5 ảnh trang chủ (FR-idence kiểm tay cần chụp lại
+- Mục 8 – Fail lệch do biến KHÔNG nằm trong ec_target (chưa đổi verdict):
+  · TC-04 – thêm từ trang chi tiết không vào giỏ (SAU = C10 bị chặn, đề xuất case gốc TC-61
+    - Riêng badge (EC43, mục tiêu) vẫn lệch vì không có badge → có thể giữ Fail cho phần này
+  · TC-205 – lần 1 không thêm được → phần cộng dồn EC9/E TC-61
+    - EC45 (không có phản hồi, mục tiêu) vẫn lệch → SV chọn giữ Fail hay Blocked
+  · TC-209 – lệch do script, không do SUT:
+    - Playwright tự JSON.stringify body không phải JSON huỗi JSON chứ không phải Infinity thô (evidenceTC-FR07-209_res.json: Unexpected token '"')
+    - Đã sửa sang Buffer, cần chạy lại
+  · TC-62, 63, 64: cùng nguyên nhân với TC-61, nhưng biến mục tiêu EC1 nằm trong ec_target → giữ Fail, không liệt kê
+- Bất thường mới:
+  · tests/B_FR07/B_FR07.spec.ts (hàm send của runApi) – lỗi body TC-209 ở trên
+  · Lượt 1 TC-201 dùng mouse.click theo toạ độ → SAU giỏg nút không. Chờ lượt chạy lại.
+- Cần quyết định:
+  · Q8 TC-209 – chạy lại với script đã sửa? (a) chạy lạiail lượt 1
+  · Q9 TC-04, TC-205 – (a) giữ Fail theo biến mục tiêu còn lệch (badge/EC45) (b) Blocked, case gốc TC-61
+```
+
+**Output:**
+````
+Quyết định chính xác hơn khi tách theo từng biến mục tiêu:
+
+**Q8 – TC-209 → (a), chạy lại.** Lượt 1 không gửi đúng thứ procedure yêu cầu, nên kết quả đó không dùng được làm Actual. Đây là sửa script, không phải đổi Expected. Có một chỗ cần kiểm thêm: Playwright chỉ tự `JSON.stringify` khi chuỗi body *không* phải JSON hợp lệ. Vì vậy TC-208 (`1e-324`) và TC-215 (số rất lớn) nhiều khả năng đã gửi đúng. Dù vậy vẫn cần đối chiếu `req.json` của hai case này để chắc chắn body thô đúng như thiết kế, vì nếu chúng cũng bị đổi thì verdict hiện tại sai.
+
+**Q9 → (a) giữ Fail cả hai, nhưng lý do khác nhau:**
+- **TC-04:** phần EC10 (gộp dòng khi thêm từ trang khác) không đánh giá được vì lỗi thêm ở trang chi tiết, tức lệch do biến khác. Nhưng badge (EC43) cũng là mục tiêu và lệch *độc lập* (SUT không có badge nào). Theo A20, chỉ cần một biến mục tiêu lệch thật là Fail. Notes nên ghi rõ: "EC10 chưa đánh giá được (case gốc TC-61); Fail do EC43".
+- **TC-205:** lý do không phải EC45 như Claude Code nêu. Case này *nhắm thẳng* vào chuỗi thao tác thêm hai lần ở trang chi tiết, và lần 1 không thêm được chính là hành vi mục tiêu bị lệch. Nó giống TC-61…64 (mục tiêu là thao tác thêm), khác TC-203/206 (mục tiêu là cách viết số). Đây cũng là bằng chứng mạnh cho bug report: case gray-box của bạn đã xác nhận đúng giả thuyết rút ra từ code.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 6b – hoàn tất (chưa commit cho tới khi có kết quả chạy lại).
+1. Q9: TC-04 giữ Fail; notes "EC10 chưa đánh giá được (thêm từ trang chi tiết không
+   vào giỏ, case gốc TC-61); Fail do EC43 – không có badge". TC-205 giữ Fail; notes
+   "Fail do chính thao tác mục tiêu (thêm 2 lần ở trang chi tiết): lần 1 không thêm,
+   khớp giả thuyết gray-box ProductDetail.jsx:21–31".
+2. Kiểm req.json của TC-208, TC-215: body thô có đúng 1e-324 và 9007199254740993
+   không? Nếu sai → thêm vào danh sách chạy lại.
+3. Cập nhật RUN.md: lượt chạy lại gồm TC-201, TC-209 (+ 208/215 nếu mục 2 sai);
+   restart backend trước lượt chạy lại.
+Dừng, báo cáo kết quả mục 2.
+```
+
+Sau đó bạn chạy lại theo `RUN.md`, rồi `merge_results.py`. Gửi mình kết quả của các case chạy lại. Nếu không có gì bất ngờ thì commit:
+
+```
+HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
+```
+
+Commit kèm evidence và prompt log. Lượt chạy lại cũng ghi vào notes của từng case, đúng như TC-201 đang làm.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #157 | 13:12 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8012,7 +9788,107 @@ TC-208 và TC-215 không cần chạy lại: body thô gửi đúng `1e-324` và
 
 ---
 
-## #133 | 13:20 20/10/2026 | Claude Opus 5.5 | [...]
+## #158 | 13:18 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+```markdown
+# B_FR07 – Lệnh chạy test (SV chạy trên máy mình, PowerShell)
+
+1. Khởi động lại backend (CSDL seed sạch, giỏ RAM rỗng):
+
+   ```powershell
+   cd ..\eshop-sut\backend; node server.js
+   ```
+
+2. Chạy web (cửa sổ PowerShell khác):
+
+   ```powershell
+   cd ..\eshop-sut\frontend-web; npm run dev
+   ```
+
+3. Chạy test (cửa sổ PowerShell khác, từ thư mục repo):
+
+   ```powershell
+   cd HW02/tests; $env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/B_FR07.json"; npx playwright test --project=B_FR07 --reporter=list,json; cd ../..
+   ```
+
+4. Gộp kết quả vào testcases.json:
+
+   ```powershell
+   python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/B_FR07/testcases.json HW02/tests/results/B_FR07.json
+   ```
+
+## Lượt chạy lại (bước 6b): TC-FR07-201, TC-FR07-209
+
+1. Khởi động lại backend (bắt buộc trước lượt chạy lại) và chạy web như bước 1–2.
+2. Chạy lại và gộp kết quả:
+
+   ```powershell
+   cd HW02/tests; $env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/B_FR07_rerun.json"; npx playwright test --project=B_FR07 -g "TC-FR07-(201|209) " --reporter=list,json; cd ../..
+   python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/B_FR07/testcases.json HW02/tests/results/B_FR07_rerun.json
+   ```
+
+```
+
+Lỡ chạy nhầm lượt trên, sau đó tôi cũng có chạy lại lượt dưới:
+Lần đầu (chạy nhầm): Bỏ 40 attachment trùng nội dung.
+Đã gộp 62 test case.
+===
+Bước chạy lại: 
+Bỏ 1 attachment trùng nội dung.
+Đã gộp 2 test case.
+````
+
+**Output:**
+````
+Không sao, xử lý được, nhưng cần kiểm 3 việc trước khi commit:
+
+1. **Quyết định verdict 6b có bị ghi đè không.** Toàn bộ chỉnh sửa 6b (Blocked, notes Pass hộp đen, case gốc) đang *chưa commit*. Lượt chạy nhầm đã merge lại cả 62 case, nên có thể đã đè lên những chỉnh sửa đó.
+2. **Lượt 1 đã bị ghi đè.** `results/B_FR07.json` và evidence của lượt 1 đã bị thay bằng lượt chạy nhầm (lượt 2). May là kết quả lượt 1 còn trong chat, mình chép lại trong lệnh dưới để đối chiếu.
+3. **Lượt 2 có dùng được không.** Lượt 2 đã chạy script mới (sửa TC-201 và body dạng Buffer). Nếu **trước lượt đó bạn có restart backend**, thì lượt 2 hoàn toàn có thể làm lượt chính thức: cả 62 case cùng một lượt, cùng một bản script. Bạn xác nhận giúp mình chỗ này nhé.
+
+Việc chạy nhầm không phải vấn đề, miễn là ghi lại trung thực. Đây cũng là chất liệu cho Audit: harness để merge ghi đè lên verdict thủ công.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 6b – xử lý chạy nhầm (chưa commit).
+Bối cảnh: SV đã chạy (lượt 2) toàn bộ 62 case bằng script mới + merge, rồi (lượt 3)
+chạy lại TC-201, 209 + merge. Lượt 1 bị ghi đè (results + evidence).
+
+1. Kiểm testcases.json: các chỉnh sửa 6b còn không? (status Blocked của TC-09, 203,
+   206, 213; notes "6b: …" của TC-04, 06, 10–13, 60, 65, 94, 200, 201, 205, 213).
+   Báo cái nào mất.
+2. So auto_status lượt 2 với lượt 1 (lượt 1, SV chép từ output merge):
+   Pass: 10,11,12,13,20,38,39,60,66,71,72,73,74,200
+   Blocked: 03,05,06,07,65
+   Fail: mọi case còn lại.
+   Liệt kê case khác kết quả (ngoài 201, 209) → nghi flaky, chưa kết luận.
+3. Áp lại quyết định 6b bị mất, NHƯNG kiểm lại điều kiện trên Actual lượt 2 trước
+   khi áp (203/206 SAU giỏ trống? 213 SAU 50 phần tử quantity 1? TC-61 vẫn Fail?).
+   Điều kiện không còn đúng → không áp, báo lại.
+4. Báo kết quả TC-201, TC-209 lượt 2 và lượt 3; khác nhau → báo, chưa chốt.
+   Kèm kết quả kiểm req.json TC-208, 215 (lệnh trước, mục 2).
+5. Ghi nhật ký lượt chạy vào RUN.md (cuối file) và notes suite: lượt 1 (chính thức
+   ban đầu, bị ghi đè do chạy nhầm), lượt 2 (toàn bộ, script đã sửa), lượt 3 (201,
+   209). Đề xuất lượt chính thức theo câu trả lời SV về restart backend.
+6. Harness: nếu merge_results.py ghi đè status/notes do SV chỉnh → vá (chỉ ghi
+   auto_status + Actual; status do SV đặt giữ nguyên trừ khi --force), và file
+   results có timestamp để không ghi đè lượt trước. Commit riêng
+   "HW02: vá harness – merge không ghi đè verdict thủ công".
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Bạn trả lời giúp: **trước lượt chạy nhầm, bạn có restart backend không?**
+````
+
+**Xử lý:** [...]
+
+---
+
+## #159 | 13:20 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8098,7 +9974,139 @@ Vá xong và đã thử trên bản sao. Cập nhật automation.md rồi commit
 
 ---
 
-## #134 | 13:23 20/10/2026 | Claude Opus 5.5 | [...]
+## #160 | 13:22 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Có hết nhé, trước mỗi lần chạy mình đều restart backend.
+===
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 6b – xử lý chạy nhầm (chưa commit phần B_FR07) + vá harness merge
+- File đã sửa:
+  · HW02/B_FR07/testcases.json, testcases.md: status, notes case, notes suite (nhật ký)
+  · HW02/B_FR07/RUN.md: nhật ký lượt + lệnh results có timestamp
+  · .claude/skills/domain-bva-testing/scripts/merge_results.py, references/automation.md (đã commit)
+- Mục 1 – sửa đổi 6b bị mất:
+  · Mất: status Blocked của TC-09, 203, 206, 213 (merge lượt 2 ghi đè thành Fail)
+  · Còn nguyên: mọi notes "6b: …" (merge không ghi notes)
+- Mục 2 – auto_status lượt 2 so với lượt 1: giống nhau ở mọi case ngoài 201/209 (Pass 14, Blocked 5, còn lại Fail). Không có case nghi flaky.
+- Mục 3 – đã kiểm điều kiện trên Actual lượt 2 rồi mới áp lại Blocked cho cả 4 case:
+  · TC-203, 206: SAU giỏ trống
+  · TC-213: 50×HTTP 200, SAU 50 phần tử id 1, mỗi phần tử quantity 1
+  · TC-61: vẫn Fail
+  · TC-09: vẫn không có dialog
+  · Tổng hiện tại: Pass 14 · Fail 39 · Blocked 9
+- Mục 4:
+  · TC-201: lượt 2 = 405 ms, lượt 3 = 410 ms (đều > 400 ms, đã ghi notes); cả hai lượt SAU có 20 dòng AirPods, mỗi dòng SL 1 → auto Fail. Hai lượt giống nhau; verdict chưa chốt.
+  · TC-209: lượt 2 và lượt 3 giống nhau: body thô đã gửi đúng (server báo "Unexpected token 'I'"), HTTP 400 dạng HTML, không có trường error, giỏ không đổi → auto Fail
+  · TC-208, 215 (kiểm lại trên evidence lượt 2): body_ra993, đều là JSON hợp lệ; GET SAU lần lượt có quantity 0 /9007199254740992 → không cần chạy lại
+- Mục 5 – nhật ký lượt chạy (cuối RUN.md + notes của 7 s
+  · lượt 1 ≈ 12:56: toàn bộ 62 case; results và evidence đã bị ghi đè
+  · lượt 2 13:14: toàn bộ 62 case, script đã sửa
+  · lượt 3 13:17: TC-201, TC-209
+- Mục 6 – vá merge_results.py:
+  · Case đã có auto_status mà status khác auto_status thì giữ status, in [GIỮ]; chỉ cập nhật auto_status, Actual, evidence; ghi đè được bằng --force
+  · Đã thử trên bản sao: giữ được Blocked, --force ghi đè được
+  · Lệnh chạy trong RUN.md giờ ghi results có timestamp
+- Commit: e4625d5 HW02: vá harness – merge không ghi đè verdict thủ công
+- Bất thường mới: evidence/ vẫn bị ghi đè mỗi lượt vì me_results.py, evidence_name). Lệnh này chưa yêu cầu vá.
+- Cần quyết định:
+  · Q10 – Lượt chính thức: lệnh nói "theo câu trả lời SV chưa nhận được câu trả lời đó → SV có restart backendtrước lượt 2 không? (a) có → lượt 2 chính thức, lượt 3 ghi là lượt chạy lại (b) không → chạy lại toàn bộ sau khi restarttrước lượt 2 không? (a) có → lượt 2 chính thức, lượt 3 ghi là lượt chạy lại (b) không → chạy lại toàn bộ sau khi restart
+```
+
+**Output:**
+````
+**Q10 → (a).** Bạn có restart backend trước mỗi lượt, nên lượt 2 là lượt chính thức, lượt 3 ghi là lượt chạy lại. Hai lượt ra kết quả giống nhau, không có case nào nghi flaky, như vậy rất ổn.
+
+**TC-201 → đề xuất chốt Fail, dù thời gian chạy là 405–410 ms, lệch khoảng 1–2%.** Lý do: kết quả là 20 dòng AirPods, mỗi dòng số lượng 1, tức là *không cộng dồn* (FR-07.3, đúng EC37 mục tiêu của case). Nếu chạy chậm mà gây ra sai lệch thì phải thấy dạng *mất* lượt thêm, chứ không thể ra 20 dòng riêng. Nghĩa là thêm 5–10 ms không thay đổi bản chất kết quả. Ghi lệch thời gian vào notes là đủ. Đây là case của bạn bắt được lỗi cộng dồn ở **trang chủ**: các case AI chỉ kiểm cộng dồn khi thêm từ trang chi tiết (TC-03) và qua API (TC-21). Điểm này đáng giữ cho phần gap analysis. Nếu bạn không đồng ý chốt Fail thì sửa mục 1 trong lệnh.
+
+**Evidence bị ghi đè:** không cần vá. Giới hạn nộp bài là ≤ 20 MB, nên giữ thêm evidence của các lượt cũ là bất lợi. Hơn nữa lượt 2 và lượt 3 giống nhau. Chỉ cần ghi notes rằng evidence của TC-201/209 lấy từ lượt 3, kết quả trùng với lượt 2.
+
+Sau đó commit 6/7b và sang bước 7 🔒. Ở bước này Claude Code chỉ gom dữ kiện và dựng khung; việc gộp hay tách bug, chọn severity và viết câu chữ là của bạn.
+
+**Lệnh cho Claude Code**
+
+```
+Nhiệm vụ 1 – chốt 6/7b
+1. Lượt chính thức = lượt 2 (SV xác nhận restart backend trước mọi lượt); lượt 3 =
+   chạy lại TC-201, 209. Ghi vào nhật ký RUN.md + notes suite.
+2. TC-201: verdict Fail (SV chốt); notes "lệch thời gian 405–410 ms so với 400 ms
+   (~1–2%), không ảnh hưởng kết luận: 20 dòng riêng, mỗi dòng SL 1 = không cộng dồn
+   (FR-07.3)". Evidence TC-201/209 từ lượt 3, kết quả trùng lượt 2.
+3. Không vá evidence ghi đè (giới hạn 20 MB); ghi một dòng vào notes suite.
+4. render_md.py → check_domain.py → linter thầy →
+   commit "HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20" (kèm evidence,
+   results lượt 2 + 3, prompt log).
+
+Nhiệm vụ 2 – Bước 7a: gom dữ kiện (AI-01 §11: KHÔNG viết bug report)
+1. Gom mọi TC Fail theo TRIỆU CHỨNG quan sát được (không gộp theo phỏng đoán nguyên
+   nhân); mỗi nhóm: danh sách TC, yêu cầu/giả định bị vi phạm, Actual tóm tắt, đường
+   dẫn evidence. Case Blocked ghi kèm vào nhóm của case gốc.
+2. Kiểm trùng: gh issue list trên tkob-team/eshop-sut (mọi tác giả, kể cả đã đóng)
+   tìm issue về giỏ hàng / /api/cart / trang chi tiết / badge / alt / ₫ / breadcrumb;
+   đối chiếu cả BUG-01…14 của A_FR01. Liệt kê nhóm nào có thể trùng, kèm số issue.
+3. Ghi HW02/B_FR07/bugs_facts.md (chỉ dữ kiện). Dựng sẵn khung trống BUG-15… theo
+   số nhóm triệu chứng (14 trường như A, mục "Dữ kiện (AI chép)" điền sẵn; mục
+   "Nhận định", tiêu đề, severity, priority để TRỐNG).
+4. Không chọn gộp/tách, không đề xuất severity. Commit
+   "HW02[B-FR07] 7/7a: dữ kiện bug (AI chép)". Dừng, báo cáo theo CLAUDE.md.
+```
+
+Khi có `bugs_facts.md`, gửi lên đây. Mình có thể giúp bạn soát cách gộp/tách theo quy tắc đã chốt (theo nguyên nhân gốc hoặc theo yêu cầu bị vi phạm; mỗi bug phải tái hiện và sửa được độc lập) và kiểm thang severity. Câu chữ và lựa chọn cuối cùng là của bạn.
+
+Dữ kiện gom khá tốt: có Actual nguyên văn, đoạn code kèm số dòng, và các nhãn nhóm chỉ mô tả triệu chứng. Trước khi bạn quyết định gộp/tách, có một lỗi dữ kiện cần sửa và một điểm nghi trùng cần kiểm.
+
+## 1. Lỗi dữ kiện: cột "Yêu cầu" đang liệt kê cả những yêu cầu đã đạt
+
+Cột này đang lấy *mọi* yêu cầu của TC (từ ec_target), trong khi bug report chỉ được ghi **yêu cầu bị vi phạm**. Ví dụ:
+- **G1** có FR-07.5, nhưng trong TC-02 bước bấm link về trang chủ ra URL '/' là đạt. G1 còn có FR-08.1, B1, FR-07.1, đều không bị vi phạm.
+- **G7** có FR-07.5 và FR-23.2, nhưng TC-01 đạt cả hai. Chỉ FR-07.7/FR-24.3 (thiếu hình minh hoạ) là lệch.
+- **G6** có FR-07.3 và FR-07.1, trong khi chỉ FR-23.2 bị vi phạm (EC10 chưa đánh giá được).
+- **G3** có B4: Thành tiền từng dòng vẫn đúng, chỉ FR-07.3 bị vi phạm. **G5** có FR-07.1. **G22** có FR-06.2.
+
+Nếu để nguyên mà chép sang bug report, người đọc sẽ nghĩ SUT vi phạm cả những yêu cầu nó đã làm đúng. Sửa dữ kiện sai so với evidence thuộc phần AI được phép làm.
+
+## 2. Nghi trùng: G20 với #25
+
+Ở A, #25 cũng là lỗi trả trang HTML, nhưng ở `/api/register`. Nếu nguyên nhân là app **không có error handler JSON cho lỗi parse body** (lỗi chung toàn app, không riêng endpoint nào), thì G20 cùng nguyên nhân gốc với #25. Khi đó không nên mở issue mới; bổ sung vào #25 rằng lỗi cũng tái hiện ở `/api/cart`. Cần đọc #25 mô tả nguyên nhân thế nào. G21 với #26 thì khác hành vi (500 so với 200 kèm phần tử null), nên không trùng.
+
+## 3. Gộp/tách: bạn quyết, đây là phân tích theo quy tắc đã chốt
+
+**Nên giữ riêng** (mỗi nhóm một yêu cầu, sửa độc lập): G1, G4, G5, G7, G8, G9, G10, G11.
+
+**Các chỗ cần chọn:**
+
+| Nhóm | Phương án | Cân nhắc |
+|---|---|---|
+| G12–G15 (4 nhãn) | (a) 4 bug · (b) 1 bug · (c) G15 riêng + G12–14 gộp | G15 là yêu cầu SRS ghi rõ "nhãn chính xác"; G12–14 dựa trên B12. Đây chính là lý do ta đã tách TC-95…98. Gộp cả 4 dễ bị xem là tách để tăng số lượng nếu để riêng, nhưng gộp hết thì trộn căn cứ mạnh với căn cứ yếu. |
+| G16–G19, G21 (đều từ `server.js:293 push(req.body)`) | (a) gộp theo nguyên nhân gốc · (b) tách theo yêu cầu | G16 (cộng dồn) và G17 (lấy giá CSDL) là hai cách sửa **khác hẳn** việc validate. G18, G19, G21 cùng là "không kiểm dữ liệu vào", có thể sửa bằng một lớp validate. Một cách gộp hợp lý: G16 · G17 · (G18+G19+G21). |
+| G22 (mất độ chính xác số lớn) | riêng, hoặc ghi chú trong bug quantity | Theo B1, giá trị này hợp lệ, nên đây không phải "chấp nhận dữ liệu sai" như G18. Đây là hệ quả của JSON.parse. Bạn cân nhắc mức độ đáng báo. |
+| G2 + G6 | riêng hoặc gộp | Nếu có badge cập nhật thì G2 tự hết (B21). Nhưng G2 cũng có thể sửa độc lập bằng toast, nên tách vẫn hợp lệ. |
+| G3 + G16 | riêng (khuyến nghị) | Cùng vi phạm FR-07.3, nhưng một lỗi ở `CartContext` (UI) và một ở `server.js` (API), hai chỗ sửa độc lập. |
+
+**Riêng G3:** dữ kiện chỉ có kết quả với 20 lần bấm. Code (`CartContext.jsx:9`) cho thấy chỉ cần **2 lần bấm chậm** là đã ra 2 dòng. Bạn nên tự tái hiện tay với 2 lần bấm và chụp ảnh (`TC-201_manual_2lan.png`). Như vậy bug report có bước tái hiện tối thiểu, và tiêu đề không bị hiểu nhầm thành lỗi do bấm dồn dập. Chưa kiểm thì phải ghi "(chưa kiểm chứng)".
+
+**Lệnh cho Claude Code** (chạy ngay, chưa phụ thuộc quyết định gộp/tách)
+
+```
+B_FR07 7a – sửa dữ kiện (commit "HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm").
+1. bugs_facts.md + khung BUG-15…36: cột/trường "Yêu cầu" chỉ giữ yêu cầu/giả định mà
+   Actual cho thấy BỊ VI PHẠM; yêu cầu đạt trong cùng case chuyển sang dòng "Đạt
+   trong cùng case: …". Rà cả 22 nhóm (đã thấy sai ở G1, G3, G5, G6, G7, G22).
+2. Đọc issue #25 và #26 (gh issue view): trích nguyên văn phần mô tả nguyên nhân/
+   Actual; ghi vào mục "Kiểm trùng" để SV so với G20, G21. Không kết luận trùng.
+3. Dừng. Báo cáo theo CLAUDE.md.
+```
+
+Sau đó bạn quyết theo mẫu, ví dụ: `G12–15: c; G16–21: G16 · G17 · G18+19+21; G22: riêng; G2/G6: riêng; G20: (sau khi xem #25)`. Mình sẽ đưa lệnh để Claude Code dựng lại khung theo cách gộp của bạn. Các phần còn lại (tiêu đề, severity, priority, Nhận định) là bạn viết.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #161 | 13:23 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8179,7 +10187,7 @@ Không có issue trùng hẳn; #14 (FR-08) có dùng `/api/cart` với quantity/
 
 ---
 
-## #135 | 13:29 20/10/2026 | Claude Opus 5.5 | [...]
+## #162 | 13:29 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8234,7 +10242,87 @@ Thêm trích nguyên văn #25, #26 vào mục Kiểm trùng.
 
 ---
 
-## #136 | 13:33 20/10/2026 | Claude Opus 5.5 | [...]
+## #163 | 13:32 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+G12-15: a
+G16-19, G21: có thể tách G16, G17 và bộ G18, G19, G21 được không?
+G22: riêng
+G2 + G6: tách nhé
+G3 + G16: riêng
+===
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7a2 – sửa dữ kiện "yêu cầu bị vi phạm" (22 nhóm) + trích #25, #26
+- File đã sửa: HW02/B_FR07/bugs_facts.md; HW02/bugs/BUG-15…36.md (chỉ phần Yêu cầu, bảng tổng hợp, mục Kiểm trùng); A_prompt_log.md
+  · BUG-01…14 không đổi
+- Kết quả kiểm tra: Fail 39/39 vẫn mỗi case đúng một nhóm; test: không chạy
+- Commit: 103c8ec HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm
+- Cách sửa:
+  · Cột "Yêu cầu" đổi thành "Yêu cầu / giả định bị vi phạm"
+  · Thêm 2 dòng mỗi nhóm: "Đạt trong cùng case", "Chưa đánh giá được trong cùng case"
+  · Dòng "Chưa đánh giá được" do AI thêm, để yêu cầu không xét được thì không xếp nhầm vào "đạt" hay "vi phạm"
+- Nhóm đã đổi, kể cả các nhóm thầy/SV chỉ ra:
+  · G1: bỏ FR-07.1, FR-07.3, FR-08.1 (→ chưa đánh giá được), FR-07.5 → đạt; thêm B1 (TC-64)
+  · G2: FR-06.3 → chưa đánh giá được (TC-99 bấm ở trang chủ), thêm B21
+  · G3: B4 → đạt
+  · G5: FR-07.1 → chưa đánh giá được; B4 → đạt
+  · G6: FR-07.3, FR-07.1 → chưa đánh giá được (case gốc
+  · G7: FR-07.5, FR-23.2 (B22) → đạt
+  · G10: B13 → đạt
+  · G16, G17: API-CART → đạt
+  · G18, G19, G20: thêm B17/B18 (Expected 4xx dựa trên hai giả định này), API-CART → đạt
+  · G22: FR-06.2, B1 → đạt; vi phạm là API-CART (GET trả quantity khác giá trị đã gửi)
+- Mục 2: bugs_facts.md có mục "#25, #26 — trích nguyên vủa từng issue) và một dòng so sánh dữ kiện endpoint/HTTPvới G20, G21. Không kết luận trùng.
+- Cần quyết định (không chặn, cần SV xác nhận):
+  · Q11 – thêm B17/B18/B21 vào nhóm vi phạm (trước đây kủa case vì là mã giả định): (a) giữ (b) bỏ
+  · Q12 – G1 xếp FR-06.2 là "vi phạm" vì Số lượng hợp lệ không được nhận: (a) giữ (b) chuyển sang chưa đánh giá được
+```
+*Đính kèm:* `bugs_facts.md`
+
+**Output:**
+````
+**Tách G16, G17 và gom G18+G19+G21 thành một bug: được.** Đây chính là cách chia theo hướng sửa: G16 cần thêm logic cộng dồn, G17 cần lấy giá từ CSDL, còn G18/19/21 cùng được sửa bằng một lớp validate dữ liệu vào. Mỗi bug tái hiện và sửa độc lập được, nên đúng quy tắc.
+
+**Q11 → (a) giữ.** Expected của các case đó dựa trên B17/B18/B21, nên bug report phải khai rằng một phần căn cứ là giả định. Đây là sự trung thực, không phải nhiễu.
+
+**Q12 → (b) chuyển FR-06.2 sang "chưa đánh giá được".** Ô Số lượng thực ra vẫn nhận giá trị (`value="2"`); thứ hỏng là *nút thêm không thêm*. FR-06.2 nói về việc ô nhận số gì, và chính vì nút không thêm nên phần đó không đánh giá được (đó là lý do có các Pass hộp đen). Thứ thật sự bị vi phạm là **chức năng thêm của nút "Thêm vào giỏ hàng"**. SRS không có câu riêng cho chức năng này, chỉ ngầm định trong FR-06, nên khi viết bạn ghi rõ "(ngầm định)" cùng với FR-06.3 + B21 (không có phản hồi).
+
+Một chỉnh nhỏ: ở **G2**, FR-06.3 là yêu cầu cho nút ở *trang chi tiết*. Nút ở trang chủ thuộc FR-24.1. Vì vậy FR-06.3 ở G2 là "không áp dụng", chứ không phải "chưa đánh giá được".
+
+**G20 và #25: bạn tự so.** Dữ kiện đã có trong mục Kiểm trùng. Tiêu chí: nếu #25 mô tả nguyên nhân là app thiếu xử lý lỗi parse JSON *chung* (không riêng `/api/register`), thì G20 cùng gốc. Khi đó bạn bình luận vào #25 rằng lỗi cũng tái hiện ở `/api/cart`, không mở bug mới. Lệnh dưới đặt G20 ở **số cuối cùng**, để nếu bỏ thì không làm lệch số các bug khác.
+
+Về G3, nếu bạn chưa tái hiện tay với 2 lần bấm, khung sẽ ghi "(chưa kiểm chứng)" cho tới khi bạn kiểm.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 7a – dựng lại khung theo quyết định SV
+(commit "HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV").
+1. Q11 = giữ B17/B18/B21 trong "vi phạm". Q12: G1 FR-06.2 → "chưa đánh giá được";
+   thêm vào "vi phạm": "chức năng thêm của nút 'Thêm vào giỏ hàng' (ngầm định trong
+   FR-06, không có câu SRS riêng)". G2: FR-06.3 → "không áp dụng (nút ở trang chủ
+   thuộc FR-24.1)".
+2. Gộp G18 + G19 + G21 thành 1 khung; giữ mục con theo từng triệu chứng, đủ TC và
+   evidence. Các nhóm còn lại 1 nhóm = 1 khung (G12–15 tách 4, G2/G6 tách, G3, G16,
+   G17, G22 riêng).
+3. Đánh số lại liên tục từ BUG-15, G20 ở SỐ CUỐI (SV còn quyết trùng #25). Xoá khung
+   thừa. Thêm bảng ánh xạ G → BUG vào đầu bugs_facts.md.
+4. Khung của G3: dòng "Tái hiện tối thiểu với 2 lần bấm cách nhau: (chưa kiểm
+   chứng) — SV kiểm tay, evidence TC-FR07-201_manual_2lan.png".
+5. Không điền tiêu đề / severity / priority / nhận định. Dừng, báo cáo theo CLAUDE.md
+   (kèm bảng ánh xạ).
+```
+
+Sau đó là phần của bạn: viết 14 trường mỗi bug. Câu chữ tự do, văn nói cũng được. Severity dùng thang Critical/High/Medium/Low, Priority dùng High/Medium/Low, tiêu đề theo dạng `[FR-xx] …`. Bug nào thuộc FR-06 thì tiêu đề ghi `[FR-06]`. Viết xong, nếu muốn mình soát thì gửi lên: mình chỉ kiểm dữ kiện có khớp evidence không và thang severity/priority có đúng không, không sửa câu chữ của bạn. Sau đó mới tạo issue (kiểm `gh` đang dùng tài khoản `ThachHaoo`, kiểm trùng lần cuối).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #164 | 13:33 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8293,7 +10381,143 @@ Commit vừa rồi thiếu thao tác xoá BUG-35/36. Bổ sung vào cùng commit
 
 ---
 
-## #137 | 13:45 20/10/2026 | Claude Opus 5.5 | [...]
+## #165 | 13:36 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7a3 – dựng lại khung bug theo cách gộp của SV
+- File đã sửa: HW02/B_FR07/bugs_facts.md (thêm bảng ánh xạ ở đầu, cột Khung, dòng "Khung" mỗi nhóm); HW02/bugs/BUG-15…34.md; xoá BUG-35, BUG-36; A_prompt_log.md
+- Kết quả kiểm tra: 39/39 Fail vẫn mỗi case đúng một nhóm; BUG-01…14 không đổi; test: không chạy
+- Commit: d72d863 HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV
+- Bảng ánh xạ:
+  | Khung | Nhóm |
+  |---|---|
+  | BUG-15 … BUG-31 | G1 … G17 (theo thứ tự, mỗi khung 1 nhóm) |
+  | BUG-32 | G18 + G19 + G21 |
+  | BUG-33 | G22 |
+  | BUG-34 | G20 (số cuối, chờ SV quyết trùng #25) |
+- Đã áp:
+  · Q11: giữ B17/B18/B21 trong "vi phạm"
+  · Q12 (G1): FR-06.2 → "chưa đánh giá được"; thêm vào "vi phạm" dòng "chức năng thêm của nút 'Thêm vào giỏ hàng' — ngầm định trong FR-06, không có câu SRS riêng"
+  · G2: FR-06.3 → dòng mới "Không áp dụng (nút ở trang chủ thuộc FR-24.1)"
+  · BUG-32: Bằng chứng / Yêu cầu / Dữ kiện chia mục con theo G18, G19, G21, đủ 14 TC và evidence
+  · BUG-17 (G3): thêm dòng "Tái hiện tối thiểu với 2 lần bấm cách nhau: (chưa kiểm chứng) — SV kiểm tay, evidence TC-FR07-201_manual_2lan.png"
+  · Tiêu đề / severity / priority / nhận định: để trống
+- Cần quyết định: không có (G20/#25 đã ghi là SV đang quyết)
+```
+
+**Output:**
+````
+Khung đã đúng như bạn quyết: 20 khung BUG-15…34, G20 nằm ở số cuối. Phần AI của bước 7a đến đây là xong.
+
+**Việc của bạn bây giờ:**
+1. **G3 (BUG-17):** tái hiện tay bằng 2 lần bấm "Thêm vào giỏ" cách nhau, chụp `TC-FR07-201_manual_2lan.png`. Ra 2 dòng thì bỏ chữ "(chưa kiểm chứng)"; không ra thì giữ nguyên và ghi lại kết quả thực tế.
+2. **G20 (BUG-34):** đọc đoạn trích #25 trong `bugs_facts.md` rồi quyết: cùng gốc thì bình luận vào #25 và xoá khung BUG-34; khác gốc thì viết như bug mới.
+3. **Viết 20 bug.** Mỗi bug điền tiêu đề `[FR-xx] …`, Tiền điều kiện, Bước, Expected, Actual, Nhận định, Severity, Priority. Phần "Dữ kiện (AI chép)" đã có sẵn để bạn đối chiếu.
+
+Khi viết xong, gửi mình vài bug (hoặc tất cả). Mình chỉ soát hai thứ: dữ kiện có khớp evidence không, và severity/priority có đúng thang không. Sau đó tạo issue: kiểm `gh` đang dùng `ThachHaoo`, kiểm trùng lần cuối, kéo ảnh vào mục "Bằng chứng" với alt là tên file, dùng bản che cho evidence của TC-209. Cuối cùng chụp `issues_page.png`.
+
+**Gợi ý tiết kiệm thời gian:** phần viết bug hoàn toàn là việc của bạn, nên trong lúc đó Claude Code có thể chạy song song bước 0–1 của **C_FR15 (Product CRUD, admin)**. Hai việc không đụng nhau. Nếu muốn, chạy lệnh này:
+
+```
+/domain-bva-testing HW02/C_FR15 0
+- Theo đúng quy ước CLAUDE.md và các quy tắc rút ra từ B_FR07: nguồn yêu cầu là SRS
+  (code chỉ dùng cho điểm quan sát); giả định SRS im lặng → mục "Giả định chờ SV
+  chốt", không tự chốt; ghi chú cách độc lập dữ liệu (admin tạo/xoá sản phẩm riêng
+  {ts}, oracle tương đối).
+- Trích SRS, khảo sát SUT, danh sách giả định → ghi vào HW02/C_FR15/notes_step1.md.
+- render → freeze → check_domain → linter thầy; commit "HW02[C-FR15] 1/7: biến vào/ra".
+- Dừng. Báo cáo theo CLAUDE.md (chỉ liệt kê giả định CHẶN bước 2).
+```
+
+Chỉ lưu ý một điều: commit của C và commit bug của B sẽ xen kẽ nhau trong git log. Không sao, vì tiền tố `[B-FR07]`/`[C-FR15]` đã phân biệt rõ.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #166 | 13:41 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+G3: ra 2 dòng. (ảnh 1)
+G20: khác gốc chứ nhỉ, giả sử sau này người ta khắc phục ở register nhưng chưa khắc phục ở cart thì phải báo để fix nữa chứ nhỉ.
+===
+Xem hiện tại như này đã hoàn thiện hết công việc AI chưa, để mình làm công việc của mình nhé
+```
+
+**Output:**
+```
+**G3:** đã xác nhận. Ảnh cho thấy 2 lần bấm ra 2 dòng iPhone 15 Pro Max, mỗi dòng số lượng 1, tổng 60.000.000 ₫. Đây đúng là bước tái hiện tối thiểu cho BUG-17. Bạn lưu ảnh thành `HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png` và bỏ chữ "(chưa kiểm chứng)" trong khung.
+
+**G20:** lo ngại của bạn là hợp lý, nhưng hãy xét chỗ sửa. `bodyParser.json()` được gắn **ở mức toàn app** (`server.js:12`), còn trang lỗi HTML là handler mặc định của Express, cũng ở mức toàn app. Nếu #25 cùng mô tả lỗi parse JSON như vậy, thì sửa một chỗ (thêm error handler trả JSON) là hết cho mọi endpoint. Lúc đó cách chuẩn là bình luận vào #25: "cũng tái hiện ở `/api/cart` (TC-FR07-209)". Như vậy người sửa biết phải kiểm lại cả hai endpoint, và đúng quy tắc gộp theo nguyên nhân gốc mà bạn đã chốt.
+
+Ngược lại, nếu #25 mô tả một lỗi riêng của `/api/register` (ví dụ crash trong handler), thì bạn đúng: tách bug là hợp lý. Bạn đã đọc đoạn trích nên bạn quyết. Nếu vẫn tách, nhớ ghi trong Nhận định "có thể cùng gốc với #25" và gắn link, để người đọc không tính trùng.
+
+## Phần AI cho B đã xong chưa?
+
+Phần AI *trước khi bạn viết* thì **đã xong**. Bạn có thể làm phần của mình ngay. Danh sách việc:
+
+| Ai | Việc | Khi nào |
+|---|---|---|
+| **Bạn** | Lưu ảnh G3; quyết G20; viết 20 (hoặc 19) bug | Bây giờ |
+| AI | Soát dữ kiện bug bạn viết với evidence, kiểm thang severity/priority | Sau khi bạn viết |
+| AI | Tạo bản che evidence TC-209 ở `bugs/_issue_redacted/` | Trước khi tạo issue |
+| AI + bạn | Tạo issue (kiểm `gh` = `ThachHaoo`, kiểm trùng lần cuối); bạn kéo ảnh vào | Sau khi soát |
+| AI | Chụp `issues_page.png`, cập nhật summary README, commit `7/7b…d` | Cuối B |
+| Mình | Cập nhật `HW02_handoff.md` (trạng thái B, BUG/issue kế tiếp, các quy tắc mới rút ra từ B) | Khi B xong |
+
+Còn một việc có thể chạy song song là bước 0–1 của C_FR15 (lệnh ở lượt trước), nếu bạn muốn tận dụng thời gian.
+
+Bạn viết bug đi. Xong thì gửi lên, mình soát dữ kiện và thang.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #167 | 13:44 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Lần này không viết file tương tự như này sao
+```
+*Đính kèm:* `_groups_A_FR01.md`
+
+**Output:**
+````
+Có, file tương đương lần này là **`HW02/B_FR07/bugs_facts.md`**, chính là file bạn gửi mình ở lượt trước. Cấu trúc giống `_groups_A_FR01.md` (bảng tổng hợp, mỗi nhóm có TC Fail, Blocked kèm case gốc, Actual nguyên văn, evidence, đoạn code), và có thêm phần kiểm trùng issue, bảng ánh xạ G → BUG, cùng các dòng "Đạt / Chưa đánh giá được trong cùng case".
+
+Chỗ khác là **tên file và vị trí** không theo quy ước của A. Khi viết report chính và Audit, bạn sẽ muốn hai feature trỏ tới file cùng kiểu. Nên đổi cho thống nhất, dùng `git mv` để giữ lịch sử.
+
+Nhân tiện, so hai file thì thấy `_groups_A_FR01.md` cũng mắc đúng lỗi mà B vừa sửa: cột "Yêu cầu" liệt kê mọi yêu cầu của TC, chứ không chỉ yêu cầu bị vi phạm. Ví dụ G7 của A (email có khoảng trắng) liệt kê từ FR-01.1 đến FR-01.8. Nếu lỗi này đã được chép sang trường "Yêu cầu" của BUG-01…14 và các issue #17–#30, thì bug report của A đang khai sai. Lệnh dưới kiểm việc này nhưng **chưa sửa**: issue đã đăng rồi, nên sửa hay không là bạn quyết.
+
+**Lệnh cho Claude Code**
+
+```
+1. Đổi tên/vị trí bugs_facts.md của B cho khớp quy ước _groups_A_FR01.md (cùng thư
+   mục, tên _groups_B_FR07.md) bằng git mv; cập nhật mọi tham chiếu trong
+   BUG-15…34 và testcases/notes. Commit "HW02[B-FR07] 7/7a4: đổi tên file dữ kiện
+   theo quy ước A".
+2. Chỉ kiểm, không sửa: trường "Yêu cầu" trong BUG-01…14.md (và body issue #17–#30
+   nếu đọc được bằng gh) có chứa yêu cầu KHÔNG bị vi phạm theo Actual không? Liệt
+   kê từng BUG: yêu cầu đang ghi / yêu cầu thực sự vi phạm.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Nếu kết quả mục 2 cho thấy A có khai sai, bạn chọn một trong hai: sửa cả file `.md` lẫn issue (phần "Dữ kiện (AI chép)" thì AI được phép sửa cho khớp evidence), hoặc giữ nguyên và ghi vào Audit như một bài học rút ra từ B. Việc này không chặn bạn viết bug của B.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #168 | 13:45 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8340,7 +10564,76 @@ Phần 1 xong (`d8d60ff`). Sang phần 2: đọc trường Yêu cầu và Actual
 
 ---
 
-## #138 | 13:47 20/10/2026 | Claude Opus 5.5 | [...]
+## #169 | 13:46 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) git mv bugs_facts.md → HW02/bugs/_groups_B_FR07.md, cập nhật tham chiếu; (2) chỉ kiểm trường "Yêu cầu" BUG-01…14 + issue #17–#30
+- File đã sửa: HW02/bugs/_groups_B_FR07.md (đổi tên), BUG-15…34.md (đổi đường dẫn tham chiếu); testcases.json/notes không có tham chiếu nên không đổi
+- Kết quả kiểm tra: grep "bugs_facts" trong HW02 = 0 (trạy
+- Commit: d8d60ff HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+- Phần 2 – issue #17–#30: danh sách Yêu cầu GIỐNG HỆT BUG-01…14.md tương ứng, nên các nhận xét dưới đây áp cho cả issue.
+- Khung có yêu cầu KHÔNG bị vi phạm theo Actual (đang ghi → thực sự vi phạm):
+  · BUG-01: FR-01.6, 7a, 7b, 7c, 8, 10 → FR-01.10 (không chuyển /login, không tạo user) và việc chấp nhận mật khẩu thoả FR-01.6–01.8 (ngầm
+định)
+    - Actual chỉ có thông báo gộp nên không xác định được luật riêng nào bị cài sai
+  · BUG-08: A3, FR-01.4 → chỉ A3 (email lưu nguyên khoảnểm: chỉ tạo 1 user, không có trùng
+  · BUG-09: FR-01.6, A4 → chỉ A4 (413 với mật khẩu dài). FR-01.6 (tối thiểu 8) không liên quan
+  · BUG-10: API-REG, A11 → chỉ A11 (500 thay vì 4xx). APh công
+    - Khác cách xếp G21 bên B (text/plain → 200: API-CART xếp là vi phạm)
+  · BUG-04: FR-01.1, FR-01.5 chỉ bị vi phạm do 1 case TC-213 (thiếu cả 3 trường), các TC còn lại chỉ sai Email → đúng nhưng nên ghi rõ "chỉ
+TC-213"
+- Thiếu (không hỏi nhưng thấy khi kiểm): BUG-06 – Expected dẫn A11 (request thứ 2 phải 4xx) nhưng Yêu cầu không có A11
+- Đã kiểm, khớp với Actual: BUG-02, 03 (A1 do TC-33), 05, 07 (A6 do TC-46/48, A5 do TC-51/224/228), 11, 12, 13, 14
+- Bất thường: file SV chưa commit HW02/B_FR07/evidence/Tm không đụng)
+- Cần quyết định: không chặn. Sửa BUG-01/04/06/08/09/10 và issue #17, 20, 22, 24, 25, 26 hay không → SV quyết
+```
+
+**Output:**
+````
+Mình khuyên **sửa**, vì ba lý do:
+- Đây là dữ kiện sai so với evidence, tức đúng phần AI được phép sửa. Câu chữ của bạn không bị đụng tới.
+- Issue nằm trên fork của nhóm, ai cũng đọc được. Để nguyên thì người đọc tưởng SUT vi phạm cả FR-01.6 (độ dài mật khẩu) ở BUG-09, trong khi thực tế không phải.
+- Sửa xong thì trong Audit có một câu chuyện đẹp: lỗi được phát hiện ở B và vá ngược lại cho A.
+
+Có hai chỗ cần làm cẩn thận:
+- **Sửa body issue thì thêm một comment đính chính ngắn** (sửa trường gì, vì sao). Như vậy người đã đọc trước đó biết có thay đổi, và lịch sử chỉnh sửa minh bạch.
+- **BUG-01:** Claude Code đề xuất "FR-01.10 + chấp nhận mật khẩu hợp lệ (ngầm định)". Cách ghi này hợp lý, vì Actual chỉ có một thông báo gộp nên không xác định được luật riêng nào sai. Nếu bạn muốn ghi khác thì sửa dòng đó trong lệnh.
+
+BUG-10 khác G21 cũng hợp lý, vì hành vi khác nhau: một bên trả 500 thay vì 4xx (vi phạm A11), một bên trả 200 kèm phần tử null.
+
+File ảnh G3 chưa commit cũng không sao, nó sẽ đi cùng commit bug B của bạn.
+
+Nếu bạn đồng ý sửa thì chạy:
+
+**Lệnh cho Claude Code**
+
+```
+A_FR01 – đính chính trường "Yêu cầu" (commit "HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm").
+Chỉ sửa trường Yêu cầu / phần Dữ kiện (AI chép); KHÔNG đụng câu chữ SV.
+1. BUG-01: → "FR-01.10; chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định — Actual
+   chỉ có thông báo gộp, không xác định được luật riêng nào bị cài sai)".
+   BUG-04: thêm "(FR-01.1, FR-01.5 chỉ do TC-213)". BUG-06: thêm A11.
+   BUG-08: chỉ A3. BUG-09: chỉ A4. BUG-10: chỉ A11.
+2. _groups_A_FR01.md: áp quy tắc "chỉ yêu cầu bị vi phạm" như _groups_B_FR07.md.
+3. Issue #17, 20, 22, 24, 25, 26: kiểm `gh auth status` = ThachHaoo; `gh issue edit`
+   chỉ thay dòng Yêu cầu trong body; thêm 1 comment mỗi issue:
+   "Đính chính 2026-10-20: trường Yêu cầu trước đây liệt kê cả yêu cầu không bị vi
+   phạm; nay chỉ giữ <…>. Bước/Actual/Expected không đổi."
+   In body trước/sau ra file HW02/bugs/_edit_log_A.md làm bằng chứng.
+4. Commit. Dừng, báo cáo theo CLAUDE.md.
+```
+
+Sau đó bạn quay lại viết bug của B. Bài học "Yêu cầu = chỉ yêu cầu bị vi phạm" sẽ được ghi vào handoff để áp từ đầu cho C và D.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #170 | 13:47 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8413,7 +10706,160 @@ Log hiện mới ghi mục Yêu cầu. Thêm toàn văn body trước/sau vào l
 
 ---
 
-## #139 | 13:59 20/10/2026 | Claude Opus 5.5 | [...]
+## #171 | 13:51 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+`````
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: A_FR01 7/7e – đính chính trường "Yêu cầu" (file + issue GitHub)
+- File đã sửa:
+g: file SV chưa commit HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png (em không đụng)
+- Cần quyết định: không chặn. Sửa BUG-01/04/06/08/09/10 và issue #17, 20, 22, 24, 25, 26 hay không → SV quyết
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #138 | 13:47 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+
+… 1 more file changed
+Allowed by auto mode classifier
+
+Đã đính chính trường Yêu cầu ở BUG-01/04/06/08/09/10 và _groups_A_FR01.md, commit ddb74cf. Sáu issue #17, 20, 22, 24, 25, 26 cũng đã sửa body
+và có comment đính chính, đăng bằng tài khoản ThachHaoo.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: A_FR01 7/7e – đính chính trường "Yêu cầu" (file + issue GitHub)
+- File đã sửa:
+  · HW02/bugs/BUG-01, 04, 06, 08, 09, 10.md: chỉ mục "## Yêu cầu"
+  · HW02/bugs/_groups_A_FR01.md
+  · HW02/bugs/_edit_log_A.md (mới)
+
+  · gh auth = ThachHaoo
+  · Sau khi sửa, đọc lại từng issue bằng gh issue view: mục Yêu cầu khớp file. Script cũng kiểm phần ngoài mục Yêu cầu không đổi.
+  · test: không chạy
+- Commit: ddb74cf HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm
+- BUG đã sửa:
+  · BUG-01: FR-01.10 + "chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định…)"
+  · BUG-04: thêm "(FR-01.1, FR-01.5 chỉ do TC-213)"
+  · BUG-06: thêm A11
+BUG-09: chỉ A4 · BUG-10: chỉ A11
+- _groups_A_FR01.md (cùng cách làm với _groups_B_FR07.md):
+  · Cột bảng đổi thành "Yêu cầu / giả định bị vi phạm"
+  · Mỗi nhóm có 3 dòng: vi phạm / đạt / chưa đánh giá đư
+  · Thêm mã giả định A… như các file BUG
+  · Thêm 1 dòng đính chính 7/7e ở đầu file
+  · G7, G9, G10, G12 chuyển yêu cầu không bị vi phạm sang "đạt" hoặc "chưa đánh giá được"
+- Issue: mỗi issue có 1 comment đúng mẫu; URL từng comme
+  · _edit_log_A.md: mục Yêu cầu trước/sau + toàn văn body trước/sau (trong thẻ <details>)
+- Bất thường:
+  · Lần ghi đầu (write_text trên Windows) làm 7 file trộư HEAD trước commit
+  · Còn CRLF sẵn từ trước ở BUG-11…14, _groups_B_FR07.md, B_FR07/RUN.md, testcases.md (không sửa)
+  · HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png của
+- Cần quyết định: không có
+`````
+
+**Output:**
+```
+Đính chính A đã xong: 6 bug và 6 issue đều sửa đúng phạm vi, có comment đính chính và log trước/sau. Việc Claude Code đọc lại từng issue sau khi sửa và kiểm phần ngoài mục Yêu cầu không đổi là đủ để yên tâm.
+
+Chuyện CRLF không ảnh hưởng nội dung, nhưng nếu muốn diff gọn thì sau này thêm một file `.gitattributes` trong commit harness riêng. Không gấp.
+
+Phiên thảo luận này đã khá dài, nên mình cập nhật luôn `claude/HW02_handoff.md` trong Project, không đợi B xong. Nội dung mới gồm:
+- trạng thái B hiện tại;
+- các quy ước rút ra từ B (khẳng định một nơi, ec_target, "SRS im lặng thì không tạo Fail", trường Yêu cầu chỉ ghi yêu cầu bị vi phạm, merge không ghi đè verdict…);
+- các sự thật về SUT phần giỏ hàng;
+- chất liệu cho gap analysis và các ghi chú cho Audit;
+- tên transcript phiên này là `_p3`.
+
+Nếu ngữ cảnh bị nén hoặc bạn mở phiên mới, chỉ cần đọc file đó là tiếp được.
+
+Giờ bạn viết bug của B. Xong thì gửi lên để mình soát dữ kiện và thang severity/priority.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #172 | 13:58 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+hmm, thấy format mấy cái bug hiện tại chưa tốt nhỉ. Giúp mình điền trước format giống như BUG-14 nhé. Kiểu có cả hình ảnh tiêu biểu. Giúp mình viết prompt cho Claude Code cũng được nhé
+```
+*Đính kèm:* `BUG-14.md`
+
+**Output:**
+````
+Được. Ta lấy BUG-14 làm mẫu, nhưng phải tách rõ phần AI được điền với phần của bạn (AI-01 §11):
+
+| Mục trong BUG-14 | Ai điền |
+|---|---|
+| ID, Môi trường, Bằng chứng (kèm ảnh tiêu biểu), TC liên quan, Yêu cầu (chép từ test basis / giả định), Dữ kiện (AI chép), dòng cuối | **AI** |
+| Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước, Expected, Actual, Nhận định | **Bạn** (để chỗ trống `<SV viết>`) |
+| Link GitHub Issue | Điền sau khi tạo issue |
+
+Để bạn viết nhanh hơn, phần Dữ kiện sẽ có sẵn Actual nguyên văn và payload `req.json` (với bug API). Bạn chỉ cần đọc rồi viết lại theo ý mình. Ảnh tiêu biểu mặc định là evidence của case có "Actual tiêu biểu" trong file nhóm; bạn đổi nếu thấy ảnh khác rõ hơn.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 7a – điền khung BUG-15…34 theo đúng format HW02/bugs/BUG-14.md
+(commit "HW02[B-FR07] 7/7a5: khung bug theo format BUG-14").
+
+0. Đọc BUG-14.md làm mẫu: giữ ĐÚNG thứ tự và tên mục (ID, Tiêu đề, Severity, Priority,
+   Môi trường, Tiền điều kiện, Các bước tái hiện, Expected (trích SRS), Actual,
+   Bằng chứng, TC liên quan, Yêu cầu, Ghi chú cô lập › Dữ kiện (AI chép) / Nhận định,
+   Link GitHub Issue, dòng cuối "Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần
+   dữ kiện."). Nếu file BUG nào SV đã bắt đầu viết (git diff có nội dung SV) → chỉ
+   bổ sung mục AI, không đụng chữ SV; báo lại file đó.
+
+AI điền:
+1. ID.
+2. Môi trường: cùng mẫu BUG-14 nhưng dữ kiện của B (SUT/fork như cũ; trình duyệt +
+   Playwright theo meta.environment của B_FR07, locale vi-VN; trang/endpoint liên quan;
+   ngày + giờ bắt đầu lượt chính thức = lượt 2; với kiểm tay thì ghi "kiểm tay").
+3. Bằng chứng: dòng "Ảnh tiêu biểu: `<tên file>`" = evidence (.png) của case Actual
+   tiêu biểu trong _groups_B_FR07.md; rồi liệt kê evidence theo từng TC như BUG-14.
+   BUG-17 (G3): ảnh tiêu biểu = TC-FR07-201_manual_2lan.png (kiểm tay, SV chụp) +
+   bỏ "(chưa kiểm chứng)" ở dòng tái hiện 2 lần, ghi "SV kiểm tay 2026-10-20: 2 lần
+   bấm → 2 dòng". BUG-32: Bằng chứng chia mục con G18 / G19 / G21.
+   Bug API có evidence chứa đường dẫn máy (TC-209) → ghi thêm dòng "Bản che dùng cho
+   issue: bugs/_issue_redacted/…" (tạo bản che nếu chưa có).
+4. TC liên quan: Fail / Blocked ghi case gốc / Pass hộp đen (nếu có) / Nhóm dữ kiện.
+5. Yêu cầu: chỉ yêu cầu/giả định BỊ VI PHẠM, mỗi dòng "**Mã:** nội dung" chép từ
+   test basis (yêu cầu) hoặc meta.assumptions (giả định, ghi "(giả định SV chốt)");
+   yêu cầu ngầm định ghi "(ngầm định)". Thêm 2 dòng "Đạt trong cùng case" và "Chưa
+   đánh giá được" như _groups_B_FR07.md.
+6. Ghi chú cô lập › Dữ kiện (AI chép): Actual nguyên văn của case tiêu biểu; bug API:
+   payload từ req.json + status/body từ res.json (rút gọn > 300 ký tự, ghi "(rút gọn)");
+   đoạn code trích nguyên văn có số dòng; case Blocked/Pass hộp đen ghi case gốc.
+
+Để trống, đúng chỗ, dạng `<SV viết>`: Tiêu đề, Severity, Priority, Tiền điều kiện,
+Các bước tái hiện, Expected (trích SRS), Actual, Nhận định. Link: `<sau khi tạo issue>`.
+KHÔNG gợi ý tiêu đề, severity, câu chữ, nguyên nhân.
+
+7. Kiểm: 20 file đủ mục theo thứ tự BUG-14; mọi đường dẫn evidence tồn tại; ảnh
+   tiêu biểu có thật. Commit (kèm TC-FR07-201_manual_2lan.png). Dừng, báo cáo theo
+   CLAUDE.md.
+```
+
+Lưu ý nhỏ: BUG-14 ghi "Ảnh tiêu biểu" chỉ bằng tên file, vì khi tạo issue bạn kéo thả ảnh vào. Nếu muốn ảnh hiện luôn khi xem file `.md` trong repo, có thể thêm một dòng nhúng ảnh bằng đường dẫn tương đối. Nhưng như vậy là lệch với format của A, nên mình để mặc định giống BUG-14.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #173 | 13:59 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8506,7 +10952,170 @@ Actual chứa HTML thô nằm ngoài backtick sẽ bị markdown render. Bọc A
 
 ---
 
-## #140 | 14:16 20/10/2026 | Claude Opus 5.5 | [...]
+## #174 | 14:01 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7a5 – khung BUG-15…34 theo format BUG-14 (chỉ dữ kiện)
+- File đã tạo/sửa:
+  · HW02/bugs/BUG-15…34.md
+  · HW02/bugs/_issue_redacted/BUG-34.txt (mới, bản che TC-209: đường dẫn → <SUT_DIR>)
+  · HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png (ảnh của SV, nay commit)
+  · A_prompt_log.md
+- Kết quả kiểm tra (script):
+  · 20 file đủ các mục, đúng thứ tự BUG-14 (ID → … → dòng cuối)
+  · Mọi đường dẫn `HW02/…` tồn tại; ảnh tiêu biểu đều có
+  · Không còn đường dẫn máy trong BUG/bản che
+  · test: không chạy
+- Commit: d0d0e05 HW02[B-FR07] 7/7a5: khung bug theo format BUG-14
+- AI đã điền:
+  · Môi trường: UI ghi Chromium + Playwright 1.48.2, locContext; trang/endpoint; lượt 2 13:14; TC-201/209 thêmlượt 3; BUG-17 thêm dòng kiểm tay
+  · Bằng chứng: ảnh tiêu biểu + evidence từng TC
+    - BUG-17: ảnh tiêu biểu là ảnh kiểm tay
+    - BUG-32: mục con G18/G19/G21, mỗi mục có ảnh tiêu b
+    - BUG-34: thêm dòng bản che
+  · TC liên quan: Fail / Blocked ghi case gốc / Pass hộp đen (BUG-15) / Nhóm dữ kiện
+  · Yêu cầu: chỉ yêu cầu bị vi phạm; giả định ghi "(giả định ghi "(ngầm định)"; cộng dòng Đạt / Chưa đánh giá được (BUG-16 thêm Không áp dụng)
+  · Dữ kiện: Actual nguyên văn; bug API có payload/phản hồi/GET SAU; code kèm số dòng; case gốc; dòng tái hiện 2 lần ở BUG-17 đổi thành "SV kiểm tay 2026-10-20: 2 lần bấm → 2 dòng"
+- Để trống `<SV viết>`: Tiêu đề, Severity, Priority, Tiền điều kiện, Bước, Expected, Actual, Nhận định; Link = `<sau khi tạo issue>`
+- Cách trình bày em tự chọn:
+  · Actual/body nhiều dòng gộp về một dòng: ký tự xuống dòng thay bằng " ↵ ", bọc trong backtick để HTML thô không bị render
+  · Dài hơn 300 ký tự thì cắt, ghi "(rút gọn)"; Actual n
+- Cần quyết định: không có
+```
+
+**Output:**
+```
+Khung đã đúng format BUG-14 và chỉ chứa dữ kiện. Cách AI tự chọn (gộp nhiều dòng bằng " ↵ ", cắt bớt khi dài hơn 300 ký tự) cũng hợp lý cho việc dán lên issue. Đến đây toàn bộ phần AI trước khi bạn viết đã xong.
+
+Một checklist ngắn để bạn tự soát khi viết (chỉ là tiêu chí kiểm, không phải nội dung):
+
+- **Tiêu đề:** `[FR-xx] …`, đọc riêng tiêu đề là hiểu được triệu chứng. Bug thuộc FR-06 thì ghi `[FR-06]`.
+- **Expected:** bám đúng các dòng trong mục "Yêu cầu" (chỉ yêu cầu bị vi phạm). Bug dựa trên giả định (B8, B12, B17, B18, B21, B1) thì nói rõ trong Expected hoặc Nhận định rằng căn cứ là giả định đã chốt, kèm lý do.
+- **Các bước:** ngắn nhất mà vẫn tái hiện được.
+  - Bug UI nhắc "không tải lại trang giữa chừng" (vì giỏ là state React).
+  - BUG-17 dùng cách tái hiện 2 lần bấm, không cần 20 lần.
+  - Bug API ghi đủ header và body, lấy từ phần Dữ kiện.
+- **Actual:** chỉ ghi những gì evidence cho thấy. Phần suy đoán nguyên nhân để sang Nhận định.
+- **Severity/Priority:** dùng đúng thang Critical/High/Medium/Low và High/Medium/Low. Giữ thang nhất quán với 14 bug của A để hai feature so sánh được.
+- **BUG-34 (G20):** quyết dứt điểm trước khi tạo issue (riêng, hoặc comment vào #25).
+
+Viết xong, bạn gửi vài file (hoặc tất cả) lên đây. Mình soát hai việc: dữ kiện có khớp evidence không, và thang severity/priority có đúng không. Sau đó Claude Code tạo issue.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #175 | 14:14 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Có thể giúp tôi check trước 3 bug này không. Bạn chỉ cần tìm fact/số liệu mà sai trầm trọng thôi. Nếu có, nhờ Claude Code sửa giúp tôi nhé
+```
+*Đính kèm:* `BUG-15.md`, `BUG-16.md`, `BUG-17.md`
+
+**Output:**
+````
+Mình đã đối chiếu 3 bug với evidence và code. **BUG-16 không có lỗi nghiêm trọng.** BUG-15 và BUG-17 mỗi bug có một chỗ sai thật:
+
+**BUG-15: câu "chỉ được thêm nếu bấm từ lần thứ 2 trở đi" sai cả với evidence lẫn với code**
+- Evidence: TC-205 có bấm lần 2 (sau khi rời trang rồi quay lại) và giỏ **vẫn trống**. Không có case nào cho thấy lần bấm thứ 2 thêm được hàng.
+- Code: sau mỗi lần thêm thành công, `setClickCount(0)` reset bộ đếm, nên lần thứ 3 lại bị bỏ qua. Tức là bấm **xen kẽ**: lần 1, 3, 5… bị nuốt, chứ không phải "từ lần 2 trở đi". Ngoài ra, rời trang thì component bị tạo lại và bộ đếm quay về 0, đó là lý do lần 2 của TC-205 cũng bị nuốt.
+- Một chỗ nhỏ đi kèm: Nhận định ghi "6 TC bấm thêm 1 lần", nhưng TC-205 bấm 2 lần (có rời trang giữa hai lần).
+
+**BUG-17: ảnh tiêu biểu không khớp với chữ**
+- Ảnh `TC-FR07-201_manual_2lan.png` chụp **iPhone 15 Pro Max**: 2 dòng, mỗi dòng 30.000.000 ₫, tổng 60.000.000 ₫.
+- Nhưng Actual (dòng "Khi bấm 2 lần") và bước tái hiện lại ghi **AirPods, 6.000.000 ₫**. Người đọc issue mở ảnh ra sẽ thấy lệch ngay.
+
+Nếu có 1 phút, bạn nên tự kiểm tay BUG-15: ở cùng một trang chi tiết, bấm 3 lần liên tiếp, rồi mở giỏ. Code dự đoán giỏ sẽ có **1 dòng**. Khi đó câu trong Actual có evidence thật, và mô tả "bấm xen kẽ bị nuốt" trở thành dữ kiện, rất mạnh cho bug report. Nếu không kiểm, lệnh dưới sẽ chuyển ý đó sang Nhận định, gắn "(chưa kiểm chứng)".
+
+**Lệnh cho Claude Code**
+
+```
+Sửa dữ kiện sai so với evidence trong BUG-15, BUG-17 (chỉ chỗ sai, giữ nguyên các câu
+khác của SV; commit "HW02[B-FR07] 7/7b: sửa dữ kiện BUG-15, 17 theo evidence").
+
+BUG-15:
+1. Actual: bỏ câu "Sản phẩm chỉ thực sự được thêm vào giỏ nếu người dùng thao tác bấm
+   thêm từ lần thứ 2 trở đi." (không có evidence; TC-205 lần 2 sau khi rời trang vẫn
+   không thêm).
+2. Nhận định: thay câu "logic thêm hàng chỉ bắt đầu chạy từ lượt bấm thứ 2…" bằng ý
+   đúng theo code, gắn "(chưa kiểm chứng bằng chạy)": trên cùng một trang, lần bấm
+   thứ 2 liên tiếp mới thêm; sau mỗi lần thêm clickCount reset về 0 nên lần kế tiếp
+   lại bị bỏ qua (bấm 1, 3, 5… bị nuốt); rời trang thì đếm lại từ 0 (khớp TC-205).
+3. Nhận định: "toàn bộ 6 test case thực hiện bấm thêm 1 lần" → ghi đúng: 5 case bấm
+   1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa hai lần.
+
+BUG-17:
+4. Actual, dòng "Khi bấm 2 lần": đổi theo ảnh TC-FR07-201_manual_2lan.png → 2 dòng
+   'iPhone 15 Pro Max', mỗi dòng Số lượng 1, Thành tiền 30.000.000 ₫, Tổng tạm tính
+   60.000.000 ₫.
+5. Các bước tái hiện: ghi rõ kiểm tay dùng 'iPhone 15 Pro Max' (id 1), tự động hoá
+   (20 lần) dùng 'Tai nghe AirPods Pro 2' (id 4).
+   Expected: giữ ví dụ AirPods nhưng nếu nêu số lượng cụ thể cho trường hợp 2 lần thì
+   dùng iPhone 15 Pro Max cho khớp ảnh.
+
+Ghi log thay đổi (trước/sau) vào cuối mục "Dữ kiện (AI chép)" của từng file:
+"Sửa dữ kiện 2026-10-20 theo evidence: …". Dừng, báo cáo theo CLAUDE.md.
+```
+
+Nếu bạn đã kiểm tay 3 lần bấm, gửi kết quả lên. Mình sẽ đưa lệnh ngắn đưa câu đó trở lại Actual kèm ảnh mới.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #176 | 14:15 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đúng rồi, trang chi tiết bấm 3 lần liên tiếp chỉ ra 1 dòng thôi
+```
+
+**Output:**
+````
+Tốt. Như vậy hành vi "bấm xen kẽ bị nuốt" đã có dữ kiện thật, không còn chỉ là suy ra từ code. Bạn lưu ảnh chụp trang giỏ sau 3 lần bấm (thấy rõ 1 dòng và cột Số lượng) thành:
+
+`HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png`
+
+Nếu lúc kiểm bạn chưa chụp, làm lại và chụp nhé, mất khoảng 30 giây. Bug report không nên khẳng định điều gì mà không có ảnh đi kèm.
+
+Lệnh dưới đây chạy được dù lệnh trước đã chạy hay chưa:
+
+**Lệnh cho Claude Code**
+
+```
+BUG-15 – cập nhật theo kiểm tay của SV (gộp với lệnh sửa BUG-15/17 nếu chưa chạy;
+commit "HW02[B-FR07] 7/7b: sửa dữ kiện BUG-15, 17 theo evidence").
+1. Kiểm file HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png tồn tại; chưa có → dừng,
+   báo SV.
+2. Actual: thay câu "chỉ thực sự được thêm… từ lần thứ 2 trở đi" (nếu còn) bằng dữ
+   kiện kiểm tay: "Kiểm tay (SV, 2026-10-20): ở cùng một trang chi tiết, bấm 'Thêm vào
+   giỏ hàng' 3 lần liên tiếp → trang giỏ chỉ có 1 dòng." Ghi đúng Số lượng của dòng
+   như trên ảnh.
+3. Nhận định: ý "bấm 1, 3, 5… bị nuốt; rời trang đếm lại từ 0" giữ nguyên, BỎ nhãn
+   "(chưa kiểm chứng bằng chạy)" cho phần "3 lần → 1 dòng"; phần "rời trang đếm lại"
+   dẫn TC-205.
+4. Bằng chứng: thêm TC-FR07-205_manual_3lan.png; Môi trường thêm dòng "Kiểm tay: SV,
+   2026-10-20 (3 lần bấm liên tiếp)"; Dữ kiện (AI chép) thêm dòng tương ứng.
+5. Các mục khác của BUG-15, BUG-17 theo lệnh sửa trước (mục 3–5). Commit kèm ảnh.
+   Dừng, báo cáo theo CLAUDE.md.
+```
+
+Sau đó bạn viết tiếp BUG-18 trở đi. Muốn soát theo đợt thì gửi mỗi lần 3–5 file như vừa rồi.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #177 | 14:16 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8552,7 +11161,88 @@ The `TC-FR07-205_manual_3lan.png` file doesn't exist yet. Per step 1 of the inst
 
 ---
 
-## #141 | 14:19 20/10/2026 | Claude Opus 5.5 | [...]
+## #178 | 14:17 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: BUG-15/17 – cập nhật theo kiểm tay (7/7b) → DỪNG ở mục 1
+- File đã tạo/sửa: không
+- Kết quả kiểm tra: HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png KHÔNG tồn tại; trong evidence chỉ có TC-FR07-201_manual_2lan.png. test: không chạy.
+- Commit: không
+- Bất thường:
+  · Working tree có thay đổi chưa commit ở BUG-15, BUG-16, BUG-17. Đây không phải do AI làm sau d0d0e05, có thể SV đang viết. Em không đụng vào và chưa đọc nội dung.
+  · Lệnh nhắc tới "lệnh sửa trước (mục 3–5)" của BUG-15/17, nhưng phiên này chưa nhận lệnh đó.
+- Cần quyết định:
+  · Q13 – Ảnh kiểm tay 3 lần: SV chép TC-FR07-205_manual_3lan.png vào HW02/B_FR07/evidence/ rồi gửi lại lệnh
+  · Q14 – "Lệnh sửa BUG-15/17 trước (mục 3–5)": (a) dán lại nội dung lệnh đó (b) bỏ qua, chỉ làm mục 2–4 của lệnh này
+  · Q15 – Mục 2–3 sửa phần Actual / Nhận định, đây là chsửa đúng các câu nêu trong lệnh (b) SV tự sửa, AI chỉ làmBằng chứng / Môi trường / Dữ kiện
+```
+
+**Output:**
+````
+Claude Code dừng lại là đúng. Có 3 việc cần xử lý.
+
+**Q13: ảnh chưa có.** Bạn chép ảnh chụp giỏ sau 3 lần bấm vào `HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png`. Nếu chưa chụp thì làm lại và chụp.
+
+**Commit phần bạn viết trước.** BUG-15/16/17 đang là bản bạn viết, chưa commit. Nên commit riêng trước khi AI sửa, để lịch sử git tách rõ phần SV viết và phần AI sửa dữ kiện. Điều này sẽ có ích khi làm Audit (AI-01 §11):
+
+```
+git add HW02/bugs/BUG-15.md HW02/bugs/BUG-16.md HW02/bugs/BUG-17.md HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png
+git commit -m "HW02[B-FR07] 7/7b: SV viết BUG-15–17"
+```
+
+**Q15: Claude Code thận trọng là đúng, nên làm theo hướng (b) có điều chỉnh.** AI được sửa *dữ kiện sai*, nhưng viết lại câu phân tích trong Nhận định thì đã là viết hộ. Cách sạch nhất:
+- AI **xoá** những câu sai (trong Actual và Nhận định).
+- AI **chép dữ kiện đúng** vào mục "Dữ kiện (AI chép)".
+- **Bạn tự viết** lại một câu Nhận định theo ý mình, nếu muốn. Ví dụ ý cần nói: bấm xen kẽ bị nuốt, rời trang thì đếm lại. Câu chữ là của bạn.
+
+Riêng dòng Actual về kiểm tay 3 lần bấm là dữ kiện thuần, AI chép vào được.
+
+**Q14:** dưới đây là lệnh gộp đầy đủ, không cần dán lại lệnh trước.
+
+**Lệnh cho Claude Code**
+
+```
+Sửa dữ kiện BUG-15, BUG-17 theo evidence. Chạy SAU commit "7/7b: SV viết BUG-15–17"
+(kiểm git log; chưa có → dừng). Commit "HW02[B-FR07] 7/7c: sửa dữ kiện BUG-15, 17
+theo evidence". AI chỉ xoá câu sai + chép dữ kiện; KHÔNG viết câu phân tích thay SV.
+
+BUG-15:
+1. Kiểm HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png tồn tại; chưa có → dừng.
+2. Actual: xoá câu "Sản phẩm chỉ thực sự được thêm vào giỏ nếu người dùng thao tác
+   bấm thêm từ lần thứ 2 trở đi."; thêm dòng dữ kiện: "Kiểm tay (SV, 2026-10-20): ở
+   cùng một trang chi tiết, bấm 'Thêm vào giỏ hàng' 3 lần liên tiếp → trang giỏ chỉ
+   có 1 dòng" (ghi Số lượng đúng như ảnh).
+3. Nhận định: xoá câu "Do lượt bấm đầu bị nuốt, logic thêm hàng chỉ bắt đầu chạy từ
+   lượt bấm thứ 2…"; sửa số liệu sai trong câu còn lại: "6 test case thực hiện bấm
+   thêm 1 lần" → "5 case bấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa
+   hai lần". Để chỗ `<SV viết thêm nếu muốn>` ngay sau.
+4. Dữ kiện (AI chép) thêm: (a) kiểm tay 3 lần → 1 dòng (ảnh); (b) code dòng 29
+   `setClickCount(0)` reset sau mỗi lần thêm; (c) TC-205: lần 2 sau khi rời trang
+   vẫn không thêm. Bằng chứng + Môi trường thêm ảnh và dòng kiểm tay.
+
+BUG-17:
+5. Actual, dòng "Khi bấm 2 lần": đổi theo ảnh TC-FR07-201_manual_2lan.png → 2 dòng
+   'iPhone 15 Pro Max', mỗi dòng Số lượng 1, Thành tiền 30.000.000 ₫; Tổng tạm tính
+   60.000.000 ₫.
+6. Các bước tái hiện: ghi rõ kiểm tay dùng 'iPhone 15 Pro Max' (id 1), tự động hoá
+   20 lần dùng 'Tai nghe AirPods Pro 2' (id 4). Nếu Expected nêu số cụ thể cho
+   trường hợp 2 lần thì đổi sang iPhone 15 Pro Max cho khớp ảnh.
+
+Cuối mục "Dữ kiện (AI chép)" mỗi file: "Sửa dữ kiện 2026-10-20 theo evidence: <liệt
+kê trước → sau>". Dừng, báo cáo theo CLAUDE.md.
+```
+
+Sau đó bạn mở BUG-15, viết một câu Nhận định ở chỗ `<SV viết thêm nếu muốn>`, rồi viết tiếp BUG-18 trở đi. Mẹo: từ giờ cứ viết xong vài bug thì commit ngay (`7/7b: SV viết BUG-xx–yy`), rồi mới gửi mình soát.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #179 | 14:19 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8623,7 +11313,144 @@ Commit SV có, ảnh có. Xem ảnh và nội dung BUG-15, BUG-17.
 
 ---
 
-## #142 | 14:46 20/10/2026 | Claude Opus 5.5 | [...]
+## #180 | 14:21 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa dữ kiện BUG-15, BUG-17 theo evidence (sau commit SV ac34ea0 "7/7b: SV viết BUG-15–17")
+- File đã sửa: HW02/bugs/BUG-15.md, BUG-17.md; thêm HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png; A_prompt_log.md
+- Kết quả kiểm tra: ảnh 3 lần có; đã đọc cả 2 ảnh để lấy số liệu; test: không chạy
+- Commit: 8b52204 HW02[B-FR07] 7/7c: sửa dữ kiện BUG-15, 17 theo evidence
+- BUG-15:
+  · Actual: xoá câu "…từ lần thứ 2 trở đi."; thêm dòng kiểm tay. Theo ảnh: 1 dòng 'Tai nghe AirPods Pro 2', Số lượng 1, Thành tiền 6.000.000 ₫, Tổng tạm tính 6.000.000 ₫.
+  · Nhận định: xoá câu "Do lượt bấm đầu bị nuốt…"; sửa "ấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa hai lần"; thêm `<SV viết thêm nếu muốn>`.
+  · Dữ kiện: thêm (a) kiểm tay 3 lần → 1 dòng; (b) code dòng 29 setClickCount(0) chạy sau addToCart; (c) Actual TC-205 lần 2 sau khi rời trang
+vẫn giỏ trống.
+  · Bằng chứng và Môi trường: thêm ảnh và dòng kiểm tay.
+- BUG-17:
+  · Actual "Khi bấm 2 lần": 2 dòng `iPhone 15 Pro Max`, Tổng tạm tính 60.000.000 ₫
+  · Bước 2: kiểm tay dùng iPhone 15 Pro Max (id 1), tự động hoá 20 lần dùng AirPods (id 4)
+  · Expected có ví dụ số cụ thể cho trường hợp 2 lần → đổi sang iPhone 15 Pro Max
+  · Dòng tái hiện 2 lần trong Dữ kiện: ghi rõ sản phẩm v
+- Cuối mục Dữ kiện mỗi file có dòng "Sửa dữ kiện 2026-10-20 theo evidence: trước → sau"
+- Bất thường:
+  · Ảnh TC-FR07-205_manual_3lan.png không có thanh địa cc đó là trang nào hay đã bấm 3 lần
+  · Câu "ở cùng một trang chi tiết, 3 lần liên tiếp" chép theo lệnh của SV
+  · Ảnh 2 lần có thanh địa chỉ localhost:5173/cart
+- Cần quyết định: không có
+===
+ảnh đó nhìn là biết đang ở cart rồi, nên khỏi cần địa chỉ
+```
+
+**Output:**
+```
+Đồng ý. Trang giỏ nhận ra được qua tiêu đề "Giỏ Hàng" và bảng cột, nên không cần thanh địa chỉ. Còn chuyện ảnh không tự chứng minh được việc "bấm 3 lần ở trang chi tiết" thì ảnh kiểm tay nào cũng chỉ chụp được trạng thái cuối. Quá trình thao tác được chứng thực bằng lời khai của tester, và BUG-15 đã ghi rõ dòng "Kiểm tay (SV, 2026-10-20)…". Như vậy là đủ cho một bug report. Bạn không cần quay video.
+
+BUG-15 và BUG-17 giờ đã khớp evidence. Việc tiếp theo của bạn:
+1. Viết một câu Nhận định ở chỗ `<SV viết thêm nếu muốn>` trong BUG-15 (hoặc xoá dòng đó nếu thấy đủ rồi).
+2. Viết tiếp BUG-18 → 34. Xong mỗi đợt thì commit `7/7b: SV viết BUG-xx–yy` rồi gửi mình 3–5 file để soát.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #181 | 14:34 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp tục check giúp mình 3 cái này nhé
+```
+*Đính kèm:* `BUG-18.md`, `BUG-19.md`, `BUG-20.md`
+
+**Output:**
+````
+Đã soát. **BUG-18 và BUG-20 không có lỗi dữ kiện nghiêm trọng.** BUG-19 có một lỗi làm hỏng việc tái hiện:
+
+**BUG-19, bước 1 "Truy cập vào trang giỏ hàng `http://localhost:5173/cart`"**: giỏ web là state React (B0d). Nếu người đọc gõ URL này vào thanh địa chỉ, trang tải lại và **giỏ bị xoá sạch**. Lúc đó không còn dòng nào để bấm "Xóa", nên bug không tái hiện được theo đúng các bước đã ghi. TC-08 thêm hàng từ trang chủ rồi bấm link "Giỏ hàng" trên navbar, và các bước cần làm giống vậy.
+
+(Chi tiết nhỏ, không bắt buộc sửa: Nhận định của BUG-18 nói TC-06 và TC-65 bị chặn do thiếu nút +/−. Thực ra hai case này có thêm case gốc thứ hai là BUG-15, vì giỏ được dựng từ trang chi tiết. Muốn chính xác hơn thì thêm "(TC-06, 65 còn bị chặn bởi BUG-15)".)
+
+Sửa này chỉ có 2 dòng, bạn tự sửa cho nhanh cũng được. Nếu muốn giao cho Claude Code:
+
+**Lệnh cho Claude Code**
+
+```
+BUG-19 – sửa bước tái hiện không tái hiện được (giỏ web là state React, B0d).
+Commit SV đã viết BUG-18–20 trước (git log có "7/7b: SV viết BUG-18–20"; chưa có → dừng).
+Thay ĐÚNG bước 1–2 trong "Các bước tái hiện" bằng:
+  1. Truy cập trang chủ http://localhost:5173/ và bấm "Thêm vào giỏ" trên thẻ
+     'Tai nghe AirPods Pro 2' (có thể thêm một sản phẩm khác để thấy dòng còn lại).
+  2. Bấm link "Giỏ hàng" trên navbar (không gõ URL /cart, không tải lại trang — giỏ
+     web không lưu khi tải lại) và định vị dòng 'Tai nghe AirPods Pro 2'.
+Giữ nguyên bước 3–4 và mọi phần khác. Cuối mục Dữ kiện (AI chép) thêm:
+"Sửa bước tái hiện 2026-10-20: gõ URL /cart làm mất giỏ (B0d) → thêm từ trang chủ +
+link navbar, như TC-FR07-08." Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-19".
+```
+
+Từ giờ, mỗi lần viết bước tái hiện cho bug UI bạn nhớ quy tắc này: **vào /cart chỉ bằng link trên navbar, không gõ URL**. Ở BUG-15, 16, 17, 18, 20 bạn đã làm đúng.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #182 | 14:45 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Kiểm tra giúp mình 21-24 nhé
+```
+*Đính kèm:* `BUG-24.md`, `BUG-21.md`, `BUG-22.md`, `BUG-23.md`
+
+**Output:**
+````
+Đã soát. **BUG-21 và BUG-23 không có lỗi nghiêm trọng.** Hai bug còn lại lặp lại đúng kiểu lỗi của BUG-19, tức là bước tái hiện không cho ra trạng thái mà Actual mô tả:
+
+**BUG-22 (breadcrumb):** bước 1 cho phép gõ thẳng URL `/cart`, khi đó giỏ trống. Giỏ trống thì trang chỉ hiện "Giỏ hàng của bạn đang trống", **không có** `<h2>Giỏ Hàng</h2>`. Nhưng Actual lại mô tả nội dung "bắt đầu ngay bằng `<h2>Giỏ Hàng</h2>`", tức là trạng thái giỏ có hàng như trong TC-91. Bug thiếu breadcrumb vẫn tái hiện được, nhưng người đọc làm theo các bước sẽ thấy một màn hình khác với Actual.
+Ngoài ra, trong Nhận định có một đoạn JSX bị vỡ định dạng (`<Breadcrumb '/' 'Giỏ 'Trang chủ', hàng' items="{[{" …`). Nhiều khả năng do dán bị lỗi; hiện đọc không hiểu được.
+
+**BUG-24 (VND):** bước 3 mở `/cart` để so sánh ký hiệu tiền. Nếu gõ URL thì giỏ trống, không có số tiền nào để so. Phần chính của bug (trang chủ hiện "VND") vẫn tái hiện được, chỉ phần so sánh với trang giỏ là hỏng.
+
+Chi tiết nhỏ, không bắt buộc sửa: BUG-20, 22, 23, 24 đều ghi "(kèm giả định B16)" trong Expected. B16 là quyết định *phạm vi* (có làm suite GUI riêng hay không), không phải căn cứ cho Expected. Bỏ đi thì chính xác hơn.
+
+**Lệnh cho Claude Code**
+
+```
+Sửa bước tái hiện BUG-22, BUG-24 (giỏ web là state React, B0d: gõ URL /cart → giỏ
+trống). Chạy sau commit SV "7/7b: SV viết BUG-21–24" (chưa có → dừng).
+Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24". Không đụng câu khác của SV.
+
+BUG-22:
+1. Bước 1 → "Truy cập trang chủ http://localhost:5173/, bấm 'Thêm vào giỏ' trên thẻ
+   'Tai nghe AirPods Pro 2', rồi bấm link 'Giỏ hàng' trên navbar (không gõ URL /cart,
+   không tải lại trang)." Tiền điều kiện thêm "giỏ có ít nhất 1 sản phẩm" (như TC-91).
+2. Nhận định: đoạn JSX ví dụ bị vỡ định dạng → khôi phục thành
+   `<Breadcrumb items={[{ label: 'Trang chủ', link: '/' }, { label: 'Giỏ hàng' }]} />`
+   trong khối code; ghi chú cuối Dữ kiện: "khôi phục đoạn ví dụ của SV bị lỗi định
+   dạng khi dán".
+
+BUG-24:
+3. Bước 3 → "Bấm 'Xem chi tiết' trên thẻ đó để xem giá ở /product/4; bấm link 'EShop'
+   về trang chủ, bấm 'Thêm vào giỏ' trên thẻ đó, rồi bấm link 'Giỏ hàng' trên navbar
+   (không gõ URL) để xem Đơn giá, Thành tiền, Tổng." (như TC-93)
+
+Cuối mục Dữ kiện (AI chép) mỗi file: "Sửa bước tái hiện 2026-10-20: gõ URL /cart làm
+mất giỏ (B0d) → thêm từ trang chủ + link navbar." Dừng, báo cáo theo CLAUDE.md.
+```
+
+Mẹo cho các bug còn lại (BUG-25 → 34): bước nào cần **giỏ có hàng** thì thêm từ trang chủ rồi vào giỏ bằng link navbar. Riêng bug về **giỏ trống** (như BUG-21) thì gõ URL lại vừa đúng.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #183 | 14:46 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8677,7 +11504,161 @@ mất giỏ (B0d) → thêm từ trang chủ + link navbar." Dừng, báo cáo t
 
 ---
 
-## #143 | 15:07 20/10/2026 | Claude Opus 5.5 | [...]
+## #184 | 14:47 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa bước tái hiện BUG-22, 24 (giỏ web là state React, gõ URL /cart làm mất giỏ – B0d)
+- File đã sửa: HW02/bugs/BUG-22.md, BUG-24.md; A_prompt_log.md
+- Kết quả kiểm tra: diff chỉ chạm các dòng nêu trong lệnh và dòng ghi chú cuối mục Dữ kiện; test: không chạy
+- Commit: 88a2a02 HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24
+- BUG-22:
+  · Tiền điều kiện thêm "Giỏ có ít nhất 1 sản phẩm (như TC-FR07-91)"
+  · Bước 1 thay đúng câu trong lệnh (thêm AirPods từ trang chủ, rồi bấm link 'Giỏ hàng' trên navbar)
+  · Nhận định: thay đoạn JSX bị vỡ bằng "(ví dụ: xem khối code dưới)", ngay dưới là khối ```jsx chứa `<Breadcrumb items={[{ label: 'Trang chủ', link: '/' }, { label: 'Giỏ hàng' }]} />`
+  · Phần còn lại của câu SV giữ nguyên
+  · Dữ kiện thêm 2 dòng: khôi phục đoạn ví dụ bị lỗi định dạng khi dán + sửa bước tái hiện
+- BUG-24: bước 3 thay đúng câu trong lệnh (như TC-93); Dữ kiện thêm dòng sửa bước tái hiện
+- Chữ em tự thêm (cần SV duyệt): cụm "(ví dụ: xem khối code dưới)" trong Nhận định BUG-22, vì khối code không đặt được bên trong ngoặc của câu
+- Cần quyết định: không có
+````
+
+**Output:**
+```
+Đã sửa đúng phạm vi. Cụm "(ví dụ: xem khối code dưới)" là chữ AI thêm vào câu của bạn, nhưng chỉ để nối sang khối code, không thêm ý nào mới. Bạn đọc thấy ổn thì giữ, không thì sửa lại theo cách bạn muốn.
+
+Còn BUG-25 → 34. Vài điểm nên lưu ý trước khi viết, để khỏi phải sửa lại:
+
+- **BUG-25 (alt):** Actual chỉ ghi những gì đo được: 5 ảnh trang chủ có `alt=""`, ảnh trang chi tiết có alt là tên sản phẩm. Như đã nói, ảnh kiểm tay nên chụp lại trong cửa sổ ẩn danh, không bật tiện ích. Thuộc tính `savior-scanned-img` không phải của SUT, nên đừng để nó lọt vào bug.
+- **BUG-26 → 29 (nhãn):** cần giỏ có hàng thì mới thấy bảng, nút Xóa, "← Mua tiếp" và dòng tổng. Vì vậy bước tái hiện phải thêm sản phẩm từ trang chủ rồi vào giỏ bằng link navbar. BUG-27 và BUG-28 dựa trên giả định B12, nên ghi rõ điều này ở Expected hoặc Nhận định. BUG-29 thì có câu SRS ghi thẳng "nhãn chính xác".
+- **BUG-30 → 34 (API):** bước tái hiện phải tự đủ, không phụ thuộc test script:
+  1. Đăng ký và đăng nhập để lấy token.
+  2. Gửi POST `/api/cart` với header và body lấy từ phần Dữ kiện.
+  3. Gọi GET `/api/cart` để xem kết quả.
+
+  Có thể ghi bằng `Invoke-RestMethod` hoặc `curl`.
+- **BUG-33 (số lớn):** Expected dựa trên B1 (không có cận trên), nên phải nói rõ là dựa trên giả định.
+- **BUG-34:** chốt trước là giữ riêng hay bình luận vào #25.
+
+Viết xong đợt nào thì commit (`7/7b: SV viết BUG-xx–yy`) rồi gửi mình soát.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #185 | 14:56 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Check giúp tôi 4 BUG này nhé
+```
+*Đính kèm:* `BUG-25.md`, `BUG-26.md`, `BUG-27.md`, `BUG-28.md`
+
+**Output:**
+`````
+Đã soát cả 4 file. **Không có lỗi dữ kiện nghiêm trọng.** Bước tái hiện của BUG-26/27/28 đều thêm hàng từ trang chủ rồi vào giỏ bằng link navbar, đúng như cần. Actual khớp evidence.
+
+Có 3 chi tiết nhỏ, sửa hay không tuỳ bạn:
+
+1. **BUG-27, Actual: "chỉ hiển thị nhãn ngắn gọn là Xóa (hoặc Xoá)"**. Evidence chỉ ghi đúng `"Xóa"`. Cụm "(hoặc Xoá)" thuộc Expected (vì B12 coi hai cách đặt dấu là như nhau), chứ không phải điều quan sát được. Actual chỉ nên ghi `Xóa`.
+2. **BUG-27, Nhận định:** khối code đang mở bằng ```` ```jx ````, cần đổi thành ```` ```jsx ```` để GitHub tô màu đúng.
+3. **BUG-25, Dữ kiện:** vẫn còn dòng "Notes SV: evidence kiểm tay cần chụp lại trong cửa sổ ẩn danh". Bug này chỉ dùng ảnh tự động (`TC-FR07-94_ui.png`, chụp bằng Playwright nên không có tiện ích), nên dòng đó giờ không còn đúng. Ngoài ra, câu Nhận định "như cách làm đúng ở ProductDetail.jsx (alt={product.name})" nói về code mà phần Dữ kiện chưa trích. Kết luận này suy ra từ DOM (alt = tên sản phẩm) nên hợp lý, chỉ là chưa có code đi kèm.
+
+Nếu muốn giao cho Claude Code:
+
+**Lệnh cho Claude Code**
+
+```
+Sửa nhỏ BUG-25, BUG-27 (sau commit SV "7/7b: SV viết BUG-25–28"; chưa có → dừng).
+Commit "HW02[B-FR07] 7/7c: sửa nhỏ BUG-25, 27".
+1. BUG-27 Actual: bỏ "(hoặc Xoá)" (evidence chỉ có "Xóa"); khối code Nhận định
+   ```jx → ```jsx. Không đụng câu khác.
+2. BUG-25 Dữ kiện (AI chép): thay dòng "Notes SV: evidence kiểm tay cần chụp lại…"
+   bằng "Bug dùng evidence tự động TC-FR07-94_ui.png (Playwright, không tiện ích);
+   không dùng ảnh kiểm tay." Thêm trích nguyên văn dòng <img> trong
+   frontend-web/src/pages/ProductDetail.jsx (có số dòng) để đối chiếu câu Nhận định
+   về alt={product.name}; nếu code KHÔNG phải product.name → báo SV, không sửa câu SV.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Còn BUG-29 → 34. Phần API (30–34) là nơi dễ sai số liệu nhất (payload, status, phần tử trả về), nên khi xong bạn gửi mình soát kỹ hơn.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #186 | 15:06 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Tiếp tục check giúp mình 3 file này nhé. đặc biệt là cú pháp xem có sai gì không nhé
+```
+*Đính kèm:* `BUG-31.md`, `BUG-29.md`, `BUG-30.md`
+
+**Output:**
+`````
+BUG-29 ổn. BUG-30 và BUG-31 có lỗi khiến **làm theo các bước sẽ không tái hiện được**, cộng thêm vài chỗ cú pháp PowerShell nên sửa.
+
+## Lỗi nghiêm trọng
+
+**1. Tài khoản đăng nhập không tồn tại (BUG-30, 31).** Bước 1 đăng nhập bằng `user@domain.com` / `Password123!`, nhưng các bước không có bước đăng ký nào, mà backend lại seed lại CSDL mỗi lần khởi động. Kết quả là login thất bại, `$token` rỗng, và mọi request sau đó trả 401. Có hai cách sửa: dùng tài khoản seed `test@eshop.com` / `Test1234!`, hoặc thêm bước đăng ký. Ngoài ra cần kiểm `/api/login` có thật sự nhận trường `email` và trả về `token` không. Trên form, ô này ghi là "Username".
+
+**2. BUG-30 thiếu bước tạo trạng thái ban đầu.** Tiền điều kiện ghi "giỏ đã có id 2 × 1", nhưng không có bước nào tạo ra trạng thái đó. Làm đúng các bước thì giỏ chỉ có **1 phần tử, quantity 3**, tức là bug không lộ ra. Cần thêm một POST id 2, quantity 1 trước bước gửi quantity 3.
+
+**3. Actual của BUG-31 lệch với các bước.** Actual có 3 phần tử (id 1 và id 5 có từ trước, lấy từ phần setup của TC-22), trong khi các bước chỉ thêm id 4. Cần làm một trong hai: thêm bước tạo id 1 và id 5, hoặc rút Actual chỉ còn phần tử id 4, kèm ghi chú "(evidence TC-22 có thêm id 1, 5 từ bước dựng giỏ)".
+
+## Cú pháp PowerShell (nên sửa)
+
+- **`Content-Type` đặt trong `-Headers`**: trên Windows PowerShell 5.1, cách này có thể báo lỗi vì Content-Type là header bị hạn chế. Nên dùng tham số `-ContentType "application/json"`, còn `$headers` chỉ giữ `Authorization`.
+- **Kết quả GET**: `Invoke-RestMethod` tự chuyển JSON thành object và in ra dạng bảng, không giống khối JSON trong Actual. Thêm `| ConvertTo-Json -Depth 5` để người đọc so được. Lưu ý PS 5.1 tự gỡ mảng 1 phần tử, nên dùng `ConvertTo-Json -InputObject @(…)` hoặc gọi `(Invoke-WebRequest …).Content` để thấy đúng JSON thô.
+- BUG-30, Nhận định: khối code mở bằng ```` ```jsx ```` cho code JS backend, nên đổi thành ```` ```js ````.
+
+## Cần một dữ kiện cho BUG-31
+
+Nhận định viết rằng kẻ gian sửa được giá "trước khi thanh toán", và severity High dựa phần lớn vào câu này. Nhưng giỏ trên web **không dùng** `/api/cart`. Vậy thanh toán có đọc `userCarts` không? Nếu không thì tác động thật nhỏ hơn nhiều. Cần kiểm code `/api/checkout` (liên quan #10, #14) trước khi bạn chốt severity.
+
+**Lệnh cho Claude Code**
+
+```
+BUG-30, BUG-31 – sửa để bước tái hiện chạy được (sau commit SV "7/7b: SV viết
+BUG-29–31"; chưa có → dừng). Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31".
+Chỉ sửa lệnh/bước và dữ kiện; không đụng câu Nhận định của SV.
+
+1. Kiểm /api/login (api_specification.md + server.js): tên trường body và trường
+   token trong phản hồi; trích nguyên văn vào Dữ kiện.
+2. Bước 1 (cả 2 bug): dùng tài khoản seed test@eshop.com / Test1234! (đúng tên trường
+   ở mục 1). $headers chỉ còn Authorization; mọi Invoke-RestMethod có body dùng
+   -ContentType "application/json".
+3. Bước GET: đổi thành
+   (Invoke-WebRequest -Uri "http://localhost:3000/api/cart" -Headers $headers).Content
+   để in JSON thô.
+4. BUG-30: thêm bước trước bước gửi quantity 3: POST {"id": 2, "name": "Samsung
+   Galaxy S24 Ultra", "price": 28000000, "quantity": 1}. Đánh số lại bước.
+   Khối code Nhận định ```jsx → ```js.
+5. BUG-31: rút khối JSON trong Actual còn phần tử id 4 và thêm dòng "(evidence
+   TC-FR07-22 có thêm id 1, id 5 do bước dựng giỏ của test)"; giữ nguyên câu SV.
+6. Restart backend rồi CHẠY THẬT các lệnh PowerShell đã sửa của 2 bug (Windows
+   PowerShell 5.1); dán output vào Dữ kiện, ghi "AI chạy kiểm bước tái hiện
+   2026-10-20". Output không khớp Actual → báo, không sửa Actual.
+7. Dữ kiện BUG-31: kiểm /api/checkout (server.js) có đọc userCarts không; trích
+   nguyên văn đoạn liên quan; không kết luận.
+Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6, 7).
+```
+
+Khi có kết quả mục 7, bạn xem lại severity của BUG-31. Nếu checkout không đọc giỏ API thì "1đ khi thanh toán" chưa chứng minh được. Lúc đó cần chỉnh lại câu Nhận định cho đúng với tác động thật.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #187 | 15:07 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8751,7 +11732,71 @@ Output khớp Actual của cả hai bug. Ghi dữ kiện vào file.
 
 ---
 
-## #144 | 15:13 20/10/2026 | Claude Opus 5.5 | [...]
+## #188 | 15:11 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa bước tái hiện BUG-30, 31 + chạy thật (sau commit SV 404a6bb "7/7b: SV viết BUG-29–31")
+- File đã sửa: HW02/bugs/BUG-30.md, BUG-31.md; A_prompt_log.md
+- Kết quả kiểm tra: chạy thật bằng Windows PowerShell 5.1.26100; test Playwright: không chạy
+- Commit: 7c3026b HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31
+- Mục 1 – /api/login:
+  · Body nhận `email`, `password`; phản hồi có `token` (kèm `message`, `user`)
+  · Đã trích nguyên văn api_specification.md dòng 23–32 và server.js dòng 32–33, 51–52 vào Dữ kiện cả 2 bug
+- Đã sửa:
+  · Bước 1: dùng test@eshop.com / Test1234! (README.md dòng 24, database.js dòng 93); $headers chỉ còn Authorization; mọi POST có -ContentType "application/json"
+  · Bước GET: đổi sang `(Invoke-WebRequest -UseBasicPars
+  · BUG-30: thêm bước 2 (POST id 2, quantity 1), đánh số lại 3, 4; khối code Nhận định đổi ```jsx → ```js
+  · BUG-31: JSON trong Actual còn phần tử id 4, thêm dòng "(evidence TC-FR07-22 có thêm id 1, id 5 do bước dựng giỏ của test)"
+  · Câu Nhận định của SV không đổi
+- Mục 6 – chạy thật (output nguyên văn dán vào Dữ kiện, có ghi "AI chạy kiểm bước tái hiện 2026-10-20"):
+  · Lần 1, đúng lệnh như lệnh giao: GET lỗi "Invoke-WebR set to an instance of an object." (PS 5.1 thiếu-UseBasicParsing) → thêm -UseBasicParsing, chạy lại
+  · Restart backend trước MỖI bug, vì test@eshop.com dùng chung giỏ RAM
+  · BUG-30: 2×"Added to cart"; GET `[{"id":2,…,"quantity` → khớp Actual
+  · BUG-31: "Added to cart"; GET `[{"id":4,"name":"Tai nghe AirPods Pro 2","price":1,"quantity":1}]` → khớp Actual
+  · Chạy xong đã restart backend thêm 1 lần để CSDL và giỏ sạch                                                                            - Mục 7 – /api/checkout: server.js dòng 297–309 chỉ đọc ress` từ req.body; trong đoạn này không có `userCarts`. Đã trích vào Dữ kiện BUG-31, không kết luận.
+- Bất thường: Tiền điều kiện BUG-30 (chữ SV) vẫn ghi "giỏ đã có sẵn 1 sản phẩm id 2", trong khi bước 2 mới tự dựng giỏ → hai chỗ lặp ý, em không sửa
+- Cần quyết định: không có (thêm -UseBasicParsing là ngoài lệnh, cần SV duyệt)
+````
+
+**Output:**
+````
+`-UseBasicParsing` là thiếu sót trong lệnh của mình: Windows PowerShell 5.1 cần tham số này thì `Invoke-WebRequest` mới chạy được nếu chưa có cấu hình IE. Claude Code tự thêm vào là đúng, bạn duyệt được. Kết quả chạy thật khớp với Actual ở cả hai bug, nên bước tái hiện giờ đã đáng tin.
+
+## Mục 7 làm đổi bức tranh của BUG-31
+
+`/api/checkout` **không đọc** `userCarts`, mà lấy dữ liệu từ `req.body`. Giỏ web cũng không gọi `/api/cart`. Vậy theo những gì đã thấy, **không có luồng nào dùng giá trong giỏ API để thanh toán**. Câu Nhận định "sửa đơn giá thành 1đ … trước khi thanh toán" hiện chưa có căn cứ. Lỗ hổng sửa giá lúc thanh toán thật ra nằm ở `total_amount` của checkout, và đã có issue #10.
+
+Còn thiếu một mảnh: **app mobile** (dùng ở D_FR20) hoặc trang admin có gọi `/api/cart` không. Nếu có thì giá client lưu trong giỏ API có thể đi tới người dùng thật, và tác động sẽ khác. Kết quả này cũng ảnh hưởng tới cách bạn đánh giá BUG-30, 32, 33, 34, vì tất cả đều là bug của giỏ API.
+
+Severity là bạn chọn. Mình chỉ lưu ý: severity nên dựa trên tác động **đã chứng minh được**, còn tác động có thể xảy ra thì ghi kèm "(chưa kiểm chứng)" trong Nhận định.
+
+**BUG-30:** Tiền điều kiện vẫn ghi "giỏ đã có sẵn id 2", trong khi bước 2 mới là bước dựng giỏ. Đây là chữ của bạn, nên bạn tự sửa, ví dụ thành "giỏ trống (bước 2 dựng sẵn id 2 × 1)".
+
+**Lệnh cho Claude Code**
+
+```
+Thu dữ kiện cho BUG-30…34 (chỉ đọc code, không sửa câu SV).
+1. Grep "/api/cart" và "api/cart" trong ../eshop-sut/frontend-mobile và
+   ../eshop-sut/frontend-admin (và mọi thư mục client khác nếu có): liệt kê file:dòng,
+   trích nguyên văn đoạn gọi (GET/POST, dữ liệu gửi, dữ liệu dùng từ phản hồi).
+2. Nếu có client dùng giá/quantity từ GET /api/cart để hiển thị hoặc gửi checkout →
+   trích đoạn đó. Không kết luận tác động.
+3. Thêm kết quả vào Dữ kiện (AI chép) của BUG-30, 31, 32, 33, 34 dưới dòng
+   "Client dùng /api/cart: …" (không có → ghi "không tìm thấy trong <thư mục>").
+Commit "HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart". Dừng, báo cáo theo CLAUDE.md.
+```
+
+Khi có kết quả, bạn chỉnh Nhận định và severity của BUG-31 (và các bug API khác nếu cần), rồi viết tiếp BUG-32 → 34.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #189 | 15:13 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8798,7 +11843,184 @@ Không có client nào gọi `/api/cart`. Em đã ghi kết quả này vào ph�
 
 ---
 
-## #145 | 15:31 20/10/2026 | Claude Opus 5.5 | [...]
+## #190 | 15:15 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – thu dữ kiện client dùng /api/cart cho BUG-30…34 (chỉ đọc code)
+- File đã sửa: HW02/bugs/BUG-30…34.md (mỗi file thêm 1 dòng "Client dùng /api/cart: …" cuối mục Dữ kiện); A_prompt_log.md
+- Kết quả kiểm tra: test: không chạy
+  · grep "api/cart" (bỏ node_modules) trong frontend-mobile, frontend-admin, frontend-web: 0 kết quả
+  · Grep rộng hơn (fetch/axios kèm "cart", "/cart"): chỉ có điều hướng giao diện (App.js:435, 978 – setView("cart"); route /cart của web), không có lời gọi API giỏ
+  · SUT chỉ có 3 thư mục client trên, không có client nào khác
+- Commit: e4ef048 HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart
+- Mục 2: không có client nào đọc giá/quantity từ GET /apch theo đúng câu hỏi
+  · Ghi thêm dữ kiện liên quan: cả hai client gọi /api/checkout đều gửi items + total_amount lấy từ giỏ state phía client
+    - frontend-web/src/pages/Checkout.jsx dòng 45–48 (`i
+    - frontend-mobile/App.js dòng 384–392 (`items: cart.length > 1 ? cart.slice(0, -1) : cart`)
+    - Đã trích nguyên văn, không kết luận tác động
+- Bất thường:
+  · Working tree của SUT (../eshop-sut) có thay đổi chưa commit: backend/database.sqlite (M), frontend-mobile/App.js (M – có thể là bản vá API_URL theo CLAUDE.md), và các file chưa theo dõi actual_results.md, reset_db.ps1, run_sv_cases.ps1
+  · Em không tạo và không sửa các file này; SUT đang ghii
+- Cần quyết định: không có
+===
+31 mình thấy severity High và nhận định nó vẫn giữ nguyên mà. Mình thấy nó đúng mà nhỉ
+```
+
+**Output:**
+```
+Severity là quyền của bạn, giữ High được. Nhưng mình nói thẳng: **Nhận định hiện tại khẳng định một tác động mà dữ kiện vừa thu được không ủng hộ.** Đây là điểm người đọc issue (hoặc thầy) có thể bắt lỗi.
+
+Câu đang viết: *"cho phép kẻ gian tự ý sửa đổi đơn giá… thành 1đ ngay ở tầng API trước khi thanh toán"*. Đối chiếu với dữ kiện:
+- Không client nào (web, mobile, admin) gọi `/api/cart`.
+- `/api/checkout` không đọc `userCarts`. Hai client gửi `items` và `total_amount` lấy từ giỏ trong state phía client.
+
+Nghĩa là giá 1đ chỉ nằm trong giỏ API của chính người gửi, và **không có luồng nào đưa giá đó vào thanh toán**. "Gian lận giá khi thanh toán" là có thật trong SUT, nhưng xảy ra qua `total_amount` của checkout (issue #10), không phải qua bug này.
+
+Nếu muốn giữ High, có căn cứ trung thực hơn:
+- Endpoint vi phạm nguyên tắc ở FR-08.2/B8 (giá phải do server quyết định), và là lỗ hổng thiết kế ở tầng API.
+- Tác động **tiềm năng**: bất kỳ client hay luồng thanh toán nào sau này dùng giỏ API sẽ bị khai thác ngay. Phần này ghi "(chưa kiểm chứng: hiện không client nào dùng /api/cart)".
+- Liên hệ #10: cùng một lớp lỗi là tin dữ liệu giá từ client.
+
+Như vậy bạn vẫn giữ được High và giọng cảnh báo, chỉ đổi chỗ khẳng định thành chỗ tiềm năng. Câu chữ là của bạn. Mình chỉ đề nghị sửa đúng cụm "trước khi thanh toán", thứ hiện đang trình bày như một sự thật.
+
+Một điều nữa: nếu BUG-31 High vì là lỗi thiết kế bảo mật API, thì khi chấm BUG-30, 32, 33, 34 (cũng là giỏ API, cũng không có client dùng), bạn nên áp cùng một logic để thang severity nhất quán.
+
+**Về working tree của SUT:** `frontend-mobile/App.js` bị sửa thì đúng là bản vá `API_URL` theo handoff. Còn `actual_results.md`, `reset_db.ps1`, `run_sv_cases.ps1` thì cần bạn xác nhận là của mình (hoặc của nhóm). Nên chạy `git -C ..\eshop-sut diff --stat` để chắc ngoài `API_URL` không còn thay đổi code nào khác, vì phần Môi trường của mọi bug đang ghi "không đổi mã".
+```
+
+**Xử lý:** [...]
+
+---
+
+## #191 | 15:17 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+hmm, giả sử mình Test blackbox, thì mình đâu biết code như thế nào, chỉ đưa ra nhận định thôi mà, thì vậy cũng được mà nhỉ
+```
+
+**Output:**
+````
+Đúng là Nhận định được phép là suy luận, kể cả khi test hộp đen. Tester hoàn toàn có thể nêu rủi ro mà mình nghi ngờ. Vấn đề chỉ nằm ở **cách viết**: suy luận thì phải đọc ra là suy luận, còn câu hiện tại đang đọc như một sự thật đã xảy ra.
+
+Có hai điều khiến lập luận "test hộp đen" không đứng vững trọn vẹn ở bug này:
+
+- **Bug này không viết theo kiểu hộp đen.** Nhận định của bạn dẫn `server.js` dòng 290–295 và giải thích cơ chế `push(req.body)`. Bạn đã biết code, và phần Dữ kiện cũng đã có đoạn code checkout cho thấy nó không đọc giỏ API. Một khẳng định trái với dữ kiện nằm ngay trong cùng file thì rất dễ bị bắt lỗi.
+- **Ngay cả với tester hộp đen thuần**, câu "sửa giá… trước khi thanh toán" vẫn kiểm được: thêm hàng với giá 1đ qua API, rồi thanh toán xem đơn có bị tính 1đ không. Chưa làm bước đó thì câu này là giả thuyết, đúng với quy ước đã chốt từ A: *khẳng định chưa có evidence thì gắn "(chưa kiểm chứng)"*.
+
+Vậy không cần viết lại gì cả. Chỉ cần làm câu đó thành giả thuyết, ví dụ thêm "có thể" và gắn "(chưa kiểm chứng)" ở cuối. Severity High và giọng cảnh báo giữ nguyên.
+
+Nếu bạn đồng ý, chỉ cần một dòng cho Claude Code (gắn nhãn này nằm trong phạm vi AI được phép làm):
+
+```
+BUG-31 Nhận định: gắn " (chưa kiểm chứng: hiện không client nào dùng /api/cart, xem Dữ kiện)" vào cuối câu nói về sửa giá "trước khi thanh toán". Không sửa chữ khác. Commit "HW02[B-FR07] 7/7c: gắn chưa kiểm chứng BUG-31".
+```
+
+Còn nếu bạn vẫn muốn giữ nguyên câu, thì đó là quyết định của bạn với tư cách người viết bug, mình không ép. Mình chỉ muốn bạn biết đó là chỗ yếu nhất của BUG-31 nếu có người phản biện.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #192 | 15:18 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Vậy mình bỏ nhận định này đi luôn nehs
+```
+
+**Output:**
+````
+Được. Mình hiểu "nhận định này" là gạch đầu dòng thứ hai, tức câu về "Price Tampering… thành 1đ… trước khi thanh toán". Gạch thứ nhất (nguyên nhân `push(req.body)`) vẫn giữ, vì nó khớp với code. Nếu bạn muốn bỏ cả mục Nhận định thì báo mình.
+
+Lệnh cho Claude Code (xoá câu theo đúng yêu cầu của bạn, không thêm gì):
+
+```
+BUG-31 – theo yêu cầu SV: xoá nguyên gạch đầu dòng thứ 2 trong mục Nhận định (bắt đầu
+"Việc tin tưởng dữ liệu client (Trusting Client Input)…"). Giữ nguyên gạch thứ nhất và
+mọi phần khác. Không viết câu thay thế. Commit "HW02[B-FR07] 7/7c: SV bỏ câu nhận định
+tác động BUG-31".
+```
+
+Bỏ câu đó rồi thì severity High phải tự đứng được trên những gì còn lại: vi phạm FR-08.2/B8 (server phải quyết định giá) và dữ kiện cho thấy giá 1đ được lưu thật. Bạn cân nhắc xem có giữ High không, hay hạ cho đồng bộ với các bug giỏ API khác. Quyết định là của bạn.
+
+Xong thì viết tiếp BUG-32 → 34.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #193 | 15:30 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Kiểm tra giúp mình 3 bug cuối nhé
+```
+*Đính kèm:* `BUG-33.md`, `BUG-34.md`, `BUG-32.md`
+
+**Output:**
+````
+Ba bug này lặp lại đúng các lỗi bước tái hiện mà BUG-30/31 vừa sửa, và có thêm hai lỗi PowerShell mới. Làm theo các bước hiện tại thì **cả 3 bug đều không tái hiện được**.
+
+## Lỗi chung (giống BUG-30/31)
+- Đăng nhập bằng `user@domain.com` / `Password123!`, tài khoản này không tồn tại nên không lấy được token. Cần đổi sang `test@eshop.com` / `Test1234!`.
+- `Content-Type` đang đặt trong `-Headers`. Cần chuyển sang tham số `-ContentType`.
+- Bước GET in ra object chứ không phải JSON thô. Dùng `(Invoke-WebRequest … -UseBasicParsing).Content`.
+
+## Lỗi mới
+
+**1. Tiếng Việt trong body bị hỏng khi gửi (BUG-32, 33, 34).** Windows PowerShell 5.1 mã hoá body dạng chuỗi theo ISO-8859-1, nên "Bàn phím cơ", "Không tồn tại" sẽ bị lưu sai ký tự, và GET ra kết quả khác Actual. BUG-30/31 không gặp vì tên sản phẩm ở đó toàn chữ ASCII. Cách sửa: gửi `-Body ([Text.Encoding]::UTF8.GetBytes($body))`.
+
+**2. BUG-32, bước 4 (G21 text/plain):** khi Content-Type nằm trong `-Headers`, PS 5.1 có thể bỏ qua hoặc báo lỗi, nên request có thể không đi đúng dạng `text/plain`. Mà đây lại chính là biến đang được kiểm. Phải dùng `-ContentType "text/plain"`.
+
+**3. BUG-34, bước 2:** với phản hồi 400, `Invoke-WebRequest` trên PS 5.1 **ném exception**. Khi đó `$response` không được gán, và người đọc không xem được Content-Type cũng như body như bước 3 yêu cầu. Cần bọc lệnh trong `try/catch` rồi đọc body từ `$_.Exception.Response`.
+
+## Chỗ chữ của bạn (bạn quyết)
+- **BUG-34, tiêu đề** bị cắt cụt: "…JSON chuẩn chứa trường" đang thiếu chữ "error" ở cuối.
+- **BUG-33, tiêu đề** dùng "tràn số". Hiện tượng thực tế là **mất độ chính xác** (làm tròn 9007199254740993 → 9007199254740992), không phải tràn số theo kiểu giá trị bị quay vòng. Nhận định của bạn đã giải thích đúng ("precision loss"), chỉ tiêu đề là lệch.
+- **BUG-33, Expected** thêm vế "(hoặc … 4xx từ đầu)". Expected của TC-215 mà bạn đã chốt (Q6) chỉ có một vế: "2xx và quantity đúng". Nên giữ Expected của bug khớp với TC; còn vế 4xx là gợi ý cách sửa, có thể chuyển sang Nhận định.
+- **BUG-34:** bạn quyết giữ riêng thay vì gộp vào #25. Nhận định đã chỉ ra nguyên nhân là thiếu error handler **chung toàn app**, nên nên thêm một câu "cùng dạng/có thể cùng gốc với #25 (`/api/register`)" kèm link, để người đọc không tính trùng.
+
+**Lệnh cho Claude Code**
+
+```
+BUG-32, 33, 34 – sửa bước tái hiện để chạy được (sau commit SV "7/7b: SV viết
+BUG-32–34"; chưa có → dừng). Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-32–34".
+Chỉ sửa lệnh/bước + dữ kiện; không đụng câu SV ngoài các mục ghi rõ dưới đây.
+
+1. Bước đăng nhập + $headers + GET: sửa y như BUG-30/31 (test@eshop.com/Test1234!;
+   $headers chỉ Authorization; GET = (Invoke-WebRequest … -UseBasicParsing).Content).
+2. Mọi POST có body: -ContentType "application/json" và
+   -Body ([Text.Encoding]::UTF8.GetBytes($body)) (PS 5.1 mã hoá chuỗi theo ISO-8859-1).
+3. BUG-32 bước 4: -ContentType "text/plain" (không đặt trong -Headers); body gửi
+   bằng UTF8 bytes như mục 2.
+4. BUG-34 bước 2: bọc try/catch; trong catch in StatusCode, ContentType và body đọc
+   từ $_.Exception.Response.GetResponseStream(); thêm -UseBasicParsing.
+5. BUG-34 tiêu đề: khôi phục chữ bị cắt — thêm "error" vào cuối (SV đã duyệt việc
+   này); không đổi chữ khác.
+6. Restart backend trước MỖI bug, chạy thật các lệnh đã sửa trên Windows PowerShell
+   5.1, dán output vào Dữ kiện ("AI chạy kiểm bước tái hiện 2026-10-20"). Output
+   không khớp Actual → báo, không sửa Actual. Chạy xong restart backend lần nữa.
+7. Khối code Nhận định BUG-32: ```jsx → ```js.
+Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6).
+```
+
+Sau khi chạy xong, bạn chỉnh 3 chỗ chữ ở trên (tiêu đề BUG-33, Expected BUG-33, link #25 ở BUG-34) nếu đồng ý. Khi đó cả 20 bug đã sẵn sàng để tạo issue.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #194 | 15:31 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8868,7 +12090,171 @@ Em đã sửa bước tái hiện BUG-32, 33, 34 và chạy thật trên Windows
 
 ---
 
-## #146 | 15:37 20/10/2026 | Claude Opus 5.5 | [...]
+## #195 | 15:34 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa bước tái hiện BUG-32–34 + chạy thật (sau commit SV a2ee5d4 "7/7b: SV viết BUG-32–34")
+- File đã sửa: HW02/bugs/BUG-32.md, BUG-33.md, BUG-34.md; A_prompt_log.md
+- Kết quả kiểm tra: Windows PowerShell 5.1.26100, restart backend trước mỗi bug và sau khi chạy xong; test Playwright: không chạy
+- Commit: b42d56d HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-32–34
+- Đã sửa:
+  · Cả 3 bug:
+    - Tài khoản test@eshop.com/Test1234!
+    - $headers chỉ còn Authorization
+    - Mọi POST: -ContentType + -Body ([Text.Encoding]::UTF8.GetBytes(...))
+    - GET: (Invoke-WebRequest -UseBasicParsing …).Content
+  · BUG-32:
+    - Bước 4: bỏ $headersText, dùng -ContentType "text/plain", body gửi dạng UTF8 bytes
+    - Khối code Nhận định: ```jsx → ```js
+  · BUG-34:
+    - Bước 2: bọc try/catch, thêm -UseBasicParsing
+    - Trong catch: in StatusCode, ContentType và body đọ
+    - Tiêu đề: chữ "error" đã có sẵn trong working tree (SV sửa, chưa commit) → em giữ nguyên, commit cùng
+- Mục 6 – output (dán nguyên văn vào Dữ kiện, có dòng "AI chạy kiểm bước tái hiện 2026-10-20"):
+  · BUG-32: 3×"Added to cart"; GET `[{…"quantity":-3},{"
+  · BUG-33: GET quantity 9007199254740992 → khớp
+  · BUG-34: StatusCode 400, ContentType text/html; charset=utf-8, body HTML "SyntaxError: Unexpected token &#39;I&#39;…" → khớp
+    - Bước của SV không có GET, nên ý "giỏ không đổi" trong Actual chưa kiểm ở lượt này
+- Ngoài lệnh:
+  · BUG-34: lần chạy đầu, body đọc từ GetResponseStream(am khi ném lỗi) → thêm `BaseStream.Position = 0;DiscardBufferedData()` rồi chạy lại
+  · Output BUG-34 có đường dẫn máy → thay bằng <SUT_DIR> chú trong Dữ kiện
+- Cần quyết định: không có
+````
+
+**Output:**
+````
+Đã sửa xong và chạy thật, cả 3 bug đều khớp Actual. Hai việc Claude Code làm ngoài lệnh đều hợp lý: đặt lại vị trí stream để đọc được body lỗi, và thay đường dẫn máy bằng `<SUT_DIR>`. Với BUG-34, ý "giỏ không đổi" trong Actual vẫn có evidence từ TC-209 (GET của Playwright), nên giữ được. Nếu muốn người đọc tự kiểm, bạn thêm một bước GET vào cuối.
+
+## Trước khi tạo issue
+
+Còn mấy việc của bạn đang treo từ các lượt trước:
+- BUG-15: chỗ `<SV viết thêm nếu muốn>` (viết hoặc xoá).
+- BUG-30: Tiền điều kiện đang trùng ý với bước 2.
+- BUG-31: xem lại severity sau khi đã bỏ câu tác động.
+- BUG-33: chữ "tràn số" trong tiêu đề, và vế 4xx trong Expected.
+- BUG-34: link tới #25.
+- BUG-25/27: các sửa nhỏ, nếu bạn chưa chạy.
+
+Ngoài ra có một điểm bị sót: **tiêu đề issue phải theo dạng `[FR-xx] …`** (quy ước đã chốt), nhưng tiêu đề trong 20 file hiện chưa có tiền tố. Lệnh dưới để Claude Code *đề xuất* tiền tố theo yêu cầu bị vi phạm, bạn duyệt trước khi tạo issue.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – kiểm cuối trước khi tạo issue (chỉ kiểm + đề xuất, không sửa, không tạo issue).
+1. Quét BUG-15…34: liệt kê file còn `<SV viết`, `<SV viết thêm nếu muốn>`,
+   "(chưa kiểm chứng)", Severity/Priority trống hoặc ngoài thang
+   (Critical/High/Medium/Low · High/Medium/Low), mục rỗng, khối code thiếu đóng.
+2. Đề xuất tiền tố tiêu đề issue cho từng bug: `[FR-xx]` = mã FR đầu tiên trong mục
+   Yêu cầu bị vi phạm (bug thuộc FR-06 → [FR-06]; bug chỉ có API-CART/giả định →
+   [FR-07]). In bảng: BUG | tiền tố đề xuất | căn cứ. SV duyệt.
+3. Kiểm trùng lần cuối: gh issue list -R tkob-team/eshop-sut --state all (mọi tác
+   giả) với từ khoá cart/giỏ/badge/breadcrumb/alt/VND/nhãn; liệt kê issue mới xuất
+   hiện từ lần kiểm trước (nếu có).
+4. Kiểm `gh auth status` = ThachHaoo.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Khi bạn duyệt bảng tiền tố và xử lý xong các mục còn treo, mình sẽ đưa lệnh tạo issue. Theo cách đã làm ở A: Claude Code tạo issue với body lấy từ file `.md`, sau đó **bạn kéo thả ảnh tiêu biểu** vào mục "Bằng chứng" của từng issue (alt = tên file). Cuối cùng chụp `issues_page.png`, cập nhật Link trong 20 file BUG, rồi commit `7/7d`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #196 | 15:35 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Lạ nhỉ, tiền tố issues trong BUG-01 đến BUG-14 có viết đâu?
+```
+
+**Output:**
+````
+Có hai khả năng, và mình chưa kiểm chứng được cái nào:
+
+1. **Tiền tố chỉ nằm ở tiêu đề issue trên GitHub, không nằm trong file `.md`.** Nghĩa là khi tạo issue ở A, Claude Code tự thêm `[FR-01]` vào tiêu đề. Quy ước trong handoff ("Tiêu đề issue `[FR-xx] …`") khớp với cách hiểu này: nó nói về tiêu đề *issue*, không phải tiêu đề trong file.
+2. **Issue của A cũng không có tiền tố.** Khi đó dòng quy ước trong handoff bị ghi sai, và B cứ làm giống A là được.
+
+Nhìn file BUG-14 thì không phân biệt được hai trường hợp này, nên phải xem tiêu đề issue thật. Chạy lệnh này (bạn tự chạy hoặc giao cho Claude Code):
+
+```powershell
+gh issue list -R tkob-team/eshop-sut --author ThachHaoo --state all --limit 20 --json number,title | ConvertFrom-Json | Format-Table number,title
+```
+
+- Nếu tiêu đề #17–#30 **có** `[FR-01] …`: B làm y như vậy. File `.md` giữ nguyên, tiền tố chỉ thêm khi tạo issue.
+- Nếu **không có**: B cũng không thêm, và mình sửa lại dòng quy ước trong handoff.
+
+Dù kết quả thế nào, mục 2 trong lệnh trước (đề xuất tiền tố) chỉ cần làm nếu rơi vào trường hợp đầu. Các mục 1, 3, 4 vẫn cần chạy.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #197 | 15:37 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627> gh issue list -R tkob-team/eshop-sut --author ThachHaoo --state all --limit 20 --json number,title | ConvertFrom-Json | Format-Table number,title
+
+number title
+------ -----
+    30 [FR-01] Form ─É─âng k├╜ tr├¬n Frontend thiß║┐u hß║│n tr╞░ß╗¥ng 'X├íc nhß║¡n mß║¡t khß║⌐u' theo y├¬u cß║ºu SRS
+    29 [FR-01] ├ö nhß║¡p Email tr├¬n form ─É─âng k├╜ d├╣ng type="text" thay v├¼ type="email"
+    28 [FR-01] Nh├ún c├íc tr╞░ß╗¥ng bß║»t buß╗Öc tr├¬n form ─É─âng k├╜ (Hß╗ì T├¬n, Email, Mß║¡t khß║⌐u) kh├┤ng c├│ k├╜ hiß╗çu dß║Ñu sao '*'
+    27 [FR-01] Hß╗ì T├¬n chß╗⌐a thß║╗ HTML/Script (`<img src=x onerror=alert(1)>`) bß╗ï d├¡nh lß╗ùi Stored XSS, chß║íy script v├á v─âng ß║únh l…
+    26 [FR-01] Gß╗¡i request POST /api/register vß╗¢i Content-Type: text/plain, v─âng lß╗ùi HTTP 500 k├¿m trang HTML stack trace
+    25 [FR-01] Gß╗¡i mß║¡t khß║⌐u hß╗úp lß╗ç d├ái 200.000 k├╜ tß╗▒ qua API l├ám backend trß║ú vß╗ü trang lß╗ùi HTML HTTP 413 PayloadTooLargeErr…
+    24 [FR-01] Backend API POST /api/register kh├┤ng Trim khoß║úng trß║»ng thß╗½a ß╗ƒ hai ─æß║ºu Email tr╞░ß╗¢c khi l╞░u v├áo CSDL
+    23 [FR-01] Backend API POST /api/register thß║ú nß╗òi kiß╗âm tra Mß║¡t khß║⌐u: yß║┐u, ngß║»n, thiß║┐u hoa/th╞░ß╗¥ng/sß╗æ/k├╜ tß╗▒ ─æß║╖c bi…
+    22 [FR-01] Gß╗¡i 2 request ─æ─âng k├╜ ─æß╗ông thß╗¥i (race condition) c├╣ng 1 email th├¼ cß║ú 2 ─æß╗üu trß║ú HTTP 200, tß║ío ra 2 user tr├╣…
+    21 [FR-01] Backend API POST /api/register cho ph├⌐p ─æ─âng k├╜ tr├╣ng email ─æ├ú c├│ trong CSDL (tr├╣ng y nguy├¬n, tr├╣ng sau khi cß║»t kho…
+    20 [FR-01] Backend API POST /api/register kh├┤ng kiß╗âm tra Email (rß╗ùng, sai ─æß╗ïnh dß║íng, thiß║┐u tr╞░ß╗¥ng, sai kiß╗âu) vß║½n trß║ú H…
+    19 [FR-01] Backend API POST /api/register kh├┤ng kiß╗âm tra Hß╗ì T├¬n (name rß╗ùng, chß╗ë khoß║úng trß║»ng, null, thiß║┐u tr╞░ß╗¥ng, sai ki…
+    18 [FR-01] Mß║¡t khß║⌐u 'Abcd 1234' th├¬m khoß║úng trß║»ng l├ám k├╜ tß╗▒ ─æß║╖c biß╗çt lß║íi lß╗ìt qua form ─É─âng k├╜, tß║ío user th├ánh c…
+    17 [FR-01] ─É─âng k├╜ kh├┤ng cho mß║¡t khß║⌐u hß╗úp lß╗ç, n├│ n├│i "Mß║¡t khß║⌐u qu├í yß║┐u!"
+```
+
+**Output:**
+````
+Vậy là trường hợp 1: **tiền tố chỉ có ở tiêu đề issue trên GitHub, file `.md` không ghi.** (Chữ bị lỗi font chỉ là do chưa chạy dòng `[Console]::OutputEncoding = [Text.UTF8Encoding]::new()`. Tiêu đề trên GitHub vẫn đúng.)
+
+Danh sách này còn cho thấy thêm một điều: ở A, **mọi** issue đều mang `[FR-01]`, kể cả các lỗi GUI thuộc FR-22 (#28 thiếu dấu `*`, #29 dùng `type="text"`). Tức là ở A, tiền tố là **FR của feature đang kiểm**, không phải FR bị vi phạm. Để B nhất quán với A, và tính cả quyết định B6 ("bug thuộc FR-06 ghi `[FR-06]`"), mình đề xuất:
+
+- **BUG-15 → `[FR-06]`**: nút thêm ở trang chi tiết, chức năng ngầm định của FR-06 cộng với FR-06.3.
+- **Các bug còn lại → `[FR-07]`**: gồm cả các lỗi GUI FR-21/23/24 (giống cách A gắn `[FR-01]` cho lỗi FR-22) và các bug API.
+
+Bạn cần xem lại BUG-32: nhóm G18 trong đó vi phạm FR-06.2 (quantity), nhưng bug gộp cả G19/G21 thuộc API-CART, nên mình đề xuất `[FR-07]`. Nếu bạn muốn `[FR-06]` thì sửa trong lệnh.
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – kiểm cuối trước khi tạo issue (chỉ kiểm, không sửa, không tạo issue).
+1. Quét BUG-15…34: liệt kê file còn `<SV viết`, `<SV viết thêm nếu muốn>`,
+   "(chưa kiểm chứng)", Severity/Priority trống hoặc ngoài thang, mục rỗng, khối code
+   thiếu đóng.
+2. Tiền tố tiêu đề issue (SV chốt, theo tiền lệ A: tiền tố = FR của feature, chỉ thêm
+   khi tạo issue, KHÔNG ghi vào .md): BUG-15 → [FR-06]; BUG-16…34 → [FR-07]. In bảng
+   BUG | tiêu đề issue đầy đủ (tiền tố + tiêu đề trong .md) để SV duyệt.
+3. Kiểm trùng lần cuối: gh issue list -R tkob-team/eshop-sut --state all (mọi tác
+   giả); liệt kê issue mới so với lần kiểm trước.
+4. gh auth status = ThachHaoo.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Mình sẽ ghi rõ quy tắc tiền tố này vào handoff khi cập nhật cuối B ("chỉ trên GitHub, xx = FR của feature, ngoại lệ FR-06"), để C và D làm đúng ngay từ đầu.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #198 | 15:37 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8924,7 +12310,87 @@ Kiểm cuối xong, chưa thấy gì chặn việc tạo issue. Em chỉ kiểm,
 
 ---
 
-## #147 | 15:40 20/10/2026 | Claude Opus 5.5 | [...]
+## #199 | 15:38 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 – kiểm cuối BUG-15…34 trước khi tạo i
+- File đã tạo/sửa: không
+- Kết quả kiểm tra: test không chạy
+  · Mục 1 (quét 20 file):
+    - Không còn `<SV viết>`, `<SV viết thêm nếu muốn>`,
+    - Severity/Priority đủ cả 20 file, đều thuộc thang (High/Medium/Low)
+    - Số dấu ``` ở mọi file đều chẵn
+    - Tiêu đề không trống
+    - Còn `<sau khi tạo issue>` ở mục Link của cả 20 fil
+    - BUG-32 bị báo "rỗng" ở "## Yêu cầu" và "### Dữ kiện" là báo nhầm: hai mục này chỉ chứa mục con G18/G19/G21
+  · Mục 4: gh auth = ThachHaoo (active)
+- Commit: không
+- Mục 2 – tiêu đề issue cần SV duyệt (tiền tố chỉ thêm khi tạo issue, không ghi vào .md):
+  | BUG | Tiêu đề issue |
+  |---|---|
+  | 15 | [FR-06] Nút 'Thêm vào giỏ hàng' ở trang chi tiếầu tiên, không thêm sản phẩm và không có phản hồi |
+  | 16…34 | [FR-07] + tiêu đề trong .md (bảng đủ 19 dòng ở output lệnh kiểm của lượt này; SV có thể yêu cầu ghi ra file) |
+- Mục 3 – kiểm trùng (--state all, mọi tác giả): repo na
+  · Mới: 64 issue #97–#160 của henry-banana (FR04, FR09, FR17, FR20), tất cả OPEN
+  · Không thấy issue nào số #70–#96
+  · #31–#48 (henry-banana, có trong lần kiểm trước) nay không còn trong danh sách
+  · Liên quan giỏ: #153–#158, #160 (mobile Add to Cart, FR-20) và #159 (mobile product detail) đều thuộc frontend-mobile, không trùng nhóm
+web/API nào của B
+  · Không có issue mới nào nhắc /api/cart, CartContext, badge, breadcrumb, alt hay nhãn trang giỏ
+- Cần quyết định:
+  · Q16 – Duyệt 20 tiêu đề issue (tiền tố [FR-06] cho BU (a) duyệt, AI tạo issue theo quy trình bước 7 (b) sửatiêu đề trước
+````
+
+**Output:**
+````
+Kiểm cuối đã sạch: không còn chỗ trống, thang severity/priority đúng, `gh` đang dùng ThachHaoo, và không có issue nào trùng với B. Có hai điều nên ghi nhận thêm:
+
+- Số issue trên fork đã nhảy lên tới **#160**. Issue tiếp theo của bạn sẽ từ **#161** trở đi, không phải #70 như handoff đang ghi. Còn chuyện #31–#48 biến mất là do một bạn khác trong nhóm, không ảnh hưởng tới B.
+- Từ #153 đến #160 là issue mobile FR-20 của một bạn khác. Khi làm **D_FR20** (đăng ký trên mobile), nhớ kiểm trùng với nhóm này.
+
+**Trước khi duyệt Q16:** issue đã tạo thì về sau sửa sẽ phải kèm comment đính chính. Vì vậy nếu bạn chưa xử lý các mục còn treo thì nên làm ngay bây giờ:
+- BUG-30: tiền điều kiện trùng với bước 2.
+- BUG-31: severity.
+- BUG-33: chữ "tràn số" trong tiêu đề và vế 4xx trong Expected.
+- BUG-34: link tới #25.
+
+Nếu bạn đã quyết giữ nguyên thì bỏ qua.
+
+Khi đã sẵn sàng và duyệt 20 tiêu đề (Q16 = a), chạy lệnh này:
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 bước 7 – tạo issue (SV đã duyệt Q16 = a). Làm như A_FR01.
+1. gh auth = ThachHaoo; repo tkob-team/eshop-sut; label bug.
+2. Tạo lần lượt BUG-15 → BUG-34 (đúng thứ tự để số issue liên tục):
+   - title = tiền tố đã duyệt + tiêu đề trong .md;
+   - body = nội dung .md theo đúng cách đã dùng cho A (BUG-01…14); BUG-34 dùng bản
+     che HW02/bugs/_issue_redacted/BUG-34.txt cho phần có đường dẫn máy;
+   - KHÔNG upload ảnh (SV kéo thả sau).
+3. Ghi URL issue vào mục "Link GitHub Issue" của từng BUG-xx.md; cập nhật bảng ánh xạ
+   G → BUG → issue trong _groups_B_FR07.md.
+4. In danh sách cho SV: BUG | số issue | ảnh tiêu biểu cần kéo vào mục "Bằng chứng".
+5. Chưa commit; chờ SV kéo ảnh + chụp issues_page.png.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Sau đó phần của bạn là:
+1. Kéo ảnh tiêu biểu vào mục "Bằng chứng" của từng issue (alt = tên file).
+2. Chụp `HW02/bugs/issues_page.png` với bộ lọc `author:@me`.
+3. Báo lại để Claude Code cập nhật summary README và commit `7/7d`.
+
+Xong bước đó là B hoàn tất, mình sẽ cập nhật handoff.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #200 | 15:40 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8991,7 +12457,150 @@ Dry-run ổn, tất cả body dưới giới hạn 65536 ký tự của GitHub. 
 
 ---
 
-## #148 | 15:56 20/10/2026 | Claude Opus 5.5 | [...]
+## #201 | 15:42 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 bước 7 – tạo issue BUG-15…34 (Q16 = a), làm như A_FR01
+- File đã sửa (CHƯA commit):
+  · HW02/bugs/BUG-15…34.md: mục Link = URL issue
+  · HW02/bugs/_groups_B_FR07.md: bảng ánh xạ thêm cột Issue
+  · A_prompt_log.md
+- Kết quả kiểm tra:
+  · gh auth = ThachHaoo; label bug có sẵn
+  · Trước khi tạo: chưa có issue [FR-06]/[FR-07] nào; 20 file không còn `<SV viết`, không có đường dẫn máy
+  · Dry-run 20 tiêu đề; body dài nhất 14.753 ký tự (BUG-32)
+  · test: không chạy
+- Commit: chưa (theo lệnh)
+- Cách tạo:
+  · title = tiền tố đã duyệt + tiêu đề trong .md
+  · body = nội dung .md, mục Link để trống như A; không upload ảnh
+  · --label bug; tạo tuần tự BUG-15 → 34
+  · BUG-34: body không chứa đường dẫn máy (output đã thay bằng <SUT_DIR> từ 7/7c), mục Bằng chứng trỏ bản che _issue_redacted/BUG-34.txt
+- Danh sách cho SV (BUG → issue: ảnh tiêu biểu kéo vào m_FR07/evidence/):
+  · 15→#161 TC-FR07-02_ui · 16→#162 TC-FR07-99_feedback · 17→#163 TC-FR07-201_manual_2lan · 18→#164 TC-FR07-90_ui
+  · 19→#165 TC-FR07-08_ui · 20→#166 TC-FR07-04_ui · 21→#C-FR07-91_ui
+  · 23→#169 TC-FR07-92_failed · 24→#170 TC-FR07-93_ui · 25→#171 TC-FR07-94_ui · 26→#172 TC-FR07-95_ui
+  · 27→#173 TC-FR07-96_ui · 28→#174 TC-FR07-97_ui · 29→#175 TC-FR07-98_ui · 30→#176 TC-FR07-21_api
+  · 31→#177 TC-FR07-22_api · 32→#178 TC-FR07-30_api + 36· 33→#179 TC-FR07-215_api · 34→#180 TC-FR07-209_api
+  · (tất cả là .png)
+- Bất thường:
+  · BUG-23: ảnh tiêu biểu là `_failed.png` vì script khô-cart.png` / `_ui-home.png`; hai ảnh này cho thấy cả 2trang, có thể hợp hơn
+  · BUG-15: ảnh tiêu biểu TC-FR07-02_ui.png chụp trang giỏ trống; ảnh kiểm tay TC-FR07-205_manual_3lan.png là lựa chọn khác
+  · SV chọn ảnh khi kéo vào
+- Cần quyết định: không chặn. Sau khi SV kéo ảnh và chụp issues_page.png → ra lệnh commit
+===
+về yêu cầu chụp HW02/bugs/issues_page.png của bạn, trước đó mình có chụp 14 cái của feature A rồi, mình có nên đặt tên khác không?
+```
+
+**Output:**
+````
+Nên đặt tên riêng cho từng feature. Lý do:
+- Khi viết report và Audit, mỗi feature cần một ảnh chứng minh issue của chính nó.
+- Bạn đã có 34 issue, mà GitHub chỉ hiện 25 issue mỗi trang. Gom tất cả vào một ảnh thì sẽ không vừa.
+
+Cách làm đề xuất:
+- Đổi tên ảnh cũ thành **`HW02/bugs/issues_page_A_FR01.png`** bằng `git mv` để giữ lịch sử. Đồng thời sửa mọi chỗ đang trỏ tới `issues_page.png` (README, summary…).
+- Chụp ảnh mới **`HW02/bugs/issues_page_B_FR07.png`**: lọc `is:issue author:@me` và sắp xếp *Newest*. Khi đó #180 → #161 nằm trên cùng, vừa đủ 20 dòng. Nếu muốn ảnh chỉ có B thì gõ thêm `FR-07` vào ô tìm kiếm. Lưu ý BUG-15 mang tiền tố `[FR-06]` nên sẽ bị lọc mất, chụp theo Newest là chắc nhất.
+
+Về hai ảnh tiêu biểu Claude Code đánh dấu, bạn chọn khi kéo vào:
+- **BUG-15:** `TC-FR07-02_ui.png` cho thấy trực tiếp triệu chứng chính (bấm 1 lần, giỏ vẫn trống). `TC-FR07-205_manual_3lan.png` minh hoạ kiểu "bấm xen kẽ bị nuốt". Kéo cả hai cũng được, mỗi ảnh một dòng.
+- **BUG-23:** `TC-FR07-92_ui-cart.png` và `_ui-home.png` đặt cạnh nhau cho thấy rõ là "không khác gì nhau" giữa hai trang, dễ hiểu hơn ảnh `_failed.png`.
+
+Khi bạn đã kéo xong ảnh vào 20 issue và chụp `issues_page_B_FR07.png`, chạy lệnh này:
+
+**Lệnh cho Claude Code**
+
+```
+B_FR07 – hoàn tất bước 7.
+1. git mv HW02/bugs/issues_page.png HW02/bugs/issues_page_A_FR01.png; sửa mọi tham
+   chiếu tới issues_page.png trong HW02 (README, summary, report, CLAUDE.md…).
+2. Kiểm HW02/bugs/issues_page_B_FR07.png tồn tại; chưa có → dừng.
+3. gh issue view #161…#180: kiểm mục "Bằng chứng" mỗi issue đã có ít nhất 1 ảnh
+   (SV kéo); liệt kê issue còn thiếu ảnh (không tự upload).
+4. tools/summary.py → cập nhật SUMMARY trong HW02/README.md (thêm B_FR07: số TC theo
+   nguồn AI / Both / Human, Pass/Fail/Blocked lượt chính thức, số bug + severity).
+5. Commit "HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png"
+   (kèm BUG-15…34.md có Link, _groups_B_FR07.md, ảnh, README, prompt log).
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+Commit `7/7d` xong là B_FR07 hoàn tất. Lúc đó mình sẽ cập nhật handoff: trạng thái B, quy tắc tiền tố, issue kế tiếp ≥ #181, cách đặt tên `issues_page_<feature>.png`, và lưu ý kiểm trùng với #153–#160 cho D.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #202 | 15:53 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Tôi đã up ảnh lên hết các issues. Tại sao tôi lại có FR-06 đó nhỉ?
+```
+
+**Output:**
+```
+Tiền tố `[FR-06]` của BUG-15 (#161) đến từ **quyết định B6 của bạn** ở bước 2: lúc đó bạn chốt đưa FR-06 (ô Số lượng và nút "Thêm vào giỏ hàng" ở trang chi tiết) vào phạm vi B, kèm quy ước "bug thuộc FR-06 thì tiêu đề ghi `[FR-06]`". BUG-15 đúng là bug thuộc FR-06:
+- Nó vi phạm chức năng thêm của nút "Thêm vào giỏ hàng", chức năng này ngầm định trong FR-06.
+- Nó vi phạm FR-06.3 (không có phản hồi sau khi bấm).
+- Lỗi nằm ở `ProductDetail.jsx`, tức trang chi tiết, không phải trang giỏ.
+
+Lượt trước bạn đã duyệt bảng tiêu đề (Q16 = a) với tiền tố này. Mình nghĩ **nên giữ**: tiền tố đúng, người phụ trách FR-06 lọc là thấy ngay, và nó nhất quán với B6. Nếu bạn vẫn muốn mọi bug của B đều là `[FR-07]` thì đổi được bằng `gh issue edit 161 --title "[FR-07] …"`, nhớ thêm một comment ngắn giải thích lý do đổi.
+
+**Về ảnh chụp:** ảnh hiện tại bị cắt mất phần trên. #180 chỉ thấy nửa tiêu đề, còn #161 ở dưới cùng thì vừa đủ. Bạn chụp lại sao cho thấy trọn cả #180 → #161: thu nhỏ trang (Ctrl + −) hoặc cuộn lên một chút. Sau đó lưu thành `HW02/bugs/issues_page_B_FR07.png` rồi chạy lệnh hoàn tất bước 7 ở lượt trước.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #203 | 15:55 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình không muốn đụng FR của người khác, nên đổi thành FR07 giúp mình nhé. Còn nếu không thuộc FR07 thì xoá luôn
+```
+
+**Output:**
+````
+Đổi được, và **không cần xoá**: theo đúng cách bạn đặt tiền tố ở A thì BUG-15 thuộc `[FR-07]`.
+
+Ở A, tiền tố là **FR của feature đang kiểm**, không phải FR bị vi phạm: #28 và #29 vi phạm FR-22 nhưng vẫn mang `[FR-01]`. BUG-15 được phát hiện bởi chính các TC của FR-07 (TC-02, 61–64, 205), và triệu chứng người dùng thấy là giỏ hàng vẫn trống. Vì vậy ghi `[FR-07]` là hoàn toàn nhất quán với A. Chỉ có dòng quy ước trong B6 ("bug thuộc FR-06 ghi `[FR-06]`") lệch với tiền lệ này. Bạn đổi ý ở đây thì chỉ cần ghi lại việc đổi là được.
+
+Có ba lý do không nên xoá:
+- Đây là bug ảnh hưởng nhiều nhất của B: 6 case Fail, 5 case Blocked và 6 case Pass hộp đen đều lấy nó làm case gốc. Xoá đi thì các case đó không còn bug để truy vết.
+- Xoá issue trên GitHub là thao tác không lấy lại được.
+- Nội dung bug đúng, chỉ có tiền tố là vấn đề.
+
+**Lệnh cho Claude Code**
+
+```
+#161 (BUG-15) – SV đổi tiền tố [FR-06] → [FR-07] (theo tiền lệ A: tiền tố = FR của
+feature đang kiểm). KHÔNG xoá issue.
+1. gh auth = ThachHaoo; gh issue edit 161 -R tkob-team/eshop-sut --title "[FR-07] <tiêu
+   đề hiện tại bỏ tiền tố>".
+2. Comment #161: "Đính chính 2026-10-20: đổi tiền tố tiêu đề [FR-06] → [FR-07] cho
+   thống nhất cách đặt tiền tố theo feature đang kiểm (FR-07 Giỏ hàng). Nội dung không
+   đổi."
+3. testcases.json: ghi chú vào B6 "Tiền tố issue: theo feature đang kiểm ([FR-07]) —
+   SV đổi 2026-10-20, thay quy ước '[FR-06]' ban đầu"; render_md.py.
+4. _groups_B_FR07.md: cập nhật tiêu đề issue #161 nếu bảng có ghi.
+Gộp vào commit 7/7d (chưa commit riêng). Dừng, báo cáo theo CLAUDE.md.
+```
+
+Sau đó bạn chụp lại `issues_page_B_FR07.png`, lúc này cả 20 issue đều là `[FR-07]`, rồi chạy lệnh hoàn tất bước 7.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #204 | 15:56 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -9040,7 +12649,52 @@ Issue #161 đã đổi tiền tố thành [FR-07] và có comment đính chính.
 
 ---
 
-## #149 | 15:59 20/10/2026 | Claude Opus 5.5 | [...]
+## #205 | 15:57 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: #161 (BUG-15) – đổi tiền tố tiêu đề [FR-06] → [FR-07], không xoá issue
+- File đã sửa (CHƯA commit, gộp vào 7/7d):
+  · HW02/B_FR07/testcases.json (ghi chú cuối giả định B6), testcases.md
+  · Các thay đổi chờ từ lượt trước vẫn còn: BUG-15…34.md, _groups_B_FR07.md, A_prompt_log.md
+- Kết quả kiểm tra:
+  · gh auth = ThachHaoo; đọc lại #161: tiêu đề mới đúng
+  · check_domain 0 errors/7 warn; lint 0 errors/10 warn; test: không chạy
+- Commit: chưa
+- Đã làm:
+  · Tiêu đề #161 = "[FR-07] Nút 'Thêm vào giỏ hàng' ở trang chi tiết sản phẩm bị nuốt lượt bấm đầu tiên, không thêm sản phẩm và không có phản hồi"
+  · Comment đúng nguyên văn lệnh: https://github.com/tkob-team/eshop-sut/issues/161#issuecomment-6287293169
+  · B6: nối thêm "Tiền tố issue: theo feature đang kiểm ([FR-07]) — SV đổi 2026-10-20, thay quy ước '[FR-06]' ban đầu."
+    - Câu cũ "Bug thuộc FR-06 đặt tiêu đề [FR-06]." vẫn giữ, nên trong B6 có cả quy ước cũ lẫn ghi chú đổi
+  · _groups_B_FR07.md: bảng ánh xạ chỉ có số issue, không ghi tiêu đề → không cần sửa
+- Bất thường: không
+- Cần quyết định: không chặn. Có xoá câu cũ "Bug thuộc FR-06 đặt tiêu đề [FR-06]." trong B6 không → SV quyết
+```
+
+**Output:**
+````
+Nên **giữ câu cũ, nhưng đánh dấu là đã thay**, ví dụ thêm "(quy ước ban đầu, đã thay — xem ghi chú dưới)". Đây là bản ghi quyết định, nên lịch sử đổi ý có giá trị khi viết Audit, đúng như cách ta ghi "trước → sau" ở các chỗ khác. Chỉ cần ai đọc cũng thấy ngay quy ước nào đang có hiệu lực. Bạn có thể gộp việc này vào lệnh hoàn tất:
+
+**Lệnh cho Claude Code**
+
+```
+1. B6 trong testcases.json: sau câu "Bug thuộc FR-06 đặt tiêu đề [FR-06]." thêm
+   " (quy ước ban đầu, đã thay — xem ghi chú dưới)"; render_md.py.
+2. Làm tiếp lệnh hoàn tất bước 7 (git mv issues_page.png → issues_page_A_FR01.png +
+   sửa tham chiếu; kiểm issues_page_B_FR07.png; kiểm ảnh trong #161…#180; summary
+   README; commit "HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png").
+```
+
+Trước khi chạy, bạn chụp lại `HW02/bugs/issues_page_B_FR07.png` sao cho thấy trọn #180 → #161, cả 20 issue đều mang `[FR-07]`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #206 | 15:59 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -9090,7 +12744,242 @@ Issue #161 đã đổi tiền tố thành [FR-07] và có comment đính chính.
 
 ---
 
-## #150 | 16:06 20/10/2026 | Claude Opus 5.5 | [...]
+## #207 | 16:02 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) chú thích B6 là quy ước ban đầu; (2) hoàn tất bước 7 – đổi tên ảnh trang Issues, kiểm ảnh #161–#180, cập nhật summary README, commit
+- File đã tạo/sửa:
+  · HW02/B_FR07/testcases.json (B6), testcases.md
+  · git mv HW02/bugs/issues_page.png → issues_page_A_FR01.png; thêm issues_page_B_FR07.png (ảnh của SV)
+  · Sửa tham chiếu tên ảnh: HW02/bugs/README.md dòng 27, CLAUDE.md dòng 158 (cây thư mục)
+  · HW02/README.md (summary); BUG-15…34.md + _groups_B_FR07.md (URL issue, từ lượt trước); A_prompt_log.md
+- Kết quả kiểm tra:
+  · Ảnh trong body issue (đếm <img>/user-attachments):
+    - #161–#170, #172–#179: mỗi issue 1 ảnh
+    - #167: 2 ảnh
+    - #171: 6 ảnh
+    - #180: 0 ảnh
+  · Cả 20 tiêu đề đều mang tiền tố [FR-07]
+  · issues_page_B_FR07.png: danh sách lọc "author:@me, open", thấy #180 → #162 đủ tiêu đề và label bug; #161 nằm ở mép dưới, bị cắt một phần
+  · test: không chạy
+- Commit: 352a34d HW02[B-FR07] 7/7d: GitHub Issues #161–
+- Summary README:
+  · B_FR07: 62 TC, Pass 14 / Fail 39 / Blocked 9, TC SV
+  · Toàn HW02: 2 feature, 195 TC, 34 bug (Critical 6, High 9, Medium 8, Low 11)
+- Bất thường:
+  · #180 (BUG-34) chưa có ảnh trong body, ảnh tiêu biểu .png
+  · Dòng #161 trong issues_page_B_FR07.png bị cắt ở mép dưới
+- Cần quyết định:
+  · Q17 – #180 thiếu ảnh: (a) SV kéo TC-FR07-209_api.pngb, repo không cần commit thêm) (b) giữ nguyên
+  · Q18 – issues_page_B_FR07.png cắt dòng #161: (a) chụp lại cho đủ #161 (b) giữ nguyên
+===
+đã thêm ảnh cho 180
+Q18: B
+```
+
+**Output:**
+```
+Ghi nhận Q18 = giữ nguyên ảnh. Cả 20 issue đã liệt kê đủ trong README và `_groups_B_FR07.md`, nên việc dòng #161 bị cắt không ảnh hưởng gì. **B_FR07 hoàn tất.**
+
+Còn một việc cần kiểm với #180: ảnh `TC-FR07-209_api.png` là ảnh chụp phản hồi lỗi HTML. Nếu trong ảnh có stack trace chứa **đường dẫn tuyệt đối trên máy bạn** (`D:\HK7\…\node_modules\body-parser…`), thì ảnh đang làm lộ đúng thông tin mà bản che `_issue_redacted/BUG-34.txt` dựng ra để giấu. Bạn mở #180 xem lại. Nếu thấy đường dẫn thì thay bằng một ảnh đã che (làm mờ đường dẫn, hoặc chụp lại bản che). Không thấy thì để nguyên.
+
+Mình đã cập nhật `claude/HW02_handoff.md` cho trạng thái mới:
+- B xong, gồm #161–#180 và summary toàn HW02 (195 TC, 34 bug).
+- **BUG kế tiếp là BUG-35, issue kế tiếp từ #181.**
+- Quy tắc tiền tố: chỉ ghi trên GitHub, xx là FR của feature đang kiểm.
+- Cách đặt tên `issues_page_<feature>.png`.
+- Checklist viết bước tái hiện: dùng link navbar, tài khoản seed, cú pháp PowerShell 5.1.
+- Nhắc kiểm trùng #153–#160 khi làm D.
+
+Tiếp theo là **C_FR15 (Product CRUD, admin)**. Khi bạn sẵn sàng, mình đưa lệnh bước 0–1, áp luôn các bài học từ B ngay từ đầu.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #208 | 16:04 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Rồi, giờ mình sẽ làm C. Mà bạn giúp mình  viết prompt log ra với nhé. Cả ở session này và Claude Code luôn nhé.
+Bạn nghĩ context ở session này có quá dài không? Và Claude Code cũng vậy.
+```
+
+**Output:**
+````
+## Context có quá dài không?
+
+**Có, cả hai đều đã dài.**
+
+- **Phiên này:** từ 10:13 tới giờ có rất nhiều lượt, kèm nhiều file lớn dán vào (testcases.md, bugs_facts.md, 20 file bug). Nếu tiếp tục làm C ở đây, ngữ cảnh rất dễ bị nén. Khi đó mình có thể quên các quyết định cũ, và theo ghi chú trong handoff, transcript xuất sau khi nén **chỉ còn phần sau lần nén**. Nên **mở phiên mới cho C**. Handoff vừa cập nhật đã đủ để phiên mới tiếp tục được.
+- **Claude Code:** cũng đã chạy rất nhiều nhiệm vụ từ sáng. Có một rủi ro riêng: nhiều bài học từ B (khẳng định một nơi, ec_target, "Yêu cầu = chỉ yêu cầu bị vi phạm", checklist PowerShell 5.1…) hiện **chỉ nằm trong ngữ cảnh của Claude Code và trong handoff của phiên thảo luận**, chưa được ghi vào `CLAUDE.md`. Nếu `/clear` ngay, phiên Claude Code mới sẽ không biết những điều này. Vì vậy phải ghi chúng vào `CLAUDE.md` trước, rồi mới clear.
+
+## Prompt log
+
+Mình **không viết tay** prompt log được: AI-01 cấm sửa tay, và bạn đã chọn cách trích tự động bằng script. Việc cần làm là xuất transcript rồi chạy script.
+
+**1. Phiên thảo luận này (claude.ai), do bạn làm:**
+1. Xuất transcript phiên này theo đúng cách bạn đã làm với `_p1`/`_p2`, đặt tên **`claude-ai_session_HW02_p3.jsonl`** và để vào `.transcripts/`. Nên xuất **ngay bây giờ**, trước khi phiên có thể bị nén.
+2. Đóng phiên này, mở phiên mới trong Project cho C.
+
+**2. Claude Code:** log của Claude Code được hook Stop trích tự động sau mỗi lượt. Chỉ cần chạy lệnh dưới **trước khi `/clear`**:
+
+**Lệnh cho Claude Code**
+
+```
+Chuẩn bị chuyển sang C_FR15 (phiên Claude Code mới sẽ /clear sau lệnh này).
+
+1. Ghi bài học từ B_FR07 vào CLAUDE.md, mục quy ước đã chốt (ngắn, dạng gạch đầu dòng,
+   không chép dài): khẳng định một nơi; ec_target + truy vết từ ec_target; phần
+   "không đổi" ghi tương đối; SRS im lặng → không tạo Fail; giả định quyết Expected mới
+   vào truy vết; LARGE + no_upper_bound; technique + approach; A20 mở rộng (Pass hộp
+   đen, 2 case gốc); merge không ghi đè verdict, results có timestamp, evidence giữ
+   lượt mới nhất; bug: format BUG-14, Yêu cầu = chỉ yêu cầu bị vi phạm (+ Đạt / Chưa
+   đánh giá được / Không áp dụng), tác động phải có dữ kiện, tiền tố issue chỉ trên
+   GitHub = FR của feature đang kiểm, issues_page_<X_FRnn>.png, SV commit bản viết
+   trước khi AI sửa dữ kiện; checklist bước tái hiện (link navbar; PS 5.1: tài khoản
+   seed, -ContentType, UTF8 bytes, -UseBasicParsing, try/catch; tiền điều kiện có bước
+   dựng). Phần chung (không nói EShop) đưa vào SKILL.md nếu chưa có. Commit riêng
+   "HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07".
+2. Kiểm .transcripts/claude-ai_session_HW02_p3.jsonl đã có (SV xuất); chưa có → báo,
+   bỏ qua mục 3 cho file này.
+3. python tools/hooks/on_stop.py --manual; kiểm A_prompt_log.md có đủ: các lượt
+   Claude Code hôm nay và các lượt claude.ai 10:13 → hiện tại (20/10). Báo số lượt
+   mỗi nguồn và khoảng thời gian; có khoảng trống > 30 phút giữa các lượt claude.ai →
+   liệt kê (KHÔNG tự điền).
+4. Commit "HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10".
+Dừng, báo cáo theo CLAUDE.md. Sau đó SV sẽ /clear.
+```
+
+**Việc của riêng bạn, làm khi rảnh:** điền Section / Mục đích / Xử lý cho các lượt mới trong `appendix/prompt_log_notes.toml` (khoá theo giờ). Phần này handoff đã xếp vào việc SV tự làm.
+
+## Mở phiên mới cho C
+
+Ở phiên claude.ai mới, câu mở đầu chỉ cần:
+
+> Đọc `claude/HW02_handoff.md` trong Project. Bắt đầu C_FR15 (Product CRUD, admin), bước 0–1. Khi cần xuất transcript của phiên đó, đặt tên `…_p4.jsonl`.
+
+Ở Claude Code, sau `/clear`, phiên mới sẽ tự đọc `CLAUDE.md` (lúc này đã có bài học từ B). Lệnh bước 0–1 cho C sẽ do phiên thảo luận mới đưa.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #209 | 16:06 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Chuẩn bị chuyển sang C_FR15 (phiên Claude Code mới sẽ /clear sau lệnh này).
+
+1. Ghi bài học từ B_FR07 vào CLAUDE.md, mục quy ước đã chốt (ngắn, dạng gạch đầu dòng,
+   không chép dài): khẳng định một nơi; ec_target + truy vết từ ec_target; phần
+   "không đổi" ghi tương đối; SRS im lặng → không tạo Fail; giả định quyết Expected mới
+   vào truy vết; LARGE + no_upper_bound; technique + approach; A20 mở rộng (Pass hộp
+   đen, 2 case gốc); merge không ghi đè verdict, results có timestamp, evidence giữ
+   lượt mới nhất; bug: format BUG-14, Yêu cầu = chỉ yêu cầu bị vi phạm (+ Đạt / Chưa
+   đánh giá được / Không áp dụng), tác động phải có dữ kiện, tiền tố issue chỉ trên
+   GitHub = FR của feature đang kiểm, issues_page_<X_FRnn>.png, SV commit bản viết
+   trước khi AI sửa dữ kiện; checklist bước tái hiện (link navbar; PS 5.1: tài khoản
+   seed, -ContentType, UTF8 bytes, -UseBasicParsing, try/catch; tiền điều kiện có bước
+   dựng). Phần chung (không nói EShop) đưa vào SKILL.md nếu chưa có. Commit riêng
+   "HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07".
+2. Kiểm .transcripts/claude-ai_session_HW02_p3.jsonl đã có (SV xuất); chưa có → báo,
+   bỏ qua mục 3 cho file này.
+3. python tools/hooks/on_stop.py --manual; kiểm A_prompt_log.md có đủ: các lượt
+   Claude Code hôm nay và các lượt claude.ai 10:13 → hiện tại (20/10). Báo số lượt
+   mỗi nguồn và khoảng thời gian; có khoảng trống > 30 phút giữa các lượt claude.ai →
+   liệt kê (KHÔNG tự điền).
+4. Commit "HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10".
+Dừng, báo cáo theo CLAUDE.md. Sau đó SV sẽ /clear.
+```
+
+**Output:**
+````
+p3 chưa có. Ghi bài học vào CLAUDE.md, và phần chung (không nói EShop) vào SKILL.md.
+
+Giờ thêm phần chung vào SKILL.md.
+
+Phần 1 xong (`9520bd5`). Giờ trích prompt log và đếm lượt theo nguồn.
+
+Đã ghi quy ước rút ra từ B_FR07 và commit prompt log. Tuy vậy, prompt log còn thiếu toàn bộ các lượt claude.ai từ 10:13 vì file `.transcripts/claude-ai_session_HW02_p3.jsonl` chưa có.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: chuẩn bị sang C_FR15 – ghi quy ước B_FR07; trích prompt log 20/10
+- File đã sửa: CLAUDE.md; .claude/skills/domain-bva-testing/SKILL.md; HW02/appendix/A_prompt_log.md
+- Kết quả kiểm tra: test: không chạy
+- Commit: 9520bd5 HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07
+          da73f82 HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10 (body commit ghi rõ: chưa có p3)
+- Mục 1 – quy ước:
+  · CLAUDE.md, mục "Quyết định đã chốt", thêm khối "2026-10-20 (rút ra từ B_FR07)": thiết kế TC, BVA LARGE, case SV, A20 mở rộng, chạy test, bug, checklist bước tái hiện
+  · Đổi "BUG kế tiếp" thành BUG-35; cây thư mục ghi issues_page_<feature>.png
+  · SKILL.md (bản không nhắc EShop): ec_target/khẳng định một nơi/oracle tương đối/không Expected khi đặc tả im lặng (B3); no_upper_bound + LARGE (B4); technique + approach (B5); Pass hộp đen + 2 case gốc, merge giữ verdict, results có timestamp, nhật ký lượt (B6); Yêu cầu chỉ ghi phần vi phạm, SV commit trước khi AI sửa, chạy thật bước tái hiện, tiền tố chỉ trên tracker (B7)
+- Mục 2: .transcripts/claude-ai_session_HW02_p3.jsonl CHƯA CÓ → bỏ qua mục 3 cho file này
+- Mục 3 – A_prompt_log.md (150 lượt toàn bộ), lượt ngày 20/10 theo nguồn:
+  · claude.ai p2: 29 lượt, 00:16 → 10:08
+  · claude.ai từ 10:13 → hiện tại: KHÔNG có trong log (thiếu p3) → không kiểm được khoảng trống > 30 phút cho đoạn này
+  · Claude Code 820baaa9: 18 lượt, 00:18 → 10:06
+  · Claude Code 0d5a057c (phiên này): 33 lượt, 10:14 → 16:06; một khoảng 11:09 → 12:10 (61 phút)
+  · claude.ai p1 và 580f5fe0: 0 lượt ngày 20/10
+- Bất thường: p2 có khoảng trống > 30 phút trước 10:13 (01:45→02:22, 02:22→07:19, 07:48→09:16), chỉ ghi nhận, không tự điền
+- Cần quyết định:
+  · Q19 – p3: SV xuất claude.ai p3 vào .transcripts/ rồi chạy `python tools/hooks/on_stop.py --manual` và commit lại; nếu làm sau /clear, phiên mới sẽ làm theo lệnh của SV
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #210 | 16:10 20/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc `claude/HW02_handoff.md` trong Project và giúp mình xuất transcript
+```
+
+**Output:**
+```
+You've hit your session limit · resets 5:10pm (Asia/Ho_Chi_Minh)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #211 | 16:11 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc `claude/HW02_handoff.md` trong Project và giúp mình xuất transcript
+```
+
+**Output:**
+```
+Mình đã đọc handoff. Bản trong Project lúc này là **bản cũ hơn**: có thêm mục 5b (quy trình xuất transcript) nhưng mất hết phần cập nhật B mình ghi lúc 13:55 và 16:05. Có lẽ bản đó được ghi đè từ nơi khác. Mình đã **gộp lại**: giữ nguyên mục 5b, khôi phục trạng thái B xong (#161–#180, BUG-35/#181 kế tiếp, các quy ước rút ra từ B), và ghi rõ `_p3` = phiên này, phiên C dùng `_p4`.
+
+Transcript phiên này: **10:13 → 16:15 ngày 20/10, không bị nén ngữ cảnh** (lượt đầu trùng giờ bắt đầu phiên), 62 lượt người dùng (gồm cả vài lượt hệ thống tự gửi lại file đính kèm). File đang được gửi ngay sau tin nhắn này.
+
+Việc của bạn:
+1. Đặt file vào `.transcripts/` với tên `claude-ai_session_HW02_p3.jsonl`, không xoá `_p1`/`_p2`.
+2. Chạy lệnh "chuẩn bị chuyển sang C_FR15" ở lượt trước cho Claude Code. Lệnh đó đã gồm ghi bài học B vào `CLAUDE.md`, chạy `on_stop.py --manual` và commit prompt log, sau đó mới `/clear`.
+3. Mở phiên mới cho C với câu: *"Đọc `claude/HW02_handoff.md` trong Project. Bắt đầu C_FR15 (Product CRUD, admin), bước 0–1. Khi cần xuất transcript của phiên đó, đặt tên `…_p4.jsonl`."*
+```
+
+**Xử lý:** [...]
+
+---
+
+## #212 | 16:14 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -9121,15 +13010,11 @@ Dừng, báo cáo theo CLAUDE.md. Sau đó SV sẽ /clear.
 
 **Output:**
 ```
-p3 chưa có. Ghi bài học vào CLAUDE.md, và phần chung (không nói EShop) vào SKILL.md.
-
-Giờ thêm phần chung vào SKILL.md.
-
-Phần 1 xong (`9520bd5`). Giờ trích prompt log và đếm lượt theo nguồn.
+p3 đã có (16:13). Mục 1 đã làm ở `9520bd5`. Chạy lại mục 3–4.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 150 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 147 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 212 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 149 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
