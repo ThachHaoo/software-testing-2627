@@ -43,7 +43,7 @@ def main():
         ids = {c.get("id") for c in cases}
         bugs |= {k for k, tcs in bug_tcs.items() if tcs & ids}
         r = Counter(designed=len(cases), executed=st["Pass"] + st["Fail"], passed=st["Pass"], failed=st["Fail"],
-                    blocked=st["Blocked"], notrun=st["Not run"] + st["Skipped"], ai=og["AI"] + og["Both"], sv=og["Human"], bugs=len(bugs))
+                    blocked=st["Blocked"], notrun=st["Not run"] + st["Skipped"], ai=og["AI"], both=og["Both"], sv=og["Human"], bugs=len(bugs))
         tot.update(r)
         rows.append((tc.parent.name, d.get("meta", {}).get("feature", ""), r))
 
@@ -52,9 +52,9 @@ def main():
         m = re.search(r"(?im)^(?:- )?\*\*Severity:?\*\*:?\s*(\w+)", bug_text[b.stem])
         sev[m.group(1) if m else "?"] += 1
 
-    h = "| Feature | Chức năng | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC SV thêm | Bug |\n|---|---|---|---|---|---|---|---|---|---|---|"
-    lines = [h] + [f"| {f} | {name} | {r['designed']} | {r['executed']} | {r['passed']} | {r['failed']} | {r['blocked']} | {r['notrun']} | {r['ai']} | {r['sv']} | {r['bugs']} |" for f, name, r in rows]
-    lines.append(f"| **Tổng** | **{len(rows)} feature** | **{tot['designed']}** | **{tot['executed']}** | **{tot['passed']}** | **{tot['failed']}** | **{tot['blocked']}** | **{tot['notrun']}** | **{tot['ai']}** | **{tot['sv']}** | **{len(bug_files) or tot['bugs']}** |")
+    h = "| Feature | Chức năng | Thiết kế | Đã chạy | Pass | Fail | Blocked | Chưa chạy | TC từ AI | TC AI + SV sửa | TC SV thêm | Bug |\n|---|---|---|---|---|---|---|---|---|---|---|---|"
+    lines = [h] + [f"| {f} | {name} | {r['designed']} | {r['executed']} | {r['passed']} | {r['failed']} | {r['blocked']} | {r['notrun']} | {r['ai']} | {r['both']} | {r['sv']} | {r['bugs']} |" for f, name, r in rows]
+    lines.append(f"| **Tổng** | **{len(rows)} feature** | **{tot['designed']}** | **{tot['executed']}** | **{tot['passed']}** | **{tot['failed']}** | **{tot['blocked']}** | **{tot['notrun']}** | **{tot['ai']}** | **{tot['both']}** | **{tot['sv']}** | **{len(bug_files) or tot['bugs']}** |")
     if bug_files:
         lines.append("")
         lines.append("Bug theo severity: " + ", ".join(f"{k} {v}" for k, v in sev.items()) + f" (tổng {len(bug_files)} file trong `bugs/`).")
