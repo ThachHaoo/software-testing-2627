@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-99
-- Nhóm dữ kiện: G2 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G2 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -55,7 +55,7 @@
 - Triệu chứng nhóm G2: UI · trang chủ: bấm 'Thêm vào giỏ' trên thẻ sản phẩm → không có phản hồi nhìn thấy được trong 2 s (toast, badge, chữ/trạng thái nút, thông báo)
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-99, nguyên văn): không có phản hồi nhìn thấy được trong 2 s
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 97–102; `frontend-web/src/App.jsx` dòng 23 (xem `bugs_facts.md`, G2)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 97–102; `frontend-web/src/App.jsx` dòng 23 (xem `_groups_B_FR07.md`, G2)
 
 ### Nhận định
 

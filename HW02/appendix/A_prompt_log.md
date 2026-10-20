@@ -8257,13 +8257,64 @@ B_FR07 7a – dựng lại khung theo quyết định SV
 ```
 
 **Output:**
-```
+````
 Lỗi quoting của shell. Ghi đoạn vá ra file rồi chạy.
+
+Commit vừa rồi thiếu thao tác xoá BUG-35/36. Bổ sung vào cùng commit (chưa push).
+
+Đã dựng lại khung bug theo cách gộp của SV, commit `d72d863`: 20 khung từ BUG-15 đến BUG-34, G20 ở số cuối, đã xoá BUG-35/36. Commit đầu tiên quên đưa thao tác xoá hai file đó vào. Em đã sửa (amend) ngay chính commit đó; repo chưa push nên không ảnh hưởng gì.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7a3 – dựng lại khung bug theo cách gộp của SV
+- File đã sửa: HW02/B_FR07/bugs_facts.md (thêm bảng ánh xạ ở đầu, cột Khung, dòng "Khung" mỗi nhóm); HW02/bugs/BUG-15…34.md; xoá BUG-35, BUG-36; A_prompt_log.md
+- Kết quả kiểm tra: 39/39 Fail vẫn mỗi case đúng một nhóm; BUG-01…14 không đổi; test: không chạy
+- Commit: d72d863 HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV
+- Bảng ánh xạ:
+  | Khung | Nhóm |
+  |---|---|
+  | BUG-15 … BUG-31 | G1 … G17 (theo thứ tự, mỗi khung 1 nhóm) |
+  | BUG-32 | G18 + G19 + G21 |
+  | BUG-33 | G22 |
+  | BUG-34 | G20 (số cuối, chờ SV quyết trùng #25) |
+- Đã áp:
+  · Q11: giữ B17/B18/B21 trong "vi phạm"
+  · Q12 (G1): FR-06.2 → "chưa đánh giá được"; thêm vào "vi phạm" dòng "chức năng thêm của nút 'Thêm vào giỏ hàng' — ngầm định trong FR-06, không có câu SRS riêng"
+  · G2: FR-06.3 → dòng mới "Không áp dụng (nút ở trang chủ thuộc FR-24.1)"
+  · BUG-32: Bằng chứng / Yêu cầu / Dữ kiện chia mục con theo G18, G19, G21, đủ 14 TC và evidence
+  · BUG-17 (G3): thêm dòng "Tái hiện tối thiểu với 2 lần bấm cách nhau: (chưa kiểm chứng) — SV kiểm tay, evidence TC-FR07-201_manual_2lan.png"
+  · Tiêu đề / severity / priority / nhận định: để trống
+- Cần quyết định: không có (G20/#25 đã ghi là SV đang quyết)
+```
+````
 *File AI ghi/gửi trong lượt này:* `tail7a3.py`, `patch7a3.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 136 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 133 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #137 | 13:45 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Đổi tên/vị trí bugs_facts.md của B cho khớp quy ước _groups_A_FR01.md (cùng thư
+   mục, tên _groups_B_FR07.md) bằng git mv; cập nhật mọi tham chiếu trong
+   BUG-15…34 và testcases/notes. Commit "HW02[B-FR07] 7/7a4: đổi tên file dữ kiện
+   theo quy ước A".
+2. Chỉ kiểm, không sửa: trường "Yêu cầu" trong BUG-01…14.md (và body issue #17–#30
+   nếu đọc được bằng gh) có chứa yêu cầu KHÔNG bị vi phạm theo Actual không? Liệt
+   kê từng BUG: yêu cầu đang ghi / yêu cầu thực sự vi phạm.
+Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 137 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 134 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

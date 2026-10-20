@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-01
-- Nhóm dữ kiện: G7 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G7 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -55,7 +55,7 @@
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-01, nguyên văn): TRƯỚC: không có bảng (giỏ trống); trạng thái trống: bảng=không, ảnh/icon=không, chữ="Giỏ hàng của bạn đang trốngTiếp tục mua sắm"; URL sau thao tác=http://localhost:5173/
 - Cùng case: dòng chữ 'Giỏ hàng của bạn đang trống' có; link về trang chủ → URL '/' đạt.
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 20–27 (xem `bugs_facts.md`, G7)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 20–27 (xem `_groups_B_FR07.md`, G7)
 
 ### Nhận định
 

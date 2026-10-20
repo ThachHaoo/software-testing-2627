@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-209
-- Nhóm dữ kiện: G20 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G20 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -62,7 +62,7 @@
 <pre>SyntaxError: Unexpected token &#39;I&#39;, ...&quot;uant; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]
 - Lượt 1 gửi sai body do script (Playwright tự JSON.stringify); lượt 2, 3 gửi đúng chuỗi thô — kết quả trùng nhau.
 - Body HTML có đường dẫn tuyệt đối trên máy chạy (node_modules\body-parser) — evidence gốc giữ nguyên (quy ước: bản dán issue che đặt ở `HW02/bugs/_issue_redacted/`).
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 12 (xem `bugs_facts.md`, G20)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 12 (xem `_groups_B_FR07.md`, G20)
 
 ### Nhận định
 

@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-92
-- Nhóm dữ kiện: G9 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G9 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -53,7 +53,7 @@
 - Triệu chứng nhóm G9: UI · navbar: link tới /cart có kiểu hiển thị giống các link khác khi đang ở /cart (không highlight)
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-92, nguyên văn): ở /cart: [{"href":"/cart","text":"Giỏ hàng","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/login","text":"Đăng nhập","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/register","text":"Đăng ký","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"}]; ở trang chủ: [{"href":"/cart","text":"Giỏ hàng","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/login","text":"Đăng nhập","style":"rgb(255, 255, 255) | none | rgba(0, 0, 0, 0) | 400 | 0px solid"},{"href":"/register","text":
-- Đoạn code trích nguyên văn: `frontend-web/src/App.jsx` dòng 21–24 (xem `bugs_facts.md`, G9)
+- Đoạn code trích nguyên văn: `frontend-web/src/App.jsx` dòng 21–24 (xem `_groups_B_FR07.md`, G9)
 
 ### Nhận định
 

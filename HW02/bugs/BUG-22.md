@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-91
-- Nhóm dữ kiện: G8 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G8 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -53,7 +53,7 @@
 - Triệu chứng nhóm G8: UI · trang giỏ: không có breadcrumb ở vùng nội dung chính
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-91, nguyên văn): không tìm thấy breadcrumb ở vùng nội dung chính
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 29–31 (xem `bugs_facts.md`, G8)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 29–31 (xem `_groups_B_FR07.md`, G8)
 
 ### Nhận định
 

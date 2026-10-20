@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-96
-- Nhóm dữ kiện: G13 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G13 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -54,7 +54,7 @@
 - Triệu chứng nhóm G13: UI · trang giỏ: nút xoá trên dòng có chữ 'Xóa' (SRS: 'Xóa sản phẩm')
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-96, nguyên văn): nhãn đọc được=["Xóa"]
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 50–55 (xem `bugs_facts.md`, G13)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 50–55 (xem `_groups_B_FR07.md`, G13)
 
 ### Nhận định
 

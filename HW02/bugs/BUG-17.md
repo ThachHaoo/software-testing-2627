@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-201
-- Nhóm dữ kiện: G3 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G3 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -56,7 +56,7 @@
 - Thời gian bấm thực tế 405 ms (lượt 2), 410 ms (lượt 3) so với 400 ms của cột Thao tác; notes SV: không ảnh hưởng kết luận.
 - Tầng API cùng dạng quan sát: nhóm API 'POST cùng id → phần tử mới' (TC-FR07-21).
 - Tái hiện tối thiểu với 2 lần bấm cách nhau: (chưa kiểm chứng) — SV kiểm tay, evidence TC-FR07-201_manual_2lan.png
-- Đoạn code trích nguyên văn: `frontend-web/src/context/CartContext.jsx` dòng 8–10 (xem `bugs_facts.md`, G3)
+- Đoạn code trích nguyên văn: `frontend-web/src/context/CartContext.jsx` dòng 8–10 (xem `_groups_B_FR07.md`, G3)
 
 ### Nhận định
 

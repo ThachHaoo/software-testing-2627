@@ -68,7 +68,7 @@
 - G18 — Fail (8): TC-FR07-30, TC-FR07-31, TC-FR07-32, TC-FR07-33, TC-FR07-34, TC-FR07-35, TC-FR07-70, TC-FR07-208
 - G19 — Fail (5): TC-FR07-36, TC-FR07-37, TC-FR07-40, TC-FR07-211, TC-FR07-212
 - G21 — Fail (1): TC-FR07-214
-- Nhóm dữ kiện: G18 + G19 + G21 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G18 + G19 + G21 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -106,21 +106,21 @@
 - Triệu chứng nhóm G18: API · POST /api/cart với quantity không hợp lệ (≤ 0, thập phân, chuỗi, thiếu) → HTTP 200, GET có phần tử mới mang quantity đó
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-30, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":-3}]
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G18)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `_groups_B_FR07.md`, G18)
 
 #### G19 — API · POST /api/cart với id không hợp lệ (không tồn tại, chuỗi, mảng, object, thiếu) → HTTP 200, GET có phần tử mới mang id đó
 
 - Triệu chứng nhóm G19: API · POST /api/cart với id không hợp lệ (không tồn tại, chuỗi, mảng, object, thiếu) → HTTP 200, GET có phần tử mới mang id đó
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-36, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":99999,"name":"Không tồn tại","price":1000,"quantity":1}]
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G19)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `_groups_B_FR07.md`, G19)
 
 #### G21 — API · POST /api/cart với Content-Type: text/plain (body JSON hợp lệ) → HTTP 200, GET có phần tử null
 
 - Triệu chứng nhóm G21: API · POST /api/cart với Content-Type: text/plain (body JSON hợp lệ) → HTTP 200, GET có phần tử null
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-214, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [null]
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 12; `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G21)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 12; `backend/server.js` dòng 290–295 (xem `_groups_B_FR07.md`, G21)
 
 ### Nhận định
 

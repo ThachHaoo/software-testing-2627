@@ -38,7 +38,7 @@
 
 - Fail (1): TC-FR07-21
 - Blocked ghi case gốc (1): TC-FR07-213
-- Nhóm dữ kiện: G16 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G16 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -56,7 +56,7 @@
 - Actual tiêu biểu (TC-FR07-21, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":1}]; SAU: [{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":1},{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":3}]
 - TC-FR07-213: 50 POST song song → 50×HTTP 200, GET SAU 50 phần tử id 1 quantity 1 (Blocked, case gốc TC-FR07-21).
 - Tầng UI cùng dạng quan sát: nhóm 'bấm 20 lần → 20 dòng' (TC-FR07-201).
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G16)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `_groups_B_FR07.md`, G16)
 
 ### Nhận định
 

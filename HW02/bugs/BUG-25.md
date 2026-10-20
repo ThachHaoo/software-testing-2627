@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-94
-- Nhóm dữ kiện: G11 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G11 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -55,7 +55,7 @@
 - Actual tiêu biểu (TC-FR07-94, nguyên văn): alt trang chủ=["","","","",""]; alt trang chi tiết=["Tai nghe AirPods Pro 2"]; trang giỏ không có ảnh sản phẩm (notes, không tính Fail); [kiểm tay] alt "mô tả nội dung ảnh": SV đối chiếu chữ alt với ảnh
 - Cùng case: trang chi tiết alt = tên sản phẩm (đạt); trang giỏ không có ảnh.
 - Notes SV: evidence kiểm tay cần chụp lại trong cửa sổ ẩn danh không tiện ích.
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 80–84 (xem `bugs_facts.md`, G11)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 80–84 (xem `_groups_B_FR07.md`, G11)
 
 ### Nhận định
 

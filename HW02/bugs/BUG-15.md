@@ -43,7 +43,7 @@
 
 - Fail (6): TC-FR07-02, TC-FR07-61, TC-FR07-62, TC-FR07-63, TC-FR07-64, TC-FR07-205
 - Blocked ghi case gốc (5): TC-FR07-03, TC-FR07-06, TC-FR07-65, TC-FR07-203, TC-FR07-206
-- Nhóm dữ kiện: G1 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G1 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -66,7 +66,7 @@
 - Pass hộp đen ghi case gốc TC-FR07-61 (notes 6b): TC-FR07-10, 11, 12, 13, 60, 200.
 - TC-FR07-04 (xếp ở nhóm badge) cũng ghi SAU = TRƯỚC sau khi thêm từ trang chi tiết; notes: EC10 chưa đánh giá được, case gốc TC-FR07-61.
 - TC-FR07-205 notes (SV): lần 1 không thêm, khớp giả thuyết gray-box ProductDetail.jsx:21–31.
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/ProductDetail.jsx` dòng 21–31 (xem `bugs_facts.md`, G1)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/ProductDetail.jsx` dòng 21–31 (xem `_groups_B_FR07.md`, G1)
 
 ### Nhận định
 

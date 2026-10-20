@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-98
-- Nhóm dữ kiện: G15 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G15 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -53,7 +53,7 @@
 - Triệu chứng nhóm G15: UI · trang giỏ: nhãn dòng tổng là 'Tổng tạm tính:' (SRS: 'Tổng cộng')
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-98, nguyên văn): nhãn đọc được=["Tổng tạm tính:"]
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 62–64 (xem `bugs_facts.md`, G15)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 62–64 (xem `_groups_B_FR07.md`, G15)
 
 ### Nhận định
 

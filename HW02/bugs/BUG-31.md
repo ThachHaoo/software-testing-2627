@@ -38,7 +38,7 @@
 ## TC liên quan
 
 - Fail (2): TC-FR07-22, TC-FR07-210
-- Nhóm dữ kiện: G17 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G17 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -55,7 +55,7 @@
 - Triệu chứng nhóm G17: API · POST /api/cart với price khác giá CSDL → HTTP 200, GET lưu đúng price client gửi
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-22, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":1}]; SAU: [{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":1},{"id":4,"name":"Tai nghe AirPods Pro 2","price":1,"quantity":1}]
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G17)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 290–295 (xem `_groups_B_FR07.md`, G17)
 
 ### Nhận định
 

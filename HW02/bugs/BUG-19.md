@@ -38,7 +38,7 @@
 
 - Fail (1): TC-FR07-08
 - Blocked ghi case gốc (1): TC-FR07-09
-- Nhóm dữ kiện: G5 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G5 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -55,7 +55,7 @@
 - Triệu chứng nhóm G5: UI · trang giỏ: bấm nút xoá → không có dialog xác nhận, dòng bị xoá ngay
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-08, nguyên văn): đăng nhập cart08_1792476880905@domain.com: navbar có tên user; TRƯỚC: 2 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Bàn phím cơ Keychron Q1 | Đơn giá 4000000 | SL 1 | Thành tiền 4000000]; Tổng 10000000; không có badge; không có dialog; SAU: 1 dòng: [Bàn phím cơ Keychron Q1 | Đơn giá 4000000 | SL 1 | Thành tiền 4000000]; Tổng 4000000; không có badge
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 49–55; `frontend-web/src/context/CartContext.jsx` dòng 12–16 (xem `bugs_facts.md`, G5)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 49–55; `frontend-web/src/context/CartContext.jsx` dòng 12–16 (xem `_groups_B_FR07.md`, G5)
 
 ### Nhận định
 

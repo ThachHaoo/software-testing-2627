@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-215
-- Nhóm dữ kiện: G22 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G22 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -54,7 +54,7 @@
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-215, nguyên văn): POST HTTP 200 {"message":"Added to cart"}; TRƯỚC: []; SAU: [{"id":5,"name":"Bàn phím cơ Keychron Q1","price":4000000,"quantity":9007199254740992}]
 - SV ghi giả định B1 (không có cận trên) cho Expected của case.
-- Đoạn code trích nguyên văn: `backend/server.js` dòng 12; `backend/server.js` dòng 290–295 (xem `bugs_facts.md`, G22)
+- Đoạn code trích nguyên văn: `backend/server.js` dòng 12; `backend/server.js` dòng 290–295 (xem `_groups_B_FR07.md`, G22)
 
 ### Nhận định
 

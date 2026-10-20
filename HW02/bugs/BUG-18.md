@@ -38,7 +38,7 @@
 
 - Fail (1): TC-FR07-90
 - Blocked ghi case gốc (4): TC-FR07-05, TC-FR07-06, TC-FR07-07, TC-FR07-65
-- Nhóm dữ kiện: G4 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G4 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -54,7 +54,7 @@
 - Triệu chứng nhóm G4: UI · trang giỏ: ô Số lượng của dòng không có nút '+' / '-'
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-90, nguyên văn): dòng: 1 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 6000000; không có badge; nút trong ô Số lượng: []
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 47 (xem `bugs_facts.md`, G4)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 47 (xem `_groups_B_FR07.md`, G4)
 
 ### Nhận định
 

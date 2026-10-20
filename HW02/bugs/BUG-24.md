@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-93
-- Nhóm dữ kiện: G10 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G10 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -54,7 +54,7 @@
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-93, nguyên văn): locale trình duyệt=vi-VN; trang chủ (thẻ)="6.000.000 VND"; trang chi tiết="6.000.000 ₫"; giỏ: Đơn giá="6.000.000 ₫"; giỏ: Thành tiền="6.000.000 ₫"; giỏ: Tổng="6.000.000 ₫"
 - Cùng case: trang chi tiết và trang giỏ dùng '₫' (đạt).
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 86–88 (xem `bugs_facts.md`, G10)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 86–88 (xem `_groups_B_FR07.md`, G10)
 
 ### Nhận định
 

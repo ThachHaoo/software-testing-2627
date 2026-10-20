@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-95
-- Nhóm dữ kiện: G12 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G12 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -54,7 +54,7 @@
 - Triệu chứng nhóm G12: UI · trang giỏ: tiêu đề cột thứ 2 là 'Giá' (SRS: 'Đơn giá')
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-95, nguyên văn): nhãn đọc được=["Sản phẩm","Giá","Số lượng","Thành tiền","Thao tác"]
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 34–40 (xem `bugs_facts.md`, G12)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 34–40 (xem `_groups_B_FR07.md`, G12)
 
 ### Nhận định
 

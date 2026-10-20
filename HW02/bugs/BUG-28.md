@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-97
-- Nhóm dữ kiện: G14 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G14 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -55,7 +55,7 @@
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-97, nguyên văn): nhãn đọc được=["← Mua tiếp"]
 - Trang giỏ trống có link 'Tiếp tục mua sắm' (Cart.jsx dòng 24); TC-FR07-97 kiểm khi giỏ có 1 dòng.
-- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 65–68 (xem `bugs_facts.md`, G14)
+- Đoạn code trích nguyên văn: `frontend-web/src/pages/Cart.jsx` dòng 65–68 (xem `_groups_B_FR07.md`, G14)
 
 ### Nhận định
 

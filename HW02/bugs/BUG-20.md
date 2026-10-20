@@ -37,7 +37,7 @@
 ## TC liên quan
 
 - Fail (1): TC-FR07-04
-- Nhóm dữ kiện: G6 trong `HW02/B_FR07/bugs_facts.md`
+- Nhóm dữ kiện: G6 trong `HW02/bugs/_groups_B_FR07.md`
 
 ## Yêu cầu
 
@@ -53,7 +53,7 @@
 - Triệu chứng nhóm G6: UI · navbar: không có badge số lượng trên/cạnh link tới /cart khi giỏ có hàng
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Actual tiêu biểu (TC-FR07-04, nguyên văn): đăng nhập cart04_1792476872458@domain.com: navbar có tên user; TRƯỚC: 2 dòng: [iPhone 15 Pro Max | Đơn giá 30000000 | SL 1 | Thành tiền 30000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 36000000; không có badge; ô Số lượng sau khi gõ "2": value="2"; không có phản hồi nhìn thấy được trong 2 s; SAU: 2 dòng: [iPhone 15 Pro Max | Đơn giá 30000000 | SL 1 | Thành tiền 30000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000]; Tổng 36000000; không có badge
-- Đoạn code trích nguyên văn: `frontend-web/src/App.jsx` dòng 23 (xem `bugs_facts.md`, G6)
+- Đoạn code trích nguyên văn: `frontend-web/src/App.jsx` dòng 23 (xem `_groups_B_FR07.md`, G6)
 
 ### Nhận định
 
