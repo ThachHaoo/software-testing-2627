@@ -20,9 +20,11 @@
 
 - Người dùng đang ở bất kỳ trang nào trên website.
 
+- Giỏ có ít nhất 1 sản phẩm (như TC-FR07-91).
+
 ## Các bước tái hiện
 
-1. Mở trình duyệt và truy cập vào trang giỏ hàng http://localhost:5173/cart (hoặc bấm nút/link "Giỏ hàng" trên thanh điều hướng).
+1. Truy cập trang chủ http://localhost:5173/, bấm 'Thêm vào giỏ' trên thẻ 'Tai nghe AirPods Pro 2', rồi bấm link 'Giỏ hàng' trên navbar (không gõ URL /cart, không tải lại trang).
 
 2. Quan sát vùng giao diện nội dung chính phía trên tiêu đề "Giỏ Hàng".
 
@@ -63,6 +65,8 @@ Tại trang /cart, vùng nội dung chính bắt đầu ngay bằng thẻ tiêu 
     30      <div className="bg-white p-6 border rounded shadow-sm">
     31        <h2 className="text-2xl font-bold mb-6">Giỏ Hàng</h2>
   ```
+- Khôi phục đoạn ví dụ của SV bị lỗi định dạng khi dán (mục Nhận định, `<Breadcrumb … />`).
+- Sửa bước tái hiện 2026-10-20: gõ URL /cart làm mất giỏ (B0d) → thêm từ trang chủ + link navbar.
 
 ### Nhận định
 
@@ -74,7 +78,11 @@ return (
     <h2 className="text-2xl font-bold mb-6">Giỏ Hàng</h2>
 ```
 
-- Developer hoàn toàn bỏ quên việc thiết kế hoặc nhúng component Breadcrumb (ví dụ: <Breadcrumb '/' 'Giỏ 'Trang chủ', hàng' items="{[{" label: link: { }, }]}/>) vào đầu trang con /cart.
+- Developer hoàn toàn bỏ quên việc thiết kế hoặc nhúng component Breadcrumb (ví dụ: xem khối code dưới) vào đầu trang con /cart.
+
+```jsx
+<Breadcrumb items={[{ label: 'Trang chủ', link: '/' }, { label: 'Giỏ hàng' }]} />
+```
 
 - Việc thiếu thanh điều hướng vết trang này làm giảm khả năng điều hướng phân cấp của giao diện người dùng, vi phạm trực tiếp quy định GUI ở FR-23.4.
 

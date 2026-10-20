@@ -8588,13 +8588,76 @@ kê trước → sau>". Dừng, báo cáo theo CLAUDE.md.
 ```
 
 **Output:**
-```
+````
 Commit SV có, ảnh có. Xem ảnh và nội dung BUG-15, BUG-17.
+
+Đã sửa dữ kiện BUG-15 và BUG-17 theo hai ảnh kiểm tay, commit `8b52204`. Em chỉ xoá câu sai và chép dữ kiện, không viết thêm câu phân tích nào.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa dữ kiện BUG-15, BUG-17 theo evidence (sau commit SV ac34ea0 "7/7b: SV viết BUG-15–17")
+- File đã sửa: HW02/bugs/BUG-15.md, BUG-17.md; thêm HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png; A_prompt_log.md
+- Kết quả kiểm tra: ảnh 3 lần có; đã đọc cả 2 ảnh để lấy số liệu; test: không chạy
+- Commit: 8b52204 HW02[B-FR07] 7/7c: sửa dữ kiện BUG-15, 17 theo evidence
+- BUG-15:
+  · Actual: xoá câu "…từ lần thứ 2 trở đi."; thêm dòng kiểm tay. Theo ảnh: 1 dòng 'Tai nghe AirPods Pro 2', Số lượng 1, Thành tiền 6.000.000 ₫, Tổng tạm tính 6.000.000 ₫.
+  · Nhận định: xoá câu "Do lượt bấm đầu bị nuốt…"; sửa "6 test case…" thành "5 case bấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa hai lần"; thêm `<SV viết thêm nếu muốn>`.
+  · Dữ kiện: thêm (a) kiểm tay 3 lần → 1 dòng; (b) code dòng 29 setClickCount(0) chạy sau addToCart; (c) Actual TC-205 lần 2 sau khi rời trang vẫn giỏ trống.
+  · Bằng chứng và Môi trường: thêm ảnh và dòng kiểm tay.
+- BUG-17:
+  · Actual "Khi bấm 2 lần": 2 dòng `iPhone 15 Pro Max`, mỗi dòng SL 1, 30.000.000 ₫; Tổng tạm tính 60.000.000 ₫
+  · Bước 2: kiểm tay dùng iPhone 15 Pro Max (id 1), tự động hoá 20 lần dùng AirPods (id 4)
+  · Expected có ví dụ số cụ thể cho trường hợp 2 lần → đổi sang iPhone 15 Pro Max
+  · Dòng tái hiện 2 lần trong Dữ kiện: ghi rõ sản phẩm và số liệu
+- Cuối mục Dữ kiện mỗi file có dòng "Sửa dữ kiện 2026-10-20 theo evidence: trước → sau"
+- Bất thường:
+  · Ảnh TC-FR07-205_manual_3lan.png không có thanh địa chỉ, nên không tự xác nhận được đó là trang nào hay đã bấm 3 lần
+  · Câu "ở cùng một trang chi tiết, 3 lần liên tiếp" chép theo lệnh của SV
+  · Ảnh 2 lần có thanh địa chỉ localhost:5173/cart
+- Cần quyết định: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `fix7c.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 141 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 138 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #142 | 14:46 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa bước tái hiện BUG-22, BUG-24 (giỏ web là state React, B0d: gõ URL /cart → giỏ
+trống). Chạy sau commit SV "7/7b: SV viết BUG-21–24" (chưa có → dừng).
+Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24". Không đụng câu khác của SV.
+
+BUG-22:
+1. Bước 1 → "Truy cập trang chủ http://localhost:5173/, bấm 'Thêm vào giỏ' trên thẻ
+   'Tai nghe AirPods Pro 2', rồi bấm link 'Giỏ hàng' trên navbar (không gõ URL /cart,
+   không tải lại trang)." Tiền điều kiện thêm "giỏ có ít nhất 1 sản phẩm" (như TC-91).
+2. Nhận định: đoạn JSX ví dụ bị vỡ định dạng → khôi phục thành
+   `<Breadcrumb items={[{ label: 'Trang chủ', link: '/' }, { label: 'Giỏ hàng' }]} />`
+   trong khối code; ghi chú cuối Dữ kiện: "khôi phục đoạn ví dụ của SV bị lỗi định
+   dạng khi dán".
+
+BUG-24:
+3. Bước 3 → "Bấm 'Xem chi tiết' trên thẻ đó để xem giá ở /product/4; bấm link 'EShop'
+   về trang chủ, bấm 'Thêm vào giỏ' trên thẻ đó, rồi bấm link 'Giỏ hàng' trên navbar
+   (không gõ URL) để xem Đơn giá, Thành tiền, Tổng." (như TC-93)
+
+Cuối mục Dữ kiện (AI chép) mỗi file: "Sửa bước tái hiện 2026-10-20: gõ URL /cart làm
+mất giỏ (B0d) → thêm từ trang chủ + link navbar." Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+*File AI ghi/gửi trong lượt này:* `fix7c2.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 142 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 139 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

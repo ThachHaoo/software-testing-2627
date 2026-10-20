@@ -26,7 +26,7 @@
 
 2. Quan sát phần hiển thị giá tiền trên các thẻ sản phẩm ở trang chủ (ví dụ: sản phẩm Tai nghe AirPods Pro 2).
 
-3. Mở trang chi tiết sản phẩm (/product/4) và trang giỏ hàng (/cart) để so sánh cách hiển thị ký hiệu đơn vị tiền tệ.
+3. Bấm 'Xem chi tiết' trên thẻ đó để xem giá ở /product/4; bấm link 'EShop' về trang chủ, bấm 'Thêm vào giỏ' trên thẻ đó, rồi bấm link 'Giỏ hàng' trên navbar (không gõ URL) để xem Đơn giá, Thành tiền, Tổng.
 
 ## Expected (trích SRS)
 
@@ -68,6 +68,7 @@ Theo yêu cầu FR-21.3 (kèm giả định B16): Hệ thống bắt buộc ph�
     87                  {Number(p.price).toLocaleString()} VND
     88                </p>
   ```
+- Sửa bước tái hiện 2026-10-20: gõ URL /cart làm mất giỏ (B0d) → thêm từ trang chủ + link navbar.
 
 ### Nhận định
 
