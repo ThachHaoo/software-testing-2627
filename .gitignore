@@ -8,3 +8,6 @@ node_modules/
 test-results/
 playwright-report/
 HW02/tests/results/
+
+# ảnh gốc chạy tay D (bản nén nằm ở evidence/)
+HW02/D_FR20/manual_raw/

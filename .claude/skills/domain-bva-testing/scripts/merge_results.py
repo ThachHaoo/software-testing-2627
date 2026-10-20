@@ -12,7 +12,7 @@ Usage: python merge_results.py testcases.json results.json [--dry-run]
   auto_status, actual_result, evidence; status giữ nguyên trừ khi chạy với --force. "notes" không bao giờ bị đụng.
 - Mỗi lượt chạy nên ghi results riêng có timestamp (vd results/B_FR07_20261020-131400.json) để không ghi đè lượt trước.
 - Chạy tay (projectName kết thúc bằng "-manual", vd file kết quả trống của D_FR20): verdict SV điền chỉ ghi vào "status",
-  không ghi "auto_status" (D14); ảnh tên "<mã TC>_manual_<n>" giữ nguyên tên → evidence/<mã TC>_manual_<n>.png.
+  không ghi "auto_status" (D14); ảnh tên "<mã TC>_manual_<n>" / "<mã TC>_admin_<n>" giữ nguyên tên → evidence/.
 - Không đụng tới expected_result.
 """
 import argparse
@@ -49,8 +49,8 @@ def evidence_name(cid, att_name, src, used):
         suf = "_failed"
     else:
         key = att_name[len(cid):] if att_name.startswith(cid + "_") else att_name
-        # ảnh chạy tay giữ đúng quy ước TC-xx_manual_<n> (slug sẽ đổi "_" thành "-")
-        suf = key if re.fullmatch(r"_manual_\d+", key) else NAME_SUFFIX.get(key) or "_" + slug(key)
+        # ảnh chạy tay giữ đúng quy ước TC-xx_manual_<n> / TC-xx_admin_<n> (slug sẽ đổi "_" thành "-")
+        suf = key if re.fullmatch(r"_(manual|admin)_\d+", key) else NAME_SUFFIX.get(key) or "_" + slug(key)
     name, n = f"{cid}{suf}{ext}", 2
     while name in used:
         name, n = f"{cid}{suf}-{n}{ext}", n + 1
