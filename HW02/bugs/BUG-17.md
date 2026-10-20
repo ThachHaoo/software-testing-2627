@@ -23,19 +23,19 @@
 ## Các bước tái hiện
 
 1. Truy cập vào trang chủ `http://localhost:5173/`.
-2. Tìm sản phẩm `Tai nghe AirPods Pro 2` (id 4).
+2. Tìm sản phẩm: kiểm tay (bấm 2 lần) dùng `iPhone 15 Pro Max` (id 1); tự động hoá (bấm 20 lần, TC-FR07-201) dùng `Tai nghe AirPods Pro 2` (id 4).
 3. Bấm nút "Thêm vào giỏ" trên thẻ sản phẩm này 2 lần (hoặc spam click 20 lần nhanh).
 4. Bấm vào link "Giỏ hàng" trên navbar để điều hướng sang trang `/cart`.
 5. Kiểm tra danh sách các dòng sản phẩm hiển thị trong bảng giỏ hàng.
 
 ## Expected (trích SRS)
 
-Theo yêu cầu FR-07.3: Khi thêm cùng một sản phẩm đã có trong giỏ hàng, hệ thống bắt buộc phải cộng dồn số lượng trên dòng sản phẩm đó chứ không được tạo thêm dòng mới (ví dụ: bấm nút thêm 2 lần thì giỏ hàng chỉ có đúng 1 dòng `Tai nghe AirPods Pro 2` với Số lượng = 2).
+Theo yêu cầu FR-07.3: Khi thêm cùng một sản phẩm đã có trong giỏ hàng, hệ thống bắt buộc phải cộng dồn số lượng trên dòng sản phẩm đó chứ không được tạo thêm dòng mới (ví dụ: bấm nút thêm 2 lần thì giỏ hàng chỉ có đúng 1 dòng `iPhone 15 Pro Max` với Số lượng = 2).
 
 ## Actual
 
 Giỏ hàng không hề cộng dồn số lượng mà tự động tạo thêm dòng mới trùng hệt cho mỗi lần bấm thêm:
-- Khi bấm 2 lần: Trong giỏ xuất hiện 2 dòng trùng nhau hoàn toàn (`Tai nghe AirPods Pro 2`), mỗi dòng đều có Số lượng = 1 và Thành tiền = 6.000.000 ₫.
+- Khi bấm 2 lần: Trong giỏ xuất hiện 2 dòng trùng nhau hoàn toàn (`iPhone 15 Pro Max`), mỗi dòng đều có Số lượng = 1 và Thành tiền = 30.000.000 ₫; Tổng tạm tính 60.000.000 ₫.
 - Khi tự động hóa test spam click 20 lần: Trong giỏ văng ra đúng 20 dòng trùng nhau liệt kê liên tiếp.
 
 ## Bằng chứng
@@ -61,7 +61,7 @@ Giỏ hàng không hề cộng dồn số lượng mà tự động tạo thêm 
 - Actual nguyên văn (TC-FR07-201): `TRƯỚC: không có bảng (giỏ trống); bấm 20 lần (element.click() trong trang) trong 410 ms [notes] thời gian thực tế 410 ms > 400 ms của cột Thao tác; SAU: 20 dòng: [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe AirPods Pro 2 | Đơn giá 6000000 | SL 1 | Thành tiền 6000000] [Tai nghe Ai… (rút gọn)`
 - Thời gian bấm thực tế 405 ms (lượt 2), 410 ms (lượt 3) so với 400 ms của cột Thao tác; notes SV: không ảnh hưởng kết luận.
 - Tầng API cùng dạng quan sát: nhóm API 'POST cùng id → phần tử mới' (TC-FR07-21).
-- Tái hiện tối thiểu với 2 lần bấm cách nhau: SV kiểm tay 2026-10-20: 2 lần bấm → 2 dòng (evidence `TC-FR07-201_manual_2lan.png`)
+- Tái hiện tối thiểu với 2 lần bấm cách nhau: SV kiểm tay 2026-10-20 với `iPhone 15 Pro Max` (id 1): 2 lần bấm → 2 dòng, mỗi dòng Số lượng 1, Thành tiền 30.000.000 ₫; Tổng tạm tính 60.000.000 ₫ (evidence `TC-FR07-201_manual_2lan.png`)
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt); lượt 3 cũng giống.
 - Đoạn code trích nguyên văn: `frontend-web/src/context/CartContext.jsx` dòng 8–10
 
@@ -70,6 +70,8 @@ Giỏ hàng không hề cộng dồn số lượng mà tự động tạo thêm 
      9      setCart([...cart, { ...product, quantity }]);
     10    };
   ```
+
+- Sửa dữ kiện 2026-10-20 theo evidence (`TC-FR07-201_manual_2lan.png`): Actual, dòng "Khi bấm 2 lần": `Tai nghe AirPods Pro 2`, Thành tiền 6.000.000 ₫ → `iPhone 15 Pro Max`, Thành tiền 30.000.000 ₫, Tổng tạm tính 60.000.000 ₫; Các bước tái hiện bước 2: chỉ `Tai nghe AirPods Pro 2` → kiểm tay dùng `iPhone 15 Pro Max` (id 1), tự động hoá 20 lần dùng `Tai nghe AirPods Pro 2` (id 4); Expected, ví dụ 2 lần: `Tai nghe AirPods Pro 2` → `iPhone 15 Pro Max`.
 
 ### Nhận định
 

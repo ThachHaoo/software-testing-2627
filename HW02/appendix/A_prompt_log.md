@@ -8459,7 +8459,7 @@ KHÔNG gợi ý tiêu đề, severity, câu chữ, nguyên nhân.
 ```
 
 **Output:**
-```
+````
 Không có BUG-15…34 nào SV đã sửa. Viết script điền khung theo format BUG-14, dùng lại dữ liệu nhóm của script trước.
 
 Sửa 2 chỗ: Actual/body nhiều dòng làm vỡ danh sách markdown, và giả định bị mất tiêu đề.
@@ -8467,11 +8467,134 @@ Sửa 2 chỗ: Actual/body nhiều dòng làm vỡ danh sách markdown, và gi�
 Heredoc làm hỏng escape. Sửa trực tiếp bằng Edit.
 
 Actual chứa HTML thô nằm ngoài backtick sẽ bị markdown render. Bọc Actual nguyên văn trong backtick.
+
+Đã dựng xong 20 khung BUG-15…34 theo đúng format BUG-14, commit `d0d0e05`. Không file nào có chữ SV, nên em dựng lại toàn bộ.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7a5 – khung BUG-15…34 theo format BUG-14 (chỉ dữ kiện)
+- File đã tạo/sửa:
+  · HW02/bugs/BUG-15…34.md
+  · HW02/bugs/_issue_redacted/BUG-34.txt (mới, bản che TC-209: đường dẫn → <SUT_DIR>)
+  · HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png (ảnh của SV, nay commit)
+  · A_prompt_log.md
+- Kết quả kiểm tra (script):
+  · 20 file đủ các mục, đúng thứ tự BUG-14 (ID → … → dòng cuối)
+  · Mọi đường dẫn `HW02/…` tồn tại; ảnh tiêu biểu đều có thật
+  · Không còn đường dẫn máy trong BUG/bản che
+  · test: không chạy
+- Commit: d0d0e05 HW02[B-FR07] 7/7a5: khung bug theo format BUG-14
+- AI đã điền:
+  · Môi trường: UI ghi Chromium + Playwright 1.48.2, locale vi-VN; API ghi APIRequestContext; trang/endpoint; lượt 2 13:14; TC-201/209 thêm lượt 3; BUG-17 thêm dòng kiểm tay
+  · Bằng chứng: ảnh tiêu biểu + evidence từng TC
+    - BUG-17: ảnh tiêu biểu là ảnh kiểm tay
+    - BUG-32: mục con G18/G19/G21, mỗi mục có ảnh tiêu biểu nhóm
+    - BUG-34: thêm dòng bản che
+  · TC liên quan: Fail / Blocked ghi case gốc / Pass hộp đen (BUG-15) / Nhóm dữ kiện
+  · Yêu cầu: chỉ yêu cầu bị vi phạm; giả định ghi "(giả định SV chốt)"; yêu cầu ngầm định ghi "(ngầm định)"; cộng dòng Đạt / Chưa đánh giá được (BUG-16 thêm Không áp dụng)
+  · Dữ kiện: Actual nguyên văn; bug API có payload/phản hồi/GET SAU; code kèm số dòng; case gốc; dòng tái hiện 2 lần ở BUG-17 đổi thành "SV kiểm tay 2026-10-20: 2 lần bấm → 2 dòng"
+- Để trống `<SV viết>`: Tiêu đề, Severity, Priority, Tiền điều kiện, Bước, Expected, Actual, Nhận định; Link = `<sau khi tạo issue>`
+- Cách trình bày em tự chọn:
+  · Actual/body nhiều dòng gộp về một dòng: ký tự xuống dòng thay bằng " ↵ ", bọc trong backtick để HTML thô không bị render
+  · Dài hơn 300 ký tự thì cắt, ghi "(rút gọn)"; Actual nguyên văn cắt ở 600
+- Cần quyết định: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `bugs7a5.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 139 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 136 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #140 | 14:16 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+BUG-15 – cập nhật theo kiểm tay của SV (gộp với lệnh sửa BUG-15/17 nếu chưa chạy;
+commit "HW02[B-FR07] 7/7b: sửa dữ kiện BUG-15, 17 theo evidence").
+1. Kiểm file HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png tồn tại; chưa có → dừng,
+   báo SV.
+2. Actual: thay câu "chỉ thực sự được thêm… từ lần thứ 2 trở đi" (nếu còn) bằng dữ
+   kiện kiểm tay: "Kiểm tay (SV, 2026-10-20): ở cùng một trang chi tiết, bấm 'Thêm vào
+   giỏ hàng' 3 lần liên tiếp → trang giỏ chỉ có 1 dòng." Ghi đúng Số lượng của dòng
+   như trên ảnh.
+3. Nhận định: ý "bấm 1, 3, 5… bị nuốt; rời trang đếm lại từ 0" giữ nguyên, BỎ nhãn
+   "(chưa kiểm chứng bằng chạy)" cho phần "3 lần → 1 dòng"; phần "rời trang đếm lại"
+   dẫn TC-205.
+4. Bằng chứng: thêm TC-FR07-205_manual_3lan.png; Môi trường thêm dòng "Kiểm tay: SV,
+   2026-10-20 (3 lần bấm liên tiếp)"; Dữ kiện (AI chép) thêm dòng tương ứng.
+5. Các mục khác của BUG-15, BUG-17 theo lệnh sửa trước (mục 3–5). Commit kèm ảnh.
+   Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+````
+The `TC-FR07-205_manual_3lan.png` file doesn't exist yet. Per step 1 of the instructions, I'm stopping here.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: BUG-15/17 – cập nhật theo kiểm tay (7/7b) → DỪNG ở mục 1
+- File đã tạo/sửa: không
+- Kết quả kiểm tra: HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png KHÔNG tồn tại; trong evidence chỉ có TC-FR07-201_manual_2lan.png. test: không chạy.
+- Commit: không
+- Bất thường:
+  · Working tree có thay đổi chưa commit ở BUG-15, BUG-16, BUG-17. Đây không phải do AI làm sau d0d0e05, có thể SV đang viết. Em không đụng vào và chưa đọc nội dung.
+  · Lệnh nhắc tới "lệnh sửa trước (mục 3–5)" của BUG-15/17, nhưng phiên này chưa nhận lệnh đó.
+- Cần quyết định:
+  · Q13 – Ảnh kiểm tay 3 lần: SV chép TC-FR07-205_manual_3lan.png vào HW02/B_FR07/evidence/ rồi gửi lại lệnh
+  · Q14 – "Lệnh sửa BUG-15/17 trước (mục 3–5)": (a) dán lại nội dung lệnh đó (b) bỏ qua, chỉ làm mục 2–4 của lệnh này
+  · Q15 – Mục 2–3 sửa phần Actual / Nhận định, đây là chữ SV: (a) SV xác nhận cho AI sửa đúng các câu nêu trong lệnh (b) SV tự sửa, AI chỉ làm Bằng chứng / Môi trường / Dữ kiện
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #141 | 14:19 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa dữ kiện BUG-15, BUG-17 theo evidence. Chạy SAU commit "7/7b: SV viết BUG-15–17"
+(kiểm git log; chưa có → dừng). Commit "HW02[B-FR07] 7/7c: sửa dữ kiện BUG-15, 17
+theo evidence". AI chỉ xoá câu sai + chép dữ kiện; KHÔNG viết câu phân tích thay SV.
+
+BUG-15:
+1. Kiểm HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png tồn tại; chưa có → dừng.
+2. Actual: xoá câu "Sản phẩm chỉ thực sự được thêm vào giỏ nếu người dùng thao tác
+   bấm thêm từ lần thứ 2 trở đi."; thêm dòng dữ kiện: "Kiểm tay (SV, 2026-10-20): ở
+   cùng một trang chi tiết, bấm 'Thêm vào giỏ hàng' 3 lần liên tiếp → trang giỏ chỉ
+   có 1 dòng" (ghi Số lượng đúng như ảnh).
+3. Nhận định: xoá câu "Do lượt bấm đầu bị nuốt, logic thêm hàng chỉ bắt đầu chạy từ
+   lượt bấm thứ 2…"; sửa số liệu sai trong câu còn lại: "6 test case thực hiện bấm
+   thêm 1 lần" → "5 case bấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa
+   hai lần". Để chỗ `<SV viết thêm nếu muốn>` ngay sau.
+4. Dữ kiện (AI chép) thêm: (a) kiểm tay 3 lần → 1 dòng (ảnh); (b) code dòng 29
+   `setClickCount(0)` reset sau mỗi lần thêm; (c) TC-205: lần 2 sau khi rời trang
+   vẫn không thêm. Bằng chứng + Môi trường thêm ảnh và dòng kiểm tay.
+
+BUG-17:
+5. Actual, dòng "Khi bấm 2 lần": đổi theo ảnh TC-FR07-201_manual_2lan.png → 2 dòng
+   'iPhone 15 Pro Max', mỗi dòng Số lượng 1, Thành tiền 30.000.000 ₫; Tổng tạm tính
+   60.000.000 ₫.
+6. Các bước tái hiện: ghi rõ kiểm tay dùng 'iPhone 15 Pro Max' (id 1), tự động hoá
+   20 lần dùng 'Tai nghe AirPods Pro 2' (id 4). Nếu Expected nêu số cụ thể cho
+   trường hợp 2 lần thì đổi sang iPhone 15 Pro Max cho khớp ảnh.
+
+Cuối mục "Dữ kiện (AI chép)" mỗi file: "Sửa dữ kiện 2026-10-20 theo evidence: <liệt
+kê trước → sau>". Dừng, báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+Commit SV có, ảnh có. Xem ảnh và nội dung BUG-15, BUG-17.
+```
+*File AI ghi/gửi trong lượt này:* `fix7c.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 141 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 138 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

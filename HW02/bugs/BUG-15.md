@@ -12,6 +12,7 @@
 - Trình duyệt: Chromium 130.0.6723.31 (Playwright 1.48.2), locale vi-VN
 - Web http://localhost:5173/product/:id → /cart (frontend-web)
 - Ngày chạy: 2026-10-20 (lượt chính thức = lượt 2, bắt đầu 13:14, Asia/Saigon)
+- Kiểm tay: SV, 2026-10-20 (3 lần bấm liên tiếp)
 - Chi tiết: `HW02/env/environment.md`, nhật ký lượt chạy `HW02/B_FR07/RUN.md`
 
 ## Tiền điều kiện
@@ -37,7 +38,7 @@
 
 - Ngay sau khi bấm nút "Thêm vào giỏ hàng" ở bước 3, giao diện hoàn toàn không có bất kỳ phản hồi nào trong 2 giây (không có toast, chữ trên nút không đổi, badge giỏ hàng không cập nhật).
 - Mở trang giỏ hàng `/cart` ở bước 4 thì giỏ hàng vẫn rỗng hoàn toàn, không xuất hiện bảng danh sách sản phẩm nào cả.
-- Sản phẩm chỉ thực sự được thêm vào giỏ nếu người dùng thao tác bấm thêm từ lần thứ 2 trở đi.
+- Kiểm tay (SV, 2026-10-20): ở cùng một trang chi tiết, bấm 'Thêm vào giỏ hàng' 3 lần liên tiếp → trang giỏ chỉ có 1 dòng ('Tai nghe AirPods Pro 2', Số lượng 1, Thành tiền 6.000.000 ₫; Tổng tạm tính 6.000.000 ₫).
 
 ## Bằng chứng
 
@@ -47,7 +48,7 @@
 - TC-FR07-62: `HW02/B_FR07/evidence/TC-FR07-62_feedback.png`, `HW02/B_FR07/evidence/TC-FR07-62_ui.png`
 - TC-FR07-63: `HW02/B_FR07/evidence/TC-FR07-63_feedback.png`, `HW02/B_FR07/evidence/TC-FR07-63_ui.png`
 - TC-FR07-64: `HW02/B_FR07/evidence/TC-FR07-64_feedback.png`, `HW02/B_FR07/evidence/TC-FR07-64_ui.png`
-- TC-FR07-205: `HW02/B_FR07/evidence/TC-FR07-205_feedback.png`, `HW02/B_FR07/evidence/TC-FR07-205_ui-lan1.png`
+- TC-FR07-205: `HW02/B_FR07/evidence/TC-FR07-205_feedback.png`, `HW02/B_FR07/evidence/TC-FR07-205_ui-lan1.png`, `HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png` (kiểm tay 3 lần, SV chụp)
 
 ## TC liên quan
 
@@ -77,6 +78,9 @@
 - TC-FR07-04 (xếp ở nhóm badge) cũng ghi SAU = TRƯỚC sau khi thêm từ trang chi tiết; notes: EC10 chưa đánh giá được, case gốc TC-FR07-61.
 - TC-FR07-205 notes (SV): lần 1 không thêm, khớp giả thuyết gray-box ProductDetail.jsx:21–31.
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
+- Kiểm tay (SV, 2026-10-20, `TC-FR07-205_manual_3lan.png`): cùng một trang chi tiết, bấm 'Thêm vào giỏ hàng' 3 lần liên tiếp → trang giỏ 1 dòng 'Tai nghe AirPods Pro 2', Số lượng 1, Thành tiền 6.000.000 ₫; Tổng tạm tính 6.000.000 ₫.
+- Code `ProductDetail.jsx` dòng 29: `setClickCount(0); // Reset lại` — chạy sau mỗi lần `addToCart` (dòng 27).
+- TC-FR07-205 (Actual nguyên văn, phần lần 2): `lần 2: value="5"; sau lần 2: không có bảng (giỏ trống)` — lần 2 bấm sau khi rời trang chi tiết (về trang chủ, mở lại trang chi tiết) vẫn không thêm.
 - Đoạn code trích nguyên văn: `frontend-web/src/pages/ProductDetail.jsx` dòng 21–31
 
   ```jsx
@@ -93,13 +97,17 @@
     31    };
   ```
 
+- Sửa dữ kiện 2026-10-20 theo evidence: Actual: "Sản phẩm chỉ thực sự được thêm vào giỏ nếu người dùng thao tác bấm thêm từ lần thứ 2 trở đi." → dòng kiểm tay 3 lần → 1 dòng, Số lượng 1 (`TC-FR07-205_manual_3lan.png`); Nhận định: xoá câu "Do lượt bấm đầu bị nuốt, logic thêm hàng chỉ bắt đầu chạy từ lượt bấm thứ 2 khi clickCount đã khác 0."; "6 test case thực hiện bấm thêm 1 lần từ trang chi tiết (TC-02, TC-61, TC-62, TC-63, TC-64, TC-205)" → "5 case bấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa hai lần"; thêm ảnh vào Bằng chứng, dòng kiểm tay vào Môi trường và Dữ kiện.
+
 ### Nhận định
 
 - Nguyên nhân: Đoạn mã xử lý sự kiện click nút thêm vào giỏ trong component frontend-web/src/pages/ProductDetail.jsx (dòng 21–31) bị cài đặt sai logic State quản lý số lần bấm (clickCount).
 
 - Khai thác mã nguồn cho thấy hàm handleAddToCart kiểm tra điều kiện if (clickCount === 0) ở ngay bước đầu tiên. Do state khởi tạo của clickCount là 0, ở lần nhấp chuột đầu tiên hàm này lập tức cập nhật setClickCount(1) rồi thoát (return;) mà hoàn toàn không gọi hàm addToCart(product, parseInt(quantity)) cũng như không gọi setAdded(true) để đổi UI phản hồi.
 
-- Do lượt bấm đầu bị nuốt, logic thêm hàng chỉ bắt đầu chạy từ lượt bấm thứ 2 khi clickCount đã khác 0. Điều này giải thích chính xác lý do tại sao toàn bộ 6 test case thực hiện bấm thêm 1 lần từ trang chi tiết (TC-02, TC-61, TC-62, TC-63, TC-64, TC-205) đều thất bại đồng loạt.
+- Điều này giải thích chính xác lý do tại sao toàn bộ 5 case bấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa hai lần đều thất bại đồng loạt.
+
+`<SV viết thêm nếu muốn>`
 
 ## Link GitHub Issue
 
