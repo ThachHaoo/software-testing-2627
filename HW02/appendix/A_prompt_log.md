@@ -15082,11 +15082,93 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã chốt kết quả lượt 6 (chính thức), commit `4979732`. Harness đã vá: dòng HTML5 giả không còn xuất hiện ở lượt này.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `4979732` HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức). check_domain: 0 lỗi; linter: 0 lỗi.
+  - Merge bằng `--force`: không có status nào do SV tự đặt (status chỉnh ở 6b đều do AI đặt theo lệnh). Lý do ghi ở RUN.md.
+  - Evidence chỉ còn lượt 6: đã xoá 278 file tự động cũ, giữ 6 ảnh manual.
+- **Tổng:** Pass 50 · Fail 66 · Blocked 5 · trống 1.
+
+  | Suite | Pass/Fail/Blocked/trống |
+  |---|---|
+  | DOM-UI | 6/9/1 |
+  | DOM-API-POST | 2/15 |
+  | DOM-API-PUT | 2/16 |
+  | DOM-API-OTHER | 1/6 |
+  | BVA-UI-THEM | 10/2 |
+  | BVA-UI-SUA | 6/2/4 |
+  | BVA-API-POST | 9/3 |
+  | BVA-API-PUT | 9/3 |
+  | GUI | 2/2/0/1 |
+  | SV-UI | 1/4 |
+  | SV-API | 2/4 |
+
+- **Fail:** giữ nguyên như bảng 6b. Thêm TC-200 và TC-202 (bảng dưới). Biến lệch đều là biến mục tiêu của từng case.
+- **Case có verdict khác lượt 3/5:**
+
+  | TC | Lượt 3/5 → lượt 6 | Ghi chú |
+  |---|---|---|
+  | TC-01 | trống → Pass | Không có thông báo nào; dữ liệu và bảng đúng. Hết lỗi H1 |
+  | TC-206 | trống → Pass | SP2 được cập nhật, SP1 không đổi, form hiện đúng SP2. Hết lỗi H2 |
+  | TC-200 | trống → Fail | Không có thông báo nào; sản phẩm tên `<script>alert(1)</script>` vẫn được tạo; không có hộp thoại "1" |
+  | TC-202 | trống → Fail | Lỗi thiết kế TC, không phải lỗi SUT, không lập bug: Expected SV ghi 7000000, nhưng `00700000` = 700000; Actual 700000 |
+
+- **Blocked:** TC-04, 80, 81, 82, 83 — case gốc TC-03. Lượt 6 chỉ lệch ô 'Giá' của dòng M trên bảng sau Sửa; dữ liệu đạt.
+- **Pass hộp đen:** không có.
+- **Chờ SV quyết:**
+  - Không còn case nào chờ phân loại chữ hộp thoại. Hộp thoại duy nhất xuất hiện là "Cập nhật thành công!" ở các case Sửa; những case Sửa bị từ chối đã Fail vì dữ liệu bị ghi đè.
+  - TC-94 vẫn để trống (mục 3).
+- **Mục 3 – ảnh manual hiện có:** `TC-FR15-90_manual.png`, `91_manual_1.png`, `91_manual_2.png`, `92_manual.png`, `93_manual.png`, `94_manual.png`.
+  - Yêu cầu chụp ảnh trích nguyên văn từ RUN.md:
+    - **90:** "Form 'Thêm sản phẩm mới' với 3 trường Tên, Giá, Danh mục (thấy có/không có nhãn và dấu '*')".
+    - **91:** "Ngay sau khi bấm 'Lưu sản phẩm' với Tên để trống: thấy thông báo lỗi và nút 'Lưu sản phẩm' trong cùng ảnh. Thông báo là hộp thoại trình duyệt thì chụp hộp thoại và ghi nội dung (C16)".
+    - **92:** "Ô 'Giá' của dòng 'iPhone 15 Pro Max'. Ghi locale trình duyệt vào notes (C17)".
+    - **93:** "DevTools (Elements) chọn thẻ `<img>` của cột 'Ảnh', thấy thuộc tính `alt`. Mỗi ảnh một tấm, hoặc Console: `[...document.querySelectorAll('table img')].map(i => i.alt)`".
+    - **94:** "Ô 'Tên SP' của dòng `<i>SEC04 {ts}</i>` và DevTools (Elements) của ô đó (có/không có phần tử `<i>`)".
+  - RUN.md yêu cầu DevTools cho cả TC-93 lẫn TC-94, nên báo cáo 6b không nhầm và không cần đính chính.
+  - TC-94 vẫn để trống: ảnh hiện có chỉ thấy chữ `<i>SEC04 {ts}</i>` hiển thị nguyên văn, chưa có ảnh DevTools.
+  - Verdict 90–93 giữ như 6b: 90 Fail, 91 Pass, 92 Fail, 93 Pass. Riêng TC-92: RUN.md yêu cầu ghi locale trình duyệt vào notes, nhưng SV chưa ghi.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 248 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 164 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #249 | 19:05 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1) Đóng bước 6 C_FR15:
+   - Ảnh TC-94: SV đổi tên 94_manual.png → TC-FR15-94_manual_1.png, thêm TC-FR15-94_manual_2.png (DevTools). Sửa mọi tham chiếu
+     tên cũ. Chốt TC-94 theo Expected dựa trên 2 ảnh; ảnh không đủ để kết luận → để trống, báo.
+   - TC-92 notes: "locale trình duyệt: en-US". Verdict giữ Fail.
+   - render_md → check_domain → linter. Commit `HW02[C-FR15] 6/7d: chốt TC-92, TC-94` kèm A_prompt_log.md.
+
+2) Bước 7a C_FR15 — AI CHỈ gom dữ kiện (AI-01 §11), KHÔNG gộp/tách bug, KHÔNG severity/priority, KHÔNG câu chữ nhận định:
+   - Tạo HW02/bugs/_groups_C_FR15.md: mỗi case Fail → TC | Expected | Actual | evidence | yêu cầu/giả định BỊ VI PHẠM
+     (FR/SEC/C… — chỉ cái bị vi phạm; "(ngầm định)" nếu có) | vị trí code liên quan (gray-box, nếu biết).
+     Nhóm G theo TRIỆU CHỨNG QUAN SÁT GIỐNG HỆT (chỉ là nhóm dữ kiện, ghi rõ "SV quyết G nào thành BUG nào").
+     Loại riêng: TC-202 (lỗi thiết kế TC, không lập bug). Blocked 04, 80–83 ghi kèm G của TC-03.
+     Bảng G → BUG → issue để trống cột BUG/issue. Đánh số BUG tiếp theo từ BUG-35, issue ≥ #181.
+   - Kiểm trùng trên tkob-team/eshop-sut: mọi issue (mọi tác giả, cả đã đóng) có triệu chứng giống từng G →
+     liệt kê số issue + tác giả + tiêu đề. `gh api user` phải là ThachHaoo.
+   - Bước tái hiện: viết nháp cho mỗi G và CHẠY THẬT để kiểm (quy ước handoff mục 4: admin admin@eshop.com/Admin123!,
+     PS 5.1: $headers chỉ Authorization, -ContentType riêng, body UTF-8 bytes, 4xx/5xx bọc try/catch; tiền điều kiện có trạng thái
+     → có bước dựng). Ghi lệnh + output đã chạy vào _groups. Restart backend sau khi kiểm.
+   - Commit `HW02[C-FR15] 7/7a: dữ kiện bug` kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): 2 commit; TC-94 verdict; bảng G | số TC | triệu chứng 1 dòng | yêu cầu bị vi phạm | issue có thể trùng;
+bước tái hiện G nào chưa chạy được. KHÔNG đề xuất gộp/tách, severity, câu chữ.
+```
+
+**Output:**
+```
+Ảnh mới SV đặt tên `C-FR15-94_manual_2.png` (thiếu "T"). Em đổi thành `TC-FR15-94_manual_2.png` theo đúng tên SV nêu, rồi xem ảnh.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 249 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 165 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

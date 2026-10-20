@@ -6972,7 +6972,7 @@
           "actual_result": "Manual – 20/10/2026 18:36. Ô 'Giá' dòng 'iPhone 15 Pro Max' hiển thị '30000000 ₫' — có ₫, không có ký tự phân cách hàng nghìn.",
           "evidence": "evidence/TC-FR15-92_manual.png",
           "bug_id": "",
-          "notes": "Ghi locale trình duyệt khi chạy (C17).",
+          "notes": "Ghi locale trình duyệt khi chạy (C17). · locale trình duyệt: en-US",
           "cleanup": [
             "Không cần: không tạo dữ liệu."
           ],
@@ -7047,11 +7047,11 @@
             }
           ],
           "expected_result": "Ô 'Tên SP' hiển thị nguyên văn '<i>SEC04 {ts}</i>' (kể cả '<i>' và '</i>'); trong ô không có phần tử <i> (SEC-04).",
-          "status": "",
-          "actual_result": "Manual – 20/10/2026 18:40. Ô 'Tên SP' dòng mới hiển thị chữ '<i>SEC04 {ts}</i>' (chữ {ts} không được thay). Thiếu ảnh DevTools của ô (RUN.md yêu cầu) để xác nhận không có phần tử <i>.",
-          "evidence": "evidence/TC-FR15-94_manual.png",
+          "status": "Pass",
+          "actual_result": "Manual – 20/10/2026. Ô 'Tên SP' dòng mới hiển thị nguyên văn '<i>SEC04 {ts}</i>' (chữ {ts} không được thay; không ảnh hưởng mục đích case). DevTools (Elements): <td class=\"p-3\"> chứa đoạn chữ '<i>SEC04 {ts}</i>', không có phần tử <i> con.",
+          "evidence": "evidence/TC-FR15-94_manual_1.png, evidence/TC-FR15-94_manual_2.png",
           "bug_id": "",
-          "notes": "6b: status để trống — thiếu ảnh DevTools (RUN.md); chờ SV bổ sung ảnh.",
+          "notes": "6b: status để trống — thiếu ảnh DevTools (RUN.md); chờ SV bổ sung ảnh. · 6d: SV đổi tên ảnh thành TC-FR15-94_manual_1.png và thêm TC-FR15-94_manual_2.png (DevTools; tệp SV gửi tên 'C-FR15-94_manual_2.png', AI đổi lại đúng tên). Chốt Pass theo 2 ảnh.",
           "cleanup": [
             "DELETE /api/products/:id (Bearer TA) bản ghi vừa tạo; thất bại → ghi notes."
           ],
