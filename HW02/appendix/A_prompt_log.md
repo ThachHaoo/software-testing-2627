@@ -8130,8 +8130,13 @@ Nhiệm vụ 2 – Bước 7a: gom dữ kiện (AI-01 §11: KHÔNG viết bug re
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Nhiệm vụ 1 xong (`4ba84b8`). Sang bước 7a: xem khung bug của A_FR01.
+
+Gom dữ kiện bug: lấy số dòng code liên quan và kiểm trùng issue.
+
+Không có issue trùng hẳn; #14 (FR-08) có dùng `/api/cart` với quantity/price sai. Lấy số dòng code còn thiếu rồi sinh file.
 ```
+*File AI ghi/gửi trong lượt này:* `bugs7a.py`
 
 **Xử lý:** [...]
 
