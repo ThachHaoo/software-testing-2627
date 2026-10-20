@@ -1,9 +1,9 @@
 # BUG-33
 
 - **ID:** BUG-33
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Endpoint POST /api/cart bị tràn số khi gửi quantity vượt quá Number.MAX_SAFE_INTEGER, làm sai lệch giá trị số lượng lưu trong giỏ
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend server đang chạy tại http://localhost:3000.
+
+- Đã đăng nhập lấy token xác thực JWT hợp lệ (<T>).
+
+- Giỏ hàng của người dùng hiện đang trống ([]).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập lấy token:
+```powershell
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$token = $loginRes.token
+$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+```
+
+2. Gửi request POST /api/cart với quantity là số nguyên cực lớn 9007199254740993 (vượt 2^53 - 1):
+```powershell
+$body = '{"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 9007199254740993}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body
+```
+
+3. Kiểm tra dữ liệu giỏ hàng bằng GET /api/cart:
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+```
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo giả định B1 (không quy định cận trên cho số lượng): Hệ thống chấp nhận giá trị số lượng lớn hợp lệ do client gửi lên. Khi client gửi request chứa quantity: 9007199254740993, backend phải tiếp nhận và lưu trữ chính xác tuyệt đối con số 9007199254740993 trong giỏ hàng (hoặc nếu giới hạn độ rộng số nguyên thì phải có cơ chế validate chặn từ chối mã 4xx từ đầu).
 
 ## Actual
 
-`<SV viết>`
+- Request POST /api/cart phản hồi HTTP 200 {"message":"Added to cart"}.
+
+- Tuy nhiên, khi gọi GET /api/cart để kiểm tra, giá trị quantity trả về bị làm tròn / sai lệch thành 9007199254740992 (bị giảm mất 1 đơn vị so với 9007199254740993 đã gửi).
 
 ## Bằng chứng
 
@@ -76,7 +98,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong JavaScript (Node.js backend runtime), kiểu dữ liệu Number tuân theo chuẩn IEEE 754 floating-point 64-bit, có giới hạn số nguyên an toàn tối đa là Number.MAX_SAFE_INTEGER (2^53 - 1 = 9007199254740991).
+- Middleware bodyParser.json() (dòng 12) khi parse chuỗi JSON thô {"quantity": 9007199254740993} sang JS object đã tự động ép kiểu con số này về kiểu Number mặc định. Do vượt quá ngưỡng an toàn 2^53-1, giá trị bị mất độ chính xác (precision loss) và bị làm tròn thành 9007199254740992.
+- Đoạn route POST /api/cart (dòng 290–295) hoàn toàn không kiểm tra ngưỡng giới hạn số nguyên hoặc validate ép kiểu BigInt/giới hạn quantity hợp lý trước khi lưu, làm sai lệch dữ liệu số lượng được lưu trữ trong giỏ.
 
 ## Link GitHub Issue
 

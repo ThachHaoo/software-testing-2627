@@ -1,9 +1,9 @@
 # BUG-32
 
 - **ID:** BUG-32
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Endpoint POST /api/cart hoàn toàn thiếu validate payload, chấp nhận dữ liệu sai kiểu, id không tồn tại, quantity âm/thập phân/rỗng và lưu cả null khi gửi text/plain
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,58 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend server đang khởi chạy tại http://localhost:3000.
+
+- Đã thực hiện đăng ký/đăng nhập tài khoản người dùng hợp lệ để lấy JWT Token (<T>).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập lấy token:
+```powershell
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$token = $loginRes.token
+$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+```
+
+2. Tái hiện nhóm G18 (quantity không hợp lệ - âm, thập phân, thiếu, sai kiểu):
+```powershell
+# Gửi quantity = -3
+$body1 = '{"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": -3}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body1
+```
+
+3. Tái hiện nhóm G19 (id không hợp lệ - id 99999 không tồn tại, sai kiểu):
+```powershell
+# Gửi id = 99999
+$body2 = '{"id": 99999, "name": "Không tồn tại", "price": 1000, "quantity": 1}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body2
+```
+
+4. Tái hiện nhóm G21 (Content-Type: text/plain):
+```powershell
+$headersText = @{ "Authorization" = "Bearer $token"; "Content-Type" = "text/plain" }
+$body3 = '{"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 1}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headersText -Body $body3
+```
+
+5.Kiểm tra kết quả giỏ hàng bằng GET /api/cart:
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+```
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo quy định validate dữ liệu hệ thống (FR-06.2) và các giả định B17, B18:
+- Backend API bắt buộc phải kiểm tra (validate) dữ liệu đầu vào trong body request của POST /api/cart.
+- Trường id phải là số nguyên dương tương ứng với sản phẩm thực sự tồn tại trong CSDL server.
+- Trường quantity phải là số nguyên dương >= 1.
+- Bất kỳ request nào chứa id không tồn tại, quantity âm/thập phân/chuỗi/rỗng, hoặc gửi sai Content-Type dẫn đến body không parse được JSON đều phải bị từ chối với mã lỗi HTTP 4xx (ví dụ 400 Bad Request) kèm mô tả lỗi, tuyệt đối không được ghi dữ liệu rác vào giỏ hàng.
 
 ## Actual
 
-`<SV viết>`
+- Với tất cả các trường hợp gửi payload lỗi ở nhóm G18 và G19, backend đều nhắm mắt trả về HTTP 200 {"message":"Added to cart"} và nhét nguyên các phần tử rác (quantity: -3, id: 99999,...) vào mảng giỏ hàng của user.
+
+- Với nhóm G21 (gửi Content-Type: text/plain), backend vẫn trả về HTTP 200 {"message":"Added to cart"}, nhưng do bodyParser.json() không parse text/plain, req.body bị undefined. Kết quả là backend push(undefined) làm cho giỏ hàng xuất hiện một phần tử null ([null]) khi gọi GET /api/cart.
 
 ## Bằng chứng
 
@@ -158,7 +197,18 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong backend/server.js (dòng 290–295), route POST /api/cart hoàn toàn không có bất kỳ dòng code validation nào đối với req.body:
+```jsx
+app.post("/api/cart", authenticateToken, (req, res) => {
+  const userId = req.user.id;
+  if (!userCarts[userId]) userCarts[userId] = [];
+  userCarts[userId].push(req.body);
+  res.json({ message: "Added to cart" });
+});
+```
+Lệnh userCarts[userId].push(req.body) đẩy trực tiếp mọi dữ liệu client gửi lên vào giỏ hàng RAM mà không hề kiểm tra tính hợp lệ của id hay quantity.
+
+- Với trường hợp Content-Type: text/plain (TC-214), middleware bodyParser.json() (dòng 12) bỏ qua không parse body, làm cho req.body nhận giá trị undefined. Hàm push(undefined) dẫn đến việc mảng giỏ hàng chứa phần tử null, gây ra phản hồi [null] bất hợp lý khi client gọi GET /api/cart.
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-34
 
 - **ID:** BUG-34
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Endpoint POST /api/cart khi nhận JSON không hợp lệ (Infinity) trả về trang lỗi HTML 400 kèm stack trace văng ra ngoài thay vì JSON chuẩn chứa trường
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,37 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend server Express.js đang chạy tại http://localhost:3000.
+
+- Đã thực hiện đăng ký/đăng nhập để lấy token xác thực JWT hợp lệ (<T>).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập lấy token:
+```powershell
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$token = $loginRes.token
+$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+```
+
+2. Gửi request POST /api/cart chứa giá trị quantity: Infinity trong chuỗi body JSON thô (JSON không hợp lệ vì chuẩn JSON không hỗ trợ Infinity):
+```powershell
+# Gửi chuỗi thô không chuẩn JSON
+$bodyRaw = '{"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": Infinity}'
+$response = Invoke-WebRequest -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $bodyRaw
+```
+
+3. Quan sát Content-Type và body trả về từ phản hồi của server.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo quy định thiết kế REST API (kèm giả định B17): Khi client gửi request có body JSON bị lỗi cú pháp (SyntaxError), backend Express phải bắt lỗi (catch error) và phản hồi bằng cấu trúc JSON nhất quán chứa trường error (ví dụ: {"error": "Invalid JSON format"}) kèm mã HTTP status 400 Bad Request. Server tuyệt đối không được trả về trang HTML mặc định hay để lộ thông tin vết mã nguồn (stack trace).
 
 ## Actual
 
-`<SV viết>`
+- Backend trả về mã lỗi HTTP 400 Bad Request (đúng status code) và giỏ hàng không bị thay đổi.
+
+- Tuy nhiên, định dạng phản hồi hoàn toàn không phải JSON mà văng ra nguyên một trang HTML mẫu mặc định của Express (<!DOCTYPE html>...<pre>SyntaxError: Unexpected token 'I'...</pre>), làm lộ chi tiết vết mã nguồn JSON.parse và thông tin nội bộ của server.
 
 ## Bằng chứng
 
@@ -66,7 +84,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong backend/server.js (dòng 12), ứng dụng sử dụng middleware app.use(bodyParser.json()) để parse dữ liệu JSON từ body request.
+
+- Khi client gửi một chuỗi JSON không đúng định dạng chuẩn (ví dụ có chứa từ khóa Infinity), bodyParser.json() gặp lỗi trong quá trình JSON.parse và lập tức ném ra ngoại lệ SyntaxError.
+
+- Do ứng dụng Express hoàn toàn không cài đặt custom Error Handling Middleware (hàm dạng app.use((err, req, res, next) => ...)), ngoại lệ này rơi vào bộ xử lý lỗi mặc định (Default Error Handler) của Express. Bộ xử lý mặc định này tự động sinh ra trang thông báo lỗi HTML kèm stack trace chi tiết thay vì trả về một đối tượng JSON chuẩn chứa cấu trúc {"error": ...} theo định dạng giao tiếp API chuẩn hóa ở B17.
 
 ## Link GitHub Issue
 
