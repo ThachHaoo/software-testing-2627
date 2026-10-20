@@ -18,6 +18,8 @@
 
 - Backend đã khởi động (`node server.js`).
 
+- File frontend-mobile/App.js dòng 16 đã được đặt API_URL trỏ tới IP LAN của máy chạy backend (ví dụ lượt 1 đặt [http://192.168.2.12:3000/api](http://192.168.2.12:3000/api) theo patch HW02/env/mobile_api_url.patch).
+
 - App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
@@ -52,7 +54,7 @@ Bàn phím ảo bật lên chỉ là bàn phím văn bản thông thường (tex
 
 ## Yêu cầu
 
-- **FR-22.2:** Trường Email phải dùng type="email".
+- **FR-22.2:** Trường Email phải dùng `type="email"` (trên mobile theo D13: bàn phím email `keyboardType="email-address"`).
 - Đạt trong cùng case: —
 - Chưa đánh giá được: —
 

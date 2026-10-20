@@ -18,6 +18,8 @@
 
 - Backend đã khởi động (`node server.js`).
 
+- File frontend-mobile/App.js dòng 16 đã được đặt API_URL trỏ tới IP LAN của máy chạy backend (ví dụ lượt 1 đặt [http://192.168.2.12:3000/api](http://192.168.2.12:3000/api) theo patch HW02/env/mobile_api_url.patch).
+
 - App mobile được chạy bằng lệnh `npx expo start`, mở qua ứng dụng Expo Go trên điện thoại Android, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
@@ -84,7 +86,9 @@ Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là
 
 ### Nhận định
 
-Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Khi khai báo thẻ <Text style={styles.label}>, lập trình viên giao diện chỉ gõ chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu chứ không thêm ký tự * (hoặc <Text style="{styles.required}">*</Text>) ở phía sau nhãn để đáp ứng yêu cầu FR-22.1.
+- Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Code thực tế hiện tại chỉ khai báo thẻ <Text style="{styles.label}"> bọc các chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu mà hoàn toàn bỏ quên ký hiệu * ở phía sau nhãn.
+
+- Để khắc phục đúng yêu cầu FR-22.1, đề xuất cập nhật thêm thẻ hiển thị dấu sao ngay sau tên nhãn (ví dụ: <Text style="{styles.label}">Họ Tên <Text style="{styles.required}">*</Text></Text>), đồng thời khai báo thêm styles.required trong StyleSheet (chẳng hạn quy định màu đỏ { color: 'red' }) vì đối tượng styles hiện tại chưa có thuộc tính này.
 
 ## Link GitHub Issue
 
