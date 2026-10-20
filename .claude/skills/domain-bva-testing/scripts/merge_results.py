@@ -11,6 +11,8 @@ Usage: python merge_results.py testcases.json results.json [--dry-run]
 - Verdict thủ công được giữ: case đã có auto_status mà status khác auto_status (SV chỉnh theo A20) → chỉ cập nhật
   auto_status, actual_result, evidence; status giữ nguyên trừ khi chạy với --force. "notes" không bao giờ bị đụng.
 - Mỗi lượt chạy nên ghi results riêng có timestamp (vd results/B_FR07_20261020-131400.json) để không ghi đè lượt trước.
+- Chạy tay (projectName kết thúc bằng "-manual", vd file kết quả trống của D_FR20): verdict SV điền chỉ ghi vào "status",
+  không ghi "auto_status" (D14); ảnh tên "<mã TC>_manual_<n>" giữ nguyên tên → evidence/<mã TC>_manual_<n>.png.
 - Không đụng tới expected_result.
 """
 import argparse
@@ -47,7 +49,8 @@ def evidence_name(cid, att_name, src, used):
         suf = "_failed"
     else:
         key = att_name[len(cid):] if att_name.startswith(cid + "_") else att_name
-        suf = NAME_SUFFIX.get(key) or "_" + slug(key)
+        # ảnh chạy tay giữ đúng quy ước TC-xx_manual_<n> (slug sẽ đổi "_" thành "-")
+        suf = key if re.fullmatch(r"_manual_\d+", key) else NAME_SUFFIX.get(key) or "_" + slug(key)
     name, n = f"{cid}{suf}{ext}", 2
     while name in used:
         name, n = f"{cid}{suf}-{n}{ext}", n + 1
@@ -131,6 +134,25 @@ def main():
             if not r:
                 continue
             hit += 1
+            if r["project"].endswith("-manual"):
+                # chạy tay (D14): không có kết quả tự động → status = verdict SV điền, bỏ auto_status
+                c = {kk: vv for kk, vv in c.items() if kk != "auto_status"}
+                c["status"] = r["status"]
+                s["cases"][k] = c
+                c["actual_result"] = r["actual"]
+                ev, used = [], set()
+                for att_name, p in r["evidence"]:
+                    src = Path(p)
+                    if not src.exists():
+                        continue
+                    dst = evdir / evidence_name(c["id"], att_name, src, used)
+                    if not a.dry_run and src.resolve() != dst.resolve():
+                        evdir.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(src, dst)
+                    ev.append(str(dst.resolve().relative_to(base.resolve())).replace("\\", "/"))
+                c["evidence"] = ", ".join(ev)
+                print(f"{c['id']}: {c['status']} (chạy tay)  {c['actual_result'][:80]}")
+                continue
             # auto_status = kết quả tự động gốc (Playwright, hoặc annotation verdict của script); status có thể được SV chỉnh sau
             old_status, old_auto = c.get("status"), c.get("auto_status")
             manual = old_auto is not None and old_status not in (None, "", "Not run") and old_status != old_auto

@@ -137,6 +137,7 @@ Skill dùng trong repo:
   - README: nguồn TC có 3 cột AI / Both (AI + SV sửa) / SV.
   - Push: SV tự push (hợp lệ); AI không push.
   - Sắp compact → chép transcript phiên vào `.transcripts\` (tên mới) + `on_stop.py --manual` + commit prompt log trước khi `/compact`.
+- 2026-10-21 (D_FR20): Không chạy merge_results.py cho A/B/C nếu không có --dry-run: test-results/ đã mất → evidence bị xoá.
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 
