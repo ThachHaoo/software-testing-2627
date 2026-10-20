@@ -6,7 +6,7 @@
     "feature": "FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products)",
     "feature_code": "C_FR15",
     "doc_id": "TCD-C_FR15",
-    "version": "0.5",
+    "version": "0.6",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -6946,6 +6946,849 @@
           ],
           "assumptions": [
             "C12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TS-SV-UI",
+      "name": "SV bổ sung — tầng UI",
+      "format": "matrix",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+        "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+        "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+        "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).",
+        "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định."
+      ],
+      "procedure": [
+        {
+          "action": "Nếu cột 'Thao tác CRUD' là Sửa hoặc Xóa: dựng sản phẩm mục tiêu M — POST /api/products (Bearer TA, Content-Type: application/json) body {name: 'Muc tieu NN {ts}', price: 1000000, description: 'Mô tả mục tiêu {ts}', imageUrl: 'https://placehold.co/300', category_id: 1}; GET /api/products, lấy id của bản ghi có name = 'Muc tieu NN {ts}' → M. Thao tác khác: bỏ qua bước này.",
+          "expected": "Có đúng 1 bản ghi name = 'Muc tieu NN {ts}'. Không dựng được → dừng, Blocked, ghi case gốc vào notes (C14)."
+        },
+        {
+          "action": "GET /api/products → lưu TRƯỚC (số bản ghi và toàn bộ bản ghi). Nếu có M: GET /api/products/M → lưu M_TRƯỚC.",
+          "expected": "HTTP 2xx; mảng JSON."
+        },
+        {
+          "action": "Mở http://localhost:5174 trong browser context mới (localStorage không có adminToken, tắt autofill). Ô 'Email' gõ admin@eshop.com, ô 'Password' gõ Admin123!, bấm 'Login' đúng một lần.",
+          "expected": "Giao diện quản trị hiển thị (thanh bên có mục 'Sản phẩm')."
+        },
+        {
+          "action": "Bấm mục 'Sản phẩm' trên thanh bên. Ghi TRƯỚC_UI: danh sách dòng của bảng sản phẩm (Tên SP, Giá dạng giá trị số — bỏ ký hiệu tiền và dấu phân cách).",
+          "expected": "Bảng sản phẩm hiển thị; số dòng = số bản ghi TRƯỚC. Không khớp → ghi notes."
+        },
+        {
+          "action": "Thực hiện cột 'Thao tác CRUD' đúng một lần. Định vị ô theo placeholder: 'Tên sản phẩm', 'Giá tiền', 'URL Ảnh', 'Mô tả'; danh mục = ô chọn duy nhất của form, chọn option theo tên trong cột. Thêm: form ở trạng thái thêm mới; với mỗi ô: xoá trắng rồi gõ đúng chuỗi trong cột — '' = không gõ gì, để nguyên ô trống; khoảng trắng gõ đúng số dấu cách ghi trong cột (bảng hiển thị ␣); 'x' × n = gõ/dán n ký tự 'x'. Sửa: bấm 'Sửa' trên dòng có Tên SP = 'Muc tieu NN {ts}'; ô ghi '(giữ)' không chạm; ô có giá trị: xoá trắng rồi gõ như trên. Thêm/Sửa: bấm nút 'Lưu sản phẩm' đúng một lần. Xóa: bấm 'Xóa' trên dòng 'Muc tieu NN {ts}' đúng một lần; nếu có hộp xác nhận, chọn xác nhận và ghi vào Actual (C13). Xem: không thao tác thêm.",
+          "expected": "Hệ thống phản hồi (thông báo, hộp thoại, bảng đổi hoặc không đổi gì)."
+        },
+        {
+          "action": "Quan sát ngay sau thao tác: bong bóng kiểm tra HTML5 gắn với ô, thông báo trên trang, hộp thoại trình duyệt. Ghi nguyên văn nội dung vào Actual; đóng hộp thoại bằng nút OK.",
+          "expected": "Khớp phần thông báo trong cột Expected (C7, C16)."
+        },
+        {
+          "action": "Ghi SAU_UI như bước 4 (không tải lại trang). GET /api/products → SAU; nếu có M: GET /api/products/M → M_SAU. So với TRƯỚC.",
+          "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, C0)."
+        }
+      ],
+      "columns": [
+        "Thao tác CRUD",
+        "Tên sản phẩm",
+        "Giá",
+        "Danh mục",
+        "Mô tả",
+        "URL Ảnh"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: GET /api/products, xoá bằng DELETE /api/products/:id (Bearer TA) mọi id có trong SAU mà không có trong TRƯỚC, và sản phẩm mục tiêu M nếu còn. Xoá thất bại → ghi notes, không đổi verdict. Lớp 2: khởi động lại backend trước lượt chạy kế tiếp (C0)."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR15-200",
+          "title": "Kiểm tra chèn XSS `<script>alert(1)</script>` vào ô 'Tên sản phẩm' ở form Thêm",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "<script>alert(1)</script>",
+            "Giá": "1500000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả SV200 {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Thêm thành công (hoặc báo lỗi/escape); Bảng hiển thị dạng chuỗi văn bản, tuyệt đối không kích hoạt alert XSS (SEC-04).",
+          "requirements": [
+            "SEC-04"
+          ],
+          "assumptions": [
+            "C12"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC5"
+          ],
+          "technique": "Security (XSS)",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Security: Thử chèn Script Injection vào ô Tên sản phẩm để xem React/Browser render an toàn hay dính Stored XSS khi load ra bảng.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-201",
+          "title": "Kiểm tra nhập giá tiền dạng E-notation `1e5` vào ô 'Giá tiền'",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "Sản phẩm E-Notation {ts}",
+            "Giá": "1e5",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả SV201 {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Thêm thành công; Giá hiển thị 100.000 ₫ (hoặc form chặn do type=number); CSDL lưu đúng 100000.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "assumptions": [
+            "C1"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC17"
+          ],
+          "technique": "Type / JS Math",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Thẻ HTML5 `<input type=\"number\">` cho phép gõ ký tự `e`/`E`, dễ làm văng lỗi `parseInt`/`NaN` ở Frontend React State.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-202",
+          "title": "Kiểm tra nhập Giá tiền có các số 0 đứng đầu `00700000`",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "Sản phẩm Leading Zero {ts}",
+            "Giá": "00700000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả SV202 {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Thêm thành công; Bảng hiển thị 7.000.000 ₫; CSDL lưu đúng giá trị số `7000000`.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "assumptions": [
+            "C1"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC17"
+          ],
+          "technique": "Boundary / EG",
+          "bva_point": "",
+          "approach": "black-box",
+          "rationale": "Chuỗi có số 0 đứng đầu là giá trị nguyên hợp lệ nhưng dễ bị frontend/backend hiểu sai hệ cơ số (Octal) hoặc lưu dạng string.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-203",
+          "title": "Kiểm tra bấm liên tục 10 lần nút 'Lưu sản phẩm' khi form Thêm hợp lệ",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "SP Spam Click UI {ts}",
+            "Giá": "1500000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả SV203 {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Nút bị disable trong lúc chờ API; Chỉ tạo đúng 1 sản phẩm duy nhất trong CSDL, không tạo ra 10 sản phẩm trùng lặp.",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "assumptions": [
+            "C13"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC1"
+          ],
+          "technique": "Concurrency (Spam Click)",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Race Condition: Người dùng cố tình spam click nút 'Lưu sản phẩm' do mạng chậm hoặc hành vi phá hoại UI.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        },
+        {
+          "id": "TC-FR15-204",
+          "title": "Kiểm tra mở 2 tab Admin cùng lúc: Tab 1 Xoá sản phẩm M, Tab 2 bấm 'Sửa' sản phẩm M",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "(giữ)",
+            "Giá": "999000",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Tab 2 báo lỗi không tìm thấy sản phẩm hoặc thông báo lỗi từ API (4xx); UI không bị văng màn hình trắng (WSOD).",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "assumptions": [
+            "C10",
+            "C19"
+          ],
+          "covers": [
+            "EC3",
+            "EC4",
+            "EC41"
+          ],
+          "ec_target": [
+            "EC41"
+          ],
+          "technique": "Concurrency / State Desync",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Multi-tab Concurrency: Dữ liệu bị xoá ở Tab 1 khiến State ở Tab 2 bị lỗi thời (Stale Data/Desync).",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        },
+        {
+          "id": "TC-FR15-205",
+          "title": "Kiểm tra dán chuỗi Unicode Full-width `１５０００００` vào ô Giá tiền",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "SP FullWidth Price {ts}",
+            "Giá": "１５０００００",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả SV205 {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Form chặn không cho nhập/dán, hoặc báo lỗi Giá tiền bắt buộc/không hợp lệ; không lưu rác vào CSDL.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "assumptions": [
+            "C7"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC20",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC20"
+          ],
+          "technique": "Unicode / Type Confusion",
+          "bva_point": "",
+          "approach": "black-box",
+          "rationale": "Ký tự số Full-width U+FF11 (gõ nhầm từ bộ gõ tiếng Nhật/Trung) nhìn như số nhưng là chuỗi ký tự Unicode khác.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-206",
+          "title": "Kiểm tra bấm nút 'Sửa' SP1, chỉnh sửa thông tin rồi bấm 'Sửa' SP2 mà không bấm 'Hủy sửa'",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "SP2 Đã Đổi {ts}",
+            "Giá": "2000000",
+            "Danh mục": "Laptop",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Form cập nhật đúng dữ liệu của SP2; Khi bấm 'Lưu sản phẩm', chỉ có SP2 bị thay đổi, SP1 hoàn toàn giữ nguyên (FR-15.5).",
+          "requirements": [
+            "FR-15.5"
+          ],
+          "assumptions": [
+            "C13"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24"
+          ],
+          "ec_target": [
+            "EC3",
+            "EC11"
+          ],
+          "technique": "State Transition / ST",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Kiểm tra logic React state chuyển đổi giữa các sản phẩm khi sửa liên tục mà không reload/cancel state.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        }
+      ],
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-UI. Ngoại lệ quy trình ghi trong notes của case."
+    },
+    {
+      "id": "TS-SV-API",
+      "name": "SV bổ sung — tầng API /api/products",
+      "format": "matrix",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+        "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+        "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+        "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0)."
+      ],
+      "procedure": [
+        {
+          "action": "Nếu cột 'Thao tác CRUD' là Sửa hoặc Xóa: dựng sản phẩm mục tiêu M — POST /api/products (Bearer TA, Content-Type: application/json) body {name: 'Muc tieu NN {ts}', price: 1000000, description: 'Mô tả mục tiêu {ts}', imageUrl: 'https://placehold.co/300', category_id: 1}; GET /api/products, lấy id của bản ghi có name = 'Muc tieu NN {ts}' → M. Thao tác khác: bỏ qua bước này.",
+          "expected": "Có đúng 1 bản ghi name = 'Muc tieu NN {ts}'. Không dựng được → dừng, Blocked, ghi case gốc vào notes (C14)."
+        },
+        {
+          "action": "GET /api/products → lưu TRƯỚC (số bản ghi và toàn bộ bản ghi). Nếu có M: GET /api/products/M → lưu M_TRƯỚC.",
+          "expected": "HTTP 2xx; mảng JSON."
+        },
+        {
+          "action": "Nếu cột token là 'U': POST /api/login với test@eshop.com / Test1234! (README.md dòng 23) → token U.",
+          "expected": "HTTP 2xx; phản hồi có token."
+        },
+        {
+          "action": "Gửi đúng một request, Content-Type: application/json. Method theo cột 'Thao tác CRUD'; đường dẫn /api/products (POST) hoặc /api/products/<id> với <id> theo cột mục tiêu: 'M' = id dựng ở bước 1; số = id đó. Header theo cột token: 'TA' = Bearer TA; 'U' = Bearer U; 'thiếu' = không gửi header Authorization; 'sai' = 'Bearer abc.def.ghi'; '—' = không gửi. Body (POST/PUT) gồm 5 khoá name, price, category_id, description, imageUrl lấy từ các cột Tên sản phẩm, Giá, Danh mục, Mô tả, URL Ảnh: \"…\" = chuỗi JSON; số không ngoặc = số JSON; null = null JSON; '— thiếu —' = bỏ khoá khỏi body; \"x\" × n = chuỗi n ký tự 'x'. DELETE/GET: không gửi body.",
+          "expected": "Nhận được phản hồi HTTP."
+        },
+        {
+          "action": "Ghi HTTP status và body phản hồi.",
+          "expected": "Khớp phần phản hồi trong cột Expected."
+        },
+        {
+          "action": "GET /api/products → SAU; nếu có M: GET /api/products/M → M_SAU. So với TRƯỚC.",
+          "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, C0)."
+        }
+      ],
+      "columns": [
+        "Thao tác CRUD",
+        "Danh tính người gọi / token",
+        "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)",
+        "Tên sản phẩm",
+        "Giá",
+        "Danh mục",
+        "Mô tả",
+        "URL Ảnh"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: GET /api/products, xoá bằng DELETE /api/products/:id (Bearer TA) mọi id có trong SAU mà không có trong TRƯỚC, và sản phẩm mục tiêu M nếu còn. Xoá thất bại → ghi notes, không đổi verdict. Lớp 2: khởi động lại backend trước lượt chạy kế tiếp (C0)."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR15-207",
+          "title": "Kiểm tra chèn SQL Injection `Robert'); DROP TABLE products;--` vào `name`",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"Robert'); DROP TABLE products;--\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx (nếu chấp nhận name chuỗi) hoặc 4xx; Tên lưu nguyên văn; Bảng `products` vẫn an toàn nguyên vẹn.",
+          "requirements": [
+            "SEC-04",
+            "FR-15.2"
+          ],
+          "assumptions": [
+            "C13"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC5",
+            "EC68"
+          ],
+          "technique": "Security (SQLi)",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Xác nhận backend Express/SQLite dùng truy vấn tham số hóa (Parameterized Query/ORM), không bị nối chuỗi SQL.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-208",
+          "title": "Kiểm tra POST /api/products gửi `price` dưới dạng số âm cực đại `-999999999999`",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Giá Âm Cực Đại {ts}\"",
+            "Giá": "-999999999999",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx kèm trường error; CSDL không tạo sản phẩm mới.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "assumptions": [
+            "C6"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC19",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC19",
+            "EC69"
+          ],
+          "technique": "Boundary / Logic",
+          "bva_point": "",
+          "approach": "black-box",
+          "rationale": "Đánh giá tính đóng cọc của validation backend với số âm cực đại làm tràn logic tính toán tiền.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-209",
+          "title": "Kiểm tra POST /api/products khi gửi `price` = `Infinity`",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Giá Infinity {ts}\"",
+            "Giá": "Infinity (gửi thô)",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx kèm trường error (không trả về HTML 500 lộ stack trace); CSDL không đổi.",
+          "requirements": [],
+          "assumptions": [
+            "C6",
+            "C20"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC69",
+            "C20"
+          ],
+          "technique": "Math / Type Confusion",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "JS Math: `Infinity` không thuộc chuẩn JSON. Nếu không try-catch khi `JSON.parse`, Express sẽ văng trang lỗi HTML 400/500.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        },
+        {
+          "id": "TC-FR15-210",
+          "title": "Kiểm tra POST /api/products gửi `category_id` dạng mảng `[1, 2]`",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Category Mảng {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "[1, 2]",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx kèm trường error; CSDL không đổi.",
+          "requirements": [],
+          "assumptions": [
+            "C9",
+            "C6"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17"
+          ],
+          "ec_target": [
+            "EC34",
+            "EC69"
+          ],
+          "technique": "Type Confusion",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Express `body-parser` tự parse mảng. Nếu backend query CSDL kiểu `WHERE category_id = req.body.category_id` dễ gây hỏng câu lệnh SQL.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-211",
+          "title": "Kiểm tra POST /api/products gửi Header `Content-Type: text/plain` chứa JSON thô",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Mismatch Header {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (400 hoặc 415) hoặc HTTP 500 có bắt lỗi; CSDL không tạo sản phẩm.",
+          "requirements": [],
+          "assumptions": [
+            "C6",
+            "C9"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC69"
+          ],
+          "technique": "Middleware Mismatch",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "`express.json()` mặc định chỉ parse khi Header là `application/json`. Thử nghiệm xem backend xử lý ra sao khi mismatch Content-Type.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        },
+        {
+          "id": "TC-FR15-212",
+          "title": "Kiểm tra bắn 30 request POST /api/products song song đồng thời",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Concurrent {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "Cả 30 request được xử lý thành công (HTTP 2xx); CSDL tạo đúng 30 sản phẩm với ID tăng dần, không bị khóa (Locking Error).",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "assumptions": [
+            "C0"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC68"
+          ],
+          "technique": "Concurrency / Race Condition",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Đánh giá khả năng xử lý bất đồng bộ của Node.js + SQLite/PostgreSQL khi nhiều request ghi gửi đến cùng lúc.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        },
+        {
+          "id": "TC-FR15-213",
+          "title": "Kiểm tra PUT /api/products/:id truyền thêm trường độc quyền `\"id\": 1` và `\"role\": \"admin\"` vào Body",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"SP Mass Assignment {ts}\"",
+            "Giá": "2000000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx; CSDL cập nhật name/price/category_id; Trường `id` của sản phẩm M tuyệt đối không bị đè đổi thành `1`.",
+          "requirements": [
+            "FR-15.5"
+          ],
+          "assumptions": [
+            "C13"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35"
+          ],
+          "ec_target": [
+            "EC57"
+          ],
+          "technique": "Mass Assignment",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Security Mass Assignment: Kiểm tra xem backend có xả nguyên `req.body` vào câu lệnh `UPDATE` hay lọc tham số an toàn.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+        },
+        {
+          "id": "TC-FR15-214",
+          "title": "Kiểm tra POST /api/products gửi `price` dưới dạng số thập phân cực nhỏ `1e-324`",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Underflow Price {ts}\"",
+            "Giá": "1e-324",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx kèm trường error (do JS parse `1e-324` ngầm thành `0`, vi phạm giá > 0); CSDL không đổi.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "assumptions": [
+            "C1",
+            "C6"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC19",
+            "EC69"
+          ],
+          "technique": "Underflow / JS Math",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Underflow Floating Point: Số quá nhỏ gây ra hiện tượng `0` ngầm trong phép toán Node.js/V8 Engine.",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-215",
+          "title": "Kiểm tra POST /api/products gửi `price` vượt giới hạn `Number.MAX_SAFE_INTEGER` (`9007199254740993`)",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP Large Number {ts}\"",
+            "Giá": "9007199254740993",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx hoặc 4xx; Nếu lưu thành công thì giá trị lưu trong CSDL không bị làm tròn sai lệch số (Precision Loss).",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "assumptions": [
+            "C2"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC31"
+          ],
+          "ec_target": [
+            "EC17",
+            "EC68"
+          ],
+          "technique": "Overflow / JS Number",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Vượt ngưỡng tính toán số nguyên an toàn của JavaScript Number ($2^{53} - 1$).",
+          "origin": "Human",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        }
+      ],
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-API-POST. Ngoại lệ quy trình ghi trong notes của case."
+    },
+    {
+      "id": "TS-SV-GUI",
+      "name": "SV bổ sung — GUI",
+      "format": "steps",
+      "description": "Case GUI SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV. Tiền điều kiện lấy từ TS-GUI.",
+      "cases": [
+        {
+          "id": "TC-FR15-216",
+          "title": "Kiểm tra thuộc tính `alt` của ảnh sản phẩm mới thêm khi tên chứa ký tự đặc biệt",
+          "layer": "UI",
+          "requirements": [
+            "FR-24.4",
+            "SEC-04"
+          ],
+          "technique": "GUI / Accessibility",
+          "type": "GUI",
+          "approach": "black-box",
+          "origin": "Human",
+          "rationale": "Dữ liệu tên có ký tự đặc biệt (`&`, `\"`, `<`) dễ làm hỏng cú pháp thẻ `<img>` nếu không escape thuộc tính `alt`.",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Thêm SP mới tên `Laptop Gaming & \"Pro\" <2026>`.",
+              "expected": "(SV chưa ghi)"
+            },
+            {
+              "action": "Soi thẻ `<img>` ở cột 'Ảnh' trong bảng sản phẩm.",
+              "expected": "(SV chưa ghi)"
+            }
+          ],
+          "expected_result": "Thuộc tính `alt` chứa đầy đủ chuỗi tên sản phẩm và được HTML escape đúng cách (ví dụ `alt=\"Laptop Gaming &amp; &quot;Pro&quot;...\"`), không bị gãy vỡ thẻ HTML.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "(SV chưa ghi)"
+          ]
+        },
+        {
+          "id": "TC-FR15-217",
+          "title": "Kiểm tra cắt tỉa khoảng trắng đầu/cuối (Trim) ở ô 'Tên sản phẩm' ở UI",
+          "layer": "UI",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "assumptions": [
+            "C4"
+          ],
+          "technique": "GUI / Form Clean",
+          "type": "GUI",
+          "approach": "gray-box",
+          "origin": "Human",
+          "rationale": "Tránh lưu trữ các dữ liệu có khoảng trắng vô nghĩa ở đầu/cuối gây xấu giao diện UI và khó tìm kiếm.",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Nhập ô Tên SP: `␣␣Tai nghe Bluetooth␣␣`.",
+              "expected": "(SV chưa ghi)"
+            },
+            {
+              "action": "Bấm 'Lưu sản phẩm'.",
+              "expected": "(SV chưa ghi)"
+            },
+            {
+              "action": "Kiểm tra tên hiển thị trên bảng UI và trong CSDL.",
+              "expected": "(SV chưa ghi)"
+            }
+          ],
+          "expected_result": "Tên được tự động trim cắt bỏ khoảng trắng thừa ở 2 đầu, hiển thị và lưu thành `Tai nghe Bluetooth`.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "(SV chưa ghi)"
           ]
         }
       ]

@@ -13408,6 +13408,38 @@ Phần 1: tách suite API.
 Phần 2: SV chốt C16–C18.
 
 Phần 3: BVA. Viết script sinh 48 case (4 suite × 12).
+
+Đã xong cả ba phần (tách suite API, chốt C16–C18, TC BVA). Có thêm một commit ngoài khối lệnh: em sửa `check_domain.py` vì nó báo lỗi sai ở 4 case LARGE (`ba71912`). Cần SV duyệt; nếu không đồng ý thì revert được.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `65c4bf2` 3/7b: tách suite API — linter: 0 lỗi, 0 cảnh báo (hết cảnh báo > 25 dòng).
+  - `af3946f` 3/7c: SV chốt C16–C18. Kèm theo: Expected của 10 case UI bị từ chối và lớp EC72 đổi sang "bong bóng/thông báo trên trang/hộp thoại đều tính".
+  - `ba71912` HW02: check_domain – điểm LARGE xét biến trong ec_target.
+    - Lỗi: script xét mọi lớp khoảng trong `covers`, kể cả lớp Tên danh nghĩa (có cận trên 255) → 4 case LARGE bị báo lỗi sai.
+    - Sửa: case có `ec_target` thì chỉ xét biến trong `ec_target` (1 dòng). Chạy lại A_FR01/B_FR07: 0 lỗi.
+    - Phải khai trong Audit (sửa harness).
+  - `1593b82` 4/7: TC BVA — check_domain: 0 lỗi, 4 cảnh báo (V1, V5, V6, V9 không có lớp không hợp lệ, như các bước trước); linter: 0 lỗi, 0 cảnh báo; tổng 111 case, phủ 73/73 lớp. Freeze: `C_FR15_step4_20261020-165850.{json,md}`.
+- **Số case BVA theo suite** (48 case, dùng mã 60–89 và 100–117):
+
+  | Suite | Số case | Mã |
+  |---|---|---|
+  | TS-BVA-UI-THEM | 12 | 60–71 |
+  | TS-BVA-UI-SUA | 12 | 72–83 |
+  | TS-BVA-API-POST | 12 | 84–89, 100–105 |
+  | TS-BVA-API-PUT | 12 | 106–117 |
+
+- **Điểm BVA** (mỗi suite chạy đủ điểm của cả hai biến; biến khác giữ danh nghĩa):
+
+  | Biến | LB−1 | LB | LB+1 | NOM | UB−1 | UB | UB+1 / LARGE |
+  |---|---|---|---|---|---|---|---|
+  | V2 Tên (độ dài) | '' (0) ✗ | 'A' (1) | 'AB' (2) | 'Bàn phím cơ BVA NN {ts}' | 'x'×254 | 'x'×255 | 'x'×256 ✗ |
+  | V3 Giá (bước 0.1) | 0 ✗ | 0.1 | 0.2 | 1500000 | – | – | LARGE = 10^12 (C2) |
+
+  - ✗ = điểm không hợp lệ.
+  - Không dùng MIN_UI/MAX_UI: ô Tên không giới hạn độ dài, ô trống trùng LB−1; ô Giá không có min/max. Lý do ghi trong mô tả suite.
+- **Giả định mới chặn bước 5:** không có.
+- Bước 5 là của SV (TS-SV từ mã 200). Em dừng ở đây, không gợi ý thêm case.
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step4.py`
 
@@ -13415,4 +13447,71 @@ Phần 3: BVA. Viết script sinh 48 case (4 suite × 12).
 
 ---
 
-**Tổng:** 218 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 155 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #219 | 17:07 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Tạo KHUNG TRỐNG HW02/C_FR15/sv_cases.md cho SV tự điền (bước 5 🔒). KHÔNG commit.
+- Nếu HW02/B_FR07/sv_cases.md tồn tại: chép đúng cấu trúc của nó (tiêu đề mục, trường, thứ tự), bỏ hết nội dung case.
+  Không có → dựng theo các trường của case trong HW02/C_FR15/testcases.json để bước 5 đưa vào được không phải đoán.
+- Phần đầu file (giữ ngắn): feature C_FR15 – Product CRUD (admin); mã TS-SV từ 200 (bỏ case thì giữ khoảng trống số);
+  suite UI / API / GUI; cách ghi '' = để trống, ␣ = đúng số dấu cách; tra mã EC/giả định ở testcases.md;
+  Expected phải có căn cứ SRS hoặc giả định SV chốt (giả định mới → ghi mã C19…, "SV chốt + lý do").
+- Thân file: đúng 1 khối case mẫu, mọi giá trị là chỗ trống trung tính dạng <...> (vd <TC-ID>, <tiêu đề>, <mã EC>,
+  <căn cứ>). Không ví dụ cụ thể, không danh mục loại case, không liệt kê EC/biến, không gợi ý kỹ thuật hay vùng cần kiểm.
+- Không ghi vào ai-outputs/, không freeze, không commit.
+Báo cáo (≤ 5 dòng): đường dẫn file; khung chép từ B hay dựng từ schema; danh sách trường.
+```
+
+**Output:**
+```
+Đã tạo khung trống ở `HW02/C_FR15/sv_cases.md`; chưa commit, chưa freeze, không ghi vào ai-outputs.
+
+- **Nguồn khung:** chép cấu trúc từ `HW02/B_FR07/sv_cases.md` (tiêu đề, gạch đầu dòng ở đầu file, bảng theo tầng, thứ tự cột). Cột nhập liệu lấy theo các cột suite của C_FR15 trong `testcases.json`.
+- **Khác bản B — em thêm:**
+  - Cột Kỹ thuật, Approach, Căn cứ (CLAUDE.md yêu cầu case SV có `technique`/`approach`, và Expected phải có căn cứ).
+  - Bảng GUI.
+  - Mục "Giả định mới".
+- **Trường (theo thứ tự):**
+  - UI: #TC, Tiêu đề, Kỹ thuật, Approach, EC phủ, EC mục tiêu, Thao tác CRUD, Tên sản phẩm, Giá, Danh mục, Mô tả, URL Ảnh, Expected, Căn cứ, Lý do chọn input.
+  - API: như UI, thêm Token và Sản phẩm mục tiêu sau Thao tác CRUD.
+  - GUI: #TC, Tiêu đề, Kỹ thuật, Approach, Yêu cầu, Các bước, Expected, Căn cứ, Lý do chọn input.
+- **Dòng mẫu:** chỉ có 1 dòng `<...>`, đặt trong bảng UI; bảng API và GUI chỉ có tiêu đề cột.
+```
+*File AI ghi/gửi trong lượt này:* `sv_cases.md`
+
+**Xử lý:** [...]
+
+---
+
+## #220 | 17:16 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+/domain-bva-testing HW02/C_FR15 5
+- Kiểm tra trước: commit `5/7` chứa sv_cases.md phải có trong git log và đứng TRƯỚC mọi file AI ở bước 5. Không có → DỪNG.
+- Làm theo skill như B: ai_gap_answer.md, phân loại "đã nghĩ tới nhưng không đưa vào" / "không nghĩ tới" /
+  "đã có nhưng bị gỡ theo quyết định SV" (dẫn mã giả định C… nếu là loại 3). Không gợi ý case mới.
+- Đưa case SV vào testcases.json: giữ nguyên chữ của SV. Trường SV bỏ trống → ghi "(SV chưa ghi)" và báo,
+  không tự điền Expected.
+- Commit theo skill (`5/7b`, `5/7c`) kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): commit; số case SV; bảng TC-SV → loại gap (1/2/3); trường SV chưa ghi (nếu có).
+```
+
+**Output:**
+```
+Commit `5/7` (`c22e3da`) có sv_cases.md, đứng trước mọi file AI bước 5 → tiếp tục. Kiểm dẫn chứng trong các bản đóng băng trước khi phân loại.
+
+Dẫn chứng đã xác nhận. Viết script chép case SV vào JSON (giữ nguyên chữ).
+
+Giờ viết `ai_gap_answer.md` (phân loại có dẫn chứng) và `sv_questions.md`.
+```
+*File AI ghi/gửi trong lượt này:* `c15_step5_import.py`, `ai_gap_answer.md`, `sv_questions.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 220 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 157 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
