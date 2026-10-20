@@ -154,8 +154,6 @@ Theo yêu cầu FR-08.2 và giả định B8: Backend phải tự tra cứu và 
 
 - Nguyên nhân: Trong backend/server.js (dòng 290–295), route POST /api/cart đẩy nguyên object req.body do client gửi lên vào mảng giỏ hàng bằng lệnh userCarts[userId].push(req.body) mà không thực hiện bất kỳ bước kiểm tra hay map lại dữ liệu với CSDL sản phẩm (products).
 
-- Việc tin tưởng dữ liệu client (Trusting Client Input) tạo ra lỗ hổng bảo mật gian lận giá tiền (Price Tampering) cực kỳ nghiêm trọng, cho phép kẻ gian tự ý sửa đổi đơn giá sản phẩm trị giá hàng triệu đồng thành 1đ ngay ở tầng API trước khi thanh toán.
-
 ## Link GitHub Issue
 
 `<sau khi tạo issue>`
