@@ -13563,11 +13563,82 @@ số case SV còn lại; TC-200 vs TC-94; câu hỏi còn chặn bước 6.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Cập nhật `ai_gap_answer.md` và trạng thái câu hỏi.
+
+Đã áp trả lời SV và commit `078c5b0`. Bước 6 vẫn bị chặn: 9 lỗi check_domain còn nguyên vì mục Q2 không áp được như lệnh.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `078c5b0` HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5. check_domain: **9 lỗi**, 4 cảnh báo; linter: 0 lỗi, 15 cảnh báo.
+- **Q2 – không đổi mã EC nào.** Lệnh giả định SV chép mã EC từ A/B, nhưng không đúng: ở 207–215, mã trong ô EC mục tiêu đều là mã của C_FR15 và đúng nghĩa với ý case. Lỗi thật là các mã này chưa nằm trong ô EC phủ.
+
+  | Case | Mã chưa có trong EC phủ | Lớp của C_FR15 |
+  |---|---|---|
+  | 207, 212 | EC68 | API trả 2xx |
+  | 208, 211 | EC69 | API trả 4xx kèm error |
+  | 209 | EC69, C20 | C20 là mã giả định, không phải EC |
+  | 210 | EC34, EC69 | EC34 = category_id là chuỗi chữ |
+  | 213 | EC57 | Sửa hợp lệ |
+  | 214 | EC19, EC69 | EC19 = giá ≤ 0 |
+  | 215 | EC17, EC68 | EC17 = giá số nguyên > 0 |
+
+  Mã nghĩa chưa khớp hẳn, SV cần xem: EC34 ở TC-210 (C_FR15 không có lớp kiểu mảng) và EC19 ở TC-214 (`1e-324` là số dương, chỉ thành 0 sau khi parse).
+- **Số case SV còn lại: 14** (UI 5, API 9, GUI 0). Đã bỏ 203, 204, 216, 217, giữ khoảng trống số; lý do ghi trong notes của suite.
+- **C19, C20, C21:**
+  - C19: SV chưa từng ghi nội dung, nên không có "câu cũ" để giữ. Em ghi C19 là "(đã bỏ – SV bỏ TC-204)", nội dung "(SV chưa ghi)".
+  - C20: đã có căn cứ theo lệnh; chủ đề, loại, truy vết và nội dung vẫn "(SV chưa ghi)".
+  - C21: đã thêm, TC-200 đã dẫn C21.
+- **TC-200 so với TC-94** (dữ kiện ở `HW02/C_FR15/ai_gap_answer.md`):
+  - Trùng: cả hai kiểm SEC-04 cho tên sản phẩm hiển thị trong bảng.
+  - TC-200 thêm: nhập qua form UI (TC-94 tạo qua API), payload `<script>` quan sát được bằng alert, và quan sát kết quả lưu (C21).
+  - TC-94 có mà TC-200 không ghi: kiểm ô tên không có phần tử HTML con.
+- **Còn chặn bước 6** (chi tiết ở `HW02/C_FR15/sv_questions.md`, mục "Trạng thái sau 5/7c"):
+  - Q2: 9 lỗi EC mục tiêu ngoài EC phủ. Phương án (a) cũ vẫn dùng được: AI thêm các mã này vào EC phủ và chuyển `C20` sang Căn cứ.
+  - Q1: nội dung C20.
+  - Q3: TC-207, 212, 213 có phần Expected chưa có căn cứ.
+  - Q4: TC-200 Expected có nhánh "Thêm thành công" trái với lý do của C21 ("hệ thống sẽ không cho phép"); TC-201, 207, 211, 215 Expected nhiều nhánh; riêng TC-211 cho phép HTTP 500, trái C6.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 221 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 158 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #222 | 17:59 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Áp trả lời SV bước 5 C_FR15 (chữ SV giữ nguyên; chỗ nào chưa rõ → DỪNG, hỏi):
+1. Q2(a): thêm mã EC mục tiêu còn thiếu vào EC phủ ở TC-207, 208, 209, 211, 213, 214; chuyển C20 từ EC mục tiêu
+   sang ô Căn cứ của TC-209.
+2. Bỏ TC-210, 212, 215 (giữ khoảng trống số), lý do "SV bỏ" (210: không có lớp tương ứng; 212: Expected không có căn cứ SRS;
+   215: SV bỏ sau khi xét lại C1/C2).
+3. C20 – chép nguyên văn SV (thay "REST API Standard" bằng "RFC 8259"):
+   "C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259, C6.
+   Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express
+   phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server."
+4. TC-200: BỎ nhánh "Thêm thành công"; Expected = báo lỗi, không kích hoạt XSS (C21).
+5. TC-201: chỉ giữ nhánh "bị chặn". TC-211: chỉ giữ nhánh "4xx, không tạo sản phẩm" (bỏ nhánh 500).
+6. TC-207: Expected chỉ còn "2xx; tên lưu nguyên văn; bảng products nguyên vẹn" (bỏ nhánh 4xx); căn cứ FR-15
+   (chuỗi là tên hợp lệ: bắt buộc, ≤ 255). Câu "nếu không chống được thì báo lỗi" → chuyển thành điều kiện Fail trong notes.
+7. TC-213: Expected = "SRS im lặng về trường ngoài đặc tả → chấp nhận: (a) 2xx, bỏ qua id/role, các trường hợp lệ được cập nhật;
+   hoặc (b) 4xx, bản ghi không đổi. Trong mọi trường hợp id sản phẩm không đổi (ngầm định: id xác định bằng URL)".
+   Không thêm giả định. Ghi notes: SV cân nhắc 4xx rồi chọn chấp nhận cả việc bỏ qua.
+8. TC-214: Expected 4xx, bản ghi không đổi. Thêm C23 (loại: quyết định Expected, truy vết: có, căn cứ: FR-15 (giá > 0),
+   RFC 8259 §6 (cho phép giới hạn độ chính xác số); giả định SV. SV chốt: 1e-324 bị làm tròn thành 0, mà yêu cầu giá > 0).
+   ec_target giữ EC19 + ghi chú "giá trị hiệu dụng = 0 sau khi parse (C23)".
+9. ai_gap_answer.md: cập nhật theo case bị bỏ.
+10. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7d: áp tiếp trả lời SV` kèm A_prompt_log.md.
+
+Báo cáo (≤ 10 dòng): commit; check_domain/linter; số case SV còn lại (UI/API/GUI); câu hỏi còn chặn bước 6 (nếu có).
+```
+
+**Output:**
+```
+Trước khi áp, có một chỗ mâu thuẫn ở TC-201 cần SV quyết.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 222 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 159 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

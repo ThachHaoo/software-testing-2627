@@ -6,7 +6,7 @@
     "feature": "FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products)",
     "feature_code": "C_FR15",
     "doc_id": "TCD-C_FR15",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -48,8 +48,10 @@
       "C17 (định dạng tiền) [loại: quyết định Expected · truy vết: có · căn cứ: FR-21.3 không nói ký tự phân cách; tiền lệ B13 · SV chốt 2026-10-20 — SV chốt: chấp nhận cả '.' và ',' làm dấu phân cách, mỗi quốc gia dùng khác nhau]: ký tự phân cách hàng nghìn '.' hoặc ',' đều đạt; locale trình duyệt ghi trong notes của TC-FR15-92. Chỉ kiểm ở TC-FR15-92.",
       "C18 (phạm vi BVA) [loại: phạm vi · truy vết: không · căn cứ: C8 (SV chốt) · SV chốt 2026-10-20, phương án a — SV chốt: BVA đủ cho Thêm và Sửa, cả UI và API, nhất quán với C8 = a]: Tên (V2): LB−1, LB, LB+1, NOM, UB−1, UB, UB+1; Giá (V3): LB−1, LB, LB+1, NOM, LARGE (C2) — cho mỗi tổ hợp Thêm/Sửa × UI/API. Quy ước đánh số: BVA dùng 60–89 và 100–199 (không đụng dải SV từ 200).",
       "C19 (đã bỏ – SV bỏ TC-204) [SV chưa ghi nội dung trước khi bỏ; TC-204 là case duy nhất dẫn C19]: (SV chưa ghi)",
-      "C20 ((SV chưa ghi)) [loại: (SV chưa ghi) · truy vết: (SV chưa ghi) · căn cứ: RFC 8259 (Infinity/NaN không phải JSON hợp lệ); C6; tiền lệ B17/BUG-34 · SV chốt 2026-10-20]: (SV chưa ghi). Được dẫn ở TC-FR15-209.",
-      "C21 (tên sản phẩm chứa mã script — TC-FR15-200) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; giả định SV · SV chốt 2026-10-20 — không có sản phẩm thực tế nào đặt tên như vậy; theo kinh nghiệm SV, hệ thống sẽ không cho phép]: (SV chưa ghi nội dung riêng; Expected nằm ở TC-FR15-200)."
+      "C20 (Xử lý các giá trị không hợp lệ của chuẩn JSON): loại: quyết định Expected, truy vết: có, căn cứ: RFC 8259, C6. Phù hợp với B17/BUG-34: Khi nhận request chứa giá trị không đúng chuẩn JSON (như `Infinity`, `NaN`), backend Express phải bắt lỗi `SyntaxError` và trả về JSON 4xx kèm trường `error`, không được văng trang lỗi HTML mặc định của server.",
+      "C21 (tên sản phẩm chứa mã script — TC-FR15-200) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; giả định SV · SV chốt 2026-10-20 — không có sản phẩm thực tế nào đặt tên như vậy; theo kinh nghiệm SV, hệ thống sẽ không cho phép]: (SV chưa ghi nội dung riêng; Expected nằm ở TC-FR15-200).",
+      "C23 (giá cực nhỏ bị làm tròn về 0 khi parse) [loại: quyết định Expected · truy vết: có · căn cứ: FR-15 (giá > 0), RFC 8259 §6 (cho phép giới hạn độ chính xác số); giả định SV · SV chốt 2026-10-20 — 1e-324 bị làm tròn thành 0, mà yêu cầu giá > 0]: dùng ở TC-FR15-214.",
+      "C24 (cách nhập giá dạng ký hiệu số mũ ở UI — TC-FR15-201) [loại: quyết định Expected · truy vết: có · căn cứ: (SV chưa ghi) · SV chốt 2026-10-20: giữ Expected 'bị chặn', xếp '1e5' vào EC20]: (SV chưa ghi)."
     ]
   },
   "requirements": [
@@ -7018,7 +7020,7 @@
             "Mô tả": "Mô tả SV200 {ts}",
             "URL Ảnh": "https://placehold.co/300"
           },
-          "expected_result": "Thêm thành công (hoặc báo lỗi/escape); Bảng hiển thị dạng chuỗi văn bản, tuyệt đối không kích hoạt alert XSS (SEC-04).",
+          "expected_result": "Báo lỗi; tuyệt đối không kích hoạt alert XSS (SEC-04, C21).",
           "requirements": [
             "SEC-04"
           ],
@@ -7058,21 +7060,22 @@
             "Mô tả": "Mô tả SV201 {ts}",
             "URL Ảnh": "https://placehold.co/300"
           },
-          "expected_result": "Thêm thành công; Giá hiển thị 100.000 ₫ (hoặc form chặn do type=number); CSDL lưu đúng 100000.",
+          "expected_result": "Form chặn do type=number.",
           "requirements": [
             "FR-15.3"
           ],
           "assumptions": [
-            "C1"
+            "C1",
+            "C24"
           ],
           "covers": [
             "EC1",
             "EC5",
-            "EC17",
+            "EC20",
             "EC31"
           ],
           "ec_target": [
-            "EC17"
+            "EC20"
           ],
           "technique": "Type / JS Math",
           "bva_point": "",
@@ -7083,7 +7086,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": ""
+          "notes": "5/7d: SV giữ nhánh 'bị chặn', xếp '1e5' vào EC20 (C24). EC mục tiêu cũ EC17."
         },
         {
           "id": "TC-FR15-202",
@@ -7270,19 +7273,16 @@
             "Mô tả": "\"Mô tả\"",
             "URL Ảnh": "\"https://placehold.co/300\""
           },
-          "expected_result": "HTTP 2xx (nếu chấp nhận name chuỗi) hoặc 4xx; Tên lưu nguyên văn; Bảng `products` vẫn an toàn nguyên vẹn.",
+          "expected_result": "HTTP 2xx; Tên lưu nguyên văn; Bảng `products` vẫn an toàn nguyên vẹn.",
           "requirements": [
-            "SEC-04",
             "FR-15.2"
-          ],
-          "assumptions": [
-            "C13"
           ],
           "covers": [
             "EC1",
             "EC5",
             "EC17",
-            "EC31"
+            "EC31",
+            "EC68"
           ],
           "ec_target": [
             "EC5",
@@ -7297,7 +7297,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": ""
+          "notes": "Căn cứ (SV, 5/7d): FR-15 — chuỗi là tên hợp lệ: bắt buộc, ≤ 255. Điều kiện Fail (SV): nếu không chống được (bảng `products` không còn nguyên vẹn) thì báo lỗi."
         },
         {
           "id": "TC-FR15-208",
@@ -7324,7 +7324,8 @@
             "EC1",
             "EC5",
             "EC19",
-            "EC31"
+            "EC31",
+            "EC69"
           ],
           "ec_target": [
             "EC19",
@@ -7364,11 +7365,11 @@
           "covers": [
             "EC1",
             "EC5",
-            "EC31"
+            "EC31",
+            "EC69"
           ],
           "ec_target": [
-            "EC69",
-            "C20"
+            "EC69"
           ],
           "technique": "Math / Type Confusion",
           "bva_point": "",
@@ -7380,46 +7381,6 @@
           "evidence": "",
           "bug_id": "",
           "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
-        },
-        {
-          "id": "TC-FR15-210",
-          "title": "Kiểm tra POST /api/products gửi `category_id` dạng mảng `[1, 2]`",
-          "layer": "API",
-          "inputs": {
-            "Thao tác CRUD": "POST",
-            "Danh tính người gọi / token": "TA",
-            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
-            "Tên sản phẩm": "\"SP Category Mảng {ts}\"",
-            "Giá": "1500000",
-            "Danh mục": "[1, 2]",
-            "Mô tả": "\"Mô tả\"",
-            "URL Ảnh": "\"https://placehold.co/300\""
-          },
-          "expected_result": "HTTP 4xx kèm trường error; CSDL không đổi.",
-          "requirements": [],
-          "assumptions": [
-            "C9",
-            "C6"
-          ],
-          "covers": [
-            "EC1",
-            "EC5",
-            "EC17"
-          ],
-          "ec_target": [
-            "EC34",
-            "EC69"
-          ],
-          "technique": "Type Confusion",
-          "bva_point": "",
-          "approach": "gray-box",
-          "rationale": "Express `body-parser` tự parse mảng. Nếu backend query CSDL kiểu `WHERE category_id = req.body.category_id` dễ gây hỏng câu lệnh SQL.",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": ""
         },
         {
           "id": "TC-FR15-211",
@@ -7435,7 +7396,7 @@
             "Mô tả": "\"Mô tả\"",
             "URL Ảnh": "\"https://placehold.co/300\""
           },
-          "expected_result": "HTTP 4xx (400 hoặc 415) hoặc HTTP 500 có bắt lỗi; CSDL không tạo sản phẩm.",
+          "expected_result": "HTTP 4xx (400 hoặc 415); CSDL không tạo sản phẩm.",
           "requirements": [],
           "assumptions": [
             "C6",
@@ -7445,7 +7406,8 @@
             "EC1",
             "EC5",
             "EC17",
-            "EC31"
+            "EC31",
+            "EC69"
           ],
           "ec_target": [
             "EC69"
@@ -7454,48 +7416,6 @@
           "bva_point": "",
           "approach": "gray-box",
           "rationale": "`express.json()` mặc định chỉ parse khi Header là `application/json`. Thử nghiệm xem backend xử lý ra sao khi mismatch Content-Type.",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
-        },
-        {
-          "id": "TC-FR15-212",
-          "title": "Kiểm tra bắn 30 request POST /api/products song song đồng thời",
-          "layer": "API",
-          "inputs": {
-            "Thao tác CRUD": "POST",
-            "Danh tính người gọi / token": "TA",
-            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
-            "Tên sản phẩm": "\"SP Concurrent {ts}\"",
-            "Giá": "1500000",
-            "Danh mục": "2",
-            "Mô tả": "\"Mô tả\"",
-            "URL Ảnh": "\"https://placehold.co/300\""
-          },
-          "expected_result": "Cả 30 request được xử lý thành công (HTTP 2xx); CSDL tạo đúng 30 sản phẩm với ID tăng dần, không bị khóa (Locking Error).",
-          "requirements": [
-            "FR-15.1"
-          ],
-          "assumptions": [
-            "C0"
-          ],
-          "covers": [
-            "EC1",
-            "EC5",
-            "EC17",
-            "EC31"
-          ],
-          "ec_target": [
-            "EC1",
-            "EC68"
-          ],
-          "technique": "Concurrency / Race Condition",
-          "bva_point": "",
-          "approach": "gray-box",
-          "rationale": "Đánh giá khả năng xử lý bất đồng bộ của Node.js + SQLite/PostgreSQL khi nhiều request ghi gửi đến cùng lúc.",
           "origin": "Human",
           "status": "Not run",
           "actual_result": "",
@@ -7517,7 +7437,7 @@
             "Mô tả": "\"Mô tả\"",
             "URL Ảnh": "\"https://placehold.co/300\""
           },
-          "expected_result": "HTTP 2xx; CSDL cập nhật name/price/category_id; Trường `id` của sản phẩm M tuyệt đối không bị đè đổi thành `1`.",
+          "expected_result": "SRS im lặng về trường ngoài đặc tả → chấp nhận: (a) 2xx, bỏ qua id/role, các trường hợp lệ được cập nhật; hoặc (b) 4xx, bản ghi không đổi. Trong mọi trường hợp id sản phẩm không đổi (ngầm định: id xác định bằng URL)",
           "requirements": [
             "FR-15.5"
           ],
@@ -7528,7 +7448,8 @@
             "EC3",
             "EC11",
             "EC24",
-            "EC35"
+            "EC35",
+            "EC57"
           ],
           "ec_target": [
             "EC57"
@@ -7542,7 +7463,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
+          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV. · SV cân nhắc 4xx rồi chọn chấp nhận cả việc bỏ qua (5/7d)."
         },
         {
           "id": "TC-FR15-214",
@@ -7564,12 +7485,15 @@
           ],
           "assumptions": [
             "C1",
-            "C6"
+            "C6",
+            "C23"
           ],
           "covers": [
             "EC1",
             "EC5",
-            "EC31"
+            "EC31",
+            "EC19",
+            "EC69"
           ],
           "ec_target": [
             "EC19",
@@ -7584,51 +7508,11 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": ""
-        },
-        {
-          "id": "TC-FR15-215",
-          "title": "Kiểm tra POST /api/products gửi `price` vượt giới hạn `Number.MAX_SAFE_INTEGER` (`9007199254740993`)",
-          "layer": "API",
-          "inputs": {
-            "Thao tác CRUD": "POST",
-            "Danh tính người gọi / token": "TA",
-            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
-            "Tên sản phẩm": "\"SP Large Number {ts}\"",
-            "Giá": "9007199254740993",
-            "Danh mục": "2",
-            "Mô tả": "\"Mô tả\"",
-            "URL Ảnh": "\"https://placehold.co/300\""
-          },
-          "expected_result": "HTTP 2xx hoặc 4xx; Nếu lưu thành công thì giá trị lưu trong CSDL không bị làm tròn sai lệch số (Precision Loss).",
-          "requirements": [
-            "FR-15.3"
-          ],
-          "assumptions": [
-            "C2"
-          ],
-          "covers": [
-            "EC1",
-            "EC5",
-            "EC31"
-          ],
-          "ec_target": [
-            "EC17",
-            "EC68"
-          ],
-          "technique": "Overflow / JS Number",
-          "bva_point": "",
-          "approach": "gray-box",
-          "rationale": "Vượt ngưỡng tính toán số nguyên an toàn của JavaScript Number ($2^{53} - 1$).",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": ""
+          "notes": "EC19: giá trị hiệu dụng = 0 sau khi parse (C23)."
         }
       ],
-      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-API-POST. Ngoại lệ quy trình ghi trong notes của case."
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-API-POST. Ngoại lệ quy trình ghi trong notes của case.",
+      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR15-210: SV bỏ: không có lớp tương ứng (5/7d). · TC-FR15-212: SV bỏ: Expected không có căn cứ SRS (5/7d). · TC-FR15-215: SV bỏ sau khi xét lại C1/C2 (5/7d)."
     },
     {
       "id": "TS-SV-GUI",

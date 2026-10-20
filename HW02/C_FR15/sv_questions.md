@@ -35,3 +35,19 @@ Case SV đã chép vào `testcases.json` (suite TS-SV-UI, TS-SV-API, TS-SV-GUI),
 - **Q5:** hết hiệu lực (TC-204 đã bỏ).
 - **Trường "(SV chưa ghi)" của TC-216, 217:** hết hiệu lực (đã bỏ).
 
+## Trạng thái sau 5/7d
+
+- **Q1:** C20 đã có nội dung (SV).
+- **Q2:** đã giải quyết. Đã thêm EC mục tiêu vào EC phủ ở 207, 208, 209, 211, 213, 214; `C20` chuyển sang Căn cứ của TC-209. TC-210 đã bỏ.
+- **Q3:**
+  - TC-207: căn cứ FR-15.2.
+  - TC-213: Expected chấp nhận hai cách, ghi chú "SRS im lặng" (SV).
+  - TC-212 đã bỏ.
+- **Q4:**
+  - TC-200: còn một nhánh (báo lỗi).
+  - TC-211: chỉ 4xx.
+  - TC-207: chỉ 2xx.
+  - TC-215 đã bỏ.
+  - TC-201: giữ nhánh "bị chặn", xếp vào EC20 kèm C24. **C24 chưa có căn cứ và nội dung "(SV chưa ghi)"**, trong khi C1 (SV chốt) coi mọi số thực > 0 là hợp lệ.
+- **Mới:** C23 (TC-214) và C24 (TC-201). Không có C22 (SV đánh số nhảy từ C21 lên C23).
+
