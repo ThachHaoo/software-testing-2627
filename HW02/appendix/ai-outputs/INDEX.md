@@ -49,3 +49,5 @@
 - 22:52 20/10/2026 · `D_FR20_step4_20261020-225208.md` · bước 4 · Claude Code bước 4 · sha256 399adbc812d5
 - 23:55 20/10/2026 · `D_FR20_step6_20261020-235519.json` · bước 6 · Claude Code 6/7a3 (procedure theo D0 mới) · sha256 3af8d17687c5
 - 23:55 20/10/2026 · `D_FR20_step6_20261020-235519.md` · bước 6 · Claude Code 6/7a3 (procedure theo D0 mới) · sha256 9536d783898c
+- 23:58 20/10/2026 · `D_FR20_step6_20261020-235828.json` · bước 6 · Claude Code 6/7a4 (ảnh theo RUN.md + cách đọc TRƯỚC/SAU) · sha256 46e10f4d0ab4
+- 23:58 20/10/2026 · `D_FR20_step6_20261020-235828.md` · bước 6 · Claude Code 6/7a4 (ảnh theo RUN.md + cách đọc TRƯỚC/SAU) · sha256 6ba0271c9f3a

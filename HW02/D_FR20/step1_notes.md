@@ -125,3 +125,4 @@ Cơ sở: A có 52 EC; TS-DOM-UI 27, TS-BVA-UI 19, TS-GUI 5, TS-DOM-API 30, TS-B
 - Sau khi đóng băng bước 4 (c19c666), khi tạo khung sv_cases.md AI đã in toàn văn HW02/C_FR15/sv_cases.md (gồm case SV TC-FR15-200…217 của C). Ở bước 5, AI in 40 dòng đầu HW02/C_FR15/ai_gap_answer.md (bản d1c71d8) để lấy cấu trúc file. Cả hai đều sau khi bản AI bước 1–4 của D đã đóng băng.
 - 5/7f: AI sửa câu suite do AI viết — quy trình TS-SV bước 5 'bấm nút ''Đăng Ký'' đúng một lần' (AI chép từ TS-DOM ở 5/7b) → 'đúng số lần ghi trong case (mặc định 1 lần)'.
 - 6/7a2: case Pass không ảnh riêng; bằng chứng = Actual + ảnh admin SAU. Evidence chạy tay D được nén bằng tools/compress_manual.py (AI viết) trước khi merge (RUN.md).
+- 6/7a4: so ảnh admin cả lượt (D0) không phát hiện thay đổi ở dòng của tài khoản khác.
