@@ -159,7 +159,7 @@ Trích SRS (AI chép nguyên văn): README.md dòng 32: "Người dùng phải c
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+[#197](https://github.com/tkob-team/eshop-sut/issues/197)
 
 ---
 

@@ -129,7 +129,7 @@ Trích SRS (AI chép nguyên văn): README.md dòng 34: "**Yêu cầu mật kh�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+[#200](https://github.com/tkob-team/eshop-sut/issues/200)
 
 ---
 

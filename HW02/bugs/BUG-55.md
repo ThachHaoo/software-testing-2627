@@ -92,7 +92,7 @@ Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+[#201](https://github.com/tkob-team/eshop-sut/issues/201)
 
 ---
 

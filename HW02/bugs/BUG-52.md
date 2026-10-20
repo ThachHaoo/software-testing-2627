@@ -172,7 +172,7 @@ Trích SRS (AI chép nguyên văn): README.md dòng 33: "Email phải có địn
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+[#198](https://github.com/tkob-team/eshop-sut/issues/198)
 
 ---
 

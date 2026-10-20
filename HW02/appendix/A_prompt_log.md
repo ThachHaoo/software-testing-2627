@@ -19673,6 +19673,31 @@ Rồi làm tiếp mục 0 (kiểm 7d: HEAD là 7/7d3; so với 9ff87a7, chỉ BU
 **Output:**
 ```
 Đã sửa cú pháp JSX trong BUG-55 (3 chỗ). Giờ xoá file tạm, xem diff, ghi log và commit 7/7d3.
+
+Commit 7/7d3 xong (chỉ BUG-55 đổi đúng chỗ). Mục 0 rà ổn. Sang mục 1: kiểm tài khoản gh và kiểm trùng issue lần cuối.
+
+Mục 0 và kiểm trùng xong. Cần SV xác nhận trước khi tạo issue.
+
+**Rà 7d:**
+- HEAD là `02cd393` (7/7d3). So với `9ff87a7`, commit này chỉ sửa 2 dòng Nhận định của BUG-55 (cú pháp `style={…}`), cộng log 7d3 và prompt log.
+- So với 7/7c2, phần dữ kiện AI chép không bị đổi sai. SV có thêm dòng patch IP vào tiền điều kiện và viết lại dòng FR-22.2 ở BUG-56; nghĩa khớp D13.
+- Thang Severity/Priority đúng; không còn `<SV viết>`.
+
+**Kiểm trùng lần cuối:** `gh auth` đang là ThachHaoo. Trên repo có 151 issue (mọi tác giả, gồm đã đóng), số lớn nhất #196. Không có issue nào về màn Đăng ký mobile. Các issue FR-20 hiện có thuộc màn khác: #153–#160 (giỏ, chi tiết sản phẩm) và #57–#61, #69. Issue cùng triệu chứng ở web/API: #19, #20, #21, #22, #23, #28, #29, #30 (xem mục kiểm trùng trong `_groups_D_FR20.md`).
+
+**Sẽ tạo trên `tkob-team/eshop-sut`**, theo thứ tự, label `bug`. Body là nội dung BUG-xx.md, không kèm ảnh; mỗi chỗ ảnh để dòng `[SV kéo ảnh: <tên file>]`:
+
+| BUG | Tiêu đề sẽ đăng | Label |
+|---|---|---|
+| BUG-51 | [FR-20] App Mobile cho phép để trống Họ Tên khi đăng ký, vẫn báo thành công và tạo tài khoản vào CSDL | bug |
+| BUG-52 | [FR-20] App Mobile cho phép nhập Email rỗng hoặc sai định dạng (thiếu '@', có khoảng trắng ở giữa) vẫn báo thành công và tạo tài khoản vào CSDL | bug |
+| BUG-53 | [FR-20] App Mobile cho phép đăng ký bằng Email đã tồn tại trong hệ thống, vẫn báo thành công và tạo tài khoản trùng trong CSDL | bug |
+| BUG-54 | [FR-20] App Mobile cho phép đăng ký Mật khẩu có ký tự đặc biệt nằm ngoài tập quy định (#), vẫn báo thành công và tạo tài khoản vào CSDL | bug |
+| BUG-55 | [FR-20] Màn hình Đăng ký trên Mobile thiếu dấu sao * đánh dấu các trường nhập liệu bắt buộc | bug |
+| BUG-56 | [FR-20] Ô nhập Email trên màn hình Đăng ký mobile không kích hoạt bàn phím định dạng Email (thiếu phím @) | bug |
+| BUG-57 | [FR-20] Màn hình Đăng ký trên Mobile thiếu hẳn ô nhập 'Xác nhận mật khẩu' theo yêu cầu SRS | bug |
+
+Tạo issue là bước đăng công khai, khó rút lại. Em trả lời **"đồng ý"** thì tôi tạo lần lượt BUG-51 → BUG-57, rồi ghi số issue vào `_groups_D_FR20.md`, các file BUG-xx.md và `testcases.json`.
 ```
 *File AI ghi/gửi trong lượt này:* `.tmp_fix55.py`
 
@@ -19680,4 +19705,80 @@ Rồi làm tiếp mục 0 (kiểm 7d: HEAD là 7/7d3; so với 9ff87a7, chỉ BU
 
 ---
 
-**Tổng:** 326 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 234 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #327 | 03:32 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đồng ý, nhưng BUG-56: SV sửa tiêu đề phần trong ngoặc thành "(không có phím @ ở bàn phím chính)". Sửa trong BUG-56.md (commit "HW02[D-FR20] 7/7d4: SV sửa tiêu đề BUG-56"), rồi tạo BUG-51 → 57.
+```
+
+**Output:**
+```
+Body đã sẵn (có dòng chờ ảnh). Tạo issue tuần tự BUG-51 → 57.
+
+Đã tạo #197–#203. Ghi số issue vào `_groups`, BUG-xx.md, testcases.json.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `279a0f8` 7/7d4: SV sửa tiêu đề BUG-56 (đúng chữ SV đưa).
+- **Đã tạo 7 issue** trên `tkob-team/eshop-sut` bằng tài khoản ThachHaoo, label `bug`. Kiểm trùng ngay trước khi tạo: 151 issue, không có issue nào về màn Đăng ký mobile.
+
+| BUG | Issue |
+|---|---|
+| BUG-51 | [#197](https://github.com/tkob-team/eshop-sut/issues/197) |
+| BUG-52 | [#198](https://github.com/tkob-team/eshop-sut/issues/198) |
+| BUG-53 | [#199](https://github.com/tkob-team/eshop-sut/issues/199) |
+| BUG-54 | [#200](https://github.com/tkob-team/eshop-sut/issues/200) |
+| BUG-55 | [#201](https://github.com/tkob-team/eshop-sut/issues/201) |
+| BUG-56 | [#202](https://github.com/tkob-team/eshop-sut/issues/202) |
+| BUG-57 | [#203](https://github.com/tkob-team/eshop-sut/issues/203) |
+
+- **Số issue đã ghi** vào cột issue của `_groups_D_FR20.md`, mục Link GitHub Issue của BUG-51…57, và trường `bug_id` của 11 TC trong `testcases.json` (9 Fail + TC-16, TC-17). Phần này chưa commit; sẽ vào commit 7/7e cùng README.
+- **Ảnh SV cần kéo vào issue**, mỗi ảnh thay đúng dòng `[SV kéo ảnh: <tên file>]` trong body. Ở D không có bản che, nên dùng ảnh trong `HW02/D_FR20/evidence/`:
+
+| Issue | Tên file |
+|---|---|
+| #197 | `TC-FR20-03_manual_1.png`, `D_admin_truoc_1.png`, `D_admin_sau_1.png`, `D_admin_sau_2.png` |
+| #198 | `TC-FR20-04_manual_1.png`, `TC-FR20-05_manual_1.png`, `TC-FR20-204_manual_1.png`, `D_admin_truoc_1.png`, `D_admin_sau_1.png`, `D_admin_sau_2.png` |
+| #199 | `TC-FR20-06_manual_1.png`, `D_admin_truoc_1.png`, `D_admin_sau_1.png`, `D_admin_sau_2.png` |
+| #200 | `TC-FR20-15_manual_1.png`, `D_admin_truoc_1.png`, `D_admin_sau_1.png`, `D_admin_sau_2.png` |
+| #201 | `TC-FR20-90_manual_1.png` |
+| #202 | `TC-FR20-91_manual_1.png` |
+| #203 | `TC-FR20-94_manual_1.png` |
+
+- **Đang dừng chờ SV kéo ảnh.** Em báo xong thì tôi kiểm từng issue bằng `gh issue view`, chụp `issues_page_D_FR20.png`, cập nhật README và CLAUDE.md (BUG kế tiếp BUG-58, issue kế tiếp #204), rồi commit 7/7e.
+```
+*File AI ghi/gửi trong lượt này:* `.tmp_issue_bodies.py`, `.tmp_issue_nums.py`
+
+**Xử lý:** [...]
+
+---
+
+## #328 | 03:40 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đã kéo xong ảnh
+```
+
+**Output:**
+```
+Đủ ảnh ở cả 7 issue. Chụp trang Issues lọc `[FR-20]` bằng Playwright headless.
+
+Trang chụp có lẫn #116 (FR04-20) do bộ lọc tìm gần đúng. Chụp lại, thêm `author:ThachHaoo`.
+
+Ảnh trang Issues đúng 7 kết quả. Giờ cập nhật README bằng `tools/summary.py`.
+
+Cột Bug của D ra 27 — sai (D chỉ có 7 bug). Xem cách `summary.py` đếm bug.
+
+Lỗi ở `summary.py`: tách `bug_id` theo dấu cách nên đếm cả chữ như "(#197)", "không lập bug". Vá thành chỉ lấy mã `BUG-\d+`, rồi so A/B/C trước/sau.
+
+Chỉ dòng D đổi (27 → 7); A/B/C giữ nguyên. Commit vá harness riêng, rồi ghi README và commit 7/7e.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 328 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 236 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

@@ -21,9 +21,10 @@
 | A_FR01 | FR-01 Đăng ký tài khoản (web frontend-web + API POST /api/register) | 133 | 108 | 43 | 65 | 25 | 0 | 98 | 10 | 25 | 14 |
 | B_FR07 | FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart) | 62 | 53 | 14 | 39 | 9 | 0 | 49 | 0 | 13 | 20 |
 | C_FR15 | FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products) | 122 | 117 | 51 | 66 | 5 | 0 | 111 | 0 | 11 | 16 |
-| **Tổng** | **3 feature** | **317** | **278** | **108** | **170** | **39** | **0** | **258** | **10** | **49** | **50** |
+| D_FR20 | FR-20 Tính năng Mobile — chức năng Đăng ký (frontend-mobile, Expo SDK 54, màn hình 'Đăng Ký Tài Khoản'), áp dụng FR-01 | 33 | 31 | 21 | 10 | 2 | 0 | 27 | 0 | 6 | 7 |
+| **Tổng** | **4 feature** | **350** | **309** | **129** | **180** | **41** | **0** | **285** | **10** | **55** | **57** |
 
-Bug theo severity: Critical 11, High 15, Medium 11, Low 13 (tổng 50 file trong `bugs/`).
+Bug theo severity: Critical 11, High 20, Medium 12, Low 14 (tổng 57 file trong `bugs/`).
 <!-- SUMMARY:END -->
 
 ## Video demo (YouTube)

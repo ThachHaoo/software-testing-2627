@@ -82,7 +82,7 @@ Lỗi này nằm ở thẻ <TextInput> của ô Email trong file App.js (dòng 8
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+[#202](https://github.com/tkob-team/eshop-sut/issues/202)
 
 ---
 

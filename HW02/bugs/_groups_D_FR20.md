@@ -9,13 +9,13 @@
 
 | Nhóm | BUG | Issue |
 |---|---|---|
-| G1 | BUG-51 | |
-| G2 | BUG-52 | |
-| G3 | BUG-53 | |
-| G4 | BUG-54 | |
-| G5 | BUG-55 | |
-| G6 | BUG-56 | |
-| G7 | BUG-57 | |
+| G1 | BUG-51 | [#197](https://github.com/tkob-team/eshop-sut/issues/197) |
+| G2 | BUG-52 | [#198](https://github.com/tkob-team/eshop-sut/issues/198) |
+| G3 | BUG-53 | [#199](https://github.com/tkob-team/eshop-sut/issues/199) |
+| G4 | BUG-54 | [#200](https://github.com/tkob-team/eshop-sut/issues/200) |
+| G5 | BUG-55 | [#201](https://github.com/tkob-team/eshop-sut/issues/201) |
+| G6 | BUG-56 | [#202](https://github.com/tkob-team/eshop-sut/issues/202) |
+| G7 | BUG-57 | [#203](https://github.com/tkob-team/eshop-sut/issues/203) |
 
 ## SV quyết mapping (21/10/2026)
 
@@ -660,6 +660,13 @@ Không sửa: Severity, Priority, tiêu đề, Expected, câu Nhận định (ng
 |---|---|---|
 | BUG-55:89 | `<Text style="{styles.label}">` | `<Text style={styles.label}>` |
 | BUG-55:91 | `<Text style="{styles.label}">Họ Tên <Text style="{styles.required}">*</Text></Text>` | `<Text style={styles.label}>Họ Tên <Text style={styles.required}>*</Text></Text>` |
+
+### 7e — tạo issue (21/10/2026)
+
+- Kiểm trùng lần cuối (`gh issue list --state all --limit 400`): 151 issue, số lớn nhất #196; không có issue về màn Đăng ký mobile.
+- Tạo bằng `gh issue create --body-file` (ThachHaoo, label `bug`, tiền tố `[FR-20]` chỉ trên GitHub): BUG-51 #197 · BUG-52 #198 · BUG-53 #199 · BUG-54 #200 · BUG-55 #201 · BUG-56 #202 · BUG-57 #203. Tiêu đề BUG-56 theo 7/7d4.
+- SV kéo ảnh vào issue. AI kiểm bằng `gh issue view`: không còn dòng `[SV kéo ảnh: …]`; số ảnh và alt khớp tên file (#200: alt `TC-FR20-15_manual_1.` thừa dấu chấm cuối). Không có bản che ở D vì ảnh không lộ thông tin (7a4).
+- Ảnh trang Issues: `bugs/issues_page_D_FR20.png` — AI chụp bằng Playwright headless, không đăng nhập, lọc `is:issue author:ThachHaoo in:title "[FR-20]"` → 7 kết quả.
 
 ### AI phát hiện (ngoài bước SV; không đưa vào bug, SV quyết)
 

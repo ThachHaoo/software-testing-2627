@@ -120,7 +120,7 @@ Màn hình 'Đăng Ký Tài Khoản' trên app mobile chỉ có vỏn vẹn 3 ô
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+[#203](https://github.com/tkob-team/eshop-sut/issues/203)
 
 ---
 
