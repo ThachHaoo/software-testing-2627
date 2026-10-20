@@ -17551,6 +17551,33 @@ có từ B). Bỏ điều kiện "commit 1/7b".
 **Output:**
 ```
 Đã commit 1/7b. Đang làm bước 2: đọc phân lớp của A và các case API tương ứng để tham chiếu.
+
+Đã xong phần A (SV chốt giả định) và bước 2 phân lớp tương đương, đều đã commit cục bộ, chưa push. Không có lỗi hay điểm dừng nào.
+
+### Báo cáo cho phiên thảo luận
+- **Commit A:** `f420033` HW02[D-FR20] 1/7b: SV chốt giả định; commit CLAUDE.md: `ea3cc1f` HW02: sửa CLAUDE.md – A3.
+- **D5:** chép nguyên văn A3 bản 2 từ `8d837f1`: "A3 (Email – duy nhất): Email so sánh sau khi cắt khoảng trắng đầu/cuối; phần local phân biệt hoa/thường, phần domain không phân biệt (RFC 5321 §2.4). SV sửa ở bước 5." CLAUDE.md đã đổi theo bản này, ghi kèm bản 1 ở `4e30b25`.
+- **D0:** chấp nhận đề xuất AI. Nội dung giữ như báo cáo trước: tải lại app (Reload) trước mỗi case, email riêng có `{ts}`, oracle tương đối SAU = TRƯỚC. D0 không quyết định Expected.
+- **Bước 2:** 32 EC, gồm 14 hợp lệ và 18 không hợp lệ (cao hơn ước tính 25–30 của D1=a). Bảng EC ở `HW02/D_FR20/testcases.md`, mục "Bước 2 — Complete Set of Partitions".
+- **EC có căn cứ chỉ là giả định D:**
+  - EC13, EC16 (chữ hoa/thường có dấu, theo D8);
+  - EC20, EC22 (ký tự ngoài tập, theo D7);
+  - EC25 (khác hoa/thường ở ô xác nhận, theo D9);
+  - EC26 (theo D12);
+  - EC28, EC30 (theo D10); EC27 (theo D11).
+  - Một phần EC7 ("chỉ khác hoa/thường ở phần domain") đến từ D5 bản 2, tức từ bước 5 của A.
+- **Code (gray-box) không tách thêm lớp nào. Code quyết định gộp hoặc giữ:**
+  - Gộp, vì client mobile không kiểm Họ Tên/Email mà gửi thẳng lên server; mỗi lớp lấy 1 đại diện và tham chiếu TC API của A:
+    - EC1 (gộp A EC1, EC2), EC2 (A EC3, EC4);
+    - EC3 (A EC7, EC8), EC5 (A EC10–15);
+    - EC6 (A EC18, EC19), EC7 (A EC20, EC21).
+  - Giữ đủ lớp con như A vì client có kiểm Mật khẩu (App.js 211–219): EC8, EC13, EC16, EC20, EC22.
+  - EC24 gộp lớp "rỗng" vào "không khớp" vì mobile không có `required` của HTML5. Gộp này dựa vào D9, không dựa vào code.
+- **Kiểm tra:**
+  - check_domain: 0 lỗi, 34 cảnh báo. 32 cảnh báo là EC chưa có case phủ (đúng như dự kiến khi chưa có case), 1 là V4 chưa có BVA, 1 là V6 không có lớp không hợp lệ (cố ý theo D12).
+  - lint: 0 lỗi, 17 cảnh báo.
+- **Commit bước 2:** `8a85ee1` HW02[D-FR20] 2/7: Phân lớp tương đương.
+- **Khai cho Audit (`step1_notes.md` mục 6):** đã ghi phần A thấy trong bước 1. Thêm 1 dòng: ở bước 2 khi in phân lớp của A, AI đã thấy EC51 và EC52 (lớp SV thêm ở bước 5 của A); D không dùng hai lớp này.
 ```
 *File AI ghi/gửi trong lượt này:* `d_step1b.py`, `d_step2.py`
 
@@ -17558,4 +17585,59 @@ có từ B). Bỏ điều kiện "commit 1/7b".
 
 ---
 
-**Tổng:** 295 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 210 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #296 | 22:44 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: sửa bước 2 (2/7b) → SV chốt (2/7c) → bước 3
+
+### A. Sửa theo review (có freeze)
+1. EC1, EC2, EC3, EC5, EC6, EC7: lý do gộp ghi "(gray-box)", kèm dòng code App.js.
+2. Ghi rõ tiền đề của việc gộp: giá trị trong ô (D12=a) = giá trị gửi trong body POST /api/register.
+   - Mỗi ô: dẫn dòng code chứng minh client không trim/biến đổi.
+   - Ô nào code không chứng minh được → KHÔNG gộp ô đó, khôi phục lớp như A, báo lại.
+3. EC24: đối chiếu chữ của D9.
+   - D9 cho cùng Expected với "rỗng" và "không khớp" → giữ gộp, lý do chỉ dẫn D9
+     (bỏ câu về HTML5).
+   - D9 không nói tới "rỗng" → DỪNG, in chữ D9.
+render_md.py → freeze.py → check_domain.py → lint → prompt log → commit
+`HW02[D-FR20] 2/7b: sửa phân lớp theo review`.
+
+### B. SV chốt (không freeze)
+Nếu A không DỪNG và không khôi phục lớp nào: commit `HW02[D-FR20] 2/7c: SV chốt phân lớp`
+(ghi "SV chốt sau review").
+Có khôi phục lớp → DỪNG trước 2/7c, báo lại.
+
+### C. Bước 3
+`/domain-bva-testing HW02/D_FR20 3` — minimum set, chạy tay. Áp CLAUDE.md:
+- Precondition theo D0;
+- Procedure ghi rõ cách nhập (`''`, `␣`), bấm đúng 1 lần, chỗ quan sát;
+- oracle theo D10/D11;
+- khẳng định một nơi;
+- mỗi case không hợp lệ có đúng 1 EC không hợp lệ trong ec_target.
+Lớp gộp: Căn cứ ghi mã TC API của A được tham chiếu.
+render_md.py → freeze.py → check_domain.py → lint → prompt log → commit `HW02[D-FR20] 3/7`.
+
+## Báo cáo cho phiên thảo luận (≤ 15 dòng)
+- Commit 2/7b, 2/7c, 3/7.
+- Mục A.2: ô nào gộp được / khôi phục; dòng code.
+- EC24: giữ hay dừng.
+- Bước 3:
+  - số TC (hợp lệ / không hợp lệ), ước tính số điểm BVA ở bước 4;
+  - case nào Expected chỉ dựa giả định D (liệt kê mã);
+  - check/lint.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Giờ sửa phân lớp theo review (2/7b): ghi tiền đề gray-box theo từng ô, EC24 chỉ dẫn D9.
+```
+*File AI ghi/gửi trong lượt này:* `d_step2b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 296 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 211 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295, #296); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

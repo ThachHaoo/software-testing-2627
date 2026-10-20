@@ -6,7 +6,7 @@
     "feature": "FR-20 Tính năng Mobile — chức năng Đăng ký (frontend-mobile, Expo SDK 54, màn hình 'Đăng Ký Tài Khoản'), áp dụng FR-01",
     "feature_code": "D_FR20",
     "doc_id": "TCD-D_FR20",
-    "version": "0.3",
+    "version": "0.4",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã); thay đổi cục bộ duy nhất: frontend-mobile/App.js dòng 16 API_URL",
@@ -205,7 +205,7 @@
         "class": "Không rỗng sau khi bỏ khoảng trắng (đại diện có chữ tiếng Việt có dấu, vd 'Nguyễn Văn Ánh')",
         "valid": true,
         "guideline": "must-be",
-        "note": "FR-01.1, D3. Gộp A EC1 (Latin không dấu) + EC2 (có dấu); A tách vì mã hoá/lưu trữ phía server. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28, TC-FR01-29 (API).",
+        "note": "FR-01.1, D3. Gộp A EC1 (Latin không dấu) + EC2 (có dấu); A tách vì mã hoá/lưu trữ phía server. (gray-box) Tiền đề gộp: giá trị trong ô (D12 = a) = giá trị gửi trong body POST /api/register. Ô 'Họ Tên' là ô có kiểm soát value={registerName} (App.js dòng 807), onChangeText={setRegisterName} (dòng 808) lưu nguyên chuỗi; handleRegister không gán lại registerName (dòng 209–219 chỉ kiểm registerPassword) và gửi name: registerName (dòng 226) qua JSON.stringify (dòng 225) → client không trim/biến đổi; việc phân biệt các lớp con do server xử lý → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28, TC-FR01-29 (API).",
         "requirements": [
           "FR-01.1",
           "D3"
@@ -217,7 +217,7 @@
         "class": "Rỗng hoặc chỉ gồm khoảng trắng (vd '' hoặc '␣␣␣')",
         "valid": false,
         "guideline": "must-be",
-        "note": "FR-01.1 bắt buộc; D3: chỉ khoảng trắng coi như rỗng. A tách EC3/EC4 vì required của HTML5 chặn '' nhưng không chặn chuỗi toàn khoảng trắng — mobile không có HTML5. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-32 (rỗng), TC-FR01-33 (chỉ khoảng trắng), TC-FR01-79 (API).",
+        "note": "FR-01.1 bắt buộc; D3: chỉ khoảng trắng coi như rỗng. A tách EC3/EC4 vì required của HTML5 chặn '' nhưng không chặn chuỗi toàn khoảng trắng — mobile không có HTML5. (gray-box) Tiền đề gộp: giá trị trong ô (D12 = a) = giá trị gửi trong body POST /api/register. Ô 'Họ Tên' là ô có kiểm soát value={registerName} (App.js dòng 807), onChangeText={setRegisterName} (dòng 808) lưu nguyên chuỗi; handleRegister không gán lại registerName (dòng 209–219 chỉ kiểm registerPassword) và gửi name: registerName (dòng 226) qua JSON.stringify (dòng 225) → client không trim/biến đổi; việc phân biệt các lớp con do server xử lý → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-32 (rỗng), TC-FR01-33 (chỉ khoảng trắng), TC-FR01-79 (API).",
         "requirements": [
           "FR-01.1",
           "D3"
@@ -229,7 +229,7 @@
         "class": "Đúng định dạng <local>@<domain>.<tld> (vd 'newuser@domain.com'); kể cả có khoảng trắng đầu/cuối (D5 cắt trước khi xử lý)",
         "valid": true,
         "guideline": "must-be",
-        "note": "FR-01.2, FR-01.3, D4, D5. Gộp A EC7 + EC8 (khoảng trắng đầu/cuối). (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC7), TC-FR01-30 (EC8) (API).",
+        "note": "FR-01.2, FR-01.3, D4, D5. Gộp A EC7 + EC8 (khoảng trắng đầu/cuối). (gray-box) Tiền đề gộp: giá trị trong ô (D12 = a) = giá trị gửi trong body POST /api/register. Ô 'Email' là ô có kiểm soát value={registerEmail} (App.js dòng 813), onChangeText={setRegisterEmail} (dòng 814) lưu nguyên chuỗi; autoCapitalize=\"none\" (dòng 815) chỉ tác động bàn phím lúc nhập; handleRegister không gán lại registerEmail (dòng 209–219) và gửi email: registerEmail (dòng 227) qua JSON.stringify (dòng 225) → client không trim/biến đổi; việc phân biệt các lớp con do server xử lý → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC7), TC-FR01-30 (EC8) (API).",
         "requirements": [
           "FR-01.2",
           "FR-01.3",
@@ -254,7 +254,7 @@
         "class": "Sai định dạng theo D4 (đại diện: không có '@', vd 'newuserdomain.com')",
         "valid": false,
         "guideline": "must-be",
-        "note": "FR-01.3, D4. Gộp A EC10–EC15 (không '@', nhiều '@', local rỗng, domain rỗng, domain không có '.', khoảng trắng bên trong); A tách theo bộ kiểm HTML5 type=email / regex client / backend — mobile không có HTML5. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-35, 36, 37, 38, 39, 40 (API).",
+        "note": "FR-01.3, D4. Gộp A EC10–EC15 (không '@', nhiều '@', local rỗng, domain rỗng, domain không có '.', khoảng trắng bên trong); A tách theo bộ kiểm HTML5 type=email / regex client / backend — mobile không có HTML5. (gray-box) Tiền đề gộp: giá trị trong ô (D12 = a) = giá trị gửi trong body POST /api/register. Ô 'Email' là ô có kiểm soát value={registerEmail} (App.js dòng 813), onChangeText={setRegisterEmail} (dòng 814) lưu nguyên chuỗi; autoCapitalize=\"none\" (dòng 815) chỉ tác động bàn phím lúc nhập; handleRegister không gán lại registerEmail (dòng 209–219) và gửi email: registerEmail (dòng 227) qua JSON.stringify (dòng 225) → client không trim/biến đổi; việc phân biệt các lớp con do server xử lý → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-35, 36, 37, 38, 39, 40 (API).",
         "requirements": [
           "FR-01.3",
           "D4"
@@ -266,7 +266,7 @@
         "class": "Email chưa tồn tại theo cách so sánh của D5 (gồm cả chỉ khác hoa/thường ở phần local, vd 'Test@eshop.com' khi đã có 'test@eshop.com')",
         "valid": true,
         "guideline": "set",
-        "note": "FR-01.4, D5. Gộp A EC18 + EC19. (gray-box) client mobile không kiểm tính duy nhất trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC18), TC-FR01-31 (EC19) (API).",
+        "note": "FR-01.4, D5. Gộp A EC18 + EC19. (gray-box) Tiền đề gộp: giá trị trong ô (D12 = a) = giá trị gửi trong body POST /api/register. Ô 'Email' là ô có kiểm soát value={registerEmail} (App.js dòng 813), onChangeText={setRegisterEmail} (dòng 814) lưu nguyên chuỗi; autoCapitalize=\"none\" (dòng 815) chỉ tác động bàn phím lúc nhập; handleRegister không gán lại registerEmail (dòng 209–219) và gửi email: registerEmail (dòng 227) qua JSON.stringify (dòng 225) → client không trim/biến đổi; việc phân biệt các lớp con do server xử lý → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC18), TC-FR01-31 (EC19) (API).",
         "requirements": [
           "FR-01.4",
           "D5"
@@ -278,7 +278,7 @@
         "class": "Trùng email đã có theo D5: trùng chính xác, trùng sau khi cắt khoảng trắng đầu/cuối, hoặc chỉ khác hoa/thường ở phần domain (đại diện: 'test@eshop.com')",
         "valid": false,
         "guideline": "set",
-        "note": "FR-01.4, D5. Gộp A EC20 + EC21; phần 'chỉ khác hoa/thường ở phần domain' suy ra từ D5 (A3 bản cuối, bước 5 của A, 8d837f1). (gray-box) client mobile không kiểm tính duy nhất trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-41 (trùng chính xác), TC-FR01-42 (trùng sau cắt khoảng trắng) (API); A không có TC API của AI cho phần domain.",
+        "note": "FR-01.4, D5. Gộp A EC20 + EC21; phần 'chỉ khác hoa/thường ở phần domain' suy ra từ D5 (A3 bản cuối, bước 5 của A, 8d837f1). (gray-box) Tiền đề gộp: giá trị trong ô (D12 = a) = giá trị gửi trong body POST /api/register. Ô 'Email' là ô có kiểm soát value={registerEmail} (App.js dòng 813), onChangeText={setRegisterEmail} (dòng 814) lưu nguyên chuỗi; autoCapitalize=\"none\" (dòng 815) chỉ tác động bàn phím lúc nhập; handleRegister không gán lại registerEmail (dòng 209–219) và gửi email: registerEmail (dòng 227) qua JSON.stringify (dòng 225) → client không trim/biến đổi; việc phân biệt các lớp con do server xử lý → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-41 (trùng chính xác), TC-FR01-42 (trùng sau cắt khoảng trắng) (API); A không có TC API của AI cho phần domain.",
         "requirements": [
           "FR-01.4",
           "D5"
@@ -474,7 +474,7 @@
         "class": "Không khớp: khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường), hoặc bỏ trống",
         "valid": false,
         "guideline": "must-be",
-        "note": "FR-01.9; D9: bỏ trống = không khớp. A tách rỗng (EC40) vì required của HTML5 có thể chặn trước khi so sánh — mobile không có HTML5 → gộp.",
+        "note": "FR-01.9; D9: 'bỏ trống = không khớp' → bỏ trống và khác ít nhất một ký tự cho cùng Expected (bị từ chối) → gộp.",
         "requirements": [
           "FR-01.9",
           "D9"
