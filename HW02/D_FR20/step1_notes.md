@@ -120,3 +120,4 @@ Cơ sở: A có 52 EC; TS-DOM-UI 27, TS-BVA-UI 19, TS-GUI 5, TS-DOM-API 30, TS-B
   - A21–A23 không dùng lại cho D.
 - D5 kế thừa giả định SV sửa ở bước 5 của A (A3 bản 2, 8d837f1) → có thể ảnh hưởng thiết kế EC của D (liên quan P1 = b; SV quyết).
 - Lệnh trước giả định nhầm A có commit 1/7b (A chốt giả định ngay trong 1/7, 4e30b25).
+- Bước 2: để tham chiếu TC API của A, AI in toàn bộ `domain.partitions` của A_FR01 kèm mã TC TS-DOM-API/TS-BVA-API theo `ec_target`. Bản in có EC51 ('Chỉ khác hoa/thường ở phần domain', ghi 'SV thêm ở bước 5 (A3)') và EC52 ('Email có ký tự ngoài ASCII', ghi 'A21; SV thêm ở bước 5'); EC19 ghi 'A3 (SV sửa ở bước 5)'. Không in nội dung case TS-SV. Lớp trùng email của D (EC7) có phần 'chỉ khác hoa/thường ở phần domain' — suy từ D5 do SV chốt; D không có lớp email ngoài ASCII.

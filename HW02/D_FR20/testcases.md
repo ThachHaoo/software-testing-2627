@@ -36,14 +36,80 @@ Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay
 | V9 | Tài khoản phía server | Ra | Quan sát theo D11: trang admin 'Quản lý Người dùng' (frontend-admin App.jsx dòng 881–892: ID, Email, Role, Số ĐT); đăng nhập thử trên app (header 'Chào, <tên>', App.js dòng 432); hoặc API (D11 c) | enum {tạo đúng 1 tài khoản, không tạo} | Hợp lệ → tạo đúng 1 tài khoản với email đã nhập, đăng nhập được bằng mật khẩu đã nhập, Họ Tên đúng; không hợp lệ → danh sách người dùng SAU = TRƯỚC (D10). | Tương ứng A_FR01 V9. A_FR01 V8 (phản hồi API) không dùng (D1 = a). |
 
 ### Bước 2 — Complete Set of Partitions
-| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Ghi chú |
-|---|---|---|---|---|---|
+| EC | Biến | Lớp tương đương | Hợp lệ | Hướng dẫn | Yêu cầu | Ghi chú |
+|---|---|---|---|---|---|---|
+| EC1 | Họ Tên | Không rỗng sau khi bỏ khoảng trắng (đại diện có chữ tiếng Việt có dấu, vd 'Nguyễn Văn Ánh') | ✔ | must-be | FR-01.1, D3 | FR-01.1, D3. Gộp A EC1 (Latin không dấu) + EC2 (có dấu); A tách vì mã hoá/lưu trữ phía server. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28, TC-FR01-29 (API). |
+| EC2 | Họ Tên | Rỗng hoặc chỉ gồm khoảng trắng (vd '' hoặc '␣␣␣') | ✘ | must-be | FR-01.1, D3 | FR-01.1 bắt buộc; D3: chỉ khoảng trắng coi như rỗng. A tách EC3/EC4 vì required của HTML5 chặn '' nhưng không chặn chuỗi toàn khoảng trắng — mobile không có HTML5. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-32 (rỗng), TC-FR01-33 (chỉ khoảng trắng), TC-FR01-79 (API). |
+| EC3 | Email | Đúng định dạng <local>@<domain>.<tld> (vd 'newuser@domain.com'); kể cả có khoảng trắng đầu/cuối (D5 cắt trước khi xử lý) | ✔ | must-be | FR-01.2, FR-01.3, D4, D5 | FR-01.2, FR-01.3, D4, D5. Gộp A EC7 + EC8 (khoảng trắng đầu/cuối). (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC7), TC-FR01-30 (EC8) (API). |
+| EC4 | Email | Rỗng (0 ký tự) | ✘ | must-be | FR-01.2 | FR-01.2 bắt buộc. Tách khỏi lớp sai định dạng vì vi phạm điều khoản khác (bắt buộc vs định dạng). Tham chiếu A: TC-FR01-34 (API). |
+| EC5 | Email | Sai định dạng theo D4 (đại diện: không có '@', vd 'newuserdomain.com') | ✘ | must-be | FR-01.3, D4 | FR-01.3, D4. Gộp A EC10–EC15 (không '@', nhiều '@', local rỗng, domain rỗng, domain không có '.', khoảng trắng bên trong); A tách theo bộ kiểm HTML5 type=email / regex client / backend — mobile không có HTML5. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-35, 36, 37, 38, 39, 40 (API). |
+| EC6 | Email đã tồn tại trong hệ thống | Email chưa tồn tại theo cách so sánh của D5 (gồm cả chỉ khác hoa/thường ở phần local, vd 'Test@eshop.com' khi đã có 'test@eshop.com') | ✔ | set | FR-01.4, D5 | FR-01.4, D5. Gộp A EC18 + EC19. (gray-box) client mobile không kiểm tính duy nhất trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC18), TC-FR01-31 (EC19) (API). |
+| EC7 | Email đã tồn tại trong hệ thống | Trùng email đã có theo D5: trùng chính xác, trùng sau khi cắt khoảng trắng đầu/cuối, hoặc chỉ khác hoa/thường ở phần domain (đại diện: 'test@eshop.com') | ✘ | set | FR-01.4, D5 | FR-01.4, D5. Gộp A EC20 + EC21; phần 'chỉ khác hoa/thường ở phần domain' suy ra từ D5 (A3 bản cuối, bước 5 của A, 8d837f1). (gray-box) client mobile không kiểm tính duy nhất trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-41 (trùng chính xác), TC-FR01-42 (trùng sau cắt khoảng trắng) (API); A không có TC API của AI cho phần domain. |
+| EC8 | Mật khẩu | Độ dài ≥ 8 ký tự (các điều kiện khác thoả) | ✔ | range | FR-01.6, D6 | FR-01.6. Chỉ có cận dưới LB = 8, không có cận trên (D6, no_upper_bound) → một lớp không hợp lệ phía dưới. (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-83, 84, 85 (API). |
+| EC9 | Mật khẩu | Độ dài 1–7 ký tự (các điều kiện khác thoả) | ✘ | range | FR-01.6 | FR-01.6. Tham chiếu A: TC-FR01-43, 82 (API). |
+| EC10 | Mật khẩu | Rỗng (0 ký tự) | ✘ | must-be | FR-01.5 | FR-01.5 bắt buộc. Tách khỏi lớp 1–7 ký tự vì vi phạm điều khoản khác (bắt buộc vs độ dài). Tham chiếu A: TC-FR01-44 (API). |
+| EC11 | Mật khẩu | Có ≥ 1 chữ hoa A–Z | ✔ | must-be | FR-01.7a, D8 | FR-01.7a, D8. |
+| EC12 | Mật khẩu | Không có chữ hoa nào (các điều kiện khác thoả) | ✘ | must-be | FR-01.7a | FR-01.7a. Tham chiếu A: TC-FR01-45 (API). |
+| EC13 | Mật khẩu | Chữ hoa duy nhất là chữ có dấu tiếng Việt, vd 'Ê' (các điều kiện khác thoả) | ✘ | split | FR-01.7a, D8 | FR-01.7a, D8: chỉ A–Z tính là chữ hoa. Tách vì bộ kiểm theo Unicode và theo [A-Z] cho kết quả khác nhau (như A EC27). (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-46 (API). |
+| EC14 | Mật khẩu | Có ≥ 1 chữ thường a–z | ✔ | must-be | FR-01.7b, D8 | FR-01.7b, D8. |
+| EC15 | Mật khẩu | Không có chữ thường nào (các điều kiện khác thoả) | ✘ | must-be | FR-01.7b | FR-01.7b. Tham chiếu A: TC-FR01-47 (API). |
+| EC16 | Mật khẩu | Chữ thường duy nhất là chữ có dấu tiếng Việt, vd 'ê' (các điều kiện khác thoả) | ✘ | split | FR-01.7b, D8 | FR-01.7b, D8, cùng lý do lớp chữ hoa có dấu (như A EC30). (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-48 (API). |
+| EC17 | Mật khẩu | Có ≥ 1 chữ số 0–9 | ✔ | must-be | FR-01.7c | FR-01.7c. |
+| EC18 | Mật khẩu | Không có chữ số nào (các điều kiện khác thoả) | ✘ | must-be | FR-01.7c | FR-01.7c. Tham chiếu A: TC-FR01-49 (API). |
+| EC19 | Mật khẩu | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | ✔ | set | FR-01.8 | FR-01.8. |
+| EC20 | Mật khẩu | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (vd '!' và '#') | ✔ | split | FR-01.8, D7 | D7: ký tự ngoài tập được phép xuất hiện thêm. Tách vì bộ kiểm dạng whitelist sẽ từ chối lớp này (như A EC34). (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-29 (API). |
+| EC21 | Mật khẩu | Không có ký tự đặc biệt nào (các điều kiện khác thoả) | ✘ | set | FR-01.8 | FR-01.8. Tham chiếu A: TC-FR01-50 (API). |
+| EC22 | Mật khẩu | Chỉ có ký tự đặc biệt ngoài tập, vd '#', '^', '-' (các điều kiện khác thoả) | ✘ | set | FR-01.8, D7 | D7: tập đóng → coi như thiếu ký tự đặc biệt; lớp 'ngoài tập' theo hướng dẫn set. (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-51 (API). |
+| EC23 | Xác nhận mật khẩu | Khớp chính xác với Mật khẩu | ✔ | must-be | FR-01.9, D9 | FR-01.9, D9. Màn hình không có ô (V5 note) → xử lý theo D9. |
+| EC24 | Xác nhận mật khẩu | Không khớp: khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường), hoặc bỏ trống | ✘ | must-be | FR-01.9, D9 | FR-01.9; D9: bỏ trống = không khớp. A tách rỗng (EC40) vì required của HTML5 có thể chặn trước khi so sánh — mobile không có HTML5 → gộp. |
+| EC25 | Xác nhận mật khẩu | Chỉ khác Mật khẩu ở chữ hoa/thường (vd 'Abcd1234!' và 'abcd1234!') | ✘ | split | FR-01.9, D9 | D9: so khớp phân biệt hoa/thường. Tách vì so sánh không phân biệt hoa/thường sẽ cho là khớp (như A EC42). |
+| EC26 | Cách nhập giá trị trên điện thoại | Giá trị của ô = chuỗi thực sự trong ô ngay trước khi bấm 'Đăng Ký' (gõ bằng bàn phím ảo hoặc dán) | ✔ | must-be | D12 | D12 = a: cách nhập không phải biến phân lớp; một lớp duy nhất để mọi case ghi nhận. Không có lớp không hợp lệ (check_domain sẽ cảnh báo – chủ ý). |
+| EC27 | Thông báo trên app sau khi bấm 'Đăng Ký' | Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) | ✔ | output | FR-20.1, D11 | Khi mọi đầu vào hợp lệ. D11: SRS im lặng về thông báo thành công. |
+| EC28 | Thông báo trên app sau khi bấm 'Đăng Ký' | Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại, toast…) | ✘ | output | D10 | D10. Nội dung chữ chỉ ghi Actual, không phân loại theo chữ của SUT; vị trí chỉ kiểm ở case FR-22.4 (D13). |
+| EC29 | Màn hình sau khi bấm 'Đăng Ký' | Chuyển sang màn 'Đăng Nhập' | ✔ | output | FR-01.10, D11 | FR-01.10, D11. |
+| EC30 | Màn hình sau khi bấm 'Đăng Ký' | Ở lại màn 'Đăng Ký Tài Khoản' | ✘ | output | D10 | D10. |
+| EC31 | Tài khoản phía server | Tạo đúng 1 tài khoản mới: thêm đúng 1 dòng có Email đã nhập ở trang admin 'Quản lý Người dùng'; đăng nhập được bằng mật khẩu đã nhập; header hiển thị 'Chào, <Họ Tên đã nhập>' | ✔ | output | FR-20.1, D11 | FR-20.1, FR-01.10 (thành công), D11. |
+| EC32 | Tài khoản phía server | Không tạo tài khoản: danh sách người dùng SAU = TRƯỚC | ✘ | output | D10, D11 | D10, D11. |
 
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
+| EC1 | Không rỗng sau khi bỏ khoảng trắng (đại diện có chữ tiếng Việt có dấu, vd 'Nguyễn Văn Ánh') | ⚠ chưa phủ |
+| EC2 | Rỗng hoặc chỉ gồm khoảng trắng (vd '' hoặc '␣␣␣') | ⚠ chưa phủ |
+| EC3 | Đúng định dạng <local>@<domain>.<tld> (vd 'newuser@domain.com'); kể cả có khoảng trắng đầu/cuối (D5 cắt trước khi xử lý) | ⚠ chưa phủ |
+| EC4 | Rỗng (0 ký tự) | ⚠ chưa phủ |
+| EC5 | Sai định dạng theo D4 (đại diện: không có '@', vd 'newuserdomain.com') | ⚠ chưa phủ |
+| EC6 | Email chưa tồn tại theo cách so sánh của D5 (gồm cả chỉ khác hoa/thường ở phần local, vd 'Test@eshop.com' khi đã có 'test@eshop.com') | ⚠ chưa phủ |
+| EC7 | Trùng email đã có theo D5: trùng chính xác, trùng sau khi cắt khoảng trắng đầu/cuối, hoặc chỉ khác hoa/thường ở phần domain (đại diện: 'test@eshop.com') | ⚠ chưa phủ |
+| EC8 | Độ dài ≥ 8 ký tự (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC9 | Độ dài 1–7 ký tự (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC10 | Rỗng (0 ký tự) | ⚠ chưa phủ |
+| EC11 | Có ≥ 1 chữ hoa A–Z | ⚠ chưa phủ |
+| EC12 | Không có chữ hoa nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC13 | Chữ hoa duy nhất là chữ có dấu tiếng Việt, vd 'Ê' (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC14 | Có ≥ 1 chữ thường a–z | ⚠ chưa phủ |
+| EC15 | Không có chữ thường nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC16 | Chữ thường duy nhất là chữ có dấu tiếng Việt, vd 'ê' (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC17 | Có ≥ 1 chữ số 0–9 | ⚠ chưa phủ |
+| EC18 | Không có chữ số nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC19 | Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập | ⚠ chưa phủ |
+| EC20 | Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (vd '!' và '#') | ⚠ chưa phủ |
+| EC21 | Không có ký tự đặc biệt nào (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC22 | Chỉ có ký tự đặc biệt ngoài tập, vd '#', '^', '-' (các điều kiện khác thoả) | ⚠ chưa phủ |
+| EC23 | Khớp chính xác với Mật khẩu | ⚠ chưa phủ |
+| EC24 | Không khớp: khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường), hoặc bỏ trống | ⚠ chưa phủ |
+| EC25 | Chỉ khác Mật khẩu ở chữ hoa/thường (vd 'Abcd1234!' và 'abcd1234!') | ⚠ chưa phủ |
+| EC26 | Giá trị của ô = chuỗi thực sự trong ô ngay trước khi bấm 'Đăng Ký' (gõ bằng bàn phím ảo hoặc dán) | ⚠ chưa phủ |
+| EC27 | Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual) | ⚠ chưa phủ |
+| EC28 | Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại, toast…) | ⚠ chưa phủ |
+| EC29 | Chuyển sang màn 'Đăng Nhập' | ⚠ chưa phủ |
+| EC30 | Ở lại màn 'Đăng Ký Tài Khoản' | ⚠ chưa phủ |
+| EC31 | Tạo đúng 1 tài khoản mới: thêm đúng 1 dòng có Email đã nhập ở trang admin 'Quản lý Người dùng'; đăng nhập được bằng mật khẩu đã nhập; header hiển thị 'Chào, <Họ Tên đã nhập>' | ⚠ chưa phủ |
+| EC32 | Không tạo tài khoản: danh sách người dùng SAU = TRƯỚC | ⚠ chưa phủ |
 
 ### Truy vết yêu cầu ↔ test case
+Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.
+
 | Yêu cầu | Test case | Số TC |
 |---|---|---|
 | FR-20.1 | ⚠ | 0 |

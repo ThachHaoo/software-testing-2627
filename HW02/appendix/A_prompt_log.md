@@ -17550,9 +17550,9 @@ có từ B). Bỏ điều kiện "commit 1/7b".
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã commit 1/7b. Đang làm bước 2: đọc phân lớp của A và các case API tương ứng để tham chiếu.
 ```
-*File AI ghi/gửi trong lượt này:* `d_step1b.py`
+*File AI ghi/gửi trong lượt này:* `d_step1b.py`, `d_step2.py`
 
 **Xử lý:** [...]
 

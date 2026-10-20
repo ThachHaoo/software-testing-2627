@@ -6,7 +6,7 @@
     "feature": "FR-20 Tính năng Mobile — chức năng Đăng ký (frontend-mobile, Expo SDK 54, màn hình 'Đăng Ký Tài Khoản'), áp dụng FR-01",
     "feature_code": "D_FR20",
     "doc_id": "TCD-D_FR20",
-    "version": "0.2",
+    "version": "0.3",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã); thay đổi cục bộ duy nhất: frontend-mobile/App.js dòng 16 API_URL",
@@ -198,7 +198,382 @@
         "note": "Tương ứng A_FR01 V9. A_FR01 V8 (phản hồi API) không dùng (D1 = a)."
       }
     ],
-    "partitions": []
+    "partitions": [
+      {
+        "id": "EC1",
+        "variable": "V1",
+        "class": "Không rỗng sau khi bỏ khoảng trắng (đại diện có chữ tiếng Việt có dấu, vd 'Nguyễn Văn Ánh')",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "FR-01.1, D3. Gộp A EC1 (Latin không dấu) + EC2 (có dấu); A tách vì mã hoá/lưu trữ phía server. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28, TC-FR01-29 (API).",
+        "requirements": [
+          "FR-01.1",
+          "D3"
+        ]
+      },
+      {
+        "id": "EC2",
+        "variable": "V1",
+        "class": "Rỗng hoặc chỉ gồm khoảng trắng (vd '' hoặc '␣␣␣')",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.1 bắt buộc; D3: chỉ khoảng trắng coi như rỗng. A tách EC3/EC4 vì required của HTML5 chặn '' nhưng không chặn chuỗi toàn khoảng trắng — mobile không có HTML5. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-32 (rỗng), TC-FR01-33 (chỉ khoảng trắng), TC-FR01-79 (API).",
+        "requirements": [
+          "FR-01.1",
+          "D3"
+        ]
+      },
+      {
+        "id": "EC3",
+        "variable": "V2",
+        "class": "Đúng định dạng <local>@<domain>.<tld> (vd 'newuser@domain.com'); kể cả có khoảng trắng đầu/cuối (D5 cắt trước khi xử lý)",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "FR-01.2, FR-01.3, D4, D5. Gộp A EC7 + EC8 (khoảng trắng đầu/cuối). (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC7), TC-FR01-30 (EC8) (API).",
+        "requirements": [
+          "FR-01.2",
+          "FR-01.3",
+          "D4",
+          "D5"
+        ]
+      },
+      {
+        "id": "EC4",
+        "variable": "V2",
+        "class": "Rỗng (0 ký tự)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.2 bắt buộc. Tách khỏi lớp sai định dạng vì vi phạm điều khoản khác (bắt buộc vs định dạng). Tham chiếu A: TC-FR01-34 (API).",
+        "requirements": [
+          "FR-01.2"
+        ]
+      },
+      {
+        "id": "EC5",
+        "variable": "V2",
+        "class": "Sai định dạng theo D4 (đại diện: không có '@', vd 'newuserdomain.com')",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.3, D4. Gộp A EC10–EC15 (không '@', nhiều '@', local rỗng, domain rỗng, domain không có '.', khoảng trắng bên trong); A tách theo bộ kiểm HTML5 type=email / regex client / backend — mobile không có HTML5. (gray-box) client mobile không kiểm biến này trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-35, 36, 37, 38, 39, 40 (API).",
+        "requirements": [
+          "FR-01.3",
+          "D4"
+        ]
+      },
+      {
+        "id": "EC6",
+        "variable": "V3",
+        "class": "Email chưa tồn tại theo cách so sánh của D5 (gồm cả chỉ khác hoa/thường ở phần local, vd 'Test@eshop.com' khi đã có 'test@eshop.com')",
+        "valid": true,
+        "guideline": "set",
+        "note": "FR-01.4, D5. Gộp A EC18 + EC19. (gray-box) client mobile không kiểm tính duy nhất trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-28 (EC18), TC-FR01-31 (EC19) (API).",
+        "requirements": [
+          "FR-01.4",
+          "D5"
+        ]
+      },
+      {
+        "id": "EC7",
+        "variable": "V3",
+        "class": "Trùng email đã có theo D5: trùng chính xác, trùng sau khi cắt khoảng trắng đầu/cuối, hoặc chỉ khác hoa/thường ở phần domain (đại diện: 'test@eshop.com')",
+        "valid": false,
+        "guideline": "set",
+        "note": "FR-01.4, D5. Gộp A EC20 + EC21; phần 'chỉ khác hoa/thường ở phần domain' suy ra từ D5 (A3 bản cuối, bước 5 của A, 8d837f1). (gray-box) client mobile không kiểm tính duy nhất trước khi gửi, gửi nguyên chuỗi trong ô tới POST /api/register (App.js dòng 222–229; chỉ kiểm Mật khẩu ở dòng 211–219) → theo D1 = a lấy 1 đại diện. Tham chiếu A: TC-FR01-41 (trùng chính xác), TC-FR01-42 (trùng sau cắt khoảng trắng) (API); A không có TC API của AI cho phần domain.",
+        "requirements": [
+          "FR-01.4",
+          "D5"
+        ]
+      },
+      {
+        "id": "EC8",
+        "variable": "V4",
+        "class": "Độ dài ≥ 8 ký tự (các điều kiện khác thoả)",
+        "valid": true,
+        "guideline": "range",
+        "note": "FR-01.6. Chỉ có cận dưới LB = 8, không có cận trên (D6, no_upper_bound) → một lớp không hợp lệ phía dưới. (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-83, 84, 85 (API).",
+        "requirements": [
+          "FR-01.6",
+          "D6"
+        ]
+      },
+      {
+        "id": "EC9",
+        "variable": "V4",
+        "class": "Độ dài 1–7 ký tự (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "range",
+        "note": "FR-01.6. Tham chiếu A: TC-FR01-43, 82 (API).",
+        "requirements": [
+          "FR-01.6"
+        ]
+      },
+      {
+        "id": "EC10",
+        "variable": "V4",
+        "class": "Rỗng (0 ký tự)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.5 bắt buộc. Tách khỏi lớp 1–7 ký tự vì vi phạm điều khoản khác (bắt buộc vs độ dài). Tham chiếu A: TC-FR01-44 (API).",
+        "requirements": [
+          "FR-01.5"
+        ]
+      },
+      {
+        "id": "EC11",
+        "variable": "V4",
+        "class": "Có ≥ 1 chữ hoa A–Z",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "FR-01.7a, D8.",
+        "requirements": [
+          "FR-01.7a",
+          "D8"
+        ]
+      },
+      {
+        "id": "EC12",
+        "variable": "V4",
+        "class": "Không có chữ hoa nào (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.7a. Tham chiếu A: TC-FR01-45 (API).",
+        "requirements": [
+          "FR-01.7a"
+        ]
+      },
+      {
+        "id": "EC13",
+        "variable": "V4",
+        "class": "Chữ hoa duy nhất là chữ có dấu tiếng Việt, vd 'Ê' (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "split",
+        "note": "FR-01.7a, D8: chỉ A–Z tính là chữ hoa. Tách vì bộ kiểm theo Unicode và theo [A-Z] cho kết quả khác nhau (như A EC27). (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-46 (API).",
+        "requirements": [
+          "FR-01.7a",
+          "D8"
+        ]
+      },
+      {
+        "id": "EC14",
+        "variable": "V4",
+        "class": "Có ≥ 1 chữ thường a–z",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "FR-01.7b, D8.",
+        "requirements": [
+          "FR-01.7b",
+          "D8"
+        ]
+      },
+      {
+        "id": "EC15",
+        "variable": "V4",
+        "class": "Không có chữ thường nào (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.7b. Tham chiếu A: TC-FR01-47 (API).",
+        "requirements": [
+          "FR-01.7b"
+        ]
+      },
+      {
+        "id": "EC16",
+        "variable": "V4",
+        "class": "Chữ thường duy nhất là chữ có dấu tiếng Việt, vd 'ê' (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "split",
+        "note": "FR-01.7b, D8, cùng lý do lớp chữ hoa có dấu (như A EC30). (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-48 (API).",
+        "requirements": [
+          "FR-01.7b",
+          "D8"
+        ]
+      },
+      {
+        "id": "EC17",
+        "variable": "V4",
+        "class": "Có ≥ 1 chữ số 0–9",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "FR-01.7c.",
+        "requirements": [
+          "FR-01.7c"
+        ]
+      },
+      {
+        "id": "EC18",
+        "variable": "V4",
+        "class": "Không có chữ số nào (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.7c. Tham chiếu A: TC-FR01-49 (API).",
+        "requirements": [
+          "FR-01.7c"
+        ]
+      },
+      {
+        "id": "EC19",
+        "variable": "V4",
+        "class": "Có ≥ 1 ký tự thuộc {@ $ ! % * ? &}, không có ký tự đặc biệt ngoài tập",
+        "valid": true,
+        "guideline": "set",
+        "note": "FR-01.8.",
+        "requirements": [
+          "FR-01.8"
+        ]
+      },
+      {
+        "id": "EC20",
+        "variable": "V4",
+        "class": "Có ≥ 1 ký tự thuộc tập và thêm ký tự đặc biệt ngoài tập (vd '!' và '#')",
+        "valid": true,
+        "guideline": "split",
+        "note": "D7: ký tự ngoài tập được phép xuất hiện thêm. Tách vì bộ kiểm dạng whitelist sẽ từ chối lớp này (như A EC34). (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-29 (API).",
+        "requirements": [
+          "FR-01.8",
+          "D7"
+        ]
+      },
+      {
+        "id": "EC21",
+        "variable": "V4",
+        "class": "Không có ký tự đặc biệt nào (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "set",
+        "note": "FR-01.8. Tham chiếu A: TC-FR01-50 (API).",
+        "requirements": [
+          "FR-01.8"
+        ]
+      },
+      {
+        "id": "EC22",
+        "variable": "V4",
+        "class": "Chỉ có ký tự đặc biệt ngoài tập, vd '#', '^', '-' (các điều kiện khác thoả)",
+        "valid": false,
+        "guideline": "set",
+        "note": "D7: tập đóng → coi như thiếu ký tự đặc biệt; lớp 'ngoài tập' theo hướng dẫn set. (gray-box) client mobile có bước kiểm Mật khẩu trước khi gửi (App.js dòng 211–219) và server cũng xử lý → giữ đủ lớp con như A cho tầng Mobile (D1 = a: BVA/phân lớp đủ cho biến client xử lý). Tham chiếu A: TC-FR01-51 (API).",
+        "requirements": [
+          "FR-01.8",
+          "D7"
+        ]
+      },
+      {
+        "id": "EC23",
+        "variable": "V5",
+        "class": "Khớp chính xác với Mật khẩu",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "FR-01.9, D9. Màn hình không có ô (V5 note) → xử lý theo D9.",
+        "requirements": [
+          "FR-01.9",
+          "D9"
+        ]
+      },
+      {
+        "id": "EC24",
+        "variable": "V5",
+        "class": "Không khớp: khác Mật khẩu ít nhất một ký tự (không chỉ khác hoa/thường), hoặc bỏ trống",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "FR-01.9; D9: bỏ trống = không khớp. A tách rỗng (EC40) vì required của HTML5 có thể chặn trước khi so sánh — mobile không có HTML5 → gộp.",
+        "requirements": [
+          "FR-01.9",
+          "D9"
+        ]
+      },
+      {
+        "id": "EC25",
+        "variable": "V5",
+        "class": "Chỉ khác Mật khẩu ở chữ hoa/thường (vd 'Abcd1234!' và 'abcd1234!')",
+        "valid": false,
+        "guideline": "split",
+        "note": "D9: so khớp phân biệt hoa/thường. Tách vì so sánh không phân biệt hoa/thường sẽ cho là khớp (như A EC42).",
+        "requirements": [
+          "FR-01.9",
+          "D9"
+        ]
+      },
+      {
+        "id": "EC26",
+        "variable": "V6",
+        "class": "Giá trị của ô = chuỗi thực sự trong ô ngay trước khi bấm 'Đăng Ký' (gõ bằng bàn phím ảo hoặc dán)",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "D12 = a: cách nhập không phải biến phân lớp; một lớp duy nhất để mọi case ghi nhận. Không có lớp không hợp lệ (check_domain sẽ cảnh báo – chủ ý).",
+        "requirements": [
+          "D12"
+        ]
+      },
+      {
+        "id": "EC27",
+        "variable": "V7",
+        "class": "Không có thông báo lỗi ở mọi kênh (thông báo thành công, nếu có, chỉ ghi Actual)",
+        "valid": true,
+        "guideline": "output",
+        "note": "Khi mọi đầu vào hợp lệ. D11: SRS im lặng về thông báo thành công.",
+        "requirements": [
+          "FR-20.1",
+          "D11"
+        ]
+      },
+      {
+        "id": "EC28",
+        "variable": "V7",
+        "class": "Có thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại, toast…)",
+        "valid": false,
+        "guideline": "output",
+        "note": "D10. Nội dung chữ chỉ ghi Actual, không phân loại theo chữ của SUT; vị trí chỉ kiểm ở case FR-22.4 (D13).",
+        "requirements": [
+          "D10"
+        ]
+      },
+      {
+        "id": "EC29",
+        "variable": "V8",
+        "class": "Chuyển sang màn 'Đăng Nhập'",
+        "valid": true,
+        "guideline": "output",
+        "note": "FR-01.10, D11.",
+        "requirements": [
+          "FR-01.10",
+          "D11"
+        ]
+      },
+      {
+        "id": "EC30",
+        "variable": "V8",
+        "class": "Ở lại màn 'Đăng Ký Tài Khoản'",
+        "valid": false,
+        "guideline": "output",
+        "note": "D10.",
+        "requirements": [
+          "D10"
+        ]
+      },
+      {
+        "id": "EC31",
+        "variable": "V9",
+        "class": "Tạo đúng 1 tài khoản mới: thêm đúng 1 dòng có Email đã nhập ở trang admin 'Quản lý Người dùng'; đăng nhập được bằng mật khẩu đã nhập; header hiển thị 'Chào, <Họ Tên đã nhập>'",
+        "valid": true,
+        "guideline": "output",
+        "note": "FR-20.1, FR-01.10 (thành công), D11.",
+        "requirements": [
+          "FR-20.1",
+          "D11"
+        ]
+      },
+      {
+        "id": "EC32",
+        "variable": "V9",
+        "class": "Không tạo tài khoản: danh sách người dùng SAU = TRƯỚC",
+        "valid": false,
+        "guideline": "output",
+        "note": "D10, D11.",
+        "requirements": [
+          "D10",
+          "D11"
+        ]
+      }
+    ]
   },
   "suites": []
 }
