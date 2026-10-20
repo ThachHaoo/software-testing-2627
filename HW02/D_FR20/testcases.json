@@ -829,7 +829,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-03_manual",
           "evidence": "evidence/TC-FR20-03_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-51",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
         },
         {
@@ -883,7 +883,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-04_manual",
           "evidence": "evidence/TC-FR20-04_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-52",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
         },
         {
@@ -938,7 +938,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-05_manual",
           "evidence": "evidence/TC-FR20-05_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-52",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
         },
         {
@@ -993,7 +993,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-06_manual",
           "evidence": "evidence/TC-FR20-06_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-53",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
         },
         {
@@ -1478,7 +1478,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-15_manual",
           "evidence": "evidence/TC-FR20-15_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-54",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5."
         },
         {
@@ -1533,7 +1533,7 @@
           "status": "Blocked",
           "actual_result": "Không chạy được vì không có ô \"Xác nhận mật khẩu\"",
           "evidence": "",
-          "bug_id": "",
+          "bug_id": "BUG-57 (liên quan; Blocked, case gốc TC-FR20-94)",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → dừng ở bước nhập, status Blocked, case gốc TC-FR20-94. SV chốt 2026-10-21: Blocked, case gốc TC-FR20-94 — màn hình không có ô Xác nhận mật khẩu."
         },
         {
@@ -1588,7 +1588,7 @@
           "status": "Blocked",
           "actual_result": "Không chạy được vì không có ô \"Xác nhận mật khẩu\"",
           "evidence": "",
-          "bug_id": "",
+          "bug_id": "BUG-57 (liên quan; Blocked, case gốc TC-FR20-94)",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → dừng ở bước nhập, status Blocked, case gốc TC-FR20-94. SV chốt 2026-10-21: Blocked, case gốc TC-FR20-94 — màn hình không có ô Xác nhận mật khẩu."
         }
       ]
@@ -1972,7 +1972,7 @@
           "status": "Fail",
           "actual_result": "Mỗi nhãn không có ký hiệu '*' bên cạnh / Xem hình TC-FR20-90-manual",
           "evidence": "evidence/TC-FR20-90_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-55",
           "notes": "",
           "cleanup": [
             "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
@@ -2012,7 +2012,7 @@
           "status": "Fail",
           "actual_result": "Bàn phím hiện ra, nhưng không phải là bàn phím Email (không có phím '@') / xem hình TC-FR20-91_manual",
           "evidence": "evidence/TC-FR20-91_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-56",
           "notes": "",
           "cleanup": [
             "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
@@ -2138,7 +2138,7 @@
           "status": "Fail",
           "actual_result": "Không có ô \"Xác nhận mật khẩu\" / xem hình TC-FR20-94_manual",
           "evidence": "evidence/TC-FR20-94_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-57",
           "notes": "",
           "cleanup": [
             "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
@@ -2358,7 +2358,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển về giao diện mua hàng / xem ảnh TC-FR20-203_manual, số user chỉ tăng thêm 1, cùng với đó có thể xem TC-FR20-203-admin_manual",
           "evidence": "evidence/TC-FR20-203_manual_1.png, evidence/TC-FR20-203_admin_1.png",
-          "bug_id": "",
+          "bug_id": "không lập bug (lỗi thiết kế TC)",
           "notes": "Căn cứ (SV): FR-20.1, D11. Lượt 20261021-001500: lệch nhỏ so với procedure (D0) — SV chụp thêm ảnh admin theo case (evidence/TC-FR20-203_admin_1.png) ngoài ảnh admin cả lượt. SV chốt 2026-10-21: Fail do lỗi thiết kế TC, không lập bug — các lần chạm sau rơi vào màn kế tiếp; procedure không quy định khi màn hình đổi → phần màn hình không đánh giá được. Phần 'đúng 1 tài khoản': ảnh TC-FR20-203_admin_1.png có đúng 1 dòng m203_{ts}@domain.com (ID 17)."
         },
         {
@@ -2410,7 +2410,7 @@
           "status": "Fail",
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-204_manual",
           "evidence": "evidence/TC-FR20-204_manual_1.png",
-          "bug_id": "",
+          "bug_id": "BUG-52",
           "notes": "Căn cứ (SV): FR-01.3, D4"
         },
         {
