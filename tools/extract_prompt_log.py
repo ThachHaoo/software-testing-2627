@@ -35,6 +35,7 @@ File lượt ngoài Claude Code (Gemini, ChatGPT…), cùng được đánh số
   [[entry]]
   time   = "2026-10-20T09:15"        # giờ địa phương
   tool   = "Gemini Flash"
+  source = "Chép tay từ giao diện …"   # tuỳ chọn, hiện thành dòng "*Nguồn:*" dưới tiêu đề lượt
   prompt = '''...'''
   output = '''...'''
 """
@@ -218,6 +219,8 @@ def render(turns, notes, args):
     for i, t in enumerate(turns, 1):
         n = note_for(notes, keys, i)
         out.append(f"## #{i} | {t['time']:%H:%M %d/%m/%Y} | {t['tool']} | {n.get('section', '[...]')}")
+        if t.get("source"):
+            out.append(f"*Nguồn:* {t['source']}")
         out.append(f"**Mục đích:** {n.get('muc_dich', '[...]')}")
         out += ["", "**Prompt:**", fence(t["prompt"])]
         if n.get("dinh_kem"):
@@ -267,7 +270,7 @@ def main():
     for e in load_toml(args.extra).get("entry", []):
         turns.append({"time": dt.datetime.fromisoformat(e["time"]).replace(tzinfo=LOCAL_TZ),
                       "tool": e["tool"], "prompt": e["prompt"].strip(), "attachments": e.get("attachments", []),
-                      "output": [e["output"].strip()], "files": []})
+                      "output": [e["output"].strip()], "files": [], "source": e.get("source", "")})
     for t in turns:
         t["tool"] = t.get("tool") or NO_MODEL
     # phiên tiếp nối (resume/fork) chép lại lịch sử phiên cũ → bỏ lượt trùng giờ + prompt, giữ bản có nhiều output hơn

@@ -780,7 +780,130 @@ bạn bảo commit rồi làm bài nhưng mình chưa thấy CLAUDE.md nên mu�
 
 ---
 
-## #15 | 16:10 19/10/2026 | Claude Opus 5.5 | [...]
+## #15 | 16:04 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627> python tools/hooks/on_stop.py --manual
+chép C:\Users\tanhi\.claude\projects\D--HK7-Testing-Exercise-HW-software-testing-2627\580f5fe0-471a-4a63-a276-07575e727880.jsonl
+Exception in thread Thread-2 (_readerthread):
+Traceback (most recent call last):
+  File "C:\msys64\ucrt64\lib\python3.14\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\msys64\ucrt64\lib\python3.14\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\msys64\ucrt64\lib\python3.14\subprocess.py", line 1613, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe3 in position 294: invalid continuation byte
+lỗi: AttributeError("'NoneType' object has no attribute 'strip'")
+===
+lỗi gì đây nhỉ.
+```
+
+**Output:**
+````
+Lỗi do script của mình chưa xử lý mã hoá ký tự trên Windows. Mình đã sửa trong 2 file vừa gửi (`on_stop.py`, `extract_prompt_log.py`).
+
+**Nguyên nhân:** `on_stop.py` gọi `extract_prompt_log.py` như một tiến trình con. Trên Windows, khi output bị chuyển hướng, tiến trình con in tiếng Việt theo code page cũ (ở đây là cp1258) chứ không phải UTF-8. Script cha lại đọc output đó như UTF-8, gặp byte `0xe3` (chữ "ã" trong cp1258) nên lỗi. Output sau đó thành `None`, kéo theo lỗi `AttributeError` thứ hai.
+
+Thực ra file log có thể đã được ghi xong, vì tiến trình con chỉ in thông báo sau khi ghi. Chỉ bước đọc thông báo bị hỏng.
+
+**Đã sửa:**
+- Ép tiến trình con dùng UTF-8 (`PYTHONIOENCODING=utf-8`, `PYTHONUTF8=1`).
+- Đọc output với `errors="replace"` để gặp ký tự lạ cũng không còn làm script dừng.
+- Cả hai script đặt lại stdout của chính nó về UTF-8, nên lệnh `--list` in tiếng Việt cũng không lỗi.
+
+Mình đã chạy thử với giả lập code page cp1258 và cp1252: chạy qua, in "Đã ghi 14 lượt…".
+
+**Bạn làm:** thay 2 file, xong chạy lại
+
+```powershell
+python tools/hooks/on_stop.py --manual
+```
+
+Kết quả mong đợi là một dòng `chép …580f5fe0….jsonl` và một dòng `Đã ghi N lượt vào …A_prompt_log.md`.
+
+Bạn đang dùng Python 3.14 của MSYS2 (`C:\msys64\ucrt64`). Bản này hợp lệ, vì hook cũng gọi đúng lệnh `python` đó. Nếu sau này cài thêm Python bản Windows chính thức thì để ý xem lệnh `python` đang trỏ vào bản nào.
+
+Chạy ổn thì quay lại phần commit ở tin nhắn trước (`git add -f CLAUDE.md`, kiểm tra `.transcripts` đã bị ignore, rồi commit).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #16 | 16:07 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627> python tools/hooks/on_stop.py --manual
+chép C:\Users\tanhi\.claude\projects\D--HK7-Testing-Exercise-HW-software-testing-2627\580f5fe0-471a-4a63-a276-07575e727880.jsonl
+Đã ghi 14 lượt vào D:\HK7\Testing\Exercise\HW\software-testing-2627\HW02\appendix\A_prompt_log.md
+===
+oke rồi. Mà khi add, có cần sửa lại gì không nhỉ
+```
+
+**Output:**
+````
+Không cần sửa gì. Mấy dòng `LF will be replaced by CRLF` chỉ là cảnh báo, không phải lỗi.
+
+- **Lý do có cảnh báo:** Git for Windows bật sẵn `core.autocrlf=true`. File do mình tạo dùng xuống dòng LF, nên Git báo sẽ đổi sang CRLF khi checkout. Trong repo vẫn lưu LF.
+- **Script có chạy được không:** Python, PowerShell, JSON, TOML và Markdown đều đọc được cả hai kiểu xuống dòng, nên không ảnh hưởng gì.
+- **`A_prompt_log.md` không có trong danh sách cảnh báo:** Python trên Windows ghi file bằng CRLF sẵn rồi nên Git không cần báo.
+
+Trước khi commit, soát lần cuối xem những gì đã được add:
+
+```powershell
+git status -s | Select-String "jsonl|transcripts|\.pdf"   # phải KHÔNG in ra dòng nào
+git commit -m "HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục"
+```
+
+`HW02/appendix/A_prompt_log.md` (14 lượt) sẽ vào commit này luôn. Như vậy là được, vì file này tự cập nhật, các commit sau sẽ có bản mới hơn.
+
+---
+
+## Bước tiếp theo: lệnh đầu tiên cho Claude Code (FR-01, bước 0–1)
+
+Trước khi dán lệnh, bạn cần quyết định một chỗ: **chỉ test qua UI, hay cả UI lẫn API** (`POST /api/register`)? Chọn cả hai thì số test case nhiều hơn và dễ chỉ ra lỗi nằm ở tầng nào. Bù lại tốn công hơn. Đây là quyết định về phạm vi, bạn tự chọn. Sau đó điền lựa chọn vào dòng "Phạm vi tầng" trong lệnh dưới.
+
+Dán vào Claude Code:
+
+```
+/domain-bva-testing HW02/A_FR01 0
+Xong bước 0 thì làm tiếp bước 1 cho cùng feature.
+
+Feature: FR-01 Đăng ký tài khoản (Pool A, HW02).
+Test basis: ../eshop-sut/README.md mục FR-01 (và FR-22 nếu liên quan tới form). SRS là oracle.
+Mã nguồn chỉ dùng để lấy đúng tên nhãn, trường, nút, thông báo, endpoint: ../eshop-sut/frontend-web/src/pages/Register.jsx, route POST /api/register trong ../eshop-sut/backend/server.js.
+Phạm vi tầng: [UI | UI + API]   ← em điền
+
+Yêu cầu:
+- Bước 0: tạo HW02/A_FR01/testcases.json. meta.sut_version = "eshop-sut 85af3ba"; meta.references ghi file + dòng đã đọc; tách FR-01 thành các yêu cầu có mã FR-01.1, FR-01.2…
+- Bước 1: domain.variables gồm cả biến đầu vào và biến đầu ra; cột source ghi đúng nơi biến xuất hiện.
+- Chỗ nào SRS không nói rõ thì ghi vào meta.assumptions, không tự quyết ngầm.
+- Chạy: freeze.py --step 1 --note "Claude Code bước 0-1", check_domain.py, render_md.py -o HW02/A_FR01/testcases.md.
+- KHÔNG làm bước 2 trở đi. KHÔNG commit, chờ em review.
+- Kết thúc bằng khối "Báo cáo cho phiên thảo luận".
+```
+
+Khi Claude Code làm xong, dán khối **"Báo cáo cho phiên thảo luận"** và nội dung `testcases.md` (bảng Biến vào/ra và phần Giả định) về đây. Mình sẽ cùng bạn review trước khi commit `HW02[A-FR01] 1/7`.
+
+Lệnh này do phiên thảo luận soạn. Khi ghi chú prompt log cho lượt tương ứng bên Claude Code, ghi phần Mục đích là "thực hiện lệnh soạn ở phiên thảo luận #n". Như vậy phần Audit sẽ khớp giữa hai phiên.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #17 | 16:10 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -859,7 +982,87 @@ Cột `source` chỉ ghi nơi biến xuất hiện. Riêng V5 ghi đúng điều
 
 ---
 
-## #16 | 16:31 19/10/2026 | Claude Opus 5.5 | [...]
+## #18 | 16:18 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 bước 0 + bước 1 (FR-01 Đăng ký, tầng UI + API)
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json (mới: meta, 14 yêu cầu FR-01.1–FR-01.10 + FR-22.1–FR-22.4, 14 giả định A1–A14, 9 biến V1–V9)
+  - HW02/A_FR01/testcases.md (sinh bằng render_md.py)
+  - HW02/appendix/ai-outputs/A_FR01_step1_20261019-1613.{json,md} + dòng mới trong INDEX.md (freeze, note "Claude Code bước 0-1")
+- Kết quả kiểm tra: check_domain 0 lỗi / 5 cảnh báo (cả 5 đều do chưa có partitions → bước 2) · lint 0 lỗi / 14 cảnh báo (chưa có TC phủ yêu cầu → bước 3) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 1/7: Phân tích biến vào/ra"
+- Cần quyết định / câu hỏi:
+  1. A3: email trùng có phân biệt hoa/thường không, có cắt khoảng trắng đầu/cuối không? (AI đang giả định: không phân biệt, có cắt)
+  2. A5: tập ký tự đặc biệt {@ $ ! % * ? &} có phải tập đóng không? Mật khẩu chỉ có '#' thì bị từ chối?
+  3. A8: yêu cầu "xác nhận mật khẩu" chỉ kiểm ở UI, không áp dụng cho API?
+  4. A14: FR-22 ('*', type=email, type=password, vị trí lỗi) để ngoài phân lớp, kiểm bằng case GUI riêng — có đưa vào phạm vi không? Có thêm FR-21 (màu nút submit) và SEC-01 (mật khẩu không lưu plaintext, có thể thêm thành biến đầu ra) không?
+  5. A1/A4: Họ Tên và Mật khẩu không có cận trên → bước 4 chỉ làm BVA quanh cận dưới. Đồng ý không?
+  6. HEAD của repo SUT là de0f48f (chỉ thêm .gitignore so với 85af3ba) → có cần ghi vào environment.md không?
+  7. Console Windows cần PYTHONIOENCODING=utf-8 mới chạy được script → đề xuất thêm vào lệnh mẫu trong CLAUDE.md.
+```
+
+**Output:**
+````
+**Bản vá (`patch-01.zip`):** giải nén đè vào gốc repo bằng `Expand-Archive patch-01.zip -DestinationPath . -Force`. Bản vá chỉ có 8 file script và settings, không đụng tới `testcases.json`, CLAUDE.md hay file ghi chú. Sau đó **khởi động lại Claude Code** để nhận biến môi trường mới.
+
+## Nhận xét bản nháp bước 0–1
+
+Bản nháp tốt:
+- Có căn cứ đến từng dòng code.
+- Có biến trạng thái (V3: email đã tồn tại).
+- Có biến đầu ra dạng bản ghi CSDL (V9). Biến đầu ra là phần hay bị bỏ quên.
+- 14 giả định được ghi tường minh.
+
+Có 3 chỗ nên sửa:
+
+1. **V6/A10 đang gộp hai mục tiêu vào một oracle.** Oracle của mọi case nhập sai đều kèm điều kiện "thông báo đặt phía trên nút Đăng Ký" (FR-22.4). Nếu vị trí sai thì mọi case validation đều Fail, và không biết lỗi nằm ở validation hay ở layout. Theo nguyên tắc "một TC một mục tiêu" (Kaner), bỏ điều kiện vị trí khỏi oracle chung và kiểm FR-22.4 bằng một case riêng.
+2. **FR-01.7 gộp ba điều kiện** (chữ hoa, chữ thường, chữ số). Ở bước 2, mỗi điều kiện "phải có" sẽ ra lớp riêng. Nên tách thành FR-01.7a/b/c để bảng truy vết khớp với các lớp.
+3. **Hai chỗ code lệch SRS:** ô Email là `type="text"`, và form không có ô Xác nhận mật khẩu. AI phát hiện khi đọc code. Giữ V2 và V5 theo SRS là đúng. Hai chỗ này mới là **dấu hiệu bug**, chưa phải bug: ghi vào note, xác nhận ở bước 6 rồi mới báo. Đây cũng là dữ liệu tốt cho phần gap analysis về sau: AI giỏi soi code tĩnh.
+
+## 7 câu hỏi của Claude Code
+
+Câu 1, 2, 3, 5 là cách hiểu đặc tả, **bạn quyết**. Ý kiến của mình ghi kèm để bạn cân nhắc.
+
+| # | Ý kiến của mình |
+|---|---|
+| 1. A3 (email hoa/thường, khoảng trắng) | SRS không nói gì nên cả hai cách hiểu đều bảo vệ được. Chọn cách nào cũng được, miễn ghi rõ là **giả định**: Expected của các case liên quan phụ thuộc vào lựa chọn này. |
+| 2. A5 (tập ký tự đặc biệt đóng) | Giữ. SRS liệt kê tập trong ngoặc, nên đọc đúng câu chữ thì đó là tập đóng. |
+| 3. A8 (xác nhận mật khẩu chỉ ở UI) | Giữ. API spec không có trường này. |
+| 4. Phạm vi | **Giữ FR-22.1–22.4**, kiểm bằng một suite GUI riêng (checklist), không phân lớp. Rẻ, gắn trực tiếp với form, và số bug là căn cứ phân hoá điểm. **Bỏ FR-21**: đó là chuẩn chung cho toàn hệ thống. **Bỏ SEC-01**: đây là case bảo mật, nằm ngoài Domain/BVA; theo AI-01 §11, case bảo mật do SV tự viết. Nếu muốn thì bạn tự viết sau. |
+| 5. Không có cận trên | Đồng ý: SRS không cho UB. Mô hình 9 điểm của slide có thêm MIN_UI/MAX_UI (giá trị lớn nhất nhập được qua UI). Có áp dụng hay không, xét ở bước 4. |
+| 6. SUT commit | Ghi đúng commit đang chạy: **fork `tkob-team/eshop-sut` @ `de0f48f`** (= `85af3ba` + `.gitignore`, không đổi code). |
+| 7. Mã hoá ký tự | Đã sửa trong bản vá: thêm `env` vào `.claude/settings.json`, và mọi script tự in UTF-8. Với PowerShell của bạn, chạy một lần lệnh `[Environment]::SetEnvironmentVariable("PYTHONUTF8","1","User")` rồi mở lại terminal. |
+
+## Lệnh cho Claude Code (điền chỗ `[...]` rồi dán)
+
+```
+Áp dụng quyết định review bước 1 cho HW02/A_FR01. Đây là phần em sửa trên bản nháp đã đóng băng: KHÔNG chạy freeze lại.
+1. Giả định: A3 = [giữ nguyên | đổi thành: ...]; giữ A5, A8; giữ A1/A4 (không có cận trên, MIN_UI/MAX_UI xét ở bước 4).
+2. Phạm vi: giữ FR-22.1–22.4, kiểm bằng suite GUI riêng, không phân lớp; bỏ FR-21 và SEC-01 khỏi phạm vi. Ghi lý do vào meta.scope.
+3. Tách FR-01.7 thành FR-01.7a (≥1 chữ hoa), FR-01.7b (≥1 chữ thường), FR-01.7c (≥1 chữ số).
+4. V6 và A10: bỏ điều kiện "đặt phía trên nút Đăng Ký" khỏi oracle của case nhập liệu; vị trí thông báo lỗi chỉ kiểm ở case FR-22.4.
+5. Thêm trường note cho V2 và V5: "Quan sát mã nguồn: [ô Email type=text | form không có ô Xác nhận mật khẩu]. Chưa kết luận lỗi, xác nhận khi thực thi (bước 6)."
+6. SUT = fork tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã): cập nhật meta.sut_version, HW02/env/environment.md và CLAUDE.md.
+7. CLAUDE.md, mục "Quyết định đã chốt": thêm dòng ngày 2026-10-19 cho các mục 1, 2, 6.
+8. Chạy check_domain.py và render_md.py. Commit "HW02[A-FR01] 1/7: Phân tích biến vào/ra" gồm testcases.json/.md, file đóng băng bước 1 trong ai-outputs/, CLAUDE.md, environment.md.
+Kết thúc bằng khối "Báo cáo cho phiên thảo luận".
+```
+
+Commit xong thì sang bước 2 (lớp tương đương) với lệnh `/domain-bva-testing HW02/A_FR01 2`. Lệnh này ngắn, không cần mình soạn. Sau bước 2, dán `testcases.md` về đây để review.
+
+Gợi ý ghi chú prompt log: lượt review này ghi Section `A – FR-01 bước 1`, Mục đích "Review bản nháp biến vào/ra và trả lời câu hỏi của Claude Code". Phần Xử lý bạn tự ghi theo những gì bạn đã chọn.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #19 | 16:31 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -920,7 +1123,95 @@ Có 2 điểm em cần biết:
 
 ---
 
-## #17 | 16:39 19/10/2026 | Claude Opus 5.5 | [...]
+## #20 | 16:36 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Có 2 điểm em cần biết:
+- Note của V2 và V5 không hiện trong testcases.md. Trường note đã có trong JSON, nhưng bảng biến của render_md.py chỉ xuất các cột id, tên, Vào/Ra, source, type, constraint.
+- Còn 7 file đã sửa trước đó mà em không đưa vào commit: .claude/settings.json, 4 script trong domain-bva-testing/scripts/, tools/summary.py, HW02/appendix/A_prompt_log.md. Các file này không thuộc nhiệm vụ này, nên vẫn để chưa commit.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: áp dụng review bước 1 cho HW02/A_FR01 (không chạy freeze lại) + commit bước 1/7
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json:
+    - A3 viết lại: so sánh email trùng có phân biệt hoa/thường, có cắt khoảng trắng đầu/cuối; expected tuân theo giả định này
+    - A10 và V6: bỏ "phía trên nút Đăng Ký" khỏi oracle của case nhập liệu, vị trí lỗi chỉ kiểm ở FR-22.4
+    - A14: suite GUI riêng cho FR-22, không phân lớp
+    - meta.scope: giữ FR-22.1–22.4; bỏ FR-21, SEC-01 kèm lý do
+    - FR-01.7 tách thành 7a/7b/7c; constraint của V4 cập nhật theo
+    - thêm note cho V2 và V5
+    - sut_version = tkob-team/eshop-sut @ de0f48f
+    - giữ nguyên A1, A4, A5, A8
+  - HW02/A_FR01/testcases.md (render lại)
+  - HW02/env/environment.md (dòng SUT)
+  - CLAUDE.md (dòng SUT ở mục 1 + 3 dòng "Quyết định đã chốt" ngày 2026-10-19 cho các mục 1, 2, 6)
+- Kết quả kiểm tra: JSON hợp lệ · check_domain 0 lỗi / 5 cảnh báo (chưa có partitions → bước 2) · lint 0 lỗi / 16 cảnh báo (chưa có TC phủ yêu cầu; 16 vì FR-01.7 đã tách) · test Not run
+- Commit: 4e30b25 HW02[A-FR01] 1/7: Phân tích biến vào/ra (7 file: testcases.json/.md, A_FR01_step1_20261019-1613.json/.md, ai-outputs/INDEX.md, CLAUDE.md, environment.md)
+- Cần quyết định / câu hỏi:
+  1. render_md.py chưa xuất trường note của biến → note V2/V5 chỉ có trong JSON, không có trong .md. Có sửa render_md.py để thêm cột Ghi chú không? (đây là việc phụ, phải khai trong Audit)
+  2. ai-outputs/INDEX.md (sổ ghi freeze) đã đưa vào commit vì đi kèm file đóng băng. Nếu không muốn thì báo để tách ra.
+  3. 7 file đã sửa nằm ngoài nhiệm vụ này, chưa commit: .claude/settings.json, 4 script trong domain-bva-testing/scripts, tools/summary.py, A_prompt_log.md. Ai sửa, có commit riêng không?
+  4. Bước tiếp theo: /domain-bva-testing HW02/A_FR01 2 (phân lớp tương đương).
+===
+đúng thật là còn vài file chưa commit. 
+        modified:   .claude/settings.json
+        modified:   .claude/skills/domain-bva-testing/scripts/check_domain.py
+        modified:   .claude/skills/domain-bva-testing/scripts/freeze.py
+        modified:   .claude/skills/domain-bva-testing/scripts/merge_results.py
+        modified:   .claude/skills/domain-bva-testing/scripts/render_md.py
+        modified:   HW02/appendix/A_prompt_log.md
+        modified:   tools/summary.py
+===
+bạn nghĩ có nên commit bây giờ không?
+```
+
+**Output:**
+````
+Có, nên commit ngay, nhưng làm **commit riêng**, không gộp vào commit bước của feature. Claude Code để riêng các file đó ra là đúng: đây là bản vá harness do phiên thảo luận này tạo, không thuộc bước 1/7. Tách riêng thì commit log vẫn sạch, mỗi commit đúng một việc, và lúc viết Audit bạn chỉ thẳng được vào commit vá harness.
+
+Trả lời 3 câu hỏi của Claude Code:
+
+1. **Cột ghi chú của biến:** mình đã sửa `render_md.py`, gửi kèm ở trên. Bảng biến tự thêm cột "Ghi chú" khi có biến nào có note. Bản sửa này là một phần của artifact "harness", nên không cần khai thành artifact riêng.
+2. **`INDEX.md` trong commit 1/7:** giữ nguyên. Đây là sổ ghi việc đóng băng, nên đi cùng file đóng băng là đúng.
+3. **7 file chưa commit:** do phiên thảo luận này sửa (bản vá `patch-01` + `render_md.py` mới). Commit riêng như bên dưới. Riêng `A_prompt_log.md` sẽ tự thay đổi sau mỗi lượt. Từ giờ cho file này đi kèm mỗi commit bước, để mốc commit khớp với log.
+
+**Thứ tự làm:**
+
+```powershell
+# 1. chép đè render_md.py vừa gửi vào .claude\skills\domain-bva-testing\scripts\
+# 2. render lại để testcases.md có note của V2/V5
+python .claude/skills/domain-bva-testing/scripts/render_md.py HW02/A_FR01/testcases.json -o HW02/A_FR01/testcases.md
+# 3. commit bản vá harness (riêng)
+git add .claude/settings.json .claude/skills/domain-bva-testing/scripts tools/summary.py
+git commit -m "HW02: vá harness (UTF-8 trên Windows, cột Ghi chú cho biến, render khi chưa có TC)"
+# 4. commit phần render lại + prompt log
+git add HW02/A_FR01/testcases.md HW02/appendix/A_prompt_log.md
+git commit -m "HW02[A-FR01] 1/7: render lại bảng biến (thêm ghi chú V2, V5) + cập nhật prompt log"
+```
+
+Bước 4 dùng lại nhãn `1/7` vì vẫn là bước 1. Như vậy commit log thể hiện rõ đây là chỉnh sửa sau review.
+
+Muốn Claude Code tự làm thì dán:
+
+```
+Commit theo hai nhóm, không đụng file khác:
+(a) "HW02: vá harness (UTF-8 trên Windows, cột Ghi chú cho biến, render khi chưa có TC)": .claude/settings.json, .claude/skills/domain-bva-testing/scripts/*, tools/summary.py.
+(b) Chạy lại render_md.py cho HW02/A_FR01, rồi commit "HW02[A-FR01] 1/7: render lại bảng biến (thêm ghi chú V2, V5) + cập nhật prompt log": HW02/A_FR01/testcases.md, HW02/appendix/A_prompt_log.md.
+Thêm vào CLAUDE.md mục 2 (Quy trình) một dòng: "Mỗi commit bước kèm HW02/appendix/A_prompt_log.md; thay đổi harness do phiên thảo luận gửi được commit riêng với tiền tố 'HW02: vá harness'." Gộp dòng này vào commit (a).
+Báo cáo cho phiên thảo luận.
+```
+
+Xong thì chạy `/domain-bva-testing HW02/A_FR01 2` và dán `testcases.md` (bảng Partitions) về đây để review.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #21 | 16:39 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -973,7 +1264,85 @@ Bước 2 xong: đã phân 50 lớp tương đương (17 hợp lệ, 33 không h
 
 ---
 
-## #18 | 16:47 19/10/2026 | Claude Opus 5.5 | [...]
+## #22 | 16:43 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình đã tự commit theo lệnh của bạn, sau đây là "Báo cáo cho phiên thảo luận" sau khi chạy /domain-bva-testing HW02/A_FR01 2 cùng với testcases.md nhé
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 2: phân lớp tương đương
+- File đã tạo/sửa:
+  - HW02/A_FR01/testcases.json (thêm domain.partitions EC1–EC50; thêm giả định A15, A16)
+  - HW02/A_FR01/testcases.md (render lại)
+  - HW02/appendix/ai-outputs/A_FR01_step2_20261019-1641.{json,md} + 2 dòng mới trong INDEX.md
+- Kết quả kiểm tra: check_domain 0 lỗi / 51 cảnh báo (50 lớp chưa có case phủ + V4 chưa có case BVA → bước 3–4) · lint 0 lỗi / 16 cảnh báo (chưa có TC) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 2/7: Phân lớp tương đương"
+- Cần quyết định / câu hỏi:
+  1. A15: có giữ 6 lớp chỉ kiểm ở tầng API (thiếu/null, sai kiểu cho name/email/password) không? Giữ thì bước 3 sẽ có thêm 6 case API.
+  2. A16: bong bóng HTML5 có được tính là "thông báo lỗi trên form" không?
+  3. EC27/EC30 (chữ hoa/thường có dấu không được tính, theo A6): giữ hay bỏ?
+  4. EC8 và EC21 lấy từ giả định A3 (cắt khoảng trắng đầu/cuối). Nếu SV đổi A3 thì phải đổi theo hai lớp này.
+  5. EC19 (chỉ khác hoa/thường → coi là email mới) đi theo A3 em chốt (có phân biệt hoa/thường). Xác nhận đúng ý em chưa?
+  6. Các lớp email sai định dạng (EC10–EC15) chia theo từng phần của mẫu bị vi phạm. Có muốn gộp bớt cho minimum set gọn hơn không?
+```
+
+**Output:**
+````
+## Review bước 2 (50 lớp)
+
+Bản này kỹ, bám đúng các hướng dẫn trong slide: khoảng giá trị, "phải là", tập giá trị, sai kiểu, tách lớp khi có lý do. Biến đầu ra cũng đã được phân lớp (EC43–EC50). Mình thấy hai điểm nên biết trước khi chốt:
+
+1. **Nhiều lý do tách lớp dựa trên phỏng đoán cách cài đặt.** Ví dụ: "HTML5 required chặn chuỗi rỗng", "regex dạng whitelist sẽ từ chối". Cách này hợp lệ, vì slide có cách nhìn *risk-based equivalence* (tương đương theo rủi ro). Nhưng khi viết report, bạn nên gọi đúng tên là "tách theo giả thuyết lỗi". Đừng viết như thể SRS yêu cầu. Lúc vấn đáp, nếu bị hỏi "sao tách EC33/EC34?", trả lời "risk-based" là đứng vững.
+2. **V5 (Xác nhận mật khẩu) sẽ ảnh hưởng bước 3.** Form có thể không có ô này (theo note V2/V5). Vì vậy cần thống nhất cách xử lý ngay từ bây giờ:
+   - Thiết kế vẫn bám SRS: case hợp lệ có V5 = khớp, và có case riêng cho EC40–EC42.
+   - Khi chạy, nếu không có ô thì case kiểm "có trường Xác nhận mật khẩu" ghi **Fail**, còn các case cần nhập V5 ghi **Blocked** kèm mã bug. Không được bỏ các case này đi.
+
+## 6 câu hỏi (bạn quyết, dưới đây là ý kiến của mình)
+
+| # | Ý kiến |
+|---|---|
+| 1. A15: 6 lớp chỉ có ở API | **Giữ.** Đúng hướng dẫn của slide (must-be, sai kiểu). Gọi API thì rẻ, và bạn đã chọn phạm vi UI + API. Thêm 6 case cũng là thêm điểm số TC. |
+| 2. A16: bong bóng HTML5 có tính là thông báo lỗi không | **Tính.** SRS không phân biệt cơ chế hiển thị, người dùng vẫn thấy phản hồi. Nhưng oracle phải ghi **cách quan sát**: bong bóng không nằm trong DOM. Ví dụ ghi oracle là "form không gửi request + ô ở trạng thái `:invalid` / `validationMessage` không rỗng". Thiếu điều kiện này thì Playwright không kiểm được. |
+| 3. EC27/EC30: chữ có dấu | Hai lớp này phụ thuộc A6, và A6 vẫn là giả định. SRS chỉ nói "chữ hoa", chưa rõ có tính chữ có dấu hay không. Nếu giữ: ghi rõ Expected đi theo A6, và khi chạy có kết quả lệch thì phân tích dưới góc "SRS mơ hồ" trước khi kết luận là bug. |
+| 4. EC8/EC21 đi theo A3 | Đúng. A3 đã chốt nên không cần làm gì thêm. |
+| 5. EC19 đi theo A3 | Khớp với lựa chọn của bạn: có phân biệt hoa/thường, nên `TEST@eshop.com` được coi là email mới và hợp lệ. Xác nhận là xong. |
+| 6. Gộp EC10–EC15 | **Không gộp.** Quy tắc "mỗi case không hợp lệ chỉ phủ một lớp" khiến mỗi lớp thành một TC. Gộp lại thì mất khả năng chỉ ra kiểu sai định dạng nào bị bỏ lọt, và cũng mất số TC. |
+
+## Lệnh 1: chốt bước 2 và commit
+
+```
+Áp dụng review bước 2 cho HW02/A_FR01 (em sửa trên bản đóng băng, KHÔNG freeze lại):
+1. Giữ A15 và 6 lớp chỉ có ở API. Giữ EC10–EC15 riêng. Giữ EC27/EC30 theo A6; ghi thêm vào A6: "Expected của EC27/EC30 phụ thuộc giả định này; kết quả lệch được phân tích là SRS mơ hồ trước khi kết luận lỗi".
+2. A16: [xác nhận | sửa: ...]. Bổ sung cách quan sát: bong bóng HTML5 không nằm trong DOM → oracle = form không gửi request + ô ở trạng thái :invalid / validationMessage không rỗng.
+3. Xác nhận EC19 theo A3. A3 không đổi.
+4. Thêm giả định A17: "Nếu form không có ô Xác nhận mật khẩu (xem note V5): case kiểm sự tồn tại của trường → Fail; các case cần nhập V5 ở tầng UI → Blocked kèm mã bug. Không xoá case."
+5. Chạy check_domain.py, render_md.py. Commit "HW02[A-FR01] 2/7: Phân lớp tương đương" gồm testcases.json/.md, file đóng băng bước 2 + INDEX.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+```
+
+## Lệnh 2: bước 3 (dán sau khi commit xong)
+
+```
+/domain-bva-testing HW02/A_FR01 3
+Ràng buộc thêm cho bước này:
+- Mỗi case ghi rõ "layer": "UI" hoặc "API". Lớp chỉ có ở API → case API. Lớp ở tầng UI → case UI; chỉ thêm bản API khi lớp đó có ý nghĩa ở cả hai tầng (theo A9).
+- Mã TC: TC-FR01-01… cho TS-DOM. Chừa khoảng trống: TS-BVA bắt đầu từ TC-FR01-60, TS-GUI (FR-22) từ TC-FR01-90.
+- Tạo luôn suite TS-GUI cho FR-22.1–22.4 (step-by-step, technique "checklist", không gắn EC).
+- Oracle theo A10/A16/A17; case UI không hợp lệ kiểm ba điều: thông báo lỗi (cách quan sát theo A16), vẫn ở /register, không tạo user.
+- Chạy freeze --step 3, check_domain (phải 0 lỗi, mọi EC đã phủ), lint, render. KHÔNG làm bước 4. KHÔNG commit.
+Báo cáo cho phiên thảo luận.
+```
+
+Sau bước 3 bạn dán `testcases.md` về đây. Lần review đó mình sẽ soát kỹ nhất phần **Expected**, vì đây là chỗ AI hay sai nhất.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #23 | 16:47 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1015,7 +1384,7 @@ Trong commit, `A_prompt_log.md` chưa có lượt này vì hook Stop chỉ tạo
 
 ---
 
-## #19 | 16:51 19/10/2026 | Claude Opus 5.5 | [...]
+## #24 | 16:51 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1086,7 +1455,205 @@ Thêm **A18**: ô Xác nhận mật khẩu cũng phải là `type="password"`, v
 
 ---
 
-## #20 | 17:09 19/10/2026 | Claude Opus 5.5 | [...]
+## #25 | 16:58 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho bước 3 cùng với testcases.md: 
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: /domain-bva-testing HW02/A_FR01 3: TS-DOM (minimum set) + TS-GUI
+- File đã tạo/sửa: HW02/A_FR01/testcases.json (suites TS-DOM 53 case, TS-GUI 5 case; giả định A18) · testcases.md (render) · ai-outputs/A_FR01_step3_20261019-1656.{json,md} + INDEX.md
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (V4 chưa có BVA → bước 4), 50/50 EC đã phủ · lint 0 lỗi / 1 cảnh báo (TS-DOM > 25 dòng) · test Not run
+- Commit: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 3/7: Test case Domain"
+- Cần quyết định / câu hỏi:
+  1. A17 hiểu theo chữ: thủ tục UI có bước nhập V5 → nếu thiếu ô Xác nhận mật khẩu thì cả 25 case UI (01–25) đều Blocked, không riêng 23–25. Có muốn: V5 = Mật khẩu (EC39) thì bỏ qua bước nhập, chỉ 23–25 Blocked không?
+  2. TS-DOM 53 case (lint cảnh báo > 25 dòng): giữ một suite hay tách TS-DOM-UI / TS-DOM-API? Hoặc cắt bớt bản API của các lớp tách theo cơ chế HTML5 (EC4, EC14, EC24)?
+  3. TC-02/TC-27 gom 4 lớp hợp lệ tách riêng (EC2, EC8, EC19, EC34) cho đúng minimum set → nếu Fail phải chạy tách lớp mới biết nguyên nhân. Chấp nhận không?
+  4. TC-03 hoặc TC-FR01-14 khi chọn TC-FR01-14 (EC24, Mật khẩu rỗng): Xác nhận mật khẩu cũng để rỗng (= Mật khẩu), đã ghi trong notes. Kiểu gì V5 cũng bị vi phạm theo A7 → xác nhận cách xử lý này.
+  5. TC-02 và TC-27 cùng tạo user 'Test@eshop.com' → hai case phải dọn dữ liệu (cleanup) giữa hai lần chạy, nếu không case thứ hai sẽ gặp trùng. Có đổi email cho một case không?
+  6. Thêm TC-FR01-94 (kiểm sự tồn tại của ô Xác nhận mật khẩu, FR-01.9) vào TS-GUI, ngoài phạm vi khối lệnh → giữ hay chuyển chỗ?
+  7. Ô có giá trị rỗng hoặc toàn khoảng trắng (TC-03/04/05/13/23…) trong bảng .md nhìn như ô trống → có cần render_md hiển thị dạng '' hoặc '␣␣␣' không?
+```
+
+**Output:**
+````
+## Review bước 3: soát Expected
+
+Phần lớn ổn:
+- Oracle của case UI không hợp lệ đủ 3 điều kiện: thông báo lỗi, vẫn ở `/register`, không tạo user.
+- Case API kiểm `4xx` + `error` + không tạo user.
+- Case hợp lệ kiểm chuyển sang `/login` và đúng 1 user mới có name/email khớp.
+- Email gắn `{ts}` nên các case độc lập với nhau.
+- 50/50 lớp đã được phủ.
+
+Có 3 chỗ cần sửa:
+
+1. **TC-02/TC-27 gộp lớp dễ che lỗi lẫn nhau.** Gộp 4 lớp hợp lệ vào một case là đúng quy tắc của slide. Nhưng hai trong bốn lớp đó (EC8 cắt khoảng trắng, EC19 khác hoa/thường) dựa trên **giả định A3**, chưa chắc hệ thống làm vậy. Nếu hệ thống coi `Test@eshop.com` là trùng thì TC-02 Fail, và EC2 (tên có dấu) cùng EC34 (ký tự ngoài tập) coi như chưa được kiểm, dù bảng coverage vẫn ghi là đã phủ. Đây là lỗi "quá phức tạp, che nguyên nhân" trong tiêu chí Kaner. Sửa như sau:
+   - TC-02 chỉ gộp các lớp có căn cứ chắc chắn từ SRS (EC2, EC34).
+   - EC8 và EC19 mỗi lớp một case hợp lệ riêng.
+   - Làm tương tự với TC-27 bên API.
+2. **TC-02 và TC-27 dùng chung dữ liệu** (`Test@eshop.com`). Case chạy sau phụ thuộc vào case chạy trước, vi phạm thuộc tính *self-standing*. Không nên chỉ dựa vào bước cleanup, vì cleanup hỏng là hai case kéo nhau Fail theo. Cho case API dùng một biến thể hoa/thường khác của email seed.
+3. **Quy trình chung đang gộp hai tầng** (bước 3 UI, bước 4 API). Một bảng matrix chỉ nên có một quy trình, và đây cũng là lý do bảng vượt 25 dòng. Nên tách thành `TS-DOM-UI` và `TS-DOM-API`, mỗi suite một quy trình riêng.
+
+## 7 câu hỏi
+
+| # | Ý kiến |
+|---|---|
+| 1. A17 làm cả 25 case UI bị Blocked | Chọn cách Claude Code đề xuất. Với các case cần V5 khớp (EC39): nếu không có ô thì bỏ qua bước nhập và ghi vào notes. Chỉ TC 23–25 là Blocked. Việc thiếu ô đã có TC-94 kiểm riêng. |
+| 2. 53 case trong một suite | Tách UI/API như mục 3 ở trên. **Giữ** bản API của EC4, EC14, EC24: ở tầng API vẫn là input khác nhau, và gọi API rẻ. Lint vẫn có thể cảnh báo >25 dòng, chấp nhận và ghi lý do vào `notes` của suite. |
+| 3. Gộp lớp ở TC-02/TC-27 | Không chấp nhận như hiện tại, sửa theo mục 1 ở trên. |
+| 4. TC-15: Mật khẩu rỗng + Xác nhận rỗng | Chấp nhận. Ghi notes: "V5 = V4 = rỗng, nên EC39 và EC40 trùng nhau chỉ vì V4 rỗng; lỗi được quy cho EC24". Khi chạy, nhìn validationMessage của ô Mật khẩu để quy đúng nguyên nhân. |
+| 5. Trùng `Test@eshop.com` | Đổi email cho case API (mục 2 ở trên). |
+| 6. TC-94 | Giữ trong TS-GUI. Đây là case mà A17 cần, đúng phạm vi. |
+| 7. Ô rỗng/toàn khoảng trắng không phân biệt được | Mình đã sửa `render_md.py` (file gửi kèm): chuỗi rỗng hiện là `''` (rỗng), khoảng trắng đầu/cuối hiện là `␣`. Ví dụ TC-04 và TC-13 trước đây trông như ô trống hoặc như email bình thường. |
+
+## Lệnh 1: áp dụng review + commit
+
+Chép `render_md.py` vào trước, rồi dán:
+
+```
+Commit riêng trước: "HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)" chỉ gồm .claude/skills/domain-bva-testing/scripts/render_md.py.
+
+Sau đó áp dụng review bước 3 cho HW02/A_FR01 (em sửa trên bản đóng băng, KHÔNG freeze lại):
+1. Tách TS-DOM thành TS-DOM-UI (TC-FR01-01…) và TS-DOM-API (đánh số tiếp), mỗi suite một procedure riêng. Ghi notes cho suite nào vẫn > 25 dòng: "giữ đủ lớp theo quy tắc mỗi case không hợp lệ phủ một lớp".
+2. Case hợp lệ gộp: chỉ gộp lớp có căn cứ SRS (EC1/EC2, EC7, EC18, EC22, EC25, EC28, EC31, EC33/EC34, EC39). EC8 và EC19 (dựa trên giả định A3) mỗi lớp một case hợp lệ riêng, ở cả UI và API.
+3. Case API của EC19 dùng biến thể hoa/thường khác với case UI (ví dụ 'TEST@eshop.com' so với 'Test@eshop.com') để hai case không phụ thuộc nhau.
+4. A17 sửa thành: nếu thiếu ô Xác nhận mật khẩu, case có V5 = EC39 bỏ qua bước nhập V5 (ghi notes), chỉ các case EC40–EC42 → Blocked. Cập nhật procedure của TS-DOM-UI cho khớp.
+5. TC của EC24 (Mật khẩu rỗng): thêm notes "V5 = V4 = rỗng; EC39/EC40 trùng nhau chỉ vì V4 rỗng; lỗi quy cho EC24 — đối chiếu validationMessage của ô Mật khẩu khi chạy".
+6. Không đổi số TS-BVA (60–) và TS-GUI (90–).
+7. Chạy check_domain (0 lỗi, 50/50 EC), lint, render. Commit "HW02[A-FR01] 3/7: Test case Domain" gồm testcases.json/.md, file đóng băng bước 3 + INDEX.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận (kèm số TC mỗi suite).
+```
+
+## Lệnh 2: bước 4 (sau khi commit)
+
+```
+/domain-bva-testing HW02/A_FR01 4
+Ràng buộc: mô hình 9 điểm theo slide; bước nhảy = 1 ký tự. Biến chạy qua biên, các biến khác giữ nominal hợp lệ. Mỗi điểm biên làm ở cả UI và API khi có ý nghĩa ở hai tầng (ghi "layer"). Xét MIN_UI/MAX_UI: chỉ thêm khi giao diện thực sự giới hạn độ dài (maxlength hoặc tương tự trong mã) — nếu không có thì ghi lý do vào notes. TS-BVA đánh số từ TC-FR01-60. Chạy freeze --step 4, check_domain, lint, render. KHÔNG commit. Dừng hẳn sau bước này (bước 5 là phần của em).
+Báo cáo cho phiên thảo luận.
+```
+
+**Lưu ý quan trọng trước bước 5.** Sau bước 4, bạn tự tìm các case còn thiếu (TS-SV) **trước khi** hỏi mình hay Claude Code. AI đã sinh 50 lớp rất kỹ, nên phần bạn tự bổ sung có thể ít. Như vậy vẫn ổn. Quan trọng là case đó do bạn tự nghĩ ra và có lý do rõ ràng. Ở bước này mình sẽ không gợi ý case cụ thể nào.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #26 | 17:04 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trước khi tôi dùng lệnh 1. Cho tôi hỏi, hiện tại bạn đã đảm bảo 1 testcase, chỉ có đúng hết hoặc là fail 1 lỗi thôi đúng không. Và sử dụng các dữ liệu khác nhau để tránh phụ thuộc nhau đúng không. Và sau khi chạy test xong 1 lần sẽ cleanup nhỉ.
+```
+
+**Output:**
+````
+Chưa đảm bảo hết. Mình trả lời từng ý:
+
+## 1. Mỗi TC chỉ có một nguyên nhân Fail?
+
+**Case không hợp lệ: đúng.**
+- `check_domain` đã chặn mọi case phủ từ 2 lớp không hợp lệ trở lên, kết quả 0 lỗi.
+- Mình soát thêm bằng tay từng giá trị mật khẩu. Ví dụ `Abc12!x` chỉ sai độ dài, `Abcdefgh!` chỉ thiếu chữ số, `Êbcd1234!` chỉ thiếu chữ hoa A–Z. Mỗi giá trị chỉ vi phạm đúng lớp nó nhắm.
+- Lưu ý: script chỉ kiểm **nhãn EC**, không kiểm giá trị thật có rơi đúng lớp không. Phần đó vẫn phải người soát.
+
+**Ngoại lệ đã biết:** TC của EC24 (mật khẩu rỗng). Ô xác nhận cũng rỗng nên EC40 trùng theo. Phần này đã ghi notes trong lệnh 1.
+
+**Case hợp lệ: không, và đây là chủ ý của phương pháp.** Slide yêu cầu case hợp lệ gộp càng nhiều lớp hợp lệ càng tốt. Nếu case đó Fail, nguyên nhân có thể nằm ở bất kỳ lớp nào trong nhóm. Cách bù:
+- Lệnh 1 chỉ gộp các lớp có căn cứ SRS chắc chắn; các lớp dựa trên giả định thì tách riêng.
+- Các case BVA ở bước 4 cô lập từng biến.
+
+## 2. Dữ liệu khác nhau để không phụ thuộc nhau?
+
+**Phần lớn là có:** email gắn `{ts}`, và tài khoản seed `test@eshop.com` chỉ được đọc, không bị ghi. Còn **hai lỗ hổng**:
+
+- TC-02/TC-27 dùng chung `Test@eshop.com`. Lỗ này đã sửa trong lệnh 1 (mục 3).
+- **Lỗ hổng mới, chưa sửa:** các case email trùng (TC-12, 13, và bản API) có oracle tuyệt đối "vẫn chỉ có **đúng 1** user `test@eshop.com`". Nếu TC-12 lộ bug (hệ thống cho đăng ký trùng), nó tạo thêm một `test@eshop.com`. Các case trùng chạy sau sẽ Fail theo, dù bản thân chúng có thể đúng. Một bug làm Fail dây chuyền nhiều case, đúng kiểu phụ thuộc bạn đang lo. Cách sửa: đổi sang oracle **tương đối**, tức "không có user mới so với danh sách lấy ở bước 1 *của chính case đó*", và dọn dẹp sau mỗi case.
+
+## 3. Cleanup có chạy sau mỗi lần test không?
+
+**Hiện mới chỉ ghi chung một dòng ở cấp suite**: "xoá user case đã tạo hoặc khởi động lại backend". Câu này chưa nói rõ chạy khi nào, và có chạy khi case Fail hay không. Nên chốt hai tầng:
+
+- **Trước mỗi lượt chạy cả suite:** khởi động lại backend để có CSDL seed sạch.
+- **Sau mỗi case, kể cả khi Fail:** so danh sách user với bước 1 của case, rồi xoá user mới phát sinh. Trong Playwright đặt ở `afterEach`.
+
+Lưu ý: cleanup gọi `DELETE /api/admin/users/:id`, mà SUT cố ý chứa bug, có thể ở chính API này. Vì vậy tính độc lập giữa các case phải dựa vào **dữ liệu riêng + oracle tương đối**. Cleanup chỉ là lớp bảo vệ thứ hai. Nếu xoá thất bại thì ghi log, không để case bị Fail vì lý do đó.
+
+## Bổ sung vào lệnh 1
+
+Thêm 3 mục này vào cuối lệnh 1 (trước dòng "7. Chạy check_domain…"), rồi dán cả lệnh:
+
+```
+8. Oracle tương đối: mọi Expected dạng "vẫn chỉ có đúng 1 user email 'test@eshop.com'" hoặc "không có thêm user nào" đổi thành "so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa". Case hợp lệ: "đúng 1 user mới so với bước 1, có name/email như cột dữ liệu".
+9. Cleanup hai tầng, ghi vào preconditions/cleanup của cả TS-DOM-UI và TS-DOM-API: (a) trước mỗi lượt chạy cả suite: khởi động lại backend để CSDL seed sạch; (b) sau mỗi case, kể cả khi Fail: xoá mọi user mới so với bước 1 bằng DELETE /api/admin/users/:id. Nếu xoá thất bại thì ghi notes, không đổi verdict của case.
+10. Ghi giả định A19: "Tính độc lập giữa các case dựa trên dữ liệu riêng ({ts}) và oracle tương đối; cleanup là lớp bảo vệ thứ hai, vì API xoá user (FR-19) nằm ngoài phạm vi và có thể có lỗi."
+```
+
+Sau khi áp dụng, Claude Code chạy `check_domain` và render lại. Bạn mở `testcases.md`, soát nhanh cột Expected của TC-12, TC-13 và các case trùng bên API. Không còn chữ "đúng 1 user `test@eshop.com`" là đạt.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #27 | 17:07 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+mình nhớ lúc dạy, thầy còn nói rõ precondition: các ô ban đầu phải trống. Và khi thực hiện phỉa nói rõ nữa cơ. Không biết đã đảm bảo chưa nhỉ
+```
+
+**Output:**
+````
+Chưa, bạn nhớ đúng. Ví dụ Tam giác trong tài liệu của thầy cũng ghi rõ tiền điều kiện "trang đã tải xong, ba ô trống". Mình đối chiếu với bản bước 3 hiện tại thì thấy thiếu mấy chỗ sau.
+
+## Đang thiếu gì
+
+**Tiền điều kiện** của suite hiện chỉ có: backend/web đang chạy, CSDL vừa seed, quy ước `{ts}`, token admin. Còn thiếu:
+- **Form vừa tải xong, cả 4 ô đều trống.**
+- **Chưa đăng nhập.** Web lưu token trong trình duyệt, nên phiên cũ còn sót lại có thể làm trang `/register` hoạt động khác đi.
+- **Trình duyệt không tự điền (autofill).** Khi chạy tay, trình duyệt hay tự điền sẵn email và mật khẩu. Lúc đó "ô trống" không còn đúng nữa. Playwright tự mở context sạch nên không bị, nhưng chạy tay thì phải dùng cửa sổ ẩn danh hoặc tắt autofill.
+
+**Cách thực hiện**: bước 3 mới ghi chung "nhập giá trị cột … vào ô cùng tên rồi bấm Đăng Ký". Còn thiếu:
+- **Thứ tự nhập** các ô.
+- **"Rỗng" nghĩa là gì**: không gõ gì, để nguyên ô. Phân biệt với trường hợp gõ rồi xoá.
+- **Khoảng trắng**: gõ đúng bao nhiêu dấu cách (bảng giờ đã hiện bằng `␣`).
+- **Bấm nút đúng một lần.**
+- **Quan sát kết quả ở đâu**: hộp lỗi đỏ, bong bóng của trình duyệt, thanh URL. Người chạy tay cần biết cụ thể nhìn chỗ nào.
+
+Hai chỗ thiếu này đều thuộc lỗi "thiết lập hỏng" và "thiếu bước" trong rubric của thầy. Sửa ngay bây giờ thì chỉ tốn vài dòng. Để đến bước 6 mới phát hiện thì kết quả chạy tay và chạy tự động có thể khác nhau.
+
+Mình cũng đã đưa hai quy tắc này vào `SKILL.md` của skill (file gửi kèm, mục bước 3). Như vậy các feature B, C, D sinh ra sẽ có sẵn hai phần này, không phải nhắc lại.
+
+## Thêm vào lệnh 1
+
+Gộp vào cùng 3 mục bổ sung ở tin trước, đặt trước dòng "Chạy check_domain…":
+
+```
+11. Preconditions của TS-DOM-UI ghi đủ trạng thái ban đầu: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token); chạy tay thì dùng cửa sổ ẩn danh/tắt autofill; Playwright dùng browser context mới cho mỗi case.
+12. Procedure của TS-DOM-UI viết rõ từng bước, mỗi bước có phản hồi quan sát được: (1) mở /register → 4 ô trống; (2) nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu bằng cách gõ đúng chuỗi trong cột; ô có giá trị `''` (rỗng) thì không nhập gì, giữ nguyên ô trống; giá trị có ␣ thì gõ đúng số dấu cách đó → ô hiển thị đúng giá trị đã gõ (mật khẩu hiện dạng che); (3) bấm nút 'Đăng Ký' đúng một lần → hệ thống phản hồi; (4) quan sát: hộp lỗi đỏ trên form / bong bóng kiểm tra của trình duyệt / URL trên thanh địa chỉ → so với cột Expected; (5) kiểm CSDL theo oracle tương đối.
+13. Procedure của TS-DOM-API ghi rõ: header Content-Type: application/json; khoá body name/email/password lấy từ cột dữ liệu; '— thiếu trường —' = bỏ khoá khỏi body; 'số …' = giá trị số JSON; '' = chuỗi rỗng; gửi đúng một request; quan sát HTTP status + body.
+```
+
+Thứ tự làm:
+1. Chép đè `SKILL.md` và `render_md.py` (cả hai đều thuộc commit "vá harness").
+2. Dán lệnh 1, gồm phần gốc cộng các mục 8–13.
+
+Khi Claude Code báo xong, dán phần **Tiền điều kiện + Quy trình chung** của `testcases.md` về đây để mình soát lại trước khi commit 3/7.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #28 | 17:09 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1163,7 +1730,90 @@ Báo cáo cho phiên thảo luận (kèm số TC mỗi suite).
 
 ---
 
-## #21 | 17:17 19/10/2026 | Claude Opus 5.5 | [...]
+## #29 | 17:14 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá render_md (commit riêng) + áp dụng review bước 3 HW02/A_FR01 (không freeze lại) + commit 3/7
+- File đã tạo/sửa:
+  - .claude/skills/domain-bva-testing/scripts/render_md.py (commit riêng)
+  - HW02/A_FR01/testcases.json:
+    - tách TS-DOM-UI 27 TC (01–27) / TS-DOM-API 30 TC (28–57), TS-GUI 5 TC (90–94) giữ nguyên → tổng 62
+    - EC8, EC19 có case hợp lệ riêng ở cả hai tầng; EC19: UI 'Test@eshop.com', API 'TEST@eshop.com'
+    - oracle tương đối; preconditions/procedure/cleanup hai tầng
+    - A17 sửa, thêm A19
+  - testcases.md (render lại)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (V4 chưa có BVA → bước 4), 50/50 EC · lint 0 lỗi / 2 cảnh báo (hai suite > 25 dòng, đã ghi notes) · test Not run
+- Commit:
+  - 31f42ad HW02: vá harness (render_md hiển thị chuỗi rỗng/khoảng trắng)
+  - 448b10d HW02[A-FR01] 3/7: Test case Domain (testcases.json/.md, A_FR01_step3_20261019-1656.{json,md}, INDEX.md, A_prompt_log.md)
+- Cần quyết định / câu hỏi:
+  1. Procedure: bước lấy danh sách user là bước 1 (để oracle "bước 1" đúng), 5 bước của mục 12 thành bước 2–6. Đồng ý không?
+  2. render_md chưa hiển thị: các bước của suite step-by-step (TS-GUI), notes của suite, tiêu đề "Bước 3b" cho TS-DOM-UI/API → vá harness thêm một commit riêng không?
+  3. Bước tiếp theo: /domain-bva-testing HW02/A_FR01 4 (TS-BVA từ TC-FR01-60; với 2 tầng UI/API, dải 60–89 chỉ có 30 mã).
+===
+Bạn xem đã xong chưa nhé. Vì mình chỉ cập nhật skill ở session này chứ không có ghi đè lại SKILL như bạn nói
+```
+
+**Output:**
+````
+## Bước 3: đạt
+
+Mình đã soát `testcases.md` mới:
+
+- **Tiền điều kiện:** có đủ 4 ô trống, chưa đăng nhập, cửa sổ ẩn danh/không autofill, Playwright dùng context mới, restart backend trước mỗi lượt chạy.
+- **Quy trình UI:** 6 bước. Mỗi bước có phản hồi quan sát được, có thứ tự nhập, ghi rõ cách nhập `''` và `␣`, bấm nút một lần, chỉ rõ chỗ quan sát.
+- **Quy trình API:** có header, cách biểu diễn thiếu trường/số/chuỗi rỗng, gửi đúng 1 request.
+- **Oracle tương đối và cleanup hai tầng:** đúng ý. Không còn chỗ nào ghi "đúng 1 user `test@eshop.com`".
+- **EC8 và EC19 đã tách thành case riêng** (TC-03, TC-04). EC19 ở UI dùng `Test@`, ở API dùng `TEST@`. Hiển thị `␣test@eshop.com␣` (TC-15) đã rõ.
+
+Commit 3/7 giữ nguyên, không cần sửa.
+
+## Về skill: bạn đang có 2 bản `domain-bva-testing`
+
+Bạn đã lưu `SKILL.md` mới vào **tài khoản claude.ai**, nhưng **chưa chép đè** vào repo. Mình thấy cả hai bản:
+
+| Bản | Nằm ở | Nội dung |
+|---|---|---|
+| Tài khoản (đồng bộ) | `~/.claude/skills/synced/` | `SKILL.md` **mới**, nhưng **không có** `scripts/`, `references/`, `assets/` |
+| Repo | `.claude/skills/domain-bva-testing/` | `SKILL.md` **cũ** + đủ scripts |
+
+Khi Claude Code thấy hai skill trùng tên, nó có thể nạp nhầm bản tài khoản. Bản đó gọi `scripts/check_domain.py` mà thư mục không có, nên sẽ lỗi. Skill cũng là bài nộp, phải nằm trong repo.
+
+Đề xuất: **giữ bản trong repo làm bản duy nhất**.
+1. Giải nén `patch-02.zip` đè vào gốc repo. Bản này gồm `SKILL.md` mới và `render_md.py`.
+2. Gỡ `domain-bva-testing` khỏi tài khoản claude.ai. Phiên thảo luận không cần chạy skill này.
+
+## 3 câu hỏi của Claude Code
+
+1. **Lấy danh sách user là bước 1:** đồng ý. Có vậy oracle "so với bước 1" mới đúng.
+2. **render_md:** đã vá trong `patch-02`. Bản mới hiển thị các bước chi tiết của suite step-by-step (TS-GUI), ghi chú của suite, và tiêu đề "Bước 3b · TS-DOM-UI/API". Commit riêng với tiền tố "vá harness".
+3. **Dải mã BVA:** 60–89 là đủ nếu chỉ có một biến có thứ tự. Nếu thiếu thì dùng tiếp từ 100 trở đi. Để dành 95–99 cho TS-GUI nếu cần thêm. TS-SV của bạn bắt đầu từ 200 để không đụng mã nào.
+
+## Lệnh cho Claude Code
+
+Giải nén `patch-02` xong thì dán:
+
+```
+(a) Commit riêng "HW02: vá harness (SKILL.md: quy tắc tiền điều kiện/cách nhập; render_md: bước chi tiết, ghi chú suite, tiêu đề suite)" gồm .claude/skills/domain-bva-testing/SKILL.md và scripts/render_md.py.
+(b) Render lại HW02/A_FR01/testcases.md, kiểm TS-GUI đã hiện bước chi tiết. Commit "HW02[A-FR01] 3/7: render lại (bước chi tiết TS-GUI, ghi chú suite)" gồm testcases.md, A_prompt_log.md.
+(c) Ghi vào CLAUDE.md mục "Quyết định đã chốt": dải mã TC — TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV (SV bổ sung) từ 200. Gộp vào commit (a).
+(d) Chạy: /domain-bva-testing HW02/A_FR01 4
+    Ràng buộc: mô hình 9 điểm theo slide; bước nhảy 1 ký tự; biến đang xét chạy qua điểm biên, các biến khác giữ nominal hợp lệ; ghi "layer" UI/API cho từng case; MIN_UI/MAX_UI chỉ thêm khi giao diện thật sự giới hạn (maxlength…) — không có thì ghi lý do vào notes; dùng lại preconditions/procedure/cleanup của TS-DOM-UI/API. Chạy freeze --step 4, check_domain, lint, render. KHÔNG commit. Dừng hẳn sau bước này.
+Báo cáo cho phiên thảo luận.
+```
+
+Sau bước 4 thì đến **bước 5, phần của bạn**. Bạn tự nghĩ thêm case vào TS-SV trước, rồi mới hỏi AI vì sao nó bỏ sót. Ở bước này mình chỉ review cách bạn trình bày, không gợi ý case.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #30 | 17:17 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1236,7 +1886,109 @@ Mỗi tầng xét 6 chiều. Các chiều này có thứ tự theo SRS; mọi bi
 
 ---
 
-## #22 | 17:25 19/10/2026 | Claude Opus 5.5 | [...]
+## #31 | 17:22 19/10/2026 | Claude Opus 5.5 | [...]
+*Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Check giúp mình nhé:
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (a) vá harness + quyết định dải mã · (b) render lại bước 3 · (d) /domain-bva-testing HW02/A_FR01 4
+- File đã tạo/sửa:
+  - (a) .claude/skills/domain-bva-testing/SKILL.md, scripts/render_md.py, CLAUDE.md (dải mã TC)
+  - (b) HW02/A_FR01/testcases.md
+  - (d) testcases.json (thêm TS-BVA-UI 19 TC: 60–78; TS-BVA-API 19 TC: 79–89 + 100–107; các phần khác không đổi, diff chỉ có dòng thêm) · testcases.md · ai-outputs/A_FR01_step4_20261019-1719.{json,md} + INDEX.md
+- Số TC mỗi suite: TS-DOM-UI 27 · TS-DOM-API 30 · TS-BVA-UI 19 · TS-BVA-API 19 · TS-GUI 5 → tổng 100 (AI 100, Not run 100)
+- Kết quả kiểm tra: check_domain 0 lỗi / 1 cảnh báo (thiếu UB do A4, đã ghi lý do) · 50/50 EC · lint 0 lỗi / 2 cảnh báo (TS-DOM > 25 dòng, đã ghi notes) · test Not run
+- Commit: 1816c8a HW02: vá harness (SKILL.md…; render_md…) · 1e5f539 HW02[A-FR01] 3/7: render lại (bước chi tiết TS-GUI, ghi chú suite) · bước 4: chưa commit (chờ SV review) → dự kiến "HW02[A-FR01] 4/7: Test case BVA"
+- Cần quyết định / câu hỏi:
+  1. BVA cho số ký tự mỗi loại (count ≥ 1) có được tính là "lớp có thứ tự" không? Nếu bỏ thì còn 7 điểm/tầng (14 TC).
+  2. Điểm LB-1 trùng dữ liệu với case TS-DOM: giữ (bảng BVA đủ điểm) hay thay bằng tham chiếu tới TC của TS-DOM?
+  3. Mã TS-BVA-API tràn sang 100–107 theo quy tắc; nếu muốn liền mạch thì chỉ giữ BVA tầng API cho độ dài Mật khẩu.
+  4. Trường mới "bva_dimension" (chiều đang xét) không có trong schema của test-case-writing; render_md chưa hiện trường này (tên chiều đã ghi trong tiêu đề case).
+  5. A_prompt_log.md sẽ được hook tạo lại sau lượt này → đưa vào commit 4/7.
+===
+đã thực hiện xong /domain-bva-testing HW02/A_FR01 4 rồi sao 
+Và hiện tại còn các file này chưa commit:
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   HW02/A_FR01/testcases.json
+        modified:   HW02/A_FR01/testcases.md
+        modified:   HW02/appendix/A_prompt_log.md
+        modified:   HW02/appendix/ai-outputs/INDEX.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        HW02/appendix/ai-outputs/A_FR01_step4_20261019-1719.json
+        HW02/appendix/ai-outputs/A_FR01_step4_20261019-1719.md
+```
+
+**Output:**
+````
+## Review bước 4: đạt, có thể commit
+
+Mình đã soát từng giá trị biên:
+
+- **Độ dài mật khẩu:** `Abc12!x` là 7 ký tự, `Abc12!xy` là 8, `Abc12!xyz` là 9, `Abc12!xyz345` là 12. Cả bốn giá trị đều đủ chữ hoa, chữ thường, chữ số và `!`, nên chỉ có độ dài thay đổi.
+- **Số ký tự mỗi loại:** các điểm LB−1 (0), LB (1), LB+1 (2) chỉ khác nhau đúng một ký tự, ví dụ `abcd1234!` → `Abcd1234!` → `ABcd1234!`. Đây đúng là cách BVA nên làm: các điểm lân cận chỉ cách nhau một bước. Độ dài được giữ ở 9 nên không lẫn với biên độ dài.
+- **Biến khác giữ nominal:** đúng. Ghi chú suite giải thích rõ vì sao không có UB và không có MIN_UI/MAX_UI (căn cứ: không có maxlength trong code).
+- **Expected:** khớp với oracle tương đối đã chốt, phần API cũng không có cột xác nhận mật khẩu. Đều đúng.
+
+## 5 câu hỏi
+
+| # | Ý kiến |
+|---|---|
+| 1. Số ký tự mỗi loại có làm BVA được không | **Có, giữ.** Đây là miền đếm (count ≥ 1), đúng hướng dẫn "số lượng" trong slide. Biên 0/1 là chỗ dễ sai `>` với `>=` nhất. |
+| 2. LB−1 trùng dữ liệu với TS-DOM | **Giữ**, để bảng BVA đủ điểm theo slide. Thêm notes "cùng giá trị với TC-xx (TS-DOM): một điểm vừa là đại diện lớp vừa là LB−1". Lúc vấn đáp bị hỏi "sao trùng?" thì có sẵn câu trả lời, không bị xem là độn số. |
+| 3. Mã 100–107 | Giữ, đúng quy tắc đã chốt. |
+| 4. `bva_dimension` | Giữ. Không ảnh hưởng linter của thầy, và tên chiều đã có trong tiêu đề. |
+| 5. Prompt log | Đưa vào commit 4/7. |
+
+## Lệnh cho Claude Code: commit 4/7
+
+```
+Áp dụng review bước 4 cho HW02/A_FR01 (KHÔNG freeze lại):
+- Với mỗi case LB-1 của TS-BVA-UI/API có dữ liệu trùng case TS-DOM, thêm notes: "Cùng giá trị với <mã TC TS-DOM>: điểm này vừa là đại diện lớp vừa là LB-1; giữ để bảng BVA đủ điểm theo slide."
+- Chạy check_domain, lint, render.
+- Commit "HW02[A-FR01] 4/7: Test case BVA" gồm testcases.json/.md, A_FR01_step4_20261019-1719.{json,md}, INDEX.md, A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+```
+
+---
+
+## Bước 5: phần của bạn 🔒
+
+Đến đây AI dừng. Bạn làm theo đúng thứ tự dưới đây, vì **thứ tự này chính là bằng chứng** cho phần G9.3:
+
+1. **Tự tìm case còn thiếu.** Bạn có thể đọc lại SRS, mở form thật để thử tay (exploratory), hoặc so với bảng lớp. Ở bước này **không hỏi AI**, cả mình lẫn Claude Code.
+2. **Tự ghi ra file** `HW02/A_FR01/sv_cases.md` bằng lời của bạn. Mỗi case gồm: input, expected (có căn cứ), và **lý do bạn nghĩ ra case đó**.
+3. **Commit ngay file này**, trước khi hỏi AI. Ví dụ: `HW02[A-FR01] 5/7: SV tự bổ sung test case (chưa hỏi AI)`. Commit log sẽ chứng minh case là của bạn và có trước câu hỏi gửi AI.
+4. **Sau đó mới đưa lệnh cho Claude Code:**
+
+   ```
+   Chép các case trong HW02/A_FR01/sv_cases.md vào suite TS-SV (mã từ TC-FR01-200, origin "Human"), giữ nguyên ý của em, chỉ chuẩn hoá theo schema (tiêu đề Action+Function+Condition, covers nếu khớp EC có sẵn, nếu không khớp EC nào thì ghi rõ "lớp mới"). Không thêm, bớt hay sửa expected.
+   Sau đó, với TỪNG case của em, đối chiếu với các bản đóng băng bước 2–4 trong appendix/ai-outputs/ và trả lời trung thực:
+   (a) case này đã có trong bản nháp của AI chưa (ghi mã EC/TC nếu có);
+   (b) nếu chưa: AI đã nghĩ tới nhưng không đưa vào output, hay không nghĩ tới;
+   (c) nguyên nhân thuộc loại nào: thông tin trong prompt chưa đủ, giới hạn của công cụ, hay độ phức tạp của feature — kèm 1–2 câu giải thích.
+   Không đề xuất thêm case mới. Chạy check_domain, render. Commit "HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả lời gap analysis của AI".
+   Báo cáo cho phiên thảo luận.
+   ```
+
+5. **Phần phân tích "vì sao AI bỏ sót" trong report do bạn tự viết.** Câu trả lời của AI ở mục 4 chỉ là dữ liệu đầu vào.
+
+Lưu ý: AI đã sinh 50 lớp rất kỹ, nên bạn có thể chỉ tìm thêm được vài case, hoặc ít hơn. Như vậy vẫn ổn. Nếu bạn tìm mãi không ra case nào AI bỏ sót thì kết quả đó cũng có giá trị: ghi lại "AI phủ đầy đủ ở tầng thiết kế", và phần gap analysis sẽ dựa thêm vào **bug** phát hiện ở bước 6. Đề yêu cầu cả "case **hoặc bug** AI bỏ sót".
+
+Gửi `sv_cases.md` về đây sau khi đã commit nếu muốn mình review cách trình bày. Mình chỉ góp ý hình thức (oracle, căn cứ, có trùng EC không), không thêm ý tưởng case.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #32 | 17:25 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1281,7 +2033,7 @@ Phần thiết kế của AI (bước 1–4) đã xong. Bước 5 là phần em 
 
 ---
 
-## #23 | 17:41 19/10/2026 | Claude Opus 5.5 | [...]
+## #33 | 17:41 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1330,7 +2082,7 @@ Báo cáo cho phiên thảo luận.
 
 ---
 
-## #24 | 17:45 19/10/2026 | Claude Opus 5.5 | [...]
+## #34 | 17:45 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1385,7 +2137,7 @@ Có file `HW02/A_FR01/sv_cases.md` chưa được git theo dõi. Em không mở 
 
 ---
 
-## #25 | 19:14 19/10/2026 | Claude Opus 5.5 | [...]
+## #35 | 19:14 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1451,7 +2203,7 @@ Vài điểm em nên tự kiểm khi viết phần phân tích:
 
 ---
 
-## #26 | 19:26 19/10/2026 | Claude Opus 5.5 | [...]
+## #36 | 19:26 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1525,7 +2277,7 @@ Sau khi bạn gửi 4 quyết định còn lại (A3, A20, mã yêu cầu, oracl
 
 ---
 
-## #27 | 19:28 19/10/2026 | Claude Opus 5.5 | [...]
+## #37 | 19:28 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1596,7 +2348,7 @@ Có 3 chỗ em nên xem trước khi commit:
 
 ---
 
-## #28 | 19:33 19/10/2026 | Claude Opus 5.5 | [...]
+## #38 | 19:33 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1673,7 +2425,7 @@ Chạy check_domain, lint, render. Chưa commit. Báo cáo cho phiên thảo lu�
 
 ---
 
-## #29 | 19:36 19/10/2026 | Claude Opus 5.5 | [...]
+## #39 | 19:36 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1726,7 +2478,7 @@ Khi dán lệnh, nhớ dán kèm 4 dòng A20–A23 ở cuối. Sau commit này, 
 
 ---
 
-## #30 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
+## #40 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1755,7 +2507,7 @@ Khi dán, nhớ thay dòng `<dán 4 gạch đầu dòng A20–A23 ở trên>` b�
 
 ---
 
-## #31 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
+## #41 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1838,7 +2590,7 @@ Giữ nguyên 229, 230, 232 vì expected không có yếu tố UI. Với 224, 22
 
 ---
 
-## #32 | 19:42 19/10/2026 | Claude Opus 5.5 | [...]
+## #42 | 19:42 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1921,7 +2673,7 @@ Sau khi Claude Code báo cáo, **bạn tự chạy cả bộ**: restart backend,
 
 ---
 
-## #33 | 22:09 19/10/2026 | Claude Opus 5.5 | [...]
+## #43 | 22:09 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2025,7 +2777,7 @@ Xong cả ba phần. Phần 1 và 2 đã commit; phần 3 viết xong và chạy
 
 ---
 
-## #34 | 22:38 19/10/2026 | Claude Opus 5.5 | [...]
+## #44 | 22:38 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2129,7 +2881,7 @@ Nếu `eshop-sut` không nằm cạnh repo bài nộp, sửa đường dẫn ở
 
 ---
 
-## #35 | 22:39 19/10/2026 | Claude Opus 5.5 | [...]
+## #45 | 22:39 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2169,7 +2921,7 @@ Script Playwright của A_FR01 đã commit ở `d840b73`.
 
 ---
 
-## #36 | 22:52 19/10/2026 | Claude Opus 5.5 | [...]
+## #46 | 22:52 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2226,7 +2978,7 @@ Khi có báo cáo, gửi về đây. Có 3 việc sẽ làm cùng nhau:
 
 ---
 
-## #37 | 22:56 19/10/2026 | Claude Opus 5.5 | [...]
+## #47 | 22:56 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2336,7 +3088,7 @@ Sau khi vá harness: xoá thư mục evidence, merge lại từ `results/A_FR01.
 
 ---
 
-## #38 | 23:03 19/10/2026 | Claude Opus 5.5 | [...]
+## #48 | 23:03 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2417,7 +3169,7 @@ Gửi bảng đề xuất về đây. Bạn duyệt xong thì commit `HW02[A-FR0
 
 ---
 
-## #39 | 23:05 19/10/2026 | Claude Opus 5.5 | [...]
+## #49 | 23:05 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2525,7 +3277,7 @@ Em đã làm xong cả ba phần; chưa commit phần 2 và 3. Có 17 case đổ
 
 ---
 
-## #40 | 23:11 19/10/2026 | Claude Opus 5.5 | [...]
+## #50 | 23:11 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2581,7 +3333,7 @@ Báo cáo cho phiên thảo luận (số Pass/Fail/Blocked cuối theo suite).
 
 ---
 
-## #41 | 23:18 19/10/2026 | Claude Opus 5.5 | [...]
+## #51 | 23:18 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2633,7 +3385,7 @@ Kiểm tay xong, bạn gửi cho Claude Code câu Actual (bằng lời của b�
 
 ---
 
-## #42 | 23:21 19/10/2026 | Claude Opus 5.5 | [...]
+## #52 | 23:21 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2680,7 +3432,7 @@ Gửi bản nháp về đây, mình sẽ kiểm trường thiếu, severity và 
 
 ---
 
-## #43 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
+## #53 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2719,7 +3471,7 @@ Trong lần chạy tự động, TC-216 bị đánh Blocked/Not run vì UI chặ
 
 ---
 
-## #44 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
+## #54 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2794,7 +3546,7 @@ check_domain 0 lỗi; lint 0 lỗi.
 
 ---
 
-## #45 | 23:26 19/10/2026 | Claude Opus 5.5 | [...]
+## #55 | 23:26 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2861,7 +3613,7 @@ Khi đã kiểm trang admin, bạn gửi câu notes mới cho Claude Code kèm l
 
 ---
 
-## #46 | 23:28 19/10/2026 | Claude Opus 5.5 | [...]
+## #56 | 23:28 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2900,7 +3652,7 @@ Sau commit này, bước 6 của feature A xong hoàn toàn và bạn chuyển s
 
 ---
 
-## #47 | 23:29 19/10/2026 | Claude Opus 5.5 | [...]
+## #57 | 23:29 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2946,7 +3698,7 @@ Tổng kết quả không đổi: 43 Pass, 65 Fail, 25 Blocked. check_domain 0 l
 
 ---
 
-## #48 | 23:31 19/10/2026 | Claude Opus 5.5 | [...]
+## #58 | 23:31 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2989,7 +3741,7 @@ Nếu muốn, mình đưa lệnh cho Claude Code làm hai việc đầu: danh s�
 
 ---
 
-## #49 | 23:33 19/10/2026 | Claude Opus 5.5 | [...]
+## #59 | 23:33 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3030,7 +3782,7 @@ Khi có `_groups_A_FR01.md`, bạn đọc qua, mở ảnh và đoạn code đi k
 
 ---
 
-## #50 | 23:34 19/10/2026 | Claude Opus 5.5 | [...]
+## #60 | 23:34 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3065,7 +3817,7 @@ Bảng TC-209 có 2 lỗi: cột "Lần" đều ghi 1 (file JSON không có `rep
 
 ---
 
-## #51 | 23:38 19/10/2026 | Claude Opus 5.5 | [...]
+## #61 | 23:38 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3131,7 +3883,7 @@ Gửi danh sách bug bạn chốt về đây. Mình sẽ đưa lệnh **lượt 
 
 ---
 
-## #52 | 23:39 19/10/2026 | Claude Opus 5.5 | [...]
+## #62 | 23:39 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3172,7 +3924,7 @@ check_domain 0 lỗi.
 
 ---
 
-## #53 | 23:46 19/10/2026 | Claude Opus 5.5 | [...]
+## #63 | 23:46 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3266,7 +4018,7 @@ Viết xong một hai file thì gửi về đây trước. Mình kiểm cách tr
 
 ---
 
-## #54 | 23:50 19/10/2026 | Claude Opus 5.5 | [...]
+## #64 | 23:50 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3302,7 +4054,7 @@ Khi dán, bỏ dòng ngoặc đơn "(Nếu SV chọn 209 → Blocked…)" trong 
 
 ---
 
-## #55 | 23:51 19/10/2026 | Claude Opus 5.5 | [...]
+## #65 | 23:51 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3379,7 +4131,7 @@ TC-209 giữ Fail, không đổi gì trong `testcases.json`.
 
 ---
 
-## #56 | 23:53 19/10/2026 | Claude Opus 5.5 | [...]
+## #66 | 23:53 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3459,7 +4211,7 @@ Viết xong 1–2 file thì gửi về đây để kiểm trước khi viết ti
 
 ---
 
-## #57 | 23:54 19/10/2026 | Claude Opus 5.5 | [...]
+## #67 | 23:54 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3526,7 +4278,7 @@ A9 (API phải từ chối dữ liệu sai như UI) có mặt ở mọi bug tầ
 
 ---
 
-## #58 | 23:56 19/10/2026 | Claude Opus 5.5 | [...]
+## #68 | 23:56 19/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3575,7 +4327,7 @@ Nếu đang muộn thì dừng ở bước viết BUG-01 và BUG-11 là hợp l�
 
 ---
 
-## #59 | 00:16 20/10/2026 | Claude Opus 5.5 | [...]
+## #69 | 00:16 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3616,7 +4368,7 @@ Sửa xong BUG-01 thì gửi luôn **BUG-11** để mình kiểm bug kiểm tay,
 
 ---
 
-## #60 | 00:17 20/10/2026 | Claude Opus 5.5 | [...]
+## #70 | 00:17 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3669,7 +4421,7 @@ Phần này ngắn, khoảng 5–10 phút.
 
 ---
 
-## #61 | 00:18 20/10/2026 | Claude Opus 5.5 | [...]
+## #71 | 00:18 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3740,7 +4492,7 @@ Có một chỗ em không sửa vì là câu chữ của SV: mục Các bước 
 
 ---
 
-## #62 | 00:20 20/10/2026 | Claude Opus 5.5 | [...]
+## #72 | 00:20 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3794,7 +4546,7 @@ Ghi chú rõ như vậy cho thấy bạn **đánh giá được** từng bug ch�
 
 ---
 
-## #63 | 00:22 20/10/2026 | Claude Opus 5.5 | [...]
+## #73 | 00:22 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3836,7 +4588,7 @@ Sau đó là tạo GitHub Issues. Nhớ kiểm trước xem issue trùng đã c�
 
 ---
 
-## #64 | 00:41 20/10/2026 | Claude Opus 5.5 | [...]
+## #74 | 00:41 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3874,7 +4626,7 @@ Sửa xong thì cứ viết tiếp các file còn lại. Khi đủ 14 file, đư
 
 ---
 
-## #65 | 00:43 20/10/2026 | Claude Opus 5.5 | [...]
+## #75 | 00:43 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3920,7 +4672,7 @@ Mục 4 chỉ thêm "(chưa kiểm chứng)" chứ không xoá câu của bạn.
 
 ---
 
-## #66 | 00:45 20/10/2026 | Claude Opus 5.5 | [...]
+## #76 | 00:45 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3994,7 +4746,7 @@ Những chỗ đối chiếu xong vẫn đúng nên giữ nguyên:
 
 ---
 
-## #67 | 00:47 20/10/2026 | Claude Opus 5.5 | [...]
+## #77 | 00:47 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4044,7 +4796,7 @@ Nếu muốn mình xem qua trước khi kiểm cuối, gửi BUG-11 (bug kiểm 
 
 ---
 
-## #68 | 01:02 20/10/2026 | Claude Opus 5.5 | [...]
+## #78 | 01:02 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4097,7 +4849,7 @@ Phần bạn tự làm: chọn lại severity cho 06, 07, 08, và quyết địn
 
 ---
 
-## #69 | 01:03 20/10/2026 | Claude Opus 5.5 | [...]
+## #79 | 01:03 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4167,7 +4919,7 @@ Priority của cả ba (High/High/Medium) vẫn thuộc thang.
 
 ---
 
-## #70 | 01:11 20/10/2026 | Claude Opus 5.5 | [...]
+## #80 | 01:11 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4221,7 +4973,7 @@ Sau khi bạn sửa các cụm từ trên và chọn severity, còn BUG-12, 13, 
 
 ---
 
-## #71 | 01:12 20/10/2026 | Claude Opus 5.5 | [...]
+## #81 | 01:12 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4283,7 +5035,7 @@ Chuỗi `PayloadTooLargeError: request entity too large` ở Actual của BUG-09
 
 ---
 
-## #72 | 01:18 20/10/2026 | Claude Opus 5.5 | [...]
+## #82 | 01:18 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4360,7 +5112,7 @@ Sau commit là bước tạo GitHub Issues. Nhớ kiểm trùng issue trước, 
 
 ---
 
-## #73 | 01:39 20/10/2026 | Claude Opus 5.5 | [...]
+## #83 | 01:39 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4388,7 +5140,7 @@ Báo cáo cho phiên thảo luận.
 
 ---
 
-## #74 | 01:45 20/10/2026 | Claude Opus 5.5 | [...]
+## #84 | 01:45 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4448,7 +5200,7 @@ Giờ đã gần 2 giờ sáng. Sau commit này nên **dừng**, để việc t�
 
 ---
 
-## #75 | 01:46 20/10/2026 | Claude Opus 5.5 | [...]
+## #85 | 01:46 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4497,7 +5249,7 @@ Em chưa commit: bản trên đĩa của BUG-09, 10, 11 chưa có phần SV sử
 
 ---
 
-## #76 | 02:22 20/10/2026 | Claude Opus 5.5 | [...]
+## #86 | 02:22 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4529,7 +5281,7 @@ Giờ đã 2 giờ 22 sáng. Nếu mệt, cứ để file chưa commit cũng kh�
 
 ---
 
-## #77 | 07:19 20/10/2026 | Claude Opus 5.5 | [...]
+## #87 | 07:19 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4566,7 +5318,7 @@ Sửa xong, **lưu file**, rồi nhắn Claude Code: *"Đã lưu BUG-09/10/11, k
 
 ---
 
-## #78 | 07:23 20/10/2026 | Claude Opus 5.5 | [...]
+## #88 | 07:23 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4614,7 +5366,7 @@ Xong bước này là **xong feature A**.
 
 ---
 
-## #79 | 07:26 20/10/2026 | Claude Opus 5.5 | [...]
+## #89 | 07:26 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4659,7 +5411,7 @@ Khi có báo cáo, gửi về đây. Nếu mọi cột đều "OK", mình sẽ �
 
 ---
 
-## #80 | 07:26 20/10/2026 | Claude Opus 5.5 | [...]
+## #90 | 07:26 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4738,7 +5490,7 @@ Cả 14 file giờ kết thúc giống nhau: `## Link GitHub Issue`, một dòng
 
 ---
 
-## #81 | 07:28 20/10/2026 | Claude Opus 5.5 | [...]
+## #91 | 07:28 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4799,7 +5551,7 @@ Báo cáo đạt, commit được. Ba câu hỏi:
 
 ---
 
-## #82 | 07:29 20/10/2026 | Claude Opus 5.5 | [...]
+## #92 | 07:29 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4861,7 +5613,7 @@ Em không thấy issue nào trùng thật: các issue trên đều ở form ho�
 
 ---
 
-## #83 | 07:30 20/10/2026 | Claude Opus 5.5 | [...]
+## #93 | 07:30 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4919,7 +5671,7 @@ Nếu tài khoản GitHub của bạn **không phải** `TonKnight`, sửa tên 
 
 ---
 
-## #84 | 07:31 20/10/2026 | Claude Opus 5.5 | [...]
+## #94 | 07:31 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4983,7 +5735,7 @@ Khi issue được tạo, GitHub sẽ tự đăng một dòng tham chiếu chéo
 
 ---
 
-## #85 | 07:33 20/10/2026 | Claude Opus 5.5 | [...]
+## #95 | 07:33 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5029,7 +5781,7 @@ Trong report và Audit, ghi tài khoản GitHub là `ThachHaoo` để TA đối 
 
 ---
 
-## #86 | 07:34 20/10/2026 | Claude Opus 5.5 | [...]
+## #96 | 07:34 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5087,7 +5839,7 @@ Trước khi kéo thả, SV mở xem `TC-FR01-212_api.png` và `TC-FR01-214_api.
 
 ---
 
-## #87 | 07:38 20/10/2026 | Claude Opus 5.5 | [...]
+## #97 | 07:38 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5118,7 +5870,7 @@ Xong cả 14 issue:
 
 ---
 
-## #88 | 07:48 20/10/2026 | Claude Opus 5.5 | [...]
+## #98 | 07:48 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5191,7 +5943,7 @@ Xong là **feature A hoàn tất cả 7 bước**.
 
 ---
 
-## #89 | 09:16 20/10/2026 | Claude Opus 5.5 | [...]
+## #99 | 09:16 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5240,7 +5992,7 @@ Khi rảnh, điền Section / Mục đích / Xử lý cho các lượt từ hôm
 
 ---
 
-## #90 | 09:18 20/10/2026 | Claude Opus 5.5 | [...]
+## #100 | 09:18 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5263,7 +6015,7 @@ Bảng summary có 2 lỗi: cột Bug của A_FR01 ra 0, và severity ra "?". Em
 
 ---
 
-## #91 | 09:21 20/10/2026 | Claude Opus 5.5 | [...]
+## #101 | 09:21 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5314,7 +6066,7 @@ Phía Claude Code cũng nên mở phiên mới cho B. Nó tự đọc CLAUDE.md,
 
 ---
 
-## #92 | 09:24 20/10/2026 | Claude Opus 5.5 | [...]
+## #102 | 09:24 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5368,7 +6120,7 @@ Ngoài những việc trên, session này không còn gì dở dang.
 
 ---
 
-## #93 | 09:26 20/10/2026 | Claude Opus 5.5 | [...]
+## #103 | 09:26 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5434,7 +6186,7 @@ Báo cáo cho phiên thảo luận.
 
 ---
 
-## #94 | 09:28 20/10/2026 | Claude Opus 5.5 | [...]
+## #104 | 09:28 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5513,7 +6265,7 @@ Nguồn để viết: `A_FR01/ai_gap_answer.md` (lời tự giải thích của 
 
 ---
 
-## #95 | 09:34 20/10/2026 | Claude Opus 5.5 | [...]
+## #105 | 09:34 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5561,7 +6313,7 @@ sao nhìn giờ cảm thấy outdate nhỉ
 
 ---
 
-## #96 | 09:38 20/10/2026 | Claude Opus 5.5 | [...]
+## #106 | 09:38 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5629,7 +6381,7 @@ Khoảng trống > 30 phút giữa các lượt claude.ai: 12/10 21:33→19/10 1
 
 ---
 
-## #97 | 09:44 20/10/2026 | Claude Opus 5.5 | [...]
+## #107 | 09:44 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -5641,12 +6393,137 @@ Báo cáo cho phiên thảo luận.
 ```
 
 **Output:**
-```
+````
 Cập nhật docstring cho khớp, rồi chuyển khoá trong file notes.
+
+Ghi chú đọc theo khoá giờ đã chạy đúng: #1 vẫn có Section "Toàn bài". Giờ commit.
+
+Ghi chú prompt log giờ dùng được khoá theo giờ bên cạnh số thứ tự (khoá giờ được ưu tiên); đã commit `5bf0287`.
+
+**1. Khoá giờ cho `prompt_log_notes.toml`**
+- **Dạng khoá:** `["2026-10-19 16:10"]`. Khi có nhiều lượt trong cùng một phút, lượt thứ k thêm `#k`, ví dụ `["2026-10-12 21:31#2"]`; hiện có 4 khoá như vậy. Khoá giờ không đổi khi thêm hay bớt lượt ở chỗ khác, nên khoá được ổn định trong khi số # có thể dịch.
+- **`--list`:** in thêm khoá giờ cạnh số thứ tự, ví dụ `#1   ["2026-10-12 21:20"]  Claude Sonnet 4.6 …`.
+- **Chuyển khoá:** thêm tuỳ chọn `--migrate-notes` để đổi tiêu đề `[n]` thành khoá giờ theo danh sách hiện tại, giữ nguyên nội dung và chú thích. Đã chạy: file notes chỉ có 1 bảng, `[1]` thành `["2026-10-12 21:20"]`.
+- **Kiểm tra sau khi trích lại:** log có 97 lượt (thêm lượt hiện tại). #1 vẫn đúng Section "Toàn bài" và phần đính kèm `attachment.txt`.
+
+**2. Khoảng 15:56–17:40 ngày 19/10:** đã ghi nhận còn thiếu khoảng 10 lượt claude.ai (phiên thảo luận review bước 0–4); git không có các lượt này. Em chưa làm gì thêm. Khi SV thêm `[[entry]]` vào `prompt_log_extra.toml`, các lượt sẽ tự xếp theo giờ; ghi chú dùng khoá giờ nên không bị lệch số.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: notes theo khoá giờ; ghi nhận khoảng thiếu 15:56–17:40 (chưa xử lý)
+- File đã sửa: tools/extract_prompt_log.py; HW02/appendix/prompt_log_notes.toml (chỉ đổi tiêu đề [1] bằng --migrate-notes); HW02/appendix/A_prompt_log.md (trích lại, 97 lượt)
+- Kết quả kiểm tra: --list in khoá giờ (4 khoá có #k); ghi chú #1 vẫn hiện đúng sau khi đổi khoá; on_stop --manual chạy OK
+- Commit: 5bf0287 HW02: vá harness – notes theo khoá giờ
+- Cần quyết định / câu hỏi:
+  1. Đầu file notes (phần SV viết) vẫn ghi "Xem số #n… Số #n đổi nếu thêm session…"; em không sửa → SV đổi thành hướng dẫn dùng khoá giờ nếu muốn.
+  2. Khoảng 15:56–17:40 (~10 lượt claude.ai) chờ SV khôi phục từ bản export claude.ai vào prompt_log_extra.toml. Mỗi entry cần time, tool (vd "Claude Opus 5.5"), prompt, output nguyên văn; khai trong AI-03 rằng các lượt này chép từ export.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #108 | 09:49 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Khôi phục ~10 lượt claude.ai bị thiếu (19/10 15:56–17:40 giờ VN = 08:56–10:40 UTC) từ bản export claude.ai ở context/private/export_2026-10-20/ (KHÔNG commit thư mục này).
+1. Tìm cuộc hội thoại của phiên thảo luận HW02: tìm trong các file JSON chuỗi đặc trưng như "UnicodeDecodeError", "Báo cáo cho phiên thảo luận", "domain-bva-testing". Báo file/khoá chứa nó và cấu trúc message (trường thời gian, người gửi, nội dung).
+2. Lọc các message trong khoảng 2026-10-19T08:56Z–10:42Z; ghép thành lượt (prompt của SV + toàn bộ phản hồi của Claude tới prompt kế tiếp). Liệt kê: giờ VN, dòng đầu prompt, độ dài output. Đối chiếu với danh sách dự kiến: Unicode error → LF/CRLF → báo cáo bước 0–1 → commit bước 1 → bước 2 → bước 3 → "đảm bảo 1 testcase…" → "precondition các ô trống" → bước 3 sửa lại → bước 4.
+3. Nếu có đủ: viết script (không chép tay) ghi các lượt này thành [[entry]] trong HW02/appendix/prompt_log_extra.toml: time (giờ VN), tool "Claude Opus 5.5", prompt, output nguyên văn, kèm trường/ghi chú nguồn "export claude.ai 2026-10-20 (transcript phiên bị nén)". Lọc bỏ khối hệ thống giống extract_prompt_log.py. Không sửa nội dung.
+4. Nếu export không chứa phiên này: báo lại, không làm gì thêm.
+5. Chạy on_stop.py --manual; báo tổng lượt mới và còn khoảng trống nào trong 15:56–17:40. Commit "HW02: khôi phục 10 lượt prompt log 19/10 từ export claude.ai" (prompt_log_extra.toml, A_prompt_log.md).
+Báo cáo cho phiên thảo luận.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 97 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 95 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #109 | 09:53 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Ủa, tôi up nhầm file Conversation của người khác, nên bỏ nó ra khỏi memory giúp tôi nhé Xem file này mới đúngd:\HK7\Testing\Exercise\HW\software-testing-2627\context\private\export_2026-10-20\projects-000\projects\01a0e7ac-5cea-749b-ab27-aa88812a7c2b.json
+```
+
+**Output:**
+```
+Hiểu, em bỏ toàn bộ phát hiện về hội thoại "FR-01 test cases" vì đó không phải của SV. Em kiểm thư mục memory xem có lưu gì về nó không, rồi đọc file project đúng.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #110 | 09:55 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+d:\HK7\Testing\Exercise\HW\software-testing-2627\context\private\export_2026-10-20\projects-000\projects\01a13075-e1d4-74bb-ae1d-5dc2e2362ba4.json Nhầm, file này mới đúng nhé
+```
+
+**Output:**
+````
+File này đúng là project "Homework Testing Software" của anh, nhưng không có hội thoại nào, nên em vẫn không khôi phục được lượt nào. Chưa sửa file, chưa commit.
+
+- **Cấu trúc file:** chỉ có thông tin project (tạo 12/10, cập nhật 20/10 02:42Z, private), `prompt_template` rỗng và `docs`. Không có `chat_messages` hay trường message nào.
+- **`docs` có đúng 1 tài liệu:** `claude/HW02_handoff.md` (7.560 ký tự), là bản bàn giao giữa các phiên thảo luận. Nó gồm 6 mục: vai trò, quy trình 7 bước, giới hạn AI, quy ước đã chốt, sự thật về SUT, trạng thái.
+- **Mốc 15:56 và 17:40 trong tài liệu:** chỉ là dòng ghi chú về khoảng bị thiếu, không phải prompt hay output nguyên văn. Đây là tóm tắt nên không dùng làm prompt log được.
+
+Bản export claude.ai để hội thoại ở `conversations.json`, tách riêng khỏi `projects/`. File project chỉ chứa tài liệu đính kèm, không chứa chat. Các lượt của phiên thảo luận phải nằm trong `conversations.json` của tài khoản anh.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: khôi phục ~10 lượt claude.ai 19/10 15:56–17:40 từ export (project 01a13075… "Homework Testing Software")
+- File đã tạo/sửa: không có
+- Kết quả kiểm tra: project chỉ có 1 doc HW02_handoff.md (tóm tắt bàn giao), 0 message → không khôi phục được
+- Commit: không có
+- Cần quyết định / câu hỏi:
+  1. Trong file zip export của tài khoản SV, tìm conversations.json (thường ở gốc zip hoặc conversations-000/), đặt vào context/private/export_2026-10-20/ rồi báo em; em lọc theo 08:56–10:42Z và tìm hội thoại chứa "Báo cáo cho phiên thảo luận".
+  2. Nếu bản export không có (ví dụ export trước khi phiên kết thúc, hoặc phiên đã bị xoá) → chép tay vào prompt_log_extra.toml và khai trong AI-03.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #111 | 10:06 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Chuyển context/private/conthieu.md (SV chép tay từ giao diện claude.ai) thành [[entry]] trong HW02/appendix/prompt_log_extra.toml BẰNG SCRIPT, không sửa nội dung:
+1. Định dạng nguồn: mỗi lượt bắt đầu bằng dòng "Time: H:MM AM/PM"; prompt = từ sau "Prompt:" tới dòng "Response:" đầu tiên (giữ nguyên mọi dòng, kể cả "==="); output = sau "Response:" tới trước dòng "---" ngay trước "Time:" kế tiếp (hoặc hết file). Không cắt ở các dòng "---" nằm giữa output.
+2. time = 2026-10-19 + giờ đã đổi sang 24h (giờ VN); tool = "Claude Opus 5.5"; thêm trường source = "Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút".
+3. BỎ lượt 5:41 PM (đã có trong claude-ai_session_HW02_p2.jsonl lúc 17:41). Báo nếu còn lượt nào trùng với transcript.
+4. Ghi TOML đúng chuẩn (chuỗi nhiều dòng, xử lý \ và ''' an toàn). Kiểm tra: đọc lại bằng tomllib, so từng prompt/output với văn bản nguồn — phải khớp 100%.
+5. extract_prompt_log.py: nếu entry có trường source thì render thêm dòng "*Nguồn:* <source>" dưới tiêu đề lượt.
+6. on_stop.py --manual; báo tổng lượt, danh sách 10 lượt mới (giờ + dòng đầu prompt), còn khoảng trống nào trong 15:56–17:40 không.
+7. Commit "HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)" gồm prompt_log_extra.toml, extract_prompt_log.py, A_prompt_log.md. KHÔNG commit context/private/.
+Báo cáo cho phiên thảo luận.
+```
+
+**Output:**
+```
+Cấu trúc nguồn rõ: 11 lượt, 12 dòng `---` (10 dòng ngăn cách đứng ngay trước `Time:` và 2 dòng nằm trong output), không có `'''`. Giờ viết script chuyển đổi.
+
+10/10 lượt khớp nguồn 100%, không lượt nào trùng transcript. Giờ thêm dòng "*Nguồn:*" vào phần render.
+```
+*File AI ghi/gửi trong lượt này:* `conthieu2toml.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 111 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 109 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
