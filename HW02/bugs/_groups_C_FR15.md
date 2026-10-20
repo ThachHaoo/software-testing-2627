@@ -1307,3 +1307,13 @@ Kiểm trùng 7e (`gh issue list -R tkob-team/eshop-sut --state all --limit 1000
 - Body = nội dung .md, bỏ mục "Link GitHub Issue"; dưới "Ảnh tiêu biểu" thêm dòng `[SV kéo ảnh … vào đây — alt = …]` để SV kéo ảnh.
 - Bản che (gốc giữ nguyên), sinh bằng `_repro_C_FR15/7c/redact_7f.js`: `_issue_redacted/TC-FR15-209_api_redacted.png`, `BUG-43.txt` (TC-209); `_issue_redacted/TC-FR15-211_api_redacted.png`, `BUG-44.txt` (TC-211); `_issue_redacted/BUG-48.txt` (stderr). Body issue BUG-48: đường dẫn máy trong stderr thay bằng `<SUT_DIR>` (file .md giữ nguyên văn). BUG-43, 44, 48 .md: thêm dòng "Bản che dùng cho issue" trong mục Bằng chứng.
 - Ảnh còn lại (UI, API JSON, ảnh chạy tay TC-90/92) không chứa đường dẫn máy/tên người dùng (đã xem).
+
+## 7g2 — thay ảnh bản che trên #189, #190 (SV thực hiện, 20/10/2026)
+
+| Issue | Mục | Trước | Sau | Kiểm |
+|---|---|---|---|---|
+| [#189](https://github.com/tkob-team/eshop-sut/issues/189) (BUG-43) | Bằng chứng | ảnh gốc `TC-FR15-209_api.png` — asset `f2e1c4bb-e87c-42b5-a712-326c26313da5`, hiện `D:\HK7\Testing\Exercise\HW\eshop-sut\…` | bản che `_issue_redacted/TC-FR15-209_api_redacted.png` — asset `023460ca-e23d-4b82-b676-82f769b01b06` (alt vẫn "TC-FR15-209_api") | AI tải ảnh mới về xem: đường dẫn đã thành `<SUT_DIR>` |
+| [#190](https://github.com/tkob-team/eshop-sut/issues/190) (BUG-44) | Bằng chứng | ảnh gốc `TC-FR15-211_api.png` — asset `903e9ba9-0c84-4b54-8377-13b9adc2c38e`, hiện `D:\HK7\…` | bản che `_issue_redacted/TC-FR15-211_api_redacted.png` — asset `a609fb04-7be8-45f4-ada3-4116c11a11dd` (alt vẫn "TC-FR15-211_api") | như trên |
+
+- Comment đính chính: chưa thấy trên GitHub (`gh api repos/tkob-team/eshop-sut/issues/{189,190}/comments` → 0 lúc ghi log) — link comment: `<SV bổ sung sau khi comment>`.
+- Ảnh gốc vẫn mở được qua link asset cũ và nằm trong lịch sử chỉnh sửa (edit history) của body issue.
