@@ -18,10 +18,10 @@
 | Case SV | Dẫn chứng trong output AI | Vì sao không có trong bản bước 3–4 |
 |---|---|---|
 | TC-FR15-200 (`<script>` vào ô Tên ở form Thêm) | Bước 1: C12 đưa SEC-04 "tên sản phẩm hiển thị an toàn" vào TS-GUI. Bước 3: TC-FR15-94 tạo sản phẩm tên `<i>SEC04 {ts}</i>` qua API rồi xem ô 'Tên SP' trong bảng. | AI đã kiểm SEC-04 cho tên nhưng ở **một** case (quy ước "thuộc tính chung khẳng định một nơi"). AI chọn thẻ `<i>` vô hại và tạo dữ liệu qua API, không qua form. Payload `<script>` và đường nhập qua form không được xét. |
-| TC-FR15-204 (2 tab: Tab 1 xoá M, Tab 2 sửa M) | Bước 1: C10 "id không tồn tại … Chỉ tạo được ở tầng API (UI chỉ chọn được sản phẩm đang hiển thị)". Bước 2: EC42–EC44 chỉ ở API. | AI đã xét "id không tồn tại" ở UI và kết luận không tạo được, vì nó giả định bảng luôn khớp CSDL. Dữ liệu cũ trên một tab khác (stale) là cách tạo được, nhưng AI không nghĩ tới. Quy trình UI cũng giả định một tab mỗi case. |
+| TC-FR15-204 (2 tab: Tab 1 xoá M, Tab 2 sửa M) — *SV đã bỏ ở 5/7c* | Bước 1: C10 "id không tồn tại … Chỉ tạo được ở tầng API (UI chỉ chọn được sản phẩm đang hiển thị)". Bước 2: EC42–EC44 chỉ ở API. | AI đã xét "id không tồn tại" ở UI và kết luận không tạo được, vì nó giả định bảng luôn khớp CSDL. Dữ liệu cũ trên một tab khác (stale) là cách tạo được, nhưng AI không nghĩ tới. Quy trình UI cũng giả định một tab mỗi case. |
 | TC-FR15-208 (price −999999999999 qua API) | Bước 2: EC19 "[Thêm] Số ≤ 0 (vd 0; -1000)". Bước 3: TC-FR15-28 dùng -1000. | Giá âm đã được xét. Theo minimum set, mỗi lớp chỉ có một đại diện nên AI chọn -1000. Giá trị âm có độ lớn cực đại không được tách thành case riêng. |
 | TC-FR15-215 (price = 2^53 + 1) | Bước 4: lý do của điểm LARGE (TC-FR15-71, 83, 105, 117): "1 nghìn tỷ ₫, vẫn là số nguyên biểu diễn chính xác". | AI đã nghĩ tới giới hạn biểu diễn chính xác của số và **cố ý chọn LARGE nằm dưới giới hạn đó**, để case LARGE chỉ kiểm "không có cận trên" (C2) mà không lẫn lỗi độ chính xác. Giới hạn đó không được đưa thành case riêng. |
-| TC-FR15-217 (khoảng trắng đầu/cuối tên ở UI) | Bước 1: C4 "Điểm biên độ dài dùng chuỗi ASCII không có khoảng trắng đầu/cuối để tránh phụ thuộc cách đếm/cắt". C3 chỉ quyết chuỗi **chỉ gồm** khoảng trắng. | AI thấy việc cắt khoảng trắng là chỗ SRS im lặng. AI chủ động né nó trong chọn đại diện thay vì đề xuất một giả định cho SV chốt. |
+| TC-FR15-217 (khoảng trắng đầu/cuối tên ở UI) — *SV đã bỏ ở 5/7c* | Bước 1: C4 "Điểm biên độ dài dùng chuỗi ASCII không có khoảng trắng đầu/cuối để tránh phụ thuộc cách đếm/cắt". C3 chỉ quyết chuỗi **chỉ gồm** khoảng trắng. | AI thấy việc cắt khoảng trắng là chỗ SRS im lặng. AI chủ động né nó trong chọn đại diện thay vì đề xuất một giả định cho SV chốt. |
 
 ## Nhóm 2 – Không nghĩ tới
 
@@ -29,7 +29,7 @@
 |---|---|---|
 | TC-FR15-201 (`1e5` vào ô Giá tiền) | EC17 số nguyên > 0, đại diện 1500000 (TC-01). | Không xét cách viết khác của cùng một giá trị số (ký hiệu số mũ mà input type=number cho gõ). |
 | TC-FR15-202 (`00700000`) | EC17, đại diện 1500000. | Không xét định dạng chuỗi của số hợp lệ (số 0 đứng đầu). |
-| TC-FR15-203 (bấm 'Lưu sản phẩm' 10 lần) | EC1/EC56 thêm đúng 1 bản ghi (TC-01). | Mô hình miền xét từng lần thao tác. Không có biến nào về số lần hay tốc độ bấm; quy trình ghi "bấm đúng một lần". |
+| TC-FR15-203 (bấm 'Lưu sản phẩm' 10 lần) — *SV đã bỏ ở 5/7c* | EC1/EC56 thêm đúng 1 bản ghi (TC-01). | Mô hình miền xét từng lần thao tác. Không có biến nào về số lần hay tốc độ bấm; quy trình ghi "bấm đúng một lần". |
 | TC-FR15-205 (`１５０００００` full-width vào ô Giá tiền) | EC20 "UI: ô 'Giá tiền' để trống"; note EC20 (bước 2): "Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp". | AI gộp mọi chuỗi không phải số vào lớp trống và chọn `''`. Chữ số Unicode full-width (nhìn như số) không xuất hiện trong output nào. |
 | TC-FR15-206 (Sửa SP1 rồi bấm Sửa SP2, không Hủy sửa) | EC67 các sản phẩm khác giữ nguyên (TC-03, TC-19: sửa **một** sản phẩm). | Không có biến về trạng thái form trước thao tác (đang sửa sản phẩm khác). Nút 'Hủy sửa' bị C13 xếp "SRS im lặng". |
 | TC-FR15-207 (SQL injection trong name) | EC5 tên hợp lệ 1–255. Bước 1 có tham chiếu README dòng 274–284 (cả bảng SEC) nhưng requirements chỉ lấy SEC-02, 03, 04. | SEC-05 (Parameterized Query) không có trong bất kỳ output nào. AI chỉ chọn các SEC liên quan tới quyền và hiển thị. |
@@ -39,7 +39,7 @@
 | TC-FR15-212 (30 POST song song) | EC56 thêm đúng 1 bản ghi (TC-17). | Không xét đồng thời. Quy trình API gửi đúng một request mỗi case. |
 | TC-FR15-213 (body PUT có thêm `id`, `role`) | EC57 sửa hợp lệ (TC-19). | Body của AI chỉ gồm 5 khoá theo api_specification. Không xét khoá thừa trong body. |
 | TC-FR15-214 (price = `1e-324`) | EC19 ≤ 0; điểm LB−1 = 0 (TC-67, 79, 101, 113). | Giá trị 0 đã kiểm nhưng chỉ dưới dạng `0`. Không xét số JSON bị làm tròn về 0. |
-| TC-FR15-216 (alt khi tên có `&`, `"`, `<`) | TC-93 (alt không rỗng, dữ liệu seed), TC-94 (tên `<i>…</i>`, SEC-04). | Hai thuộc tính được kiểm riêng, mỗi cái một nơi. AI không kết hợp chúng (escape trong **thuộc tính** alt). |
+| TC-FR15-216 (alt khi tên có `&`, `"`, `<`) — *SV đã bỏ ở 5/7c* | TC-93 (alt không rỗng, dữ liệu seed), TC-94 (tên `<i>…</i>`, SEC-04). | Hai thuộc tính được kiểm riêng, mỗi cái một nơi. AI không kết hợp chúng (escape trong **thuộc tính** alt). |
 
 ## Nguyên nhân chung (AI tự nhận)
 
@@ -56,3 +56,27 @@
 - **Không mang bài học từ feature trước:**
   - Nhiều case SV ở đây cùng kiểu với case SV của B_FR07: `1e5`, số 0 đứng đầu, `Infinity`, `1e-324`, mảng, Content-Type, đồng thời, bấm liên tục, nhiều tab, 2^53.
   - Ở bước 1–4 của C_FR15, AI không đọc `HW02/B_FR07/sv_cases.md` hay `HW02/B_FR07/ai_gap_answer.md`; AI chỉ đọc chúng khi dựng khung `sv_cases.md`, sau bước 4. Không có dẫn chứng nào cho thấy AI đã xét các kiểu case này cho C_FR15.
+
+## Cập nhật sau 5/7c
+
+- **Case SV đã bỏ** (giữ khoảng trống số, lý do ghi trong notes của suite TS-SV-*):
+  - TC-203, TC-216, TC-217: Expected không có căn cứ SRS.
+  - TC-204: kèm theo C19 bị bỏ.
+  - Các dòng của 4 case này trong bảng trên được giữ lại làm lịch sử và đánh dấu "SV đã bỏ".
+- **Sau 5/7c còn 14 case SV.** Nhóm 1: 200, 208, 215. Nhóm 2: 201, 202, 205, 206, 207, 209, 210, 211, 212, 213, 214. Nhóm 3: không có.
+
+### TC-FR15-200 so với TC-FR15-94 (dữ kiện)
+
+| Mục | TC-FR15-94 (AI, TS-GUI) | TC-FR15-200 (SV, TS-SV-UI) |
+|---|---|---|
+| Đường nhập | POST /api/products bằng token admin | Form 'Thêm sản phẩm mới' trên UI |
+| Giá trị tên | `<i>SEC04 {ts}</i>` | `<script>alert(1)</script>` |
+| Điểm quan sát | Ô 'Tên SP' trong bảng: chữ hiển thị nguyên văn, không có phần tử `<i>` con | Bảng hiển thị dạng chuỗi văn bản; không bật alert; kết quả lưu ("Thêm thành công (hoặc báo lỗi/escape)") |
+| Căn cứ | SEC-04, C12 | SEC-04, C12, C21 |
+
+- **Phần trùng:** cả hai kiểm SEC-04 cho tên sản phẩm hiển thị trong bảng sản phẩm.
+- **TC-200 thêm:**
+  - dữ liệu đi qua form UI (TC-94 đi qua API);
+  - payload thực thi được, quan sát được bằng hộp thoại alert;
+  - quan sát kết quả lưu khi tạo (C21).
+- **TC-94 có mà TC-200 không ghi:** kiểm cấu trúc DOM của ô (không có phần tử con được render từ chuỗi).

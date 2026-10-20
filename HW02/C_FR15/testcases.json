@@ -6,7 +6,7 @@
     "feature": "FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products)",
     "feature_code": "C_FR15",
     "doc_id": "TCD-C_FR15",
-    "version": "0.6",
+    "version": "0.6.1",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
@@ -46,7 +46,10 @@
       "C15 (kiểu dữ liệu price trong phản hồi GET) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về response; giả định SV · SV chốt 2026-10-20, phương án b — SV chốt: price trong response phải là số JSON; lý do giống C9 — phân biệt rạch ròi giữa chuỗi và số, không chấp nhận ngoại lệ]: price trong phản hồi GET /api/products/:id phải là số JSON; price dạng chuỗi (kể cả chuỗi số) lệch Expected. Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so price theo giá trị số.",
       "C16 (thông báo lỗi dạng hộp thoại trình duyệt) [loại: quyết định Expected · truy vết: có · căn cứ: C7, A16; FR-22.4 · SV chốt 2026-10-20, phương án a — SV chốt: hộp thoại alert tính là thông báo lỗi, như A16 với bong bóng HTML5; hình thức/vị trí chỉ khẳng định ở TC-91 theo FR-22.4]: hộp thoại trình duyệt (alert) có nội dung báo lỗi được tính là thông báo lỗi cho C7. Riêng TC-FR15-91 (FR-22.4): thông báo chỉ ở dạng hộp thoại thì không nằm phía trên nút → Fail.",
       "C17 (định dạng tiền) [loại: quyết định Expected · truy vết: có · căn cứ: FR-21.3 không nói ký tự phân cách; tiền lệ B13 · SV chốt 2026-10-20 — SV chốt: chấp nhận cả '.' và ',' làm dấu phân cách, mỗi quốc gia dùng khác nhau]: ký tự phân cách hàng nghìn '.' hoặc ',' đều đạt; locale trình duyệt ghi trong notes của TC-FR15-92. Chỉ kiểm ở TC-FR15-92.",
-      "C18 (phạm vi BVA) [loại: phạm vi · truy vết: không · căn cứ: C8 (SV chốt) · SV chốt 2026-10-20, phương án a — SV chốt: BVA đủ cho Thêm và Sửa, cả UI và API, nhất quán với C8 = a]: Tên (V2): LB−1, LB, LB+1, NOM, UB−1, UB, UB+1; Giá (V3): LB−1, LB, LB+1, NOM, LARGE (C2) — cho mỗi tổ hợp Thêm/Sửa × UI/API. Quy ước đánh số: BVA dùng 60–89 và 100–199 (không đụng dải SV từ 200)."
+      "C18 (phạm vi BVA) [loại: phạm vi · truy vết: không · căn cứ: C8 (SV chốt) · SV chốt 2026-10-20, phương án a — SV chốt: BVA đủ cho Thêm và Sửa, cả UI và API, nhất quán với C8 = a]: Tên (V2): LB−1, LB, LB+1, NOM, UB−1, UB, UB+1; Giá (V3): LB−1, LB, LB+1, NOM, LARGE (C2) — cho mỗi tổ hợp Thêm/Sửa × UI/API. Quy ước đánh số: BVA dùng 60–89 và 100–199 (không đụng dải SV từ 200).",
+      "C19 (đã bỏ – SV bỏ TC-204) [SV chưa ghi nội dung trước khi bỏ; TC-204 là case duy nhất dẫn C19]: (SV chưa ghi)",
+      "C20 ((SV chưa ghi)) [loại: (SV chưa ghi) · truy vết: (SV chưa ghi) · căn cứ: RFC 8259 (Infinity/NaN không phải JSON hợp lệ); C6; tiền lệ B17/BUG-34 · SV chốt 2026-10-20]: (SV chưa ghi). Được dẫn ở TC-FR15-209.",
+      "C21 (tên sản phẩm chứa mã script — TC-FR15-200) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; giả định SV · SV chốt 2026-10-20 — không có sản phẩm thực tế nào đặt tên như vậy; theo kinh nghiệm SV, hệ thống sẽ không cho phép]: (SV chưa ghi nội dung riêng; Expected nằm ở TC-FR15-200)."
     ]
   },
   "requirements": [
@@ -7020,7 +7023,8 @@
             "SEC-04"
           ],
           "assumptions": [
-            "C12"
+            "C12",
+            "C21"
           ],
           "covers": [
             "EC1",
@@ -7121,84 +7125,6 @@
           "notes": ""
         },
         {
-          "id": "TC-FR15-203",
-          "title": "Kiểm tra bấm liên tục 10 lần nút 'Lưu sản phẩm' khi form Thêm hợp lệ",
-          "layer": "UI",
-          "inputs": {
-            "Thao tác CRUD": "Thêm",
-            "Tên sản phẩm": "SP Spam Click UI {ts}",
-            "Giá": "1500000",
-            "Danh mục": "Laptop",
-            "Mô tả": "Mô tả SV203 {ts}",
-            "URL Ảnh": "https://placehold.co/300"
-          },
-          "expected_result": "Nút bị disable trong lúc chờ API; Chỉ tạo đúng 1 sản phẩm duy nhất trong CSDL, không tạo ra 10 sản phẩm trùng lặp.",
-          "requirements": [
-            "FR-15.1"
-          ],
-          "assumptions": [
-            "C13"
-          ],
-          "covers": [
-            "EC1",
-            "EC5",
-            "EC17",
-            "EC31"
-          ],
-          "ec_target": [
-            "EC1"
-          ],
-          "technique": "Concurrency (Spam Click)",
-          "bva_point": "",
-          "approach": "gray-box",
-          "rationale": "Race Condition: Người dùng cố tình spam click nút 'Lưu sản phẩm' do mạng chậm hoặc hành vi phá hoại UI.",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
-        },
-        {
-          "id": "TC-FR15-204",
-          "title": "Kiểm tra mở 2 tab Admin cùng lúc: Tab 1 Xoá sản phẩm M, Tab 2 bấm 'Sửa' sản phẩm M",
-          "layer": "UI",
-          "inputs": {
-            "Thao tác CRUD": "Sửa",
-            "Tên sản phẩm": "(giữ)",
-            "Giá": "999000",
-            "Danh mục": "(giữ)",
-            "Mô tả": "(giữ)",
-            "URL Ảnh": "(giữ)"
-          },
-          "expected_result": "Tab 2 báo lỗi không tìm thấy sản phẩm hoặc thông báo lỗi từ API (4xx); UI không bị văng màn hình trắng (WSOD).",
-          "requirements": [
-            "FR-15.1"
-          ],
-          "assumptions": [
-            "C10",
-            "C19"
-          ],
-          "covers": [
-            "EC3",
-            "EC4",
-            "EC41"
-          ],
-          "ec_target": [
-            "EC41"
-          ],
-          "technique": "Concurrency / State Desync",
-          "bva_point": "",
-          "approach": "gray-box",
-          "rationale": "Multi-tab Concurrency: Dữ liệu bị xoá ở Tab 1 khiến State ở Tab 2 bị lỗi thời (Stale Data/Desync).",
-          "origin": "Human",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
-        },
-        {
           "id": "TC-FR15-205",
           "title": "Kiểm tra dán chuỗi Unicode Full-width `１５０００００` vào ô Giá tiền",
           "layer": "UI",
@@ -7277,7 +7203,8 @@
           "notes": "Ngoại lệ quy trình so với suite gốc: thực hiện theo Tiêu đề của SV."
         }
       ],
-      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-UI. Ngoại lệ quy trình ghi trong notes của case."
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-UI. Ngoại lệ quy trình ghi trong notes của case.",
+      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR15-203: SV bỏ: Expected không có căn cứ SRS (5/7c). · TC-FR15-204: SV bỏ (C19 bỏ theo) (5/7c)."
     },
     {
       "id": "TS-SV-API",
@@ -7708,90 +7635,8 @@
       "name": "SV bổ sung — GUI",
       "format": "steps",
       "description": "Case GUI SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit c22e3da), giữ nguyên chữ của SV. Tiền điều kiện lấy từ TS-GUI.",
-      "cases": [
-        {
-          "id": "TC-FR15-216",
-          "title": "Kiểm tra thuộc tính `alt` của ảnh sản phẩm mới thêm khi tên chứa ký tự đặc biệt",
-          "layer": "UI",
-          "requirements": [
-            "FR-24.4",
-            "SEC-04"
-          ],
-          "technique": "GUI / Accessibility",
-          "type": "GUI",
-          "approach": "black-box",
-          "origin": "Human",
-          "rationale": "Dữ liệu tên có ký tự đặc biệt (`&`, `\"`, `<`) dễ làm hỏng cú pháp thẻ `<img>` nếu không escape thuộc tính `alt`.",
-          "preconditions": [
-            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
-            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
-          ],
-          "test_data": "",
-          "steps": [
-            {
-              "action": "Thêm SP mới tên `Laptop Gaming & \"Pro\" <2026>`.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Soi thẻ `<img>` ở cột 'Ảnh' trong bảng sản phẩm.",
-              "expected": "(SV chưa ghi)"
-            }
-          ],
-          "expected_result": "Thuộc tính `alt` chứa đầy đủ chuỗi tên sản phẩm và được HTML escape đúng cách (ví dụ `alt=\"Laptop Gaming &amp; &quot;Pro&quot;...\"`), không bị gãy vỡ thẻ HTML.",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "",
-          "cleanup": [
-            "(SV chưa ghi)"
-          ]
-        },
-        {
-          "id": "TC-FR15-217",
-          "title": "Kiểm tra cắt tỉa khoảng trắng đầu/cuối (Trim) ở ô 'Tên sản phẩm' ở UI",
-          "layer": "UI",
-          "requirements": [
-            "FR-15.2"
-          ],
-          "assumptions": [
-            "C4"
-          ],
-          "technique": "GUI / Form Clean",
-          "type": "GUI",
-          "approach": "gray-box",
-          "origin": "Human",
-          "rationale": "Tránh lưu trữ các dữ liệu có khoảng trắng vô nghĩa ở đầu/cuối gây xấu giao diện UI và khó tìm kiếm.",
-          "preconditions": [
-            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
-            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
-          ],
-          "test_data": "",
-          "steps": [
-            {
-              "action": "Nhập ô Tên SP: `␣␣Tai nghe Bluetooth␣␣`.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Bấm 'Lưu sản phẩm'.",
-              "expected": "(SV chưa ghi)"
-            },
-            {
-              "action": "Kiểm tra tên hiển thị trên bảng UI và trong CSDL.",
-              "expected": "(SV chưa ghi)"
-            }
-          ],
-          "expected_result": "Tên được tự động trim cắt bỏ khoảng trắng thừa ở 2 đầu, hiển thị và lưu thành `Tai nghe Bluetooth`.",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "",
-          "cleanup": [
-            "(SV chưa ghi)"
-          ]
-        }
-      ]
+      "cases": [],
+      "notes": "Case đã bỏ (giữ khoảng trống số): TC-FR15-216: SV bỏ: Expected không có căn cứ SRS (5/7c). · TC-FR15-217: SV bỏ: Expected không có căn cứ SRS (5/7c)."
     }
   ]
 }

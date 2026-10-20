@@ -21,3 +21,17 @@ Case SV đã chép vào `testcases.json` (suite TS-SV-UI, TS-SV-API, TS-SV-GUI),
 - **Linter:** 15 WARN "title thiếu CONDITION" (tiêu đề giữ nguyên văn SV); 3 WARN "not traced to any requirement" ở TC-209, 210, 211 vì Căn cứ chỉ có mã C.
 - **Ngoại lệ quy trình** (ghi trong notes của case: "thực hiện theo Tiêu đề của SV"): 203 (bấm 10 lần), 204 (2 tab), 206 (Sửa SP1 rồi SP2), 209 (body không phải JSON), 211 (Content-Type text/plain), 212 (30 request song song), 213 (khoá `id`, `role` thêm vào body — cột dữ liệu không thể hiện được).
 - TC-217 nằm ở bảng GUI nhưng kiểm dữ liệu lưu (FR-15.2) chứ không kiểm thuộc tính giao diện. SV có thể giữ hoặc chuyển sang TS-SV-UI.
+
+## Trạng thái sau 5/7c
+
+- **Q1:**
+  - C19 đã bỏ cùng TC-204.
+  - C20: đã có căn cứ (RFC 8259; C6; B17/BUG-34). Chủ đề, loại, truy vết và nội dung vẫn "(SV chưa ghi)".
+- **Q2:** chưa giải quyết. Các mã trong ô EC mục tiêu của 207–215 đã là mã của C_FR15 và đúng nghĩa với ý case (EC68 = API 2xx, EC69 = API 4xx, EC57 = Sửa hợp lệ, EC19/EC17/EC34 = lớp của Giá/Danh mục). Không có mã nào chép từ A/B nên không đổi. 9 ERROR của check_domain còn nguyên, vì các mã này chưa nằm trong ô EC phủ; `C20` vẫn nằm trong ô EC mục tiêu của TC-209.
+  - TC-210: EC34 là "category_id là chuỗi chữ". C_FR15 không có lớp riêng cho kiểu mảng.
+  - TC-214: EC19 là "Số ≤ 0", trong khi `1e-324` là số dương và chỉ thành 0 sau khi parse (theo Lý do của SV).
+- **Q3:** TC-203, 204, 216, 217 đã bỏ. Còn TC-207, 212, 213 có phần Expected chưa có căn cứ.
+- **Q4:** TC-200 đã dẫn C21, nhưng Expected vẫn có hai nhánh "Thêm thành công (hoặc báo lỗi/escape)", trong khi lý do của C21 nói "hệ thống sẽ không cho phép". TC-201, 207, 211, 215 chưa đổi.
+- **Q5:** hết hiệu lực (TC-204 đã bỏ).
+- **Trường "(SV chưa ghi)" của TC-216, 217:** hết hiệu lực (đã bỏ).
+

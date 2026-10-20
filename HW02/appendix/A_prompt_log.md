@@ -13507,6 +13507,33 @@ Commit `5/7` (`c22e3da`) có sv_cases.md, đứng trước mọi file AI bước
 Dẫn chứng đã xác nhận. Viết script chép case SV vào JSON (giữ nguyên chữ).
 
 Giờ viết `ai_gap_answer.md` (phân loại có dẫn chứng) và `sv_questions.md`.
+
+Bước 5 mới xong phần `5/7b` (`d1c71d8`); `5/7c` chưa làm được vì cần SV trả lời câu hỏi trước. Đã kiểm trước khi làm: commit `5/7` (`c22e3da`) có `sv_cases.md` và đứng trước mọi file AI của bước 5.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `d1c71d8` HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer.
+  - Đã đưa 18 case SV (200–217) vào `testcases.json`, giữ nguyên chữ: TS-SV-UI 7, TS-SV-API 9, TS-SV-GUI 2.
+  - check_domain: **9 lỗi**, đều do dữ liệu SV ghi — ô EC mục tiêu có mã không nằm trong ô EC phủ ở TC-207…215 (câu hỏi Q2). Em không tự sửa.
+  - linter: 0 lỗi, 17 cảnh báo (15 tiêu đề thiếu phần điều kiện, 3 case không truy vết được yêu cầu).
+  - `5/7c` chờ SV trả lời Q1–Q5 trong `HW02/C_FR15/sv_questions.md`.
+- **Phân loại gap** (`HW02/C_FR15/ai_gap_answer.md`; mỗi case nhóm 1 có trích dẫn từ bản đóng băng):
+
+  | Nhóm | Case SV |
+  |---|---|
+  | 1 – đã nghĩ tới nhưng không đưa vào | 200 (TC-94), 204 (C10), 208 (EC19 / −1000), 215 (lý do chọn LARGE), 217 (C4) |
+  | 2 – không nghĩ tới | 201, 202, 203, 205, 206, 207, 209, 210, 211, 212, 213, 214, 216 |
+  | 3 – đã có nhưng bị gỡ theo quyết định SV | không có |
+
+- **Một điều AI tự nhận trong file trả lời:** nhiều case nhóm 2 cùng kiểu với case SV của B_FR07 (`1e5`, `Infinity`, `1e-324`, mảng, Content-Type, đồng thời…). Ở bước 1–4 của C_FR15, AI không đọc lại `sv_cases.md` và `ai_gap_answer.md` của B_FR07.
+- **Trường SV chưa ghi** (đã đánh "(SV chưa ghi)"):
+  - TC-216, 217: Expected của từng bước (linter bắt buộc) và Cleanup (hai case này tạo sản phẩm).
+  - Nội dung giả định C19 (TC-204 dẫn) và C20 (TC-209 dẫn): mục "Giả định mới" vẫn là dòng mẫu (Q1).
+- **Câu hỏi chặn bước 6** (chi tiết trong `HW02/C_FR15/sv_questions.md`):
+  - Q1: nội dung C19/C20.
+  - Q2: 9 lỗi EC mục tiêu ngoài EC phủ.
+  - Q3: 7 case có phần Expected chưa có căn cứ.
+  - Q4: 5 case Expected nhiều nhánh; TC-211 cho phép HTTP 500, trái C6 (không 5xx).
+  - Q5: EC mục tiêu của TC-204.
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step5_import.py`, `ai_gap_answer.md`, `sv_questions.md`
 
@@ -13514,4 +13541,33 @@ Giờ viết `ai_gap_answer.md` (phân loại có dẫn chứng) và `sv_questio
 
 ---
 
-**Tổng:** 220 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 157 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #221 | 17:39 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Áp trả lời SV cho bước 5 C_FR15:
+1. Q2 – giữ TC-207…215, sửa mã EC: các mã EC mục tiêu SV chép từ A/B → đổi sang EC tương ứng của C_FR15.
+   Chỉ đổi khi có ĐÚNG MỘT EC của C cùng nghĩa; không chắc → để nguyên, đưa vào báo cáo. Không đổi chữ khác của SV.
+2. C19: đánh dấu "(đã bỏ – SV bỏ TC-204)", giữ câu cũ. Bỏ TC-204 (giữ khoảng trống số).
+3. C20: căn cứ = "RFC 8259 (Infinity/NaN không phải JSON hợp lệ); C6; tiền lệ B17/BUG-34". Giữ nguyên phần còn lại SV viết.
+4. Bỏ TC-203, 216, 217 (giữ khoảng trống số), lý do "SV bỏ: Expected không có căn cứ SRS".
+5. TC-200: giữ Expected của SV. Thêm C21 (loại: quyết định Expected, truy vết: có, căn cứ: SRS im lặng; giả định SV.
+   SV chốt: không có sản phẩm thực tế nào đặt tên như vậy; theo kinh nghiệm SV, hệ thống sẽ không cho phép). TC-200 dẫn C21.
+6. ai_gap_answer.md: cập nhật theo case bị bỏ; làm rõ TC-200 so với TC-94 (trùng / TC-200 thêm gì) — chỉ dữ kiện.
+7. render_md.py → check_domain.py → linter. Commit `HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5` kèm A_prompt_log.md.
+
+Báo cáo (≤ 15 dòng): commit; check_domain/linter; bảng mã EC đã đổi ở 207–215 (cũ → mới) + mã chưa đổi được;
+số case SV còn lại; TC-200 vs TC-94; câu hỏi còn chặn bước 6.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 221 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 158 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
