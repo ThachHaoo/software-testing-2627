@@ -652,6 +652,15 @@ Không sửa: Severity, Priority, tiêu đề, Expected, câu Nhận định (ng
 - **BUG-57:** Expected không có câu trích nguyên văn SRS (dòng 35); Tiền điều kiện thiếu các mục ở bảng trên.
 - **BUG-55, BUG-56 (mục Yêu cầu, AI điền ở khung, SV duyệt):** D13 có loại "phạm vi + quyết định Expected". Quy ước C: giả định phạm vi không vào "yêu cầu bị vi phạm" → SV quyết giữ hay bỏ D13.
 
+### 7d3 — AI sửa dữ kiện code trích (BUG-55, sau 7/7d2 `9ff87a7`)
+
+Điểm SV tự sửa "BUG-55 Nhận định ghi `style="{styles.label}"`" → AI sửa dữ kiện code trích (chỉ đổi cú pháp JSX cho đúng App.js dòng 804; không đổi chữ nào khác của SV).
+
+| Dòng | Trước | Sau |
+|---|---|---|
+| BUG-55:89 | `<Text style="{styles.label}">` | `<Text style={styles.label}>` |
+| BUG-55:91 | `<Text style="{styles.label}">Họ Tên <Text style="{styles.required}">*</Text></Text>` | `<Text style={styles.label}>Họ Tên <Text style={styles.required}>*</Text></Text>` |
+
 ### AI phát hiện (ngoài bước SV; không đưa vào bug, SV quyết)
 
 - TC-FR20-204, lượt 1: ảnh điện thoại (`TC-FR20-204_manual_1.png`, ô Username) và ảnh admin (ID 8) cho thấy email đã nhập là `m204_{ts}@ domain.com` (dấu cách **sau** '@'). Input của TC là `m204_{ts} @domain.com` (dấu cách trước '@'), cũng là ví dụ trong bước 3 của BUG-52. Cả hai giá trị đều thuộc lớp "khoảng trắng bên trong" (EC5).

@@ -19449,7 +19449,12 @@ Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài kho�
 
 **Output:**
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- **Commit:** `c589c54` HW02[D-FR20] 7/7c2: dữ kiện TC-204 + Yêu cầu BUG-55/56 + trích SRS. Đây là commit mới, không amend; luật "không amend" đã thêm vào CLAUDE.md, dòng Audit đã thêm vào `step1_notes.md`. Lint 0/0; prompt log 323 lượt.
+- **TC-204:** notes đã ghi giá trị thực nhập `m204_{ts}@ domain.com` (dấu cách sau '@'). BUG-52 thêm 1 dòng dữ kiện về giá trị này; Actual đã đúng ảnh từ 7c. Bước tái hiện SV viết giữ nguyên.
+- **Mục 2:** theo `git blame`, dòng D13 trong mục Yêu cầu của BUG-55 và BUG-56 do AI điền ở 7a3 (`3b8131c`), nên đã bỏ; giữ FR-22.1 và FR-22.2. Chữ "(D13)" trong phần Expected là SV viết (`6d16d98`), tôi không sửa.
+- **Mục 3:** mục Yêu cầu của 7 BUG giờ chỉ còn D4, D5, D7, D9, D10, đều thuộc loại "quyết định Expected"; không còn giả định phạm vi/nới. Dòng FR-22.x vẫn có chữ "theo D13" vì đó là nguyên văn requirement trong `testcases.json`.
+- **Trích SRS:** đã thêm cho cả 7 BUG, không BUG nào bị bỏ qua vì BUG nào SV cũng dẫn điều khoản. Dòng README.md: BUG-51 dòng 32, BUG-52 dòng 32–33, BUG-53 dòng 33, BUG-54 dòng 34, BUG-55 dòng 252, BUG-56 dòng 253, BUG-57 dòng 35.
 ```
 *File AI ghi/gửi trong lượt này:* `d_7c2.py`
 
@@ -19457,4 +19462,222 @@ Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài kho�
 
 ---
 
-**Tổng:** 323 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 231 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #324 | 03:16 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: kiểm 7d trước khi tạo issue (chỉ đọc, không sửa)
+
+### 0. Đầu vào
+- HEAD có commit SV 7/7d. In `git show --stat`: chỉ được chạm BUG-51…57 (+ prompt log).
+  Chạm file khác → liệt kê.
+- `git status` sạch.
+
+### 1. Điểm SV tự sửa (mục 7c trong _groups_D_FR20.md)
+Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiện tại). Không gợi ý câu thay.
+
+### 2. Dữ kiện AI chép không bị hỏng (so 7/7c2 c589c54 ↔ HEAD)
+- Phần AI chép: Môi trường, TC liên quan, Bằng chứng, Liên quan, Yêu cầu, Dữ kiện (Actual nguyên
+  văn, Lặp lại, code có số dòng), Trích SRS, dòng "AI chưa chạy lại". Khác → in diff, ghi đổi đúng
+  hay sai so với evidence.
+- Đường dẫn ảnh trong Bằng chứng tồn tại.
+
+### 3. Quy ước
+- Không còn `<SV viết>`.
+- Severity ∈ {Critical, High, Medium, Low}; Priority ∈ {High, Medium, Low}.
+- Tiêu đề không có `[FR-20]`, không có ký tự markdown thừa.
+- Mục Yêu cầu chỉ có yêu cầu/giả định bị vi phạm (không có giả định phạm vi/nới).
+- Expected SV viết có căn cứ (FR-01 / FR-22.x / SEC-04 / D-mã quyết định Expected), khớp
+  Expected của TC.
+- Tác động trong Nhận định: câu nào không có dữ kiện mà chưa gắn "(chưa kiểm chứng)" → liệt kê.
+- Tiền điều kiện đủ để dựng lại: restart backend, patch IP, `npx expo start`, Expo Go, đường đi tới
+  màn Đăng ký.
+
+### 4. Tái hiện lại (chỉ khi SV đổi bước tái hiện hoặc giá trị nhập ở 7d)
+- Phần server: restart backend, chạy lại POST /api/register bằng PowerShell 5.1 theo bước mới (quy
+  ước như 7c). In mã HTTP + có/không tạo tài khoản.
+- Phần mobile: đối chiếu bước mới với code App.js + ảnh lượt 1.
+- Không đổi bước → ghi "không đổi, giữ kết quả 7c".
+
+### 5. Không sửa file, không commit, không tạo issue.
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Mỗi BUG 1 dòng: điểm SV tự sửa (đã/chưa/một phần) · dữ kiện hỏng? · lỗi quy ước · tái hiện lại
+  (nếu có).
+- File ngoài BUG bị chạm (nếu có).
+- Kết luận: "sẵn sàng tạo issue" / "chưa — còn N điểm" (liệt kê).
+```
+
+**Output:**
+```
+### Báo cáo cho phiên thảo luận
+- **Đầu vào:** HEAD `e2a7210` (7/7d) chỉ sửa BUG-51…57, không đụng file nào khác. `git status` sạch. Tôi không sửa file, không commit, không tạo issue.
+- **Kiểm chung cho cả 7 BUG:**
+  - Không còn `<SV viết>`; Severity/Priority đúng thang; tiêu đề không có `[FR-20]`.
+  - Mục Yêu cầu không có giả định phạm vi/nới; 15/15 đường dẫn ảnh tồn tại.
+  - SV không đổi bước tái hiện, nên giữ kết quả tái hiện 7c (server HTTP 200, có tạo tài khoản).
+  - Phần dữ kiện AI chép còn nguyên, trừ một dòng ở BUG-56 (xem bảng).
+  - Mọi câu tác động trong Nhận định đều có dữ kiện hoặc đã gắn "(chưa kiểm chứng)".
+
+| BUG | Điểm SV tự sửa (mục 7c) | Dữ kiện AI chép | Còn lại |
+|---|---|---|---|
+| 51 | Đã sửa: restart backend, expo start + Expo Go, bỏ "máy máy tính" | Nguyên | Tiền điều kiện chưa có bước áp patch IP |
+| 52 | Đã sửa: tiền điều kiện; "server phải từ chối" → "Hệ thống từ chối đăng ký" (khớp D10) | Nguyên | Như BUG-51 |
+| 53 | Đã sửa: tiền điều kiện | Nguyên | Như BUG-51 |
+| 54 | Đã sửa: tiền điều kiện, "Nguyên nhân", câu từ chối | Nguyên | Như BUG-51 |
+| 55 | Một phần: đã sửa `style={styles.label}`, nhưng vẫn còn `<Text style="{styles.required}">*</Text>` (dấu nháy; App.js không có `styles.required`) | Nguyên | Câu Nhận định nêu trên; tiền điều kiện chưa có patch IP |
+| 56 | Đã sửa: bỏ backtick ở tiêu đề, bỏ "phím dấu chấm" | **Bị đổi:** SV sửa dòng FR-22.2 trong mục Yêu cầu thành `type="email".` | Dòng FR-22.2 khớp SRS dòng 253 nhưng mất phần "(mobile: cách hiểu theo D13)" so với requirement trong testcases.json; SV quyết giữ hay khôi phục. Tiền điều kiện chưa có patch IP |
+| 57 | Đã sửa: tiền điều kiện | Nguyên | Như BUG-51 |
+
+- **Kết luận: chưa sẵn sàng tạo issue, còn 3 điểm:**
+  1. Tiền điều kiện của cả 7 BUG chưa có bước áp `mobile_api_url.patch` / IP 192.168.2.12; hiện chỉ có ở mục Môi trường.
+  2. BUG-55: câu Nhận định còn `style="{styles.required}"`.
+  3. BUG-56: dòng FR-22.2 trong mục Yêu cầu bị SV đổi so với chữ AI chép.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #325 | 03:26 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: kiểm 7d trước khi tạo issue (chỉ đọc, không sửa)
+
+### 0. Đầu vào
+- HEAD có commit SV 7/7d. In `git show --stat`: chỉ được chạm BUG-51…57 (+ prompt log).
+  Chạm file khác → liệt kê.
+- `git status` sạch.
+
+### 1. Điểm SV tự sửa (mục 7c trong _groups_D_FR20.md)
+Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiện tại). Không gợi ý câu thay.
+
+### 2. Dữ kiện AI chép không bị hỏng (so 7/7c2 c589c54 ↔ HEAD)
+- Phần AI chép: Môi trường, TC liên quan, Bằng chứng, Liên quan, Yêu cầu, Dữ kiện (Actual nguyên
+  văn, Lặp lại, code có số dòng), Trích SRS, dòng "AI chưa chạy lại". Khác → in diff, ghi đổi đúng
+  hay sai so với evidence.
+- Đường dẫn ảnh trong Bằng chứng tồn tại.
+
+### 3. Quy ước
+- Không còn `<SV viết>`.
+- Severity ∈ {Critical, High, Medium, Low}; Priority ∈ {High, Medium, Low}.
+- Tiêu đề không có `[FR-20]`, không có ký tự markdown thừa.
+- Mục Yêu cầu chỉ có yêu cầu/giả định bị vi phạm (không có giả định phạm vi/nới).
+- Expected SV viết có căn cứ (FR-01 / FR-22.x / SEC-04 / D-mã quyết định Expected), khớp
+  Expected của TC.
+- Tác động trong Nhận định: câu nào không có dữ kiện mà chưa gắn "(chưa kiểm chứng)" → liệt kê.
+- Tiền điều kiện đủ để dựng lại: restart backend, patch IP, `npx expo start`, Expo Go, đường đi tới
+  màn Đăng ký.
+
+### 4. Tái hiện lại (chỉ khi SV đổi bước tái hiện hoặc giá trị nhập ở 7d)
+- Phần server: restart backend, chạy lại POST /api/register bằng PowerShell 5.1 theo bước mới (quy
+  ước như 7c). In mã HTTP + có/không tạo tài khoản.
+- Phần mobile: đối chiếu bước mới với code App.js + ảnh lượt 1.
+- Không đổi bước → ghi "không đổi, giữ kết quả 7c".
+
+### 5. Không sửa file, không commit, không tạo issue.
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Mỗi BUG 1 dòng: điểm SV tự sửa (đã/chưa/một phần) · dữ kiện hỏng? · lỗi quy ước · tái hiện lại
+  (nếu có).
+- File ngoài BUG bị chạm (nếu có).
+- Kết luận: "sẵn sàng tạo issue" / "chưa — còn N điểm" (liệt kê).
+```
+
+**Output:**
+```
+### Báo cáo cho phiên thảo luận
+- **Đầu vào:** HEAD là commit mới của SV `9ff87a7` (7/7d2), sau lần kiểm 7d trước; commit này chỉ sửa BUG-51…57. `git status` chỉ có `A_prompt_log.md` do hook tự cập nhật. Tôi không sửa file, không commit, không tạo issue.
+- **Kiểm chung cho cả 7 BUG:**
+  - Không còn `<SV viết>`; Severity/Priority đúng thang; tiêu đề sạch.
+  - Phần dữ kiện AI chép còn nguyên; ảnh bằng chứng đều tồn tại.
+  - SV không đổi bước tái hiện, nên giữ kết quả 7c.
+
+| BUG | Điểm SV tự sửa | Dữ kiện / quy ước | Còn lại |
+|---|---|---|---|
+| 51–54, 57 | Đã sửa hết; tiền điều kiện nay có thêm dòng API_URL/patch IP | Ổn | — |
+| 55 | Một phần: đã thêm patch IP | Câu Nhận định hiện tại: "Code thực tế hiện tại chỉ khai báo thẻ `<Text style="{styles.label}">`…". Code App.js dòng 804 là `style={styles.label}`, không có dấu nháy. Bản 7/7d đã viết đúng, 7/7d2 làm sai lại. Câu "styles hiện tại chưa có thuộc tính này" đúng với code (App.js không có `styles.required`) | 1 điểm |
+| 56 | Đã sửa: thêm patch IP; dòng FR-22.2 khôi phục ý mobile: "`type="email"` (trên mobile theo D13: bàn phím email `keyboardType="email-address"`)" | Khớp nghĩa với requirement trong testcases.json | — |
+
+- **Kết luận: chưa sẵn sàng tạo issue, còn 1 điểm:** BUG-55, câu Nhận định ghi `style="{styles.label}"`, khác code App.js dòng 804.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #326 | 03:28 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### 0a. Sửa dữ kiện BUG-55 (AI, có log)
+- Câu Nhận định trích code hiện có: `style="{styles.label}"` → `style={styles.label}` đúng App.js
+  dòng 804.
+- Chỉ sửa ký tự trích code, không đổi chữ nào khác của SV.
+- Nếu câu đề xuất `styles.required` cũng có dấu nháy thừa trong JSX → sửa cú pháp như trên,
+  giữ nguyên ý SV.
+- Log trước/sau vào _groups_D_FR20.md mục 7c; ghi "Điểm SV tự sửa" → "AI sửa dữ kiện code trích".
+- Commit `HW02[D-FR20] 7/7d3: AI sửa dữ kiện code trích BUG-55` (gồm A_prompt_log.md hook đã cập
+  nhật).
+Rồi làm tiếp mục 0 (kiểm 7d: HEAD là 7/7d3; so với 9ff87a7, chỉ BUG-55 được đổi đúng chỗ trên) → mục 1.
+## Lệnh cho Claude Code — D_FR20: rà 7d → tạo issue → cập nhật số liệu
+
+### 0. Rà 7d (chỉ đọc)
+- HEAD có commit SV 7/7d chỉ chạm BUG-51…57 (+ prompt log).
+- So với 7/7c2:
+  - dữ kiện AI chép (Actual, Dữ kiện, code, Trích SRS, Môi trường, Bằng chứng, Liên quan) không bị
+    đổi sai;
+  - thang Severity/Priority đúng;
+  - không còn chỗ `<SV viết>`.
+- Lệch → DỪNG, liệt kê (không sửa chữ SV).
+
+### 1. Tạo issue trên tkob-team/eshop-sut
+- `gh auth status` phải là ThachHaoo. Khác → DỪNG.
+- Kiểm trùng lần cuối (`gh issue list --state all --limit 400`, mọi tác giả) theo tiêu đề và
+  triệu chứng của 7 BUG; in kết quả.
+- In bảng 7 dòng: BUG-xx | tiêu đề sẽ đăng `[FR-20] <tiêu đề SV>` | label bug. Hỏi SV xác nhận
+  trong chat. Chỉ tạo sau khi SV trả lời "đồng ý".
+- Tạo tuần tự BUG-51 → 57, label `bug`.
+  - Body = nội dung BUG-xx.md, không có ảnh.
+  - Tại mỗi chỗ ảnh để dòng `[SV kéo ảnh: <tên file>]`.
+  - Ghi số issue ngay sau mỗi lần tạo.
+- Ghi số issue vào _groups_D_FR20.md (cột issue), BUG-xx.md, trường bug trong testcases.json.
+- In danh sách cho SV kéo ảnh: issue | tên file | đường dẫn.
+  Ảnh có bản che ở bugs/_issue_redacted/ thì dùng bản che (ở D không có).
+- Dừng ở đây, chờ SV báo đã kéo xong ảnh.
+
+### 2. Sau khi SV báo đã kéo ảnh
+- `gh issue view` từng issue: không còn dòng `[SV kéo ảnh: …]`; alt ảnh = tên file.
+  Thiếu → liệt kê.
+- issues_page_D.png: chụp trang issue lọc `[FR-20]` (Playwright headless nếu chụp được; không được
+  → SV chụp, AI đặt tên).
+- README.md: cập nhật dòng D_FR20 và tổng HW02, tính từ testcases.json của A–D và BUG-xx.md:
+  - số TC (AI/Both/SV);
+  - Pass/Fail/Blocked, số đã chạy (= không tính Blocked);
+  - số bug theo Severity.
+  Không ước lượng tay.
+- CLAUDE.md: BUG kế tiếp BUG-58; issue kế tiếp theo số thật.
+- render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7e: issue #xxx–#yyy + README`.
+
+## Báo cáo (≤ 10 dòng)
+- Rà 7d; kiểm trùng; số issue BUG-51…57.
+- Ảnh đã kéo đủ chưa.
+- Số liệu README (D + tổng HW02).
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Đã sửa cú pháp JSX trong BUG-55 (3 chỗ). Giờ xoá file tạm, xem diff, ghi log và commit 7/7d3.
+```
+*File AI ghi/gửi trong lượt này:* `.tmp_fix55.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 326 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 234 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

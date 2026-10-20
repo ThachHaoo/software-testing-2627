@@ -86,9 +86,9 @@ Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là
 
 ### Nhận định
 
-- Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Code thực tế hiện tại chỉ khai báo thẻ <Text style="{styles.label}"> bọc các chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu mà hoàn toàn bỏ quên ký hiệu * ở phía sau nhãn.
+- Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Code thực tế hiện tại chỉ khai báo thẻ <Text style={styles.label}> bọc các chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu mà hoàn toàn bỏ quên ký hiệu * ở phía sau nhãn.
 
-- Để khắc phục đúng yêu cầu FR-22.1, đề xuất cập nhật thêm thẻ hiển thị dấu sao ngay sau tên nhãn (ví dụ: <Text style="{styles.label}">Họ Tên <Text style="{styles.required}">*</Text></Text>), đồng thời khai báo thêm styles.required trong StyleSheet (chẳng hạn quy định màu đỏ { color: 'red' }) vì đối tượng styles hiện tại chưa có thuộc tính này.
+- Để khắc phục đúng yêu cầu FR-22.1, đề xuất cập nhật thêm thẻ hiển thị dấu sao ngay sau tên nhãn (ví dụ: <Text style={styles.label}>Họ Tên <Text style={styles.required}>*</Text></Text>), đồng thời khai báo thêm styles.required trong StyleSheet (chẳng hạn quy định màu đỏ { color: 'red' }) vì đối tượng styles hiện tại chưa có thuộc tính này.
 
 ## Link GitHub Issue
 
