@@ -22,9 +22,9 @@
 
 ## Các bước tái hiện
 
-1. Truy cập vào trang giỏ hàng http://localhost:5173/cart.
+1. Truy cập trang chủ http://localhost:5173/ và bấm "Thêm vào giỏ" trên thẻ 'Tai nghe AirPods Pro 2' (có thể thêm một sản phẩm khác để thấy dòng còn lại).
 
-2. Định vị dòng sản phẩm Tai nghe AirPods Pro 2 trong bảng giỏ hàng.
+2. Bấm link "Giỏ hàng" trên navbar (không gõ URL /cart, không tải lại trang — giỏ web không lưu khi tải lại) và định vị dòng 'Tai nghe AirPods Pro 2'.
 
 3. Bấm nút "Xóa" nằm ở cột Thao tác trên dòng sản phẩm đó đúng 1 lần.
 

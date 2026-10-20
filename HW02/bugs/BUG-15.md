@@ -107,8 +107,6 @@
 
 - Điều này giải thích chính xác lý do tại sao toàn bộ 5 case bấm 1 lần (02, 61–64) và TC-205 bấm 2 lần có rời trang giữa hai lần đều thất bại đồng loạt.
 
-`<SV viết thêm nếu muốn>`
-
 ## Link GitHub Issue
 
 `<sau khi tạo issue>`
