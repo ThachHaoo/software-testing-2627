@@ -6,11 +6,11 @@
     "feature": "FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart)",
     "feature_code": "B_FR07",
     "doc_id": "TCD-B_FR07",
-    "version": "0.3",
+    "version": "0.4",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
-    "environment": "Windows (PowerShell), backend http://localhost:3000, web http://localhost:5173 (route /cart, /product/:id, /); chi tiết ở HW02/env/environment.md",
+    "environment": "Windows (PowerShell), backend http://localhost:3000, web http://localhost:5173 (route /cart, /product/:id, /); chi tiết ở HW02/env/environment.md; locale trình duyệt (ảnh hưởng ký tự phân cách hàng nghìn, B13): Playwright mặc định en-US, chạy tay ghi locale thực tế của Chrome vào notes của case.",
     "scope": "Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web (tầng UI), endpoint GET/POST /api/cart (tầng API, suite riêng — B7 SV chốt). Trong phạm vi: FR-07 (phân lớp + BVA); FR-06.2/FR-06.3 ô 'Số lượng' và phản hồi khi thêm (B6 SV chốt); badge FR-23.2 (B9). Thuộc tính GUI (FR-07.2 sự tồn tại nút +/-, FR-21 ₫, FR-23 breadcrumb/highlight, FR-24 alt) kiểm bằng suite TS-GUI riêng, không phân lớp, giới hạn trang giỏ và các điểm thêm vào giỏ (B16 SV chốt). Ngoài phạm vi: thanh toán (FR-08, chỉ dùng FR-08.1 để suy ra B11), mã giảm giá (FR-09), giỏ hàng trên Mobile (FR-20), giữ giỏ khi tải lại trang/đăng nhập/đăng xuất (B10 SV chốt).",
     "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI)",
     "references": [
@@ -18,7 +18,7 @@
       "../eshop-sut/README.md §3 FR-06 dòng 83–87 — ô 'Số lượng' (nguyên dương, tối thiểu 1) và nút 'Thêm vào giỏ hàng'",
       "../eshop-sut/README.md §4 FR-08 dòng 102–108 — chỉ thanh toán cần đăng nhập; giỏ được xoá sau thanh toán",
       "../eshop-sut/README.md §8 FR-21 dòng 242–248 (₫ + phân cách hàng nghìn), FR-23 dòng 258–263 (badge, breadcrumb), FR-24 dòng 265–270 (phản hồi khi thêm, dialog xoá, empty state, alt)",
-      "../eshop-sut/README.md §9 dòng 274–284 — SEC-02 (API cần JWT), SEC-04 (escape dữ liệu hiển thị)",
+      "../eshop-sut/README.md §9 dòng 279 — SEC-02 (API cần JWT)",
       "../eshop-sut/README.md dòng 20–23 — tài khoản seed",
       "../eshop-sut/api_specification.md §4 dòng 110–127 — GET /api/cart, POST /api/cart body {id, name, price, quantity}, header Authorization: Bearer <token>; không có endpoint sửa/xoá dòng giỏ",
       "../eshop-sut/api_specification.md §6.1 dòng 171–177 — GET/DELETE /api/admin/users (cleanup user test)",
@@ -28,7 +28,8 @@
       "../eshop-sut/frontend-web/src/pages/Cart.jsx dòng 1–79 — bảng giỏ, tiêu đề cột, nút 'Xóa', nhãn tổng, link '← Mua tiếp', trạng thái trống",
       "../eshop-sut/frontend-web/src/pages/ProductDetail.jsx dòng 21–31, 54–69 — ô 'Số lượng' (input type=number), nút 'Thêm vào giỏ hàng'",
       "../eshop-sut/frontend-web/src/pages/Home.jsx dòng 97–102 — nút 'Thêm vào giỏ' trên thẻ sản phẩm (số lượng 1)",
-      "../eshop-sut/frontend-web/src/App.jsx dòng 15–23 (link 'Giỏ hàng' trên navbar), 57 (route /cart)"
+      "../eshop-sut/frontend-web/src/App.jsx dòng 15–23 (link 'Giỏ hàng' trên navbar), 57 (route /cart)",
+      "../eshop-sut/README.md §4 FR-08 dòng 105 — FR-08.2 tổng tiền tính tự động (căn cứ B8)"
     ],
     "assumptions": [
       "B0a (độc lập, đã chốt từ phiên thảo luận): mỗi case dùng user riêng tạo qua POST /api/register với email chứa {ts}, đăng nhập lấy token riêng → userCarts[userId] riêng (server.js dòng 14, 291–293). Case UI chạy trong browser context mới (giỏ web là state React, rỗng khi mở trang).",
@@ -38,20 +39,20 @@
       "B1 (cận trên Số lượng) (SV chốt 2026-10-20): KHÔNG có cận trên. Lý do: SRS chỉ quy định ≥ 1 (FR-06). BVA phía trên dùng 1 đại diện 'giá trị lớn' hợp lệ thay cho UB/UB±1.",
       "B2 (Số lượng không hợp lệ khi thêm) (SV chốt 2026-10-20): oracle từ chối = giỏ không đổi (số dòng, Số lượng, Tổng cộng, badge). Không yêu cầu thông báo lỗi — lý do: FR-06 chỉ nói 'chỉ nhận số nguyên dương', không yêu cầu thông báo. Bỏ EC52 và biến V21; nội dung thông báo (nếu có) chỉ ghi làm Actual.",
       "B3 (nút '-' khi Số lượng = 1) (SV chốt 2026-10-20): giữ nguyên 1. Lý do: FR-06 'tối thiểu là 1'; xoá dòng phải qua dialog FR-07.4. Ghi chú: SUT chưa thấy nút +/− (Cart.jsx dòng 47) → xử lý theo quy tắc A17 ở bước 3 (1 case kiểm sự tồn tại, case phụ thuộc → Blocked).",
-      "B4 (Thành tiền và Tổng cộng) (AI đề xuất, chờ SV chốt): SRS không ghi công thức. Nguồn gợi ý — thông lệ: Thành tiền = Đơn giá × Số lượng; Tổng cộng = Σ Thành tiền các dòng; FR-08 'tổng tiền tính tự động từ giỏ hàng'.",
+      "B4 (Thành tiền và Tổng cộng) (SV chốt 2026-10-20, theo đề xuất AI): SRS không ghi công thức. Nguồn gợi ý — thông lệ: Thành tiền = Đơn giá × Số lượng; Tổng cộng = Σ Thành tiền các dòng; FR-08 'tổng tiền tính tự động từ giỏ hàng'.",
       "B5 ('cùng một sản phẩm') (SV chốt 2026-10-20): cùng id = cùng sản phẩm; tách lớp EC9 (thêm lại từ cùng trang) và EC10 (thêm lại từ trang khác) — lý do: hai điểm thêm vào giỏ (Trang chủ 'Thêm vào giỏ', Chi tiết 'Thêm vào giỏ hàng') đều thấy được trên UI.",
       "B6 (phạm vi FR-06) (SV chốt 2026-10-20): CÓ — ô Số lượng và phản hồi khi thêm (FR-06.2, FR-06.3) nằm trong phạm vi. Bug thuộc FR-06 đặt tiêu đề [FR-06].",
       "B7 (tầng API) (SV chốt 2026-10-20): CÓ — /api/cart là tầng riêng, suite riêng (UI / API).",
-      "B8 (giá/tên do client gửi ở POST /api/cart) (SV chốt 2026-10-20): giá lấy từ CSDL, không tin giá client — lý do: FR-08 'tổng tiền được tính tự động, không cho phép người dùng chỉnh sửa trực tiếp'. EC16 hợp lệ, oracle = giá CSDL. Tên (EC32) áp dụng tương tự: AI suy rộng từ quyết định về giá, SV xác nhận khi review bước 3.",
+      "B8 (giá do client gửi ở POST /api/cart) (SV chốt 2026-10-20): giá lấy từ CSDL, không tin giá client — lý do: FR-08.2 'tổng tiền được tính tự động từ giỏ hàng và không cho phép người dùng chỉnh sửa trực tiếp'. EC16 hợp lệ, oracle = giá CSDL.",
       "B9 (badge 'Giỏ hàng') (SV chốt 2026-10-20): badge đếm TỔNG Số lượng. Giả định của SV, lý do: FR-23 'badge số lượng sản phẩm trong giỏ'. Câu SRS vẫn có thể hiểu là số dòng (số sản phẩm khác nhau) — ghi nhận độ mơ hồ.",
       "B10 (giữ giỏ khi tải lại trang / đăng nhập / đăng xuất) (SV chốt 2026-10-20): NGOÀI phạm vi — lý do: SRS im lặng. Không phân lớp; procedure UI vẫn tránh tải lại trang giữa chừng (B0d).",
-      "B11 (khách chưa đăng nhập dùng giỏ ở UI) (AI đề xuất, chờ SV chốt): FR-08 chỉ yêu cầu đăng nhập khi thanh toán → đề xuất: khách chưa đăng nhập vẫn thêm/xem/sửa giỏ được. Tầng API: SEC-02 + api_specification §4 yêu cầu Bearer → thiếu/sai token bị từ chối 4xx.",
-      "B12 (nhãn chính xác) (AI đề xuất, chờ SV chốt): FR-07 in đậm 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác', 'Tiếp tục mua sắm', 'Tổng cộng'. Đề xuất: so khớp đúng chữ (không phân biệt hoa/thường). 'Nút Xóa sản phẩm' — chữ in đậm nhưng có thể là mô tả chức năng chứ không phải nhãn; cần chốt có so khớp chữ 'Xóa sản phẩm' hay không.",
-      "B13 (định dạng tiền) (AI đề xuất, chờ SV chốt): FR-21 '₫ với định dạng phân cách hàng nghìn' — không nói ký tự phân cách. Nguồn gợi ý — thông lệ vi-VN dùng '.', code dùng toLocaleString() theo locale trình duyệt (Cart.jsx dòng 46, 48, 63). Lựa chọn: chấp nhận '.' hoặc ','; hay bắt buộc '.'.",
-      "B14 (dialog xoá) (AI đề xuất, chờ SV chốt): FR-07/FR-24 chỉ yêu cầu có dialog. Đề xuất: chọn Hủy → giỏ giữ nguyên; chọn Đồng ý → dòng bị xoá, Tổng cộng cập nhật; dialog native (window.confirm) hay modal đều chấp nhận.",
-      "B15 (empty state) (AI đề xuất, chờ SV chốt): 'hình minh họa và thông báo rõ ràng' — oracle đề xuất: có phần tử ảnh/icon (img/svg) và có dòng chữ báo giỏ trống; không cố định nội dung chữ.",
+      "B11 (khách chưa đăng nhập dùng giỏ) (SV chốt 2026-10-20): chấp nhận. UI: khách thêm/xem/sửa giỏ được — suy luận từ FR-08.1. Căn cứ trích nguyên văn: \"Chỉ người dùng **đã đăng nhập** mới tiến hành thanh toán được.\" (README.md dòng 104). Grep README.md và api_specification.md ('khách', 'đăng nhập', 'guest', 'login', 'token'): không có câu nào nói trực tiếp về giỏ hàng của khách. API: thiếu/sai token bị từ chối — căn cứ: \"*Yêu cầu Header: `Authorization: Bearer <token>`*\" (api_specification.md dòng 112) và \"Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ.\" (README.md dòng 279, SEC-02). Không dùng hành vi SUT làm căn cứ.",
+      "B12 (nhãn chính xác) (SV chốt 2026-10-20): các cụm in đậm trong FR-07 là nhãn — 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác', 'Xóa sản phẩm', 'Tiếp tục mua sắm', 'Tổng cộng'. So khớp đúng chữ, PHÂN BIỆT hoa/thường, chuẩn hoá Unicode NFC trước khi so; coi hai cách đặt dấu 'óa'/'oá' là như nhau (vd 'Xóa' = 'Xoá'). Chỉ kiểm ở TC-FR07-95; case chức năng định vị nút/link không dựa vào chữ.",
+      "B13 (định dạng tiền) (SV chốt 2026-10-20): chấp nhận ký tự phân cách hàng nghìn '.' hoặc ','. Locale trình duyệt ghi trong meta.environment. Chỉ kiểm ở TC-FR07-93.",
+      "B14 (dialog xoá) (SV chốt 2026-10-20, theo đề xuất AI): FR-07/FR-24 chỉ yêu cầu có dialog. Đề xuất: chọn Hủy → giỏ giữ nguyên; chọn Đồng ý → dòng bị xoá, Tổng cộng cập nhật; dialog native (window.confirm) hay modal đều chấp nhận.",
+      "B15 (empty state) (SV chốt 2026-10-20, theo đề xuất AI): 'hình minh họa và thông báo rõ ràng' — oracle đề xuất: có phần tử ảnh/icon (img/svg) và có dòng chữ báo giỏ trống; không cố định nội dung chữ.",
       "B16 (GUI liên quan) (SV chốt 2026-10-20): có suite TS-GUI riêng, giới hạn trang Giỏ hàng (/cart) và các điểm thêm vào giỏ (Trang chủ /, Chi tiết /product/:id): sự tồn tại nút +/- (A17), breadcrumb, highlight navbar, ký hiệu ₫ + phân cách hàng nghìn, alt ảnh. Không phân lớp.",
-      "B17 (mã lỗi API) (AI đề xuất, chờ SV chốt): api_specification §4 không mô tả lỗi. Đề xuất như A11: dữ liệu không hợp lệ → 4xx (không 2xx, không 5xx) kèm trường error; không cố định mã. Quan sát code: thiếu token → 401, token sai → 403 (server.js dòng 103, 106).",
+      "B17 (mã lỗi API) (SV chốt 2026-10-20, theo đề xuất AI): api_specification §4 không mô tả lỗi. Đề xuất như A11: dữ liệu không hợp lệ → 4xx (không 2xx, không 5xx) kèm trường error; không cố định mã. Quan sát code: thiếu token → 401, token sai → 403 (server.js dòng 103, 106).",
       "B18 (sai kiểu / id không tồn tại ở API) (SV chốt 2026-10-20): giữ 4 lớp chỉ có ở tầng API — EC6, EC7 (quantity) và EC12, EC13 (id) — phải bị từ chối 4xx, giỏ không đổi.",
       "B19 (đại diện id chẵn/lẻ ở API) (SV chốt 2026-10-20): suite TS-DOM-API lấy đại diện cả sản phẩm id chẵn và id lẻ. Đại diện chọn theo code server.js:162 (gray-box), không phải lớp mới.",
       "B20 (A17/A20 áp cho B_FR07) (AI đề xuất theo quy ước đã chốt từ A_FR01): nút +/- thiếu → TC-FR07-90 (kiểm sự tồn tại) Fail; các case cần bấm +/- → Blocked, case gốc TC-FR07-90. Giỏ ban đầu không dựng được đúng như cột (do lỗi đã có ở case khác) → Blocked, ghi case gốc."
@@ -99,6 +100,10 @@
       "text": "(liên quan) Chỉ người dùng đã đăng nhập mới tiến hành thanh toán được — dùng để suy ra B11."
     },
     {
+      "id": "FR-08.2",
+      "text": "Tổng tiền thanh toán được tính tự động từ giỏ hàng và không cho phép người dùng chỉnh sửa trực tiếp (README.md dòng 105) — căn cứ của B8."
+    },
+    {
       "id": "FR-21.3",
       "text": "(GUI, B16) Luôn dùng ký hiệu ₫ với định dạng phân cách hàng nghìn."
     },
@@ -137,10 +142,6 @@
     {
       "id": "SEC-02",
       "text": "Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ (README.md dòng 279)."
-    },
-    {
-      "id": "SEC-04",
-      "text": "Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng innerHTML trực tiếp (README.md dòng 281) — áp cho tên sản phẩm hiển thị trong giỏ."
     }
   ],
   "domain": {
@@ -219,7 +220,7 @@
         "io": "input",
         "source": "API: body.name (api_specification.md dòng 123)",
         "type": "string",
-        "constraint": "SRS im lặng; client tự gửi tên → B8. Khi hiển thị phải escape (SEC-04)."
+        "constraint": "SRS im lặng; client tự gửi tên. Không có điểm quan sát cho tên khác CSDL (giỏ web không hiển thị dữ liệu /api/cart) → chỉ còn lớp hợp lệ EC31."
       },
       {
         "id": "V10",
@@ -317,7 +318,10 @@
         "class": "Số nguyên ≥ 1 (vd 2)",
         "valid": true,
         "guideline": "range",
-        "note": "Không có cận trên (B1 SV chốt) → miền hợp lệ một phía. Áp UI (ô 'Số lượng:') + API (body.quantity)."
+        "note": "Không có cận trên (B1 SV chốt) → miền hợp lệ một phía. Áp UI (ô 'Số lượng:') + API (body.quantity).",
+        "requirements": [
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC2",
@@ -325,7 +329,10 @@
         "class": "Số nguyên ≤ 0 (vd 0, -3)",
         "valid": false,
         "guideline": "range",
-        "note": "Lớp không hợp lệ phía dưới của miền ≥ 1. Phía trên không có lớp không hợp lệ (B1)."
+        "note": "Lớp không hợp lệ phía dưới của miền ≥ 1. Phía trên không có lớp không hợp lệ (B1).",
+        "requirements": [
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC3",
@@ -333,7 +340,10 @@
         "class": "Số không nguyên (vd 1.5)",
         "valid": false,
         "guideline": "type",
-        "note": "FR-06 'chỉ nhận số nguyên'. UI + API."
+        "note": "FR-06 'chỉ nhận số nguyên'. UI + API.",
+        "requirements": [
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC4",
@@ -341,7 +351,10 @@
         "class": "Rỗng (không nhập gì)",
         "valid": false,
         "guideline": "must-be",
-        "note": "UI: xoá trắng ô Số lượng rồi bấm thêm. API: quantity = \"\" ."
+        "note": "UI: xoá trắng ô Số lượng rồi bấm thêm. API: quantity = \"\" .",
+        "requirements": [
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC5",
@@ -349,7 +362,10 @@
         "class": "Không phải số (vd 'abc')",
         "valid": false,
         "guideline": "type",
-        "note": "UI: input type=number có thể không cho gõ chữ (trừ e/E) — nếu không nhập được thì ghi notes, quan sát ở bước 6. API: quantity = \"abc\"."
+        "note": "UI: input type=number có thể không cho gõ chữ (trừ e/E) — nếu không nhập được thì ghi notes, quan sát ở bước 6. API: quantity = \"abc\".",
+        "requirements": [
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC6",
@@ -357,7 +373,11 @@
         "class": "API: quantity là chuỗi số (vd \"2\")",
         "valid": false,
         "guideline": "type",
-        "note": "Chỉ tầng API (B18 đề xuất): sai kiểu JSON (chuỗi thay vì số)."
+        "note": "Chỉ tầng API (B18 đề xuất): sai kiểu JSON (chuỗi thay vì số).",
+        "requirements": [
+          "FR-06.2",
+          "API-CART"
+        ]
       },
       {
         "id": "EC7",
@@ -365,7 +385,11 @@
         "class": "API: thiếu trường quantity hoặc null",
         "valid": false,
         "guideline": "must-be",
-        "note": "Chỉ tầng API (B18 đề xuất)."
+        "note": "Chỉ tầng API (B18 đề xuất).",
+        "requirements": [
+          "FR-06.2",
+          "API-CART"
+        ]
       },
       {
         "id": "EC8",
@@ -373,7 +397,10 @@
         "class": "Sản phẩm chưa có trong giỏ",
         "valid": true,
         "guideline": "set",
-        "note": "→ tạo dòng mới (FR-07.3 suy ngược). UI + API."
+        "note": "→ tạo dòng mới (FR-07.3 suy ngược). UI + API.",
+        "requirements": [
+          "FR-07.1"
+        ]
       },
       {
         "id": "EC9",
@@ -381,7 +408,10 @@
         "class": "Sản phẩm đã có trong giỏ, thêm lại từ cùng một trang",
         "valid": true,
         "guideline": "split",
-        "note": "FR-07.3 → tăng Số lượng, không tạo dòng mới. Tách theo nguồn thêm (B5 đề xuất)."
+        "note": "FR-07.3 → tăng Số lượng, không tạo dòng mới. Tách theo nguồn thêm (B5 đề xuất).",
+        "requirements": [
+          "FR-07.3"
+        ]
       },
       {
         "id": "EC10",
@@ -389,7 +419,10 @@
         "class": "Sản phẩm đã có trong giỏ, thêm lại từ trang khác (Trang chủ ↔ Chi tiết)",
         "valid": true,
         "guideline": "split",
-        "note": "Hai nút thêm khác nhau ('Thêm vào giỏ' ở /, 'Thêm vào giỏ hàng' ở /product/:id) → có lý do tin bị xử lý khác nhau (B5). Chỉ tầng UI."
+        "note": "Hai nút thêm khác nhau ('Thêm vào giỏ' ở /, 'Thêm vào giỏ hàng' ở /product/:id) → có lý do tin bị xử lý khác nhau (B5). Chỉ tầng UI.",
+        "requirements": [
+          "FR-07.3"
+        ]
       },
       {
         "id": "EC11",
@@ -397,7 +430,11 @@
         "class": "API: id đã có trong giỏ (POST lần 2 cùng id)",
         "valid": true,
         "guideline": "set",
-        "note": "Tầng API của FR-07.3: GET /api/cart phải có 1 phần tử, quantity cộng dồn."
+        "note": "Tầng API của FR-07.3: GET /api/cart phải có 1 phần tử, quantity cộng dồn.",
+        "requirements": [
+          "FR-07.3",
+          "API-CART"
+        ]
       },
       {
         "id": "EC12",
@@ -405,15 +442,32 @@
         "class": "API: id không tồn tại trong products (vd 99999)",
         "valid": false,
         "guideline": "set",
-        "note": "Ngoài tập sản phẩm (B18 đề xuất)."
+        "note": "Ngoài tập sản phẩm (B18 đề xuất).",
+        "requirements": [
+          "API-CART"
+        ]
       },
       {
         "id": "EC13",
         "variable": "V2",
-        "class": "API: thiếu id / id sai kiểu (vd \"abc\")",
+        "class": "API: id sai kiểu (vd \"abc\")",
         "valid": false,
         "guideline": "type",
-        "note": "B18 đề xuất."
+        "note": "B18 SV chốt. Tách khỏi 'thiếu id' (EC53) như cách tách quantity (EC5/EC7).",
+        "requirements": [
+          "API-CART"
+        ]
+      },
+      {
+        "id": "EC53",
+        "variable": "V2",
+        "class": "API: thiếu trường id hoặc id = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "B18 SV chốt. Tách từ EC13 (review bước 3). Mã EC53 (không dùng EC52 vì EC52 đã có nghĩa khác trong bản đóng băng bước 2).",
+        "requirements": [
+          "API-CART"
+        ]
       },
       {
         "id": "EC14",
@@ -421,7 +475,10 @@
         "class": "UI: sản phẩm seed, đơn giá nguyên dương (4.000.000–45.000.000)",
         "valid": true,
         "guideline": "set",
-        "note": "Không do người dùng nhập. Đại diện chọn theo code server.js:162 (gray-box): suite API lấy cả id chẵn và id lẻ (B19); không tách lớp."
+        "note": "Không do người dùng nhập. Đại diện chọn theo code server.js:162 (gray-box): suite API lấy cả id chẵn và id lẻ (B19); không tách lớp.",
+        "requirements": [
+          "FR-07.1"
+        ]
       },
       {
         "id": "EC15",
@@ -429,7 +486,10 @@
         "class": "API: body.price khớp giá CSDL",
         "valid": true,
         "guideline": "set",
-        "note": "B8."
+        "note": "B8.",
+        "requirements": [
+          "API-CART"
+        ]
       },
       {
         "id": "EC16",
@@ -437,7 +497,10 @@
         "class": "API: body.price khác giá CSDL (khác số, ≤ 0, sai kiểu, thiếu)",
         "valid": true,
         "guideline": "split",
-        "note": "B8 SV chốt: price client bị bỏ qua, giỏ dùng giá CSDL → hợp lệ, oracle = giá CSDL."
+        "note": "B8 SV chốt: price client bị bỏ qua, giỏ dùng giá CSDL → hợp lệ, oracle = giá CSDL.",
+        "requirements": [
+          "FR-08.2"
+        ]
       },
       {
         "id": "EC17",
@@ -445,7 +508,10 @@
         "class": "Bấm '+'",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.2. Chỉ UI (API không có endpoint sửa). SUT chưa thấy nút → A17 (B3)."
+        "note": "FR-07.2. Chỉ UI (API không có endpoint sửa). SUT chưa thấy nút → A17 (B3).",
+        "requirements": [
+          "FR-07.2"
+        ]
       },
       {
         "id": "EC18",
@@ -453,7 +519,10 @@
         "class": "Bấm '-'",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.2. Chỉ UI."
+        "note": "FR-07.2. Chỉ UI.",
+        "requirements": [
+          "FR-07.2"
+        ]
       },
       {
         "id": "EC19",
@@ -461,7 +530,11 @@
         "class": "Số lượng hiện tại = 1",
         "valid": true,
         "guideline": "split",
-        "note": "Điểm đặc biệt cho '-': giữ 1 (B3 SV chốt). Biến trạng thái, không có lớp không hợp lệ."
+        "note": "Điểm đặc biệt cho '-': giữ 1 (B3 SV chốt). Biến trạng thái, không có lớp không hợp lệ.",
+        "requirements": [
+          "FR-07.2",
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC20",
@@ -469,7 +542,10 @@
         "class": "Số lượng hiện tại ≥ 2",
         "valid": true,
         "guideline": "split",
-        "note": "'-' giảm 1; '+' tăng 1 (không cận trên, B1)."
+        "note": "'-' giảm 1; '+' tăng 1 (không cận trên, B1).",
+        "requirements": [
+          "FR-07.2"
+        ]
       },
       {
         "id": "EC21",
@@ -477,7 +553,11 @@
         "class": "Bấm nút xoá rồi chọn Xác nhận trong dialog",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.4, B14: dòng bị xoá, Tổng cộng cập nhật."
+        "note": "FR-07.4, B14: dòng bị xoá, Tổng cộng cập nhật.",
+        "requirements": [
+          "FR-07.4",
+          "FR-24.2"
+        ]
       },
       {
         "id": "EC22",
@@ -485,7 +565,11 @@
         "class": "Bấm nút xoá rồi chọn Hủy trong dialog",
         "valid": true,
         "guideline": "set",
-        "note": "B14: giỏ giữ nguyên."
+        "note": "B14: giỏ giữ nguyên.",
+        "requirements": [
+          "FR-07.4",
+          "FR-24.2"
+        ]
       },
       {
         "id": "EC23",
@@ -493,7 +577,10 @@
         "class": "Giỏ có 0 dòng",
         "valid": true,
         "guideline": "count",
-        "note": "→ empty state (FR-07.7). Biến trạng thái, không có lớp không hợp lệ."
+        "note": "→ empty state (FR-07.7). Biến trạng thái, không có lớp không hợp lệ.",
+        "requirements": [
+          "FR-07.7"
+        ]
       },
       {
         "id": "EC24",
@@ -501,7 +588,10 @@
         "class": "Giỏ có đúng 1 dòng",
         "valid": true,
         "guideline": "count",
-        "note": "Xoá dòng cuối → chuyển sang empty state."
+        "note": "Xoá dòng cuối → chuyển sang empty state.",
+        "requirements": [
+          "FR-07.1"
+        ]
       },
       {
         "id": "EC25",
@@ -509,7 +599,10 @@
         "class": "Giỏ có ≥ 2 dòng",
         "valid": true,
         "guideline": "count",
-        "note": "Tổng cộng = Σ nhiều Thành tiền (B4); xoá 1 dòng không ảnh hưởng dòng khác."
+        "note": "Tổng cộng = Σ nhiều Thành tiền (B4); xoá 1 dòng không ảnh hưởng dòng khác.",
+        "requirements": [
+          "FR-07.1"
+        ]
       },
       {
         "id": "EC26",
@@ -517,7 +610,10 @@
         "class": "UI: chưa đăng nhập",
         "valid": true,
         "guideline": "set",
-        "note": "B11 đề xuất: khách vẫn dùng giỏ (suy từ FR-08.1)."
+        "note": "B11 đề xuất: khách vẫn dùng giỏ (suy từ FR-08.1).",
+        "requirements": [
+          "FR-08.1"
+        ]
       },
       {
         "id": "EC27",
@@ -525,7 +621,10 @@
         "class": "UI: đã đăng nhập (test@eshop.com hoặc user {ts})",
         "valid": true,
         "guideline": "set",
-        "note": ""
+        "note": "",
+        "requirements": [
+          "FR-08.1"
+        ]
       },
       {
         "id": "EC28",
@@ -533,7 +632,11 @@
         "class": "API: token hợp lệ",
         "valid": true,
         "guideline": "must-be",
-        "note": "SEC-02."
+        "note": "SEC-02.",
+        "requirements": [
+          "SEC-02",
+          "API-CART"
+        ]
       },
       {
         "id": "EC29",
@@ -541,7 +644,10 @@
         "class": "API: thiếu header Authorization",
         "valid": false,
         "guideline": "must-be",
-        "note": "SEC-02, B17: 4xx."
+        "note": "SEC-02, B17: 4xx.",
+        "requirements": [
+          "SEC-02"
+        ]
       },
       {
         "id": "EC30",
@@ -549,7 +655,10 @@
         "class": "API: token sai/giả mạo",
         "valid": false,
         "guideline": "must-be",
-        "note": "SEC-02, B17: 4xx."
+        "note": "SEC-02, B17: 4xx.",
+        "requirements": [
+          "SEC-02"
+        ]
       },
       {
         "id": "EC31",
@@ -557,15 +666,10 @@
         "class": "API: body.name khớp tên CSDL",
         "valid": true,
         "guideline": "set",
-        "note": "B8."
-      },
-      {
-        "id": "EC32",
-        "variable": "V9",
-        "class": "API: body.name khác tên CSDL (kể cả chuỗi chứa thẻ HTML)",
-        "valid": true,
-        "guideline": "split",
-        "note": "Áp B8 cho tên (AI suy rộng, SV xác nhận): name client bị bỏ qua, giỏ dùng tên CSDL."
+        "note": "B8.",
+        "requirements": [
+          "API-CART"
+        ]
       },
       {
         "id": "EC33",
@@ -573,15 +677,21 @@
         "class": "Bấm 'Tiếp tục mua sắm'",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.5. Hai trạng thái giỏ (trống / có hàng) do V7 phủ."
+        "note": "FR-07.5. Hai trạng thái giỏ (trống / có hàng) do V7 phủ.",
+        "requirements": [
+          "FR-07.5"
+        ]
       },
       {
         "id": "EC34",
         "variable": "V11",
-        "class": "Bảng giỏ hiển thị đủ 5 cột (Sản phẩm, Đơn giá, Số lượng, Thành tiền, Thao tác), mỗi sản phẩm 1 dòng",
+        "class": "Bảng giỏ có 5 cột với nhãn 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác'",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.1, FR-07.3. UI."
+        "note": "Nhãn kiểm một nơi duy nhất: TC-FR07-95 (B12).",
+        "requirements": [
+          "FR-07.1"
+        ]
       },
       {
         "id": "EC35",
@@ -589,7 +699,10 @@
         "class": "Không có bảng (giỏ trống)",
         "valid": true,
         "guideline": "set",
-        "note": "Đi cùng EC48 (empty state)."
+        "note": "Đi cùng EC48 (empty state).",
+        "requirements": [
+          "FR-07.7"
+        ]
       },
       {
         "id": "EC36",
@@ -597,7 +710,11 @@
         "class": "API: GET /api/cart trả mảng, mỗi id một phần tử, chỉ chứa hàng của user sở hữu token",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.3 áp cho API (B7); mỗi user một giỏ (B0a)."
+        "note": "FR-07.3 áp cho API (B7); mỗi user một giỏ (B0a).",
+        "requirements": [
+          "FR-07.3",
+          "API-CART"
+        ]
       },
       {
         "id": "EC37",
@@ -605,7 +722,10 @@
         "class": "Số lượng tăng đúng bằng số lượng thêm (cộng dồn)",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.3."
+        "note": "FR-07.3.",
+        "requirements": [
+          "FR-07.3"
+        ]
       },
       {
         "id": "EC38",
@@ -613,7 +733,10 @@
         "class": "Số lượng tăng 1",
         "valid": true,
         "guideline": "set",
-        "note": "'+' (FR-07.2)."
+        "note": "'+' (FR-07.2).",
+        "requirements": [
+          "FR-07.2"
+        ]
       },
       {
         "id": "EC39",
@@ -621,7 +744,10 @@
         "class": "Số lượng giảm 1",
         "valid": true,
         "guideline": "set",
-        "note": "'-' khi ≥ 2."
+        "note": "'-' khi ≥ 2.",
+        "requirements": [
+          "FR-07.2"
+        ]
       },
       {
         "id": "EC40",
@@ -629,23 +755,33 @@
         "class": "Số lượng giữ nguyên",
         "valid": true,
         "guideline": "set",
-        "note": "'-' khi = 1 (B3), hoặc lần thêm bị từ chối (B2)."
+        "note": "'-' khi = 1 (B3), hoặc lần thêm bị từ chối (B2).",
+        "requirements": [
+          "FR-07.2",
+          "FR-06.2"
+        ]
       },
       {
         "id": "EC41",
         "variable": "V13",
-        "class": "Thành tiền = Đơn giá × Số lượng, hiển thị ₫ + phân cách hàng nghìn",
+        "class": "Thành tiền = Đơn giá × Số lượng (so giá trị số)",
         "valid": true,
         "guideline": "set",
-        "note": "B4, FR-21.3, B13."
+        "note": "B4. Định dạng ₫ kiểm riêng ở TC-FR07-93.",
+        "requirements": [
+          "FR-07.1"
+        ]
       },
       {
         "id": "EC42",
         "variable": "V14",
-        "class": "Nhãn 'Tổng cộng', giá trị = Σ Thành tiền, hiển thị ₫",
+        "class": "Tổng = Σ Thành tiền các dòng (so giá trị số)",
         "valid": true,
         "guideline": "set",
-        "note": "FR-07.6, B4."
+        "note": "B4. Nhãn 'Tổng cộng' kiểm ở TC-FR07-95; định dạng ở TC-FR07-93.",
+        "requirements": [
+          "FR-07.6"
+        ]
       },
       {
         "id": "EC43",
@@ -653,7 +789,10 @@
         "class": "Badge = tổng Số lượng trong giỏ (≥ 1)",
         "valid": true,
         "guideline": "set",
-        "note": "FR-23.2, B9 SV chốt."
+        "note": "FR-23.2, B9 SV chốt. Kiểm ở một case có số dòng ≠ tổng Số lượng (TC-FR07-04).",
+        "requirements": [
+          "FR-23.2"
+        ]
       },
       {
         "id": "EC44",
@@ -661,7 +800,10 @@
         "class": "Giỏ trống: badge ẩn hoặc hiển thị 0",
         "valid": true,
         "guideline": "set",
-        "note": "SRS im lặng; đề xuất chấp nhận cả hai."
+        "note": "SRS im lặng; đề xuất chấp nhận cả hai.",
+        "requirements": [
+          "FR-23.2"
+        ]
       },
       {
         "id": "EC45",
@@ -669,7 +811,11 @@
         "class": "Có phản hồi trực quan (toast hoặc badge cập nhật) sau lần thêm hợp lệ",
         "valid": true,
         "guideline": "set",
-        "note": "FR-06.3, FR-24.1."
+        "note": "FR-06.3, FR-24.1. Mỗi nút thêm kiểm một lần, quan sát ngay sau thao tác chính: 'Thêm vào giỏ hàng' (TC-FR07-02), 'Thêm vào giỏ' (TC-FR07-96).",
+        "requirements": [
+          "FR-06.3",
+          "FR-24.1"
+        ]
       },
       {
         "id": "EC46",
@@ -677,7 +823,11 @@
         "class": "Không báo 'đã thêm' khi lần thêm bị từ chối",
         "valid": true,
         "guideline": "set",
-        "note": "B2 SV chốt: không yêu cầu thông báo lỗi; chỉ yêu cầu không có phản hồi 'đã thêm' và giỏ không đổi."
+        "note": "B2 SV chốt: không yêu cầu thông báo lỗi; chỉ yêu cầu không có phản hồi 'đã thêm' và giỏ không đổi.",
+        "requirements": [
+          "FR-06.2",
+          "FR-06.3"
+        ]
       },
       {
         "id": "EC47",
@@ -685,7 +835,11 @@
         "class": "Dialog xác nhận hiện ra trước khi xoá",
         "valid": true,
         "guideline": "must-be",
-        "note": "FR-07.4, FR-24.2."
+        "note": "FR-07.4, FR-24.2.",
+        "requirements": [
+          "FR-07.4",
+          "FR-24.2"
+        ]
       },
       {
         "id": "EC48",
@@ -693,7 +847,11 @@
         "class": "Empty state có hình minh hoạ/icon và thông báo giỏ trống",
         "valid": true,
         "guideline": "must-be",
-        "note": "FR-07.7, FR-24.3, B15."
+        "note": "FR-07.7, FR-24.3, B15.",
+        "requirements": [
+          "FR-07.7",
+          "FR-24.3"
+        ]
       },
       {
         "id": "EC49",
@@ -701,7 +859,10 @@
         "class": "URL sau khi bấm là trang chủ '/'",
         "valid": true,
         "guideline": "must-be",
-        "note": "FR-07.5."
+        "note": "FR-07.5.",
+        "requirements": [
+          "FR-07.5"
+        ]
       },
       {
         "id": "EC50",
@@ -709,7 +870,10 @@
         "class": "API: 2xx và GET /api/cart phản ánh thay đổi",
         "valid": true,
         "guideline": "set",
-        "note": ""
+        "note": "",
+        "requirements": [
+          "API-CART"
+        ]
       },
       {
         "id": "EC51",
@@ -717,7 +881,11 @@
         "class": "API: 4xx kèm trường error, giỏ không đổi",
         "valid": true,
         "guideline": "set",
-        "note": "B17. Không 2xx, không 5xx."
+        "note": "B17. Không 2xx, không 5xx.",
+        "requirements": [
+          "API-CART",
+          "SEC-02"
+        ]
       }
     ]
   },
@@ -743,14 +911,14 @@
         },
         {
           "action": "Dựng 'Giỏ ban đầu' theo đúng thứ tự trong cột. 'TC: <id>' = ở trang chủ bấm 'Thêm vào giỏ' trên thẻ sản phẩm đó đúng một lần. 'CT: <id> × n' = bấm 'Xem chi tiết' trên thẻ, xoá trắng ô 'Số lượng:', gõ n, bấm 'Thêm vào giỏ hàng' đúng một lần, rồi bấm link 'EShop' trên navbar để về trang chủ. '—' = không thêm gì. Chỉ điều hướng bằng link trong app, không tải lại trang.",
-          "expected": "Mỗi lần thêm có phản hồi trên trang."
+          "expected": "Không đánh giá ở bước này (phản hồi khi thêm chỉ kiểm ở case có mục tiêu EC45); giỏ được đối chiếu ở bước 3."
         },
         {
-          "action": "Bấm link 'Giỏ hàng' trên navbar. Ghi lại trạng thái TRƯỚC: số dòng; Sản phẩm, Đơn giá, Số lượng, Thành tiền của từng dòng; Tổng cộng; badge trên link 'Giỏ hàng'.",
+          "action": "Bấm link tới /cart trên navbar. Ghi trạng thái TRƯỚC: số dòng; với mỗi dòng: tên sản phẩm, Đơn giá, Số lượng, Thành tiền; Tổng; badge. Số tiền ghi dạng giá trị số (bỏ ký hiệu tiền và dấu phân cách). Cách định vị (không dựa vào đúng chữ của nhãn): dòng sản phẩm = dòng của bảng giỏ có chứa tên sản phẩm; cột theo thứ tự FR-07.1 (1 Sản phẩm, 2 Đơn giá, 3 Số lượng, 4 Thành tiền, 5 Thao tác) — thứ tự khác thì xác định theo tiêu đề gần nghĩa và ghi notes; nút '+'/'-' = hai nút trong ô cột Số lượng của dòng (nút tăng/giảm); nút xoá = nút trong ô cột Thao tác của dòng; link về trang chủ = phần tử a[href='/'] trong vùng nội dung chính của trang giỏ (không tính navbar và logo 'EShop'); Tổng = số tiền ở phần tổng bên dưới bảng; badge = con số hiển thị trên/cạnh link tới /cart trên navbar.",
           "expected": "Giỏ khớp cột 'Giỏ ban đầu' (sản phẩm, số lượng). Không khớp → dừng, Blocked, ghi case gốc gây chặn (B20)."
         },
         {
-          "action": "Thực hiện cột 'Thao tác' đúng một lần. Thao tác ở trang chi tiết: từ trang giỏ bấm link 'EShop' → 'Xem chi tiết' trên thẻ sản phẩm → ô 'Số lượng:' xoá trắng rồi gõ đúng chuỗi trong cột ('' = để trống) → bấm 'Thêm vào giỏ hàng' đúng một lần. Thao tác '+', '-', xoá: bấm nút trên dòng sản phẩm ghi trong cột; dialog: bấm nút ghi trong cột.",
+          "action": "Thực hiện cột 'Thao tác' đúng một lần, định vị phần tử như bước 3. Thao tác ở trang chi tiết: từ trang giỏ bấm link 'EShop' trên navbar → link 'Xem chi tiết' trên thẻ sản phẩm → ô 'Số lượng:' xoá trắng rồi gõ đúng chuỗi trong cột ('' = để trống) → bấm nút thêm vào giỏ của trang đúng một lần. Thao tác '+', '-', xoá: bấm nút trên dòng sản phẩm ghi trong cột; dialog: chọn nút xác nhận hoặc nút huỷ như cột ghi.",
           "expected": "Hệ thống phản hồi (phản hồi trực quan, dialog, đổi số, chuyển trang hoặc không đổi gì)."
         },
         {
@@ -758,7 +926,7 @@
           "expected": "Khớp phần phản hồi trong cột Expected."
         },
         {
-          "action": "Nếu không ở trang giỏ: bấm link 'Giỏ hàng' trên navbar (trừ khi Expected yêu cầu quan sát trang khác). Ghi trạng thái SAU, so với TRƯỚC ở bước 3.",
+          "action": "Nếu không ở trang giỏ: bấm link tới /cart trên navbar (trừ khi Expected yêu cầu quan sát trang khác). Ghi trạng thái SAU như bước 3, so với TRƯỚC.",
           "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, B0b)."
         }
       ],
@@ -773,20 +941,20 @@
       "cases": [
         {
           "id": "TC-FR07-01",
-          "title": "Kiểm tra trang giỏ hàng trống và nút 'Tiếp tục mua sắm' khi khách chưa đăng nhập mở giỏ rỗng",
+          "title": "Kiểm tra trang giỏ trống và việc quay về trang chủ khi khách chưa đăng nhập mở giỏ rỗng",
           "layer": "UI",
           "inputs": {
             "Đăng nhập": "khách",
             "Giỏ ban đầu": "—",
-            "Thao tác": "Ở trang giỏ: bấm 'Tiếp tục mua sắm'"
+            "Thao tác": "Ở trang giỏ: bấm link về trang chủ"
           },
-          "expected_result": "Bước 3: trang giỏ không có bảng; có hình minh hoạ/icon và thông báo giỏ trống (FR-07.7); badge ẩn hoặc 0. Bước 5: URL = http://localhost:5173/ (FR-07.5).",
+          "expected_result": "Bước 3: không có bảng sản phẩm; có hình minh hoạ/icon (img hoặc svg) và dòng chữ báo giỏ trống; badge ẩn hoặc 0. Sau thao tác: URL = http://localhost:5173/.",
           "requirements": [
-            "FR-07.5",
             "FR-07.7",
-            "FR-24.3",
+            "FR-08.1",
+            "FR-07.5",
             "FR-23.2",
-            "FR-08.1"
+            "FR-24.3"
           ],
           "covers": [
             "EC23",
@@ -816,17 +984,17 @@
           "inputs": {
             "Đăng nhập": "user {ts}",
             "Giỏ ban đầu": "—",
-            "Thao tác": "CT: id 2 × 2, rồi ở trang giỏ bấm 'Tiếp tục mua sắm'"
+            "Thao tác": "CT: id 2 × 2, rồi ở trang giỏ bấm link về trang chủ"
           },
-          "expected_result": "Bước 5 (sau khi bấm 'Thêm vào giỏ hàng'): có phản hồi trực quan (toast hoặc badge cập nhật). TRƯỚC → SAU: 0 → 1 dòng; bảng có đủ 5 cột 'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác'; dòng 'Samsung Galaxy S24 Ultra', Đơn giá 28.000.000 ₫, Số lượng 2, Thành tiền 56.000.000 ₫; nhãn 'Tổng cộng' = 56.000.000 ₫; badge 2. Sau khi bấm 'Tiếp tục mua sắm' (có ở giỏ không rỗng): URL = http://localhost:5173/, badge vẫn 2.",
+          "expected_result": "Ngay sau khi bấm 'Thêm vào giỏ hàng': có phản hồi trực quan (toast hoặc badge cập nhật). TRƯỚC → SAU: 0 → 1 dòng 'Samsung Galaxy S24 Ultra', Đơn giá 28000000, Số lượng 2, Thành tiền 56000000; Tổng 56000000. Sau khi bấm link về trang chủ (giỏ có hàng): URL = http://localhost:5173/.",
           "requirements": [
             "FR-06.2",
-            "FR-06.3",
             "FR-07.1",
+            "FR-07.7",
+            "FR-08.1",
             "FR-07.5",
             "FR-07.6",
-            "FR-21.3",
-            "FR-23.2",
+            "FR-06.3",
             "FR-24.1"
           ],
           "covers": [
@@ -836,16 +1004,14 @@
             "EC23",
             "EC27",
             "EC33",
-            "EC34",
             "EC41",
             "EC42",
-            "EC43",
             "EC45",
             "EC49"
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Case hợp lệ chính: số lượng danh nghĩa 2 (khác giá trị mặc định 1 để thấy ô Số lượng có tác dụng); Thành tiền khác Đơn giá nên kiểm được phép nhân; kiểm 'Tiếp tục mua sắm' ở giỏ có hàng (TC-01 đã kiểm ở giỏ rỗng).",
+          "rationale": "Case hợp lệ chính: số lượng 2 (khác mặc định 1 để thấy ô Số lượng có tác dụng); Thành tiền khác Đơn giá nên kiểm được phép nhân; nút 'Thêm vào giỏ hàng' là thao tác chính nên kiểm phản hồi EC45 tại đây; kiểm quay về trang chủ khi giỏ có hàng (TC-01 kiểm khi giỏ rỗng).",
           "origin": "AI",
           "priority": "High",
           "type": "Positive",
@@ -864,22 +1030,23 @@
             "Giỏ ban đầu": "CT: id 5 × 1",
             "Thao tác": "CT: id 5 × 3"
           },
-          "expected_result": "Có phản hồi trực quan sau khi thêm. TRƯỚC → SAU: vẫn 1 dòng (không tạo dòng mới); 'Bàn phím cơ Keychron Q1' Số lượng 1 → 4; Thành tiền 16.000.000 ₫; Tổng cộng 16.000.000 ₫; badge 4.",
+          "expected_result": "TRƯỚC → SAU: vẫn 1 dòng (không tạo dòng mới); 'Bàn phím cơ Keychron Q1' Số lượng 1 → 4; Thành tiền 16000000; Tổng 16000000.",
           "requirements": [
+            "FR-06.2",
             "FR-07.3",
-            "FR-06.3",
-            "FR-23.2"
+            "FR-07.1",
+            "FR-08.1",
+            "FR-07.6"
           ],
           "covers": [
             "EC1",
             "EC9",
+            "EC14",
             "EC24",
             "EC26",
             "EC37",
             "EC41",
-            "EC42",
-            "EC43",
-            "EC45"
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -902,11 +1069,13 @@
             "Giỏ ban đầu": "TC: id 1; TC: id 4",
             "Thao tác": "CT: id 4 × 2"
           },
-          "expected_result": "Mỗi lần bấm 'Thêm vào giỏ' ở bước 2 có phản hồi trực quan (FR-24.1). TRƯỚC → SAU: vẫn 2 dòng; dòng 'Tai nghe AirPods Pro 2' Số lượng 1 → 3, Thành tiền 18.000.000 ₫; dòng 'iPhone 15 Pro Max' giữ Số lượng 1, Thành tiền 30.000.000 ₫; Tổng cộng 48.000.000 ₫; badge 4.",
+          "expected_result": "TRƯỚC → SAU: vẫn 2 dòng; 'Tai nghe AirPods Pro 2' Số lượng 1 → 3, Thành tiền 18000000; 'iPhone 15 Pro Max' giữ Số lượng 1, Thành tiền 30000000; Tổng 48000000; badge 2 → 4 (tổng Số lượng, B9).",
           "requirements": [
+            "FR-06.2",
             "FR-07.3",
+            "FR-07.1",
+            "FR-08.1",
             "FR-07.6",
-            "FR-24.1",
             "FR-23.2"
           ],
           "covers": [
@@ -918,12 +1087,11 @@
             "EC37",
             "EC41",
             "EC42",
-            "EC43",
-            "EC45"
+            "EC43"
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Đại diện EC10 (thêm lại từ trang khác, B5) trong giỏ ≥ 2 dòng: kiểm cùng lúc gộp đúng dòng và Tổng cộng là tổng nhiều Thành tiền.",
+          "rationale": "Đại diện EC10 (thêm lại từ trang khác, B5) trong giỏ ≥ 2 dòng: kiểm gộp đúng dòng và Tổng của nhiều dòng; số dòng (2) ≠ tổng Số lượng (4) nên badge phân biệt được hai cách hiểu FR-23 — case duy nhất kiểm EC43.",
           "origin": "AI",
           "priority": "High",
           "type": "Positive",
@@ -942,11 +1110,13 @@
             "Giỏ ban đầu": "TC: id 5",
             "Thao tác": "Bấm '+' trên dòng id 5"
           },
-          "expected_result": "TRƯỚC → SAU: 'Bàn phím cơ Keychron Q1' Số lượng 1 → 2; Thành tiền 4.000.000 → 8.000.000 ₫; Tổng cộng 8.000.000 ₫; badge 2; vẫn 1 dòng.",
+          "expected_result": "TRƯỚC → SAU: vẫn 1 dòng; Số lượng 1 → 2; Thành tiền 4000000 → 8000000; Tổng 8000000.",
           "requirements": [
+            "FR-07.1",
             "FR-07.2",
-            "FR-07.6",
-            "FR-23.2"
+            "FR-06.2",
+            "FR-08.1",
+            "FR-07.6"
           ],
           "covers": [
             "EC14",
@@ -956,12 +1126,11 @@
             "EC26",
             "EC38",
             "EC41",
-            "EC42",
-            "EC43"
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Đại diện '+' tại điểm danh nghĩa nhỏ nhất (Số lượng 1); dựng giỏ bằng trang chủ để không phụ thuộc ô Số lượng.",
+          "rationale": "Đại diện '+' tại Số lượng 1; dựng giỏ bằng trang chủ để không phụ thuộc ô Số lượng.",
           "origin": "AI",
           "priority": "High",
           "type": "Positive",
@@ -980,25 +1149,26 @@
             "Giỏ ban đầu": "CT: id 5 × 3",
             "Thao tác": "Bấm '-' trên dòng id 5"
           },
-          "expected_result": "TRƯỚC → SAU: Số lượng 3 → 2; Thành tiền 12.000.000 → 8.000.000 ₫; Tổng cộng 8.000.000 ₫; badge 2; vẫn 1 dòng.",
+          "expected_result": "TRƯỚC → SAU: vẫn 1 dòng; Số lượng 3 → 2; Thành tiền 12000000 → 8000000; Tổng 8000000.",
           "requirements": [
+            "FR-07.1",
             "FR-07.2",
-            "FR-07.6",
-            "FR-23.2"
+            "FR-08.1",
+            "FR-07.6"
           ],
           "covers": [
+            "EC14",
             "EC18",
             "EC20",
             "EC24",
             "EC27",
             "EC39",
             "EC41",
-            "EC42",
-            "EC43"
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Đại diện '-' khi Số lượng ≥ 2 (lấy 3, không phải biên 2 — biên để bước 4).",
+          "rationale": "Đại diện '-' khi Số lượng ≥ 2 (lấy 3, không phải giá trị 2 nằm sát lớp EC19).",
           "origin": "AI",
           "priority": "High",
           "type": "Positive",
@@ -1017,11 +1187,12 @@
             "Giỏ ban đầu": "TC: id 5",
             "Thao tác": "Bấm '-' trên dòng id 5"
           },
-          "expected_result": "Không có dialog xoá, dòng không bị xoá. TRƯỚC → SAU: Số lượng giữ 1; Thành tiền 4.000.000 ₫; Tổng cộng 4.000.000 ₫; badge 1 (B3).",
+          "expected_result": "Không có dialog xoá. TRƯỚC → SAU: vẫn 1 dòng; Số lượng giữ 1; Tổng 4000000 (B3).",
           "requirements": [
+            "FR-07.1",
             "FR-07.2",
             "FR-06.2",
-            "FR-07.4"
+            "FR-08.1"
           ],
           "covers": [
             "EC14",
@@ -1052,26 +1223,25 @@
             "Giỏ ban đầu": "TC: id 4; TC: id 5",
             "Thao tác": "Bấm nút xoá trên dòng id 4 → dialog: chọn xác nhận"
           },
-          "expected_result": "Sau khi bấm nút xoá: hiện dialog xác nhận, dòng chưa bị xoá khi dialog đang mở (FR-07.4). Sau khi xác nhận: TRƯỚC → SAU: 2 → 1 dòng; không còn 'Tai nghe AirPods Pro 2'; 'Bàn phím cơ Keychron Q1' giữ nguyên Số lượng 1; Tổng cộng 10.000.000 → 4.000.000 ₫; badge 2 → 1.",
+          "expected_result": "Sau khi bấm nút xoá: hiện dialog xác nhận; dòng chưa bị xoá khi dialog đang mở. Sau khi xác nhận: TRƯỚC → SAU: 2 → 1 dòng; không còn 'Tai nghe AirPods Pro 2'; 'Bàn phím cơ Keychron Q1' giữ Số lượng 1; Tổng 10000000 → 4000000.",
           "requirements": [
+            "FR-07.1",
             "FR-07.4",
             "FR-24.2",
-            "FR-07.6",
-            "FR-23.2"
+            "FR-08.1",
+            "FR-07.6"
           ],
           "covers": [
             "EC14",
             "EC21",
             "EC25",
             "EC27",
-            "EC34",
             "EC42",
-            "EC43",
             "EC47"
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Xoá trong giỏ ≥ 2 dòng để kiểm được cả 'xoá đúng dòng' và 'dòng còn lại không đổi'. Xoá dòng cuối (1 → 0) để bước 4 (biên số dòng).",
+          "rationale": "Xoá trong giỏ ≥ 2 dòng để kiểm được cả 'xoá đúng dòng' và 'dòng còn lại không đổi'.",
           "origin": "AI",
           "priority": "High",
           "type": "Positive",
@@ -1088,12 +1258,14 @@
           "inputs": {
             "Đăng nhập": "khách",
             "Giỏ ban đầu": "TC: id 4",
-            "Thao tác": "Bấm nút xoá trên dòng id 4 → dialog: chọn Hủy"
+            "Thao tác": "Bấm nút xoá trên dòng id 4 → dialog: chọn huỷ"
           },
-          "expected_result": "Sau khi bấm nút xoá: hiện dialog xác nhận. Sau khi Hủy: TRƯỚC → SAU: giỏ không đổi — 1 dòng 'Tai nghe AirPods Pro 2' Số lượng 1, Tổng cộng 6.000.000 ₫, badge 1 (B14).",
+          "expected_result": "Sau khi bấm nút xoá: hiện dialog xác nhận. Sau khi huỷ: TRƯỚC → SAU: giỏ không đổi — 1 dòng 'Tai nghe AirPods Pro 2' Số lượng 1, Tổng 6000000 (B14).",
           "requirements": [
+            "FR-07.1",
             "FR-07.4",
-            "FR-24.2"
+            "FR-24.2",
+            "FR-08.1"
           ],
           "covers": [
             "EC14",
@@ -1104,7 +1276,7 @@
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Nhánh Hủy của dialog — kết quả khác nhánh xác nhận nên case riêng.",
+          "rationale": "Nhánh huỷ của dialog — kết quả khác nhánh xác nhận nên case riêng.",
           "origin": "AI",
           "priority": "High",
           "type": "Positive",
@@ -1123,9 +1295,12 @@
             "Giỏ ban đầu": "TC: id 1",
             "Thao tác": "CT: id 5 × -3"
           },
-          "expected_result": "Không có phản hồi 'đã thêm'; TRƯỚC → SAU: giỏ không đổi — vẫn 1 dòng id 1 Số lượng 1, không có dòng id 5, Tổng cộng 30.000.000 ₫, badge 1 (B2).",
+          "expected_result": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — 1 dòng 'iPhone 15 Pro Max' Số lượng 1, không có dòng 'Bàn phím cơ Keychron Q1', Tổng 30000000 (B2).",
           "requirements": [
             "FR-06.2",
+            "FR-07.1",
+            "FR-08.1",
+            "FR-07.2",
             "FR-06.3"
           ],
           "covers": [
@@ -1134,12 +1309,12 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC46",
-            "EC40"
+            "EC40",
+            "EC46"
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Đại diện giữa lớp ≤ 0 (−3); giá trị 0 là LB-1, để bước 4. Giỏ ban đầu có hàng khác để 'giỏ không đổi' quan sát được.",
+          "rationale": "Đại diện giữa lớp ≤ 0 (−3), không trùng điểm biên 0. Giỏ ban đầu có hàng khác để 'giỏ không đổi' quan sát được.",
           "origin": "AI",
           "priority": "High",
           "type": "Negative",
@@ -1158,9 +1333,13 @@
             "Giỏ ban đầu": "TC: id 1",
             "Thao tác": "CT: id 5 × 1.5"
           },
-          "expected_result": "Không có phản hồi 'đã thêm'; TRƯỚC → SAU: giỏ không đổi — vẫn 1 dòng id 1 Số lượng 1, không có dòng id 5, Tổng cộng 30.000.000 ₫, badge 1 (B2).",
+          "expected_result": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — 1 dòng 'iPhone 15 Pro Max' Số lượng 1, không có dòng 'Bàn phím cơ Keychron Q1', Tổng 30000000 (B2).",
           "requirements": [
-            "FR-06.2"
+            "FR-06.2",
+            "FR-07.1",
+            "FR-08.1",
+            "FR-07.2",
+            "FR-06.3"
           ],
           "covers": [
             "EC3",
@@ -1168,8 +1347,8 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC46",
-            "EC40"
+            "EC40",
+            "EC46"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1192,9 +1371,13 @@
             "Giỏ ban đầu": "TC: id 1",
             "Thao tác": "CT: id 5 × '' (xoá trắng ô)"
           },
-          "expected_result": "Không có phản hồi 'đã thêm'; TRƯỚC → SAU: giỏ không đổi — vẫn 1 dòng id 1 Số lượng 1, không có dòng id 5, Tổng cộng 30.000.000 ₫, badge 1 (B2).",
+          "expected_result": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — 1 dòng 'iPhone 15 Pro Max' Số lượng 1, không có dòng 'Bàn phím cơ Keychron Q1', Tổng 30000000 (B2).",
           "requirements": [
-            "FR-06.2"
+            "FR-06.2",
+            "FR-07.1",
+            "FR-08.1",
+            "FR-07.2",
+            "FR-06.3"
           ],
           "covers": [
             "EC4",
@@ -1202,8 +1385,8 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC46",
-            "EC40"
+            "EC40",
+            "EC46"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1226,9 +1409,13 @@
             "Giỏ ban đầu": "TC: id 1",
             "Thao tác": "CT: id 5 × 'abc'"
           },
-          "expected_result": "Không có phản hồi 'đã thêm'; TRƯỚC → SAU: giỏ không đổi — vẫn 1 dòng id 1 Số lượng 1, không có dòng id 5, Tổng cộng 30.000.000 ₫, badge 1 (B2).",
+          "expected_result": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — 1 dòng 'iPhone 15 Pro Max' Số lượng 1, không có dòng 'Bàn phím cơ Keychron Q1', Tổng 30000000 (B2).",
           "requirements": [
-            "FR-06.2"
+            "FR-06.2",
+            "FR-07.1",
+            "FR-08.1",
+            "FR-07.2",
+            "FR-06.3"
           ],
           "covers": [
             "EC5",
@@ -1236,8 +1423,8 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC46",
-            "EC40"
+            "EC40",
+            "EC46"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1257,7 +1444,7 @@
       "id": "TS-DOM-API",
       "name": "Domain — minimum set, tầng API /api/cart (FR-07, FR-06)",
       "format": "matrix",
-      "description": "Minimum set tầng API (B7): cùng quy tắc chọn; thêm lớp chỉ có ở API (EC6, EC7, EC12, EC13 — B18; EC16, EC32 — B8; EC29, EC30 — SEC-02). Đại diện có cả sản phẩm id chẵn và lẻ (B19). V4/V6/V10 không áp dụng vì API không có endpoint sửa/xoá.",
+      "description": "Minimum set tầng API (B7): cùng quy tắc chọn; thêm lớp chỉ có ở API (EC6, EC7, EC12, EC13, EC53 — B18; EC16 — B8; EC29, EC30 — SEC-02). Đại diện có cả sản phẩm id chẵn và lẻ (B19). V4/V6/V10 không áp dụng vì API không có endpoint sửa/xoá.",
       "notes": "Giá trị danh nghĩa: token T của user {ts}, giỏ ban đầu id 1 × 1, body id 5 (tên/giá CSDL) quantity 1.",
       "preconditions": [
         "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
@@ -1317,9 +1504,12 @@
           },
           "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → đúng 1 phần tử id 1, name 'iPhone 15 Pro Max', price 30000000, quantity 2.",
           "requirements": [
-            "API-CART",
             "FR-06.2",
-            "SEC-02"
+            "FR-07.1",
+            "API-CART",
+            "FR-07.7",
+            "SEC-02",
+            "FR-07.3"
           ],
           "covers": [
             "EC1",
@@ -1357,8 +1547,11 @@
           },
           "expected_result": "HTTP 2xx. TRƯỚC → SAU: vẫn 1 phần tử id 2 (không thêm phần tử mới); quantity 1 → 4.",
           "requirements": [
+            "FR-06.2",
             "FR-07.3",
-            "API-CART"
+            "API-CART",
+            "FR-07.1",
+            "SEC-02"
           ],
           "covers": [
             "EC1",
@@ -1397,8 +1590,11 @@
           },
           "expected_result": "HTTP 2xx. TRƯỚC → SAU: 2 → 3 phần tử; phần tử id 4 có price 6000000 (giá CSDL, không phải 1); id 1 và id 5 không đổi.",
           "requirements": [
-            "API-CART",
-            "FR-08.1"
+            "FR-06.2",
+            "FR-07.1",
+            "FR-08.2",
+            "SEC-02",
+            "API-CART"
           ],
           "covers": [
             "EC1",
@@ -1419,45 +1615,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "B8: oracle = giá CSDL."
-        },
-        {
-          "id": "TC-FR07-23",
-          "title": "Kiểm tra thêm qua API khi name trong body khác tên CSDL và chứa thẻ HTML (sản phẩm id lẻ)",
-          "layer": "API",
-          "inputs": {
-            "Token": "T",
-            "Giỏ ban đầu": "—",
-            "id": "5",
-            "name": "\"<b>Hack</b>\"",
-            "price": "CSDL",
-            "quantity": "1"
-          },
-          "expected_result": "HTTP 2xx. TRƯỚC → SAU: [] → 1 phần tử id 5, name 'Bàn phím cơ Keychron Q1' (tên CSDL), price 4000000.",
-          "requirements": [
-            "API-CART",
-            "SEC-04"
-          ],
-          "covers": [
-            "EC1",
-            "EC8",
-            "EC15",
-            "EC23",
-            "EC28",
-            "EC32",
-            "EC50"
-          ],
-          "technique": "EP",
-          "bva_point": "",
-          "rationale": "Lớp dựa trên suy rộng B8 cho tên — case riêng; chuỗi HTML để nếu tên client được giữ thì còn kiểm được SEC-04 ở nơi hiển thị.",
-          "origin": "AI",
-          "priority": "High",
-          "type": "Positive",
-          "status": "Not run",
-          "actual_result": "",
-          "evidence": "",
-          "bug_id": "",
-          "notes": "EC32 dựa trên suy rộng của AI từ B8 (chờ SV xác nhận)."
+          "notes": "B8: oracle = giá CSDL (FR-08.2)."
         },
         {
           "id": "TC-FR07-30",
@@ -1474,7 +1632,9 @@
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
             "FR-06.2",
-            "API-CART"
+            "FR-07.1",
+            "API-CART",
+            "SEC-02"
           ],
           "covers": [
             "EC2",
@@ -1511,7 +1671,9 @@
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
             "FR-06.2",
-            "API-CART"
+            "FR-07.1",
+            "API-CART",
+            "SEC-02"
           ],
           "covers": [
             "EC3",
@@ -1548,7 +1710,9 @@
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
             "FR-06.2",
-            "API-CART"
+            "FR-07.1",
+            "API-CART",
+            "SEC-02"
           ],
           "covers": [
             "EC4",
@@ -1585,7 +1749,9 @@
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
             "FR-06.2",
-            "API-CART"
+            "FR-07.1",
+            "API-CART",
+            "SEC-02"
           ],
           "covers": [
             "EC5",
@@ -1622,7 +1788,9 @@
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
             "FR-06.2",
-            "API-CART"
+            "API-CART",
+            "FR-07.1",
+            "SEC-02"
           ],
           "covers": [
             "EC6",
@@ -1659,7 +1827,9 @@
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
             "FR-06.2",
-            "API-CART"
+            "API-CART",
+            "FR-07.1",
+            "SEC-02"
           ],
           "covers": [
             "EC7",
@@ -1695,7 +1865,10 @@
           },
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 99999.",
           "requirements": [
-            "API-CART"
+            "FR-06.2",
+            "API-CART",
+            "FR-07.1",
+            "SEC-02"
           ],
           "covers": [
             "EC1",
@@ -1730,7 +1903,10 @@
           },
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có phần tử mới.",
           "requirements": [
-            "API-CART"
+            "FR-06.2",
+            "API-CART",
+            "FR-07.1",
+            "SEC-02"
           ],
           "covers": [
             "EC1",
@@ -1741,7 +1917,7 @@
           ],
           "technique": "EP",
           "bva_point": "",
-          "rationale": "Sai kiểu id (B18); thiếu id tương đương, để bước 5/BVA nếu cần.",
+          "rationale": "Đại diện EC13 (id sai kiểu, B18): chuỗi chữ không thể là id sản phẩm.",
           "origin": "AI",
           "priority": "High",
           "type": "Negative",
@@ -1765,6 +1941,8 @@
           },
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
+            "FR-06.2",
+            "FR-07.1",
             "SEC-02",
             "API-CART"
           ],
@@ -1803,6 +1981,8 @@
           },
           "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có id 5.",
           "requirements": [
+            "FR-06.2",
+            "FR-07.1",
             "SEC-02",
             "API-CART"
           ],
@@ -1826,12 +2006,50 @@
           "evidence": "",
           "bug_id": "",
           "notes": ""
+        },
+        {
+          "id": "TC-FR07-40",
+          "title": "Kiểm tra thêm qua API khi thiếu trường id",
+          "layer": "API",
+          "inputs": {
+            "Token": "T",
+            "Giỏ ban đầu": "id 1 × 1",
+            "id": "— thiếu —",
+            "name": "CSDL của id 5",
+            "price": "CSDL của id 5",
+            "quantity": "1"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (B17). TRƯỚC → SAU: GET /api/cart không đổi — 1 phần tử id 1 quantity 1, không có phần tử mới.",
+          "requirements": [
+            "FR-06.2",
+            "FR-07.1",
+            "SEC-02",
+            "API-CART"
+          ],
+          "covers": [
+            "EC1",
+            "EC24",
+            "EC28",
+            "EC51",
+            "EC53"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện EC53 (B18): bỏ khoá id khỏi body — dạng thiếu phổ biến nhất; null cùng lớp.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
         }
       ]
     },
     {
       "id": "TS-GUI",
-      "name": "GUI — trang giỏ và các điểm thêm vào giỏ (FR-07.2 tồn tại nút, FR-21, FR-23, FR-24)",
+      "name": "GUI — trang giỏ và các điểm thêm vào giỏ (FR-07 nhãn + nút +/-, FR-21, FR-23, FR-24)",
       "format": "steps",
       "description": "Kiểm thuộc tính giao diện theo checklist, không gắn lớp tương đương (B16).",
       "cases": [
@@ -1856,7 +2074,7 @@
           "steps": [
             {
               "action": "Mở http://localhost:5173/; bấm 'Thêm vào giỏ' trên thẻ 'Tai nghe AirPods Pro 2' đúng một lần.",
-              "expected": "Có phản hồi trên trang."
+              "expected": "Không đánh giá ở bước này."
             },
             {
               "action": "Bấm link 'Giỏ hàng' trên navbar.",
@@ -1898,18 +2116,22 @@
           "steps": [
             {
               "action": "Mở http://localhost:5173/; bấm 'Thêm vào giỏ' trên thẻ 'Tai nghe AirPods Pro 2' đúng một lần.",
-              "expected": "Có phản hồi trên trang."
+              "expected": "Không đánh giá ở bước này."
             },
             {
-              "action": "Bấm link 'Giỏ hàng' trên navbar.",
+              "action": "Bấm link tới /cart trên navbar.",
               "expected": "Trang giỏ hiển thị 1 dòng."
             },
             {
-              "action": "Tìm breadcrumb ở đầu nội dung trang.",
-              "expected": "Có breadcrumb."
+              "action": "Tìm breadcrumb ở đầu vùng nội dung chính; đọc các mục theo thứ tự.",
+              "expected": "Có breadcrumb; có mục trỏ về trang chủ và mục cuối là trang Giỏ hàng (trang hiện tại)."
+            },
+            {
+              "action": "Bấm mục trang chủ trên breadcrumb.",
+              "expected": "URL = http://localhost:5173/."
             }
           ],
-          "expected_result": "Trang Giỏ hàng có breadcrumb thể hiện vị trí (ví dụ 'Trang chủ > Giỏ hàng'); mục trang chủ bấm được.",
+          "expected_result": "Trang Giỏ hàng có breadcrumb gồm mục trang chủ và mục cuối là Giỏ hàng; bấm mục trang chủ → URL '/' (FR-23.4).",
           "status": "Not run",
           "actual_result": "",
           "evidence": "",
@@ -1940,23 +2162,27 @@
           "steps": [
             {
               "action": "Mở http://localhost:5173/; bấm 'Thêm vào giỏ' trên thẻ 'Tai nghe AirPods Pro 2' đúng một lần.",
-              "expected": "Có phản hồi trên trang."
+              "expected": "Không đánh giá ở bước này."
             },
             {
-              "action": "Bấm link 'Giỏ hàng' trên navbar.",
+              "action": "Bấm link tới /cart trên navbar.",
               "expected": "Trang giỏ hiển thị 1 dòng."
             },
             {
-              "action": "So kiểu hiển thị link 'Giỏ hàng' với các link khác trên navbar (màu, gạch chân, nền, font).",
-              "expected": "Link 'Giỏ hàng' khác biệt."
+              "action": "Đưa chuột ra ngoài navbar; so kiểu hiển thị link tới /cart với các link khác trên navbar (màu, gạch chân, nền, độ đậm); chụp ảnh.",
+              "expected": "Link tới /cart khác biệt với các link khác."
+            },
+            {
+              "action": "Bấm link 'EShop' trên navbar để về trang chủ; đưa chuột ra ngoài navbar; so lại kiểu hiển thị link tới /cart với các link khác; chụp ảnh.",
+              "expected": "Link tới /cart hiển thị như các link khác."
             }
           ],
-          "expected_result": "Link 'Giỏ hàng' được highlight (kiểu hiển thị khác các link khác) khi ở /cart; ở trang chủ thì không.",
+          "expected_result": "Ở /cart: link tới /cart được highlight (kiểu hiển thị khác các link khác trên navbar). Ở trang chủ: link tới /cart không được highlight (FR-23.1).",
           "status": "Not run",
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Hover không tính là highlight; chụp ảnh khi chuột không nằm trên navbar.",
+          "notes": "Hover không tính là highlight.",
           "cleanup": [
             "Không cần: không tạo user; giỏ web mất khi đóng context."
           ]
@@ -1993,12 +2219,12 @@
               "expected": "Các số tiền hiển thị."
             }
           ],
-          "expected_result": "Mọi số tiền ở 3 trang dùng ký hiệu '₫' và có phân cách hàng nghìn (6.000.000 ₫ hoặc 6,000,000 ₫, B13).",
+          "expected_result": "Mọi số tiền ở 3 trang (giá trên thẻ, giá trang chi tiết, Đơn giá, Thành tiền, Tổng ở trang giỏ) dùng ký hiệu '₫' và có phân cách hàng nghìn '.' hoặc ',' (vd 6.000.000 ₫ hoặc 6,000,000 ₫, B13). Nơi duy nhất kiểm định dạng tiền.",
           "status": "Not run",
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "",
+          "notes": "Ghi locale trình duyệt khi chạy (B13).",
           "cleanup": [
             "Không cần: không tạo user; giỏ web mất khi đóng context."
           ]
@@ -2041,6 +2267,108 @@
           "evidence": "",
           "bug_id": "",
           "notes": "Trang giỏ không có ảnh: ghi notes, không tính Fail (FR-07 không yêu cầu ảnh trong giỏ).",
+          "cleanup": [
+            "Không cần: không tạo user; giỏ web mất khi đóng context."
+          ]
+        },
+        {
+          "id": "TC-FR07-95",
+          "title": "Kiểm tra nhãn chính xác của bảng giỏ, nút xoá, nút tiếp tục mua sắm và dòng tổng khi giỏ có 1 dòng",
+          "layer": "UI",
+          "requirements": [
+            "FR-07.1",
+            "FR-07.4",
+            "FR-07.5",
+            "FR-07.6"
+          ],
+          "covers": [
+            "EC34"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Gom mọi khẳng định về nhãn vào một case (review bước 3) để case chức năng chỉ kiểm đầu ra của biến mục tiêu.",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy.",
+            "Khách chưa đăng nhập; browser context mới."
+          ],
+          "test_data": "Sản phẩm id 4 'Tai nghe AirPods Pro 2'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/; bấm 'Thêm vào giỏ' trên thẻ 'Tai nghe AirPods Pro 2' đúng một lần.",
+              "expected": "Không đánh giá ở bước này."
+            },
+            {
+              "action": "Bấm link tới /cart trên navbar.",
+              "expected": "Trang giỏ hiển thị 1 dòng."
+            },
+            {
+              "action": "Đọc chữ của 5 tiêu đề cột bảng giỏ theo thứ tự.",
+              "expected": "'Sản phẩm', 'Đơn giá', 'Số lượng', 'Thành tiền', 'Thao tác'."
+            },
+            {
+              "action": "Đọc chữ của nút xoá trên dòng (nút trong ô cột thứ 5).",
+              "expected": "'Xóa sản phẩm'."
+            },
+            {
+              "action": "Đọc chữ của nút/link về trang chủ trong vùng nội dung trang giỏ (a[href='/'], không tính navbar).",
+              "expected": "'Tiếp tục mua sắm'."
+            },
+            {
+              "action": "Đọc nhãn đứng trước số tiền tổng bên dưới bảng.",
+              "expected": "'Tổng cộng' (không phải 'Tổng tạm tính')."
+            }
+          ],
+          "expected_result": "Mọi nhãn khớp đúng chữ theo B12: phân biệt hoa/thường, chuẩn hoá NFC trước khi so, 'óa' = 'oá'; bỏ khoảng trắng đầu/cuối và dấu ':' ở cuối nhãn. Nơi duy nhất kiểm nhãn của FR-07.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Mỗi nhãn sai ghi riêng trong actual_result để bug report tách được.",
+          "cleanup": [
+            "Không cần: không tạo user; giỏ web mất khi đóng context."
+          ]
+        },
+        {
+          "id": "TC-FR07-96",
+          "title": "Kiểm tra phản hồi trực quan khi bấm 'Thêm vào giỏ' trên thẻ sản phẩm ở trang chủ",
+          "layer": "UI",
+          "requirements": [
+            "FR-24.1",
+            "FR-06.3"
+          ],
+          "covers": [
+            "EC45"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Nút 'Thêm vào giỏ' ở trang chủ không phải thao tác chính của case domain nào (chỉ dùng để dựng giỏ) nên EC45 cho nút này kiểm ở đây.",
+          "preconditions": [
+            "Web http://localhost:5173 và backend http://localhost:3000 đang chạy.",
+            "Khách chưa đăng nhập; browser context mới."
+          ],
+          "test_data": "Sản phẩm id 4 'Tai nghe AirPods Pro 2'",
+          "steps": [
+            {
+              "action": "Mở http://localhost:5173/; ghi badge trên link tới /cart (nếu có).",
+              "expected": "Trang chủ hiển thị."
+            },
+            {
+              "action": "Bấm 'Thêm vào giỏ' trên thẻ 'Tai nghe AirPods Pro 2' đúng một lần; quan sát ngay trong 2 giây và chụp ảnh.",
+              "expected": "Có toast hoặc badge thay đổi so với trước."
+            }
+          ],
+          "expected_result": "Ngay sau khi bấm 'Thêm vào giỏ' ở trang chủ có phản hồi trực quan: toast hoặc badge trên link tới /cart cập nhật (FR-24.1).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
           "cleanup": [
             "Không cần: không tạo user; giỏ web mất khi đóng context."
           ]

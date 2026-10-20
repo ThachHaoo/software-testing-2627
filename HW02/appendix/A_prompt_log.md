@@ -7209,17 +7209,100 @@ Nhiệm vụ 2 – Bước 3 (TC Domain, minimum set)
 ```
 
 **Output:**
-```
+````
 Xem cấu trúc suite A_FR01 làm mẫu.
 
 Viết script bước 3 (quyết định SV + 3 suite).
 
 Sửa tiêu đề 93/94 (thiếu phần điều kiện) trực tiếp trong json, rồi render → freeze → check → lint.
+
+Bước 3 xong: 27 TC Domain phủ đủ 51/51 lớp tương đương, cộng thêm 5 TC GUI. Đã ghi 6 quyết định của SV và dừng chờ review. Chưa chạy test nào.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) ghi 6 quyết định B2/B5/B8/B10/B16/B18 + đại diện id chẵn/lẻ (ghi thành giả định mới B19); (2) bước 3 TC domain
+- File đã tạo/sửa: HW02/B_FR07/testcases.json/.md; HW02/appendix/ai-outputs/B_FR07_step3_20261020-1037.{json,md}; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/8 warn (7 biến trạng thái/thao tác không có lớp không hợp lệ: V3–V7, V9, V10; V1 chưa có case BVA); lint 0 errors/0 warn; test Not run
+- Commit: 4c69716 HW02[B-FR07] 3/7: TC domain
+- Minimum set: 27 TC / 51 EC = 0,53 TC mỗi EC
+  - UI 13 TC (01–13): 9 hợp lệ, 4 không hợp lệ
+  - API 14 TC (20–23, 30–39): 4 hợp lệ, 10 không hợp lệ
+  - GUI 5 TC (90–94): không gắn EC
+- Thay đổi ngoài khối lệnh:
+  - Bỏ biến V21: bỏ EC52 thì V21 không còn lớp nào
+  - Thêm yêu cầu FR-23.1 (highlight navbar) để TC-92 truy vết được
+  - B20: áp quy tắc A17/A20 của A_FR01 vào B_FR07 — thiếu nút +/- thì TC-90 Fail, TC-05/06/07 Blocked
+  - Sửa tiêu đề TC-93/94 theo cảnh báo của linter
+- Cần quyết định (chặn bước 4): không có
+- Không chặn, cần SV xác nhận khi review (2 điểm, xem HW02/B_FR07/testcases.md):
+  - EC32/TC-23: em suy rộng B8 sang tên sản phẩm (tên client bị bỏ qua, dùng tên CSDL)
+  - Dựng giỏ ban đầu qua trang chi tiết (TC-03, TC-06) phụ thuộc nút "Thêm vào giỏ hàng"; nếu nút lỗi thì các case này Blocked theo B20, chỗ nào được thì dựng qua trang chủ
+- Bất thường mới: không có
+```
+````
 *File AI ghi/gửi trong lượt này:* `step3_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 121 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 118 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #122 | 10:47 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+B_FR07 – sửa bước 3 theo review. Sửa testcases.json, không đụng ai-outputs.
+
+A. Ghi quyết định SV (đánh dấu SV chốt + lý do):
+- EC32: bỏ (không có điểm quan sát: giỏ web không hiển thị dữ liệu /api/cart).
+  V9 chỉ còn lớp hợp lệ EC31; bỏ TC-FR07-23 (giữ khoảng trống số, không đánh số lại);
+  gỡ SEC-04 khỏi truy vết. Sửa ghi chú B8: bỏ phần suy rộng sang tên.
+- B11: chấp nhận. Grep SRS (README.md, api_specification.md) mọi câu về khách /
+  đăng nhập / giỏ; có thì trích nguyên văn làm căn cứ, không có thì ghi
+  "suy luận từ FR-08.1". Không dùng hành vi SUT quan sát được làm căn cứ.
+- B12: các cụm in đậm trong FR-07 là nhãn; so khớp đúng chữ, PHÂN BIỆT hoa thường,
+  chuẩn hoá Unicode NFC trước khi so; coi hai cách đặt dấu "óa"/"oá" là như nhau.
+- B13: chấp nhận "." hoặc ","; thêm locale trình duyệt vào mục môi trường.
+- B4, B14, B15, B17: SV chốt theo đề xuất.
+
+B. Sửa thiết kế:
+1. Thuộc tính chung chỉ khẳng định ở MỘT nơi:
+   - Nhãn (5 tiêu đề cột FR-07.1, "Tiếp tục mua sắm", "Tổng cộng", "Xóa sản phẩm"):
+     gom vào 1 case mới trong TS-GUI (mã 95+). Bỏ EC34 khỏi TC-02/08.
+   - Định dạng ₫: chỉ TC-93.
+   - Badge (EC43): 1 case có số dòng ≠ tổng số lượng (vd TC-04); EC44 giữ ở TC-01.
+   - Phản hồi sau khi thêm (EC45): mỗi nút thêm 1 lần, quan sát ngay sau thao tác
+     chính của case (không khẳng định trên bước dựng giỏ); nút nào không có case
+     phù hợp thì thêm vào TS-GUI.
+   - Các case còn lại: Expected chỉ gồm đầu ra của biến mục tiêu (số dòng, Số lượng,
+     Thành tiền và Tổng dạng số, không kiểm nhãn/định dạng/badge).
+   - Case chức năng tìm nút/link không dựa vào đúng chữ (vd link về '/' trên trang
+     giỏ, nút xoá trên dòng); ghi cách định vị trong procedure.
+2. TC-91, TC-92: Expected và procedure phải khớp — mỗi ý trong Expected có bước
+   quan sát tương ứng (thêm bước hoặc bỏ ý).
+3. EC13: tách "thiếu id" và "id sai kiểu" như cách tách quantity; thêm case cho lớp
+   mới. Xoá mọi câu "để bước 5" trong toàn file (AI không gợi việc cho bước 5).
+4. Truy vết: thêm FR-08.2 ("Tổng tiền thanh toán được tính tự động…") vào test
+   basis; TC-22 → FR-08.2. Bảng truy vết sinh tự động từ ánh xạ EC → yêu cầu
+   (nếu render_md.py đang lấy từ chỗ khác → vá harness, commit riêng).
+
+C. render_md.py → freeze.py → check_domain.py → linter thầy.
+   Commit "HW02[B-FR07] 3/7b: sửa TC domain theo review" kèm prompt log.
+   Dừng. Báo cáo theo CLAUDE.md, ghi số TC trước/sau và danh sách TC bị bỏ/thêm.
+```
+
+**Output:**
+```
+Đọc phần truy vết của `render_md.py` và grep SRS cho B11.
+
+A_FR01 render không đổi (EC chưa có `requirements` nên giữ cách cũ). Commit vá harness riêng.
+
+Giờ sửa testcases.json theo review.
+```
+*File AI ghi/gửi trong lượt này:* `step3b_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 122 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 119 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
