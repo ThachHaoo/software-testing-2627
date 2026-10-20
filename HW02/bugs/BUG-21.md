@@ -1,9 +1,9 @@
 # BUG-21
 
 - **ID:** BUG-21
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Trang giỏ hàng trống chỉ có thông báo chữ, thiếu hoàn toàn hình minh họa/icon theo yêu cầu Empty State
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Giỏ hàng hiện tại đang hoàn toàn trống (chưa có bất kỳ sản phẩm nào).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập trực tiếp vào trang giỏ hàng http://localhost:5173/cart (hoặc bấm vào link "Giỏ hàng" trên navbar khi giỏ đang trống).
+
+2. Quan sát phần hiển thị giao diện trạng thái trống (Empty State) trên màn hình.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.7 và FR-24.3: Khi giỏ hàng trống, giao diện bắt buộc phải có thông báo rõ ràng kèm theo hình minh họa hoặc icon trực quan (Empty State) để tăng trải nghiệm người dùng, kèm đường dẫn "Tiếp tục mua sắm" quay về trang chủ.
 
 ## Actual
 
-`<SV viết>`
+Giao diện trang giỏ hàng trống chỉ hiển thị hai dòng chữ giản đơn: tiêu đề "Giỏ hàng của bạn đang trống" và đường dẫn "Tiếp tục mua sắm". Hoàn toàn không xuất hiện bất kỳ hình ảnh (<img>), hình minh họa hay icon (SVG/FontIcon) nào đi kèm theo quy định thiết kế Empty State.
 
 ## Bằng chứng
 
@@ -69,7 +73,21 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Cart.jsx (dòng 20–27), khi kiểm tra cart.length === 0, giao diện được trả về rất sơ sài:
+
+```jsx
+if (cart.length === 0) {
+  return (
+    <div className="text-center mt-10">
+      <h2 className="text-2xl mb-4">Giỏ hàng của bạn đang trống</h2>
+      <Link to="/" className="text-blue-600 hover:underline">Tiếp tục mua sắm</Link>
+    </div>
+  );
+}
+```
+- Developer chỉ chèn thẻ <h2> chứa câu thông báo chữ và thẻ <Link> để điều hướng về trang chủ mà quên không thêm bất kỳ phần tử ảnh hoặc icon minh họa nào (như ảnh chiếc giỏ hàng rỗng) phía trên dòng thông báo.
+
+- Dù giao diện đã đáp ứng được phần thông báo chữ và link chuyển trang, việc bỏ qua hình minh họa/icon khiến giao diện vi phạm trực tiếp tiêu chuẩn thiết kế Empty State được quy định cụ thể tại FR-07.7 và FR-24.3.
 
 ## Link GitHub Issue
 

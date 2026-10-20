@@ -1,9 +1,9 @@
 # BUG-22
 
 - **ID:** BUG-22
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Trang Giỏ hàng thiếu hoàn toàn thanh điều hướng Breadcrumb ở vùng nội dung chính
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Người dùng đang ở bất kỳ trang nào trên website.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang giỏ hàng http://localhost:5173/cart (hoặc bấm nút/link "Giỏ hàng" trên thanh điều hướng).
+
+2. Quan sát vùng giao diện nội dung chính phía trên tiêu đề "Giỏ Hàng".
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-23.4 (kèm giả định B16): Trang con Giỏ hàng (/cart) bắt buộc phải hiển thị thanh điều hướng Breadcrumb ở phía trên vùng nội dung chính (ví dụ: Trang chủ > Giỏ hàng) giúp người dùng nhận biết vị trí phân cấp trang hiện tại và dễ dàng nhấp chuyển nhanh về các trang cha.
 
 ## Actual
 
-`<SV viết>`
+Tại trang /cart, vùng nội dung chính bắt đầu ngay bằng thẻ tiêu đề <h2>Giỏ Hàng</h2>. Hoàn toàn không xuất hiện bất kỳ thanh điều hướng Breadcrumb nào phía trên tiêu đề hay trong khu vực nội dung trang.
 
 ## Bằng chứng
 
@@ -62,7 +66,17 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong component frontend-web/src/pages/Cart.jsx (dòng 29–31), giao diện trang giỏ hàng được render thẳng từ thẻ <div> bọc tiêu đề <h2>:
+
+```jsx
+return (
+  <div className="bg-white p-6 border rounded shadow-sm">
+    <h2 className="text-2xl font-bold mb-6">Giỏ Hàng</h2>
+```
+
+- Developer hoàn toàn bỏ quên việc thiết kế hoặc nhúng component Breadcrumb (ví dụ: <Breadcrumb '/' 'Giỏ 'Trang chủ', hàng' items="{[{" label: link: { }, }]}/>) vào đầu trang con /cart.
+
+- Việc thiếu thanh điều hướng vết trang này làm giảm khả năng điều hướng phân cấp của giao diện người dùng, vi phạm trực tiếp quy định GUI ở FR-23.4.
 
 ## Link GitHub Issue
 

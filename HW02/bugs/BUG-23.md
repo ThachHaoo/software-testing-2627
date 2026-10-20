@@ -1,9 +1,9 @@
 # BUG-23
 
 - **ID:** BUG-23
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Thanh điều hướng Navbar không highlight link 'Giỏ hàng' khi người dùng đang ở trang Giỏ hàng
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Trình duyệt đang mở website EShop ở bất kỳ trang nào.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang giỏ hàng http://localhost:5173/cart (hoặc nhấp chuột vào link "Giỏ hàng" trên thanh điều hướng).
+
+2. Quan sát kiểu dáng hiển thị (màu sắc, gạch chân, độ đậm font) của link "Giỏ hàng" trên thanh điều hướng Navbar.
+
+3. So sánh kiểu dáng của link "Giỏ hàng" khi ở trang /cart với khi chuyển sang trang chủ /.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-23.1 (kèm giả định B16): Thanh điều hướng (Navbar) bắt buộc phải highlight (làm nổi bật bằng màu chữ khác, gạch chân active hoặc đổi font-weight/background) link đại diện cho trang hiện tại mà người dùng đang truy cập (cụ thể khi đang ở trang /cart thì link "Giỏ hàng" phải có kiểu dáng active khác biệt so với các link khác).
 
 ## Actual
 
-`<SV viết>`
+Link "Giỏ hàng" trên Navbar khi người dùng đứng ở trang /cart có kiểu dáng hiển thị tĩnh hoàn toàn trùng hệt như khi đứng ở trang chủ / (chữ màu trắng rgb(255, 255, 255), font-weight 400, không gạch chân active, không có hiệu ứng highlight phân biệt).
 
 ## Bằng chứng
 
@@ -63,7 +69,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong frontend-web/src/App.jsx (dòng 23), các đường dẫn trên Navbar sử dụng thẻ <Link> tĩnh của React Router thay vì <NavLink>:
+
+```jsx
+<Link to="/cart" className="hover:underline">Giỏ hàng</Link>
+```
+
+- Do dùng thẻ <Link> thông thường nên component không nhận diện được đường dẫn đường dẫn hiện tại (useLocation().pathname) để tự động áp dụng class css hay style active cho link "Giỏ hàng" khi URL khớp với /cart.
+
+- Điều này khiến giao diện Navbar vi phạm yêu cầu GUI ở FR-23.1, làm người dùng không nhận biết được trang mình đang đứng thông qua thanh menu điều hướng.
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-24
 
 - **ID:** BUG-24
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Giá sản phẩm ở thẻ sản phẩm trang chủ hiển thị đơn vị tiền tệ là 'VND' thay vì '₫' theo quy chuẩn
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang hoạt động bình thường.
+
+- Trình duyệt đang ở ngôn ngữ / locale tiếng Việt (vi-VN).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang chủ http://localhost:5173/.
+
+2. Quan sát phần hiển thị giá tiền trên các thẻ sản phẩm ở trang chủ (ví dụ: sản phẩm Tai nghe AirPods Pro 2).
+
+3. Mở trang chi tiết sản phẩm (/product/4) và trang giỏ hàng (/cart) để so sánh cách hiển thị ký hiệu đơn vị tiền tệ.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-21.3 (kèm giả định B16): Hệ thống bắt buộc phải nhất quán hiển thị giá tiền bằng ký hiệu ₫ đi kèm định dạng phân cách hàng nghìn (ví dụ: 6.000.000 ₫) trên toàn bộ các trang giao diện (bao gồm cả trang chủ, trang chi tiết và giỏ hàng).
 
 ## Actual
 
-`<SV viết>`
+- Tại trang chủ (/), giá tiền trên các thẻ sản phẩm lại hiển thị ký hiệu đơn vị là VND (ví dụ: 6.000.000 VND).
+
+- Trong khi đó, ở trang chi tiết sản phẩm (/product/4) và trang giỏ hàng (/cart), giá tiền lại hiển thị đúng chuẩn với ký hiệu ₫ (ví dụ: 6.000.000 ₫). Việc này gây ra sự không đồng nhất về mặt giao diện giữa các trang.
 
 ## Bằng chứng
 
@@ -63,7 +71,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Home.jsx (dòng 86–88), developer đã nối cứng (hardcode) chuỗi chữ "VND" đằng sau giá trị tiền tệ:
+
+```jsx
+<p className="text-red-500 font-bold mb-2">
+  {Number(p.price).toLocaleString()} VND
+</p>
+```
+
+- Việc hardcode chữ "VND" ở Home.jsx thay vì dùng chung helper format tiền tệ hoặc dùng ký hiệu ₫ (như các trang ProductDetail.jsx và Cart.jsx đang làm) khiến trang chủ bị lệch quy chuẩn giao diện so với phần còn lại của ứng dụng, vi phạm FR-21.3.
 
 ## Link GitHub Issue
 
