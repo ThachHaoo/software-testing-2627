@@ -10,6 +10,7 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
   "domain": {
     "variables": [
       {"id": "V1", "name": "Mật khẩu", "io": "input",  "source": "ô 'Mật khẩu' (Register.jsx) / body.password", "type": "string", "constraint": "trích đặc tả"},
+      // tuỳ chọn trên biến đầu vào: "no_upper_bound": "B1" (mã giả định khai miền không có cận trên)
       {"id": "V9", "name": "Kết quả đăng ký", "io": "output", "source": "thông báo / chuyển trang / bản ghi DB", "type": "enum", "constraint": "..."}
     ],
     "partitions": [
@@ -68,4 +69,6 @@ File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requir
 | WARN | Case thiếu `rationale`, `origin`, `technique` |
 | ERROR | `ec_target` có EC không nằm trong `covers`; case không hợp lệ không có đúng 1 EC không hợp lệ trong `ec_target` |
 | WARN | TC trong suite TS-DOM*/TS-BVA* thiếu `ec_target` (chỉ khi file đã dùng trường này) |
+| ERROR | `bva_point: "LARGE"` khi biến khoảng của case không có `no_upper_bound` trỏ tới giả định có thật, hoặc mã đó không nằm trong `assumptions` của case; `no_upper_bound` trỏ tới giả định không tồn tại |
+| — | Biến có `no_upper_bound`: kiểm thiếu điểm biên chỉ xét LB-1/LB/LB+1 |
 | INFO | Thống kê: số EC (hợp lệ/không), số case theo suite, theo origin, theo status |

@@ -59,6 +59,13 @@ def check(data):
     covered = defaultdict(list)
     ids = Counter()
     uses_target = any(c.get("ec_target") for _, c in all_cases(data))  # chỉ cảnh báo thiếu ec_target khi file đã dùng trường này
+    # biến khai "không có cận trên": no_upper_bound = mã giả định có trong meta.assumptions
+    acodes = {str(a).split(" ", 1)[0] for a in data.get("meta", {}).get("assumptions", [])}
+    no_ub = {vid for vid, v in variables.items() if v.get("no_upper_bound") in acodes}
+    no_ub_codes = {variables[vid]["no_upper_bound"] for vid in no_ub}
+    for vid, v in variables.items():
+        if v.get("no_upper_bound") and vid not in no_ub:
+            add("ERROR", vid, f"no_upper_bound trỏ tới giả định không tồn tại '{v['no_upper_bound']}'")
     for s, c in all_cases(data):
         cid = c.get("id", "?")
         ids[cid] += 1
@@ -90,6 +97,11 @@ def check(data):
             bp = c.get("bva_point", "")
             if not bp:
                 add("WARN", cid, "case BVA thiếu bva_point")
+            elif bp == "LARGE":
+                rvars = {parts[e]["variable"] for e in cov if e in parts and parts[e].get("guideline") == "range"}
+                if not rvars or not all(v in no_ub for v in rvars) or not (set(as_list(c.get("assumptions"))) & no_ub_codes):
+                    add("ERROR", cid, "bva_point 'LARGE' chỉ dùng khi biến có giả định 'không có cận trên' được khai "
+                                      "(domain.variables[].no_upper_bound = mã giả định, và mã đó nằm trong assumptions của case)")
             elif bp not in BVA_POINTS:
                 add("WARN", cid, f"bva_point '{bp}' không thuộc {sorted(BVA_POINTS)}")
         for f in ("rationale", "origin"):
@@ -113,7 +125,7 @@ def check(data):
                 if e in parts:
                     bva[parts[e]["variable"]].add(c.get("bva_point"))
     for vid in {p["variable"] for p in parts.values() if p.get("guideline") == "range" and p.get("valid")}:
-        missing = {"LB-1", "LB", "LB+1", "UB-1", "UB", "UB+1"} - bva[vid]
+        missing = ({"LB-1", "LB", "LB+1"} if vid in no_ub else {"LB-1", "LB", "LB+1", "UB-1", "UB", "UB+1"}) - bva[vid]
         if bva[vid] and missing:
             add("WARN", vid, f"BVA cho biến '{variables.get(vid, {}).get('name')}' còn thiếu điểm {sorted(missing)} (bỏ qua nếu miền chỉ có một phía biên)")
         if not bva[vid]:
