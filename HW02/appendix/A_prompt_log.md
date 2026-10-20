@@ -13404,7 +13404,12 @@ bảng điểm BVA theo biến (giá trị cụ thể); giả định MỚI ch�
 **Output:**
 ```
 Phần 1: tách suite API.
+
+Phần 2: SV chốt C16–C18.
+
+Phần 3: BVA. Viết script sinh 48 case (4 suite × 12).
 ```
+*File AI ghi/gửi trong lượt này:* `c15_step4.py`
 
 **Xử lý:** [...]
 

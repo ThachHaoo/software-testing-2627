@@ -33,3 +33,5 @@
 - 16:52 20/10/2026 · `C_FR15_step3_20261020-165215.md` · bước 3 · Claude Code bước 3 · sha256 1f9162fb4789
 - 16:57 20/10/2026 · `C_FR15_step3_20261020-165700.json` · bước 3 · Claude Code bước 3b (tách suite API) · sha256 27366aa6cf29
 - 16:57 20/10/2026 · `C_FR15_step3_20261020-165700.md` · bước 3 · Claude Code bước 3b (tách suite API) · sha256 c318a55e9970
+- 16:58 20/10/2026 · `C_FR15_step4_20261020-165850.json` · bước 4 · Claude Code bước 4 · sha256 3286fbe9344f
+- 16:58 20/10/2026 · `C_FR15_step4_20261020-165850.md` · bước 4 · Claude Code bước 4 · sha256 affb8a118f8c
