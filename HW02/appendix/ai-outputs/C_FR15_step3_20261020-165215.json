@@ -1,0 +1,4283 @@
+{
+  "meta": {
+    "language": "vi",
+    "title": "Domain Testing + BVA — FR-15 Quản lý Sản phẩm (Product CRUD, admin)",
+    "project": "CS423 HW02 – Domain Testing on EShop",
+    "feature": "FR-15 Quản lý Sản phẩm (web admin frontend-admin: tab 'Sản phẩm' + API POST/GET/PUT/DELETE /api/products)",
+    "feature_code": "C_FR15",
+    "doc_id": "TCD-C_FR15",
+    "version": "0.4",
+    "date": "2026-10-20",
+    "author": "Lê Tấn Hiệp – 23120255",
+    "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
+    "environment": "Windows (PowerShell), backend http://localhost:3000, web admin http://localhost:5174 (một trang, tab 'Sản phẩm'); tài khoản admin@eshop.com / Admin123!; chi tiết ở HW02/env/environment.md",
+    "scope": "SV chốt 2026-10-20 (C5=a, C6=a, C8=a, C12, C13). form 'Thêm sản phẩm mới' / 'Sửa sản phẩm', nút 'Sửa', 'Xóa' và bảng sản phẩm ở tab 'Sản phẩm' của web admin (tầng UI); endpoint POST /api/products, PUT /api/products/:id, DELETE /api/products/:id, GET /api/products(/:id) (tầng API, suite riêng). Trong phạm vi: FR-15 (phân lớp + BVA); kiểm soát quyền của FR-12.2 cho 3 endpoint ghi của /api/products (C5); thuộc tính GUI của form/bảng sản phẩm (FR-21.3, FR-22.1, FR-22.4, FR-24.4, SEC-04) kiểm bằng suite TS-GUI riêng, không phân lớp (C12). Ngoài phạm vi: import CSV (FR-16), Category CRUD (FR-14, của thành viên khác), Dashboard (FR-13), hiển thị sản phẩm trên frontend-web/mobile (FR-05, FR-06, FR-20) (C13).",
+    "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI); biến không có cận trên dùng điểm LARGE",
+    "tc_id_ranges": "TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV từ 200",
+    "references": [
+      "../eshop-sut/README.md §6 FR-15 dòng 191–198 — Quản lý Sản phẩm (oracle chính)",
+      "../eshop-sut/README.md §6 FR-12 dòng 174–179 — chỉ role admin; POST/PUT/DELETE /api/products phải yêu cầu JWT hợp lệ + role = 'admin'",
+      "../eshop-sut/README.md §6 FR-14 dòng 186–189 — danh mục (nguồn 'danh sách có sẵn' của FR-15; feature của thành viên khác)",
+      "../eshop-sut/README.md §6 FR-16 dòng 200–211 — import CSV (ngoài phạm vi, chỉ để phân biệt)",
+      "../eshop-sut/README.md §8 FR-21 dòng 242–248 (₫ + phân cách hàng nghìn), FR-22 dòng 250–256 ('*' cạnh nhãn trường bắt buộc, thông báo lỗi trên nút submit), FR-24 dòng 265–270 (alt ảnh)",
+      "../eshop-sut/README.md §9 dòng 274–284 — SEC-02 (JWT), SEC-03 (kiểm role trong token), SEC-04 (escape dữ liệu hiển thị)",
+      "../eshop-sut/README.md dòng 20–23 — tài khoản seed admin@eshop.com / Admin123!, test@eshop.com / Test1234!",
+      "../eshop-sut/api_specification.md §3 dòng 78–106 — GET /api/products (?search), GET /api/products/:id, POST /api/products, PUT /api/products/:id, DELETE /api/products/:id; body {name, price, description, imageUrl, category_id}; GET /api/categories. Không mô tả phản hồi lỗi.",
+      "../eshop-sut/backend/server.js dòng 100–110 (authenticateToken: thiếu token → 401 'Unauthorized', token sai → 403 'Forbidden'), 141–157 (GET /api/products), 159–165 (GET /api/products/:id), 167–177 (POST), 179–189 (PUT), 191–196 (DELETE), 243–247 (GET /api/categories)",
+      "../eshop-sut/backend/database.js dòng 23–26 (bảng categories), 64–71 (bảng products: id, name TEXT, price INTEGER, description, imageUrl, category_id INTEGER), 84–88 (3 danh mục seed id 1–3), 97–103 (5 sản phẩm seed)",
+      "../eshop-sut/frontend-admin/src/App.jsx dòng 4 (API_URL), 7 + 35–39 (adminToken trong localStorage, header Authorization), 41–59 (fetchData), 61–74 (handleLogin, kiểm role phía client dòng 65–67), 95–102 (productForm mặc định, category_id: 1), 105–131 (handleProductSubmit), 133–140 (deleteProduct), 188–215 (form 'Admin Login'), 240–243 (tab 'Sản phẩm'), 339 (tiêu đề 'Quản lý Sản phẩm'), 484–565 (form sản phẩm), 567–608 (bảng sản phẩm)"
+    ],
+    "assumptions": [
+      "C0 (độc lập và điểm quan sát) [loại: quy trình · truy vết: không · căn cứ: CLAUDE.md (backend khởi động lại → CSDL seed lại), tiền lệ A19/B0b · SV chốt 2026-10-20, chấp nhận đề xuất AI]: mỗi case tạo sản phẩm riêng có tên chứa {ts}; Sửa/Xóa chỉ thao tác trên sản phẩm do case tạo; oracle tương đối (danh sách/bản ghi SAU so với TRƯỚC trong chính case). Điểm quan sát dữ liệu: GET /api/products và GET /api/products/:id (api_specification dòng 80–85, không yêu cầu token). Cleanup lớp 2: DELETE /api/products/:id bằng token admin cuối suite; khởi động lại backend seed lại toàn bộ.",
+      "C1 (Giá – số thực dương) [loại: quyết định Expected · truy vết: có · căn cứ: FR-15.3 'phải là số dương (> 0)' · SV chốt 2026-10-20, phương án a]: mọi số thực > 0 hợp lệ, kể cả số thập phân (vd 0.5) — lý do SV: FR-15 chỉ quy định > 0. Bước nhảy 0.1 do SV chọn → LB = 0.1 (LB−1 = 0, LB+1 = 0.2). Ghi chú SV: thực tế giá thường ≥ 1000 đồng — chỉ dùng để chọn đại diện hợp lệ điển hình, KHÔNG phải cận dưới, KHÔNG quyết định Expected.",
+      "C2 (Giá – cận trên) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng (FR-15.3 chỉ có > 0) · SV chốt 2026-10-20, phương án a theo khuyến nghị]: không có cận trên → biến V3 khai no_upper_bound = C2; BVA phía trên dùng 1 điểm LARGE hợp lệ (như B1).",
+      "C3 (Tên – chuỗi chỉ gồm khoảng trắng) [loại: quyết định Expected · truy vết: có · căn cứ: FR-15.2 'bắt buộc', SRS im lặng về khoảng trắng; tiền lệ A1 · SV chốt 2026-10-20, phương án a theo khuyến nghị]: chuỗi chỉ gồm khoảng trắng coi như trống → bị từ chối; tách lớp riêng với chuỗi rỗng.",
+      "C4 (Tên – đơn vị đếm 255 ký tự) [loại: chọn đại diện · truy vết: không · căn cứ: FR-15.2 'tối đa 255 ký tự', không nói đơn vị · SV chốt 2026-10-20, chấp nhận đề xuất AI]: 1 ký tự = 1 Unicode code point (dạng NFC). Điểm biên độ dài dùng chuỗi ASCII không có khoảng trắng đầu/cuối để tránh phụ thuộc cách đếm/cắt; 1 đại diện NOM có chữ tiếng Việt có dấu.",
+      "C5 (phạm vi FR-12 – quyền) [loại: phạm vi · truy vết: không · căn cứ: FR-12.2 nêu đích danh POST/PUT/DELETE /api/products; SEC-02, SEC-03 · SV chốt 2026-10-20, phương án a theo khuyến nghị; không mở rộng sang cổng 'Admin Login']: tầng API, biến V8 (không token / token sai / token role user / token admin) cho 3 endpoint ghi; không đủ quyền → 4xx, dữ liệu không đổi (theo C6). FR-12.1 (cổng đăng nhập UI) ngoài phạm vi — đã bỏ biến ra V15 và dòng yêu cầu FR-12.1.",
+      "C6 (tầng API áp FR-15) [loại: quyết định Expected · truy vết: có · căn cứ: FR-15 là yêu cầu hệ thống; tiền lệ A9, A11, B7, B17 · SV chốt 2026-10-20, phương án a theo khuyến nghị]: API là tầng riêng, suite riêng: POST/PUT gọi trực tiếp với dữ liệu vi phạm FR-15.2–15.4 → 4xx (không 2xx, không 5xx) kèm trường error, không tạo/không đổi bản ghi; không cố định mã cụ thể.",
+      "C7 (oracle khi UI từ chối) [loại: quyết định Expected · truy vết: có · căn cứ: FR-22.4 'Thông báo lỗi phải xuất hiện trên nút submit' (README.md dòng 255) — quy định vị trí, ngụ ý form có thông báo lỗi; tiền lệ A10/A16 · SV chốt 2026-10-20, phương án a theo khuyến nghị]: dữ liệu không đổi (GET trước/sau) + có thông báo lỗi trên form (bong bóng kiểm tra HTML5 được tính như A16); nội dung chữ chỉ ghi làm Actual. Vị trí thông báo kiểm riêng ở TS-GUI (C12).",
+      "C8 (ràng buộc khi Sửa) [loại: quyết định Expected · truy vết: có · căn cứ: FR-15 đặt 'Ràng buộc đầu vào' chung cho Thêm/Sửa · SV chốt 2026-10-20, phương án a]: FR-15.2–15.4 áp cho cả Thêm và Sửa; tách lớp theo thao tác — lý do SV: Thêm và Sửa là hai thao tác khác nhau, không gộp lớp. Mỗi lớp của Tên/Giá/Danh mục có bản Thêm và bản Sửa.",
+      "C9 (thiếu trường / sai kiểu ở API) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về body JSON; tiền lệ A15, B18 · SV chốt 2026-10-20, phương án a — SV chốt: phân biệt rạch ròi giữa số và chuỗi]: name/price/category_id thiếu, null hoặc sai kiểu JSON (name là số; price là chuỗi — kể cả chuỗi số như \"100000\"; category_id là chuỗi chữ) → 4xx, không tạo/không đổi bản ghi.",
+      "C10 (id không tồn tại khi Xem/Sửa/Xóa) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng; api_specification không mô tả lỗi; tiền lệ A11 · SV chốt 2026-10-20, chấp nhận đề xuất AI]: GET/PUT/DELETE /api/products/:id với id không có trong CSDL → 4xx (không 2xx, không 5xx), không tạo bản ghi mới, các sản phẩm khác không đổi. Chỉ tạo được ở tầng API (UI chỉ chọn được sản phẩm đang hiển thị).",
+      "C11 (Danh mục – 'danh sách có sẵn') [loại: quyết định Expected · truy vết: có · căn cứ: FR-15.4 'phải chọn từ danh sách có sẵn' · SV chốt 2026-10-20, chấp nhận đề xuất AI]: danh sách có sẵn = các danh mục tồn tại trong bảng categories (GET /api/categories) tại thời điểm lưu. category_id không có trong danh sách hoặc thiếu → không hợp lệ. Quan sát (gray-box): ô chọn danh mục trên UI luôn có giá trị, mặc định category_id 1 (App.jsx dòng 101, 528–543) → lớp 'không chọn'/'ngoài danh sách' chỉ tạo được qua API.",
+      "C12 (GUI liên quan) [loại: phạm vi · truy vết: không · căn cứ: tiền lệ A14, B16 (SV chốt) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: thuộc tính tĩnh/hiển thị của form và bảng sản phẩm — FR-22.1 ('*' cạnh nhãn Tên, Giá, Danh mục), FR-22.4 (thông báo lỗi trên nút 'Lưu sản phẩm'), FR-21.3 (cột 'Giá' dùng ₫ + phân cách hàng nghìn), FR-24.4 (alt ảnh trong cột 'Ảnh'), SEC-04 (tên sản phẩm hiển thị an toàn) — kiểm bằng suite TS-GUI riêng, mỗi thuộc tính khẳng định ở đúng 1 case, không phân lớp. Quan sát: form chỉ có placeholder, không có phần tử nhãn (App.jsx dòng 491–543) — xử lý ở bước 3 theo A17.",
+      "C13 (ngoài phạm vi / SRS im lặng) [loại: phạm vi · truy vết: không · căn cứ: SRS · SV chốt 2026-10-20, chấp nhận đề xuất AI]: ngoài phạm vi — FR-16 (import CSV), FR-14 (Category CRUD, chỉ dùng 3 danh mục seed làm dữ liệu), FR-13, hiển thị sản phẩm trên frontend-web/mobile (FR-05, FR-06, FR-20). SRS im lặng – chấp nhận mọi cách hợp lý, không đặt Expected: tên trùng với sản phẩm khác; Mô tả và URL Ảnh (giữ giá trị nominal hợp lệ); hộp xác nhận trước khi Xóa sản phẩm (FR-24.2 chỉ nói giỏ hàng); nội dung thông báo khi lưu/xóa thành công; nút 'Hủy sửa'.",
+      "C14 (quy tắc verdict) [loại: quy trình · truy vết: không · căn cứ: quy ước đã chốt từ A_FR01/B_FR07 (A17, A20) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: lệch Expected do biến mục tiêu → Fail; bị chặn bởi lỗi đã có ở case khác → Blocked, ghi case gốc; trường SRS yêu cầu mà UI không có → case kiểm sự tồn tại Fail, case phụ thuộc Blocked; từ chối đúng nhưng lý do không chứng minh luật mục tiêu → 'Pass hộp đen' ghi trong notes.",
+      "C15 (kiểu dữ liệu price trong phản hồi GET) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về response; giả định SV · SV chốt 2026-10-20, phương án b — SV chốt: price trong response phải là số JSON; lý do giống C9 — phân biệt rạch ròi giữa chuỗi và số, không chấp nhận ngoại lệ]: price trong phản hồi GET /api/products/:id phải là số JSON; price dạng chuỗi (kể cả chuỗi số) lệch Expected. Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so price theo giá trị số.",
+      "C16 (thông báo lỗi dạng hộp thoại trình duyệt) [loại: quyết định Expected · truy vết: có · căn cứ: C7 (SV chốt) và A16 chỉ nói bong bóng HTML5; FR-22.4 quy định vị trí 'trên nút submit' · đề xuất – chờ SV chốt]: (a) hộp thoại trình duyệt (alert) có nội dung báo lỗi được tính là 'thông báo lỗi trên form' cho C7; riêng TC-FR15-91 (FR-22.4): thông báo chỉ ở dạng hộp thoại thì không nằm phía trên nút → Fail; (b) hộp thoại không được tính cho C7 → case UI từ chối Fail phần thông báo nếu chỉ có hộp thoại.",
+      "C17 (định dạng tiền) [loại: quyết định Expected · truy vết: có · căn cứ: FR-21.3 không nói ký tự phân cách; tiền lệ B13 (SV chốt) · đề xuất – chờ SV chốt]: chấp nhận ký tự phân cách hàng nghìn '.' hoặc ','; locale trình duyệt ghi trong notes của TC-FR15-92. Chỉ kiểm ở TC-FR15-92."
+    ]
+  },
+  "requirements": [
+    {
+      "id": "FR-15.1",
+      "text": "Admin có thể Thêm / Xem / Sửa / Xóa sản phẩm."
+    },
+    {
+      "id": "FR-15.2",
+      "text": "Tên sản phẩm: bắt buộc, tối đa 255 ký tự."
+    },
+    {
+      "id": "FR-15.3",
+      "text": "Giá: bắt buộc, phải là số dương (> 0)."
+    },
+    {
+      "id": "FR-15.4",
+      "text": "Danh mục: bắt buộc, phải chọn từ danh sách có sẵn."
+    },
+    {
+      "id": "FR-15.5",
+      "text": "Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên."
+    },
+    {
+      "id": "FR-12.2",
+      "text": "(liên quan, C5) Các API có tính ảnh hưởng dữ liệu POST/PUT/DELETE /api/products phải yêu cầu (1) Token JWT hợp lệ, (2) role = 'admin' trong Token."
+    },
+    {
+      "id": "API-PROD",
+      "text": "GET /api/products, GET /api/products/:id, POST /api/products, PUT /api/products/:id, DELETE /api/products/:id; body Thêm/Sửa JSON {name, price, description, imageUrl, category_id} (api_specification.md dòng 78–100). Không mô tả phản hồi lỗi."
+    },
+    {
+      "id": "SEC-02",
+      "text": "(liên quan, C5) Các API có tính bảo mật phải yêu cầu JWT Token hợp lệ (README.md dòng 279)."
+    },
+    {
+      "id": "SEC-03",
+      "text": "(liên quan, C5) API Admin phải kiểm tra role = 'admin' trong Token, không chỉ kiểm tra sự tồn tại của Token (README.md dòng 280)."
+    },
+    {
+      "id": "FR-21.3",
+      "text": "(GUI, C12) Luôn dùng ký hiệu ₫ với định dạng phân cách hàng nghìn — áp cho cột 'Giá' của bảng sản phẩm."
+    },
+    {
+      "id": "FR-22.1",
+      "text": "(GUI, C12) Tất cả trường bắt buộc phải có ký hiệu * bên cạnh nhãn — áp cho Tên, Giá, Danh mục."
+    },
+    {
+      "id": "FR-22.4",
+      "text": "(GUI, C12) Thông báo lỗi phải xuất hiện trên nút submit, không phải bên dưới."
+    },
+    {
+      "id": "FR-24.4",
+      "text": "(GUI, C12) Tất cả ảnh sản phẩm phải có thuộc tính alt mô tả nội dung ảnh (không để rỗng)."
+    },
+    {
+      "id": "SEC-04",
+      "text": "(GUI, C12) Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng innerHTML trực tiếp (README.md dòng 281) — áp cho tên sản phẩm trong bảng."
+    }
+  ],
+  "domain": {
+    "variables": [
+      {
+        "id": "V1",
+        "name": "Thao tác CRUD",
+        "io": "input",
+        "source": "UI: tiêu đề form 'Thêm sản phẩm mới' / 'Sửa sản phẩm' (App.jsx dòng 487–489), nút 'Lưu sản phẩm' (545–547), nút 'Sửa' và 'Xóa' trên từng dòng bảng (592–603), bảng sản phẩm (567–608) · API: POST /api/products, GET /api/products(/:id), PUT /api/products/:id, DELETE /api/products/:id (api_specification.md dòng 80–90)",
+        "type": "enum {Thêm, Xem, Sửa, Xóa}",
+        "constraint": "Admin thực hiện được cả 4 thao tác (FR-15.1). Ràng buộc đầu vào áp cho Thêm và Sửa (C8).",
+        "note": "Nút 'Hủy sửa' (App.jsx dòng 548–565): SRS im lặng – chấp nhận mọi cách hợp lý (C13)."
+      },
+      {
+        "id": "V2",
+        "name": "Tên sản phẩm",
+        "io": "input",
+        "source": "UI: ô placeholder 'Tên sản phẩm' (App.jsx dòng 491–499) · API: body.name (api_specification.md dòng 94)",
+        "type": "string",
+        "constraint": "Bắt buộc; độ dài 1–255 ký tự (FR-15.2). Chuỗi chỉ khoảng trắng → C3. Đơn vị đếm → C4. Sai kiểu/thiếu ở API → C9.",
+        "note": "Quan sát code (gray-box): ô có thuộc tính required, không có maxLength; không có phần tử nhãn (chỉ placeholder). Chỉ ghi nhận, chưa kết luận."
+      },
+      {
+        "id": "V3",
+        "name": "Giá",
+        "io": "input",
+        "source": "UI: ô placeholder 'Giá tiền', type=\"number\" (App.jsx dòng 500–507) · API: body.price (api_specification.md dòng 95)",
+        "type": "number (₫)",
+        "constraint": "Bắt buộc; > 0, số thực (FR-15.3, C1 SV chốt: bước nhảy 0.1, LB = 0.1). Không có cận trên (C2, no_upper_bound). Sai kiểu/thiếu ở API → C9.",
+        "note": "Quan sát code (gray-box): ô không có required/min; cột products.price kiểu INTEGER (database.js dòng 67). Chỉ ghi nhận, chưa kết luận.",
+        "no_upper_bound": "C2"
+      },
+      {
+        "id": "V4",
+        "name": "Danh mục",
+        "io": "input",
+        "source": "UI: ô chọn (select, không nhãn) lấy danh sách từ GET /api/categories (App.jsx dòng 528–543; 49–50), mặc định category_id 1 (dòng 101) · API: body.category_id (api_specification.md dòng 98) · Dữ liệu: 3 danh mục seed id 1–3 (database.js dòng 84–88)",
+        "type": "integer (id danh mục)",
+        "constraint": "Bắt buộc; phải thuộc danh sách danh mục có sẵn (FR-15.4, C11). Thiếu/sai kiểu ở API → C9.",
+        "note": "Gray-box: lớp 'không chọn' và 'ngoài danh sách' chỉ tạo được qua API (C11)."
+      },
+      {
+        "id": "V5",
+        "name": "Mô tả",
+        "io": "input",
+        "source": "UI: ô textarea placeholder 'Mô tả' (App.jsx dòng 517–526) · API: body.description (api_specification.md dòng 96)",
+        "type": "string",
+        "constraint": "FR-15 không ràng buộc — SRS im lặng – chấp nhận mọi cách hợp lý (C13). Giữ giá trị nominal hợp lệ trong mọi case."
+      },
+      {
+        "id": "V6",
+        "name": "URL Ảnh",
+        "io": "input",
+        "source": "UI: ô placeholder 'URL Ảnh' (App.jsx dòng 509–515) · API: body.imageUrl (api_specification.md dòng 97)",
+        "type": "string (URL)",
+        "constraint": "FR-15 không ràng buộc — SRS im lặng – chấp nhận mọi cách hợp lý (C13). Giữ giá trị nominal hợp lệ trong mọi case. Ảnh hiển thị phải có alt (FR-24.4, TS-GUI)."
+      },
+      {
+        "id": "V7",
+        "name": "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)",
+        "io": "input",
+        "source": "UI: dòng bảng được bấm 'Sửa' / 'Xóa' (App.jsx dòng 594, 600) · API: tham số đường dẫn :id",
+        "type": "integer (id sản phẩm)",
+        "constraint": "Tồn tại → thao tác áp lên đúng sản phẩm đó (FR-15.1, FR-15.5). Không tồn tại → C10 (chỉ ở API)."
+      },
+      {
+        "id": "V8",
+        "name": "Danh tính người gọi / token",
+        "io": "input",
+        "source": "UI: phiên admin sau 'Admin Login' (adminToken trong localStorage, App.jsx dòng 7, 35–39, 61–74) · API: header Authorization: Bearer <token> (server.js dòng 100–110)",
+        "type": "enum {không token, token sai, token role user, token role admin}",
+        "constraint": "POST/PUT/DELETE /api/products chỉ chấp nhận token hợp lệ có role admin (FR-12.2, SEC-02, SEC-03). Phạm vi → C5.",
+        "note": "Quan sát code (gray-box): kiểm role khi đăng nhập UI nằm ở client (App.jsx dòng 65–67); route POST/PUT/DELETE /api/products không gắn authenticateToken (server.js dòng 167, 179, 191). Chỉ ghi nhận, chưa kết luận."
+      },
+      {
+        "id": "V9",
+        "name": "Các sản phẩm khác trong CSDL (trạng thái)",
+        "io": "input",
+        "source": "Dữ liệu: bảng products — 5 sản phẩm seed (database.js dòng 97–103) + sản phẩm do case tạo",
+        "type": "list",
+        "constraint": "Có ít nhất 1 sản phẩm khác ngoài sản phẩm mục tiêu, để quan sát FR-15.5."
+      },
+      {
+        "id": "V10",
+        "name": "Bản ghi sản phẩm sau thao tác",
+        "io": "output",
+        "source": "API: GET /api/products (server.js dòng 141–157), GET /api/products/:id (dòng 159–165); trường id, name, price, description, imageUrl, category_id (database.js dòng 64–71)",
+        "type": "record",
+        "constraint": "Thêm hợp lệ → thêm đúng 1 bản ghi, các trường = giá trị nhập; Sửa hợp lệ → bản ghi mục tiêu = giá trị mới; Xóa → bản ghi không còn (FR-15.1). Dữ liệu không hợp lệ / không đủ quyền → không tạo, không đổi (C5, C6, C7).",
+        "note": "Quan sát code (gray-box): GET /api/products/:id trả 200 {} khi không tìm thấy (server.js dòng 161) và trả price dạng chuỗi khi id chẵn (dòng 162) — ảnh hưởng cách so sánh ở điểm quan sát; chưa kết luận, xác nhận ở bước 6."
+      },
+      {
+        "id": "V11",
+        "name": "Danh sách sản phẩm trên UI",
+        "io": "output",
+        "source": "UI: tab 'Sản phẩm' (App.jsx dòng 240–243), bảng cột 'Ảnh', 'Tên SP', 'Giá', 'Hành động' (dòng 567–608)",
+        "type": "list",
+        "constraint": "Phản ánh kết quả Thêm/Sửa/Xóa (FR-15.1 – Xem). Thuộc tính chung — khẳng định ở đúng 1 case TS-GUI (C12): ₫ + phân cách hàng nghìn ở cột 'Giá' (FR-21.3), alt ảnh (FR-24.4), tên hiển thị an toàn (SEC-04)."
+      },
+      {
+        "id": "V12",
+        "name": "Các sản phẩm khác sau khi Sửa",
+        "io": "output",
+        "source": "UI: các dòng khác của bảng sản phẩm · API: các phần tử khác trong GET /api/products",
+        "type": "list",
+        "constraint": "Giữ nguyên — SAU = TRƯỚC (FR-15.5). Quan sát cả UI và API (mỗi tầng một case)."
+      },
+      {
+        "id": "V13",
+        "name": "Phản hồi API sản phẩm",
+        "io": "output",
+        "source": "API: mã HTTP + body của POST/PUT/DELETE /api/products(/:id); body thành công quan sát được trong code: {\"message\": \"Product created\", \"id\"} (server.js dòng 174), {\"message\": \"Product updated\"} (dòng 186), {\"message\": \"Product deleted\"} (dòng 194)",
+        "type": "HTTP",
+        "constraint": "Hợp lệ → 2xx (api_specification không quy định body → không khẳng định nội dung). Dữ liệu không hợp lệ → 4xx kèm error (C6, C9); id không tồn tại → 4xx (C10); không đủ quyền → 4xx (C5)."
+      },
+      {
+        "id": "V14",
+        "name": "Phản hồi trên UI khi lưu / xóa",
+        "io": "output",
+        "source": "UI: hộp alert (App.jsx dòng 115, 129, 138), form trở về trạng thái 'Thêm sản phẩm mới' (dòng 120–127), bong bóng kiểm tra HTML5 của ô có required",
+        "type": "enum",
+        "constraint": "Thành công: SRS im lặng – chấp nhận mọi cách hợp lý, không khẳng định nội dung (C13). Bị từ chối: oracle theo C7. Thuộc tính chung — vị trí thông báo lỗi trên nút 'Lưu sản phẩm' (FR-22.4) khẳng định ở đúng 1 case TS-GUI (C12)."
+      }
+    ],
+    "partitions": [
+      {
+        "id": "EC1",
+        "variable": "V1",
+        "class": "Thêm",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC2",
+        "variable": "V1",
+        "class": "Xem",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC3",
+        "variable": "V1",
+        "class": "Sửa",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC4",
+        "variable": "V1",
+        "class": "Xóa",
+        "valid": true,
+        "guideline": "set",
+        "note": "1 lớp/giá trị của tập thao tác (FR-15.1). Không có lớp 'ngoài tập': SRS không nêu thao tác nào khác để đặt Expected → cảnh báo 'không có lớp không hợp lệ' giữ nguyên.",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC5",
+        "variable": "V2",
+        "class": "[Thêm] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}')",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của khoảng 1–255 (FR-15.2). UI + API (POST /api/products). Đếm ký tự theo C4. Tách theo thao tác (C8).",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC6",
+        "variable": "V2",
+        "class": "[Thêm] Rỗng — 0 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới (bắt buộc). UI: ô 'Tên sản phẩm' để trống; API: name = \"\".",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC7",
+        "variable": "V2",
+        "class": "[Thêm] Dài hơn 255 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía trên. UI + API.",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC8",
+        "variable": "V2",
+        "class": "[Thêm] Chỉ gồm khoảng trắng (vd '   ')",
+        "valid": false,
+        "guideline": "split",
+        "note": "C3 SV chốt: coi như trống. Tách khỏi lớp 'rỗng' vì độ dài > 0 — có lý do tin bị xử lý khác chuỗi rỗng. UI + API.",
+        "requirements": [
+          "FR-15.2",
+          "C3"
+        ]
+      },
+      {
+        "id": "EC9",
+        "variable": "V2",
+        "class": "[Thêm] API: thiếu trường name hoặc name = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9). Đại diện thiếu/null chọn ở bước 3.",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC10",
+        "variable": "V2",
+        "class": "[Thêm] API: name không phải chuỗi (vd số 123)",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC11",
+        "variable": "V2",
+        "class": "[Sửa] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}')",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của khoảng 1–255 (FR-15.2). UI + API (PUT /api/products/:id). Đếm ký tự theo C4. Tách theo thao tác (C8).",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC12",
+        "variable": "V2",
+        "class": "[Sửa] Rỗng — 0 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới (bắt buộc). UI: ô 'Tên sản phẩm' để trống; API: name = \"\".",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC13",
+        "variable": "V2",
+        "class": "[Sửa] Dài hơn 255 ký tự",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía trên. UI + API.",
+        "requirements": [
+          "FR-15.2"
+        ]
+      },
+      {
+        "id": "EC14",
+        "variable": "V2",
+        "class": "[Sửa] Chỉ gồm khoảng trắng (vd '   ')",
+        "valid": false,
+        "guideline": "split",
+        "note": "C3 SV chốt: coi như trống. Tách khỏi lớp 'rỗng' vì độ dài > 0 — có lý do tin bị xử lý khác chuỗi rỗng. UI + API.",
+        "requirements": [
+          "FR-15.2",
+          "C3"
+        ]
+      },
+      {
+        "id": "EC15",
+        "variable": "V2",
+        "class": "[Sửa] API: thiếu trường name hoặc name = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9). Đại diện thiếu/null chọn ở bước 3.",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC16",
+        "variable": "V2",
+        "class": "[Sửa] API: name không phải chuỗi (vd số 123)",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.2",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC17",
+        "variable": "V3",
+        "class": "[Thêm] Số nguyên > 0 (vd 1500000)",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của miền > 0 (FR-15.3). Không có cận trên (C2) → miền một phía. UI + API (POST /api/products).",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC18",
+        "variable": "V3",
+        "class": "[Thêm] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5)",
+        "valid": true,
+        "guideline": "split",
+        "note": "Lớp HỢP LỆ — Expected = chấp nhận (C1 SV chốt: mọi số thực > 0 hợp lệ); lớp số nguyên cùng biến cũng là lớp hợp lệ. Tách khỏi lớp số nguyên vì có lý do tin bị xử lý khác (gray-box): cột products.price kiểu INTEGER (../eshop-sut/backend/database.js dòng 67). UI + API.",
+        "requirements": [
+          "FR-15.3",
+          "C1"
+        ]
+      },
+      {
+        "id": "EC19",
+        "variable": "V3",
+        "class": "[Thêm] Số ≤ 0 (vd 0; -1000)",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới. Phía trên không có lớp không hợp lệ (C2). UI + API.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC20",
+        "variable": "V3",
+        "class": "[Thêm] UI: ô 'Giá tiền' để trống",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng UI (bắt buộc). Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp. Bản API tương ứng: lớp thiếu/null.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC21",
+        "variable": "V3",
+        "class": "[Thêm] API: thiếu trường price hoặc price = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC22",
+        "variable": "V3",
+        "class": "[Thêm] API: price là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC23",
+        "variable": "V3",
+        "class": "[Thêm] API: price là chuỗi số (vd \"100000\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API. C9 SV chốt: chuỗi số là sai kiểu. Tách khỏi chuỗi chữ vì giá trị số của nó hợp lệ — có lý do tin bị xử lý khác (chuyển kiểu ngầm).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC24",
+        "variable": "V3",
+        "class": "[Sửa] Số nguyên > 0 (vd 1500000)",
+        "valid": true,
+        "guideline": "range",
+        "note": "Lớp hợp lệ của miền > 0 (FR-15.3). Không có cận trên (C2) → miền một phía. UI + API (PUT /api/products/:id).",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC25",
+        "variable": "V3",
+        "class": "[Sửa] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5)",
+        "valid": true,
+        "guideline": "split",
+        "note": "Lớp HỢP LỆ — Expected = chấp nhận (C1 SV chốt: mọi số thực > 0 hợp lệ); lớp số nguyên cùng biến cũng là lớp hợp lệ. Tách khỏi lớp số nguyên vì có lý do tin bị xử lý khác (gray-box): cột products.price kiểu INTEGER (../eshop-sut/backend/database.js dòng 67). UI + API.",
+        "requirements": [
+          "FR-15.3",
+          "C1"
+        ]
+      },
+      {
+        "id": "EC26",
+        "variable": "V3",
+        "class": "[Sửa] Số ≤ 0 (vd 0; -1000)",
+        "valid": false,
+        "guideline": "range",
+        "note": "Lớp không hợp lệ phía dưới. Phía trên không có lớp không hợp lệ (C2). UI + API.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC27",
+        "variable": "V3",
+        "class": "[Sửa] UI: ô 'Giá tiền' để trống",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng UI (bắt buộc). Chuỗi không phải số gõ vào ô type=number cho giá trị rỗng → cùng lớp. Bản API tương ứng: lớp thiếu/null.",
+        "requirements": [
+          "FR-15.3"
+        ]
+      },
+      {
+        "id": "EC28",
+        "variable": "V3",
+        "class": "[Sửa] API: thiếu trường price hoặc price = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC29",
+        "variable": "V3",
+        "class": "[Sửa] API: price là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC30",
+        "variable": "V3",
+        "class": "[Sửa] API: price là chuỗi số (vd \"100000\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API. C9 SV chốt: chuỗi số là sai kiểu. Tách khỏi chuỗi chữ vì giá trị số của nó hợp lệ — có lý do tin bị xử lý khác (chuyển kiểu ngầm).",
+        "requirements": [
+          "FR-15.3",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC31",
+        "variable": "V4",
+        "class": "[Thêm] category_id thuộc danh sách danh mục có sẵn (vd 2)",
+        "valid": true,
+        "guideline": "set",
+        "note": "C11: danh sách = bảng categories lúc lưu (seed id 1–3). Các danh mục xử lý như nhau → 1 lớp. UI (ô chọn) + API.",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC32",
+        "variable": "V4",
+        "class": "[Thêm] API: category_id không có trong danh sách (vd 999)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API — ô chọn trên UI chỉ có danh mục có sẵn (C11, gray-box).",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC33",
+        "variable": "V4",
+        "class": "[Thêm] API: thiếu trường category_id hoặc category_id = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC34",
+        "variable": "V4",
+        "class": "[Thêm] API: category_id là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC35",
+        "variable": "V4",
+        "class": "[Sửa] category_id thuộc danh sách danh mục có sẵn (vd 2)",
+        "valid": true,
+        "guideline": "set",
+        "note": "C11: danh sách = bảng categories lúc lưu (seed id 1–3). Các danh mục xử lý như nhau → 1 lớp. UI (ô chọn) + API.",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC36",
+        "variable": "V4",
+        "class": "[Sửa] API: category_id không có trong danh sách (vd 999)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API — ô chọn trên UI chỉ có danh mục có sẵn (C11, gray-box).",
+        "requirements": [
+          "FR-15.4",
+          "C11"
+        ]
+      },
+      {
+        "id": "EC37",
+        "variable": "V4",
+        "class": "[Sửa] API: thiếu trường category_id hoặc category_id = null",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC38",
+        "variable": "V4",
+        "class": "[Sửa] API: category_id là chuỗi chữ (vd \"abc\")",
+        "valid": false,
+        "guideline": "type",
+        "note": "Chỉ tầng API (C9).",
+        "requirements": [
+          "FR-15.4",
+          "C9"
+        ]
+      },
+      {
+        "id": "EC39",
+        "variable": "V5",
+        "class": "Chuỗi mô tả bất kỳ (nominal, vd 'Mô tả {ts}')",
+        "valid": true,
+        "guideline": "set",
+        "note": "SRS im lặng – chấp nhận mọi cách hợp lý (C13). Không có lớp không hợp lệ → cảnh báo giữ nguyên.",
+        "requirements": []
+      },
+      {
+        "id": "EC40",
+        "variable": "V6",
+        "class": "URL ảnh dạng http(s) (nominal, vd 'https://placehold.co/300')",
+        "valid": true,
+        "guideline": "set",
+        "note": "SRS im lặng – chấp nhận mọi cách hợp lý (C13). Không có lớp không hợp lệ → cảnh báo giữ nguyên.",
+        "requirements": []
+      },
+      {
+        "id": "EC41",
+        "variable": "V7",
+        "class": "id sản phẩm tồn tại (sản phẩm do case tạo, C0)",
+        "valid": true,
+        "guideline": "set",
+        "note": "UI (dòng được bấm 'Sửa'/'Xóa') + API (:id).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC42",
+        "variable": "V7",
+        "class": "[Xem] API: GET /api/products/:id với id không tồn tại",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8).",
+        "requirements": [
+          "FR-15.1",
+          "C10"
+        ]
+      },
+      {
+        "id": "EC43",
+        "variable": "V7",
+        "class": "[Sửa] API: PUT /api/products/:id với id không tồn tại",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8).",
+        "requirements": [
+          "FR-15.1",
+          "C10"
+        ]
+      },
+      {
+        "id": "EC44",
+        "variable": "V7",
+        "class": "[Xóa] API: DELETE /api/products/:id với id không tồn tại",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C10). Tách theo thao tác: ba endpoint khác nhau (theo lý do của C8).",
+        "requirements": [
+          "FR-15.1",
+          "C10"
+        ]
+      },
+      {
+        "id": "EC45",
+        "variable": "V8",
+        "class": "Token hợp lệ, role admin",
+        "valid": true,
+        "guideline": "set",
+        "note": "UI luôn chạy trong phiên admin. API: Authorization: Bearer <token admin>.",
+        "requirements": [
+          "FR-12.2"
+        ]
+      },
+      {
+        "id": "EC46",
+        "variable": "V8",
+        "class": "[Thêm] API: POST không có header Authorization",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC47",
+        "variable": "V8",
+        "class": "[Thêm] API: POST với token không hợp lệ (chuỗi không phải JWT của hệ thống)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC48",
+        "variable": "V8",
+        "class": "[Thêm] API: POST với token hợp lệ của role user (test@eshop.com)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-03"
+        ]
+      },
+      {
+        "id": "EC49",
+        "variable": "V8",
+        "class": "[Sửa] API: PUT không có header Authorization",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC50",
+        "variable": "V8",
+        "class": "[Sửa] API: PUT với token không hợp lệ (chuỗi không phải JWT của hệ thống)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC51",
+        "variable": "V8",
+        "class": "[Sửa] API: PUT với token hợp lệ của role user (test@eshop.com)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-03"
+        ]
+      },
+      {
+        "id": "EC52",
+        "variable": "V8",
+        "class": "[Xóa] API: DELETE không có header Authorization",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC53",
+        "variable": "V8",
+        "class": "[Xóa] API: DELETE với token không hợp lệ (chuỗi không phải JWT của hệ thống)",
+        "valid": false,
+        "guideline": "must-be",
+        "note": "Chỉ tầng API (C5).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-02"
+        ]
+      },
+      {
+        "id": "EC54",
+        "variable": "V8",
+        "class": "[Xóa] API: DELETE với token hợp lệ của role user (test@eshop.com)",
+        "valid": false,
+        "guideline": "set",
+        "note": "Chỉ tầng API (C5). Tách khỏi 'token không hợp lệ': token xác thực được nhưng sai role (SEC-03).",
+        "requirements": [
+          "FR-12.2",
+          "SEC-03"
+        ]
+      },
+      {
+        "id": "EC55",
+        "variable": "V9",
+        "class": "Có ≥ 1 sản phẩm khác ngoài sản phẩm mục tiêu (5 sản phẩm seed + sản phẩm của case)",
+        "valid": true,
+        "guideline": "count",
+        "note": "Trạng thái dữ liệu cần để quan sát FR-15.5. Không có lớp không hợp lệ (0 sản phẩm khác không phải đầu vào sai) → cảnh báo giữ nguyên.",
+        "requirements": [
+          "FR-15.5"
+        ]
+      },
+      {
+        "id": "EC56",
+        "variable": "V10",
+        "class": "Thêm hợp lệ: thêm đúng 1 bản ghi; name, price, category_id = giá trị gửi",
+        "valid": true,
+        "guideline": "set",
+        "note": "Quan sát GET /api/products trước/sau (C0). So price theo giá trị số; kiểu dữ liệu price chỉ khẳng định ở EC59 (C15).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC57",
+        "variable": "V10",
+        "class": "Sửa hợp lệ: bản ghi mục tiêu có name, price, category_id = giá trị mới",
+        "valid": true,
+        "guideline": "set",
+        "note": "Quan sát GET /api/products/:id. So price theo giá trị số; kiểu dữ liệu price chỉ khẳng định ở EC59 (C15).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC58",
+        "variable": "V10",
+        "class": "Xóa hợp lệ: bản ghi mục tiêu không còn trong GET /api/products",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC59",
+        "variable": "V10",
+        "class": "Xem: GET /api/products/:id trả bản ghi có các trường = giá trị đã lưu; price là số JSON",
+        "valid": true,
+        "guideline": "set",
+        "note": "C15 SV chốt (b): nơi duy nhất khẳng định kiểu dữ liệu price.",
+        "requirements": [
+          "FR-15.1",
+          "C15"
+        ]
+      },
+      {
+        "id": "EC60",
+        "variable": "V10",
+        "class": "Tầng API bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC",
+        "valid": true,
+        "guideline": "set",
+        "note": "C6; dùng chung cho từ chối do dữ liệu, id không tồn tại, không đủ quyền.",
+        "requirements": [
+          "C6"
+        ]
+      },
+      {
+        "id": "EC61",
+        "variable": "V10",
+        "class": "Tầng UI bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC",
+        "valid": true,
+        "guideline": "set",
+        "note": "C7. Quan sát bằng GET /api/products (C0).",
+        "requirements": [
+          "C7"
+        ]
+      },
+      {
+        "id": "EC62",
+        "variable": "V11",
+        "class": "Sau Thêm hợp lệ: bảng có thêm 1 dòng, 'Tên SP' và 'Giá' = giá trị nhập",
+        "valid": true,
+        "guideline": "set",
+        "note": "So giá trị số; định dạng ₫ kiểm riêng ở TS-GUI (C12).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC63",
+        "variable": "V11",
+        "class": "Sau Sửa hợp lệ: dòng mục tiêu hiển thị giá trị mới",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC64",
+        "variable": "V11",
+        "class": "Sau Xóa: dòng mục tiêu không còn trong bảng",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC65",
+        "variable": "V11",
+        "class": "Xem: tab 'Sản phẩm' hiển thị đủ các sản phẩm có trong GET /api/products",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "FR-15.1"
+        ]
+      },
+      {
+        "id": "EC66",
+        "variable": "V11",
+        "class": "UI bị từ chối: bảng không đổi (SAU = TRƯỚC)",
+        "valid": true,
+        "guideline": "set",
+        "note": "",
+        "requirements": [
+          "C7"
+        ]
+      },
+      {
+        "id": "EC67",
+        "variable": "V12",
+        "class": "Các sản phẩm khác giữ nguyên sau khi Sửa (SAU = TRƯỚC)",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "Áp cả UI (bảng) và API (GET /api/products); mỗi tầng một case.",
+        "requirements": [
+          "FR-15.5"
+        ]
+      },
+      {
+        "id": "EC68",
+        "variable": "V13",
+        "class": "API: 2xx khi thao tác hợp lệ",
+        "valid": true,
+        "guideline": "set",
+        "note": "Không khẳng định nội dung body (api_specification không quy định).",
+        "requirements": [
+          "API-PROD"
+        ]
+      },
+      {
+        "id": "EC69",
+        "variable": "V13",
+        "class": "API: 4xx kèm trường error khi dữ liệu vi phạm FR-15.2–15.4 hoặc sai kiểu/thiếu trường",
+        "valid": true,
+        "guideline": "set",
+        "note": "Không 2xx, không 5xx; không cố định mã (C6).",
+        "requirements": [
+          "C6"
+        ]
+      },
+      {
+        "id": "EC70",
+        "variable": "V13",
+        "class": "API: 4xx khi id không tồn tại",
+        "valid": true,
+        "guideline": "set",
+        "note": "Không 2xx, không 5xx (C10).",
+        "requirements": [
+          "C10"
+        ]
+      },
+      {
+        "id": "EC71",
+        "variable": "V13",
+        "class": "API: 4xx khi không đủ quyền (thiếu/sai token, role user)",
+        "valid": true,
+        "guideline": "set",
+        "note": "C5; không cố định mã.",
+        "requirements": [
+          "FR-12.2"
+        ]
+      },
+      {
+        "id": "EC72",
+        "variable": "V14",
+        "class": "UI bị từ chối: có thông báo lỗi trên form (kể cả bong bóng kiểm tra HTML5)",
+        "valid": true,
+        "guideline": "must-be",
+        "note": "Nội dung chữ ghi làm Actual. Vị trí (FR-22.4) kiểm riêng ở TS-GUI (C12).",
+        "requirements": [
+          "C7"
+        ]
+      },
+      {
+        "id": "EC73",
+        "variable": "V14",
+        "class": "UI thành công: không hiển thị thông báo lỗi",
+        "valid": true,
+        "guideline": "set",
+        "note": "(ngầm định) Nội dung thông báo thành công không khẳng định (C13).",
+        "requirements": [
+          "FR-15.1"
+        ]
+      }
+    ]
+  },
+  "suites": [
+    {
+      "id": "TS-DOM-UI",
+      "name": "Domain — minimum set, tầng UI (web admin, tab 'Sản phẩm')",
+      "format": "matrix",
+      "description": "Minimum set tầng UI: mỗi thao tác Thêm/Sửa/Xóa/Xem có case hợp lệ; lớp số thập phân hợp lệ có case riêng; mỗi case không hợp lệ phủ đúng một lớp không hợp lệ có ở UI (Tên, Giá — Thêm và Sửa tách theo C8). Lớp chỉ có ở API (thiếu/null/sai kiểu, danh mục ngoài danh sách, id không tồn tại, token) nằm ở TS-DOM-API. Giá trị danh nghĩa: danh mục 'Laptop', Mô tả 'Mô tả NN {ts}', URL Ảnh 'https://placehold.co/300'.",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+        "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+        "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+        "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).",
+        "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định."
+      ],
+      "procedure": [
+        {
+          "action": "Nếu cột 'Thao tác CRUD' là Sửa hoặc Xóa: dựng sản phẩm mục tiêu M — POST /api/products (Bearer TA, Content-Type: application/json) body {name: 'Muc tieu NN {ts}', price: 1000000, description: 'Mô tả mục tiêu {ts}', imageUrl: 'https://placehold.co/300', category_id: 1}; GET /api/products, lấy id của bản ghi có name = 'Muc tieu NN {ts}' → M. Thao tác khác: bỏ qua bước này.",
+          "expected": "Có đúng 1 bản ghi name = 'Muc tieu NN {ts}'. Không dựng được → dừng, Blocked, ghi case gốc vào notes (C14)."
+        },
+        {
+          "action": "GET /api/products → lưu TRƯỚC (số bản ghi và toàn bộ bản ghi). Nếu có M: GET /api/products/M → lưu M_TRƯỚC.",
+          "expected": "HTTP 2xx; mảng JSON."
+        },
+        {
+          "action": "Mở http://localhost:5174 trong browser context mới (localStorage không có adminToken, tắt autofill). Ô 'Email' gõ admin@eshop.com, ô 'Password' gõ Admin123!, bấm 'Login' đúng một lần.",
+          "expected": "Giao diện quản trị hiển thị (thanh bên có mục 'Sản phẩm')."
+        },
+        {
+          "action": "Bấm mục 'Sản phẩm' trên thanh bên. Ghi TRƯỚC_UI: danh sách dòng của bảng sản phẩm (Tên SP, Giá dạng giá trị số — bỏ ký hiệu tiền và dấu phân cách).",
+          "expected": "Bảng sản phẩm hiển thị; số dòng = số bản ghi TRƯỚC. Không khớp → ghi notes."
+        },
+        {
+          "action": "Thực hiện cột 'Thao tác CRUD' đúng một lần. Định vị ô theo placeholder: 'Tên sản phẩm', 'Giá tiền', 'URL Ảnh', 'Mô tả'; danh mục = ô chọn duy nhất của form, chọn option theo tên trong cột. Thêm: form ở trạng thái thêm mới; với mỗi ô: xoá trắng rồi gõ đúng chuỗi trong cột — '' = không gõ gì, để nguyên ô trống; khoảng trắng gõ đúng số dấu cách ghi trong cột (bảng hiển thị ␣); 'x' × n = gõ/dán n ký tự 'x'. Sửa: bấm 'Sửa' trên dòng có Tên SP = 'Muc tieu NN {ts}'; ô ghi '(giữ)' không chạm; ô có giá trị: xoá trắng rồi gõ như trên. Thêm/Sửa: bấm nút 'Lưu sản phẩm' đúng một lần. Xóa: bấm 'Xóa' trên dòng 'Muc tieu NN {ts}' đúng một lần; nếu có hộp xác nhận, chọn xác nhận và ghi vào Actual (C13). Xem: không thao tác thêm.",
+          "expected": "Hệ thống phản hồi (thông báo, hộp thoại, bảng đổi hoặc không đổi gì)."
+        },
+        {
+          "action": "Quan sát ngay sau thao tác: bong bóng kiểm tra HTML5 gắn với ô, thông báo trên trang, hộp thoại trình duyệt. Ghi nguyên văn nội dung vào Actual; đóng hộp thoại bằng nút OK.",
+          "expected": "Khớp phần thông báo trong cột Expected (C7, C16)."
+        },
+        {
+          "action": "Ghi SAU_UI như bước 4 (không tải lại trang). GET /api/products → SAU; nếu có M: GET /api/products/M → M_SAU. So với TRƯỚC.",
+          "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, C0)."
+        }
+      ],
+      "columns": [
+        "Thao tác CRUD",
+        "Tên sản phẩm",
+        "Giá",
+        "Danh mục",
+        "Mô tả",
+        "URL Ảnh"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: GET /api/products, xoá bằng DELETE /api/products/:id (Bearer TA) mọi id có trong SAU mà không có trong TRƯỚC, và sản phẩm mục tiêu M nếu còn. Xoá thất bại → ghi notes, không đổi verdict. Lớp 2: khởi động lại backend trước lượt chạy kế tiếp (C0)."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR15-01",
+          "title": "Kiểm tra thêm sản phẩm qua form khi mọi trường hợp lệ và giá là số nguyên",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "Bàn phím UI01 {ts}",
+            "Giá": "1500000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Không có thông báo lỗi (thông báo thành công, nếu có, chỉ ghi Actual — C13). Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'Bàn phím UI01 {ts}', 'Giá' = 1500000 (so giá trị số). Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có name = 'Bàn phím UI01 {ts}', price = 1500000, category_id = 2 (so giá trị số).",
+          "requirements": [
+            "FR-15.1",
+            "FR-15.2",
+            "FR-15.3",
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC55",
+            "EC56",
+            "EC62",
+            "EC73"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC56",
+            "EC62",
+            "EC73"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ chính tầng UI: giá nguyên điển hình (C1 ghi chú SV), danh mục khác mặc định để thấy ô chọn có tác dụng; tên có dấu tiếng Việt. Nơi duy nhất khẳng định 'thành công không có thông báo lỗi' (EC73).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C11"
+          ]
+        },
+        {
+          "id": "TC-FR15-02",
+          "title": "Kiểm tra thêm sản phẩm qua form khi giá là số thập phân dương",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "Chuột UI02 {ts}",
+            "Giá": "199999.5",
+            "Danh mục": "Phụ kiện",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'Chuột UI02 {ts}', 'Giá' = 199999.5 (so giá trị số). Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có price = 199999.5, category_id = 3 (so giá trị số).",
+          "requirements": [
+            "FR-15.3",
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC18",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC55",
+            "EC56",
+            "EC62"
+          ],
+          "ec_target": [
+            "EC18",
+            "EC56",
+            "EC62"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp số thập phân hợp lệ (C1 SV chốt); phần lẻ .5 đủ lớn để không bị nhầm với lỗi làm tròn hiển thị.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Gray-box: lớp tách khỏi số nguyên theo cột price INTEGER (database.js dòng 67).",
+          "assumptions": [
+            "C1"
+          ],
+          "approach": "gray-box"
+        },
+        {
+          "id": "TC-FR15-03",
+          "title": "Kiểm tra sửa tên, giá, danh mục của một sản phẩm qua form khi giá mới là số nguyên",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "Sửa UI03 {ts}",
+            "Giá": "2500000",
+            "Danh mục": "Phụ kiện",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Không đánh giá thông báo. Bảng: dòng của M hiển thị 'Tên SP' = 'Sửa UI03 {ts}', 'Giá' = 2500000 (so giá trị số); mọi dòng khác SAU_UI = TRƯỚC_UI; số dòng không đổi. Dữ liệu: M_SAU có name = 'Sửa UI03 {ts}', price = 2500000, category_id = 3 (so giá trị số).",
+          "requirements": [
+            "FR-15.1",
+            "FR-15.2",
+            "FR-15.3",
+            "FR-15.4",
+            "FR-15.5"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC55",
+            "EC57",
+            "EC63",
+            "EC67"
+          ],
+          "ec_target": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC41",
+            "EC57",
+            "EC63",
+            "EC67"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ chính của Sửa ở UI: đổi cả 3 trường bị ràng buộc; kiểm FR-15.5 trên bảng (bản API ở TC-FR15-19).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C11"
+          ]
+        },
+        {
+          "id": "TC-FR15-04",
+          "title": "Kiểm tra sửa giá của một sản phẩm qua form khi giá mới là số thập phân dương",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "(giữ)",
+            "Giá": "2500000.5",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Bảng: dòng của M hiển thị 'Giá' = 2500000.5 (so giá trị số). Dữ liệu: M_SAU có price = 2500000.5 (so giá trị số); name, category_id = M_TRƯỚC.",
+          "requirements": [
+            "FR-15.3",
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC25",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC55",
+            "EC57",
+            "EC63"
+          ],
+          "ec_target": [
+            "EC25",
+            "EC57",
+            "EC63"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp số thập phân hợp lệ khi Sửa (C1, C8): chỉ đổi giá để cô lập lớp mục tiêu.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Gray-box: lớp tách khỏi số nguyên theo cột price INTEGER (database.js dòng 67).",
+          "assumptions": [
+            "C1"
+          ],
+          "approach": "gray-box"
+        },
+        {
+          "id": "TC-FR15-05",
+          "title": "Kiểm tra xoá một sản phẩm từ bảng khi sản phẩm tồn tại",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Xóa",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "Bảng: dòng 'Muc tieu 05 {ts}' không còn; số dòng SAU_UI = TRƯỚC_UI − 1. Dữ liệu: GET /api/products SAU không còn id M; số bản ghi SAU = TRƯỚC − 1.",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC4",
+            "EC41",
+            "EC45",
+            "EC55",
+            "EC58",
+            "EC64"
+          ],
+          "ec_target": [
+            "EC4",
+            "EC41",
+            "EC58",
+            "EC64"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thao tác Xóa trên sản phẩm do case tạo (C0), không đụng dữ liệu seed.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-06",
+          "title": "Kiểm tra xem danh sách sản phẩm ở tab 'Sản phẩm' khi CSDL có dữ liệu seed",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Xem",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "TRƯỚC_UI có số dòng = số bản ghi TRƯỚC; mỗi bản ghi có đúng 1 dòng với 'Tên SP' = name và 'Giá' = price (so giá trị số).",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC2",
+            "EC45",
+            "EC55",
+            "EC65"
+          ],
+          "ec_target": [
+            "EC2",
+            "EC65"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Thao tác Xem: so bảng với nguồn dữ liệu ngay sau khi seed, không cần dựng thêm.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-07",
+          "title": "Kiểm tra thêm sản phẩm qua form khi ô 'Tên sản phẩm' để trống",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "",
+            "Giá": "1500000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC6",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC6",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện duy nhất của lớp rỗng (bắt buộc, FR-15.2).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-08",
+          "title": "Kiểm tra thêm sản phẩm qua form khi tên dài 300 ký tự",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "'x' × 300",
+            "Giá": "1500000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC7",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC7",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Vượt xa 255 để chắc chắn thuộc lớp > 255; biên 256 kiểm ở BVA.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-09",
+          "title": "Kiểm tra thêm sản phẩm qua form khi tên chỉ gồm 3 dấu cách",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "   ",
+            "Giá": "1500000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC8",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC8",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "C3: chỉ khoảng trắng coi như trống; 3 dấu cách để phân biệt với rỗng.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C3",
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-10",
+          "title": "Kiểm tra thêm sản phẩm qua form khi giá âm",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "Tai nghe UI10 {ts}",
+            "Giá": "-1000",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC19",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC19",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện điển hình của lớp ≤ 0; điểm 0 kiểm ở BVA (LB−1).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-11",
+          "title": "Kiểm tra thêm sản phẩm qua form khi ô 'Giá tiền' để trống",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Thêm",
+            "Tên sản phẩm": "Tai nghe UI11 {ts}",
+            "Giá": "",
+            "Danh mục": "Laptop",
+            "Mô tả": "Mô tả NN {ts}",
+            "URL Ảnh": "https://placehold.co/300"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC20",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC20",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp bắt buộc của Giá ở UI.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-12",
+          "title": "Kiểm tra sửa sản phẩm qua form khi xoá trắng ô 'Tên sản phẩm'",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "",
+            "Giá": "(giữ)",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC12",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC12",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp rỗng khi Sửa (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-13",
+          "title": "Kiểm tra sửa sản phẩm qua form khi tên mới dài 300 ký tự",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "'x' × 300",
+            "Giá": "(giữ)",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC13",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC13",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp > 255 khi Sửa (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-14",
+          "title": "Kiểm tra sửa sản phẩm qua form khi tên mới chỉ gồm 3 dấu cách",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "   ",
+            "Giá": "(giữ)",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC14",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC14",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp chỉ khoảng trắng khi Sửa (C3, C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C3",
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-15",
+          "title": "Kiểm tra sửa sản phẩm qua form khi giá mới âm",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "(giữ)",
+            "Giá": "-1000",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC26",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC26",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp ≤ 0 khi Sửa (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        },
+        {
+          "id": "TC-FR15-16",
+          "title": "Kiểm tra sửa sản phẩm qua form khi xoá trắng ô 'Giá tiền'",
+          "layer": "UI",
+          "inputs": {
+            "Thao tác CRUD": "Sửa",
+            "Tên sản phẩm": "(giữ)",
+            "Giá": "",
+            "Danh mục": "(giữ)",
+            "Mô tả": "(giữ)",
+            "URL Ảnh": "(giữ)"
+          },
+          "expected_result": "Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC27",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "ec_target": [
+            "EC27",
+            "EC61",
+            "EC66",
+            "EC72"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp bắt buộc của Giá khi Sửa ở UI (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TS-DOM-API",
+      "name": "Domain — minimum set, tầng API /api/products",
+      "format": "matrix",
+      "description": "Minimum set tầng API (C6): hợp lệ cho POST/PUT/DELETE/GET; mỗi lớp không hợp lệ của Tên/Giá/Danh mục cho POST và PUT (C8, C9, C11), id không tồn tại cho GET/PUT/DELETE (C10), quyền cho POST/PUT/DELETE (C5). Giá trị danh nghĩa: token TA; body POST {name 'SP APINN {ts}', price 1500000, category_id 2}; body PUT {name 'Sua APINN {ts}', price 2500000, category_id 3}; description 'Mô tả NN {ts}', imageUrl 'https://placehold.co/300'.",
+      "preconditions": [
+        "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+        "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+        "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+        "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0)."
+      ],
+      "procedure": [
+        {
+          "action": "Nếu cột 'Thao tác CRUD' là Sửa hoặc Xóa: dựng sản phẩm mục tiêu M — POST /api/products (Bearer TA, Content-Type: application/json) body {name: 'Muc tieu NN {ts}', price: 1000000, description: 'Mô tả mục tiêu {ts}', imageUrl: 'https://placehold.co/300', category_id: 1}; GET /api/products, lấy id của bản ghi có name = 'Muc tieu NN {ts}' → M. Thao tác khác: bỏ qua bước này.",
+          "expected": "Có đúng 1 bản ghi name = 'Muc tieu NN {ts}'. Không dựng được → dừng, Blocked, ghi case gốc vào notes (C14)."
+        },
+        {
+          "action": "GET /api/products → lưu TRƯỚC (số bản ghi và toàn bộ bản ghi). Nếu có M: GET /api/products/M → lưu M_TRƯỚC.",
+          "expected": "HTTP 2xx; mảng JSON."
+        },
+        {
+          "action": "Nếu cột token là 'U': POST /api/login với test@eshop.com / Test1234! (README.md dòng 23) → token U.",
+          "expected": "HTTP 2xx; phản hồi có token."
+        },
+        {
+          "action": "Gửi đúng một request, Content-Type: application/json. Method theo cột 'Thao tác CRUD'; đường dẫn /api/products (POST) hoặc /api/products/<id> với <id> theo cột mục tiêu: 'M' = id dựng ở bước 1; số = id đó. Header theo cột token: 'TA' = Bearer TA; 'U' = Bearer U; 'thiếu' = không gửi header Authorization; 'sai' = 'Bearer abc.def.ghi'; '—' = không gửi. Body (POST/PUT) gồm 5 khoá name, price, category_id, description, imageUrl lấy từ các cột Tên sản phẩm, Giá, Danh mục, Mô tả, URL Ảnh: \"…\" = chuỗi JSON; số không ngoặc = số JSON; null = null JSON; '— thiếu —' = bỏ khoá khỏi body; \"x\" × n = chuỗi n ký tự 'x'. DELETE/GET: không gửi body.",
+          "expected": "Nhận được phản hồi HTTP."
+        },
+        {
+          "action": "Ghi HTTP status và body phản hồi.",
+          "expected": "Khớp phần phản hồi trong cột Expected."
+        },
+        {
+          "action": "GET /api/products → SAU; nếu có M: GET /api/products/M → M_SAU. So với TRƯỚC.",
+          "expected": "Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, C0)."
+        }
+      ],
+      "columns": [
+        "Thao tác CRUD",
+        "Danh tính người gọi / token",
+        "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)",
+        "Tên sản phẩm",
+        "Giá",
+        "Danh mục",
+        "Mô tả",
+        "URL Ảnh"
+      ],
+      "cleanup": [
+        "Sau mỗi case, kể cả khi Fail: GET /api/products, xoá bằng DELETE /api/products/:id (Bearer TA) mọi id có trong SAU mà không có trong TRƯỚC, và sản phẩm mục tiêu M nếu còn. Xoá thất bại → ghi notes, không đổi verdict. Lớp 2: khởi động lại backend trước lượt chạy kế tiếp (C0)."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR15-17",
+          "title": "Kiểm tra thêm sản phẩm qua API khi body hợp lệ và giá là số nguyên",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API17 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx. Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có name = 'SP API17 {ts}', price = 1500000, category_id = 2 (so giá trị số).",
+          "requirements": [
+            "FR-15.1",
+            "FR-15.2",
+            "FR-15.3",
+            "FR-15.4",
+            "FR-12.2",
+            "API-PROD"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC56",
+            "EC68"
+          ],
+          "ec_target": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC45",
+            "EC56",
+            "EC68"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ chính tầng API: body đúng mẫu api_specification §3.3, token admin.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C11"
+          ]
+        },
+        {
+          "id": "TC-FR15-18",
+          "title": "Kiểm tra thêm sản phẩm qua API khi giá là số thập phân dương",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API18 {ts}\"",
+            "Giá": "1500000.5",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx. Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có price = 1500000.5 (so giá trị số).",
+          "requirements": [
+            "FR-15.3",
+            "FR-15.1",
+            "API-PROD"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC18",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC56",
+            "EC68"
+          ],
+          "ec_target": [
+            "EC18",
+            "EC56",
+            "EC68"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp số thập phân hợp lệ (C1) ở tầng API.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Gray-box: lớp tách khỏi số nguyên theo cột price INTEGER (database.js dòng 67).",
+          "assumptions": [
+            "C1"
+          ],
+          "approach": "gray-box"
+        },
+        {
+          "id": "TC-FR15-19",
+          "title": "Kiểm tra sửa sản phẩm qua API khi body hợp lệ và chỉ sản phẩm mục tiêu thay đổi",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API19 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx. Dữ liệu: M_SAU có name = 'Sua API19 {ts}', price = 2500000, category_id = 3 (so giá trị số); số bản ghi SAU = TRƯỚC; mọi bản ghi id ≠ M: SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.1",
+            "FR-15.2",
+            "FR-15.3",
+            "FR-15.4",
+            "FR-15.5",
+            "API-PROD"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC55",
+            "EC57",
+            "EC67",
+            "EC68"
+          ],
+          "ec_target": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC41",
+            "EC57",
+            "EC67",
+            "EC68"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Case hợp lệ chính của PUT; kiểm FR-15.5 ở tầng dữ liệu (bản UI ở TC-FR15-03).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C11"
+          ]
+        },
+        {
+          "id": "TC-FR15-20",
+          "title": "Kiểm tra sửa sản phẩm qua API khi giá mới là số thập phân dương",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API20 {ts}\"",
+            "Giá": "2500000.5",
+            "Danh mục": "1",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 2xx. Dữ liệu: M_SAU có price = 2500000.5 (so giá trị số), name = 'Sua API20 {ts}'.",
+          "requirements": [
+            "FR-15.3",
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC25",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC57",
+            "EC68"
+          ],
+          "ec_target": [
+            "EC25",
+            "EC57"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp số thập phân hợp lệ khi Sửa (C1, C8) ở tầng API.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Gray-box: lớp tách khỏi số nguyên theo cột price INTEGER (database.js dòng 67).",
+          "assumptions": [
+            "C1"
+          ],
+          "approach": "gray-box"
+        },
+        {
+          "id": "TC-FR15-21",
+          "title": "Kiểm tra xoá sản phẩm qua API khi sản phẩm tồn tại",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "DELETE",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 2xx. Dữ liệu: GET /api/products SAU không còn id M; số bản ghi SAU = TRƯỚC − 1.",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC4",
+            "EC41",
+            "EC45",
+            "EC55",
+            "EC58",
+            "EC68"
+          ],
+          "ec_target": [
+            "EC4",
+            "EC41",
+            "EC58"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "DELETE trên sản phẩm do case tạo (C0).",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-FR15-22",
+          "title": "Kiểm tra xem chi tiết sản phẩm qua API khi sản phẩm có id chẵn",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "GET",
+            "Danh tính người gọi / token": "—",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "2 (seed)",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 2xx; body là bản ghi id 2 với name = 'Samsung Galaxy S24 Ultra', category_id = 1 và price = 28000000 là số JSON (không phải chuỗi) (C15). Nơi duy nhất khẳng định kiểu dữ liệu price.",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC2",
+            "EC59"
+          ],
+          "ec_target": [
+            "EC2",
+            "EC59"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Xem chi tiết dùng sản phẩm seed (chỉ đọc, không vi phạm C0); giá trị kỳ vọng lấy từ dữ liệu seed (database.js dòng 99).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Positive",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Gray-box: chọn id chẵn vì server.js dòng 162 xử lý price khác nhau theo tính chẵn lẻ của id. Expected chỉ dựa C15.",
+          "assumptions": [
+            "C15"
+          ],
+          "approach": "gray-box"
+        },
+        {
+          "id": "TC-FR15-23",
+          "title": "Kiểm tra thêm sản phẩm qua API khi name là chuỗi rỗng",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC6",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC6",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp rỗng ở API.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-24",
+          "title": "Kiểm tra thêm sản phẩm qua API khi name dài 300 ký tự",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"x\" × 300",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC7",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC7",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp > 255 ở API; biên 256 ở BVA.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-25",
+          "title": "Kiểm tra thêm sản phẩm qua API khi name chỉ gồm 3 dấu cách",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"   \"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC8",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC8",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "C3 ở API.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C3",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-26",
+          "title": "Kiểm tra thêm sản phẩm qua API khi body thiếu khoá name",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "— thiếu —",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC9",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC9",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện 'thiếu' (bản Sửa dùng null để phủ cả hai cách).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-27",
+          "title": "Kiểm tra thêm sản phẩm qua API khi name là số",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "123",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC1",
+            "EC10",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC10",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu JSON (C9).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-28",
+          "title": "Kiểm tra thêm sản phẩm qua API khi price âm",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API28 {ts}\"",
+            "Giá": "-1000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC19",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC19",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp ≤ 0; điểm 0 ở BVA.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-29",
+          "title": "Kiểm tra thêm sản phẩm qua API khi body thiếu khoá price",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API29 {ts}\"",
+            "Giá": "— thiếu —",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC21",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC21",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện 'thiếu' (bản Sửa dùng null).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-30",
+          "title": "Kiểm tra thêm sản phẩm qua API khi price là chuỗi chữ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API30 {ts}\"",
+            "Giá": "\"abc\"",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC22",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC22",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu (C9).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-31",
+          "title": "Kiểm tra thêm sản phẩm qua API khi price là chuỗi số",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API31 {ts}\"",
+            "Giá": "\"100000\"",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC23",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC23",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "C9 SV chốt: chuỗi số là sai kiểu.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-32",
+          "title": "Kiểm tra thêm sản phẩm qua API khi category_id không có trong danh sách danh mục",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API32 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "999",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC32",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC32",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "id danh mục xa ngoài 1–3 (C11).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C11",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-33",
+          "title": "Kiểm tra thêm sản phẩm qua API khi body thiếu khoá category_id",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API33 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "— thiếu —",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC33",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC33",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện 'thiếu' (bản Sửa dùng null).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-34",
+          "title": "Kiểm tra thêm sản phẩm qua API khi category_id là chuỗi chữ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API34 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "\"abc\"",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC34",
+            "EC39",
+            "EC40",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC34",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu (C9).",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-35",
+          "title": "Kiểm tra sửa sản phẩm qua API khi name mới là chuỗi rỗng",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"\"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC12",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC12",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp rỗng khi Sửa (C8). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-36",
+          "title": "Kiểm tra sửa sản phẩm qua API khi name mới dài 300 ký tự",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"x\" × 300",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC13",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC13",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp > 255 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-37",
+          "title": "Kiểm tra sửa sản phẩm qua API khi name mới chỉ gồm 3 dấu cách",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"   \"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC14",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC14",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "C3 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C3",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-38",
+          "title": "Kiểm tra sửa sản phẩm qua API khi name = null",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "null",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC15",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC15",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện null (bản Thêm dùng 'thiếu'). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-39",
+          "title": "Kiểm tra sửa sản phẩm qua API khi name là số",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "123",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.2"
+          ],
+          "covers": [
+            "EC3",
+            "EC16",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC16",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu khi Sửa (C9). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-40",
+          "title": "Kiểm tra sửa sản phẩm qua API khi price mới âm",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API40 {ts}\"",
+            "Giá": "-1000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC26",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC26",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Lớp ≤ 0 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-41",
+          "title": "Kiểm tra sửa sản phẩm qua API khi price = null",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API41 {ts}\"",
+            "Giá": "null",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC28",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC28",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện null (bản Thêm dùng 'thiếu'). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-42",
+          "title": "Kiểm tra sửa sản phẩm qua API khi price là chuỗi chữ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API42 {ts}\"",
+            "Giá": "\"abc\"",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC29",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC29",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-43",
+          "title": "Kiểm tra sửa sản phẩm qua API khi price là chuỗi số",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API43 {ts}\"",
+            "Giá": "\"100000\"",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.3"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC30",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC30",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "C9 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-44",
+          "title": "Kiểm tra sửa sản phẩm qua API khi category_id không có trong danh sách danh mục",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API44 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "999",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC36",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC36",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "C11 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C11",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-45",
+          "title": "Kiểm tra sửa sản phẩm qua API khi category_id = null",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API45 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "null",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC37",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC37",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện null (bản Thêm dùng 'thiếu'). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-46",
+          "title": "Kiểm tra sửa sản phẩm qua API khi category_id là chuỗi chữ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API46 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "\"abc\"",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.4"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC38",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC45",
+            "EC60",
+            "EC69"
+          ],
+          "ec_target": [
+            "EC38",
+            "EC60",
+            "EC69"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C9",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-47",
+          "title": "Kiểm tra xem chi tiết sản phẩm qua API khi id không tồn tại",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "GET",
+            "Danh tính người gọi / token": "—",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "999999 (không tồn tại)",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (C10). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC2",
+            "EC42",
+            "EC60",
+            "EC70"
+          ],
+          "ec_target": [
+            "EC42",
+            "EC70"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "id lớn, chắc chắn không có trong CSDL seed + dữ liệu test.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Trước khi gửi: xác nhận id 999999 không có trong TRƯỚC; có → chọn id = max(id) + 1000 và ghi notes.",
+          "assumptions": [
+            "C10"
+          ]
+        },
+        {
+          "id": "TC-FR15-48",
+          "title": "Kiểm tra sửa sản phẩm qua API khi id không tồn tại",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "999999 (không tồn tại)",
+            "Tên sản phẩm": "\"Sua API48 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (C10). Dữ liệu: GET /api/products SAU = TRƯỚC (không có bản ghi mới, không bản ghi nào đổi).",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC43",
+            "EC45",
+            "EC60",
+            "EC70"
+          ],
+          "ec_target": [
+            "EC43",
+            "EC60",
+            "EC70"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Body hợp lệ để chỉ id là yếu tố sai.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Trước khi gửi: xác nhận id 999999 không có trong TRƯỚC; có → chọn id = max(id) + 1000 và ghi notes.",
+          "assumptions": [
+            "C10",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-49",
+          "title": "Kiểm tra xoá sản phẩm qua API khi id không tồn tại",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "DELETE",
+            "Danh tính người gọi / token": "TA",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "999999 (không tồn tại)",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (C10). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-15.1"
+          ],
+          "covers": [
+            "EC4",
+            "EC44",
+            "EC45",
+            "EC60",
+            "EC70"
+          ],
+          "ec_target": [
+            "EC44",
+            "EC60",
+            "EC70"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "id lớn, chắc chắn không tồn tại.",
+          "origin": "AI",
+          "priority": "Medium",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Trước khi gửi: xác nhận id 999999 không có trong TRƯỚC; có → chọn id = max(id) + 1000 và ghi notes.",
+          "assumptions": [
+            "C10",
+            "C6"
+          ]
+        },
+        {
+          "id": "TC-FR15-50",
+          "title": "Kiểm tra thêm sản phẩm qua API khi không có header Authorization",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "thiếu",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API50 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-02"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC46",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC46",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho POST /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-51",
+          "title": "Kiểm tra thêm sản phẩm qua API khi token không hợp lệ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "sai",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API51 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-02"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC47",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC47",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho POST /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-52",
+          "title": "Kiểm tra thêm sản phẩm qua API khi token của tài khoản role user",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "POST",
+            "Danh tính người gọi / token": "U",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "—",
+            "Tên sản phẩm": "\"SP API52 {ts}\"",
+            "Giá": "1500000",
+            "Danh mục": "2",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-03"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC17",
+            "EC31",
+            "EC39",
+            "EC40",
+            "EC48",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC48",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho POST /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-53",
+          "title": "Kiểm tra sửa sản phẩm qua API khi không có header Authorization",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "thiếu",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API53 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-02"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC49",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC49",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho PUT /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-54",
+          "title": "Kiểm tra sửa sản phẩm qua API khi token không hợp lệ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "sai",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API54 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-02"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC50",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC50",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho PUT /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-55",
+          "title": "Kiểm tra sửa sản phẩm qua API khi token của tài khoản role user",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "PUT",
+            "Danh tính người gọi / token": "U",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "\"Sua API55 {ts}\"",
+            "Giá": "2500000",
+            "Danh mục": "3",
+            "Mô tả": "\"Mô tả NN {ts}\"",
+            "URL Ảnh": "\"https://placehold.co/300\""
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-03"
+          ],
+          "covers": [
+            "EC3",
+            "EC11",
+            "EC24",
+            "EC35",
+            "EC39",
+            "EC40",
+            "EC41",
+            "EC51",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC51",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho PUT /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-56",
+          "title": "Kiểm tra xóa sản phẩm qua API khi không có header Authorization",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "DELETE",
+            "Danh tính người gọi / token": "thiếu",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU vẫn có id M; SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-02"
+          ],
+          "covers": [
+            "EC4",
+            "EC41",
+            "EC52",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC52",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho DELETE /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-57",
+          "title": "Kiểm tra xóa sản phẩm qua API khi token không hợp lệ",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "DELETE",
+            "Danh tính người gọi / token": "sai",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU vẫn có id M; SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-02"
+          ],
+          "covers": [
+            "EC4",
+            "EC41",
+            "EC53",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC53",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho DELETE /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        },
+        {
+          "id": "TC-FR15-58",
+          "title": "Kiểm tra xóa sản phẩm qua API khi token của tài khoản role user",
+          "layer": "API",
+          "inputs": {
+            "Thao tác CRUD": "DELETE",
+            "Danh tính người gọi / token": "U",
+            "Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa)": "M",
+            "Tên sản phẩm": "—",
+            "Giá": "—",
+            "Danh mục": "—",
+            "Mô tả": "—",
+            "URL Ảnh": "—"
+          },
+          "expected_result": "HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU vẫn có id M; SAU = TRƯỚC.",
+          "requirements": [
+            "FR-12.2",
+            "SEC-03"
+          ],
+          "covers": [
+            "EC4",
+            "EC41",
+            "EC54",
+            "EC60",
+            "EC71"
+          ],
+          "ec_target": [
+            "EC54",
+            "EC60",
+            "EC71"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "FR-12.2 cho DELETE /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai.",
+          "origin": "AI",
+          "priority": "High",
+          "type": "Negative",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "assumptions": [
+            "C6",
+            "C5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TS-GUI",
+      "name": "GUI — form và bảng sản phẩm (FR-21.3, FR-22.1, FR-22.4, FR-24.4, SEC-04)",
+      "format": "steps",
+      "description": "Kiểm thuộc tính giao diện theo checklist, không gắn lớp tương đương (C12). Mỗi thuộc tính khẳng định ở đúng một case.",
+      "cases": [
+        {
+          "id": "TC-FR15-90",
+          "title": "Kiểm tra ký hiệu '*' cạnh nhãn các trường bắt buộc của form sản phẩm khi form ở trạng thái 'Thêm sản phẩm mới'",
+          "layer": "UI",
+          "requirements": [
+            "FR-22.1"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "FR-15 liệt kê đúng 3 trường bắt buộc; một case cho cả form (như TC-FR01-90).",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Ở form 'Thêm sản phẩm mới', tìm nhãn của 3 trường bắt buộc theo FR-15: Tên sản phẩm, Giá, Danh mục.",
+              "expected": "Mỗi trường có nhãn nhìn thấy được."
+            },
+            {
+              "action": "Đọc nội dung từng nhãn.",
+              "expected": "Mỗi nhãn có ký hiệu '*' bên cạnh."
+            }
+          ],
+          "expected_result": "3 nhãn Tên sản phẩm, Giá, Danh mục đều có ký hiệu '*' (FR-22.1).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Theo A17: trường không có nhãn → case này Fail; các case khác định vị ô theo placeholder/ô chọn nên không bị chặn.",
+          "cleanup": [
+            "Không cần: không tạo dữ liệu."
+          ],
+          "assumptions": [
+            "C12"
+          ]
+        },
+        {
+          "id": "TC-FR15-91",
+          "title": "Kiểm tra vị trí thông báo lỗi so với nút 'Lưu sản phẩm' khi bỏ trống tên",
+          "layer": "UI",
+          "requirements": [
+            "FR-22.4"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Lỗi dễ tạo nhất (tên rỗng); một case cho thuộc tính chung của form.",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Ở form 'Thêm sản phẩm mới': để trống 'Tên sản phẩm'; 'Giá tiền' gõ 1500000; chọn danh mục 'Laptop'. Bấm 'Lưu sản phẩm' đúng một lần.",
+              "expected": "Có thông báo lỗi."
+            },
+            {
+              "action": "Xác định vị trí thông báo lỗi (bong bóng HTML5: vị trí ô mà bong bóng gắn vào — A16) và vị trí nút 'Lưu sản phẩm'.",
+              "expected": "Cạnh dưới của thông báo nằm phía trên cạnh trên của nút."
+            }
+          ],
+          "expected_result": "Thông báo lỗi nằm phía trên nút 'Lưu sản phẩm' (FR-22.4). Nơi duy nhất kiểm vị trí thông báo lỗi.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Thông báo chỉ ở dạng hộp thoại trình duyệt → xử lý theo C16.",
+          "cleanup": [
+            "Không cần: không tạo dữ liệu."
+          ],
+          "assumptions": [
+            "C12",
+            "C16"
+          ]
+        },
+        {
+          "id": "TC-FR15-92",
+          "title": "Kiểm tra định dạng tiền ở cột 'Giá' của bảng sản phẩm khi bảng hiển thị sản phẩm seed",
+          "layer": "UI",
+          "requirements": [
+            "FR-21.3"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Giá seed 8 chữ số có 2 nhóm hàng nghìn, dễ thấy thiếu phân cách.",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "Sản phẩm seed id 1 'iPhone 15 Pro Max' 30000000",
+          "steps": [
+            {
+              "action": "Đọc ô 'Giá' của dòng 'iPhone 15 Pro Max' (giá seed 30000000).",
+              "expected": "Có ký hiệu '₫' và có phân cách hàng nghìn."
+            }
+          ],
+          "expected_result": "Ô 'Giá' hiển thị ký hiệu '₫' và phân cách hàng nghìn '.' hoặc ',' (vd 30.000.000 ₫ hoặc 30,000,000 ₫) (FR-21.3, C17). Nơi duy nhất kiểm định dạng tiền.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Ghi locale trình duyệt khi chạy (C17).",
+          "cleanup": [
+            "Không cần: không tạo dữ liệu."
+          ],
+          "assumptions": [
+            "C12",
+            "C17"
+          ]
+        },
+        {
+          "id": "TC-FR15-93",
+          "title": "Kiểm tra thuộc tính alt của ảnh trong cột 'Ảnh' khi bảng hiển thị 5 sản phẩm seed",
+          "layer": "UI",
+          "requirements": [
+            "FR-24.4"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Kiểm một lần cho cả bảng với 5 sản phẩm seed.",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "5 sản phẩm seed",
+          "steps": [
+            {
+              "action": "Đọc thuộc tính alt của mọi ảnh trong cột 'Ảnh'.",
+              "expected": "Mọi alt không rỗng."
+            }
+          ],
+          "expected_result": "Mọi ảnh sản phẩm trong bảng có alt không rỗng (không chỉ khoảng trắng), mô tả nội dung ảnh (ví dụ chứa tên sản phẩm) (FR-24.4).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "Không cần: không tạo dữ liệu."
+          ],
+          "assumptions": [
+            "C12"
+          ]
+        },
+        {
+          "id": "TC-FR15-94",
+          "title": "Kiểm tra hiển thị tên sản phẩm trong bảng khi tên chứa thẻ HTML",
+          "layer": "UI",
+          "requirements": [
+            "SEC-04"
+          ],
+          "technique": "checklist",
+          "type": "GUI",
+          "method": "Automated",
+          "priority": "Medium",
+          "origin": "AI",
+          "rationale": "Tên 22 ký tự, hợp lệ theo FR-15.2 nên được lưu; thẻ <i> vô hại nhưng đủ để thấy có render HTML hay không.",
+          "preconditions": [
+            "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).",
+            "Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'."
+          ],
+          "test_data": "name = '<i>SEC04 {ts}</i>'",
+          "steps": [
+            {
+              "action": "POST /api/products (Bearer TA) body {name: '<i>SEC04 {ts}</i>', price: 1500000, description: 'Mô tả', imageUrl: 'https://placehold.co/300', category_id: 1}. Rồi bấm mục 'Sản phẩm' trên thanh bên (hoặc chuyển tab khác rồi quay lại) để bảng tải lại.",
+              "expected": "Bảng có dòng mới."
+            },
+            {
+              "action": "Đọc ô 'Tên SP' của dòng mới: nội dung chữ và các phần tử con.",
+              "expected": "Chữ hiển thị nguyên văn, không có phần tử <i>."
+            }
+          ],
+          "expected_result": "Ô 'Tên SP' hiển thị nguyên văn '<i>SEC04 {ts}</i>' (kể cả '<i>' và '</i>'); trong ô không có phần tử <i> (SEC-04).",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "",
+          "cleanup": [
+            "DELETE /api/products/:id (Bearer TA) bản ghi vừa tạo; thất bại → ghi notes."
+          ],
+          "assumptions": [
+            "C12"
+          ]
+        }
+      ]
+    }
+  ]
+}

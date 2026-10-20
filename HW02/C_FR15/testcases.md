@@ -117,99 +117,249 @@ SV chốt 2026-10-20 (C5=a, C6=a, C8=a, C12, C13). form 'Thêm sản phẩm mớ
 ### Bước 3a — Test Cases Providing Coverage of Partitions
 | EC | Lớp | Test case phủ |
 |---|---|---|
-| EC1 | Thêm | ⚠ chưa phủ |
-| EC2 | Xem | ⚠ chưa phủ |
-| EC3 | Sửa | ⚠ chưa phủ |
-| EC4 | Xóa | ⚠ chưa phủ |
-| EC5 | [Thêm] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | ⚠ chưa phủ |
-| EC6 | [Thêm] Rỗng — 0 ký tự | ⚠ chưa phủ |
-| EC7 | [Thêm] Dài hơn 255 ký tự | ⚠ chưa phủ |
-| EC8 | [Thêm] Chỉ gồm khoảng trắng (vd '   ') | ⚠ chưa phủ |
-| EC9 | [Thêm] API: thiếu trường name hoặc name = null | ⚠ chưa phủ |
-| EC10 | [Thêm] API: name không phải chuỗi (vd số 123) | ⚠ chưa phủ |
-| EC11 | [Sửa] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | ⚠ chưa phủ |
-| EC12 | [Sửa] Rỗng — 0 ký tự | ⚠ chưa phủ |
-| EC13 | [Sửa] Dài hơn 255 ký tự | ⚠ chưa phủ |
-| EC14 | [Sửa] Chỉ gồm khoảng trắng (vd '   ') | ⚠ chưa phủ |
-| EC15 | [Sửa] API: thiếu trường name hoặc name = null | ⚠ chưa phủ |
-| EC16 | [Sửa] API: name không phải chuỗi (vd số 123) | ⚠ chưa phủ |
-| EC17 | [Thêm] Số nguyên > 0 (vd 1500000) | ⚠ chưa phủ |
-| EC18 | [Thêm] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | ⚠ chưa phủ |
-| EC19 | [Thêm] Số ≤ 0 (vd 0; -1000) | ⚠ chưa phủ |
-| EC20 | [Thêm] UI: ô 'Giá tiền' để trống | ⚠ chưa phủ |
-| EC21 | [Thêm] API: thiếu trường price hoặc price = null | ⚠ chưa phủ |
-| EC22 | [Thêm] API: price là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
-| EC23 | [Thêm] API: price là chuỗi số (vd "100000") | ⚠ chưa phủ |
-| EC24 | [Sửa] Số nguyên > 0 (vd 1500000) | ⚠ chưa phủ |
-| EC25 | [Sửa] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | ⚠ chưa phủ |
-| EC26 | [Sửa] Số ≤ 0 (vd 0; -1000) | ⚠ chưa phủ |
-| EC27 | [Sửa] UI: ô 'Giá tiền' để trống | ⚠ chưa phủ |
-| EC28 | [Sửa] API: thiếu trường price hoặc price = null | ⚠ chưa phủ |
-| EC29 | [Sửa] API: price là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
-| EC30 | [Sửa] API: price là chuỗi số (vd "100000") | ⚠ chưa phủ |
-| EC31 | [Thêm] category_id thuộc danh sách danh mục có sẵn (vd 2) | ⚠ chưa phủ |
-| EC32 | [Thêm] API: category_id không có trong danh sách (vd 999) | ⚠ chưa phủ |
-| EC33 | [Thêm] API: thiếu trường category_id hoặc category_id = null | ⚠ chưa phủ |
-| EC34 | [Thêm] API: category_id là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
-| EC35 | [Sửa] category_id thuộc danh sách danh mục có sẵn (vd 2) | ⚠ chưa phủ |
-| EC36 | [Sửa] API: category_id không có trong danh sách (vd 999) | ⚠ chưa phủ |
-| EC37 | [Sửa] API: thiếu trường category_id hoặc category_id = null | ⚠ chưa phủ |
-| EC38 | [Sửa] API: category_id là chuỗi chữ (vd "abc") | ⚠ chưa phủ |
-| EC39 | Chuỗi mô tả bất kỳ (nominal, vd 'Mô tả {ts}') | ⚠ chưa phủ |
-| EC40 | URL ảnh dạng http(s) (nominal, vd 'https://placehold.co/300') | ⚠ chưa phủ |
-| EC41 | id sản phẩm tồn tại (sản phẩm do case tạo, C0) | ⚠ chưa phủ |
-| EC42 | [Xem] API: GET /api/products/:id với id không tồn tại | ⚠ chưa phủ |
-| EC43 | [Sửa] API: PUT /api/products/:id với id không tồn tại | ⚠ chưa phủ |
-| EC44 | [Xóa] API: DELETE /api/products/:id với id không tồn tại | ⚠ chưa phủ |
-| EC45 | Token hợp lệ, role admin | ⚠ chưa phủ |
-| EC46 | [Thêm] API: POST không có header Authorization | ⚠ chưa phủ |
-| EC47 | [Thêm] API: POST với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ⚠ chưa phủ |
-| EC48 | [Thêm] API: POST với token hợp lệ của role user (test@eshop.com) | ⚠ chưa phủ |
-| EC49 | [Sửa] API: PUT không có header Authorization | ⚠ chưa phủ |
-| EC50 | [Sửa] API: PUT với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ⚠ chưa phủ |
-| EC51 | [Sửa] API: PUT với token hợp lệ của role user (test@eshop.com) | ⚠ chưa phủ |
-| EC52 | [Xóa] API: DELETE không có header Authorization | ⚠ chưa phủ |
-| EC53 | [Xóa] API: DELETE với token không hợp lệ (chuỗi không phải JWT của hệ thống) | ⚠ chưa phủ |
-| EC54 | [Xóa] API: DELETE với token hợp lệ của role user (test@eshop.com) | ⚠ chưa phủ |
-| EC55 | Có ≥ 1 sản phẩm khác ngoài sản phẩm mục tiêu (5 sản phẩm seed + sản phẩm của case) | ⚠ chưa phủ |
-| EC56 | Thêm hợp lệ: thêm đúng 1 bản ghi; name, price, category_id = giá trị gửi | ⚠ chưa phủ |
-| EC57 | Sửa hợp lệ: bản ghi mục tiêu có name, price, category_id = giá trị mới | ⚠ chưa phủ |
-| EC58 | Xóa hợp lệ: bản ghi mục tiêu không còn trong GET /api/products | ⚠ chưa phủ |
-| EC59 | Xem: GET /api/products/:id trả bản ghi có các trường = giá trị đã lưu; price là số JSON | ⚠ chưa phủ |
-| EC60 | Tầng API bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | ⚠ chưa phủ |
-| EC61 | Tầng UI bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | ⚠ chưa phủ |
-| EC62 | Sau Thêm hợp lệ: bảng có thêm 1 dòng, 'Tên SP' và 'Giá' = giá trị nhập | ⚠ chưa phủ |
-| EC63 | Sau Sửa hợp lệ: dòng mục tiêu hiển thị giá trị mới | ⚠ chưa phủ |
-| EC64 | Sau Xóa: dòng mục tiêu không còn trong bảng | ⚠ chưa phủ |
-| EC65 | Xem: tab 'Sản phẩm' hiển thị đủ các sản phẩm có trong GET /api/products | ⚠ chưa phủ |
-| EC66 | UI bị từ chối: bảng không đổi (SAU = TRƯỚC) | ⚠ chưa phủ |
-| EC67 | Các sản phẩm khác giữ nguyên sau khi Sửa (SAU = TRƯỚC) | ⚠ chưa phủ |
-| EC68 | API: 2xx khi thao tác hợp lệ | ⚠ chưa phủ |
-| EC69 | API: 4xx kèm trường error khi dữ liệu vi phạm FR-15.2–15.4 hoặc sai kiểu/thiếu trường | ⚠ chưa phủ |
-| EC70 | API: 4xx khi id không tồn tại | ⚠ chưa phủ |
-| EC71 | API: 4xx khi không đủ quyền (thiếu/sai token, role user) | ⚠ chưa phủ |
-| EC72 | UI bị từ chối: có thông báo lỗi trên form (kể cả bong bóng kiểm tra HTML5) | ⚠ chưa phủ |
-| EC73 | UI thành công: không hiển thị thông báo lỗi | ⚠ chưa phủ |
+| EC1 | Thêm | TC-FR15-01, TC-FR15-02, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-17, TC-FR15-18, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-50, TC-FR15-51, TC-FR15-52 |
+| EC2 | Xem | TC-FR15-06, TC-FR15-22, TC-FR15-47 |
+| EC3 | Sửa | TC-FR15-03, TC-FR15-04, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16, TC-FR15-19, TC-FR15-20, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-53, TC-FR15-54, TC-FR15-55 |
+| EC4 | Xóa | TC-FR15-05, TC-FR15-21, TC-FR15-49, TC-FR15-56, TC-FR15-57, TC-FR15-58 |
+| EC5 | [Thêm] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | TC-FR15-01, TC-FR15-02, TC-FR15-10, TC-FR15-11, TC-FR15-17, TC-FR15-18, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-50, TC-FR15-51, TC-FR15-52 |
+| EC6 | [Thêm] Rỗng — 0 ký tự | TC-FR15-07, TC-FR15-23 |
+| EC7 | [Thêm] Dài hơn 255 ký tự | TC-FR15-08, TC-FR15-24 |
+| EC8 | [Thêm] Chỉ gồm khoảng trắng (vd '   ') | TC-FR15-09, TC-FR15-25 |
+| EC9 | [Thêm] API: thiếu trường name hoặc name = null | TC-FR15-26 |
+| EC10 | [Thêm] API: name không phải chuỗi (vd số 123) | TC-FR15-27 |
+| EC11 | [Sửa] Độ dài 1–255 ký tự, có ít nhất 1 ký tự khác khoảng trắng (vd 'Tai nghe {ts}') | TC-FR15-03, TC-FR15-04, TC-FR15-15, TC-FR15-16, TC-FR15-19, TC-FR15-20, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-53, TC-FR15-54, TC-FR15-55 |
+| EC12 | [Sửa] Rỗng — 0 ký tự | TC-FR15-12, TC-FR15-35 |
+| EC13 | [Sửa] Dài hơn 255 ký tự | TC-FR15-13, TC-FR15-36 |
+| EC14 | [Sửa] Chỉ gồm khoảng trắng (vd '   ') | TC-FR15-14, TC-FR15-37 |
+| EC15 | [Sửa] API: thiếu trường name hoặc name = null | TC-FR15-38 |
+| EC16 | [Sửa] API: name không phải chuỗi (vd số 123) | TC-FR15-39 |
+| EC17 | [Thêm] Số nguyên > 0 (vd 1500000) | TC-FR15-01, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-17, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-50, TC-FR15-51, TC-FR15-52 |
+| EC18 | [Thêm] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | TC-FR15-02, TC-FR15-18 |
+| EC19 | [Thêm] Số ≤ 0 (vd 0; -1000) | TC-FR15-10, TC-FR15-28 |
+| EC20 | [Thêm] UI: ô 'Giá tiền' để trống | TC-FR15-11 |
+| EC21 | [Thêm] API: thiếu trường price hoặc price = null | TC-FR15-29 |
+| EC22 | [Thêm] API: price là chuỗi chữ (vd "abc") | TC-FR15-30 |
+| EC23 | [Thêm] API: price là chuỗi số (vd "100000") | TC-FR15-31 |
+| EC24 | [Sửa] Số nguyên > 0 (vd 1500000) | TC-FR15-03, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-19, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-53, TC-FR15-54, TC-FR15-55 |
+| EC25 | [Sửa] Số thập phân > 0, không nguyên (vd 0.5; 1500000.5) | TC-FR15-04, TC-FR15-20 |
+| EC26 | [Sửa] Số ≤ 0 (vd 0; -1000) | TC-FR15-15, TC-FR15-40 |
+| EC27 | [Sửa] UI: ô 'Giá tiền' để trống | TC-FR15-16 |
+| EC28 | [Sửa] API: thiếu trường price hoặc price = null | TC-FR15-41 |
+| EC29 | [Sửa] API: price là chuỗi chữ (vd "abc") | TC-FR15-42 |
+| EC30 | [Sửa] API: price là chuỗi số (vd "100000") | TC-FR15-43 |
+| EC31 | [Thêm] category_id thuộc danh sách danh mục có sẵn (vd 2) | TC-FR15-01, TC-FR15-02, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-17, TC-FR15-18, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-50, TC-FR15-51, TC-FR15-52 |
+| EC32 | [Thêm] API: category_id không có trong danh sách (vd 999) | TC-FR15-32 |
+| EC33 | [Thêm] API: thiếu trường category_id hoặc category_id = null | TC-FR15-33 |
+| EC34 | [Thêm] API: category_id là chuỗi chữ (vd "abc") | TC-FR15-34 |
+| EC35 | [Sửa] category_id thuộc danh sách danh mục có sẵn (vd 2) | TC-FR15-03, TC-FR15-04, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16, TC-FR15-19, TC-FR15-20, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-48, TC-FR15-53, TC-FR15-54, TC-FR15-55 |
+| EC36 | [Sửa] API: category_id không có trong danh sách (vd 999) | TC-FR15-44 |
+| EC37 | [Sửa] API: thiếu trường category_id hoặc category_id = null | TC-FR15-45 |
+| EC38 | [Sửa] API: category_id là chuỗi chữ (vd "abc") | TC-FR15-46 |
+| EC39 | Chuỗi mô tả bất kỳ (nominal, vd 'Mô tả {ts}') | TC-FR15-01, TC-FR15-02, TC-FR15-03, TC-FR15-04, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16, TC-FR15-17, TC-FR15-18, TC-FR15-19, TC-FR15-20, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55 |
+| EC40 | URL ảnh dạng http(s) (nominal, vd 'https://placehold.co/300') | TC-FR15-01, TC-FR15-02, TC-FR15-03, TC-FR15-04, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16, TC-FR15-17, TC-FR15-18, TC-FR15-19, TC-FR15-20, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55 |
+| EC41 | id sản phẩm tồn tại (sản phẩm do case tạo, C0) | TC-FR15-03, TC-FR15-04, TC-FR15-05, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16, TC-FR15-19, TC-FR15-20, TC-FR15-21, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-53, TC-FR15-54, TC-FR15-55, TC-FR15-56, TC-FR15-57, TC-FR15-58 |
+| EC42 | [Xem] API: GET /api/products/:id với id không tồn tại | TC-FR15-47 |
+| EC43 | [Sửa] API: PUT /api/products/:id với id không tồn tại | TC-FR15-48 |
+| EC44 | [Xóa] API: DELETE /api/products/:id với id không tồn tại | TC-FR15-49 |
+| EC45 | Token hợp lệ, role admin | TC-FR15-01, TC-FR15-02, TC-FR15-03, TC-FR15-04, TC-FR15-05, TC-FR15-06, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16, TC-FR15-17, TC-FR15-18, TC-FR15-19, TC-FR15-20, TC-FR15-21, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-49 |
+| EC46 | [Thêm] API: POST không có header Authorization | TC-FR15-50 |
+| EC47 | [Thêm] API: POST với token không hợp lệ (chuỗi không phải JWT của hệ thống) | TC-FR15-51 |
+| EC48 | [Thêm] API: POST với token hợp lệ của role user (test@eshop.com) | TC-FR15-52 |
+| EC49 | [Sửa] API: PUT không có header Authorization | TC-FR15-53 |
+| EC50 | [Sửa] API: PUT với token không hợp lệ (chuỗi không phải JWT của hệ thống) | TC-FR15-54 |
+| EC51 | [Sửa] API: PUT với token hợp lệ của role user (test@eshop.com) | TC-FR15-55 |
+| EC52 | [Xóa] API: DELETE không có header Authorization | TC-FR15-56 |
+| EC53 | [Xóa] API: DELETE với token không hợp lệ (chuỗi không phải JWT của hệ thống) | TC-FR15-57 |
+| EC54 | [Xóa] API: DELETE với token hợp lệ của role user (test@eshop.com) | TC-FR15-58 |
+| EC55 | Có ≥ 1 sản phẩm khác ngoài sản phẩm mục tiêu (5 sản phẩm seed + sản phẩm của case) | TC-FR15-01, TC-FR15-02, TC-FR15-03, TC-FR15-04, TC-FR15-05, TC-FR15-06, TC-FR15-19, TC-FR15-21 |
+| EC56 | Thêm hợp lệ: thêm đúng 1 bản ghi; name, price, category_id = giá trị gửi | TC-FR15-01, TC-FR15-02, TC-FR15-17, TC-FR15-18 |
+| EC57 | Sửa hợp lệ: bản ghi mục tiêu có name, price, category_id = giá trị mới | TC-FR15-03, TC-FR15-04, TC-FR15-19, TC-FR15-20 |
+| EC58 | Xóa hợp lệ: bản ghi mục tiêu không còn trong GET /api/products | TC-FR15-05, TC-FR15-21 |
+| EC59 | Xem: GET /api/products/:id trả bản ghi có các trường = giá trị đã lưu; price là số JSON | TC-FR15-22 |
+| EC60 | Tầng API bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-47, TC-FR15-48, TC-FR15-49, TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55, TC-FR15-56, TC-FR15-57, TC-FR15-58 |
+| EC61 | Tầng UI bị từ chối: số bản ghi và bản ghi mục tiêu SAU = TRƯỚC | TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16 |
+| EC62 | Sau Thêm hợp lệ: bảng có thêm 1 dòng, 'Tên SP' và 'Giá' = giá trị nhập | TC-FR15-01, TC-FR15-02 |
+| EC63 | Sau Sửa hợp lệ: dòng mục tiêu hiển thị giá trị mới | TC-FR15-03, TC-FR15-04 |
+| EC64 | Sau Xóa: dòng mục tiêu không còn trong bảng | TC-FR15-05 |
+| EC65 | Xem: tab 'Sản phẩm' hiển thị đủ các sản phẩm có trong GET /api/products | TC-FR15-06 |
+| EC66 | UI bị từ chối: bảng không đổi (SAU = TRƯỚC) | TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16 |
+| EC67 | Các sản phẩm khác giữ nguyên sau khi Sửa (SAU = TRƯỚC) | TC-FR15-03, TC-FR15-19 |
+| EC68 | API: 2xx khi thao tác hợp lệ | TC-FR15-17, TC-FR15-18, TC-FR15-19, TC-FR15-20, TC-FR15-21 |
+| EC69 | API: 4xx kèm trường error khi dữ liệu vi phạm FR-15.2–15.4 hoặc sai kiểu/thiếu trường | TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46 |
+| EC70 | API: 4xx khi id không tồn tại | TC-FR15-47, TC-FR15-48, TC-FR15-49 |
+| EC71 | API: 4xx khi không đủ quyền (thiếu/sai token, role user) | TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55, TC-FR15-56, TC-FR15-57, TC-FR15-58 |
+| EC72 | UI bị từ chối: có thông báo lỗi trên form (kể cả bong bóng kiểm tra HTML5) | TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16 |
+| EC73 | UI thành công: không hiển thị thông báo lỗi | TC-FR15-01 |
+
+### Bước 3b — Minimum Set of Test Cases (Domain) · TS-DOM-UI — Domain — minimum set, tầng UI (web admin, tab 'Sản phẩm')
+**Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).; Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.; Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.; Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).; Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định.
+
+**Quy trình chung:**
+1. Nếu cột 'Thao tác CRUD' là Sửa hoặc Xóa: dựng sản phẩm mục tiêu M — POST /api/products (Bearer TA, Content-Type: application/json) body {name: 'Muc tieu NN {ts}', price: 1000000, description: 'Mô tả mục tiêu {ts}', imageUrl: 'https://placehold.co/300', category_id: 1}; GET /api/products, lấy id của bản ghi có name = 'Muc tieu NN {ts}' → M. Thao tác khác: bỏ qua bước này. → Có đúng 1 bản ghi name = 'Muc tieu NN {ts}'. Không dựng được → dừng, Blocked, ghi case gốc vào notes (C14).
+2. GET /api/products → lưu TRƯỚC (số bản ghi và toàn bộ bản ghi). Nếu có M: GET /api/products/M → lưu M_TRƯỚC. → HTTP 2xx; mảng JSON.
+3. Mở http://localhost:5174 trong browser context mới (localStorage không có adminToken, tắt autofill). Ô 'Email' gõ admin@eshop.com, ô 'Password' gõ Admin123!, bấm 'Login' đúng một lần. → Giao diện quản trị hiển thị (thanh bên có mục 'Sản phẩm').
+4. Bấm mục 'Sản phẩm' trên thanh bên. Ghi TRƯỚC_UI: danh sách dòng của bảng sản phẩm (Tên SP, Giá dạng giá trị số — bỏ ký hiệu tiền và dấu phân cách). → Bảng sản phẩm hiển thị; số dòng = số bản ghi TRƯỚC. Không khớp → ghi notes.
+5. Thực hiện cột 'Thao tác CRUD' đúng một lần. Định vị ô theo placeholder: 'Tên sản phẩm', 'Giá tiền', 'URL Ảnh', 'Mô tả'; danh mục = ô chọn duy nhất của form, chọn option theo tên trong cột. Thêm: form ở trạng thái thêm mới; với mỗi ô: xoá trắng rồi gõ đúng chuỗi trong cột — '' = không gõ gì, để nguyên ô trống; khoảng trắng gõ đúng số dấu cách ghi trong cột (bảng hiển thị ␣); 'x' × n = gõ/dán n ký tự 'x'. Sửa: bấm 'Sửa' trên dòng có Tên SP = 'Muc tieu NN {ts}'; ô ghi '(giữ)' không chạm; ô có giá trị: xoá trắng rồi gõ như trên. Thêm/Sửa: bấm nút 'Lưu sản phẩm' đúng một lần. Xóa: bấm 'Xóa' trên dòng 'Muc tieu NN {ts}' đúng một lần; nếu có hộp xác nhận, chọn xác nhận và ghi vào Actual (C13). Xem: không thao tác thêm. → Hệ thống phản hồi (thông báo, hộp thoại, bảng đổi hoặc không đổi gì).
+6. Quan sát ngay sau thao tác: bong bóng kiểm tra HTML5 gắn với ô, thông báo trên trang, hộp thoại trình duyệt. Ghi nguyên văn nội dung vào Actual; đóng hộp thoại bằng nút OK. → Khớp phần thông báo trong cột Expected (C7, C16).
+7. Ghi SAU_UI như bước 4 (không tải lại trang). GET /api/products → SAU; nếu có M: GET /api/products/M → M_SAU. So với TRƯỚC. → Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, C0).
+
+**Dọn dẹp:** Sau mỗi case, kể cả khi Fail: GET /api/products, xoá bằng DELETE /api/products/:id (Bearer TA) mọi id có trong SAU mà không có trong TRƯỚC, và sản phẩm mục tiêu M nếu còn. Xoá thất bại → ghi notes, không đổi verdict. Lớp 2: khởi động lại backend trước lượt chạy kế tiếp (C0).
+
+| #TC | Tiêu đề | EC phủ | EC mục tiêu | Thao tác CRUD | Tên sản phẩm | Giá | Danh mục | Mô tả | URL Ảnh | Expected | Lý do chọn input | Cách tiếp cận | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR15-01 | Kiểm tra thêm sản phẩm qua form khi mọi trường hợp lệ và giá là số nguyên | EC1, EC5, EC17, EC31, EC39, EC40, EC45, EC55, EC56, EC62, EC73 | EC1, EC5, EC17, EC31, EC56, EC62, EC73 | Thêm | Bàn phím UI01 {ts} | 1500000 | Laptop | Mô tả NN {ts} | https://placehold.co/300 | Không có thông báo lỗi (thông báo thành công, nếu có, chỉ ghi Actual — C13). Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'Bàn phím UI01 {ts}', 'Giá' = 1500000 (so giá trị số). Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có name = 'Bàn phím UI01 {ts}', price = 1500000, category_id = 2 (so giá trị số). | Case hợp lệ chính tầng UI: giá nguyên điển hình (C1 ghi chú SV), danh mục khác mặc định để thấy ô chọn có tác dụng; tên có dấu tiếng Việt. Nơi duy nhất khẳng định 'thành công không có thông báo lỗi' (EC73). | black-box | AI |
+| TC-FR15-02 | Kiểm tra thêm sản phẩm qua form khi giá là số thập phân dương | EC1, EC5, EC18, EC31, EC39, EC40, EC45, EC55, EC56, EC62 | EC18, EC56, EC62 | Thêm | Chuột UI02 {ts} | 199999.5 | Phụ kiện | Mô tả NN {ts} | https://placehold.co/300 | Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'Chuột UI02 {ts}', 'Giá' = 199999.5 (so giá trị số). Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có price = 199999.5, category_id = 3 (so giá trị số). | Lớp số thập phân hợp lệ (C1 SV chốt); phần lẻ .5 đủ lớn để không bị nhầm với lỗi làm tròn hiển thị. | gray-box | AI |
+| TC-FR15-03 | Kiểm tra sửa tên, giá, danh mục của một sản phẩm qua form khi giá mới là số nguyên | EC3, EC11, EC24, EC35, EC39, EC40, EC41, EC45, EC55, EC57, EC63, EC67 | EC3, EC11, EC24, EC35, EC41, EC57, EC63, EC67 | Sửa | Sửa UI03 {ts} | 2500000 | Phụ kiện | (giữ) | (giữ) | Không đánh giá thông báo. Bảng: dòng của M hiển thị 'Tên SP' = 'Sửa UI03 {ts}', 'Giá' = 2500000 (so giá trị số); mọi dòng khác SAU_UI = TRƯỚC_UI; số dòng không đổi. Dữ liệu: M_SAU có name = 'Sửa UI03 {ts}', price = 2500000, category_id = 3 (so giá trị số). | Case hợp lệ chính của Sửa ở UI: đổi cả 3 trường bị ràng buộc; kiểm FR-15.5 trên bảng (bản API ở TC-FR15-19). | black-box | AI |
+| TC-FR15-04 | Kiểm tra sửa giá của một sản phẩm qua form khi giá mới là số thập phân dương | EC3, EC11, EC25, EC35, EC39, EC40, EC41, EC45, EC55, EC57, EC63 | EC25, EC57, EC63 | Sửa | (giữ) | 2500000.5 | (giữ) | (giữ) | (giữ) | Bảng: dòng của M hiển thị 'Giá' = 2500000.5 (so giá trị số). Dữ liệu: M_SAU có price = 2500000.5 (so giá trị số); name, category_id = M_TRƯỚC. | Lớp số thập phân hợp lệ khi Sửa (C1, C8): chỉ đổi giá để cô lập lớp mục tiêu. | gray-box | AI |
+| TC-FR15-05 | Kiểm tra xoá một sản phẩm từ bảng khi sản phẩm tồn tại | EC4, EC41, EC45, EC55, EC58, EC64 | EC4, EC41, EC58, EC64 | Xóa | — | — | — | — | — | Bảng: dòng 'Muc tieu 05 {ts}' không còn; số dòng SAU_UI = TRƯỚC_UI − 1. Dữ liệu: GET /api/products SAU không còn id M; số bản ghi SAU = TRƯỚC − 1. | Thao tác Xóa trên sản phẩm do case tạo (C0), không đụng dữ liệu seed. | black-box | AI |
+| TC-FR15-06 | Kiểm tra xem danh sách sản phẩm ở tab 'Sản phẩm' khi CSDL có dữ liệu seed | EC2, EC45, EC55, EC65 | EC2, EC65 | Xem | — | — | — | — | — | TRƯỚC_UI có số dòng = số bản ghi TRƯỚC; mỗi bản ghi có đúng 1 dòng với 'Tên SP' = name và 'Giá' = price (so giá trị số). | Thao tác Xem: so bảng với nguồn dữ liệu ngay sau khi seed, không cần dựng thêm. | black-box | AI |
+| TC-FR15-07 | Kiểm tra thêm sản phẩm qua form khi ô 'Tên sản phẩm' để trống | EC1, EC6, EC17, EC31, EC39, EC40, EC45, EC61, EC66, EC72 | EC6, EC61, EC66, EC72 | Thêm | `''` (rỗng) | 1500000 | Laptop | Mô tả NN {ts} | https://placehold.co/300 | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC. | Đại diện duy nhất của lớp rỗng (bắt buộc, FR-15.2). | black-box | AI |
+| TC-FR15-08 | Kiểm tra thêm sản phẩm qua form khi tên dài 300 ký tự | EC1, EC7, EC17, EC31, EC39, EC40, EC45, EC61, EC66, EC72 | EC7, EC61, EC66, EC72 | Thêm | 'x' × 300 | 1500000 | Laptop | Mô tả NN {ts} | https://placehold.co/300 | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC. | Vượt xa 255 để chắc chắn thuộc lớp > 255; biên 256 kiểm ở BVA. | black-box | AI |
+| TC-FR15-09 | Kiểm tra thêm sản phẩm qua form khi tên chỉ gồm 3 dấu cách | EC1, EC8, EC17, EC31, EC39, EC40, EC45, EC61, EC66, EC72 | EC8, EC61, EC66, EC72 | Thêm | `␣␣␣` | 1500000 | Laptop | Mô tả NN {ts} | https://placehold.co/300 | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC. | C3: chỉ khoảng trắng coi như trống; 3 dấu cách để phân biệt với rỗng. | black-box | AI |
+| TC-FR15-10 | Kiểm tra thêm sản phẩm qua form khi giá âm | EC1, EC5, EC19, EC31, EC39, EC40, EC45, EC61, EC66, EC72 | EC19, EC61, EC66, EC72 | Thêm | Tai nghe UI10 {ts} | -1000 | Laptop | Mô tả NN {ts} | https://placehold.co/300 | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC. | Đại diện điển hình của lớp ≤ 0; điểm 0 kiểm ở BVA (LB−1). | black-box | AI |
+| TC-FR15-11 | Kiểm tra thêm sản phẩm qua form khi ô 'Giá tiền' để trống | EC1, EC5, EC20, EC31, EC39, EC40, EC45, EC61, EC66, EC72 | EC20, EC61, EC66, EC72 | Thêm | Tai nghe UI11 {ts} | `''` (rỗng) | Laptop | Mô tả NN {ts} | https://placehold.co/300 | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC. | Lớp bắt buộc của Giá ở UI. | black-box | AI |
+| TC-FR15-12 | Kiểm tra sửa sản phẩm qua form khi xoá trắng ô 'Tên sản phẩm' | EC3, EC12, EC24, EC35, EC39, EC40, EC41, EC45, EC61, EC66, EC72 | EC12, EC61, EC66, EC72 | Sửa | `''` (rỗng) | (giữ) | (giữ) | (giữ) | (giữ) | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp rỗng khi Sửa (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ). | black-box | AI |
+| TC-FR15-13 | Kiểm tra sửa sản phẩm qua form khi tên mới dài 300 ký tự | EC3, EC13, EC24, EC35, EC39, EC40, EC41, EC45, EC61, EC66, EC72 | EC13, EC61, EC66, EC72 | Sửa | 'x' × 300 | (giữ) | (giữ) | (giữ) | (giữ) | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp > 255 khi Sửa (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ). | black-box | AI |
+| TC-FR15-14 | Kiểm tra sửa sản phẩm qua form khi tên mới chỉ gồm 3 dấu cách | EC3, EC14, EC24, EC35, EC39, EC40, EC41, EC45, EC61, EC66, EC72 | EC14, EC61, EC66, EC72 | Sửa | `␣␣␣` | (giữ) | (giữ) | (giữ) | (giữ) | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp chỉ khoảng trắng khi Sửa (C3, C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ). | black-box | AI |
+| TC-FR15-15 | Kiểm tra sửa sản phẩm qua form khi giá mới âm | EC3, EC11, EC26, EC35, EC39, EC40, EC41, EC45, EC61, EC66, EC72 | EC26, EC61, EC66, EC72 | Sửa | (giữ) | -1000 | (giữ) | (giữ) | (giữ) | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp ≤ 0 khi Sửa (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ). | black-box | AI |
+| TC-FR15-16 | Kiểm tra sửa sản phẩm qua form khi xoá trắng ô 'Giá tiền' | EC3, EC11, EC27, EC35, EC39, EC40, EC41, EC45, EC61, EC66, EC72 | EC27, EC61, EC66, EC72 | Sửa | (giữ) | `''` (rỗng) | (giữ) | (giữ) | (giữ) | Có thông báo lỗi trên form (bong bóng kiểm tra HTML5 hoặc thông báo trên trang; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp bắt buộc của Giá khi Sửa ở UI (C8). Chỉ đổi đúng ô mục tiêu, các ô khác giữ giá trị của M (hợp lệ). | black-box | AI |
+
+### Bước 3b — Minimum Set of Test Cases (Domain) · TS-DOM-API — Domain — minimum set, tầng API /api/products
+**Tiền điều kiện:** Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).; Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.; Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.; Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).
+
+**Quy trình chung:**
+1. Nếu cột 'Thao tác CRUD' là Sửa hoặc Xóa: dựng sản phẩm mục tiêu M — POST /api/products (Bearer TA, Content-Type: application/json) body {name: 'Muc tieu NN {ts}', price: 1000000, description: 'Mô tả mục tiêu {ts}', imageUrl: 'https://placehold.co/300', category_id: 1}; GET /api/products, lấy id của bản ghi có name = 'Muc tieu NN {ts}' → M. Thao tác khác: bỏ qua bước này. → Có đúng 1 bản ghi name = 'Muc tieu NN {ts}'. Không dựng được → dừng, Blocked, ghi case gốc vào notes (C14).
+2. GET /api/products → lưu TRƯỚC (số bản ghi và toàn bộ bản ghi). Nếu có M: GET /api/products/M → lưu M_TRƯỚC. → HTTP 2xx; mảng JSON.
+3. Nếu cột token là 'U': POST /api/login với test@eshop.com / Test1234! (README.md dòng 23) → token U. → HTTP 2xx; phản hồi có token.
+4. Gửi đúng một request, Content-Type: application/json. Method theo cột 'Thao tác CRUD'; đường dẫn /api/products (POST) hoặc /api/products/<id> với <id> theo cột mục tiêu: 'M' = id dựng ở bước 1; số = id đó. Header theo cột token: 'TA' = Bearer TA; 'U' = Bearer U; 'thiếu' = không gửi header Authorization; 'sai' = 'Bearer abc.def.ghi'; '—' = không gửi. Body (POST/PUT) gồm 5 khoá name, price, category_id, description, imageUrl lấy từ các cột Tên sản phẩm, Giá, Danh mục, Mô tả, URL Ảnh: "…" = chuỗi JSON; số không ngoặc = số JSON; null = null JSON; '— thiếu —' = bỏ khoá khỏi body; "x" × n = chuỗi n ký tự 'x'. DELETE/GET: không gửi body. → Nhận được phản hồi HTTP.
+5. Ghi HTTP status và body phản hồi. → Khớp phần phản hồi trong cột Expected.
+6. GET /api/products → SAU; nếu có M: GET /api/products/M → M_SAU. So với TRƯỚC. → Chênh lệch TRƯỚC → SAU đúng như cột Expected (oracle tương đối, C0).
+
+**Dọn dẹp:** Sau mỗi case, kể cả khi Fail: GET /api/products, xoá bằng DELETE /api/products/:id (Bearer TA) mọi id có trong SAU mà không có trong TRƯỚC, và sản phẩm mục tiêu M nếu còn. Xoá thất bại → ghi notes, không đổi verdict. Lớp 2: khởi động lại backend trước lượt chạy kế tiếp (C0).
+
+| #TC | Tiêu đề | EC phủ | EC mục tiêu | Thao tác CRUD | Danh tính người gọi / token | Sản phẩm mục tiêu (khi Xem chi tiết / Sửa / Xóa) | Tên sản phẩm | Giá | Danh mục | Mô tả | URL Ảnh | Expected | Lý do chọn input | Cách tiếp cận | Nguồn |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| TC-FR15-17 | Kiểm tra thêm sản phẩm qua API khi body hợp lệ và giá là số nguyên | EC1, EC5, EC17, EC31, EC39, EC40, EC45, EC56, EC68 | EC1, EC5, EC17, EC31, EC45, EC56, EC68 | POST | TA | — | "SP API17 {ts}" | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 2xx. Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có name = 'SP API17 {ts}', price = 1500000, category_id = 2 (so giá trị số). | Case hợp lệ chính tầng API: body đúng mẫu api_specification §3.3, token admin. | black-box | AI |
+| TC-FR15-18 | Kiểm tra thêm sản phẩm qua API khi giá là số thập phân dương | EC1, EC5, EC18, EC31, EC39, EC40, EC45, EC56, EC68 | EC18, EC56, EC68 | POST | TA | — | "SP API18 {ts}" | 1500000.5 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 2xx. Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có price = 1500000.5 (so giá trị số). | Lớp số thập phân hợp lệ (C1) ở tầng API. | gray-box | AI |
+| TC-FR15-19 | Kiểm tra sửa sản phẩm qua API khi body hợp lệ và chỉ sản phẩm mục tiêu thay đổi | EC3, EC11, EC24, EC35, EC39, EC40, EC41, EC45, EC55, EC57, EC67, EC68 | EC3, EC11, EC24, EC35, EC41, EC57, EC67, EC68 | PUT | TA | M | "Sua API19 {ts}" | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 2xx. Dữ liệu: M_SAU có name = 'Sua API19 {ts}', price = 2500000, category_id = 3 (so giá trị số); số bản ghi SAU = TRƯỚC; mọi bản ghi id ≠ M: SAU = TRƯỚC. | Case hợp lệ chính của PUT; kiểm FR-15.5 ở tầng dữ liệu (bản UI ở TC-FR15-03). | black-box | AI |
+| TC-FR15-20 | Kiểm tra sửa sản phẩm qua API khi giá mới là số thập phân dương | EC3, EC11, EC25, EC35, EC39, EC40, EC41, EC45, EC57, EC68 | EC25, EC57 | PUT | TA | M | "Sua API20 {ts}" | 2500000.5 | 1 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 2xx. Dữ liệu: M_SAU có price = 2500000.5 (so giá trị số), name = 'Sua API20 {ts}'. | Lớp số thập phân hợp lệ khi Sửa (C1, C8) ở tầng API. | gray-box | AI |
+| TC-FR15-21 | Kiểm tra xoá sản phẩm qua API khi sản phẩm tồn tại | EC4, EC41, EC45, EC55, EC58, EC68 | EC4, EC41, EC58 | DELETE | TA | M | — | — | — | — | — | HTTP 2xx. Dữ liệu: GET /api/products SAU không còn id M; số bản ghi SAU = TRƯỚC − 1. | DELETE trên sản phẩm do case tạo (C0). | black-box | AI |
+| TC-FR15-22 | Kiểm tra xem chi tiết sản phẩm qua API khi sản phẩm có id chẵn | EC2, EC59 | EC2, EC59 | GET | — | 2 (seed) | — | — | — | — | — | HTTP 2xx; body là bản ghi id 2 với name = 'Samsung Galaxy S24 Ultra', category_id = 1 và price = 28000000 là số JSON (không phải chuỗi) (C15). Nơi duy nhất khẳng định kiểu dữ liệu price. | Xem chi tiết dùng sản phẩm seed (chỉ đọc, không vi phạm C0); giá trị kỳ vọng lấy từ dữ liệu seed (database.js dòng 99). | gray-box | AI |
+| TC-FR15-23 | Kiểm tra thêm sản phẩm qua API khi name là chuỗi rỗng | EC1, EC6, EC17, EC31, EC39, EC40, EC45, EC60, EC69 | EC6, EC60, EC69 | POST | TA | — | "" | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Lớp rỗng ở API. | black-box | AI |
+| TC-FR15-24 | Kiểm tra thêm sản phẩm qua API khi name dài 300 ký tự | EC1, EC7, EC17, EC31, EC39, EC40, EC45, EC60, EC69 | EC7, EC60, EC69 | POST | TA | — | "x" × 300 | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Lớp > 255 ở API; biên 256 ở BVA. | black-box | AI |
+| TC-FR15-25 | Kiểm tra thêm sản phẩm qua API khi name chỉ gồm 3 dấu cách | EC1, EC8, EC17, EC31, EC39, EC40, EC45, EC60, EC69 | EC8, EC60, EC69 | POST | TA | — | "   " | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | C3 ở API. | black-box | AI |
+| TC-FR15-26 | Kiểm tra thêm sản phẩm qua API khi body thiếu khoá name | EC1, EC9, EC17, EC31, EC39, EC40, EC45, EC60, EC69 | EC9, EC60, EC69 | POST | TA | — | — thiếu — | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Đại diện 'thiếu' (bản Sửa dùng null để phủ cả hai cách). | black-box | AI |
+| TC-FR15-27 | Kiểm tra thêm sản phẩm qua API khi name là số | EC1, EC10, EC17, EC31, EC39, EC40, EC45, EC60, EC69 | EC10, EC60, EC69 | POST | TA | — | 123 | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Sai kiểu JSON (C9). | black-box | AI |
+| TC-FR15-28 | Kiểm tra thêm sản phẩm qua API khi price âm | EC1, EC5, EC19, EC31, EC39, EC40, EC45, EC60, EC69 | EC19, EC60, EC69 | POST | TA | — | "SP API28 {ts}" | -1000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Lớp ≤ 0; điểm 0 ở BVA. | black-box | AI |
+| TC-FR15-29 | Kiểm tra thêm sản phẩm qua API khi body thiếu khoá price | EC1, EC5, EC21, EC31, EC39, EC40, EC45, EC60, EC69 | EC21, EC60, EC69 | POST | TA | — | "SP API29 {ts}" | — thiếu — | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Đại diện 'thiếu' (bản Sửa dùng null). | black-box | AI |
+| TC-FR15-30 | Kiểm tra thêm sản phẩm qua API khi price là chuỗi chữ | EC1, EC5, EC22, EC31, EC39, EC40, EC45, EC60, EC69 | EC22, EC60, EC69 | POST | TA | — | "SP API30 {ts}" | "abc" | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Sai kiểu (C9). | black-box | AI |
+| TC-FR15-31 | Kiểm tra thêm sản phẩm qua API khi price là chuỗi số | EC1, EC5, EC23, EC31, EC39, EC40, EC45, EC60, EC69 | EC23, EC60, EC69 | POST | TA | — | "SP API31 {ts}" | "100000" | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | C9 SV chốt: chuỗi số là sai kiểu. | black-box | AI |
+| TC-FR15-32 | Kiểm tra thêm sản phẩm qua API khi category_id không có trong danh sách danh mục | EC1, EC5, EC17, EC32, EC39, EC40, EC45, EC60, EC69 | EC32, EC60, EC69 | POST | TA | — | "SP API32 {ts}" | 1500000 | 999 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | id danh mục xa ngoài 1–3 (C11). | black-box | AI |
+| TC-FR15-33 | Kiểm tra thêm sản phẩm qua API khi body thiếu khoá category_id | EC1, EC5, EC17, EC33, EC39, EC40, EC45, EC60, EC69 | EC33, EC60, EC69 | POST | TA | — | "SP API33 {ts}" | 1500000 | — thiếu — | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Đại diện 'thiếu' (bản Sửa dùng null). | black-box | AI |
+| TC-FR15-34 | Kiểm tra thêm sản phẩm qua API khi category_id là chuỗi chữ | EC1, EC5, EC17, EC34, EC39, EC40, EC45, EC60, EC69 | EC34, EC60, EC69 | POST | TA | — | "SP API34 {ts}" | 1500000 | "abc" | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: GET /api/products SAU = TRƯỚC. | Sai kiểu (C9). | black-box | AI |
+| TC-FR15-35 | Kiểm tra sửa sản phẩm qua API khi name mới là chuỗi rỗng | EC3, EC12, EC24, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC12, EC60, EC69 | PUT | TA | M | "" | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp rỗng khi Sửa (C8). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-36 | Kiểm tra sửa sản phẩm qua API khi name mới dài 300 ký tự | EC3, EC13, EC24, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC13, EC60, EC69 | PUT | TA | M | "x" × 300 | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp > 255 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-37 | Kiểm tra sửa sản phẩm qua API khi name mới chỉ gồm 3 dấu cách | EC3, EC14, EC24, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC14, EC60, EC69 | PUT | TA | M | "   " | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | C3 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-38 | Kiểm tra sửa sản phẩm qua API khi name = null | EC3, EC15, EC24, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC15, EC60, EC69 | PUT | TA | M | null | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Đại diện null (bản Thêm dùng 'thiếu'). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-39 | Kiểm tra sửa sản phẩm qua API khi name là số | EC3, EC16, EC24, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC16, EC60, EC69 | PUT | TA | M | 123 | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Sai kiểu khi Sửa (C9). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-40 | Kiểm tra sửa sản phẩm qua API khi price mới âm | EC3, EC11, EC26, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC26, EC60, EC69 | PUT | TA | M | "Sua API40 {ts}" | -1000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Lớp ≤ 0 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-41 | Kiểm tra sửa sản phẩm qua API khi price = null | EC3, EC11, EC28, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC28, EC60, EC69 | PUT | TA | M | "Sua API41 {ts}" | null | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Đại diện null (bản Thêm dùng 'thiếu'). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-42 | Kiểm tra sửa sản phẩm qua API khi price là chuỗi chữ | EC3, EC11, EC29, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC29, EC60, EC69 | PUT | TA | M | "Sua API42 {ts}" | "abc" | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Sai kiểu khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-43 | Kiểm tra sửa sản phẩm qua API khi price là chuỗi số | EC3, EC11, EC30, EC35, EC39, EC40, EC41, EC45, EC60, EC69 | EC30, EC60, EC69 | PUT | TA | M | "Sua API43 {ts}" | "100000" | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | C9 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-44 | Kiểm tra sửa sản phẩm qua API khi category_id không có trong danh sách danh mục | EC3, EC11, EC24, EC36, EC39, EC40, EC41, EC45, EC60, EC69 | EC36, EC60, EC69 | PUT | TA | M | "Sua API44 {ts}" | 2500000 | 999 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | C11 khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-45 | Kiểm tra sửa sản phẩm qua API khi category_id = null | EC3, EC11, EC24, EC37, EC39, EC40, EC41, EC45, EC60, EC69 | EC37, EC60, EC69 | PUT | TA | M | "Sua API45 {ts}" | 2500000 | null | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Đại diện null (bản Thêm dùng 'thiếu'). Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-46 | Kiểm tra sửa sản phẩm qua API khi category_id là chuỗi chữ | EC3, EC11, EC24, EC38, EC39, EC40, EC41, EC45, EC60, EC69 | EC38, EC60, EC69 | PUT | TA | M | "Sua API46 {ts}" | 2500000 | "abc" | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx), body có trường error (C6). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | Sai kiểu khi Sửa. Các trường khác của body hợp lệ và khác giá trị của M để thấy được nếu bị ghi. | black-box | AI |
+| TC-FR15-47 | Kiểm tra xem chi tiết sản phẩm qua API khi id không tồn tại | EC2, EC42, EC60, EC70 | EC42, EC70 | GET | — | 999999 (không tồn tại) | — | — | — | — | — | HTTP 4xx (không 2xx, không 5xx) (C10). Dữ liệu: GET /api/products SAU = TRƯỚC. | id lớn, chắc chắn không có trong CSDL seed + dữ liệu test. | black-box | AI |
+| TC-FR15-48 | Kiểm tra sửa sản phẩm qua API khi id không tồn tại | EC3, EC11, EC24, EC35, EC39, EC40, EC43, EC45, EC60, EC70 | EC43, EC60, EC70 | PUT | TA | 999999 (không tồn tại) | "Sua API48 {ts}" | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (C10). Dữ liệu: GET /api/products SAU = TRƯỚC (không có bản ghi mới, không bản ghi nào đổi). | Body hợp lệ để chỉ id là yếu tố sai. | black-box | AI |
+| TC-FR15-49 | Kiểm tra xoá sản phẩm qua API khi id không tồn tại | EC4, EC44, EC45, EC60, EC70 | EC44, EC60, EC70 | DELETE | TA | 999999 (không tồn tại) | — | — | — | — | — | HTTP 4xx (không 2xx, không 5xx) (C10). Dữ liệu: GET /api/products SAU = TRƯỚC. | id lớn, chắc chắn không tồn tại. | black-box | AI |
+| TC-FR15-50 | Kiểm tra thêm sản phẩm qua API khi không có header Authorization | EC1, EC5, EC17, EC31, EC39, EC40, EC46, EC60, EC71 | EC46, EC60, EC71 | POST | thiếu | — | "SP API50 {ts}" | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU = TRƯỚC. | FR-12.2 cho POST /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-51 | Kiểm tra thêm sản phẩm qua API khi token không hợp lệ | EC1, EC5, EC17, EC31, EC39, EC40, EC47, EC60, EC71 | EC47, EC60, EC71 | POST | sai | — | "SP API51 {ts}" | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU = TRƯỚC. | FR-12.2 cho POST /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-52 | Kiểm tra thêm sản phẩm qua API khi token của tài khoản role user | EC1, EC5, EC17, EC31, EC39, EC40, EC48, EC60, EC71 | EC48, EC60, EC71 | POST | U | — | "SP API52 {ts}" | 1500000 | 2 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU = TRƯỚC. | FR-12.2 cho POST /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-53 | Kiểm tra sửa sản phẩm qua API khi không có header Authorization | EC3, EC11, EC24, EC35, EC39, EC40, EC41, EC49, EC60, EC71 | EC49, EC60, EC71 | PUT | thiếu | M | "Sua API53 {ts}" | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | FR-12.2 cho PUT /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-54 | Kiểm tra sửa sản phẩm qua API khi token không hợp lệ | EC3, EC11, EC24, EC35, EC39, EC40, EC41, EC50, EC60, EC71 | EC50, EC60, EC71 | PUT | sai | M | "Sua API54 {ts}" | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | FR-12.2 cho PUT /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-55 | Kiểm tra sửa sản phẩm qua API khi token của tài khoản role user | EC3, EC11, EC24, EC35, EC39, EC40, EC41, EC51, EC60, EC71 | EC51, EC60, EC71 | PUT | U | M | "Sua API55 {ts}" | 2500000 | 3 | "Mô tả NN {ts}" | "https://placehold.co/300" | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC. | FR-12.2 cho PUT /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-56 | Kiểm tra xóa sản phẩm qua API khi không có header Authorization | EC4, EC41, EC52, EC60, EC71 | EC52, EC60, EC71 | DELETE | thiếu | M | — | — | — | — | — | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU vẫn có id M; SAU = TRƯỚC. | FR-12.2 cho DELETE /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-57 | Kiểm tra xóa sản phẩm qua API khi token không hợp lệ | EC4, EC41, EC53, EC60, EC71 | EC53, EC60, EC71 | DELETE | sai | M | — | — | — | — | — | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU vẫn có id M; SAU = TRƯỚC. | FR-12.2 cho DELETE /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+| TC-FR15-58 | Kiểm tra xóa sản phẩm qua API khi token của tài khoản role user | EC4, EC41, EC54, EC60, EC71 | EC54, EC60, EC71 | DELETE | U | M | — | — | — | — | — | HTTP 4xx (không 2xx, không 5xx) (FR-12.2). Dữ liệu: GET /api/products SAU vẫn có id M; SAU = TRƯỚC. | FR-12.2 cho DELETE /api/products (C5); body/mục tiêu hợp lệ để chỉ quyền là yếu tố sai. | black-box | AI |
+
+### TS-GUI — GUI — form và bảng sản phẩm (FR-21.3, FR-22.1, FR-22.4, FR-24.4, SEC-04)
+| #TC | Tiêu đề | EC phủ | Expected | Lý do chọn input | Nguồn |
+|---|---|---|---|---|---|
+| TC-FR15-90 | Kiểm tra ký hiệu '*' cạnh nhãn các trường bắt buộc của form sản phẩm khi form ở trạng thái 'Thêm sản phẩm mới' |  | 3 nhãn Tên sản phẩm, Giá, Danh mục đều có ký hiệu '*' (FR-22.1). | FR-15 liệt kê đúng 3 trường bắt buộc; một case cho cả form (như TC-FR01-90). | AI |
+| TC-FR15-91 | Kiểm tra vị trí thông báo lỗi so với nút 'Lưu sản phẩm' khi bỏ trống tên |  | Thông báo lỗi nằm phía trên nút 'Lưu sản phẩm' (FR-22.4). Nơi duy nhất kiểm vị trí thông báo lỗi. | Lỗi dễ tạo nhất (tên rỗng); một case cho thuộc tính chung của form. | AI |
+| TC-FR15-92 | Kiểm tra định dạng tiền ở cột 'Giá' của bảng sản phẩm khi bảng hiển thị sản phẩm seed |  | Ô 'Giá' hiển thị ký hiệu '₫' và phân cách hàng nghìn '.' hoặc ',' (vd 30.000.000 ₫ hoặc 30,000,000 ₫) (FR-21.3, C17). Nơi duy nhất kiểm định dạng tiền. | Giá seed 8 chữ số có 2 nhóm hàng nghìn, dễ thấy thiếu phân cách. | AI |
+| TC-FR15-93 | Kiểm tra thuộc tính alt của ảnh trong cột 'Ảnh' khi bảng hiển thị 5 sản phẩm seed |  | Mọi ảnh sản phẩm trong bảng có alt không rỗng (không chỉ khoảng trắng), mô tả nội dung ảnh (ví dụ chứa tên sản phẩm) (FR-24.4). | Kiểm một lần cho cả bảng với 5 sản phẩm seed. | AI |
+| TC-FR15-94 | Kiểm tra hiển thị tên sản phẩm trong bảng khi tên chứa thẻ HTML |  | Ô 'Tên SP' hiển thị nguyên văn '<i>SEC04 {ts}</i>' (kể cả '<i>' và '</i>'); trong ô không có phần tử <i> (SEC-04). | Tên 22 ký tự, hợp lệ theo FR-15.2 nên được lưu; thẻ <i> vô hại nhưng đủ để thấy có render HTML hay không. | AI |
+
+**Các bước chi tiết:**
+
+**TC-FR15-90** — Kiểm tra ký hiệu '*' cạnh nhãn các trường bắt buộc của form sản phẩm khi form ở trạng thái 'Thêm sản phẩm mới'
+
+- Tiền điều kiện: Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).; Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'.
+- Bước 1: Ở form 'Thêm sản phẩm mới', tìm nhãn của 3 trường bắt buộc theo FR-15: Tên sản phẩm, Giá, Danh mục. → Mỗi trường có nhãn nhìn thấy được.
+- Bước 2: Đọc nội dung từng nhãn. → Mỗi nhãn có ký hiệu '*' bên cạnh.
+- Dọn dẹp: Không cần: không tạo dữ liệu.
+
+**TC-FR15-91** — Kiểm tra vị trí thông báo lỗi so với nút 'Lưu sản phẩm' khi bỏ trống tên
+
+- Tiền điều kiện: Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).; Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'.
+- Bước 1: Ở form 'Thêm sản phẩm mới': để trống 'Tên sản phẩm'; 'Giá tiền' gõ 1500000; chọn danh mục 'Laptop'. Bấm 'Lưu sản phẩm' đúng một lần. → Có thông báo lỗi.
+- Bước 2: Xác định vị trí thông báo lỗi (bong bóng HTML5: vị trí ô mà bong bóng gắn vào — A16) và vị trí nút 'Lưu sản phẩm'. → Cạnh dưới của thông báo nằm phía trên cạnh trên của nút.
+- Dọn dẹp: Không cần: không tạo dữ liệu.
+
+**TC-FR15-92** — Kiểm tra định dạng tiền ở cột 'Giá' của bảng sản phẩm khi bảng hiển thị sản phẩm seed
+
+- Tiền điều kiện: Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).; Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'.
+- Dữ liệu: Sản phẩm seed id 1 'iPhone 15 Pro Max' 30000000
+- Bước 1: Đọc ô 'Giá' của dòng 'iPhone 15 Pro Max' (giá seed 30000000). → Có ký hiệu '₫' và có phân cách hàng nghìn.
+- Dọn dẹp: Không cần: không tạo dữ liệu.
+
+**TC-FR15-93** — Kiểm tra thuộc tính alt của ảnh trong cột 'Ảnh' khi bảng hiển thị 5 sản phẩm seed
+
+- Tiền điều kiện: Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).; Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'.
+- Dữ liệu: 5 sản phẩm seed
+- Bước 1: Đọc thuộc tính alt của mọi ảnh trong cột 'Ảnh'. → Mọi alt không rỗng.
+- Dọn dẹp: Không cần: không tạo dữ liệu.
+
+**TC-FR15-94** — Kiểm tra hiển thị tên sản phẩm trong bảng khi tên chứa thẻ HTML
+
+- Tiền điều kiện: Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy; CSDL vừa seed (C0).; Browser context mới; đã đăng nhập admin qua form 'Admin Login' (admin@eshop.com / Admin123!) và mở mục 'Sản phẩm'.
+- Dữ liệu: name = '<i>SEC04 {ts}</i>'
+- Bước 1: POST /api/products (Bearer TA) body {name: '<i>SEC04 {ts}</i>', price: 1500000, description: 'Mô tả', imageUrl: 'https://placehold.co/300', category_id: 1}. Rồi bấm mục 'Sản phẩm' trên thanh bên (hoặc chuyển tab khác rồi quay lại) để bảng tải lại. → Bảng có dòng mới.
+- Bước 2: Đọc ô 'Tên SP' của dòng mới: nội dung chữ và các phần tử con. → Chữ hiển thị nguyên văn, không có phần tử <i>.
+- Dọn dẹp: DELETE /api/products/:id (Bearer TA) bản ghi vừa tạo; thất bại → ghi notes.
 
 ### Truy vết yêu cầu ↔ test case
 Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các EC mục tiêu (ec_target; TC không có ec_target thì dùng EC phủ) theo cột Yêu cầu ở bảng Bước 2, cộng với trường requirements và assumptions của TC (dùng cho case GUI không gắn EC). Mã giả định (B…) hiện thành dòng riêng.
 
 | Yêu cầu | Test case | Số TC |
 |---|---|---|
-| FR-15.1 | ⚠ | 0 |
-| FR-15.2 | ⚠ | 0 |
-| FR-15.3 | ⚠ | 0 |
-| FR-15.4 | ⚠ | 0 |
-| FR-15.5 | ⚠ | 0 |
-| FR-12.2 | ⚠ | 0 |
-| API-PROD | ⚠ | 0 |
-| SEC-02 | ⚠ | 0 |
-| SEC-03 | ⚠ | 0 |
-| FR-21.3 | ⚠ | 0 |
-| FR-22.1 | ⚠ | 0 |
-| FR-22.4 | ⚠ | 0 |
-| FR-24.4 | ⚠ | 0 |
-| SEC-04 | ⚠ | 0 |
+| FR-15.1 | TC-FR15-01, TC-FR15-02, TC-FR15-03, TC-FR15-04, TC-FR15-05, TC-FR15-06, TC-FR15-17, TC-FR15-18, TC-FR15-19, TC-FR15-20, TC-FR15-21, TC-FR15-22, TC-FR15-47, TC-FR15-48, TC-FR15-49 | 15 |
+| FR-15.2 | TC-FR15-01, TC-FR15-03, TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-17, TC-FR15-19, TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39 | 20 |
+| FR-15.3 | TC-FR15-01, TC-FR15-02, TC-FR15-03, TC-FR15-04, TC-FR15-10, TC-FR15-11, TC-FR15-15, TC-FR15-16, TC-FR15-17, TC-FR15-18, TC-FR15-19, TC-FR15-20, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43 | 20 |
+| FR-15.4 | TC-FR15-01, TC-FR15-03, TC-FR15-17, TC-FR15-19, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-44, TC-FR15-45, TC-FR15-46 | 10 |
+| FR-15.5 | TC-FR15-03, TC-FR15-19 | 2 |
+| FR-12.2 | TC-FR15-17, TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55, TC-FR15-56, TC-FR15-57, TC-FR15-58 | 10 |
+| API-PROD | TC-FR15-17, TC-FR15-18, TC-FR15-19 | 3 |
+| SEC-02 | TC-FR15-50, TC-FR15-51, TC-FR15-53, TC-FR15-54, TC-FR15-56, TC-FR15-57 | 6 |
+| SEC-03 | TC-FR15-52, TC-FR15-55, TC-FR15-58 | 3 |
+| FR-21.3 | TC-FR15-92 | 1 |
+| FR-22.1 | TC-FR15-90 | 1 |
+| FR-22.4 | TC-FR15-91 | 1 |
+| FR-24.4 | TC-FR15-93 | 1 |
+| SEC-04 | TC-FR15-94 | 1 |
+| C11 (giả định) | TC-FR15-01, TC-FR15-03, TC-FR15-17, TC-FR15-19, TC-FR15-32, TC-FR15-44 | 6 |
+| C1 (giả định) | TC-FR15-02, TC-FR15-04, TC-FR15-18, TC-FR15-20 | 4 |
+| C7 (giả định) | TC-FR15-07, TC-FR15-08, TC-FR15-09, TC-FR15-10, TC-FR15-11, TC-FR15-12, TC-FR15-13, TC-FR15-14, TC-FR15-15, TC-FR15-16 | 10 |
+| C3 (giả định) | TC-FR15-09, TC-FR15-14, TC-FR15-25, TC-FR15-37 | 4 |
+| C15 (giả định) | TC-FR15-22 | 1 |
+| C6 (giả định) | TC-FR15-23, TC-FR15-24, TC-FR15-25, TC-FR15-26, TC-FR15-27, TC-FR15-28, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-32, TC-FR15-33, TC-FR15-34, TC-FR15-35, TC-FR15-36, TC-FR15-37, TC-FR15-38, TC-FR15-39, TC-FR15-40, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-44, TC-FR15-45, TC-FR15-46, TC-FR15-48, TC-FR15-49, TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55, TC-FR15-56, TC-FR15-57, TC-FR15-58 | 35 |
+| C9 (giả định) | TC-FR15-26, TC-FR15-27, TC-FR15-29, TC-FR15-30, TC-FR15-31, TC-FR15-33, TC-FR15-34, TC-FR15-38, TC-FR15-39, TC-FR15-41, TC-FR15-42, TC-FR15-43, TC-FR15-45, TC-FR15-46 | 14 |
+| C10 (giả định) | TC-FR15-47, TC-FR15-48, TC-FR15-49 | 3 |
+| C5 (giả định) | TC-FR15-50, TC-FR15-51, TC-FR15-52, TC-FR15-53, TC-FR15-54, TC-FR15-55, TC-FR15-56, TC-FR15-57, TC-FR15-58 | 9 |
+| C12 (giả định) | TC-FR15-90, TC-FR15-91, TC-FR15-92, TC-FR15-93, TC-FR15-94 | 5 |
+| C16 (giả định) | TC-FR15-91 | 1 |
+| C17 (giả định) | TC-FR15-92 | 1 |
 
 ### Giả định khi đặc tả chưa nói rõ
 - C0 (độc lập và điểm quan sát) [loại: quy trình · truy vết: không · căn cứ: CLAUDE.md (backend khởi động lại → CSDL seed lại), tiền lệ A19/B0b · SV chốt 2026-10-20, chấp nhận đề xuất AI]: mỗi case tạo sản phẩm riêng có tên chứa {ts}; Sửa/Xóa chỉ thao tác trên sản phẩm do case tạo; oracle tương đối (danh sách/bản ghi SAU so với TRƯỚC trong chính case). Điểm quan sát dữ liệu: GET /api/products và GET /api/products/:id (api_specification dòng 80–85, không yêu cầu token). Cleanup lớp 2: DELETE /api/products/:id bằng token admin cuối suite; khởi động lại backend seed lại toàn bộ.
@@ -228,5 +378,7 @@ Sinh tự động: yêu cầu của một TC = hợp các yêu cầu của các 
 - C13 (ngoài phạm vi / SRS im lặng) [loại: phạm vi · truy vết: không · căn cứ: SRS · SV chốt 2026-10-20, chấp nhận đề xuất AI]: ngoài phạm vi — FR-16 (import CSV), FR-14 (Category CRUD, chỉ dùng 3 danh mục seed làm dữ liệu), FR-13, hiển thị sản phẩm trên frontend-web/mobile (FR-05, FR-06, FR-20). SRS im lặng – chấp nhận mọi cách hợp lý, không đặt Expected: tên trùng với sản phẩm khác; Mô tả và URL Ảnh (giữ giá trị nominal hợp lệ); hộp xác nhận trước khi Xóa sản phẩm (FR-24.2 chỉ nói giỏ hàng); nội dung thông báo khi lưu/xóa thành công; nút 'Hủy sửa'.
 - C14 (quy tắc verdict) [loại: quy trình · truy vết: không · căn cứ: quy ước đã chốt từ A_FR01/B_FR07 (A17, A20) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: lệch Expected do biến mục tiêu → Fail; bị chặn bởi lỗi đã có ở case khác → Blocked, ghi case gốc; trường SRS yêu cầu mà UI không có → case kiểm sự tồn tại Fail, case phụ thuộc Blocked; từ chối đúng nhưng lý do không chứng minh luật mục tiêu → 'Pass hộp đen' ghi trong notes.
 - C15 (kiểu dữ liệu price trong phản hồi GET) [loại: quyết định Expected · truy vết: có · căn cứ: SRS im lặng về response; giả định SV · SV chốt 2026-10-20, phương án b — SV chốt: price trong response phải là số JSON; lý do giống C9 — phân biệt rạch ròi giữa chuỗi và số, không chấp nhận ngoại lệ]: price trong phản hồi GET /api/products/:id phải là số JSON; price dạng chuỗi (kể cả chuỗi số) lệch Expected. Kiểu dữ liệu price chỉ khẳng định ở EC59; EC56/EC57 so price theo giá trị số.
+- C16 (thông báo lỗi dạng hộp thoại trình duyệt) [loại: quyết định Expected · truy vết: có · căn cứ: C7 (SV chốt) và A16 chỉ nói bong bóng HTML5; FR-22.4 quy định vị trí 'trên nút submit' · đề xuất – chờ SV chốt]: (a) hộp thoại trình duyệt (alert) có nội dung báo lỗi được tính là 'thông báo lỗi trên form' cho C7; riêng TC-FR15-91 (FR-22.4): thông báo chỉ ở dạng hộp thoại thì không nằm phía trên nút → Fail; (b) hộp thoại không được tính cho C7 → case UI từ chối Fail phần thông báo nếu chỉ có hộp thoại.
+- C17 (định dạng tiền) [loại: quyết định Expected · truy vết: có · căn cứ: FR-21.3 không nói ký tự phân cách; tiền lệ B13 (SV chốt) · đề xuất – chờ SV chốt]: chấp nhận ký tự phân cách hàng nghìn '.' hoặc ','; locale trình duyệt ghi trong notes của TC-FR15-92. Chỉ kiểm ở TC-FR15-92.
 
-**Tổng:** chưa có test case (bước 3–4).
+**Tổng:** 63 TC · Not run: 63 · Nguồn: AI 63
