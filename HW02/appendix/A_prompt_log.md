@@ -17717,11 +17717,82 @@ Tạo HW02/D_FR20/sv_cases.md: khung trống chép cấu trúc từ HW02/C_FR15/
 **Output:**
 ```
 Đã commit 3/7b. Giờ bước 4 (BVA độ dài Mật khẩu).
+
+Bước 4 đã xong. D_FR20 có 27 TC do AI tạo, chưa chạy case nào. Khung bước 5 đã tạo nhưng chưa commit (đúng lệnh).
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `de46981` 3/7b: sửa theo review.
+  - `c19c666` 4/7: Test case BVA.
+- **A.1:** commit 2/7c của C (`b889942`) có sửa `testcases.json` và `testcases.md` (ghi "SV chốt" vào câu giả định C9, C15). Nên D đã ghi "SV chốt sau review" vào `meta.review_log` trong 3/7b; commit `721b852` giữ nguyên.
+- **A.2: Không có ô Xác nhận mật khẩu.** Màn Đăng ký (App.js dòng 797–837) chỉ có 3 `TextInput` ở dòng 805, 811, 818; tìm "confirm/Xác nhận" không ra ô nào thuộc màn này. Note của TC-16, TC-17 giữ nguyên chữ "nếu".
+- **A.3:** quy tắc cũ, nguyên văn: "{ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231) — email mỗi case là duy nhất trong một lượt chạy (D0)." Đã sửa trong 3/7b:
+  - Email mẫu `m01_2231@domain.com` thuộc EC3 (FR-01.3, D4) và EC6 (FR-01.4, D5).
+  - Ghi rõ email chỉ có thể trùng trong cùng một lượt, vì restart backend xoá dữ liệu. Chạy lại case trong cùng lượt phải dùng HHmm khác, nếu không email rơi vào EC7 (đã tồn tại).
+- **Bước 4: 5 điểm BVA cho độ dài Mật khẩu, TC-FR20-60 đến 64.**
+  - LB−1 = 7, LB = 8, LB+1 = 9, NOM = 12, LARGE = 64 ký tự.
+  - `no_upper_bound = D6`.
+  - Không làm MIN_UI vì 0 ký tự trùng lớp rỗng EC10 (TC-08). Không làm MAX_UI vì ô không đặt `maxLength`.
+- **Tổng TC AI của D: 27** (TS-DOM 17, TS-BVA 5, TS-GUI 5).
+- **Kiểm tra:**
+  - check_domain: 0 lỗi, 32/32 EC được phủ, còn 1 cảnh báo V6 (cố ý theo D12).
+  - lint: 0 lỗi, 0 cảnh báo.
+- **Khung bước 5:**
+  - `HW02/D_FR20/sv_cases.md`: chỉ có bảng tầng Mobile và GUI theo D1=a, mã giả định mới bắt đầu từ D16, không giữ case nào của C.
+  - `step1_notes.md` mục "Khai cho Audit" đã thêm dòng "Khung sv_cases.md do AI tạo".
 ```
-*File AI ghi/gửi trong lượt này:* `d_step4.py`
+*File AI ghi/gửi trong lượt này:* `d_step4.py`, `sv_cases.md`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 297 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 212 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295, #296, #297); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #298 | 23:12 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20 bước 5 (sau khi SV đã commit sv_cases.md)
+
+0. Kiểm:
+   - HEAD có commit SV chỉ chạm HW02/D_FR20/sv_cases.md (+ prompt log);
+   - sv_cases.md không còn chỗ trống của khung chưa điền ở các case SV đã viết.
+   Không đạt → DỪNG.
+1. (Trước, riêng) NOM bước 4: nếu mật khẩu TC-01 dài 12 ký tự và skill/harness cho phép điểm
+   NOM tham chiếu TC-01 → bỏ case NOM, giữ khoảng trống số, ghi "NOM = TC-01".
+   Không cho phép → giữ nguyên.
+   Có sửa → freeze, commit `HW02[D-FR20] 4/7b: NOM dùng TC-01`.
+2. `/domain-bva-testing HW02/D_FR20 5`.
+   - Đưa case SV vào TS-SV (mã từ 200), giữ nguyên chữ; trường SV bỏ trống → "(SV chưa ghi)".
+   - KHÔNG sửa case SV. Lỗi format/nhất quán thì chỉ liệt kê:
+     ec_target ngoài EC, Expected thiếu căn cứ/nhiều nhánh, mâu thuẫn D1–D15, giả định D16+ thiếu
+     căn cứ.
+   - ai_gap_answer.md: với mỗi case SV, tách "đã nghĩ tới nhưng không đưa vào" /
+     "không nghĩ tới" / "đã có nhưng bị gỡ theo quyết định SV".
+     Ghi rõ nếu điều đó liên quan P1=b (AI không đọc case SV của A).
+   - Trả lời sv_questions.md nếu có.
+   - Không gợi ý thêm case.
+   render_md.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 5/7b: đưa case SV vào TS-SV + gap answer`.
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Commit.
+- NOM: gộp hay giữ.
+- Số case SV, mã.
+- Lỗi nhất quán từng case (mã + lỗi, không đề xuất cách sửa).
+- Số case theo 3 nhóm gap.
+- Tổng TC D; check/lint.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+NOM: mật khẩu TC-01 là `Abcd1234!` (9 ký tự, không phải 12) → giữ nguyên case NOM. Giờ chạy bước 5.
+```
+*File AI ghi/gửi trong lượt này:* `d_step5.py`, `ai_gap_answer.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 298 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 213 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295, #296, #297, #298); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

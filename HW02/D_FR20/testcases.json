@@ -2140,6 +2140,440 @@
           ]
         }
       ]
+    },
+    {
+      "id": "TS-SV",
+      "name": "SV bổ sung — tầng Mobile",
+      "format": "matrix",
+      "description": "Case SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit f66b32f), giữ nguyên chữ của SV. Tiền điều kiện, quy trình, dọn dẹp lấy từ TS-DOM.",
+      "preconditions": [
+        "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
+        "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
+        "Điện thoại Android, Expo Go (SDK 54), cùng mạng với máy; app EShop Mobile đã mở với API_URL = http://172.21.0.137:3000/api (D15).",
+        "{ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231). Email mẫu m01_2231@domain.com: đúng một '@', local 'm01_2231' không rỗng, domain 'domain.com' có '.' → thuộc EC3 (FR-01.3, D4) và, vì chưa có trong CSDL, EC6 (FR-01.4, D5). Email chỉ có thể trùng trong cùng một lượt chạy (khởi động lại backend xoá mọi tài khoản đã tạo, D0): chạy lại cùng case trong cùng lượt phải dùng HHmm khác (chờ sang phút mới), nếu không email rơi vào EC7 (đã tồn tại).",
+        "Trạng thái ban đầu của mỗi case: app vừa tải lại (Reload trong Expo Go), đang ở màn hình chủ, header hiển thị 'Đăng nhập' (chưa đăng nhập); sau khi vào màn 'Đăng Ký Tài Khoản' cả ba ô Họ Tên, Email, Mật khẩu đều trống, không có chữ lỗi (D0)."
+      ],
+      "procedure": [
+        {
+          "action": "Trên máy tính: tải lại trang admin (F5), mở tab 'Người dùng'; đếm số dòng, chụp ảnh TC-FR20-xx_manual_admin_before.png.",
+          "expected": "Bảng 'Quản lý Người dùng' hiển thị, có admin@eshop.com và test@eshop.com."
+        },
+        {
+          "action": "Trên điện thoại: tải lại app trong Expo Go (Reload).",
+          "expected": "Màn hình chủ; header hiển thị 'Đăng nhập'."
+        },
+        {
+          "action": "Bấm 'Đăng nhập' trên header, rồi bấm 'Đăng ký ngay'.",
+          "expected": "Màn 'Đăng Ký Tài Khoản' hiển thị; ba ô Họ Tên, Email, Mật khẩu trống; không có chữ lỗi."
+        },
+        {
+          "action": "Nhập lần lượt Họ Tên → Email → Mật khẩu → Xác nhận mật khẩu (nếu có) bằng bàn phím ảo, gõ đúng chuỗi trong cột. Ô có giá trị `''` (rỗng): không chạm vào ô, giữ trống. Giá trị có ␣: bấm phím cách đúng số lần đó. Bàn phím tự viết hoa/tự sửa/chèn gợi ý làm đổi chuỗi → xoá và gõ lại cho đúng, ghi notes (D12). Không có ô Xác nhận mật khẩu → làm theo notes của case (D9).",
+          "expected": "Ô Họ Tên và Email hiển thị đúng chuỗi trong cột; ô Mật khẩu hiển thị dạng che với số ký tự che bằng độ dài chuỗi trong cột. Chụp TC-FR20-xx_manual_input.png."
+        },
+        {
+          "action": "Ẩn bàn phím, bấm nút 'Đăng Ký' đúng một lần.",
+          "expected": "App phản hồi (chữ lỗi, hộp thoại, toast hoặc chuyển màn hình)."
+        },
+        {
+          "action": "Quan sát và chụp TC-FR20-xx_manual_result.png: mọi kênh thông báo (hộp thoại: ghi tiêu đề + nội dung rồi mới đóng; chữ trên màn hình; toast) và tiêu đề màn hình sau khi đóng hộp thoại.",
+          "expected": "Khớp phần app của cột Expected."
+        },
+        {
+          "action": "Trên máy tính: tải lại trang admin, mở tab 'Người dùng'; so với ảnh ở bước 1, chụp TC-FR20-xx_manual_admin_after.png.",
+          "expected": "Số dòng và Email như cột Expected (oracle tương đối)."
+        },
+        {
+          "action": "Chỉ case hợp lệ: trên màn 'Đăng Nhập' của app, bảo đảm ô Email chứa đúng email của case (xoá và gõ lại nếu khác), nhập Mật khẩu của case, bấm 'Sign In'; chụp TC-FR20-xx_manual_login.png.",
+          "expected": "Header hiển thị 'Chào, <Họ Tên của case>' như cột Expected."
+        }
+      ],
+      "columns": [
+        "Họ Tên",
+        "Email",
+        "Email trong CSDL",
+        "Mật khẩu",
+        "Xác nhận mật khẩu"
+      ],
+      "cleanup": [
+        "Không xoá tài khoản giữa các case: mỗi case dùng email riêng và oracle tương đối (D0). Cuối lượt: khởi động lại backend để CSDL seed lại."
+      ],
+      "cases": [
+        {
+          "id": "TC-FR20-200",
+          "title": "Kiểm tra dán (paste) chuỗi XSS `<script>alert(1)</script>` từ Clipboard vào ô Họ Tên bằng menu ngữ cảnh mobile",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "<script>alert(1)</script>",
+            "Email": "m200_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Đăng ký thành công; app không bị giật/văng; trang Admin hiển thị nguyên văn chuỗi dạng chữ, không thực thi script.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "assumptions": [
+            "D3"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC1"
+          ],
+          "technique": "Security / Input Handling",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Security: Kiểm tra việc dán mã script từ bộ nhớ tạm mobile xem React Native TextInput render và lưu trữ an toàn hay không.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-01.1, D3"
+        },
+        {
+          "id": "TC-FR20-201",
+          "title": "Kiểm tra dán chuỗi Unicode Emoji 🐻 vào ô Họ Tên qua bàn phím di động",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Lê 🐻 Hiệp ",
+            "Email": "m201_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Đăng ký thành công; CSDL và trang Admin lưu đúng ký tự Emoji 4-byte UTF-8, không bị lỗi font/dấu '?' hoặc rách icon.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "assumptions": [
+            "D3"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC1"
+          ],
+          "technique": "Unicode / Encoding",
+          "bva_point": "",
+          "approach": "black-box",
+          "rationale": "Mobile Keyboard: Bàn phím di động thường xuyên gõ emoji. Kiểm tra xem chuỗi Emoji 4-byte UTF-8 có bị lỗi mã hóa CSDL không.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-01.1, D3"
+        },
+        {
+          "id": "TC-FR20-202",
+          "title": "Kiểm tra nhập chuỗi Mật khẩu có ký tự xuống dòng `\\n` bằng cách dán từ ứng dụng Ghi chú (Notes)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m202_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd123\\n4!",
+            "Xác nhận mật khẩu": "Abcd123\\n4!"
+          },
+          "expected_result": "App hiển thị thông báo lỗi Mật khẩu không hợp lệ và giữ nguyên người dùng ở màn hình Đăng ký; không tạo tài khoản mới.",
+          "requirements": [
+            "FR-01.8"
+          ],
+          "assumptions": [
+            "D8"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC8"
+          ],
+          "technique": "Injection / Format",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Input Parsing: Dán mật khẩu có chứa ký tự xuống dòng `\\n` từ ứng dụng khác dễ làm gãy chuỗi JSON.stringify khi gửi request.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-01.8, D8"
+        },
+        {
+          "id": "TC-FR20-203",
+          "title": "Kiểm tra bấm chạm liên tục 10 lần nút 'Đăng Ký' khi form hợp lệ (Spam Touch / Double Tap)",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m203_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "Nút 'Đăng Ký' bị vô hiệu hóa trong lúc chờ phản hồi; chỉ tạo duy nhất 1 tài khoản trong CSDL, không tạo trùng lặp.",
+          "requirements": [
+            "FR-20.1"
+          ],
+          "assumptions": [
+            "D11"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC1",
+            "D11"
+          ],
+          "technique": "Concurrency / Double Tap",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "UX Mobile: Người dùng mạng chậm/lag thường bấm chạm nút 'Đăng Ký' liên tục nhiều lần.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-20.1, D11"
+        },
+        {
+          "id": "TC-FR20-204",
+          "title": "Kiểm tra tính năng Bàn phím tự động gợi ý / Tự viết hoa (Auto-correct / Auto-capitalize) tự chèn khoảng trắng ở ô Email",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m205_{ts} @domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "App hiển thị thông báo lỗi Email không hợp lệ và không gửi request tạo tài khoản.",
+          "requirements": [
+            "FR-01.3"
+          ],
+          "assumptions": [
+            "D4"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC5"
+          ],
+          "technique": "Mobile Keyboard Behavior",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Mobile Keyboard: Tính năng Auto-correct trên Gboard/iOS Keyboard rất hay tự động chèn khoảng trắng sau dấu `@` hoặc dấu `.`.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-01.3, D4"
+        },
+        {
+          "id": "TC-FR20-205",
+          "title": "Kiểm tra nhập Mật khẩu chứa chuỗi số Full-width `１２３４５６78` bằng bộ gõ tiếng Trung/Nhật",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "Nguyễn Văn Ánh",
+            "Email": "m206_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd１２３4!",
+            "Xác nhận mật khẩu": "Abcd１２３4!"
+          },
+          "expected_result": "App báo lỗi Mật khẩu thiếu chữ số (chuỗi `１２３` Full-width U+FF11 không phải là chữ số ASCII 0–9).",
+          "requirements": [
+            "FR-01.7c"
+          ],
+          "assumptions": [
+            "D8"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC18"
+          ],
+          "technique": "Unicode / Type Confusion",
+          "bva_point": "",
+          "approach": "black-box",
+          "rationale": "Mobile Keyboard: Bộ gõ CJK trên mobile sinh ra ký tự Full-width nhìn giống số nhưng không thuộc tập ASCII `[0-9]`.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-01.7c, D8"
+        },
+        {
+          "id": "TC-FR20-206",
+          "title": "Kiểm tra nhập Họ Tên có độ dài cực lớn (10.000 ký tự) bằng cách dán chuỗi từ bộ nhớ tạm",
+          "layer": "Mobile",
+          "method": "Manual",
+          "inputs": {
+            "Họ Tên": "10.000 chữ 'a'",
+            "Email": "m207_{ts}@domain.com",
+            "Email trong CSDL": "chưa có",
+            "Mật khẩu": "Abcd1234!",
+            "Xác nhận mật khẩu": "Abcd1234!"
+          },
+          "expected_result": "App xử lý mượt mà không bị đơ UI; gửi request thành công, chuyển sang màn hình Đăng nhập và tạo đúng 1 tài khoản mới trong CSDL.",
+          "requirements": [
+            "FR-01.1"
+          ],
+          "assumptions": [
+            "D3"
+          ],
+          "covers": [
+            "EC1",
+            "EC3",
+            "EC6",
+            "EC8"
+          ],
+          "ec_target": [
+            "EC1"
+          ],
+          "technique": "Boundary / Overflow",
+          "bva_point": "",
+          "approach": "gray-box",
+          "rationale": "Boundary/Performance: Dán chuỗi cực đại vào TextInput trên React Native dễ làm đơ luồng JS Thread (Main Thread) của app mobile.",
+          "origin": "Human",
+          "priority": "Medium",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-01.1, D3"
+        }
+      ]
+    },
+    {
+      "id": "TS-SV-GUI",
+      "name": "SV bổ sung — GUI",
+      "format": "steps",
+      "description": "Case GUI SV bổ sung ở bước 5 (origin Human), chép từ sv_cases.md (commit f66b32f), giữ nguyên chữ của SV. Cột 'Các bước' của SV không có kết quả mong đợi từng bước → ghi '(SV chưa ghi)'. Tiền điều kiện lấy từ TS-GUI.",
+      "cases": [
+        {
+          "id": "TC-FR20-207",
+          "title": "Kiểm tra bàn phím tự động che khuất (Keyboard Obscure) ô Mật khẩu và nút 'Đăng Ký' khi hiện bàn phím",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-22.4"
+          ],
+          "assumptions": [
+            "D13"
+          ],
+          "technique": "GUI / Mobile Usability",
+          "approach": "black-box",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "Medium",
+          "origin": "Human",
+          "rationale": "UX Mobile: Bàn phím ảo chiếm 1/2 màn hình mobile dễ che mất các ô phía dưới nếu không dùng KeyboardAvoidingView.",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Mở màn Đăng ký.",
+              "expected": "(SV chưa ghi)"
+            },
+            {
+              "action": "Chạm vào ô Mật khẩu để mở bàn phím ảo.",
+              "expected": "(SV chưa ghi)"
+            },
+            {
+              "action": "Quan sát vị trí ô Mật khẩu và nút 'Đăng Ký'.",
+              "expected": "(SV chưa ghi)"
+            }
+          ],
+          "expected_result": "Ô Mật khẩu và nút 'Đăng Ký' tự động cuộn lên (dùng KeyboardAvoidingView), không bị bàn phím ảo che khuất hoàn toàn.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-22.4, D13",
+          "cleanup": [
+            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
+          ]
+        },
+        {
+          "id": "TC-FR20-208",
+          "title": "Kiểm tra sự tồn tại và hoạt động của nút 'Mắt' (Show/Hide Password) ở ô Mật khẩu",
+          "layer": "Mobile",
+          "requirements": [
+            "FR-22.3"
+          ],
+          "assumptions": [
+            "D13"
+          ],
+          "technique": "GUI / Mobile Feature",
+          "approach": "black-box",
+          "type": "GUI",
+          "method": "Manual",
+          "priority": "Medium",
+          "origin": "Human",
+          "rationale": "Mobile Usability: Trên bàn phím nhỏ di động, nút xem/ẩn mật khẩu giúp người dùng tránh gõ sai mật khẩu.",
+          "preconditions": [
+            "Như precondition của TS-DOM (backend, admin, điện thoại, trạng thái ban đầu D0)."
+          ],
+          "test_data": "",
+          "steps": [
+            {
+              "action": "Nhập 'Abcd1234!' vào ô Mật khẩu.",
+              "expected": "(SV chưa ghi)"
+            },
+            {
+              "action": "Bấm vào biểu tượng 'Mắt' bên phải ô Mật khẩu.",
+              "expected": "(SV chưa ghi)"
+            }
+          ],
+          "expected_result": "Ký tự mật khẩu chuyển từ dạng che (`••••••••`) sang dạng văn bản đọc được (`Abcd1234!`); bấm lại chuyển về dạng che.",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": "Căn cứ (SV): FR-22.3, D13",
+          "cleanup": [
+            "Không tạo dữ liệu (không bấm Đăng Ký); tải lại app trước case kế tiếp (D0)."
+          ]
+        }
+      ]
     }
   ]
 }
