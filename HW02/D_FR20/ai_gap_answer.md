@@ -45,13 +45,14 @@
 
 ## Rà nhất quán case SV (chỉ liệt kê, không sửa)
 
-- TC-FR20-200: Expected khẳng định "trang Admin hiển thị nguyên văn chuỗi", nhưng trang 'Quản lý Người dùng' không có cột Họ Tên (D11; admin App.jsx dòng 881–892). Expected về không thực thi script không có căn cứ trong cột Căn cứ (FR-01.1, D3); SEC-04 không có trong requirements của D. "app không bị giật/văng" không có căn cứ.
-- TC-FR20-201: Expected "CSDL và trang Admin lưu đúng" — trang admin không có cột Họ Tên (D11). Giá trị `Lê 🐻 Hiệp ` có dấu cách cuối; Expected không nói giá trị lưu có giữ dấu cách đó không.
-- TC-FR20-202: Expected từ chối, nhưng giá trị `Abcd123\n4!` có chữ hoa, chữ thường, chữ số, '!' và dài ≥ 8; theo FR-01 và D7 (ký tự ngoài tập được phép đi kèm) là hợp lệ → Expected mâu thuẫn D7. Căn cứ D8 (chữ có dấu) không liên quan tới giá trị. `ec_target` EC8 là lớp hợp lệ trong khi Expected là từ chối.
-- TC-FR20-203: `ec_target` có `D11` (không phải mã EC) → check_domain ERROR. Expected "nút bị vô hiệu hoá trong lúc chờ phản hồi" không có căn cứ trong FR-20.1, D11.
-- TC-FR20-204: Expected "không gửi request tạo tài khoản" — khi chạy tay không có điểm quan sát request; D10/D11 quan sát qua dữ liệu trang admin. Expected "thông báo lỗi Email không hợp lệ" phân loại theo chữ thông báo, trái D10 ("không phân loại theo chữ của SUT"). Email dùng `m205_` trong case 204. Tiêu đề thiếu phần điều kiện (lint WARN).
-- TC-FR20-205: `ec_target` EC18 không nằm trong `covers` → check_domain ERROR. Giá trị `Abcd１２３4!` có chữ số ASCII '4' → có ≥ 1 chữ số 0–9 (FR-01.7c), mâu thuẫn Expected "thiếu chữ số". Tiêu đề ghi `１２３４５６78`, khác giá trị nhập. Căn cứ D8 chỉ nói chữ cái có dấu, không nói chữ số full-width (không có giả định D16+). Email dùng `m206_`.
-- TC-FR20-206: Expected "xử lý mượt mà không bị đơ UI" không có căn cứ SRS/giả định (FR-01.1, D3 không nói hiệu năng). Email dùng `m207_`.
-- TC-FR20-207: Căn cứ FR-22.4 (vị trí thông báo lỗi so với nút submit) không nói tới bàn phím che ô; Expected nêu cách hiện thực (KeyboardAvoidingView).
-- TC-FR20-208: FR-22.3/D13 chỉ yêu cầu che ký tự; Expected yêu cầu nút chuyển hiện/ẩn — không có căn cứ. Tiêu đề thiếu phần điều kiện (lint WARN).
-- Chung: `EC phủ` của 200–206 chỉ có EC1, EC3, EC6, EC8 (thiếu lớp của Mật khẩu khác, V5, V6 và lớp đầu ra). Cột "Các bước" của 207, 208 không có kết quả từng bước → ghi "(SV chưa ghi)". Mục "Giả định mới" chưa có giả định nào.
+Cập nhật ở 5/7d theo `sv_cases.md` commit `7a9f887`. TC-FR20-202 SV đã bỏ (giữ khoảng trống số). SV không thêm giả định D16+.
+
+- TC-FR20-200: không thấy lỗi nhất quán. (SEC-04 được thêm vào `requirements` của D ở 5/7d để truy vết được căn cứ SV dẫn — README.md dòng 281.)
+- TC-FR20-201: không thấy lỗi nhất quán.
+- TC-FR20-203: quy trình của suite TS-SV (chép từ TS-DOM) ghi "bấm nút 'Đăng Ký' đúng một lần", mâu thuẫn với thao tác của case (chạm 10 lần).
+- TC-FR20-204: không thấy lỗi nhất quán.
+- TC-FR20-205: tiêu đề "chỉ chứa các chữ số Full-width `１２３４５６７８`" khác giá trị nhập `Abcd１２３４５６!` (có chữ cái, '!', và chữ số full-width 1–6). Căn cứ D8 chỉ nói về chữ hoa/thường có dấu, không nói chữ số full-width; không có giả định D16+. `EC phủ` có cả EC17 (có ≥ 1 chữ số) và EC18 (không có chữ số) của cùng biến.
+- TC-FR20-206: không thấy lỗi nhất quán.
+- TC-FR20-207: FR-22.4 (vị trí thông báo lỗi) đã được khẳng định ở TC-FR20-93; khẳng định lần hai (quy ước "khẳng định một nơi"). Các bước không nhập Họ Tên.
+- TC-FR20-208: FR-22.3 (che ký tự ô Mật khẩu) đã được khẳng định ở TC-FR20-92; khẳng định lần hai.
+- Chung: cột "Các bước" của 207, 208 không có kết quả từng bước → ghi "(SV chưa ghi)".
