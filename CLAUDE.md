@@ -76,6 +76,14 @@ Skill dùng trong repo:
 - 2026-10-19: SUT = `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã); ghi ở `meta.sut_version` và `HW02/env/environment.md`.
 - 2026-10-19: Dải mã TC mỗi feature — TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV (SV bổ sung) từ 200.
 - Transcript ghi nhận các lượt #1–#3 của session cloud ngày 12/10 do Claude Sonnet 4.6 trả lời, các lượt sau Claude Opus 5.5 → AI-03 khai cả hai.
+- 2026-10-20 (từ A_FR01) Verdict: lệch do biến mục tiêu → Fail; do biến khác chặn → Blocked, ghi case gốc trong notes (A20); `auto_status` giữ kết quả tự động gốc; "Pass hộp đen" (ghi notes) khi bị từ chối đúng nhưng lý do không chứng minh luật mục tiêu.
+- A17: thiếu trường SRS yêu cầu → 1 case kiểm sự tồn tại (Fail), các case phụ thuộc trường đó Blocked.
+- Case "UI+API" phải tách thành 2 case (mỗi tầng một case); expected của case API không chứa yếu tố UI.
+- Chỉ đổi Expected sau khi có Actual khi điểm quan sát không tồn tại; ghi lý do vào notes.
+- Evidence: tên `TC-xx_ui/_api/_req/_res/_failed/_manual_*`; bỏ trace .zip; evidence gốc không che đường dẫn (bản che để dán issue: `bugs/_issue_redacted/`).
+- Bug: `BUG-xx` đánh số liên tục toàn HW02 (kế tiếp **BUG-15**); Severity Critical/High/Medium/Low, Priority High/Medium/Low (`bugs/README.md`).
+- Bước 7: AI gom dữ kiện → SV chốt danh sách bug → AI dựng khung (chỉ dữ kiện) → SV viết → AI sửa dữ kiện theo evidence, đánh dấu "(chưa kiểm chứng)" → kiểm trùng issue → `gh issue create` bằng tài khoản SV, tiêu đề `[FR-xx] <tiêu đề>`, `--label bug`.
+- Tài khoản GitHub của SV: `ThachHaoo` (tên hiển thị TonKnight).
 
 **Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 
