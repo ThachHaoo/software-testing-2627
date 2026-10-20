@@ -15438,6 +15438,33 @@ UI: cả 9 bug tái hiện được (bước đăng nhập là em tự thêm vì
 Đã xác nhận bất thường mới. Giờ sửa dữ kiện trong file BUG và ghi log trước/sau.
 
 Đã sửa dữ kiện ở 11 chỗ trong các file BUG. Đang ghi mục "Kiểm 7c" (lệnh, output, log trước/sau) vào `_groups_C_FR15.md`.
+
+Đã commit `8260da3`. Cả 16 bug đều tái hiện được trên SUT sau khi đã reset dữ liệu: 7 bug API chạy bằng PowerShell 5.1, 9 bug UI chạy bằng Playwright. Có một ngoại lệ ở BUG-45: ví dụ "id = 8" không tồn tại sau khi seed lại.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** 7c C_FR15 — chạy thật bước tái hiện SV viết, sửa dữ kiện. Commit 7/7b (`b06a775`) đứng ngay trước. Backend được restart trước mỗi bug/thao tác và sau thao tác cuối.
+- **File đã sửa:**
+  - `BUG-35…41, 43, 44, 45, 47, 49, 50.md`
+  - `bugs/_groups_C_FR15.md`, mục "Kiểm 7c": lệnh, output, log trước/sau, điểm SV tự sửa
+  - script mới `bugs/_repro_C_FR15/7c/`
+  - `A_prompt_log.md` (sinh lại)
+- **Commit:** `8260da3 HW02[C-FR15] 7/7c: soát dữ kiện BUG-35–50`
+
+| BUG | Tái hiện được? | Chỗ đã sửa dữ kiện | SV tự sửa |
+|---|---|---|---|
+| 35, 39, 40, 49, 50 | Có | Thêm bước đăng nhập admin vào Tiền điều kiện (SV chưa ghi; thiếu bước này thì không vào được trang) | — |
+| 36 | Có | Đăng nhập; TC-205 là dán chữ số full-width chứ không phải "để trống"; "cho phép bán…" gắn "(chưa kiểm chứng)" | Severity "Major", Priority "Major" nằm ngoài thang cho phép |
+| 37, 38 | Có | Đăng nhập; xoá "(hoặc 'Cập nhật sản phẩm')" vì giao diện không có nút này | — |
+| 39 | Có | Đăng nhập | Severity "Major" |
+| 41 | Có | "toàn bộ hệ thống" gắn "(chưa kiểm chứng)" | — |
+| 42, 46, 48 | Có | — | BUG-46: tiêu đề ghi "44xx"; Expected đòi "body JSON" nhưng C10 không nêu |
+| 43 | Có | "lỗi parse phía Client" gắn "(chưa kiểm chứng)" | — |
+| 44 | Có | Ghi rõ TC-211 gửi `text/plain` | — |
+| 45 | Không theo đúng ví dụ | Đăng nhập; đổi ví dụ "id = 8" thành "iPhone 15 Pro Max" (id 1); xoá nút "Cập nhật sản phẩm"; giá cũ trong Actual ghi cả hai giá trị: TC-03 là 1000000, lần chạy 7c là 30000000 | Severity "Major" |
+| 47 | Có (thử thêm token hết hạn, vẫn 200) | "trên Internet" gắn "(chưa kiểm chứng)" | Expected ghi cố định 401/403, trong khi FR-12.2, C5, C6 chỉ nói 4xx |
+
+- **Bất thường mới (SUT):** `POST /api/products` với `price: null` tạo bản ghi có id chẵn. Gọi tiếp `GET /api/products/<id đó>` thì tiến trình `node server.js` dừng hẳn (`backend/server.js:162`, lệnh `row.price.toString()` gặp null). Lỗi này do em gọi thêm ngoài bước của SV. Chưa có TC hay bug nào cho nó — SV quyết có lập bug không.
+- **Cần quyết định:** không có điểm nào chặn bước kế tiếp. Có 6 điểm chữ SV cần tự sửa, liệt kê ở `_groups_C_FR15.md`, mục "Điểm SV tự sửa".
 ```
 *File AI ghi/gửi trong lượt này:* `restart_backend.ps1`, `api_7c.ps1`, `ui_7c.js`, `kiem7c_template.md`
 
@@ -15445,4 +15472,32 @@ UI: cả 9 bug tái hiện được (bước đăng nhập là em tự thêm vì
 
 ---
 
-**Tổng:** 255 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 171 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #256 | 20:42 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trước khi compact: lưu transcript phiên Claude Code này và cập nhật prompt log. Không sửa tay prompt log.
+1. Tìm transcript phiên hiện tại:
+   Get-ChildItem "$env:USERPROFILE\.claude\projects\*\*.jsonl" | Sort-Object LastWriteTime -Descending | Select-Object -First 3 FullName, LastWriteTime, Length
+   Chọn file có tên là session-id của phiên này.
+2. Chép sang .transcripts\ với tên MỚI (không đè file nào đã có). Theo quy ước tên các file Claude Code đã có trong .transcripts\;
+   chưa có quy ước → `claude-code_session_HW02_C_<yyyyMMdd-HHmm>.jsonl`.
+3. Kiểm nhanh (python inline): số lượt user (bỏ isMeta, tool_result), giờ lượt đầu và lượt cuối (giờ VN).
+   Lượt đầu muộn hơn lúc phiên bắt đầu → phiên đã từng bị compact, báo SV.
+4. Chạy `python tools/hooks/on_stop.py --manual`; kiểm HW02/appendix/A_prompt_log.md có lượt mới nhất của phiên này.
+5. Commit `HW02: cập nhật prompt log (trước compact)` chỉ gồm HW02/appendix/A_prompt_log.md
+   (không thêm .transcripts\ nếu thư mục đó không được theo dõi trong git).
+Báo cáo (≤ 5 dòng): tên file đã chép; số lượt + giờ đầu/cuối; commit.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 256 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 172 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
