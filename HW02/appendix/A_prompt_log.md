@@ -6305,9 +6305,83 @@ sao nhìn giờ cảm thấy outdate nhỉ
 ```
 
 **Output:**
+````
+Log trông "cũ" không phải vì log lỗi thời, mà vì **phần của phiên claude.ai bị mất một đoạn**. Có hai nguyên nhân, và một nguyên nhân là lỗi của mình.
+
+## Chuyện gì đã xảy ra
+
+1. **Phiên này bị nén ngữ cảnh lúc khoảng 17:23 ngày 19/10.** Sau lần nén, file transcript của phiên **chỉ còn các lượt từ 17:41 trở đi**. File mình gửi lúc nãy cũng chỉ có phần đó, thế là bạn đặt vào `.transcripts/` đè lên bản cũ, và toàn bộ lượt từ 12/10 biến khỏi log.
+2. **Lỗi của mình:** khi xuất file, mình đã chép đè lên bản xuất trước đó mà không kiểm xem nó chứa khoảng thời gian nào, và mình còn dặn bạn đặt đè cùng tên. Lẽ ra mỗi lần xuất phải dùng một tên mới.
+3. **Script lỗi `NoneType`:** lượt 17:41 không có câu trả lời nằm trong cùng file (câu trả lời đến sau lần nén), nên không có tên model. Script không xử lý trường hợp này nên dừng ngay ở lượt #10. Thêm nữa, tin nhắn tóm tắt của lần nén ("This session is being continued…") đang bị tính như một prompt của bạn, mà đó là do hệ thống tạo ra.
+
+## Đã khôi phục được
+
+Mình tìm thấy một bản sao cũ trong thư mục làm việc và tách thành hai phần:
+- **`claude-ai_session_HW02_p1.jsonl`**: từ 12/10 đến 15:55 ngày 19/10 (14 lượt).
+- **`claude-ai_session_HW02_p2.jsonl`**: từ 17:41 ngày 19/10 đến giờ.
+
+**Còn hở khoảng 15:56–17:40 ngày 19/10**, gồm khoảng 8–10 lượt: lỗi UnicodeDecodeError, LF/CRLF, và phần review các bước 0–4. Phần này vẫn có thể lấy lại từ **lịch sử git**: mỗi commit bước 1/7 đến 4/7 đều kèm `A_prompt_log.md` sinh từ bản xuất cũ. Nếu các commit đó không có thì còn một cách: chép từ giao diện claude.ai, vì ở đó vẫn hiển thị đầy đủ hội thoại.
+
+### Bạn làm trước
+
+Trong `.transcripts/`, **xoá** `claude-ai_session_HW02.jsonl`, rồi đặt `_p1.jsonl` và `_p2.jsonl` vào.
+
+### Lệnh cho Claude Code
+
 ```
-(không có output dạng văn bản)
+Sửa prompt log (vá harness, commit riêng):
+1. tools/extract_prompt_log.py:
+   a. Lượt không có model → tool = "Claude (không rõ model)"; render/list không được crash khi tool None.
+   b. Thêm vào SKIP_PREFIXES: "This session is being continued from a previous conversation" (tóm tắt do hệ thống nén ngữ cảnh tạo, không phải prompt của SV) — output sau đó gộp vào lượt trước.
+   c. "<command-message>…<command-name>/x</command-name><command-args>y</command-args>" → hiển thị prompt là "/x y".
+   d. "<pasted_content …>…</pasted_content>" → bỏ thẻ, giữ nguyên nội dung bên trong.
+2. Chạy --list trên .transcripts/*.jsonl, báo: tổng lượt, lượt đầu/cuối của mỗi file, và khoảng trống thời gian > 30 phút giữa các lượt claude.ai.
+3. Khôi phục khoảng 15:56–17:40 ngày 19/10 từ git: với các commit có HW02/appendix/A_prompt_log.md (git log --follow), lấy bản mới nhất có lượt claude.ai trong khoảng đó; liệt kê các lượt đó (giờ, dòng đầu prompt). Viết script (không chép tay) chuyển nguyên văn các lượt thiếu thành [[entry]] trong HW02/appendix/prompt_log_extra.toml (time, tool, prompt, output) kèm dòng ghi chú nguồn "khôi phục từ <commit>:A_prompt_log.md do transcript bị nén". Không sửa nội dung.
+4. Chạy python tools/hooks/on_stop.py --manual; báo tổng lượt mới và còn khoảng trống nào không.
+5. Commit "HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command" và commit riêng "HW02: khôi phục lượt prompt log 19/10 15:56–17:40 từ git" kèm A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
 ```
+
+Nếu git cũng không còn các lượt đó, bạn chép tay từ giao diện claude.ai vào `prompt_log_extra.toml` (bạn tự chép là hợp lệ). Ngoài ra, thêm một dòng trong Audit/AI-03 giải thích rằng transcript bị nén nên một phần được khôi phục.
+
+**Từ nay khi xuất transcript:** mỗi lần dùng **tên mới** có hậu tố `_p3`, `_p4`…, không bao giờ đè. Mình đã ghi quy tắc này vào bản bàn giao.
+
+Log trông "cũ" vì nó bị **mất toàn bộ các lượt của phiên claude.ai từ 12/10 tới 17:40 ngày 19/10**, không phải do script hỏng hẳn. Phần lớn đã khôi phục được; còn hở một khoảng, và khoảng đó lấy lại được từ git.
+
+**Chuyện gì đã xảy ra:**
+- Phiên này bị nén ngữ cảnh lúc khoảng 17:23 ngày 19/10. Sau lần nén, file transcript chỉ còn các lượt từ 17:41 trở đi.
+- **Đây là lỗi của mình:** khi xuất file, mình chép đè lên bản xuất trước đó mà không kiểm nội dung, rồi còn dặn bạn đặt đè cùng tên vào `.transcripts/`. Vì vậy các lượt cũ biến khỏi log.
+- Lỗi `NoneType` là do lượt 17:41 không có câu trả lời nằm trong cùng file, nên không có tên model và script dừng ở lượt #10. Script còn tính nhầm tin nhắn tóm tắt của lần nén ("This session is being continued…") là prompt của bạn, trong khi đó là do hệ thống tạo.
+
+**Đã khôi phục:** mình tìm được một bản sao cũ và tách thành hai file vừa gửi:
+- **`claude-ai_session_HW02_p1.jsonl`**: từ 12/10 đến 15:55 ngày 19/10 (14 lượt).
+- **`claude-ai_session_HW02_p2.jsonl`**: từ 17:41 ngày 19/10 đến giờ.
+
+**Còn hở 15:56–17:40 ngày 19/10**, khoảng 8–10 lượt (lỗi Unicode, LF/CRLF, review bước 0–4). Các commit bước 1/7 đến 4/7 đều kèm `A_prompt_log.md`, nên có thể lấy lại từ lịch sử git. Nếu git không có, bạn chép tay từ giao diện claude.ai vào `prompt_log_extra.toml`, vì ở đó vẫn hiện đủ hội thoại.
+
+**Bạn làm trước:** trong `.transcripts/`, xoá `claude-ai_session_HW02.jsonl`, rồi đặt hai file `_p1` và `_p2` vào.
+
+**Lệnh cho Claude Code:**
+
+```
+Sửa prompt log (vá harness, commit riêng):
+1. tools/extract_prompt_log.py:
+   a. Lượt không có model → tool = "Claude (không rõ model)"; render/list không được crash khi tool None.
+   b. Thêm vào SKIP_PREFIXES: "This session is being continued from a previous conversation" (tóm tắt do hệ thống nén ngữ cảnh tạo, không phải prompt của SV) — output sau đó gộp vào lượt trước.
+   c. "<command-message>…<command-name>/x</command-name><command-args>y</command-args>" → hiển thị prompt là "/x y".
+   d. "<pasted_content …>…</pasted_content>" → bỏ thẻ, giữ nguyên nội dung bên trong.
+2. Chạy --list trên .transcripts/*.jsonl, báo: tổng lượt, lượt đầu/cuối của mỗi file, và khoảng trống thời gian > 30 phút giữa các lượt claude.ai.
+3. Khôi phục khoảng 15:56–17:40 ngày 19/10 từ git: với các commit có HW02/appendix/A_prompt_log.md (git log --follow), lấy bản mới nhất có lượt claude.ai trong khoảng đó; liệt kê các lượt đó (giờ, dòng đầu prompt). Viết script (không chép tay) chuyển nguyên văn các lượt thiếu thành [[entry]] trong HW02/appendix/prompt_log_extra.toml (time, tool, prompt, output) kèm dòng ghi chú nguồn "khôi phục từ <commit>:A_prompt_log.md do transcript bị nén". Không sửa nội dung.
+4. Chạy python tools/hooks/on_stop.py --manual; báo tổng lượt mới và còn khoảng trống nào không.
+5. Commit "HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command" và commit riêng "HW02: khôi phục lượt prompt log 19/10 15:56–17:40 từ git" kèm A_prompt_log.md.
+Báo cáo cho phiên thảo luận.
+```
+
+Trong Audit và AI-03, thêm một dòng nói rõ transcript bị nén nên một phần prompt log được khôi phục từ git (hoặc chép tay).
+
+Từ nay mỗi lần xuất transcript dùng **tên mới** (`_p3`, `_p4`…), không bao giờ đè. Mình đã ghi quy tắc này vào `claude/HW02_handoff.md` trong Project để phiên mới làm theo.
+````
+*File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p1.jsonl`, `claude-ai_session_HW02_p2.jsonl`
 
 **Xử lý:** [...]
 
@@ -6381,7 +6455,113 @@ Khoảng trống > 30 phút giữa các lượt claude.ai: 12/10 21:33→19/10 1
 
 ---
 
-## #107 | 09:44 20/10/2026 | Claude Opus 5.5 | [...]
+## #107 | 09:41 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã vá extract_prompt_log.py và commit, nhưng không có lượt nào để khôi phục nên em không tạo commit thứ hai. Khoảng 15:56–17:40 ngày 19/10 không mất lượt: lúc đó SV đang làm ở Claude Code (8 lượt, đã có trong log), chứ không phải ở claude.ai.
+
+1. Vá script (cả 4 mục a–d)
+- a. Lượt không có model hiện là "Claude (không rõ model)"; --list và render không còn crash khi tool rỗng.
+- b. Tin nhắn "This session is being continued…" bị bỏ; output sau đó gộp vào lượt trước.
+- c. <command-message>…<command-name>/x</command-name><command-args>y</command-args> hiện là /x y.
+- d. Thẻ pasted_content bị bỏ, nội dung giữ nguyên.
+
+Em sửa thêm 2 lỗi --list vừa lộ ra (ngoài lệnh):
+- Lượt trùng: transcript 580f5fe0 (phiên cũ) và 820baaa9 (phiên tiếp nối) cùng có lượt 16:10 /domain-bva-testing HW02/A_FR01 0. Lượt này bị đếm 2 lần ở cả log đã commit trước đây (#15 và #16). Giờ script bỏ lượt trùng giờ + prompt.
+- /compact: lệnh cục bộ này từng bị tính là prompt (chính là lượt "không rõ model" duy nhất). Giờ script bỏ các lệnh cục bộ như /compact, /add-dir…
+
+2. --list (sau khi vá, tính từ 12/10):
+
+┌───────────────────────────┬──────┬─────────────┬──────────────────────────────────┐
+│           file            │ lượt │     đầu     │               cuối               │
+├───────────────────────────┼──────┼─────────────┼──────────────────────────────────┤
+│ claude-ai_se15:56–17:40 (16:10, 16:31, 16:39, 16:47, 16:51, 17:09, 17:17, 17:25), tất cả là lượt Claude Code. Sau khi làm sạch thẻ, cả 8 khớp transcript 820baaa9. Vì vậy không thêm [[entry]] nào vào prompt_log_extra.toml.
+
+4. on_stop.py --manual: log có 96 lượt (Sonnet 4.6: 3, Opus 5.5: 94; #3 có output từ cả hai model nên được đếm ở cả hai). Không còn lượt "không rõ model". Khoảng trống > 30 phút khi gộp mọi nguồn: 12/10→19/10; 14:06→14:53; 17:45→19:14; 19:42→22:09; 01:46→02:22; 02:22→07:19; 07:48→09:16. Khoảng 15:55→17:41 đã được lượt Claude Code lấp kín.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: vá extract_prompt_log (a–d), liệt kê lượt và khoảng trống, khôi phục 15:56–17:40 từ git, trích lại log
+- File đã sửa: tools/extract_prompt_log.py; HW02/appendix/A_prompt_log.md (tạo lại bằng script)
+- Kết quả kiểm tra: 96 lượt, 0 lượt không rõ model; bỏ 1 lượt trùng (16:10) và 1 lượt /compact; khoảng 15:56–17:40 có 8 lượt Claude Code đủ trong transcript; git không chứa lượt claude.ai nào trong khoảng đó
+- Commit: b812d33 HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command (gồm A_prompt_log.md); KHÔNG tạo commit "khôi phục…" vì không có lượt nào để khôi phục
+- Cần quyết định / câu hỏi:
+  1. SV xác nhận trong 15:55–17:41 ngày 19/10 không chat ở claude.ai. Nếu có thì đó là transcript tải về bị thiếu → tải lại phiên claude.ai, không dựng lại từ trí nhớ.
+  2. Số lượt đổi (bỏ lượt trùng và /compact) → số # trong prompt_log_notes.toml có thể lệch; SV kiểm lại ghi chú Section/Mục đích/Xử lý theo số mới.
+  3. Lệnh cũ ghi "A_prompt_log.md đi với commit khôi phục"; em đưa nó vào commit harness vì không có commit khôi phục.
+```
+
+**Output:**
+````
+Kết luận của Claude Code về khoảng **15:56–17:40 ngày 19/10** là **chưa đúng**. Trong khoảng đó bạn chat ở **cả hai nơi**: Claude Code chạy các bước, còn phiên claude.ai này review từng bước. 8 lượt Claude Code đã có đủ trong log, nhưng **khoảng 10 lượt ở claude.ai thì thật sự bị mất**. Git cũng không có, vì bản xuất bạn dùng lúc commit chỉ chứa tới 15:55.
+
+Các lượt claude.ai bị thiếu, theo thứ tự (lấy từ phần tóm tắt khi nén):
+1. Hỏi lỗi `UnicodeDecodeError` ("lỗi gì đây nhỉ")
+2. `on_stop` chạy được; hỏi cảnh báo LF/CRLF khi `git add`
+3. Gửi báo cáo bước 0–1 (7 câu hỏi) kèm `testcases.md`
+4. Báo cáo commit bước 1 ("có nên commit bây giờ không?")
+5. Đã commit + báo cáo bước 2 (6 câu hỏi)
+6. Báo cáo bước 3 (7 câu hỏi)
+7. "Trước khi tôi dùng lệnh 1. Cho tôi hỏi, hiện tại bạn đã đảm bảo 1 testcase…"
+8. "mình nhớ lúc dạy, thầy còn nói rõ precondition…"
+9. Báo cáo bước 3 sau khi sửa ("Bạn xem đã xong chưa nhé…")
+10. Báo cáo bước 4 ("Check giúp mình nhé")
+
+## Cách lấy lại, theo thứ tự nên thử
+
+1. **Xuất dữ liệu từ claude.ai:** Settings → Privacy → Export data. Bản xuất có thể chứa đầy đủ hội thoại, kể cả phần trước lúc nén; nếu có thì Claude Code viết script chuyển sang `prompt_log_extra.toml`. Mình không chắc bản xuất có bao gồm loại phiên này không, nên cần thử mới biết.
+2. **Nếu không được:** cuộn lên trong giao diện của phiên này (giao diện vẫn hiển thị hội thoại cũ) và **tự chép nguyên văn** 10 lượt trên vào `prompt_log_extra.toml`. Do bạn tự chép nên hợp lệ. Giờ ghi gần đúng cũng được, kèm ghi chú "giờ ước lượng; chép tay từ giao diện vì transcript bị nén".
+
+Dù cách nào, nhớ khai một dòng trong Audit và AI-03.
+
+## Câu hỏi của Claude Code
+
+1. Như trên: **có** chat ở claude.ai trong khoảng đó.
+2. **Số thứ tự sẽ còn lệch nữa**, vì 10 lượt khôi phục sẽ chèn vào giữa. Nên vá để `prompt_log_notes.toml` dùng **giờ** làm khoá thay cho số thứ tự, **trước khi** bạn bắt đầu điền ghi chú.
+3. Gộp `A_prompt_log.md` vào commit harness là được.
+
+```
+1. extract_prompt_log.py: cho phép prompt_log_notes.toml dùng khoá theo giờ ("2026-10-19 16:10") bên cạnh số thứ tự; ưu tiên khoá giờ. Nếu file notes đang có khoá số, chuyển sang khoá giờ theo danh sách hiện tại (script, không sửa tay nội dung). --list in thêm khoá giờ để SV dùng.
+2. Ghi nhận: khoảng 15:56–17:40 ngày 19/10 THIẾU ~10 lượt claude.ai (phiên thảo luận review bước 0–4); không có trong git. SV sẽ khôi phục từ bản export claude.ai hoặc chép tay vào prompt_log_extra.toml. Chưa làm gì thêm.
+3. Commit "HW02: vá harness – notes theo khoá giờ".
+Báo cáo cho phiên thảo luận.
+```
+
+Mình sẽ sửa lại tài liệu bàn giao cho đúng tình trạng này.
+
+Prompt log vẫn đang thiếu khoảng 10 lượt của phiên claude.ai này, trong khoảng 15:56–17:40 ngày 19/10. Claude Code kết luận "không mất lượt nào" là sai: nó chỉ thấy 8 lượt Claude Code trong khoảng đó, trong khi bạn chat song song ở cả hai nơi. Git cũng không giữ các lượt này, vì bản xuất dùng lúc commit chỉ có tới 15:55.
+
+Các lượt bị thiếu là phần mình review bước 0–4 cho bạn:
+- lỗi `UnicodeDecodeError` và câu hỏi về LF/CRLF;
+- các báo cáo bước 0–1, 1, 2, 3 và 4;
+- hai câu bạn hỏi về "mỗi case fail vì đúng 1 nguyên nhân" và "precondition phải ghi các ô trống".
+
+**Cách lấy lại:**
+1. **Thử trước:** claude.ai → Settings → Privacy → Export data. Mình không chắc bản xuất có chứa phiên kiểu này không, phải thử mới biết. Nếu có thì Claude Code viết script chuyển các lượt đó sang `prompt_log_extra.toml`.
+2. **Nếu không được:** cuộn lên trong giao diện phiên này và tự chép nguyên văn 10 lượt đó vào `prompt_log_extra.toml`. Giờ ghi gần đúng, kèm ghi chú "chép tay từ giao diện vì transcript bị nén".
+
+Dù dùng cách nào, nhớ thêm một dòng giải thích trong Audit và AI-03.
+
+**Lệnh cho Claude Code:**
+
+```
+1. extract_prompt_log.py: cho phép prompt_log_notes.toml dùng khoá theo giờ ("2026-10-19 16:10") bên cạnh số thứ tự; ưu tiên khoá giờ. Nếu file notes đang có khoá số, chuyển sang khoá giờ theo danh sách hiện tại (script, không sửa tay nội dung). --list in thêm khoá giờ để SV dùng.
+2. Ghi nhận: khoảng 15:56–17:40 ngày 19/10 THIẾU ~10 lượt claude.ai (phiên thảo luận review bước 0–4); không có trong git. SV sẽ khôi phục từ bản export claude.ai hoặc chép tay vào prompt_log_extra.toml. Chưa làm gì thêm.
+3. Commit "HW02: vá harness – notes theo khoá giờ".
+Báo cáo cho phiên thảo luận.
+```
+
+Mục 1 cần làm **trước khi bạn bắt đầu điền ghi chú**. Hiện ghi chú khoá theo số thứ tự lượt, nên khi chèn 10 lượt khôi phục vào giữa, các số sẽ lệch hết.
+
+Mình đã sửa `claude/HW02_handoff.md` trong Project cho đúng tình trạng này, kèm quy tắc mỗi lần xuất transcript dùng một tên mới. Xong lệnh trên thì phiên này không còn gì dở dang, bạn có thể sang phiên mới để làm B_FR07.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #108 | 09:44 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6424,7 +6604,53 @@ Ghi chú prompt log giờ dùng được khoá theo giờ bên cạnh số thứ
 
 ---
 
-## #108 | 09:49 20/10/2026 | Claude Opus 5.5 | [...]
+## #109 | 09:46 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sau khi chạy prompt trên: ### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: notes theo khoá giờ; ghi nhận khoảng thiếu 15:56–17:40 (chưa xử lý)
+- File đã sửa: tools/extract_prompt_log.py; HW02/appendix/prompt_log_notes.toml (chỉ đổi tiêu đề [1] bằng --migrate-notes); HW02/appendix/A_prompt_log.md (trích lại, 97 lượt)
+- Kết quả kiểm tra: --list in khoá giờ (4 khoá có #k); ghi chú #1 vẫn hiện đúng sau khi đổi khoá; on_stop --manual chạy OK
+- Commit: 5bf0287 HW02: vá harness – notes theo khoá giờ
+- Cần quyết định / câu hỏi:
+  1. Đầu file notes (phần SV viết) vẫn ghi "Xem số #n… Số #n đổi nếu thêm session…"; em không sửa → SV đổi thành hướng dẫn dùng khoá giờ nếu muốn.
+  2. Khoảng 15:56–17:40 (~10 lượt claude.ai) chờ SV khôi phục từ bản export claude.ai vào prompt_log_extra.toml. Mỗi entry cần time, tool (vd "Claude Opus 5.5"), prompt, output nguyên văn; khai trong AI-03 rằng các lượt này chép từ export.
+===
+Bạn có thể đọc được không nhỉ. Mình vừa tải export data từ 19/10 - 20/10
+```
+*Đính kèm:* `manifest-d803db65-ba43-44ed-a451-116c4708780b-1792464204-3249963b-2026-10-20-02-43-42.json`
+
+**Output:**
+````
+Mình **không đọc được nội dung**. File này chỉ là **danh sách link tải**, chưa phải dữ liệu. Mình cũng không nên tự mở các link đó: mỗi link chỉ dùng được một lần và cần bạn đăng nhập, nếu mình mở hỏng thì bạn mất luôn link.
+
+**Bạn làm:**
+1. Mở `manifest…json`, tải **`conversations-000.zip`**. Tải thêm `frames-000.zip` phòng khi phiên này nằm ở đó: phiên này chạy dạng "Claude Code trên web", mình không chắc nó được xếp vào loại nào. Ba file còn lại (metadata, projects, memories) không cần.
+2. Giải nén vào thư mục **không bị commit**, ví dụ `context/private/export_2026-10-20/`. Thư mục này đã nằm trong `.gitignore`. Bản xuất chứa **mọi hội thoại** trong tài khoản, nên tuyệt đối không commit hay đưa vào zip nộp bài.
+3. Gửi lệnh dưới cho Claude Code. Claude Code chạy trên máy bạn nên đọc thẳng được file, bạn không cần gửi file lên đây.
+
+### Lệnh cho Claude Code
+
+```
+Khôi phục ~10 lượt claude.ai bị thiếu (19/10 15:56–17:40 giờ VN = 08:56–10:40 UTC) từ bản export claude.ai ở context/private/export_2026-10-20/ (KHÔNG commit thư mục này).
+1. Tìm cuộc hội thoại của phiên thảo luận HW02: tìm trong các file JSON chuỗi đặc trưng như "UnicodeDecodeError", "Báo cáo cho phiên thảo luận", "domain-bva-testing". Báo file/khoá chứa nó và cấu trúc message (trường thời gian, người gửi, nội dung).
+2. Lọc các message trong khoảng 2026-10-19T08:56Z–10:42Z; ghép thành lượt (prompt của SV + toàn bộ phản hồi của Claude tới prompt kế tiếp). Liệt kê: giờ VN, dòng đầu prompt, độ dài output. Đối chiếu với danh sách dự kiến: Unicode error → LF/CRLF → báo cáo bước 0–1 → commit bước 1 → bước 2 → bước 3 → "đảm bảo 1 testcase…" → "precondition các ô trống" → bước 3 sửa lại → bước 4.
+3. Nếu có đủ: viết script (không chép tay) ghi các lượt này thành [[entry]] trong HW02/appendix/prompt_log_extra.toml: time (giờ VN), tool "Claude Opus 5.5", prompt, output nguyên văn, kèm trường/ghi chú nguồn "export claude.ai 2026-10-20 (transcript phiên bị nén)". Lọc bỏ khối hệ thống giống extract_prompt_log.py. Không sửa nội dung.
+4. Nếu export không chứa phiên này: báo lại, không làm gì thêm.
+5. Chạy on_stop.py --manual; báo tổng lượt mới và còn khoảng trống nào trong 15:56–17:40. Commit "HW02: khôi phục 10 lượt prompt log 19/10 từ export claude.ai" (prompt_log_extra.toml, A_prompt_log.md).
+Báo cáo cho phiên thảo luận.
+```
+
+Câu hỏi 1 của Claude Code: phần đầu `prompt_log_notes.toml` là do bạn viết, nên bạn tự sửa câu hướng dẫn từ "số #n" sang "khoá giờ" khi tiện. Việc này không gấp.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #110 | 09:49 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6447,7 +6673,7 @@ Báo cáo cho phiên thảo luận.
 
 ---
 
-## #109 | 09:53 20/10/2026 | Claude Opus 5.5 | [...]
+## #111 | 09:53 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6464,7 +6690,7 @@ Hiểu, em bỏ toàn bộ phát hiện về hội thoại "FR-01 test cases" v�
 
 ---
 
-## #110 | 09:55 20/10/2026 | Claude Opus 5.5 | [...]
+## #112 | 09:55 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6498,7 +6724,54 @@ Bản export claude.ai để hội thoại ở `conversations.json`, tách riên
 
 ---
 
-## #111 | 10:06 20/10/2026 | Claude Opus 5.5 | [...]
+## #113 | 10:05 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: khôi phục ~10 lượt claude.ai 19/10 15:56–17:40 từ export (project 01a13075… "Homework Testing Software")
+- File đã tạo/sửa: không có
+- Kết quả kiểm tra: project chỉ có 1 doc HW02_handoff.md (tóm tắt bàn giao), 0 message → không khôi phục được
+- Commit: không có
+- Cần quyết định / câu hỏi:
+  1. Trong file zip export của tài khoản SV, tìm conversations.json (thường ở gốc zip hoặc conversations-000/), đặt vào context/private/export_2026-10-20/ rồi báo em; em lọc theo 08:56–10:42Z và tìm hội thoại chứa "Báo cáo cho phiên thảo luận".
+  2. Nếu bản export không có (ví dụ export trước khi phiên kết thúc, hoặc phiên đã bị xoá) → chép tay vào prompt_log_extra.toml và khai trong AI-03.
+===
+có vẻ không có nên mình tự chép tay vào. GIúp mình format lại nhé, hoặc là nhờ Claude Code format lại, mình đang đặt ở context/private/conthieu.md
+```
+*Đính kèm:* `conthieu.md`
+
+**Output:**
+````
+Bạn chép tay khá đều tay nên dễ chuyển đổi: 11 lượt, mỗi lượt có `Time:`, `Prompt:`, `Response:`, và các lượt cách nhau bởi `---`. Cách nhanh và an toàn nhất là để Claude Code dùng **script** chuyển thẳng sang `prompt_log_extra.toml`, không ai sửa tay nội dung.
+
+Hai điểm mình đã kiểm trong file:
+- Lượt cuối (**5:41 PM**) **đã có sẵn** trong transcript `_p2` (17:41). Phải bỏ lượt này, nếu không log sẽ có một lượt bị lặp.
+- Trong phần Prompt của một vài lượt có dòng `===`. Đó là dấu phân cách bạn tự gõ trong tin nhắn gốc, nên giữ nguyên, không coi là ranh giới giữa prompt và response.
+
+### Lệnh cho Claude Code
+
+```
+Chuyển context/private/conthieu.md (SV chép tay từ giao diện claude.ai) thành [[entry]] trong HW02/appendix/prompt_log_extra.toml BẰNG SCRIPT, không sửa nội dung:
+1. Định dạng nguồn: mỗi lượt bắt đầu bằng dòng "Time: H:MM AM/PM"; prompt = từ sau "Prompt:" tới dòng "Response:" đầu tiên (giữ nguyên mọi dòng, kể cả "==="); output = sau "Response:" tới trước dòng "---" ngay trước "Time:" kế tiếp (hoặc hết file). Không cắt ở các dòng "---" nằm giữa output.
+2. time = 2026-10-19 + giờ đã đổi sang 24h (giờ VN); tool = "Claude Opus 5.5"; thêm trường source = "Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút".
+3. BỎ lượt 5:41 PM (đã có trong claude-ai_session_HW02_p2.jsonl lúc 17:41). Báo nếu còn lượt nào trùng với transcript.
+4. Ghi TOML đúng chuẩn (chuỗi nhiều dòng, xử lý \ và ''' an toàn). Kiểm tra: đọc lại bằng tomllib, so từng prompt/output với văn bản nguồn — phải khớp 100%.
+5. extract_prompt_log.py: nếu entry có trường source thì render thêm dòng "*Nguồn:* <source>" dưới tiêu đề lượt.
+6. on_stop.py --manual; báo tổng lượt, danh sách 10 lượt mới (giờ + dòng đầu prompt), còn khoảng trống nào trong 15:56–17:40 không.
+7. Commit "HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)" gồm prompt_log_extra.toml, extract_prompt_log.py, A_prompt_log.md. KHÔNG commit context/private/.
+Báo cáo cho phiên thảo luận.
+```
+
+Sau đó, trong AI-03 và Audit, ghi một câu: *"10 lượt ngày 19/10 (16:04–17:22) của phiên claude.ai được em chép tay từ giao diện vì transcript bị nén ngữ cảnh; script chuyển sang prompt log, không sửa nội dung."*
+````
+
+**Xử lý:** [...]
+
+---
+
+## #114 | 10:06 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -6526,4 +6799,30 @@ Cấu trúc nguồn rõ: 11 lượt, 12 dòng `---` (10 dòng ngăn cách đứn
 
 ---
 
-**Tổng:** 111 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 109 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #115 | 10:08 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: chuyển context/private/conthieu.md → [[entry]] trong prompt_log_extra.toml (bằng script), render dòng Nguồn, trích lại log
+- File đã sửa: HW02/appendix/prompt_log_extra.toml (+10 entry), tools/extract_prompt_log.py (trường source → "*Nguồn:*"), HW02/appendix/A_prompt_log.md
+- Kết quả kiểm tra: 11 lượt nguồn, bỏ 17:41, ghi 10; tomllib đọc lại khớp 100% (10/10 prompt + output); không lượt nào trùng transcript; log 111 lượt; 15:56–17:40 không còn khoảng trống >30 phút
+- Commit: "HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)" (3 file); context/private/ không commit (gitignore)
+- Cần quyết định / câu hỏi:
+  1. Số #n dịch sau mốc 16:04 → ghi chú trong prompt_log_notes.toml nên dùng khoá giờ (--list in sẵn).
+  2. Khai trong AI-03/AI-02: 10 lượt 16:04–17:22 ngày 19/10 được chép tay từ giao diện claude.ai, giờ chính xác tới phút.
+===
+Vậy còn gì nữa không nhỉ
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 115 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 113 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
