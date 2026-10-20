@@ -28,6 +28,8 @@
 
 3. Quan sát nhãn (label) của các trường nhập liệu trên biểu mẫu đăng ký.
 
+(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1)
+
 ## Expected (trích SRS)
 
 Tất cả các trường bắt buộc theo quy định FR-01 (gồm Họ Tên, Email, Mật khẩu) phải có ký hiệu dấu sao * hiển thị ngay bên cạnh nhãn theo yêu cầu FR-22.1 (D13).

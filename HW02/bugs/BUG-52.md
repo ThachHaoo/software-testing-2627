@@ -37,6 +37,8 @@
 
 5. Bấm nút 'Đăng Ký'.
 
+(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1)
+
 ## Expected (trích SRS)
 
 - Hệ thống phải bắt buộc người dùng nhập Email theo quy định FR-01.2 và Email phải chuẩn định dạng user@domain.com theo FR-01.3 (D4).
@@ -51,9 +53,9 @@
 
 - Trong cả ba trường hợp trên, vừa bấm Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
 
-- Sau khi bấm đóng hộp thoại, app tự động chuyển luôn sang màn hình 'Đăng Nhập'.
+- Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-04_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau).
 
-- Mở web admin kiểm tra danh sách người dùng thì thấy trong cả 3 lượt chạy đều bị chèn thêm tài khoản mới vào CSDL với chuỗi Email rỗng hoặc sai định dạng đúng như đã nhập trên app.
+- Mở web admin kiểm tra danh sách người dùng thì thấy cả 3 case (cùng lượt 1) đều bị chèn thêm tài khoản mới vào CSDL với chuỗi Email rỗng hoặc sai định dạng như đã nhập trên app: ID 4 (Email trống), ID 5 `m05_{ts}domain.com`, ID 8 `m204_{ts}@ domain.com` (ảnh `D_admin_sau_1.png`).
 
 ## Bằng chứng
 
@@ -90,7 +92,7 @@
 - Actual nguyên văn (TC-FR20-04): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-04_manual`
 - Actual nguyên văn (TC-FR20-05): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-05_manual`
 - Actual nguyên văn (TC-FR20-204): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-204_manual`
-- Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại.
+- Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=4 email=[], id=5 email=[m05_2231domain.com], id=6 email=[m204_2231 @domain.com]. Bước trên thiết bị chưa chạy lại.
 - Đoạn code trích nguyên văn: `frontend-mobile/App.js` dòng 209–240
 
   ```js
@@ -158,7 +160,7 @@
 
 ### Nhận định
 
-- Tương tự trường hợp Họ Tên, hàm handleRegister ở App.js trên app mobile hoàn toàn không viết bất kỳ dòng lệnh nào để validate biến registerEmail. Cho dù email có để trống, nhập thiếu ký tự @ hay dính khoảng trắng ở giữa do tính năng auto-correct của bàn phím di động thì client vẫn đóng gói gửi thẳng sang server qua request POST /api/register.
+- Tương tự trường hợp Họ Tên, hàm handleRegister ở App.js trên app mobile hoàn toàn không viết bất kỳ dòng lệnh nào để validate biến registerEmail. Cho dù email có để trống, nhập thiếu ký tự @ hay dính khoảng trắng ở giữa do tính năng auto-correct của bàn phím di động (chưa kiểm chứng) thì client vẫn đóng gói gửi thẳng sang server qua request POST /api/register.
 
 - Đồng thời, phía server ở file server.js cũng bỏ ngỏ không kiểm tra tính hợp lệ hay định dạng của email mà thực thi ngay lệnh INSERT vào CSDL SQLite. Việc không validate ở cả hai phía làm cho dữ liệu rác/lỗi dễ dàng lưu trữ thành công vào hệ thống.
 

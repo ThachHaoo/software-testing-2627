@@ -480,3 +480,179 @@ Không có BUG nào của A/B/C ở `frontend-mobile/App.js` dòng 209–240 hay
 | G5 | 90 | mobile · `App.js` 804, 810, 817 (`<Text style={styles.label}>` Họ Tên / Email / Mật khẩu) | BUG-12: `Register.jsx` 35–37; BUG-49: `frontend-admin/src/App.jsx` 490–507 | không trùng | không | Nhãn mobile là `Text` riêng trong `App.js`; Register.jsx và admin App.jsx không được mobile dùng. |
 | G6 | 91 | mobile · `App.js` 811–816 (`TextInput` Email không có `keyboardType`) | BUG-13: `Register.jsx` 45–49 | không trùng | không | Loại bàn phím do prop của `TextInput` mobile quyết định; `type` của input web không ảnh hưởng. |
 | G7 | 94 (Blocked 16, 17) | mobile · `App.js` 797–837 (thêm ô Xác nhận), 209–219 (so khớp), 225–229 (body nếu server cũng kiểm); server · `server.js` 20–29 (chỉ khi body có trường xác nhận) | BUG-14: `Register.jsx` 63–72 | không trùng | không | Màn mobile dựng riêng ở `renderRegister` (797–837); thêm ô ở form web không thêm ô trên mobile. |
+
+## 7c — AI kiểm tái hiện + sửa dữ kiện (21/10/2026, sau commit 7/7b `6d16d98`)
+
+### Đầu vào
+- 7/7b (`6d16d98`) chỉ chạm `HW02/bugs/BUG-51.md` … `BUG-57.md`. HEAD = merge `af05093` (SV) của `6d16d98` với `40052e9`; cây không đổi so với `6d16d98`.
+- `git status`: chỉ có `A_prompt_log.md` (hook tự cập nhật).
+- Không còn chỗ `<SV viết>` nào trong BUG-51…57.
+- Severity/Priority: cả 7 BUG đúng thang (51–54, 57: High/High; 55: Low/Low; 56: Medium/Medium).
+- Tiêu đề trong file không có tiền tố `[FR-20]`.
+
+### Phần server — chạy thật (PowerShell 5.1)
+
+Restart backend (`node server.js`, CSDL seed lại) → gửi POST /api/register với đúng giá trị trong bước tái hiện SV ghi. Body JSON theo thứ tự khoá như mobile (App.js 225–229). Kiểm dữ liệu: đăng nhập admin seed → GET /api/admin/users. Chạy xong restart backend lần nữa để xoá dữ liệu thử. BUG-55…57 là GUI, không có phần server.
+
+Lệnh (`repro_D.ps1`, chạy bằng `powershell.exe -NoProfile -ExecutionPolicy Bypass -File`):
+
+```powershell
+$ErrorActionPreference = 'Stop'
+$base = 'http://localhost:3000/api'
+function Post($label, $path, $obj, $headers = @{}) {
+    $body = $obj | ConvertTo-Json -Compress
+    "### $label"
+    "POST $path  body=$body"
+    try {
+        $r = Invoke-WebRequest -UseBasicParsing -Method Post -Uri "$base$path" -ContentType 'application/json' -Headers $headers -Body ([Text.Encoding]::UTF8.GetBytes($body))
+        "HTTP $($r.StatusCode)  $($r.Content)"
+        return $r.Content
+    } catch {
+        $resp = $_.Exception.Response
+        if ($resp) {
+            $s = $resp.GetResponseStream(); $s.Position = 0
+            "HTTP $([int]$resp.StatusCode)  $((New-Object IO.StreamReader($s)).ReadToEnd())"
+        } else { "ERROR $($_.Exception.Message)" }
+    }
+}
+$cases = @(
+    @('BUG-51 / TC-FR20-03', @{ name = ''; email = 'm03_2231@domain.com'; password = 'Abcd1234!' }),
+    @('BUG-52 / TC-FR20-04', @{ name = 'Nguyễn Văn Ánh'; email = ''; password = 'Abcd1234!' }),
+    @('BUG-52 / TC-FR20-05', @{ name = 'Nguyễn Văn Ánh'; email = 'm05_2231domain.com'; password = 'Abcd1234!' }),
+    @('BUG-52 / TC-FR20-204', @{ name = 'Nguyễn Văn Ánh'; email = 'm204_2231 @domain.com'; password = 'Abcd1234!' }),
+    @('BUG-53 / TC-FR20-06', @{ name = 'Nguyễn Văn Ánh'; email = 'test@eshop.com'; password = 'Abcd1234!' }),
+    @('BUG-54 / TC-FR20-15', @{ name = 'Nguyễn Văn Ánh'; email = 'm15_2231@domain.com'; password = 'Abcd1234#' })
+)
+foreach ($c in $cases) {
+    # giữ thứ tự khoá như App.js 225–229: name, email, password
+    $o = [ordered]@{ name = $c[1].name; email = $c[1].email; password = $c[1].password }
+    Post $c[0] '/register' $o
+    ''
+}
+'### Kiểm dữ liệu: đăng nhập admin seed rồi GET /api/admin/users'
+$login = Invoke-WebRequest -UseBasicParsing -Method Post -Uri "$base/login" -ContentType 'application/json' -Body ([Text.Encoding]::UTF8.GetBytes('{"email":"admin@eshop.com","password":"Admin123!"}'))
+"POST /login (admin@eshop.com) → HTTP $($login.StatusCode)"
+$token = ($login.Content | ConvertFrom-Json).token
+$u = Invoke-WebRequest -UseBasicParsing -Uri "$base/admin/users" -Headers @{ Authorization = "Bearer $token" }
+"GET /admin/users → HTTP $($u.StatusCode)"
+($u.Content | ConvertFrom-Json) | ForEach-Object { "id=$($_.id) | name=[$($_.name)] | email=[$($_.email)] | role=$($_.role)" }
+```
+
+Output:
+
+```text
+### BUG-51 / TC-FR20-03
+POST /register  body={"name":"","email":"m03_2231@domain.com","password":"Abcd1234!"}
+HTTP 200  {"message":"User registered successfully","id":3}
+{"message":"User registered successfully","id":3}
+
+### BUG-52 / TC-FR20-04
+POST /register  body={"name":"Nguyễn Văn Ánh","email":"","password":"Abcd1234!"}
+HTTP 200  {"message":"User registered successfully","id":4}
+{"message":"User registered successfully","id":4}
+
+### BUG-52 / TC-FR20-05
+POST /register  body={"name":"Nguyễn Văn Ánh","email":"m05_2231domain.com","password":"Abcd1234!"}
+HTTP 200  {"message":"User registered successfully","id":5}
+{"message":"User registered successfully","id":5}
+
+### BUG-52 / TC-FR20-204
+POST /register  body={"name":"Nguyễn Văn Ánh","email":"m204_2231 @domain.com","password":"Abcd1234!"}
+HTTP 200  {"message":"User registered successfully","id":6}
+{"message":"User registered successfully","id":6}
+
+### BUG-53 / TC-FR20-06
+POST /register  body={"name":"Nguyễn Văn Ánh","email":"test@eshop.com","password":"Abcd1234!"}
+HTTP 200  {"message":"User registered successfully","id":7}
+{"message":"User registered successfully","id":7}
+
+### BUG-54 / TC-FR20-15
+POST /register  body={"name":"Nguyễn Văn Ánh","email":"m15_2231@domain.com","password":"Abcd1234#"}
+HTTP 200  {"message":"User registered successfully","id":8}
+{"message":"User registered successfully","id":8}
+
+### Kiểm dữ liệu: đăng nhập admin seed rồi GET /api/admin/users
+POST /login (admin@eshop.com) → HTTP 200
+GET /admin/users → HTTP 200
+id=1 | name=[Admin User] | email=[admin@eshop.com] | role=admin
+id=2 | name=[Test User] | email=[test@eshop.com] | role=user
+id=3 | name=[] | email=[m03_2231@domain.com] | role=user
+id=4 | name=[Nguyễn Văn Ánh] | email=[] | role=user
+id=5 | name=[Nguyễn Văn Ánh] | email=[m05_2231domain.com] | role=user
+id=6 | name=[Nguyễn Văn Ánh] | email=[m204_2231 @domain.com] | role=user
+id=7 | name=[Nguyễn Văn Ánh] | email=[test@eshop.com] | role=user
+id=8 | name=[Nguyễn Văn Ánh] | email=[m15_2231@domain.com] | role=user
+```
+
+### Phần thao tác trên mobile — đối chiếu code + evidence (AI không chạy được)
+
+Bước SV ghi khớp code App.js, không phải sửa bước nào:
+- header `Đăng nhập` (dòng 429–432);
+- màn `Đăng Nhập` (762), link `Chưa có tài khoản? Đăng ký ngay` (785–787);
+- màn `Đăng Ký Tài Khoản` (800); nhãn `Họ Tên`, `Email`, `Mật khẩu` (804, 810, 817); nút `Đăng Ký` (828–829).
+
+Đã thêm dòng "(Bước trên thiết bị: AI chưa chạy lại; …)" vào cuối mục Bước tái hiện của cả 7 BUG.
+
+### Tiền điều kiện — có đủ để dựng lại không (SV viết, AI chỉ liệt kê)
+
+| BUG | Thiếu |
+|---|---|
+| 51, 52 | restart backend để CSDL seed lại; áp `mobile_api_url.patch` / IP `192.168.2.12`; `npx expo start` + mở bằng Expo Go (SDK 54) |
+| 53, 54 | áp patch IP; `npx expo start` + Expo Go (đã có ý seed lại) |
+| 55, 56, 57 | áp patch IP; `npx expo start` + Expo Go |
+
+### Log sửa dữ kiện 7c (trước → sau)
+
+| BUG | Trước | Sau |
+|---|---|---|
+| BUG-51 | - Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'. | - Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-03_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau). |
+| BUG-51 | - Kiểm tra lại danh sách bên trang admin thì thấy xuất hiện thêm một dòng tài khoản mới có email m03_2231@domain.com, nhưng cột Họ Tên bị bỏ rỗng. | - Kiểm tra lại danh sách bên trang admin thì thấy xuất hiện thêm một dòng tài khoản mới có email m03_{ts}@domain.com (ID 3, ảnh `D_admin_sau_1.png`). Trang admin không có cột Họ Tên (cột: ID, Email, Role, Số ĐT); Họ Tên rỗng chỉ thấy qua API khi AI chạy lại phần server (7c: `name=[]`). |
+| BUG-51 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+| BUG-51 | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại. | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=3, name=[] , email=[m03_2231@domain.com]. Bước trên thiết bị chưa chạy lại. |
+| BUG-52 | - Sau khi bấm đóng hộp thoại, app tự động chuyển luôn sang màn hình 'Đăng Nhập'. | - Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-04_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau). |
+| BUG-52 | - Mở web admin kiểm tra danh sách người dùng thì thấy trong cả 3 lượt chạy đều bị chèn thêm tài khoản mới vào CSDL với chuỗi Email rỗng hoặc sai định dạng đúng như đã nhập trên app. | - Mở web admin kiểm tra danh sách người dùng thì thấy cả 3 case (cùng lượt 1) đều bị chèn thêm tài khoản mới vào CSDL với chuỗi Email rỗng hoặc sai định dạng như đã nhập trên app: ID 4 (Email trống), ID 5 `m05_{ts}domain.com`, ID 8 `m204_{ts}@ domain.com` (ảnh `D_admin_sau_1.png`). |
+| BUG-52 | do tính năng auto-correct của bàn phím di động thì client | do tính năng auto-correct của bàn phím di động (chưa kiểm chứng) thì client |
+| BUG-52 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+| BUG-52 | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại. | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=4 email=[], id=5 email=[m05_2231domain.com], id=6 email=[m204_2231 @domain.com]. Bước trên thiết bị chưa chạy lại. |
+| BUG-53 | - Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'. | - Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-06_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau). |
+| BUG-53 | - Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang đúng email test@eshop.com, dẫn đến việc CSDL bị trùng lặp email. | - Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang đúng email test@eshop.com (ID 6, cùng email với ID 2; ảnh `D_admin_sau_1.png`), dẫn đến việc CSDL bị trùng lặp email. |
+| BUG-53 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+| BUG-53 | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại. | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=7 email=[test@eshop.com] (cùng email với id=2 seed). Bước trên thiết bị chưa chạy lại. |
+| BUG-54 | - Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'. | - Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-15_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau). |
+| BUG-54 | - Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang email m15_2231@domain.com với mật khẩu Abcd1234# lọt qua thành công. | - Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang email m15_{ts}@domain.com (ID 7, ảnh `D_admin_sau_1.png`); trang admin không hiển thị mật khẩu. |
+| BUG-54 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+| BUG-54 | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại. | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=8 email=[m15_2231@domain.com]. Bước trên thiết bị chưa chạy lại. |
+| BUG-55 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+| BUG-56 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+| BUG-57 | (cuối Các bước tái hiện) | (Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1) |
+
+Không sửa: Severity, Priority, tiêu đề, Expected, câu Nhận định (ngoài nhãn "(chưa kiểm chứng)").
+
+### Điểm SV tự sửa (chữ của SV — AI không sửa)
+
+- **BUG-51:**
+  - Tiền điều kiện: lặp chữ "máy máy tính"; thiếu các mục đã nêu ở bảng trên.
+  - Mục "Expected (trích SRS)" không có câu trích nguyên văn SRS (README.md dòng 32).
+- **BUG-52:**
+  - Tiền điều kiện: "máy máy tính"; thiếu các mục ở bảng trên.
+  - Expected không có câu trích nguyên văn SRS (dòng 33).
+  - Expected "Server phải từ chối request": TC-04/05/204 Expected chỉ khẳng định danh sách admin SAU = TRƯỚC (D10); không có câu SRS/giả định làm căn cứ cho "server từ chối".
+- **BUG-53:** Tiền điều kiện thiếu các mục ở bảng trên; Expected không có câu trích nguyên văn SRS (dòng 33).
+- **BUG-54:**
+  - Nhận định: "guyên nhân" (thiếu chữ).
+  - Expected "Phía server phải từ chối request": thiếu căn cứ như BUG-52.
+  - Expected không có câu trích nguyên văn SRS (dòng 34); Tiền điều kiện thiếu các mục ở bảng trên.
+- **BUG-55:**
+  - Nhận định ghi `<Text style="{styles.label}">`, nhưng code App.js 804 là `style={styles.label}` (không có dấu nháy).
+  - Expected không trích nguyên văn FR-22.1; Tiền điều kiện thiếu các mục ở bảng trên.
+- **BUG-56:**
+  - Tiêu đề có dấu backtick thừa ở đầu.
+  - Expected thêm "phím dấu chấm . ngay trên bàn phím chính": D13 chỉ nêu `keyboardType email-address`, thiếu căn cứ cho phím '.'.
+  - Tiền điều kiện thiếu các mục ở bảng trên.
+- **BUG-57:** Expected không có câu trích nguyên văn SRS (dòng 35); Tiền điều kiện thiếu các mục ở bảng trên.
+- **BUG-55, BUG-56 (mục Yêu cầu, AI điền ở khung, SV duyệt):** D13 có loại "phạm vi + quyết định Expected". Quy ước C: giả định phạm vi không vào "yêu cầu bị vi phạm" → SV quyết giữ hay bỏ D13.
+
+### AI phát hiện (ngoài bước SV; không đưa vào bug, SV quyết)
+
+- TC-FR20-204, lượt 1: ảnh điện thoại (`TC-FR20-204_manual_1.png`, ô Username) và ảnh admin (ID 8) cho thấy email đã nhập là `m204_{ts}@ domain.com` (dấu cách **sau** '@'). Input của TC là `m204_{ts} @domain.com` (dấu cách trước '@'), cũng là ví dụ trong bước 3 của BUG-52. Cả hai giá trị đều thuộc lớp "khoảng trắng bên trong" (EC5).
+- Lịch sử git có 2 commit 7/7a4 cùng cây: `40052e9` (đã lên remote) và `75da144` (AI amend để sửa message sau khi `40052e9` đã được push). SV merge lại ở `af05093`. Nguyên nhân: AI amend commit đã push.

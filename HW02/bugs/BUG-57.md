@@ -28,6 +28,8 @@
 
 3. Cuộn xem toàn bộ giao diện biểu mẫu đăng ký.
 
+(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1)
+
 ## Expected (trích SRS)
 
 Giao diện đăng ký tài khoản phải bắt buộc có trường 'Xác nhận mật khẩu' để người dùng nhập lại mật khẩu, và hệ thống phải đối chiếu từ chối nếu hai mật khẩu không khớp theo quy định FR-01.9 (D9).

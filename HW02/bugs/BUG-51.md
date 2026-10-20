@@ -34,6 +34,8 @@
 
 5. Bấm nút 'Đăng Ký'.
 
+(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1)
+
 ## Expected (trích SRS)
 
 - Hệ thống phải bắt buộc người dùng nhập Họ Tên theo quy định FR-01.1 (trường bắt buộc).
@@ -48,9 +50,9 @@
 
 - Vừa bấm nút Đăng Ký xong thì app hiện ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
 
-- Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'.
+- Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-03_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau).
 
-- Kiểm tra lại danh sách bên trang admin thì thấy xuất hiện thêm một dòng tài khoản mới có email m03_2231@domain.com, nhưng cột Họ Tên bị bỏ rỗng.
+- Kiểm tra lại danh sách bên trang admin thì thấy xuất hiện thêm một dòng tài khoản mới có email m03_{ts}@domain.com (ID 3, ảnh `D_admin_sau_1.png`). Trang admin không có cột Họ Tên (cột: ID, Email, Role, Số ĐT); Họ Tên rỗng chỉ thấy qua API khi AI chạy lại phần server (7c: `name=[]`).
 
 ## Bằng chứng
 
@@ -80,7 +82,7 @@
 ### Dữ kiện (AI chép)
 
 - Actual nguyên văn (TC-FR20-03): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-03_manual`
-- Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại.
+- Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=3, name=[] , email=[m03_2231@domain.com]. Bước trên thiết bị chưa chạy lại.
 - Đoạn code trích nguyên văn: `frontend-mobile/App.js` dòng 209–240
 
   ```js

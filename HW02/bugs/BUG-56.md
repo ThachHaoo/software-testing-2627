@@ -28,6 +28,8 @@
 
 3. Chạm tay vào ô nhập liệu 'Email' để gọi bàn phím ảo hiển thị.
 
+(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1)
+
 ## Expected (trích SRS)
 
 Ô nhập Email phải mở bàn phím ảo được tối ưu riêng cho việc gõ email (chứa sẵn phím @ và phím dấu chấm . ngay trên bàn phím chính) theo tương đương yêu cầu FR-22.2 (D13 quy định thuộc tính keyboardType="email-address").

@@ -34,6 +34,8 @@
 
 5. Bấm nút 'Đăng Ký'.
 
+(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code App.js + evidence lượt 1)
+
 ## Expected (trích SRS)
 
 - Mật khẩu bắt buộc phải chứa ít nhất 1 ký tự đặc biệt thuộc tập đóng @, $, !, %, *, ?, & theo quy định FR-01.8 (D7).
@@ -48,9 +50,9 @@
 
 - Vừa bấm nút Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
 
-- Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'.
+- Hộp thoại hiện trên nền màn 'Đăng Nhập': app đã chuyển màn ngay khi hiện hộp thoại, trước khi đóng (ảnh `TC-FR20-15_manual_1.png`; App.js 233–236 gọi `Alert.alert` rồi `setView("login")` liền nhau).
 
-- Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang email m15_2231@domain.com với mật khẩu Abcd1234# lọt qua thành công.
+- Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang email m15_{ts}@domain.com (ID 7, ảnh `D_admin_sau_1.png`); trang admin không hiển thị mật khẩu.
 
 ## Bằng chứng
 
@@ -82,7 +84,7 @@
 ### Dữ kiện (AI chép)
 
 - Actual nguyên văn (TC-FR20-15): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-15_manual`
-- Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend); chưa chạy lại.
+- Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=8 email=[m15_2231@domain.com]. Bước trên thiết bị chưa chạy lại.
 - Đoạn code trích nguyên văn: `frontend-mobile/App.js` dòng 209–219
 
   ```js

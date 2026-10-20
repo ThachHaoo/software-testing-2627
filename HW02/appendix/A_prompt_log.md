@@ -19304,7 +19304,15 @@ Quoting PowerShell hỏng; dùng Edit.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- **Commit:** `75da144` HW02[D-FR20] 7/7a4: Liên quan BUG-54 + trường bug TC + bản che. Lần commit đầu ghi nhầm "13 ảnh"; tôi đã amend commit cục bộ (chưa push) để sửa thành 12.
+- **BUG-54:** thêm mục "Liên quan": BUG-07 (#23), dòng chung `server.js` 20–29; dòng mobile `App.js` 211–212 ghi riêng.
+- **Trường bug của 12 TC:**
+  - 9 Fail gắn BUG-51…57 theo `_groups_D_FR20.md`.
+  - TC-16, TC-17 ghi "BUG-57 (liên quan; Blocked, case gốc TC-FR20-94)".
+  - TC-203 ghi "không lập bug (lỗi thiết kế TC)".
+- **Ảnh bằng chứng:** đã rà 12 ảnh (9 ảnh điện thoại, 3 ảnh admin cả lượt). Ảnh điện thoại chỉ có thanh trạng thái; ảnh admin chỉ có nội dung trang, không có thanh địa chỉ hay taskbar. Không ảnh nào lộ đường dẫn hay tên người dùng nên không tạo bản che; `_issue_redacted/` không đổi.
+- **Kiểm tra:** check_domain 0 lỗi, 1 cảnh báo (V6); lint 0 lỗi, 0 cảnh báo; prompt log 321 lượt.
 ```
 *File AI ghi/gửi trong lượt này:* `d_bugid.py`
 
@@ -19312,4 +19320,74 @@ Quoting PowerShell hỏng; dùng Edit.
 
 ---
 
-**Tổng:** 321 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 229 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #322 | 02:54 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20 7/7c: kiểm tái hiện + dữ kiện BUG-51…57
+
+### 0. Kiểm đầu vào
+- HEAD có commit SV 7/7b chỉ chạm HW02/bugs/BUG-51.md … BUG-57.md (+ prompt log).
+- `git status` sạch.
+- Còn chỗ `<SV viết>` chưa điền ở bất kỳ BUG nào → liệt kê; không DỪNG, làm tiếp phần còn lại.
+
+### 1. Kiểm tái hiện
+- Phần server (chạy thật):
+  - restart backend (`node server.js`, CSDL seed lại);
+  - với mỗi BUG, gửi POST /api/register bằng PowerShell 5.1 với đúng giá trị SV ghi trong bước
+    tái hiện, body JSON giống body mobile gửi (App.js 225–229): `-ContentType` riêng, body UTF-8
+    bytes, 4xx/5xx bọc try/catch, in thô response;
+  - kiểm dữ liệu bằng đăng nhập admin seed (`admin@eshop.com` / `Admin123!`) rồi GET danh sách
+    người dùng (không ký JWT bằng SECRET_KEY).
+  - Ghi lệnh + output vào log.
+- Phần thao tác trên mobile (AI không chạy được):
+  - đối chiếu từng bước với code App.js (tên màn, tên nút, chữ hiển thị, điều hướng), RUN.md lượt 1
+    và ảnh evidence;
+  - bước sai so với code/evidence (tên nút, chữ màn hình, thứ tự) → sửa dữ kiện, log trước/sau;
+  - cuối mục Bước tái hiện thêm 1 dòng: "(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code
+    App.js + evidence lượt 1)".
+- Tiền điều kiện: có đủ để dựng lại không (restart backend, patch IP, `npx expo start`, Expo Go,
+  từ màn hình chủ → Đăng nhập → Đăng ký ngay; tài khoản seed nếu cần). Thiếu → liệt kê, không viết hộ.
+
+### 2. Rà dữ kiện và quy ước (chỉ sửa dữ kiện sai so với evidence; chữ SV → liệt kê)
+- Actual trong bug ↔ Actual trong testcases.json/file lượt/ảnh: lệch → sửa dữ kiện, log trước/sau.
+- Môi trường, TC liên quan, Bằng chứng (đường dẫn ảnh tồn tại), Liên quan: đúng như khung 7a3–7a4.
+- Thang: Severity ∈ {Critical, High, Medium, Low}, Priority ∈ {High, Medium, Low}. Sai → liệt kê.
+- Yêu cầu: chỉ yêu cầu/giả định bị vi phạm. Không có giả định phạm vi/nới.
+- Tác động trong Nhận định: câu nào không có dữ kiện → gắn "(chưa kiểm chứng)".
+- Expected SV viết: so với Expected của TC; mâu thuẫn hoặc thiếu căn cứ → chỉ liệt kê.
+- Tiêu đề trong file không có tiền tố `[FR-20]` (chỉ thêm trên GitHub).
+- Bất thường AI thấy ngoài các bước SV → ghi "AI phát hiện", không đưa vào bug; SV quyết.
+
+### 3. Ghi + commit
+- Log trước/sau + output PowerShell → cuối HW02/bugs/_groups_D_FR20.md, mục "7c".
+- Mục "Điểm SV tự sửa": mỗi BUG liệt kê điểm cần SV sửa chữ (không gợi ý câu thay).
+- render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7c: AI kiểm tái hiện + sửa dữ kiện`.
+- Không tạo issue, không push.
+
+## Báo cáo cho phiên thảo luận (≤ 15 dòng)
+- Commit.
+- Mỗi BUG 1 dòng:
+  - server tái hiện được? (mã HTTP + có/không tạo tài khoản);
+  - số dữ kiện AI đã sửa;
+  - số "(chưa kiểm chứng)" đã gắn;
+  - số điểm SV tự sửa.
+- Chỗ `<SV viết>` còn trống; lỗi thang.
+- AI phát hiện (nếu có).
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Bước SV khớp code App.js. Giờ restart backend và gửi POST /api/register để tái hiện phần server.
+
+Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài khoản). Restart lại backend cho sạch, rồi sửa dữ kiện trong BUG.
+```
+*File AI ghi/gửi trong lượt này:* `repro_D.ps1`, `d_7c.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 322 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 230 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
