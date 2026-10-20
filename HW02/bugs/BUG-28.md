@@ -1,9 +1,9 @@
 # BUG-28
 
 - **ID:** BUG-28
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Link quay lại trang chủ ở trang Giỏ hàng (khi giỏ có hàng) hiển thị sai nhãn '← Mua tiếp' thay vì 'Tiếp tục mua sắm' theo quy định SRS
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang hoạt động bình thường.
+
+- Đã thêm ít nhất một sản phẩm bất kỳ vào giỏ hàng từ trang chủ (để trang giỏ hàng ở trạng thái có sản phẩm).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang chủ http://localhost:5173/.
+
+2. Bấm nút "Thêm vào giỏ" trên thẻ một sản phẩm bất kỳ (ví dụ: Tai nghe AirPods Pro 2).
+
+3. Bấm vào link "Giỏ hàng" trên thanh điều hướng Navbar để điều hướng sang trang /cart.
+
+4. Quan sát nhãn văn bản hiển thị trên nút/link quay về trang chủ ở bên dưới bảng giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.5 (kèm giả định B12): Nút/link để chuyển hướng quay lại trang chủ ở trang Giỏ hàng bắt buộc phải hiển thị chính xác nhãn văn bản là Tiếp tục mua sắm.
 
 ## Actual
 
-`<SV viết>`
+Khi giỏ hàng có chứa sản phẩm, nút quay về trang chủ chỉ hiển thị nhãn là ← Mua tiếp, hoàn toàn sai lệch so với nhãn chuẩn "Tiếp tục mua sắm" được định nghĩa trong SRS.
 
 ## Bằng chứng
 
@@ -65,7 +73,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Cart.jsx (dòng 66–68), khi giỏ hàng có sản phẩm, developer đã gán cứng nhãn cho thẻ <Link to="/"> là "← Mua tiếp":
+
+```jsx
+<Link to="/" className="border px-4 py-2 rounded text-gray-600 hover:bg-gray-50">
+  ← Mua tiếp
+</Link>
+```
+
+- Mặc dù khi giỏ hàng rỗng (ở dòng 24), trang có hiển thị chữ "Tiếp tục mua sắm", nhưng ở giao diện bảng giỏ hàng có hàng thì nút này lại bị đặt nhãn sai thành "← Mua tiếp", vi phạm quy chuẩn nhãn in đậm Tiếp tục mua sắm tại FR-07.5 và giả định B12.
 
 ## Link GitHub Issue
 

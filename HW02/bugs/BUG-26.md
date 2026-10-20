@@ -1,9 +1,9 @@
 # BUG-26
 
 - **ID:** BUG-26
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Trang Giỏ hàng hiển thị sai nhãn cột 'Giá' thay vì 'Đơn giá' theo đúng quy định SRS
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang hoạt động bình thường.
+
+- Đã thêm ít nhất một sản phẩm bất kỳ vào giỏ hàng từ trang chủ (để giỏ hàng hiển thị dạng bảng danh sản phẩm).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang chủ http://localhost:5173/.
+
+2. Bấm nút "Thêm vào giỏ" trên thẻ một sản phẩm bất kỳ (ví dụ: Tai nghe AirPods Pro 2).
+
+3. Bấm vào link "Giỏ hàng" trên thanh điều hướng Navbar để điều hướng sang trang /cart.
+
+4. Quan sát các nhãn tiêu đề cột (<th>) ở hàng đầu tiên của bảng giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.1 (kèm giả định B12): Bảng giỏ hàng bắt buộc phải hiển thị danh sách sản phẩm với các nhãn tiêu đề cột chính xác tuyệt đối theo SRS gồm: Sản phẩm, Đơn giá, Số lượng, Thành tiền, Thao tác.
 
 ## Actual
 
-`<SV viết>`
+Tại tiêu đề cột thứ 2 của bảng giỏ hàng, nhãn hiển thị bị ghi sai thành Giá thay vì Đơn giá theo đúng yêu cầu (danh sách nhãn hiển thị thực tế là: Sản phẩm, Giá, Số lượng, Thành tiền, Thao tác).
 
 ## Bằng chứng
 
@@ -67,7 +75,13 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Cart.jsx (dòng 36), thẻ <th> của cột thứ 2 bị developer gán cứng văn bản là "Giá":
+
+```jsx
+<th className="py-2">Giá</th>
+```
+
+- Việc dùng từ "Giá" thay vì "Đơn giá" làm sai lệch nhãn giao diện chuẩn được quy định cụ thể tại FR-07.1 và giả định chốt nhãn B12.
 
 ## Link GitHub Issue
 

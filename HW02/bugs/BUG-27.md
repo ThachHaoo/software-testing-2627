@@ -1,9 +1,9 @@
 # BUG-27
 
 - **ID:** BUG-27
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Nút 'Xóa' ở cột Thao tác trang Giỏ hàng hiển thị sai nhãn 'Xóa' thay vì 'Xóa sản phẩm' theo quy định SRS
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang hoạt động bình thường.
+
+- Đã thêm ít nhất một sản phẩm bất kỳ vào giỏ hàng từ trang chủ (để bảng giỏ hàng hiển thị các dòng sản phẩm cùng cột Thao tác).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang chủ http://localhost:5173/.
+
+2. Bấm nút "Thêm vào giỏ" trên thẻ một sản phẩm bất kỳ (ví dụ: Tai nghe AirPods Pro 2).
+
+3. Bấm vào link "Giỏ hàng" trên thanh điều hướng Navbar để vào trang /cart.
+
+4. Quan sát nhãn văn bản hiển thị trên nút nằm ở cột Thao tác của dòng sản phẩm.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.4 (kèm giả định B12): Nút thực hiện thao tác xóa sản phẩm khỏi giỏ hàng bắt buộc phải hiển thị chính xác nhãn văn bản là Xóa sản phẩm (hoặc Xoá sản phẩm).
 
 ## Actual
 
-`<SV viết>`
+Nút bấm ở cột Thao tác chỉ hiển thị nhãn ngắn gọn là Xóa (hoặc Xoá), hoàn toàn thiếu vắng từ "sản phẩm" phía sau so với nhãn chuẩn được quy định trong SRS.
 
 ## Bằng chứng
 
@@ -66,7 +74,18 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Cart.jsx (dòng 54), developer đã gán cứng nhãn của nút xóa chỉ là chuỗi "Xóa":
+
+```jx
+<button
+  onClick={() => removeFromCart(index)}
+  className="text-red-500 hover:text-red-700"
+>
+  Xóa
+</button>
+```
+
+- Việc viết thiếu chữ "sản phẩm" khiến nhãn nút không khớp với quy chuẩn nhãn in đậm Xóa sản phẩm được định nghĩa tại FR-07.4 và giả định B12.
 
 ## Link GitHub Issue
 

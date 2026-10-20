@@ -1,9 +1,9 @@
 # BUG-25
 
 - **ID:** BUG-25
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Toàn bộ 5 ảnh sản phẩm hiển thị trên trang chủ bị cài thuộc tính alt rỗng (alt="")
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang chạy bình thường.
+
+- Trình duyệt mở ở chế độ ẩn danh (Incognito mode, không bật extension/tiện ích mở rộng).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt ẩn danh và truy cập vào trang chủ http://localhost:5173/.
+
+2. Mở DevTools (bấm F12 hoặc chuột phải chọn Inspect/Kiểm tra) để kiểm tra DOM của các thẻ ảnh <img> trên 5 thẻ sản phẩm ở trang chủ.
+
+3. Chuyển sang trang chi tiết sản phẩm (http://localhost:5173/product/4) và kiểm tra thuộc tính alt của thẻ <img> tại trang chi tiết để so sánh.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-24.4 (kèm giả định B16): Tất cả các thẻ ảnh sản phẩm trên toàn hệ thống bắt buộc phải có thuộc tính alt chứa văn bản mô tả nội dung trực quan của ảnh (không được để rỗng alt="") nhằm hỗ trợ đọc màn hình (Accessibility) và SEO.
 
 ## Actual
 
-`<SV viết>`
+- Tại trang chủ (/), cả 5 thẻ ảnh sản phẩm đều bị bỏ rỗng thuộc tính alt (alt="").
+
+- Trong khi đó, ở trang chi tiết sản phẩm (/product/4), thẻ ảnh được gắn giá trị alt chính xác là tên sản phẩm (alt="Tai nghe AirPods Pro 2").
 
 ## Bằng chứng
 
@@ -66,7 +74,19 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Home.jsx (dòng 80–84), thẻ <img> của sản phẩm bị gán cứng thuộc tính alt là chuỗi rỗng:
+
+```jsx
+<img
+  src={p.imageUrl}
+  alt=""
+  className="w-full h-48 object-cover mb-4 rounded"
+/>
+```
+
+- Developer đã gán cứng alt="" thay vì trích xuất thuộc tính p.name (hoặc p.title) để truyền vào như cách làm đúng ở ProductDetail.jsx (alt={product.name}).
+
+- Việc để rỗng alt="" trên thẻ ảnh trang chủ làm mất khả năng tiếp cận người dùng dùng trình đọc màn hình, vi phạm tiêu chuẩn thiết kế GUI ở FR-24.4.
 
 ## Link GitHub Issue
 
