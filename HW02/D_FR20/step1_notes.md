@@ -105,3 +105,18 @@ Giả định A dùng lại: A1→D3, A2→D4, A3→D5, A4→D6, A5→D7, A6→D
 | c – đủ UI + API | Mobile + API (chạy lại suite API của A) | đủ | ~50 | ~50 tay + 49 API | ~3,5–4 giờ |
 
 Cơ sở: A có 52 EC; TS-DOM-UI 27, TS-BVA-UI 19, TS-GUI 5, TS-DOM-API 30, TS-BVA-API 19. ≈ 3,5 phút/case tay (tải lại app, vào màn Đăng ký, nhập bằng bàn phím ảo, chụp màn hình, kiểm trang admin/đăng nhập thử).
+
+## 6. Khai cho Audit
+
+- P1 = b (AI không đọc `sv_cases.md` / `ai_gap_answer.md` / `sv_questions.md` của A, B, C ở bước 1–4), nhưng ở bước 1 AI đã đọc `HW02/A_FR01/testcases.json` (bản HEAD), file này có chứa kết quả bước 5 của A. Đã thấy cụ thể (từ lệnh in `meta.scope`, `requirements`, `meta.assumptions`, `domain.variables`, và số case theo suite):
+  - `meta.scope`: câu "TS-SV có kiểm thăm dò SEC-04, SEC-05, SEC-06* liên quan trực tiếp tới dữ liệu đăng ký."
+  - `requirements`: mã SEC-04, SEC-05, SEC-06* ("mở rộng cho đăng ký, A23").
+  - A20: nội dung quy tắc Blocked do lỗi đã biết (ghi "AI đề xuất, SV duyệt 2026-10-19").
+  - A21: email có ký tự ngoài ASCII là sai định dạng; TC-219 `tеst@eshop.com` (chữ е Cyrillic) phải bị từ chối; thêm EC52.
+  - A22: đăng ký khi đang đăng nhập → thành công, chuyển /login, tạo 1 user, test@eshop.com không đổi; Expected của TC-223.
+  - A23: tài khoản tạo qua đăng ký luôn có role user, trường ngoài api_specification bị bỏ qua; TC-222.
+  - A3 bản cuối có câu "SV sửa ở bước 5" (local phân biệt hoa/thường, domain không phân biệt).
+  - Số case: TS-SV 33 case (UI 13, API 20; origin Human 25, Both 8). Không in nội dung từng case TS-SV.
+  - A21–A23 không dùng lại cho D.
+- D5 kế thừa giả định SV sửa ở bước 5 của A (A3 bản 2, 8d837f1) → có thể ảnh hưởng thiết kế EC của D (liên quan P1 = b; SV quyết).
+- Lệnh trước giả định nhầm A có commit 1/7b (A chốt giả định ngay trong 1/7, 4e30b25).

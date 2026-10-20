@@ -17382,6 +17382,58 @@ Now SRS + A_FR01 step-1 structure. Look at how C_FR15 step1 committed (files & f
 Read C_FR15 step1 frozen JSON as structural template (meta/variables/assumptions shape).
 
 Đã đọc SRS, code màn Đăng ký mobile, biến/giả định A. Giờ xem header/điều hướng mobile rồi viết `testcases.json`.
+
+Đóng băng xong. Giờ cập nhật prompt log và commit.
+
+Bước 0–1 của D_FR20 đã xong và đã commit (chưa push). Không có giả định nào được chốt sẵn: D0–D15 đều chờ em quyết. Khối dưới đây để dán về phiên thảo luận.
+
+### Báo cáo cho phiên thảo luận
+- Kiểm đầu vào: Đạt. Có 1 lệch nhỏ: lúc bắt đầu, git status còn `A_prompt_log.md` do hook ghi (chỉ đổi nhãn model của lượt #292), đã gộp vào commit này.
+- Lệnh ghi FR-20 ở §6, thực tế FR-20 nằm ở §7 (README.md dòng 231–236).
+- Harness: render, freeze, check, lint đều chạy được với tầng Mobile, không vướng giả định web/Playwright.
+- Nhiệm vụ: D_FR20 bước 0–1 (biến vào/ra V1–V9, giả định D0–D15).
+- File đã tạo/sửa:
+  - `HW02/D_FR20/{testcases.json, testcases.md, step1_notes.md}`: notes chứa SRS nguyên văn, mã mobile, bảng đối chiếu web vs mobile, ước tính phạm vi.
+  - `appendix/ai-outputs/D_FR20_step1_20261020-222828.*` và `INDEX.md`, `A_prompt_log.md` (293 lượt).
+- Kết quả kiểm tra: check_domain 0 lỗi, 4 cảnh báo (chưa có phân lớp, đúng như dự kiến ở bước 1). Lint 0 lỗi, 17 cảnh báo (yêu cầu chưa có TC). Test: Not run.
+- Commit: `c266570 HW02[D-FR20] 1/7: Phân tích biến vào/ra`
+- Cần quyết định (chặn bước 2):
+  - `D1` – phạm vi – Kiểm tầng nào, BVA đến mức nào?
+    - a) Gọn: chỉ Mobile; BVA chỉ độ dài Mật khẩu (theo code, client mobile chỉ tự kiểm ô này trước khi gửi); lớp do server xử lý lấy 1 đại diện và tham chiếu case API của A → ~25–30 EC, ~18–22 TC, ~1,3–1,5 giờ.
+    - b) Đủ UI như A → ~45–50 EC, ~45–50 TC, ~3–3,5 giờ.
+    - c) b + chạy lại API của A (mobile gọi cùng `POST /api/register`, App.js dòng 222–229) → +49 TC API trùng A, ~3,5–4 giờ.
+    - Khuyến nghị: a (FR-20 dòng 235 chỉ yêu cầu có chức năng; luật nằm ở FR-01, A đã phủ tầng API).
+  - `D2` – Expected – FR-20 có áp đủ FR-01 cho mobile không?
+    - a) Có → Expected lấy từ FR-01.
+    - b) Chỉ cần có chức năng; luật FR-01 thành kiểm thăm dò, không tạo Fail.
+    - Khuyến nghị: SRS không đủ căn cứ, SV quyết; CLAUDE.md đang ghi "áp dụng FR-01" → a.
+  - `D3–D9` – kế thừa A1–A7, A17 – Có chốt lại nguyên như A không?
+    - a) Giữ nguyên → không đổi thêm gì.
+    - b) Sửa từng mã.
+    - Riêng `D5`: văn bản A3 trong JSON ("domain không phân biệt hoa/thường") khác CLAUDE.md ("phân biệt hoa/thường") → chọn một bản.
+  - `D10` – oracle khi bị từ chối:
+    - a) Dữ liệu không đổi + có thông báo ở kênh bất kỳ + vẫn ở màn Đăng ký.
+    - b) Dữ liệu không đổi + vẫn ở màn Đăng ký; thông báo chỉ ghi Actual.
+    - Khuyến nghị: a (tiền lệ A10). Bong bóng HTML5 (A16) không áp dụng cho mobile.
+  - `D11` – điểm quan sát server:
+    - a) Trang admin "Quản lý Người dùng" (đếm dòng/Email; không có cột Họ Tên) + đăng nhập thử để thấy "Chào, <tên>".
+    - b) Chỉ đăng nhập thử → không kiểm được "đúng 1 tài khoản".
+    - c) Gọi API bằng PowerShell.
+    - Khuyến nghị: a (FR-01 dòng 36 không đủ, cần thêm oracle dữ liệu).
+  - `D12` – cách nhập (bàn phím ảo, dán, tự sửa):
+    - a) Giá trị case = chuỗi đang có trong ô; không thành biến riêng → không thêm case.
+    - b) Thành biến có lớp riêng → thêm case.
+    - c) a + 1 case "dán" Mật khẩu.
+    - Khuyến nghị: SRS im lặng, SV quyết; a hợp với mục tiêu ít case.
+  - `D13` – GUI trên mobile (FR-22 viết theo khái niệm HTML):
+    - a) Như A: FR-22.1 và 22.4 áp nguyên; 22.2/22.3 hiểu là bàn phím email và che ký tự; bỏ FR-21.
+    - b) a + FR-21.1, FR-21.2.
+    - c) Bỏ FR-22.2.
+    - Khuyến nghị: SRS không đủ căn cứ, SV quyết.
+- Không chặn:
+  - 2 mục: D14 (quy tắc verdict khi chạy tay), D15 (thiết bị/locale) → `HW02/D_FR20/testcases.json`.
+  - Chưa có `HW02/env/mobile_api_url.patch` (ngoài phạm vi lệnh).
+  - A21–A23 không dùng lại cho D vì chúng sinh ra từ case SV của A.
 ```
 *File AI ghi/gửi trong lượt này:* `testcases.json`, `step1_notes.md`
 
@@ -17389,4 +17441,121 @@ Read C_FR15 step1 frozen JSON as structural template (meta/variables/assumptions
 
 ---
 
-**Tổng:** 293 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 208 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #294 | 22:31 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — HW02 D_FR20: SV chốt bước 1 (1/7b) → bước 2
+
+### A. SV chốt giả định (không freeze)
+Ghi vào ô "SV chốt + lý do" trong HW02/D_FR20/testcases.json, đúng chữ dưới đây:
+- D1 = a. Lý do: ít case vì chạy tay; tầng API đã phủ ở A; mobile gọi cùng POST /api/register
+  (App.js 222–229, chỉ dùng để chọn đại diện).
+- D2 = a. Lý do: FR-20 yêu cầu chức năng Đăng ký trên mobile; luật của chức năng này định nghĩa ở
+  FR-01; SRS không ghi ngoại lệ cho mobile.
+  → Sửa câu căn cứ của D2: bỏ dẫn chứng CLAUDE.md.
+- D3, D4, D6, D7, D8, D9 = a: giữ nguyên như A.
+- D5 = a, theo đúng câu SV đã chốt cho A3 ở commit `1/7b` của A_FR01.
+  - Tra `git log`/`git show` để lấy câu đó và chép nguyên văn.
+  - Nếu có "(đã thay)" thì lấy bản sau cùng.
+  - Lịch sử không rõ ràng → DỪNG, in 2 bản kèm commit.
+  - Nếu CLAUDE.md ghi khác bản này → sửa CLAUDE.md trong commit riêng `HW02: sửa CLAUDE.md – A3`.
+- D10 = a. Lý do: khớp quy ước C (oracle chính = dữ liệu không đổi; thông báo mọi kênh;
+  không phân loại thông báo theo chữ).
+- D11 = a. Lý do: kiểm được "đúng 1 tài khoản" khi chạy tay.
+- D12 = a. Lý do: mục tiêu ít case.
+- D13 = a. Lý do: nhất quán với A, giữ dòng so sánh web vs mobile (SRS không đủ căn cứ, SV quyết).
+- D14, D15 = chấp nhận đề xuất AI.
+- D0: in nội dung D0 vào báo cáo.
+  - Nếu D0 KHÔNG quyết định Expected → chấp nhận đề xuất AI.
+  - Nếu có → DỪNG.
+
+Ghi vào step1_notes.md (mục "Khai cho Audit"): P1=b, nhưng testcases.json của A đọc ở bước 1 có
+chứa case SV. Liệt kê cụ thể đã thấy gì: mã case SV, A21–A23, nội dung nào. Không suy diễn.
+
+render_md.py → check_domain.py → lint → cập nhật prompt log → commit
+`HW02[D-FR20] 1/7b: SV chốt giả định`.
+
+### B. Bước 2 (chỉ chạy nếu A không bị DỪNG)
+`/domain-bva-testing HW02/D_FR20 2` theo D1=a, D2=a. Áp quy ước CLAUDE.md:
+- lý do tách lớp dựa trên code → ghi "(gray-box)";
+- lớp thuộc server: 1 đại diện + tham chiếu TC API của A.
+Sau bước: render_md.py → freeze.py → check_domain.py → lint → prompt log → commit `HW02[D-FR20] 2/7`.
+
+## Báo cáo cho phiên thảo luận (≤ 15 dòng)
+- Commit A (+ commit CLAUDE.md nếu có).
+- D5: câu đã chép + commit nguồn.
+- D0: nội dung.
+- Bước 2:
+  - số EC (hợp lệ/không hợp lệ);
+  - đường dẫn bảng EC;
+  - EC nào căn cứ chỉ là giả định D (liệt kê mã);
+  - EC nào tách theo code (gray-box);
+  - kết quả check/lint; commit.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Em dừng ở phần A, nên chưa sửa file nào, chưa commit và chưa chạy bước 2. Lý do: lịch sử của A3 không rõ ràng.
+
+### Báo cáo cho phiên thảo luận
+- **DỪNG ở A (D5):** A_FR01 không có commit nào tên `1/7b`, và A3 có 2 bản trong lịch sử:
+  - **Bản 1** — `4e30b25` "HW02[A-FR01] 1/7: Phân tích biến vào/ra" (19/10 16:33). Bản này còn nguyên qua 2/7, 3/7, 4/7, 4/7b:
+    > "A3 (Email – duy nhất): SRS không nói so sánh có phân biệt hoa/thường và có cắt khoảng trắng đầu/cuối hay không. Giả định (SV chốt 2026-10-19): so sánh CÓ phân biệt hoa/thường (TEST@eshop.com khác test@eshop.com, coi là email mới) và khoảng trắng đầu/cuối được cắt trước khi so sánh (' test@eshop.com ' trùng test@eshop.com). Expected của các case liên quan email trùng tuân theo giả định này."
+  - **Bản 2** — `8d837f1` "HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả lời gap analysis của AI" (19/10 19:20). Bản này giữ đến HEAD:
+    > "A3 (Email – duy nhất): Email so sánh sau khi cắt khoảng trắng đầu/cuối; phần local phân biệt hoa/thường, phần domain không phân biệt (RFC 5321 §2.4). SV sửa ở bước 5."
+  - Không bản nào có chữ "(đã thay)".
+  - CLAUDE.md đang ghi theo bản 1.
+  - Bản 2 sinh ra ở bước 5 của A. Nếu D dùng bản 2 thì đụng tới P1 = b.
+- **Cần quyết định:** `D5` – chép bản nào?
+  - a) Bản 1: khớp CLAUDE.md, không cần commit sửa CLAUDE.md.
+  - b) Bản 2: bản cuối của A; phải sửa CLAUDE.md trong commit riêng và khai trong mục "Khai cho Audit".
+- **D0 (nội dung hiện tại):** Đầu mỗi case tải lại app trong Expo Go, về màn hình chủ, chưa đăng nhập, rồi vào "Đăng nhập" → "Đăng ký ngay"; ba ô trống. Mỗi case dùng email riêng có `{ts}`; email trùng dùng `test@eshop.com`. Oracle tương đối: danh sách người dùng SAU so với TRƯỚC. Restart backend sẽ xoá các tài khoản đã tạo.
+  - Nhận định: D0 không quyết định Expected (chỉ là quy trình và chọn đại diện, giống C0). Khi chạy tiếp sẽ ghi "chấp nhận đề xuất AI".
+- **Đã làm:** chỉ tra lịch sử bằng `git log`/`git show`.
+- **Commit:** không có.
+- **Bước 2:** chưa chạy.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #295 | 22:39 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — tiếp tục từ chỗ DỪNG (D5)
+
+Đính chính lệnh trước: A_FR01 không có commit 1/7b (SV chốt giả định ngay trong 1/7; quy ước 1/7b
+có từ B). Bỏ điều kiện "commit 1/7b".
+
+- D5 = b. Chép nguyên văn A3 bản 2 (8d837f1). Ô "SV chốt + lý do":
+  "Kế thừa A3 bản cuối (SV sửa ở bước 5 của A, 8d837f1); giữ cùng luật với A để so sánh
+  web vs mobile."
+- CLAUDE.md: thay A3 bằng bản 2, ghi chú "(đổi ở bước 5 của A, 8d837f1; bản 1 ở 4e30b25)".
+  Commit riêng `HW02: sửa CLAUDE.md – A3`. Không sửa file nào của A_FR01.
+- Thêm vào step1_notes.md, mục "Khai cho Audit", 2 dòng:
+  - D5 kế thừa giả định SV sửa ở bước 5 của A → có thể ảnh hưởng thiết kế EC của D
+    (liên quan P1=b; SV quyết).
+  - Lệnh trước giả định nhầm A có commit 1/7b.
+- D0 = chấp nhận đề xuất AI.
+- Làm tiếp phần còn lại của lệnh trước: các mã khác của mục A → commit 1/7b → mục B (bước 2) →
+  báo cáo theo khung cũ.
+  Ở mục "D5", ghi commit nguồn 8d837f1 và commit sửa CLAUDE.md.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+*File AI ghi/gửi trong lượt này:* `d_step1b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 295 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 210 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
