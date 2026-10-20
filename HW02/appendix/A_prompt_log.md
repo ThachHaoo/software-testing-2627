@@ -15534,6 +15534,11 @@ Báo cáo (≤ 5 dòng): commit; stack trace 1 dòng chính.
 SV có sửa chưa commit ở 7 file BUG (severity, BUG-46 tiêu đề, BUG-47/49 Expected). Em sẽ chỉ stage phần em sửa, phần của SV giữ nguyên trong working tree.
 
 Đang chèn dữ kiện sập backend và các chỗ trống `<SV viết…>` vào BUG-48, bỏ "Token hết hạn" ở BUG-47.
+
+Đã commit `1f91e5f HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend`.
+- **Stack trace (dòng chính):** `TypeError: Cannot read properties of null (reading 'toString') at Statement.<anonymous> (backend\server.js:162:49)`. Tiến trình backend dừng với mã thoát 1. Trace đầy đủ nằm ở BUG-48 và mục "Kiểm 7c2".
+- **BUG-48:** Critical/High lấy từ bản SV đã sửa trong working tree. Đã thêm dòng "Ngoài TC", mục dữ kiện sập backend và 4 chỗ trống `<SV viết: phần sập backend>`. Script tái hiện: `_repro_C_FR15/7c/crash_48.ps1`. Backend đã restart về dữ liệu seed.
+- **Chưa commit:** các chỗ SV tự sửa (severity BUG-36/39/45, tiêu đề BUG-46, Expected BUG-47/49) em để nguyên, chưa đưa vào commit. Riêng BUG-47, commit chỉ có phần bỏ "Token hết hạn"; dòng Expected 401 SV sửa vẫn nằm ngoài commit. SV tự commit các chỗ này.
 ```
 *File AI ghi/gửi trong lượt này:* `crash_48.ps1`
 
@@ -15541,4 +15546,76 @@ SV có sửa chưa commit ở 7 file BUG (severity, BUG-46 tiêu đề, BUG-47/4
 
 ---
 
-**Tổng:** 257 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 173 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #258 | 21:31 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 7e C_FR15:
+0. Kiểm commit `7/7d` có trong git log; working tree HW02/bugs/ sạch. Không đạt → DỪNG. `gh api user` phải là ThachHaoo.
+1. BUG-48 – Yêu cầu: thay chỗ trống `<SV viết: phần sập backend>` ở mục Yêu cầu bằng yêu cầu/giả định BỊ VI PHẠM bởi phần sập backend,
+   dạng như các dòng khác ("**<mã>:** (<nguồn>) <diễn giải ngắn>"); không có điều khoản → ghi rõ "(ngầm định)". Mỗi dòng nêu căn cứ
+   (điều khoản SRS/giả định C… hoặc lý do ngầm định). Ghi thêm vào _groups_C_FR15.md (cột yêu cầu bị vi phạm của G12). SV sẽ duyệt.
+2. Chạy thật phần bước tái hiện "sập backend" SV viết ở BUG-48 (restart backend trước và sau). Chỉ sửa DỮ KIỆN sai như 7c,
+   log trước/sau; không sửa chữ SV. Không tái hiện được → DỪNG, báo.
+3. Kiểm trùng lại trên tkob-team/eshop-sut (mọi tác giả, cả đã đóng, issue mới từ sau 7a; thêm từ khoá crash/sập/server dừng)
+   → trùng → DỪNG, báo.
+4. Commit `HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend` kèm A_prompt_log.md. DỪNG, chờ SV duyệt mục 1
+   trước khi tạo issue.
+Báo cáo (≤ 10 dòng): commit; các dòng Yêu cầu đã điền cho phần sập backend (nguyên văn); kết quả mục 2, 3.
+```
+
+**Output:**
+```
+Em dừng ở bước 0: commit `7/7d` (`cf57743`) có trong log và `gh api user` trả về `ThachHaoo`, nhưng thư mục `HW02/bugs/` chưa sạch. Em chưa làm bước 1–4 và chưa commit gì.
+
+Sáu file còn thay đổi chưa commit. Đây đúng là các chỗ SV đã sửa theo danh sách 7c, nhưng commit 7/7d không có chúng:
+- BUG-36: Severity và Priority đổi từ Major sang Critical/High.
+- BUG-39, BUG-45: Severity đổi từ Major sang Critical.
+- BUG-46: tiêu đề "44xx" thành "4xx".
+- BUG-47: dòng Expected thành "4xx (Ví dụ: 401 Unauthorized)".
+- BUG-49: bỏ chữ "màu đỏ".
+
+Đây là chữ của SV nên em không tự commit. Có hai cách để chạy tiếp:
+- **SV commit:** SV tự commit 6 file này (ví dụ `HW02[C-FR15] 7/7d2: SV sửa chữ theo 7c (bổ sung)`), rồi gửi lại lệnh 7e.
+- **Em commit:** SV cho phép, em commit nguyên trạng 6 file với message do SV chọn, sau đó chạy tiếp 7e.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #259 | 21:32 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 7e C_FR15:
+0. Kiểm commit `7/7d` có trong git log; working tree HW02/bugs/ sạch. Không đạt → DỪNG. `gh api user` phải là ThachHaoo.
+1. BUG-48 – Yêu cầu: thay chỗ trống `<SV viết: phần sập backend>` ở mục Yêu cầu bằng yêu cầu/giả định BỊ VI PHẠM bởi phần sập backend,
+   dạng như các dòng khác ("**<mã>:** (<nguồn>) <diễn giải ngắn>"); không có điều khoản → ghi rõ "(ngầm định)". Mỗi dòng nêu căn cứ
+   (điều khoản SRS/giả định C… hoặc lý do ngầm định). Ghi thêm vào _groups_C_FR15.md (cột yêu cầu bị vi phạm của G12). SV sẽ duyệt.
+2. Chạy thật phần bước tái hiện "sập backend" SV viết ở BUG-48 (restart backend trước và sau). Chỉ sửa DỮ KIỆN sai như 7c,
+   log trước/sau; không sửa chữ SV. Không tái hiện được → DỪNG, báo.
+3. Kiểm trùng lại trên tkob-team/eshop-sut (mọi tác giả, cả đã đóng, issue mới từ sau 7a; thêm từ khoá crash/sập/server dừng)
+   → trùng → DỪNG, báo.
+4. Commit `HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend` kèm A_prompt_log.md. DỪNG, chờ SV duyệt mục 1
+   trước khi tạo issue.
+Báo cáo (≤ 10 dòng): commit; các dòng Yêu cầu đã điền cho phần sập backend (nguyên văn); kết quả mục 2, 3.
+```
+
+**Output:**
+```
+Đang điền mục Yêu cầu cho BUG-48, sau đó chạy lại bước 4a–4c SV viết.
+
+Bước 4a–4c tái hiện được: stderr giống 7c2, tiến trình dừng. Đang kiểm trùng issue.
+
+Đang sửa hai dòng đường dẫn bị lỗi ký tự điều khiển trong `_groups_C_FR15.md`, rồi commit.
+```
+*File AI ghi/gửi trong lượt này:* `fixpaths.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 259 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 175 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

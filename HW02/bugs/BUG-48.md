@@ -65,7 +65,9 @@
 - Đạt trong cùng case: name, category_id đúng giá trị seed
 - Chưa đánh giá được: —
 
-`<SV viết: phần sập backend>`
+- **Ổn định tiến trình backend (ngầm định):** (SRS v2.0 không có điều khoản về độ ổn định/xử lý lỗi; lý do ngầm định: lỗi khi xử lý một request chỉ được ảnh hưởng request đó — server phải trả phản hồi lỗi, không dừng tiến trình phục vụ mọi endpoint) — (sập backend: GET /api/products/6 làm `node server.js` dừng; request kế tiếp bị từ chối kết nối)
+- **API spec §3.2:** (`api_specification.md` dòng 84–85) `GET /api/products/:id` — Xem chi tiết một sản phẩm. — (sập backend: request không nhận được phản hồi nào)
+- Chưa đánh giá được (phần sập backend): FR-06 Xem chi tiết sản phẩm — `frontend-web/src/pages/ProductDetail.jsx` dòng 16 và `frontend-mobile/App.js` dòng 120 gọi endpoint này; chưa kiểm qua UI
 
 ## Ghi chú cô lập
 

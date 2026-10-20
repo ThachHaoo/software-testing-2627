@@ -41,7 +41,7 @@
 | G9 | 15 | 0 | FR-15.2 (35–39, 106, 112), FR-15.3 (40–43, 113), FR-15.4 (44–46), C6, C9 (38, 39, 41, 42, 43, 45, 46), C3 (37), C11 (44) |
 | G10 | 3 | 0 | C10 |
 | G11 | 9 | 0 | FR-12.2, SEC-02 (thiếu/sai token: 50, 51, 53, 54, 56, 57), SEC-03 (role user: 52, 55, 58) |
-| G12 | 1 | 0 | C15 |
+| G12 | 1 | 0 | C15; phần sập backend (7c, ngoài TC): ổn định tiến trình backend (ngầm định), API spec §3.2 — chưa đánh giá: FR-06 |
 | G13 | 1 | 0 | C20 |
 | G14 | 1 | 0 | C6 (không 5xx; SV ghi căn cứ C6, C9) |
 | G15 | 1 | 0 | FR-22.1 |
@@ -773,7 +773,7 @@ Output:
 
 - **TC Fail (1):** 22
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định bị vi phạm:** C15
+- **Yêu cầu / giả định bị vi phạm:** C15; phần sập backend (7c, ngoài TC — AI đề xuất ở 7e, chờ SV duyệt): ổn định tiến trình backend (ngầm định — SRS không có điều khoản; lỗi một request không được dừng tiến trình), API spec §3.2 (`api_specification.md` dòng 84–85, GET /api/products/:id). Chưa đánh giá được: FR-06 (web `ProductDetail.jsx` dòng 16, mobile `App.js` dòng 120 gọi endpoint này; chưa kiểm qua UI)
 - **Đạt trong cùng case:** name, category_id đúng giá trị seed
 - **Chưa đánh giá được trong cùng case:** —
 - **Actual (lượt 6 / manual, rút gọn 260 ký tự):**
@@ -1252,3 +1252,44 @@ TypeError: Cannot read properties of null (reading 'toString')
 Node.js v24.15.0
 backend restart xong: 5 sản phẩm
 ```
+
+## Kiểm 7e — chạy lại bước 4a–4c (phần sập backend) SV viết ở BUG-48 (20/10/2026)
+
+Restart backend trước (`restart_backend.ps1`) và sau (cuối `crash_48.ps1`). Bước 4a SV chỉ ghi `"price": null`; các trường khác lấy giá trị hợp lệ như TC. Sau seed, bản ghi mới có id 6 (chẵn) như ví dụ của SV.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File HW02\bugs\_repro_C_FR15\7c\restart_backend.ps1
+powershell -ExecutionPolicy Bypass -File HW02\bugs\_repro_C_FR15\7c\crash_48.ps1
+```
+
+Output:
+
+```text
+backend restart xong: 5 sản phẩm
+POST /api/products body: {"name": "SP 7c null", "price": null, "category_id": 2, "description": "Mô tả 7c", "imageUrl": "https://placehold.co/300"}
+-> HTTP 200 {"message":"Product created","id":6}
+GET /api/products/6 -> lỗi: Unable to connect to the remote server
+tiến trình đã dừng: True; mã thoát: 
+--- stderr ---
+D:\HK7\Testing\Exercise\HW\eshop-sut\backend\server.js:162
+    if (row.id % 2 === 0) row.price = row.price.toString();
+                                                ^
+
+TypeError: Cannot read properties of null (reading 'toString')
+    at Statement.<anonymous> (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\server.js:162:49)
+    at Statement.replacement (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\node_modules\sqlite3\lib\trace.js:25:27)
+    at Statement.replacement (D:\HK7\Testing\Exercise\HW\eshop-sut\backend\node_modules\sqlite3\lib\trace.js:25:27)
+
+Node.js v24.15.0
+backend restart xong: 5 sản phẩm
+```
+
+Kết quả: tái hiện được — POST trả `HTTP 200 {"message":"Product created","id":6}`; GET /api/products/6 không có phản hồi; tiến trình `node server.js` dừng; stderr giống 7c2. Khác 7c2 ở chi tiết không thuộc chữ SV: thông báo PowerShell lần này là "Unable to connect to the remote server" (7c2: "An error occurred while sending the request."), và `ExitCode` không đọc được (trống) — 7c2 đọc được 1.
+
+Log sửa dữ kiện 7e (trước → sau): không sửa chữ SV. Đối chiếu: "id = 6" khớp; "mã thoát 1" khớp 7c2; "TypeError: Cannot read properties of null (reading 'toString') tại dòng 162" khớp stderr; "Connection refused" khớp 7c; "không có khối try-catch" khớp `backend/server.js` (không có `try {`, không có `process.on('uncaughtException')`).
+
+| BUG | Mục | Trước | Sau | Căn cứ |
+|---|---|---|---|---|
+| 48 | Yêu cầu | `<SV viết: phần sập backend>` | 2 dòng yêu cầu bị vi phạm (ổn định tiến trình backend — ngầm định; API spec §3.2) + 1 dòng "Chưa đánh giá được: FR-06" | lệnh 7e mục 1 — AI đề xuất, chờ SV duyệt |
+
+Kiểm trùng 7e (`gh issue list -R tkob-team/eshop-sut --state all --limit 1000`, mọi tác giả): 135 issue (lớn nhất #180); issue mới từ sau 7a (20/10/2026 19:11): 0. Từ khoá crash/sập/dừng/server dừng/tiến trình/toString/DoS/unhandled/uncaught/connection refused/"Cannot read properties of null" trên tiêu đề + nội dung: khớp #25, #26, #28 — cả ba của FR-01 (#25: HTTP 413, "tiến trình backend không dừng"; #26: POST /api/register text/plain → HTTP 500, "tiến trình backend không dừng"; #28: nhãn '*', "không gây sập app"). Không trùng.
