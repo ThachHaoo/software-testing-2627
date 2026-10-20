@@ -8651,13 +8651,76 @@ mất giỏ (B0d) → thêm từ trang chủ + link navbar." Dừng, báo cáo t
 ```
 
 **Output:**
+````
+Đã sửa bước tái hiện của BUG-22 và BUG-24, commit `88a2a02`. Lệnh này chạy sau commit `f38f271` "7/7b: SV viết BUG-21–24" của SV.
+
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: B_FR07 7/7c – sửa bước tái hiện BUG-22, 24 (giỏ web là state React, gõ URL /cart làm mất giỏ – B0d)
+- File đã sửa: HW02/bugs/BUG-22.md, BUG-24.md; A_prompt_log.md
+- Kết quả kiểm tra: diff chỉ chạm các dòng nêu trong lệnh và dòng ghi chú cuối mục Dữ kiện; test: không chạy
+- Commit: 88a2a02 HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24
+- BUG-22:
+  · Tiền điều kiện thêm "Giỏ có ít nhất 1 sản phẩm (như TC-FR07-91)"
+  · Bước 1 thay đúng câu trong lệnh (thêm AirPods từ trang chủ, rồi bấm link 'Giỏ hàng' trên navbar)
+  · Nhận định: thay đoạn JSX bị vỡ bằng "(ví dụ: xem khối code dưới)", ngay dưới là khối ```jsx chứa `<Breadcrumb items={[{ label: 'Trang chủ', link: '/' }, { label: 'Giỏ hàng' }]} />`
+  · Phần còn lại của câu SV giữ nguyên
+  · Dữ kiện thêm 2 dòng: khôi phục đoạn ví dụ bị lỗi định dạng khi dán + sửa bước tái hiện
+- BUG-24: bước 3 thay đúng câu trong lệnh (như TC-93); Dữ kiện thêm dòng sửa bước tái hiện
+- Chữ em tự thêm (cần SV duyệt): cụm "(ví dụ: xem khối code dưới)" trong Nhận định BUG-22, vì khối code không đặt được bên trong ngoặc của câu
+- Cần quyết định: không có
 ```
+````
 *File AI ghi/gửi trong lượt này:* `fix7c2.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 142 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 139 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #143 | 15:07 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+BUG-30, BUG-31 – sửa để bước tái hiện chạy được (sau commit SV "7/7b: SV viết
+BUG-29–31"; chưa có → dừng). Commit "HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31".
+Chỉ sửa lệnh/bước và dữ kiện; không đụng câu Nhận định của SV.
+
+1. Kiểm /api/login (api_specification.md + server.js): tên trường body và trường
+   token trong phản hồi; trích nguyên văn vào Dữ kiện.
+2. Bước 1 (cả 2 bug): dùng tài khoản seed test@eshop.com / Test1234! (đúng tên trường
+   ở mục 1). $headers chỉ còn Authorization; mọi Invoke-RestMethod có body dùng
+   -ContentType "application/json".
+3. Bước GET: đổi thành
+   (Invoke-WebRequest -Uri "http://localhost:3000/api/cart" -Headers $headers).Content
+   để in JSON thô.
+4. BUG-30: thêm bước trước bước gửi quantity 3: POST {"id": 2, "name": "Samsung
+   Galaxy S24 Ultra", "price": 28000000, "quantity": 1}. Đánh số lại bước.
+   Khối code Nhận định ```jsx → ```js.
+5. BUG-31: rút khối JSON trong Actual còn phần tử id 4 và thêm dòng "(evidence
+   TC-FR07-22 có thêm id 1, id 5 do bước dựng giỏ của test)"; giữ nguyên câu SV.
+6. Restart backend rồi CHẠY THẬT các lệnh PowerShell đã sửa của 2 bug (Windows
+   PowerShell 5.1); dán output vào Dữ kiện, ghi "AI chạy kiểm bước tái hiện
+   2026-10-20". Output không khớp Actual → báo, không sửa Actual.
+7. Dữ kiện BUG-31: kiểm /api/checkout (server.js) có đọc userCarts không; trích
+   nguyên văn đoạn liên quan; không kết luận.
+Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6, 7).
+````
+
+**Output:**
+```
+`/api/login`: body nhận `{email, password}`, phản hồi có `token`. `/api/checkout` không đọc `userCarts`. Giờ sửa các bước trong file.
+
+Giờ restart backend và chạy thật các lệnh PowerShell (5.1) lấy từ chính file BUG.
+
+Lệnh GET trong lệnh (Invoke-WebRequest không có `-UseBasicParsing`) lỗi NullReferenceException trên PS 5.1. Thêm `-UseBasicParsing` rồi chạy lại.
+
+Output khớp Actual của cả hai bug. Ghi dữ kiện vào file.
+```
+*File AI ghi/gửi trong lượt này:* `fix7c3.py`, `facts7c3.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 143 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 140 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

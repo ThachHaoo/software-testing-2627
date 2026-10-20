@@ -26,20 +26,20 @@
 
 1. Đăng nhập lấy token:
 ```powershell
-$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"test@eshop.com","password":"Test1234!"}'
 $token = $loginRes.token
-$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+$headers = @{ "Authorization" = "Bearer $token" }
 ```
 
 2. Gửi request thêm sản phẩm (id: 4) nhưng cố tình chỉnh sửa field price thành 1 trong body JSON:
 ```powershell
 $body = '{"id": 4, "name": "Tai nghe AirPods Pro 2", "price": 1, "quantity": 1}'
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body $body
 ```
 
 3.Kiểm tra giỏ hàng qua GET /api/cart:
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+(Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:3000/api/cart" -Headers $headers).Content
 ```
 
 ## Expected (trích SRS)
@@ -54,11 +54,11 @@ Theo yêu cầu FR-08.2 và giả định B8: Backend phải tự tra cứu và 
 
 ```json
 [
-  {"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 1},
-  {"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 1},
   {"id": 4, "name": "Tai nghe AirPods Pro 2", "price": 1, "quantity": 1}
 ]
 ```
+
+(evidence TC-FR07-22 có thêm id 1, id 5 do bước dựng giỏ của test)
 
 ## Bằng chứng
 
@@ -97,6 +97,57 @@ Theo yêu cầu FR-08.2 và giả định B8: Backend phải tự tra cứu và 
    294    res.json({ message: "Added to cart" });
    295  });
   ```
+- `/api/login` (dùng ở bước 1), trích nguyên văn:
+  - `api_specification.md` dòng 23–32:
+
+  ```
+    23  ### 1.2 Đăng nhập
+    24  - **Endpoint:** `POST /api/login`
+    25  - **Body (JSON):**
+    26    ```json
+    27    {
+    28      "email": "test@domain.com",
+    29      "password": "Password123!"
+    30    }
+    31    ```
+    32  - **Phản hồi thành công (200 OK):** Trả về chuỗi JWT `token` và thông tin `user`.
+  ```
+
+  - `backend/server.js` dòng 32–33 và 51–52 (tên trường body `email`, `password`; phản hồi có trường `token`):
+
+  ```js
+    32  app.post("/api/login", (req, res) => {
+    33    const { email, password } = req.body;
+    51        const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY);
+    52        res.json({ message: "Login successful", token, user });
+  ```
+- AI chạy kiểm bước tái hiện 2026-10-20: restart backend (`node server.js`) ngay trước khi chạy; chạy đúng các khối PowerShell ở mục "Các bước tái hiện" bằng Windows PowerShell 5.1.26100 (`powershell.exe -File`). Output nguyên văn:
+
+  ```text
+  message      
+  -------      
+  Added to cart
+  [{"id":4,"name":"Tai nghe AirPods Pro 2","price":1,"quantity":1}]
+  ```
+- Output khớp mục Actual (phần tử id 4, price 1).
+- `/api/checkout` có đọc `userCarts` không — trích nguyên văn `backend/server.js` dòng 297–309 (route chỉ lấy `total_amount`, `shipping_address` từ `req.body`; trong đoạn này không có `userCarts`):
+
+  ```js
+   297  app.post("/api/checkout", authenticateToken, (req, res) => {
+   298    const userId = req.user.id;
+   299    const { total_amount, shipping_address } = req.body;
+   300  
+   301    db.run(
+   302      "INSERT INTO orders (user_id, total_amount, status, shipping_address) VALUES (?, ?, ?, ?)",
+   303      [userId, total_amount, "pending", shipping_address],
+   304      function (err) {
+   305        if (err) return res.status(500).json({ error: err.message });
+   306        res.json({ message: "Checkout successful", orderId: this.lastID });
+   307      },
+   308    );
+   309  });
+  ```
+- Sửa bước tái hiện 2026-10-20: tài khoản `user@domain.com`/`Password123!` (không có trong seed) → `test@eshop.com`/`Test1234!` (README.md dòng 24; backend/database.js dòng 93); `$headers` bỏ `Content-Type`, các lệnh POST thêm `-ContentType "application/json"`; bước GET đổi sang `Invoke-WebRequest … .Content` để in JSON thô và thêm `-UseBasicParsing` (Windows PowerShell 5.1 báo `Object reference not set to an instance of an object.` khi thiếu). Khối JSON mục Actual rút còn phần tử id 4, thêm dòng ghi chú evidence TC-FR07-22.
 
 ### Nhận định
 

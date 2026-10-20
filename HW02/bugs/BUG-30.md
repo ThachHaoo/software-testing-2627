@@ -26,20 +26,26 @@
 
 1. Đăng nhập lấy token:
 ```powershell
-$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"test@eshop.com","password":"Test1234!"}'
 $token = $loginRes.token
-$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+$headers = @{ "Authorization" = "Bearer $token" }
 ```
 
-2. Gửi request thêm sản phẩm cùng ID (id: 2) vào giỏ
+2. Thêm sản phẩm id 2 với quantity 1 để dựng giỏ ban đầu:
+```powershell
+$body = '{"id": 2, "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 1}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body $body
+```
+
+3. Gửi request thêm sản phẩm cùng ID (id: 2) vào giỏ
 ```powershell
 $body = '{"id": 2, "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 3}'
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -ContentType "application/json" -Body $body
 ```
 
-3. Kiểm tra trạng thái giỏ hàng sau khi thêm
+4. Kiểm tra trạng thái giỏ hàng sau khi thêm
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+(Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:3000/api/cart" -Headers $headers).Content
 ```
 
 ## Expected (trích SRS)
@@ -98,12 +104,47 @@ Theo yêu cầu FR-07.3: Khi thêm một sản phẩm đã tồn tại trong gi�
    294    res.json({ message: "Added to cart" });
    295  });
   ```
+- `/api/login` (dùng ở bước 1), trích nguyên văn:
+  - `api_specification.md` dòng 23–32:
+
+  ```
+    23  ### 1.2 Đăng nhập
+    24  - **Endpoint:** `POST /api/login`
+    25  - **Body (JSON):**
+    26    ```json
+    27    {
+    28      "email": "test@domain.com",
+    29      "password": "Password123!"
+    30    }
+    31    ```
+    32  - **Phản hồi thành công (200 OK):** Trả về chuỗi JWT `token` và thông tin `user`.
+  ```
+
+  - `backend/server.js` dòng 32–33 và 51–52 (tên trường body `email`, `password`; phản hồi có trường `token`):
+
+  ```js
+    32  app.post("/api/login", (req, res) => {
+    33    const { email, password } = req.body;
+    51        const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY);
+    52        res.json({ message: "Login successful", token, user });
+  ```
+- AI chạy kiểm bước tái hiện 2026-10-20: restart backend (`node server.js`) ngay trước khi chạy; chạy đúng các khối PowerShell ở mục "Các bước tái hiện" bằng Windows PowerShell 5.1.26100 (`powershell.exe -File`). Output nguyên văn:
+
+  ```text
+  message      
+  -------      
+  Added to cart
+  Added to cart
+  [{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":1},{"id":2,"name":"Samsung Galaxy S24 Ultra","price":28000000,"quantity":3}]
+  ```
+- Output khớp mục Actual (2 phần tử id 2, quantity 1 và 3).
+- Sửa bước tái hiện 2026-10-20: tài khoản `user@domain.com`/`Password123!` (không có trong seed) → `test@eshop.com`/`Test1234!` (README.md dòng 24; backend/database.js dòng 93); `$headers` bỏ `Content-Type`, các lệnh POST thêm `-ContentType "application/json"`; bước GET đổi sang `Invoke-WebRequest … .Content` để in JSON thô và thêm `-UseBasicParsing` (Windows PowerShell 5.1 báo `Object reference not set to an instance of an object.` khi thiếu). Thêm bước 2 (POST id 2 quantity 1) để dựng giỏ ban đầu; đánh số lại bước 3, 4. Khối code mục Nhận định: ```jsx → ```js.
 
 ### Nhận định
 
 - Nguyên nhân: Trong backend/server.js (dòng 290–295), route POST /api/cart xử lý lưu trữ giỏ hàng cực kỳ ngây thơ:
 
-```jsx
+```js
 app.post("/api/cart", authenticateToken, (req, res) => {
   const userId = req.user.id;
   if (!userCarts[userId]) userCarts[userId] = [];
