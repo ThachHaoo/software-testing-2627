@@ -2,7 +2,7 @@
 
 - **ID:** BUG-45
 - **Tiêu đề:** Form Sửa sản phẩm (UI Admin) cập nhật đè tên của sản phẩm vừa sửa lên toàn bộ các sản phẩm khác trên bảng danh sách UI và không cập nhật lại Giá tiền mới trên bảng
-- **Severity:** Major
+- **Severity:** Critical
 - **Priority:** High
 
 ## Môi trường

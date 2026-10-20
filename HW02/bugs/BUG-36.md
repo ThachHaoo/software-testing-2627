@@ -2,8 +2,8 @@
 
 - **ID:** BUG-36
 - **Tiêu đề:** Form Thêm sản phẩm (UI Admin) không kiểm tra điều kiện Giá tiền (> 0 và bắt buộc), cho phép nhập giá âm, giá bằng 0 hoặc để trống mà vẫn tạo sản phẩm thành công
-- **Severity:** Major
-- **Priority:** Major
+- **Severity:** Critical
+- **Priority:** High
 
 ## Môi trường
 

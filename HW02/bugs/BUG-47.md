@@ -44,7 +44,7 @@
   + Các API thay đổi dữ liệu (POST, PUT, DELETE /api/products) bắt buộc phải yêu cầu xác thực Token JWT hợp lệ.
   + Phải kiểm tra phân quyền tài khoản, chỉ cho phép Token có role = 'admin' mới được thực hiện thao tác.
 
-- Nếu không có Token hoặc Token không hợp lệ, API phải trả về lỗi 401 Unauthorized.
+- Nếu không có Token hoặc Token không hợp lệ, API phải trả về lỗi 4xx (Ví dụ: 401 Unauthorized).
 
 - Nếu Token thuộc tài khoản thường (role = 'user'), API phải từ chối truy cập và trả về lỗi 403 Forbidden.
 

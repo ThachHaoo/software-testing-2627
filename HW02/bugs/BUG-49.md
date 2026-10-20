@@ -36,7 +36,7 @@
 
 ## Expected (trích SRS)
 
-- Theo yêu cầu FR-22.1 (quy định thiết kế GUI, C12): Tất cả các trường thông tin bắt buộc phải có nhãn (label) tên trường và phải hiển thị dấu sao màu đỏ hoặc ký hiệu * ngay bên cạnh nhãn đó.
+- Theo yêu cầu FR-22.1 (quy định thiết kế GUI, C12): Tất cả các trường thông tin bắt buộc phải có nhãn (label) tên trường và phải hiển thị dấu sao hoặc ký hiệu * ngay bên cạnh nhãn đó.
 
 - Áp dụng cụ thể cho các trường bắt buộc của sản phẩm gồm: Tên sản phẩm (*), Giá tiền (*), Danh mục (*).
 

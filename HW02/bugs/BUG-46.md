@@ -1,7 +1,7 @@
 # BUG-46
 
 - **ID:** BUG-46
-- **Tiêu đề:** Các API GET, PUT, DELETE /api/products/:id trả về HTTP 200 OK giả thay vì 44xx (Not Found / Client Error) khi thao tác với product id không tồn tại trong CSDL
+- **Tiêu đề:** Các API GET, PUT, DELETE /api/products/:id trả về HTTP 200 OK giả thay vì 4xx (Not Found / Client Error) khi thao tác với product id không tồn tại trong CSDL
 - **Severity:** Medium
 - **Priority:** Medium
 

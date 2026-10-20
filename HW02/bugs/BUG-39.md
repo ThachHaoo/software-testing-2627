@@ -2,7 +2,7 @@
 
 - **ID:** BUG-39
 - **Tiêu đề:** Form Thêm sản phẩm (UI Admin) không kiểm tra và chặn Tên sản phẩm chứa thẻ script, cho phép lưu chuỗi XSS <script>alert(1)</script> vào hệ thống mà không có thông báo lỗi
-- **Severity:** Major
+- **Severity:** Critical
 - **Priority:** High
 
 ## Môi trường
