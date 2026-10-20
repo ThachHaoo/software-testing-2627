@@ -13218,6 +13218,43 @@ Kiểm FR-22.4 trước khi áp C7, và xem cách B_FR07 phân lớp biến ra.
 FR-22.4 có nói về vị trí thông báo lỗi → căn cứ C7 hợp lệ. Áp quyết định SV (phần 1).
 
 Phần 1 xong. Giờ bước 2: dựng `domain.partitions`.
+
+Cảnh báo đều đúng trạng thái bước 2. Freeze rồi commit.
+
+Đã xong cả hai phần: áp quyết định của SV cho C0–C14 (`1012f71`) và phân lớp tương đương bước 2 (`d1e228a`). Checker và linter không có lỗi; cảnh báo còn lại đều do chưa có test case. Em đã kiểm FR-22.4 trước khi áp C7: câu SRS (dòng 255) nói rõ vị trí thông báo lỗi, nên căn cứ của C7 đứng được.
+
+Có một việc em làm thêm ngoài khối lệnh: vì C5 = a (không mở rộng sang cổng 'Admin Login'), em đã bỏ biến ra V15 và dòng yêu cầu FR-12.1 trong commit `1012f71`.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `1012f71` HW02[C-FR15] 1/7b: SV chốt giả định C0–C14 — check_domain: 0 lỗi, 6 cảnh báo; linter: 0 lỗi, 14 cảnh báo (đều là "chưa có case/lớp").
+  - `d1e228a` HW02[C-FR15] 2/7: lớp tương đương — check_domain: 0 lỗi, 79 cảnh báo; linter: 0 lỗi, 14 cảnh báo. Freeze: `HW02/appendix/ai-outputs/C_FR15_step2_20261020-163945.{json,md}`.
+- **Cảnh báo giữ nguyên, không ẩn:**
+  - 73 lớp chưa được case nào phủ (chờ bước 3).
+  - V2, V3 chưa có case BVA (chờ bước 4).
+  - V1, V5, V6, V9 không có lớp không hợp lệ: SRS không cho căn cứ đặt Expected (lý do ghi ở `note` của từng lớp).
+- **Số lớp theo biến (tổng 73 = 35 hợp lệ / 38 không hợp lệ):**
+
+  | Biến | Hợp lệ | Không hợp lệ | Ghi chú |
+  |---|---|---|---|
+  | V1 Thao tác | 4 | 0 | |
+  | V2 Tên | 2 | 10 | Thêm/Sửa × (1 hợp lệ + rỗng, >255, chỉ khoảng trắng, API thiếu/null, API sai kiểu) |
+  | V3 Giá | 4 | 10 | Thêm/Sửa × (số nguyên, số thập phân + ≤0, UI trống, API thiếu/null, chuỗi chữ, chuỗi số) |
+  | V4 Danh mục | 2 | 6 | Lớp không hợp lệ chỉ ở API |
+  | V5 Mô tả | 1 | 0 | |
+  | V6 URL Ảnh | 1 | 0 | |
+  | V7 id mục tiêu | 1 | 3 | id không tồn tại × Xem/Sửa/Xóa |
+  | V8 Token | 1 | 9 | Thêm/Sửa/Xóa × (không token, token sai, role user) |
+  | V9 SP khác | 1 | 0 | |
+  | V10–V14 (biến ra) | 6 / 5 / 1 / 4 / 2 | 0 | |
+
+- **Tách lớp có lý do (ghi trong `note`):**
+  - Số thập phân tách khỏi số nguyên: đơn vị ₫ không có phần lẻ, cột price kiểu INTEGER (gray-box).
+  - Chuỗi số tách khỏi chuỗi chữ: giá trị số của chuỗi số là hợp lệ.
+  - Role user tách khỏi token sai (theo SEC-03).
+  - V7 và V8 tách theo thao tác, cùng lý do với C8.
+- **Giả định mới chặn bước 3:**
+  - **C15** | GET trả price dạng chuỗi ("100000" thay vì 100000) có tính là khớp Expected? | a) so theo giá trị số → chuỗi số vẫn khớp; b) price phải là số JSON → chuỗi là lệch Expected (Fail ở lớp EC59 và cách so trong EC56/EC57) | Khuyến nghị b: nhất quán với C9 (SV đã coi price chuỗi là sai kiểu ở chiều gửi) và ví dụ body trong api_specification (dòng 95) dùng số. SRS im lặng → SV chọn. Gray-box: server.js dòng 162 đổi price thành chuỗi khi id chẵn.
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step2.py`
 
@@ -13225,4 +13262,33 @@ Phần 1 xong. Giờ bước 2: dựng `domain.partitions`.
 
 ---
 
-**Tổng:** 215 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 152 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #216 | 16:42 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa bước 2 C_FR15 theo review của SV (output AI → có freeze):
+1. Chép nguyên văn C9 trong testcases.json vào báo cáo. Nếu C9=a nghĩa là chuỗi số ở price bị TỪ CHỐI:
+   giữ nguyên lớp "chuỗi số" không hợp lệ của V3; sửa lý do C9 thành "SV chốt: <SV điền>"
+   (bỏ "theo khuyến nghị" — báo cáo bước 1 ghi C9 là "SV chọn"). Nếu C9=a nghĩa là CHẤP NHẬN → DỪNG, báo.
+2. Lớp số thập phân của V3: bỏ lý do "đơn vị ₫ không có phần lẻ" (trái C1 SV chốt); chỉ giữ lý do gray-box
+   (cột price INTEGER, <file:dòng>); ghi rõ cả số nguyên và số thập phân là lớp HỢP LỆ, Expected = chấp nhận.
+3. Không thêm/bớt lớp nào khác.
+4. render_md.py → freeze.py → check_domain.py → linter. Commit `HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3`
+   kèm A_prompt_log.md.
+
+Báo cáo (≤ 15 dòng): commit + checker/linter; nguyên văn C9;
+nguồn mốc 255 của V2 (trích SRS mục/câu, hoặc "chỉ có trong code: <file:dòng>");
+"ví dụ body" trong C15 là gì (trích SRS mục/câu, có ví dụ response chứa price không).
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 216 lượt; Claude Sonnet 4.6 63 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210); Claude Opus 5.5 153 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #214, #215, #216); Claude (không rõ model) 1 lượt (#118). 1 lượt có output từ hơn một model nên được đếm ở cả hai.

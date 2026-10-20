@@ -27,3 +27,5 @@
 - 16:26 20/10/2026 · `C_FR15_step1_20261020-162618.md` · bước 1 · Claude Code bước 0–1 · sha256 4764e4ab0ec7
 - 16:39 20/10/2026 · `C_FR15_step2_20261020-163945.json` · bước 2 · Claude Code bước 2 · sha256 3930559993c8
 - 16:39 20/10/2026 · `C_FR15_step2_20261020-163945.md` · bước 2 · Claude Code bước 2 · sha256 e2c63197af74
+- 16:43 20/10/2026 · `C_FR15_step2_20261020-164315.json` · bước 2 · Claude Code bước 2b (sửa lý do C9, EC18/EC25) · sha256 7fc15bb688a1
+- 16:43 20/10/2026 · `C_FR15_step2_20261020-164315.md` · bước 2 · Claude Code bước 2b (sửa lý do C9, EC18/EC25) · sha256 018e96c9b5d0
