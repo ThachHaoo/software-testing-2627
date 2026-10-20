@@ -19041,6 +19041,24 @@ Hiện trạng:
 **Output:**
 ```
 Ảnh và status đã cập nhật. Giờ sửa RUN.md (đếm ảnh, bảng đổi tên, cảnh báo merge lại), chạy kiểm tra và commit.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** áp quyết định của SV vào status, kèm notes "SV chốt 2026-10-21" + lý do; thêm 9 ảnh đăng nhập thử `_manual_2`.
+- **Commit:** `f644140` HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhập thử. Lệnh không đặt tên commit nên AI tự đặt.
+- **File đã sửa:** `HW02/D_FR20/testcases.json`/`.md`, `RUN.md` (đếm ảnh, bảng đổi tên), file lượt `results/D_FR20_manual_20261021-001500.json` (chỉ thêm attachment), 9 ảnh mới trong `evidence/`.
+- **Kết quả kiểm tra:** check_domain 0 lỗi, 1 cảnh báo (V6); lint 0/0; prompt log 317 lượt.
+- **Status mới:** Pass 21 (trong đó 10 Pass hộp đen) / Fail 10 / Blocked 2.
+  - TC-16, TC-17: Blocked, case gốc TC-94.
+  - TC-203: Fail do lỗi thiết kế TC, không lập bug. Notes ghi theo ảnh `TC-FR20-203_admin_1.png`: đúng 1 dòng `m203_{ts}@domain.com` (ID 17).
+  - TC-07–14, 60, 205: Pass hộp đen (A20).
+- **TC-206: không phải dừng.** Expected chỉ yêu cầu: không lỗi, chuyển sang 'Đăng Nhập', đúng 1 dòng admin, đăng nhập được. Không có yêu cầu bố cục/header → Pass, notes ghi quan sát ngoài Expected đúng chữ SV. Ảnh `_manual_2` khớp quan sát: tên tràn kín header.
+- **9 case đăng nhập thử:** đã thêm notes "Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."; verdict vẫn Pass theo Check.md. Ảnh `_2` có header 'Chào, …' đúng Họ Tên; ở TC-200, `<script>alert(1)</script>` hiện dạng chữ.
+- **Ảnh điện thoại:** tổng 40/20, giữ hết. Bắt buộc đạt 10/11; còn thiếu ảnh 01 "màn hình sau khi đóng hộp thoại".
+- **Cần lưu ý:** `merge_results.py` (chạy tay) ghi đè status bằng verdict trong file lượt, mà file lượt vẫn giữ verdict theo Check.md. Merge lại lượt 1 sẽ làm mất status SV chốt. Đã ghi cảnh báo "không merge lại lượt 1" trong RUN.md.
+- **Cần quyết định (không chặn):**
+  - Check.md chưa có Actual nguyên văn của bước đăng nhập thử (header) cho 9 case; AI không tự viết. SV bổ sung vào Check.md hoặc chấp nhận chỉ có ảnh.
+  - Nhật ký lượt vẫn trống 5 trường: Máy, Điện thoại, Expo Go, Locale/bàn phím, IP API_URL.
+  - File `results/D_FR20_manual_20261021-0010.json` (giống TEMPLATE) vẫn untracked; AI không đụng.
 ```
 *File AI ghi/gửi trong lượt này:* `d_6c.py`
 
@@ -19048,4 +19066,75 @@ Hiện trạng:
 
 ---
 
-**Tổng:** 317 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 225 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #318 | 02:09 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: dọn 6/7b3 → 7/7a
+
+### A. Dọn kết quả (6/7b3)
+1. File lượt results/D_FR20_manual_20261021-001500.json: verdict = status SV đã chốt ở f644140.
+   - Log trước/sau trong RUN.md.
+   - Nhãn "Pass hộp đen" / "Fail do lỗi thiết kế TC" ghi theo cách file hỗ trợ (notes nếu không có trường).
+   - Kiểm: merge_results.py --dry-run cho D ra status giống hệt hiện tại → bỏ cảnh báo
+     "không merge lại lượt 1" trong RUN.md.
+   - Ghi Audit: "bản vá chạy tay ghi đè status, trái quy ước; xử lý bằng đồng bộ file lượt".
+2. Actual bước đăng nhập thử của 9 case (01, 02, 61–64, 200, 201, 206): chép chữ header từ ảnh
+   `_manual_2` vào Actual trong file lượt + testcases.json, gắn "(AI chép từ ảnh _manual_2, SV duyệt)".
+   - TC-206: "header hiển thị chuỗi 'a' tràn màn hình, không đếm được độ dài (AI chép từ ảnh)".
+   - Không sửa Check.md.
+   - Audit: "AI chép Actual từ ảnh SV cho 9 case".
+3. TC-01 notes: "thiếu ảnh bắt buộc _manual_2 (màn Đăng Nhập sau hộp thoại); bằng chứng = Actual".
+A.4 (thay) — Nhật ký lượt 1 trong RUN.md, chép đúng chữ SV:
+- Máy (OS): AI lấy từ máy.
+- IP API_URL: AI lấy từ App.js dòng 16.
+- Điện thoại (model, Android): POCO F5 · OS 1.0.5.0.UMRTWXM · Android 14 (UKQ1.230804.001)
+- Expo Go: 54.0.8
+- Locale / bàn phím: Tiếng Việt (Việt Nam) · QWERTY
+Điền thêm D15 (thiết bị/locale) trong testcases.json nếu D15 có ô tương ứng.
+Nếu đã commit 6/7b3 → sửa trong commit `HW02[D-FR20] 6/7b4: nhật ký lượt`.
+5. Xoá results/D_FR20_manual_20261021-0010.json (untracked, giống TEMPLATE; SV đồng ý).
+render_md.py → check_domain.py → lint → prompt log → commit
+`HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăng nhập thử`.
+
+### B. 7/7a — dữ kiện bug (không soạn bước tái hiện, không đề xuất mapping/severity)
+1. HW02/bugs/_groups_D_FR20.md theo mẫu _groups_C_FR15.md. Mỗi Fail trừ TC-203 (lỗi thiết kế TC)
+   ghi:
+   - TC, Expected, Actual, evidence;
+   - yêu cầu bị vi phạm (chỉ yêu cầu bị vi phạm);
+   - vị trí code (frontend-mobile và/hoặc backend).
+   Nhóm G theo triệu chứng giống hệt.
+2. Bảng dữ kiện đối chiếu cho mỗi G:
+   - BUG của A/B/C cùng vị trí code và/hoặc cùng yêu cầu (mã BUG, số issue);
+   - kiểm trùng trên tkob-team/eshop-sut (`gh issue list --state all --limit 300`, mọi tác giả,
+     gồm #153–#160): issue nào cùng triệu chứng/vị trí (số, tiêu đề, tác giả, trạng thái).
+   Chỉ dữ kiện, không kết luận trùng/không trùng.
+3. HW02/D_FR20/compare_web_mobile.md: với mỗi EC của D có lớp tương ứng ở A, ghi
+   - mã EC D ↔ EC/TC A;
+   - verdict A (web) ↔ verdict D (mobile);
+   - khác nhau ở tầng nào (client mobile/server), có dòng code.
+   Chỉ dữ kiện, không nhận định.
+4. render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7a: gom dữ kiện bug + bảng web vs mobile`.
+
+## Báo cáo (≤ 12 dòng)
+- Commit A, B.
+- Dry-run D sau đồng bộ: giống/khác.
+- Số G; mỗi G: TC + BUG A/B/C cùng vị trí/yêu cầu + issue cùng triệu chứng (số).
+- Bảng web vs mobile: số dòng cùng verdict / khác verdict.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+Đồng bộ verdict trong file lượt với status SV chốt, chép header đăng nhập thử từ ảnh, rồi dry-run merge để so.
+
+Now TC-01 notes + meta.environment.
+```
+*File AI ghi/gửi trong lượt này:* `d_6b3.py`, `d_6b3b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 318 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 226 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

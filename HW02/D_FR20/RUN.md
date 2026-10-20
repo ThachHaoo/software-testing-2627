@@ -132,7 +132,7 @@ Xác nhận mật khẩu: TC-16 `Abcd1234?`, TC-17 `abcd1234!`; các case khác 
 
 | Lượt | Ngày giờ bắt đầu | Máy (OS) | Điện thoại (model, Android) | Expo Go | Locale / bàn phím | IP API_URL | Phạm vi | File kết quả | Ảnh admin TRƯỚC/SAU | Số ảnh điện thoại | Chính thức? | Ghi chú |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 2026-10-21 00:15 (giờ TC-FR20-94, cột Time của `results/Check.md`) | | | | | | 31/33 case (TC-16, TC-17 không chạy — Check.md dòng 35) | `results/D_FR20_manual_20261021-001500.json` (giây = 00: Check.md chỉ ghi HHmm) | `D_admin_truoc_1` / `D_admin_sau_1`, `_2` (+ `TC-FR20-203_admin_1`) | 31 | có (SV xác nhận đã restart backend trước lượt) | Bản ghi gốc của SV: `results/Check.md` (không sửa). Email gõ nguyên chuỗi `{ts}`, không thay HHmm (ảnh admin SAU, ảnh điện thoại) |
+| 1 | 2026-10-21 00:15 (giờ TC-FR20-94, cột Time của `results/Check.md`) | Windows 11 Home Single Language 10.0.26200 (AI lấy từ máy) | POCO F5 · OS 1.0.5.0.UMRTWXM · Android 14 (UKQ1.230804.001) | 54.0.8 | Tiếng Việt (Việt Nam) · QWERTY | `192.168.2.12` (App.js dòng 16, sửa lúc 2026-10-20 23:51, trước lượt; `HW02/env/mobile_api_url.patch` vẫn ghi `172.21.0.137`) | 31/33 case (TC-16, TC-17 không chạy — Check.md dòng 35) | `results/D_FR20_manual_20261021-001500.json` (giây = 00: Check.md chỉ ghi HHmm) | `D_admin_truoc_1` / `D_admin_sau_1`, `_2` (+ `TC-FR20-203_admin_1`) | 31 | có (SV xác nhận đã restart backend trước lượt) | Bản ghi gốc của SV: `results/Check.md` (không sửa). Email gõ nguyên chuỗi `{ts}`, không thay HHmm (ảnh admin SAU, ảnh điện thoại) |
 
 Lượt chính thức = lượt chạy toàn bộ sau khi restart backend. Evidence chỉ giữ lượt mới nhất.
 
@@ -150,7 +150,16 @@ AI đổi tên và định dạng ảnh của SV, không sửa nội dung. Ảnh
 | `TC-FR20-<xx>_manual.jpg` (29 ảnh: 01–15, 60–64, 91–93, 200, 201, 203–206) | `TC-FR20-<xx>_manual_1.png` |
 | `TC-FR20-<xx>_manual_2.jpg` (9 ảnh đăng nhập thử: 01, 02, 61–64, 200, 201, 206) | `TC-FR20-<xx>_manual_2.png` (chỉ đổi định dạng) |
 
-Status SV chốt 2026-10-21 (Blocked 16/17, Fail TC-203, Pass hộp đen) được đặt thẳng trong `testcases.json`, còn file kết quả lượt vẫn giữ verdict chép từ Check.md. Với project `-manual`, `merge_results.py` ghi đè status bằng verdict trong file lượt → **không merge lại lượt 1**; nếu bắt buộc phải merge lại thì đặt lại status theo notes "SV chốt".
+## Đồng bộ file lượt với status SV chốt (6/7b3)
+
+Annotation `verdict` của `results/D_FR20_manual_20261021-001500.json` được đặt bằng status SV chốt ở f644140. Nhãn ghi ở annotation `label` (merge không đọc; notes trong `testcases.json` đã có sẵn). Sau khi đồng bộ, chạy `merge_results.py --dry-run` cho D ra status giống hệt 33/33 case, nên merge lại không còn làm mất status SV chốt. Actual của file lượt có thêm phần "Đăng nhập thử" cho 9 case (AI chép từ ảnh `_manual_2`); Check.md giữ nguyên.
+
+| TC | verdict trước (Check.md) | verdict sau | label |
+|---|---|---|---|
+| TC-FR20-07…14, 60, 205 (10 case) | Pass | Pass | Pass hộp đen |
+| TC-FR20-203 | Pass | Fail | Fail do lỗi thiết kế TC, không lập bug |
+| TC-FR20-16 | (trống) | Blocked | — |
+| TC-FR20-17 | (trống) | Blocked | — |
 
 ## Ghi chú harness
 

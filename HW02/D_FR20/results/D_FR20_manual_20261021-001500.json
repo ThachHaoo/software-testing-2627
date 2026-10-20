@@ -286,6 +286,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -316,6 +320,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -346,6 +354,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -376,6 +388,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -406,6 +422,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -436,6 +456,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -466,6 +490,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -496,6 +524,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -556,6 +588,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -616,6 +652,10 @@
                 {
                   "type": "verdict",
                   "description": "Pass"
+                },
+                {
+                  "type": "label",
+                  "description": "Pass hộp đen"
                 }
               ],
               "results": [
@@ -641,7 +681,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-01_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-01_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -676,7 +716,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-02_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-02_manual · Đăng nhập thử: header hiển thị 'Chào, Trần Thị Bình' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -711,7 +751,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-61_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-61_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -746,7 +786,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-62_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-62_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -781,7 +821,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-63_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-63_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -816,7 +856,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-64_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-64_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -851,7 +891,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-200_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-200_manual · Đăng nhập thử: header hiển thị 'Chào, <script>alert(1)</script>' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -886,7 +926,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-201_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-201_manual · Đăng nhập thử: header hiển thị 'Chào, Lê 🐻 Hiệp' (AI chép từ ảnh _manual_2, SV duyệt)"
                 },
                 {
                   "type": "verdict",
@@ -925,7 +965,11 @@
                 },
                 {
                   "type": "verdict",
-                  "description": "Pass"
+                  "description": "Fail"
+                },
+                {
+                  "type": "label",
+                  "description": "Fail do lỗi thiết kế TC, không lập bug"
                 }
               ],
               "results": [
@@ -956,7 +1000,7 @@
               "annotations": [
                 {
                   "type": "actual",
-                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-206_manual"
+                  "description": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-206_manual · Đăng nhập thử: header hiển thị chuỗi 'a' tràn màn hình, không đếm được độ dài (AI chép từ ảnh)"
                 },
                 {
                   "type": "verdict",
@@ -995,7 +1039,7 @@
                 },
                 {
                   "type": "verdict",
-                  "description": ""
+                  "description": "Blocked"
                 }
               ],
               "results": [
@@ -1019,7 +1063,7 @@
                 },
                 {
                   "type": "verdict",
-                  "description": ""
+                  "description": "Blocked"
                 }
               ],
               "results": [

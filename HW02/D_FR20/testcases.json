@@ -10,7 +10,7 @@
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã); thay đổi cục bộ duy nhất: frontend-mobile/App.js dòng 16 API_URL",
-    "environment": "Android thật, Expo Go (bản cho SDK 54; expo ~54.0.33, react-native 0.81.5 theo frontend-mobile/package.json). App.js dòng 16: API_URL = \"http://172.21.0.137:3000/api\" (IP LAN của máy chạy backend, Windows PowerShell). Điện thoại và máy cùng mạng Wi-Fi/hotspot. Backend :3000; web admin :5174 (điểm quan sát 'Quản lý Người dùng'). Locale/bàn phím của điện thoại: SV bổ sung khi chạy (D15). Chạy tay. Chi tiết chung ở HW02/env/environment.md.",
+    "environment": "Android thật, Expo Go (bản cho SDK 54; expo ~54.0.33, react-native 0.81.5 theo frontend-mobile/package.json). App.js dòng 16: API_URL = \"http://172.21.0.137:3000/api\" (IP LAN của máy chạy backend, Windows PowerShell). Điện thoại và máy cùng mạng Wi-Fi/hotspot. Backend :3000; web admin :5174 (điểm quan sát 'Quản lý Người dùng'). Lượt 1 (2026-10-21, D15, SV ghi): điện thoại POCO F5 · OS 1.0.5.0.UMRTWXM · Android 14 (UKQ1.230804.001); Expo Go 54.0.8; locale/bàn phím Tiếng Việt (Việt Nam) · QWERTY; máy Windows 11 Home Single Language 10.0.26200; API_URL lúc chạy = \"http://192.168.2.12:3000/api\" (App.js dòng 16). Chạy tay. Chi tiết chung ở HW02/env/environment.md.",
     "scope": "Màn hình 'Đăng Ký Tài Khoản' của app mobile (tầng Mobile, chạy tay trên Android thật, Expo Go). Theo D1 = a (gọn): Domain — mỗi lớp không hợp lệ tạo được từ UI một case; lớp con mà chỉ server xử lý lấy 1 đại diện/biến và tham chiếu TC API của A_FR01; BVA chỉ độ dài Mật khẩu (biến client mobile xử lý trước khi gửi, gray-box); GUI FR-22.1–22.4 theo D13 = a ở suite TS-GUI riêng, không phân lớp. Ngoài phạm vi: tầng API (đã phủ ở A_FR01), FR-21, SEC-01, đăng nhập (FR-02), các chức năng mobile khác của FR-20. Mã TC TC-FR20-xx.",
     "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI); biến không có cận trên dùng điểm LARGE",
     "tc_id_ranges": "TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV từ 200",
@@ -716,10 +716,10 @@
           "priority": "High",
           "type": "Positive",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-01_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-01_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-01_manual_1.png, evidence/TC-FR20-01_manual_2.png",
           "bug_id": "",
-          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
+          "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend. Thiếu ảnh bắt buộc _manual_2 (màn Đăng Nhập sau hộp thoại) theo phân bổ RUN.md — file TC-FR20-01_manual_2.png hiện có là ảnh header; bằng chứng = Actual."
         },
         {
           "id": "TC-FR20-02",
@@ -772,7 +772,7 @@
           "priority": "Medium",
           "type": "Positive",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-02_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-02_manual · Đăng nhập thử: header hiển thị 'Chào, Trần Thị Bình' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-02_manual_1.png, evidence/TC-FR20-02_manual_2.png",
           "bug_id": "",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -1755,7 +1755,7 @@
           "priority": "High",
           "type": "Positive",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-61_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-61_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-61_manual_1.png, evidence/TC-FR20-61_manual_2.png",
           "bug_id": "",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -1811,7 +1811,7 @@
           "priority": "Medium",
           "type": "Positive",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-62_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-62_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-62_manual_1.png, evidence/TC-FR20-62_manual_2.png",
           "bug_id": "",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -1867,7 +1867,7 @@
           "priority": "Medium",
           "type": "Positive",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-63_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-63_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-63_manual_1.png, evidence/TC-FR20-63_manual_2.png",
           "bug_id": "",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -1924,7 +1924,7 @@
           "priority": "Medium",
           "type": "Positive",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-64_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-64_manual · Đăng nhập thử: header hiển thị 'Chào, Nguyễn Văn Ánh' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-64_manual_1.png, evidence/TC-FR20-64_manual_2.png",
           "bug_id": "",
           "notes": "Theo D9: nếu màn hình không có ô 'Xác nhận mật khẩu' → bỏ bước nhập ô này, ghi notes; verdict không phụ thuộc V5. Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -2252,7 +2252,7 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-200_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-200_manual · Đăng nhập thử: header hiển thị 'Chào, <script>alert(1)</script>' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-200_manual_1.png, evidence/TC-FR20-200_manual_2.png",
           "bug_id": "",
           "notes": "Căn cứ (SV): FR-01.1, D3, SEC-04 Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -2304,7 +2304,7 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-201_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-201_manual · Đăng nhập thử: header hiển thị 'Chào, Lê 🐻 Hiệp' (AI chép từ ảnh _manual_2, SV duyệt)",
           "evidence": "evidence/TC-FR20-201_manual_1.png, evidence/TC-FR20-201_manual_2.png",
           "bug_id": "",
           "notes": "Căn cứ (SV): FR-01.1, D3 Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."
@@ -2512,7 +2512,7 @@
           "origin": "Human",
           "priority": "Medium",
           "status": "Pass",
-          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-206_manual",
+          "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-206_manual · Đăng nhập thử: header hiển thị chuỗi 'a' tràn màn hình, không đếm được độ dài (AI chép từ ảnh)",
           "evidence": "evidence/TC-FR20-206_manual_1.png, evidence/TC-FR20-206_manual_2.png",
           "bug_id": "",
           "notes": "Căn cứ (SV): FR-01.1, D3 Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend. SV chốt 2026-10-21: Pass — quan sát ngoài Expected: tên tràn che màn hình, không cuộn được; SRS im lặng → không tạo Fail."
