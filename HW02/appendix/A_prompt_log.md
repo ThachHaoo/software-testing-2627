@@ -15177,6 +15177,43 @@ Toàn bộ tái hiện API đã khớp kết quả lượt 6. Giờ tái hiện 
 Mọi nhóm UI tái hiện đúng như lượt 6. Giờ restart backend theo yêu cầu.
 
 Dựng `HW02/bugs/_groups_C_FR15.md` (dữ kiện, có trích Actual/evidence từ JSON) và lưu script tái hiện vào `HW02/bugs/_repro_C_FR15/`.
+
+Đã đóng bước 6 và gom xong dữ kiện bước 7a. Tái hiện đã chạy thật cho cả 16 nhóm, không nhóm nào thiếu; sau khi kiểm em đã restart backend.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `afa074e` 6/7d: chốt TC-92, TC-94 — TC-92 ghi notes "locale trình duyệt: en-US", giữ Fail.
+  - `ea4cfd6` 7/7a: dữ kiện bug — `HW02/bugs/_groups_C_FR15.md` và script tái hiện ở `HW02/bugs/_repro_C_FR15/`.
+  - check_domain và linter: 0 lỗi.
+- **TC-94: Pass.**
+  - Ảnh 1: ô 'Tên SP' hiển thị nguyên văn `<i>SEC04 {ts}</i>`. Ảnh 2 (DevTools): ô `<td>` chỉ chứa chữ, không có phần tử `<i>` con.
+  - File SV thêm có tên `C-FR15-94_manual_2.png` (thiếu chữ "T"); em đã đổi thành `TC-FR15-94_manual_2.png`. Không còn chỗ nào tham chiếu tên cũ `94_manual.png`.
+- **Nhóm dữ kiện** (SV quyết nhóm nào thành bug nào; BUG kế tiếp BUG-35, issue mới từ #181). Bảng gồm 65 case Fail; TC-202 xếp riêng, không lập bug (lỗi thiết kế TC):
+
+  | G | Số TC | Triệu chứng | Yêu cầu bị vi phạm | Issue có thể trùng |
+  |---|---|---|---|---|
+  | G1 | 3 | UI Thêm: Tên > 255 ký tự hoặc chỉ khoảng trắng vẫn được lưu, không thông báo | FR-15.2, C3, C7/C16 | #66 (import) |
+  | G2 | 4 | UI Thêm: Giá ≤ 0 hoặc để trống vẫn được lưu | FR-15.3, C7/C16 | #51 (import) |
+  | G3 | 3 | UI Sửa: Tên vi phạm ghi đè M, hộp thoại "Cập nhật thành công!" | FR-15.2, C3, C8, C7 | — |
+  | G4 | 3 | UI Sửa: Giá vi phạm ghi đè M | FR-15.3, C8, C7 | — |
+  | G5 | 1 + 5 Blocked | UI Sửa: mọi dòng bảng đổi tên; ô Giá của M giữ giá cũ | FR-15.5 (trên bảng), FR-15.1 | — |
+  | G6 | 1 | UI Thêm: tên `<script>…` được lưu, không báo lỗi | C21, C7/C16 | #16, #27, #122 (dạng XSS khác) |
+  | G7 | 1 | UI Thêm: giá `1e5` được lưu thành 100000 | C24 | — |
+  | G8 | 17 | API POST dữ liệu sai → 200, bản ghi được tạo | FR-15.2/3/4, C6, C9, C3, C11, C23 | #51, #52, #66, #178 |
+  | G9 | 15 | API PUT dữ liệu sai → 200, M bị ghi đè | FR-15.2/3/4, C6, C8, C9 | #178 |
+  | G10 | 3 | id không tồn tại → 200 | C10 | — |
+  | G11 | 9 | Không token / token sai / token user → 200, thao tác được thực hiện | FR-12.2, SEC-02, SEC-03 | #50, #149–151 |
+  | G12 | 1 | GET id chẵn trả price dạng chuỗi | C15 | — |
+  | G13 | 1 | Body có `Infinity` → 400 trang HTML | C20 | #180 (/api/cart) |
+  | G14 | 1 | Content-Type text/plain → 500 trang HTML | C6 | #26 (/api/register) |
+  | G15 | 1 | Form không có nhãn, không có '*' | FR-22.1 | #7, #28, #152 (form khác) |
+  | G16 | 1 | Giá không có phân cách hàng nghìn | FR-21.3, C17 | — |
+
+- **Kiểm trùng:** đã kiểm cả 135 issue (mọi tác giả, gồm đã đóng; `gh api user` = ThachHaoo). Không issue nào trùng `/api/products` hay màn hình sản phẩm admin; các issue liệt kê trên chỉ cùng dạng ở endpoint/màn hình khác.
+- **Tái hiện:**
+  - API: chạy bằng PowerShell 5.1; UI: chạy bằng script Playwright `ui_repro.js` theo đúng các bước nháp. Kết quả khớp lượt 6; lệnh và output ghi trong `HW02/bugs/_groups_C_FR15.md`.
+  - Lần chạy đầu G9 lỗi do lệnh của em (`""` trong `"$(...)"` làm hỏng JSON), không phải do SUT. Đã sửa và chạy lại; ghi chú trong file.
+- **Backend:** em đã dừng tiến trình `node server.js` cũ của SV và chạy lại trong một cửa sổ thu nhỏ mới. CSDL về 5 sản phẩm seed (id 1–5).
 ```
 *File AI ghi/gửi trong lượt này:* `prelude.ps1`, `ui_repro.js`, `c15_groups.py`
 
@@ -15184,4 +15221,105 @@ Dựng `HW02/bugs/_groups_C_FR15.md` (dữ kiện, có trích Actual/evidence t�
 
 ---
 
-**Tổng:** 249 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 165 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #250 | 19:17 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 7 C_FR15 – khung bug (AI-01 §11: bug 100% SV viết; AI chỉ dựng khung + chép dữ kiện):
+0. Sửa dữ kiện _groups_C_FR15.md: G3 bỏ C8 khỏi "yêu cầu bị vi phạm" (giả định phạm vi); G16 <bỏ | giữ> C17.
+   Thêm ghi chú đầu mục tái hiện: "Lệnh tái hiện do AI soạn để kiểm khả năng tái hiện; không dùng làm bước tái hiện trong BUG."
+1. Mapping SV quyết: <DÁN MAPPING G → BUG>. G nào chưa có trong mapping → DỪNG, hỏi.
+2. Tạo HW02/bugs/BUG-35.md … theo format BUG-14. AI CHỈ điền: TC liên quan; ảnh tiêu biểu (đường dẫn evidence);
+   mục "Dữ kiện (AI chép)" = Expected/Actual NGUYÊN VĂN từ testcases.json + đường dẫn evidence; dòng cuối AI-01 §11.
+   MỌI trường khác (tiêu đề, Severity, Priority, Yêu cầu, tiền điều kiện, bước tái hiện, Expected, Actual, Nhận định) = "<SV viết>".
+   Không chép lệnh tái hiện từ _groups. Không tiền tố [FR-15].
+3. Commit `HW02[C-FR15] 7/7a2: khung bug (trống) + chép dữ kiện` kèm A_prompt_log.md.
+Báo cáo (≤ 5 dòng): commit; danh sách file BUG.
+```
+
+**Output:**
+```
+Em dừng ở đây, chưa sửa file và chưa commit gì: khối lệnh còn hai chỗ chưa điền.
+
+1. **Mapping G → BUG:** mục 1 vẫn là `<DÁN MAPPING G → BUG>`. Lệnh yêu cầu dừng khi G nào chưa có trong mapping, mà hiện cả 16 nhóm (G1–G16) đều chưa có. Cần SV dán mapping, ví dụ `G1 → BUG-35, G2 → BUG-35, G3 → BUG-36, …`. Số bắt đầu từ BUG-35; nếu có nhóm không lập bug thì ghi rõ.
+2. **G16 – C17:** mục 0 vẫn là `<bỏ | giữ>`. Cần SV chọn bỏ hay giữ C17 trong "yêu cầu bị vi phạm" của G16.
+
+Các phần còn lại của mục 0 (bỏ C8 khỏi G3, thêm ghi chú đầu mục tái hiện) đã rõ; em sẽ làm cùng lúc khi nhận đủ hai điểm trên.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #251 | 19:20 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Chưa dựng khung bug. Trước đó in cho SV bảng dữ kiện để SV tự quyết mapping (KHÔNG đề xuất gộp/tách):
+- Đủ G1–G16, mỗi dòng: G | màn hình/endpoint | thao tác (Thêm/Sửa/Xem/Xóa) | triệu chứng 1 dòng | yêu cầu bị vi phạm |
+  vị trí code gây ra (file:dòng, gray-box) | các G khác có CÙNG vị trí code | các G khác có CÙNG yêu cầu bị vi phạm.
+- Không sửa file, không commit. Báo cáo chỉ gồm bảng này (≤ 25 dòng).
+```
+
+**Output:**
+```
+Đây là bảng dữ kiện để SV tự quyết mapping. Em chưa sửa file và chưa commit gì.
+
+| G | Màn hình / endpoint | Thao tác | Triệu chứng | Yêu cầu bị vi phạm | Vị trí code (gray-box) | G cùng vị trí code | G cùng yêu cầu |
+|---|---|---|---|---|---|---|---|
+| G1 | Admin · form sản phẩm | Thêm | Tên > 255 ký tự / chỉ khoảng trắng được lưu, không thông báo | FR-15.2, C3, C7/C16 | App.jsx:491–499; server.js:167–177 | 491–499: G3, G6 · 167–177: G2, G6, G7, G8 | FR-15.2: G3, G8, G9 · C3: G3, G8, G9 · C7/C16: G2, G3, G4, G6 |
+| G2 | Admin · form sản phẩm | Thêm | Giá ≤ 0 / rỗng được lưu, không thông báo | FR-15.3, C7/C16 | App.jsx:500–507; server.js:167–177 | 500–507: G4, G7 · 167–177: G1, G6, G7, G8 | FR-15.3: G4, G8, G9 · C7/C16: G1, G3, G4, G6 |
+| G3 | Admin · form sản phẩm | Sửa | Tên vi phạm ghi đè M; hộp thoại "Cập nhật thành công!" | FR-15.2, C3, C8 (chưa bỏ), C7/C16 | App.jsx:491–499, 105–116; server.js:179–189 | 491–499: G1, G6 · 105–116: G4, G5 · 179–189: G4, G9, G10 | FR-15.2: G1, G8, G9 · C3: G1, G8, G9 · C8: G4, G9 · C7/C16: G1, G2, G4, G6 |
+| G4 | Admin · form sản phẩm | Sửa | Giá vi phạm ghi đè M; hộp thoại "Cập nhật thành công!" | FR-15.3, C8, C7/C16 | App.jsx:500–507, 105–116; server.js:179–189 | 500–507: G2, G7 · 105–116: G3, G5 · 179–189: G3, G9, G10 | FR-15.3: G2, G8, G9 · C8: G3, G9 · C7/C16: G1, G2, G3, G6 |
+| G5 | Admin · bảng sản phẩm | Sửa (hợp lệ) | Mọi dòng đổi 'Tên SP' thành tên mới; ô 'Giá' của M giữ giá cũ | FR-15.5 (trên bảng), FR-15.1 – Xem | App.jsx:110–114 | 105–116: G3, G4 | — |
+| G6 | Admin · form sản phẩm | Thêm | Tên `<script>alert(1)</script>` được lưu, không báo lỗi | C21, C7/C16 | App.jsx:491–499; server.js:167–177 | 491–499: G1, G3 · 167–177: G1, G2, G7, G8 | C7/C16: G1, G2, G3, G4 |
+| G7 | Admin · form sản phẩm | Thêm | Giá `1e5` được lưu thành 100000 | C24 | App.jsx:500–507; server.js:167–177 | 500–507: G2, G4 · 167–177: G1, G2, G6, G8 | — |
+| G8 | API POST /api/products | Thêm | Dữ liệu sai / sai kiểu / thiếu trường → 200, bản ghi được tạo | FR-15.2/3/4, C6, C9, C3, C11, C23 | server.js:167–177 | G1, G2, G6, G7; dòng 167: G11 | FR-15.2: G1, G3, G9 · FR-15.3: G2, G4, G9 · C6: G9, G14 · C9, C11: G9 · C3: G1, G3, G9 |
+| G9 | API PUT /api/products/:id | Sửa | Dữ liệu sai → 200, M bị ghi đè | FR-15.2/3/4, C6, C8, C9, C3, C11 | server.js:179–189 | G3, G4, G10; dòng 179: G11 | FR-15.2: G1, G3, G8 · FR-15.3: G2, G4, G8 · C6: G8, G14 · C8: G3, G4 · C9, C11: G8 · C3: G1, G3, G8 |
+| G10 | API GET/PUT/DELETE /api/products/:id | Xem/Sửa/Xóa | id không tồn tại → 200 (GET `{}`; PUT, DELETE báo thành công) | C10 | server.js:159–161, 179–196 | 159–165: G12 · 179–189: G3, G4, G9 · 191–196: G11 | — |
+| G11 | API POST/PUT/DELETE /api/products | Thêm/Sửa/Xóa | Không token / token sai / token user → 200, thao tác được thực hiện | FR-12.2, SEC-02, SEC-03 | server.js:167, 179, 191 (không gắn `authenticateToken`, dòng 100–110) | 167: G8 · 179: G9 · 191: G10 | — |
+| G12 | API GET /api/products/:id | Xem | id chẵn → price là chuỗi JSON | C15 | server.js:162 | 159–165: G10 | — |
+| G13 | API POST /api/products | Thêm | Body có `Infinity` → 400, body là trang HTML | C20 | server.js:12 (bodyParser.json, không có error handler) | dòng 12: G14 | — |
+| G14 | API POST /api/products | Thêm | Content-Type text/plain → 500, body là trang HTML | C6 | server.js:12, 168 (stack trace trỏ `server.js:168:11`) | dòng 12: G13 · 167–168: G8 | C6: G8, G9 |
+| G15 | Admin · form sản phẩm | (giao diện) | Không có nhãn, không có '*' | FR-22.1 | App.jsx:490–543 (chỉ có placeholder) | dòng 491–507 nằm trong G1, G2 | — |
+| G16 | Admin · bảng sản phẩm | Xem | 'Giá' không phân cách hàng nghìn ("30000000 ₫") | FR-21.3, C17 (chờ quyết giữ/bỏ) | App.jsx:590 | — | — |
+
+- G3 vẫn ghi C8 đúng như file hiện tại, vì mục 0 (bỏ C8) chưa áp.
+- "Cùng vị trí code" xét theo trùng khoảng dòng. Một số khoảng trùng chỉ vì cùng đi qua route chung (vd server.js:167–177 cho cả lỗi UI lẫn API), không có nghĩa là cùng nguyên nhân.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #252 | 19:26 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 7 C_FR15 – khung bug (AI-01 §11: bug 100% SV viết; AI chỉ dựng khung + chép dữ kiện):
+0. Sửa dữ kiện _groups_C_FR15.md: bỏ C8 khỏi "yêu cầu bị vi phạm" ở G3, G4, G9 (giả định phạm vi, không thể bị vi phạm);
+   G16 bỏ C17 (giả định nới, không bị vi phạm; vi phạm là FR-21.3).
+   Thêm ghi chú đầu mục tái hiện: "Lệnh tái hiện do AI soạn để kiểm khả năng tái hiện; không dùng làm bước tái hiện trong BUG."
+1. Mapping SV quyết (1 G = 1 BUG): G1→BUG-35, G2→36, G3→37, G4→38, G6→39, G7→40, G8→41, G9→42, G13→43, G14→44,
+   G5→45, G10→46, G11→47, G12→48, G15→49, G16→50. Điền cột BUG trong bảng G → BUG → issue; cột issue để trống.
+2. Tạo HW02/bugs/BUG-35.md … BUG-50.md theo format BUG-14. AI CHỈ điền: TC liên quan; ảnh tiêu biểu (đường dẫn evidence);
+   mục "Dữ kiện (AI chép)" = Expected/Actual NGUYÊN VĂN từ testcases.json + đường dẫn evidence; dòng cuối AI-01 §11.
+   MỌI trường khác (tiêu đề, Severity, Priority, Yêu cầu, tiền điều kiện, bước tái hiện, Expected, Actual, Nhận định) = "<SV viết>".
+   Không chép lệnh tái hiện từ _groups. Không tiền tố [FR-15].
+3. Commit `HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện` kèm A_prompt_log.md.
+Báo cáo (≤ 5 dòng): commit; danh sách file BUG; G nào thiếu dữ kiện để chép (nếu có).
+```
+
+**Output:**
+```
+Giờ dựng khung BUG-35…50 (chỉ điền TC, ảnh tiêu biểu, dữ kiện chép nguyên văn).
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 252 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 168 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

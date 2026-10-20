@@ -1,6 +1,6 @@
 # Dữ kiện Fail — FR-15 Quản lý Sản phẩm (C_FR15)
 
-> Dữ kiện do AI gom ở bước 7a, chưa phải bug report. **SV quyết G nào thành BUG nào** (gộp/tách), tiêu đề, severity, priority.
+> Dữ kiện do AI gom ở bước 7a, chưa phải bug report. Sửa ở 7a2: bỏ C8 (G3, G4, G9) và C17 (G16) khỏi yêu cầu bị vi phạm — giả định phạm vi/nới, không bị vi phạm; điền cột BUG theo mapping SV. **SV quyết G nào thành BUG nào** (gộp/tách), tiêu đề, severity, priority.
 > Nhóm G chỉ gom các case có triệu chứng quan sát được giống nhau (tầng + quan sát). Không có tên bug, severity, priority hay kết luận nguyên nhân.
 > Nguồn: `HW02/C_FR15/testcases.json` sau commit 6/7d (lượt chính thức = lượt 6, `results/C_FR15_20261020-185355.json`; manual TC-90…94). Đoạn code trích nguyên văn để SV đối chiếu (gray-box), không bình luận.
 > BUG kế tiếp: **BUG-35**; issue mới trên tkob-team/eshop-sut sẽ từ **#181** trở đi.
@@ -9,22 +9,22 @@
 
 | Nhóm | BUG | Issue |
 |---|---|---|
-| G1 | | |
-| G2 | | |
-| G3 | | |
-| G4 | | |
-| G5 | | |
-| G6 | | |
-| G7 | | |
-| G8 | | |
-| G9 | | |
-| G10 | | |
-| G11 | | |
-| G12 | | |
-| G13 | | |
-| G14 | | |
-| G15 | | |
-| G16 | | |
+| G1 | BUG-35 | |
+| G2 | BUG-36 | |
+| G3 | BUG-37 | |
+| G4 | BUG-38 | |
+| G5 | BUG-45 | |
+| G6 | BUG-39 | |
+| G7 | BUG-40 | |
+| G8 | BUG-41 | |
+| G9 | BUG-42 | |
+| G10 | BUG-46 | |
+| G11 | BUG-47 | |
+| G12 | BUG-48 | |
+| G13 | BUG-43 | |
+| G14 | BUG-44 | |
+| G15 | BUG-49 | |
+| G16 | BUG-50 | |
 
 ## Tổng hợp
 
@@ -32,20 +32,20 @@
 |---|---|---|---|
 | G1 | 3 | 0 | FR-15.2 (TC-08, 66: 300/256 ký tự), C3 (TC-09: 3 dấu cách), C7 + C16 (không có thông báo lỗi) |
 | G2 | 4 | 0 | FR-15.3 (TC-10: -1000; TC-67: 0; TC-11, 205: giá rỗng được lưu), C7 + C16 (không có thông báo lỗi) |
-| G3 | 3 | 0 | FR-15.2 (TC-13: 300 ký tự; TC-78: 256 ký tự), C3 (TC-14), C8, C7 + C16 (không có thông báo lỗi; hộp thoại duy nhất là 'Cập nhật thành công!') |
-| G4 | 3 | 0 | FR-15.3 (TC-15: -1000; TC-79: 0; TC-16: rỗng), C8, C7 + C16 |
+| G3 | 3 | 0 | FR-15.2 (TC-13: 300 ký tự; TC-78: 256 ký tự), C3 (TC-14), C7 + C16 (không có thông báo lỗi; hộp thoại duy nhất là 'Cập nhật thành công!') |
+| G4 | 3 | 0 | FR-15.3 (TC-15: -1000; TC-79: 0; TC-16: rỗng), C7 + C16 |
 | G5 | 1 | 5 | FR-15.5 (trên bảng UI: các sản phẩm khác hiển thị bị đổi tên), FR-15.1 – Xem (bảng không hiển thị giá mới của M; EC63) |
 | G6 | 1 | 0 | C21 (SV chốt), C7 + C16 (không có thông báo lỗi) |
 | G7 | 1 | 0 | C24 (SV chốt) |
 | G8 | 17 | 0 | FR-15.2 (name: 23, 24, 25, 26, 27, 84, 100), FR-15.3 (price: 28, 29, 30, 31, 101, 208, 214), FR-15.4 (category_id: 32, 33, 34), C6, C9 (26, 27, 29, 30, 31, 33, 34), C3 (25), C11 (32), C23 (214) |
-| G9 | 15 | 0 | FR-15.2 (35–39, 106, 112), FR-15.3 (40–43, 113), FR-15.4 (44–46), C6, C8, C9 (38, 39, 41, 42, 43, 45, 46), C3 (37), C11 (44) |
+| G9 | 15 | 0 | FR-15.2 (35–39, 106, 112), FR-15.3 (40–43, 113), FR-15.4 (44–46), C6, C9 (38, 39, 41, 42, 43, 45, 46), C3 (37), C11 (44) |
 | G10 | 3 | 0 | C10 |
 | G11 | 9 | 0 | FR-12.2, SEC-02 (thiếu/sai token: 50, 51, 53, 54, 56, 57), SEC-03 (role user: 52, 55, 58) |
 | G12 | 1 | 0 | C15 |
 | G13 | 1 | 0 | C20 |
 | G14 | 1 | 0 | C6 (không 5xx; SV ghi căn cứ C6, C9) |
 | G15 | 1 | 0 | FR-22.1 |
-| G16 | 1 | 0 | FR-21.3, C17 |
+| G16 | 1 | 0 | FR-21.3 |
 
 Tổng Fail trong nhóm: 65; cộng TC-202 (loại riêng) = 66 — khớp 66 Fail của testcases.json. Blocked: TC-04, 80, 81, 82, 83 (case gốc TC-03, ghi ở G5).
 
@@ -75,6 +75,8 @@ Tổng Fail trong nhóm: 65; cộng TC-202 (loại riêng) = 66 — khớp 66 Fa
 Không thấy issue nào về: id không tồn tại trả 200 (G10), price trả dạng chuỗi (G12), bảng admin đổi tên mọi dòng sau Sửa (G5), định dạng tiền ở admin (G16), '1e5' (G7).
 
 ## Bước tái hiện — đã chạy thật (20/10/2026, sau lượt 6)
+
+> Lệnh tái hiện do AI soạn để kiểm khả năng tái hiện; không dùng làm bước tái hiện trong BUG.
 
 - API: Lệnh chung (Windows PowerShell 5.1, lưu file UTF-8 có BOM): `HW02/bugs/_repro_C_FR15/prelude.ps1` — đăng nhập admin@eshop.com / Admin123! lấy token; `$headers` chỉ có Authorization; `-ContentType` truyền riêng; body gửi dạng UTF-8 bytes; lỗi 4xx/5xx đọc body trong try/catch (`GetResponseStream()`, `Position = 0`). Mỗi script tự dựng dữ liệu (M) và tự xoá dữ liệu đã tạo.
 - UI: Đã chạy kiểm bằng `HW02/bugs/_repro_C_FR15/ui_repro.js` (Playwright headless, đăng nhập admin, thao tác như các bước dưới), output dán bên dưới.
@@ -204,7 +206,7 @@ G2 Thêm, giá để trống: hộp thoại=[]; bản ghi 9 → 10; bản ghi m�
 
 - **TC Fail (3):** 13, 14, 78
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định bị vi phạm:** FR-15.2 (TC-13: 300 ký tự; TC-78: 256 ký tự), C3 (TC-14), C8, C7 + C16 (không có thông báo lỗi; hộp thoại duy nhất là 'Cập nhật thành công!')
+- **Yêu cầu / giả định bị vi phạm:** FR-15.2 (TC-13: 300 ký tự; TC-78: 256 ký tự), C3 (TC-14), C7 + C16 (không có thông báo lỗi; hộp thoại duy nhất là 'Cập nhật thành công!')
 - **Đạt trong cùng case:** —
 - **Chưa đánh giá được trong cùng case:** FR-22.4
 - **Actual (lượt 6 / manual, rút gọn 260 ký tự):**
@@ -265,7 +267,7 @@ G3: hộp thoại=["Cập nhật thành công!"]; M TRƯỚC={"name":"repro G3 M
 
 - **TC Fail (3):** 15, 16, 79
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định bị vi phạm:** FR-15.3 (TC-15: -1000; TC-79: 0; TC-16: rỗng), C8, C7 + C16
+- **Yêu cầu / giả định bị vi phạm:** FR-15.3 (TC-15: -1000; TC-79: 0; TC-16: rỗng), C7 + C16
 - **Đạt trong cùng case:** —
 - **Chưa đánh giá được trong cùng case:** FR-22.4
 - **Actual (lượt 6 / manual, rút gọn 260 ký tự):**
@@ -537,7 +539,7 @@ Output:
 
 - **TC Fail (15):** 35, 36, 37, 38, 39, 106, 112, 40, 41, 42, 43, 113, 44, 45, 46
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định bị vi phạm:** FR-15.2 (35–39, 106, 112), FR-15.3 (40–43, 113), FR-15.4 (44–46), C6, C8, C9 (38, 39, 41, 42, 43, 45, 46), C3 (37), C11 (44)
+- **Yêu cầu / giả định bị vi phạm:** FR-15.2 (35–39, 106, 112), FR-15.3 (40–43, 113), FR-15.4 (44–46), C6, C9 (38, 39, 41, 42, 43, 45, 46), C3 (37), C11 (44)
 - **Đạt trong cùng case:** —
 - **Chưa đánh giá được trong cùng case:** —
 - **Actual (lượt 6 / manual, rút gọn 260 ký tự):**
@@ -941,7 +943,7 @@ G15: số <label> trong form=0; có '*' trong form=false; placeholder=["Tên s�
 
 - **TC Fail (1):** 92
 - **Blocked ghi case gốc (0):** —
-- **Yêu cầu / giả định bị vi phạm:** FR-21.3, C17
+- **Yêu cầu / giả định bị vi phạm:** FR-21.3
 - **Đạt trong cùng case:** Có ký hiệu ₫
 - **Chưa đánh giá được trong cùng case:** —
 - **Actual (lượt 6 / manual, rút gọn 260 ký tự):**
