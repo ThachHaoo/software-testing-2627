@@ -1,9 +1,9 @@
 # BUG-29
 
 - **ID:** BUG-29
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Nhãn tổng tiền tại trang Giỏ hàng hiển thị sai thành 'Tổng tạm tính:' thay vì 'Tổng cộng' theo quy định SRS
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend web và backend server đang hoạt động bình thường.
+
+- Giỏ hàng đã có chứa sản phẩm (được thêm từ trang chủ) để hiển thị khu vực tổng tiền ở trang /cart.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang chủ http://localhost:5173/.
+
+2. Bấm nút "Thêm vào giỏ" trên thẻ một sản phẩm bất kỳ (ví dụ: Tai nghe AirPods Pro 2).
+
+3. Bấm vào link "Giỏ hàng" trên thanh điều hướng Navbar để sang trang /cart.
+
+4. Quan sát nhãn văn bản hiển thị ngay trước số tiền ở phần tổng kết giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.6: Nhãn hiển thị cho phần tổng tiền ở trang giỏ hàng bắt buộc phải ghi chính xác là Tổng cộng (SRS có quy định câu rõ ràng: không được ghi thành "Tổng tạm tính").
 
 ## Actual
 
-`<SV viết>`
+Nhãn hiển thị thực tế tại góc tổng tiền lại ghi là Tổng tạm tính: (ví dụ: Tổng tạm tính: 6.000.000 ₫), trực tiếp vi phạm câu cấm của SRS.
 
 ## Bằng chứng
 
@@ -62,7 +70,15 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong file frontend-web/src/pages/Cart.jsx (dòng 63), developer đã gán cứng chuỗi văn bản "Tổng tạm tính:":
+
+```jsx
+<div className="text-xl font-bold">
+  Tổng tạm tính: <span className="text-red-600">{cartTotal.toLocaleString()} ₫</span>
+</div>
+```
+
+- Việc hardcode từ "Tổng tạm tính:" thay vì "Tổng cộng:" làm sai lệch nhãn giao diện và vi phạm trực tiếp quy định cụ thể của SRS tại FR-07.6.
 
 ## Link GitHub Issue
 

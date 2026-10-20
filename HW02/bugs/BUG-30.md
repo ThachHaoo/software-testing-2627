@@ -1,9 +1,9 @@
 # BUG-30
 
 - **ID:** BUG-30
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Endpoint POST /api/cart không cộng dồn số lượng khi gửi cùng sản phẩm mà push thêm phần tử mới vào giỏ
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,48 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend server đang chạy ở http://localhost:3000.
+
+- Đã thực hiện đăng ký/đăng nhập tài khoản người dùng để lấy token xác thực (JWT token <T>).
+
+- Giỏ hàng của người dùng trên server đã có sẵn 1 sản phẩm (ví dụ: Samsung Galaxy S24 Ultra, id: 2, quantity: 1).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập lấy token:
+```powershell
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$token = $loginRes.token
+$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+```
+
+2. Gửi request thêm sản phẩm cùng ID (id: 2) vào giỏ
+```powershell
+$body = '{"id": 2, "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 3}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body
+```
+
+3. Kiểm tra trạng thái giỏ hàng sau khi thêm
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+```
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-07.3: Khi thêm một sản phẩm đã tồn tại trong giỏ hàng (cùng id), backend API phải tìm sản phẩm đó trong giỏ và thực hiện cộng dồn số lượng (quantity = 1 + 3 = 4), giữ nguyên giỏ hàng gồm 1 phần tử có quantity: 4.
 
 ## Actual
 
-`<SV viết>`
+- Request POST /api/cart trả về HTTP 200 {"message":"Added to cart"}.
+
+- Tuy nhiên, khi gọi GET /api/cart, backend trả về mảng gồm 2 phần tử riêng biệt cho cùng một sản phẩm id: 2:
+
+```json
+[
+  {"id": 2, "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 1},
+  {"id": 2, "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 3}
+]
+```
 
 ## Bằng chứng
 
@@ -72,7 +101,20 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong backend/server.js (dòng 290–295), route POST /api/cart xử lý lưu trữ giỏ hàng cực kỳ ngây thơ:
+
+```jsx
+app.post("/api/cart", authenticateToken, (req, res) => {
+  const userId = req.user.id;
+  if (!userCarts[userId]) userCarts[userId] = [];
+  userCarts[userId].push(req.body);
+  res.json({ message: "Added to cart" });
+});
+```
+
+- Backend dùng lệnh push(req.body) để đẩy trực tiếp payload request vào mảng userCarts[userId] mà không có bất kỳ logic kiểm tra xem item.id đã tồn tại trong mảng giỏ hàng hay chưa.
+
+- Logic này khiến giỏ hàng ở tầng API bị nhân bản phần tử cùng ID trùng hệt như lỗi ở tầng Frontend UI (BUG-17), vi phạm trực tiếp yêu cầu gộp/cộng dồn số lượng sản phẩm ở FR-07.3.
 
 ## Link GitHub Issue
 

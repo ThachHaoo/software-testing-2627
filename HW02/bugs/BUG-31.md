@@ -1,9 +1,9 @@
 # BUG-31
 
 - **ID:** BUG-31
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Endpoint POST /api/cart tin tưởng hoàn toàn giá tiền do client gửi lên, cho phép ghi đè đơn giá sản phẩm trong giỏ thành 1đ
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,49 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend server đang chạy tại http://localhost:3000.
+
+- Đã thực hiện đăng ký/đăng nhập tài khoản người dùng để lấy token xác thực (JWT token <T>).
+
+- Sản phẩm có ID = 4 (Tai nghe AirPods Pro 2) có giá niêm yết chuẩn trong CSDL backend là 6.000.000 ₫.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập lấy token:
+```powershell
+$loginRes = Invoke-RestMethod -Uri "http://localhost:3000/api/login" -Method Post -ContentType "application/json" -Body '{"email":"user@domain.com","password":"Password123!"}'
+$token = $loginRes.token
+$headers = @{ "Authorization" = "Bearer $token"; "Content-Type" = "application/json" }
+```
+
+2. Gửi request thêm sản phẩm (id: 4) nhưng cố tình chỉnh sửa field price thành 1 trong body JSON:
+```powershell
+$body = '{"id": 4, "name": "Tai nghe AirPods Pro 2", "price": 1, "quantity": 1}'
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Post -Headers $headers -Body $body
+```
+
+3.Kiểm tra giỏ hàng qua GET /api/cart:
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/cart" -Method Get -Headers $headers
+```
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Theo yêu cầu FR-08.2 và giả định B8: Backend phải tự tra cứu và áp dụng giá sản phẩm chuẩn lưu trong CSDL server, tuyệt đối không tin tưởng field price do client gửi lên. Khi client gửi body có price: 1, backend phải bỏ qua field price này hoặc tự động thay bằng giá chuẩn 6000000, lưu vào giỏ hàng với giá 6000000.
 
 ## Actual
 
-`<SV viết>`
+- Backend chấp nhận hoàn toàn payload do client gửi lên, trả về HTTP 200 {"message":"Added to cart"}.
+
+- Khi gọi GET /api/cart, item mới được lưu vào giỏ hàng với đơn giá bị thao túng thành 1 ₫ ("price": 1):
+
+```json
+[
+  {"id": 1, "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 1},
+  {"id": 5, "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 1},
+  {"id": 4, "name": "Tai nghe AirPods Pro 2", "price": 1, "quantity": 1}
+]
+```
 
 ## Bằng chứng
 
@@ -70,7 +100,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân: Trong backend/server.js (dòng 290–295), route POST /api/cart đẩy nguyên object req.body do client gửi lên vào mảng giỏ hàng bằng lệnh userCarts[userId].push(req.body) mà không thực hiện bất kỳ bước kiểm tra hay map lại dữ liệu với CSDL sản phẩm (products).
+
+- Việc tin tưởng dữ liệu client (Trusting Client Input) tạo ra lỗ hổng bảo mật gian lận giá tiền (Price Tampering) cực kỳ nghiêm trọng, cho phép kẻ gian tự ý sửa đổi đơn giá sản phẩm trị giá hàng triệu đồng thành 1đ ngay ở tầng API trước khi thanh toán.
 
 ## Link GitHub Issue
 
