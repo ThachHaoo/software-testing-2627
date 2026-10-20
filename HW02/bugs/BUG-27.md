@@ -32,7 +32,7 @@
 
 ## Expected (trích SRS)
 
-Theo yêu cầu FR-07.4 (kèm giả định B12): Nút thực hiện thao tác xóa sản phẩm khỏi giỏ hàng bắt buộc phải hiển thị chính xác nhãn văn bản là Xóa sản phẩm (hoặc Xoá sản phẩm).
+Theo yêu cầu FR-07.4 (kèm giả định B12): Nút thực hiện thao tác xóa sản phẩm khỏi giỏ hàng bắt buộc phải hiển thị chính xác nhãn văn bản là Xóa sản phẩm.
 
 ## Actual
 
@@ -76,7 +76,7 @@ Nút bấm ở cột Thao tác chỉ hiển thị nhãn ngắn gọn là Xóa (h
 
 - Nguyên nhân: Trong file frontend-web/src/pages/Cart.jsx (dòng 54), developer đã gán cứng nhãn của nút xóa chỉ là chuỗi "Xóa":
 
-```jx
+```jsx
 <button
   onClick={() => removeFromCart(index)}
   className="text-red-500 hover:text-red-700"

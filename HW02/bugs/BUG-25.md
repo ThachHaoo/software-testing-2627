@@ -60,7 +60,7 @@ Theo yêu cầu FR-24.4 (kèm giả định B16): Tất cả các thẻ ảnh s�
 
 - Actual nguyên văn (TC-FR07-94): `alt trang chủ=["","","","",""]; alt trang chi tiết=["Tai nghe AirPods Pro 2"]; trang giỏ không có ảnh sản phẩm (notes, không tính Fail); [kiểm tay] alt "mô tả nội dung ảnh": SV đối chiếu chữ alt với ảnh`
 - Cùng case: trang chi tiết alt = tên sản phẩm (đạt); trang giỏ không có ảnh.
-- Notes SV: evidence kiểm tay cần chụp lại trong cửa sổ ẩn danh không tiện ích.
+- Bug dùng evidence tự động TC-FR07-94_ui.png (Playwright, không tiện ích); không dùng ảnh kiểm tay.
 - Lặp lại: auto_status giống nhau ở lượt 1 và lượt 2 (restart backend trước mỗi lượt).
 - Đoạn code trích nguyên văn: `frontend-web/src/pages/Home.jsx` dòng 80–84
 
