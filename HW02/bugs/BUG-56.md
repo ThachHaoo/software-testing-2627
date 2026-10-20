@@ -34,6 +34,8 @@
 
 Ô nhập Email phải mở bàn phím ảo được tối ưu riêng cho việc gõ email (chứa sẵn phím @ và phím dấu chấm . ngay trên bàn phím chính) theo tương đương yêu cầu FR-22.2 (D13 quy định thuộc tính keyboardType="email-address").
 
+Trích SRS (AI chép nguyên văn): README.md dòng 253: "Trường Email phải dùng `type="email"`."
+
 ## Actual
 
 Bàn phím ảo bật lên chỉ là bàn phím văn bản thông thường (text/standard keyboard), hoàn toàn không xuất hiện phím @ ở giao diện bàn phím chính. Người dùng phải bấm chuyển sang trang ký tự đặc biệt mới gõ được dấu @.
@@ -51,7 +53,6 @@ Bàn phím ảo bật lên chỉ là bàn phím văn bản thông thường (tex
 ## Yêu cầu
 
 - **FR-22.2:** Trường Email phải dùng type="email" (mobile: cách hiểu theo D13). [D13]
-- **D13** (giả định, yêu cầu GUI trên mobile): FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi
 - Đạt trong cùng case: —
 - Chưa đánh giá được: —
 

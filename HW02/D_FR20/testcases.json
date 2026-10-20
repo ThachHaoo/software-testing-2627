@@ -2411,7 +2411,7 @@
           "actual_result": "Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-204_manual",
           "evidence": "evidence/TC-FR20-204_manual_1.png",
           "bug_id": "BUG-52",
-          "notes": "Căn cứ (SV): FR-01.3, D4"
+          "notes": "Căn cứ (SV): FR-01.3, D4 Lượt 1: giá trị thực nhập (theo ảnh TC-FR20-204_manual_1.png và ảnh admin ID 8) là 'm204_{ts}@ domain.com' (dấu cách sau '@') — giá trị thực nhập khác procedure, cùng EC5; verdict giữ."
         },
         {
           "id": "TC-FR20-205",

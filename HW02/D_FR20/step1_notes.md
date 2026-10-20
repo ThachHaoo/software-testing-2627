@@ -128,4 +128,5 @@ Cơ sở: A có 52 EC; TS-DOM-UI 27, TS-BVA-UI 19, TS-GUI 5, TS-DOM-API 30, TS-B
 - 6/7a4: so ảnh admin cả lượt (D0) không phát hiện thay đổi ở dòng của tài khoản khác.
 - 6/7b: AI đổi tên/định dạng ảnh SV, không sửa nội dung (35 ảnh, .jpg → .png nén; bảng ở RUN.md mục "Đổi tên evidence"). AI chép Actual + verdict từ `results/Check.md` (SV viết) vào file kết quả lượt nguyên văn, điền nhật ký lượt và ghi chú lệch procedure của TC-FR20-203.
 - 6/7b3: bản vá chạy tay của merge_results.py (79209f6) ghi đè status bằng verdict của file lượt, trái quy ước "không ghi đè status SV đã chỉnh"; xử lý bằng cách đồng bộ file lượt (verdict = status SV chốt), dry-run giống hệt 33/33.
+- 7/7a4 bị amend sau khi SV push (40052e9/75da144) → SV merge af05093.
 - 6/7b3: AI chép Actual từ ảnh SV cho 9 case (phần đăng nhập thử, chữ header ở ảnh `_manual_2` của 01, 02, 61–64, 200, 201, 206), gắn "(AI chép từ ảnh …)", SV duyệt.

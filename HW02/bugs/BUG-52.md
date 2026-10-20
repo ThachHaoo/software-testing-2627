@@ -49,6 +49,9 @@
 
 - Server phải từ chối request, không được tạo thêm dòng tài khoản mới nào trong CSDL (danh sách bên web admin giữ nguyên).
 
+Trích SRS (AI chép nguyên văn): README.md dòng 32: "Người dùng phải cung cấp: **Họ Tên**, **Email**, **Mật khẩu**."
+Trích SRS (AI chép nguyên văn): README.md dòng 33: "Email phải có định dạng hợp lệ (`user@domain.com`) và là duy nhất trong hệ thống."
+
 ## Actual
 
 - Trong cả ba trường hợp trên, vừa bấm Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
@@ -92,6 +95,7 @@
 - Actual nguyên văn (TC-FR20-04): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-04_manual`
 - Actual nguyên văn (TC-FR20-05): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-05_manual`
 - Actual nguyên văn (TC-FR20-204): `Sau khi ấn đăng ký, hiển thị Dialog thông báo đăng ký thành công, đồng thời chuyển sang giao diện login / xem ảnh TC-FR20-204_manual`
+- Giá trị Email thực nhập ở lượt 1 (TC-FR20-204, theo ảnh `TC-FR20-204_manual_1.png` ô Username và ảnh admin ID 8): `m204_{ts}@ domain.com` (dấu cách sau '@'); input TC là `m204_{ts} @domain.com`; cả hai thuộc EC5.
 - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại 21/10/2026 (7c, sau restart backend, giá trị theo bước SV): POST /api/register → HTTP 200 `User registered successfully`; GET /api/admin/users: id=4 email=[], id=5 email=[m05_2231domain.com], id=6 email=[m204_2231 @domain.com]. Bước trên thiết bị chưa chạy lại.
 - Đoạn code trích nguyên văn: `frontend-mobile/App.js` dòng 209–240
 

@@ -46,6 +46,8 @@
 
 - Phía server không được tạo thêm bất kỳ tài khoản nào trùng email trong CSDL (danh sách bên web admin giữ nguyên không đổi).
 
+Trích SRS (AI chép nguyên văn): README.md dòng 33: "Email phải có định dạng hợp lệ (`user@domain.com`) và là duy nhất trong hệ thống."
+
 ## Actual
 
 - Vừa bấm nút Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.

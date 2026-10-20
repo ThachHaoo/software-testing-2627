@@ -46,6 +46,8 @@
 
 - Phía server phải từ chối request, không tạo tài khoản mới trong CSDL (danh sách bên web admin giữ nguyên).
 
+Trích SRS (AI chép nguyên văn): README.md dòng 34: "**Yêu cầu mật khẩu mạnh**: Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)."
+
 ## Actual
 
 - Vừa bấm nút Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.

@@ -46,6 +46,8 @@
 
 - Phía server không được tạo thêm bất kỳ tài khoản mới nào trong CSDL (danh sách bên trang admin giữ nguyên không đổi).
 
+Trích SRS (AI chép nguyên văn): README.md dòng 32: "Người dùng phải cung cấp: **Họ Tên**, **Email**, **Mật khẩu**."
+
 ## Actual
 
 - Vừa bấm nút Đăng Ký xong thì app hiện ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.

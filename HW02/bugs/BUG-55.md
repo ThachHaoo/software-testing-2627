@@ -34,6 +34,8 @@
 
 Tất cả các trường bắt buộc theo quy định FR-01 (gồm Họ Tên, Email, Mật khẩu) phải có ký hiệu dấu sao * hiển thị ngay bên cạnh nhãn theo yêu cầu FR-22.1 (D13).
 
+Trích SRS (AI chép nguyên văn): README.md dòng 252: "Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn."
+
 ## Actual
 
 Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là 'Họ Tên', 'Email', 'Mật khẩu' mà không hề có ký hiệu dấu sao * bên cạnh để báo cho người dùng biết đây là các trường bắt buộc.
@@ -51,7 +53,6 @@ Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là
 ## Yêu cầu
 
 - **FR-22.1:** Trường bắt buộc có ký hiệu * bên cạnh nhãn. [phạm vi theo D13]
-- **D13** (giả định, yêu cầu GUI trên mobile): FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi
 - Đạt trong cùng case: —
 - Chưa đánh giá được: —
 

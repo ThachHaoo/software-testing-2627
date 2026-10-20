@@ -34,6 +34,8 @@
 
 Giao diện đăng ký tài khoản phải bắt buộc có trường 'Xác nhận mật khẩu' để người dùng nhập lại mật khẩu, và hệ thống phải đối chiếu từ chối nếu hai mật khẩu không khớp theo quy định FR-01.9 (D9).
 
+Trích SRS (AI chép nguyên văn): README.md dòng 35: "Phải có trường **Xác nhận mật khẩu** — hệ thống từ chối nếu hai trường không khớp."
+
 ## Actual
 
 Màn hình 'Đăng Ký Tài Khoản' trên app mobile chỉ có vỏn vẹn 3 ô nhập liệu là 'Họ Tên', 'Email', và 'Mật khẩu', hoàn toàn không có ô 'Xác nhận mật khẩu'.

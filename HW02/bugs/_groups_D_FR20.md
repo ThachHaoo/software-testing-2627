@@ -656,3 +656,25 @@ Không sửa: Severity, Priority, tiêu đề, Expected, câu Nhận định (ng
 
 - TC-FR20-204, lượt 1: ảnh điện thoại (`TC-FR20-204_manual_1.png`, ô Username) và ảnh admin (ID 8) cho thấy email đã nhập là `m204_{ts}@ domain.com` (dấu cách **sau** '@'). Input của TC là `m204_{ts} @domain.com` (dấu cách trước '@'), cũng là ví dụ trong bước 3 của BUG-52. Cả hai giá trị đều thuộc lớp "khoảng trắng bên trong" (EC5).
 - Lịch sử git có 2 commit 7/7a4 cùng cây: `40052e9` (đã lên remote) và `75da144` (AI amend để sửa message sau khi `40052e9` đã được push). SV merge lại ở `af05093`. Nguyên nhân: AI amend commit đã push.
+
+## 7c2 — sửa dữ kiện + quy ước (21/10/2026)
+
+- TC-FR20-204: theo ảnh, lượt 1 đã nhập `m204_{ts}@ domain.com` (dấu cách sau '@'). Đã ghi vào notes của TC: "giá trị thực nhập khác procedure, cùng EC5; verdict giữ". BUG-52 thêm dòng dữ kiện tương ứng; Actual đã đúng ảnh từ 7c; bước tái hiện SV viết giữ nguyên.
+- BUG-55, BUG-56: theo `git blame`, dòng D13 trong mục Yêu cầu do AI điền ở 7a3 (`3b8131c`) → đã bỏ D13 (giả định phạm vi), giữ FR-22.1 / FR-22.2. Chữ "(D13)" trong Expected là SV viết (`6d16d98`), không sửa.
+- Kiểm lại mục Yêu cầu của 7 BUG: chỉ còn D4, D5, D7, D9, D10, đều thuộc loại "quyết định Expected"; không còn giả định phạm vi/nới.
+- Mục "Expected (trích SRS)": thêm dòng trích nguyên văn README.md theo điều khoản SV dẫn — BUG-51: dòng 32; BUG-52: dòng 32, 33; BUG-53: 33; BUG-54: 34; BUG-55: 252; BUG-56: 253; BUG-57: 35. BUG nào cũng có dẫn điều khoản nên không có BUG bị bỏ qua.
+
+### Log 7c2 (trước → sau)
+
+| BUG | Trước | Sau |
+|---|---|---|
+| BUG-52 | - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại | - Giá trị Email thực nhập ở lượt 1 (TC-FR20-204, theo ảnh `TC-FR20-204_manual_1.png` ô Username và ảnh admin ID 8): `m204_{ts}@ domain.com` (dấu cách sau '@'); input TC là `m204_{ts} @domain.com`; cả hai thuộc EC5. ⏎ - Lặp lại: 1 lượt chính thức (lượt 1, sau restart backend). Phần server AI chạy lại |
+| BUG-55 | - **D13** (giả định, yêu cầu GUI trên mobile): FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi | (bỏ dòng) |
+| BUG-56 | - **D13** (giả định, yêu cầu GUI trên mobile): FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi | (bỏ dòng) |
+| BUG-51 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 32: "Người dùng phải cung cấp: **Họ Tên**, **Email**, **Mật khẩu**." ⏎  ⏎ ## Actual |
+| BUG-52 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 32: "Người dùng phải cung cấp: **Họ Tên**, **Email**, **Mật khẩu**." ⏎ Trích SRS (AI chép nguyên văn): README.md dòng 33: "Email phải có định dạng hợp lệ (`user@domain.com`) và là duy nhất trong hệ thống." ⏎  ⏎ ## Actual |
+| BUG-53 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 33: "Email phải có định dạng hợp lệ (`user@domain.com`) và là duy nhất trong hệ thống." ⏎  ⏎ ## Actual |
+| BUG-54 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 34: "**Yêu cầu mật khẩu mạnh**: Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`)." ⏎  ⏎ ## Actual |
+| BUG-55 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 252: "Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn." ⏎  ⏎ ## Actual |
+| BUG-56 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 253: "Trường Email phải dùng `type="email"`." ⏎  ⏎ ## Actual |
+| BUG-57 | ## Actual | Trích SRS (AI chép nguyên văn): README.md dòng 35: "Phải có trường **Xác nhận mật khẩu** — hệ thống từ chối nếu hai trường không khớp." ⏎  ⏎ ## Actual |
