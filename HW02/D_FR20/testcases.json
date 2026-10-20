@@ -6,7 +6,7 @@
     "feature": "FR-20 Tính năng Mobile — chức năng Đăng ký (frontend-mobile, Expo SDK 54, màn hình 'Đăng Ký Tài Khoản'), áp dụng FR-01",
     "feature_code": "D_FR20",
     "doc_id": "TCD-D_FR20",
-    "version": "0.5",
+    "version": "0.6",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã); thay đổi cục bộ duy nhất: frontend-mobile/App.js dòng 16 API_URL",
@@ -41,6 +41,9 @@
       "D13 (yêu cầu GUI trên mobile) [loại: phạm vi + quyết định Expected · truy vết: có · căn cứ: FR-22 dòng 252–255 viết theo khái niệm web (type=\"email\", type=\"password\"); tiền lệ A14 (suite GUI riêng, không phân lớp) và phạm vi A (bỏ FR-21) · SV chốt 2026-10-20, phương án a]: FR-22.1 ('*' cạnh nhãn), FR-22.4 (thông báo lỗi phía trên nút 'Đăng Ký') áp nguyên; FR-22.2/22.3 hiểu tương đương mobile: Email → bàn phím email (keyboardType email-address), Mật khẩu → che ký tự (secureTextEntry); kiểm ở TS-GUI, không phân lớp; FR-21 ngoài phạm vi — lý do SV: nhất quán với A, giữ dòng so sánh web vs mobile (SRS không đủ căn cứ, SV quyết).",
       "D14 (verdict khi chạy tay) [loại: quy trình · truy vết: không · căn cứ: quyết định đã chốt A20/A17 (CLAUDE.md), quy tắc verdict của skill · SV chốt 2026-10-20, chấp nhận đề xuất AI]: chạy tay nên status do SV điền trực tiếp, auto_status để trống; lệch do biến mục tiêu → Fail; bị biến khác chặn → Blocked + case gốc; 'Pass hộp đen' khi bị từ chối đúng nhưng lý do không chứng minh luật mục tiêu. Evidence: ảnh chụp màn hình điện thoại TC-FR20-xx_manual_*.png (+ ảnh trang admin theo D11).",
       "D15 (thiết bị, locale, bàn phím) [loại: môi trường · truy vết: không · căn cứ: P2 (SV chốt Android thật, Expo Go) · SV chốt 2026-10-20, chấp nhận đề xuất AI]: SV ghi model, phiên bản Android, bản Expo Go, ngôn ngữ hệ thống, bàn phím (vd Gboard) khi chạy; ghi vào meta.environment và HW02/env/environment.md."
+    ],
+    "review_log": [
+      "2/7c (721b852, 2026-10-20): SV chốt sau review — phân lớp 32 EC theo 2/7b (af52010), không đổi nội dung."
     ]
   },
   "requirements": [
@@ -585,7 +588,7 @@
         "Trước lượt chạy chính thức: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (D0).",
         "Web admin http://localhost:5174 trên máy tính: đăng nhập admin@eshop.com / Admin123!, mở tab 'Người dùng' (trang 'Quản lý Người dùng') (D11).",
         "Điện thoại Android, Expo Go (SDK 54), cùng mạng với máy; app EShop Mobile đã mở với API_URL = http://172.21.0.137:3000/api (D15).",
-        "{ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231) — email mỗi case là duy nhất trong một lượt chạy (D0).",
+        "{ts} = 4 chữ số giờ-phút lúc chạy case (HHmm, vd 2231). Email mẫu m01_2231@domain.com: đúng một '@', local 'm01_2231' không rỗng, domain 'domain.com' có '.' → thuộc EC3 (FR-01.3, D4) và, vì chưa có trong CSDL, EC6 (FR-01.4, D5). Email chỉ có thể trùng trong cùng một lượt chạy (khởi động lại backend xoá mọi tài khoản đã tạo, D0): chạy lại cùng case trong cùng lượt phải dùng HHmm khác (chờ sang phút mới), nếu không email rơi vào EC7 (đã tồn tại).",
         "Trạng thái ban đầu của mỗi case: app vừa tải lại (Reload trong Expo Go), đang ở màn hình chủ, header hiển thị 'Đăng nhập' (chưa đăng nhập); sau khi vào màn 'Đăng Ký Tài Khoản' cả ba ô Họ Tên, Email, Mật khẩu đều trống, không có chữ lỗi (D0)."
       ],
       "procedure": [

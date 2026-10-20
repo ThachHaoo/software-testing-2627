@@ -17635,6 +17635,35 @@ render_md.py → freeze.py → check_domain.py → lint → prompt log → commi
 Giờ sửa phân lớp theo review (2/7b): ghi tiền đề gray-box theo từng ô, EC24 chỉ dẫn D9.
 
 2/7b, 2/7c đã commit. Giờ bước 3: dựng minimum set chạy tay.
+
+Đã làm xong 2/7b, 2/7c và bước 3. Không có điểm dừng nào, không phải khôi phục lớp nào.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:**
+  - `af52010` 2/7b: sửa phân lớp theo review.
+  - `721b852` 2/7c: SV chốt phân lớp. Đây là commit rỗng: dòng "SV chốt sau review" chỉ nằm trong thân commit, không có trong JSON. Cần ghi vào JSON thì báo em.
+  - `61b7e8c` 3/7: Test case Domain.
+- **A.2: gộp được cả 3 ô.** Code cho thấy client không trim hay biến đổi giá trị: ô hiển thị đúng state, onChangeText lưu nguyên chuỗi, `handleRegister` không gán lại biến (dòng 209–219 chỉ kiểm mật khẩu), body gửi qua `JSON.stringify` (dòng 225).
+  - Họ Tên (EC1, EC2): App.js dòng 807, 808 → `name` dòng 226.
+  - Email (EC3, EC5, EC6, EC7): dòng 813, 814 → `email` dòng 227. `autoCapitalize` (dòng 815) chỉ tác động bàn phím lúc nhập.
+  - Đã ghi "(gray-box)" và số dòng vào note của từng EC.
+- **EC24: giữ gộp.** D9 ghi "bỏ trống = không khớp" nên hai trường hợp cùng Expected. Note chỉ còn dẫn D9, đã bỏ câu về HTML5.
+- **Bước 3: 22 TC.**
+  - TS-DOM 17 case: 2 hợp lệ (01–02), 15 không hợp lệ (03–17).
+  - TS-GUI 5 case (90–94).
+  - TC-16, TC-17 sẽ Blocked nếu màn hình không có ô Xác nhận mật khẩu; case gốc là TC-94.
+  - Rationale của case đại diện lớp gộp đã ghi mã TC API của A được tham chiếu.
+- **Ước tính bước 4:** BVA độ dài Mật khẩu ~4 điểm mới (LB−1 = 7, LB = 8, LB+1 = 9, LARGE). NOM dùng chung giá trị với TC-01.
+- **Case có Expected chỉ dựa vào giả định D:**
+  - TC-02, TC-15 (D7).
+  - TC-10, TC-12 (D8).
+  - TC-17 (D9, so khớp phân biệt hoa/thường).
+  - TC-91, TC-92 (D13, cách hiểu FR-22.2/22.3 trên mobile).
+  - Toàn bộ phần thông báo, màn hình và dữ liệu của các case dựa vào D10/D11. Cả 22 case đều phụ thuộc D2.
+- **Kiểm tra:**
+  - check_domain: 0 lỗi, 32/32 EC đã được phủ. Còn 2 cảnh báo: V4 chưa có BVA (để bước 4), V6 không có lớp không hợp lệ (cố ý theo D12).
+  - lint: 0 lỗi, 0 cảnh báo. Trước đó 5 case GUI bị cảnh báo thiếu cleanup, em đã bổ sung.
+- **Bất thường (không chặn):** quy trình dùng `{ts}` = giờ-phút HHmm để gõ trên điện thoại cho ngắn. Hai case chạy trong cùng một phút vẫn không trùng email vì tiền tố `mNN_` khác nhau.
 ```
 *File AI ghi/gửi trong lượt này:* `d_step2b.py`, `d_step3.py`
 
@@ -17642,4 +17671,56 @@ Giờ sửa phân lớp theo review (2/7b): ghi tiền đề gray-box theo từn
 
 ---
 
-**Tổng:** 296 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 211 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295, #296); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #297 | 22:50 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+## Lệnh cho Claude Code — D_FR20: rà bước 3 → bước 4 → khung bước 5
+
+### A. Rà bước 3
+1. Tra `git show --stat` commit 2/7c của C_FR15.
+   - Commit đó có ghi vào JSON → ghi "SV chốt sau review" vào JSON của D giống cách C đã làm.
+   - Không có → giữ 721b852 rỗng.
+2. App.js có ô Xác nhận mật khẩu không? Trả lời có/không kèm dòng code.
+   - Có → bỏ chữ "nếu" trong note của TC-16, TC-17.
+   - Không → giữ nguyên, nêu trong báo cáo.
+3. Quy tắc email/{ts} của D:
+   - in nguyên văn;
+   - kiểm 1 email mẫu thuộc lớp email hợp lệ nào (mã EC + căn cứ FR-01/giả định);
+   - ghi rõ chỉ trùng được trong cùng 1 lượt (restart backend xoá dữ liệu).
+   Không thuộc lớp hợp lệ → sửa quy tắc.
+Có sửa → render_md.py → freeze.py → check_domain.py → lint → prompt log → commit
+`HW02[D-FR20] 3/7b: sửa theo review`.
+
+### B. Bước 4
+`/domain-bva-testing HW02/D_FR20 4`.
+- Dùng LARGE → `no_upper_bound = <mã D đã có>`.
+  - D chưa có giả định cận trên → DỪNG trước khi commit, đề xuất giả định mới (phương án + hệ quả).
+- Mã BVA 60–89; suite ≤ 25 dòng.
+render_md.py → freeze.py → check_domain.py → lint → prompt log → commit `HW02[D-FR20] 4/7`.
+
+### C. Khung bước 5 (không commit)
+Tạo HW02/D_FR20/sv_cases.md: khung trống chép cấu trúc từ HW02/C_FR15/sv_cases.md.
+- Không giữ case, ví dụ, danh mục hay gợi ý nào của C.
+- Ghi vào step1_notes.md mục "Khai cho Audit": "Khung sv_cases.md do AI tạo".
+- Không tạo ai_gap_answer.md, sv_questions.md.
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Commit (3/7b nếu có, 4/7).
+- A.1–A.3: kết quả từng mục.
+- Bước 4: số điểm BVA, mã TC, no_upper_bound dùng mã nào; tổng TC AI của D.
+- check/lint.
+- Dừng/lỗi → ghi đầu báo cáo.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 297 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 212 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #293, #294, #295, #296, #297); Claude (không rõ model) 2 lượt (#118, #272). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
