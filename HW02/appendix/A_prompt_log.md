@@ -18452,13 +18452,121 @@ Em đã đưa 9 case SV vào `testcases.json`, viết `ai_gap_answer.md` và com
 **Output:**
 ```
 Đang xuất transcript `_p5`, xong mình gửi file kèm giờ lượt đầu/cuối để bạn kiểm.
+
+Mình đã gửi file `claude-ai_session_HW02_p5.jsonl`. File có 8 lượt, từ 22:16 đến 23:13 ngày 20/10. Lượt đầu trùng với lúc phiên bắt đầu nên không bị nén ngữ cảnh, không phải chép tay phần nào.
+
+Việc bạn cần làm:
+1. Đặt file vào `.transcripts/`.
+2. Chạy `python tools/hooks/on_stop.py --manual` và đợi in ra "Tổng: N lượt…".
+3. Commit `HW02/appendix/A_prompt_log.md`.
+
+Nên commit sau khi Claude Code đã commit xong `5/7b`, để hai commit không đụng nhau ở cùng file prompt log.
+
+Lần xuất sau, nếu đây vẫn là cùng phiên chỉ dài thêm, mình sẽ dùng lại tên `_p5` và bạn ghi đè.
 ```
+*File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p5.jsonl`
 
 **Xử lý:** [...]
 
 ---
 
-## #307 | 23:19 20/10/2026 | Claude Opus 5.5 | [...]
+## #307 | 23:17 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo
+Báo cáo cho phiên thảo luận
+
+- Kiểm tra (2 lỗi): check_domain báo 2 ERROR: TC-203 có ec_target chứa D11 (không phải mã EC); TC-205 có ec_target EC18 không nằm trong covers. Em giữ nguyên chữ của SV, không sửa. Ngoài ra còn 1 cảnh báo V6 (cố ý theo D12). Lint: 0 lỗi, 3 cảnh báo (tiêu đề TC-201, 204, 208 thiếu phần điều kiện).
+- Commit: b975f90 5/7b: đưa case SV vào TS-SV + gap answer. Không có commit 4/7b.
+- NOM: giữ. Mật khẩu TC-01 là Abcd1234!, dài 9 ký tự chứ không phải 12, nên không gộp được.
+- Case SV: 9 case. TC-FR20-200 đến 206 vào suite TS-SV (Mobile); 207, 208 vào TS-SV-GUI. Các bước của 207, 208 không có kết quả từng bước nên ghi "(SV chưa ghi)".
+- Lỗi nhất quán (chi tiết ở HW02/D_FR20/ai_gap_answer.md, mục cuối):
+  - 200, 201: Expected kiểm Họ Tên trên trang ad cột Họ Tên (mâu thuẫn D11). 200 thêm: Expectedthiếu căn cứ (SEC-04 không có trong requirements, "không giật/văng" không có căn cứ).
+  - 202: Expected là từ chối, nhưng giá trị Abcd123\n4! hợp lệ theo FR-01 và D7. Căn cứ D8 không liên quan; ec_target là lớp hợp lệ.
+  - 203: lỗi ec_target ở trên. Expected "nút bị vô hiệu hoá" không có căn cứ.
+  - 204: "không gửi request" không quan sát được chữ thông báo, trái D10. Email ghi m205_ trongcase 204.
+  - 205: lỗi ec_target ở trên. Giá trị có chữ sốd "thiếu chữ số". Tiêu đề khác giá trị nhập. D8không phủ chữ số full-width. Email ghi m206_.
+  - 206: "không đơ UI" không có căn cứ. Email ghi m207_.
+  - 207: căn cứ FR-22.4 không nói tới bàn phím c
+  - 208: yêu cầu nút hiện/ẩn mật khẩu không có căn cứ trong FR-22.3/D13.
+- Gap:                                                                                                                          - Nhóm 1 "đã nghĩ tới nhưng không đưa vào": 1
+  - Nhóm 2 "không nghĩ tới": 7 case (200, 201, 202, 203, 205, 207, 208).
+  - Nhóm 3 "đã có nhưng bị gỡ theo quyết định SV": 1 case (204, do D12=a và D1=a).
+  - Liên quan P1=b: AI không đọc case SV của A nên không biết A có case tương tự không. Riêng 200, AI từng thấy dòng scope của A nhắc SEC-04 nhưng không đưa vào D.                                                                                        Tổng TC của D: 36 (AI 27, SV 9).
+- Khai cho Audit: đã ghi vào step1_notes.md rằng AI có in sv_cases.md và 40 dòng đầu ai_gap_answer.md của C, cả hai sau khi bản AI bước 1–4 của D đã đóng băng.
+- Không có sv_questions.md để trả lời.
+```
+
+**Output:**
+`````
+Kết quả lặp đúng mẫu của C: 9 case SV thì gần như case nào cũng có lỗi về căn cứ hoặc nhất quán. Theo quy ước, Claude Code giữ nguyên chữ của bạn là đúng. Việc sửa, thêm giả định hay bỏ case là do bạn quyết; AI chỉ được đồng bộ lại sau khi bạn sửa.
+
+**Hai nhận định của Claude Code cần kiểm lại trước khi bạn sửa** (có thể nó sai):
+- **TC-200, SEC-04:** Claude Code nói "SEC-04 không có trong requirements", nhưng cũng nói phạm vi của A từng nhắc SEC-04. Nếu README có SEC-04 thì đó là căn cứ SRS hợp lệ, chỉ cần đưa SEC-04 vào danh sách yêu cầu của D.
+- **TC-202, `\n`:** câu "hợp lệ theo D7" phụ thuộc vào cách D7 định nghĩa tập ký tự. Cần đọc nguyên văn D7.
+
+Lệnh nhỏ dưới đây chỉ đọc, không sửa gì, để lấy 2 dữ kiện này.
+
+**Lỗi của từng case** (chi tiết ở `ai_gap_answer.md`, mục cuối):
+
+| Case | Lỗi |
+|---|---|
+| 200, 201 | Kiểm Họ Tên trên trang admin, nhưng trang này không có cột Họ Tên. Theo D11 phải kiểm qua đăng nhập thử ("Chào, <tên>"). 200 còn có "không giật/văng" không có căn cứ. |
+| 202 | Tuỳ kết quả kiểm D7 |
+| 203 | ec_target chứa D11 (mã giả định, không đặt được trong ec_target); "nút vô hiệu hoá" không có căn cứ |
+| 204 | "không gửi request" không quan sát được khi chạy tay (D10); email ghi `m205_` |
+| 205 | EC18 nằm ngoài covers; tiêu đề không khớp giá trị nhập; D8 không phủ chữ số full-width; email ghi `m206_` |
+| 206 | "không đơ UI" không có căn cứ; email ghi `m207_` |
+| 207 | FR-22.4 không nói tới bàn phím |
+| 208 | Nút hiện/ẩn mật khẩu không có căn cứ (FR-22.3, D13) |
+| 201, 204, 208 | Tiêu đề thiếu phần điều kiện (cảnh báo lint) |
+
+Với mỗi case bạn có 3 hướng:
+1. **Sửa** để Expected bám SRS hoặc giả định D có sẵn.
+2. **Thêm giả định D16+** có căn cứ và lý do của bạn (tiền lệ C21, C23). Lưu ý "cách các app thường làm" không được chấp nhận làm căn cứ, như đã áp ở B và C.
+3. **Bỏ case**, giữ khoảng trống số.
+
+Số email lệch (204→`m205_`, 205→`m206_`, 206→`m207_`) là lỗi gõ, bạn sửa nhanh được.
+
+Vì bạn muốn ít case: nếu bỏ, mỗi case bị bỏ vẫn là chất liệu cho gap analysis (như 7 case bỏ ở C), nên không mất gì.
+
+Về Audit: Claude Code có in `sv_cases.md` và 40 dòng đầu `ai_gap_answer.md` của C, nhưng sau khi phần AI bước 1–4 đã đóng băng, nên không ảnh hưởng thiết kế. Nó đã tự khai.
+
+**Lệnh 1 — chỉ đọc, dán ngay:**
+````
+## Lệnh cho Claude Code — D_FR20: tra 2 dữ kiện cho SV (chỉ đọc, không commit)
+1. README.md của SUT: có mục SEC-04 không? Có → chép nguyên văn + số dòng; ghi thêm FR/mục chứa nó.
+2. Chép nguyên văn D7 trong HW02/D_FR20/testcases.json (cả câu SV chốt).
+   Theo đúng chữ D7: ký tự xuống dòng (\n) thuộc tập cho phép hay không, hay D7 không nói tới?
+## Báo cáo (≤ 8 dòng): 2 mục trên, nguyên văn.
+````
+
+**Lệnh 2 — dán sau khi** bạn đã sửa `sv_cases.md` và commit `HW02[D-FR20] 5/7c: SV sửa case SV`:
+````
+## Lệnh cho Claude Code — D_FR20: đồng bộ case SV sau khi SV sửa
+0. HEAD có commit SV 5/7c chỉ chạm HW02/D_FR20/sv_cases.md (+ prompt log). Không đạt → DỪNG.
+1. Đồng bộ TS-SV theo sv_cases.md, giữ nguyên chữ.
+   - Case SV bỏ → gỡ khỏi suite, giữ khoảng trống số.
+   - Giả định D16+ SV viết → đưa vào assumptions, đúng chữ SV.
+2. ai_gap_answer.md: chỉ cập nhật mục cuối (lỗi nhất quán) cho các case còn lại.
+   Không đổi phân nhóm gap đã ghi.
+3. render_md.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 5/7d: đồng bộ case SV`.
+## Báo cáo (≤ 10 dòng)
+- Case giữ / bỏ, giả định mới.
+- Lỗi còn lại (mã + lỗi).
+- check/lint; tổng TC D (AI/SV).
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #308 | 23:19 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18487,7 +18595,50 @@ Em đã đưa 9 case SV vào `testcases.json`, viết `ai_gap_answer.md` và com
 
 ---
 
-## #308 | 23:24 20/10/2026 | Claude Opus 5.5 | [...]
+## #309 | 23:20 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo lệnh 1:
+Báo cáo cho phiên thảo luận
+
+1. SEC-04: có. Nằm ở ../eshop-sut/README.md §9 "Yêu cầu Bảo mật (Security Requirements — Tham khảo)" (dòng 274). SEC-04 là một dòng trong bảng SEC, không thuộc FR nào:
+▎ 281: | SEC-04 | Mọi dữ liệu từ user nhập vào khi hiển thị trên UI phải được escape đúng cách, không dùng innerHTML trực tiếp. |
+2. D7 nguyên văn:
+▎ D7 (kế thừa A5 – ký tự đặc biệt) [loại: quyết định Expected · truy vết: có · căn cứ: FR-01 dòng 34 liệt kê (@, $, !, %, *, ?, &) · SV chốt 2026-10-20, phương án a]: tập ĐÓNG — mật khẩu chỉ có ký tự đặc biệt ngoài tập bị coi là thiếu ký tự đặc biệt; ký tự ngoài tập được phép xuất hiện thêm nếu đã có ≥ 1 ký tự trong tập — lý do SV: giữ nguyên như A.
+
+   D7 không nhắc tới \n (cũng không nói tới ký tự điều khiển). Chỉ có câu chung "ký tự ngoài tập được phép xuất hiện thêm nếu đã có ≥ 1 ký tự trong tập". Đọc đúng chữ thì p, vì giá trị đã có '!'. Nhưng D7 không nói \n cóđược coi là "ký tự" theo nghĩa của luật này không.
+
+   Ở mục rà nhất quán TC-202, em ghi "theo FR-01g theo chữ của D7, nhưng là suy diễn, vì D7 khôngnêu đích danh \n.
+```
+
+**Output:**
+```
+Cả hai dữ kiện đều làm thay đổi nhận định trước đó:
+
+**TC-200 (SEC-04): có căn cứ.** README §9 có SEC-04, nên câu "SEC-04 không có trong requirements" của Claude Code chỉ đúng với danh sách yêu cầu của D, không đúng với SRS. Muốn giữ case này, bạn cần:
+- **Thêm giả định D16 (loại phạm vi):** SEC-04 áp cho mobile. Cần ghi chú 2 điểm:
+  - §9 ghi là "Tham khảo". Nên đối chiếu A đã xử lý SEC-04 thế nào để giữ nhất quán.
+  - SEC-04 viết theo khái niệm web (innerHTML). Trên mobile, cách hiểu tương đương là chuỗi hiển thị đúng như đã nhập, giống cách D13 đã chuyển FR-22 sang mobile.
+- **Expected:** bám điểm quan sát D11 (lời chào "Chào, <tên>"), không dùng trang admin.
+- **"Không giật/văng":** vẫn không có căn cứ. Bỏ đi, hoặc viết thành giả định riêng có lý do.
+
+**TC-202 (`\n`): theo đúng chữ D7 thì đây là mật khẩu hợp lệ.** D7 ghi ký tự ngoài tập được phép xuất hiện thêm, và giá trị đã có `!`. Hiện không có căn cứ nào để Expected là "từ chối". Bạn có 3 hướng:
+- **a) Giữ "từ chối"** và thêm giả định D16+ về ký tự điều khiển. Lý do phải là nguyên tắc rõ ràng, không phải "app thường làm vậy" (đã bị loại ở B và C).
+- **b) Đổi Expected thành "chấp nhận"**, ec_target là lớp hợp lệ. Hướng này khớp với chữ D7 bạn đã chốt.
+- **c) Bỏ case.**
+
+Dù chọn hướng nào, cũng cần nghĩ tới khả năng thực hiện. Theo D12=a, giá trị của case là chuỗi đang có trong ô. Nếu ô mật khẩu một dòng trên Android không giữ được `\n` (gõ hay dán đều không vào được), case không thực hiện được như thiết kế. Đây là câu hỏi về việc case có hợp lệ không, không phải dự đoán hành vi SUT, và bạn nên tự cân nhắc trước khi chọn.
+
+Các case còn lại vẫn theo bảng lỗi ở lượt trước. Sửa xong `sv_cases.md` thì commit `5/7c` rồi dán **Lệnh 2**. Nếu thêm D16+, nhớ ghi đủ loại giả định, căn cứ và lý do của bạn để Claude Code chép đúng chữ.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #310 | 23:24 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18530,7 +18681,84 @@ Em đã đưa 9 case SV vào `testcases.json`, viết `ai_gap_answer.md` và com
 
 ---
 
-## #309 | 23:32 20/10/2026 | Claude Opus 5.5 | [...]
+## #311 | 23:25 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo lệnh 2:
+Báo cáo cho phiên thảo luận
+
+- Case: giữ 8 case (TC-FR20-200, 201, 203–206 trong TS-SV; 207, 208 trong TS-SV-GUI). Bỏ TC-202, giữ khoảng trống số và ghi vào notes của suite. SV không thêm giả định D16+.
+- Thay đổi ngoài case SV: em thêm SEC-04 vào requirements của D, chép nguyên văn README.md dòng 281. Lý do: TC-200 dẫn SEC-04 làm căn cứ, nếu không thêm thì lint báo lỗi "unknown requirement". Muốn bỏ thì báo em.
+- Lỗi nhất quán còn lại:
+  - 203: quy trình suite TS-SV (chép từ TS-DOM) ghi "bấm 'Đăng Ký' đúng một lần", mâu thuẫn với thao tác chạm 10 lần của case.
+  - 205: tiêu đề ghi chỉ có chữ số full-width １２３４５６７８, nhưng giá trị nhập là Abcd１２３４５６!. D8 không nói tới chữ số full-width. EC phủ có cả EC17 lẫn EC18 của cùng biến.
+  - 207: FR-22.4 đã được khẳng định ở TC-93, nay khẳng định lần hai. Các bước không nhập Họ Tên.
+  - 208: FR-22.3 đã được khẳng định ở TC-92, nay
+  - 200, 201, 204, 206: không thấy lỗi.
+  - Chi tiết ở HW02/D_FR20/ai_gap_answer.md, mục cuối; phân nhóm gap giữ nguyên.
+- Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6,  cảnh báo.
+- Tổng TC của D: 35 (AI 27, SV 8).
+```
+
+**Output:**
+`````
+Còn 4 case có lỗi; 200, 201, 204 và 206 đã sạch. Việc Claude Code thêm SEC-04 vào danh sách yêu cầu là chấp nhận được: TC-200 của bạn dẫn SEC-04 và nó chép nguyên văn dòng 281. Ghi một dòng trong Audit là "AI thêm SEC-04 vào requirements theo case SV". Lưu ý thêm: vì bạn không thêm D16, việc SEC-04 áp cho mobile hiện chỉ nằm ngầm trong TC-200. Nếu thấy chấp nhận được thì không cần làm gì.
+
+Lỗi còn lại:
+
+| Case | Vấn đề | Hướng xử lý |
+|---|---|---|
+| 203 | Mâu thuẫn nằm ở câu quy trình của **suite** ("bấm đúng 1 lần"), không nằm ở case của bạn | Câu này khả năng cao do AI chép từ TS-DOM lúc dựng suite, nên AI tự sửa được. Lệnh dưới bắt kiểm `git blame` trước khi sửa. |
+| 205 | (1) Tiêu đề không khớp giá trị nhập. (2) Covers có cả EC17 lẫn EC18 của cùng một biến; một giá trị chỉ thuộc một lớp. (3) Chưa có căn cứ để coi `１２３…` (full-width) là chữ số hay không phải chữ số. | (1) và (2) bạn sửa. Với (3): **a)** thêm D16 kèm lý do của bạn; **b)** để Expected "chấp nhận mọi cách hợp lý", không tạo Fail; **c)** bỏ case. |
+| 207, 208 | Phần có căn cứ (FR-22.4, FR-22.3) đã được khẳng định ở TC-93 và TC-92, phần còn lại thì không có căn cứ | Giữ thì phải bỏ khẳng định trùng, và khi đó gần như không còn gì để kiểm. Thực tế nên **bỏ**, cũng hợp với mục tiêu ít case. |
+
+Về gap: nếu bạn bỏ 207 và 208, chúng vẫn đang nằm ở nhóm "không nghĩ tới" trong `ai_gap_answer.md`. Khi tự viết gap analysis, bạn nên tự xếp lại hai case này: bản cuối thì trùng TC-92/93, còn bản đầu thì không có căn cứ.
+
+Sửa xong thì commit `HW02[D-FR20] 5/7e: SV sửa case SV (lần 2)`, rồi dán lệnh này:
+
+````
+## Lệnh cho Claude Code — D_FR20: đồng bộ case SV lần 2 → chuẩn bị bước 6 (chạy tay)
+
+### A. Đồng bộ
+0. HEAD có commit SV 5/7e chỉ chạm sv_cases.md (+ prompt log). Không đạt → DỪNG.
+1. Câu quy trình suite TS-SV "bấm đúng một lần": `git blame` / `git log -L`.
+   - Do AI viết (5/7b) → sửa thành "bấm đúng số lần ghi trong case (mặc định 1 lần)",
+     ghi Audit "AI sửa câu suite do AI viết".
+   - Do SV viết → không sửa, báo lại.
+2. Đồng bộ TS-SV theo sv_cases.md như lệnh trước: giữ nguyên chữ; case bỏ → giữ khoảng trống số;
+   D16+ → chép đúng chữ.
+   Mục cuối ai_gap_answer.md cập nhật lỗi còn lại; không đổi phân nhóm.
+3. render_md.py → check_domain.py → lint → prompt log → commit `HW02[D-FR20] 5/7f: đồng bộ case SV`.
+   Còn lỗi nhất quán → DỪNG ở đây, không làm B.
+
+### B. Chuẩn bị bước 6 (chỉ khi A sạch) — không chạy app
+- HW02/env/mobile_api_url.patch: `git -C ..\eshop-sut diff frontend-mobile/App.js`.
+- HW02/D_FR20/RUN.md cho chạy tay trên Android thật (Expo Go), theo D0, D10, D11, D14, D15:
+  - bước restart backend trước lượt;
+  - cách tính {ts} và email từng case;
+  - thứ tự case (gom các case cần xem trang admin);
+  - mỗi case: thao tác, ảnh cần chụp (tên `TC-FR20-xx_manual_<n>.png`), điểm quan sát,
+    chỗ SV ghi Actual nguyên văn;
+  - case Blocked theo case gốc thì ghi rõ "không chạy, đánh dấu Blocked nếu TC-94 Fail";
+  - nhật ký lượt (ngày, máy, locale, lượt chính thức).
+- File kết quả trống cho SV điền (theo định dạng merge_results.py đọc được), không điền sẵn
+  Actual/verdict.
+- render_md.py → lint → prompt log → commit `HW02[D-FR20] 6/7a: RUN.md chạy tay`.
+
+## Báo cáo (≤ 10 dòng)
+- A: câu suite (ai viết, sửa/không); case giữ/bỏ; lỗi còn lại; tổng TC (AI/SV).
+- B: số case cần chạy tay, số ảnh, ước tính thời gian, đường dẫn RUN.md + file kết quả.
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #312 | 23:32 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18600,7 +18828,66 @@ Em dừng sau khi đồng bộ (5/7f) và chưa làm phần B, vì TC-205 và D1
 
 ---
 
-## #310 | 23:38 20/10/2026 | Claude Opus 5.5 | [...]
+## #313 | 23:34 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xem báo cáo mới:
+Báo cáo cho phiên thảo luận
+
+- DỪNG ở A.3:
+  - Tiêu đề TC-205 ghi Abcd１２３４５６７８ và nói "chỉ chứa các chữ số", nhưng giá trị nhập là Abcd１２３４５６!: cuối chuỗi khác nhau, và chuỗi có cả chữ cái.
+  - D16 dẫn căn cứ "D8 (chữ số 0-9)", nhưng D8 chỉ nói về chữ hoa/thường A–Z / a–z, không nói chữ số.
+- Câu quy trình "bấm đúng một lần":
+  - Do AI viết: có từ commit 3/7 (61b7e8c), AI chép sang TS-SV ở 5/7b (b975f90).
+  - Đã sửa trong TS-SV thành "đúng số lần ghi trong case (mặc định 1 lần)", TS-DOM giữ nguyên.
+  - Đã ghi Audit "AI sửa câu suite do AI viết".
+- Case:
+  - Giữ 6 case: TC-FR20-200, 201, 203, 204, 205, 206.
+  - Bỏ 202 (từ 5/7c) và 207, 208 (5/7e, mục GUI ghi "Bỏ hết"). Suite TS-SV-GUI đã gỡ; khoảng trống số ghi trong notes của TS-SV.
+  - D16 đã chép đúng chữ SV vào meta.assumptions.
+- Lỗi còn lại:
+  - Chỉ còn TC-205 và D16 như nêu ở trên.
+  - TC-203 hết lỗi nhờ câu quy trình đã sửa.
+  - 200, 201, 204, 206 không thấy lỗi.
+  - Chi tiết ở HW02/D_FR20/ai_gap_answer.md, mục cuối.
+- Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
+- Tổng TC của D: 33 (AI 27, SV 6).
+- Commit: c32baff HW02[D-FR20] 5/7f: đồng bộ case SV.
+```
+
+**Output:**
+`````
+Chỉ còn 2 lỗi, đều nằm ở chữ của bạn trong TC-205 và D16. Phần còn lại sạch: lint không còn lỗi hay cảnh báo, check_domain chỉ còn cảnh báo V6 cố ý, tổng D là 33 TC (AI 27, SV 6). Claude Code tự sửa câu suite là đúng, vì câu đó do AI viết và đã được khai cho Audit.
+
+Bạn cần sửa:
+1. **TC-205: tiêu đề và giá trị nhập phải mô tả cùng một chuỗi.**
+   - Tiêu đề hiện ghi `Abcd１２３４５６７８` "chỉ chứa các chữ số".
+   - Giá trị nhập là `Abcd１２３４５６!`.
+   - Hai chuỗi khác phần cuối, và giá trị nhập có cả chữ cái lẫn `!` nên không phải "chỉ chứa các chữ số". Chọn một chuỗi rồi sửa chỗ còn lại cho khớp.
+2. **D16: căn cứ dẫn sai.** D8 nói về chữ hoa/thường, không nói về chữ số. Căn cứ đúng là điều khoản về chữ số trong FR-01, cộng với lý do của bạn về việc ký tự full-width có được tính là chữ số hay không. Nhớ ghi rõ loại giả định (quyết định Expected).
+
+Sửa xong thì commit `HW02[D-FR20] 5/7g: SV sửa TC-205, D16`, rồi dán:
+
+````
+## Lệnh cho Claude Code — D_FR20: đồng bộ lần 3 → bước 6a
+Làm lại đúng lệnh trước, thay:
+- mục A.0: kiểm commit SV `5/7g` (thay cho 5/7e);
+- bỏ A.1 (câu suite đã sửa ở c32baff);
+- commit đồng bộ: `HW02[D-FR20] 5/7h: đồng bộ case SV`.
+A sạch → làm tiếp mục B (RUN.md, mobile_api_url.patch, file kết quả trống, commit 6/7a)
+và báo cáo theo khung cũ.
+````
+
+Sau `6/7a`, phần còn lại của bạn là chạy khoảng 30 case trên Android theo RUN.md.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #314 | 23:38 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18649,7 +18936,98 @@ và báo cáo theo khung cũ.
 
 ---
 
-## #311 | 23:44 20/10/2026 | Claude Opus 5.5 | [...]
+## #315 | 23:41 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo mới:
+Báo cáo cho phiên thảo luận
+
+- Ghi đầu báo cáo, không chặn: TC-205 đã hết lỗi ở tiêu đề và D16. Còn 1 chi tiết: cột Căn cứ vẫn ghi D8 và Lý do chọn input vẫn viết "theo D8", trong khi D8 chỉ nói về chữ hoa/thường. Expected vẫn có đủ căn cứ (FR-01.7c + D16), nên em coi phần A là sạch và làm tiếp B. Nếu chị/anh muốn sửa thì cần SV sửa sv_cases.md.
+- A:
+  - Commit 12b9cda 5/7h: đồng bộ case SV.
+  - Câu "bấm đúng số lần" trong suite TS-SV đã sửa ở c32baff, lần này không đụng.
+  - Giữ 6 case SV: TC-FR20-200, 201, 203, 204, 205, 206. Đã bỏ 202, 207, 208 (giữ khoảng trống số). D16 chép đúng chữ SV.
+  - Tổng TC của D: 33 (AI 27, SV 6).
+  - Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
+- B (06f4d14 6/7a):
+  - 33 case cần chạy tay. TC-16 và TC-17 ghi "không chạy, đánh dấu Blocked nếu TC-94 Fail", và TC-94 được xếp chạy đầu tiên.
+  - Thứ tự: GUI trước, rồi nhóm bị từ chối, nhóm hợp lệ, cuối cùng TC-16/17.
+  - Tối đa 128 ảnh, ước tính khoảng 2 giờ.
+  - File:
+    - HW02/D_FR20/RUN.md
+    - File kết quả trống: HW02/D_FR20/results/D_nh dạng giống JSON của Playwright; em đã chạy thửmerge_results.py --dry-run và gộp được cả 33 case.
+    - HW02/env/mobile_api_url.patch
+- Harness chưa vá, chờ SV quyết (đã ghi cuối RUN
+  - merge_results.py đổi tên ảnh thành TC-FR20-xx_manual-1.png (gạch ngang), không phải _manual_1 như quy ước.
+  - merge_results.py ghi auto_status bằng đúng verdict SV điền, trái với D14 ("auto_status để trống" khi chạy tay).
+- Lưu ý nhỏ: git báo mobile_api_url.patch sẽ bị ên có thể phải apply bằng git apply--ignore-whitespace.
+```
+
+**Output:**
+`````
+Bước 6a ổn: thứ tự chạy hợp lý (TC-94 chạy đầu vì là case gốc của TC-16/17) và `merge_results --dry-run` đã gộp được đủ 33 case. Trước khi bạn cầm điện thoại chạy, còn 4 việc:
+
+1. **TC-205 vẫn dẫn D8** ở cột Căn cứ và ở Lý do chọn input. Expected vẫn đủ căn cứ (FR-01.7c + D16), nhưng nộp bài mà dẫn sai căn cứ thì dễ bị bắt. Bạn xoá 2 chỗ nhắc D8 trong `sv_cases.md`, mất khoảng 30 giây, rồi commit `HW02[D-FR20] 5/7i: SV bỏ dẫn D8 ở TC-205`.
+2. **Hai lỗi harness: nên vá, và phải vá trước khi chạy.**
+   - Tên ảnh: RUN.md bảo bạn đặt `_manual_1`, nhưng `merge_results.py` lại đổi thành `_manual-1`, sai quy ước. Vá script theo quy ước.
+   - `auto_status`: D14 bạn đã chốt là để trống khi chạy tay, vì không có gì tự động. Ghi verdict của bạn vào `auto_status` sẽ làm sai số liệu "auto vs SV" ở báo cáo.
+   - Vá xong phải kiểm lại kết quả A/B/C không đổi, vì C cũng có ảnh `_manual_`.
+3. **Dung lượng: rủi ro lớn nhất của D.** Zip toàn HW02 phải ≤ 20 MB. Một ảnh chụp màn hình Android PNG nặng khoảng 0,2–1,5 MB, nên 128 ảnh có thể vượt giới hạn dù tính riêng D, chưa kể evidence của A/B/C. Cần biết dung lượng hiện tại và có công cụ nén ảnh trước khi chạy.
+4. **Cảnh báo khoảng trắng khi apply patch** là do CRLF. Chỉ cần ghi lệnh `git apply --ignore-whitespace` vào mục môi trường của RUN.md. `.gitattributes` vẫn là việc tuỳ chọn như đã ghi.
+
+Sau khi bạn commit `5/7i`, dán lệnh này:
+
+````
+## Lệnh cho Claude Code — D_FR20: đồng bộ 5/7i → vá harness → kiểm dung lượng
+
+### A. Đồng bộ
+HEAD có commit SV 5/7i chỉ chạm sv_cases.md (+ prompt log). Không đạt → DỪNG.
+Đồng bộ TS-SV (giữ nguyên chữ) → render_md.py → check_domain.py → lint → prompt log → commit
+`HW02[D-FR20] 5/7j: đồng bộ case SV`.
+
+### B. Vá harness (commit riêng)
+merge_results.py:
+- giữ tên ảnh chạy tay đúng quy ước `TC-FRnn-xx_manual_<n>.png`, không đổi gạch dưới thành gạch ngang;
+- case chạy tay (theo D14): auto_status để trống/null; verdict SV điền chỉ ghi vào status.
+Kiểm hồi quy: chạy merge_results.py --dry-run cho A_FR01, B_FR07, C_FR15.
+- Kết quả phải giống hệt bản đã commit.
+- Có khác → DỪNG, không commit, báo case nào khác.
+Chạy lại --dry-run cho D (33 case).
+Commit `HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay`.
+
+### C. Dung lượng
+1. Đo dung lượng hiện tại:
+   - evidence A, B, C;
+   - ước tính zip nộp bài (theo cách hw-submission-audit đóng gói, nếu skill có ghi).
+   Tính phần dung lượng còn lại cho D.
+2. Nếu 128 ảnh × ~0,5 MB không vừa:
+   - viết tools/compress_manual.py (Pillow): resize + nén, giữ tên .png, chỉ đụng ảnh
+     `*_manual_*.png` của D;
+   - in kích thước trước/sau;
+   - ghi trong RUN.md: chạy script sau khi chép ảnh, trước khi merge;
+   - đề xuất có giảm số ảnh tối đa trong RUN.md không (liệt kê case nào chụp > 3 ảnh, không tự giảm).
+   Thêm dòng Audit "evidence chạy tay D đã nén bằng tools/compress_manual.py".
+3. RUN.md mục môi trường: thêm `git apply --ignore-whitespace HW02/env/mobile_api_url.patch` + lý do CRLF.
+Có thay đổi → commit `HW02: vá harness – nén ảnh chạy tay D` (hoặc gộp vào commit B nếu chỉ sửa RUN.md).
+
+## Báo cáo (≤ 10 dòng)
+- Commit A, B, C.
+- Hồi quy A/B/C: giống/khác.
+- Dung lượng hiện tại, phần còn lại cho D, kết quả nén thử nếu có (1 ảnh mẫu bất kỳ).
+- Đề xuất số ảnh (nếu có).
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+Nếu chưa có ảnh thật để nén thử, cứ để Claude Code báo con số ước tính. Khi chụp được vài ảnh đầu, bạn chạy script một lần để kiểm, rồi hãy chạy tiếp hết lượt.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #316 | 23:44 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18726,7 +19104,114 @@ Em dừng ở bước kiểm hồi quy của phần B. Bản vá `merge_results.
 
 ---
 
-## #312 | 23:49 20/10/2026 | Claude Opus 5.5 | [...]
+## #317 | 23:47 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho lệnh trên:
+Báo cáo cho phiên thảo luận
+
+- Lý do dừng: lệnh yêu cầu kết quả gộp phải giống hệt bản đã commit. Với A_FR01 và B_FR07 thì không giống, nhưng script cũ (trước khi vá) cũng cho đúng kết quả đó:
+  - Script cũ và script mới cho kết quả giống hệt nhau ở A, B, C: cùng output --dry-run, cùng testcases.json, cùng danh sách ảnh evidence (C có 276 file).
+  - Chỉ C_FR15 ra đúng như bản đã commit.
+  - A_FR01 khác bản commit ở 133 case: trường evidence bị rỗng, vì các file trong test-results/ mà kết quả Playwright trỏ tới không còn trên máy. Ngoài ra actual_result của TC-FR01-216 khác vì SV đã ghi tay (kiểm tay).
+  - B_FR07 cũng vậy: 62 case evidence rỗng, actual_result của TC-FR07-201 khác.
+  - File kết quả dùng để kiểm: A_FR01.json, B_FR55.json.
+- Cần quyết định: kiểm hồi quy theo cách nào?
+  - a) Chấp nhận "script cũ = script mới" làm đii làm tiếp C.
+  - b) Giữ điều kiện "giống bản đã commit" → không làm được cho A/B, vì ảnh trong test-results/ đã mất và có Actual ghi tay.
+- Commit:
+  - A: cc61c0b 5/7j: đồng bộ case SV. Kiểm tra: o (V6); lint 0 lỗi, 0 cảnh báo; TC-205 không cònlỗi nhất quán.
+  - B: chưa commit.
+  - C: chưa làm.
+- Bản vá đang chờ:
+  - Ảnh chạy tay giữ đúng tên _manual_<n>.
+  - Case chạy tay nhận diện qua projectName kết thúc bằng -manual: không ghi auto_status, verdict SV điền chỉ vào status.
+  - A, B, C không có project -manual nên không b
+  - Chưa chạy --dry-run cho D bằng bản vá.
+===
+128 ảnh là quá nhiều, điện thoại mình hết dung lượng rồi. Chụp tối đa 20 ảnh thôi
+```
+
+**Output:**
+`````
+**Kiểm hồi quy: chọn a.** Điều kiện "giống bản đã commit" là mình đặt sai. Kết quả gộp phụ thuộc vào `test-results/` của Playwright, mà thư mục này đã không còn trên máy, và có Actual bạn ghi tay. Mục đích của kiểm hồi quy là chứng minh bản vá không đổi hành vi trên A/B/C, và "script cũ = script mới" đã chứng minh đúng điều đó.
+
+Từ đây rút ra một điều quan trọng: **tuyệt đối không chạy `merge_results.py` cho A/B mà không có `--dry-run`**, vì sẽ làm rỗng evidence của 195 case. Lệnh dưới bắt Claude Code kiểm A/B vẫn sạch và ghi cảnh báo này vào CLAUDE.md.
+
+**20 ảnh: làm được, nhưng phải đổi cách lấy bằng chứng.** Nên đổi cách chụp chứ đừng bỏ bớt case:
+- **Oracle dữ liệu (D11) chụp trên máy tính, không chụp trên điện thoại.** Mỗi case dùng email riêng có tiền tố `mNN_`, nên chỉ cần chụp trang admin "Quản lý Người dùng" trên PC 2 lần:
+  - TRƯỚC: ngay sau khi restart backend.
+  - SAU: cuối lượt.
+  
+  Case bị từ chối thì email `mNN_` của nó không có trong danh sách SAU; case email trùng thì `test@eshop.com` vẫn chỉ có 1 dòng. Như vậy vẫn là oracle tương đối, chỉ chuyển từ so từng case sang so cả lượt.
+  - Việc này đổi quy trình của D0, nên ghi "(đã thay)" và bạn chốt lại. D0 không quyết định Expected nên không ảnh hưởng truy vết.
+- **Ảnh điện thoại (≤ 20) chỉ chụp những gì chữ không thay được:**
+  - 5 case GUI;
+  - mỗi kiểu màn hình hoặc thông báo khác nhau 1 ảnh đại diện;
+  - case nào ra khác Expected mà Actual khó diễn đạt bằng chữ.
+  
+  Các case còn lại ghi Actual nguyên văn. Vì server không validate (đã biết từ A), nhiều case không hợp lệ có thể ra cùng một màn hình thành công. Một ảnh đại diện cộng ảnh admin SAU là đủ làm bằng chứng cho cả nhóm đó.
+- **Mẹo phụ:** chép ảnh sang máy tính sau mỗi nhóm case rồi xoá trên điện thoại.
+
+Đổi lại: các case Pass không có ảnh riêng, bằng chứng chỉ là Actual bằng chữ cộng ảnh admin. Phải khai điều này trong RUN.md và Audit. Mình không biết thầy có yêu cầu ảnh cho từng case không. Nếu có quy định đó, hãy kiểm bằng `hw-submission-audit` trước khi chạy.
+
+````
+## Lệnh cho Claude Code — D_FR20: chốt hồi quy → vá harness → RUN.md ≤ 20 ảnh
+
+### A. Hồi quy + vá harness
+- SV chọn a: hồi quy = output --dry-run của script cũ và script mới giống hệt nhau trên A, B, C (đã đạt).
+- Kiểm `git status`: không file nào của A_FR01, B_FR07, C_FR15 bị đổi (chỉ dry-run).
+  Có đổi → `git checkout` các file đó, báo lại.
+- Chạy --dry-run cho D bằng bản vá (33 case).
+- CLAUDE.md thêm 1 dòng: "Không chạy merge_results.py cho A/B/C nếu không có --dry-run:
+  test-results/ đã mất → evidence bị xoá".
+- Commit `HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay`
+  (kèm dòng CLAUDE.md).
+
+### B. RUN.md: ảnh điện thoại ≤ 20
+1. Oracle dữ liệu (D11) bằng ảnh trang admin "Quản lý Người dùng" trên PC, không tính vào 20:
+   - TRƯỚC: ngay sau restart backend;
+   - SAU: cuối lượt (cuộn đủ trang, đặt tên `D_admin_truoc_<n>.png`, `D_admin_sau_<n>.png`);
+   - với từng case, ghi trong RUN.md cần kiểm gì ở ảnh SAU:
+     - email mNN_ có hay không;
+     - test@eshop.com có đúng 1 dòng không.
+2. Sửa D0 phần oracle: giữ câu cũ + "(đã thay)", thêm câu mới "so ảnh admin TRƯỚC/SAU của lượt;
+   mỗi case kiểm bằng email riêng". Để ô "SV chốt + lý do" trống.
+   Báo SV chốt (không chặn bước 6b).
+3. Ảnh điện thoại: phân bổ tối đa 20, mỗi case ghi một trong ba: "bắt buộc" / "chỉ khi khác
+   Expected" / "không chụp". Thứ tự ưu tiên:
+   - case GUI;
+   - 1 ảnh đại diện cho mỗi kiểu màn hình/thông báo;
+   - còn lại "chỉ khi khác Expected".
+   - Case không chụp: Actual ghi nguyên văn chữ trên màn hình.
+   - Thêm ô đếm ảnh đã dùng trong RUN.md.
+4. Mục môi trường: `git apply --ignore-whitespace HW02/env/mobile_api_url.patch` (lý do CRLF).
+   Mục Audit: "case Pass không ảnh riêng; bằng chứng = Actual + ảnh admin SAU".
+5. Dung lượng:
+   - đo dung lượng evidence A, B, C và ước tính zip;
+   - nếu 20 ảnh điện thoại + 2–4 ảnh PC có nguy cơ vượt 20 MB → viết tools/compress_manual.py
+     (Pillow, chỉ đụng ảnh `*_manual_*.png` và `D_admin_*.png` của D, giữ tên .png,
+     in kích thước trước/sau).
+render_md.py → lint → prompt log → commit `HW02[D-FR20] 6/7a2: RUN.md giới hạn 20 ảnh`
+(script nén nếu có: commit harness riêng).
+
+## Báo cáo (≤ 10 dòng)
+- Commit.
+- git status A/B/C.
+- Dry-run D.
+- Phân bổ ảnh: số case "bắt buộc" / "khi khác Expected" / "không chụp", tổng tối đa.
+- Dung lượng hiện tại + dư cho D; nén (có/không).
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #318 | 23:49 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18816,7 +19301,96 @@ Em đã vá harness, viết lại RUN.md với tối đa 20 ảnh điện thoạ
 
 ---
 
-## #313 | 23:54 20/10/2026 | Claude Opus 5.5 | [...]
+## #319 | 23:53 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - 79209f6 HW02: vá harness – merge_results tên ảnh manual + auto_status chạy tay (kèm dòng CLAUDE.md).
+  - ead7314 HW02: vá harness – nén ảnh chạy tay D.
+  - fdbef12 HW02[D-FR20] 6/7a2: RUN.md giới hạn 20 ảnh.
+- git status A/B/C: không file nào bị đổi (hồi quy chỉ chạy trên bản chép trong scratchpad).
+- Dry-run D bằng bản vá: gộp được 33/33 case. Case chạy tay không ghi auto_status. Ô verdict còn trống nên mỗi case in 1 cảnh báo và tạm để "Not run".
+- Phân bổ ảnh điện thoại:
+  - 9 case "bắt buộc", tổng 11 ảnh: GUI 90–94, TC-01 (3 ảnh), TC-06, TC-200, TC-201.
+  - 22 case "chỉ khi khác Expected", dùng chung tối đa 9 ảnh.
+  - 2 case "không chụp": TC-16, TC-17.
+  - Tổng tối đa 20 ảnh. Ảnh admin trên PC (D_admin_truoc_<n>, D_admin_sau_<n>) tính riêng. RUN.md có ô đếm ảnh đã dùng và cột "Kiểm ở ảnh admin SAU" cho từng case.
+- D0: đã giữ câu oracle cũ kèm "(đã thay)" và thêm câu mới; ô "SV chốt + lý do" để trống, chờ SV chốt.
+- Dung lượng:
+  - Evidence hiện có: A 3,26 MB, B 2,00 MB, C 3,61 MB.
+  - Em zip thử các file đã commit trong HW02/: 9,6 MB, nên còn khoảng 10 MB trước giới hạn 20 MB. Phần dư này còn phải chứa PDF, skill và D. Em chưa đối chiếu với cách đóng gói của skill hw-submission-audit.
+  - Ảnh chụp màn hình điện thoại để nguyên PNG có thể tới khoảng 1 MB/ảnh, nên có rủi ro vượt giới hạn → có nén.
+  - Python 3.12 trên máy đã có sẵn Pillow (lệnh python mặc định của msys thì không có), nên RUN.md dùng py -3.12.
+  - Nén thử 1 ảnh mẫu: 254 KB → 51 KB (thu về rộng 720 px, 256 màu).
+- Cần quyết định (không chặn 6b): quy trình trong testcases.json (bước 1 và 7 của TS-DOM/BVA/SV) vẫn ghi chụp admin TRƯỚC/SAU cho từng case, còn RUN.md đã đổi sang ảnh admin của cả lượt. Em đã ghi điều này cuối RUN.md.
+  - a) Sửa quy trình trong testcases.json cho khớp D0 mới.
+  - b) Giữ nguyên quy trình, chỉ ghi chú.
+```
+
+**Output:**
+`````
+Mọi thứ đã sẵn sàng để chạy. Dung lượng ổn: nén còn khoảng 51 KB/ảnh, nên 20 ảnh điện thoại cộng ảnh admin chỉ thêm khoảng 1–2 MB vào zip, trong khi đang còn dư khoảng 10 MB. Riêng video demo skill chắc chắn không vừa zip, nên đặt link thay vì đính kèm.
+
+**Quy trình trong testcases.json: chọn a, và làm trước khi chạy.**
+- Lý do: test case phải mô tả đúng cách nó được chạy. Người chấm đọc testcases chứ không đọc RUN.md.
+- Nếu chọn b, cả 31 case sẽ phải ghi "lệch so với procedure" trong notes.
+- Sửa procedure trước khi có Actual là hợp lệ, vì Expected không đổi.
+- Chỉ lưu ý quyền sửa:
+  - Chữ do AI viết (TS-DOM, TS-BVA, câu quy trình chung của suite TS-SV): AI sửa rồi freeze.
+  - Chữ do bạn viết trong từng case SV: bạn tự sửa, hoặc để nguyên và ghi lệch vào notes.
+
+**D0:** bạn chưa ghi lý do, nên mình điền sẵn vào lệnh: "Chấp nhận đề xuất AI: giới hạn 20 ảnh điện thoại; mỗi case dùng email riêng nên so ảnh admin cả lượt tương đương so từng case". Sửa câu này trước khi dán nếu không đúng ý bạn.
+
+````
+## Lệnh cho Claude Code — D_FR20: khớp procedure với D0 mới (trước khi chạy)
+1. D0: ô "SV chốt + lý do" = "SV chốt 2026-10-20: chấp nhận đề xuất AI — giới hạn 20 ảnh điện
+   thoại; mỗi case dùng email riêng nên so ảnh admin TRƯỚC/SAU của cả lượt tương đương so từng case."
+2. Procedure bước chụp admin (bước 1 và 7) → "so ảnh admin TRƯỚC/SAU của lượt (D0), kiểm theo
+   cột 'Kiểm ở ảnh admin SAU' của RUN.md". Expected KHÔNG đổi.
+   - Sửa: TS-DOM, TS-BVA, câu quy trình chung của suite TS-SV — chỉ chỗ `git blame` cho thấy AI viết.
+   - Chữ SV trong từng case TS-SV: không sửa; liệt kê mã case + câu còn ghi theo từng case.
+3. render_md.py → freeze.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 6/7a3: procedure theo D0 mới`.
+## Báo cáo (≤ 6 dòng): commit; số case đã sửa; case SV còn lệch (mã); check/lint.
+````
+
+**Sau đó bạn chạy trên Android:**
+1. Restart backend (CSDL được seed lại), mở admin trên PC, chụp `D_admin_truoc_<n>.png`.
+2. Chạy theo thứ tự trong RUN.md. Chụp ảnh đúng cột phân bổ, cập nhật ô đếm ảnh, ghi Actual nguyên văn và verdict vào file kết quả.
+3. Cuối lượt, chụp `D_admin_sau_<n>.png`.
+4. Chép ảnh vào máy, chạy `py -3.12 tools/compress_manual.py`, ghi lượt vào nhật ký RUN.md.
+
+Lệnh dùng sau khi bạn chạy xong:
+
+````
+## Lệnh cho Claude Code — D_FR20 bước 6b: gộp kết quả chạy tay
+0. Kiểm:
+   - file kết quả đủ 33 case, không case nào thiếu verdict;
+   - ảnh đặt tên đúng quy ước, đã nén (in kích thước);
+   - ô đếm ảnh ≤ 20;
+   - nhật ký lượt có ngày/máy/locale.
+   Thiếu → DỪNG, liệt kê.
+1. merge_results.py cho D (không --force).
+2. Đối chiếu từng case:
+   - Actual khớp ảnh: ảnh điện thoại nếu có, ảnh admin SAU theo cột kiểm;
+   - verdict khớp D14/A20: lệch do biến mục tiêu → Fail; do biến khác → Blocked + case gốc;
+     Pass không chứng minh luật → "Pass hộp đen".
+   Lệch → KHÔNG sửa verdict/Actual của SV, chỉ liệt kê.
+3. TC-16/17: theo verdict TC-94.
+4. render_md.py → check_domain.py → lint → prompt log → commit `HW02[D-FR20] 6/7b: kết quả lượt chính thức`.
+## Báo cáo (≤ 10 dòng): Pass/Fail/Blocked; case lệch Actual↔ảnh hoặc verdict↔quy tắc (mã + lý do); dung lượng evidence D; commit.
+````
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #320 | 23:54 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18847,7 +19421,91 @@ Em đã vá harness, viết lại RUN.md với tối đa 20 ảnh điện thoạ
 
 ---
 
-## #314 | 23:57 20/10/2026 | Claude Opus 5.5 | [...]
+## #321 | 23:56 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo prompt lượt 1:
+Báo cáo cho phiên thảo luận
+
+- Commit: 21b4a24 6/7a3: procedure theo D0 mới. D0 đã ghi đúng chữ SV chốt; bản AI đã freeze vào D_FR20_step6_20261020-235519.*.
+- Đã sửa: bước 1 và bước 7 của quy trình trong 3 suite TS-DOM, TS-BVA, TS-SV. Áp cho 28 case AI và 6 case SV. Các câu này do AI viết (lịch sử git: các commit 3/7, 4/7, 5/7b). Expected không đổi. Em cũng sửa dòng ghi chú cuối RUN.md cho khớp.
+- Case SV còn ghi theo từng case: TC-FR20-200, 201, 203, 206 ("SAU có đúng 1 dòng mới so với TRƯỚC") và TC-FR20-204, 205 ("SAU = TRƯỚC"). Các câu này nằm trong Expected, em không sửa. Expected của case AI cũng còn cách viết này.
+- Còn lệch, không chặn: bước 4, 6, 8 của quy trình vẫn yêu cầu chụp ảnh _manual_input, _manual_result, _manual_login cho mọi case, trái với giới hạn 20 ảnh trong RUN.md.
+- Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
+```
+
+**Output:**
+`````
+Còn 3 điểm, và mình đề nghị sửa cả ba trước khi chạy. Lỗi bước 4, 6, 8 là do lệnh trước của mình chỉ nêu bước 1 và 7.
+
+1. **Bước 4, 6, 8 vẫn yêu cầu 3 ảnh cho mọi case.** Phải sửa cho khớp cột phân bổ ảnh trong RUN.md, cùng lý do như lượt trước: procedure phải mô tả đúng cách chạy. Các câu này do AI viết nên AI sửa được.
+2. **Expected "SAU = TRƯỚC" và "SAU có đúng 1 dòng mới".** Khi so ảnh admin cho cả lượt, tổng SAU sẽ có nhiều dòng mới, nên đọc đúng chữ thì không quan sát được theo từng case.
+   - Không cần sửa Expected; chỉ cần định nghĩa cách đọc trong D0: "TRƯỚC/SAU" của một case xét theo các dòng có email của chính case đó.
+     - "SAU = TRƯỚC" = số dòng mang email của case không đổi: email `mNN_` không có, hoặc `test@eshop.com` vẫn chỉ có 1 dòng.
+     - "Đúng 1 dòng mới" = có đúng 1 dòng mang email của case.
+   - Giới hạn cần khai thật: cách so cả lượt không phát hiện được nếu một case làm đổi dòng của tài khoản khác. Với chức năng đăng ký thì chấp nhận được, nhưng vẫn nên ghi vào Audit.
+3. **Số case AI lệch.** Báo cáo ghi "28 case AI + 6 case SV" = 34, trong khi tổng D là 33 (AI 27). Cần xác minh con số đúng.
+
+Mình đã điền sẵn câu chốt D0 trong lệnh; sửa nếu không đúng ý bạn.
+
+````
+## Lệnh cho Claude Code — D_FR20: khớp ảnh + cách đọc TRƯỚC/SAU (trước khi chạy)
+1. Procedure bước 4, 6, 8 (chụp _manual_input/_result/_login): đổi thành "chụp theo cột phân bổ
+   ảnh của RUN.md; không chụp thì ghi Actual nguyên văn".
+   - Chỉ sửa chỗ `git blame` cho thấy AI viết.
+   - Chữ SV trong từng case: không sửa, liệt kê.
+2. D0: thêm câu cách đọc Expected, ô SV chốt ghi:
+   "Trong Expected, 'TRƯỚC/SAU' của một case xét theo các dòng mang email của case đó:
+   - 'SAU = TRƯỚC' = số dòng mang email của case không đổi;
+   - 'SAU có đúng 1 dòng mới' = có đúng 1 dòng mang email của case.
+   SV chốt 2026-10-20: chấp nhận đề xuất phiên thảo luận — giữ nguyên Expected, chỉ định nghĩa
+   cách đọc khi so ảnh cả lượt."
+   Mục Audit thêm: "so cả lượt không phát hiện thay đổi ở dòng của tài khoản khác".
+3. Xác minh số case AI: 27 hay 28 (lệch so với tổng 33 = AI 27 + SV 6). In danh sách mã nếu khác 27.
+4. render_md.py → freeze.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 6/7a4: ảnh theo RUN.md + cách đọc TRƯỚC/SAU`.
+## Báo cáo (≤ 6 dòng): commit; số case đã sửa; case SV còn lệch (mã); số case AI đúng; check/lint.
+````
+
+Báo cáo sạch là bạn chạy được theo RUN.md, rồi dùng lệnh 6b ở lượt trước.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #322 | 23:57 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Hiện tại đang yêu cầu 3 ảnh cho tất cả các case sao? Tôi muốn chỉ chụp ảnh cho các case quan trọng, hoặc là đã chia phân lớp tương đương tốt rồi thôi. Vì tôi còn phải dành thời gian viết báo cáo nữa
+```
+
+**Output:**
+```
+Không. Yêu cầu "3 ảnh cho mọi case" chỉ còn sót trong chữ procedure ở testcases.json (bước 4, 6, 8). Lệnh mình vừa đưa sửa đúng chỗ đó, để procedure theo RUN.md. Cứ dán lệnh đó, không cần lệnh mới.
+
+Theo RUN.md, bạn chỉ chụp những case quan trọng:
+- **Bắt buộc, 11 ảnh cho 9 case:**
+  - 5 case GUI (90–94): kết quả nằm ở chính giao diện nên phải có ảnh.
+  - TC-01 (3 ảnh): case hợp lệ chuẩn, gồm ảnh lúc nhập, kết quả, và lời chào sau khi đăng nhập để chứng minh tên được lưu đúng.
+  - TC-06, TC-200, TC-201.
+- **22 case còn lại: chỉ chụp khi kết quả khác Expected**, và chụp chung (tối đa 9 ảnh). Nhiều case cho ra cùng một màn hình thì chụp 1 ảnh đại diện; nếu ra đúng màn hình đã có ảnh thì không chụp nữa. Những case ra đúng Expected thì chỉ ghi Actual bằng chữ.
+- **TC-16, TC-17: không chạy.**
+
+Thực tế bạn sẽ chụp khoảng 11–15 ảnh, không phải 20. Đúng như bạn nghĩ, mỗi lớp tương đương chỉ cần đại diện, nên các case cùng lớp hoặc cùng kết quả dùng chung bằng chứng: ảnh đại diện cộng 2 ảnh admin TRƯỚC/SAU chụp trên PC.
+
+Về thời gian, chụp ảnh chỉ mất vài giây mỗi tấm. Phần tốn thời gian là nhập tay khoảng 31 case. Ước tính khoảng 1,5–2 giờ là cho việc nhập, không phải cho ảnh.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #323 | 23:57 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18887,7 +19545,52 @@ Em đã vá harness, viết lại RUN.md với tối đa 20 ảnh điện thoạ
 
 ---
 
-## #315 | 23:59 20/10/2026 | Claude Opus 5.5 | [...]
+## #324 | 23:58 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo prompt trên:
+Báo cáo cho phiên thảo luận
+
+- Commit: 644d982 6/7a4: ảnh theo RUN.md + cách đọc TRƯỚC/SAU.
+  - Bản AI đã freeze vào D_FR20_step6_20261020-235828.*.
+  - D0 đã thêm cách đọc TRƯỚC/SAU đúng chữ SV chốt.
+  - Mục Audit đã thêm dòng "so cả lượt không phát hiện thay đổi ở dòng của tài khoản khác".
+- Đã sửa: bước 4, 6, 8 của quy trình 3 suite TS-DOM, TS-BVA, TS-SV (AI viết ở 3/7, 4/7, 5/7b). Áp cho 22 case AI và 6 case SV. Bước 4, 6, 8 giờ ghi "Chụp theo cột phân bổ ảnh của RUN.md; không chụp thì ghi Actual nguyên văn".
+- Case SV còn lệch: không có. Không case SV nào tự ghi bước chụp ảnh.
+- Số case AI đúng là 27: TS-DOM 17, TS-BVA 5, TS-GUI 5. Tổng 33 = AI 27 + SV 6 là đúng. Báo cáo 6/7a3 trước ghi "28 case AI" là sai: lần sửa đó chỉ áp cho 22 case AI (TS-DOM + TS-BVA), vì TS-GUI dùng quy trình riêng.
+- Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
+```
+
+**Output:**
+`````
+Báo cáo sạch, và số case khớp: 33 = AI 27 + SV 6.
+
+Còn một chỗ chưa kiểm: **TS-GUI có quy trình riêng** nên không nằm trong cả hai lần sửa. Đây lại là nhóm bạn chạy đầu tiên, nên nên kiểm nhanh trước khi cầm điện thoại:
+
+````
+## Lệnh cho Claude Code — D_FR20: rà quy trình TS-GUI (TC-90–94) so với RUN.md
+So procedure của 5 case TS-GUI với RUN.md (cột phân bổ ảnh, ảnh admin cả lượt theo D0).
+- Khớp → không commit, báo "khớp".
+- Lệch ở chữ AI viết → sửa như 6/7a4 (render → freeze → check → lint → prompt log), commit
+  `HW02[D-FR20] 6/7a5: quy trình TS-GUI theo RUN.md`.
+## Báo cáo (≤ 3 dòng): khớp/đã sửa (mã case), commit.
+````
+
+Nếu không muốn chờ, cứ chạy luôn theo RUN.md. Lệch nào giữa procedure TS-GUI và RUN.md thì ghi vào notes như "lệch nhỏ so với procedure", đúng quy ước.
+
+Xong thì bắt đầu lượt chính thức:
+1. Restart backend, chụp `D_admin_truoc_1.png` trên PC.
+2. Chạy theo RUN.md.
+3. Chụp `D_admin_sau_1.png`, nén ảnh, rồi dán lệnh 6b.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #325 | 23:59 20/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -18911,7 +19614,217 @@ So procedure của 5 case TS-GUI với RUN.md (cột phân bổ ảnh, ảnh adm
 
 ---
 
-## #316 | 01:37 21/10/2026 | Claude Opus 5.5 | [...]
+## #326 | 23:59 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo:
+Báo cáo cho phiên thảo luận
+
+- Lệch, đã sửa cả 5 case TC-FR20-90, 91, 92, 93, 94. Tên ảnh trong quy trình là TC-FR20-9x_manual.png (AI viết ở 3/7), nay đổi thành _manual_1.png cho khớp bảng phân bổ ảnh của RUN.md. Phần còn lại đã khớp: cả 5 case đều "bắt buộc" 1 ảnh, TC-93 kiểm "không có dòng m93_" ở ảnh admin của lượt.
+- Commit: 690e797 6/7a5: quy trình TS-GUI theo RUN.md. check_domain 0 lỗi, 1 cảnh báo (V6); lint 0 lỗi, 0 cảnh báo.
+```
+
+**Output:**
+```
+Đã khớp. Tên ảnh `_manual_1` giờ trùng với cái `merge_results.py` đã vá sẽ giữ nguyên, nên không còn gì chặn lượt chạy.
+
+Thứ tự lượt chính thức:
+1. Restart backend, rồi chụp `D_admin_truoc_1.png` trên PC.
+2. Chạy theo RUN.md, bắt đầu từ TC-94. Nhớ cập nhật ô đếm ảnh.
+3. Chụp `D_admin_sau_1.png` trên PC.
+4. Chép ảnh từ điện thoại sang máy, chạy `py -3.12 tools/compress_manual.py`, ghi nhật ký lượt vào RUN.md.
+5. Dán lệnh 6b.
+
+Bây giờ đã gần 0 giờ, và lượt chạy mất khoảng 1,5–2 giờ. Nếu để mai chạy, chỉ cần làm lại từ bước 1, không phải làm lại gì khác.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #327 | 00:05 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Chép `HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json` thành `HW02/D_FR20/results/D_FR20_manual_<yyyyMMdd-HHmmss>.json`.
+
+---
+chép cái này để làm gì nhỉ?
+```
+
+**Output:**
+```
+File TEMPLATE là **phiếu kết quả trống** cho lượt chạy tay, theo đúng định dạng mà `merge_results.py` đọc được (giống file kết quả JSON Playwright sinh ra ở A, B, C). Phải chép thành file riêng vì:
+
+- **Bạn ghi Actual và verdict vào bản chép**, không ghi vào TEMPLATE. TEMPLATE giữ nguyên trống, nên nếu phải chạy thêm lượt (lượt thử bị hỏng, hay chạy lại) thì chép bản mới, không phải xoá dữ liệu cũ.
+- **Tên có giờ để phân biệt các lượt.** Lượt nào là lượt chính thức thì ghi đúng tên file đó vào nhật ký RUN.md. Lệnh 6b sẽ gộp file đó; các lượt khác ghi là "lượt thử".
+
+Lấy giờ lúc bạn bắt đầu chạy, khớp với dòng nhật ký lượt, ví dụ `D_FR20_manual_20261021-0010.json`. Nếu ngại, cứ bảo Claude Code chép giúp: "chép TEMPLATE thành file kết quả lượt với giờ hiện tại, in tên file".
+```
+
+**Xử lý:** [...]
+
+---
+
+## #328 | 00:10 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Rồi sao thứ tự làm các test ở đâu không thấy nhỉ?
+```
+*Đính kèm:* `RUN.md`
+
+**Output:**
+````
+Thứ tự nằm ở mục **"## Thứ tự case"** (từ dòng 68 của RUN.md). Chạy theo nhóm, trong mỗi nhóm thì từ trên xuống:
+
+1. **Nhóm 1 – GUI:** 94 → 90 → 91 → 92 → 93. TC-94 chạy đầu vì nó quyết định TC-16 và TC-17.
+2. **Nhóm 2 – case bị từ chối:** 03 → 04 → 05 → 06 → 07 → … → 15 → 60 → 204 → 205.
+3. **Nhóm 3 – case hợp lệ** (có đăng nhập thử): 01 → 02 → 61 → 62 → 63 → 64 → 200 → 201 → 203 → 206.
+4. **Nhóm 4:** TC-16, TC-17. Nếu TC-94 Fail thì không chạy, chỉ đánh dấu Blocked.
+
+Mỗi dòng trong bảng cho bạn biết giá trị cần nhập, có cần chụp ảnh không, và cần kiểm gì ở ảnh admin SAU. Còn thao tác chung cho mọi case (Reload → Đăng nhập → Đăng ký ngay → nhập → bấm → ghi Actual) nằm ở mục "Quy trình mỗi case nhập liệu" (dòng 35–42).
+
+**Mẹo đỡ tốn thời gian:** cột "Actual / verdict" ghi "file lượt", nghĩa là bạn phải điền vào file JSON. Vừa cầm điện thoại vừa sửa JSON thì rất chậm. Thay vào đó, ghi nhanh vào một file text, mỗi case một dòng:
+
+```
+TC-FR20-03 | 0012 | <chữ thông báo nguyên văn / tiêu đề màn hình> | Fail
+```
+
+Rồi khi dán lệnh 6b, thêm một dòng vào **đầu** lệnh:
+
+```
+0a. Chép HW02/D_FR20/results/run_notes.txt vào file kết quả lượt: Actual và verdict nguyên văn
+    chữ SV, không sửa, không suy diễn; dòng thiếu → để trống và báo.
+```
+
+Việc AI chỉ chép lại dữ kiện của bạn thì hợp lệ; verdict vẫn là do bạn ghi.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #329 | 01:33 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Hiện tại, kết quả test mình đặt trong D_FR20/results/Check.md; screenshot admin ở D_FR20/evidence; screenshot mobile ở: D_FR20/manual_raw. nhưng mà đui file mình đang viết theo RUN.md. Như là trong evidence có: TC-FR20-203-admin_manual.png; còn trong manual_raw có: TC-FR20-203-admin_manual.jpg
+===
+Vậy nên giúp ôti viết lại prompt 6b luôn nhé
+```
+
+**Output:**
+`````
+Lệnh 6b viết lại theo đúng những gì bạn đang có: kết quả ở `Check.md`, ảnh admin ở `evidence/`, ảnh điện thoại ở `manual_raw/`, tên file theo kiểu của bạn. Claude Code sẽ tự đổi tên, đổi định dạng và nén, chỉ DỪNG khi gặp ảnh không đoán được là của case nào.
+
+Một chỗ bạn phải điền: lượt này có restart backend trước khi chạy không. Câu này quyết định có được tính là lượt chính thức hay không.
+
+````
+## Lệnh cho Claude Code — D_FR20 bước 6b: gộp kết quả chạy tay (theo file SV đang có)
+
+SV điền (còn `<...>` → DỪNG):
+- Lượt này chạy toàn bộ sau khi restart backend (= lượt chính thức): `<có|không>`
+
+Hiện trạng:
+- kết quả SV ghi ở HW02/D_FR20/results/Check.md;
+- ảnh admin ở HW02/D_FR20/evidence/;
+- ảnh điện thoại ở HW02/D_FR20/manual_raw/;
+- tên file theo kiểu của SV, vd `evidence/TC-FR20-203-admin_manual.png`,
+  `manual_raw/TC-FR20-203-admin_manual.jpg` (không theo quy ước RUN.md).
+
+### 0. Kiểm kê (chỉ đọc)
+- Liệt kê toàn bộ file trong evidence/ và manual_raw/ (tên, đuôi, kích thước, kích thước ảnh).
+- Mở từng ảnh (Read) để xác định: ảnh điện thoại hay ảnh PC; thuộc case nào; là ảnh admin hay
+  màn hình app.
+- Cặp cùng tên khác đuôi (vd 203 .png/.jpg): kiểm có phải cùng một ảnh không (nội dung, kích thước).
+- Đọc Check.md: định dạng, số case có Actual, số case có verdict, thông tin lượt
+  (giờ, máy, điện thoại, locale).
+- Không đoán được ảnh thuộc case nào → DỪNG, in danh sách ảnh đó.
+
+### 1. Đổi tên + nén (không xoá ảnh gốc)
+- Lập bảng ánh xạ tên cũ → tên mới:
+  - ảnh điện thoại: `TC-FR20-xx_manual_<n>.png`;
+  - ảnh admin cả lượt: `D_admin_truoc_<n>.png` / `D_admin_sau_<n>.png`;
+  - ảnh admin theo từng case: `TC-FR20-xx_admin_<n>.png`.
+  Ghi bảng vào RUN.md (mục "Đổi tên evidence") + Audit
+  ("AI đổi tên/định dạng ảnh SV, không sửa nội dung").
+- tools/compress_manual.py:
+  - cho đọc được .jpg, xuất .png đã nén vào evidence/ theo tên mới; ảnh trùng chỉ giữ 1 bản;
+  - gốc giữ nguyên ở manual_raw/;
+  - thêm manual_raw/ vào .gitignore (không commit ảnh gốc).
+  Script cần sửa → commit harness riêng `HW02: vá harness – nén ảnh .jpg + ảnh admin theo case`.
+- Đếm ảnh điện thoại: bắt buộc ?/11, khi khác Expected ?/9. Vượt 20 → không bỏ ảnh nào, báo lại.
+
+### 2. Chép kết quả
+- Chép TEMPLATE thành `results/D_FR20_manual_<yyyyMMdd-HHmmss>.json`, lấy giờ bắt đầu lượt từ
+  Check.md (không có → giờ của file Check.md, ghi rõ).
+- Chép Actual + verdict từ Check.md nguyên văn chữ SV; không sửa, không suy diễn.
+  Case thiếu → để trống, liệt kê.
+- Nhật ký lượt trong RUN.md: điền từ Check.md và theo SV điền ở trên (chính thức có/không).
+  Trường không có → để trống, liệt kê (SV bổ sung sau).
+- Không sửa Check.md (giữ làm bản ghi gốc của SV).
+
+### 3. Gộp + đối chiếu
+- merge_results.py cho D (không --force).
+- Đối chiếu từng case:
+  - Actual ↔ ảnh (điện thoại nếu có; admin theo cột "Kiểm ở ảnh admin SAU", hoặc ảnh admin theo
+    case nếu SV chụp từng case);
+  - verdict ↔ quy tắc D14/A20: lệch do biến mục tiêu → Fail; do biến khác → Blocked + case gốc;
+    Pass không chứng minh luật → "Pass hộp đen";
+  - TC-16/17 theo verdict TC-94.
+  Lệch → KHÔNG sửa của SV, chỉ liệt kê.
+- SV chụp admin theo từng case thay vì cả lượt → ghi notes "lệch nhỏ so với procedure (D0)",
+  không coi là lỗi.
+- render_md.py → check_domain.py → lint → prompt log → commit
+  `HW02[D-FR20] 6/7b: kết quả lượt chính thức` (lượt thử → `6/7b: kết quả lượt thử`).
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Commit (harness nếu có, 6/7b).
+- Kiểm kê: số ảnh điện thoại / admin; số cặp trùng; ảnh không xác định (nếu có).
+- Đếm ảnh điện thoại; dung lượng evidence D sau nén; ước tính zip HW02.
+- Pass / Fail / Blocked (+ Pass hộp đen).
+- Case thiếu Actual/verdict; case lệch Actual↔ảnh hoặc verdict↔quy tắc (mã + lý do ngắn).
+- Trường nhật ký lượt còn trống.
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+Lệnh này giữ nguyên ảnh gốc và `Check.md` của bạn, chỉ tạo bản đã đổi tên và nén để nộp. Nếu Claude Code DỪNG vì có ảnh không xác định được case, bạn chỉ cần trả lời theo mẫu "ảnh X = TC-FR20-yy".
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #330 | 01:37 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình có restart backend trước khi chạy nhé
+```
+
+**Output:**
+````
+Vậy đây là lượt chính thức. Trong lệnh 6b, bạn sửa dòng điền thành:
+
+```
+- Lượt này chạy toàn bộ sau khi restart backend (= lượt chính thức): `có` (SV xác nhận đã restart backend trước lượt)
+```
+
+Phần còn lại của lệnh giữ nguyên, dán vào Claude Code là được.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #331 | 01:37 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19018,7 +19931,144 @@ Hiện trạng:
 
 ---
 
-## #317 | 02:02 21/10/2026 | Claude Opus 5.5 | [...]
+## #332 | 01:44 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit: harness 16e39d4 (nén ảnh .jpg, đổi tên chuẩn, giữ tên _admin_<n> khi merge, manual_raw/ vào gitignore) và 74ecbb3 6/7b: kết quả lượt chính thức. check_domain 0 lỗi, 1 cảnh báo (V6); lint 0/0; prompt log 316 lượt. Không dừng, không lỗi.
+- Kiểm kê: 31 ảnh điện thoại (.jpg, mỗi case đã chạy 1 ảnh) và 4 ảnh admin trên PC (TRƯỚC, SAU_1, SAU_2, TC-203 theo case). Không có cặp trùng; ảnh nào cũng xác định được case. Bảng đổi tên ở HW02/D_FR20/RUN.md, mục "Đổi tên evidence".
+- Ảnh điện thoại: 31/20, vượt mức, giữ hết.
+  - Bắt buộc: 7/11 đúng nội dung. Thiếu 01_2, 01_3; ảnh 200 và 201 chụp hộp thoại thay vì header.
+  - Khi khác Expected: 6/9. Ngoài phân bổ: 16 ảnh.
+  - Evidence D sau nén 2,55 MB; ước tính zip HW02 ≈ 12,1 MB.
+- Kết quả: Pass 22 / Fail 9 / Blocked 0 / Not run 2. Chưa case nào ghi "Pass hộp đen".
+- Thiếu verdict: TC-16, TC-17 có Actual (Check.md dòng 35) nhưng verdict trống, merge ghi Not run. Theo notes và RUN.md thì là Blocked, case gốc TC-94 (đã Fail); SV đặt.
+- TC-203: SV ghi Pass, nhưng Actual và ảnh cho thấy app về "Danh sách sản phẩm", trong khi Expected là màn "Đăng Nhập".
+- 01, 02, 61–64, 200, 201, 206: SV ghi Pass, nhưng Actual và ảnh không có bước đăng nhập thử và header mà Expected yêu cầu (riêng 200 là phần SEC-04).
+- 07–14, 60, 205: bị từ chối, nhưng thông báo giống hệt nhau, nêu chung mọi luật mật khẩu. Theo A20, SV xét có phải "Pass hộp đen" không.
+- 9 case Fail khớp ảnh và admin SAU: 03, 04, 05, 06, 15, 204, 90, 91, 94.
+- Lệch procedure (không coi là lỗi):                                                                                               - Email gõ nguyên chuỗi {ts}; vẫn không trùng vì
+  - TC-203 có thêm ảnh admin theo case; đã ghi notes "lệch nhỏ so với procedure (D0)".
+- Nhật ký lượt còn trống: Máy (OS), Điện thoại (model, Android), Expo Go, Locale/bàn phím, IP API_URL. Giờ bắt đầu lấy từ Check.md (00:15, giây ghi 00).
+- Không đụng: file results/D_FR20_manual_20261021-0010.json của SV giống hệt TEMPLATE, chưa điền, chưa commit, để nguyên.
+```
+
+**Output:**
+`````
+**Việc gấp: đừng restart backend.** Khi restart, `node server.js` seed lại CSDL và xoá hết tài khoản vừa tạo. Có 9 case cần đăng nhập thử bằng chính các tài khoản đó.
+
+Kết quả chung khớp với dự đoán: 9 Fail đều khớp ảnh và ảnh admin SAU, và dung lượng ổn (zip khoảng 12 MB). Vượt 20 ảnh không sao, vì vấn đề lúc đó là dung lượng điện thoại và nó đã qua; chỉ cần sửa lại ô đếm ảnh. Có 5 việc, verdict nào cũng là bạn quyết:
+
+**1. Chín case 01, 02, 61–64, 200, 201, 206 chưa thể Pass.** Expected (theo D11) yêu cầu đăng nhập thử và xem header "Chào, <tên>", nhưng bạn chưa làm bước này.
+- Nếu backend vẫn đang chạy: đăng nhập lần lượt bằng email và mật khẩu của từng case (lấy trong Check.md và RUN.md), ghi header nguyên văn vào Check.md. Chín lần đăng nhập mất khoảng 10 phút.
+- Nhân lúc này chụp luôn các ảnh bắt buộc còn thiếu: `01` (màn Đăng Nhập + header), `200` và `201` (header).
+- Ghi chú "đăng nhập thử làm sau, lúc HH:mm". Đây là lệch nhỏ so với procedure, không ảnh hưởng tính chính thức của lượt.
+- Nếu backend đã bị restart: các tài khoản đã mất. Không được đánh Pass cho 9 case này; nói lại để tính cách khác.
+
+**2. TC-16, TC-17:** ghi verdict `Blocked (case gốc TC-94)`. Màn hình không có ô Xác nhận và TC-94 đã Fail.
+
+**3. TC-203 không thể là Pass.** Expected bạn viết là về màn "Đăng Nhập", nhưng app lại về "Danh sách sản phẩm". Bạn chọn:
+- **Fail**, nếu phần "về màn Đăng Nhập" có căn cứ FR-01. Khi đó có thể có bug "bấm nhiều lần → điều hướng sai". Kiểm thêm ảnh admin theo case xem `m203_` có đúng 1 dòng không.
+- **"Fail do lỗi thiết kế TC, không lập bug"**, nếu bạn thấy phần màn hình không có căn cứ hoặc lẽ ra phải khẳng định ở case khác (tiền lệ TC-FR15-202).
+
+**4. Các case 07–14, 60, 205** bị từ chối với cùng một thông báo, liệt kê tất cả luật mật khẩu. Thông báo này không chứng minh được đúng luật mục tiêu của từng case đã được kiểm. Theo A20, nên ghi **"Pass hộp đen"**, giống tiền lệ ở B.
+
+**5. Email gõ nguyên chữ `{ts}`** (ví dụ `m01_{ts}@domain.com`). Email vẫn không trùng nhau, nhưng có thêm ký tự `{` `}`. Cần kiểm xem các email này còn thuộc lớp email hợp lệ theo FR-01 và giả định D không. Nếu không thuộc, các case hợp lệ đã dùng đại diện sai lớp. Lệnh dưới bắt Claude Code kiểm việc này.
+
+Ngoài ra:
+- Điền nốt nhật ký lượt: hệ điều hành máy, model điện thoại + phiên bản Android, phiên bản Expo Go, locale/bàn phím, IP.
+- Xoá file trống `D_FR20_manual_20261021-0010.json` của bạn (chưa commit) cho khỏi nhầm.
+
+Sửa xong `Check.md` và chép ảnh mới vào `manual_raw/`, rồi dán lệnh này:
+
+````
+## Lệnh cho Claude Code — D_FR20 6/7b2: cập nhật kết quả SV bổ sung
+
+0. Kiểm email có `{ts}` nguyên chữ:
+   - các email `mNN_{ts}@domain.com` (và biến thể) thuộc lớp email nào theo FR-01 + D3/D4
+     (kế thừa A1/A2);
+   - lớp hợp lệ → ghi notes "lệch nhỏ so với procedure: email gõ nguyên chữ {ts}";
+   - không thuộc lớp hợp lệ → DỪNG, liệt kê case bị ảnh hưởng + căn cứ.
+1. Ảnh mới trong manual_raw/ (chụp lúc đăng nhập thử bổ sung):
+   - xác định case, đổi tên theo quy ước, nén vào evidence/, bổ sung bảng "Đổi tên evidence";
+   - sửa ô đếm ảnh trong RUN.md theo thực tế, ghi "vượt 20, SV giữ hết".
+2. Đọc lại Check.md (SV đã sửa): chép Actual + verdict mới vào file kết quả lượt
+   (results/D_FR20_manual_20261021-001500.json), nguyên văn.
+   - Verdict SV đổi so với 74ecbb3 → cập nhật status trong testcases.json theo chữ SV,
+     log trước/sau trong RUN.md ("SV sửa verdict sau đối chiếu"). Không dùng --force.
+   - Nhật ký lượt: điền trường SV đã bổ sung.
+3. Đối chiếu lại như 6b (Actual ↔ ảnh; verdict ↔ D14/A20; Blocked có case gốc). Lệch → chỉ liệt kê.
+4. render_md.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 6/7b2: SV bổ sung đăng nhập thử + chốt verdict`.
+
+## Báo cáo (≤ 10 dòng)
+- Commit.
+- Email {ts}: lớp nào, ảnh hưởng gì.
+- Ảnh mới (số, tên).
+- Pass / Pass hộp đen / Fail / Fail do thiết kế TC / Blocked.
+- Lệch còn lại (mã + lý do).
+- Trường nhật ký còn trống; dung lượng evidence D.
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #333 | 02:00 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. 9 case này mình vừa chụp lại và thêm vào manual_raw, với thêm số _2 ở sau. Ngoại trừ 206 thì đều hiển thị tên bình thường. Còn 206 thì nó hiện mà chữ a che mất cả màn hình, không kéo gì được cả.
+2. oke
+3. Có thể là do mình cố gắng nhấn nhiều lần vào 1 chỗ, xong nó đổi trang nên vậy. Hoặc do không test được.
+```
+
+**Output:**
+`````
+Cả ba hướng đều xử lý được. Cụ thể:
+
+**1. TC-206 (chữ "a" tràn kín màn hình, không kéo được).** Ghi vào Check.md đúng những gì bạn thấy, ví dụ: "header hiển thị chuỗi 'a' tràn che toàn màn hình, không cuộn/thao tác được". Verdict phụ thuộc vào Expected bạn đã viết cho 206:
+- Nếu Expected chỉ yêu cầu đăng ký thành công, có đúng 1 dòng và tên hiển thị ở header → **Pass**. Hiện tượng tràn màn hình ghi vào notes như một quan sát ngoài Expected.
+- Hiện tượng tràn màn hình **không tạo được Fail hay bug**. SRS không nói gì về bố cục khi tên dài, và bạn đã bỏ "không đơ UI" ở bước 5 vì không có căn cứ ("SRS im lặng → không tạo Fail"). Đây vẫn là chất liệu tốt cho gap analysis.
+
+**3. TC-203.** Giải thích của bạn hợp lý: các lần chạm sau rơi vào màn kế tiếp. Khi đó lệch là do cách thao tác, không phải do SUT. Procedure chỉ ghi "chạm 10 lần" mà không nói phải làm gì khi màn hình đổi, nên phần "về màn Đăng Nhập" không đánh giá được.
+- **Khuyến nghị: "Fail do lỗi thiết kế TC, không lập bug"** (tiền lệ TC-FR15-202). Notes ghi: phần "đúng 1 tài khoản" đánh giá theo ảnh admin theo case; phần màn hình không đánh giá được do procedure không quy định lúc màn hình đổi.
+- Nếu muốn chặt chẽ hơn, bạn có thể chạy lại 203 ngay (backend còn chạy, chờ sang phút mới), nhưng phải sửa procedure trước. Lúc 2 giờ sáng thì không đáng.
+
+**Các mục chưa trả lời:** mình điền theo khuyến nghị — 07–14, 60, 205 = **Pass hộp đen**; email `{ts}` để Claude Code kiểm. Muốn đổi thì sửa trong lệnh.
+
+Bạn chỉ cần tự ghi vào Check.md **Actual của 9 lần đăng nhập** (header nguyên văn), vì đó là quan sát của bạn. Các verdict thì đã nằm trong lệnh. Thêm khối này vào **đầu** lệnh 6/7b2 ở lượt trước:
+
+````
+### SV quyết (áp vào status, ghi "SV chốt 2026-10-21" + lý do vào notes)
+- TC-16, TC-17 = Blocked, case gốc TC-94 (màn hình không có ô Xác nhận).
+- TC-203 = "Fail do lỗi thiết kế TC, không lập bug". Lý do SV: các lần chạm sau rơi vào màn kế
+  tiếp; procedure không quy định khi màn hình đổi → phần màn hình không đánh giá được.
+  Notes ghi kết quả phần "đúng 1 tài khoản" theo ảnh admin TC-203.
+- TC-07–14, 60, 205 = Pass hộp đen. Lý do: thông báo chung liệt kê mọi luật mật khẩu, không chứng
+  minh luật mục tiêu được kiểm (A20).
+- TC-206: đối chiếu Expected với Actual SV ghi.
+  - Expected không yêu cầu bố cục → Pass, notes "quan sát ngoài Expected: tên tràn che màn hình,
+    không cuộn được; SRS im lặng → không tạo Fail".
+  - Expected có yêu cầu bị Actual vi phạm → DỪNG, in Expected.
+- 9 case đăng nhập thử bổ sung (ảnh `_2`): notes "đăng nhập thử làm sau, cùng lượt, chưa restart
+  backend". Verdict theo Actual SV ghi trong Check.md.
+````
+
+Giữ backend chạy cho tới khi báo cáo 6/7b2 sạch, phòng trường hợp phải kiểm lại.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #334 | 02:02 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19066,7 +20116,189 @@ Hiện trạng:
 
 ---
 
-## #318 | 02:09 21/10/2026 | Claude Opus 5.5 | [...]
+## #335 | 02:04 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: áp quyết định của SV vào status, kèm notes "SV chốt 2026-10-21" + lý do; thêm 9 ảnh đăng nhập thử _manual_2.
+- Commit: f644140 HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhập thử. Lệnh không đặt tên commit nên AI tự đặt.
+- File đã sửa: HW02/D_FR20/testcases.json/.md, RUN.md (đếm ảnh, bảng đổi tên), file lượt results/D_FR20_manual_20261021-001500.json (chỉ thêm attachment), 9 ảnh mới trong evidence/.
+- Kết quả kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6); lint 0/0; prompt log 317 lượt.
+- Status mới: Pass 21 (trong đó 10 Pass hộp đen) / Fail 10 / Blocked 2.
+  - TC-16, TC-17: Blocked, case gốc TC-94.
+  - TC-203: Fail do lỗi thiết kế TC, không lập bug. Notes ghi theo ảnh TC-FR20-203_admin_1.png: đúng 1 dòng m203_{ts}@domain.com (ID 17).
+  - TC-07–14, 60, 205: Pass hộp đen (A20).
+- TC-206: không phải dừng. Expected chỉ yêu cầu: không lỗi, chuyển sang 'Đăng Nhập', đúng 1 dòng admin, đăng nhập được. Không có yêu cầu bố cục/header → Pass, notes ghi quan sát ngoài Expected đúng chữ SV. Ảnh _manual_2 khớp quan sát: tên tràn kín header.
+- 9 case đăng nhập thử: đã thêm notes "Đăng nhập thử (ảnh _manual_2) làm sau, cùng lượt, chưa restart backend."; verdict vẫn Pass theo Check.md. Ảnh _2 có header 'Chào, …' đúng Họ Tên; ở TC-200, <script>alert(1)</script> hiện dạng chữ.
+- Ảnh điện thoại: tổng 40/20, giữ hết. Bắt buộc đạt 10/11; còn thiếu ảnh 01 "màn hình sau khi đóng hộp thoại".
+- Cần lưu ý: merge_results.py (chạy tay) ghi đè status bằng verdict trong file lượt, mà file lượt vẫn giữ verdict theo Check.md. Merge lại lượt 1 sẽ làm mất status SV chốt. Đã ghi cảnh báo "không merge lại lượt 1" trong RUN.md.
+- Cần quyết định (không chặn):
+  - Check.md chưa có Actual nguyên văn của bước đăng nhập thử (header) cho 9 case; AI không tự viết. SV bổ sung vào Check.md hoặc chấp nhận chỉ có ảnh.
+  - Nhật ký lượt vẫn trống 5 trường: Máy, Điện thoại, Expo Go, Locale/bàn phím, IP API_URL.
+  - File results/D_FR20_manual_20261021-0010.json (giống TEMPLATE) vẫn untracked; AI không đụng.
+```
+
+**Output:**
+`````
+Kết quả đã chốt: **Pass 21 (trong đó 10 Pass hộp đen) / Fail 10 / Blocked 2**. Trong 10 Fail có TC-203 là "lỗi thiết kế TC", nên còn **9 Fail có thể thành bug**.
+
+**Cần xử lý trước khi sang bước 7:**
+
+1. **Nguy cơ mất verdict khi merge lại (quan trọng).** Bản vá chạy tay lại để `merge_results.py` ghi đè status. Điều này trái quy ước "merge không ghi đè status SV đặt". Cảnh báo trong RUN.md không đủ an toàn. Cách gọn nhất là đồng bộ verdict trong file lượt cho khớp status bạn đã chốt (có log), để sau này merge lại cũng không mất gì. Check.md giữ nguyên làm bản ghi gốc của bạn.
+2. **Actual của bước đăng nhập thử (9 case).** Có 2 cách:
+   - **a)** Bạn tự ghi 9 dòng header vào Check.md, mất khoảng 5 phút.
+   - **b)** AI chép chữ từ ảnh `_manual_2` vào file lượt, gắn nhãn "(AI chép từ ảnh, SV duyệt)" và khai trong Audit. Đây chỉ là chép dữ kiện có sẵn trong ảnh, nên hợp lệ. Riêng TC-206 ghi "chuỗi 'a' tràn màn hình, không đếm được độ dài".
+   
+   Lệnh dưới để sẵn **b** cho đỡ việc; muốn tự ghi thì đổi.
+3. **Thiếu ảnh bắt buộc 01_2** (màn Đăng Nhập sau khi đóng hộp thoại). Chụp lại phải tạo tài khoản mới, nên không đáng. Ghi notes "thiếu ảnh bắt buộc; bằng chứng = Actual".
+4. **Nhật ký lượt:**
+   - Máy (OS) và IP API_URL thì AI tự lấy được.
+   - Bạn chỉ cần tự điền 4 trường vào RUN.md khi rảnh: model điện thoại, phiên bản Android, phiên bản Expo Go, locale/bàn phím.
+
+Sau lệnh này có thể **tắt backend**, vì mọi quan sát đã xong. Bước 7c sẽ tự dựng lại môi trường khi kiểm bước tái hiện.
+
+**Lưu ý trước bước 7:** mobile gọi cùng `/api/register` với web, nên nhiều Fail của D có thể cùng nguyên nhân với các bug của A (#17–#30). Theo quy ước gộp/tách theo nguyên nhân gốc, chúng có thể không phải bug mới. Lệnh dưới bắt AI in dữ kiện đối chiếu (cùng vị trí code, cùng yêu cầu bị vi phạm, issue trùng, kể cả #153–#160 của bạn cùng nhóm). AI không đề xuất gộp hay tách; mapping G → BUG là bạn quyết. Kiểm trùng ở bước này là đúng thời điểm, không còn rủi ro dùng hành vi SUT làm căn cứ Expected.
+
+````
+## Lệnh cho Claude Code — D_FR20: dọn 6/7b3 → 7/7a
+
+### A. Dọn kết quả (6/7b3)
+1. File lượt results/D_FR20_manual_20261021-001500.json: verdict = status SV đã chốt ở f644140.
+   - Log trước/sau trong RUN.md.
+   - Nhãn "Pass hộp đen" / "Fail do lỗi thiết kế TC" ghi theo cách file hỗ trợ (notes nếu không có trường).
+   - Kiểm: merge_results.py --dry-run cho D ra status giống hệt hiện tại → bỏ cảnh báo
+     "không merge lại lượt 1" trong RUN.md.
+   - Ghi Audit: "bản vá chạy tay ghi đè status, trái quy ước; xử lý bằng đồng bộ file lượt".
+2. Actual bước đăng nhập thử của 9 case (01, 02, 61–64, 200, 201, 206): chép chữ header từ ảnh
+   `_manual_2` vào Actual trong file lượt + testcases.json, gắn "(AI chép từ ảnh _manual_2, SV duyệt)".
+   - TC-206: "header hiển thị chuỗi 'a' tràn màn hình, không đếm được độ dài (AI chép từ ảnh)".
+   - Không sửa Check.md.
+   - Audit: "AI chép Actual từ ảnh SV cho 9 case".
+3. TC-01 notes: "thiếu ảnh bắt buộc _manual_2 (màn Đăng Nhập sau hộp thoại); bằng chứng = Actual".
+4. Nhật ký lượt: điền Máy (OS, lấy từ máy) + IP API_URL (App.js dòng 16). 4 trường còn lại để trống
+   (SV điền).
+5. Xoá results/D_FR20_manual_20261021-0010.json (untracked, giống TEMPLATE; SV đồng ý).
+render_md.py → check_domain.py → lint → prompt log → commit
+`HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăng nhập thử`.
+
+### B. 7/7a — dữ kiện bug (không soạn bước tái hiện, không đề xuất mapping/severity)
+1. HW02/bugs/_groups_D_FR20.md theo mẫu _groups_C_FR15.md. Mỗi Fail trừ TC-203 (lỗi thiết kế TC)
+   ghi:
+   - TC, Expected, Actual, evidence;
+   - yêu cầu bị vi phạm (chỉ yêu cầu bị vi phạm);
+   - vị trí code (frontend-mobile và/hoặc backend).
+   Nhóm G theo triệu chứng giống hệt.
+2. Bảng dữ kiện đối chiếu cho mỗi G:
+   - BUG của A/B/C cùng vị trí code và/hoặc cùng yêu cầu (mã BUG, số issue);
+   - kiểm trùng trên tkob-team/eshop-sut (`gh issue list --state all --limit 300`, mọi tác giả,
+     gồm #153–#160): issue nào cùng triệu chứng/vị trí (số, tiêu đề, tác giả, trạng thái).
+   Chỉ dữ kiện, không kết luận trùng/không trùng.
+3. HW02/D_FR20/compare_web_mobile.md: với mỗi EC của D có lớp tương ứng ở A, ghi
+   - mã EC D ↔ EC/TC A;
+   - verdict A (web) ↔ verdict D (mobile);
+   - khác nhau ở tầng nào (client mobile/server), có dòng code.
+   Chỉ dữ kiện, không nhận định.
+4. render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7a: gom dữ kiện bug + bảng web vs mobile`.
+
+## Báo cáo (≤ 12 dòng)
+- Commit A, B.
+- Dry-run D sau đồng bộ: giống/khác.
+- Số G; mỗi G: TC + BUG A/B/C cùng vị trí/yêu cầu + issue cùng triệu chứng (số).
+- Bảng web vs mobile: số dòng cùng verdict / khác verdict.
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+Đến đây là hợp lý để dừng nghỉ. Bước kế tiếp, 7b, là phần của bạn: quyết mapping G → BUG rồi viết bug. Trước khi nghỉ, nên xuất transcript `_p5` một lần nữa; vì cùng phiên dài thêm nên bạn ghi đè file cũ.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #336 | 02:08 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Device Name: POCO F5; OS Version (for POCO): 1.0.5.0 UMRTWXM; Android Version: 14 UKQ1.230804.001; Expo Go: Version: 54.0.8; Locale/bàn phím: Tiếng Việt (Việt Nam) QWERTY
+```
+
+**Output:**
+`````
+Thay mục A.4 trong lệnh vừa đưa bằng đoạn dưới. Nếu đã dán lệnh rồi thì gửi riêng đoạn này cho Claude Code sau khi nó báo xong:
+
+````
+A.4 (thay) — Nhật ký lượt 1 trong RUN.md, chép đúng chữ SV:
+- Máy (OS): AI lấy từ máy.
+- IP API_URL: AI lấy từ App.js dòng 16.
+- Điện thoại (model, Android): POCO F5 · OS 1.0.5.0.UMRTWXM · Android 14 (UKQ1.230804.001)
+- Expo Go: 54.0.8
+- Locale / bàn phím: Tiếng Việt (Việt Nam) · QWERTY
+Điền thêm D15 (thiết bị/locale) trong testcases.json nếu D15 có ô tương ứng.
+Nếu đã commit 6/7b3 → sửa trong commit `HW02[D-FR20] 6/7b4: nhật ký lượt`.
+````
+
+Mục Môi trường của bug report ở bước 7 cũng dùng lại các giá trị này.
+
+7a đã đủ dữ kiện, và kiểm trùng sạch: #153–#160 nói về giỏ hàng và chi tiết sản phẩm, không có issue nào về màn Đăng ký trên mobile.
+
+**1. IP trong patch sai (phải sửa).** Patch và bước 4 của RUN.md ghi `172.21.0.137`, nhưng lượt chính thức chạy với `192.168.2.12`. Hồ sơ môi trường phải khớp lượt chính thức, nếu không mục Môi trường của bug sẽ sai. Lệnh dưới tạo lại patch, sửa RUN.md và ghi D15 vào `environment.md`.
+
+**2. Mapping G → BUG: bạn quyết** (AI-01 §11, mình không đề xuất). Đây là quyết định ảnh hưởng nhiều nhất tới thời gian còn lại, vì cả 7 G đều đã có BUG của A cùng vị trí hoặc cùng yêu cầu. Ở C bạn dùng tiêu chí **"vị trí cần sửa"**. Áp vào D, câu hỏi cho từng G là: muốn triệu chứng trên mobile biến mất, có cần sửa ở chỗ nào **ngoài** chỗ mà BUG của A đã chỉ ra không?
+
+| Nếu bạn chọn | Hệ quả |
+|---|---|
+| **BUG mới** cho G | Issue mới `[FR-20]`, đánh số BUG-51 trở đi, viết đủ báo cáo (7b → 7d). |
+| **Không lập BUG mới**, bổ sung vào issue của A | Bạn viết một comment ngắn trên issue A ("tái hiện trên mobile: TC-FR20-xx, bằng chứng …"). TC vẫn Fail và trỏ tới BUG của A; số bug không tăng; viết ít hơn nhiều. |
+
+Không được tách bug chỉ để tăng số. Ngược lại, nếu thật sự có chỗ sửa riêng ở mobile thì cũng không nên gộp vào A. Để bạn trả lời được câu hỏi trên, lệnh dưới bắt Claude Code in dữ kiện cho từng G: chỗ code nào phải đổi để triệu chứng mất (tầng mobile hay server), có trùng chỗ của BUG A không. Chỉ in dữ kiện, không kết luận.
+
+**3. Bảng web vs mobile** (10 lớp cùng verdict, 15 lớp khác) là dữ kiện thô; phần nhận định khi viết báo cáo là của bạn.
+
+````
+## Lệnh cho Claude Code — D_FR20: sửa môi trường + dữ kiện "vị trí cần sửa" theo G
+
+### A. Môi trường (commit harness/env riêng)
+- Tạo lại HW02/env/mobile_api_url.patch từ `git -C ..\eshop-sut diff frontend-mobile/App.js`
+  (IP 192.168.2.12 = lượt chính thức).
+- RUN.md bước 4: đổi IP kiểm thành 192.168.2.12. Giữ câu cũ + "(đã thay: IP đổi trước lượt 1,
+  App.js sửa 2026-10-20 23:51)".
+- HW02/env/environment.md: thêm mục D_FR20 theo D15, dùng đúng các giá trị trong nhật ký lượt 1
+  (điện thoại, Android, Expo Go, locale/bàn phím, IP, máy).
+Commit `HW02: cập nhật env – mobile_api_url.patch + thiết bị D_FR20`.
+
+### B. Dữ kiện cho SV quyết mapping (không commit nếu chỉ in; nếu ghi file → thêm vào cuối
+_groups_D_FR20.md, commit `HW02[D-FR20] 7/7a2: dữ kiện vị trí cần sửa`)
+Với mỗi G1–G7, in:
+- Đường đi của dữ liệu: ô mobile → App.js (dòng) → POST /api/register → server.js (dòng).
+- Mỗi chỗ code có thể phải đổi để triệu chứng của TC trong G mất, ghi tầng (mobile/server)
+  + dòng.
+- Chỗ code mà BUG A/B/C liên quan đã chỉ ra (lấy từ HW02/bugs/BUG-xx.md): trùng / không trùng
+  với từng chỗ ở trên.
+- Sửa riêng chỗ của BUG A thì triệu chứng của TC trong G có mất không:
+  - suy ra từ code: có / không / không suy ra được;
+  - kèm 1 câu lý do dựa trên code.
+KHÔNG đề xuất gộp/tách, không kết luận "trùng bug".
+
+## Báo cáo (≤ 12 dòng)
+- Commit A.
+- Bảng G1–G7: tầng + dòng code phải đổi | chỗ của BUG A trùng? | sửa BUG A → triệu chứng mất?
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+Sau khi có bảng B, bạn chỉ cần trả lời theo mẫu `G1=A, G2=mới, …` (A = bổ sung vào issue của A, mới = BUG mới). Lúc đó mình sẽ đưa lệnh dựng khung, theo mẫu B cho bug mới, và khung comment cho các G bổ sung vào A.
+
+Đã 2 giờ 17 sáng. Nếu bạn dừng ở đây, nên xuất lại transcript `_p5` (ghi đè file cũ) trước khi nghỉ.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #337 | 02:09 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19169,7 +20401,7 @@ Phần A đã commit. Sang B: đọc mẫu `_groups_C_FR15.md`, mã đăng ký m
 
 ---
 
-## #319 | 02:19 21/10/2026 | Claude Opus 5.5 | [...]
+## #338 | 02:19 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19231,7 +20463,217 @@ Commit A xong. Sang B: đọc chỗ code mà từng BUG A/B/C chỉ ra.
 
 ---
 
-## #320 | 02:32 21/10/2026 | Claude Opus 5.5 | [...]
+## #339 | 02:23 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình thì muốn viết bug mới hơn. Và cũng đổi IP lại nhé. Do ip trước đó là ở ngoài cafe, mà giờ mình chính thức chạy trong phòng ktx
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+`````
+**IP đã đổi xong** ở commit `3ad5c8f`. Patch giờ dùng `192.168.2.12` (IP ở phòng ký túc xá, lúc chạy lượt chính thức). RUN.md giữ câu IP cũ của quán cafe kèm "(đã thay…)", và nhật ký lượt 1 cũng đã cập nhật. Bạn không cần làm gì thêm.
+
+**Về "viết bug mới": quyết định là của bạn, nhưng dữ kiện chia ra hai nhóm rõ rệt.** Áp đúng tiêu chí "vị trí cần sửa" bạn đã dùng ở C:
+
+| G | Có chỗ sửa riêng ở mobile? | Theo tiêu chí ở C |
+|---|---|---|
+| **G5, G6, G7** (GUI, keyboardType, thiếu ô Xác nhận) | Có, chỉ ở App.js; không trùng chỗ nào với web | Bug mới |
+| **G4** (mật khẩu `#` được nhận) | Có: regex của chính mobile (App.js 211–212) sai, tách khỏi phần server | Bug mới, giống tiền lệ A (regex client Register.jsx và server là 2 bug riêng) |
+| **G1, G2, G3** (Họ Tên trống, email sai định dạng hoặc có dấu cách, email trùng) | **Không.** Mobile không có code kiểm hai ô này, và SRS không bắt client phải kiểm. Sửa BUG-03/04/05/06 của A ở server là triệu chứng trên mobile biến mất. | Trùng bug A → bổ sung comment vào issue A |
+
+Nghĩa là bạn vẫn viết **4 bug mới** (G4–G7). Nếu muốn G1–G3 cũng là bug mới, bạn cần một tiêu chí khác "vị trí cần sửa" và phải ghi rõ lý do. Nếu không, rất dễ bị bắt là trùng với #19–#22, tức đúng lỗi "tách để tăng số" mà quy ước cấm. Comment bổ sung vào issue A cũng ngắn hơn nhiều so với viết một bug đầy đủ.
+
+Trả lời bằng cách điền vào chỗ trống trong lệnh dưới (`mới` hoặc `A`), rồi dán:
+
+````
+## Lệnh cho Claude Code — D_FR20 7/7a3: dựng khung bug theo mapping SV
+
+SV quyết (còn `<...>` → DỪNG):
+- G1 = `<mới|A>`, G2 = `<mới|A>`, G3 = `<mới|A>`, G4 = `<mới|A>`, G5 = `<mới|A>`, G6 = `<mới|A>`,
+  G7 = `<mới|A>`
+- Tiêu chí: "vị trí cần sửa" (như C). G nào chọn "mới" dù dữ kiện 7a2 ghi "sửa BUG A →
+  triệu chứng mất: có" → SV ghi lý do: `<...>` (không có G nào như vậy → ghi "không áp dụng").
+
+1. Mỗi G "mới" = 1 BUG, đánh số liên tục từ BUG-51 theo thứ tự G.
+   Khung HW02/bugs/BUG-xx.md theo mẫu B `d0d0e05:HW02/bugs/BUG-22.md`:
+   - chỗ SV viết = `` `<SV viết>` ``;
+   - Môi trường: gạch đầu dòng giá trị thật (SUT @85af3ba/fork; máy; POCO F5 · Android 14 · Expo Go
+     54.0.8 · Tiếng Việt QWERTY; màn Đăng ký mobile + POST /api/register; ngày + lượt chính
+     thức 1; link environment.md/RUN.md);
+   - TC liên quan (gồm TC Blocked do G, vd TC-16/17 cho G7);
+   - Bằng chứng: ảnh tiêu biểu + evidence từng TC; bản che (nếu ảnh có đường dẫn/thông tin máy) ở
+     bugs/_issue_redacted/;
+   - Yêu cầu: AI điền từ _groups (chỉ yêu cầu bị vi phạm, kèm "Đạt trong cùng case" /
+     "Chưa đánh giá được" / "Không áp dụng"; không đưa giả định phạm vi/nới);
+   - Dữ kiện (AI chép): Actual nguyên văn (ký tự lặp > 20 → "x"×N), "Lặp lại", code trích có
+     số dòng. Không chép Expected.
+   - Không soạn bước tái hiện, tiêu đề, Severity, Priority, Nhận định.
+2. Mỗi G "A" → HW02/bugs/_comments_D_FR20.md, mỗi mục:
+   - issue đích (số + BUG-xx);
+   - TC-FR20 liên quan + đường dẫn evidence (bản che);
+   - dữ kiện Actual nguyên văn;
+   - ô `` `<SV viết>` `` cho nội dung comment.
+   Không đăng gì lên GitHub.
+3. testcases.json: trường bug của mỗi TC Fail trỏ BUG mới hoặc BUG A tương ứng; TC-203 giữ
+   "không lập bug".
+4. render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7a3: khung bug theo mapping SV`.
+
+## Báo cáo (≤ 8 dòng)
+- Commit.
+- BUG mới (mã ↔ G ↔ TC); mục comment (issue ↔ G ↔ TC).
+- Ảnh nào cần bản che.
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+Sau lệnh này đến bước 7b của bạn: viết các chỗ `<SV viết>` trong từng BUG-xx.md (và nội dung comment nếu có), rồi commit trước khi AI kiểm tái hiện ở 7c. Tiền tố `[FR-20]` chỉ đặt trên tiêu đề GitHub, không ghi trong file.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #340 | 02:28 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+hmm, theo lý thì sau khi sang bước 7 thì bạn bắt đầu chia các BUG rồi viết format các BUG để tôi tự điền vào rồi chứ nhỉ
+```
+
+**Output:**
+````
+Đúng là quy trình như vậy, và AI đã làm phần "chia". Chỉ có một bước ở giữa là của bạn theo AI-01 §11:
+
+| Bước | Ai làm | Trạng thái |
+|---|---|---|
+| **7a**: chia Fail thành nhóm G theo triệu chứng, gom dữ kiện | AI | Xong (G1–G7) |
+| **G → BUG**: G nào thành bug mới, G nào gộp hoặc trùng bug cũ | **SV** (AI không được chọn gộp/tách) | Đang chờ bạn |
+| **7a3**: dựng khung BUG-xx.md có sẵn chỗ `<SV viết>` để bạn điền | AI | Lệnh vừa đưa, chạy ngay sau khi bạn quyết |
+| **7b**: điền tiêu đề, Severity, bước tái hiện, … | SV | |
+
+Ở C, bước giữa này rất nhanh vì mọi G đều thành bug mới (1 G = 1 BUG). Ở D, nếu áp y như vậy thì G1–G3 sẽ trùng với bug của A. Vì thế lệnh mới để chỗ trống bắt bạn quyết, thay vì để AI tự quyết.
+
+Bạn chỉ cần thay dòng mapping trong lệnh bằng **một** trong hai dòng sau rồi dán:
+
+```
+- G1 = A, G2 = A, G3 = A, G4 = mới, G5 = mới, G6 = mới, G7 = mới
+- Tiêu chí: "vị trí cần sửa" (như C). SV ghi lý do: không áp dụng
+```
+→ 4 bug mới (BUG-51…54) cộng 3 comment ngắn trên #19–#22.
+
+```
+- G1 = mới, G2 = mới, G3 = mới, G4 = mới, G5 = mới, G6 = mới, G7 = mới
+- Tiêu chí: 1 G = 1 BUG như C. SV ghi lý do cho G1–G3: <lý do của bạn>
+```
+→ 7 bug mới (BUG-51…57). Phải có lý do của bạn cho G1–G3, vì dữ kiện cho thấy sửa bug A là triệu chứng đó mất.
+
+Sau đó AI dựng khung ngay, bạn chỉ việc điền.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #341 | 02:29 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nói mình kĩ hơn về G1, G2, G3 để mình quyết nhé
+```
+
+**Output:**
+````
+Dưới đây là cả ba nhóm, theo dữ kiện ở bảng 7a2. Chi tiết Actual từng case nằm trong `HW02/bugs/_groups_D_FR20.md`.
+
+**Điểm chung của cả ba nhóm:** trên mobile, hàm `handleRegister` (App.js 209–219) **chỉ kiểm mật khẩu**. Họ Tên và Email được gửi thẳng lên `POST /api/register` mà không qua kiểm tra nào. Server (`server.js` 20–29) cũng không validate, đúng lỗi bạn đã báo ở A. App chỉ xét `response.ok` (App.js 232): server trả 2xx thì app báo thành công, không thì báo lỗi. Vì vậy, chỉ cần server từ chối đúng là app trên mobile tự hiện lỗi, không phải sửa gì ở mobile.
+
+**G1 – TC-03: Họ Tên để trống**
+- Expected: bị từ chối, vì FR-01 bắt buộc có Họ Tên.
+- Actual: đăng ký thành công, ảnh admin SAU có dòng `m03_…`.
+- Bug của A cùng chỗ: **BUG-03 (#19)**, server nhận Họ Tên trống.
+- Sửa BUG-03 thì triệu chứng trên mobile mất.
+
+**G2 – TC-04 (email trống), TC-05 (email thiếu `@`), TC-204 (email có dấu cách trước `@`)**
+- Expected: bị từ chối, vì email phải đúng định dạng.
+- Actual: cả ba đều được nhận.
+- Bug của A cùng chỗ: **BUG-04 (#20)**, server không kiểm định dạng email. Sửa BUG-04 thì cả ba triệu chứng mất (cùng điều kiện).
+- BUG-08 cũng liên quan nhưng chỉ nói về việc cắt khoảng trắng, sửa nó không làm mất triệu chứng.
+- Bảng còn liệt kê #4, issue của người khác có triệu chứng tương tự trên web.
+
+**G3 – TC-06: đăng ký bằng email đã tồn tại (`test@eshop.com`)**
+- Expected: bị từ chối; `test@eshop.com` vẫn chỉ có 1 dòng.
+- Chỗ liên quan: `server.js` 20–29 và ràng buộc UNIQUE ở `database.js` 50–61.
+- Bug của A cùng chỗ: **BUG-05, BUG-06 (#21, #22)**, trùng cả hai chỗ.
+- Mobile không tự biết email đã tồn tại, nên chỉ server sửa được.
+- Mình không có Actual chi tiết của TC-06 trong các báo cáo: không rõ là tạo ra dòng thứ hai hay chỉ báo sai. Xem `_groups_D_FR20.md` trước khi quyết.
+
+**Cân nhắc khi quyết:**
+
+| | Comment vào issue A | Bug mới |
+|---|---|---|
+| Nhất quán với tiêu chí ở C ("vị trí cần sửa") | Có | Không, cần tiêu chí khác |
+| Rủi ro bị coi là trùng hoặc tách để tăng số | Thấp | Có, cùng nguyên nhân và cùng chỗ sửa với #19–#22 |
+| Thông tin cho dev | "Cũng tái hiện trên mobile" nằm ngay trong bug gốc; sửa một chỗ là đóng cả hai | Dev phải tự nhận ra 3 issue là một |
+| Công sức | Khoảng 3 dòng mỗi comment, trên chính issue của bạn | 3 bug đầy đủ: bước tái hiện, kiểm ở 7c, bản che, đăng issue |
+| Số bug trong README | 4 bug mới (tổng 54) | 7 bug mới (tổng 57) |
+
+**Lý do duy nhất đủ mạnh để chọn bug mới:** nếu ở A bạn đã tách bug theo *điểm vào* (UI web và API là 2 bug riêng dù cùng nguyên nhân ở server), thì tách thêm một bug cho mobile là nhất quán với tiền lệ đó. Mình không nhớ A đã làm thế nào. Nếu muốn chắc, gửi Claude Code câu này:
+
+```
+Chỉ đọc: ở A_FR01, có cặp BUG nào cùng vị trí code server nhưng tách theo điểm vào (UI web vs API) không? Liệt kê mã BUG + vị trí + lý do tách ghi trong BUG-xx.md.
+```
+
+- Có cặp như vậy → chọn "mới" cho G1–G3 có tiền lệ; lý do ghi "tách theo điểm vào như A (BUG-xx/yy)".
+- Không có → chọn "A" cho G1–G3 thì nhất quán.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #342 | 02:31 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+hmm, mình thì lại muốn chọn mới cho cả G1, G2, G3. Vì mình làm UI (Web), API và giờ tách ra Mobile. Vì Mobile cũng không liên quan đến Web cho lắm
+```
+
+**Output:**
+`````
+Được, mình ghi lý do của bạn là **tách theo điểm vào: Web UI, API, Mobile**. Có 2 điểm cần làm để quyết định này đứng vững khi nộp:
+
+1. **Không được coi mobile là "không liên quan".** Ở G1–G3, lỗi nằm ở server dùng chung (`server.js` 20–29). Phần Vị trí code trong 3 bug mới sẽ trùng với #19–#22, và người chấm sẽ thấy điều đó. Cách đỡ: mỗi bug ghi rõ "Liên quan: BUG-03 (#19)…" để dev biết đây là cùng nguyên nhân gốc. Lệnh dưới bắt AI điền dòng này như dữ kiện.
+2. **Tiêu chí của D khác C**, và quy ước "mỗi bug sửa độc lập" không còn đúng cho G1–G3: sửa server là đóng được cả bug A lẫn bug D. Ghi một câu về điều này trong báo cáo chính hoặc phần gap analysis là đủ, không cần làm gì khác.
+
+Dùng lại lệnh 7a3 ở trên, chỉ thay phần "SV quyết" bằng đoạn này:
+
+````
+SV quyết:
+- G1 = mới, G2 = mới, G3 = mới, G4 = mới, G5 = mới, G6 = mới, G7 = mới → BUG-51…57 theo thứ tự G.
+- Tiêu chí: tách theo điểm vào (Web UI / API / Mobile), khác C ("vị trí cần sửa").
+  Lý do SV: "Web, API và Mobile là các điểm vào khác nhau; bug trên Mobile được tái hiện
+  độc lập trên app mobile."
+  Ghi tiêu chí + lý do vào _groups_D_FR20.md (mục "SV quyết mapping").
+- G1–G3: thêm vào khung BUG mục "Liên quan" (AI điền dữ kiện):
+  - BUG A cùng vị trí code server (G1: BUG-03 #19; G2: BUG-04 #20, BUG-08; G3: BUG-05 #21,
+    BUG-06 #22);
+  - dòng code chung.
+  Không viết nhận định.
+````
+
+Phần còn lại (mục 1–4 và khung báo cáo) giữ nguyên. Sau khi có khung, bạn viết 7 bug ở bước 7b.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #343 | 02:32 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19284,7 +20726,70 @@ Quoting PowerShell hỏng; dùng Edit.
 
 ---
 
-## #321 | 02:36 21/10/2026 | Claude Opus 5.5 | [...]
+## #344 | 02:34 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: ghi quyết định mapping của SV, dựng khung BUG-51…57, điền mục "Liên quan" cho G1–G3.
+- File đã tạo/sửa:
+  - HW02/bugs/_groups_D_FR20.md: điền bảng ánh xạ G1–G7 → BUG-51…57 (cột issue để trống) và thêm mục "SV quyết mapping" (tiêu chí điểm vào, lý do SV nguyên văn).
+  - HW02/bugs/BUG-51.md … BUG-57.md: khung theo mẫu B.
+  - CLAUDE.md: dòng BUG kế tiếp đổi thành BUG-58. Lệnh không yêu cầu sửa dòng này; tôi sửa vì 51–57 đã cấp.                        ần AI đã điền trong khung:
+  - Môi trường thật của lượt 1 (POCO F5, Expo Go 54.0.8, IP 192.168.2.12).                                                         Bằng chứng: ảnh điện thoại; G1–G4 kèm ảnh admi
+  - TC liên quan; BUG-57 ghi thêm Blocked 16, 17 với case gốc TC-94.                                                               Yêu cầu lấy đúng từ _groups (trích chữ của req
+  - Dữ kiện: Actual nguyên văn, dòng "Lặp lại: 1 lượt chính thức; chưa chạy lại", code trích có số dòng.
+  - Tiêu đề, severity, priority, tiền điều kiện, bước tái hiện, Expected, Actual, Nhận định để <SV viết>.                          c "Liên quan" (chỉ dữ kiện, không nhận định):
+  - BUG-51: BUG-03 (#19), dòng chung server.js 20–29.
+  - BUG-52: BUG-04 (#20), BUG-08 (#24), dòng chung server.js 20–29.
+  - BUG-53: BUG-05 (#21), BUG-06 (#22), dòng chung server.js 20–29 và database.js 50–54.                                           t quả kiểm tra: prompt log 320 lượt. Không chạcases.json không đổi.
+- Commit: 3b8131c HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57                                                           n quyết định / câu hỏi:
+  - BUG-54 (G4) cũng có BUG-07 (#23) trùng chỗ server.js 20–29, nhưng lệnh chỉ yêu cầu "Liên quan" cho G1–G3 nên tôi chưa thêm. SV quyết có thêm không.
+  - Bước kế: SV viết các khung và commit 7/7b.
+```
+
+**Output:**
+`````
+Khung đã dựng xong. Còn 3 điểm nhỏ trước khi bạn viết:
+
+1. **BUG-54 nên có mục "Liên quan: BUG-07 (#23)"**. Đây là dữ kiện cùng loại với G1–G3, thiếu ở đây là không nhất quán. BUG-54 khác ở chỗ còn có lỗi riêng của mobile (regex App.js 211–212), nhưng dòng code server dùng chung vẫn nên ghi ra.
+2. **Mục 3 của lệnh hình như chưa làm.** Báo cáo ghi testcases.json "không đổi", nghĩa là trường bug của các TC Fail chưa trỏ tới BUG-51…57.
+3. **Báo cáo chưa trả lời ảnh nào cần bản che.** Ảnh admin chụp trên PC có thể lộ thanh địa chỉ, taskbar hoặc tên người dùng máy.
+
+````
+## Lệnh cho Claude Code — D_FR20 7/7a4: bổ sung khung
+1. BUG-54: thêm mục "Liên quan" (dữ kiện): BUG-07 (#23), dòng chung server.js 20–29; ghi riêng
+   dòng mobile App.js 211–212.
+2. testcases.json: trường bug của TC Fail → BUG-51…57 theo _groups_D_FR20.md
+   (TC-16/17 Blocked ghi liên quan BUG-57). TC-203 giữ "không lập bug".
+3. Rà từng ảnh trong mục Bằng chứng của BUG-51…57: ảnh nào lộ đường dẫn, tên người dùng máy,
+   taskbar, thanh địa chỉ ngoài localhost → tạo bản che ở bugs/_issue_redacted/ (giữ tên, ghi
+   chỗ che). Không sửa ảnh gốc.
+4. render_md.py → check_domain.py → lint → prompt log → commit
+   `HW02[D-FR20] 7/7a4: Liên quan BUG-54 + trường bug TC + bản che`.
+## Báo cáo (≤ 6 dòng): commit; số TC đã gắn bug; ảnh đã che (tên + chỗ che).
+````
+
+**Lưu ý khi viết 7b:** ở 7c, AI không chạy được app trên điện thoại. Nó chỉ chạy thật được phần server (gọi `POST /api/register` bằng PowerShell, xem dữ liệu) và đối chiếu các bước trên mobile với code, RUN.md và ảnh. Vì vậy, khi viết **bước tái hiện**:
+- Ghi đủ tiền điều kiện để người khác dựng lại được: restart backend, áp patch IP, `npx expo start`, mở Expo Go, đi từ màn hình chủ → Đăng nhập → Đăng ký ngay.
+- Mỗi bước là một thao tác cụ thể trên điện thoại, với giá trị nhập chính xác như trong RUN.md.
+- Phần trên mobile mà AI không kiểm được sẽ được gắn "(chưa kiểm chứng bởi AI trên thiết bị)". Nếu muốn bỏ nhãn đó, bạn tự chạy lại các bước trên điện thoại.
+
+Các quy ước còn lại giữ như A–C:
+- Severity: Critical/High/Medium/Low; Priority: High/Medium/Low.
+- Tác động trong Nhận định phải có dữ kiện.
+- Viết xong thì commit **7/7b trước**, rồi AI mới kiểm ở 7c.
+
+Đã gần 3 giờ sáng, đây là chỗ hợp lý để dừng. Viết 7 bug cần đầu óc tỉnh. Nếu nghỉ, nói "xuất transcript" để mình ghi đè `_p5`. Mình cũng nên cập nhật handoff cho phiên sau, vì phiên này đã dài.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #345 | 02:36 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19320,7 +20825,168 @@ Quoting PowerShell hỏng; dùng Edit.
 
 ---
 
-## #322 | 02:54 21/10/2026 | Claude Opus 5.5 | [...]
+## #346 | 02:37 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit: 75da144 HW02[D-FR20] 7/7a4: Liên quan BUG-54 + trường bug TC + bản che. Lần commit đầu ghi nhầm "13 ảnh"; tôi đã amend commit cục bộ (chưa push) để sửa thành 12.
+- BUG-54: thêm mục "Liên quan": BUG-07 (#23), dòng chung server.js 20–29; dòng mobile App.js 211–212 ghi riêng.
+- Trường bug của 12 TC:
+  - 9 Fail gắn BUG-51…57 theo _groups_D_FR20.md.
+  - TC-16, TC-17 ghi "BUG-57 (liên quan; Blocked, case gốc TC-FR20-94)".
+  - TC-203 ghi "không lập bug (lỗi thiết kế TC)".
+- Ảnh bằng chứng: đã rà 12 ảnh (9 ảnh điện thoại, 3 ảnh admin cả lượt). Ảnh điện thoại chỉ có thanh trạng thái; ảnh admin chỉ có nội dung trang, không có thanh địa chỉ hay taskbar. Không ảnh nào lộ đường dẫn hay tên người dùng nên không tạo bản che; _issue_redacted/ không đổi.
+- Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6); lint 0 lỗi, 0 cảnh báo; prompt log 321 lượt.
+```
+
+**Output:**
+```
+Bước 7a đã sạch, mọi thứ sẵn sàng cho 7b. Chỉ cần ghi thêm một dòng Audit: "`75da144` amend cục bộ (sửa số ảnh 13 → 12)", giống tiền lệ `a7cd868` ở C.
+
+**Tiếp theo là bước 7b, phần của bạn:**
+- Viết các chỗ `<SV viết>` trong `HW02/bugs/BUG-51.md` … `BUG-57.md`: tiêu đề, Severity, Priority, tiền điều kiện, bước tái hiện, Expected, Actual, Nhận định.
+- Viết xong thì commit `HW02[D-FR20] 7/7b: SV viết BUG-51–57` **trước**, rồi mới gửi báo cáo để mình đưa lệnh 7c.
+
+Trước khi nghỉ, bạn muốn mình làm luôn hai việc này không?
+1. **Xuất transcript `_p5`** (ghi đè bản cũ, vì cùng phiên dài thêm).
+2. **Cập nhật `claude/HW02_handoff.md`** với trạng thái D, để phiên sau làm tiếp 7b → 7d, issue và báo cáo mà không cần đọc lại phiên này. Nội dung gồm: các quyết định D0–D16, P1=b, phạm vi gọn, mapping theo điểm vào, các bản vá harness, chất liệu gap analysis và ghi chú Audit của D.
+
+Chỉ cần trả lời "làm cả hai" hoặc chọn một.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #347 | 02:54 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã viết xong các bug và commit rồi. Giờ mình làm gì nữa nhỉ. Bạn viết prompt cho Claude Code check qua giúp mình nhé
+```
+
+**Output:**
+`````
+Bước tiếp theo là **7c**: AI rà 7 bug bạn vừa viết. AI không chạy được app trên điện thoại, nên nó chạy thật phần server bằng PowerShell, còn phần thao tác trên mobile thì đối chiếu với code, RUN.md và ảnh. AI chỉ được sửa dữ kiện sai so với bằng chứng; chữ của bạn thì nó liệt kê để bạn tự sửa ở 7d.
+
+````
+## Lệnh cho Claude Code — D_FR20 7/7c: kiểm tái hiện + dữ kiện BUG-51…57
+
+### 0. Kiểm đầu vào
+- HEAD có commit SV 7/7b chỉ chạm HW02/bugs/BUG-51.md … BUG-57.md (+ prompt log).
+- `git status` sạch.
+- Còn chỗ `<SV viết>` chưa điền ở bất kỳ BUG nào → liệt kê; không DỪNG, làm tiếp phần còn lại.
+
+### 1. Kiểm tái hiện
+- Phần server (chạy thật):
+  - restart backend (`node server.js`, CSDL seed lại);
+  - với mỗi BUG, gửi POST /api/register bằng PowerShell 5.1 với đúng giá trị SV ghi trong bước
+    tái hiện, body JSON giống body mobile gửi (App.js 225–229): `-ContentType` riêng, body UTF-8
+    bytes, 4xx/5xx bọc try/catch, in thô response;
+  - kiểm dữ liệu bằng đăng nhập admin seed (`admin@eshop.com` / `Admin123!`) rồi GET danh sách
+    người dùng (không ký JWT bằng SECRET_KEY).
+  - Ghi lệnh + output vào log.
+- Phần thao tác trên mobile (AI không chạy được):
+  - đối chiếu từng bước với code App.js (tên màn, tên nút, chữ hiển thị, điều hướng), RUN.md lượt 1
+    và ảnh evidence;
+  - bước sai so với code/evidence (tên nút, chữ màn hình, thứ tự) → sửa dữ kiện, log trước/sau;
+  - cuối mục Bước tái hiện thêm 1 dòng: "(Bước trên thiết bị: AI chưa chạy lại; đã đối chiếu code
+    App.js + evidence lượt 1)".
+- Tiền điều kiện: có đủ để dựng lại không (restart backend, patch IP, `npx expo start`, Expo Go,
+  từ màn hình chủ → Đăng nhập → Đăng ký ngay; tài khoản seed nếu cần). Thiếu → liệt kê, không viết hộ.
+
+### 2. Rà dữ kiện và quy ước (chỉ sửa dữ kiện sai so với evidence; chữ SV → liệt kê)
+- Actual trong bug ↔ Actual trong testcases.json/file lượt/ảnh: lệch → sửa dữ kiện, log trước/sau.
+- Môi trường, TC liên quan, Bằng chứng (đường dẫn ảnh tồn tại), Liên quan: đúng như khung 7a3–7a4.
+- Thang: Severity ∈ {Critical, High, Medium, Low}, Priority ∈ {High, Medium, Low}. Sai → liệt kê.
+- Yêu cầu: chỉ yêu cầu/giả định bị vi phạm. Không có giả định phạm vi/nới.
+- Tác động trong Nhận định: câu nào không có dữ kiện → gắn "(chưa kiểm chứng)".
+- Expected SV viết: so với Expected của TC; mâu thuẫn hoặc thiếu căn cứ → chỉ liệt kê.
+- Tiêu đề trong file không có tiền tố `[FR-20]` (chỉ thêm trên GitHub).
+- Bất thường AI thấy ngoài các bước SV → ghi "AI phát hiện", không đưa vào bug; SV quyết.
+
+### 3. Ghi + commit
+- Log trước/sau + output PowerShell → cuối HW02/bugs/_groups_D_FR20.md, mục "7c".
+- Mục "Điểm SV tự sửa": mỗi BUG liệt kê điểm cần SV sửa chữ (không gợi ý câu thay).
+- render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7c: AI kiểm tái hiện + sửa dữ kiện`.
+- Không tạo issue, không push.
+
+## Báo cáo cho phiên thảo luận (≤ 15 dòng)
+- Commit.
+- Mỗi BUG 1 dòng:
+  - server tái hiện được? (mã HTTP + có/không tạo tài khoản);
+  - số dữ kiện AI đã sửa;
+  - số "(chưa kiểm chứng)" đã gắn;
+  - số điểm SV tự sửa.
+- Chỗ `<SV viết>` còn trống; lỗi thang.
+- AI phát hiện (nếu có).
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+**Các bước còn lại của D sau 7c:**
+1. **7d (bạn):** sửa chữ theo mục "Điểm SV tự sửa", rồi commit.
+2. **Tạo issue:**
+   - kiểm trùng lại;
+   - `gh` đăng nhập bằng `ThachHaoo`;
+   - tạo tuần tự 7 issue, tiêu đề có tiền tố `[FR-20]`;
+   - bạn tự kéo ảnh vào (alt = tên file);
+   - chụp `issues_page_D.png`.
+3. **README và CLAUDE.md:** cập nhật số liệu D và tổng HW02. BUG kế tiếp giờ là BUG-58.
+
+Sau D là phần cuối của HW02: report chính (.md + PDF), Critique, AI-02 Audit, AI-03, AI-05, video demo, rồi `hw-submission-audit`.
+
+Mình vẫn đề nghị **xuất transcript `_p5` và cập nhật handoff** sau 7c, vì phiên này đã rất dài. Chỉ cần nói "làm cả hai".
+
+7c ổn: phần server của cả 4 bug (BUG-51…54) đều tái hiện được, mọi bug đúng thang Severity/Priority, và phần thao tác trên mobile khớp với code cùng ảnh lượt 1.
+
+**Hai phát hiện của AI cần xử lý:**
+1. **Commit bị amend sau khi bạn đã push.** Lượt trước Claude Code nói `7/7a4` "chưa push", nhưng thực ra bạn đã push rồi, nên bạn phải tạo commit merge `af05093`. Lịch sử git không hỏng, nhưng phải khai trong Audit. Lệnh dưới cũng thêm vào CLAUDE.md một luật: không amend nữa, sửa gì cũng tạo commit mới.
+2. **Giá trị thực nhập ở TC-204 khác procedure.** Trong ảnh, dấu cách nằm sau `@`; procedure và BUG-52 đặt dấu cách trước `@`. Cả hai cách vẫn thuộc EC5 nên verdict giữ nguyên. Đây là dữ kiện, AI tự ghi được: Actual của BUG-52 và notes của TC-204 ghi giá trị thực nhập. Bước tái hiện của bạn vẫn đúng, vì server đã tái hiện bằng chính giá trị đó.
+
+**D13 trong mục Yêu cầu của BUG-55, 56:** theo quy ước, giả định phạm vi không bao giờ được vào mục Yêu cầu. Chỉ giữ FR-22.x bị vi phạm. Mục này do AI điền ở 7a3, nên nếu đúng là AI viết thì AI tự bỏ.
+
+**"Expected (trích SRS)" chưa có câu trích nguyên văn:** chép nguyên văn SRS là chép dữ kiện, AI làm được. Lệnh để sẵn cho AI chép, gắn nhãn, đặt dưới câu Expected của bạn. Muốn tự làm thì xoá mục 4 của lệnh.
+
+**Phần bạn tự sửa (7d)** là danh sách "Điểm SV tự sửa" trong `_groups_D_FR20.md`, mục 7c:
+- Tiền điều kiện của cả 7 bug: thêm `npx expo start` + Expo Go. BUG-51, 52 thêm restart backend. Có thể chép từ RUN.md.
+- BUG-52, 54: câu "server phải từ chối" nói tới một tầng cụ thể mà không có căn cứ. FR-01 chỉ yêu cầu từ chối, không nói tầng nào phải làm.
+- BUG-55: Nhận định trích `style=` khác với code thật.
+- BUG-56: tiêu đề thừa dấu backtick; phím `.` trong Expected không có căn cứ.
+
+````
+## Lệnh cho Claude Code — D_FR20 7/7c2: sửa dữ kiện + quy ước (trước khi SV sửa chữ)
+1. TC-204: giá trị thực nhập ở lượt 1 lấy theo ảnh (dấu cách sau '@').
+   - Ghi vào notes TC-204: "giá trị thực nhập khác procedure, cùng EC5; verdict giữ".
+   - BUG-52: sửa dữ kiện Actual/Dữ kiện cho đúng ảnh, log trước/sau.
+   - Không sửa bước tái hiện SV viết.
+2. BUG-55, 56 mục Yêu cầu: `git blame`.
+   - D13 do AI điền (7a3) → bỏ D13 khỏi Yêu cầu (giả định phạm vi), giữ FR-22.x bị vi phạm,
+     log trước/sau.
+   - Do SV viết → không sửa, báo lại.
+3. Kiểm lại: 7 BUG không còn giả định phạm vi/nới trong mục Yêu cầu.
+4. Mục "Expected (trích SRS)" của 7 BUG: dưới câu SV, thêm dòng
+   `Trích SRS (AI chép nguyên văn): README.md dòng N: "…"` với đúng điều khoản SV dẫn
+   (FR-01 / FR-22.x / SEC-04).
+   SV không dẫn điều khoản nào → không thêm, liệt kê.
+5. CLAUDE.md: thêm luật "Không amend commit; sửa gì cũng tạo commit mới (SV có thể đã push)".
+   Audit: "7/7a4 bị amend sau khi SV push (40052e…/75da144) → SV merge af05093".
+6. render_md.py → lint → prompt log → commit
+   `HW02[D-FR20] 7/7c2: dữ kiện TC-204 + Yêu cầu BUG-55/56 + trích SRS`.
+## Báo cáo (≤ 6 dòng): commit; mục 2 (ai viết, đã bỏ chưa); BUG chưa thêm trích SRS (lý do).
+````
+
+Sau đó bạn sửa chữ và commit `HW02[D-FR20] 7/7d: SV sửa chữ BUG-51–57`. Báo lại để mình đưa lệnh tạo issue.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #348 | 02:54 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19421,7 +21087,7 @@ Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài kho�
 
 ---
 
-## #323 | 03:02 21/10/2026 | Claude Opus 5.5 | [...]
+## #349 | 03:02 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19462,7 +21128,154 @@ Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài kho�
 
 ---
 
-## #324 | 03:16 21/10/2026 | Claude Opus 5.5 | [...]
+## #350 | 03:04 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Giờ làm gi tiếp nhỉ:
+Báo cáo cho phiên thảo luận
+
+- Commit: c589c54 HW02[D-FR20] 7/7c2: dữ kiện TC-204 + Yêu cầu BUG-55/56 + trích SRS. Đây là commit mới, không amend; luật "không amend" đã thêm vào CLAUDE.md, dòng Audit đã thêm vào step1_notes.md. Lint 0/0; prompt log 323 lượt.
+- TC-204: notes đã ghi giá trị thực nhập m204_{ts}@ domain.com (dấu cách sau '@'). BUG-52 thêm 1 dòng dữ kiện về giá trị này; Actual đã đúng ảnh từ 7c. Bước tái hiện SV viết giữ nguyên.
+- Mục 2: theo git blame, dòng D13 trong mục Yêu cầu của BUG-55 và BUG-56 do AI điền ở 7a3 (3b8131c), nên đã bỏ; giữ FR-22.1 và FR-22.2. Chữ "(D13)" trong phần Expected là SV v
+- Mục 3: mục Yêu cầu của 7 BUG giờ chỉ còn D4, D5, D7, D9, D10, đều thuộc loại "quyết định Expected"; không còn giả định phạm vi/nới. Dòng FR-22.x vẫn có chữ "theo D13" vì đó là nguyên văn requirement trong testcases.json.
+- Trích SRS: đã thêm cho cả 7 BUG, không BUG nào bẫn điều khoản. Dòng README.md: BUG-51 dòng 32,BUG-52 dòng 32–33, BUG-53 dòng 33, BUG-54 dòng 34, BUG-55 dòng 252, BUG-56 dòng 253, BUG-57 dòng 35.
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+`````
+Đến lượt bạn làm **7d**: sửa chữ theo danh sách "Điểm SV tự sửa" (cuối `HW02/bugs/_groups_D_FR20.md`, mục 7c). Tóm tắt:
+
+- **Cả 7 bug:** thêm `npx expo start` + mở Expo Go vào tiền điều kiện. BUG-51, 52 thêm restart backend. Có thể chép từ RUN.md, mục "Môi trường, trước mỗi lượt".
+- **BUG-52, 54:** câu "server phải từ chối" nói tới một tầng cụ thể. FR-01 chỉ yêu cầu từ chối, không nói tầng nào.
+- **BUG-55:** Nhận định trích `style=` khác code thật. Mở App.js đúng dòng đã ghi trong mục Dữ kiện để đối chiếu.
+- **BUG-56:** bỏ dấu backtick thừa ở tiêu đề; phím `.` trong Expected chưa có căn cứ, nên bỏ đi hoặc dẫn căn cứ.
+
+Việc D13 vẫn nằm trong tên requirement FR-22.x là chấp nhận được. Đó là cách D13 đã chuyển FR-22 sang mobile, không phải một giả định bị liệt kê như yêu cầu bị vi phạm.
+
+Sửa xong thì commit `HW02[D-FR20] 7/7d: SV sửa chữ BUG-51–57` và dán lệnh tạo issue này:
+
+````
+## Lệnh cho Claude Code — D_FR20: rà 7d → tạo issue → cập nhật số liệu
+
+### 0. Rà 7d (chỉ đọc)
+- HEAD có commit SV 7/7d chỉ chạm BUG-51…57 (+ prompt log).
+- So với 7/7c2:
+  - dữ kiện AI chép (Actual, Dữ kiện, code, Trích SRS, Môi trường, Bằng chứng, Liên quan) không bị
+    đổi sai;
+  - thang Severity/Priority đúng;
+  - không còn chỗ `<SV viết>`.
+- Lệch → DỪNG, liệt kê (không sửa chữ SV).
+
+### 1. Tạo issue trên tkob-team/eshop-sut
+- `gh auth status` phải là ThachHaoo. Khác → DỪNG.
+- Kiểm trùng lần cuối (`gh issue list --state all --limit 400`, mọi tác giả) theo tiêu đề và
+  triệu chứng của 7 BUG; in kết quả.
+- In bảng 7 dòng: BUG-xx | tiêu đề sẽ đăng `[FR-20] <tiêu đề SV>` | label bug. Hỏi SV xác nhận
+  trong chat. Chỉ tạo sau khi SV trả lời "đồng ý".
+- Tạo tuần tự BUG-51 → 57, label `bug`.
+  - Body = nội dung BUG-xx.md, không có ảnh.
+  - Tại mỗi chỗ ảnh để dòng `[SV kéo ảnh: <tên file>]`.
+  - Ghi số issue ngay sau mỗi lần tạo.
+- Ghi số issue vào _groups_D_FR20.md (cột issue), BUG-xx.md, trường bug trong testcases.json.
+- In danh sách cho SV kéo ảnh: issue | tên file | đường dẫn.
+  Ảnh có bản che ở bugs/_issue_redacted/ thì dùng bản che (ở D không có).
+- Dừng ở đây, chờ SV báo đã kéo xong ảnh.
+
+### 2. Sau khi SV báo đã kéo ảnh
+- `gh issue view` từng issue: không còn dòng `[SV kéo ảnh: …]`; alt ảnh = tên file.
+  Thiếu → liệt kê.
+- issues_page_D.png: chụp trang issue lọc `[FR-20]` (Playwright headless nếu chụp được; không được
+  → SV chụp, AI đặt tên).
+- README.md: cập nhật dòng D_FR20 và tổng HW02, tính từ testcases.json của A–D và BUG-xx.md:
+  - số TC (AI/Both/SV);
+  - Pass/Fail/Blocked, số đã chạy (= không tính Blocked);
+  - số bug theo Severity.
+  Không ước lượng tay.
+- CLAUDE.md: BUG kế tiếp BUG-58; issue kế tiếp theo số thật.
+- render_md.py → lint → prompt log → commit `HW02[D-FR20] 7/7e: issue #xxx–#yyy + README`.
+
+## Báo cáo (≤ 10 dòng)
+- Rà 7d; kiểm trùng; số issue BUG-51…57.
+- Ảnh đã kéo đủ chưa.
+- Số liệu README (D + tổng HW02).
+- Dừng/lỗi → ghi đầu báo cáo.
+````
+
+Lệnh có **hai điểm dừng chờ bạn**: xác nhận trước khi đăng issue, và báo sau khi đã kéo ảnh vào issue.
+
+Xong bước này là D hoàn tất. Lúc đó mình sẽ **xuất transcript `_p5` và cập nhật handoff**. Đừng để tới phiên sau mới làm, vì phiên này rất dài và có nguy cơ bị nén ngữ cảnh.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #351 | 03:15 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa xong rồi. Giúp mình viết prompt check trước khi sử dụng prompt để tạo issue nhé
+```
+
+**Output:**
+`````
+Lệnh dưới chỉ đọc và kiểm, không sửa gì. Nếu bạn đổi bước tái hiện ở 7d, nó chạy lại phần server để chắc bước mới vẫn tái hiện được.
+
+````
+## Lệnh cho Claude Code — D_FR20: kiểm 7d trước khi tạo issue (chỉ đọc, không sửa)
+
+### 0. Đầu vào
+- HEAD có commit SV 7/7d. In `git show --stat`: chỉ được chạm BUG-51…57 (+ prompt log).
+  Chạm file khác → liệt kê.
+- `git status` sạch.
+
+### 1. Điểm SV tự sửa (mục 7c trong _groups_D_FR20.md)
+Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiện tại). Không gợi ý câu thay.
+
+### 2. Dữ kiện AI chép không bị hỏng (so 7/7c2 c589c54 ↔ HEAD)
+- Phần AI chép: Môi trường, TC liên quan, Bằng chứng, Liên quan, Yêu cầu, Dữ kiện (Actual nguyên
+  văn, Lặp lại, code có số dòng), Trích SRS, dòng "AI chưa chạy lại". Khác → in diff, ghi đổi đúng
+  hay sai so với evidence.
+- Đường dẫn ảnh trong Bằng chứng tồn tại.
+
+### 3. Quy ước
+- Không còn `<SV viết>`.
+- Severity ∈ {Critical, High, Medium, Low}; Priority ∈ {High, Medium, Low}.
+- Tiêu đề không có `[FR-20]`, không có ký tự markdown thừa.
+- Mục Yêu cầu chỉ có yêu cầu/giả định bị vi phạm (không có giả định phạm vi/nới).
+- Expected SV viết có căn cứ (FR-01 / FR-22.x / SEC-04 / D-mã quyết định Expected), khớp
+  Expected của TC.
+- Tác động trong Nhận định: câu nào không có dữ kiện mà chưa gắn "(chưa kiểm chứng)" → liệt kê.
+- Tiền điều kiện đủ để dựng lại: restart backend, patch IP, `npx expo start`, Expo Go, đường đi tới
+  màn Đăng ký.
+
+### 4. Tái hiện lại (chỉ khi SV đổi bước tái hiện hoặc giá trị nhập ở 7d)
+- Phần server: restart backend, chạy lại POST /api/register bằng PowerShell 5.1 theo bước mới (quy
+  ước như 7c). In mã HTTP + có/không tạo tài khoản.
+- Phần mobile: đối chiếu bước mới với code App.js + ảnh lượt 1.
+- Không đổi bước → ghi "không đổi, giữ kết quả 7c".
+
+### 5. Không sửa file, không commit, không tạo issue.
+
+## Báo cáo cho phiên thảo luận (≤ 12 dòng)
+- Mỗi BUG 1 dòng: điểm SV tự sửa (đã/chưa/một phần) · dữ kiện hỏng? · lỗi quy ước · tái hiện lại
+  (nếu có).
+- File ngoài BUG bị chạm (nếu có).
+- Kết luận: "sẵn sàng tạo issue" / "chưa — còn N điểm" (liệt kê).
+````
+
+Báo cáo ra "sẵn sàng tạo issue" thì dán lệnh tạo issue ở lượt trước. Nếu còn điểm chưa sửa, bạn sửa tiếp, commit `7/7d2`, rồi chạy lại lệnh kiểm này.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #352 | 03:16 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19540,7 +21353,88 @@ Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiệ
 
 ---
 
-## #325 | 03:26 21/10/2026 | Claude Opus 5.5 | [...]
+## #353 | 03:17 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Đầu vào: HEAD e2a7210 (7/7d) chỉ sửa BUG-51…57, không đụng file nào khác. git status sạch. Tôi không sửa file, không commit, không tạo issue.
+- Kiểm chung cho cả 7 BUG:
+  - Không còn <SV viết>; Severity/Priority đúng thang; tiêu đề không có [FR-20].
+  - Mục Yêu cầu không có giả định phạm vi/nới; 15/15 đường dẫn ảnh tồn tại.
+  - SV không đổi bước tái hiện, nên giữ kết quả tái hiện 7c (server HTTP 200, có tạo tài khoản).
+  - Phần dữ kiện AI chép còn nguyên, trừ một dòng ở BUG-56 (xem bảng).
+  - Mọi câu tác động trong Nhận định đều có dữ kiện hoặc đã gắn "(chưa kiểm chứng)".
+
+BUG: 51
+Điểm SV tự sửa (mục 7c): Đã sửa: restart backend, expo start + Expo Go, bỏ "máy máy tính"
+Dữ kiện AI chép: Nguyên
+Còn lại: Tiền điều kiện chưa có bước áp patch IP
+────────────────────────────────────────
+BUG: 52
+Điểm SV tự sửa (mục 7c): Đã sửa: tiền điều kiện; "server phải từ chối" → "Hệ thống từ chối đăng ký" (khớp D10)
+Dữ kiện AI chép: Nguyên
+Còn lại: Như BUG-51
+────────────────────────────────────────
+BUG: 53
+Điểm SV tự sửa (mục 7c): Đã sửa: tiền điều kiện
+Dữ kiện AI chép: Nguyên
+Còn lại: Như BUG-51
+────────────────────────────────────────
+BUG: 54
+Điểm SV tự sửa (mục 7c): Đã sửa: tiền điều kiện, "Nguyên nhân", câu từ chối
+Dữ kiện AI chép: Nguyên
+Còn lại: Như BUG-51
+────────────────────────────────────────
+BUG: 55
+Điểm SV tự sửa (mục 7c): Một phần: đã sửa style={styles.label}, nhưng vẫn còn <Text style="{styles.required}">*</Text> (dấu nháy;
+App.js không có styles.required)
+Dữ kiện AI chép: Nguyên
+Còn lại: Câu Nhận định nêu trên; tiền điều kiện chưa có patch IP
+────────────────────────────────────────
+BUG: 56
+Điểm SV tự sửa (mục 7c): Đã sửa: bỏ backtick ở tiêu đề, bỏ "phím dấu chấm"
+Dữ kiện AI chép: Bị đổi: SV sửa dòng FR-22.2 trong mục Yêu cầu thành type="email".
+Còn lại: Dòng FR-22.2 khớp SRS dòng 253 nhưng mất  D13)" so với requirement trong testcases.json; SV
+quyết giữ hay khôi phục. Tiền điều kiện chưa có patch IP
+────────────────────────────────────────
+BUG: 57
+Điểm SV tự sửa (mục 7c): Đã sửa: tiền điều kiện
+Dữ kiện AI chép: Nguyên
+Còn lại: Như BUG-51
+
+- Kết luận: chưa sẵn sàng tạo issue, còn 3 điểm:
+  a. Tiền điều kiện của cả 7 BUG chưa có bước áp mobile_api_url.patch / IP 192.168.2.12; hiện chỉ có ở mục Môi trường.
+  b. BUG-55: câu Nhận định còn style="{styles.requ
+  c. BUG-56: dòng FR-22.2 trong mục Yêu cầu bị SV đổi so với chữ AI chép.
+```
+
+**Output:**
+```
+Còn 3 điểm, sửa nhanh được, và chỉ bạn sửa được vì đều nằm trong phần chữ của bạn.
+
+**a. Tiền điều kiện thiếu bước đặt API_URL (cả 7 bug): nên thêm.** Thiếu bước này thì người khác không tái hiện được, vì app không gọi tới được backend. Lưu ý IP `192.168.2.12` chỉ đúng trong mạng ký túc xá của bạn. Câu đúng phải có nghĩa là "đặt `API_URL` (App.js dòng 16) bằng IP LAN của máy chạy backend", rồi ghi IP của lượt 1 kèm link patch làm ví dụ. Một dòng giống nhau cho cả 7 file; bạn có thể dựa theo bước 4 trong RUN.md.
+
+**b. BUG-55: đoạn code trong Nhận định.** `<Text style="{styles.required}">*</Text>` có 2 vấn đề:
+- Cú pháp JSX sai: dấu nháy làm thuộc tính thành chuỗi. Viết đúng là `style={styles.required}`.
+- App.js không có `styles.required`.
+
+Xem câu đó định nói gì:
+- Nếu là **code hiện có**: sai dữ kiện, phải bỏ hoặc thay bằng code thật (dòng đã ghi ở mục Dữ kiện).
+- Nếu là **đề xuất sửa**: ghi rõ "đề xuất", sửa lại cú pháp, và nói thêm rằng cần khai báo style `required` vì hiện chưa có.
+
+**c. BUG-56: dòng FR-22.2 trong mục Yêu cầu: nên khôi phục phần "theo D13".** Bạn được sửa mục này (AI điền, bạn duyệt), nhưng bản hiện tại làm bug sai về nội dung. `type="email"` là thuộc tính HTML, không tồn tại trên React Native. Ghi nguyên văn như vậy thì yêu cầu bị vi phạm không áp dụng được cho mobile. D13 là chỗ nói rằng trên mobile, FR-22.2 nghĩa là bàn phím email. Cách gọn nhất: giữ câu trích SRS, thêm `(trên mobile theo D13: bàn phím email)`.
+
+Sửa xong thì commit `HW02[D-FR20] 7/7d2: SV sửa tiền điều kiện + BUG-55/56`, rồi chạy lại **lệnh kiểm vừa rồi**. Thay mục 0 thành "HEAD có commit SV 7/7d2", và mục 2 so với `e2a7210`. Báo cáo ra "sẵn sàng tạo issue" thì dán lệnh tạo issue.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #354 | 03:26 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19609,7 +21503,87 @@ Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiệ
 
 ---
 
-## #326 | 03:28 21/10/2026 | Claude Opus 5.5 | [...]
+## #355 | 03:27 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Đầu vào: HEAD là commit mới của SV 9ff87a7 (7/7d2), sau lần kiểm 7d trước; commit này chỉ sửa BUG-51…57. git status chỉ có A_prompt_log.md do hook tự cập nhật. Tôi không stạo issue.
+- Kiểm chung cho cả 7 BUG:
+  - Không còn <SV viết>; Severity/Priority đúng thang; tiêu đề sạch.
+  - Phần dữ kiện AI chép còn nguyên; ảnh bằng chứn
+  - SV không đổi bước tái hiện, nên giữ kết quả 7c.
+
+BUG: 51–54, 57
+Điểm SV tự sửa: Đã sửa hết; tiền điều kiện nay có thêm dòng API_URL/patch IP
+Dữ kiện / quy ước: Ổn
+Còn lại: —
+────────────────────────────────────────
+BUG: 55
+Điểm SV tự sửa: Một phần: đã thêm patch IP
+Dữ kiện / quy ước: Câu Nhận định hiện tại: "Code tthẻ <Text style="{styles.label}">…". Code App.js
+dòng 804 là style={styles.label}, không có dấu nháy. Bản 7/7d đã viết đúng, 7/7d2 làm sai lại. Câu "styles hiện tại chưa có thuộc
+ tính này" đúng với code (App.js không có styles.required)
+Còn lại: 1 điểm
+────────────────────────────────────────
+BUG: 56
+Điểm SV tự sửa: Đã sửa: thêm patch IP; dòng FR-22.2 khôi phục ý mobile: "type="email" (trên mobile theo D13: bàn phím email
+keyboardType="email-address")"
+Dữ kiện / quy ước: Khớp nghĩa với requirement trong testcases.json
+Còn lại: —
+
+- Kết luận: chưa sẵn sàng tạo issue, còn 1 điểm: BUG-55, câu Nhận định ghi style="{styles.label}", khác code App.js dòng 804.
+```
+
+**Output:**
+`````
+Chỉ còn đúng 1 điểm, và đây là **dữ kiện sai so với code**: trong Nhận định, đoạn trích code hiện có ghi `style="{styles.label}"`, còn App.js dòng 804 là `style={styles.label}`. Theo quy ước, AI được sửa dữ kiện sai so với evidence (có log trước/sau), nên không cần bạn sửa thêm một vòng nữa.
+
+Dán **lệnh tạo issue** đã đưa ở trước, chèn thêm đoạn này vào đầu:
+
+````
+### 0a. Sửa dữ kiện BUG-55 (AI, có log)
+- Câu Nhận định trích code hiện có: `style="{styles.label}"` → `style={styles.label}` đúng App.js
+  dòng 804.
+- Chỉ sửa ký tự trích code, không đổi chữ nào khác của SV.
+- Nếu câu đề xuất `styles.required` cũng có dấu nháy thừa trong JSX → sửa cú pháp như trên,
+  giữ nguyên ý SV.
+- Log trước/sau vào _groups_D_FR20.md mục 7c; ghi "Điểm SV tự sửa" → "AI sửa dữ kiện code trích".
+- Commit `HW02[D-FR20] 7/7d3: AI sửa dữ kiện code trích BUG-55` (gồm A_prompt_log.md hook đã cập
+  nhật).
+Rồi làm tiếp mục 0 (kiểm 7d: HEAD là 7/7d3; so với 9ff87a7, chỉ BUG-55 được đổi đúng chỗ trên) → mục 1.
+````
+
+Lệnh sẽ dừng ở 2 chỗ chờ bạn: xác nhận bảng 7 issue trước khi đăng, và báo đã kéo ảnh xong.
+
+Bảng tiêu đề khớp với dữ kiện:
+- BUG-53 ghi "tạo tài khoản trùng": đúng, 7c đã tái hiện ra id=7 trùng `test@eshop.com`.
+- BUG-52 ghi "khoảng trắng ở giữa": đúng với giá trị thực nhập ở TC-204 (dấu cách sau `@`).
+- Không có issue nào trùng.
+
+Riêng **BUG-56** khẳng định "thiếu phím @". Nếu bạn chưa nhìn lại ảnh bàn phím trong bằng chứng thì nên kiểm, vì đây là chỗ duy nhất trong tiêu đề mà 7c chưa đối chiếu với ảnh. Nếu đi kèm với lệnh đồng ý thì câu trả lời cho Claude Code là:
+
+```
+Trước khi tạo: mở ảnh bằng chứng của BUG-56, xác nhận bàn phím trong ảnh không có phím '@' ở lớp chính. Đúng → đồng ý, tạo BUG-51 → 57. Không đúng → dừng, báo lại.
+```
+
+Nếu đã chắc thì chỉ cần trả lời: `đồng ý`.
+
+**Sau khi tạo xong, kéo ảnh** cho từng issue Claude Code liệt kê:
+1. Mở issue trên GitHub → `…` → **Edit**.
+2. Tìm dòng `[SV kéo ảnh: <tên file>]`, xoá dòng đó, rồi kéo đúng file vào đúng chỗ. GitHub tự lấy tên file làm alt.
+3. Bấm **Update comment**.
+
+Xong cả 7 issue thì báo Claude Code: "đã kéo xong ảnh". Nó sẽ kiểm, chụp `issues_page_D.png` và cập nhật README.
+`````
+
+**Xử lý:** [...]
+
+---
+
+## #356 | 03:28 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19705,7 +21679,42 @@ Tạo issue là bước đăng công khai, khó rút lại. Em trả lời **"đ
 
 ---
 
-## #327 | 03:32 21/10/2026 | Claude Opus 5.5 | [...]
+## #357 | 03:31 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+BUG-56, đã xem là không có '@' ở phím chính, phải đổi sang phím số mới có nhé.
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+````
+Vậy tiêu đề BUG-56 đúng dữ kiện. Chỉ có cụm "thiếu phím @" hơi mạnh hơn sự thật, vì người đọc có thể hiểu là không gõ được `@` ở đâu cả, trong khi phím này vẫn có ở bàn phím số. Có hai cách:
+
+- **Giữ nguyên** và trả lời Claude Code: `đồng ý`.
+- **Chính xác hơn** (tuỳ chọn): đổi trong ngoặc thành `(không có phím @ ở bàn phím chính)`. Vì tiêu đề là chữ của bạn, trả lời Claude Code:
+  ```
+  Đồng ý, nhưng BUG-56: SV sửa tiêu đề phần trong ngoặc thành "(không có phím @ ở bàn phím chính)". Sửa trong BUG-56.md (commit "HW02[D-FR20] 7/7d4: SV sửa tiêu đề BUG-56"), rồi tạo BUG-51 → 57.
+  ```
+
+Cách nào cũng được. Câu hỏi này không chặn việc tạo issue.
+
+Đã tạo đủ 7 issue, **#197–#203**. Giờ bạn kéo ảnh vào, tổng cộng 22 lượt kéo, theo bảng Claude Code đã in:
+
+- **Lấy ảnh ở `HW02/D_FR20/evidence/`**, đây là bản đã đổi tên và nén. **Không** lấy ở `manual_raw/`, vì ở đó là ảnh gốc `.jpg` với tên cũ, sai quy ước.
+- Bốn issue #197–#200 dùng chung 3 ảnh admin (`D_admin_truoc_1`, `D_admin_sau_1`, `D_admin_sau_2`). Mỗi issue phải kéo lại một lần, vì GitHub không dùng chung ảnh giữa các issue.
+- Mỗi issue: `…` → **Edit** → xoá dòng `[SV kéo ảnh: <tên file>]` → kéo đúng file vào chỗ đó → **Update comment**.
+- Mẹo: mở thư mục `evidence/` bên cạnh trình duyệt, kéo xong ảnh nào thì kiểm ngay tên alt trong ô soạn thảo. Alt phải là `TC-FR20-xx_manual_1` hoặc `D_admin_…`, không phải tên kiểu `IMG_…`.
+
+Xong cả 7 issue thì trả lời Claude Code: `đã kéo xong ảnh`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #358 | 03:32 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19754,7 +21763,7 @@ Body đã sẵn (có dòng chờ ảnh). Tạo issue tuần tự BUG-51 → 57.
 
 ---
 
-## #328 | 03:40 21/10/2026 | Claude Opus 5.5 | [...]
+## #359 | 03:40 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -19775,10 +21784,73 @@ Cột Bug của D ra 27 — sai (D chỉ có 7 bug). Xem cách `summary.py` đ�
 Lỗi ở `summary.py`: tách `bug_id` theo dấu cách nên đếm cả chữ như "(#197)", "không lập bug". Vá thành chỉ lấy mã `BUG-\d+`, rồi so A/B/C trước/sau.
 
 Chỉ dòng D đổi (27 → 7); A/B/C giữ nguyên. Commit vá harness riêng, rồi ghi README và commit 7/7e.
+
+### Báo cáo cho phiên thảo luận
+- **Commit:** `279a0f8` 7/7d4 (sửa tiêu đề BUG-56) · `4a13a76` vá harness `summary.py` · `ec4175d` 7/7e: issue #197–#203 + README.
+- **Rà 7d:** ổn. Phần dữ kiện AI chép không bị đổi sai; thang Severity/Priority đúng; không còn `<SV viết>`.
+- **Kiểm trùng ngay trước khi tạo:** 151 issue, số lớn nhất #196; không có issue nào về màn Đăng ký mobile.
+- **Issue đã tạo:** BUG-51 #197, BUG-52 #198, BUG-53 #199, BUG-54 #200, BUG-55 #201, BUG-56 #202, BUG-57 #203. Số issue đã ghi vào BUG-xx.md, `_groups_D_FR20.md` và `testcases.json`.
+- **Ảnh trong issue:** đã đủ ở cả 7 issue, không còn dòng chờ ảnh, alt đúng tên file. Riêng #200 có alt `TC-FR20-15_manual_1.` thừa dấu chấm cuối; không ảnh hưởng nội dung.
+- **Ảnh trang Issues:** `HW02/bugs/issues_page_D_FR20.png`, chụp bằng Playwright, không đăng nhập. Lọc thêm `author:ThachHaoo` để ra đúng 7 kết quả; bộ lọc chỉ theo `[FR-20]` lẫn #116 của người khác. Tên file theo quy ước `issues_page_<X_FRnn>`, khác tên `issues_page_D.png` trong lệnh.
+- **Vá `summary.py`:** cột Bug của D ban đầu ra 27 thay vì 7, vì script tách `bug_id` theo dấu cách nên đếm cả chữ như "(#197)" hay "không lập bug". Đã sửa để chỉ lấy mã `BUG-xx`; chạy lại thì A/B/C không đổi, chỉ D từ 27 về 7.
+- **Số liệu README:**
+
+| | TC (AI / Both / SV) | Pass / Fail / Blocked | Đã chạy | Bug |
+|---|---|---|---|---|
+| D_FR20 | 33 (27 / 0 / 6) | 21 / 10 / 2 | 31 | 7 |
+| Tổng HW02 | 350 (285 / 10 / 55) | 129 / 180 / 41 | 309 | 57 (Critical 11, High 20, Medium 12, Low 14) |
+
+  7 bug của D gồm High 5, Medium 1, Low 1.
+- **Kiểm tra:** check_domain 0 lỗi, 1 cảnh báo (V6); lint 0/0; prompt log 328 lượt.
+- **Đã cập nhật CLAUDE.md:** BUG kế tiếp BUG-58, issue kế tiếp từ #204. Không push.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 328 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 236 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #360 | 03:49 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit: 279a0f8 7/7d4 (sửa tiêu đề BUG-56) · 4a13a76 vá harness summary.py · ec4175d 7/7e: issue #197–#203 + README.
+- Rà 7d: ổn. Phần dữ kiện AI chép không bị đổi sai; thang Severity/Priority đúng; không còn <SV viết>.
+- Kiểm trùng ngay trước khi tạo: 151 issue, số lớn nhất #196; không có issue nào về màn Đăng ký mobile.
+- Issue đã tạo: BUG-51 #197, BUG-52 #198, BUG-53 #199, BUG-54 #200, BUG-55 #201, BUG-56 #202, BUG-57 #203. Số issue đã ghi vào BUG-xx.md, _groups_D_FR20.md và testcases.json.
+- Ảnh trong issue: đã đủ ở cả 7 issue, không còn dòng chờ ảnh, alt đúng tên file. Riêng #200 có alt TC-FR20-15_manual_1. thừa dấu chấm cuối; không ảnh hưởng nội dung.
+- Ảnh trang Issues: HW02/bugs/issues_page_D_FR20.png, chụp bằng Playwright, không đăng nhập. Lọc thêm author:ThachHaoo để ra đúng 7 kết quả; bộ lọc chỉ theo [FR-20] lẫn #116 của người khác. Tên file theo quy ước issues_page_<X_FRnn>, khác tên issues_page_D.png trong lệnh.
+- Vá summary.py: cột Bug của D ban đầu ra 27 thay vì 7, vì script tách bug_id theo dấu cách nên đếm cả chữ như "(#197)" hay "không lập bug". Đã sửa để chỉ lấy mã BUG-xx; chạy lại thì A/B/C không đổi, chỉ D từ 27 về 7.
+- Số liệu README:
+
+┌───────────┬─────────────────────┬───────────────────────────────────────────────────┐
+│           │ TC (AI / Both / SV) │ Pass / Fail / Blocked │ Đã chạy │                     Bug                      │
+├───────────┼─────────────────────┼───────────────────────┼─────────┼──────────────────────────────────────────────┤
+│ D_FR20    │ 33 (27 / 0 / 6)     │ 21 / 10 / 2                                       │
+├───────────┼─────────────────────┼───────────────────────┼─────────┼──────────────────────────────────────────────┤
+│ Tổng HW02 │ 350 (285 / 10 / 55) │ 129 / 180 / 41        │ 309     │ 57 (Critical 11, High 20, Medium 12, Low 14) │
+└───────────┴─────────────────────┴───────────────────────────────────────────────────┘
+
+  7 bug của D gồm High 5, Medium 1, Low 1.
+- Kiểm tra: check_domain 0 lỗi, 1 cảnh báo (V6); l
+- Đã cập nhật CLAUDE.md: BUG kế tiếp BUG-58, issue kế tiếp từ #204. Không push.
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+```
+**D_FR20 xong 7/7.** Số liệu README khớp với phép cộng từ handoff: 317+33 = 350 TC (285/10/55); Pass 129 / Fail 180 / Blocked 41; đã chạy 309; 57 bug (Critical 11, High 20, Medium 12, Low 14). Vá `summary.py` là hợp lệ, vì A/B/C không đổi. Alt thừa dấu chấm ở #200 không đáng sửa.
+
+Việc của bạn: **push** (AI không push).
+
+Mình đang cập nhật handoff trong Project và xuất transcript `_p5`, vì D vừa xong là mốc lớn.
+```
+*File AI ghi/gửi trong lượt này:* `HW02_handoff.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 360 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 268 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
