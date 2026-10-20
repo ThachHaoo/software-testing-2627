@@ -9053,12 +9053,83 @@ Issue #161 đã đổi tiền tố thành [FR-07] và có comment đính chính.
 ```
 
 **Output:**
+````
+Đã hoàn tất bước 7 của B_FR07, commit `352a34d`. Còn một chỗ cần anh/chị xử lý: issue #180 (BUG-34) chưa có ảnh.
+
 ```
-(không có output dạng văn bản)
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) chú thích B6 là quy ước ban đầu; (2) hoàn tất bước 7 – đổi tên ảnh trang Issues, kiểm ảnh #161–#180, cập nhật summary README, commit
+- File đã tạo/sửa:
+  · HW02/B_FR07/testcases.json (B6), testcases.md
+  · git mv HW02/bugs/issues_page.png → issues_page_A_FR01.png; thêm issues_page_B_FR07.png (ảnh của SV)
+  · Sửa tham chiếu tên ảnh: HW02/bugs/README.md dòng 27, CLAUDE.md dòng 158 (cây thư mục)
+  · HW02/README.md (summary); BUG-15…34.md + _groups_B_FR07.md (URL issue, từ lượt trước); A_prompt_log.md
+- Kết quả kiểm tra:
+  · Ảnh trong body issue (đếm <img>/user-attachments):
+    - #161–#170, #172–#179: mỗi issue 1 ảnh
+    - #167: 2 ảnh
+    - #171: 6 ảnh
+    - #180: 0 ảnh
+  · Cả 20 tiêu đề đều mang tiền tố [FR-07]
+  · issues_page_B_FR07.png: danh sách lọc "author:@me, open", thấy #180 → #162 đủ tiêu đề và label bug; #161 nằm ở mép dưới, bị cắt một phần
+  · test: không chạy
+- Commit: 352a34d HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+- Summary README:
+  · B_FR07: 62 TC, Pass 14 / Fail 39 / Blocked 9, TC SV thêm 13, 20 bug
+  · Toàn HW02: 2 feature, 195 TC, 34 bug (Critical 6, High 9, Medium 8, Low 11)
+- Bất thường:
+  · #180 (BUG-34) chưa có ảnh trong body, ảnh tiêu biểu theo khung là TC-FR07-209_api.png
+  · Dòng #161 trong issues_page_B_FR07.png bị cắt ở mép dưới
+- Cần quyết định:
+  · Q17 – #180 thiếu ảnh: (a) SV kéo TC-FR07-209_api.png vào #180 (chỉ sửa trên GitHub, repo không cần commit thêm) (b) giữ nguyên
+  · Q18 – issues_page_B_FR07.png cắt dòng #161: (a) chụp lại cho đủ #161 (b) giữ nguyên
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #150 | 16:06 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Chuẩn bị chuyển sang C_FR15 (phiên Claude Code mới sẽ /clear sau lệnh này).
+
+1. Ghi bài học từ B_FR07 vào CLAUDE.md, mục quy ước đã chốt (ngắn, dạng gạch đầu dòng,
+   không chép dài): khẳng định một nơi; ec_target + truy vết từ ec_target; phần
+   "không đổi" ghi tương đối; SRS im lặng → không tạo Fail; giả định quyết Expected mới
+   vào truy vết; LARGE + no_upper_bound; technique + approach; A20 mở rộng (Pass hộp
+   đen, 2 case gốc); merge không ghi đè verdict, results có timestamp, evidence giữ
+   lượt mới nhất; bug: format BUG-14, Yêu cầu = chỉ yêu cầu bị vi phạm (+ Đạt / Chưa
+   đánh giá được / Không áp dụng), tác động phải có dữ kiện, tiền tố issue chỉ trên
+   GitHub = FR của feature đang kiểm, issues_page_<X_FRnn>.png, SV commit bản viết
+   trước khi AI sửa dữ kiện; checklist bước tái hiện (link navbar; PS 5.1: tài khoản
+   seed, -ContentType, UTF8 bytes, -UseBasicParsing, try/catch; tiền điều kiện có bước
+   dựng). Phần chung (không nói EShop) đưa vào SKILL.md nếu chưa có. Commit riêng
+   "HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07".
+2. Kiểm .transcripts/claude-ai_session_HW02_p3.jsonl đã có (SV xuất); chưa có → báo,
+   bỏ qua mục 3 cho file này.
+3. python tools/hooks/on_stop.py --manual; kiểm A_prompt_log.md có đủ: các lượt
+   Claude Code hôm nay và các lượt claude.ai 10:13 → hiện tại (20/10). Báo số lượt
+   mỗi nguồn và khoảng thời gian; có khoảng trống > 30 phút giữa các lượt claude.ai →
+   liệt kê (KHÔNG tự điền).
+4. Commit "HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10".
+Dừng, báo cáo theo CLAUDE.md. Sau đó SV sẽ /clear.
+```
+
+**Output:**
+```
+p3 chưa có. Ghi bài học vào CLAUDE.md, và phần chung (không nói EShop) vào SKILL.md.
+
+Giờ thêm phần chung vào SKILL.md.
+
+Phần 1 xong (`9520bd5`). Giờ trích prompt log và đếm lượt theo nguồn.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 149 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 146 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+**Tổng:** 150 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 147 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
