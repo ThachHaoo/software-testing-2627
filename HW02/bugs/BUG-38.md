@@ -22,6 +22,8 @@
 
 - Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
 
+- Đã đăng nhập trang Admin bằng tài khoản `admin@eshop.com` / `Admin123!`.
+
 - Đã truy cập vào trang Admin tại http://localhost:5174, chọn mục "Sản phẩm" và bấm nút "Sửa" tại một sản phẩm bất kỳ để mở form "Sửa sản phẩm".
 
 ## Các bước tái hiện
@@ -35,7 +37,7 @@
   + Nhập số 0: 0 (TC-FR15-79)
   + Để trống ô giá tiền: "" (TC-FR15-16)
 
-4. Bấm nút "Lưu sản phẩm" (hoặc "Cập nhật sản phẩm").
+4. Bấm nút "Lưu sản phẩm".
 
 5. Quan sát thông báo hiển thị trên màn hình, đồng thời kiểm tra lại giá tiền của sản phẩm được sửa và toàn bộ danh sách sản phẩm hiển thị trên bảng UI cũng như trong CSDL qua API GET /api/products.
 

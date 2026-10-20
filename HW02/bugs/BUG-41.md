@@ -145,7 +145,7 @@
 
 - Ở Backend (backend/server.js, dòng 167–177): Endpoint POST /api/products chỉ đơn thuần bóc tách req.body và đẩy thẳng các biến vào câu lệnh INSERT INTO products của SQLite mà không có bất cứ dòng code nào để validate kiểu dữ liệu, độ dài hay sự tồn tại của khóa ngoại category_id.
 
-- Đây là lỗi rất nghiêm trọng ở tầng API Backend. Mặc dù ở Frontend có thể có một số bước chặn cơ bản, việc Backend hoàn toàn bỏ ngỏ validation sẽ cho phép kẻ gian bypass qua UI (dùng Postman, cURL, script) để bơm dữ liệu rác, phá hoại CSDL và gây sai lệch toàn bộ hệ thống.
+- Đây là lỗi rất nghiêm trọng ở tầng API Backend. Mặc dù ở Frontend có thể có một số bước chặn cơ bản, việc Backend hoàn toàn bỏ ngỏ validation sẽ cho phép kẻ gian bypass qua UI (dùng Postman, cURL, script) để bơm dữ liệu rác, phá hoại CSDL và gây sai lệch toàn bộ hệ thống (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

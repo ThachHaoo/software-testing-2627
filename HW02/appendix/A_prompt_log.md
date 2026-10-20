@@ -15392,6 +15392,13 @@ Báo cáo (≤ 6 dòng): commit; chỗ ghi `<SV điền>` (nếu có); bug nào 
 **Output:**
 ```
 Mẫu = `d0d0e05:HW02/bugs/BUG-22.md` (khung 7/7a5 của B). Phiên bản thật: Playwright 1.48.2 / Chromium 130.0.6723.31; lượt 6 bắt đầu 18:53. Dựng lại 16 file theo mẫu.
+
+Đã định dạng lại BUG-35…50 theo khung của B và commit `1a35775`; còn 2 chỗ `<SV điền>`. `BUG-22.md` không có thay đổi chưa commit; mẫu lấy từ `d0d0e05:HW02/bugs/BUG-22.md` (B_FR07 7/7a5 "khung bug theo format BUG-14").
+
+- **`<SV điền>`:** BUG-49 (TC-90) và BUG-50 (TC-92) — tên và phiên bản trình duyệt SV dùng khi chạy tay. Em không tìm được giá trị này trong repo.
+- **Lệch so với lệnh:** với 7 bug chỉ có API (41–44, 46–48), em không ghi "Client: PowerShell 5.1 Invoke-WebRequest" như lệnh. Lượt 6 thực tế chạy bằng Playwright 1.48.2 APIRequestContext; PowerShell 5.1 chỉ dùng khi AI kiểm tái hiện ở 7/7a. Em ghi cả hai cho đúng. Nếu SV vẫn muốn chỉ ghi PowerShell thì báo em sửa.
+- **Bug có Blocked liên quan:** chỉ BUG-45 (G5) — TC-04, 80, 81, 82, 83, case gốc TC-FR15-03.
+- Ngoài ra BUG-39 (TC-200) có dòng "Lặp lại" ghi rõ lượt 3 passed, lượt 6 failed (lượt 3 là lượt thử, harness lỗi).
 ```
 *File AI ghi/gửi trong lượt này:* `c15_bugfmt.py`
 
@@ -15399,4 +15406,43 @@ Mẫu = `d0d0e05:HW02/bugs/BUG-22.md` (khung 7/7a5 của B). Phiên bản thật
 
 ---
 
-**Tổng:** 254 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 170 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #255 | 20:30 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bước 7c C_FR15 – soát dữ kiện bug SV viết (AI-01 §11):
+0. Kiểm commit `7/7b: SV viết BUG-35–50` có trong git log, đứng trước mọi sửa đổi của bước này. Không có → DỪNG.
+1. Với từng BUG-35…50: CHẠY THẬT bước tái hiện SV viết (UI bằng Playwright theo đúng bước; API bằng PowerShell 5.1),
+   restart backend trước và sau. Ghi lệnh + output vào _groups_C_FR15.md mục "Kiểm 7c".
+2. AI chỉ được: sửa DỮ KIỆN sai so với evidence/kết quả chạy (giá trị, mã HTTP, tên trường, tài khoản, cú pháp PS 5.1, bước thiếu
+   làm không tái hiện được); xoá câu sai dữ kiện; gắn "(chưa kiểm chứng)" cho khẳng định tác động không có dữ kiện; kiểm thang
+   Severity/Priority đúng giá trị cho phép. KHÔNG sửa câu chữ, tiêu đề, nhận định, severity/priority SV chọn, không gộp/tách.
+   Trường "Yêu cầu" liệt kê yêu cầu KHÔNG bị vi phạm → báo, không tự xoá.
+3. Log trước/sau từng chỗ sửa vào _groups_C_FR15.md. Commit `HW02[C-FR15] 7/7c: soát dữ kiện BUG-35–50` kèm A_prompt_log.md.
+Báo cáo (≤ 20 dòng): commit; BUG | tái hiện được? | chỗ đã sửa dữ kiện (1 dòng) | điểm cần SV tự sửa (chữ của SV).
+```
+
+**Output:**
+```
+Đã đọc xong BUG-35…46, đang đọc nốt 47–50 rồi chạy tái hiện.
+
+Đang đối chiếu Expected của SV với SRS và giả định; sau đó chạy tái hiện.
+
+Đã có script restart backend. Đang viết script tái hiện API (PS 5.1) theo đúng bước SV viết.
+
+API: cả 7 bug tái hiện được. Đang viết script Playwright cho 9 bug UI (BUG-35…40, 45, 49, 50).
+
+UI: cả 9 bug tái hiện được (bước đăng nhập là em tự thêm vì SV không ghi). Em kiểm lại riêng bất thường làm backend sập trước khi ghi nhận.
+
+Đã xác nhận bất thường mới. Giờ sửa dữ kiện trong file BUG và ghi log trước/sau.
+
+Đã sửa dữ kiện ở 11 chỗ trong các file BUG. Đang ghi mục "Kiểm 7c" (lệnh, output, log trước/sau) vào `_groups_C_FR15.md`.
+```
+*File AI ghi/gửi trong lượt này:* `restart_backend.ps1`, `api_7c.ps1`, `ui_7c.js`, `kiem7c_template.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 255 lượt; Claude Sonnet 4.6 85 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245); Claude Opus 5.5 171 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255); Claude (không rõ model) 1 lượt (#118). 2 lượt có output từ hơn một model nên được đếm ở cả hai.

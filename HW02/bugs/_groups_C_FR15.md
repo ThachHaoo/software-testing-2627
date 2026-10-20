@@ -969,3 +969,253 @@ Output (`ui_repro.js`):
 G16: ô Giá dòng 'iPhone 15 Pro Max' = "30000000 ₫"
 ```
 
+
+
+
+## Kiểm 7c — chạy thật bước tái hiện SV viết (20/10/2026, sau commit 7/7b `b06a775`)
+
+Script: `HW02/bugs/_repro_C_FR15/7c/` — `restart_backend.ps1` (dừng `node server.js`, khởi động lại, chờ đủ 5 sản phẩm seed), `api_7c.ps1` (Windows PowerShell 5.1), `ui_7c.js` (Playwright 1.48.2, Chromium). Lệnh tái hiện do AI soạn để kiểm khả năng tái hiện; không dùng làm bước tái hiện trong BUG.
+
+- Restart backend: API — trước mỗi BUG và sau BUG cuối; UI — trước mỗi thao tác (A/B/C…) và sau thao tác cuối.
+- API: payload theo bước SV; trường SV không ghi lấy giá trị hợp lệ như TC (`price` 1500000/2500000, `category_id` 2/3, `description`, `imageUrl`). SV không ghi token ở BUG-41…44, 46, 48 → không gửi `Authorization`. BUG-42 dùng sản phẩm seed id 1. BUG-47 chạy cả "token hết hạn" (SV ghi trong bước; không có TC) bằng JWT ký với `SECRET_KEY` ở `backend/server.js` dòng 9, `exp` = 1 giờ trước.
+- UI: SV không ghi bước đăng nhập; script đăng nhập `admin@eshop.com` / `Admin123!` rồi đi theo bước SV. "Sản phẩm bất kỳ" ở BUG-37/38 = dòng "iPhone 15 Pro Max" (id 1). Danh mục "bất kỳ" = Laptop.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File HW02\bugs\_repro_C_FR15\7c\api_7c.ps1
+$env:NODE_PATH = (Resolve-Path 'HW02\tests\node_modules').Path; node HW02\bugs\_repro_C_FR15\7c\ui_7c.js
+```
+
+### Kết quả
+
+| BUG | Tái hiện theo bước SV? | Ghi chú |
+|---|---|---|
+| BUG-35 | Có (thêm bước đăng nhập) | A/B/C: không thông báo, 5 → 6 |
+| BUG-36 | Có (thêm bước đăng nhập) | -1000 / 0 / rỗng: không thông báo, 5 → 6; TC-205 thực tế dán chữ số full-width (ô thành rỗng), không phải "để trống" |
+| BUG-37 | Có (thêm bước đăng nhập) | nút ở chế độ sửa chỉ có "Lưu sản phẩm"; không có nút "Cập nhật sản phẩm" |
+| BUG-38 | Có (thêm bước đăng nhập) | như BUG-37 |
+| BUG-39 | Có (thêm bước đăng nhập) | không có hộp thoại "1" |
+| BUG-40 | Có (thêm bước đăng nhập) | price lưu 100000 |
+| BUG-41 | Có | 16/16 payload → HTTP 200 "Product created" |
+| BUG-42 | Có | 14/14 payload → HTTP 200 "Product updated" |
+| BUG-43 | Có | HTTP 400, `Content-Type: text/html` |
+| BUG-44 | Có | không `-ContentType` và `text/plain` đều HTTP 500, body HTML |
+| BUG-45 | Không theo đúng ví dụ (id 8 không có sau seed); có với sản phẩm seed | tên mới đè mọi dòng; ô 'Giá' dòng M giữ giá cũ |
+| BUG-46 | Có | GET `{}`, PUT/DELETE 200 |
+| BUG-47 | Có | 4 kiểu danh tính × POST/PUT/DELETE → HTTP 200, dữ liệu đổi |
+| BUG-48 | Có | price kiểu String |
+| BUG-49 | Có (thêm bước đăng nhập) | 0 `<label>`, không có '*' |
+| BUG-50 | Có (thêm bước đăng nhập) | "30000000 ₫" |
+
+Bất thường mới (ngoài bước SV, phát sinh khi AI gọi thêm `GET /api/products/:id` ở lần chạy đầu): `POST` với `price: null` tạo bản ghi id chẵn, sau đó `GET /api/products/<id chẵn>` làm tiến trình `node server.js` dừng (`row.price.toString()` trên `null` — `backend/server.js` dòng 162). Chạy lại riêng: POST → `{"message":"Product created","id":6}`; GET /api/products/6 → "An error occurred while sending the request."; GET /api/products → "No connection could be made because the target machine actively refused it. (localhost:3000)"; tiến trình server.js còn chạy: False. Chưa có TC/bug — SV quyết. Script đã đổi sang đọc bản ghi qua `GET /api/products` (đúng bước SV) và chạy lại; output dưới đây là lần chạy lại.
+
+Output `api_7c.ps1` (chuỗi "x" lặp rút gọn thành 20 ký tự + "…"):
+
+```text
+===== BUG-41 (POST /api/products, các payload vi phạm; không gửi token)
+   [backend restart xong: 5 sản phẩm]
+name ""          (TC-23/84) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":6}; bản ghi 5 → 6; bản ghi id 6 trong GET /api/products: {"id":6,"name":"","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+name 256×x       (TC-100) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":7}; bản ghi 6 → 7; bản ghi id 7 trong GET /api/products: {"id":7,"name":"xxxxxxxxxxxxxxxxxxxx…","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+name 300×x       (TC-24) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":8}; bản ghi 7 → 8; bản ghi id 8 trong GET /api/products: {"id":8,"name":"xxxxxxxxxxxxxxxxxxxx…","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+name "   "       (TC-25) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":9}; bản ghi 8 → 9; bản ghi id 9 trong GET /api/products: {"id":9,"name":"   ","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+name null        (TC-26) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":10}; bản ghi 9 → 10; bản ghi id 10 trong GET /api/products: {"id":10,"name":null,"price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+name 123         (TC-27) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":11}; bản ghi 10 → 11; bản ghi id 11 trong GET /api/products: {"id":11,"name":"123","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price -1000      (TC-28) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":12}; bản ghi 11 → 12; bản ghi id 12 trong GET /api/products: {"id":12,"name":"SP 7c 28","price":-1000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price -999999999999 (TC-208) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":13}; bản ghi 12 → 13; bản ghi id 13 trong GET /api/products: {"id":13,"name":"SP 7c 208","price":-999999999999,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price 0          (TC-101) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":14}; bản ghi 13 → 14; bản ghi id 14 trong GET /api/products: {"id":14,"name":"SP 7c 101","price":0,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price 1e-324     (TC-214) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":15}; bản ghi 14 → 15; bản ghi id 15 trong GET /api/products: {"id":15,"name":"SP 7c 214","price":0,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price null       (TC-29) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":16}; bản ghi 15 → 16; bản ghi id 16 trong GET /api/products: {"id":16,"name":"SP 7c 29","price":null,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price "abc"      (TC-30) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":17}; bản ghi 16 → 17; bản ghi id 17 trong GET /api/products: {"id":17,"name":"SP 7c 30","price":"abc","description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+price "100000"   (TC-31) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":18}; bản ghi 17 → 18; bản ghi id 18 trong GET /api/products: {"id":18,"name":"SP 7c 31","price":100000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+category 999     (TC-32) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":19}; bản ghi 18 → 19; bản ghi id 19 trong GET /api/products: {"id":19,"name":"SP 7c 32","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":999}
+category null    (TC-33) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":20}; bản ghi 19 → 20; bản ghi id 20 trong GET /api/products: {"id":20,"name":"SP 7c 33","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":null}
+category "abc"   (TC-34) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":21}; bản ghi 20 → 21; bản ghi id 21 trong GET /api/products: {"id":21,"name":"SP 7c 34","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":"abc"}
+===== BUG-42 (PUT /api/products/1 — sản phẩm seed đang tồn tại; không gửi token)
+   [backend restart xong: 5 sản phẩm]
+name ""          (TC-35/106) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"description":"Điện thoại cao cấp của Apple","imageUrl":"https://placehold.co/300x300/png?text=iPhone+15","category_id":1}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+name 256×x       (TC-112) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"xxxxxxxxxxxxxxxxxxxx…","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+name 300×x       (TC-36) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"xxxxxxxxxxxxxxxxxxxx…","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"xxxxxxxxxxxxxxxxxxxx…","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+name "   "       (TC-37) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"xxxxxxxxxxxxxxxxxxxx…","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"   ","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+name null        (TC-38) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"   ","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":null,"price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+name 123         (TC-39) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":null,"price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"123","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+price -1000      (TC-40) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"123","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 40","price":-1000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+price 0          (TC-113) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 40","price":-1000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 113","price":0,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+price null       (TC-41) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 113","price":0,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 41","price":null,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+price "abc"      (TC-42) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 41","price":null,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 42","price":"abc","description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+price "100000"   (TC-43) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 42","price":"abc","description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 43","price":100000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+category 999     (TC-44) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 43","price":100000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 44","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":999}
+category null    (TC-45) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 44","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":999}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 45","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":null}
+category "abc"   (TC-46) -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 45","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":null}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 46","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":"abc"}
+===== BUG-43 (POST, price: Infinity thô, Content-Type application/json)
+   [backend restart xong: 5 sản phẩm]
+price Infinity   (TC-209) -> HTTP 400 [text/html; charset=utf-8] <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>SyntaxError: Unexpected token &#39;I&#39;, ...&quot; &quot;price&quot;: Infinity, &quot;... is not valid JSON<br> &nbsp;…; bản ghi 5 → 5; bản ghi id  trong GET /api/products: —
+===== BUG-44 (POST không có Content-Type: application/json)
+   [backend restart xong: 5 sản phẩm]
+a) không truyền -ContentType (PS 5.1 tự gửi application/x-www-form-urlencoded) -> HTTP 500 [text/html; charset=utf-8] <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>TypeError: Cannot destructure property &#39;name&#39; of &#39;req.body&#39; as it is undefined.<br> &nbsp; &nbsp;at D:\H…; bản ghi 5 → 5
+b) Content-Type: text/plain (như TC-211) -> HTTP 500 [text/html; charset=utf-8] <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>TypeError: Cannot destructure property &#39;name&#39; of &#39;req.body&#39; as it is undefined.<br> &nbsp; &nbsp;at D:\H…; bản ghi 5 → 5
+===== BUG-46 (id 999 không tồn tại)
+   [backend restart xong: 5 sản phẩm]
+GET    /api/products/999 -> HTTP 200 [application/json; charset=utf-8] {}; bản ghi 5 → 5
+PUT    /api/products/999 -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 5 → 5
+DELETE /api/products/999 -> HTTP 200 [application/json; charset=utf-8] {"message":"Product deleted"}; bản ghi 5 → 5
+   GET /api/products (danh sách sau 3 request): 1,2,3,4,5
+===== BUG-47 (không token / token sai / token hết hạn / token user)
+   [backend restart xong: 5 sản phẩm]
+   token user: role trong phản hồi login = user
+POST   [không token] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":6}; bản ghi 5 → 6; bản ghi id 6 trong GET /api/products: {"id":6,"name":"SP 7c 47 không token","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+PUT    /1 [không token] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 6 → 6
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"description":"Điện thoại cao cấp của Apple","imageUrl":"https://placehold.co/300x300/png?text=iPhone+15","category_id":1}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 không token","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+DELETE /2 [không token] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product deleted"}; bản ghi 6 → 5; GET /api/products/2 -> HTTP 200 [application/json; charset=utf-8] {}
+POST   [token sai abc.def.ghi] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":7}; bản ghi 5 → 6; bản ghi id 7 trong GET /api/products: {"id":7,"name":"SP 7c 47 token sai abc.def.ghi","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+PUT    /1 [token sai abc.def.ghi] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 6 → 6
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 không token","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 token sai abc.def.ghi","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+DELETE /3 [token sai abc.def.ghi] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product deleted"}; bản ghi 6 → 5; GET /api/products/3 -> HTTP 200 [application/json; charset=utf-8] {}
+POST   [token hết hạn (exp = 1 giờ trước)] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":8}; bản ghi 5 → 6; bản ghi id 8 trong GET /api/products: {"id":8,"name":"SP 7c 47 token hết hạn (exp = 1 giờ trước)","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+PUT    /1 [token hết hạn (exp = 1 giờ trước)] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 6 → 6
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 token sai abc.def.ghi","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 token hết hạn (exp = 1 giờ trước)","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+DELETE /4 [token hết hạn (exp = 1 giờ trước)] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product deleted"}; bản ghi 6 → 5; GET /api/products/4 -> HTTP 200 [application/json; charset=utf-8] {}
+POST   [token user test@eshop.com] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product created","id":9}; bản ghi 5 → 6; bản ghi id 9 trong GET /api/products: {"id":9,"name":"SP 7c 47 token user test@eshop.com","price":1500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":2}
+PUT    /1 [token user test@eshop.com] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product updated"}; bản ghi 6 → 6
+      M TRƯỚC: HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 token hết hạn (exp = 1 giờ trước)","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+      M SAU:   HTTP 200 [application/json; charset=utf-8] {"id":1,"name":"Sua 7c 47 token user test@eshop.com","price":2500000,"description":"Mô tả 7c","imageUrl":"https://placehold.co/300","category_id":3}
+DELETE /5 [token user test@eshop.com] -> HTTP 200 [application/json; charset=utf-8] {"message":"Product deleted"}; bản ghi 6 → 5; GET /api/products/5 -> HTTP 200 [application/json; charset=utf-8] {}
+===== BUG-48 (GET /api/products/2)
+   [backend restart xong: 5 sản phẩm]
+GET /api/products/2 -> HTTP 200 {"id":2,"name":"Samsung Galaxy S24 Ultra","price":"28000000","description":"Màn hình hiển thị xuất sắc, camera siêu zoom","imageUrl":"https://placehold.co/300x300/png?text=Samsung+S24","category_id":1}
+   kiểu price trong JSON: String
+===== kết thúc
+   [backend restart xong: 5 sản phẩm]
+```
+
+Output `ui_7c.js` (chuỗi "x" lặp ghi `"x"×N`):
+
+```text
+===== BUG-35 (Thêm — Tên vi phạm; Giá 1500000; Danh mục Laptop)
+   [backend restart xong: 5 sản phẩm]
+A 300×x  (TC-08): giá trị ô Giá tiền lúc bấm="1500000"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"\"x\"×300","price":1500000,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["\"x\"×300 | 1500000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+B "   "  (TC-09): giá trị ô Giá tiền lúc bấm="1500000"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"   ","price":1500000,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["    | 1500000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+C 256×x  (TC-66): giá trị ô Giá tiền lúc bấm="1500000"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"\"x\"×256","price":1500000,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["\"x\"×256 | 1500000 ₫"]
+===== BUG-36 (Thêm — Tên "Tai nghe UI10"; Giá vi phạm; Danh mục Laptop)
+   [backend restart xong: 5 sản phẩm]
+-1000            (TC-10): giá trị ô Giá tiền lúc bấm="-1000"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"Tai nghe UI10","price":-1000,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["Tai nghe UI10 | -1000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+0                (TC-67): giá trị ô Giá tiền lúc bấm="0"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"Tai nghe UI10","price":0,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["Tai nghe UI10 | 0 ₫"]
+   [backend restart xong: 5 sản phẩm]
+để trống         (TC-11, TC-205 theo bước SV): giá trị ô Giá tiền lúc bấm=""; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"Tai nghe UI10","price":"","category_id":2}]; bảng 5 → 6 dòng; dòng mới=["Tai nghe UI10 |  ₫"]
+   [backend restart xong: 5 sản phẩm]
+gõ "１５０００００" (input thật của TC-205, kiểm thêm): giá trị ô Giá tiền lúc bấm=""; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"Tai nghe UI10","price":"","category_id":2}]; bảng 5 → 6 dòng; dòng mới=["Tai nghe UI10 |  ₫"]
+===== BUG-37 (Sửa — chọn dòng 'iPhone 15 Pro Max'; Tên vi phạm)
+   [backend restart xong: 5 sản phẩm]
+300×x  (TC-13): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"\"x\"×300","price":30000000,"category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["\"x\"×300 | 30000000 ₫","\"x\"×300 | 28000000 ₫","\"x\"×300 | 45000000 ₫","\"x\"×300 | 6000000 ₫","\"x\"×300 | 4000000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+"   "  (TC-14): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"   ","price":30000000,"category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["    | 30000000 ₫","    | 28000000 ₫","    | 45000000 ₫","    | 6000000 ₫","    | 4000000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+256×x  (TC-78): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"\"x\"×256","price":30000000,"category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["\"x\"×256 | 30000000 ₫","\"x\"×256 | 28000000 ₫","\"x\"×256 | 45000000 ₫","\"x\"×256 | 6000000 ₫","\"x\"×256 | 4000000 ₫"]
+===== BUG-38 (Sửa — chọn dòng 'iPhone 15 Pro Max'; Giá vi phạm)
+   [backend restart xong: 5 sản phẩm]
+-1000    (TC-15): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":-1000,"category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["iPhone 15 Pro Max | 30000000 ₫","iPhone 15 Pro Max | 28000000 ₫","iPhone 15 Pro Max | 45000000 ₫","iPhone 15 Pro Max | 6000000 ₫","iPhone 15 Pro Max | 4000000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+0        (TC-79): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":0,"category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["iPhone 15 Pro Max | 30000000 ₫","iPhone 15 Pro Max | 28000000 ₫","iPhone 15 Pro Max | 45000000 ₫","iPhone 15 Pro Max | 6000000 ₫","iPhone 15 Pro Max | 4000000 ₫"]
+   [backend restart xong: 5 sản phẩm]
+để trống (TC-16): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":"","category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["iPhone 15 Pro Max | 30000000 ₫","iPhone 15 Pro Max | 28000000 ₫","iPhone 15 Pro Max | 45000000 ₫","iPhone 15 Pro Max | 6000000 ₫","iPhone 15 Pro Max | 4000000 ₫"]
+===== BUG-39 (Thêm — Tên <script>alert(1)</script>)
+   [backend restart xong: 5 sản phẩm]
+TC-200: giá trị ô Giá tiền lúc bấm="1500000"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"<script>alert(1)</script>","price":1500000,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["<script>alert(1)</script> | 1500000 ₫"]
+===== BUG-40 (Thêm — Tên "Sản phẩm E-Notation"; Giá 1e5)
+   [backend restart xong: 5 sản phẩm]
+TC-201: giá trị ô Giá tiền lúc bấm="1e5"; hộp thoại=[]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=[]; bản ghi (GET /api/products) 5 → 6; bản ghi mới=[{"id":6,"name":"Sản phẩm E-Notation","price":100000,"category_id":2}]; bảng 5 → 6 dòng; dòng mới=["Sản phẩm E-Notation | 100000 ₫"]
+===== BUG-45 (Sửa — Tên "Sửa UI03", Giá 2500000)
+   [backend restart xong: 5 sản phẩm]
+   bước 2 SV ghi "ví dụ sản phẩm id = 8": GET /api/products/8 sau seed -> {}; id trong CSDL: [1,2,3,4,5]; bảng UI không có cột id
+   [backend restart xong: 5 sản phẩm]
+thay bằng dòng seed 'iPhone 15 Pro Max' (id 1): tiêu đề form sau khi bấm 'Sửa'=["📂 Import sản phẩm từ CSV","Sửa sản phẩm"]; hộp thoại=["Cập nhật thành công!"]; ô HTML5 invalid=[]; chữ mới trên trang (ngoài bảng)=["Thêm sản phẩm mới","Lưu sản phẩm"]; bản ghi 5 → 5
+      M TRƯỚC (GET /api/products): {"id":1,"name":"iPhone 15 Pro Max","price":30000000,"category_id":1}
+      M SAU   (GET /api/products): {"id":1,"name":"Sửa UI03","price":2500000,"category_id":1}
+      bảng TRƯỚC: ["iPhone 15 Pro Max | 30000000 ₫","Samsung Galaxy S24 Ultra | 28000000 ₫","MacBook Pro M3 | 45000000 ₫","Tai nghe AirPods Pro 2 | 6000000 ₫","Bàn phím cơ Keychron Q1 | 4000000 ₫"]
+      bảng SAU:   ["Sửa UI03 | 30000000 ₫","Sửa UI03 | 28000000 ₫","Sửa UI03 | 45000000 ₫","Sửa UI03 | 6000000 ₫","Sửa UI03 | 4000000 ₫"]
+===== BUG-49 + BUG-50 (quan sát form 'Thêm sản phẩm mới' và cột 'Giá')
+   [backend restart xong: 5 sản phẩm]
+BUG-49: tiêu đề form=["📂 Import sản phẩm từ CSV","Thêm sản phẩm mới"]; số <label> trong form=0; có '*' trong form=false; placeholder=["Tên sản phẩm","Giá tiền","URL Ảnh","Mô tả"]; số <select>=1
+BUG-50: ô Giá dòng 'iPhone 15 Pro Max' = "30000000 ₫"
+===== kết thúc   [backend restart xong: 5 sản phẩm]
+```
+
+### Log sửa dữ kiện 7c (trước → sau)
+
+| BUG | Mục | Trước | Sau | Căn cứ |
+|---|---|---|---|---|
+| 35, 36, 37, 38, 39, 40, 45, 49, 50 | Tiền điều kiện | (không có bước đăng nhập) | thêm dòng "- Đã đăng nhập trang Admin bằng tài khoản `admin@eshop.com` / `Admin123!`." | bước thiếu: `frontend-admin/src/App.jsx` dòng 188 (`if (!token)` → chỉ hiện form "Admin Login") |
+| 36 | Bước 3 | `+ Để trống ô giá tiền: "" (TC-FR15-11, TC-FR15-205)` | `+ Để trống ô giá tiền: "" (TC-FR15-11)` + dòng mới `+ Dán chuỗi chữ số toàn chiều rộng "１５０００００" — ô Giá tiền nhận giá trị rỗng "" (TC-FR15-205)` | inputs TC-FR15-205 (`Giá: "１５０００００"`); Actual TC-205 `giá trị ô Giá tiền trước khi lưu: ""`; 7c: gõ chuỗi này → ô "" |
+| 36 | Nhận định | `…hoặc không có giá.` | `…hoặc không có giá (chưa kiểm chứng).` | không có case/evidence về luồng bán (giỏ hàng, đặt hàng) với sản phẩm này |
+| 37, 38, 45 | Bước 4 | `Bấm nút "Lưu sản phẩm" (hoặc "Cập nhật sản phẩm").` | `Bấm nút "Lưu sản phẩm".` | `App.jsx` dòng 546: nút duy nhất "Lưu sản phẩm" cho cả Thêm và Sửa |
+| 45 | Bước 2 | `(ví dụ sản phẩm id = 8)` | `(ví dụ dòng "iPhone 15 Pro Max", id = 1)` | sau seed chỉ có id 1–5 (`GET /api/products/8` → `{}`); id 8 là sản phẩm harness dựng ở lượt 6; bảng UI không có cột id |
+| 45 | Actual | `…giá cũ trên bảng UI (1000000 ₫).` | `…giá cũ trên bảng UI (TC-FR15-03: 1000000 ₫; tái hiện 7c với "iPhone 15 Pro Max": 30000000 ₫).` | 1000000 là giá của M ở TC-03; theo bước đã sửa, giá cũ là 30000000 (output 7c) |
+| 44 | Bước 1 | `…Content-Type: application/json (TC-FR15-211).` | `…Content-Type: application/json (TC-FR15-211 gửi Content-Type: text/plain).` | `TC-FR15-211_req.json`: `"Content-Type": "text/plain"` |
+| 41 | Nhận định | `…gây sai lệch toàn bộ hệ thống.` | `…gây sai lệch toàn bộ hệ thống (chưa kiểm chứng).` | evidence chỉ cho thấy bản ghi products bị tạo; không có dữ kiện về phần khác |
+| 43 | Nhận định | `…kỳ vọng nhận JSON response).` | `…kỳ vọng nhận JSON response) (chưa kiểm chứng).` | không có case cho client (web/admin/mobile) nhận phản hồi này |
+| 47 | Nhận định | `Bất kỳ ai trên Internet cũng…` | `Bất kỳ ai trên Internet (chưa kiểm chứng) cũng…` | chỉ kiểm trên localhost; phần "không cần đăng nhập/quyền Admin" có dữ kiện (lượt 6 + 7c) |
+
+### Điểm SV tự sửa (chữ của SV — AI không sửa)
+
+- Severity/Priority ngoài thang (`bugs/README.md`: Severity Critical/High/Medium/Low, Priority High/Medium/Low): BUG-36 Severity "Major", Priority "Major"; BUG-39 Severity "Major"; BUG-45 Severity "Major".
+- BUG-46 tiêu đề: "44xx" (thang mã HTTP là 4xx).
+- BUG-46 Expected: "kèm thông báo lỗi cụ thể dạng JSON" — C10 chỉ nêu 4xx (không 2xx, không 5xx), không nêu body.
+- BUG-47 Expected: "401 Unauthorized" / "403 Forbidden" — FR-12.2, SEC-02, SEC-03, C5 không nêu mã; C6: "không cố định mã cụ thể".
+- BUG-49 Expected: "dấu sao màu đỏ hoặc ký hiệu *" — FR-22.1 chỉ nêu "ký hiệu *" (vế "hoặc" vẫn đúng; SV xem lại).
+- Mục "Yêu cầu": không thấy yêu cầu nào được liệt kê mà Actual không vi phạm.

@@ -24,7 +24,7 @@
 
 ## Các bước tái hiện
 
-1. Thực hiện gửi request POST tới URL http://localhost:3000/api/products với payload bất kỳ nhưng cố tình không truyền Header Content-Type: application/json (TC-FR15-211).
+1. Thực hiện gửi request POST tới URL http://localhost:3000/api/products với payload bất kỳ nhưng cố tình không truyền Header Content-Type: application/json (TC-FR15-211 gửi Content-Type: text/plain).
 
 2. Kiểm tra HTTP Status Code và Response Body trả về từ Server.
 

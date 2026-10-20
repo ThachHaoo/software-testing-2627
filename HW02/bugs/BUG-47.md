@@ -134,7 +134,7 @@
 
 - Ở Backend (backend/server.js): Mặc dù file server có định nghĩa sẵn middleware xác thực authenticateToken (dòng 100–110), nhưng tại các khai báo endpoint POST /api/products (dòng 167), PUT /api/products/:id (dòng 179) và DELETE /api/products/:id (dòng 191), dev lại không gắn middleware authenticateToken cũng như không có bất kỳ logic kiểm tra req.user.role === 'admin' nào.
 
-- Đây là lỗi hổng bảo mật đặc biệt nghiêm trọng (Broken Access Control / Unauthenticated API access). Bất kỳ ai trên Internet cũng có thể gọi trực tiếp API để thêm, sửa, xóa dữ liệu sản phẩm trong CSDL hệ thống mà không cần đăng nhập hay có quyền Admin.
+- Đây là lỗi hổng bảo mật đặc biệt nghiêm trọng (Broken Access Control / Unauthenticated API access). Bất kỳ ai trên Internet (chưa kiểm chứng) cũng có thể gọi trực tiếp API để thêm, sửa, xóa dữ liệu sản phẩm trong CSDL hệ thống mà không cần đăng nhập hay có quyền Admin.
 
 ## Link GitHub Issue
 

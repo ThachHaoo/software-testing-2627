@@ -22,6 +22,8 @@
 
 - Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
 
+- Đã đăng nhập trang Admin bằng tài khoản `admin@eshop.com` / `Admin123!`.
+
 - Đã truy cập vào trang Admin tại http://localhost:5174 và chuyển sang mục "Sản phẩm" để mở form "Thêm sản phẩm mới".
 
 ## Các bước tái hiện
@@ -33,7 +35,8 @@
 3. Nhập dữ liệu vi phạm vào ô "Giá tiền" theo một trong các trường hợp sau:
   + Nhập số âm: -1000 (TC-FR15-10)
   + Nhập số 0: 0 (TC-FR15-67)
-  + Để trống ô giá tiền: "" (TC-FR15-11, TC-FR15-205)
+  + Để trống ô giá tiền: "" (TC-FR15-11)
+  + Dán chuỗi chữ số toàn chiều rộng "１５０００００" — ô Giá tiền nhận giá trị rỗng "" (TC-FR15-205)
 
 4. Chọn Danh mục bất kỳ rồi bấm nút "Lưu sản phẩm".
 
@@ -122,7 +125,7 @@
 
 - Backend (backend/server.js, dòng 167–177) khi nhận request POST /api/products cũng bỏ qua bước validation trường price, cứ thế nhét thẳng vào câu lệnh SQL INSERT INTO products.
 
-- Việc này làm dữ liệu trong CSDL bị sai lệch nghiêm trọng, cho phép bán sản phẩm với giá âm, giá 0 đồng hoặc không có giá.
+- Việc này làm dữ liệu trong CSDL bị sai lệch nghiêm trọng, cho phép bán sản phẩm với giá âm, giá 0 đồng hoặc không có giá (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

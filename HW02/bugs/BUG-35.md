@@ -22,6 +22,8 @@
 
 - Hệ thống Frontend Admin (`frontend-admin`) đang chạy tại `http://localhost:5174`.
 
+- Đã đăng nhập trang Admin bằng tài khoản `admin@eshop.com` / `Admin123!`.
+
 - Người dùng đã truy cập trang Admin `http://localhost:5174` và điều hướng đến mục "Sản phẩm" (hiển thị form "Thêm sản phẩm mới").
 
 ## Các bước tái hiện

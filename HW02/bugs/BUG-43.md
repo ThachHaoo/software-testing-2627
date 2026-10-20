@@ -86,7 +86,7 @@
 
 - Khi bodyParser.json() bắt gặp một giá trị không hợp lệ chuẩn JSON như Infinity, nó tự động throw SyntaxError và đẩy thẳng ra Error Handler mặc định của Express. Handler mặc định này render lỗi ra một trang HTML web.
 
-- Việc trả về trang HTML khi client gọi REST API làm gãy cấu trúc giao tiếp hệ thống, gây ra lỗi parse JSON phía Client (như các ứng dụng frontend hoặc ứng dụng mobile kỳ vọng nhận JSON response).
+- Việc trả về trang HTML khi client gọi REST API làm gãy cấu trúc giao tiếp hệ thống, gây ra lỗi parse JSON phía Client (như các ứng dụng frontend hoặc ứng dụng mobile kỳ vọng nhận JSON response) (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

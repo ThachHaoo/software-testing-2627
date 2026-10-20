@@ -22,6 +22,8 @@
 
 - Frontend Admin frontend-admin đang chạy ở cổng http://localhost:5174.
 
+- Đã đăng nhập trang Admin bằng tài khoản `admin@eshop.com` / `Admin123!`.
+
 - Người dùng đã mở trang Admin tại http://localhost:5174 và chọn mục "Sản phẩm" để hiển thị bảng danh sách sản phẩm.
 
 ## Các bước tái hiện

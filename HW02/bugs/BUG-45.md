@@ -22,17 +22,19 @@
 
 - Frontend Admin frontend-admin đang chạy ở trang http://localhost:5174.
 
+- Đã đăng nhập trang Admin bằng tài khoản `admin@eshop.com` / `Admin123!`.
+
 - Đã truy cập vào trang Admin tại http://localhost:5174, chọn mục "Sản phẩm" và bấm nút "Sửa" tại một sản phẩm bất kỳ để mở form "Sửa sản phẩm".
 
 ## Các bước tái hiện
 
 1. Mở giao diện Admin ở link http://localhost:5174 rồi bấm chọn mục "Sản phẩm".
 
-2. Tại bảng danh sách sản phẩm, chọn một sản phẩm mục tiêu (ví dụ sản phẩm id = 8) và bấm nút "Sửa".
+2. Tại bảng danh sách sản phẩm, chọn một sản phẩm mục tiêu (ví dụ dòng "iPhone 15 Pro Max", id = 1) và bấm nút "Sửa".
 
 3. Nhập dữ liệu hợp lệ mới để cập nhật cho sản phẩm (ví dụ đổi Tên sản phẩm thành Sửa UI03 và Giá tiền thành 2500000).
 
-4. Bấm nút "Lưu sản phẩm" (hoặc "Cập nhật sản phẩm").
+4. Bấm nút "Lưu sản phẩm".
 
 5. Quan sát dữ liệu hiển thị trên bảng danh sách sản phẩm ở giao diện UI Admin và đối chiếu với dữ liệu thực tế lưu trong CSDL.
 
@@ -50,7 +52,7 @@
 
 - Tuy nhiên trên giao diện bảng sản phẩm UI Admin bị lỗi hiển thị nghiêm trọng:
   + Tất cả các sản phẩm khác trong danh sách đều bị đè tên thành Tên sản phẩm vừa sửa (Sửa UI03).
-  + Dòng hiển thị của sản phẩm vừa sửa không cập nhật lại Giá tiền mới (2500000) mà vẫn giữ nguyên giá cũ trên bảng UI (1000000 ₫).
+  + Dòng hiển thị của sản phẩm vừa sửa không cập nhật lại Giá tiền mới (2500000) mà vẫn giữ nguyên giá cũ trên bảng UI (TC-FR15-03: 1000000 ₫; tái hiện 7c với "iPhone 15 Pro Max": 30000000 ₫).
 
 ## Bằng chứng
 
