@@ -1,9 +1,9 @@
 # BUG-51
 
 - **ID:** BUG-51
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** App Mobile cho phép để trống Họ Tên khi đăng ký, vẫn báo thành công và tạo tài khoản vào CSDL
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã bật và chạy ở máy máy tính.
+
+- Trang web Admin đã đăng nhập bằng tài khoản admin@eshop.com và mở sẵn tab Quản lý Người dùng để theo dõi dữ liệu.
+
+- App EShop trên điện thoại Android đã bật lên, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Ở màn hình chính của app mobile, bấm vào 'Đăng nhập' trên thanh header, sau đó bấm tiếp 'Đăng ký ngay' để chuyển sang màn 'Đăng Ký Tài Khoản'.
+
+2. Để trống ô 'Họ Tên' (không nhập gì cả).
+
+3. Nhập Email hợp lệ chưa từng có trong hệ thống (ví dụ: m03_2231@domain.com).
+
+4. Nhập Mật khẩu đúng chuẩn quy định (ví dụ: Abcd1234!).
+
+5. Bấm nút 'Đăng Ký'.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống phải bắt buộc người dùng nhập Họ Tên theo quy định FR-01.1 (trường bắt buộc).
+
+- Khi để trống Họ Tên, app phải chặn lại và bật thông báo lỗi ở ít nhất một kênh (chữ hiển thị trên màn hình, hộp thoại alert hoặc toast).
+
+- Giao diện phải giữ người dùng ở lại màn 'Đăng Ký Tài Khoản' chứ không chuyển màn hình.
+
+- Phía server không được tạo thêm bất kỳ tài khoản mới nào trong CSDL (danh sách bên trang admin giữ nguyên không đổi).
 
 ## Actual
 
-`<SV viết>`
+- Vừa bấm nút Đăng Ký xong thì app hiện ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
+
+- Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'.
+
+- Kiểm tra lại danh sách bên trang admin thì thấy xuất hiện thêm một dòng tài khoản mới có email m03_2231@domain.com, nhưng cột Họ Tên bị bỏ rỗng.
 
 ## Bằng chứng
 
@@ -125,7 +147,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Lỗi này xuất phát từ việc hàm handleRegister ở file App.js của mobile hoàn toàn bỏ qua bước validation kiểm tra trường registerName. Trong code chỉ viết đúng một đoạn regex kiểm tra độ mạnh của Mật khẩu rồi gửi ngay request POST sang API.
+
+- Song song đó, phía backend ở file server.js khi nhận request tại endpoint /api/register cũng thả nổi không kiểm tra dữ liệu đầu vào. Cả name, email, password đều được đem đi INSERT trực tiếp vào bảng users trong CSDL mà không có bước validate nào, dẫn tới việc thông tin rỗng vẫn ghi nhận thành công.
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-54
 
 - **ID:** BUG-54
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** App Mobile cho phép đăng ký Mật khẩu có ký tự đặc biệt nằm ngoài tập quy định (#), vẫn báo thành công và tạo tài khoản vào CSDL
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã khởi động và seed sẵn dữ liệu sạch.
+
+- Web Admin đã đăng nhập tài khoản admin@eshop.com và mở sẵn tab Quản lý Người dùng để kiểm tra dữ liệu.
+
+- App EShop trên điện thoại Android đã bật, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Ở màn hình chính của app mobile, bấm vào 'Đăng nhập' trên thanh header, rồi chọn 'Đăng ký ngay' để chuyển sang màn 'Đăng Ký Tài Khoản'.
+
+2. Nhập Họ Tên hợp lệ (ví dụ: Nguyễn Văn Ánh).
+
+3. Nhập Email hợp lệ chưa có trong hệ thống (ví dụ: m15_2231@domain.com).
+
+4. Tại ô 'Mật khẩu', nhập chuỗi có ký tự đặc biệt nằm ngoài tập quy định (ví dụ: Abcd1234# – dùng ký tự # thay vì một trong các ký tự @, $, !, %, *, ?, &).
+
+5. Bấm nút 'Đăng Ký'.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Mật khẩu bắt buộc phải chứa ít nhất 1 ký tự đặc biệt thuộc tập đóng @, $, !, %, *, ?, & theo quy định FR-01.8 (D7).
+
+- Ký tự # không nằm trong tập ký tự đặc biệt cho phép, do đó hệ thống phải tính là thiếu ký tự đặc biệt, chặn đăng ký và hiển thị thông báo lỗi ở ít nhất một kênh (chữ hiển thị trên màn hình, hộp thoại alert hoặc toast).
+
+- Giao diện app phải giữ người dùng ở lại màn 'Đăng Ký Tài Khoản'.
+
+- Phía server phải từ chối request, không tạo tài khoản mới trong CSDL (danh sách bên web admin giữ nguyên).
 
 ## Actual
 
-`<SV viết>`
+- Vừa bấm nút Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
+
+- Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'.
+
+- Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang email m15_2231@domain.com với mật khẩu Abcd1234# lọt qua thành công.
 
 ## Bằng chứng
 
@@ -95,7 +117,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân đầu tiên là do biểu thức chính quy strongPasswordRegex trong file App.js (dòng 211–212) được viết dạng mở [^A-Za-z\d]. Đoạn regex này chỉ kiểm tra xem chuỗi có tồn tại bất kỳ ký tự nào không phải là chữ cái và chữ số hay không, chứ không giới hạn đúng tập ký tự đặc biệt @, $, !, %, *, ?, & theo yêu cầu của SRS. Vì vậy ký tự # vẫn lọt qua bộ kiểm soát ở client.
+
+- guyên nhân thứ hai là phía backend ở file server.js cũng hoàn toàn không validate độ mạnh hay tập ký tự của mật khẩu trước khi lưu vào CSDL, làm cho request chứa mật khẩu không hợp lệ vẫn được thực thi và tạo tài khoản thành công.
 
 ## Link GitHub Issue
 

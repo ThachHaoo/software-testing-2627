@@ -1,9 +1,9 @@
 # BUG-52
 
 - **ID:** BUG-52
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** App Mobile cho phép nhập Email rỗng hoặc sai định dạng (thiếu '@', có khoảng trắng ở giữa) vẫn báo thành công và tạo tài khoản vào CSDL
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,44 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã bật và chạy ở máy máy tính.
+
+- Trang web Admin đã đăng nhập tài khoản admin@eshop.com và mở sẵn tab Quản lý Người dùng để theo dõi dữ liệu.
+
+- App EShop trên điện thoại Android đã bật lên, kết nối cùng mạng với server và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Trên app mobile, bấm vào 'Đăng nhập' ở thanh header, sau đó chọn 'Đăng ký ngay' để vào màn hình 'Đăng Ký Tài Khoản'.
+
+2. Nhập Họ Tên hợp lệ (ví dụ: Nguyễn Văn Ánh).
+
+3. Tại ô 'Email', thử nhập một trong ba trường hợp sai sau:
+  + Trường hợp 1 (TC-FR20-04): Để trống hoàn toàn ô Email (không nhập gì).
+  + Trường hợp 2 (TC-FR20-05): Nhập chuỗi Email thiếu ký tự '@' (ví dụ: m05_2231domain.com).
+  + Trường hợp 3 (TC-FR20-204): Nhập chuỗi Email có chứa khoảng trắng ở giữa do bàn phím tự động sửa/chèn gợi ý (ví dụ: m204_2231 @domain.com).
+
+4. Nhập Mật khẩu đúng chuẩn quy định (ví dụ: Abcd1234!).
+
+5. Bấm nút 'Đăng Ký'.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống phải bắt buộc người dùng nhập Email theo quy định FR-01.2 và Email phải chuẩn định dạng user@domain.com theo FR-01.3 (D4).
+
+- Khi Email rỗng hoặc sai định dạng (thiếu '@' hoặc dính khoảng trắng ở giữa), app phải chặn lại và hiển thị thông báo lỗi ở ít nhất một kênh (chữ trên màn hình, hộp thoại alert hoặc toast).
+
+- Giao diện app giữ nguyên người dùng ở màn 'Đăng Ký Tài Khoản'.
+
+- Server phải từ chối request, không được tạo thêm dòng tài khoản mới nào trong CSDL (danh sách bên web admin giữ nguyên).
 
 ## Actual
 
-`<SV viết>`
+- Trong cả ba trường hợp trên, vừa bấm Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
+
+- Sau khi bấm đóng hộp thoại, app tự động chuyển luôn sang màn hình 'Đăng Nhập'.
+
+- Mở web admin kiểm tra danh sách người dùng thì thấy trong cả 3 lượt chạy đều bị chèn thêm tài khoản mới vào CSDL với chuỗi Email rỗng hoặc sai định dạng đúng như đã nhập trên app.
 
 ## Bằng chứng
 
@@ -133,7 +158,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Tương tự trường hợp Họ Tên, hàm handleRegister ở App.js trên app mobile hoàn toàn không viết bất kỳ dòng lệnh nào để validate biến registerEmail. Cho dù email có để trống, nhập thiếu ký tự @ hay dính khoảng trắng ở giữa do tính năng auto-correct của bàn phím di động thì client vẫn đóng gói gửi thẳng sang server qua request POST /api/register.
+
+- Đồng thời, phía server ở file server.js cũng bỏ ngỏ không kiểm tra tính hợp lệ hay định dạng của email mà thực thi ngay lệnh INSERT vào CSDL SQLite. Việc không validate ở cả hai phía làm cho dữ liệu rác/lỗi dễ dàng lưu trữ thành công vào hệ thống.
 
 ## Link GitHub Issue
 

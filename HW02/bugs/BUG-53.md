@@ -1,9 +1,9 @@
 # BUG-53
 
 - **ID:** BUG-53
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** App Mobile cho phép đăng ký bằng Email đã tồn tại trong hệ thống, vẫn báo thành công và tạo tài khoản trùng trong CSDL
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,41 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã khởi động và seed sẵn dữ liệu mẫu, có sẵn tài khoản test@eshop.com.
+
+- Web Admin đã đăng nhập bằng tài khoản admin@eshop.com và đang mở sẵn tab Quản lý Người dùng để theo dõi dữ liệu CSDL.
+
+- App EShop trên điện thoại Android đã bật, kết nối chung mạng với backend và đang ở trạng thái ban đầu chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Ở màn hình chính của app mobile, bấm vào 'Đăng nhập' trên thanh header, rồi chọn 'Đăng ký ngay' để vào màn 'Đăng Ký Tài Khoản'.
+
+2. Nhập Họ Tên hợp lệ (ví dụ: Nguyễn Văn Ánh).
+
+3. Tại ô 'Email', nhập chính xác email đã tồn tại sẵn trong hệ thống (ví dụ tài khoản seed: test@eshop.com).
+
+4. Nhập Mật khẩu đúng chuẩn quy định (ví dụ: Abcd1234!).
+
+5. Bấm nút 'Đăng Ký'.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Email đăng ký phải là duy nhất trong hệ thống theo quy định FR-01.4 (D5).
+
+- Khi nhập email đã tồn tại, app phải chặn lại và bật thông báo lỗi ở ít nhất một kênh (chữ hiển thị trên màn hình, hộp thoại alert hoặc toast).
+
+- Giao diện app phải giữ người dùng ở lại màn 'Đăng Ký Tài Khoản'.
+
+- Phía server không được tạo thêm bất kỳ tài khoản nào trùng email trong CSDL (danh sách bên web admin giữ nguyên không đổi).
 
 ## Actual
 
-`<SV viết>`
+- Vừa bấm nút Đăng Ký xong thì app hiển thị ngay hộp thoại Dialog báo 'Đăng ký tài khoản thành công'.
+
+- Sau khi bấm đóng thông báo, app tự động chuyển luôn sang màn 'Đăng Nhập'.
+
+- Kiểm tra danh sách bên trang web admin thì thấy xuất hiện thêm một dòng tài khoản mới mang đúng email test@eshop.com, dẫn đến việc CSDL bị trùng lặp email.
 
 ## Bằng chứng
 
@@ -132,7 +154,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Nguyên nhân gốc rễ của bug này xuất phát hoàn toàn từ phía backend. Thứ nhất, trong file database.js khi định nghĩa bảng users, cột email không hề được thiết lập ràng buộc UNIQUE.
+
+- Thứ hai, ở file server.js tại endpoint /api/register, trước khi thực hiện câu lệnh INSERT, backend không hề viết câu lệnh SELECT kiểm tra xem email đã tồn tại trong CSDL hay chưa. Kết quả là câu lệnh INSERT INTO users luôn luôn chạy thành công mà không gặp bất kỳ lỗi hay phản hồi ngăn chặn nào từ SQLite. Phía client app mobile chỉ nhận phản hồi 200 OK từ server nên lập tức báo thành công cho người dùng.
 
 ## Link GitHub Issue
 

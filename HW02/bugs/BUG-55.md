@@ -1,9 +1,9 @@
 # BUG-55
 
 - **ID:** BUG-55
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Màn hình Đăng ký trên Mobile thiếu dấu sao * đánh dấu các trường nhập liệu bắt buộc
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -16,19 +16,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã khởi động.
+
+- App EShop trên điện thoại Android đã mở và đang ở trạng thái chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở app mobile, bấm vào nút 'Đăng nhập' ở thanh header.
+
+2. Chọn tiếp 'Đăng ký ngay' để chuyển sang giao diện màn hình 'Đăng Ký Tài Khoản'.
+
+3. Quan sát nhãn (label) của các trường nhập liệu trên biểu mẫu đăng ký.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Tất cả các trường bắt buộc theo quy định FR-01 (gồm Họ Tên, Email, Mật khẩu) phải có ký hiệu dấu sao * hiển thị ngay bên cạnh nhãn theo yêu cầu FR-22.1 (D13).
 
 ## Actual
 
-`<SV viết>`
+Nhãn của cả ba trường nhập liệu chỉ hiển thị đơn thuần là 'Họ Tên', 'Email', 'Mật khẩu' mà không hề có ký hiệu dấu sao * bên cạnh để báo cho người dùng biết đây là các trường bắt buộc.
 
 ## Bằng chứng
 
@@ -75,7 +81,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Lỗi giao diện này nằm trực tiếp trong file App.js tại các dòng 804, 810 và 817. Khi khai báo thẻ <Text style="{styles.label}">, lập trình viên giao diện chỉ gõ chuỗi văn bản tĩnh lần lượt là Họ Tên, Email và Mật khẩu chứ không thêm ký tự * (hoặc <Text style="{styles.required}">*</Text>) ở phía sau nhãn để đáp ứng yêu cầu FR-22.1.
 
 ## Link GitHub Issue
 

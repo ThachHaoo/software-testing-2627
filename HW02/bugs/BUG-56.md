@@ -1,9 +1,9 @@
 # BUG-56
 
 - **ID:** BUG-56
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** `Ô nhập Email trên màn hình Đăng ký mobile không kích hoạt bàn phím định dạng Email (thiếu phím @)
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -16,19 +16,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã khởi động.
+
+- App EShop trên điện thoại Android đã bật và đang ở màn hình chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Trên app mobile, bấm vào 'Đăng nhập' ở thanh header.
+
+2. Chọn 'Đăng ký ngay' để chuyển sang màn hình 'Đăng Ký Tài Khoản'.
+
+3. Chạm tay vào ô nhập liệu 'Email' để gọi bàn phím ảo hiển thị.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Ô nhập Email phải mở bàn phím ảo được tối ưu riêng cho việc gõ email (chứa sẵn phím @ và phím dấu chấm . ngay trên bàn phím chính) theo tương đương yêu cầu FR-22.2 (D13 quy định thuộc tính keyboardType="email-address").
 
 ## Actual
 
-`<SV viết>`
+Bàn phím ảo bật lên chỉ là bàn phím văn bản thông thường (text/standard keyboard), hoàn toàn không xuất hiện phím @ ở giao diện bàn phím chính. Người dùng phải bấm chuyển sang trang ký tự đặc biệt mới gõ được dấu @.
 
 ## Bằng chứng
 
@@ -67,7 +73,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Lỗi này nằm ở thẻ <TextInput> của ô Email trong file App.js (dòng 811–816). Lập trình viên chỉ mới thiết lập thuộc tính autoCapitalize="none" để tắt tự động viết hoa, nhưng lại bỏ quên việc khai báo thuộc tính keyboardType="email-address". Do đó hệ thống Android không thể nhận biết đây là ô gõ email để kích hoạt bố cục bàn phím phù hợp cho trải nghiệm người dùng.
 
 ## Link GitHub Issue
 

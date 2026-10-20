@@ -1,9 +1,9 @@
 # BUG-57
 
 - **ID:** BUG-57
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** Màn hình Đăng ký trên Mobile thiếu hẳn ô nhập 'Xác nhận mật khẩu' theo yêu cầu SRS
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -16,19 +16,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Backend đã khởi động.
+
+- App EShop trên điện thoại Android đã mở và đang ở trạng thái chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở app mobile, bấm vào nút 'Đăng nhập' ở thanh header.
+
+2. Chọn 'Đăng ký ngay' để chuyển sang màn hình 'Đăng Ký Tài Khoản'.
+
+3. Cuộn xem toàn bộ giao diện biểu mẫu đăng ký.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+Giao diện đăng ký tài khoản phải bắt buộc có trường 'Xác nhận mật khẩu' để người dùng nhập lại mật khẩu, và hệ thống phải đối chiếu từ chối nếu hai mật khẩu không khớp theo quy định FR-01.9 (D9).
 
 ## Actual
 
-`<SV viết>`
+Màn hình 'Đăng Ký Tài Khoản' trên app mobile chỉ có vỏn vẹn 3 ô nhập liệu là 'Họ Tên', 'Email', và 'Mật khẩu', hoàn toàn không có ô 'Xác nhận mật khẩu'.
 
 ## Bằng chứng
 
@@ -102,7 +108,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- Lỗi thiếu chức năng này thể hiện rất rõ trong hàm renderRegister ở file App.js (dòng 797–837). Trong cây component JSX render ra màn hình, lập trình viên hoàn toàn bỏ quên không khai báo thêm nhãn và ô <TextInput> cho trường 'Xác nhận mật khẩu'.
+
+- Đồng thời, hàm xử lý handleRegister (dòng 209–240) cũng hoàn toàn không có state hay logic so sánh hai mật khẩu trước khi gửi request đăng ký. Việc thiếu mất ô nhập này khiến các test case kiểm tra nhập sai/khác xác nhận mật khẩu (như TC-FR20-16 và TC-FR20-17) không thể thực thi được và bị chặn (Blocked).
 
 ## Link GitHub Issue
 
