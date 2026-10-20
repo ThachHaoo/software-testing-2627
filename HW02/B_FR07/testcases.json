@@ -6,13 +6,13 @@
     "feature": "FR-07 Giỏ hàng (web frontend-web: /product/:id, /, /cart + API GET/POST /api/cart)",
     "feature_code": "B_FR07",
     "doc_id": "TCD-B_FR07",
-    "version": "0.7",
+    "version": "0.8",
     "date": "2026-10-20",
     "author": "Lê Tấn Hiệp – 23120255",
     "sut_version": "tkob-team/eshop-sut @ de0f48f (= ttbhanh/eshop-sut 85af3ba + .gitignore, không đổi mã)",
     "environment": "Windows (PowerShell), backend http://localhost:3000, web http://localhost:5173 (route /cart, /product/:id, /); chi tiết ở HW02/env/environment.md; locale trình duyệt (ảnh hưởng ký tự phân cách hàng nghìn, B13): Playwright mặc định en-US, chạy tay ghi locale thực tế của Chrome vào notes của case.",
     "scope": "Trang 'Giỏ Hàng' (/cart) và các điểm thêm vào giỏ trên frontend-web (tầng UI), endpoint GET/POST /api/cart (tầng API, suite riêng — B7 SV chốt). Trong phạm vi: FR-07 (phân lớp + BVA); FR-06.2/FR-06.3 ô 'Số lượng' và phản hồi khi thêm (B6 SV chốt); badge FR-23.2 (B9). Thuộc tính GUI (FR-07.2 sự tồn tại nút +/-, nhãn chính xác của FR-07 (FR-07.1, FR-07.4, FR-07.5, FR-07.6 — B12), phản hồi khi bấm 'Thêm vào giỏ' ở trang chủ (FR-24.1, B21), FR-21 ₫, FR-23 breadcrumb/highlight, FR-24 alt) kiểm bằng suite TS-GUI riêng, không phân lớp, giới hạn trang giỏ và các điểm thêm vào giỏ (B16 SV chốt). Ngoài phạm vi: thanh toán (FR-08, chỉ dùng FR-08.1 để suy ra B11), mã giảm giá (FR-09), giỏ hàng trên Mobile (FR-20), giữ giỏ khi tải lại trang/đăng nhập/đăng xuất (B10 SV chốt).",
-    "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI)",
+    "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI); thêm nhãn LARGE = đại diện giá trị lớn thay UB/UB±1 khi miền không có cận trên (B1)",
     "references": [
       "../eshop-sut/README.md §4 FR-07 dòng 93–100 — Giỏ hàng (oracle chính)",
       "../eshop-sut/README.md §3 FR-06 dòng 83–87 — ô 'Số lượng' (nguyên dương, tối thiểu 1) và nút 'Thêm vào giỏ hàng'",
@@ -1352,7 +1352,8 @@
             "EC22",
             "EC24",
             "EC26",
-            "EC47"
+            "EC47",
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1367,7 +1368,8 @@
           "notes": "Không có dialog: dòng bị xoá ngay → Fail (biến mục tiêu là dialog).",
           "ec_target": [
             "EC22",
-            "EC47"
+            "EC47",
+            "EC42"
           ]
         },
         {
@@ -1390,7 +1392,8 @@
             "EC24",
             "EC27",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1406,7 +1409,8 @@
           "ec_target": [
             "EC2",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ]
         },
         {
@@ -1429,7 +1433,8 @@
             "EC24",
             "EC27",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1445,7 +1450,8 @@
           "ec_target": [
             "EC3",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ]
         },
         {
@@ -1468,7 +1474,8 @@
             "EC24",
             "EC27",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1484,7 +1491,8 @@
           "ec_target": [
             "EC4",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ]
         },
         {
@@ -1507,7 +1515,8 @@
             "EC24",
             "EC27",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ],
           "technique": "EP",
           "bva_point": "",
@@ -1523,7 +1532,8 @@
           "ec_target": [
             "EC5",
             "EC54",
-            "EC46"
+            "EC46",
+            "EC42"
           ]
         }
       ]
@@ -2170,7 +2180,7 @@
       "name": "Boundary values — tầng UI (FR-06.2, FR-07)",
       "format": "matrix",
       "description": "Boundary values; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-UI.",
-      "notes": "Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán MAX_UI; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).",
+      "notes": "Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán nhãn LARGE; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).",
       "preconditions": [
         "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
         "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
@@ -2233,11 +2243,13 @@
             "EC14",
             "EC24",
             "EC27",
-            "EC54"
+            "EC54",
+            "EC42"
           ],
           "ec_target": [
             "EC2",
-            "EC54"
+            "EC54",
+            "EC42"
           ],
           "technique": "BVA",
           "bva_point": "LB-1",
@@ -2396,7 +2408,7 @@
             "EC42"
           ],
           "technique": "BVA",
-          "bva_point": "MAX_UI",
+          "bva_point": "LARGE",
           "rationale": "Đại diện giá trị lớn phía trên (B1 SV chốt); Thành tiền 4 tỷ kiểm phép nhân với số lớn.",
           "origin": "AI",
           "priority": "High",
@@ -2405,7 +2417,10 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Theo B1: không có cận trên nên không có UB-1/UB/UB+1. Điểm này là 1 đại diện 'giá trị lớn' hợp lệ; gán nhãn MAX_UI vì là giá trị lớn nhất chọn kiểm, KHÔNG phải giới hạn của giao diện (ô input type=number không có max)."
+          "notes": "Đại diện giá trị lớn thay UB/UB±1 (B1): SRS không có cận trên nên không có biên trên; 1000 là giá trị lớn hợp lệ chọn để kiểm, không phải giới hạn của giao diện.",
+          "assumptions": [
+            "B1"
+          ]
         },
         {
           "id": "TC-FR07-65",
@@ -2432,7 +2447,9 @@
           ],
           "ec_target": [
             "EC20",
-            "EC39"
+            "EC39",
+            "EC41",
+            "EC42"
           ],
           "technique": "BVA",
           "bva_point": "LB",
@@ -2481,7 +2498,7 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Dialog không phải mục tiêu của case (kiểm ở TC-FR07-08/09): không có dialog thì vẫn quan sát kết quả xoá, ghi notes."
+          "notes": "Dialog không khẳng định ở đây (EC47 kiểm ở TC-FR07-08/09); có thì xác nhận, không có thì ghi Actual."
         }
       ]
     },
@@ -2490,7 +2507,7 @@
       "name": "Boundary values — tầng API /api/cart (FR-06.2)",
       "format": "matrix",
       "description": "Boundary values; dùng lại tiền điều kiện, quy trình và dọn dẹp của TS-DOM-API.",
-      "notes": "Mô hình 9 điểm (B1: không có cận trên). Đã làm BVA: V1 Số lượng khi thêm (LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán MAX_UI; UB-1/UB/UB+1 không áp dụng); V5 Số lượng hiện tại với '-' (LB = 2 của EC20; LB-1, LB+1 trùng TC-07, TC-06); V7 Số dòng (xoá 1 → 0). Không làm BVA: V3 Đơn giá (không do người dùng nhập, giá seed cố định; giá client bị bỏ qua — B8); V2 id sản phẩm (tập định danh, SRS không cho thứ tự); V4, V6, V8, V9, V10 (tập giá trị/thao tác, không có thứ tự); '+' (không có cận trên, B1). Biến khác giữ danh nghĩa: user {ts}, sản phẩm id 5. Không khẳng định lại nhãn, định dạng ₫, badge, phản hồi khi thêm (kiểm một nơi ở TS-GUI / TC domain).",
+      "notes": "Mô hình 9 điểm (B1: không có cận trên). Tầng API chỉ làm BVA cho V1 Số lượng (body.quantity): LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 gán nhãn LARGE; UB-1/UB/UB+1 không áp dụng. Biến khác giữ danh nghĩa: token T của user {ts}, sản phẩm id 5 (tên/giá CSDL). Không làm BVA ở API: id (tập định danh, SRS không cho thứ tự), price/name (bị bỏ qua — B8), token (không có thứ tự); API không có endpoint sửa/xoá nên không có V5/V7.",
       "preconditions": [
         "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
         "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
@@ -2734,7 +2751,7 @@
             "EC50"
           ],
           "technique": "BVA",
-          "bva_point": "MAX_UI",
+          "bva_point": "LARGE",
           "rationale": "Cùng giá trị lớn với TC-FR07-64 để so UI ↔ API.",
           "origin": "AI",
           "priority": "High",
@@ -2743,7 +2760,10 @@
           "actual_result": "",
           "evidence": "",
           "bug_id": "",
-          "notes": "Theo B1: không có cận trên nên không có UB-1/UB/UB+1. Điểm này là 1 đại diện 'giá trị lớn' hợp lệ; gán nhãn MAX_UI vì là giá trị lớn nhất chọn kiểm, KHÔNG phải giới hạn của giao diện (ô input type=number không có max). Ở tầng API nhãn MAX_UI chỉ để ghép cặp với TC-FR07-64."
+          "notes": "Đại diện giá trị lớn thay UB/UB±1 (B1): SRS không có cận trên nên không có biên trên; 1000 là giá trị lớn hợp lệ chọn để kiểm, không phải giới hạn của giao diện. Ghép cặp với TC-FR07-64 để so UI ↔ API.",
+          "assumptions": [
+            "B1"
+          ]
         }
       ]
     },
@@ -3159,8 +3179,8 @@
           "title": "Kiểm tra phản hồi trực quan khi bấm 'Thêm vào giỏ' trên thẻ sản phẩm ở trang chủ",
           "layer": "UI",
           "requirements": [
-            "FR-24.1",
-            "FR-06.3"
+            "FR-06.3",
+            "FR-24.1"
           ],
           "covers": [
             "EC45"

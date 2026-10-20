@@ -7435,15 +7435,83 @@ Báo cáo theo CLAUDE.md, kèm danh sách biến đã làm BVA và lý do bỏ b
 ```
 
 **Output:**
-```
+````
 Nhiệm vụ 1: làm sạch truy vết.
 
 Nhiệm vụ 2: BVA. Viết script bước 4.
+
+Xong cả hai nhiệm vụ: làm sạch truy vết (3/7d) và bước 4 BVA với 12 TC mới, check và linter không báo lỗi. Bước 5 là phần SV tự làm nên em dừng ở đây.
+
 ```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: (1) bước 3 lần 3 – làm sạch truy vết; (2) bước 4 BVA
+- File đã tạo/sửa: HW02/B_FR07/testcases.json/.md; render_md.py, schema-domain.md (vá harness + ghi quy tắc cột Yêu cầu); ai-outputs/B_FR07_step3_20261020-1102.*, B_FR07_step4_20261020-1103.*; A_prompt_log.md
+- Kết quả kiểm tra: check_domain 0 errors/8 warn (7 biến không có lớp không hợp lệ: V3–V7, V9, V10; V1 thiếu UB/UB±1 — đúng theo B1), phủ 53/53 EC; lint 0 errors/0 warn; test Not run
+- Commit: 8c72dcc HW02[B-FR07] 3/7d: làm sạch truy vết
+          3a1c… → ae3… (xem git log): HW02: vá harness – trường assumptions của TC trong truy vết
+          7dcb0a7 HW02[B-FR07] 4/7: TC BVA
+- Số TC: 37 → 49 (+12 BVA: UI 60–66, API 70–74)
+- Biến đã làm BVA:
+  - V1 Số lượng khi thêm: LB-1 = 0, LB = 1, LB+1 = 2, NOM = 5, giá trị lớn 1000 (gán nhãn MAX_UI theo B1) — làm ở cả UI và API
+  - V5 Số lượng hiện tại khi bấm '-': LB = 2 (TC-65); LB-1 trùng TC-07, LB+1 trùng TC-06
+  - V7 Số dòng: xoá dòng cuối 1 → 0 (TC-66)
+- Biến bỏ BVA và lý do:
+  - V3 Đơn giá: không do người dùng nhập, giá seed cố định; giá client bị bỏ qua (B8)
+  - V2 id: là tập định danh, SRS không cho thứ tự
+  - V4, V6, V8, V9, V10: tập giá trị hoặc thao tác, không có thứ tự
+  - Nút '+': không có cận trên (B1)
+- Bất thường (harness):
+  - Linter của thầy báo lỗi khi requirements chứa mã giả định → chuyển B12/B13 sang trường riêng assumptions của case; render_md gộp trường này vào truy vết; A_FR01 render không đổi
+  - Bản đóng băng B_FR07_step3_20261020-1102 chụp trước khi sửa lỗi này (freeze cùng phút nên không ghi đè được)
+- Thay đổi ngoài khối lệnh: EC8 tách theo tầng (EC8 UI, EC55 API) vì không có yêu cầu nào đúng cho cả hai tầng; bỏ B7 khỏi EC11 theo quy tắc mới
+- Cần quyết định (chặn bước 5): không có
+- Không chặn: TC-64/74 gán nhãn MAX_UI cho "giá trị lớn" 1000 vì mô hình 9 điểm không có nhãn phù hợp hơn (giải thích trong notes của case) — giữ, hoặc đổi nhãn khác
+```
+
+Ở dòng Commit, em không chép được hash của commit vá harness. Đây là commit nằm giữa `8c72dcc` và `7dcb0a7`; xem bằng `git log --oneline -4`.
+````
 *File AI ghi/gửi trong lượt này:* `step3d_b.py`, `step4_b.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 124 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 121 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #125 | 11:07 20/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Nhiệm vụ 1 – Vá harness (commit riêng "HW02: vá harness – freeze timestamp có giây")
+- freeze.py: timestamp tên file thêm giây (YYYYMMDD-HHMMSS); không đổi tên file cũ.
+
+Nhiệm vụ 2 – B_FR07 sửa bước 4 (commit "HW02[B-FR07] 4/7b: sửa TC BVA theo review")
+1. TC-64, TC-74: nhãn điểm biên MAX_UI → LARGE; notes "đại diện giá trị lớn thay
+   UB/UB±1 (B1)". Thêm B1 vào truy vết của 2 case (cơ chế assumptions hoặc gắn
+   EC — chọn cách hợp với linter).
+2. Rà ec_target của MỌI TC (domain + BVA): lớp đầu ra mà Expected khẳng định phải
+   nằm trong ec_target. Sửa TC-65 (thêm EC41, EC42) và bất kỳ case nào khác lệch;
+   liệt kê các case đã sửa trong báo cáo.
+3. TC-66 notes: "dialog không khẳng định ở đây (EC47 kiểm ở TC-08/09); có thì xác
+   nhận, không có thì ghi Actual".
+4. Ghi chú suite TS-BVA-API: viết riêng cho API (chỉ V1 tầng API), bỏ phần V5/V7.
+5. render_md.py → freeze.py → check_domain.py → linter thầy → commit.
+
+Nhiệm vụ 3 – Dựng khung trống cho bước 5 (không commit, không điền nội dung)
+- Tạo HW02/B_FR07/sv_cases.md: chỉ tiêu đề cột giống bảng TC domain (UI và API
+  tách 2 bảng), quy ước mã TS-SV từ TC-FR07-200, nhắc quy tắc "UI+API phải tách 2
+  case". KHÔNG thêm ví dụ, KHÔNG gợi ý biến/lớp/giá trị nào.
+Dừng. Báo cáo theo CLAUDE.md.
+```
+
+**Output:**
+```
+Nhiệm vụ 2: rà ec_target. In ra các EC đầu ra có trong covers mà không nằm trong ec_target, để đối chiếu với Expected của từng case.
+
+Kết quả rà: TC-65 lệch như review nêu. Thêm 6 case nữa có Expected khẳng định giá trị Tổng nhưng thiếu EC42: TC-09, TC-10…13, TC-60.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 125 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #3); Claude Opus 5.5 122 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #118, #119, #120, #121, #122, #123, #124, #125); Claude (không rõ model) 1 lượt (#117). 1 lượt có output từ hơn một model nên được đếm ở cả hai.
