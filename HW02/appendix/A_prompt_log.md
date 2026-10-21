@@ -21922,7 +21922,127 @@ Commit `HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo`.
 
 ---
 
-## #363 | 06:43 21/10/2026 | Claude Opus 5.5 | [...]
+## #363 | 06:40 21/10/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đọc `claude/HW02_handoff.md`. A–D xong; bắt đầu báo cáo HW02. Viết lệnh cho Claude Code dùng skill `cs423-ai-first-homework` để liệt kê đủ form/mục phải nộp cho HW02 và dựng khung report. Transcript phiên này là `_p6`
+===
+Tôi vừa thêm Connector Github cho bạn, không biết bạn có thể xem được repo software-testing trực tiếp luôn không? (mặc dù đang để private)
+```
+
+**Output:**
+```
+Mình sẽ thử truy cập repo qua kết nối GitHub và đọc skill để lệnh khớp đúng danh mục form.
+
+No response requested.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #364 | 06:40 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Continue with the task described in the conversation above. Your most recent mcp__claude-code-remote__add_repo call has not run yet; nothing is wrong with the tool or its input. Run it now from the beginning with the tools you have, without assuming any result, file or state from it, and use the working directory and file locations you have now rather than ones earlier steps assumed.
+
+The user's timezone is Asia/Saigon (UTC+07:00).
+```
+
+**Output:**
+````
+**Về GitHub:** chưa xem được. Mình đã thử thêm `ThachHaoo/software-testing-2627` vào phiên và bị từ chối vì không có quyền. Danh sách repo mà phiên này thấy chỉ có repo **public** (45 repo, gồm `tkob-team/eshop-sut`), không có repo private nào. Trong phiên cũng không có công cụ GitHub riêng nào được nạp. Hai nguyên nhân có thể:
+
+- GitHub App của Claude chưa được cấp quyền vào repo đó. Bạn vào phần cài đặt GitHub App "Claude" trên GitHub, mục Repository access, thêm `software-testing-2627`.
+- Connector vừa thêm chưa bật cho chat này. Thường phải mở phiên mới hoặc bật trong cài đặt connector của chat.
+
+Kể cả khi đọc được, mình chỉ thấy những gì **đã push**. D chưa push nên vẫn chưa có trên đó. Vì vậy lệnh dưới đây vẫn để Claude Code làm trên máy và báo lại.
+
+---
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: HW02 – liệt kê form/mục phải nộp + dựng KHUNG report (chưa điền nội dung).
+
+0. Nạp skill `cs423-ai-first-homework` và làm theo §0, §1, §4 bước 1–2, §6.
+   Kiểm `git status`. Nếu nhánh còn commit chưa push thì chỉ ghi vào báo cáo, KHÔNG push.
+
+1. Đọc đề HW02 trong repo (tìm file đề/rubric. Không thấy → DỪNG, hỏi SV đường dẫn).
+   Lập trong `HW02/report_plan.md`:
+   a) Bảng biểu mẫu AI-01→AI-06 cho HW02 (bắt buộc?, nộp khi nào, AI làm phần nào, SV làm phần nào).
+      Đề khác bảng mặc định của skill → theo đề và ghi chỗ khác.
+      AI-04: chỉ đưa vào nếu đề yêu cầu.
+      AI-06: ghi "SV xác nhận đã nộp tuần 1?".
+   b) Bảng điểm/rubric của đề + cấp độ AI + ánh xạ từng requirement sang G9.x.
+   c) Danh sách MỌI file/mục phải nộp theo đề và Homework Policies:
+      - report .md + PDF
+      - Critique 200–300 từ
+      - Mandatory Disclosure
+      - Tự đánh giá
+      - AI-02, AI-03, AI-05 (.md + PDF ký)
+      - prompt log
+      - commit log
+      - ảnh trang Issues (`issues_page_*.png`)
+      - video demo skill (link)
+      - README
+      - tên zip theo mẫu đề, ≤ 20 file, ≤ 20 MB
+      Mỗi mục ghi trạng thái: ĐÃ CÓ (đường dẫn) / THIẾU / CẦN CẬP NHẬT.
+      Kiểm thật bằng ls/glob, không đoán.
+   d) Chỗ mâu thuẫn hoặc dễ sót trong đề (điểm mô tả ≠ rubric, yêu cầu chỉ có ở bảng CLO, file bắt buộc ẩn…).
+   e) Vị trí file form gốc (docx AI-02/03/05) nếu có trong repo. CHƯA chuyển đổi.
+
+2. Dựng khung report.
+   Tên file: theo đề. Đề không quy định → `HW02/report.md` (ghi rõ là tạm).
+   Khung theo §4 bước 2 của skill:
+   - Mục lục theo đúng thứ tự rubric; mỗi feature A_FR01, B_FR07, C_FR15, D_FR20 có mục con theo 7 bước.
+   - Bảng vẽ sẵn, ô cần điền ghi `[...]`.
+   - Chỗ cần số liệu: ghi `[số liệu: summary.py]`. KHÔNG gõ số tay.
+   - Placeholder ảnh `![...](đường_dẫn_thật_đang_có)`.
+   - Gắn 🔒 cho phần SV tự viết: Critique, gap analysis từng feature, verdict Audit, nội dung bug.
+     Bảng bug trong report: chỉ dựng cột trống.
+   - Khối 📝 hướng dẫn (xoá trước khi nộp).
+     Ở mỗi mục 🔒 gap analysis, 📝 chỉ được ghi đường dẫn tới dữ kiện có sẵn
+     (`sv_cases.md`, `ai_gap_answer.md`, `sv_questions.md`, `_groups_*.md`, RUN.md, `compare_web_mobile.md`).
+     KHÔNG viết nhận xét, KHÔNG tóm tắt.
+   - Có mục "Biểu mẫu AI" (danh sách file trong `ai-forms/`) và cây thư mục nộp bài.
+
+3. Ràng buộc:
+   - Không viết Critique, gap analysis, verdict Audit, mô tả bug.
+   - Không sửa `appendix/ai-outputs/`.
+   - Không sửa tay prompt log.
+   - Không đổi file của A–D.
+   - Không amend, không push.
+   - Chạy linter thầy nếu có áp dụng cho .md.
+
+4. Commit `HW02: kế hoạch nộp bài + khung report`
+   (gồm `report_plan.md`, file report khung, `HW02/appendix/A_prompt_log.md`).
+
+5. Báo cáo cho phiên thảo luận (≤ 25 dòng):
+   - đường dẫn đề đã đọc
+   - bảng form rút gọn (mã | bắt buộc | trạng thái)
+   - các mục THIẾU / CẦN CẬP NHẬT
+   - chỗ mâu thuẫn trong đề
+   - tên file report + số mục 🔒
+   - tên zip dự kiến
+   - hash commit
+   - commit chưa push (nếu có)
+```
+
+---
+
+Ghi chú: transcript phiên này là `_p6`. Khi xong mốc này, bạn nói "xuất transcript" là mình chép ra.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #365 | 06:43 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22054,7 +22174,46 @@ Linter thầy (`lint_testcases.py`) chỉ đọc JSON → không áp dụng cho 
 
 ---
 
-## #364 | 06:49 21/10/2026 | Claude Opus 5.5 | [...]
+## #366 | 06:43 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trong lúc chờ prompt chạy, mình vừa thêm quyền cho bạn, bạn thử xem lại nhé
+```
+
+**Output:**
+````
+Giờ mình đọc được repo rồi. Mình đã clone bản mới nhất, commit `015505b` ("CLAUDE.md – bài học D + chuyển giai đoạn báo cáo", đẩy lúc 06:38). Nghĩa là D đã được push, việc treo đó xong.
+
+Mình đã đối chiếu lệnh vừa đưa với `context/HW02_assignment.md` và `CLAUDE.md`. Có 1 chỗ lệnh sai và vài điểm cần lưu ý.
+
+**Lệnh sai 1 chỗ.** Tên report mình ghi tạm là `HW02/report.md`. Nhưng `CLAUDE.md` §6 và README đã chốt tên `HW02/23120255_HW02_Report.md`. Nếu Claude Code đã tạo `report.md`, gửi thêm cho nó:
+
+```
+Sửa: đổi tên khung report thành `HW02/23120255_HW02_Report.md` (theo CLAUDE.md §6 và README).
+Tạo commit mới, không amend.
+```
+
+**Lưu ý khi đọc báo cáo của nó (đề đã ghi rõ):**
+- **Câu khai bắt buộc ở §9 của đề.** Report và Audit phải có nguyên văn câu *"I use AI tools for the following tasks,"*. Mỗi lượt kèm tên công cụ, ngày giờ, prompt và output. Prompt log tự động đã đáp ứng phần nội dung, nhưng câu khai này cần có trong khung.
+- **Agent Skill (10 điểm).** Đề yêu cầu nộp skill kèm video YouTube. Skill hiện chỉ nằm ở `.claude/skills/domain-bva-testing`, còn `HW02/skills/` chưa có. Zip chỉ gồm `HW02/` nên phải chép skill sang trước khi nén. Việc này đã ghi trong CLAUDE.md, nhưng thiếu là mất 10 điểm.
+- **"Chưa chạy" trong README đang là 0, còn Blocked là 41.** Đề yêu cầu báo số "not yet executed". Case Blocked thực chất là chưa chạy được, nên có hai cách hiểu:
+  - (a) giữ nguyên, thêm 1 câu giải thích Blocked = không chạy được do bug gốc;
+  - (b) gộp Blocked vào "Chưa chạy".
+  
+  Mình khuyến nghị (a), vì cột Blocked đã tách riêng và có ghi case gốc. Bạn chọn.
+- **Mức Bloom-AI không thống nhất trong đề.** Bảng đầu ghi "G9.1 → G9.6", còn §3 và §8 ghi G9.2 + G9.3. Có thể ghi trong report: bài chính là G9.2/G9.3, phần Agent Skill thuộc G9.5.
+- **Form AI.** Repo không có file docx mẫu. Bản HW01 ở `HW01/ai-forms/*.md` là mẫu định dạng gần nhất. Khi làm form, Claude Code nên dựa vào đó nhưng không chép số liệu của HW01.
+
+Từ giờ, sau mỗi lần bạn push, mình có thể tự đọc repo để soát. Bạn chỉ cần dán phần báo cáo ngắn, không phải dán file.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #367 | 06:49 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22087,7 +22246,203 @@ Khung report giờ tên là `HW02/23120255_HW02_Report.md`. Đã tạo commit m�
 
 ---
 
-## #365 | 06:57 21/10/2026 | Claude Opus 5.5 | [...]
+## #368 | 06:50 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+2 báo cáo mới nhất:
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: liệt kê form/mục phải nộp HW02 và dựng khung report (chưa điền nội dung).
+- Đề đã đọc: context/HW02_assignment.md.
+- File đã tạo/sửa: HW02/report_plan.md (mục a–e), HW02/report.md (khung, tên tạm), HW02/appendix/A_prompt_log.md (hook tự sinh).
+- Form:
+  - AI-02: bắt buộc – THIẾU (ai-forms/ đang rỗng)
+  - AI-03: bắt buộc – THIẾU
+  - AI-05: bắt buộc – THIẾU
+  - AI-06: tuần 1 – cần SV xác nhận đã nộp (repo không có file nào)
+  - AI-04: không đưa vào vì đề không yêu cầu
+- File form gốc .docx: repo không có; chỉ có bản .md của HW01 ở HW01/ai-forms/.
+- THIẾU: report PDF, Critique, Mandatory Disclosure, appendix/commit_log.txt, video YouTube, HW02/skills/domain-bva-testing/, PDF
+  của các form.
+- CẦN CẬP NHẬT:
+  - README: ô tự đánh giá, dòng "Công cụ AI", tên
+  - Prompt log: prompt_log_notes.toml mới có 1 entry trên 363 lượt.
+  - 8 file BUG còn chữ "(chưa kiểm chứng)": BUG-04
+- Đề có chỗ mâu thuẫn hoặc dễ sót (14 điểm, chi tiết ở report_plan.md mục d). Chính:
+  - Bloom-AI: bảng đầu đề ghi G9.1–6, còn §3/§8 ghi G9.2+G9.3.
+  - Đề §9 bắt câu tuyên bố nguyên văn "I use AI to.
+  - Đề không nói Critique là file riêng hay một mục.
+  - Policies đòi PDF cho mọi .md, còn đề §14 chỉ đòi PDF cho report và Critique + Audit.
+  - Skill được 10 điểm nhưng đề chỉ ghi "encouraged".
+- Report: HW02/report.md (tên tạm), 10 mục 🔒 (bước 5 và bước 7 của 4 feature, bảng bug tổng, Critique) cộng cột Verdict/Lý do/Kết
+  luận trong mục Audit.
+- Zip dự kiến: 23120255_HW02_AI_DomainTesting_<ggg>.zip.
+- Kết quả kiểm tra: check_domain Not run (không đổ áp dụng cho .md, test Not run. 9 đường dẫn ảnhtrong khung đều trỏ tới file có thật.
+- Commit: d8627c7 HW02: kế hoạch nộp bài + khung report
+- Commit chưa push: 1 (d8627c7), theo ref origin/mg push.
+- Bất thường mới phát hiện:
+  - HW02/appendix/A_prompt_log.md:6904 (#118) và :16383 (#272) ghi model "Claude (không rõ model)".
+  - Zip thử HW02/ (đã bỏ node_modules và manual_raw) nặng 35,6 MB, vượt giới hạn 20 MB.
+- Cần quyết định:
+  - R1 – Tên report chính: giữ report.md hay đổi t(README và CLAUDE.md đang dùng tên này).
+  - R2 – Dung lượng 35,6 MB: nén ảnh evidence, split-and-zip, hay bỏ bớt file _* / ai-outputs.
+  - R3 – Phạm vi PDF: chỉ report + Critique + AI-0 testcases, prompt log).
+  - R4 – Critique: file riêng, hay chỉ là một mục trong report và AI-02.
+===
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: đổi tên khung report theo CLAUDE.md §6 và README.
+- File đã tạo/sửa:
+  - Đổi tên HW02/report.md thành HW02/23120255_HW02_Report.md bằng git mv, nên git ghi nhận là đổi tên.
+  - Trong report: sửa dòng 📝 ở đầu file và dòng tên file trong cây thư mục nộp bài, bỏ chữ "tên tạm".
+  - HW02/report_plan.md: sửa mục c.1 và d.8 sang tên đã chốt.
+  - HW02/appendix/A_prompt_log.md: hook tự sinh lại, không sửa tay.
+- Kết quả kiểm tra: check_domain, lint và test đều Not run, vì không đổi testcases.json.
+- Commit: 6f3b791 HW02: đổi tên khung report thành 23120255_HW02_Report.md
+- Commit chưa push: 2 (d8627c7, 6f3b791).
+- Cần quyết định: R1 đã xong. Còn 3 điểm từ báo cáo trước:
+  - R2 – Dung lượng zip 35,6 MB, vượt giới hạn 20 MB: nén ảnh, split-and-zip, hay bỏ bớt file.
+  - R3 – Phạm vi PDF: chỉ report, Critique và các form, hay mọi file .md.
+  - R4 – Critique: file riêng, hay chỉ là một mục trong report và AI-02.
+```
+
+**Output:**
+````
+Mình đã tự kiểm trên repo (bản đã push `015505b`) để có căn cứ cho R2–R4. Kết quả:
+
+- **Repo hiện là private.** Nhưng `CLAUDE.md` mục "Việc còn mở" vẫn ghi "repo đang public… chỉ push sau hạn nộp". Câu này đã cũ và mâu thuẫn với việc bạn đang push, cần sửa.
+- **Dung lượng.** Mình nén riêng các file đã commit trong `HW02/` bằng `git archive` thì zip chỉ **14,3 MB**. Con số 35,6 MB nhiều khả năng do file chưa commit hoặc bị ignore trên máy bạn (kết quả các lượt chạy cũ, `test-results`…).
+- **Tiền lệ HW01.** Zip HW01 chỉ có PDF cho report và 3 form. Critique là **§5 trong report**, AI-05 ghi "Critique có trong báo cáo".
+- **2 lượt "không rõ model" trong prompt log:**
+  - #118 chỉ là `[Request interrupted by user]`, không phải prompt.
+  - #272 là prompt thật của bạn, nhưng phản hồi là thông báo "You've hit your session limit", không có model.
+  
+  Trong `ai-outputs/` không file nào dẫn số #n, nên đánh số lại bây giờ là an toàn.
+- **`prompt_log_notes.toml` mới có 1/363 lượt.** Đây là phần việc tay lớn nhất còn lại.
+
+### Quyết định (trả lời theo mẫu `R2=a, …`)
+
+| Mã | Phương án | Khuyến nghị |
+|---|---|---|
+| R2 – dung lượng | **a)** zip bằng `git archive`, chỉ lấy file đã commit (14,3 MB, còn khoảng 5,7 MB cho PDF, skill, commit log) · b) nén thêm ảnh evidence · c) split-and-zip | **a**. Chỉ làm b nếu a vẫn vượt |
+| R3 – PDF | **a)** PDF cho report và AI-02/03/05, như HW01. Đủ §14 vì Critique nằm trong report, Audit là AI-02 · b) a + `README.pdf` (rẻ, giảm rủi ro hiểu Policies theo nghĩa "mọi .md") · c) mọi .md (hàng trăm file, vô lý) | **b** |
+| R4 – Critique | **a)** một mục trong report như HW01, AI-02 tham chiếu tới · b) file riêng | **a**, để khẳng định ở một nơi |
+| P1 – 2 lượt lạ | **a)** bỏ #118 (các số sau lùi 1); #272 giữ, gắn nhãn "không phản hồi – hết giới hạn phiên" · b) giữ cả hai, chỉ đổi nhãn | **a**. #118 không phải prompt |
+| P2 – ghi chú 363 lượt | **a)** vá script cho phép ghi chú **theo khoảng giờ** và in commit gần nhất cạnh mỗi lượt để bạn gom nhóm. Chữ vẫn do bạn viết · b) ghi từng lượt | **a** |
+
+Lưu ý: số #n còn đổi nếu sau này thêm transcript, gồm `_p6` của phiên này và khoảng 15:56–17:40 ngày 19/10 đang thiếu. Vì vậy chỉ viết số #n vào Audit/AI-03 **sau khi đã chốt đủ transcript**.
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: ghi quyết định R2–R4, P1–P2 + vá harness prompt log.
+Quyết định SV: R2=<...>, R3=<...>, R4=<...>, P1=<...>, P2=<...>   (còn <...> → DỪNG, hỏi)
+
+1. Ghi quyết định vào HW02/report_plan.md và CLAUDE.md "Quyết định đã chốt" (2026-10-21).
+   Sửa CLAUDE.md "Việc còn mở": repo đã private (kiểm 21/10), SV tự push. Bỏ câu "chỉ push sau hạn nộp".
+2. Dung lượng:
+   - In top 10 file/thư mục trong HW02 chưa commit hoặc bị ignore, kèm dung lượng
+     (git status --ignored --porcelain HW02 + du), để giải thích con số 35,6 MB.
+   - Đo `git archive --format=zip -o <scratch>/t.zip HEAD HW02`.
+   - Ghi số vào report_plan mục c.
+   - Nếu R2=a: thêm lệnh zip bằng git archive vào CLAUDE.md §6, kèm ghi chú
+     "commit hết (skill, PDF, commit log) rồi mới zip".
+3. Chỉnh khung report và report_plan theo R3, R4.
+4. Nếu P1=a: vá tools/extract_prompt_log.py
+   - bỏ lượt mà prompt chỉ là "[Request interrupted by user]" và không có output;
+   - lượt mà output là thông báo hệ thống, không có model (vd "You've hit your session limit")
+     → tool = "Claude (không phản hồi – hết giới hạn phiên)";
+   - header không còn "không rõ model".
+   Kiểm hồi quy: so output --list trước và sau. Chỉ được khác: mất #118, các số sau lùi 1, nhãn của lượt 20:44 20/10.
+5. Nếu P2=a: prompt_log_notes.toml nhận thêm khoá khoảng ["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]
+   - Áp cho mọi lượt trong khoảng. Khoá giờ đơn ưu tiên hơn khoá khoảng.
+   - Ghi cú pháp ở đầu file toml.
+   - Thêm `--list --commits`: mỗi lượt in kèm commit đầu tiên SAU lượt đó (hash + message), lưu ra file trong HW02/appendix/.
+   - KHÔNG điền section / mục đích / xử lý.
+6. Commit:
+   - `HW02: vá harness – prompt log (lượt hệ thống, khoá khoảng)`
+   - `HW02: chốt R2–R4, P1–P2`
+   Không amend.
+7. Báo cáo ≤ 15 dòng:
+   - top 5 nguồn gây 35,6 MB
+   - dung lượng git archive
+   - số lượt trước/sau khi vá
+   - đường dẫn file --list --commits
+   - hash
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #369 | 06:56 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Hiện tại, mặc dù chưa xong nhưng mình xem thấy thư mục HW02 là 64.6MB và 67.0 MB on disk. Không biết a có đủ không. 
+R2: a, b, c (sử dụng thêm b, c nếu không đủ)
+R3: a (vì mình thấy người ta toàn đọc README.md luôn chứ không chuyển sang pdf)
+R4: a
+P1: Mấy lượt đó chạm limit hoặc đang dùng thì Ctrl C thì để vậy cũng được
+P2: a
+```
+
+**Output:**
+````
+Đủ. Con số 64,6 MB trên máy bạn tính cả các thư mục không bao giờ vào zip, vì `.gitignore` đã loại chúng: `tests/node_modules`, `tests/results` của các lượt cũ, `D_FR20/manual_raw` (ảnh gốc chưa nén), `test-results`… Phương án a chỉ lấy file **đã commit**. Ở `015505b` phần đó là 23,8 MB chưa nén, nén lại còn **14,3 MB**. Lệnh dưới vẫn bắt Claude Code đo lại trên máy bạn, kèm 2 bản commit mới. Nếu vượt thì làm tiếp b, rồi c.
+
+**P1:** giữ nguyên cả hai lượt, không vá script. AI-03 chỉ cần 1 câu: 2 lượt ghi "không rõ model" là lượt bị ngắt (Ctrl C) và lượt chạm giới hạn phiên, không có phản hồi của model. Mình đã thêm câu này vào lệnh để nó ghi lại, khi điền AI-03 sẽ dùng.
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: ghi quyết định R2–R4, P1–P2 + vá harness ghi chú prompt log.
+Quyết định SV:
+  R2 = a (zip bằng git archive); nếu vượt 20 MB → b (nén thêm ảnh evidence); vẫn vượt → c (split-and-zip)
+  R3 = a (PDF cho report + AI-02/03/05; README không cần PDF — SV: người đọc xem README.md trực tiếp)
+  R4 = a (Critique là 1 mục trong report; AI-02 tham chiếu mục đó)
+  P1 = giữ nguyên #118 (Ctrl C) và lượt 20:44 20/10 (chạm giới hạn phiên); không vá script
+  P2 = a
+
+1. Ghi quyết định vào HW02/report_plan.md và CLAUDE.md "Quyết định đã chốt" (2026-10-21).
+   - Với P1, ghi thêm: "AI-03 cần 1 câu giải thích 2 lượt 'không rõ model'".
+   - Sửa CLAUDE.md "Việc còn mở": repo đã private (kiểm 21/10), SV tự push. Bỏ câu "chỉ push sau hạn nộp".
+2. Dung lượng:
+   - In top 10 file/thư mục trong HW02 chưa commit hoặc bị ignore, kèm dung lượng
+     (git status --ignored --porcelain HW02 + du).
+   - Đo `git archive --format=zip -o <scratch>/t.zip HEAD HW02`. Ghi số vào report_plan mục c.
+   - Thêm vào CLAUDE.md §6 lệnh zip bằng git archive, kèm ghi chú
+     "commit hết (skill, PDF, commit log) rồi mới zip; vượt 20 MB → nén ảnh → split-and-zip".
+3. Chỉnh khung report và report_plan theo R3, R4.
+4. P2 – vá tools/extract_prompt_log.py:
+   - prompt_log_notes.toml nhận thêm khoá khoảng ["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"],
+     áp cho mọi lượt trong khoảng. Khoá giờ đơn ưu tiên hơn khoá khoảng.
+   - Ghi cú pháp ở đầu file toml.
+   - Thêm `--list --commits`: mỗi lượt in kèm commit đầu tiên SAU lượt đó (hash + message),
+     ghi ra file trong HW02/appendix/ để SV gom khoảng.
+   - KHÔNG điền section / mục đích / xử lý.
+   - Kiểm hồi quy: output render trước và sau giống hệt nhau khi toml chưa có khoá khoảng.
+5. Commit, không amend:
+   - `HW02: vá harness – prompt log (khoá khoảng, --commits)`
+   - `HW02: chốt R2–R4, P1–P2`
+6. Báo cáo ≤ 15 dòng:
+   - top 5 nguồn gây chênh dung lượng
+   - dung lượng git archive
+   - kết quả hồi quy
+   - đường dẫn file --list --commits
+   - hash
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #370 | 06:57 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22179,7 +22534,139 @@ Archive 14,4 MB < 20 MB. Giờ sửa CLAUDE.md, report_plan, khung report.
 
 ---
 
-## #366 | 07:03 21/10/2026 | Claude Opus 5.5 | [...]
+## #371 | 07:01 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: ghi quyết định R2–R4, P1–P2 và vá script trích prompt log.
+- Top 5 nguồn làm zip thư mục (35,6 MB) nặng hơn bản git archive, đều là file bị ignore nên archive tự bỏ:
+  - tests/test-results/: 26,2 MB
+  - tests/node_modules/: 11,6 MB
+  - D_FR20/manual_raw/: 4,1 MB
+  - tests/results/A_FR01.json: 1,1 MB
+  - 2 file tests/results/C_FR15_*.json: mỗi file 0,96 MB
+- git archive HEAD HW02 đo tại c33a7df: 14,4 MB (967 file, 24,1 MB khi chưa nén), dưới 20 MB. Số này chưa gồm PDF, skills/ và commit_log.txt, nên phải đo lại trước khi nộp.
+- Hồi quy: chạy trên cùng bản chụp transcript (364 lượt) và toml chưa có khoá khoảng, A_prompt_log.md ra giống hệt bản trước vá, kể cả sau khi thêm chú thích cú pháp vào toml; --list cũng giống hệt.
+- Thử khoá khoảng:
+  - Lượt trong khoảng nhận section của khoảng.
+  - Khoá giờ đơn ghi đè từng trường (trường nào khhoảng).
+  - Lượt nằm trong nhiều khoảng thì dùng khoảng hẹp nhất; khoảng hẹp không thừa hưởng trường của khoảng rộng.
+  - Khoá có .. sai cú pháp thì script dừng với mã lỗi 1. Khoá viết sai mà không có .. (ví dụ dùng dấu -) thì bị bỏ qua im lặng,
+    giống khoá thường không khớp lượt nào.
+- File --list --commits: HW02/appendix/prompt_log_turns.txt (364 lượt). Bản đã commit chưa có các lượt từ phiên làm nhiệm vụ này trở đi; chạy lại lệnh ở CLAUDE.md §5 trước khi gom khoảng.
+- File đã tạo/sửa:
+  - Commit vá script: tools/extract_prompt_log.py, HW02/appendix/prompt_log_notes.toml (chỉ thêm chú thích cú pháp ở đầu, không điền Section/Mục đích/Xử lý), HW02/appendix/prompt_log_turns.txt.
+  - Commit chốt quyết định: CLAUDE.md (Quyết định đã chốt, Việc còn mở, §5 và §6), HW02/report_plan.md (mục a, c, d và mục mới f),
+    HW02/23120255_HW02_Report.md.
+  - Cả 2 commit kèm HW02/appendix/A_prompt_log.md do hook sinh lại.
+- Commit:
+  - c33a7df HW02: vá harness – prompt log (khoá khoảng, --commits)
+  - f38933d HW02: chốt R2–R4, P1–P2
+- Cần quyết định: không có điểm chặn.
+```
+
+**Output:**
+````
+Báo cáo ổn: số liệu dung lượng khớp với bản mình đo (14,3 → 14,4 MB) và hồi quy sạch. Có 1 điểm nên vá. Script hiện **bỏ qua im lặng** khoá viết sai, ví dụ dùng `-` thay cho `..`. Bạn sắp viết vài chục khoá, viết sai một khoá là cả khoảng đó mất ghi chú mà không ai biết. Nên để script **cảnh báo** mọi khoá không khớp lượt nào. Mình đã gộp việc này vào lệnh dưới.
+
+Bạn **push** 4 commit mới (`d8627c7` → `f38933d`) để mình đọc trực tiếp khung report trên repo trước khi Claude Code điền nội dung.
+
+### Việc còn lại
+
+1. AI điền phần dữ kiện của report, từng feature.
+2. Bạn viết gap analysis, Critique và ghi chú prompt log.
+3. Hoàn thiện AI-02, AI-03 và README (tự đánh giá).
+4. Quay video, chép skill sang `HW02/skills/`, xuất commit log.
+5. Làm AI-05 và xuất PDF.
+6. Chạy `hw-submission-audit`, rồi zip.
+
+### 2 quyết định trước khi điền report
+
+| Mã | Câu hỏi | Phương án | Khuyến nghị |
+|---|---|---|---|
+| E1 | Phần "giải thích từng bước áp dụng kỹ thuật" (đề §6.1–6.2, được chấm điểm nhưng **không** nằm trong danh mục cấm) | a) AI nháp từ JSON, giả định và lịch sử review; gắn nhãn để bạn duyệt; khai trong Audit · b) bạn tự viết | **a** |
+| B1 | Bảng bug tổng trong report | a) AI **chép nguyên văn** ID, tiêu đề, Severity, Priority, TC, link issue từ `BUG-xx.md` do bạn viết, nhãn "(AI chép)". Không thêm chữ nào · b) bạn tự điền | **a**. Đây là chép dữ kiện, không phải nháp mô tả |
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: (1) vá nhỏ harness prompt log; (2) điền phần DỮ KIỆN của report cho A_FR01, rồi DỪNG chờ review.
+Quyết định SV: E1=<...>, B1=<...>   (còn <...> → DỪNG, hỏi)
+
+1. Vá tools/extract_prompt_log.py:
+   - In cảnh báo ra stderr cho mọi khoá trong prompt_log_notes.toml không khớp lượt nào
+     (kể cả khoá sai cú pháp không có '..').
+   - Hồi quy: output giống hệt bản trước.
+   - Commit riêng: `HW02: vá harness – cảnh báo khoá ghi chú không khớp`.
+
+2. Report mục A_FR01, theo khung đã có và "4 bảng theo slide" (CLAUDE.md §6):
+   - Bảng sinh từ HW02/A_FR01/testcases.json (biến, lớp, minimum set, BVA 9 điểm).
+     Bảng dài → trích gọn + link `A_FR01/testcases.md`. Không chép toàn bộ TC.
+   - Giả định: bản cuối của SV (tra git), giữ "SV chốt + lý do".
+   - Số liệu: lấy từ summary.py hoặc JSON, ghi lệnh/nguồn. Không gõ số tay.
+   - Nếu E1=a: nháp phần giải thích từng bước.
+     Đầu mỗi khối ghi "> 📝 AI nháp – SV duyệt/sửa, xoá dòng này khi xong".
+     Chỉ dựa trên dữ kiện có trong repo (JSON, review_log, commit). Không suy đoán lý do SV không ghi.
+   - Nếu B1=a: bảng bug của A, chép nguyên văn các trường từ HW02/bugs/BUG-xx.md, ghi "(AI chép)".
+   - KHÔNG đụng mục 🔒 (gap analysis bước 5, Critique) ngoài việc giữ link dữ kiện.
+   - Kiểm: mọi link/ảnh trỏ tới file có thật; số trong report = số summary.py.
+   - Commit: `HW02: report – điền dữ kiện A_FR01`.
+
+3. Báo cáo ≤ 15 dòng:
+   - số dòng mục A
+   - danh sách khối 📝 AI nháp
+   - chỗ dữ kiện thiếu hoặc mâu thuẫn (file:dòng)
+   - hash
+   DỪNG, không làm B–D.
+```
+
+Sau khi xong A, bạn push. Mình soát A trên repo, rồi lệnh cho B–D sẽ chạy một lượt.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #372 | 07:03 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Khi nào làm 1. AI điền phần dữ kiện của report, từng feature. nhỉ? Lúc đó cũng báo cho mình để mình làm việc viết tay này nhé: "Bạn viết gap analysis, Critique và ghi chú prompt log."
+```
+
+**Output:**
+```
+Bước 1 bắt đầu ngay khi bạn điền `E1=…, B1=…` vào lệnh vừa đưa rồi dán cho Claude Code. Bước 2 trong lệnh đó chính là điền dữ kiện cho A_FR01. Sau khi mình soát A, lệnh tiếp theo sẽ điền B, C, D trong một lượt.
+
+Ba việc viết tay **không phải chờ** bước 1, vì dữ kiện đã có sẵn trong repo. Thứ tự hợp lý:
+
+1. **Gap analysis (làm ngay, song song với AI).**
+   - Mỗi feature dựa trên `sv_cases.md`, `ai_gap_answer.md`, `sv_questions.md` của feature đó.
+   - Mục "Chất liệu gap analysis" trong handoff là danh sách dữ kiện để bạn đối chiếu, không phải bài viết.
+   - Bạn có thể viết ra file nháp riêng rồi dán vào report khi Claude Code điền xong mục feature đó, để khỏi đụng commit của nó.
+2. **Ghi chú prompt log (làm ngay).**
+   - Khoá ghi chú theo **giờ**, nên thêm transcript sau (`_p6`, khoảng thiếu 19/10) không làm lệch ghi chú đã viết.
+   - Bạn chỉ cần bổ sung khoá cho các lượt mới.
+   - Trước khi bắt đầu, nhờ Claude Code chạy lại lệnh `--list --commits` để `prompt_log_turns.txt` có đủ lượt.
+3. **Critique (làm sau cùng).**
+   - Nên viết sau gap analysis của cả 4 feature, vì Critique rút ý từ đó (AI sai, bỏ sót gì, vì sao).
+   - Lúc AI điền xong D, mình sẽ nhắc bạn chuyển sang Critique.
+
+Ở mỗi mốc, mình sẽ báo rõ phần nào đã sẵn để bạn viết tay:
+- A xong → gap analysis A có chỗ dán trong report.
+- B–D xong → đủ chỗ cho gap analysis B–D, và đến lúc viết Critique.
+- Trước khi làm AI-02/AI-03 → ghi chú prompt log phải xong, vì Audit lấy Section và Xử lý từ đó.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #373 | 07:03 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22268,7 +22755,170 @@ Mục A_FR01 trong report đã có đủ dữ kiện. Em dừng ở đây chờ 
 
 ---
 
-## #367 | 07:17 21/10/2026 | Claude Opus 5.5 | [...]
+## #374 | 07:06 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Gap analysis là viết gì nhỉ? Và viết ở đâu? tên file là gì?
+```
+
+**Output:**
+```
+### Gap analysis là gì
+
+Đây là yêu cầu (3) ở đề §6, áp dụng cho từng feature. Bạn liệt kê các **test case và bug mà AI bỏ sót**, rồi giải thích **vì sao** AI bỏ sót. Đề gợi ý ba loại nguyên nhân:
+
+- chất lượng input của bạn (prompt, ngữ cảnh đưa cho AI);
+- giới hạn của công cụ AI;
+- độ phức tạp của feature.
+
+Phần này nằm trong danh mục 🔒, nên bạn tự viết. Mình chỉ gợi ý **cách tổ chức** cho mỗi feature, không gợi ý nội dung:
+
+1. **Bảng case AI bỏ sót.** Mỗi case TS-SV một dòng, gồm các cột:
+   - TC
+   - lớp/điểm được kiểm
+   - AI tự phân loại ra sao (theo `ai_gap_answer.md`: *không nghĩ tới* / *nghĩ tới nhưng không đưa vào* / *gỡ theo quyết định SV*)
+   - case đó có lộ bug không (BUG-xx)
+   - nguyên nhân theo bạn (prompt / công cụ / độ phức tạp)
+2. **Bug AI bỏ sót:** bug chỉ lộ ra nhờ case của bạn, hoặc nhờ bạn kiểm tay.
+3. **Giải thích vì sao.** Gom theo ba nguyên nhân trên, mỗi ý kèm dẫn chứng (TC, commit, file). Lưu ý:
+   - lời AI tự giải thích trong `ai_gap_answer.md` chỉ là **lời AI nói**; bạn đánh giá đúng hay sai, không chép lại làm kết luận;
+   - một ví dụ chưa đủ để kết luận "AI thường…".
+4. **Case của bạn bị bỏ và lý do**, nếu có (ví dụ C bỏ 7 case, D bỏ 3 case). Đây là phần trung thực về lỗi thiết kế của chính bạn, ghi được điểm.
+5. **Điều chỉnh rút ra** cho feature sau (ví dụ quyết định P1=b ở D xuất phát từ phát hiện ở C).
+
+Dữ kiện để đối chiếu nằm ở mục "Chất liệu gap analysis" trong handoff, cùng các file `sv_cases.md`, `ai_gap_answer.md`, `sv_questions.md` và `_groups_*.md` của từng feature.
+
+### Viết ở đâu, tên file
+
+Nội dung cuối cùng phải nằm **trong report chính** (`HW02/23120255_HW02_Report.md`), ở mục 🔒 bước 5 của từng feature, vì đề yêu cầu báo cáo trong report.
+
+Trong lúc Claude Code còn sửa report, bạn **viết ra file nháp riêng** để tránh xung đột:
+
+- `HW02/A_FR01/gap_analysis_sv.md`
+- `HW02/B_FR07/gap_analysis_sv.md`
+- `HW02/C_FR15/gap_analysis_sv.md`
+- `HW02/D_FR20/gap_analysis_sv.md`
+
+Xong feature nào thì commit `HW02[A-FR01]: SV viết gap analysis` (đổi mã theo feature). Sau đó Claude Code **chép nguyên văn** vào report và xoá file nháp. Lịch sử git vẫn giữ bản của bạn làm bằng chứng phần này do bạn tự viết.
+
+### Cách làm nhanh hơn
+
+Muốn đỡ việc, bạn có thể cho Claude Code dựng sẵn **khung bảng ở mục 1**. Nó chỉ chép dữ kiện (TC, lớp, cách AI tự phân loại, BUG-xx), còn cột "nguyên nhân theo bạn" và mục 2–5 để trống cho bạn. Nếu cần, mình gộp việc này vào lệnh điền A.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #375 | 07:14 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Vá prompt log (ec3719f):
+  - Khoá ghi chú không khớp lượt nào giờ in cảnh báo ra stderr, kể cả khoá thiếu ... Hồi quy: output giống hệt bản trước.
+  - Ngoài lệnh: sửa thêm 1 dòng tools/hooks/on_stop.py để hook ghi cảnh báo vào log, nếu không cảnh báo bị nuốt khi chạy tự động.
+- Mục A dài 303 dòng. Bảng sinh bằng script mới tools/report_tables.py (ngoài lệnh, để tái tạo được số và dùng lại cho B–D; chạy lại cho kết quả giống hệt). Bảng gồm:
+  - phạm vi, yêu cầu, giả định kèm nguồn gốc theo freeze + git;
+  - biến, lớp và TC phủ;
+  - minimum set (trích 3 case đầu mỗi suite);
+  - ma trận BVA 9 điểm;
+  - kết quả chạy;
+  - bảng bug ghi "(AI chép)".
+- Tổng A khớp dòng A_FR01 của summary.py: 133 thiết kế / 108 đã chạy / 43 Pass / 65 Fail / 25 Blocked / 0 chưa chạy, nguồn AI 98 · Both 10 · Human 25, 14 bug.
+- Khối 📝 AI nháp (5 khối): 3.1 Bước 1, 3.2 Bước 2, 3.3 Bước 3, 3.4 Bước 4, 3.6 Bước 6.
+- Mục 3.7 có tiêu đề 🔒 nhưng giờ chứa bảng bug AI chép từ BUG-xx.md (theo B1=a), không có lời AI viết.
+- Mâu thuẫn dữ kiện: CLAUDE.md:86 ghi A3 đổi ở 8d8ổi ở 1cfa163 (5/7b); ở 8d837f1 A3 vẫn là bản của4e30b25.
+- Cần SV xem: bản AI đóng băng bước 3 dùng mã TC khác bản cuối (TC-05 lúc đó là "Email rỗng"). Vì vậy phần review bước 3 chỉ ghi việc tách suite UI/API, không ghi số case đã sửa
+- Commit: ec3719f (vá cảnh báo), 8cf76b0 HW02: report – điền dữ kiện A_FR01
+```
+
+**Output:**
+````
+Mình đã đọc mục A trên repo (`8cf76b0`). Nhìn chung tốt: bảng sinh bằng script có marker, số liệu khớp `summary.py`, bảng bug chép đúng chữ của bạn. Có 4 điểm cần xử lý:
+
+1. **Sai dữ kiện ở 3.6.** Report ghi "TC-FR01-216 kiểm tay trên trang admin". Theo `testcases.json`, TC-216 được kiểm tay **qua API**, sau đó xem header web sau khi đăng nhập. Trang admin không có cột Họ Tên nên chính bạn đã bỏ nó khỏi điểm quan sát (ảnh `_manual_admin.png`).
+2. **Mâu thuẫn hash của A3 là lỗi của phiên thảo luận.** Claude Code đúng: A3 bản 2 nằm ở `1cfa163` (5/7b), còn `8d837f1` vẫn là bản 1. Mình đã kiểm cả 3 commit. Hash sai này lan sang `CLAUDE.md:86` và sang D: `D_FR20/testcases.json` (D5, nằm trong câu lý do của bạn), `testcases.md` và `step1_notes.md`. Nội dung A3 ở hai bản D trích là giống hệt nhau, nên verdict D không bị ảnh hưởng. Khuyến nghị: sửa `CLAUDE.md`; **giữ nguyên** các file D vì hash nằm trong câu bạn chốt, chỉ thêm 1 dòng đính chính vào danh sách khai Audit.
+3. **A dùng `api_specification.md` làm căn cứ** (yêu cầu API-REG, các giả định A8, A11, A12). Từ C trở đi bạn chốt không dùng tài liệu này (C9). Đây không phải lỗi của A, nhưng report nên có **1 câu** nêu việc đổi căn cứ từ C. Câu đó có thể đặt ở §2.3 hoặc trong gap analysis/Critique, tuỳ bạn.
+4. **§2 Phương pháp chung còn trống** (bảng 9 điểm, verdict, Expected). Ngoài ra các khối giải thích nhắc tên quy tắc chia lớp (`split`, `must-be`, `set`…) nhưng chưa giải thích nghĩa ở đâu. Nên giải thích một lần ở §2 để cả 4 feature dùng chung.
+
+**Lưu ý khi bạn viết tay:** bảng trong report do script sinh giữa các marker `<!-- REPORT:…:START/END -->`, và lần chạy sau sẽ ghi đè phần đó. Vì vậy chữ bạn viết (gap analysis, Critique) phải nằm **ngoài marker**. Viết trong file nháp `gap_analysis_sv.md` như đã bàn là an toàn nhất. Lệnh dưới cũng bắt Claude Code kiểm rằng các mục 🔒 không nằm trong marker.
+
+Các khối 📝 AI nháp đang viết theo giọng "em". Khi bạn xoá dòng 📝, phần đó vẫn phải được khai trong Mandatory Disclosure và AI-02 là "AI nháp, em duyệt/sửa". Mình đã đưa việc này vào lệnh.
+
+### Quyết định
+
+| Mã | Câu hỏi | Phương án | Khuyến nghị |
+|---|---|---|---|
+| G1 | Mục 3.5 / 4.5 / 5.5 / 6.5 | a) AI điền **bảng case TS-SV** (chép từ JSON) và các cột dữ kiện của bảng "Vì sao AI bỏ sót": TC, cách AI tự phân loại chép nguyên văn từ `ai_gap_answer.md` có nhãn "(AI tự nhận)", BUG-xx. Bạn viết cột "nguyên nhân theo em", phần giải thích và mục 2–5 · b) để trống toàn bộ | **a** |
+| H1 | Hash sai `8d837f1` | a) sửa `CLAUDE.md`, giữ file D, ghi đính chính cho Audit · b) sửa cả file D | **a** |
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: sửa A + điền §2 + điền dữ kiện B, C, D (mỗi feature 1 commit).
+Quyết định SV: G1=<...>, H1=<...>   (còn <...> → DỪNG, hỏi)
+
+0. Sửa A (commit `HW02: report – sửa dữ kiện A_FR01`):
+   - 3.6: câu về TC-FR01-216 sửa theo notes của case trong testcases.json
+     (kiểm tay qua API + header web; trang admin không dùng làm điểm quan sát).
+   - H1=a: sửa CLAUDE.md:86, hash A3 bản 2 = 1cfa163 (5/7b), bản 1 = 4e30b25.
+     KHÔNG sửa file D. Thêm vào report_plan.md, mục "Khai cho Audit":
+     "phiên thảo luận đưa sai hash 8d837f1 cho A3 bản 2 (đúng 1cfa163);
+      D5 trích hash sai, nội dung giống hệt".
+   - report_plan.md, danh sách cho Mandatory Disclosure: thêm
+     "khối giải thích từng bước (3.x–6.x) do AI nháp, em duyệt/sửa" và "tools/report_tables.py do AI viết".
+
+1. §2 Phương pháp chung (cùng commit trên). Chỉ dùng nguồn có trong repo:
+   SKILL.md của domain-bva-testing, CLAUDE.md "Quyết định đã chốt".
+   - Bảng 9 điểm + LARGE.
+   - Nghĩa của các quy tắc chia lớp (split, must-be, set, type, range, output) theo SKILL.md.
+   - Quy ước verdict (Fail / Blocked / Pass hộp đen / Fail do lỗi thiết kế TC).
+   - Quy ước Expected (căn cứ SRS hoặc giả định SV chốt; SRS im lặng → không tạo Fail).
+   - Thêm 1 dòng 📝: "em quyết có ghi việc đổi căn cứ api_specification.md từ C (C9) ở đây hay không".
+   Không trích slide nếu không có trong repo.
+
+2. B_FR07, C_FR15, D_FR20: làm như A, mỗi feature 1 commit `HW02: report – điền dữ kiện <X_FRnn>`.
+   - Bảng qua tools/report_tables.py (có marker).
+   - Khối 📝 AI nháp giải thích từng bước, chỉ dựa trên dữ kiện có trong repo.
+   - Bảng bug "(AI chép)".
+   - D thêm 6.8 từ D_FR20/compare_web_mobile.md (link + bảng tóm tắt nếu script sinh được).
+   - Chạy tay (D): mô tả theo RUN.md.
+
+3. Nếu G1=a: ở mục bước 5 của cả 4 feature, sinh bằng script (có marker):
+   - bảng case TS-SV chép từ JSON;
+   - bảng "Vì sao AI bỏ sót" chỉ điền: TC | BUG-xx | "AI tự nhận" (chép nguyên văn nhãn phân loại trong ai_gap_answer.md).
+     Cột "Nguyên nhân theo em" và "Giải thích" để `<SV viết>`, đặt NGOÀI marker
+     (hoặc marker chỉ bao các cột dữ kiện; chọn cách nào để chữ SV không bị ghi đè).
+   - Số TC em bổ sung lấy từ summary.py.
+
+4. Kiểm:
+   - Không mục 🔒 nào có lời AI viết.
+   - Không mục 🔒 nào nằm trong marker.
+   - Số liệu mỗi feature = summary.py.
+   - Link/ảnh tồn tại.
+   - Chạy lại report_tables.py → không đổi gì.
+
+5. Báo cáo ≤ 20 dòng:
+   - hash từng commit
+   - số dòng mỗi mục
+   - danh sách khối 📝 AI nháp
+   - mâu thuẫn dữ kiện (file:dòng)
+   DỪNG.
+```
+
+Khi lệnh này xong, gap analysis của cả 4 feature đã có chỗ dán. Lúc đó bạn bắt đầu viết `gap_analysis_sv.md`, theo thứ tự A → D, rồi đến Critique.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #376 | 07:17 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22399,7 +23049,199 @@ Dùng Edit trực tiếp.
 
 ---
 
-## #368 | 07:33 21/10/2026 | Claude Opus 5.5 | [...]
+## #377 | 07:28 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - 1182899 sửa dữ kiện A_FR01 (gồm §2, CLAUDE.md:86, report_plan mục g/h)
+  - 1ff456e B_FR07 · 91586b4 C_FR15 · e7690d2 D_FR20
+- Số dòng: §2 = 87 · A = 399 · B = 383 · C = 420 · D = 329.
+- Khối 📝 AI nháp (21 khối): 1 khối cho cả §2, cộng 5 khối mỗi feature ở x.1, x.2, x.3, x.4, x.6.
+- Bước 5 (G1=a):
+  - Bảng case TS-SV (chép từ JSON) và bảng "AI tự nhận" nằm trong marker.
+  - Bảng "Nguyên nhân theo em / Giải thích" điền sẵn <SV viết> cho từng TC, nằm ngoài marker nên script không ghi đè.
+- Thêm vào script: cột LARGE, cách nhóm BVA cho B–D, bảng bug tính giống summary.py, bảng tóm tắt web ↔ mobile ở 6.8.
+- Mâu thuẫn dữ kiện:
+  - D_FR20/testcases.json: giả định D5 cũng ghi "A3 bản cuối (A_FR01, 8d837f1)". Đây là cùng hash sai như D_FR20/step1_notes.md:121; không sửa vì lệnh cấm sửa file D.
+  - HW02/tests/README.md:6 ghi spec của các feature khác nằm ở specs/, nhưng thực tế ở tests/B_FR07/, tests/C_FR15/; specs/ rỗng.
+  - C_FR15/RUN.md:79–81 trỏ tới tests/results/C_FR15_*.json, nhưng các file này bị gitignore nên sẽ không có trong zip git archive.
+  - C_FR15/testcases.json: danh sách giả định nhảy từ C21 sang C23, không có C22.
+  - SKILL.md không định nghĩa quy tắc chia lớp output, nhưng A và D có dùng. Đã ghi rõ ở bảng §2.3, không suy diễn thêm.
+- Bất thường: có 2 file chưa track, không phải do em tạo: HW02/A_FR01/gap_analysis_sv.md và HW02/B_FR07/gap_analysis_sv.md. Em không đọc, không commit.
+- Cần quyết định:
+  - GA1 – nếu 2 file gap_analysis_sv.md là bản SV viết cho phần "vì sao AI bỏ sót": chép vào bảng <SV viết> trong report (a), hay chỉ đặt link tới file (b)?
+```
+
+**Output:**
+````
+Bạn chưa push 4 commit mới (`1182899` → `e7690d2`), nên mình chưa đọc được B–D. Đẩy lên để mình soát. Trong lúc đó, xử lý các điểm Claude Code nêu như sau:
+
+- **Hash `8d837f1` ở D5:** đúng là không sửa, như đã chốt H1=a. Đính chính đã nằm trong report_plan.
+- **C22 không có:** đây là chuyện đã biết. Handoff ghi "C19 bỏ cùng TC-204, C22 không dùng", và quy ước là giữ khoảng trống số. Nên thêm 1 dòng ghi chú dưới bảng giả định của C để người chấm không tưởng sót. Mình đã đưa vào lệnh.
+- **`tests/README.md:6` trỏ sai thư mục:** chỉ là tài liệu harness, sửa luôn.
+- **`RUN.md` của C trỏ tới file kết quả bị gitignore (K1):** đây là kết quả thô của lượt chạy chính thức, tức bằng chứng Actual.
+  - a) chỉ commit file kết quả của **lượt chính thức** mỗi feature (A khoảng 1,1 MB, C khoảng 1 MB; JSON nén rất tốt, zip tăng không đáng kể);
+  - b) giữ nguyên, ghi vào `RUN.md` là "không nộp".
+  
+  Khuyến nghị **a**. B đã có `B_FR07.json` được commit theo cách này.
+- **Quy tắc `output` không có trong SKILL.md:** skill là bài nộp 10 điểm, mà A và D lại dùng một quy tắc skill không định nghĩa. Nên bổ sung định nghĩa vào SKILL.md, rút từ cách A và D đã dùng (lớp của biến ra), không đặt thêm luật mới. Việc này là vá harness, commit riêng.
+- **GA1:** khuyến nghị **a**, với thứ tự như sau:
+  1. Claude Code commit nguyên 2 file của bạn trước, làm bằng chứng phần này do bạn viết.
+  2. Chép **nguyên văn** vào mục 3.5 và 4.5 trong report, nằm ngoài marker.
+  3. Xoá file nháp ở một commit sau; lịch sử git vẫn giữ bản gốc.
+  
+  Nếu bài của bạn không theo từng TC, Claude Code đặt nguyên đoạn văn vào report và bỏ bảng `<SV viết>` trống, không tự xếp lại câu chữ.
+
+Sau khi push, mình có thể soát **cách viết** của gap analysis A và B: chỗ khẳng định quá mức so với bằng chứng, chỗ dẫn chứng sai TC hay sai commit. Mình không sửa câu chữ của bạn.
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: đưa gap analysis SV (A, B) vào report + vá lặt vặt.
+Quyết định SV: GA1=<...>, K1=<...>   (còn <...> → DỪNG, hỏi)
+SV xác nhận: HW02/A_FR01/gap_analysis_sv.md và HW02/B_FR07/gap_analysis_sv.md là bản SV viết.
+
+1. Commit nguyên 2 file, KHÔNG sửa chữ nào (mỗi file 1 commit):
+   `HW02[A-FR01]: SV viết gap analysis`, `HW02[B-FR07]: SV viết gap analysis`.
+2. Nếu GA1=a:
+   - Chép nguyên văn vào 3.5 và 4.5, ngoài marker.
+   - Nội dung theo từng TC → điền vào ô <SV viết> tương ứng.
+     Không theo từng TC → đặt nguyên đoạn dưới bảng "AI tự nhận" và bỏ bảng <SV viết> trống.
+   - Không sửa câu chữ, không sửa chính tả.
+   - Kiểm diff: nội dung chép = file gốc, từng ký tự.
+   - Commit `HW02: report – chép gap analysis SV A, B`.
+   - Sau đó xoá 2 file nháp, commit riêng `HW02: xoá nháp gap analysis A, B (đã chép vào report)`.
+   Nếu GA1=b: chỉ đặt link tới file ở 3.5/4.5.
+3. Vá lặt vặt (commit `HW02: report – vá dữ kiện`):
+   - Report mục giả định C: thêm 1 dòng
+     "C19 bỏ cùng TC-FR15-204; C22 không dùng; giữ khoảng trống mã theo quy ước".
+     Kiểm lại bằng git trước khi ghi.
+   - HW02/tests/README.md:6: sửa đường dẫn spec cho đúng thực tế.
+   - Nếu K1=a: `git add -f` CHỈ file kết quả của lượt chính thức mỗi feature
+     (A, C; B đã có; D chạy tay → file lượt chạy tay, nếu đã có thì bỏ qua).
+     Cập nhật RUN.md cho khớp. Ghi tên + dung lượng file vào báo cáo.
+4. Vá skill (commit riêng `HW02: vá harness – SKILL.md định nghĩa quy tắc output`):
+   - Thêm định nghĩa `output` vào .claude/skills/domain-bva-testing/SKILL.md,
+     rút từ cách A và D đã dùng (trích 1–2 lớp làm ví dụ).
+   - Không thêm luật mới. Cập nhật §2.3 report trỏ tới định nghĩa này.
+5. Đo lại `git archive HEAD HW02`.
+6. Báo cáo ≤ 15 dòng: hash, kết quả diff chép nguyên văn, dung lượng archive.
+```
+
+Khi bạn viết xong C và D, cứ đặt file nháp cùng tên ở thư mục C và D rồi báo mình. Lệnh lần sau sẽ lặp lại đúng quy trình này.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #378 | 07:31 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Hiện tại vẫn còn nhiều phần trong report chưa được viết. Bạn có thể nói AI viết tất cả các phần đó, còn AI gap analysis thì đợi tôi viết xong tôi tự commit được không?
+```
+
+**Output:**
+````
+Được. Phần lớn chỗ còn trống AI làm được. Dưới đây là ranh giới, rồi đến lệnh.
+
+### AI làm (trong lệnh dưới)
+
+- **Đầu report:**
+  - dòng "Công cụ AI" lấy từ header của prompt log;
+  - câu tuyên bố ở §9 của đề, phần liệt kê việc AI làm, viết khớp với Mandatory Disclosure.
+- **§1 Môi trường:** lấy từ `env/environment.md` và patch.
+- **§7 Agent Skill:** mô tả skill, cấu trúc thư mục, cách dùng; để trống ô link video.
+- **§8 Test summary:** từ `summary.py`.
+- **§9 Bug tổng hợp:** chép nguyên văn từ `BUG-xx.md`, giống các bảng bug của từng feature.
+- **§10 AI Audit:** dựng **danh mục artifact** và điền mục (1), (2), (5) từ dữ kiện có sẵn (ai-outputs, review_log, git diff, các file harness). Mục (3) Verdict và (4) Lý do để bạn viết. Số #n để chỗ chờ, vì số #n còn đổi cho đến khi chốt transcript (`_p6` và khoảng thiếu ngày 19/10).
+- **§12 Mandatory Disclosure:** AI nháp danh sách sự kiện; bạn xác nhận.
+- **§13 Tự đánh giá:** AI điền cột **căn cứ** (dữ kiện). Bạn tự cho điểm.
+- **§14, §15:** danh mục form, phụ lục, cây thư mục.
+- Các vá lặt vặt đã bàn: ghi chú C19/C22, `tests/README.md`, file kết quả lượt chính thức (K1=a), định nghĩa `output` trong SKILL.md.
+
+### Bạn tự làm (AI không được làm)
+
+- Gap analysis 4 feature.
+- Critique 200–300 từ.
+- Verdict và lý do của Audit.
+- Điểm tự đánh giá.
+- Video có giọng bạn và link video.
+- Ghi chú prompt log.
+- Ngày nộp.
+- Chữ ký.
+- Tick các mục cam kết trong AI-05.
+- **Duyệt 21 khối 📝 AI nháp** (phần này được chấm điểm).
+
+**Về gap analysis:** viết trong `gap_analysis_sv.md`. **Đợi lệnh dưới chạy xong** rồi mới tự dán vào mục x.5 của report, nằm ngoài marker. Như vậy hai bên không sửa cùng một file một lúc. Commit theo mẫu `HW02[A-FR01]: SV viết gap analysis`. Lệnh dưới cấm Claude Code đụng vào mục x.5 và 2 file nháp của bạn.
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: điền mọi phần DỮ KIỆN còn trống của report + vá lặt vặt.
+SV tự viết gap analysis và tự commit → KHÔNG sửa mục 3.5/4.5/5.5/6.5,
+KHÔNG đọc/commit HW02/*/gap_analysis_sv.md.
+Quyết định SV: K1=a (commit file kết quả lượt chính thức; đổi nếu SV chọn b)
+
+1. Vá lặt vặt (commit `HW02: report – vá dữ kiện`):
+   - Dưới bảng giả định C: "C19 bỏ cùng TC-FR15-204; C22 không dùng; giữ khoảng trống mã theo quy ước"
+     (kiểm bằng git trước khi ghi).
+   - HW02/tests/README.md:6: sửa đường dẫn spec.
+   - K1=a: `git add -f` CHỈ file kết quả lượt chính thức của A, C (B đã có; D là file lượt chạy tay nếu chưa có);
+     cập nhật RUN.md.
+2. Vá skill (commit riêng `HW02: vá harness – SKILL.md định nghĩa quy tắc output`):
+   - Định nghĩa `output` rút từ cách A và D đã dùng; không thêm luật mới.
+   - §2.3 report trỏ tới định nghĩa này.
+3. Điền report (commit `HW02: report – điền các mục chung`):
+   - Đầu file: Công cụ AI = danh sách model trong header A_prompt_log.md.
+     Câu tuyên bố §9 giữ nguyên "I use AI tools for the following tasks," + liệt kê việc, khớp §12.
+     Ngày nộp để [...].
+   - §1 từ env/environment.md, env/mobile_api_url.patch, mục Môi trường của các BUG (giá trị thật).
+   - §7: skill domain-bva-testing (mục đích, 7 bước, script, cách gọi, cấu trúc thư mục);
+     link video để [...]. Ghi chú: skill sẽ chép sang HW02/skills/ trước khi nộp.
+   - §8: từ summary.py (có marker). Thêm 1 câu: Blocked = không chạy được do bug gốc, ghi ở notes.
+   - §9: bảng tổng 57 bug, chép nguyên văn từ BUG-xx.md, "(AI chép)", có marker.
+   - §10 AI Audit:
+     * Danh mục artifact = mọi output AI, kể cả việc phụ:
+       freeze bước 1–4 × 4 feature, script/harness, skill, khung sv_cases, _groups, khung BUG,
+       RUN.md, report_tables, khung report, các khối 📝, form, README, nén ảnh…
+       Nguồn: appendix/ai-outputs/, git log, CLAUDE.md "Khai cho Audit", report_plan.md.
+     * Mỗi hàng: (1) tool + thời gian + commit; #n = "[#n: chờ chốt transcript]";
+       (2) output: trích ngắn + đường dẫn file;
+       (5) bản SV sửa: tóm tắt diff từ review_log/git (commit SV sửa), không diễn giải lý do.
+       (3) Verdict và (4) Lý do = `<SV viết>`.
+     * Bảng đánh giá từng TC AI sinh: liệt kê TC origin AI/Both + trạng thái sửa theo git;
+       cột Verdict `<SV viết>`.
+     * Tỉ lệ VALID/INVALID/INCOMPLETE: công thức/đếm để [...] (tính sau khi SV điền verdict).
+   - §12 Mandatory Disclosure: nháp danh sách sự kiện theo mục 6 của skill cs423
+     (AI tạo bản đầu / SV xem xét và sửa / edge case SV bổ sung / SV tự viết hoàn toàn /
+      cách tạo prompt log / danh mục cấm), gồm cả việc AI nháp 21 khối 📝 và report_tables.py.
+     Đầu mục: "> 📝 AI nháp – SV xác nhận".
+   - §13: bảng tự đánh giá theo rubric đề §15; cột "Điểm tự chấm" = `<SV viết>`;
+     cột "Căn cứ" = dữ kiện (số TC, bug, link mục).
+   - §14: danh sách file trong ai-forms/ (trạng thái THIẾU/ĐÃ CÓ).
+   - §15: phụ lục + cây thư mục khớp repo thật.
+4. Không viết: Critique, gap analysis, verdict/lý do Audit, điểm tự chấm, link video, ngày nộp.
+   Không sửa 21 khối 📝 đã có.
+5. Kiểm: số liệu = summary.py; link/ảnh tồn tại; report_tables.py chạy lại không đổi;
+   đo `git archive HEAD HW02`.
+6. Báo cáo ≤ 20 dòng: hash, số hàng Audit, danh sách chỗ `<SV viết>` theo mục, mâu thuẫn dữ kiện (file:dòng).
+```
+
+Khi lệnh này xong và bạn push, mình sẽ soát. Sau đó là việc chốt transcript, gồm xuất `_p6` và lấp khoảng thiếu ngày 19/10, để điền số #n vào Audit.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #379 | 07:33 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22510,7 +23352,112 @@ SV vừa commit `129cfcc` xen giữa — kiểm có đụng report không.
 
 ---
 
-## #369 | 07:52 21/10/2026 | Claude Opus 5.5 | [...]
+## #380 | 07:44 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit:
+  - 608df85 vá dữ kiện: ghi chú C19/C22, sửa tests/README.md, git add -f kết quả lượt chính thức A và C, sửa C_FR15/RUN.md. B và D đã có file kết quả từ trước.
+  Ran 1 shell command
+
+Đã điền hết phần dữ kiện chung của report và vá các chỗ lặt vặt, qua 3 commit, không push. Em không đụng mục 3.5–6.5 và không commit các file gap_analysis_sv.md. Giữa chừng SV commit 129cfcc (4 file gap_analysis_sv.md). Commit này không đụng report, nêng bị ghi đè.
+                                                                                                                               cáo cho phiên thảo luận
+                                                                                                                               mmit:
+  - 608df85 vá dữ kiện: ghi chú C19/C22, sửa tests/README.md, git add -f kết quả lượt chính thức A và C, sửa C_FR15/RUN.md. B và D đã có file kết quả từ trước.                                                                                               6a21f55 SKILL.md định nghĩa quy tắc output; §2
+  - b210ba0 điền các mục chung: đầu file, §1, §7–§15, script mới tools/audit_tables.py.
+- Bảng Audit:                                                                                                                  10.1 có 54 artifact: 17 bản đóng băng (4 bước D) và 37 việc phụ.
+  - 10.3 đánh giá 295 TC có nguồn AI/Both: 285 giữ nguyên bản AI, 2 khác bản AI, 8 không có trong bản AI đóng băng.
+- Kiểm tra:
+  - Bảng §8 và tổng từng feature khớp summary.py.                                                                              134 link/ảnh đều tồn tại.
+  - Chạy lại report_tables.py và audit_tables.py không đổi gì.                                                                 Không mục 🔒 nào có khối AI nháp.
+  - git archive HEAD HW02 = 14,5 MB / 973 file.                                                                                ỗ <SV viết>: 10.2 (54 hàng × 2 cột) · 10.3 (29 (6 ô điểm). Các bảng ở 3.5–6.5 vẫn giữ <SV viết>như cũ.                                                                                                                      ỗ [...]: ngày nộp, Node.js (§1), video (§7, §1 soát (10.6), AI-06, số lượt prompt log,commit_log, #n của Audit, khung sv_cases.md của feature khác ngoài C.
+- Bảng 10.1 (artifact) và cây thư mục ở §15 sinh từ git, nên thay đổi sau mỗi commit. Cần chạy lại audit_tables.py sau commit  ối, trước khi zip.
+- Mâu thuẫn dữ kiện:
+  - CLAUDE.md:90 ghi Sonnet 4.6 chỉ trả lời lượt #1–#3. Nhưng appendix/A_prompt_log.md:22375 (dòng Tổng) đếm Sonnet 4.6 = 93 lượt (#116, #120…).                                                                                                             env/environment.md:7–12: Máy, Node.js, Trình d]. Các BUG-xx đã có giá trị thật (Chromium130.0.6723.31, Playwright 1.48.2), §1 lấy từ đó.                                                                           A_FR01 không có RUN.md, nên không có chỗ ghi f ghi ở tests/README.md.
+  - Bản đóng băng của A1–A4: SV sửa ngay trong cùng commit của bước, nên cột (5) không có commit riêng; em ghi số phần tử khác giữa bản cuối và bản AI thay vào.
+- Cần quyết định: không có điểm chặn.
+===
+Mình cũng đã viết xong hết các gap_analysis_sv và đã commit, push luôn rồi nhé.
+Vậy nên dựa vào các gap_analysis_sv mình đã viết, Claude Code có thể hỗ trợ mình đưa nó vào trong report được không?
+```
+
+**Output:**
+````
+Được, nhưng mình vừa đối chiếu 4 file của bạn với `testcases.json` bản cuối và thấy **lỗi dữ kiện cần sửa trước khi chép**. Nếu chép nguyên văn ngay, report sẽ tự mâu thuẫn:
+
+| Feature | Vấn đề |
+|---|---|
+| **A** | File dùng mã **SV-01 … SV-24**, là số thứ tự trong `sv_cases.md` ban đầu. Report và JSON dùng **TC-FR01-200 … 232** (33 case, sau khi tách UI/API). Người chấm sẽ không đối được SV-xx với TC nào. |
+| **B** | Có 3 case **đã bị bỏ** khỏi JSON nhưng vẫn nằm trong bảng "AI bỏ sót": TC-FR07-**202, 204, 207**. |
+| **C** | Có 7 case **đã bị bỏ**: TC-FR15-**203, 204, 210, 212, 215, 216, 217**. |
+| **D** | Khớp: 6/6 case đều có trong JSON. |
+
+Thêm 2 điểm về cách viết. Mình chỉ chỉ ra, không sửa chữ của bạn:
+
+- **Bảng thứ nhất trong mỗi file** (#TC, Tiêu đề, EC, Expected…) trùng với bảng TS-SV mà Claude Code đã chép từ JSON vào report. Nội dung hai bảng có thể lệch nhau, ví dụ B và C có cả case đã bỏ. Report nên giữ **một** bảng, và bảng nên giữ là bản JSON vì nó khớp với verdict.
+- Một số câu khẳng định quá mức so với bằng chứng, ví dụ "AI **luôn** nghĩ trang web chạy…", "AI **chưa từng** trải qua…". Một vài ví dụ chưa đủ để nói "luôn". Nên dựa vào lời AI tự nhận trong `ai_gap_answer.md` hoặc một commit cụ thể.
+
+**Prompt log, về Sonnet 4.6 (Claude Code báo mâu thuẫn):** mình đã kiểm. Log **đúng**, chỉ có `CLAUDE.md:90` đã cũ. 93 lượt Sonnet 4.6 trùng đúng các phiên claude.ai:
+- phiên B từ 10:13;
+- phiên C, 16:19–18:06;
+- đầu phiên D, 22:16–23:13; sau 23:13 phiên D chuyển sang Opus 5.5.
+
+Không thiếu lượt nào. AI-03 phải khai đúng số lượt theo log.
+
+### Quyết định
+
+| Mã | Câu hỏi | Phương án | Khuyến nghị |
+|---|---|---|---|
+| M1 | Mã SV-xx ở A | a) AI thêm **bảng đối chiếu SV-xx → TC-FR01-2xx** (chép từ notes trong JSON) ngay trên phần của bạn, không sửa chữ của bạn · b) bạn tự đổi mã trong file | **a** |
+| G2 | Bảng case thứ nhất trong file của bạn | a) không chép vào report, giữ bảng TS-SV từ JSON · b) chép cả hai | **a** |
+| G3 | Case đã bỏ ở B, C | a) **bạn tự sửa**: xoá khỏi bảng "AI bỏ sót", hoặc chuyển sang một mục "Case em đề xuất rồi bỏ + lý do" (mục này ghi được điểm) · b) giữ nguyên | **a**. AI không được tách các ô bạn viết chung nhiều TC |
+
+Vì G3=a là việc của bạn, lệnh dưới chia 2 nhịp:
+1. Claude Code lập file dữ kiện giúp bạn sửa nhanh, và chép **D** ngay vì D đã sạch.
+2. Bạn sửa A–C, rồi gửi lệnh "chép A–C".
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: kiểm gap analysis SV + chép D vào report.
+Quyết định SV: M1=<...>, G2=<...>, G3=<...>   (còn <...> → DỪNG, hỏi)
+KHÔNG sửa HW02/*/gap_analysis_sv.md.
+
+1. Tạo HW02/appendix/gap_check.md (chỉ dữ kiện, không nhận xét câu chữ). Mỗi feature:
+   a) Mã trong file SV không có trong testcases.json → kèm lý do bỏ
+      (dòng/commit trong sv_cases.md, review_log, git log).
+   b) A: bảng SV-xx → TC-FR01-2xx, chép từ notes "Nguồn: SV-xx" trong JSON
+      (một SV-xx có thể ra nhiều TC). Ghi SV-xx nào không ánh xạ được.
+   c) Cột "AI đã nghĩ tới?" của SV so với nhãn trong ai_gap_answer.md:
+      liệt kê các TC hai bên khác nhau. Chỉ liệt kê, không kết luận ai đúng.
+   d) Bảng case thứ nhất của SV so với JSON: TC nào khác Tiêu đề / EC / Expected (đếm + liệt kê mã).
+   Commit `HW02: dữ kiện đối chiếu gap analysis SV`.
+2. CLAUDE.md:90 sửa theo thực tế log:
+   - Sonnet 4.6: #1–#3 (12/10) + các phiên claude.ai B (từ 10:13 20/10), C (16:19–18:06), đầu D (22:16–23:13).
+   - Opus 5.5: phần còn lại.
+   - Kèm dòng "Tổng" hiện tại của A_PROMPT log.
+   Thêm vào report_plan mục AI-03: "khai đủ 2 model theo dòng Tổng của prompt log".
+3. Chép D:
+   - Nếu D không có mục nào ở 1a/1c/1d: chép nguyên văn phần phân tích của D_FR20/gap_analysis_sv.md vào 6.5, ngoài marker.
+     G2=a: không chép bảng case thứ nhất.
+     Thay các ô <SV viết> tương ứng; còn ô không có nội dung SV thì để nguyên.
+   - Kiểm: phần chép = file gốc từng ký tự.
+   - Commit `HW02: report – chép gap analysis SV D_FR20`.
+   - Nếu D có vấn đề → không chép, báo.
+4. Báo cáo ≤ 12 dòng: số mục 1a/1c/1d mỗi feature, hash. DỪNG.
+```
+
+Sau khi lệnh chạy xong, mở `gap_check.md`. Sửa file A–C của bạn theo mục 1a; mục 1c tuỳ bạn giữ hay đổi. Commit, rồi báo mình để lấy lệnh chép A–C.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #381 | 07:52 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22584,7 +23531,201 @@ Em chưa chép gap analysis của D vào report. D có khác biệt ở mục 1c
 
 ---
 
-## #370 | 08:10 21/10/2026 | Claude Opus 5.5 | [...]
+## #382 | 07:54 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+Trong lúc Claude Code chạy: đánh giá Critique của tôi nhé:
+
+```markdown
+## 11. AI Critique 🔒
+
+Làm xong HW02 em mới thấy rõ AI tạo kịch bản kiểm thử cơ bản thì cực kỳ nhanh, mà vào thực tế thì lộ ra vô số điểm mù nguy hiểm. AI tạo cảm giác câu trả lời của nó chuẩn chỉnh và logic, nhưng lại bỏ sót các kịch bản đời thực: từ chèn mã độc (SQLi, Stored XSS), cho đến kịch bản người dùng bấm nút lia lịa hay mở nhiều cửa sổ cùng lúc làm lệch dữ liệu. Lý do có lẽ là vì AI bị trói buộc bởi mấy quy tắc tối ưu bộ test, lại còn coi tài liệu SRS như điều hiển nhiên trong một thế giới màu hồng. Đặc biệt là AI không có môi trường chạy thử thật, nó chỉ đọc chữ rồi đoán chứ đâu được trực tiếp bấm trên trình duyệt hay chạy thử ứng dụng. Thế nên những trò hay dùng để phá như gõ chữ 1e5 làm ô số lượng bị quá tải, số siêu nhỏ tự biến thành 0, hay sửa dán lung tung làm văng màn hình trắng xóa thì AI chịu, khó mà tự nghĩ ra được. Nhìn AI sinh ra cả đống test case trông rất hoành tráng nhưng thực sự thì chỉ mới đi được nửa đường. Bài học lớn nhất em rút ra là tuyệt đối không bao giờ tin hoàn toàn vào output của AI. Hãy coi AI như một người trợ lý giúp mình dựng cái khung ban đầu, sau đó con người bắt buộc phải nhảy vào kiểm chứng (human in the loop), mò mẫm tìm edge case và thử nghiệm trực tiếp trên ứng dụng thật để lấp vào những khoảng trống mà AI không bao giờ chạm tới được.
+
+**Số từ:** 293 (đếm theo khoảng trắng, như Word)
+```
+````
+
+**Output:**
+```
+Mình chỉ góp ý **dữ kiện và cách lập luận**, không viết lại câu. Số từ: mình đếm theo khoảng trắng được **289**, bạn ghi 293. Cả hai đều nằm trong khoảng 200–300, nhưng sau khi sửa nhớ đếm lại.
+
+### 1. Lỗi dữ kiện (nên sửa, vì đối chiếu với JSON là lộ)
+
+| Câu trong Critique | Thực tế trong repo |
+|---|---|
+| "mở nhiều cửa sổ cùng lúc **làm lệch dữ liệu**" | Hai case multi-tab (B-202, C-204) đã bị **bạn bỏ**, chưa từng chạy. Không có bằng chứng dữ liệu bị lệch. |
+| "sửa dán lung tung **làm văng màn hình trắng xoá**" | Đó là case B-204 (localStorage JSON rác), cũng **đã bỏ**. Ngoài ra giỏ web không dùng localStorage (`B0d`), nên tiền đề của case cũng sai. |
+| "gõ 1e5 làm ô số lượng **bị quá tải**" | B-203 (1e5 ở ô số lượng) bị **Blocked**, chưa kiểm được. C-201 (1e5 ở ô giá) Fail vì UI nhận ký hiệu khoa học (C24), không phải vì "quá tải". |
+| "chèn mã độc (**SQLi**, Stored XSS)" là điểm mù | AI đúng là bỏ sót case. Nhưng case SQLi của bạn (A, C-207) đều **Pass**. Nên tách: "AI không nghĩ tới case" khác với "có lỗ hổng". Stored XSS thì có bug thật (BUG-11). |
+
+### 2. Lập luận
+
+- **Đề hỏi 3 ý: AI sai, thiên lệch, *hoặc* thiếu ở đâu.** Bài hiện chỉ nói về phần **thiếu** (bỏ sót case). Phần **sai** chưa có, dù chính bạn đã ghi nhận vài chỗ ở các phiên trước (mục "Chất liệu" trong handoff):
+  - oracle A10 cho ra Pass giả;
+  - lỗi harness H1 ở C;
+  - AI lấy code làm nguồn;
+  - AI không mang bài học từ feature này sang feature sau.
+  
+  Bạn chọn dùng hay không.
+- **Nguyên nhân đang đổ hết cho AI.** Câu "bị trói buộc bởi quy tắc tối ưu bộ test" nói về minimum set. Nhưng quy tắc này nằm trong skill và prompt **do bạn chọn**, tức thuộc nhóm "chất lượng input" mà đề nêu. Chính file gap của bạn cũng xếp vài case vào loại "Prompt". Critique nên nhất quán với phân loại đó.
+- **"AI không có môi trường chạy thử thật"** đúng với bước 1–4. Nhưng ở bước 7c AI **có chạy**, và chính lúc đó tìm ra lỗi sập backend (BUG-48). Đây là bằng chứng *ủng hộ* lập luận của bạn (khi được chạy thì AI tìm thêm được lỗi), nhưng câu hiện tại viết như thể AI không bao giờ chạy.
+
+### 3. Khẳng định quá mức
+
+- Các từ "**vô số**", "**tuyệt đối không bao giờ**", "**không bao giờ chạm tới được**": một vài ví dụ chưa đủ để kết luận tuyệt đối. Đây cũng chính là lỗi đã được góp ý ở Critique HW01 ("thường" → "đôi khi").
+- "**chỉ mới đi được nửa đường**" là một con số không có căn cứ. Nếu muốn giữ ý này, có dữ kiện để đo: bug lộ ra chỉ nhờ case của bạn so với bug lộ ra từ case AI. Claude Code có thể đếm giúp từ JSON, chỉ đưa số, không đưa nhận xét.
+- **Bài học cuối** ("không tin hoàn toàn, human in the loop") còn chung chung, viết cho bài nào cũng đúng. Ở HW01 phần này cũng bị nhận xét tương tự. Một nguyên tắc gắn với việc **bạn đã làm khác đi** trong HW02 sẽ chắc hơn.
+
+### 4. Văn phong
+
+Các từ "lia lịa", "AI chịu", "hoành tráng", "thế giới màu hồng" khá khẩu ngữ so với một report. Đây là lựa chọn của bạn, mình chỉ nêu một lần.
+
+Nếu muốn số liệu cho ý "nửa đường", nói mình. Mình sẽ đưa lệnh để Claude Code đếm số bug lộ ra theo nguồn TC (AI / Both / SV) cho từng feature, chỉ ra con số.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #383 | 07:58 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+Mình mới viết lại, dựa trên các ý kiến sửa đổi của bạn, ngoại trừ văn phong thì mình vẫn giữ. Vì mình muốn Dev nhận ra đó là mình:
+
+```markdown
+Làm xong HW02 em mới thấy rõ AI tạo kịch bản kiểm thử nền tảng rất nhanh, nhưng lại lộ ra nhiều điểm mù cả về độ thiếu lẫn độ sai. Về độ thiếu, AI bỏ sót các kịch bản kiểm thử bảo mật (SQLi, Stored XSS), dồn dập thao tác hay các lỗi parser giao diện (như C-201 nhận ký hiệu khoa học 1e5). Cần phân biệt việc AI không nghĩ ra case (như SQLi) với việc hệ thống có lỗi thật (như Stored XSS dính BUG-11). Về độ sai và thiên lệch, AI có xu hướng lấy trực tiếp mã nguồn làm oracle dẫn đến Pass giả (A10), bị dính lỗi harness (H1 ở feature C), và không tự chuyển giao bài học giữa các feature. Nguyên nhân một phần do quy tắc minimum set trong prompt em thiết lập khiến AI tự gọt bớt case, một phần do AI thiếu kỹ thuật Error Guessing khi chỉ suy luận trên văn bản mà không có môi trường chạy thật. Điểm sáng là khi được cho chạy thực tế ở bước 7c, AI đã tìm được lỗi sập backend (BUG-48), chứng minh tầm quan trọng của runtime execution. Bài học lớn nhất em rút ra là không coi output của AI hay oracle từ code là sự thật tuyệt đối. Cần áp dụng mô hình Human-in-the-loop: cải thiện chất lượng prompt/skill, và chính con người phải trực tiếp can thiệp bằng các kỹ thuật đoán lỗi nâng cao kết hợp chạy thực nghiệm trên SUT để lấp đầy những điểm mù của AI.
+
+**Số từ:** 264 (đếm bằng Grammarly)
+
+```
+````
+
+**Output:**
+```
+Bản mới tốt hơn rõ: đã có cả phần "thiếu" lẫn phần "sai", có tự nhận phần do prompt của bạn, và có dẫn mã case/bug. Giữ văn phong là quyền của bạn. Số từ mình đếm theo khoảng trắng được **256**, trong khoảng 200–300.
+
+Còn 3 chỗ dữ kiện chưa khớp:
+
+1. **"AI có xu hướng lấy trực tiếp mã nguồn làm oracle dẫn đến Pass giả (A10)"** đang gộp hai việc khác nhau:
+   - A10 cho ra Pass giả vì **oracle quá yếu**: chỉ kiểm "có bị từ chối" mà không kiểm từ chối vì đúng lý do. Không phải vì lấy code làm oracle.
+   - Việc AI dùng code thì là dùng làm **nguồn tên trường**, và theo quy ước của bạn thì điều đó được phép.
+   
+   Trong repo chưa có bằng chứng nào cho thấy AI lấy code làm oracle. Câu "oracle từ code" ở phần bài học cũng dựa trên tiền đề này.
+
+2. **"AI thiếu kỹ thuật Error Guessing"**: AI biết EG. Bước 1–4 của skill chỉ yêu cầu EP và BVA, còn EG được dành riêng cho bước 5 của bạn (vì AI-01 cấm AI gợi ý edge case). Vậy đây là do **phạm vi skill và prompt** mà bạn thiết kế, cùng nhóm với lý do minimum set. Không phải AI thiếu kỹ thuật.
+
+3. **"không tự chuyển giao bài học giữa các feature"**: đúng với C, vì AI không đọc case của B. Còn ở D thì **bạn chủ động chặn** (P1=b) để bước 5 vẫn đo được. Câu hiện tại đọc như thể cả hai lần đều là lỗi của AI.
+
+Hai điểm nhỏ:
+- **"bị dính lỗi harness (H1)"**: harness đó do chính AI viết. "Bị dính" nghe như lỗi từ bên ngoài. Nếu đây là ví dụ cho "AI sai", nên thấy rõ đó là code của AI.
+- **"chứng minh tầm quan trọng"**: một ví dụ (BUG-48) thì *cho thấy*, chưa đủ để *chứng minh*.
+
+Ngoài 5 điểm trên, mình không có góp ý thêm. Sửa xong là bạn có thể chốt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #384 | 08:02 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa vậy được rồi, mình sẽ chốt bảng Critique mình vừa sửa trong Report luôn. Giờ quay lại với Claude Code nhé:
+Báo cáo cho phiên thảo luận
+
+- Đã tạo HW02/appendix/gap_check.md, chỉ có dữ kiện. Không sửa file gap_analysis_sv.md nào.
+- Số mục mỗi feature:
+
+| Feature | 1a                                                           | 1c                                                                     | 1d                      |
+|---------|--------------------------------------------------------------|------------------------------------------------------------------------|-------------------------|
+| A       | 0                                                            | 12                                                                     | 24/24                   |
+| B       | 3 (TC-202, 204, 207 đã bỏ ở 5/7c)                            | 2                                                                      | 13/13                   |
+| C       | 7 (TC-203, 204, 216, 217 bỏ ở 5/7c; 210, 212, 215 bỏ ở 5/7d) | 5                                                                      | 11/11                   |
+| D       | 0                                     C-204: SV "Không" / AI "Nhóm 3"; TC-206: SV "Không" / AI "Nhóm 1") | 6/6 (Tiêu đề, Expected) |
+
+- A (1b): cả 24 SV-xx đều ánh xạ được sang TC; 8 SV-xx ra 2 TC (một UI, một API).
+- Số "TC em bổ sung" ghi trong file SV khác JSON:
+  - A: file ghi 24, JSON có 25 case origin: Human.
+  - B: file ghi 16, JSON có 13 (3 case đã bỏ).
+  - C: file ghi 18, JSON có 11 (7 case đã bỏ).
+  - D: khớp (6).
+- CLAUDE.md:90 đã sửa theo log: Sonnet 4.6 cho #1–C, đầu D; Opus 5.5 phần còn lại; kèm dòng Tổng lúckiểm (368 lượt; Sonnet 4.6 93; Opus 5.5 276; không rõ model 2). report_plan mục AI-03 đã thêm "khai đủ 2 model theo dòng Tổng".
+- Các sửa CLAUDE.md và report_plan nằm chung commiđịnh commit riêng cho bước 2.
+- Bất thường: HW02/23120255_HW02_Report.md đang có thay đổi chưa commit quanh dòng 2254 (mục 10.6). Không phải do em sửa; em không đụng, không commit.
+- Cần quyết định:
+  - D1 – D có khác biệt 1c/1d. Chọn: (a) SV sửa gap_analysis_sv.md của D rồi em chép; (b) vẫn chép nguyên văn như hiện tại; (c)
+    chỉ đặt link tới file.
+```
+
+**Output:**
+````
+Bảng 1d (24/24, 13/13…) **không cần xử lý**: với G2=a, bảng case thứ nhất của bạn không được chép vào report. Report dùng bảng TS-SV sinh từ JSON, nên việc lệch tiêu đề/Expected so với bản nháp ban đầu không ảnh hưởng.
+
+Những gì **bạn cần sửa** trong các file `gap_analysis_sv.md` trước khi chép:
+
+| Feature | Sửa gì |
+|---|---|
+| A | Con số "24 TC em bổ sung": thực tế là 24 ý ở `sv_cases.md`, sau khi tách UI/API thành 33 TC (Human 25 + Both 8). Ghi rõ hoặc bỏ con số; bảng đối chiếu SV-xx → TC (M1=a) sẽ do AI thêm. |
+| B | Bỏ TC-202, 204, 207 khỏi bảng "AI bỏ sót", hoặc chuyển chúng sang mục "case em đề xuất rồi bỏ + lý do". Sửa con số 16 → 13. |
+| C | Làm tương tự với TC-203, 204, 210, 212, 215, 216, 217. Sửa con số 18 → 11. |
+| D | **TC-204**: bạn ghi "Không" (AI không nghĩ tới). Nhưng AI có lớp này và đã gỡ theo quyết định D1/D12 *của bạn*; điều này kiểm được qua git (`gap_check.md`), nên ô này nên sửa. **TC-206**: AI tự nhận "nghĩ tới nhưng không đưa vào". Đây chỉ là lời AI nói, không kiểm được, nên bạn giữ "Không" cũng được, kèm nửa câu nói vì sao bạn không tin lời AI. |
+
+Các chỗ 1c còn lại (A 12, B 2, C 5): ý kiến của bạn được phép khác lời AI tự nhận. Nhưng report đặt hai bảng cạnh nhau, nên người chấm sẽ thấy chỗ vênh. Nên thêm 1 câu chung, đại ý "cột của em là đánh giá của em, có thể khác lời AI tự nhận", để thấy đó là chủ ý chứ không phải sơ suất.
+
+**D1:** chọn **a**, bạn sửa D cùng lúc với A–C, rồi chép cả 4 trong một lượt.
+
+**Thay đổi chưa commit ở report (quanh dòng 2254):** đó là phần bạn đang sửa, Critique hoặc §10. **Commit ngay** trước khi Claude Code chép gap analysis vào cùng file, để hai bên không đè lên nhau.
+
+### Thứ tự
+
+1. Bạn commit phần đã sửa trong report (Critique và phần quanh dòng 2254).
+2. Bạn sửa 4 file `gap_analysis_sv.md` theo bảng trên, rồi commit `HW02: SV sửa gap analysis theo gap_check`.
+3. Gửi lệnh dưới.
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: chép gap analysis SV A–D vào report.
+Tiền điều kiện: `git status` sạch với HW02/23120255_HW02_Report.md và HW02/*/gap_analysis_sv.md
+(SV đã commit). Chưa sạch → DỪNG, báo.
+Quyết định SV: M1=a, G2=a, G3=a, D1=a.
+
+1. Chạy lại phần 1a/1b của gap_check.md trên bản SV mới, ghi đè gap_check.md
+   (commit `HW02: cập nhật gap_check sau SV sửa`).
+   Còn mã nào không có trong JSON mà nằm trong bảng "AI bỏ sót" → DỪNG, báo.
+2. Mỗi feature, mục x.5, ngoài marker:
+   - G2=a: không chép bảng case thứ nhất của SV.
+   - Chép nguyên văn mọi phần còn lại: bảng "AI bỏ sót", đoạn văn, mục "case em đề xuất rồi bỏ" nếu có.
+     Phần SV đã viết thay cho các ô <SV viết> → thay đúng chỗ; ô không có nội dung SV → để nguyên.
+   - A (M1=a): thêm ngay trên phần SV một bảng "Đối chiếu SV-xx → TC-FR01-2xx
+     (AI chép từ notes trong testcases.json)". Không sửa chữ nào của SV.
+   - Kiểm: phần chép = file gốc từng ký tự (diff, bỏ qua bảng thứ nhất).
+3. Commit `HW02: report – chép gap analysis SV A–D`. Không xoá file nháp (SV tự quyết sau).
+4. Chạy lại report_tables.py, audit_tables.py → không đổi phần ngoài marker.
+5. Báo cáo ≤ 10 dòng: hash, kết quả diff từng feature, số ô <SV viết> còn lại ở x.5.
+```
+
+Sau bước này, các phần bạn còn phải tự viết là:
+- verdict và lý do trong Audit (§10);
+- điểm tự chấm (§13);
+- ghi chú prompt log;
+- video;
+- duyệt 21 khối 📝.
+
+Khi bạn muốn bắt đầu Audit, nói mình. Trước đó cần chốt transcript (xuất `_p6`) để Claude Code điền số #n.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #385 | 08:10 21/10/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -22620,10 +23761,194 @@ Bảng "AI bỏ sót" không còn mã lạ. Chép phần SV vào x.5.
 Kiểm từng ký tự + chạy lại script sinh bảng.
 
 Ngoài marker không đổi; trong marker chỉ đổi khối phụ thuộc git (commit count, cây thư mục). Commit.
+
+Đã chép gap analysis SV của cả 4 feature vào mục x.5 của report, nằm ngoài marker. Phần chép khớp file gốc từng ký tự, không gồm bảng case thứ nhất. Không push, không xoá file nháp.
+
+### Báo cáo cho phiên thảo luận
+- Commit: `e2ae88e` cập nhật gap_check · `23c61d6` chép gap analysis SV A–D.
+- gap_check trên bản SV mới (`5d082ad`):
+  - 1a = 0 ở cả 4 feature.
+  - A: 24 SV-xx đều ánh xạ được sang TC.
+  - Mã trong bảng "AI bỏ sót" đều có trong JSON (hoặc ánh xạ được từ SV-xx).
+- Diff phần chép so với file gốc:
+  - A, B, C, D: giống hệt.
+  - A có thêm bảng "Đối chiếu SV-xx → TC-FR01-2xx" (AI chép từ notes), đặt ngay trên phần SV.
+- Ô `<SV viết>` còn lại ở x.5:
+  - 3.5, 4.5, 5.5: 0.
+  - 6.5: 6 ô, tức 3 dòng TC-FR20-202, 207, 208. Đây là 3 case có trong `ai_gap_answer.md` nhưng file SV của D không nhắc tới.
+- Chạy lại `report_tables.py` và `audit_tables.py`: ngoài marker không đổi gì. Trong marker chỉ đổi 2 khối lấy từ git: số commit ở bảng artifact và cây thư mục (thêm `gap_check.md`).
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 370 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 278 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366, #367, #368, #369, #370); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #386 | 08:12 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Commit: e2ae88e cập nhật gap_check · 23c61d6 chép gap analysis SV A–D.
+- gap_check trên bản SV mới (5d082ad):
+  - 1a = 0 ở cả 4 feature.
+  - A: 24 SV-xx đều ánh xạ được sang TC.
+  - Mã trong bảng "AI bỏ sót" đều có trong JSON (hoặc ánh xạ được từ SV-xx).
+- Diff phần chép so với file gốc:
+  - A, B, C, D: giống hệt.
+  - A có thêm bảng "Đối chiếu SV-xx → TC-FR01-2xx" (AI chép từ notes), đặt ngay trên phần SV.
+- Ô <SV viết> còn lại ở x.5:
+  - 3.5, 4.5, 5.5: 0.
+  - 6.5: 6 ô, tức 3 dòng TC-FR20-202, 207, 208. Đây là 3 case có trong ai_gap_answer.md nhưng file SV của D không nhắc tới.
+- Chạy lại report_tables.py và audit_tables.py: ngoài marker không đổi gì. Trong marker chỉ đổi 2 khối lấy từ git: số commit ở bảng artifact và cây thư mục (thêm gap_check.md).
+```
+
+**Output:**
+````
+Còn đúng 1 chỗ: TC-FR20-**202, 207, 208** là 3 case **bạn đã bỏ** ở D. Chúng vẫn hiện ra vì bảng "AI tự nhận" được sinh từ `ai_gap_answer.md`, mà file đó lập trước khi bạn bỏ case. Đây không phải chỗ bạn quên viết. Hai cách:
+
+- **a)** script lọc bảng "AI tự nhận" chỉ giữ TC có trong JSON. Các case đã bỏ gom thành 1 dòng ghi chú dữ kiện, kiểu "Case em đề xuất rồi bỏ: 202, 207, 208 (lý do: xem `D_FR20/sv_cases.md` / commit …)". Bỏ 3 dòng `<SV viết>` trống vì đó là khung do AI dựng, không phải chữ của bạn. Áp dụng giống nhau cho cả 4 feature.
+- **b)** giữ nguyên, bạn tự viết 3 dòng đó.
+
+Khuyến nghị **a**. Nếu muốn, bạn có thể tự thêm nửa câu lý do bỏ trong phần của bạn.
+
+### Lệnh cho Claude Code
+
+```
+NHIỆM VỤ: lọc case đã bỏ khỏi bảng "AI tự nhận" ở x.5 (cả 4 feature).
+Quyết định SV: phương án a.
+
+1. tools/report_tables.py:
+   - Bảng "AI tự nhận" chỉ giữ TC có trong testcases.json (A: theo ánh xạ SV-xx).
+   - Case có trong ai_gap_answer.md nhưng không có trong JSON →
+     1 dòng dưới bảng: "Case em đề xuất rồi bỏ (không chạy): <mã> — <commit bỏ>", lấy từ git/gap_check.md.
+   - Không viết lý do.
+2. Xoá các dòng khung <SV viết> của các case đó (khung do AI dựng). Không đụng chữ SV.
+3. Kiểm: diff phần chữ SV ở x.5 = trước khi sửa; ô <SV viết> còn lại ở x.5 = 0.
+4. Commit `HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận`.
+5. Báo cáo ≤ 6 dòng: hash, danh sách case đã lọc theo feature.
+```
+
+### Việc còn lại
+
+| # | Việc | Ai |
+|---|---|---|
+| 1 | Xuất transcript `_p6` (phiên này) và lấp khoảng thiếu ngày 19/10, sau đó chốt số #n | mình xuất `_p6`; bạn đặt file + chạy `on_stop.py --manual` |
+| 2 | Ghi chú prompt log (`prompt_log_notes.toml`, theo khoảng giờ) | bạn |
+| 3 | Audit §10: Claude Code điền #n; bạn viết verdict và lý do; Claude Code tính tỉ lệ | AI + bạn |
+| 4 | Duyệt 21 khối 📝; điểm tự chấm §13; Mandatory Disclosure §12 (xác nhận) | bạn |
+| 5 | Video demo skill + link | bạn |
+| 6 | AI-02, AI-03 → AI-05; xuất PDF; ký | AI dựng form, bạn tick + ký |
+| 7 | Chép skill sang `HW02/skills/`, commit log, `hw-submission-audit`, zip | AI |
+
+Phiên này đã khá dài. Mình đề nghị **xuất `_p6` ngay bây giờ** để tránh mất phần đầu nếu ngữ cảnh bị nén. Nói "xuất transcript" là mình làm.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #387 | 08:13 21/10/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+──
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #388 | 08:13 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: lọc case đã bỏ khỏi bảng "AI tự nhận" ở x.5 (cả 4 feature).
+Quyết định SV: phương án a.
+
+1. tools/report_tables.py:
+   - Bảng "AI tự nhận" chỉ giữ TC có trong testcases.json (A: theo ánh xạ SV-xx).
+   - Case có trong ai_gap_answer.md nhưng không có trong JSON →
+     1 dòng dưới bảng: "Case em đề xuất rồi bỏ (không chạy): <mã> — <commit bỏ>", lấy từ git/gap_check.md.
+   - Không viết lý do.
+2. Xoá các dòng khung <SV viết> của các case đó (khung do AI dựng). Không đụng chữ SV.
+3. Kiểm: diff phần chữ SV ở x.5 = trước khi sửa; ô <SV viết> còn lại ở x.5 = 0.
+4. Commit `HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận`.
+5. Báo cáo ≤ 6 dòng: hash, danh sách case đã lọc theo feature.
+```
+
+**Output:**
+```
+Áp vào report, xoá khung `<SV viết>` còn lại ở 6.5.
+
+Đã lọc các case đã bỏ khỏi bảng "AI tự nhận" ở x.5 của cả 4 feature, commit `0c9d807`, không push. Chữ SV trong x.5 giữ nguyên, ô `<SV viết>` còn lại ở x.5 là 0 ở cả 4 feature. Chạy lại `report_tables.py` không đổi gì thêm.
+
+### Báo cáo cho phiên thảo luận
+- Mỗi case đã lọc thành 1 dòng "Case em đề xuất rồi bỏ (không chạy)" dưới bảng, kèm commit bỏ khỏi JSON:
+  - A: không có case nào phải lọc.
+  - B: TC-FR07-202, 204, 207 — bỏ ở `21a989a` (5/7c).
+  - C: TC-FR15-203, 204, 216, 217 — bỏ ở `078c5b0` (5/7c); TC-FR15-210, 212, 215 — bỏ ở `7561a75` (5/7d).
+  - D: TC-FR20-202 — bỏ ở `57191a7` (5/7d); TC-FR20-207, 208 — bỏ ở `c32baff` (5/7f). Đã xoá khung `<SV viết>` 3 dòng của 3 case này ở 6.5.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #389 | 08:14 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Mỗi case đã lọc thành 1 dòng "Case em đề xuất rồi bỏ (không chạy)" dưới bảng, kèm commit bỏ khỏi JSON:
+  - A: không có case nào phải lọc.
+  - B: TC-FR07-202, 204, 207 — bỏ ở 21a989a (5/7c).
+  - C: TC-FR15-203, 204, 216, 217 — bỏ ở 078c5b0 (5/7c); TC-FR15-210, 212, 215 — bỏ ở 7561a75 (5/7d).
+  - D: TC-FR20-202 — bỏ ở 57191a7 (5/7d); TC-FR20-207, 208 — bỏ ở c32baff (5/7f). Đã xoá khung <SV viết> 3 dòng của 3 case này ở 6.5.
+```
+
+**Output:**
+```
+Ổn. Bảng ở x.5 giờ chỉ còn case có trong JSON, và mỗi case bị bỏ đều có commit làm căn cứ. Báo cáo thiếu hash commit; khi bạn push, mình sẽ đối chiếu trên repo.
+
+Phần report do AI điền đến đây là xong. Việc tiếp theo bắt đầu từ **chốt transcript**, vì Audit (§10), AI-03 và AI-05 đều cần số #n và số lượt cuối:
+
+1. **Xuất `_p6` (phiên này).** Nói "xuất transcript", mình làm ngay. Bạn đặt file vào `.transcripts/` rồi chạy `python tools/hooks/on_stop.py --manual`.
+2. **Khoảng thiếu 15:56–17:40 ngày 19/10:** cần khoảng 10 lượt claude.ai. Lấy từ export claude.ai, hoặc chép tay vào `prompt_log_extra.toml`. Nếu không lấy lại được, Audit và AI-03 khai rõ khoảng thiếu đó.
+3. **Ghi chú prompt log:** bạn gom theo khoảng giờ, dựa trên `prompt_log_turns.txt`. Nhờ Claude Code chạy lại lệnh `--list --commits` **sau** bước 1–2 để file có đủ lượt.
+
+Sau 3 việc này, mình sẽ đưa lệnh điền #n vào Audit. Lúc đó bạn viết verdict và lý do cho 54 artifact.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #390 | 08:15 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xuất transcript nhé
+```
+
+**Output:**
+```
+Đang xuất transcript phiên này thành `claude-ai_session_HW02_p6.jsonl`. File sẽ gửi ngay bên dưới.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 390 lượt; Claude Sonnet 4.6 94 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306, #363); Claude Opus 5.5 296 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #364, #365, #366, #367, #368, #369, #370, #371, #372, #373, #374, #375, #376, #377, #378, #379, #380, #381, #382, #383, #384, #385, #386, #388, #389, #390); Claude (không rõ model) 3 lượt (#118, #272, #387). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
