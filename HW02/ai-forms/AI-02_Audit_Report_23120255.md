@@ -155,7 +155,7 @@
 | P2 | Khung report + bảng dữ kiện + 21 khối giải thích từng bước do AI nháp (§2, x.1–x.4, x.6) + các mục chung | INCOMPLETE | AI nháp ban đầu chứa một số câu khẳng định quá mức; SV đã rà soát gọt dũa văn phong và tự viết phần AI Critique/Audit. |
 | P3 | README HW02 (bảng tự đánh giá trống, khối SUMMARY) | VALID | File README tổng quan của bài tập được tạo đầy đủ các mục tóm tắt số liệu (SUMMARY) đúng quy ước bài tập. |
 | P4 | File lượt chạy tay D (AI chép nguyên văn từ `Check.md` của SV) | VALID | AI chuyển đổi chính xác nguyên văn dữ liệu kết quả kiểm thử thủ công từ file `Check.md` của SV sang JSON mà không làm biến đổi nội dung gốc. |
-| F1 | Biểu mẫu AI-02/03/05 (.md) | [chấm sau khi làm form] | Các biểu mẫu khai báo minh bạch quá trình sử dụng AI được tạo đúng định dạng (dù nội dung chi tiết được điền hoàn thiện ở bước nộp bài cuối cùng). |
+| F1 | Biểu mẫu AI-02/03/05 (.md) | VALID | Đã làm tốt rồi, không cần sửa |
 
 ### 3.3 Đánh giá từng TC do AI sinh
 
