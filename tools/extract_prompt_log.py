@@ -236,6 +236,35 @@ def warn_unmatched(notes, keys, turns, ranges):
             print(f'Cảnh báo: khoá ghi chú ["{k}"] không khớp lượt nào', file=sys.stderr)
 
 
+STEP_RE = re.compile(r"HW02\[[A-D]-FR\d\d\] \d/7")
+
+
+def suggest_ranges(turns, cms, gap_min=60):
+    """Khoảng gợi ý để gom ghi chú: tách khi tiền tố bước của commit kế tiếp (HW02[X-FRnn] k/7) đổi,
+    hoặc khi hai lượt liền nhau cách > gap_min phút. Chỉ là dữ kiện; không điền section/mục đích/xử lý."""
+    def prefix(c):
+        if not c:
+            return "(chưa có commit)"
+        m = STEP_RE.search(c[2])
+        return m.group(0) if m else c[2].split(":")[0]
+    ranges = []
+    for i, (t, c) in enumerate(zip(turns, cms)):
+        p = prefix(c)
+        if not ranges or p != ranges[-1]["p"] or (t["time"] - turns[i - 1]["time"]).total_seconds() > gap_min * 60:
+            ranges.append({"p": p, "idx": []})
+        ranges[-1]["idx"].append(i)
+    out = [f"# Khoảng gợi ý ({len(ranges)} khoảng; tách khi tiền tố bước của commit kế tiếp đổi hoặc hai lượt cách > {gap_min} phút)",
+           "# khoá khoảng | số lượt | #đầu–#cuối | model | commit kế tiếp đầu / cuối"]
+    for r in ranges:
+        a, b = turns[r["idx"][0]], turns[r["idx"][-1]]
+        models = sorted({m for i in r["idx"] for m in turns[i]["tool"].split(" + ")})
+        c0, c1 = cms[r["idx"][0]], cms[r["idx"][-1]]
+        fmt = lambda c: f"{c[0]} {c[2][:50]}" if c else "(chưa có)"
+        out.append(f'["{a["time"]:%Y-%m-%d %H:%M} .. {b["time"]:%Y-%m-%d %H:%M}"] | {len(r["idx"])} | '
+                   f'#{r["idx"][0] + 1}–#{r["idx"][-1] + 1} | {", ".join(models)} | {fmt(c0)} / {fmt(c1)}')
+    return "\n".join(out) + "\n"
+
+
 def commits_after(turns, repo="."):
     """Với mỗi lượt: commit đầu tiên có giờ commit sau giờ lượt → (hash ngắn, message) hoặc None."""
     import subprocess
@@ -371,6 +400,8 @@ def main():
                 line += f"\n      → commit kế tiếp: {c[0]} ({c[1]}) {c[2]}" if c else "\n      → commit kế tiếp: (chưa có)"
             lines.append(line)
         txt = "\n".join(lines) + "\n"
+        if args.commits:
+            txt = suggest_ranges(turns, cms) + "\n" + txt
         if args.out:
             hdr = ("# Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list"
                    + (" --commits" if args.commits else "") + "). Dùng để gom khoá khoảng trong prompt_log_notes.toml.\n"

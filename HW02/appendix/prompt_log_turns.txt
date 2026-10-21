@@ -1,6 +1,80 @@
 # Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list --commits). Dùng để gom khoá khoảng trong prompt_log_notes.toml.
 # Commit kế tiếp = commit đầu tiên có giờ commit sau giờ lượt (git log --all).
 
+# Khoảng gợi ý (71 khoảng; tách khi tiền tố bước của commit kế tiếp đổi hoặc hai lượt cách > 60 phút)
+# khoá khoảng | số lượt | #đầu–#cuối | model | commit kế tiếp đầu / cuối
+["2026-10-12 21:20 .. 2026-10-12 21:33"] | 8 | #1–#8 | Claude Opus 5.5, Claude Sonnet 4.6 | f9e8c1b HW02: khởi tạo thư mục và ghi nhận môi trường test / f9e8c1b HW02: khởi tạo thư mục và ghi nhận môi trường test
+["2026-10-19 14:06 .. 2026-10-19 16:07"] | 8 | #9–#16 | Claude Opus 5.5 | f9e8c1b HW02: khởi tạo thư mục và ghi nhận môi trường test / d81747d HW02: thêm harness (CLAUDE.md, skill domain-bva-te
+["2026-10-19 16:10 .. 2026-10-19 16:31"] | 3 | #17–#19 | Claude Opus 5.5 | 4e30b25 HW02[A-FR01] 1/7: Phân tích biến vào/ra / 4e30b25 HW02[A-FR01] 1/7: Phân tích biến vào/ra
+["2026-10-19 16:36 .. 2026-10-19 16:36"] | 1 | #20–#20 | Claude Opus 5.5 | aa770dc HW02: vá harness (UTF-8 trên Windows, cột Ghi chú  / aa770dc HW02: vá harness (UTF-8 trên Windows, cột Ghi chú 
+["2026-10-19 16:39 .. 2026-10-19 16:47"] | 3 | #21–#23 | Claude Opus 5.5 | d799b74 HW02[A-FR01] 2/7: Phân lớp tương đương / d799b74 HW02[A-FR01] 2/7: Phân lớp tương đương
+["2026-10-19 16:51 .. 2026-10-19 17:17"] | 7 | #24–#30 | Claude Opus 5.5 | 31f42ad HW02: vá harness (render_md hiển thị chuỗi rỗng/kh / 1816c8a HW02: vá harness (SKILL.md: quy tắc tiền điều kiện
+["2026-10-19 17:22 .. 2026-10-19 17:45"] | 4 | #31–#34 | Claude Opus 5.5 | b567dc2 HW02[A-FR01] 4/7: Test case BVA / 6a5a17e HW02[A-FR01] 4/7b: SV sửa TC-90, TC-92 cô lập nguy
+["2026-10-19 19:14 .. 2026-10-19 19:14"] | 1 | #35–#35 | Claude Opus 5.5 | 8d837f1 HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả  / 8d837f1 HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả 
+["2026-10-19 19:26 .. 2026-10-19 19:28"] | 2 | #36–#37 | Claude Opus 5.5 | 85458ad HW02: vá harness – render_md chỉ đánh dấu rỗng cho / 85458ad HW02: vá harness – render_md chỉ đánh dấu rỗng cho
+["2026-10-19 19:33 .. 2026-10-19 19:42"] | 5 | #38–#42 | Claude Opus 5.5 | 1cfa163 HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API / f3126b0 HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV
+["2026-10-19 22:09 .. 2026-10-19 22:09"] | 1 | #43–#43 | Claude Opus 5.5 | f3126b0 HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV / f3126b0 HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV
+["2026-10-19 22:38 .. 2026-10-19 22:39"] | 2 | #44–#45 | Claude Opus 5.5 | d840b73 HW02[A-FR01] 6/7a: script Playwright đọc testcases / d840b73 HW02[A-FR01] 6/7a: script Playwright đọc testcases
+["2026-10-19 22:52 .. 2026-10-19 23:05"] | 4 | #46–#49 | Claude Opus 5.5 | f64f135 HW02: vá harness – merge_results gọn evidence / f64f135 HW02: vá harness – merge_results gọn evidence
+["2026-10-19 23:11 .. 2026-10-19 23:29"] | 8 | #50–#57 | Claude Opus 5.5 | 32390b1 HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdi / a6cd0ef HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 
+["2026-10-19 23:31 .. 2026-10-20 02:22"] | 29 | #58–#86 | Claude Opus 5.5 | e899e06 HW02[A-FR01] 7/7a: gom dữ kiện Fail để SV viết bug / 7b9c972 HW02[A-FR01] 7/7c: bug report BUG-01…14
+["2026-10-20 07:19 .. 2026-10-20 07:48"] | 12 | #87–#98 | Claude Opus 5.5 | 7b9c972 HW02[A-FR01] 7/7c: bug report BUG-01…14 / 27da576 HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_
+["2026-10-20 09:16 .. 2026-10-20 09:18"] | 2 | #99–#100 | Claude Opus 5.5 | 27da576 HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_ / 27da576 HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_
+["2026-10-20 09:21 .. 2026-10-20 09:26"] | 3 | #101–#103 | Claude Opus 5.5 | af48958 HW02[A-FR01]: ghi bug_id + tách cột Both trong sum / af48958 HW02[A-FR01]: ghi bug_id + tách cột Both trong sum
+["2026-10-20 09:28 .. 2026-10-20 10:06"] | 11 | #104–#114 | Claude Opus 5.5 | b812d33 HW02: vá harness – extract_prompt_log xử lý lượt k / 8e2498c HW02: khôi phục 10 lượt prompt log 19/10 (chép tay
+["2026-10-20 10:08 .. 2026-10-20 10:08"] | 1 | #115–#115 | Claude Opus 5.5 | 7b30b58 Update A_prompt_log.md after finish pool A / 7b30b58 Update A_prompt_log.md after finish pool A
+["2026-10-20 10:13 .. 2026-10-20 10:14"] | 4 | #116–#119 | Claude (không rõ model), Claude Opus 5.5, Claude Sonnet 4.6 | b48929e HW02[B-FR07] 1/7: biến vào/ra / b48929e HW02[B-FR07] 1/7: biến vào/ra
+["2026-10-20 10:20 .. 2026-10-20 10:23"] | 4 | #120–#123 | Claude Opus 5.5, Claude Sonnet 4.6 | b5c95b6 HW02: CLAUDE.md – giới hạn độ dài báo cáo / b5c95b6 HW02: CLAUDE.md – giới hạn độ dài báo cáo
+["2026-10-20 10:24 .. 2026-10-20 10:29"] | 3 | #124–#126 | Claude Opus 5.5, Claude Sonnet 4.6 | e9ca12c HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo s / e9ca12c HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo s
+["2026-10-20 10:32 .. 2026-10-20 10:33"] | 3 | #127–#129 | Claude Opus 5.5, Claude Sonnet 4.6 | 4c69716 HW02[B-FR07] 3/7: TC domain / 4c69716 HW02[B-FR07] 3/7: TC domain
+["2026-10-20 10:38 .. 2026-10-20 11:09"] | 13 | #130–#142 | Claude Opus 5.5, Claude Sonnet 4.6 | 4fee1ad HW02: vá harness – truy vết sinh từ ánh xạ EC → yê / 263d3e8 HW02: vá harness – điểm LARGE có điều kiện
+["2026-10-20 11:11 .. 2026-10-20 12:10"] | 2 | #143–#144 | Claude Opus 5.5, Claude Sonnet 4.6 | 3d0cbca HW02[B-FR07] 5/7: SV thêm TC / 897a7c8 HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+["2026-10-20 12:15 .. 2026-10-20 12:37"] | 4 | #145–#148 | Claude Opus 5.5, Claude Sonnet 4.6 | 82be2bc HW02: vá harness – trường approach (gray-box) / 82be2bc HW02: vá harness – trường approach (gray-box)
+["2026-10-20 12:40 .. 2026-10-20 12:41"] | 2 | #149–#150 | Claude Opus 5.5, Claude Sonnet 4.6 | 21a989a HW02[B-FR07] 5/7c: áp trả lời SV / 21a989a HW02[B-FR07] 5/7c: áp trả lời SV
+["2026-10-20 12:43 .. 2026-10-20 12:44"] | 2 | #151–#152 | Claude Opus 5.5, Claude Sonnet 4.6 | 1abe0a1 HW02[B-FR07] 6/7a: Playwright / 1abe0a1 HW02[B-FR07] 6/7a: Playwright
+["2026-10-20 12:54 .. 2026-10-20 13:20"] | 7 | #153–#159 | Claude Opus 5.5, Claude Sonnet 4.6 | e4625d5 HW02: vá harness – merge không ghi đè verdict thủ  / e4625d5 HW02: vá harness – merge không ghi đè verdict thủ 
+["2026-10-20 13:22 .. 2026-10-20 13:23"] | 2 | #160–#161 | Claude Opus 5.5, Claude Sonnet 4.6 | 4ba84b8 HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20 / 4ba84b8 HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
+["2026-10-20 13:29 .. 2026-10-20 13:45"] | 7 | #162–#168 | Claude Opus 5.5, Claude Sonnet 4.6 | 103c8ec HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm / d8d60ff HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy 
+["2026-10-20 13:46 .. 2026-10-20 13:47"] | 2 | #169–#170 | Claude Opus 5.5, Claude Sonnet 4.6 | ddb74cf HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm / ddb74cf HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm
+["2026-10-20 13:51 .. 2026-10-20 15:59"] | 36 | #171–#206 | Claude Opus 5.5, Claude Sonnet 4.6 | d0d0e05 HW02[B-FR07] 7/7a5: khung bug theo format BUG-14 / 352a34d HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issue
+["2026-10-20 16:02 .. 2026-10-20 16:15"] | 7 | #207–#213 | Claude Opus 5.5, Claude Sonnet 4.6 | 9520bd5 HW02: CLAUDE.md – ghi quy ước rút ra từ B_FR07 / ea82c96 HW02: cập nhật prompt log – p3 đầy đủ
+["2026-10-20 16:19 .. 2026-10-20 16:35"] | 6 | #214–#219 | Claude Opus 5.5, Claude Sonnet 4.6 | 224f147 HW02[C-FR15] 1/7: biến vào/ra / 1012f71 HW02[C-FR15] 1/7b: SV chốt giả định C0–C14
+["2026-10-20 16:40 .. 2026-10-20 16:46"] | 6 | #220–#225 | Claude Opus 5.5, Claude Sonnet 4.6 | f982e3b HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phâ / b889942 HW02[C-FR15] 2/7c: SV chốt C9, C15
+["2026-10-20 16:52 .. 2026-10-20 16:56"] | 3 | #226–#228 | Claude Opus 5.5, Claude Sonnet 4.6 | 65c4bf2 HW02[C-FR15] 3/7b: tách suite API theo linter / 65c4bf2 HW02[C-FR15] 3/7b: tách suite API theo linter
+["2026-10-20 16:59 .. 2026-10-20 18:05"] | 16 | #229–#244 | Claude Opus 5.5, Claude Sonnet 4.6 | c22e3da HW02[C-FR15] 5/7: SV tự thêm TC / 4c9655c HW02[C-FR15] 5/7e: SV chốt TC-201
+["2026-10-20 18:06 .. 2026-10-20 18:42"] | 4 | #245–#248 | Claude Opus 5.5, Claude Sonnet 4.6 | ab466c8 HW02[C-FR15] 6/7a: Playwright + RUN.md / e4945b3 HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5
+["2026-10-20 18:47 .. 2026-10-20 18:51"] | 3 | #249–#251 | Claude Opus 5.5 | 1ddb10f HW02: vá harness – C_FR15 H1–H4 / 1ddb10f HW02: vá harness – C_FR15 H1–H4
+["2026-10-20 18:57 .. 2026-10-20 19:05"] | 3 | #252–#254 | Claude Opus 5.5 | 4979732 HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức) / afa074e HW02[C-FR15] 6/7d: chốt TC-92, TC-94
+["2026-10-20 19:12 .. 2026-10-20 20:30"] | 15 | #255–#269 | Claude Opus 5.5 | 2431b79 HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép / 8260da3 HW02[C-FR15] 7/7c: soát dữ kiện BUG-35–50
+["2026-10-20 20:42 .. 2026-10-20 20:42"] | 2 | #270–#271 | Claude Opus 5.5 | a1ca0cd HW02: cập nhật prompt log (trước compact) / a1ca0cd HW02: cập nhật prompt log (trước compact)
+["2026-10-20 20:44 .. 2026-10-20 21:55"] | 13 | #272–#284 | Claude (không rõ model), Claude Opus 5.5 | 1f91e5f HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-4 / 4d816d8 HW02[C-FR15] 7/7g: ảnh trang issue + README
+["2026-10-20 21:59 .. 2026-10-20 22:03"] | 2 | #285–#286 | Claude Opus 5.5 | 502e59f HW02: log thay ảnh #189 #190 (README không đổi: 10 / 502e59f HW02: log thay ảnh #189 #190 (README không đổi: 10
+["2026-10-20 22:04 .. 2026-10-20 22:05"] | 2 | #287–#288 | Claude Opus 5.5 | 65d8135 HW02[C-FR15]: link comment đính chính #189 #190 / 65d8135 HW02[C-FR15]: link comment đính chính #189 #190
+["2026-10-20 22:06 .. 2026-10-20 22:12"] | 4 | #289–#292 | Claude Opus 5.5 | 6ffde86 HW02: cập nhật prompt log (đóng C_FR15) / c678fa4 HW02: cập nhật prompt log (đóng C_FR15)
+["2026-10-20 22:16 .. 2026-10-20 22:23"] | 3 | #293–#295 | Claude Opus 5.5, Claude Sonnet 4.6 | c266570 HW02[D-FR20] 1/7: Phân tích biến vào/ra / c266570 HW02[D-FR20] 1/7: Phân tích biến vào/ra
+["2026-10-20 22:29 .. 2026-10-20 22:39"] | 4 | #296–#299 | Claude Opus 5.5, Claude Sonnet 4.6 | ea3cc1f HW02: sửa CLAUDE.md – A3 / ea3cc1f HW02: sửa CLAUDE.md – A3
+["2026-10-20 22:43 .. 2026-10-20 22:44"] | 2 | #300–#301 | Claude Opus 5.5, Claude Sonnet 4.6 | 721b852 HW02[D-FR20] 2/7c: SV chốt phân lớp / 721b852 HW02[D-FR20] 2/7c: SV chốt phân lớp
+["2026-10-20 22:49 .. 2026-10-20 22:50"] | 2 | #302–#303 | Claude Opus 5.5, Claude Sonnet 4.6 | de46981 HW02[D-FR20] 3/7b: sửa theo review / de46981 HW02[D-FR20] 3/7b: sửa theo review
+["2026-10-20 22:53 .. 2026-10-20 23:13"] | 3 | #304–#306 | Claude Opus 5.5, Claude Sonnet 4.6 | f66b32f HW02[D-FR20] 5/7: case SV / b975f90 HW02[D-FR20] 5/7b: đưa case SV vào TS-SV + gap ans
+["2026-10-20 23:17 .. 2026-10-20 23:17"] | 1 | #307–#307 | Claude Opus 5.5 | 0523610 Update A_prompt_log.md / 0523610 Update A_prompt_log.md
+["2026-10-20 23:19 .. 2026-10-20 23:44"] | 9 | #308–#316 | Claude Opus 5.5 | 7a9f887 HW02[D-FR20] 5/7c: SV sửa case SV / cc61c0b HW02[D-FR20] 5/7j: đồng bộ case SV
+["2026-10-20 23:47 .. 2026-10-20 23:49"] | 2 | #317–#318 | Claude Opus 5.5 | 79209f6 HW02: vá harness – merge_results tên ảnh manual +  / 79209f6 HW02: vá harness – merge_results tên ảnh manual + 
+["2026-10-20 23:53 .. 2026-10-20 23:59"] | 7 | #319–#325 | Claude Opus 5.5 | 21b4a24 HW02[D-FR20] 6/7a3: procedure theo D0 mới / 690e797 HW02[D-FR20] 6/7a5: quy trình TS-GUI theo RUN.md
+["2026-10-20 23:59 .. 2026-10-21 00:10"] | 3 | #326–#328 | Claude Opus 5.5 | 16e39d4 HW02: vá harness – nén ảnh .jpg + ảnh admin theo c / 16e39d4 HW02: vá harness – nén ảnh .jpg + ảnh admin theo c
+["2026-10-21 01:33 .. 2026-10-21 01:37"] | 3 | #329–#331 | Claude Opus 5.5 | 16e39d4 HW02: vá harness – nén ảnh .jpg + ảnh admin theo c / 16e39d4 HW02: vá harness – nén ảnh .jpg + ảnh admin theo c
+["2026-10-21 01:44 .. 2026-10-21 02:09"] | 6 | #332–#337 | Claude Opus 5.5 | f644140 HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhậ / f5c893e HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăn
+["2026-10-21 02:19 .. 2026-10-21 02:19"] | 1 | #338–#338 | Claude Opus 5.5 | 3ad5c8f HW02: cập nhật env – mobile_api_url.patch + thiết  / 3ad5c8f HW02: cập nhật env – mobile_api_url.patch + thiết 
+["2026-10-21 02:23 .. 2026-10-21 03:32"] | 20 | #339–#358 | Claude Opus 5.5 | 3b8131c HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-5 / 279a0f8 HW02[D-FR20] 7/7d4: SV sửa tiêu đề BUG-56
+["2026-10-21 03:40 .. 2026-10-21 03:40"] | 1 | #359–#359 | Claude Opus 5.5 | 4a13a76 HW02: vá harness – summary.py đếm bug_id theo mã B / 4a13a76 HW02: vá harness – summary.py đếm bug_id theo mã B
+["2026-10-21 03:49 .. 2026-10-21 03:49"] | 1 | #360–#360 | Claude Opus 5.5 | a8704ff Update A_prompt_log.md / a8704ff Update A_prompt_log.md
+["2026-10-21 06:36 .. 2026-10-21 07:33"] | 19 | #361–#379 | Claude Opus 5.5, Claude Sonnet 4.6 | 015505b HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo / 608df85 HW02: report – vá dữ kiện
+["2026-10-21 07:44 .. 2026-10-21 07:44"] | 1 | #380–#380 | Claude Opus 5.5 | 0cc13c1 HW02 - report: Bỏ từ khẳng định / 0cc13c1 HW02 - report: Bỏ từ khẳng định
+["2026-10-21 07:52 .. 2026-10-21 07:52"] | 1 | #381–#381 | Claude Opus 5.5 | 1a5137f HW02: dữ kiện đối chiếu gap analysis SV / 1a5137f HW02: dữ kiện đối chiếu gap analysis SV
+["2026-10-21 07:54 .. 2026-10-21 07:58"] | 2 | #382–#383 | Claude Opus 5.5 | db3c193 HW02 - report: SV viết AI Critique, AI review / db3c193 HW02 - report: SV viết AI Critique, AI review
+["2026-10-21 08:02 .. 2026-10-21 08:13"] | 5 | #384–#388 | Claude (không rõ model), Claude Opus 5.5 | 5d082ad HW02: SV sửa gap analysis theo gap_check / 0c9d807 HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận
+["2026-10-21 08:14 .. 2026-10-21 08:15"] | 2 | #389–#390 | Claude Opus 5.5 | 7aefc8f HW02/appendix/A_prompt_log.md / 7aefc8f HW02/appendix/A_prompt_log.md
+["2026-10-21 08:23 .. 2026-10-21 08:23"] | 1 | #391–#391 | Claude Opus 5.5 | (chưa có) / (chưa có)
+
 #1   ["2026-10-12 21:20"]  Claude Sonnet 4.6 Đọc context và kinh nghiệm rút ra từ session khác của homework môn software test
       → commit kế tiếp: f9e8c1b (14:50 19/10) HW02: khởi tạo thư mục và ghi nhận môi trường test
 #2   ["2026-10-12 21:25"]  Claude Sonnet 4.6 Đọc yêu cầu đề giúp mình nhé
@@ -725,7 +799,61 @@
       → commit kế tiếp: 015505b (06:38 21/10) HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo
 #362 ["2026-10-21 06:38"]  Claude Opus 5.5  ## Lệnh cho Claude Code — CLAUDE.md: bài học D + chuyển giai đoạn
       → commit kế tiếp: 015505b (06:38 21/10) HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo
-#363 ["2026-10-21 06:43"]  Claude Opus 5.5  NHIỆM VỤ: HW02 – liệt kê form/mục phải nộp + dựng KHUNG report (chưa điền nội du
+#363 ["2026-10-21 06:40"]  Claude Sonnet 4.6 Đọc `claude/HW02_handoff.md`. A–D xong; bắt đầu báo cáo HW02. Viết lệnh cho Clau
       → commit kế tiếp: d8627c7 (06:48 21/10) HW02: kế hoạch nộp bài + khung report
-#364 ["2026-10-21 06:49"]  Claude Opus 5.5  Sửa: đổi tên khung report thành `HW02/23120255_HW02_Report.md` (theo CLAUDE.md §
+#364 ["2026-10-21 06:40#2"]  Claude Opus 5.5  Continue with the task described in the conversation above. Your most recent mcp
+      → commit kế tiếp: d8627c7 (06:48 21/10) HW02: kế hoạch nộp bài + khung report
+#365 ["2026-10-21 06:43"]  Claude Opus 5.5  NHIỆM VỤ: HW02 – liệt kê form/mục phải nộp + dựng KHUNG report (chưa điền nội du
+      → commit kế tiếp: d8627c7 (06:48 21/10) HW02: kế hoạch nộp bài + khung report
+#366 ["2026-10-21 06:43#2"]  Claude Opus 5.5  Trong lúc chờ prompt chạy, mình vừa thêm quyền cho bạn, bạn thử xem lại nhé
+      → commit kế tiếp: d8627c7 (06:48 21/10) HW02: kế hoạch nộp bài + khung report
+#367 ["2026-10-21 06:49"]  Claude Opus 5.5  Sửa: đổi tên khung report thành `HW02/23120255_HW02_Report.md` (theo CLAUDE.md §
       → commit kế tiếp: 6f3b791 (06:49 21/10) HW02: đổi tên khung report thành 23120255_HW02_Report.md
+#368 ["2026-10-21 06:50"]  Claude Opus 5.5  2 báo cáo mới nhất:
+      → commit kế tiếp: c33a7df (06:59 21/10) HW02: vá harness – prompt log (khoá khoảng, --commits)
+#369 ["2026-10-21 06:56"]  Claude Opus 5.5  Hiện tại, mặc dù chưa xong nhưng mình xem thấy thư mục HW02 là 64.6MB và 67.0 MB
+      → commit kế tiếp: c33a7df (06:59 21/10) HW02: vá harness – prompt log (khoá khoảng, --commits)
+#370 ["2026-10-21 06:57"]  Claude Opus 5.5  NHIỆM VỤ: ghi quyết định R2–R4, P1–P2 + vá harness ghi chú prompt log.
+      → commit kế tiếp: c33a7df (06:59 21/10) HW02: vá harness – prompt log (khoá khoảng, --commits)
+#371 ["2026-10-21 07:01"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ec3719f (07:04 21/10) HW02: vá harness – cảnh báo khoá ghi chú không khớp
+#372 ["2026-10-21 07:03"]  Claude Opus 5.5  Khi nào làm 1. AI điền phần dữ kiện của report, từng feature. nhỉ? Lúc đó cũng b
+      → commit kế tiếp: ec3719f (07:04 21/10) HW02: vá harness – cảnh báo khoá ghi chú không khớp
+#373 ["2026-10-21 07:03#2"]  Claude Opus 5.5  NHIỆM VỤ: (1) vá nhỏ harness prompt log; (2) điền phần DỮ KIỆN của report cho A_
+      → commit kế tiếp: ec3719f (07:04 21/10) HW02: vá harness – cảnh báo khoá ghi chú không khớp
+#374 ["2026-10-21 07:06"]  Claude Opus 5.5  Gap analysis là viết gì nhỉ? Và viết ở đâu? tên file là gì?
+      → commit kế tiếp: 8cf76b0 (07:10 21/10) HW02: report – điền dữ kiện A_FR01
+#375 ["2026-10-21 07:14"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 1182899 (07:26 21/10) HW02: report – sửa dữ kiện A_FR01
+#376 ["2026-10-21 07:17"]  Claude Opus 5.5  NHIỆM VỤ: sửa A + điền §2 + điền dữ kiện B, C, D (mỗi feature 1 commit).
+      → commit kế tiếp: 1182899 (07:26 21/10) HW02: report – sửa dữ kiện A_FR01
+#377 ["2026-10-21 07:28"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 608df85 (07:34 21/10) HW02: report – vá dữ kiện
+#378 ["2026-10-21 07:31"]  Claude Opus 5.5  Hiện tại vẫn còn nhiều phần trong report chưa được viết. Bạn có thể nói AI viết 
+      → commit kế tiếp: 608df85 (07:34 21/10) HW02: report – vá dữ kiện
+#379 ["2026-10-21 07:33"]  Claude Opus 5.5  NHIỆM VỤ: điền mọi phần DỮ KIỆN còn trống của report + vá lặt vặt.
+      → commit kế tiếp: 608df85 (07:34 21/10) HW02: report – vá dữ kiện
+#380 ["2026-10-21 07:44"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 0cc13c1 (07:51 21/10) HW02 - report: Bỏ từ khẳng định
+#381 ["2026-10-21 07:52"]  Claude Opus 5.5  NHIỆM VỤ: kiểm gap analysis SV + chép D vào report.
+      → commit kế tiếp: 1a5137f (07:53 21/10) HW02: dữ kiện đối chiếu gap analysis SV
+#382 ["2026-10-21 07:54"]  Claude Opus 5.5  Trong lúc Claude Code chạy: đánh giá Critique của tôi nhé:
+      → commit kế tiếp: db3c193 (08:02 21/10) HW02 - report: SV viết AI Critique, AI review
+#383 ["2026-10-21 07:58"]  Claude Opus 5.5  Mình mới viết lại, dựa trên các ý kiến sửa đổi của bạn, ngoại trừ văn phong thì 
+      → commit kế tiếp: db3c193 (08:02 21/10) HW02 - report: SV viết AI Critique, AI review
+#384 ["2026-10-21 08:02"]  Claude Opus 5.5  Sửa vậy được rồi, mình sẽ chốt bảng Critique mình vừa sửa trong Report luôn. Giờ
+      → commit kế tiếp: 5d082ad (08:10 21/10) HW02: SV sửa gap analysis theo gap_check
+#385 ["2026-10-21 08:10"]  Claude Opus 5.5  NHIỆM VỤ: chép gap analysis SV A–D vào report.
+      → commit kế tiếp: e2ae88e (08:10 21/10) HW02: cập nhật gap_check sau SV sửa
+#386 ["2026-10-21 08:12"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 0c9d807 (08:14 21/10) HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận
+#387 ["2026-10-21 08:13"]  Claude (không rõ model) ──
+      → commit kế tiếp: 0c9d807 (08:14 21/10) HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận
+#388 ["2026-10-21 08:13#2"]  Claude Opus 5.5  NHIỆM VỤ: lọc case đã bỏ khỏi bảng "AI tự nhận" ở x.5 (cả 4 feature).
+      → commit kế tiếp: 0c9d807 (08:14 21/10) HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận
+#389 ["2026-10-21 08:14"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7aefc8f (08:16 21/10) HW02/appendix/A_prompt_log.md
+#390 ["2026-10-21 08:15"]  Claude Opus 5.5  Xuất transcript nhé
+      → commit kế tiếp: 7aefc8f (08:16 21/10) HW02/appendix/A_prompt_log.md
+#391 ["2026-10-21 08:23"]  Claude Opus 5.5  NHIỆM VỤ: tạo lại danh sách lượt prompt log để SV ghi chú theo khoảng.
+      → commit kế tiếp: (chưa có)
