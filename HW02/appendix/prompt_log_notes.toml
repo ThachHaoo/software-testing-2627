@@ -11,8 +11,190 @@
 # Gom khoảng theo commit: python tools/extract_prompt_log.py ".transcripts/*.jsonl" --since 2026-10-12 \
 #     --extra HW02/appendix/prompt_log_extra.toml --list --commits -o HW02/appendix/prompt_log_turns.txt
 
-["2026-10-12 21:20"]
-section  = "Toàn bài"
-muc_dich = "[...]"
-xu_ly    = "[...]"
-dinh_kem = "`attachment.txt` (context và bài học HW01)"
+# ==============================================================================
+# 0. KHỞI TẠO MÔI TRƯỜNG & HARNESS CƠ BẢN
+# ==============================================================================
+
+["2026-10-12 21:20 .. 2026-10-19 16:07"]
+section  = "Khởi tạo môi trường & Harness"
+muc_dich = "Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu."
+xu_ly    = "Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo."
+
+# ==============================================================================
+# 1. FEATURE A (A_FR01: Đăng ký tài khoản)
+# ==============================================================================
+
+["2026-10-19 16:10 .. 2026-10-19 16:36"]
+section  = "3.1 A_FR01 Bước 1 – Phân tích biến vào/ra"
+muc_dich = "Khảo sát giao diện/API đăng ký, trích xuất danh sách biến đầu vào/ra và các quy tắc nghiệp vụ liên quan."
+xu_ly    = "Chấp nhận danh sách biến; bổ sung các ghi chú thực tế khi thao tác trên SUT."
+
+["2026-10-19 16:39 .. 2026-10-19 16:47"]
+section  = "3.2 A_FR01 Bước 2 – Phân lớp tương đương"
+muc_dich = "Phân chia các phân vùng tương đương (chúng/không hợp lệ) cho từng biến của feature Đăng ký."
+xu_ly    = "Chấp nhận phân lớp tương đương; sửa đổi một số lý do phân lớp để khớp với giả định hệ thống."
+
+["2026-10-19 16:51 .. 2026-10-19 17:17"]
+section  = "3.3 A_FR01 Bước 3 – Sinh test case Domain"
+muc_dich = "Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A."
+xu_ly    = "Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite."
+
+["2026-10-19 17:22 .. 2026-10-19 17:45"]
+section  = "3.4 A_FR01 Bước 4 – Sinh test case BVA"
+muc_dich = "Sinh các test case phân tích giá trị biên (BVA) cho độ dài mật khẩu và định dạng email."
+xu_ly    = "Chấp nhận; SV tự tay hiệu chỉnh TC-90, TC-92 để cô lập nguyên nhân thiếu ô Xác nhận mật khẩu."
+
+["2026-10-19 19:14 .. 2026-10-19 22:09"]
+section  = "3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis"
+muc_dich = "Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis."
+xu_ly    = "Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu."
+
+["2026-10-19 22:38 .. 2026-10-19 23:29"]
+section  = "3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử"
+muc_dich = "Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict)."
+xu_ly    = "Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị."
+
+["2026-10-19 23:31 .. 2026-10-20 09:18"]
+section  = "3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)"
+muc_dich = "Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub."
+xu_ly    = "SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng."
+
+["2026-10-20 09:21 .. 2026-10-20 10:08"]
+section  = "3.8 A_FR01 Tổng kết & Vá Harness"
+muc_dich = "Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A."
+xu_ly    = "Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log."
+
+# ==============================================================================
+# 2. FEATURE B (B_FR07: Giỏ hàng)
+# ==============================================================================
+
+["2026-10-20 10:13 .. 2026-10-20 10:33"]
+section  = "4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định"
+muc_dich = "Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18)."
+xu_ly    = "Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra."
+
+["2026-10-20 10:38 .. 2026-10-20 11:09"]
+section  = "4.3 B_FR07 Bước 3 – Sinh test case Domain"
+muc_dich = "Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu."
+xu_ly    = "Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement."
+
+["2026-10-20 11:11 .. 2026-10-20 12:41"]
+section  = "4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis"
+muc_dich = "Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu."
+xu_ly    = "Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập."
+
+["2026-10-20 12:43 .. 2026-10-20 13:23"]
+section  = "4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử"
+muc_dich = "Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công."
+xu_ly    = "Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend."
+
+["2026-10-20 13:29 .. 2026-10-20 16:07"]
+section  = "4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)"
+muc_dich = "Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues."
+xu_ly    = "SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo."
+
+# ==============================================================================
+# 3. FEATURE C (C_FR15: Quản lý sản phẩm Admin)
+# ==============================================================================
+
+["2026-10-20 16:10 .. 2026-10-20 16:37"]
+section  = "5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định"
+muc_dich = "Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14."
+xu_ly    = "Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu."
+
+["2026-10-20 16:40 .. 2026-10-20 16:46"]
+section  = "5.2 C_FR15 Bước 2 – Phân lớp tương đương"
+muc_dich = "Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh)."
+xu_ly    = "Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền."
+
+["2026-10-20 16:52 .. 2026-10-20 16:57"]
+section  = "5.3 C_FR15 Bước 3 – Sinh test case Domain"
+muc_dich = "Sinh bộ kịch bản kiểm thử Domain Testing cho CRUD sản phẩm và phân tách suite API."
+xu_ly    = "Chấp nhận; điều chỉnh theo linter để đảm bảo cấu trúc testcases.json hợp lệ."
+
+["2026-10-20 16:59 .. 2026-10-20 18:05"]
+section  = "5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis"
+muc_dich = "Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa."
+xu_ly    = "Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API."
+
+["2026-10-20 18:06 .. 2026-10-20 19:05"]
+section  = "5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử"
+muc_dich = "Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict."
+xu_ly    = "SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi."
+
+["2026-10-20 19:12 .. 2026-10-20 22:13"]
+section  = "5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)"
+muc_dich = "Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues."
+xu_ly    = "SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue."
+
+# ==============================================================================
+# 4. FEATURE D (D_FR20: Đăng ký trên Mobile)
+# ==============================================================================
+
+["2026-10-20 22:16 .. 2026-10-20 22:39"]
+section  = "6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định"
+muc_dich = "Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile."
+xu_ly    = "Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md."
+
+["2026-10-20 22:43 .. 2026-10-20 22:46"]
+section  = "6.2 D_FR20 Bước 2 – Phân lớp tương đương"
+muc_dich = "Phân chia lớp tương đương cho các trường thông tin đăng ký trên giao diện di động."
+xu_ly    = "Chấp nhận; SV duyệt và chốt các phân vùng tương đương phù hợp với bàn phím di động."
+
+["2026-10-20 22:49 .. 2026-10-20 22:51"]
+section  = "6.3 D_FR20 Bước 3 – Sinh test case Domain"
+muc_dich = "Sinh kịch bản kiểm thử Domain cho ứng dụng di động và rà soát theo phản hồi review."
+xu_ly    = "Chấp nhận; hiệu chỉnh các bước thực hiện để khớp với giao diện thực tế của Mobile App."
+
+["2026-10-20 22:53 .. 2026-10-20 23:45"]
+section  = "6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis"
+muc_dich = "Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis."
+xu_ly    = "Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím."
+
+["2026-10-20 23:47 .. 2026-10-21 02:11"]
+section  = "6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử"
+muc_dich = "Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử."
+xu_ly    = "SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh."
+
+["2026-10-21 02:19 .. 2026-10-21 03:49"]
+section  = "6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)"
+muc_dich = "Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues."
+xu_ly    = "SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi."
+
+# ==============================================================================
+# 5. TỔNG HỢP VÀ BÁO CÁO BÀI TẬP (REPORT & AI CRITIQUE)
+# ==============================================================================
+
+["2026-10-21 06:36 .. 2026-10-21 07:44"]
+section  = "Báo cáo HW02 – Điền dữ kiện"
+muc_dich = "Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D."
+xu_ly    = "Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan."
+
+["2026-10-21 07:52 .. 2026-10-21 08:23"]
+section  = "Báo cáo HW02 – AI Critique & Hoàn thiện"
+muc_dich = "Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log."
+xu_ly    = "SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo."
+
+["2026-10-21 08:24 .. 2026-10-21 13:00"]
+section  = "Báo cáo HW02 – Hoàn thiện"
+muc_dich = "Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài."
+xu_ly    = "Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo."
+
+# ==============================================================================
+# 6. KHOÁ GIỜ ĐƠN DÙNG ĐỂ GHI ĐÈ / LƯỢT ĐẶC BIỆT
+# ==============================================================================
+
+["2026-10-20 10:14#2"]
+section  = "4.1 B_FR07 Bước 1"
+muc_dich = "Lượt bị ngắt giữa chừng do bấm Ctrl+C."
+xu_ly    = "Bỏ qua lượt này, phát lại lệnh ở lượt tiếp theo."
+
+["2026-10-20 20:44"]
+section  = "5.7 C_FR15 Bước 7"
+muc_dich = "Chạm giới hạn phiên làm việc (compact context) của Claude Code."
+xu_ly    = "Xuất transcript trước khi compact và khởi động phiên làm việc mới."
+
+["2026-10-21 08:13"]
+section  = "Báo cáo HW02 – Hoàn thiện"
+muc_dich = "Lượt bị dán nhầm chuỗi ký tự phân cách '──'."
+xu_ly    = "Bỏ qua prompt rác, gửi lại prompt yêu cầu lọc case ở lượt ngay sau đó."

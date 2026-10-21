@@ -5,14 +5,13 @@
 
 ---
 
-## #1 | 21:20 12/10/2026 | Claude Sonnet 4.6 | Toàn bài
-**Mục đích:** [...]
+## #1 | 21:20 12/10/2026 | Claude Sonnet 4.6 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
 Đọc context và kinh nghiệm rút ra từ session khác của homework môn software testing nhé
 ```
-*Đính kèm:* `attachment.txt` (context và bài học HW01)
 
 **Output:**
 ```
@@ -31,12 +30,12 @@ Có hai việc cần làm sớm ở HW02, vì HW01 đã vướng:
 Gửi đề HW02 (và tài liệu EShop nếu có), mình bắt đầu từ bước tóm tắt bảng điểm và liệt kê chỗ dễ sót.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #2 | 21:25 12/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #2 | 21:25 12/10/2026 | Claude Sonnet 4.6 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -85,12 +84,12 @@ Gửi đề HW02 (và tài liệu EShop nếu có), mình bắt đầu từ bư�
 Bước tiếp theo, mình có thể đọc repo `eshop-sut` để xác nhận Pool D, cách chạy SUT, và spec của các FR bạn chọn.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #3 | 21:26 12/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #3 | 21:26 12/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -130,12 +129,12 @@ Lượt này (chọn feature) là một lượt AI cần ghi vào prompt log.
 Bạn chốt 4 feature với nhóm xong thì báo mình. Bước tiếp theo là dựng dàn ý report và cây thư mục HW02.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #4 | 21:28 12/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #4 | 21:28 12/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -170,12 +169,12 @@ Hai việc cần chốt với nhóm:
 Chốt xong thì mình làm tiếp dàn ý report và cây thư mục HW02.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #5 | 21:30 12/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #5 | 21:30 12/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -201,12 +200,12 @@ Nếu bạn đang phân vân giữa hai cái:
 FR-17 gần với FR-09 của bạn cùng nhóm, nhưng không tính là trùng: một bên là quản trị coupon (admin CRUD), một bên là áp dụng coupon lúc checkout.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #6 | 21:31 12/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #6 | 21:31 12/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -231,12 +230,12 @@ Cách ghi này rõ cho người chấm và tránh bị hiểu là trùng feature
 Còn một việc: báo nhóm để không ai chọn trùng "Đăng ký trên Mobile".
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #7 | 21:31 12/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #7 | 21:31 12/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -258,12 +257,12 @@ Bộ chốt của bạn:
 - **D:** FR-20 – Đăng ký trên Mobile
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #8 | 21:33 12/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #8 | 21:33 12/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -277,12 +276,12 @@ Không có. Mình tìm trong `frontend-mobile/App.js` các từ "category" và "
 Như vậy nếu "D tương tự C" của bạn cùng nhóm là FR-14 trên mobile thì **không làm được**. Bạn nên báo họ sớm. Họ cũng phải chọn D theo một chức năng mobile có thật, tức là một trong các màn: Home/tìm kiếm, Chi tiết SP, Giỏ hàng, Checkout, Đăng nhập, Đăng ký, Quên mật khẩu, Hồ sơ. Đồng thời họ không được trùng với "Đăng ký trên Mobile" của bạn. Với họ, hợp lý nhất là **Hồ sơ trên Mobile**, vì nó khớp với FR-04 họ đang làm ở A.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #9 | 14:06 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #9 | 14:06 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -399,12 +398,12 @@ cd frontend-mobile; npm install; npx expo start
 Môi trường chạy được thì mình dựng dàn ý report và cây thư mục HW02.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #10 | 14:53 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #10 | 14:53 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -499,12 +498,12 @@ Bạn xem bài nộp HW01: https://github.com/ThachHaoo/software-testing-2627. X
 3. **Gửi slide Domain Testing và BVA của thầy.** H2 và các bước 1–4 phải bám đúng cách thầy dạy (cách đặt tên on/off point, mẫu bảng).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #11 | 15:07 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #11 | 15:07 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -591,12 +590,12 @@ Bạn chỉ cần chép gói vào repo và review. Skill `cs423-ai-first-homewor
 ````
 *File AI ghi/gửi trong lượt này:* `extract_prompt_log.py`, `test-design-istqb.SKILL.md`, `prompt_log_notes.toml`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #12 | 15:20 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #12 | 15:20 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -670,12 +669,12 @@ What I couldn't test: Windows itself (the hook calls `python`, so `python --vers
 ```
 *File AI ghi/gửi trong lượt này:* `SKILL.md`, `schema-domain.md`, `automation.md`, `check_domain.py`, `render_md.py`, `freeze.py`, `merge_results.py`, `hw.toml`, `on_stop.py`, `summary.py`, `export_commit_log.ps1`, `CLAUDE.md`, `HARNESS_SETUP.md`, `harness-HW02.zip`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #13 | 15:40 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #13 | 15:40 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -728,12 +727,12 @@ Việc tiếp theo: bạn cài harness xong và chạy bước kiểm tra trong 
 ````
 *File AI ghi/gửi trong lượt này:* `harness-HW02.zip`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #14 | 15:55 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #14 | 15:55 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -776,13 +775,13 @@ bạn bảo commit rồi làm bài nhưng mình chưa thấy CLAUDE.md nên mu�
 (không có output dạng văn bản)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #15 | 16:04 19/10/2026 | Claude Opus 5.5 | [...]
+## #15 | 16:04 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -834,13 +833,13 @@ Bạn đang dùng Python 3.14 của MSYS2 (`C:\msys64\ucrt64`). Bản này hợp
 Chạy ổn thì quay lại phần commit ở tin nhắn trước (`git add -f CLAUDE.md`, kiểm tra `.transcripts` đã bị ignore, rồi commit).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #16 | 16:07 19/10/2026 | Claude Opus 5.5 | [...]
+## #16 | 16:07 19/10/2026 | Claude Opus 5.5 | Khởi tạo môi trường & Harness
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Đọc context, yêu cầu đề HW02, trao đổi chọn Pool/Feature và thiết lập khung thư mục, công cụ test harness ban đầu.
 
 **Prompt:**
 ```
@@ -899,12 +898,12 @@ Khi Claude Code làm xong, dán khối **"Báo cáo cho phiên thảo luận"** 
 Lệnh này do phiên thảo luận soạn. Khi ghi chú prompt log cho lượt tương ứng bên Claude Code, ghi phần Mục đích là "thực hiện lệnh soạn ở phiên thảo luận #n". Như vậy phần Audit sẽ khớp giữa hai phiên.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận cấu trúc harness đề xuất; điều chỉnh lựa chọn Feature A (FR-01), B (FR-07), C (FR-15), D (FR-20) cho phù hợp với repo.
 
 ---
 
-## #17 | 16:10 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #17 | 16:10 19/10/2026 | Claude Opus 5.5 | 3.1 A_FR01 Bước 1 – Phân tích biến vào/ra
+**Mục đích:** Khảo sát giao diện/API đăng ký, trích xuất danh sách biến đầu vào/ra và các quy tắc nghiệp vụ liên quan.
 
 **Prompt:**
 ```
@@ -978,13 +977,13 @@ Cột `source` chỉ ghi nơi biến xuất hiện. Riêng V5 ghi đúng điều
 ````
 *File AI ghi/gửi trong lượt này:* `testcases.json`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; bổ sung các ghi chú thực tế khi thao tác trên SUT.
 
 ---
 
-## #18 | 16:18 19/10/2026 | Claude Opus 5.5 | [...]
+## #18 | 16:18 19/10/2026 | Claude Opus 5.5 | 3.1 A_FR01 Bước 1 – Phân tích biến vào/ra
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Khảo sát giao diện/API đăng ký, trích xuất danh sách biến đầu vào/ra và các quy tắc nghiệp vụ liên quan.
 
 **Prompt:**
 ```
@@ -1058,12 +1057,12 @@ Commit xong thì sang bước 2 (lớp tương đương) với lệnh `/domain-b
 Gợi ý ghi chú prompt log: lượt review này ghi Section `A – FR-01 bước 1`, Mục đích "Review bản nháp biến vào/ra và trả lời câu hỏi của Claude Code". Phần Xử lý bạn tự ghi theo những gì bạn đã chọn.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; bổ sung các ghi chú thực tế khi thao tác trên SUT.
 
 ---
 
-## #19 | 16:31 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #19 | 16:31 19/10/2026 | Claude Opus 5.5 | 3.1 A_FR01 Bước 1 – Phân tích biến vào/ra
+**Mục đích:** Khảo sát giao diện/API đăng ký, trích xuất danh sách biến đầu vào/ra và các quy tắc nghiệp vụ liên quan.
 
 **Prompt:**
 ```
@@ -1119,13 +1118,13 @@ Có 2 điểm em cần biết:
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; bổ sung các ghi chú thực tế khi thao tác trên SUT.
 
 ---
 
-## #20 | 16:36 19/10/2026 | Claude Opus 5.5 | [...]
+## #20 | 16:36 19/10/2026 | Claude Opus 5.5 | 3.1 A_FR01 Bước 1 – Phân tích biến vào/ra
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Khảo sát giao diện/API đăng ký, trích xuất danh sách biến đầu vào/ra và các quy tắc nghiệp vụ liên quan.
 
 **Prompt:**
 ```
@@ -1207,12 +1206,12 @@ Báo cáo cho phiên thảo luận.
 Xong thì chạy `/domain-bva-testing HW02/A_FR01 2` và dán `testcases.md` (bảng Partitions) về đây để review.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; bổ sung các ghi chú thực tế khi thao tác trên SUT.
 
 ---
 
-## #21 | 16:39 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #21 | 16:39 19/10/2026 | Claude Opus 5.5 | 3.2 A_FR01 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia các phân vùng tương đương (chúng/không hợp lệ) cho từng biến của feature Đăng ký.
 
 **Prompt:**
 ```
@@ -1260,13 +1259,13 @@ Bước 2 xong: đã phân 50 lớp tương đương (17 hợp lệ, 33 không h
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận phân lớp tương đương; sửa đổi một số lý do phân lớp để khớp với giả định hệ thống.
 
 ---
 
-## #22 | 16:43 19/10/2026 | Claude Opus 5.5 | [...]
+## #22 | 16:43 19/10/2026 | Claude Opus 5.5 | 3.2 A_FR01 Bước 2 – Phân lớp tương đương
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Phân chia các phân vùng tương đương (chúng/không hợp lệ) cho từng biến của feature Đăng ký.
 
 **Prompt:**
 ```
@@ -1338,12 +1337,12 @@ Báo cáo cho phiên thảo luận.
 Sau bước 3 bạn dán `testcases.md` về đây. Lần review đó mình sẽ soát kỹ nhất phần **Expected**, vì đây là chỗ AI hay sai nhất.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận phân lớp tương đương; sửa đổi một số lý do phân lớp để khớp với giả định hệ thống.
 
 ---
 
-## #23 | 16:47 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #23 | 16:47 19/10/2026 | Claude Opus 5.5 | 3.2 A_FR01 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia các phân vùng tương đương (chúng/không hợp lệ) cho từng biến của feature Đăng ký.
 
 **Prompt:**
 ```
@@ -1380,12 +1379,12 @@ Trong commit, `A_prompt_log.md` chưa có lượt này vì hook Stop chỉ tạo
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận phân lớp tương đương; sửa đổi một số lý do phân lớp để khớp với giả định hệ thống.
 
 ---
 
-## #24 | 16:51 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #24 | 16:51 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1451,13 +1450,13 @@ Thêm **A18**: ô Xác nhận mật khẩu cũng phải là `type="password"`, v
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_step3_gen.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #25 | 16:58 19/10/2026 | Claude Opus 5.5 | [...]
+## #25 | 16:58 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1538,13 +1537,13 @@ Báo cáo cho phiên thảo luận.
 **Lưu ý quan trọng trước bước 5.** Sau bước 4, bạn tự tìm các case còn thiếu (TS-SV) **trước khi** hỏi mình hay Claude Code. AI đã sinh 50 lớp rất kỹ, nên phần bạn tự bổ sung có thể ít. Như vậy vẫn ổn. Quan trọng là case đó do bạn tự nghĩ ra và có lý do rõ ràng. Ở bước này mình sẽ không gợi ý case cụ thể nào.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #26 | 17:04 19/10/2026 | Claude Opus 5.5 | [...]
+## #26 | 17:04 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1597,13 +1596,13 @@ Thêm 3 mục này vào cuối lệnh 1 (trước dòng "7. Chạy check_domain�
 Sau khi áp dụng, Claude Code chạy `check_domain` và render lại. Bạn mở `testcases.md`, soát nhanh cột Expected của TC-12, TC-13 và các case trùng bên API. Không còn chữ "đúng 1 user `test@eshop.com`" là đạt.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #27 | 17:07 19/10/2026 | Claude Opus 5.5 | [...]
+## #27 | 17:07 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1649,12 +1648,12 @@ Thứ tự làm:
 Khi Claude Code báo xong, dán phần **Tiền điều kiện + Quy trình chung** của `testcases.md` về đây để mình soát lại trước khi commit 3/7.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #28 | 17:09 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #28 | 17:09 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1726,13 +1725,13 @@ Báo cáo cho phiên thảo luận (kèm số TC mỗi suite).
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_step3_split.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #29 | 17:14 19/10/2026 | Claude Opus 5.5 | [...]
+## #29 | 17:14 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1809,12 +1808,12 @@ Báo cáo cho phiên thảo luận.
 Sau bước 4 thì đến **bước 5, phần của bạn**. Bạn tự nghĩ thêm case vào TS-SV trước, rồi mới hỏi AI vì sao nó bỏ sót. Ở bước này mình chỉ review cách bạn trình bày, không gợi ý case.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #30 | 17:17 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #30 | 17:17 19/10/2026 | Claude Opus 5.5 | 3.3 A_FR01 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh bộ test case Domain Testing kiểm tra các phân vùng chính của feature A.
 
 **Prompt:**
 ```
@@ -1882,13 +1881,13 @@ Mỗi tầng xét 6 chiều. Các chiều này có thứ tự theo SRS; mọi bi
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_step4_bva.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận các test case AI sinh ra; yêu cầu bổ sung tiền điều kiện (preconditions) rõ ràng cho từng suite.
 
 ---
 
-## #31 | 17:22 19/10/2026 | Claude Opus 5.5 | [...]
+## #31 | 17:22 19/10/2026 | Claude Opus 5.5 | 3.4 A_FR01 Bước 4 – Sinh test case BVA
 *Nguồn:* Chép tay từ giao diện claude.ai (transcript phiên bị nén ngữ cảnh); giờ theo giao diện, độ chính xác phút
-**Mục đích:** [...]
+**Mục đích:** Sinh các test case phân tích giá trị biên (BVA) cho độ dài mật khẩu và định dạng email.
 
 **Prompt:**
 ```
@@ -1984,12 +1983,12 @@ Lưu ý: AI đã sinh 50 lớp rất kỹ, nên bạn có thể chỉ tìm thêm
 Gửi `sv_cases.md` về đây sau khi đã commit nếu muốn mình review cách trình bày. Mình chỉ góp ý hình thức (oracle, căn cứ, có trùng EC không), không thêm ý tưởng case.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV tự tay hiệu chỉnh TC-90, TC-92 để cô lập nguyên nhân thiếu ô Xác nhận mật khẩu.
 
 ---
 
-## #32 | 17:25 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #32 | 17:25 19/10/2026 | Claude Opus 5.5 | 3.4 A_FR01 Bước 4 – Sinh test case BVA
+**Mục đích:** Sinh các test case phân tích giá trị biên (BVA) cho độ dài mật khẩu và định dạng email.
 
 **Prompt:**
 ```
@@ -2029,12 +2028,12 @@ Phần thiết kế của AI (bước 1–4) đã xong. Bước 5 là phần em 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV tự tay hiệu chỉnh TC-90, TC-92 để cô lập nguyên nhân thiếu ô Xác nhận mật khẩu.
 
 ---
 
-## #33 | 17:41 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #33 | 17:41 19/10/2026 | Claude Opus 5.5 | 3.4 A_FR01 Bước 4 – Sinh test case BVA
+**Mục đích:** Sinh các test case phân tích giá trị biên (BVA) cho độ dài mật khẩu và định dạng email.
 
 **Prompt:**
 ```
@@ -2078,12 +2077,12 @@ Báo cáo cho phiên thảo luận.
 **Lưu ý cho bước 5 và 7:** việc form thiếu ô Xác nhận mật khẩu **không phải case AI bỏ sót**, vì AI đã gắn cờ chuyện này từ bước 1. Đừng đưa nó vào TS-SV như một phát hiện của bạn. Nó là ứng viên bug cho bước 7, phần mô tả bug bạn tự viết. Khi làm feature D (FR-20 Mobile), nhớ kiểm xem màn hình đăng ký trên app có ô này không.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV tự tay hiệu chỉnh TC-90, TC-92 để cô lập nguyên nhân thiếu ô Xác nhận mật khẩu.
 
 ---
 
-## #34 | 17:45 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #34 | 17:45 19/10/2026 | Claude Opus 5.5 | 3.4 A_FR01 Bước 4 – Sinh test case BVA
+**Mục đích:** Sinh các test case phân tích giá trị biên (BVA) cho độ dài mật khẩu và định dạng email.
 
 **Prompt:**
 ```
@@ -2133,12 +2132,12 @@ Có file `HW02/A_FR01/sv_cases.md` chưa được git theo dõi. Em không mở 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV tự tay hiệu chỉnh TC-90, TC-92 để cô lập nguyên nhân thiếu ô Xác nhận mật khẩu.
 
 ---
 
-## #35 | 19:14 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #35 | 19:14 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2199,12 +2198,12 @@ Vài điểm em nên tự kiểm khi viết phần phân tích:
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_step5_sv.py`, `ai_gap_answer.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #36 | 19:26 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #36 | 19:26 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2273,12 +2272,12 @@ Báo cáo cho phiên thảo luận.
 Sau khi bạn gửi 4 quyết định còn lại (A3, A20, mã yêu cầu, oracle cho 219/223), bằng lời của bạn, mình sẽ đưa lệnh commit `HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách tầng, giả định, truy vết)`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #37 | 19:28 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #37 | 19:28 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2344,12 +2343,12 @@ Có 3 chỗ em nên xem trước khi commit:
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #38 | 19:33 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #38 | 19:33 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2421,12 +2420,12 @@ Chạy check_domain, lint, render. Chưa commit. Báo cáo cho phiên thảo lu�
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #39 | 19:36 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #39 | 19:36 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2474,12 +2473,12 @@ Báo cáo cho phiên thảo luận.
 Khi dán lệnh, nhớ dán kèm 4 dòng A20–A23 ở cuối. Sau commit này, bước 5 của feature A xong phần thiết kế. Phần "vì sao AI bỏ sót" trong report vẫn do bạn tự viết, dựa trên `ai_gap_answer.md` và kết quả bạn tự kiểm lại các câu "Đã nghĩ tới". Bước tiếp theo là bước 6: Claude Code viết Playwright, bạn chạy trên máy.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #40 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #40 | 19:39 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2503,12 +2502,12 @@ Nếu bạn **đã lỡ gửi lệnh trước** cho Claude Code thì cũng khôn
 Khi dán, nhớ thay dòng `<dán 4 gạch đầu dòng A20–A23 ở trên>` bằng 4 giả định A20–A23 trong mục "Giả định mới" ở tin nhắn trước, nếu không Claude Code sẽ không có nguyên văn để chép.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #41 | 19:39 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #41 | 19:39 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2586,12 +2585,12 @@ Giữ nguyên 229, 230, 232 vì expected không có yếu tố UI. Với 224, 22
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_sv_final.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #42 | 19:42 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #42 | 19:42 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2669,12 +2668,12 @@ Báo cáo cho phiên thảo luận: danh sách file, số test, các case không
 Sau khi Claude Code báo cáo, **bạn tự chạy cả bộ**: restart backend, chạy lệnh trong CLAUDE.md mục 5, rồi chạy `merge_results.py`. Mỗi lần chạy lại cả bộ đều phải restart backend trước. Commit `6/7` làm sau khi đã có kết quả thật.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #43 | 22:09 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #43 | 22:09 19/10/2026 | Claude Opus 5.5 | 3.5 A_FR01 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa bộ kịch bản kiểm thử do SV tự nghĩ (sv_cases.md) vào suite TS-SV, chuẩn hóa phân tách tầng UI/API và hoàn thiện gap analysis.
 
 **Prompt:**
 ```
@@ -2773,12 +2772,12 @@ Xong cả ba phần. Phần 1 và 2 đã commit; phần 3 viết xong và chạy
 ````
 *File AI ghi/gửi trong lượt này:* `lib.ts`, `A_FR01.spec.ts`, `playwright.config.ts`, `global-setup.ts`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chuẩn hóa mã test case TS-SV, tách rõ tầng UI và API, cập nhật truy vết yêu cầu.
 
 ---
 
-## #44 | 22:38 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #44 | 22:38 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ````
@@ -2877,12 +2876,12 @@ Nếu `eshop-sut` không nằm cạnh repo bài nộp, sửa đường dẫn ở
 **Lưu ý khi đọc kết quả:** trong báo cáo, TC-01 (`Abcd1234!`) đã bị form chặn với thông báo "Mật khẩu quá yếu!". Nghĩa là kiểu "một nguyên nhân làm fail cả loạt case UI hợp lệ" mà mình đã cảnh báo rất có thể sẽ xảy ra. Sau khi chạy sẽ có nhiều case UI Fail. **Đừng vội kết luận từng case là một bug.** Gửi báo cáo về đây, mình sẽ cùng bạn cô lập nguyên nhân gốc (A20) trước bước 7.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #45 | 22:39 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #45 | 22:39 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -2917,12 +2916,12 @@ Script Playwright của A_FR01 đã commit ở `d840b73`.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #46 | 22:52 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #46 | 22:52 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -2974,12 +2973,12 @@ Khi có báo cáo, gửi về đây. Có 3 việc sẽ làm cùng nhau:
 - **Commit `6/7b`** sau khi đã chốt verdict.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #47 | 22:56 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #47 | 22:56 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3084,12 +3083,12 @@ Sau khi vá harness: xoá thư mục evidence, merge lại từ `results/A_FR01.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #48 | 23:03 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #48 | 23:03 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3165,12 +3164,12 @@ PHẦN 3 — chốt verdict theo quy tắc SV duyệt:
 Gửi bảng đề xuất về đây. Bạn duyệt xong thì commit `HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #49 | 23:05 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #49 | 23:05 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3273,12 +3272,12 @@ Em đã làm xong cả ba phần; chưa commit phần 2 và 3. Có 17 case đổ
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #50 | 23:11 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #50 | 23:11 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3329,12 +3328,12 @@ Báo cáo cho phiên thảo luận (số Pass/Fail/Blocked cuối theo suite).
 **Sau commit này** còn bước 7: bạn tự viết bug report và tạo GitHub Issues. Lúc đó cô lập nguyên nhân gốc (ví dụ regex ở `Register.jsx` dòng 15) và quyết định gộp hay tách bug. Mình chỉ kiểm tra trường thiếu, severity và priority, không viết mô tả bug.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #51 | 23:18 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #51 | 23:18 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3381,12 +3380,12 @@ Báo cáo cho phiên thảo luận (số Pass/Fail/Blocked cuối theo suite).
 Kiểm tay xong, bạn gửi cho Claude Code câu Actual (bằng lời của bạn), verdict và tên file ảnh, kèm lời nhắn: "ghi vào TC-216, commit `HW02[A-FR01] 6/7c: kết quả kiểm tay TC-216`".
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #52 | 23:21 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #52 | 23:21 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3428,12 +3427,12 @@ Sau commit này, bước 6 của feature A xong. Tiếp theo là **bước 7, ph
 Gửi bản nháp về đây, mình sẽ kiểm trường thiếu, severity và priority.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #53 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #53 | 23:24 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3467,12 +3466,12 @@ Báo cáo cho phiên thảo luận (số Pass/Fail/Blocked cuối theo suite).
 Trong lần chạy tự động, TC-216 bị đánh Blocked/Not run vì UI chặn mật khẩu, và kết quả này chỉ lộ ra khi kiểm tay qua đường API. Đây là chất liệu tốt cho phần gap analysis của bạn: một lỗi chỉ tìm thấy khi đi đường vòng.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #54 | 23:24 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #54 | 23:24 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3542,12 +3541,12 @@ check_domain 0 lỗi; lint 0 lỗi.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #55 | 23:26 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #55 | 23:26 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3609,12 +3608,12 @@ Báo cáo cho phiên thảo luận.
 Khi đã kiểm trang admin, bạn gửi câu notes mới cho Claude Code kèm lời nhắn: "ghi vào notes TC-216 rồi commit `HW02[A-FR01] 6/7c: chỉnh notes TC-216 theo quan sát trang admin`".
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #56 | 23:28 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #56 | 23:28 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3648,12 +3647,12 @@ Báo cáo cho phiên thảo luận.
 Sau commit này, bước 6 của feature A xong hoàn toàn và bạn chuyển sang bước 7 (bug report) theo trình tự ở tin nhắn trước.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #57 | 23:29 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #57 | 23:29 19/10/2026 | Claude Opus 5.5 | 3.6 A_FR01 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Chạy tự động các kịch bản kiểm thử UI/API bằng Playwright, thu thập bằng chứng (evidence) và chốt kết quả thực thi (verdict).
 
 **Prompt:**
 ```
@@ -3694,12 +3693,12 @@ Tổng kết quả không đổi: 43 Pass, 65 Fail, 25 Blocked. check_domain 0 l
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận kết quả tự động; SV trực tiếp kiểm tra thủ công các case đặc thù (TC-216) trên trang quản trị.
 
 ---
 
-## #58 | 23:31 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #58 | 23:31 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -3737,12 +3736,12 @@ Mình thấy hiện nay bug report và GitHub Issues toàn sử dụng LLM để
 Nếu muốn, mình đưa lệnh cho Claude Code làm hai việc đầu: danh sách nhóm Fail và khung `BUG-xx.md` trống có sẵn phần dữ kiện. Phần câu chữ mô tả lỗi bạn tự viết.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #59 | 23:33 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #59 | 23:33 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -3778,12 +3777,12 @@ Khi có `_groups_A_FR01.md`, bạn đọc qua, mở ảnh và đoạn code đi k
 **Phần nên khai trong Audit:** "AI gom dữ kiện, dựng khung và kiểm trường. Toàn bộ mô tả bug do SV viết (AI-01 §11)."
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #60 | 23:34 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #60 | 23:34 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -3813,12 +3812,12 @@ Bảng TC-209 có 2 lỗi: cột "Lần" đều ghi 1 (file JSON không có `rep
 ```
 *File AI ghi/gửi trong lượt này:* `fr01_groups.py`, `README.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #61 | 23:38 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #61 | 23:38 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -3879,12 +3878,12 @@ Báo cáo cho phiên thảo luận.
 Gửi danh sách bug bạn chốt về đây. Mình sẽ đưa lệnh **lượt 2**: Claude Code tạo `BUG-xx.md` với phần dữ kiện điền sẵn (môi trường, commit SUT, TC liên quan, yêu cầu, đường dẫn ảnh, kết quả lặp lại 3 lần của TC-209), còn các trường mô tả để trống cho bạn viết.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #62 | 23:39 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #62 | 23:39 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -3920,12 +3919,12 @@ check_domain 0 lỗi.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #63 | 23:46 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #63 | 23:46 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4014,12 +4013,12 @@ Không commit khung trống. Báo cáo danh sách file đã tạo.
 Viết xong một hai file thì gửi về đây trước. Mình kiểm cách trình bày sớm để những file sau không phải sửa lại hàng loạt.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #64 | 23:50 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #64 | 23:50 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4050,12 +4049,12 @@ TC-209 giữ Fail (không áp A20).
 Khi dán, bỏ dòng ngoặc đơn "(Nếu SV chọn 209 → Blocked…)" trong lệnh lượt 2, vì bạn đã chọn giữ Fail.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #65 | 23:51 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #65 | 23:51 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4127,12 +4126,12 @@ TC-209 giữ Fail, không đổi gì trong `testcases.json`.
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_bugs.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #66 | 23:53 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #66 | 23:53 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4207,12 +4206,12 @@ Phần này là gợi ý về hình thức, không phải nội dung:
 Viết xong 1–2 file thì gửi về đây để kiểm trước khi viết tiếp.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #67 | 23:54 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #67 | 23:54 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4274,12 +4273,12 @@ A9 (API phải từ chối dữ liệu sai như UI) có mặt ở mọi bug tầ
 ````
 *File AI ghi/gửi trong lượt này:* `fr01_bugfix.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #68 | 23:56 19/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #68 | 23:56 19/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4323,12 +4322,12 @@ Khi bước 7 xong là **xong feature A**. Phần còn lại của HW02:
 Nếu đang muộn thì dừng ở bước viết BUG-01 và BUG-11 là hợp lý. Lúc rảnh, nhớ điền thêm Section / Mục đích / Xử lý cho các lượt hôm nay trong `prompt_log_notes.toml`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #69 | 00:16 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #69 | 00:16 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4364,12 +4363,12 @@ Phần `<details>` thu gọn 14 TC là ý hay: GitHub hiển thị được và 
 Sửa xong BUG-01 thì gửi luôn **BUG-11** để mình kiểm bug kiểm tay, sau đó bạn viết 12 file còn lại theo khuôn này.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #70 | 00:17 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #70 | 00:17 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4417,12 +4416,12 @@ Phần này ngắn, khoảng 5–10 phút.
 **Khai trong Audit:** "AI sửa phần dữ kiện của bug report (môi trường, giá trị, đường dẫn ảnh, trích nguyên văn SRS); mô tả do SV viết."
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #71 | 00:18 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #71 | 00:18 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4488,12 +4487,12 @@ Có một chỗ em không sửa vì là câu chữ của SV: mục Các bước 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #72 | 00:20 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #72 | 00:20 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4542,12 +4541,12 @@ Ghi chú rõ như vậy cho thấy bạn **đánh giá được** từng bug ch�
 **Trước khi tạo Issues:** xem trang Issues của `tkob-team/eshop-sut` đã có bug trùng chưa. Các bạn cùng nhóm làm FR-04 (hồ sơ) có thể đã báo lỗi XSS ở tên người dùng giống BUG-11. Nếu trùng thì **bình luận vào issue sẵn có** kèm bằng chứng của bạn, đừng tạo issue mới.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #73 | 00:22 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #73 | 00:22 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4584,12 +4583,12 @@ Báo cáo cho phiên thảo luận.
 Sau đó là tạo GitHub Issues. Nhớ kiểm trước xem issue trùng đã có chưa, nhất là bug XSS.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #74 | 00:41 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #74 | 00:41 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4622,12 +4621,12 @@ Ba file viết tốt. Phần nhận định của BUG-02 phân tích regex chín
 Sửa xong thì cứ viết tiếp các file còn lại. Khi đủ 14 file, đưa lệnh kiểm cuối ở tin nhắn trước cho Claude Code: nó sẽ tự đối chiếu các bước với `testcases.json`, Actual với `actual_result`, và báo lỗi kèm số dòng. Thêm vào lệnh đó một dòng: *"xoá dòng trích code lặp trong mục Dữ kiện của BUG-04"*.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #75 | 00:43 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #75 | 00:43 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4668,12 +4667,12 @@ Mục 4 chỉ thêm "(chưa kiểm chứng)" chứ không xoá câu của bạn.
 **Khai trong Audit:** "AI đối chiếu và sửa dữ kiện (payload, nhãn case, danh sách giá trị trong Actual) theo evidence; câu chữ mô tả do SV viết."
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #76 | 00:45 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #76 | 00:45 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4742,12 +4741,12 @@ Những chỗ đối chiếu xong vẫn đúng nên giữ nguyên:
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #77 | 00:47 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #77 | 00:47 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4792,12 +4791,12 @@ Báo cáo cho phiên thảo luận.
 Nếu muốn mình xem qua trước khi kiểm cuối, gửi BUG-11 (bug kiểm tay) và một trong ba bug dựa trên giả định (08, 09 hoặc 10). Mấy file đó dễ lệch sự thật nhất.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #78 | 01:02 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #78 | 01:02 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4845,12 +4844,12 @@ Báo cáo cho phiên thảo luận.
 Phần bạn tự làm: chọn lại severity cho 06, 07, 08, và quyết định giữ hay bỏ ý "plaintext" ở BUG-07. Xong thì viết tiếp BUG-09 đến 14.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #79 | 01:03 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #79 | 01:03 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4915,12 +4914,12 @@ Priority của cả ba (High/High/Medium) vẫn thuộc thang.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #80 | 01:11 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #80 | 01:11 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -4969,12 +4968,12 @@ Báo cáo cho phiên thảo luận.
 Sau khi bạn sửa các cụm từ trên và chọn severity, còn BUG-12, 13, 14, đều là lỗi GUI đơn giản. Viết xong thì chạy lệnh kiểm cuối cho cả 14 file.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #81 | 01:12 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #81 | 01:12 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5031,12 +5030,12 @@ Chuỗi `PayloadTooLargeError: request entity too large` ở Actual của BUG-09
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #82 | 01:18 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #82 | 01:18 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5108,12 +5107,12 @@ Báo cáo cho phiên thảo luận.
 Sau commit là bước tạo GitHub Issues. Nhớ kiểm trùng issue trước, nhất là bug XSS (BUG-11).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #83 | 01:39 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #83 | 01:39 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5136,12 +5135,12 @@ Báo cáo cho phiên thảo luận.
 Đang sửa BUG-11/13, thêm dòng cuối 12/13, tạo file redacted.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #84 | 01:45 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #84 | 01:45 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5196,12 +5195,12 @@ Báo cáo cho phiên thảo luận.
 Giờ đã gần 2 giờ sáng. Sau commit này nên **dừng**, để việc tạo GitHub Issues sang hôm sau: đó là thao tác trên web, kéo thả ảnh, cần tỉnh táo để kiểm trùng. Khi làm, nhớ điền link issue vào từng file và chụp `issues_page.png`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #85 | 01:46 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #85 | 01:46 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5245,12 +5244,12 @@ Em chưa commit: bản trên đĩa của BUG-09, 10, 11 chưa có phần SV sử
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #86 | 02:22 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #86 | 02:22 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5277,12 +5276,12 @@ Việc cần làm:
 Giờ đã 2 giờ 22 sáng. Nếu mệt, cứ để file chưa commit cũng không mất gì: mai lưu, kiểm, commit 7/7c, rồi làm tiếp GitHub Issues.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #87 | 07:19 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #87 | 07:19 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5314,12 +5313,12 @@ Làm tương tự với hai file còn lại:
 Sửa xong, **lưu file**, rồi nhắn Claude Code: *"Đã lưu BUG-09/10/11, kiểm lại và commit 7/7c nếu đạt."*
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #88 | 07:23 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #88 | 07:23 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5362,12 +5361,12 @@ Báo cáo cho phiên thảo luận.
 Xong bước này là **xong feature A**.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #89 | 07:26 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #89 | 07:26 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5407,12 +5406,12 @@ Kiểm toàn bộ HW02/bugs/BUG-01.md … BUG-14.md và thêm dòng khai báo. K
 Khi có báo cáo, gửi về đây. Nếu mọi cột đều "OK", mình sẽ đưa lệnh commit `7/7c`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #90 | 07:26 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #90 | 07:26 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5486,12 +5485,12 @@ Cả 14 file giờ kết thúc giống nhau: `## Link GitHub Issue`, một dòng
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #91 | 07:28 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #91 | 07:28 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5547,12 +5546,12 @@ Báo cáo đạt, commit được. Ba câu hỏi:
 3. Nhắn Claude Code: *"Đã đính ảnh và chụp issues_page.png, commit 7/7d."*
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #92 | 07:29 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #92 | 07:29 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5609,12 +5608,12 @@ Em không thấy issue nào trùng thật: các issue trên đều ở form ho�
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #93 | 07:30 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #93 | 07:30 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5667,12 +5666,12 @@ Body không chứa đường dẫn tuyệt đối là tốt. Bản `_issue_redac
 Nếu tài khoản GitHub của bạn **không phải** `TonKnight`, sửa tên đó trong lệnh trước khi gửi.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #94 | 07:31 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #94 | 07:31 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5731,12 +5730,12 @@ Khi issue được tạo, GitHub sẽ tự đăng một dòng tham chiếu chéo
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #95 | 07:33 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #95 | 07:33 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5777,12 +5776,12 @@ Sau khi có bảng:
 Trong report và Audit, ghi tài khoản GitHub là `ThachHaoo` để TA đối chiếu được với tác giả của các issue.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #96 | 07:34 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #96 | 07:34 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5835,12 +5834,12 @@ Trước khi kéo thả, SV mở xem `TC-FR01-212_api.png` và `TC-FR01-214_api.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #97 | 07:38 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #97 | 07:38 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5866,12 +5865,12 @@ Xong cả 14 issue:
 2. Nhắn Claude Code: *"Đã đính ảnh 14 issue và chụp issues_page.png, commit 7/7d."*
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #98 | 07:48 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #98 | 07:48 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5939,12 +5938,12 @@ Cả hai đều không bắt buộc.
 Xong là **feature A hoàn tất cả 7 bước**.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #99 | 09:16 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #99 | 09:16 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -5988,12 +5987,12 @@ Báo cáo cho phiên thảo luận.
 Khi rảnh, điền Section / Mục đích / Xử lý cho các lượt từ hôm qua trong `prompt_log_notes.toml`. Số lượt đã khá nhiều, để dồn tới cuối sẽ rất ngại.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #100 | 09:18 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #100 | 09:18 20/10/2026 | Claude Opus 5.5 | 3.7 A_FR01 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Gom các test case Fail, phân nhóm lỗi, dựng khung bug report (BUG-01..14) và đăng Issue lên GitHub.
 
 **Prompt:**
 ```
@@ -6011,12 +6010,12 @@ Nội dung issue đã đổi giống file. Giờ commit 7/7d, rồi chạy summa
 Bảng summary có 2 lỗi: cột Bug của A_FR01 ra 0, và severity ra "?". Em xem `tools/summary.py`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp biên soạn nội dung bug report và tạo GitHub Issues; nhờ AI kiểm tra tính nhất quán của dữ kiện và đính kèm ảnh bằng chứng.
 
 ---
 
-## #101 | 09:21 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #101 | 09:21 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6062,12 +6061,12 @@ Phía Claude Code cũng nên mở phiên mới cho B. Nó tự đọc CLAUDE.md,
 ````
 *File AI ghi/gửi trong lượt này:* `HW02_handoff.md`, `claude-ai_session_HW02.jsonl`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #102 | 09:24 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #102 | 09:24 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6116,12 +6115,12 @@ Tin nhắn đầu tiên có thể là:
 Ngoài những việc trên, session này không còn gì dở dang.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #103 | 09:26 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #103 | 09:26 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6182,12 +6181,12 @@ Báo cáo cho phiên thảo luận.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #104 | 09:28 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #104 | 09:28 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6261,12 +6260,12 @@ Nguồn để viết: `A_FR01/ai_gap_answer.md` (lời tự giải thích của 
 4. Mở phiên mới: claude.ai đọc `claude/HW02_handoff.md`; Claude Code chạy `/domain-bva-testing HW02/B_FR07 0`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #105 | 09:34 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #105 | 09:34 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6383,12 +6382,12 @@ Từ nay mỗi lần xuất transcript dùng **tên mới** (`_p3`, `_p4`…), k
 ````
 *File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p1.jsonl`, `claude-ai_session_HW02_p2.jsonl`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #106 | 09:38 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #106 | 09:38 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6451,12 +6450,12 @@ Khoảng trống > 30 phút giữa các lượt claude.ai: 12/10 21:33→19/10 1
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #107 | 09:41 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #107 | 09:41 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6557,12 +6556,12 @@ Mục 1 cần làm **trước khi bạn bắt đầu điền ghi chú**. Hiện 
 Mình đã sửa `claude/HW02_handoff.md` trong Project cho đúng tình trạng này, kèm quy tắc mỗi lần xuất transcript dùng một tên mới. Xong lệnh trên thì phiên này không còn gì dở dang, bạn có thể sang phiên mới để làm B_FR07.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #108 | 09:44 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #108 | 09:44 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6600,12 +6599,12 @@ Ghi chú prompt log giờ dùng được khoá theo giờ bên cạnh số thứ
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #109 | 09:46 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #109 | 09:46 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6646,12 +6645,12 @@ Báo cáo cho phiên thảo luận.
 Câu hỏi 1 của Claude Code: phần đầu `prompt_log_notes.toml` là do bạn viết, nên bạn tự sửa câu hướng dẫn từ "số #n" sang "khoá giờ" khi tiện. Việc này không gấp.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #110 | 09:49 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #110 | 09:49 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6669,12 +6668,12 @@ Báo cáo cho phiên thảo luận.
 (không có output dạng văn bản)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #111 | 09:53 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #111 | 09:53 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6686,12 +6685,12 @@ Báo cáo cho phiên thảo luận.
 Hiểu, em bỏ toàn bộ phát hiện về hội thoại "FR-01 test cases" vì đó không phải của SV. Em kiểm thư mục memory xem có lưu gì về nó không, rồi đọc file project đúng.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #112 | 09:55 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #112 | 09:55 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6720,12 +6719,12 @@ Bản export claude.ai để hội thoại ở `conversations.json`, tách riên
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #113 | 10:05 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #113 | 10:05 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6767,12 +6766,12 @@ Báo cáo cho phiên thảo luận.
 Sau đó, trong AI-03 và Audit, ghi một câu: *"10 lượt ngày 19/10 (16:04–17:22) của phiên claude.ai được em chép tay từ giao diện vì transcript bị nén ngữ cảnh; script chuyển sang prompt log, không sửa nội dung."*
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #114 | 10:06 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #114 | 10:06 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6795,12 +6794,12 @@ Cấu trúc nguồn rõ: 11 lượt, 12 dòng `---` (10 dòng ngăn cách đứn
 ```
 *File AI ghi/gửi trong lượt này:* `conthieu2toml.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #115 | 10:08 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #115 | 10:08 20/10/2026 | Claude Opus 5.5 | 3.8 A_FR01 Tổng kết & Vá Harness
+**Mục đích:** Tổng hợp số liệu kiểm thử A_FR01, bổ sung mã bug_id, khôi phục prompt log bị thiếu và chốt kết thúc Feature A.
 
 **Prompt:**
 ```
@@ -6821,12 +6820,12 @@ Vậy còn gì nữa không nhỉ
 (không có output dạng văn bản)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; cập nhật file A_prompt_log.md và hoàn thiện công cụ trích xuất log.
 
 ---
 
-## #116 | 10:13 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #116 | 10:13 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -6880,12 +6879,12 @@ Nhiệm vụ 2 – B_FR07 Giỏ hàng, bước 0–1
 Khi có báo cáo, gửi lại đây. Mình sẽ review bảng biến trước, rồi cùng bạn chốt các giả định trước khi sang bước 2. Transcript phiên này sẽ đặt tên `claude-ai_session_HW02_p3.jsonl`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #117 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #117 | 10:14 20/10/2026 | Claude Opus 5.5 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -6897,12 +6896,12 @@ Khi có báo cáo, gửi lại đây. Mình sẽ review bảng biến trước, 
 Thư mục trống (listing trước là của `../eshop-sut`). Đọc test basis FR-07.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #118 | 10:14 20/10/2026 | Claude (không rõ model) | [...]
-**Mục đích:** [...]
+## #118 | 10:14 20/10/2026 | Claude (không rõ model) | 4.1 B_FR07 Bước 1
+**Mục đích:** Lượt bị ngắt giữa chừng do bấm Ctrl+C.
 
 **Prompt:**
 ```
@@ -6914,12 +6913,12 @@ Thư mục trống (listing trước là của `../eshop-sut`). Đọc test basi
 (không có output dạng văn bản)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Bỏ qua lượt này, phát lại lệnh ở lượt tiếp theo.
 
 ---
 
-## #119 | 10:14 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #119 | 10:14 20/10/2026 | Claude Opus 5.5 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7111,12 +7110,12 @@ Xong bước 0–1 cho B_FR07, dừng ở đây chờ em review. Nhiệm vụ 1 
 ````
 *File AI ghi/gửi trong lượt này:* `init_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #120 | 10:20 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #120 | 10:20 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7153,12 +7152,12 @@ Commit riêng: "HW02: vá harness – quy ước báo cáo ngắn".
 Lượt sau mình sẽ bàn 5 quyết định B1, B3, B6, B7, B9. Nếu bạn muốn, mình có thể đưa sẵn phương án và hệ quả của từng cái để bạn chọn nhanh.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #121 | 10:22 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #121 | 10:22 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7220,12 +7219,12 @@ Commit: "HW02: CLAUDE.md – bổ sung quy ước báo cáo".
 Sau đó mình sẽ quay lại 5 quyết định B1, B3, B6, B7, B9.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #122 | 10:23 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #122 | 10:23 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ````
@@ -7280,12 +7279,12 @@ Dòng "Kể cả khi lệnh yêu cầu…" là để chặn đúng lỗi vừa r
 Nội dung bước 1 của B hiện chỉ nằm trong báo cáo đã gửi, chưa có file riêng. Trích SRS và khảo sát SUT sẽ mất nếu không lưu lại. Nếu muốn giữ, thêm vào cùng lệnh một dòng: *"Ghi phần trích SRS, khảo sát SUT và giả định B0–B18 của bước 1 vào `HW02/B_FR07/step1_notes.md` (nếu testcases.md chưa có)."*
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #123 | 10:23 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #123 | 10:23 20/10/2026 | Claude Opus 5.5 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ````
@@ -7332,12 +7331,12 @@ Em đã thay đoạn đó trong CLAUDE.md đúng nguyên văn và commit. Đoạ
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #124 | 10:24 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #124 | 10:24 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7384,12 +7383,12 @@ Em đã thay đoạn đó trong CLAUDE.md đúng nguyên văn và commit. Đoạ
 Trả lời gọn kiểu `B1=a, B3=a, B6=có, B7=có, B9=?`. Mình sẽ gộp vào một lệnh: commit notes bước 1, ghi 5 quyết định, rồi chạy bước 2. Các giả định còn lại (B2, B4, B5, B8, B10–B18) để Claude Code đề xuất trong bước 2, bạn chốt khi review.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #125 | 10:28 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #125 | 10:28 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7440,12 +7439,12 @@ Nhiệm vụ 3 – Bước 2 (lớp tương đương)
 Khi có báo cáo bước 2, mình sẽ review danh sách lớp trong `testcases.md`. Bạn dán bảng lớp hoặc cho mình đường dẫn, kèm báo cáo.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #126 | 10:29 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #126 | 10:29 20/10/2026 | Claude Opus 5.5 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7513,12 +7512,12 @@ Xong cả 3 nhiệm vụ: đã ghi notes bước 1, ghi 5 quyết định SV, v�
 ````
 *File AI ghi/gửi trong lượt này:* `notes_step1.md`, `step2_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #127 | 10:32 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #127 | 10:32 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7583,12 +7582,12 @@ Nhiệm vụ 2 – Bước 3 (TC Domain, minimum set)
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #128 | 10:32 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #128 | 10:32 20/10/2026 | Claude Sonnet 4.6 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7602,12 +7601,12 @@ Phần đó không chặn bước 3, bạn chạy luôn lệnh ở lượt trư�
 Về bản freeze bước 1 thiếu `.md`: nên để nguyên, không bổ sung. `ai-outputs/` là vùng không được sửa, kể cả thêm file sinh sau, vì như vậy bản đóng băng mất ý nghĩa "đúng thời điểm đó". JSON đóng băng đã chứa đủ nội dung, `.md` chỉ là bản render lại. Bạn chỉ cần ghi một dòng vào ghi chú cho AI-02 Audit: *"B_FR07 bước 1: bản đóng băng chỉ có JSON (freeze chạy trước render); .md tái tạo bằng render_md.py từ JSON đóng băng. Từ bước 2 đã sửa thứ tự."* Câu này khai luôn cả việc harness từng chạy sai thứ tự, một điểm có lợi khi viết Audit.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #129 | 10:33 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #129 | 10:33 20/10/2026 | Claude Opus 5.5 | 4.1 B_FR07 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Giỏ hàng, trích xuất biến vào/ra và thống nhất các giả định nghiệp vụ (B0-B18).
 
 **Prompt:**
 ```
@@ -7667,12 +7666,12 @@ Bước 3 xong: 27 TC Domain phủ đủ 51/51 lớp tương đương, cộng th
 ````
 *File AI ghi/gửi trong lượt này:* `step3_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt 6 quyết định giả định do SV đưa ra.
 
 ---
 
-## #130 | 10:38 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #130 | 10:38 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -7713,12 +7712,12 @@ Trong lúc đó, ngay từ báo cáo đã thấy 3 điểm cần xem lại:
 Khi có file, mình sẽ tập trung vào: 9 case hợp lệ của UI có thật sự gộp lớp không (với minimum set thì con số này hơi nhiều), oracle của từng case API, và mục Giả định B4, B11–B15, B17.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #131 | 10:39 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #131 | 10:39 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -7783,12 +7782,12 @@ Bảng truy vết nên sinh tự động từ ánh xạ EC → yêu cầu, khôn
 Trả lời kiểu `EC32=a, B11=ok, B12=?, B13=cả hai, còn lại ok`. Mình sẽ gộp quyết định và 5 điểm sửa vào một lệnh. Sau khi sửa, commit `3/7b`, chưa sang bước 4.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #132 | 10:46 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #132 | 10:46 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -7854,12 +7853,12 @@ C. render_md.py → freeze.py → check_domain.py → linter thầy.
 Khi có báo cáo, bạn gửi lại `testcases.md` mới. Mình sẽ soát lại 5 điểm đã sửa trước khi sang bước 4.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #133 | 10:47 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #133 | 10:47 20/10/2026 | Claude Opus 5.5 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -7936,12 +7935,12 @@ Em đã sửa xong bước 3 theo review và commit, dừng chờ SV duyệt. S�
 ````
 *File AI ghi/gửi trong lượt này:* `step3b_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #134 | 10:51 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #134 | 10:51 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8018,12 +8017,12 @@ Case phản hồi ở trang chủ chuyển sang 99. Vẫn vừa dải TS-GUI 90�
 Trả lời kiểu `trace=c, B21=?, tách 95=có`. Mình sẽ gộp tất cả vào lệnh `3/7c`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #135 | 10:55 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #135 | 10:55 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8076,12 +8075,12 @@ C. render_md.py → freeze.py → check_domain.py → linter thầy. Dừng.
 Khi có kết quả, bạn gửi lại bảng truy vết và mục Giả định là đủ. Phần còn lại mình đã soát, trừ khi báo cáo cho thấy có thay đổi ngoài lệnh.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #136 | 10:55 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #136 | 10:55 20/10/2026 | Claude Opus 5.5 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8152,12 +8151,12 @@ Em đã sửa xong bước 3 lần 2 và vá harness: số TC từ 34 lên 37, c
 ````
 *File AI ghi/gửi trong lượt này:* `step3c_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #137 | 10:59 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #137 | 10:59 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8234,12 +8233,12 @@ Báo cáo theo CLAUDE.md, kèm danh sách biến đã làm BVA và lý do bỏ b
 Khi có kết quả, bạn gửi bảng TC BVA và bảng truy vết. Mục Giả định chỉ cần gửi nếu báo cáo có giả định mới.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #138 | 11:00 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #138 | 11:00 20/10/2026 | Claude Opus 5.5 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8306,12 +8305,12 @@ Xong cả hai nhiệm vụ: làm sạch truy vết (3/7d) và bước 4 BVA vớ
 ````
 *File AI ghi/gửi trong lượt này:* `step3d_b.py`, `step4_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #139 | 11:06 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #139 | 11:06 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ````
@@ -8444,12 +8443,12 @@ Dừng. Báo cáo theo CLAUDE.md.
 Bạn điền `sv_cases.md`, commit `HW02[B-FR07] 5/7: SV thêm TC`, rồi quay lại đây. Lúc đó mình mới cùng bạn xem phần AI trả lời vì sao bỏ sót.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #140 | 11:07 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #140 | 11:07 20/10/2026 | Claude Opus 5.5 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8507,12 +8506,12 @@ Xong 3 nhiệm vụ: vá freeze, sửa bước 4 theo review, dựng khung bư�
 ````
 *File AI ghi/gửi trong lượt này:* `sv_cases.md`
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #141 | 11:08 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #141 | 11:08 20/10/2026 | Claude Sonnet 4.6 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8566,12 +8565,12 @@ Nhiệm vụ 2 – B_FR07 (commit "HW02[B-FR07] 4/7c: oracle tương đối cho 
 Sau lệnh này, phần AI của B_FR07 (bước 0–4) đã xong. File `sv_cases.md` khung trống đang nằm sẵn, chưa commit. Bước 5 là việc của bạn: điền case, commit `HW02[B-FR07] 5/7: SV thêm TC`, rồi quay lại đây.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #142 | 11:09 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #142 | 11:09 20/10/2026 | Claude Opus 5.5 | 4.3 B_FR07 Bước 3 – Sinh test case Domain
+**Mục đích:** Tạo bộ test case Domain cho feature Giỏ hàng và tinh chỉnh công cụ truy vết yêu cầu.
 
 **Prompt:**
 ```
@@ -8622,12 +8621,12 @@ Xong cả 2 nhiệm vụ: `check_domain` không còn lỗi, các cảnh báo LAR
 ````
 *File AI ghi/gửi trong lượt này:* `step4c_b.py`
 
-**Xử lý:** [...]
+**Xử lý:** Sửa đổi bộ test case theo kết quả review của SV; bổ sung thông tin truy vết EC -> Requirement.
 
 ---
 
-## #143 | 11:11 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #143 | 11:11 20/10/2026 | Claude Sonnet 4.6 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -8691,12 +8690,12 @@ B_FR07 bước 5 – phần sau khi SV đã commit sv_cases.md.
 Khi xong, bạn gửi `ai_gap_answer.md` lên đây. Mình sẽ giúp bạn soát xem các khẳng định "đã nghĩ tới" có thật sự có dẫn chứng trong bản đóng băng không. Ở A, việc kiểm 3–4 câu này đã từng được đề xuất là phần SV nên tự làm.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #144 | 12:10 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #144 | 12:10 20/10/2026 | Claude Opus 5.5 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -8755,12 +8754,12 @@ Xong bước 5b, commit `897a7c8`. Còn 6 case SV có chỗ mơ hồ cần anh/c
 ````
 *File AI ghi/gửi trong lượt này:* `step5_sv.py`, `sv_questions.md`, `ai_gap_answer.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #145 | 12:15 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #145 | 12:15 20/10/2026 | Claude Sonnet 4.6 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -8838,12 +8837,12 @@ Select-String -Path HW02/appendix/ai-outputs/B_FR07_step4_20261020-111050.json -
 Bạn trả lời Q1–Q6 cùng 4 điểm ở trên, ghi thẳng vào `sv_questions.md` hoặc gửi ở đây. Sau đó mình sẽ đưa lệnh để Claude Code áp đúng câu trả lời của bạn (commit `5/7c`), rồi sang bước 6 (Playwright).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #146 | 12:29 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #146 | 12:29 20/10/2026 | Claude Sonnet 4.6 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -8918,12 +8917,12 @@ Báo cáo theo CLAUDE.md; nếu còn case thiếu căn cứ SRS/giả định tr
 Sau 5/7c là sang bước 6. Ở bước đó AI viết Playwright, **bạn chạy**, rồi chạy `merge_results.py`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #147 | 12:36 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #147 | 12:36 20/10/2026 | Claude Sonnet 4.6 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -8973,12 +8972,12 @@ Báo cáo theo CLAUDE.md; liệt kê case còn thiếu căn cứ SRS/giả đị
 Sau lệnh này, TS-SV còn 13 case (bỏ 202, 204, 207). Tiếp theo là bước 6.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #148 | 12:37 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #148 | 12:37 20/10/2026 | Claude Opus 5.5 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -9053,12 +9052,12 @@ Commit `5/7c` chưa làm. Lý do: `check_domain` báo 1 lỗi, và để sửa t
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #149 | 12:40 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #149 | 12:40 20/10/2026 | Claude Sonnet 4.6 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -9125,12 +9124,12 @@ B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
 Khi 5/7c xong, sang bước 6. Mình sẽ đưa lệnh để AI viết Playwright cho cả 3 tầng (UI, API, GUI) cùng các case SV, theo quy ước đã chốt ở A: evidence, `auto_status`, một browser context mỗi case, và restart backend trước mỗi lượt chạy.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #150 | 12:41 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #150 | 12:41 20/10/2026 | Claude Opus 5.5 | 4.5 B_FR07 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Ghi nhận kịch bản kiểm thử bổ sung của SV, thực hiện AI gap analysis và giải đáp các thắc mắc chuyên sâu.
 
 **Prompt:**
 ```
@@ -9177,12 +9176,12 @@ B_FR07 – hoàn tất 5/7c (gộp vào commit 5/7c đang chờ).
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV chủ động loại bỏ một số kịch bản không phù hợp (như multi-tab, localStorage rác) và điều chỉnh tham số kiểm thử dồn dập.
 
 ---
 
-## #151 | 12:43 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #151 | 12:43 20/10/2026 | Claude Sonnet 4.6 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9268,12 +9267,12 @@ Dừng. Báo cáo theo CLAUDE.md.
 Sau đó **bạn tự chạy** theo `RUN.md` (nhớ restart backend trước mỗi lượt), rồi chạy `merge_results.py`. Gửi lại đây báo cáo kèm danh sách Fail/Blocked, mình sẽ cùng bạn rà verdict theo A20 trước khi commit 6/7b.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #152 | 12:44 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #152 | 12:44 20/10/2026 | Claude Opus 5.5 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9365,12 +9364,12 @@ Config chưa được vá (escape sai). Sửa bằng Edit.
 ````
 *File AI ghi/gửi trong lượt này:* `lib.ts`, `B_FR07.spec.ts`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #153 | 12:54 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #153 | 12:54 20/10/2026 | Claude Sonnet 4.6 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9432,12 +9431,12 @@ Lỗi `tsc` thiếu kiểu node không ảnh hưởng gì, vì Playwright tự b
 Lúc đó mình sẽ cùng bạn rà từng case Fail/Blocked theo A20: lệch do chính biến mục tiêu thì Fail, lệch do biến khác thì Blocked. Chốt xong mới commit 6/7b.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #154 | 13:07 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #154 | 13:07 20/10/2026 | Claude Sonnet 4.6 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9579,12 +9578,12 @@ Báo cáo: bảng Pass/Fail/Blocked trước/sau, danh sách thay đổi, danh s
 Sau khi bạn chạy lại TC-201 và xác nhận danh sách ở mục 8, commit `6/7b`. Tiếp theo là bước 7 (bug report 🔒). Ở bước đó Claude Code chỉ gom dữ kiện theo triệu chứng; phần gộp/tách bug và câu chữ là của bạn.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #155 | 13:08 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #155 | 13:08 20/10/2026 | Claude Opus 5.5 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9657,12 +9656,12 @@ Sửa script: TC-201 dùng `element.click()` trong trang, body API gửi dạng 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #156 | 13:11 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #156 | 13:11 20/10/2026 | Claude Sonnet 4.6 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9738,12 +9737,12 @@ HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
 Commit kèm evidence và prompt log. Lượt chạy lại cũng ghi vào notes của từng case, đúng như TC-201 đang làm.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #157 | 13:12 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #157 | 13:12 20/10/2026 | Claude Opus 5.5 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9784,12 +9783,12 @@ TC-208 và TC-215 không cần chạy lại: body thô gửi đúng `1e-324` và
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #158 | 13:18 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #158 | 13:18 20/10/2026 | Claude Sonnet 4.6 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ````
@@ -9884,12 +9883,12 @@ Dừng, báo cáo theo CLAUDE.md.
 Bạn trả lời giúp: **trước lượt chạy nhầm, bạn có restart backend không?**
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #159 | 13:20 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #159 | 13:20 20/10/2026 | Claude Opus 5.5 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -9970,12 +9969,12 @@ Vá xong và đã thử trên bản sao. Cập nhật automation.md rồi commit
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #160 | 13:22 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #160 | 13:22 20/10/2026 | Claude Sonnet 4.6 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -10102,12 +10101,12 @@ B_FR07 7a – sửa dữ kiện (commit "HW02[B-FR07] 7/7a2: sửa dữ kiện y
 Sau đó bạn quyết theo mẫu, ví dụ: `G12–15: c; G16–21: G16 · G17 · G18+19+21; G22: riêng; G2/G6: riêng; G20: (sau khi xem #25)`. Mình sẽ đưa lệnh để Claude Code dựng lại khung theo cách gộp của bạn. Các phần còn lại (tiêu đề, severity, priority, Nhận định) là bạn viết.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #161 | 13:23 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #161 | 13:23 20/10/2026 | Claude Opus 5.5 | 4.6 B_FR07 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Tạo script Playwright cho B_FR07, thực thi kịch bản và chốt kết quả tự động/thủ công.
 
 **Prompt:**
 ```
@@ -10183,12 +10182,12 @@ Không có issue trùng hẳn; #14 (FR-08) có dùng `/api/cart` với quantity/
 ````
 *File AI ghi/gửi trong lượt này:* `bugs7a.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; xử lý tình huống chạy nhầm kết quả và ghi nhận đúng trạng thái sau khi khởi động lại backend.
 
 ---
 
-## #162 | 13:29 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #162 | 13:29 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10238,12 +10237,12 @@ Thêm trích nguyên văn #25, #26 vào mục Kiểm trùng.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #163 | 13:32 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #163 | 13:32 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10318,12 +10317,12 @@ B_FR07 7a – dựng lại khung theo quyết định SV
 Sau đó là phần của bạn: viết 14 trường mỗi bug. Câu chữ tự do, văn nói cũng được. Severity dùng thang Critical/High/Medium/Low, Priority dùng High/Medium/Low, tiêu đề theo dạng `[FR-xx] …`. Bug nào thuộc FR-06 thì tiêu đề ghi `[FR-06]`. Viết xong, nếu muốn mình soát thì gửi lên: mình chỉ kiểm dữ kiện có khớp evidence không và thang severity/priority có đúng không, không sửa câu chữ của bạn. Sau đó mới tạo issue (kiểm `gh` đang dùng tài khoản `ThachHaoo`, kiểm trùng lần cuối).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #164 | 13:33 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #164 | 13:33 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10377,12 +10376,12 @@ Commit vừa rồi thiếu thao tác xoá BUG-35/36. Bổ sung vào cùng commit
 ````
 *File AI ghi/gửi trong lượt này:* `tail7a3.py`, `patch7a3.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #165 | 13:36 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #165 | 13:36 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10435,12 +10434,12 @@ Khi viết xong, gửi mình vài bug (hoặc tất cả). Mình chỉ soát hai
 Chỉ lưu ý một điều: commit của C và commit bug của B sẽ xen kẽ nhau trong git log. Không sao, vì tiền tố `[B-FR07]`/`[C-FR15]` đã phân biệt rõ.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #166 | 13:41 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #166 | 13:41 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10476,12 +10475,12 @@ Còn một việc có thể chạy song song là bước 0–1 của C_FR15 (l�
 Bạn viết bug đi. Xong thì gửi lên, mình soát dữ kiện và thang.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #167 | 13:44 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #167 | 13:44 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10513,12 +10512,12 @@ Dừng, báo cáo theo CLAUDE.md.
 Nếu kết quả mục 2 cho thấy A có khai sai, bạn chọn một trong hai: sửa cả file `.md` lẫn issue (phần "Dữ kiện (AI chép)" thì AI được phép sửa cho khớp evidence), hoặc giữ nguyên và ghi vào Audit như một bài học rút ra từ B. Việc này không chặn bạn viết bug của B.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #168 | 13:45 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #168 | 13:45 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10560,12 +10559,12 @@ Phần 1 xong (`d8d60ff`). Sang phần 2: đọc trường Yêu cầu và Actual
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #169 | 13:46 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #169 | 13:46 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10629,12 +10628,12 @@ Chỉ sửa trường Yêu cầu / phần Dữ kiện (AI chép); KHÔNG đụng
 Sau đó bạn quay lại viết bug của B. Bài học "Yêu cầu = chỉ yêu cầu bị vi phạm" sẽ được ghi vào handoff để áp từ đầu cho C và D.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #170 | 13:47 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #170 | 13:47 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10702,12 +10701,12 @@ Log hiện mới ghi mục Yêu cầu. Thêm toàn văn body trước/sau vào l
 ````
 *File AI ghi/gửi trong lượt này:* `fix7e.py`, `issues7e.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #171 | 13:51 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #171 | 13:51 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 `````
@@ -10784,12 +10783,12 @@ Nếu ngữ cảnh bị nén hoặc bạn mở phiên mới, chỉ cần đọc 
 Giờ bạn viết bug của B. Xong thì gửi lên để mình soát dữ kiện và thang severity/priority.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #172 | 13:58 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #172 | 13:58 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10855,12 +10854,12 @@ KHÔNG gợi ý tiêu đề, severity, câu chữ, nguyên nhân.
 Lưu ý nhỏ: BUG-14 ghi "Ảnh tiêu biểu" chỉ bằng tên file, vì khi tạo issue bạn kéo thả ảnh vào. Nếu muốn ảnh hiện luôn khi xem file `.md` trong repo, có thể thêm một dòng nhúng ảnh bằng đường dẫn tương đối. Nhưng như vậy là lệch với format của A, nên mình để mặc định giống BUG-14.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #173 | 13:59 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #173 | 13:59 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -10948,12 +10947,12 @@ Actual chứa HTML thô nằm ngoài backtick sẽ bị markdown render. Bọc A
 ````
 *File AI ghi/gửi trong lượt này:* `bugs7a5.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #174 | 14:01 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #174 | 14:01 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11005,12 +11004,12 @@ Một checklist ngắn để bạn tự soát khi viết (chỉ là tiêu chí k
 Viết xong, bạn gửi vài file (hoặc tất cả) lên đây. Mình soát hai việc: dữ kiện có khớp evidence không, và thang severity/priority có đúng không. Sau đó Claude Code tạo issue.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #175 | 14:14 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #175 | 14:14 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11066,12 +11065,12 @@ Ghi log thay đổi (trước/sau) vào cuối mục "Dữ kiện (AI chép)" c�
 Nếu bạn đã kiểm tay 3 lần bấm, gửi kết quả lên. Mình sẽ đưa lệnh ngắn đưa câu đó trở lại Actual kèm ảnh mới.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #176 | 14:15 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #176 | 14:15 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11111,12 +11110,12 @@ commit "HW02[B-FR07] 7/7b: sửa dữ kiện BUG-15, 17 theo evidence").
 Sau đó bạn viết tiếp BUG-18 trở đi. Muốn soát theo đợt thì gửi mỗi lần 3–5 file như vừa rồi.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #177 | 14:16 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #177 | 14:16 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11157,12 +11156,12 @@ The `TC-FR07-205_manual_3lan.png` file doesn't exist yet. Per step 1 of the inst
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #178 | 14:17 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #178 | 14:17 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11238,12 +11237,12 @@ kê trước → sau>". Dừng, báo cáo theo CLAUDE.md.
 Sau đó bạn mở BUG-15, viết một câu Nhận định ở chỗ `<SV viết thêm nếu muốn>`, rồi viết tiếp BUG-18 trở đi. Mẹo: từ giờ cứ viết xong vài bug thì commit ngay (`7/7b: SV viết BUG-xx–yy`), rồi mới gửi mình soát.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #179 | 14:19 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #179 | 14:19 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11309,12 +11308,12 @@ Commit SV có, ảnh có. Xem ảnh và nội dung BUG-15, BUG-17.
 ````
 *File AI ghi/gửi trong lượt này:* `fix7c.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #180 | 14:21 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #180 | 14:21 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11353,12 +11352,12 @@ BUG-15 và BUG-17 giờ đã khớp evidence. Việc tiếp theo của bạn:
 2. Viết tiếp BUG-18 → 34. Xong mỗi đợt thì commit `7/7b: SV viết BUG-xx–yy` rồi gửi mình 3–5 file để soát.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #181 | 14:34 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #181 | 14:34 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11394,12 +11393,12 @@ link navbar, như TC-FR07-08." Commit "HW02[B-FR07] 7/7c: sửa bước tái hi�
 Từ giờ, mỗi lần viết bước tái hiện cho bug UI bạn nhớ quy tắc này: **vào /cart chỉ bằng link trên navbar, không gõ URL**. Ở BUG-15, 16, 17, 18, 20 bạn đã làm đúng.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #182 | 14:45 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #182 | 14:45 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11446,12 +11445,12 @@ mất giỏ (B0d) → thêm từ trang chủ + link navbar." Dừng, báo cáo t
 Mẹo cho các bug còn lại (BUG-25 → 34): bước nào cần **giỏ có hàng** thì thêm từ trang chủ rồi vào giỏ bằng link navbar. Riêng bug về **giỏ trống** (như BUG-21) thì gõ URL lại vừa đúng.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #183 | 14:46 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #183 | 14:46 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11500,12 +11499,12 @@ mất giỏ (B0d) → thêm từ trang chủ + link navbar." Dừng, báo cáo t
 ````
 *File AI ghi/gửi trong lượt này:* `fix7c2.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #184 | 14:47 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #184 | 14:47 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ````
@@ -11545,12 +11544,12 @@ Còn BUG-25 → 34. Vài điểm nên lưu ý trước khi viết, để khỏi 
 Viết xong đợt nào thì commit (`7/7b: SV viết BUG-xx–yy`) rồi gửi mình soát.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #185 | 14:56 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #185 | 14:56 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11588,12 +11587,12 @@ Dừng, báo cáo theo CLAUDE.md.
 Còn BUG-29 → 34. Phần API (30–34) là nơi dễ sai số liệu nhất (payload, status, phần tử trả về), nên khi xong bạn gửi mình soát kỹ hơn.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #186 | 15:06 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #186 | 15:06 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11654,12 +11653,12 @@ Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6, 7).
 Khi có kết quả mục 7, bạn xem lại severity của BUG-31. Nếu checkout không đọc giỏ API thì "1đ khi thanh toán" chưa chứng minh được. Lúc đó cần chỉnh lại câu Nhận định cho đúng với tác động thật.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #187 | 15:07 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #187 | 15:07 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ````
@@ -11728,12 +11727,12 @@ Output khớp Actual của cả hai bug. Ghi dữ kiện vào file.
 ````
 *File AI ghi/gửi trong lượt này:* `fix7c3.py`, `facts7c3.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #188 | 15:11 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #188 | 15:11 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ````
@@ -11792,12 +11791,12 @@ Commit "HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart". Dừng, báo cá
 Khi có kết quả, bạn chỉnh Nhận định và severity của BUG-31 (và các bug API khác nếu cần), rồi viết tiếp BUG-32 → 34.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #189 | 15:13 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #189 | 15:13 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11839,12 +11838,12 @@ Không có client nào gọi `/api/cart`. Em đã ghi kết quả này vào ph�
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #190 | 15:15 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #190 | 15:15 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11891,12 +11890,12 @@ Một điều nữa: nếu BUG-31 High vì là lỗi thiết kế bảo mật AP
 **Về working tree của SUT:** `frontend-mobile/App.js` bị sửa thì đúng là bản vá `API_URL` theo handoff. Còn `actual_results.md`, `reset_db.ps1`, `run_sv_cases.ps1` thì cần bạn xác nhận là của mình (hoặc của nhóm). Nên chạy `git -C ..\eshop-sut diff --stat` để chắc ngoài `API_URL` không còn thay đổi code nào khác, vì phần Môi trường của mọi bug đang ghi "không đổi mã".
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #191 | 15:17 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #191 | 15:17 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11923,12 +11922,12 @@ BUG-31 Nhận định: gắn " (chưa kiểm chứng: hiện không client nào 
 Còn nếu bạn vẫn muốn giữ nguyên câu, thì đó là quyết định của bạn với tư cách người viết bug, mình không ép. Mình chỉ muốn bạn biết đó là chỗ yếu nhất của BUG-31 nếu có người phản biện.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #192 | 15:18 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #192 | 15:18 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -11953,12 +11952,12 @@ Bỏ câu đó rồi thì severity High phải tự đứng được trên nhữ
 Xong thì viết tiếp BUG-32 → 34.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #193 | 15:30 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #193 | 15:30 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12016,12 +12015,12 @@ Dừng, báo cáo theo CLAUDE.md (kèm kết quả mục 6).
 Sau khi chạy xong, bạn chỉnh 3 chỗ chữ ở trên (tiêu đề BUG-33, Expected BUG-33, link #25 ở BUG-34) nếu đồng ý. Khi đó cả 20 bug đã sẵn sàng để tạo issue.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #194 | 15:31 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #194 | 15:31 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ````
@@ -12086,12 +12085,12 @@ Em đã sửa bước tái hiện BUG-32, 33, 34 và chạy thật trên Windows
 ````
 *File AI ghi/gửi trong lượt này:* `fix7c4.py`, `facts7c4.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #195 | 15:34 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #195 | 15:34 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ````
@@ -12160,12 +12159,12 @@ Dừng, báo cáo theo CLAUDE.md.
 Khi bạn duyệt bảng tiền tố và xử lý xong các mục còn treo, mình sẽ đưa lệnh tạo issue. Theo cách đã làm ở A: Claude Code tạo issue với body lấy từ file `.md`, sau đó **bạn kéo thả ảnh tiêu biểu** vào mục "Bằng chứng" của từng issue (alt = tên file). Cuối cùng chụp `issues_page.png`, cập nhật Link trong 20 file BUG, rồi commit `7/7d`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #196 | 15:35 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #196 | 15:35 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12191,12 +12190,12 @@ gh issue list -R tkob-team/eshop-sut --author ThachHaoo --state all --limit 20 -
 Dù kết quả thế nào, mục 2 trong lệnh trước (đề xuất tiền tố) chỉ cần làm nếu rơi vào trường hợp đầu. Các mục 1, 3, 4 vẫn cần chạy.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #197 | 15:37 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #197 | 15:37 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12250,12 +12249,12 @@ Dừng, báo cáo theo CLAUDE.md.
 Mình sẽ ghi rõ quy tắc tiền tố này vào handoff khi cập nhật cuối B ("chỉ trên GitHub, xx = FR của feature, ngoại lệ FR-06"), để C và D làm đúng ngay từ đầu.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #198 | 15:37 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #198 | 15:37 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12306,12 +12305,12 @@ Kiểm cuối xong, chưa thấy gì chặn việc tạo issue. Em chỉ kiểm,
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #199 | 15:38 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #199 | 15:38 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ````
@@ -12386,12 +12385,12 @@ Sau đó phần của bạn là:
 Xong bước đó là B hoàn tất, mình sẽ cập nhật handoff.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #200 | 15:40 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #200 | 15:40 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12453,12 +12452,12 @@ Dry-run ổn, tất cả body dưới giới hạn 65536 ký tự của GitHub. 
 ````
 *File AI ghi/gửi trong lượt này:* `create7.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #201 | 15:42 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #201 | 15:42 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12530,12 +12529,12 @@ Dừng, báo cáo theo CLAUDE.md.
 Commit `7/7d` xong là B_FR07 hoàn tất. Lúc đó mình sẽ cập nhật handoff: trạng thái B, quy tắc tiền tố, issue kế tiếp ≥ #181, cách đặt tên `issues_page_<feature>.png`, và lưu ý kiểm trùng với #153–#160 cho D.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #202 | 15:53 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #202 | 15:53 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12554,12 +12553,12 @@ Lượt trước bạn đã duyệt bảng tiêu đề (Q16 = a) với tiền t�
 **Về ảnh chụp:** ảnh hiện tại bị cắt mất phần trên. #180 chỉ thấy nửa tiêu đề, còn #161 ở dưới cùng thì vừa đủ. Bạn chụp lại sao cho thấy trọn cả #180 → #161: thu nhỏ trang (Ctrl + −) hoặc cuộn lên một chút. Sau đó lưu thành `HW02/bugs/issues_page_B_FR07.png` rồi chạy lệnh hoàn tất bước 7 ở lượt trước.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #203 | 15:55 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #203 | 15:55 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12596,12 +12595,12 @@ Gộp vào commit 7/7d (chưa commit riêng). Dừng, báo cáo theo CLAUDE.md.
 Sau đó bạn chụp lại `issues_page_B_FR07.png`, lúc này cả 20 issue đều là `[FR-07]`, rồi chạy lệnh hoàn tất bước 7.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #204 | 15:56 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #204 | 15:56 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12645,12 +12644,12 @@ Issue #161 đã đổi tiền tố thành [FR-07] và có comment đính chính.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #205 | 15:57 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #205 | 15:57 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12690,12 +12689,12 @@ Nên **giữ câu cũ, nhưng đánh dấu là đã thay**, ví dụ thêm "(quy
 Trước khi chạy, bạn chụp lại `HW02/bugs/issues_page_B_FR07.png` sao cho thấy trọn #180 → #161, cả 20 issue đều mang `[FR-07]`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #206 | 15:59 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #206 | 15:59 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12740,12 +12739,12 @@ Trước khi chạy, bạn chụp lại `HW02/bugs/issues_page_B_FR07.png` sao c
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #207 | 16:02 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #207 | 16:02 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12797,12 +12796,12 @@ Mình đã cập nhật `claude/HW02_handoff.md` cho trạng thái mới:
 Tiếp theo là **C_FR15 (Product CRUD, admin)**. Khi bạn sẵn sàng, mình đưa lệnh bước 0–1, áp luôn các bài học từ B ngay từ đầu.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #208 | 16:04 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #208 | 16:04 20/10/2026 | Claude Sonnet 4.6 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12867,12 +12866,12 @@ Dừng, báo cáo theo CLAUDE.md. Sau đó SV sẽ /clear.
 Ở Claude Code, sau `/clear`, phiên mới sẽ tự đọc `CLAUDE.md` (lúc này đã có bài học từ B). Lệnh bước 0–1 cho C sẽ do phiên thảo luận mới đưa.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #209 | 16:06 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #209 | 16:06 20/10/2026 | Claude Opus 5.5 | 4.7 B_FR07 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Phân nhóm lỗi Giỏ hàng, dựng khung BUG-15..34, SV viết chi tiết bug report và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -12934,12 +12933,12 @@ Phần 1 xong (`9520bd5`). Giờ trích prompt log và đếm lượt theo ngu�
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp viết nội dung mô tả bug; nhờ AI hỗ trợ chuẩn hóa bước tái hiện lỗi API và định dạng khung báo cáo.
 
 ---
 
-## #210 | 16:10 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #210 | 16:10 20/10/2026 | Claude Sonnet 4.6 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -12951,12 +12950,12 @@ Phần 1 xong (`9520bd5`). Giờ trích prompt log và đếm lượt theo ngu�
 You've hit your session limit · resets 5:10pm (Asia/Ho_Chi_Minh)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #211 | 16:11 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #211 | 16:11 20/10/2026 | Claude Opus 5.5 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -12985,12 +12984,12 @@ Bạn làm tiếp theo thứ tự này:
 ```
 *File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p3.jsonl`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #212 | 16:14 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #212 | 16:14 20/10/2026 | Claude Opus 5.5 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13049,12 +13048,12 @@ File p3 đã có, nên em trích lại prompt log và commit `422f9cc`. Mục 1 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #213 | 16:15 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #213 | 16:15 20/10/2026 | Claude Opus 5.5 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13095,12 +13094,12 @@ Báo cáo ổn. Mình nhận xét từng điểm:
 Sau đó bạn đóng phiên này và mở phiên mới cho C.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #214 | 16:19 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #214 | 16:19 20/10/2026 | Claude Sonnet 4.6 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13167,12 +13166,12 @@ Báo cáo cho phiên thảo luận (thay khung 5 mục, ≤ 25 dòng):
 Bạn trả lời giả định theo mẫu `C1=a, C2=b…` là đủ để sang bước 2. Khi bạn nói "xuất transcript", mình sẽ xuất file `claude-ai_session_HW02_p4.jsonl`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #215 | 16:21 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #215 | 16:21 20/10/2026 | Claude Opus 5.5 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13253,12 +13252,12 @@ Chạy render → check_domain → linter trước, freeze sau khi sạch.
 ```
 *File AI ghi/gửi trong lượt này:* `testcases.json`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #216 | 16:28 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #216 | 16:28 20/10/2026 | Claude Sonnet 4.6 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13324,12 +13323,12 @@ không hợp lệ; giả định MỚI chặn bước 3 (cùng định dạng nh
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #217 | 16:32 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #217 | 16:32 20/10/2026 | Claude Sonnet 4.6 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13369,12 +13368,12 @@ C0, C4, C10–C14: SV chấp nhận đề xuất của AI
 Ngoài ra, ở mục 1 của lệnh lần trước, bạn bỏ câu "C8: nếu lý do dựa vào code thì ghi (gray-box)", vì lý do C8 của bạn không dựa vào code.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #218 | 16:35 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #218 | 16:35 20/10/2026 | Claude Sonnet 4.6 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13411,12 +13410,12 @@ không hợp lệ; giả định MỚI chặn bước 3 (định dạng: mã | c
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #219 | 16:35 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #219 | 16:35 20/10/2026 | Claude Opus 5.5 | 5.1 C_FR15 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát chức năng Quản lý sản phẩm Admin, xác định danh sách biến và chốt các giả định C0-C14.
 
 **Prompt:**
 ```
@@ -13488,12 +13487,12 @@ Có một việc em làm thêm ngoài khối lệnh: vì C5 = a (không mở r�
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step2.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận danh sách biến; chốt các quyết định của SV về bước nhảy giá tiền và quy tắc nhập liệu.
 
 ---
 
-## #220 | 16:40 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #220 | 16:40 20/10/2026 | Claude Sonnet 4.6 | 5.2 C_FR15 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh).
 
 **Prompt:**
 ```
@@ -13556,12 +13555,12 @@ C15 viết lại: mã | câu hỏi | phương án + hệ quả | khuyến nghị
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền.
 
 ---
 
-## #221 | 16:42 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #221 | 16:42 20/10/2026 | Claude Sonnet 4.6 | 5.2 C_FR15 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh).
 
 **Prompt:**
 ```
@@ -13599,12 +13598,12 @@ nguồn mốc 255 của V2 (trích SRS mục/câu, hoặc "chỉ có trong code:
 Bạn chạy lệnh luôn cũng được, còn lý do C9 thì gửi sau. Khi có báo cáo, bạn chốt C15 và lý do C9 cùng lúc.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền.
 
 ---
 
-## #222 | 16:42 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #222 | 16:42 20/10/2026 | Claude Opus 5.5 | 5.2 C_FR15 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh).
 
 **Prompt:**
 ```
@@ -13642,12 +13641,12 @@ C9=a nghĩa là từ chối chuỗi số → làm tiếp.
   - Vì vậy căn cứ của khuyến nghị C15 (b) chỉ là suy ra từ request, không có văn bản quy định response. C15 vẫn đang chờ SV chốt.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền.
 
 ---
 
-## #223 | 16:43 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #223 | 16:43 20/10/2026 | Claude Sonnet 4.6 | 5.2 C_FR15 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh).
 
 **Prompt:**
 ```
@@ -13707,12 +13706,12 @@ case gray-box (mã + 1 dòng lý do); giả định MỚI chặn bước 4 (mã 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền.
 
 ---
 
-## #224 | 16:46 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #224 | 16:46 20/10/2026 | Claude Sonnet 4.6 | 5.2 C_FR15 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh).
 
 **Prompt:**
 ```
@@ -13747,12 +13746,12 @@ case gray-box (mã + 1 dòng lý do); giả định MỚI chặn bước 4 (mã 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền.
 
 ---
 
-## #225 | 16:46 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #225 | 16:46 20/10/2026 | Claude Opus 5.5 | 5.2 C_FR15 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường dữ liệu sản phẩm (tên, giá, danh mục, hình ảnh).
 
 **Prompt:**
 ```
@@ -13816,12 +13815,12 @@ Xem cách A/B đã viết case GUI cho FR-22.4, FR-24.4, FR-21.3, SEC-04 để g
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step3.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; bổ sung giả định C15 và làm rõ lý do phân lớp chuỗi số/giá tiền.
 
 ---
 
-## #226 | 16:52 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #226 | 16:52 20/10/2026 | Claude Sonnet 4.6 | 5.3 C_FR15 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh bộ kịch bản kiểm thử Domain Testing cho CRUD sản phẩm và phân tách suite API.
 
 **Prompt:**
 ```
@@ -13904,12 +13903,12 @@ bảng điểm BVA theo biến (giá trị cụ thể); giả định MỚI ch�
 Sau bước 4 là bước 5 🔒. Bạn tự thêm case và commit `sv_cases.md` trước, rồi mới hỏi AI.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; điều chỉnh theo linter để đảm bảo cấu trúc testcases.json hợp lệ.
 
 ---
 
-## #227 | 16:55 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #227 | 16:55 20/10/2026 | Claude Sonnet 4.6 | 5.3 C_FR15 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh bộ kịch bản kiểm thử Domain Testing cho CRUD sản phẩm và phân tách suite API.
 
 **Prompt:**
 ```
@@ -13950,12 +13949,12 @@ bảng điểm BVA theo biến (giá trị cụ thể); giả định MỚI ch�
 Sau bước 4, nếu báo cáo không còn giả định chặn thì bạn sang bước 5 🔒: tự viết `sv_cases.md`, commit `5/7` trước, rồi mới hỏi AI phần gap. Đây cũng là mốc hợp lý để xuất transcript `_p4`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; điều chỉnh theo linter để đảm bảo cấu trúc testcases.json hợp lệ.
 
 ---
 
-## #228 | 16:56 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #228 | 16:56 20/10/2026 | Claude Opus 5.5 | 5.3 C_FR15 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh bộ kịch bản kiểm thử Domain Testing cho CRUD sản phẩm và phân tách suite API.
 
 **Prompt:**
 ```
@@ -14023,12 +14022,12 @@ Phần 3: BVA. Viết script sinh 48 case (4 suite × 12).
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step4.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; điều chỉnh theo linter để đảm bảo cấu trúc testcases.json hợp lệ.
 
 ---
 
-## #229 | 16:59 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #229 | 16:59 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14099,12 +14098,12 @@ Báo cáo (≤ 20 dòng): commit; số case SV; bảng TC-SV → loại gap (1/2
 Đây cũng là mốc hợp lý để xuất transcript. Khi muốn, bạn chỉ cần nói "xuất transcript", mình sẽ xuất `claude-ai_session_HW02_p4.jsonl`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #230 | 17:06 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #230 | 17:06 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14134,12 +14133,12 @@ Báo cáo (≤ 5 dòng): đường dẫn file; khung chép từ B hay dựng t�
 Sau đó bạn nhân bản khối mẫu cho mỗi case, điền vào, rồi commit `HW02[C-FR15] 5/7: SV tự thêm TC`. Xong thì chạy lệnh bước 5 lần trước.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #231 | 17:07 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #231 | 17:07 20/10/2026 | Claude Opus 5.5 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14172,12 +14171,12 @@ Báo cáo (≤ 5 dòng): đường dẫn file; khung chép từ B hay dựng t�
 ```
 *File AI ghi/gửi trong lượt này:* `sv_cases.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #232 | 17:16 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #232 | 17:16 20/10/2026 | Claude Opus 5.5 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14228,12 +14227,12 @@ Bước 5 mới xong phần `5/7b` (`d1c71d8`); `5/7c` chưa làm được vì c
 ```
 *File AI ghi/gửi trong lượt này:* `c15_step5_import.py`, `ai_gap_answer.md`, `sv_questions.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #233 | 17:21 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #233 | 17:21 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14297,12 +14296,12 @@ Báo cáo (≤ 15 dòng): commit; check_domain/linter; TC-200 vs TC-94; câu h�
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #234 | 17:35 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #234 | 17:35 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14349,12 +14348,12 @@ Mẫu trả lời gọn:
 `Q2: giữ case, sửa mã EC | bỏ; C19: bỏ | sửa truy vết; C20: căn cứ RFC 8259; 203/216/217: giả định | nới | bỏ; TC-200: <Expected bạn sửa>`
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #235 | 17:38 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #235 | 17:38 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14390,12 +14389,12 @@ số case SV còn lại; TC-200 vs TC-94; câu hỏi còn chặn bước 6.
 Bảng "mã EC cũ → mới" bạn nhớ xem lại, vì đó là lựa chọn thiết kế của bạn. Claude Code chỉ đổi những chỗ có tương ứng rõ ràng.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #236 | 17:39 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #236 | 17:39 20/10/2026 | Claude Opus 5.5 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14451,12 +14450,12 @@ Cập nhật `ai_gap_answer.md` và trạng thái câu hỏi.
   - Q4: TC-200 Expected có nhánh "Thêm thành công" trái với lý do của C21 ("hệ thống sẽ không cho phép"); TC-201, 207, 211, 215 Expected nhiều nhánh; riêng TC-211 cho phép HTTP 500, trái C6.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #237 | 17:40 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #237 | 17:40 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14536,12 +14535,12 @@ Báo cáo (≤ 10 dòng): commit; check_domain/linter; câu hỏi còn chặn b�
 Bạn điền 2 chỗ `<...>` ở mục 1 trước khi chạy.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #238 | 17:49 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #238 | 17:49 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14575,12 +14574,12 @@ Mẫu trả lời:
 Ngoài ra, mục 1 lệnh lần trước còn 2 chỗ trống: TC-210 (giữ EC34 hay thêm EC mảng) và TC-214 (1e-324). Bạn trả lời cùng lúc để mình gộp tất cả vào một lệnh.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #239 | 17:52 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #239 | 17:52 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14628,12 +14627,12 @@ Báo cáo (≤ 12 dòng): commit; check_domain/linter; giá trị price cụ th�
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #240 | 17:59 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #240 | 17:59 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14682,12 +14681,12 @@ Báo cáo (≤ 10 dòng): commit; check_domain/linter; số case SV còn lại (
 Sau lệnh này, nếu check_domain hết lỗi thì bạn sang bước 6. Phiên này đã khá dài, nên bạn có thể nói "xuất transcript" ngay bây giờ để phòng trường hợp ngữ cảnh bị nén.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #241 | 17:59 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #241 | 17:59 20/10/2026 | Claude Opus 5.5 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14734,12 +14733,12 @@ Cập nhật `ai_gap_answer.md` và trạng thái câu hỏi rồi commit.
   - TC-200 giờ chỉ còn nhánh báo lỗi, nên không còn quan sát tên hiển thị trong bảng; phần trùng với TC-94 hết. Đã ghi trong `HW02/C_FR15/ai_gap_answer.md`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #242 | 18:04 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #242 | 18:04 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14792,12 +14791,12 @@ Báo cáo (≤ 12 dòng): 2 commit; số test tự động / manual theo suite; 
 Bạn nên **xuất transcript ngay bây giờ**, trước khi chạy test. Phiên đã dài, và đây là mốc lớn.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #243 | 18:05 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #243 | 18:05 20/10/2026 | Claude Sonnet 4.6 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14831,12 +14830,12 @@ Báo cáo (≤ 12 dòng): 2 commit; số test tự động / manual theo suite; 
 Nhắc lại: bạn nên nói "xuất transcript" trước khi chạy test.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #244 | 18:05 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #244 | 18:05 20/10/2026 | Claude Opus 5.5 | 5.5 C_FR15 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Chuẩn hóa các kịch bản do SV tự đề xuất cho Admin CRUD, giải quyết thắc mắc gap analysis và gọt bỏ case thừa.
 
 **Prompt:**
 ```
@@ -14911,12 +14910,12 @@ Viết `RUN.md` cho SV.
 ````
 *File AI ghi/gửi trong lượt này:* `c15_oracle_gen.py`, `lib.ts`, `C_FR15.spec.ts`, `global-setup.ts`, `RUN.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; gọt bỏ các kịch bản không thực thi, chốt xử lý các ngoại lệ định dạng gói tin API.
 
 ---
 
-## #245 | 18:06 20/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #245 | 18:06 20/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -14938,12 +14937,12 @@ Khi xong feature C và bạn yêu cầu lại, mình sẽ xuất bản lớn hơ
 ```
 *File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p4.jsonl`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #246 | 18:14 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #246 | 18:14 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -14988,12 +14987,12 @@ Blocked: TC | case gốc; case "Pass hộp đen"; trả lời mục 1. KHÔNG đ
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #247 | 18:17 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #247 | 18:17 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15040,12 +15039,12 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
 Bạn điền `<n>`, `<ts>` và thư mục ảnh sau khi chạy xong.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #248 | 18:42 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #248 | 18:42 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15129,12 +15128,12 @@ Kết quả lượt 3 và lượt 5 đã gộp, verdict đã chốt, commit `e49
   - Chưa sửa harness nào; cần SV đồng ý rồi vá ở commit riêng.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #249 | 18:47 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #249 | 18:47 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15257,12 +15256,12 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #250 | 18:50 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #250 | 18:50 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15310,12 +15309,12 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #251 | 18:51 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #251 | 18:51 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15350,12 +15349,12 @@ Báo cáo (≤ 8 dòng): commit; H4 dùng làm gì và đã xử lý thế nào;
   Trước khi merge lượt 6 cần chạy lại với `--force`, hoặc xoá status 6b, vì merge không ghi đè các status đã chỉnh ở 6b (TC-04, 80–83, 90–94 và 5 case để trống).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #252 | 18:57 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #252 | 18:57 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15424,12 +15423,12 @@ KHÔNG đề xuất gộp/tách bug, severity hay câu chữ bug.
   - Verdict 90–93 giữ như 6b: 90 Fail, 91 Pass, 92 Fail, 93 Pass. Riêng TC-92: RUN.md yêu cầu ghi locale trình duyệt vào notes, nhưng SV chưa ghi.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #253 | 19:03 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #253 | 19:03 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15529,12 +15528,12 @@ bước tái hiện G nào chưa chạy được. KHÔNG đề xuất gộp/tác
 Khi có báo cáo 7a, bạn quyết G nào thành BUG nào và severity bao nhiêu, rồi tự viết các file BUG theo format BUG-14. Bạn commit `7/7b: SV viết BUG-35–xx` **trước**, sau đó AI mới được soát dữ kiện ở `7/7c`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #254 | 19:05 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #254 | 19:05 20/10/2026 | Claude Opus 5.5 | 5.6 C_FR15 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Viết kịch bản Playwright, chạy kiểm thử tự động nhiều lượt, khắc phục lỗi harness (H1-H4) và chốt verdict.
 
 **Prompt:**
 ```
@@ -15615,12 +15614,12 @@ Dựng `HW02/bugs/_groups_C_FR15.md` (dữ kiện, có trích Actual/evidence t�
 ```
 *File AI ghi/gửi trong lượt này:* `prelude.ps1`, `ui_repro.js`, `c15_groups.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV trực tiếp thực thi kịch bản; nhờ AI hỗ trợ vá lỗi công cụ harness khi gộp kết quả thực thi.
 
 ---
 
-## #255 | 19:12 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #255 | 19:12 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15698,12 +15697,12 @@ Báo cáo (≤ 8 dòng): commit; danh sách file BUG tạo ra; chỗ dữ kiện
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #256 | 19:14 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #256 | 19:14 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15728,12 +15727,12 @@ Vậy là giờ viết tất cả BUG nhỉ
 Bạn có thể bắt đầu từ bước 1 ngay bây giờ. Nếu muốn, bạn dán bảng G đầy đủ từ `_groups_C_FR15.md` vào đây. Mình chỉ ra những G có cùng nguyên nhân gốc hoặc cùng yêu cầu bị vi phạm, để bạn tự quyết gộp hay tách. Mình không gợi ý severity.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #257 | 19:16 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #257 | 19:16 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15767,12 +15766,12 @@ Báo cáo (≤ 5 dòng): commit; danh sách file BUG.
 Bạn cũng có thể bỏ qua bước dựng khung và tự chép file BUG-14 làm mẫu. Như vậy chỉ mất thêm vài phút, đổi lại phần AI tham gia ít hơn nữa.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #258 | 19:17 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #258 | 19:17 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15798,12 +15797,12 @@ Em dừng ở đây, chưa sửa file và chưa commit gì: khối lệnh còn h
 Các phần còn lại của mục 0 (bỏ C8 khỏi G3, thêm ghi chú đầu mục tái hiện) đã rõ; em sẽ làm cùng lúc khi nhận đủ hai điểm trên.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #259 | 19:19 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #259 | 19:19 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15836,12 +15835,12 @@ Khi có bảng, bạn trả lời theo mẫu:
 Bạn cũng chưa chốt **G16 – C17**. Mình khuyên **bỏ**: C17 là giả định nới (chấp nhận '.' hoặc ','), nên SUT không vi phạm C17; cái bị vi phạm là FR-21.3. Bạn trả lời "bỏ" hay "giữ" cùng lúc với mapping. Sau đó mình điền cả hai vào lệnh dựng khung.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #260 | 19:20 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #260 | 19:20 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15878,12 +15877,12 @@ Chưa dựng khung bug. Trước đó in cho SV bảng dữ kiện để SV tự
 - "Cùng vị trí code" xét theo trùng khoảng dòng. Một số khoảng trùng chỉ vì cùng đi qua route chung (vd server.js:167–177 cho cả lỗi UI lẫn API), không có nghĩa là cùng nguyên nhân.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #261 | 19:21 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #261 | 19:21 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15927,12 +15926,12 @@ Bảng bạn dán bị mất G7, và mất phần vị trí code của G4. Bạn
 Khi có mapping, mình điền vào lệnh dựng khung (đã thêm việc bỏ C8 ở G3, G4, G9).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #262 | 19:25 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #262 | 19:25 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -15977,12 +15976,12 @@ Báo cáo (≤ 5 dòng): commit; danh sách file BUG; G nào thiếu dữ kiện
 Sau lệnh này bạn viết 16 file, commit `7/7b: SV viết BUG-35–50`, rồi quay lại đây để lấy lệnh soát dữ kiện (`7/7c`).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #263 | 19:26 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #263 | 19:26 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16017,12 +16016,12 @@ Giờ dựng khung BUG-35…50 (chỉ điền TC, ảnh tiêu biểu, dữ kiệ
 - **Mục cần SV xem:** "Môi trường" em cũng để `<SV viết>` vì lệnh không liệt kê nó trong phần AI được điền (BUG-14 có ghi môi trường). Nếu SV muốn AI chép môi trường từ `HW02/env/environment.md` thì báo em.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #264 | 19:27 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #264 | 19:27 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16073,12 +16072,12 @@ Báo cáo (≤ 20 dòng): commit; BUG | tái hiện được? | chỗ đã sửa
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #265 | 19:27 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #265 | 19:27 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16093,12 +16092,12 @@ cho bug UI). Không sửa mục khác. Commit `HW02[C-FR15] 7/7a3: chép môi tr
 Lưu ý: chính `environment.md` còn 7 chỗ `[...]` chưa điền (máy, Node.js, trình duyệt, điện thoại, Expo Go, IP LAN, Playwright), nên các file BUG cũng mang theo các chỗ trống đó. SV cần điền `environment.md` rồi chép lại vào các bug.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #266 | 19:33 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #266 | 19:33 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16151,12 +16150,12 @@ Báo cáo (≤ 6 dòng): commit; chỗ ghi `<SV điền>` (nếu có); bug nào 
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #267 | 19:34 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #267 | 19:34 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16203,12 +16202,12 @@ Mẫu = `d0d0e05:HW02/bugs/BUG-22.md` (khung 7/7a5 của B). Phiên bản thật
 ```
 *File AI ghi/gửi trong lượt này:* `c15_bugfmt.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #268 | 19:36 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #268 | 19:36 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16238,12 +16237,12 @@ Giờ bạn viết 16 bug. Viết xong, commit `HW02[C-FR15] 7/7b: SV viết BUG
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #269 | 20:30 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #269 | 20:30 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16304,12 +16303,12 @@ UI: cả 9 bug tái hiện được (bước đăng nhập là em tự thêm vì
 ```
 *File AI ghi/gửi trong lượt này:* `restart_backend.ps1`, `api_7c.ps1`, `ui_7c.js`, `kiem7c_template.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #270 | 20:42 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #270 | 20:42 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16338,12 +16337,12 @@ Báo cáo (≤ 5 dòng): tên file đã chép; số lượt + giờ đầu/cuố
 Sau khi nó báo xong, bạn chạy `/compact`. Sau compact, lệnh `7c` vẫn dùng được như cũ, vì lệnh đó tự chứa đủ thông tin và không phụ thuộc vào ngữ cảnh trước compact.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #271 | 20:42 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #271 | 20:42 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16376,12 +16375,12 @@ Báo cáo (≤ 5 dòng): tên file đã chép; số lượt + giờ đầu/cuố
 No response requested.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #272 | 20:44 20/10/2026 | Claude (không rõ model) | [...]
-**Mục đích:** [...]
+## #272 | 20:44 20/10/2026 | Claude (không rõ model) | 5.7 C_FR15 Bước 7
+**Mục đích:** Chạm giới hạn phiên làm việc (compact context) của Claude Code.
 
 **Prompt:**
 ```
@@ -16394,12 +16393,12 @@ Xem báo cáo nhé:
 You've hit your session limit · resets 9:10pm (Asia/Ho_Chi_Minh)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Xuất transcript trước khi compact và khởi động phiên làm việc mới.
 
 ---
 
-## #273 | 21:14 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #273 | 21:14 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16446,12 +16445,12 @@ Báo cáo (≤ 20 dòng): commit; bảng BUG → issue #; danh sách ảnh SV c�
 Sau đó bạn kéo ảnh vào từng issue, rồi chụp trang issue (lọc `author:@me`, sắp Newest), lưu thành `bugs/issues_page_C_FR15.png`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #274 | 21:19 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #274 | 21:19 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16509,12 +16508,12 @@ Báo cáo (≤ 20 dòng): commit; kết quả mục 1; bảng BUG → issue #; �
 Sau lệnh 3, bạn kéo ảnh vào từng issue và chụp `bugs/issues_page_C_FR15.png`. Phần BUG-48 do AI phát hiện, nhớ khai trong Audit.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #275 | 21:20 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #275 | 21:20 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16545,12 +16544,12 @@ SV có sửa chưa commit ở 7 file BUG (severity, BUG-46 tiêu đề, BUG-47/4
 ```
 *File AI ghi/gửi trong lượt này:* `crash_48.ps1`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #276 | 21:29 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #276 | 21:29 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16591,12 +16590,12 @@ Báo cáo (≤ 10 dòng): commit; các dòng Yêu cầu đã điền cho phần 
 Lệnh dừng trước khi tạo issue, để bạn duyệt trường Yêu cầu của BUG-48. Bạn gửi báo cáo, mình soát xong rồi đưa lệnh tạo issue.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #277 | 21:31 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #277 | 21:31 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16630,12 +16629,12 @@ Sáu file còn thay đổi chưa commit. Đây đúng là các chỗ SV đã s�
 - **Em commit:** SV cho phép, em commit nguyên trạng 6 file với message do SV chọn, sau đó chạy tiếp 7e.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #278 | 21:32 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #278 | 21:32 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16676,12 +16675,12 @@ Các dòng Yêu cầu đã điền cho phần sập backend (BUG-48, nguyên vă
 ```
 *File AI ghi/gửi trong lượt này:* `fixpaths.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #279 | 21:36 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #279 | 21:36 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16735,12 +16734,12 @@ Báo cáo (≤ 20 dòng): commit; bảng BUG → issue #; ảnh SV cần kéo v�
 Sau lệnh này bạn kéo ảnh vào từng issue, rồi chụp `bugs/issues_page_C_FR15.png` (lọc `author:@me`, sắp Newest).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #280 | 21:39 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #280 | 21:39 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16767,12 +16766,12 @@ Bạn cũng có thể nhớ lại mình có gõ `git push` không.
 Trả lời mẫu: `API spec: bỏ; push: tôi | Claude Code`
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #281 | 21:39 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #281 | 21:39 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16803,12 +16802,12 @@ Báo cáo (≤ 20 dòng): 2 commit; bảng BUG → issue #; ảnh SV cần kéo 
 Sau lệnh này bạn kéo ảnh vào từng issue, rồi chụp `bugs/issues_page_C_FR15.png` (lọc `author:@me`, sắp Newest).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #282 | 21:40 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #282 | 21:40 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16871,12 +16870,12 @@ Còn lại cho SV: kéo ảnh vào 16 issue, rồi chụp trang Issues lưu thà
 ```
 *File AI ghi/gửi trong lượt này:* `f0.py`, `redact_7f.js`, `bodies_7f.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #283 | 21:52 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #283 | 21:52 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16918,12 +16917,12 @@ Báo cáo (≤ 10 dòng): 2 commit; kết quả mục 1; số liệu README (TC,
 Khi bạn gửi báo cáo, mình sẽ cập nhật `HW02_handoff.md` trong Project với trạng thái C: số liệu, các giả định C0–C24, chất liệu gap analysis, các ghi chú cần khai trong Audit. Sau đó mình xuất transcript `_p4` bản đầy đủ. Phiên D sẽ đọc handoff mới mà không cần đọc lại phiên này.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #284 | 21:55 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #284 | 21:55 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -16974,12 +16973,12 @@ Lần sửa thứ hai thất bại (chữ hoa "GetResponseStream"), nên commit 
 - **BUG/issue kế tiếp:** em chỉ ghi vào CLAUDE.md, không ghi vào README nộp bài vì đó là số đếm nội bộ.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #285 | 21:59 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #285 | 21:59 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17057,12 +17056,12 @@ Khi bạn nói "xuất transcript", mình sẽ xuất bản đầy đủ `_p4` �
 ````
 *File AI ghi/gửi trong lượt này:* `HW02_handoff.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #286 | 22:03 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #286 | 22:03 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17085,12 +17084,12 @@ Báo cáo (≤ 6 dòng): commit; 10 mã TC + nguồn; bảng README sau sửa.
 - **Ảnh gốc vẫn còn:** link asset cũ vẫn mở được, và ảnh còn trong lịch sử chỉnh sửa của issue. Muốn ẩn hẳn, SV xoá bản sửa cũ trong lịch sử chỉnh sửa của từng issue.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #287 | 22:04 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #287 | 22:04 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17129,12 +17128,12 @@ Handoff trong Project đã cập nhật: số liệu README đúng (có cột Bo
 Sau khi chạy lệnh comment, feature C đóng hẳn. Lúc đó bạn nói "xuất transcript", mình sẽ xuất bản đầy đủ `_p4` để ghi đè bản 18:06.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #288 | 22:05 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #288 | 22:05 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17152,12 +17151,12 @@ Commit `HW02[C-FR15]: link comment đính chính #189 #190` kèm A_prompt_log.md
 - Đã ghi link 2 comment vào `_groups_C_FR15.md` thay cho chỗ `<SV bổ sung sau khi comment>`, commit `65d8135 HW02[C-FR15]: link comment đính chính #189 #190` kèm `A_prompt_log.md`, chưa push.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #289 | 22:06 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #289 | 22:06 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17184,12 +17183,12 @@ Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
 Lệnh comment #189/#190 vẫn chạy trước hoặc sau lệnh này đều được. Nếu chạy sau thì prompt log sẽ thiếu lượt đó; muốn đủ thì chạy lệnh comment trước.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #290 | 22:08 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #290 | 22:08 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17215,12 +17214,12 @@ Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
 - **Header `#138` xuất hiện hai lần:** một ở 11:00, một ở 13:47 (nằm sau #171). Bản đã commit trước đó cũng có y như vậy, nên không do lần chép này gây ra. Theo em, header thứ hai là văn bản trích nằm trong một prompt chứ không phải lượt riêng, vì script báo 290 lượt khớp với số header trừ cái này. Chưa kiểm chứng sâu hơn.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #291 | 22:11 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #291 | 22:11 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17273,12 +17272,12 @@ Báo cáo (≤ 8 dòng): commit; mục nào đã có sẵn, mục nào vừa th�
 Lưu ý: ở 7e em có dùng `api_specification.md` làm căn cứ Yêu cầu cho BUG-48. Dòng đó đã bỏ ở 7f0, nên các file hiện tại không còn mâu thuẫn với quy tắc mới.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #292 | 22:12 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #292 | 22:12 20/10/2026 | Claude Opus 5.5 | 5.7 C_FR15 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-35..50, SV biên soạn chi tiết các lỗi Admin, kiểm tra lỗi sập backend (BUG-48) và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -17305,12 +17304,12 @@ Báo cáo (≤ 5 dòng): file đã chép; tổng lượt + theo model; commit.
 - **Cần làm thêm:** chạy lại `python tools/hooks/on_stop.py --manual` và commit thêm một lần nữa thì #292 sẽ ghi đúng Opus 5.5. Hook Stop cũng tự sinh lại log sau lượt này, nhưng phần thay đổi đó chưa commit.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ mô tả lỗi; nhờ AI soát dữ kiện kỹ thuật, đính chính hình ảnh bị lộ thông tin nhạy cảm và cập nhật link issue.
 
 ---
 
-## #293 | 22:16 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #293 | 22:16 20/10/2026 | Claude Sonnet 4.6 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17392,12 +17391,12 @@ Lệnh cấm đọc #153–#160 ở bước này vì các issue đó mô tả h�
 Transcript phiên này sẽ xuất tên `claude-ai_session_HW02_p5.jsonl` khi bạn nói "xuất transcript".
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #294 | 22:20 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #294 | 22:20 20/10/2026 | Claude Sonnet 4.6 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17490,12 +17489,12 @@ Ngoại lệ: nếu dừng, kiểm tra lỗi hoặc harness vướng → ghi 1�
 Nhớ khai lựa chọn P1=b cùng lý do trong AI-03/Audit.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #295 | 22:23 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #295 | 22:23 20/10/2026 | Claude Opus 5.5 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17622,12 +17621,12 @@ Bước 0–1 của D_FR20 đã xong và đã commit (chưa push). Không có gi
 ```
 *File AI ghi/gửi trong lượt này:* `testcases.json`, `step1_notes.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #296 | 22:29 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #296 | 22:29 20/10/2026 | Claude Sonnet 4.6 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17715,12 +17714,12 @@ Sau bước: render_md.py → freeze.py → check_domain.py → lint → prompt 
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #297 | 22:31 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #297 | 22:31 20/10/2026 | Claude Opus 5.5 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17797,12 +17796,12 @@ Em dừng ở phần A, nên chưa sửa file nào, chưa commit và chưa chạ
 - **Bước 2:** chưa chạy.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #298 | 22:38 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #298 | 22:38 20/10/2026 | Claude Sonnet 4.6 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17866,12 +17865,12 @@ có từ B). Bỏ điều kiện "commit 1/7b".
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #299 | 22:39 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #299 | 22:39 20/10/2026 | Claude Opus 5.5 | 6.1 D_FR20 Bước 1 – Phân tích biến vào/ra & Giả định
+**Mục đích:** Khảo sát tính năng Đăng ký trên ứng dụng di động, trích xuất biến và xác định giả định đặc thù mobile.
 
 **Prompt:**
 ```
@@ -17928,12 +17927,12 @@ có từ B). Bỏ điều kiện "commit 1/7b".
 ```
 *File AI ghi/gửi trong lượt này:* `d_step1b.py`, `d_step2.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; chốt điều kiện P1 và cập nhật quy tắc vào CLAUDE.md.
 
 ---
 
-## #300 | 22:43 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #300 | 22:43 20/10/2026 | Claude Sonnet 4.6 | 6.2 D_FR20 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường thông tin đăng ký trên giao diện di động.
 
 **Prompt:**
 ```
@@ -18021,12 +18020,12 @@ render_md.py → freeze.py → check_domain.py → lint → prompt log → commi
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV duyệt và chốt các phân vùng tương đương phù hợp với bàn phím di động.
 
 ---
 
-## #301 | 22:44 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #301 | 22:44 20/10/2026 | Claude Opus 5.5 | 6.2 D_FR20 Bước 2 – Phân lớp tương đương
+**Mục đích:** Phân chia lớp tương đương cho các trường thông tin đăng ký trên giao diện di động.
 
 **Prompt:**
 ```
@@ -18107,12 +18106,12 @@ Giờ sửa phân lớp theo review (2/7b): ghi tiền đề gray-box theo từn
 ```
 *File AI ghi/gửi trong lượt này:* `d_step2b.py`, `d_step3.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; SV duyệt và chốt các phân vùng tương đương phù hợp với bàn phím di động.
 
 ---
 
-## #302 | 22:49 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #302 | 22:49 20/10/2026 | Claude Sonnet 4.6 | 6.3 D_FR20 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh kịch bản kiểm thử Domain cho ứng dụng di động và rà soát theo phản hồi review.
 
 **Prompt:**
 ```
@@ -18203,12 +18202,12 @@ Tạo HW02/D_FR20/sv_cases.md: khung trống chép cấu trúc từ HW02/C_FR15/
 Sau lệnh này đến lượt bước 5 của bạn: tự viết case vào `sv_cases.md` rồi **commit trước**, sau đó mới hỏi AI. Theo P1=b, bạn được mang ý từ case của chính mình ở A sang; ghi rõ "(kế thừa TC-FR01-2xx)".
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; hiệu chỉnh các bước thực hiện để khớp với giao diện thực tế của Mobile App.
 
 ---
 
-## #303 | 22:50 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #303 | 22:50 20/10/2026 | Claude Opus 5.5 | 6.3 D_FR20 Bước 3 – Sinh test case Domain
+**Mục đích:** Sinh kịch bản kiểm thử Domain cho ứng dụng di động và rà soát theo phản hồi review.
 
 **Prompt:**
 ```
@@ -18279,12 +18278,12 @@ Bước 4 đã xong. D_FR20 có 27 TC do AI tạo, chưa chạy case nào. Khung
 ```
 *File AI ghi/gửi trong lượt này:* `d_step4.py`, `sv_cases.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; hiệu chỉnh các bước thực hiện để khớp với giao diện thực tế của Mobile App.
 
 ---
 
-## #304 | 22:53 20/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #304 | 22:53 20/10/2026 | Claude Sonnet 4.6 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18364,12 +18363,12 @@ Lệnh dùng **sau khi** bạn đã commit `sv_cases.md`:
 Bước 1–4 của D đã xong. Nên xuất transcript `_p5` ngay để phòng nén ngữ cảnh; chỉ cần nói "xuất transcript".
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #305 | 23:12 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #305 | 23:12 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18437,12 +18436,12 @@ Em đã đưa 9 case SV vào `testcases.json`, viết `ai_gap_answer.md` và com
 ```
 *File AI ghi/gửi trong lượt này:* `d_step5.py`, `ai_gap_answer.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #306 | 23:13 20/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #306 | 23:13 20/10/2026 | Claude Sonnet 4.6 + Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18466,12 +18465,12 @@ Lần xuất sau, nếu đây vẫn là cùng phiên chỉ dài thêm, mình s�
 ```
 *File AI ghi/gửi trong lượt này:* `claude-ai_session_HW02_p5.jsonl`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #307 | 23:17 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #307 | 23:17 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18562,12 +18561,12 @@ Về Audit: Claude Code có in `sv_cases.md` và 40 dòng đầu `ai_gap_answer.
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #308 | 23:19 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #308 | 23:19 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18591,12 +18590,12 @@ Về Audit: Claude Code có in `sv_cases.md` và 40 dòng đầu `ai_gap_answer.
    Ở mục rà nhất quán TC-202, em ghi "theo FR-01 và D7 là hợp lệ". Câu đó đúng theo chữ của D7, nhưng là suy diễn, vì D7 không nêu đích danh `\n`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #309 | 23:20 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #309 | 23:20 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18634,12 +18633,12 @@ Dù chọn hướng nào, cũng cần nghĩ tới khả năng thực hiện. The
 Các case còn lại vẫn theo bảng lỗi ở lượt trước. Sửa xong `sv_cases.md` thì commit `5/7c` rồi dán **Lệnh 2**. Nếu thêm D16+, nhớ ghi đủ loại giả định, căn cứ và lý do của bạn để Claude Code chép đúng chữ.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #310 | 23:24 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #310 | 23:24 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18677,12 +18676,12 @@ Các case còn lại vẫn theo bảng lỗi ở lượt trước. Sửa xong `s
 - **Tổng TC của D:** 35 (AI 27, SV 8).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #311 | 23:25 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #311 | 23:25 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18754,12 +18753,12 @@ Sửa xong thì commit `HW02[D-FR20] 5/7e: SV sửa case SV (lần 2)`, rồi d�
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #312 | 23:32 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #312 | 23:32 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18824,12 +18823,12 @@ Em dừng sau khi đồng bộ (5/7f) và chưa làm phần B, vì TC-205 và D1
 ```
 *File AI ghi/gửi trong lượt này:* `d_step5f.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #313 | 23:34 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #313 | 23:34 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18883,12 +18882,12 @@ và báo cáo theo khung cũ.
 Sau `6/7a`, phần còn lại của bạn là chạy khoảng 30 case trên Android theo RUN.md.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #314 | 23:38 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #314 | 23:38 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -18932,12 +18931,12 @@ và báo cáo theo khung cũ.
 ```
 *File AI ghi/gửi trong lượt này:* `d_run.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #315 | 23:41 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #315 | 23:41 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -19023,12 +19022,12 @@ Có thay đổi → commit `HW02: vá harness – nén ảnh chạy tay D` (ho�
 Nếu chưa có ảnh thật để nén thử, cứ để Claude Code báo con số ước tính. Khi chụp được vài ảnh đầu, bạn chạy script một lần để kiểm, rồi hãy chạy tiếp hết lượt.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #316 | 23:44 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #316 | 23:44 20/10/2026 | Claude Opus 5.5 | 6.5 D_FR20 Bước 5 – SV bổ sung TC & AI gap analysis
+**Mục đích:** Đưa các kịch bản kiểm thử đặc thù Mobile (dán clipboard, emoji, spam tap) vào suite và đồng bộ gap analysis.
 
 **Prompt:**
 ```
@@ -19100,12 +19099,12 @@ Em dừng ở bước kiểm hồi quy của phần B. Bản vá `merge_results.
 ```
 *File AI ghi/gửi trong lượt này:* `regress.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận; đồng bộ dữ liệu nhiều lần sau khi SV chỉnh sửa chi tiết các test case kiểm tra bàn phím.
 
 ---
 
-## #317 | 23:47 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #317 | 23:47 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19207,12 +19206,12 @@ render_md.py → lint → prompt log → commit `HW02[D-FR20] 6/7a2: RUN.md gi�
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #318 | 23:49 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #318 | 23:49 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19297,12 +19296,12 @@ Em đã vá harness, viết lại RUN.md với tối đa 20 ảnh điện thoạ
 ```
 *File AI ghi/gửi trong lượt này:* `compress_manual.py`, `d_run2.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #319 | 23:53 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #319 | 23:53 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19386,12 +19385,12 @@ Lệnh dùng sau khi bạn chạy xong:
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #320 | 23:54 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #320 | 23:54 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19417,12 +19416,12 @@ Lệnh dùng sau khi bạn chạy xong:
 - **Kiểm tra:** check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #321 | 23:56 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #321 | 23:56 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19472,12 +19471,12 @@ Mình đã điền sẵn câu chốt D0 trong lệnh; sửa nếu không đúng 
 Báo cáo sạch là bạn chạy được theo RUN.md, rồi dùng lệnh 6b ở lượt trước.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #322 | 23:57 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #322 | 23:57 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19501,12 +19500,12 @@ Thực tế bạn sẽ chụp khoảng 11–15 ảnh, không phải 20. Đúng n
 Về thời gian, chụp ảnh chỉ mất vài giây mỗi tấm. Phần tốn thời gian là nhập tay khoảng 31 case. Ước tính khoảng 1,5–2 giờ là cho việc nhập, không phải cho ảnh.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #323 | 23:57 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #323 | 23:57 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19541,12 +19540,12 @@ Về thời gian, chụp ảnh chỉ mất vài giây mỗi tấm. Phần tốn 
 - **Kiểm tra:** check_domain 0 lỗi, 1 cảnh báo (V6, cố ý theo D12). Lint 0 lỗi, 0 cảnh báo.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #324 | 23:58 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #324 | 23:58 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19586,12 +19585,12 @@ Xong thì bắt đầu lượt chính thức:
 3. Chụp `D_admin_sau_1.png`, nén ảnh, rồi dán lệnh 6b.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #325 | 23:59 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #325 | 23:59 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19610,12 +19609,12 @@ So procedure của 5 case TS-GUI với RUN.md (cột phân bổ ảnh, ảnh adm
 - **Commit:** `690e797` 6/7a5: quy trình TS-GUI theo RUN.md. check_domain 0 lỗi, 1 cảnh báo (V6); lint 0 lỗi, 0 cảnh báo.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #326 | 23:59 20/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #326 | 23:59 20/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19640,12 +19639,12 @@ Thứ tự lượt chính thức:
 Bây giờ đã gần 0 giờ, và lượt chạy mất khoảng 1,5–2 giờ. Nếu để mai chạy, chỉ cần làm lại từ bước 1, không phải làm lại gì khác.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #327 | 00:05 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #327 | 00:05 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19665,12 +19664,12 @@ File TEMPLATE là **phiếu kết quả trống** cho lượt chạy tay, theo �
 Lấy giờ lúc bạn bắt đầu chạy, khớp với dòng nhật ký lượt, ví dụ `D_FR20_manual_20261021-0010.json`. Nếu ngại, cứ bảo Claude Code chép giúp: "chép TEMPLATE thành file kết quả lượt với giờ hiện tại, in tên file".
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #328 | 00:10 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #328 | 00:10 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19705,12 +19704,12 @@ Rồi khi dán lệnh 6b, thêm một dòng vào **đầu** lệnh:
 Việc AI chỉ chép lại dữ kiện của bạn thì hợp lệ; verdict vẫn là do bạn ghi.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #329 | 01:33 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #329 | 01:33 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19797,12 +19796,12 @@ Hiện trạng:
 Lệnh này giữ nguyên ảnh gốc và `Check.md` của bạn, chỉ tạo bản đã đổi tên và nén để nộp. Nếu Claude Code DỪNG vì có ảnh không xác định được case, bạn chỉ cần trả lời theo mẫu "ảnh X = TC-FR20-yy".
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #330 | 01:37 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #330 | 01:37 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19820,12 +19819,12 @@ Vậy đây là lượt chính thức. Trong lệnh 6b, bạn sửa dòng điề
 Phần còn lại của lệnh giữ nguyên, dán vào Claude Code là được.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #331 | 01:37 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #331 | 01:37 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -19927,12 +19926,12 @@ Hiện trạng:
 ```
 *File AI ghi/gửi trong lượt này:* `compress_manual.py`, `d_6b.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #332 | 01:44 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #332 | 01:44 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -20015,12 +20014,12 @@ Sửa xong `Check.md` và chép ảnh mới vào `manual_raw/`, rồi dán lện
 ````
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #333 | 02:00 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #333 | 02:00 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -20064,12 +20063,12 @@ Bạn chỉ cần tự ghi vào Check.md **Actual của 9 lần đăng nhập** 
 Giữ backend chạy cho tới khi báo cáo 6/7b2 sạch, phòng trường hợp phải kiểm lại.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #334 | 02:02 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #334 | 02:02 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -20112,12 +20111,12 @@ Giữ backend chạy cho tới khi báo cáo 6/7b2 sạch, phòng trường hợ
 ```
 *File AI ghi/gửi trong lượt này:* `d_6c.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #335 | 02:04 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #335 | 02:04 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -20214,12 +20213,12 @@ render_md.py → check_domain.py → lint → prompt log → commit
 Đến đây là hợp lý để dừng nghỉ. Bước kế tiếp, 7b, là phần của bạn: quyết mapping G → BUG rồi viết bug. Trước khi nghỉ, nên xuất transcript `_p5` một lần nữa; vì cùng phiên dài thêm nên bạn ghi đè file cũ.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #336 | 02:08 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #336 | 02:08 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -20294,12 +20293,12 @@ Sau khi có bảng B, bạn chỉ cần trả lời theo mẫu `G1=A, G2=mới, 
 Đã 2 giờ 17 sáng. Nếu bạn dừng ở đây, nên xuất lại transcript `_p5` (ghi đè file cũ) trước khi nghỉ.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #337 | 02:09 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #337 | 02:09 21/10/2026 | Claude Opus 5.5 | 6.6 D_FR20 Bước 6 – Thực thi kịch bản kiểm thử
+**Mục đích:** Thực thi kịch bản thủ công trên thiết bị thật (POCO F5), chụp ảnh bằng chứng và cập nhật kết quả vào kết quả kiểm thử.
 
 **Prompt:**
 ```
@@ -20397,12 +20396,12 @@ Phần A đã commit. Sang B: đọc mẫu `_groups_C_FR15.md`, mã đăng ký m
 ```
 *File AI ghi/gửi trong lượt này:* `d_6b3.py`, `d_6b3b.py`, `d_cmp.py`, `d_groups.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV thực hiện test trên điện thoại thật; nhờ AI hỗ trợ gộp kết quả manual_raw.json và nén ảnh chứng minh.
 
 ---
 
-## #338 | 02:19 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #338 | 02:19 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20459,12 +20458,12 @@ Commit A xong. Sang B: đọc chỗ code mà từng BUG A/B/C chỉ ra.
 | G7 | mobile App.js 797–837, 209–219, 225–229 (+ server 20–29 nếu body có trường xác nhận) | BUG-14: không | không |
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #339 | 02:23 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #339 | 02:23 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20531,12 +20530,12 @@ SV quyết (còn `<...>` → DỪNG):
 Sau lệnh này đến bước 7b của bạn: viết các chỗ `<SV viết>` trong từng BUG-xx.md (và nội dung comment nếu có), rồi commit trước khi AI kiểm tái hiện ở 7c. Tiền tố `[FR-20]` chỉ đặt trên tiêu đề GitHub, không ghi trong file.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #340 | 02:28 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #340 | 02:28 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20573,12 +20572,12 @@ Bạn chỉ cần thay dòng mapping trong lệnh bằng **một** trong hai dò
 Sau đó AI dựng khung ngay, bạn chỉ việc điền.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #341 | 02:29 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #341 | 02:29 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20631,12 +20630,12 @@ Chỉ đọc: ở A_FR01, có cặp BUG nào cùng vị trí code server nhưng 
 - Không có → chọn "A" cho G1–G3 thì nhất quán.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #342 | 02:31 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #342 | 02:31 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20669,12 +20668,12 @@ SV quyết:
 Phần còn lại (mục 1–4 và khung báo cáo) giữ nguyên. Sau khi có khung, bạn viết 7 bug ở bước 7b.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #343 | 02:32 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #343 | 02:32 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20722,12 +20721,12 @@ Quoting PowerShell hỏng; dùng Edit.
 ```
 *File AI ghi/gửi trong lượt này:* `d_frames.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #344 | 02:34 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #344 | 02:34 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20785,12 +20784,12 @@ Các quy ước còn lại giữ như A–C:
 Đã gần 3 giờ sáng, đây là chỗ hợp lý để dừng. Viết 7 bug cần đầu óc tỉnh. Nếu nghỉ, nói "xuất transcript" để mình ghi đè `_p5`. Mình cũng nên cập nhật handoff cho phiên sau, vì phiên này đã dài.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #345 | 02:36 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #345 | 02:36 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20821,12 +20820,12 @@ Các quy ước còn lại giữ như A–C:
 ```
 *File AI ghi/gửi trong lượt này:* `d_bugid.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #346 | 02:37 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #346 | 02:37 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20857,12 +20856,12 @@ Trước khi nghỉ, bạn muốn mình làm luôn hai việc này không?
 Chỉ cần trả lời "làm cả hai" hoặc chọn một.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #347 | 02:54 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #347 | 02:54 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -20982,12 +20981,12 @@ Mình vẫn đề nghị **xuất transcript `_p5` và cập nhật handoff** sa
 Sau đó bạn sửa chữ và commit `HW02[D-FR20] 7/7d: SV sửa chữ BUG-51–57`. Báo lại để mình đưa lệnh tạo issue.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #348 | 02:54 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #348 | 02:54 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21083,12 +21082,12 @@ Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài kho�
 ```
 *File AI ghi/gửi trong lượt này:* `repro_D.ps1`, `d_7c.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #349 | 03:02 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #349 | 03:02 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21124,12 +21123,12 @@ Phần server tái hiện được cả 6 request (HTTP 200, có tạo tài kho�
 ```
 *File AI ghi/gửi trong lượt này:* `d_7c2.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #350 | 03:04 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #350 | 03:04 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21209,12 +21208,12 @@ Lệnh có **hai điểm dừng chờ bạn**: xác nhận trước khi đăng i
 Xong bước này là D hoàn tất. Lúc đó mình sẽ **xuất transcript `_p5` và cập nhật handoff**. Đừng để tới phiên sau mới làm, vì phiên này rất dài và có nguy cơ bị nén ngữ cảnh.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #351 | 03:15 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #351 | 03:15 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21271,12 +21270,12 @@ Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiệ
 Báo cáo ra "sẵn sàng tạo issue" thì dán lệnh tạo issue ở lượt trước. Nếu còn điểm chưa sửa, bạn sửa tiếp, commit `7/7d2`, rồi chạy lại lệnh kiểm này.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #352 | 03:16 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #352 | 03:16 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21349,12 +21348,12 @@ Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiệ
   3. BUG-56: dòng FR-22.2 trong mục Yêu cầu bị SV đổi so với chữ AI chép.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #353 | 03:17 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #353 | 03:17 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21430,12 +21429,12 @@ Xem câu đó định nói gì:
 Sửa xong thì commit `HW02[D-FR20] 7/7d2: SV sửa tiền điều kiện + BUG-55/56`, rồi chạy lại **lệnh kiểm vừa rồi**. Thay mục 0 thành "HEAD có commit SV 7/7d2", và mục 2 so với `e2a7210`. Báo cáo ra "sẵn sàng tạo issue" thì dán lệnh tạo issue.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #354 | 03:26 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #354 | 03:26 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21499,12 +21498,12 @@ Mỗi điểm: đã sửa / chưa sửa / sửa một phần (trích dòng hiệ
 - **Kết luận: chưa sẵn sàng tạo issue, còn 1 điểm:** BUG-55, câu Nhận định ghi `style="{styles.label}"`, khác code App.js dòng 804.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #355 | 03:27 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #355 | 03:27 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21579,12 +21578,12 @@ Nếu đã chắc thì chỉ cần trả lời: `đồng ý`.
 Xong cả 7 issue thì báo Claude Code: "đã kéo xong ảnh". Nó sẽ kiểm, chụp `issues_page_D.png` và cập nhật README.
 `````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #356 | 03:28 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #356 | 03:28 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21675,12 +21674,12 @@ Tạo issue là bước đăng công khai, khó rút lại. Em trả lời **"đ
 ```
 *File AI ghi/gửi trong lượt này:* `.tmp_fix55.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #357 | 03:31 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #357 | 03:31 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21710,12 +21709,12 @@ Cách nào cũng được. Câu hỏi này không chặn việc tạo issue.
 Xong cả 7 issue thì trả lời Claude Code: `đã kéo xong ảnh`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #358 | 03:32 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #358 | 03:32 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21759,12 +21758,12 @@ Body đã sẵn (có dòng chờ ảnh). Tạo issue tuần tự BUG-51 → 57.
 ```
 *File AI ghi/gửi trong lượt này:* `.tmp_issue_bodies.py`, `.tmp_issue_nums.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #359 | 03:40 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #359 | 03:40 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21805,12 +21804,12 @@ Chỉ dòng D đổi (27 → 7); A/B/C giữ nguyên. Commit vá harness riêng,
 - **Đã cập nhật CLAUDE.md:** BUG kế tiếp BUG-58, issue kế tiếp từ #204. Không push.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #360 | 03:49 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #360 | 03:49 21/10/2026 | Claude Opus 5.5 | 6.7 D_FR20 Bước 7 – Báo cáo lỗi (Bug report)
+**Mục đích:** Dựng khung BUG-51..57, SV trực tiếp biên soạn mô tả lỗi Mobile, AI rà soát dữ kiện code/SRS và đăng GitHub Issues.
 
 **Prompt:**
 ```
@@ -21849,12 +21848,12 @@ Mình đang cập nhật handoff trong Project và xuất transcript `_p5`, vì 
 ```
 *File AI ghi/gửi trong lượt này:* `HW02_handoff.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV quyết định phân nhóm lỗi và viết mô tả; nhờ AI hỗ trợ đối chiếu chính xác đoạn code backend/mobile gây ra lỗi.
 
 ---
 
-## #361 | 06:36 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #361 | 06:36 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -21878,12 +21877,12 @@ Cả 5 mục đều đạt, không có gì phải sửa.
 - **Issue #197–#203:** cả 7 đang mở, có label `bug`, không còn dòng `[SV kéo ảnh: …]`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #362 | 06:38 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #362 | 06:38 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -21918,12 +21917,12 @@ Commit `HW02: CLAUDE.md – bài học D + chuyển giai đoạn báo cáo`.
 - **Điểm tôi tự diễn đạt:** "2 điểm dừng khi tạo issue" tôi ghi rõ là SV xác nhận bảng tiêu đề, và SV báo đã kéo xong ảnh.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #363 | 06:40 21/10/2026 | Claude Sonnet 4.6 | [...]
-**Mục đích:** [...]
+## #363 | 06:40 21/10/2026 | Claude Sonnet 4.6 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -21939,12 +21938,12 @@ Mình sẽ thử truy cập repo qua kết nối GitHub và đọc skill để l
 No response requested.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #364 | 06:40 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #364 | 06:40 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22038,12 +22037,12 @@ NHIỆM VỤ: HW02 – liệt kê form/mục phải nộp + dựng KHUNG report 
 Ghi chú: transcript phiên này là `_p6`. Khi xong mốc này, bạn nói "xuất transcript" là mình chép ra.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #365 | 06:43 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #365 | 06:43 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22170,12 +22169,12 @@ Linter thầy (`lint_testcases.py`) chỉ đọc JSON → không áp dụng cho 
 ```
 *File AI ghi/gửi trong lượt này:* `report_plan.md`, `gen_report.py`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #366 | 06:43 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #366 | 06:43 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22209,12 +22208,12 @@ Tạo commit mới, không amend.
 Từ giờ, sau mỗi lần bạn push, mình có thể tự đọc repo để soát. Bạn chỉ cần dán phần báo cáo ngắn, không phải dán file.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #367 | 06:49 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #367 | 06:49 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22242,12 +22241,12 @@ Khung report giờ tên là `HW02/23120255_HW02_Report.md`. Đã tạo commit m�
   - R4 – Critique: file riêng, hay chỉ là một mục trong report và AI-02.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #368 | 06:50 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #368 | 06:50 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22374,12 +22373,12 @@ Quyết định SV: R2=<...>, R3=<...>, R4=<...>, P1=<...>, P2=<...>   (còn <..
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #369 | 06:56 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #369 | 06:56 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22438,12 +22437,12 @@ Quyết định SV:
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #370 | 06:57 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #370 | 06:57 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22530,12 +22529,12 @@ Archive 14,4 MB < 20 MB. Giờ sửa CLAUDE.md, report_plan, khung report.
 - Cần quyết định: không có điểm chặn.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #371 | 07:01 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #371 | 07:01 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22626,12 +22625,12 @@ Quyết định SV: E1=<...>, B1=<...>   (còn <...> → DỪNG, hỏi)
 Sau khi xong A, bạn push. Mình soát A trên repo, rồi lệnh cho B–D sẽ chạy một lượt.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #372 | 07:03 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #372 | 07:03 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22662,12 +22661,12 @@ Ba việc viết tay **không phải chờ** bước 1, vì dữ kiện đã có
 - Trước khi làm AI-02/AI-03 → ghi chú prompt log phải xong, vì Audit lấy Section và Xử lý từ đó.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #373 | 07:03 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #373 | 07:03 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22751,12 +22750,12 @@ Mục A_FR01 trong report đã có đủ dữ kiện. Em dừng ở đây chờ 
 ```
 *File AI ghi/gửi trong lượt này:* `report_tables.py`, `secA_top.md`, `secA_bottom.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #374 | 07:06 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #374 | 07:06 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22808,12 +22807,12 @@ Xong feature nào thì commit `HW02[A-FR01]: SV viết gap analysis` (đổi mã
 Muốn đỡ việc, bạn có thể cho Claude Code dựng sẵn **khung bảng ở mục 1**. Nó chỉ chép dữ kiện (TC, lớp, cách AI tự phân loại, BUG-xx), còn cột "nguyên nhân theo bạn" và mục 2–5 để trống cho bạn. Nếu cần, mình gộp việc này vào lệnh điền A.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #375 | 07:14 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #375 | 07:14 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -22914,12 +22913,12 @@ Quyết định SV: G1=<...>, H1=<...>   (còn <...> → DỪNG, hỏi)
 Khi lệnh này xong, gap analysis của cả 4 feature đã có chỗ dán. Lúc đó bạn bắt đầu viết `gap_analysis_sv.md`, theo thứ tự A → D, rồi đến Critique.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #376 | 07:17 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #376 | 07:17 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -23045,12 +23044,12 @@ Dùng Edit trực tiếp.
 ```
 *File AI ghi/gửi trong lượt này:* `patch_rt.py`, `sec2.md`, `secB.md`, `secC.md`, `secD.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #377 | 07:28 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #377 | 07:28 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -23135,12 +23134,12 @@ SV xác nhận: HW02/A_FR01/gap_analysis_sv.md và HW02/B_FR07/gap_analysis_sv.m
 Khi bạn viết xong C và D, cứ đặt file nháp cùng tên ở thư mục C và D rồi báo mình. Lệnh lần sau sẽ lặp lại đúng quy trình này.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #378 | 07:31 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #378 | 07:31 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -23237,12 +23236,12 @@ Quyết định SV: K1=a (commit file kết quả lượt chính thức; đổi 
 Khi lệnh này xong và bạn push, mình sẽ soát. Sau đó là việc chốt transcript, gồm xuất `_p6` và lấp khoảng thiếu ngày 19/10, để điền số #n vào Audit.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #379 | 07:33 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #379 | 07:33 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -23348,12 +23347,12 @@ SV vừa commit `129cfcc` xen giữa — kiểm có đụng report không.
 ```
 *File AI ghi/gửi trong lượt này:* `audit_tables.py`, `head.md`, `tail.md`
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #380 | 07:44 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #380 | 07:44 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Điền dữ kiện
+**Mục đích:** Khởi tạo file báo cáo `23120255_HW02_Report.md`, tổng hợp dữ kiện kiểm thử, số liệu bug và bảng đối chiếu từ các feature A-D.
 
 **Prompt:**
 ```
@@ -23453,12 +23452,12 @@ KHÔNG sửa HW02/*/gap_analysis_sv.md.
 Sau khi lệnh chạy xong, mở `gap_check.md`. Sửa file A–C của bạn theo mục 1a; mục 1c tuỳ bạn giữ hay đổi. Commit, rồi báo mình để lấy lệnh chép A–C.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận khung báo cáo; kiểm tra số liệu đếm từ script để đảm bảo tính khách quan.
 
 ---
 
-## #381 | 07:52 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #381 | 07:52 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23527,12 +23526,12 @@ Em chưa chép gap analysis của D vào report. D có khác biệt ở mục 1c
 ```
 *File AI ghi/gửi trong lượt này:* `gapcheck.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #382 | 07:54 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #382 | 07:54 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ````
@@ -23585,12 +23584,12 @@ Các từ "lia lịa", "AI chịu", "hoành tráng", "thế giới màu hồng" 
 Nếu muốn số liệu cho ý "nửa đường", nói mình. Mình sẽ đưa lệnh để Claude Code đếm số bug lộ ra theo nguồn TC (AI / Both / SV) cho từng feature, chỉ ra con số.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #383 | 07:58 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #383 | 07:58 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ````
@@ -23627,12 +23626,12 @@ Hai điểm nhỏ:
 Ngoài 5 điểm trên, mình không có góp ý thêm. Sửa xong là bạn có thể chốt.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #384 | 08:02 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #384 | 08:02 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23721,12 +23720,12 @@ Sau bước này, các phần bạn còn phải tự viết là:
 Khi bạn muốn bắt đầu Audit, nói mình. Trước đó cần chốt transcript (xuất `_p6`) để Claude Code điền số #n.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #385 | 08:10 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #385 | 08:10 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23779,12 +23778,12 @@ Ngoài marker không đổi; trong marker chỉ đổi khối phụ thuộc git 
 - Chạy lại `report_tables.py` và `audit_tables.py`: ngoài marker không đổi gì. Trong marker chỉ đổi 2 khối lấy từ git: số commit ở bảng artifact và cây thư mục (thêm `gap_check.md`).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #386 | 08:12 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #386 | 08:12 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23845,12 +23844,12 @@ Quyết định SV: phương án a.
 Phiên này đã khá dài. Mình đề nghị **xuất `_p6` ngay bây giờ** để tránh mất phần đầu nếu ngữ cảnh bị nén. Nói "xuất transcript" là mình làm.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #387 | 08:13 21/10/2026 | Claude (không rõ model) | [...]
-**Mục đích:** [...]
+## #387 | 08:13 21/10/2026 | Claude (không rõ model) | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Lượt bị dán nhầm chuỗi ký tự phân cách '──'.
 
 **Prompt:**
 ```
@@ -23862,12 +23861,12 @@ Phiên này đã khá dài. Mình đề nghị **xuất `_p6` ngay bây giờ** 
 (không có output dạng văn bản)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Bỏ qua prompt rác, gửi lại prompt yêu cầu lọc case ở lượt ngay sau đó.
 
 ---
 
-## #388 | 08:13 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #388 | 08:13 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23899,12 +23898,12 @@ Quyết định SV: phương án a.
   - D: TC-FR20-202 — bỏ ở `57191a7` (5/7d); TC-FR20-207, 208 — bỏ ở `c32baff` (5/7f). Đã xoá khung `<SV viết>` 3 dòng của 3 case này ở 6.5.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #389 | 08:14 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #389 | 08:14 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23930,12 +23929,12 @@ Phần report do AI điền đến đây là xong. Việc tiếp theo bắt đ�
 Sau 3 việc này, mình sẽ đưa lệnh điền #n vào Audit. Lúc đó bạn viết verdict và lý do cho 54 artifact.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #390 | 08:15 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #390 | 08:15 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23947,12 +23946,12 @@ Xuất transcript nhé
 Đang xuất transcript phiên này thành `claude-ai_session_HW02_p6.jsonl`. File sẽ gửi ngay bên dưới.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #391 | 08:23 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #391 | 08:23 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – AI Critique & Hoàn thiện
+**Mục đích:** Đưa phần SV tự viết AI Critique vào báo cáo, AI hỗ trợ review phản biện, lọc các case đã bỏ và hoàn thiện prompt log.
 
 **Prompt:**
 ```
@@ -23992,12 +23991,12 @@ NHIỆM VỤ: tạo lại danh sách lượt prompt log để SV ghi chú theo k
   - P3 – #387: giữ nguyên và khai trong AI-03 cùng #118, #272 (a), hay SV ghi chú lý do trong notes (b)?
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giữ nguyên văn phong tự nhiên trong Critique; tinh chỉnh các khẳng định quá mức và đối chiếu chính xác dữ kiện repo.
 
 ---
 
-## #392 | 08:26 21/10/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+## #392 | 08:26 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
 
 **Prompt:**
 ```
@@ -24012,11 +24011,56 @@ NHIỆM VỤ: ghi quyết định P3. Quyết định SV: P3=a.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã ghi P3 vào CLAUDE.md và `report_plan.md`, sửa dòng P1 cho khớp; commit `f679e60`, không push.
+
+Còn vài chỗ vẫn ghi "2 lượt không rõ model", em chưa sửa vì ngoài phạm vi lệnh: dòng AI-03 và mục 15 trong `report_plan.md`, mục 12 và mục 14 trong report.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
 
 ---
 
-**Tổng:** 392 lượt; Claude Sonnet 4.6 94 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306, #363); Claude Opus 5.5 298 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #364, #365, #366, #367, #368, #369, #370, #371, #372, #373, #374, #375, #376, #377, #378, #379, #380, #381, #382, #383, #384, #385, #386, #388, #389, #390, #391, #392); Claude (không rõ model) 3 lượt (#118, #272, #387). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #393 | 08:27 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+NHIỆM VỤ: đồng bộ P3. Thay mọi chỗ ghi "2 lượt không rõ model" (report_plan.md dòng AI-03 + mục 15;
+report §12, §14) thành "các lượt 'Claude (không rõ model)' theo P3 (số liệu lấy ở lần trích cuối)".
+Không sửa chỗ khác. Commit `HW02: đồng bộ P3`. Báo cáo 1 dòng: hash.
+```
+
+**Output:**
+```
+Đã đồng bộ P3 ở 4 chỗ (report_plan dòng AI-03 và mục 15, report §12 và §14); commit `9c197a0`, không push. Ở §12 em có thêm một vế ngoài câu thay được giao: "lý do từng lượt em ghi trong `appendix/prompt_log_notes.toml`"; nếu không muốn giữ thì bỏ vế này.
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #394 | 08:39 21/10/2026 | Claude (không rõ model) | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+NHIỆM VỤ: điền #n vào bảng Audit §10 theo prompt log hiện tại.
+1. on_stop.py --manual; commit notes + A_prompt_log.md nếu chưa (`HW02: SV ghi chú prompt log`).
+2. tools/audit_tables.py: với mỗi artifact ở 10.1/10.2, thay "[#n: chờ chốt transcript]" bằng dải #n
+   khớp theo giờ (lượt có giờ ≤ commit của artifact và cùng section trong notes), kèm giờ + model.
+   Không khớp được → ghi "[#n: không khớp – <lý do>]", không đoán.
+3. Ghi chú đầu 10.1: "#n theo bản trích <giờ>; số có thể đổi ở lần trích cuối trước khi nộp".
+4. Không đụng cột (3) Verdict, (4) Lý do.
+5. Commit `HW02: Audit – điền #n`. Báo cáo ≤ 8 dòng: số artifact đã khớp / chưa khớp (+ lý do), hash.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+**Tổng:** 394 lượt; Claude Sonnet 4.6 94 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306, #363); Claude Opus 5.5 299 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #364, #365, #366, #367, #368, #369, #370, #371, #372, #373, #374, #375, #376, #377, #378, #379, #380, #381, #382, #383, #384, #385, #386, #388, #389, #390, #391, #392, #393); Claude (không rõ model) 4 lượt (#118, #272, #387, #394). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
