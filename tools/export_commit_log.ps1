@@ -1,4 +1,4 @@
-# Xuất commit log UTF-8 cho một bài (chạy ở gốc repo, SAU commit cuối cùng).
+﻿# Xuất commit log UTF-8 cho một bài (chạy ở gốc repo, SAU commit cuối cùng).
 # Dùng: powershell -ExecutionPolicy Bypass -File tools\export_commit_log.ps1 HW02
 param([string]$Hw = "HW02")
 $out = "$Hw/appendix/commit_log.txt"
