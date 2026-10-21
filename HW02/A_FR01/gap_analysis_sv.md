@@ -27,7 +27,7 @@ Feature A - AI gap analysis
 | SV-23 | API - Mass Assignment (Truyền thêm trường `"role": "admin"` vào body) | Mass Assignment | API | Security (Mass Assignment) | Đăng ký thành công nhưng role vẫn là "user" mặc định chứ không bị đè thành "admin". | Cố tình nhét thêm quyền sếp (admin) vào gói tin gửi đi xem hệ thống có dại dột biến tài khoản này thành sếp luôn không. |
 | SV-24 | UI - Mở trang /register khi đã đăng nhập tài khoản khác từ trước | Auth State / Route Guard | UI | State Transition / Auth | Ghi nhận giao diện xử lý thế nào (có chuyển hướng hoặc chặn form lại không). | Đang trong trạng thái đăng nhập nick này rồi mà cố tình mò vào lại trang đăng ký xem màn hình có biết đường chặn lại không. |
 
-Số TC em bổ sung: **24**
+*Ghi chú:* Danh sách trên gồm **24 ý đề xuất bổ sung từ sinh viên** (`sv_cases.md`). Sau khi tách riêng từng tầng UI và API theo quy tắc một test case chỉ thuộc một tầng, số lượng thực tế là **33 TC** (bao gồm 25 TC đơn tầng và 8 TC kiểm tra song song cả 2 tầng).
 
 **Vì sao AI bỏ sót** 
 
