@@ -157,7 +157,14 @@ Skill dùng trong repo:
     - Mobile 7c: AI chỉ tái hiện phần server.
   - Kế thừa giả định của feature trước: lấy bản cuối của SV (tra git), mã mới ghi "(kế thừa Ax)".
 
-**Việc còn mở:** repo bài nộp đang public và chưa chuyển private được → **commit cục bộ, chỉ `git push` sau hạn nộp** (commit vẫn giữ giờ gốc, commit log xuất từ máy); không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
+- 2026-10-21 (giai đoạn báo cáo, `HW02/report_plan.md`):
+  - R2: zip bằng `git archive` (lệnh ở §5); vượt 20 MB → nén thêm ảnh evidence; vẫn vượt → split-and-zip.
+  - R3: PDF chỉ cho report chính + AI-02/03/05; README không cần PDF (người đọc xem README.md trực tiếp).
+  - R4: AI Critique là một mục trong report chính; AI-02 tham chiếu mục đó, không chép riêng file.
+  - P1: giữ nguyên 2 lượt "Claude (không rõ model)" — #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên); không vá script. AI-03 cần 1 câu giải thích 2 lượt "không rõ model".
+  - P2: `prompt_log_notes.toml` có khoá khoảng `["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]`; gom khoảng theo `HW02/appendix/prompt_log_turns.txt` (`--list --commits`).
+
+**Việc còn mở:** repo bài nộp đã chuyển private (kiểm 21/10/2026); SV tự push; không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
 
 ## 2. Quy trình mỗi feature — 7 bước, mỗi bước một commit
 
@@ -205,6 +212,7 @@ cd HW02/tests; $env:PLAYWRIGHT_JSON_OUTPUT_NAME="results/A_FR01.json"; npx playw
 python .claude/skills/domain-bva-testing/scripts/merge_results.py HW02/A_FR01/testcases.json HW02/tests/results/A_FR01.json
 python tools/summary.py HW02 --write HW02/README.md
 powershell -ExecutionPolicy Bypass -File tools/export_commit_log.ps1 HW02
+python tools/extract_prompt_log.py ".transcripts/*.jsonl" --since 2026-10-12 --extra HW02/appendix/prompt_log_extra.toml --list --commits -o HW02/appendix/prompt_log_turns.txt
 ```
 
 ## 6. Cấu trúc HW02
@@ -225,4 +233,10 @@ HW02/
 └── appendix/A_prompt_log.md, prompt_log_notes.toml, ai-outputs/, commit_log.txt
 ```
 
-Trước khi nộp: chạy skill `hw-submission-audit`; chép `.claude/skills/domain-bva-testing` sang `HW02/skills/`; zip **chỉ** thư mục `HW02` (không `.git`, không `.transcripts`).
+Trước khi nộp: chạy skill `hw-submission-audit`; chép `.claude/skills/domain-bva-testing` sang `HW02/skills/`; zip **chỉ** thư mục `HW02` (không `.git`, không `.transcripts`):
+
+```powershell
+git archive --format=zip -o 23120255_HW02_AI_DomainTesting_<ggg>.zip HEAD HW02
+```
+
+Commit hết (skill, PDF, commit log) rồi mới zip — `git archive` chỉ lấy file đã commit ở HEAD (tự bỏ file bị ignore: `node_modules`, `test-results`, `manual_raw`). Vượt 20 MB → nén ảnh → split-and-zip.
