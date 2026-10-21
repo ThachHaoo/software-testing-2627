@@ -262,8 +262,9 @@ def parse_bug(p):
     f = lambda k: (re.search(rf"\*\*{k}:\*\*\s*(.+)", t) or [None, ""])[1].strip()
     tc = re.search(r"## TC liên quan\s*\n(.*?)(?:\n## |\Z)", t, re.S)
     fail = next((l[2:].strip() for l in (tc.group(1).splitlines() if tc else []) if l.startswith("- Fail")), "")
-    link = re.search(r"## Link GitHub Issue\s*\n+\s*(\S+)", t)
-    return f("ID"), fail, f("Tiêu đề"), f("Severity"), f("Priority"), link.group(1) if link else ""
+    sec = re.search(r"## Link GitHub Issue\s*\n+(.*)", t)  # URL thô hoặc dạng [#n](URL)
+    link = re.search(r"https?://[^\s)\]]+", sec.group(1)) if sec else None
+    return f("ID"), fail, f("Tiêu đề"), f("Severity"), f("Priority"), link.group(0) if link else ""
 
 
 def b_bugs(ctx):
