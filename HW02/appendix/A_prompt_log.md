@@ -24686,6 +24686,8 @@ Prompt log có model mới: **Claude Haiku 5.5 – 6 lượt**. Kiểm các lư�
 Số lượt khớp (407). Xuất commit log + 4 PDF.
 
 Bước 6: rà soát cuối bằng script của skill.
+
+Bước 7: trích log lần cuối (gồm lượt hiện tại), đồng bộ số lượt ở report + 3 form, xuất PDF, commit chốt.
 ```
 
 **Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
