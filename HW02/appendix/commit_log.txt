@@ -2238,3 +2238,25 @@ M	HW02/23120255_HW02_Report.md
 
 d98207c | 10:31 21/10/2026 | TonKnight | HW02: report – xoá các khối 📝 hướng dẫn
 M	HW02/23120255_HW02_Report.md
+
+23b48be | 10:33 21/10/2026 | TonKnight | HW02: chạy lại số liệu, Audit, form (khai Haiku 5.5), commit log, PDF
+M	HW02/23120255_HW02_Report.md
+M	HW02/23120255_HW02_Report.pdf
+M	HW02/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW02/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW02/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW02/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW02/ai-forms/AI-05_Privacy_Checklist_23120255.md
+M	HW02/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/commit_log.txt
+
+bfff8f4 | 10:34 21/10/2026 | TonKnight | HW02: chốt nộp
+M	HW02/23120255_HW02_Report.md
+M	HW02/23120255_HW02_Report.pdf
+M	HW02/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW02/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW02/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW02/ai-forms/AI-05_Privacy_Checklist_23120255.md
+M	HW02/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+M	HW02/appendix/A_prompt_log.md
