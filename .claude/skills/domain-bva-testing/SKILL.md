@@ -33,7 +33,7 @@ Gọi: `/domain-bva-testing <feature-dir> <bước>` — ví dụ `HW02/A_FR01 1
 ### Bước 2 — Lớp tương đương
 - Điền `domain.partitions` (EC1, EC2…): mỗi điều kiện → lớp hợp lệ/không hợp lệ theo hướng dẫn của bài giảng: khoảng giá trị → 1 hợp lệ + 2 không hợp lệ; số lượng → 1 + 2; tập giá trị xử lý khác nhau → 1 lớp/giá trị + 1 ngoài tập; điều kiện "phải là" → 1 + 1; sai kiểu. Có lý do tin rằng các phần tử của một lớp bị xử lý khác nhau thì **tách lớp** và ghi lý do vào `note`.
 - Phân lớp cả **biến đầu ra**.
-- Ghi `guideline` (range/count/set/must-be/type/split) cho mỗi lớp. Dừng.
+- Ghi `guideline` (range/count/set/must-be/type/split/output) cho mỗi lớp. `output` = lớp của biến đầu ra (`io: "output"`): mỗi biến ra có một lớp ứng với kết quả khi đầu vào hợp lệ (`valid: true`) và một lớp ứng với kết quả khi bị từ chối (`valid: false`) — cách A_FR01, D_FR20 đã dùng. Dừng.
 
 ### Bước 3 — Test case Domain (minimum set)
 - Tạo suite `TS-DOM` (`format: "matrix"`, `procedure` viết một lần, `columns` = các biến đầu vào). Tách suite theo tầng (UI / API) nếu quy trình khác nhau — mỗi suite một quy trình.
