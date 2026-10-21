@@ -223,6 +223,19 @@ def note_for(notes, keys, i, turns=None, ranges=()):
     return {**min(hits, key=lambda r: r[1] - r[0])[2], **single}
 
 
+def warn_unmatched(notes, keys, turns, ranges):
+    """In ra stderr mọi khoá ghi chú không khớp lượt nào (kể cả khoá gõ sai cú pháp)."""
+    times = [t["time"].replace(tzinfo=None, second=0, microsecond=0) for t in turns]
+    used_ranges = {id(r[2]) for r in ranges if any(r[0] <= x <= r[1] for x in times)}
+    for k, v in notes.items():
+        if RANGE_SEP in k:
+            ok = id(v) in used_ranges
+        else:
+            ok = k in keys or (k.isdigit() and 1 <= int(k) <= len(turns))
+        if not ok:
+            print(f'Cảnh báo: khoá ghi chú ["{k}"] không khớp lượt nào', file=sys.stderr)
+
+
 def commits_after(turns, repo="."):
     """Với mỗi lượt: commit đầu tiên có giờ commit sau giờ lượt → (hash ngắn, message) hoặc None."""
     import subprocess
@@ -261,6 +274,7 @@ def migrate_notes(path, turns):
 def render(turns, notes, args):
     keys = time_keys(turns)
     ranges = parse_ranges(notes)
+    warn_unmatched(notes, set(keys), turns, ranges)
     tools = sorted({m for t in turns for m in t["tool"].split(" + ")})
     out = [f"# {args.title}",
            f"**Họ tên:** {args.name} | **MSSV:** {args.mssv} | **Công cụ AI:** {', '.join(tools)}",

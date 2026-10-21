@@ -82,7 +82,7 @@ def main():
     env = {**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"}
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", env=env)
     out, err = (r.stdout or "").strip(), (r.stderr or "").strip()
-    log(out + (f" | lỗi (mã {r.returncode}): {err}" if r.returncode else ""))
+    log(out + (f" | lỗi (mã {r.returncode}): {err}" if r.returncode else (f" | {err}" if err else "")))
 
 
 if __name__ == "__main__":

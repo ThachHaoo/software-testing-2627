@@ -22065,11 +22065,164 @@ Tạo commit mới, không amend.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Khung report giờ tên là `HW02/23120255_HW02_Report.md`. Đã tạo commit mới `6f3b791`, không amend, không push.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: đổi tên khung report theo CLAUDE.md §6 và README.
+- File đã tạo/sửa:
+  - Đổi tên `HW02/report.md` thành `HW02/23120255_HW02_Report.md` bằng `git mv`, nên git ghi nhận là đổi tên.
+  - Trong report: sửa dòng 📝 ở đầu file và dòng tên file trong cây thư mục nộp bài, bỏ chữ "tên tạm".
+  - `HW02/report_plan.md`: sửa mục c.1 và d.8 sang tên đã chốt.
+  - `HW02/appendix/A_prompt_log.md`: hook tự sinh lại, không sửa tay.
+- Kết quả kiểm tra: check_domain, lint và test đều Not run, vì không đổi `testcases.json`.
+- Commit: `6f3b791` HW02: đổi tên khung report thành 23120255_HW02_Report.md
+- Commit chưa push: 2 (`d8627c7`, `6f3b791`).
+- Cần quyết định: R1 đã xong. Còn 3 điểm từ báo cáo trước:
+  - R2 – Dung lượng zip 35,6 MB, vượt giới hạn 20 MB: nén ảnh, split-and-zip, hay bỏ bớt file.
+  - R3 – Phạm vi PDF: chỉ report, Critique và các form, hay mọi file .md.
+  - R4 – Critique: file riêng, hay chỉ là một mục trong report và AI-02.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 364 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 272 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #365 | 06:57 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: ghi quyết định R2–R4, P1–P2 + vá harness ghi chú prompt log.
+Quyết định SV:
+  R2 = a (zip bằng git archive); nếu vượt 20 MB → b (nén thêm ảnh evidence); vẫn vượt → c (split-and-zip)
+  R3 = a (PDF cho report + AI-02/03/05; README không cần PDF — SV: người đọc xem README.md trực tiếp)
+  R4 = a (Critique là 1 mục trong report; AI-02 tham chiếu mục đó)
+  P1 = giữ nguyên #118 (Ctrl C) và lượt 20:44 20/10 (chạm giới hạn phiên); không vá script
+  P2 = a
+
+1. Ghi quyết định vào HW02/report_plan.md và CLAUDE.md "Quyết định đã chốt" (2026-10-21).
+   - Với P1, ghi thêm: "AI-03 cần 1 câu giải thích 2 lượt 'không rõ model'".
+   - Sửa CLAUDE.md "Việc còn mở": repo đã private (kiểm 21/10), SV tự push. Bỏ câu "chỉ push sau hạn nộp".
+2. Dung lượng:
+   - In top 10 file/thư mục trong HW02 chưa commit hoặc bị ignore, kèm dung lượng
+     (git status --ignored --porcelain HW02 + du).
+   - Đo `git archive --format=zip -o <scratch>/t.zip HEAD HW02`. Ghi số vào report_plan mục c.
+   - Thêm vào CLAUDE.md §6 lệnh zip bằng git archive, kèm ghi chú
+     "commit hết (skill, PDF, commit log) rồi mới zip; vượt 20 MB → nén ảnh → split-and-zip".
+3. Chỉnh khung report và report_plan theo R3, R4.
+4. P2 – vá tools/extract_prompt_log.py:
+   - prompt_log_notes.toml nhận thêm khoá khoảng ["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"],
+     áp cho mọi lượt trong khoảng. Khoá giờ đơn ưu tiên hơn khoá khoảng.
+   - Ghi cú pháp ở đầu file toml.
+   - Thêm `--list --commits`: mỗi lượt in kèm commit đầu tiên SAU lượt đó (hash + message),
+     ghi ra file trong HW02/appendix/ để SV gom khoảng.
+   - KHÔNG điền section / mục đích / xử lý.
+   - Kiểm hồi quy: output render trước và sau giống hệt nhau khi toml chưa có khoá khoảng.
+5. Commit, không amend:
+   - `HW02: vá harness – prompt log (khoá khoảng, --commits)`
+   - `HW02: chốt R2–R4, P1–P2`
+6. Báo cáo ≤ 15 dòng:
+   - top 5 nguồn gây chênh dung lượng
+   - dung lượng git archive
+   - kết quả hồi quy
+   - đường dẫn file --list --commits
+   - hash
+```
+
+**Output:**
+```
+Baseline hồi quy trước khi vá.
+
+Vá script.
+
+Hồi quy + thử khoá khoảng trên toml tạm.
+
+Sinh file `--list --commits` thật.
+
+Ghi cú pháp vào đầu `prompt_log_notes.toml`.
+
+Đang đo dung lượng (ignored/untracked + git archive).
+
+Archive 14,4 MB < 20 MB. Giờ sửa CLAUDE.md, report_plan, khung report.
+
+Đề nói §6 → chuyển lệnh zip sang §6.
+
+Đã ghi các quyết định R2–R4, P1–P2 và vá script trích prompt log. Có 2 commit mới, không amend, không push. Hồi quy đạt: prompt log sinh lại giống hệt bản trước khi vá.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: ghi quyết định R2–R4, P1–P2 và vá script trích prompt log.
+- Top 5 nguồn làm zip thư mục (35,6 MB) nặng hơn bản `git archive`, đều là file bị ignore nên archive tự bỏ:
+  - `tests/test-results/`: 26,2 MB
+  - `tests/node_modules/`: 11,6 MB
+  - `D_FR20/manual_raw/`: 4,1 MB
+  - `tests/results/A_FR01.json`: 1,1 MB
+  - 2 file `tests/results/C_FR15_*.json`: mỗi file 0,96 MB
+- `git archive HEAD HW02` đo tại `c33a7df`: **14,4 MB** (967 file, 24,1 MB khi chưa nén), dưới 20 MB. Số này chưa gồm PDF, `skills/` và `commit_log.txt`, nên phải đo lại trước khi nộp.
+- Hồi quy: chạy trên cùng bản chụp transcript (364 lượt) và toml chưa có khoá khoảng, `A_prompt_log.md` ra giống hệt bản trước vá, kể cả sau khi thêm chú thích cú pháp vào toml; `--list` cũng giống hệt.
+- Thử khoá khoảng:
+  - Lượt trong khoảng nhận section của khoảng.
+  - Khoá giờ đơn ghi đè từng trường (trường nào khoá đơn không ghi thì lấy từ khoảng).
+  - Lượt nằm trong nhiều khoảng thì dùng khoảng hẹp nhất; khoảng hẹp **không** thừa hưởng trường của khoảng rộng.
+  - Khoá có `..` sai cú pháp thì script dừng với mã lỗi 1. Khoá viết sai mà không có `..` (ví dụ dùng dấu `-`) thì bị **bỏ qua im lặng**, giống khoá thường không khớp lượt nào.
+- File `--list --commits`: `HW02/appendix/prompt_log_turns.txt` (364 lượt). Bản đã commit chưa có các lượt từ phiên làm nhiệm vụ này trở đi; chạy lại lệnh ở CLAUDE.md §5 trước khi gom khoảng.
+- File đã tạo/sửa:
+  - Commit vá script: `tools/extract_prompt_log.py`, `HW02/appendix/prompt_log_notes.toml` (chỉ thêm chú thích cú pháp ở đầu, không điền Section/Mục đích/Xử lý), `HW02/appendix/prompt_log_turns.txt`.
+  - Commit chốt quyết định: `CLAUDE.md` (Quyết định đã chốt, Việc còn mở, §5 và §6), `HW02/report_plan.md` (mục a, c, d và mục mới f), `HW02/23120255_HW02_Report.md`.
+  - Cả 2 commit kèm `HW02/appendix/A_prompt_log.md` do hook sinh lại.
+- Commit:
+  - `c33a7df` HW02: vá harness – prompt log (khoá khoảng, --commits)
+  - `f38933d` HW02: chốt R2–R4, P1–P2
+- Cần quyết định: không có điểm chặn.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #366 | 07:03 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: (1) vá nhỏ harness prompt log; (2) điền phần DỮ KIỆN của report cho A_FR01, rồi DỪNG chờ review.
+Quyết định SV: E1=a B1=a
+
+1. Vá tools/extract_prompt_log.py:
+   - In cảnh báo ra stderr cho mọi khoá trong prompt_log_notes.toml không khớp lượt nào
+     (kể cả khoá sai cú pháp không có '..').
+   - Hồi quy: output giống hệt bản trước.
+   - Commit riêng: `HW02: vá harness – cảnh báo khoá ghi chú không khớp`.
+
+2. Report mục A_FR01, theo khung đã có và "4 bảng theo slide" (CLAUDE.md §6):
+   - Bảng sinh từ HW02/A_FR01/testcases.json (biến, lớp, minimum set, BVA 9 điểm).
+     Bảng dài → trích gọn + link `A_FR01/testcases.md`. Không chép toàn bộ TC.
+   - Giả định: bản cuối của SV (tra git), giữ "SV chốt + lý do".
+   - Số liệu: lấy từ summary.py hoặc JSON, ghi lệnh/nguồn. Không gõ số tay.
+   - Nếu E1=a: nháp phần giải thích từng bước.
+     Đầu mỗi khối ghi "> 📝 AI nháp – SV duyệt/sửa, xoá dòng này khi xong".
+     Chỉ dựa trên dữ kiện có trong repo (JSON, review_log, commit). Không suy đoán lý do SV không ghi.
+   - Nếu B1=a: bảng bug của A, chép nguyên văn các trường từ HW02/bugs/BUG-xx.md, ghi "(AI chép)".
+   - KHÔNG đụng mục 🔒 (gap analysis bước 5, Critique) ngoài việc giữ link dữ kiện.
+   - Kiểm: mọi link/ảnh trỏ tới file có thật; số trong report = số summary.py.
+   - Commit: `HW02: report – điền dữ kiện A_FR01`.
+
+3. Báo cáo ≤ 15 dòng:
+   - số dòng mục A
+   - danh sách khối 📝 AI nháp
+   - chỗ dữ kiện thiếu hoặc mâu thuẫn (file:dòng)
+   - hash
+   DỪNG, không làm B–D.
+```
+
+**Output:**
+```
+Phần 1: cảnh báo khoá không khớp.
+
+Hook `on_stop.py` chỉ ghi stderr khi lỗi → cảnh báo sẽ bị nuốt. Thêm 1 dòng để log cảnh báo.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 366 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 274 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
