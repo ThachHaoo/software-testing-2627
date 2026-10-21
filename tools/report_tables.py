@@ -132,7 +132,7 @@ def b_assum(ctx):
     rows = []
     for a in ctx["d"]["meta"]["assumptions"]:
         # nhãn = mã + (tên) + [loại…] trước dấu ':' đầu tiên nằm ngoài ngoặc
-        m = re.match(r"([A-Z]\d+[a-z]?(?:\s*\([^)]*\))?(?:\s*\[[^\]]*\])?)\s*:\s*(.*)", a, re.S)
+        m = re.match(r"([A-Z]\d+[a-z]?(?:\s*\([^)]*\))*(?:\s*\[[^\]]*\])?)\s*:\s*(.*)", a, re.S)
         rows.append((m.group(1), m.group(2), hist.get(aid(a), "")) if m else (aid(a), a, hist.get(aid(a), "")))
     return table(["Mã", "Nội dung (nguyên văn, gồm ghi chú chốt)", "Nguồn gốc (ai-outputs + git)"], rows) + \
         f"\n\n*Nguồn: `{ctx['rel']}` → `meta.assumptions` (bản HEAD); cột cuối so với `appendix/ai-outputs/{ctx['feat']}_step*.json` và `git log -- {ctx['feat']}/testcases.json`.*"
