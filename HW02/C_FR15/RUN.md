@@ -78,7 +78,7 @@ Chạy tay sau khi khởi động lại backend. Dùng **cửa sổ ẩn danh, t
 | 1, 2, 4 | — | — | — | SV chưa cung cấp file results; không có trong `HW02/tests/results/` |
 | 3 | 18:22:15 | toàn bộ 117 test | `results/C_FR15_20261020-182214.json` | 47 passed, 70 failed. SV đã merge trước bước 6b |
 | 5 | 18:26:26 | TC-FR15-201, TC-FR15-205 | `results/C_FR15_20261020-182625.json` | Cả hai failed, cùng kết quả lượt 3. AI merge ở 6b (không `--force`) |
-| 6 (chính thức) | 18:53:56 (≈ 190 s) | toàn bộ 117 test; SV xác nhận đã restart backend trước lượt | `results/C_FR15_20261020-185355.json` | Harness đã vá H1–H4. 48 passed, 69 failed |
+| 6 (chính thức) | 18:53:56 (≈ 190 s) | toàn bộ 117 test; SV xác nhận đã restart backend trước lượt | `results/C_FR15_20261020-185355.json` (đã commit bằng `git add -f`; lượt 3, 5 không commit) | Harness đã vá H1–H4. 48 passed, 69 failed |
 | manual | 18:33–18:40 | TC-FR15-90…94 | `evidence/TC-FR15-9x_manual*.png` | SV chạy tay |
 
 - **Lượt 3 và lượt 5 là lượt thử.** Harness của hai lượt này có lỗi H1–H4, đã vá ở commit "HW02: vá harness – C_FR15 H1–H4":

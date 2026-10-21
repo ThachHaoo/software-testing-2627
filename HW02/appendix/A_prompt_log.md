@@ -22241,6 +22241,26 @@ Regex marker rỗng không khớp; sửa.
 Kiểm link/ảnh, số so với summary.py, mục 🔒 3.5 không đổi.
 
 Dùng lại `show()` của render_md cho ô giá trị nhập (cùng quy ước ␣).
+
+Mục A_FR01 trong report đã có đủ dữ kiện. Em dừng ở đây chờ review, chưa làm B–D. Cả hai phần đều đã commit, không push. Bảng số liệu khớp `summary.py`, mọi link và ảnh trỏ tới file có thật. Hai mục 🔒 (bước 5 và Critique) không bị đụng tới.
+
+### Báo cáo cho phiên thảo luận
+- Vá prompt log (`ec3719f`):
+  - Khoá ghi chú không khớp lượt nào giờ in cảnh báo ra stderr, kể cả khoá thiếu `..`. Hồi quy: output giống hệt bản trước.
+  - Ngoài lệnh: sửa thêm 1 dòng `tools/hooks/on_stop.py` để hook ghi cảnh báo vào log, nếu không cảnh báo bị nuốt khi chạy tự động.
+- Mục A dài **303 dòng**. Bảng sinh bằng script mới `tools/report_tables.py` (ngoài lệnh, để tái tạo được số và dùng lại cho B–D; chạy lại cho kết quả giống hệt). Bảng gồm:
+  - phạm vi, yêu cầu, giả định kèm nguồn gốc theo freeze + git;
+  - biến, lớp và TC phủ;
+  - minimum set (trích 3 case đầu mỗi suite);
+  - ma trận BVA 9 điểm;
+  - kết quả chạy;
+  - bảng bug ghi "(AI chép)".
+- Tổng A khớp dòng A_FR01 của `summary.py`: 133 thiết kế / 108 đã chạy / 43 Pass / 65 Fail / 25 Blocked / 0 chưa chạy, nguồn AI 98 · Both 10 · Human 25, 14 bug.
+- Khối 📝 AI nháp (5 khối): 3.1 Bước 1, 3.2 Bước 2, 3.3 Bước 3, 3.4 Bước 4, 3.6 Bước 6.
+- Mục 3.7 có tiêu đề 🔒 nhưng giờ chứa bảng bug AI chép từ `BUG-xx.md` (theo B1=a), không có lời AI viết.
+- Mâu thuẫn dữ kiện: `CLAUDE.md:86` ghi A3 đổi ở `8d837f1`, nhưng git cho thấy A3 đổi ở `1cfa163` (5/7b); ở `8d837f1` A3 vẫn là bản của `4e30b25`.
+- Cần SV xem: bản AI đóng băng bước 3 dùng mã TC khác bản cuối (TC-05 lúc đó là "Email rỗng"). Vì vậy phần review bước 3 chỉ ghi việc tách suite UI/API, không ghi số case đã sửa.
+- Commit: `ec3719f` (vá cảnh báo), `8cf76b0` HW02: report – điền dữ kiện A_FR01
 ```
 *File AI ghi/gửi trong lượt này:* `report_tables.py`, `secA_top.md`, `secA_bottom.md`
 
@@ -22248,4 +22268,108 @@ Dùng lại `show()` của render_md cho ô giá trị nhập (cùng quy ước 
 
 ---
 
-**Tổng:** 366 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 274 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #367 | 07:17 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: sửa A + điền §2 + điền dữ kiện B, C, D (mỗi feature 1 commit).
+Quyết định SV: G1=a H1=a (còn <...> → DỪNG, hỏi)
+
+0. Sửa A (commit `HW02: report – sửa dữ kiện A_FR01`):
+   - 3.6: câu về TC-FR01-216 sửa theo notes của case trong testcases.json
+     (kiểm tay qua API + header web; trang admin không dùng làm điểm quan sát).
+   - H1=a: sửa CLAUDE.md:86, hash A3 bản 2 = 1cfa163 (5/7b), bản 1 = 4e30b25.
+     KHÔNG sửa file D. Thêm vào report_plan.md, mục "Khai cho Audit":
+     "phiên thảo luận đưa sai hash 8d837f1 cho A3 bản 2 (đúng 1cfa163);
+      D5 trích hash sai, nội dung giống hệt".
+   - report_plan.md, danh sách cho Mandatory Disclosure: thêm
+     "khối giải thích từng bước (3.x–6.x) do AI nháp, em duyệt/sửa" và "tools/report_tables.py do AI viết".
+
+1. §2 Phương pháp chung (cùng commit trên). Chỉ dùng nguồn có trong repo:
+   SKILL.md của domain-bva-testing, CLAUDE.md "Quyết định đã chốt".
+   - Bảng 9 điểm + LARGE.
+   - Nghĩa của các quy tắc chia lớp (split, must-be, set, type, range, output) theo SKILL.md.
+   - Quy ước verdict (Fail / Blocked / Pass hộp đen / Fail do lỗi thiết kế TC).
+   - Quy ước Expected (căn cứ SRS hoặc giả định SV chốt; SRS im lặng → không tạo Fail).
+   - Thêm 1 dòng 📝: "em quyết có ghi việc đổi căn cứ api_specification.md từ C (C9) ở đây hay không".
+   Không trích slide nếu không có trong repo.
+
+2. B_FR07, C_FR15, D_FR20: làm như A, mỗi feature 1 commit `HW02: report – điền dữ kiện <X_FRnn>`.
+   - Bảng qua tools/report_tables.py (có marker).
+   - Khối 📝 AI nháp giải thích từng bước, chỉ dựa trên dữ kiện có trong repo.
+   - Bảng bug "(AI chép)".
+   - D thêm 6.8 từ D_FR20/compare_web_mobile.md (link + bảng tóm tắt nếu script sinh được).
+   - Chạy tay (D): mô tả theo RUN.md.
+
+3. Nếu G1=a: ở mục bước 5 của cả 4 feature, sinh bằng script (có marker):
+   - bảng case TS-SV chép từ JSON;
+   - bảng "Vì sao AI bỏ sót" chỉ điền: TC | BUG-xx | "AI tự nhận" (chép nguyên văn nhãn phân loại trong ai_gap_answer.md).
+     Cột "Nguyên nhân theo em" và "Giải thích" để `<SV viết>`, đặt NGOÀI marker
+     (hoặc marker chỉ bao các cột dữ kiện; chọn cách nào để chữ SV không bị ghi đè).
+   - Số TC em bổ sung lấy từ summary.py.
+
+4. Kiểm:
+   - Không mục 🔒 nào có lời AI viết.
+   - Không mục 🔒 nào nằm trong marker.
+   - Số liệu mỗi feature = summary.py.
+   - Link/ảnh tồn tại.
+   - Chạy lại report_tables.py → không đổi gì.
+
+5. Báo cáo ≤ 20 dòng:
+   - hash từng commit
+   - số dòng mỗi mục
+   - danh sách khối 📝 AI nháp
+   - mâu thuẫn dữ kiện (file:dòng)
+   DỪNG.
+```
+
+**Output:**
+```
+Bắt đầu sửa A: đọc notes TC-216.
+
+Khảo sát B/C/D: guideline, suite, BVA, ai_gap_answer.
+
+BVA cần nhóm tổng quát hơn (B/C/D không có `bva_dimension`, có LARGE). Xem `ai_gap_answer.md` các feature.
+
+Gom dữ kiện B/C/D: commit theo bước, RUN.md.
+
+Nâng cấp `report_tables.py`: BVA tổng quát + LARGE, bug theo logic summary.py, khối `sv`, `gap`, `cmp`.
+
+Heredoc vỡ; ghi patch ra file rồi chạy.
+
+Chọn biến đang xét = cột có nhiều giá trị khác nhau nhất.
+
+Bug của TC: hợp `bug_id` với BUG-xx có TC đó trong "TC liên quan".
+
+Gom dữ kiện review (freeze ↔ bản cuối) cho B, C, D.
+
+Kiểm số exec/bug mỗi feature so với summary.py trước khi viết.
+
+Sửa dòng `auto_status` cho D (chạy tay), rồi viết nội dung.
+
+Viết §2.
+
+Viết mục B.
+
+Viết mục C.
+
+Viết mục D.
+
+Script kiểm chung (số, link, marker, 🔒, idempotent).
+
+Commit 1 (A + §2).
+
+Có 2 file lạ chưa track (`gap_analysis_sv.md` ở A, B) — không phải của em, để nguyên. Tiếp B.
+
+D: link issue lồng nhau (BUG-51–57 ghi link dạng markdown). Sửa parse.
+
+Dùng Edit trực tiếp.
+```
+*File AI ghi/gửi trong lượt này:* `patch_rt.py`, `sec2.md`, `secB.md`, `secC.md`, `secD.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 367 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 275 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366, #367); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
