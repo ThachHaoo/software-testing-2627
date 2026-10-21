@@ -9,7 +9,7 @@
 | 1 | Feature A – FR-01 Đăng ký (Domain + Boundary) | 25 | 25 | Hoàn thành đầy đủ các bước thiết kế test case (EP, Domain, BVA); rà soát và điều chỉnh các biến vào/ra; SV tự hiệu chỉnh TC-90 và TC-92 cô lập lỗi SUT không có ô Confirm Password; mã tự động hóa Playwright T2 chạy ổn định; tạo đầy đủ báo cáo lỗi. |
 | 2 | Feature B – FR-07 Giỏ hàng (Domain + Boundary) | 25 | 25 | Hoàn thành các bước thiết kế kiểm thử; điều chỉnh lý do phân lớp EP và thêm lớp mới; thực hiện làm sạch truy vết RTM; bổ sung hàm xử lý chờ bất đồng bộ trong lib.ts giúp mã Playwright T3 chạy ổn định; tạo đầy đủ báo cáo lỗi. |
 | 3 | Feature C – FR-15 Product CRUD (Domain + Boundary) | 25 | 25 | Hoàn thành các bước kiểm thử Admin CRUD; tách suite API; bổ sung file oracle.ts sinh dữ liệu ngẫu nhiên tránh trùng tên sản phẩm khi chạy test; bổ sung lệnh cleanup CSDL trong RUN.md; tạo đầy đủ báo cáo lỗi. |
-| 4 | Feature D – FR-20 Đăng ký trên Mobile (Domain + Boundary) | 15 | 25 | Bổ sung hệ thống giả định D0–D16 đặc thù di động; bổ sung kịch bản kiểm thử bộ gõ di động (CJK/Emoji); hoàn thành kịch bản chạy tay thực tế trên thiết bị di động; đính chính cấu hình IP endpoint trong file ghi chú; tạo đầy đủ báo cáo lỗi Mobile. |
+| 4 | Feature D – FR-20 Đăng ký trên Mobile (Domain + Boundary) | 15 | 15 | Bổ sung hệ thống giả định D0–D16 đặc thù di động; bổ sung kịch bản kiểm thử bộ gõ di động (CJK/Emoji); hoàn thành kịch bản chạy tay thực tế trên thiết bị di động; đính chính cấu hình IP endpoint trong file ghi chú; tạo đầy đủ báo cáo lỗi Mobile. |
 | 5 | Agent Skills (`skills/domain-bva-testing`) | 10 | 10 | Đóng gói đầy đủ Agent Skill domain-bva-testing chứa các script tự động hóa (check_domain.py, render_md.py, merge_results.py, summary.py, report_tables.py); tích hợp Hook Stop lưu transcript và script trích prompt log minh bạch; các script chạy đúng, đã kiểm hồi quy. |
 |  | **Tổng** | **100** | **100** | |
 
@@ -29,9 +29,9 @@ Bug theo severity: Critical 11, High 20, Medium 12, Low 14 (tổng 57 file trong
 
 ## Video demo (YouTube)
 
-| Nội dung | Link | Thời lượng |
-|---|---|---|
-| Agent Skill `domain-bva-testing` chạy end-to-end trên một feature | [...] | [...] |
+| Nội dung | Link |
+|---|---|
+| Agent Skill `domain-bva-testing` chạy end-to-end trên một feature | https://www.youtube.com/watch?v=S0ff2DNibMM |
 
 ## Tài liệu trong bài nộp
 

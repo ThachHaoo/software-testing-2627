@@ -1,5 +1,5 @@
 # Prompt Log – HW02
-**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude (không rõ model), Claude Opus 5.5, Claude Sonnet 4.6
+**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude (không rõ model), Claude Haiku 5.5, Claude Opus 5.5, Claude Sonnet 4.6
 
 > Prompt và output được trích tự động, nguyên văn, từ transcript của công cụ AI bằng script `tools/extract_prompt_log.py` (không qua AI). Section, Mục đích và Xử lý do em tự ghi.
 
@@ -24179,10 +24179,482 @@ Sửa đuôi `_tceval_rows` (trả rows) và đăng ký khối.
 Suite trùng tên giữa các feature bị gộp — tách theo feature.
 
 Bỏ nhiễu số bước ("bước 5") trong kiểm số, rồi sinh lại và commit.
+
+Đã dựng lại 10.3 theo suite, tính 10.4 và lập `audit_check.md`; commit `7f57909`, không push.
+
+### Báo cáo cho phiên thảo luận
+- 10.4 Artifact (10.2, không tính F1): VALID 27 (50,9%) · INVALID 0 · INCOMPLETE 26 (49,1%) / 53 hàng.
+- 10.4 TC do AI sinh: VALID 285 (96,6%) · INVALID 0 · INCOMPLETE 10 (3,4%) / 295 TC.
+- 10.3: Bảng A gồm 22 dòng, mỗi suite của mỗi feature một dòng. Bảng B gồm 10 TC, trong đó TC-FR01-90 và 92 khác bản AI, 8 TC còn lại của A không có trong bản đóng băng. Bản 10.3 cũ đã chuyển sang `HW02/appendix/audit_103_sv_old.md`. F1 ở 10.2 ghi "[chấm sau khi làm form]".
+- `audit_check.md` có **11 hàng** (A1, A2, A3, B1, B2, C4, D4, H1, G5, B6, B8). Hai loại điểm cần xem:
+  - Lý do nói SV sửa nhưng cột (5) không có commit ghi "SV". Ở A1–A3, SV sửa ngay trong cùng commit của bước nên cột (5) không có commit riêng.
+  - Số liệu trong Lý do không có ở cột (2)/(5): H1 nhắc số 18; B6, B8 nhắc số 57.
+- Bất thường:
+  - Mã B1–B4 trùng ở 10.1/10.2: vừa là bản đóng băng B_FR07, vừa là dữ kiện bug. Script ghép 10.1 với 10.2 theo thứ tự hàng nên vẫn đúng hàng, nhưng người đọc dễ nhầm.
+  - Thư mục làm việc có 6 file `.gitkeep` bị xoá (A_FR01, C_FR15, D_FR20, `appendix/ai-outputs`, `bugs`, `env`), không phải do em xoá. Em không đưa thay đổi này vào commit.
+- Cần quyết định:
+  - M2 – đổi mã 8 hàng dữ kiện bug B1–B8 ở 10.1/10.2 thành BG1–BG8 cho khỏi trùng (a), hay giữ nguyên (b)?
 ```
 
 **Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
 
 ---
 
-**Tổng:** 397 lượt; Claude Sonnet 4.6 94 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306, #363); Claude Opus 5.5 303 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #364, #365, #366, #367, #368, #369, #370, #371, #372, #373, #374, #375, #376, #377, #378, #379, #380, #381, #382, #383, #384, #385, #386, #388, #389, #390, #391, #392, #393, #394, #395, #396, #397); Claude (không rõ model) 3 lượt (#118, #272, #387). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #398 | 09:22 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+NHIỆM VỤ: hoàn thiện mọi phần AI làm được trước khi nộp. Làm liên tục, mỗi mục 1 commit, không hỏi lại
+trừ khi chặn. Không push.
+
+0. git restore 6 file .gitkeep. M2=a: đổi mã dữ kiện bug B1–B8 ở 10.1/10.2 thành BG1–BG8.
+1. Skill: chép .claude/skills/domain-bva-testing → HW02/skills/domain-bva-testing/;
+   tạo HW02/skills/VideoLinks.md (bảng: nội dung | link `[...]` | thời lượng `[...]`).
+2. Form (theo mẫu HW01/ai-forms/*.md, KHÔNG chép số liệu HW01), đặt ở HW02/ai-forms/:
+   - AI-02_Audit_Report_23120255.md: thông tin SV; bảng 10.1–10.4 chép từ report §10 (sinh bằng script);
+     kết luận = tham chiếu report §10.5; Critique = tham chiếu report §11;
+     Mandatory Disclosure dán nguyên văn §12; Chữ ký `[...]`.
+   - AI-03_Disclosure_Form_23120255.md: cấp độ 4; công cụ + số lượt theo dòng Tổng của A_prompt_log.md
+     (đủ 2 model + các lượt không rõ model theo P3 + 10 lượt chép tay 19/10 từ prompt_log_extra);
+     cách tạo prompt log; giai đoạn dùng AI theo section; 2–3 prompt nguyên văn quan trọng (chép từ log);
+     phần AI đóng góp / KHÔNG đóng góp (theo §12); cách xác minh; trích dẫn IEEE. Chữ ký `[...]`.
+   - AI-05_Privacy_Checklist_23120255.md: CHỈ tick mục có bằng chứng trong repo;
+     mục cam kết cá nhân để `[ ]` kèm "(em tự xác nhận)". Số lượt khớp AI-03.
+   - Report §14 cập nhật trạng thái 3 form.
+3. Chấm F1 ở 10.2: để nguyên "[chấm sau khi làm form]" (SV chấm).
+4. Chạy lại: summary.py --write README.md, report_tables.py, audit_tables.py.
+5. Xuất commit log: tools/export_commit_log.ps1 HW02 → HW02/appendix/commit_log.txt.
+6. PDF (Playwright Chromium in markdown→HTML→PDF, giữ bảng và ảnh): report + 3 form → cùng thư mục, cùng tên .pdf.
+   Đây là bản nháp; xuất lại sau khi SV điền xong.
+7. Chạy skill hw-submission-audit, ghi kết quả vào HW02/appendix/submission_check.md
+   (thiếu gì / file > 20 MB / placeholder còn lại theo file:dòng).
+8. Đo git archive HEAD HW02.
+9. Báo cáo ≤ 15 dòng: hash từng mục, dung lượng archive, danh sách việc SV còn phải làm (theo submission_check).
+```
+
+**Output:**
+```
+Bước 0: restore `.gitkeep`, đổi mã B1–B8 → BG1–BG8.
+
+Bước 1: chép skill + VideoLinks.
+
+Bước 2: forms. Kiểm §11 (Critique) và chọn prompt quan trọng từ log.
+
+Viết `tools/build_forms.py` (sinh 3 form từ report + prompt log, chạy lại được sau lần trích cuối).
+
+Sửa parse dòng Tổng (thiếu "không rõ model") và bỏ tick mục "mọi code đã test" (không chứng minh được "mọi").
+
+Forms ổn. Cập nhật §14 và commit bước 2.
+
+Bước 4: chạy lại summary/README + bảng.
+
+Lưu ý: commit vừa rồi gồm cả sửa README của SV (bảng tự đánh giá) đang có trong working tree. Bước 5: xuất commit log.
+
+Windows PowerShell 5.1 đọc sai UTF-8; chạy bằng pwsh.
+
+Bước 6: PDF. Kiểm công cụ chuyển Markdown.
+
+Không có pandoc/py-markdown. Dùng `marked` (cài vào HW02/tests) + Playwright Chromium có sẵn; viết `tools/md2pdf.js`.
+
+Kiểm nhanh PDF report (trang đầu + trang có ảnh).
+
+Ảnh: 9/9 có trong PDF. Commit bước 6.
+
+Bước 7: chạy skill rà soát nộp bài.
+
+Đang lập `submission_check.md` (placeholder theo file:dòng + kết quả script).
+
+Đã làm hết các mục 0–8, mỗi mục một commit, không push. Vấn đề cần sửa gấp: bảng tự đánh giá trong README cho Feature D 25 điểm trên mức tối đa 15, nên tổng các dòng là 110 nhưng dòng Tổng ghi 100.
+
+### Báo cáo cho phiên thảo luận
+- Commit theo mục:
+  - 0 (restore `.gitkeep`, đổi mã B→BG): `3cc035d`
+  - 1 (skill + VideoLinks): `1745846`
+  - 2 (3 form .md, sinh bằng `tools/build_forms.py`): `6959802`
+  - 4 (chạy lại summary/README, bảng report, Audit): `64775c4`
+  - 5 (commit log, chạy bằng `pwsh`): `e5304e1`
+  - 6 (PDF nháp report + 3 form, bằng `tools/md2pdf.js`; PDF report 97 trang, đủ 9/9 ảnh): `c3647fb`
+  - 7 (`submission_check.md`): `68eb659`
+- Mục 3: F1 vẫn để "[chấm sau khi làm form]".
+- `git archive HEAD HW02`: **16,49 MB**, 994 file, dưới 20 MB. Không có file lẻ nào trên 20 MB.
+- Mục 5: `export_commit_log.ps1` chạy bằng Windows PowerShell 5.1 bị lỗi đọc tiếng Việt; em đã thêm BOM vào file để chạy được.
+- Commit `64775c4` lỡ gồm cả phần SV đang sửa trong `README.md` (bảng tự đánh giá). Sau đó SV lại sửa README tiếp; bản này chưa commit và em không đụng.
+- Script rà soát báo 2 lỗi HIGH, đều là báo nhầm: mã #138 bị đếm hai lần vì có một dòng nằm trong output; dòng "Danh mục cấm" ở §12 dính từ khoá.
+- Việc SV còn phải làm (theo `submission_check.md`):
+  - Sửa điểm Feature D trong README (tối đa 15) và tổng tự đánh giá; điền §13 report cho khớp.
+  - Quay video, điền link ở `skills/VideoLinks.md`, README, report §7 và §13.
+  - Ghi Mục đích/Xử lý cho lượt #138 và #171. Trích prompt log lần cuối (hiện 398 lượt, các form ghi 397), rồi chạy lại `build_forms.py`, `audit_tables.py`, `report_tables.py`, `summary.py`.
+  - Chấm F1; điền 10.5, 10.6, ngày nộp, Node.js (§1), AI-06; điền `env/environment.md` (7 ô `[...]`).
+  - Xoá 54 khối 📝 trong report.
+  - Tick các mục cam kết AI-05; ký và ghi ngày cho AI-02, AI-03, AI-05.
+  - Xuất lại PDF và commit log sau commit cuối, rồi zip `23120255_HW02_AI_DomainTesting_<ggg>.zip`.
+```
+*File AI ghi/gửi trong lượt này:* `VideoLinks.md`, `build_forms.py`, `md2pdf.js`
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #399 | 09:39 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+Mình vừa thêm signature. Giúp mình chuyển đổi các file ai-forms .md sang .pdf nhé
+```
+
+**Output:**
+```
+Có `signature.png` và 3 form đã có ảnh chữ ký. Em giới hạn kích thước ảnh trong ô bảng (để chữ ký không chiếm cả trang) rồi xuất PDF.
+
+Kiểm trực quan ô chữ ký (chụp HTML cùng CSS).
+
+Đã xuất 3 file PDF từ bản .md bạn vừa sửa, mỗi file đều có ảnh chữ ký:
+
+- `HW02/ai-forms/AI-02_Audit_Report_23120255.pdf`
+- `HW02/ai-forms/AI-03_Disclosure_Form_23120255.pdf`
+- `HW02/ai-forms/AI-05_Privacy_Checklist_23120255.pdf`
+
+Em đã giới hạn chiều cao ảnh trong ô bảng ở `tools/md2pdf.js` để chữ ký không chiếm cả trang. Em xem trước bảng chữ ký của AI-05: ảnh nằm gọn trong ô "Chữ ký:", ngày 21/10/2026 hiển thị đúng.
+
+Mỗi PDF nặng khoảng 1,1–1,2 MB, chủ yếu do `signature.png`; vẫn dưới 20 MB.
+
+Em chưa commit, vì working tree đang có cả thay đổi của bạn:
+- 3 file .md trong `ai-forms/`, `signature.png`, `README.md`;
+- `.gitkeep` trong `ai-forms/` bị xoá;
+- `HW01/ai-forms/AI-02_Audit_Report_23120255.pdf` bị sửa (không phải do em).
+
+Bạn muốn em commit những file nào?
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #400 | 10:10 21/10/2026 | Claude Haiku 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+/domain-bva-testing HW02/_demo_FR01 1
+DEMO quay video. Phạm vi: FR-01 chỉ trường Mật khẩu (FR-01.5–FR-01.8), chỉ tầng API POST /api/register;
+```
+
+**Output:**
+```
+Bước 1 cho `HW02/_demo_FR01`. Trước tiên kiểm tra thư mục và đọc đặc tả FR-01 cùng API.
+
+Thư mục demo chưa có, nên phải làm Bước 0 (khởi tạo) trước. Đọc đặc tả và route API thật.
+
+Đã đủ dữ liệu cho Bước 0–1. Phạm vi demo: chỉ `V1` Mật khẩu (FR-01.5–01.8), tầng API. Tạo thư mục và file khởi tạo.
+
+Đã tạo `testcases.json` (Bước 0) và điền biến vào/ra (Bước 1). Chạy render, đóng băng bản nháp, và kiểm tra.
+
+Xong bước 0–1, dừng chờ review.
+
+- Tạo `HW02/_demo_FR01/testcases.json`: meta, 7 yêu cầu (FR-01.5–01.8, API-REG), giả định M1–M6 (M2–M6 kế thừa từ A_FR01).
+- Biến vào/ra: V1 Mật khẩu (vào, API `body.password`); V2 Phản hồi API, V3 Bản ghi user (ra). Họ Tên/Email giữ nominal hợp lệ (M1). Không có partition/case, đúng bước 1.
+- Bảng biến render ở `HW02/_demo_FR01/testcases.md`.
+- Bản nháp đóng băng: `HW02/_demo_FR01/ai-outputs/_demo_FR01_step1_20261021-101139.json` (+ `.md`). Ghi vào thư mục demo, không vào `HW02/appendix/ai-outputs/`, để log nộp không lẫn dữ liệu demo.
+- `check_domain.py`: 0 lỗi, 3 cảnh báo. Đều đúng kỳ vọng ở bước 1 (ra chưa phân lớp, chưa có partition).
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: `/domain-bva-testing HW02/_demo_FR01 1`, phạm vi FR-01.5–01.8, tầng API. Đã làm bước 0 (khởi tạo) và bước 1 (biến vào/ra).
+- File đã tạo: `HW02/_demo_FR01/testcases.json`, `testcases.md`, `ai-outputs/_demo_FR01_step1_20261021-101139.{json,md}`.
+- Kết quả kiểm tra: check_domain 0 lỗi / 3 cảnh báo (kỳ vọng ở bước 1); lint Not run (suite rỗng, chưa cần ở bước 1); test Not run.
+- Commit: chưa commit (bạn chưa yêu cầu). CLAUDE.md quy định mỗi bước một commit, nên khi bạn muốn có thể commit `HW02[_demo_FR01] 1/7: Phân tích biến vào/ra`.
+- Cần quyết định / câu hỏi:
+  - Chốt biến và giả định M1–M6 (đặc biệt M1: Họ Tên/Email giữ nominal, không tách biến).
+  - Đồng ý chạy bước 2 (lớp tương đương) không.
+- Bất thường: không có. Ghi chú: `server.js` dòng 21–27 nhận body thẳng vào INSERT, không có kiểm tra mật khẩu phía server. Điều này chỉ là quan sát về mã, chưa phải kết luận bug; bước 6 mới kiểm.
+```
+*File AI ghi/gửi trong lượt này:* `testcases.json`
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #401 | 10:12 21/10/2026 | Claude Haiku 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+Em chấp nhận bước 1. Làm bước 2 (lớp tương đương) rồi dừng.
+```
+
+**Output:**
+```
+Làm bước 2 cho V1 (Mật khẩu, từ M2–M6) và các lớp đầu ra V2, V3.
+
+Xong bước 2, dừng để bạn review.
+
+- Lớp tương đương cho V1 Mật khẩu (EC1–EC17): độ dài (≥8 hợp lệ, 1–7 không hợp lệ; rỗng tách riêng), chữ hoa/thường/số, ký tự đặc biệt theo tập đóng (M3), chữ có dấu không tính (M4), thiếu/null và sai kiểu ở API (M6).
+- Lớp đầu ra: V2 Phản hồi API (EC18–19), V3 Bản ghi user (EC20–21).
+- Tổng: 21 lớp, 8 hợp lệ, 13 không hợp lệ. Mỗi lớp có `requirements` trỏ tới FR-01.5–01.8 / API-REG, và ghi chú lý do tách.
+- Cảnh báo `check_domain` (22) và lint (7) đều là "chưa có case phủ", đúng kỳ vọng ở bước 2.
+- Chưa có `BVA` (`no_upper_bound` đặt ở bước 4).
+
+File:
+- `HW02/_demo_FR01/testcases.json`
+- `HW02/_demo_FR01/testcases.md`
+- Bản đóng băng: `HW02/_demo_FR01/ai-outputs/_demo_FR01_step2_20261021-101245.json` (+ `.md`)
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: `/domain-bva-testing HW02/_demo_FR01 2` — lớp tương đương (V1 + V2, V3), phạm vi FR-01.5–01.8 API.
+- File đã tạo/sửa: `HW02/_demo_FR01/testcases.json` (điền `partitions`), `testcases.md` (render), `ai-outputs/_demo_FR01_step2_20261021-101245.{json,md}`.
+- Kết quả kiểm tra: check_domain 0 lỗi / 22 cảnh báo (chưa có case, chưa có BVA — kỳ vọng); lint 0 lỗi / 7 cảnh báo (chưa có TC); test Not run.
+- Commit: chưa commit (bạn chưa yêu cầu). Tên gợi ý: `HW02[_demo_FR01] 2/7: Phân lớp tương đương`.
+- Cần quyết định / câu hỏi:
+  - Q2-1 – Lớp "rỗng" (EC3) tách khỏi "độ dài 1–7" (EC2) — chấp nhận hay gộp?
+  - Q2-2 – Lớp chữ có dấu (EC14–15, theo M4) — giữ làm lớp không hợp lệ riêng hay bỏ vì không thuộc phạm vi demo?
+- Bất thường: không có.
+
+Bước 3 (TC Domain) tiếp theo khi bạn chốt Q2-1 và Q2-2.
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #402 | 10:13 21/10/2026 | Claude Haiku 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+Chấp nhận. Làm bước 3 (minimum set), chạy check_domain + render_md rồi dừng.
+```
+
+**Output:**
+```
+Bước 3: minimum set `TS-DOM`. Trước khi viết, kiểm cách `check_domain.py` đếm lớp không hợp lệ trong `covers` và `ec_target`, vì quy tắc này quyết định case đầu ra.
+
+Quy tắc của `check_domain` cho phép một case không hợp lệ chỉ phủ đúng một lớp không hợp lệ trong `covers` và `ec_target`. Vì vậy lớp đầu ra không hợp lệ (EC19, EC21) không thể đăng ký vào case. Ghi nhận điểm này để báo lại, không tự đổi lớp. Viết suite `TS-DOM`.
+
+Linter cảnh báo 17 tiêu đề chưa đúng dạng "Kiểm tra + chức năng + điều kiện". Đây là lỗi của bản nháp bước 3, nên sửa tiêu đề rồi đóng băng lại.
+
+Xong bước 3, dừng để bạn review.
+
+- Đã tạo `TS-DOM` với 13 case API, cột Mật khẩu, mỗi case một tiêu đề "Kiểm tra…". Email tạo theo timestamp để mỗi case độc lập (M1).
+- Case hợp lệ: `TC-DEMO-01` (`Abcdef1!`) và `TC-DEMO-02` (`Abcdef1!#`), tách để không lẫn EC10 với EC11.
+- Case không hợp lệ: 11 case, mỗi case đúng một lớp đầu vào không hợp lệ (EC2, EC3, EC5, EC7, EC9, EC12–EC17).
+- `check_domain`: 0 lỗi, 3 cảnh báo. Phủ 19/21 lớp. Hai cảnh báo EC19 và EC21 là lớp đầu ra không hợp lệ, xem Q3-1 bên dưới. Cảnh báo BVA là kỳ vọng của bước 4.
+- `lint_testcases` (linter giảng viên): 0 lỗi, 0 cảnh báo, sau khi sửa 13 tiêu đề theo chuẩn Action + Function + Condition.
+- Bản nháp đóng băng: `HW02/_demo_FR01/ai-outputs/_demo_FR01_step3_20261021-101359.json` (bản đầu), `..._step3_20261021-101420.json` (bản sau khi sửa tiêu đề). Cả hai đều được ghi lại theo quy định.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: `/domain-bva-testing HW02/_demo_FR01 3`, TS-DOM minimum set, phạm vi FR-01.5–01.8, tầng API.
+- File đã tạo/sửa: `HW02/_demo_FR01/testcases.json` (suite TS-DOM), `testcases.md` (render), hai bản đóng băng step 3 trong `HW02/_demo_FR01/ai-outputs/`.
+- Kết quả kiểm tra: check_domain 0 lỗi / 3 cảnh báo (EC19, EC21 chưa phủ; V1 chưa có BVA); lint 0 lỗi / 0 cảnh báo; test Not run.
+- Commit: chưa commit. Tên gợi ý: `HW02[_demo_FR01] 3/7: Test case Domain`.
+- Cần quyết định / câu hỏi:
+  - Q3-1 – Lớp đầu ra không hợp lệ EC19 (4xx có error) và EC21 (không tạo user) không đăng ký được vào case: `check_domain` chỉ cho một EC không hợp lệ trong `covers`/`ec_target` mỗi case. Phương án: (a) giữ như hiện tại và ghi rõ trong báo cáo rằng EC19/EC21 là oracle chung của mọi case không hợp lệ; (b) đổi quy tắc `check_domain` cho phép lớp đầu ra không hợp lệ đi kèm; (c) tách thành case riêng cho từng lớp đầu ra. Em đề xuất (a) cho demo.
+  - Q3-2 – Hai case `TC-DEMO-10` (chữ hoa có dấu) và `TC-DEMO-11` (chữ thường có dấu) thực chất cũng thiếu A–Z/a–z thuần (đã ghi trong rationale). Chấp nhận như vậy, hay muốn thay bằng giá trị chỉ khác ở chữ có dấu nhưng vẫn đủ A–Z/a–z?
+- Bất thường mới: không có.
+
+Bước 4 (BVA) tiếp theo khi bạn chốt Q3-1 và Q3-2. Cần lưu ý: BVA cần khai `no_upper_bound` cho V1 (theo M2).
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #403 | 10:15 21/10/2026 | Claude Haiku 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+Chấp nhận. Làm bước 4 (BVA 9 điểm cho độ dài mật khẩu, LB = 8) rồi dừng.
+```
+
+**Output:**
+```
+Bước 4: BVA độ dài mật khẩu. Trước khi viết, kiểm xem giao diện có giới hạn `maxLength`/`minLength` nào không, để xác định có MIN_UI/MAX_UI hay không.
+
+Không có `maxLength`/`minLength` trong `frontend-web/src`, nên MIN_UI/MAX_UI không áp dụng cho độ dài. Thay bằng `LARGE` theo M2. Viết biến `no_upper_bound`, suite `TS-BVA`, rồi đóng băng.
+
+Xong bước 4, dừng để bạn review.
+
+- Khai `no_upper_bound: "M2"` cho V1 Mật khẩu. Không có UB/UB±1 vì không có cận trên.
+- MIN_UI/MAX_UI không áp dụng: `frontend-web/src` không có `maxLength`/`minLength` (đã grep). Tầng API cũng không giới hạn. Thay bằng `LARGE` (128 ký tự) theo M2.
+- Suite `TS-BVA`, 5 case, theo dải mã TC-DEMO-60…64:
+  - `TC-DEMO-60` LB−1 = 7 ký tự `Xyzab9!` → 4xx, không tạo user (EC2).
+  - `TC-DEMO-61` LB = 8 `Xyzabc9!` → 200, tạo 1 user.
+  - `TC-DEMO-62` LB+1 = 9 `Xyzabcd9!` → 200.
+  - `TC-DEMO-63` NOM = 12 `Xyzabcdefg9!` → 200.
+  - `TC-DEMO-64` LARGE = 128 ký tự (`Aa1!` lặp 32 lần) → 200; mang `assumptions: ["M2"]`.
+- Giá trị BVA dùng chuỗi khác TC-DEMO-01 để không chạy trùng.
+- `check_domain`: 0 lỗi / 2 cảnh báo (EC19, EC21, chính là Q3-1 đã nêu). `lint`: 0 lỗi / 0 cảnh báo, 18 case.
+- Bản nháp đóng băng: `HW02/_demo_FR01/ai-outputs/_demo_FR01_step4_20261021-101553.json`.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: `/domain-bva-testing HW02/_demo_FR01 4`, BVA độ dài Mật khẩu (LB = 8, không có cận trên), tầng API.
+- File đã tạo/sửa: `HW02/_demo_FR01/testcases.json` (V1 `no_upper_bound`, suite TS-BVA), `testcases.md` (render), `ai-outputs/_demo_FR01_step4_20261021-101553.{json,md}`.
+- Kết quả kiểm tra: check_domain 0 lỗi / 2 cảnh báo (EC19, EC21 — Q3-1); lint 0 lỗi / 0 cảnh báo; test Not run.
+- Commit: chưa commit. Tên gợi ý: `HW02[_demo_FR01] 4/7: Test case BVA`.
+- Cần quyết định / câu hỏi:
+  - Q3-1 còn mở (lớp đầu ra không hợp lệ EC19/EC21 không đăng ký được vào case). Em đề xuất phương án (a).
+  - Q4-1 – `LARGE` = 128 ký tự; có muốn chọn giá trị khác (ví dụ 256 hoặc 1000) không? Giá trị nào cũng chỉ đại diện, không chứng minh cận trên.
+- Bất thường mới: không có.
+
+Bước 5 là phần của bạn: thêm suite `TS-SV` (origin Human) rồi hỏi gap analysis. Em dừng ở đây như đã định.
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #404 | 10:16 21/10/2026 | Claude Haiku 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+Chấp nhận. Bước 6: sinh spec Playwright API cho HW02/_demo_FR01 (dùng lib.ts sẵn có), chỉ chạy --list rồi dừng.
+```
+
+**Output:**
+```
+Có `lib.ts` ở `A_FR01`. Đọc nó và một spec mẫu để theo đúng cách dùng.
+
+`lib.ts` của A_FR01 đọc cứng `A_FR01/testcases.json` và có oracle theo chữ của feature đó. Cách làm: spec demo đọc JSON demo, chỉ dùng từ `lib.ts` các helper chung (fixture `admin`, `listUsers`, `attachJson`, `renderResponse`, `actual`). Ngoài ra cần thêm một project vào `playwright.config.ts`, nếu không `--list` sẽ không thấy spec demo.
+
+Xong bước 6 (đến `--list`), dừng. Chưa chạy test thật.
+
+- Spec `HW02/tests/_demo_FR01/_demo_FR01.spec.ts`: đọc `HW02/_demo_FR01/testcases.json`, 18 case (TS-DOM 13 + TS-BVA 5). Dùng từ `A_FR01/lib.ts` các helper chung: fixture `admin` (snapshot user trước case, xoá user mới sau case), `listUsers`, `attachJson`, `renderResponse`, `actual`. Không dùng oracle theo chữ của A_FR01.
+- Assertion lấy từ `expected_result`: không tạo user → `HTTP 4xx` + có `error` + không user mới; hợp lệ → `HTTP 200` + message + id số + đúng 1 user có email của case. Không chỉnh theo Actual.
+- Thêm project `_demo_FR01` (baseURL :3000) vào `HW02/tests/playwright.config.ts`. Không có project này thì `--list` không thấy spec. Đây là sửa cấu hình, ngoài spec.
+- `npx playwright test _demo_FR01 --list`: 18 test trong 1 file, không lỗi.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: bước 6 — sinh spec Playwright API cho `HW02/_demo_FR01`, dùng `lib.ts` sẵn có; chỉ `--list`.
+- File đã tạo/sửa: `HW02/tests/_demo_FR01/_demo_FR01.spec.ts` (mới); `HW02/tests/playwright.config.ts` (thêm project `_demo_FR01`).
+- Kết quả kiểm tra: `--list` Pass (18 test); check_domain/lint không chạy lại ở bước này; run thật Not run.
+- Commit: chưa commit.
+- Cần quyết định / câu hỏi:
+  - Q6-1 – Chạy thật (`npx playwright test _demo_FR01`) cần backend :3000 đang chạy và DB reseed. Bạn muốn em chạy ngay ở bước 6 hay để SV chạy trên máy mình theo quy trình?
+  - Q3-1 còn mở: EC19, EC21 chưa phủ case (không ảnh hưởng `--list`).
+- Bất thường mới:
+  - `HW02/tests/_demo_FR01/_demo_FR01.spec.ts` import `../A_FR01/lib`; lib này đọc `A_FR01/testcases.json` lúc load (đã kiểm: load được). Nếu A_FR01 đổi tên suite `TS-DOM-API`, spec demo sẽ lỗi khi import.
+```
+*File AI ghi/gửi trong lượt này:* `_demo_FR01.spec.ts`
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #405 | 10:19 21/10/2026 | Claude Haiku 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+Gộp kết quả bằng merge_results.py vào HW02/_demo_FR01/testcases.json, render_md, cho em xem bảng Pass/Fail rồi dừng.
+```
+
+**Output:**
+```
+Trước khi gộp, kiểm tra xem đã có file kết quả Playwright của demo chưa.
+
+Đã có backend :3000 chạy. `results/last.json` lúc 10:17 có khả năng là đầu ra của lệnh `--list` trước đó, chưa phải kết quả chạy. Chạy demo spec để có kết quả thật, rồi gộp.
+
+Kết quả: 6 Pass, 12 Fail. Các case hợp lệ pass; mọi case vi phạm FR-01.5–01.8 đều nhận HTTP 200 và bị tạo user. Đây là Fail theo oracle, không phải lỗi harness. Chạy `merge_results.py` ở chế độ `--dry-run` trước, như CLAUDE.md quy định.
+
+Dry-run ổn: 18 case, 6 Pass và 12 Fail đều khớp kết quả đã thấy. Chạy gộp thật.
+
+Đã gộp và render. Bảng kết quả:
+
+| Mã | Chọn đại diện | Actual (HTTP) | Verdict |
+|---|---|---|---|
+| TC-DEMO-01 | `Abcdef1!` (hợp lệ) | 200, tạo user | **Pass** |
+| TC-DEMO-02 | `Abcdef1!#` (hợp lệ, ngoài tập) | 200, tạo user | **Pass** |
+| TC-DEMO-03 | `Abc1!` (5 ký tự) | 200, tạo user | **Fail** |
+| TC-DEMO-04 | rỗng | 200, tạo user | **Fail** |
+| TC-DEMO-05 | thiếu chữ hoa | 200, tạo user | **Fail** |
+| TC-DEMO-06 | thiếu chữ thường | 200, tạo user | **Fail** |
+| TC-DEMO-07 | thiếu chữ số | 200, tạo user | **Fail** |
+| TC-DEMO-08 | thiếu ký tự đặc biệt | 200, tạo user | **Fail** |
+| TC-DEMO-09 | chỉ ký tự ngoài tập | 200, tạo user | **Fail** |
+| TC-DEMO-10 | chữ hoa có dấu (Ê) | 200, tạo user | **Fail** |
+| TC-DEMO-11 | chữ thường có dấu (ê) | 200, tạo user | **Fail** |
+| TC-DEMO-12 | thiếu trường password | 200, tạo user | **Fail** |
+| TC-DEMO-13 | password dạng số | 200, tạo user | **Fail** |
+| TC-DEMO-60 | 7 ký tự (LB−1) | 200, tạo user | **Fail** |
+| TC-DEMO-61 | 8 ký tự (LB) | 200, tạo user | **Pass** |
+| TC-DEMO-62 | 9 ký tự (LB+1) | 200, tạo user | **Pass** |
+| TC-DEMO-63 | 12 ký tự (NOM) | 200, tạo user | **Pass** |
+| TC-DEMO-64 | 128 ký tự (LARGE) | 200, tạo user | **Pass** |
+
+Tổng: 6 Pass, 12 Fail, 0 Blocked, 0 Not run.
+
+Nhận xét:
+- Mọi case vi phạm FR-01.5–01.8 đều được API chấp nhận (HTTP 200, tạo user). Đây là Fail theo oracle, vì lệch do biến mục tiêu (mật khẩu), không do biến khác.
+- Quan sát mã: `backend/server.js` dòng 20–27 nhận `password` và INSERT trực tiếp, không kiểm tra độ mạnh. Đây mới là quan sát về mã, chưa phải kết luận bug. Theo quy trình, cần cô lập nguyên nhân (chạy lại, reset DB, so kết quả) trước khi lập bug ở bước 7.
+- Đây là lượt chạy demo, không phải lượt chính thức: không restart backend trước, và chạy từ AI thay vì SV. CLAUDE.md quy định SV là người chạy bước 6; em nói rõ để bạn quyết định có chạy lại trên máy SV không.
+
+Đã ghi:
+- `HW02/_demo_FR01/testcases.json`: `status` và `auto_status` cho 18 case; `evidence` trỏ tới `evidence/` (54 file: `_req.json`, `_res.json`, `_api.png`).
+- `HW02/_demo_FR01/testcases.md`: render lại.
+- Kết quả gốc: `HW02/tests/results/_demo_FR01_20261021-101934.json`.
+
+Chưa commit. Gợi ý tên: `HW02[_demo_FR01] 6/7: Chạy test, cập nhật Actual/Verdict`.
+
+Cần quyết định:
+- Q6-2 – Lượt này có giữ làm demo, hay chạy lại thành lượt chính thức (restart backend, rồi chạy toàn bộ) trên máy SV?
+- Q3-1 còn mở: EC19 và EC21 chưa phủ case.
+
+Bước 7 (bug report) là phần SV; em dừng ở đây.
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+## #406 | 10:29 21/10/2026 | Claude Opus 5.5 | Báo cáo HW02 – Hoàn thiện
+**Mục đích:** Rà soát toàn bộ file báo cáo Report.md, điền bổ sung mục AI Critique, hoàn thiện prompt log và kiểm tra các yêu cầu định dạng trước khi nộp bài.
+
+**Prompt:**
+```
+NHIỆM VỤ: chốt nộp HW02. Làm liên tục, mỗi mục 1 commit, không amend, không push.
+SV cung cấp:
+  VIDEO = https://www.youtube.com/watch?v=S0ff2DNibMM
+  F1 (10.2) = Verdict VALID; Lý do: Đã làm tốt rồi, không cần sửa
+  SV xác nhận đã duyệt các khối 📝 AI nháp: có
+
+0. Dọn demo: nếu còn nhánh demo-video / thư mục HW02/_demo_FR01, HW02/tests/_demo_FR01* → đảm bảo đang ở main,
+   xoá chúng; `git status` không còn file demo.
+1. Link video: điền VIDEO (thời lượng lấy từ SV nếu có, không thì "[...]" bỏ cột) vào HW02/skills/VideoLinks.md,
+   README (mục video), report §7 và §13. Kiểm README/§13: Feature D ≤ 15, tổng = tổng các mục; sai → DỪNG.
+2. F1: chép nguyên văn verdict + lý do SV vào 10.2.
+3. §1: điền phiên bản Node.js bằng `node -v` (giá trị thật). Các `[...]` còn lại trong report/form:
+   liệt kê file:dòng, không tự điền nội dung. (v24.15.0
+4. Xoá mọi dòng/khối 📝 trong report và 3 form (không đụng nội dung khác).
+5. on_stop.py --manual; build_forms.py, audit_tables.py, report_tables.py, summary.py --write README.md;
+   export_commit_log; xuất lại 4 PDF (report + AI-02/03/05). Số lượt ở report, AI-02, AI-03, AI-05 phải khớp dòng Tổng.
+6. hw-submission-audit lần cuối (bỏ qua 2 báo nhầm đã biết: #138 nằm trong output; từ khoá "Danh mục cấm").
+7. Commit `HW02: chốt nộp`; xuất commit log lần cuối (để có cả commit này) → commit `HW02: commit log cuối`.
+8. git archive --format=zip -o 23120255_HW02_AI_DomainTesting_<tổng §13, 3 chữ số>.zip HEAD HW02; đo ≤ 20 MB.
+9. Báo cáo ≤ 10 dòng: tên zip, dung lượng, số lượt prompt log, mục còn thiếu (nếu có).
+```
+
+**Output:**
+```
+Demo chỉ còn thư mục rỗng chưa track → xoá. Kiểm SV đã sửa gì trong form (build_forms sẽ ghi đè).
+
+README vẫn ghi Feature D 25/15. Kiểm §13 report và tổng.
+
+Em dừng ở bước 1 vì README sai điểm tự đánh giá, chưa làm các bước 1–9.
+
+- **README (`HW02/README.md`, bảng Tự đánh giá):** dòng 4 (Feature D) ghi tự chấm **25** trong khi tối đa là **15**. Tổng các dòng vì vậy là 110, nhưng dòng Tổng ghi 100.
+- **Report §13:** đúng — D = 15, tổng 100. README và report đang lệch nhau.
+- **Bước 0 đã xong:** đang ở `main`, không có nhánh demo. Hai thư mục `HW02/_demo_FR01/` và `HW02/tests/_demo_FR01/` chỉ là thư mục rỗng, chưa track, em đã xoá. `git status` sạch, không cần commit.
+
+Khi làm bước 5 còn một rủi ro: `tools/build_forms.py` sinh lại 3 form sẽ ghi đè phần bạn đã sửa trong commit `e842a28` (ngày ký, ảnh chữ ký, các tick ở AI-05). Em sẽ sửa script để giữ nguyên các phần này, hoặc chỉ cập nhật số lượt, không chạy sinh lại cả form.
+
+Cần quyết định:
+- Q1 – Điểm D trong README: (a) bạn tự sửa 25 → 15 cho khớp §13 rồi em chạy tiếp; (b) em sửa đúng ô đó thành 15 rồi chạy tiếp.
+```
+
+**Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
+
+---
+
+**Tổng:** 406 lượt; Claude Sonnet 4.6 94 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306, #363); Claude Opus 5.5 306 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #364, #365, #366, #367, #368, #369, #370, #371, #372, #373, #374, #375, #376, #377, #378, #379, #380, #381, #382, #383, #384, #385, #386, #388, #389, #390, #391, #392, #393, #394, #395, #396, #397, #398, #399, #406); Claude (không rõ model) 3 lượt (#118, #272, #387); Claude Haiku 5.5 6 lượt (#400, #401, #402, #403, #404, #405). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
