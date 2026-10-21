@@ -13,7 +13,5 @@
 | D4 | D_FR20 – bước 4 (TC BVA) | Prompt gộp chung với bước 3; AI đưa ra Expected sai cho kịch bản BVA độ dài mật khẩu trên Mobile, SV đã chỉnh sửa 5 kịch bản BVA cho đúng thực tế (Boundary Value Analysis). | Bản cuối (HEAD) so với bản đóng băng cuối của bước — biến: 0 đổi, 0 bỏ, 0 thêm; lớp: 0 đổi, 0 bỏ, 0 thêm; TC (trường thiết kế): 5 đổi, 0 bỏ. | Lý do nói SV làm/sửa nhưng cột (5) không có commit ghi "SV" |
 | H1 | Harness: CLAUDE.md | AI dựng quy ước ban đầu còn chung chung, SV đã cập nhật và tinh chỉnh qua 18 commit sau khi rút kinh nghiệm từ các feature trước (Test Environment). | 19 commit sau; có chữ "SV": `3b8131c` HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57; `1a5137f` HW02: dữ kiện đối chiếu gap analysis SV | số trong Lý do không có ở cột (2)/(5): 18 |
 | G5 | Khung trống `sv_cases.md` (AI tạo khung, nội dung SV viết; commit chung với nội dung SV) | Khung mẫu Markdown được tạo chuẩn cấu trúc giúp SV tự điền kịch bản bổ sung ở bước 5 dễ dàng; đã kiểm tra đồng bộ. | không có commit sau | Lý do nói SV làm/sửa nhưng cột (5) không có commit ghi "SV" |
-| B6 | Khung BUG-xx (trống, chỉ dữ kiện) và sửa dữ kiện theo evidence (7/7a, 7/7c) | Khung báo cáo lỗi do AI sinh ban đầu bị thiếu thông tin môi trường và bằng chứng; SV đã tự tay hoàn thiện mô tả chi tiết cho 57 bug (Defect Management). | — | số trong Lý do không có ở cột (2)/(5): 57; Lý do nói SV làm/sửa nhưng cột (5) không có commit ghi "SV" |
-| B8 | Tạo GitHub Issues bằng `gh issue create` (nội dung SV viết) + ảnh trang Issues | Tự động hóa việc đẩy 57 báo cáo lỗi do SV biên soạn lên GitHub Issues thành công; script chạy đúng, đã kiểm hồi quy. | — | số trong Lý do không có ở cột (2)/(5): 57; Lý do nói SV làm/sửa nhưng cột (5) không có commit ghi "SV" |
 
-*11 hàng.*
+*9 hàng.*
