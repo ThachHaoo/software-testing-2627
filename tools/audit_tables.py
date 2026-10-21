@@ -212,6 +212,66 @@ def diff_summary(fz, hd, st):
     return "; ".join(out) + "."
 
 
+def all_commits():
+    """[(hash, giờ địa phương không tz, theo phút, subject)] theo thời gian tăng dần."""
+    out = []
+    for l in git("log", "--reverse", "--format=%h|%aI|%s").splitlines():
+        h, ts, s = l.split("|", 2)
+        out.append((h, dt.datetime.fromisoformat(ts).replace(tzinfo=None, second=0), s))
+    return out
+
+
+def fmt_turns(blk, extra=""):
+    models = sorted({m for x in blk for m in x[2].split(" + ")})
+    secs = list(dict.fromkeys(x[3] for x in blk))
+    a, b = blk[0], blk[-1]
+    return (f"#{a[0]}–#{b[0]} ({a[1]:%H:%M %d/%m} – {b[1]:%H:%M %d/%m}; {', '.join(models)}; "
+            f"section trong notes: {' / '.join(f'“{s}”' for s in secs)}{extra})")
+
+
+def turns_between(hw, t0, t1):
+    """Lượt có giờ > t0 và ≤ t1 (t0 None = từ đầu); rỗng thì nới thành ≥ t0 (lượt cùng phút với commit trước)."""
+    tl = turns_of(hw)
+    blk = [x for x in tl if (t0 is None or x[1] > t0) and x[1] <= t1]
+    blk = blk or [x for x in tl if (t0 is None or x[1] >= t0) and x[1] <= t1]
+    if not blk:  # một lượt AI tạo nhiều commit liên tiếp: lấy lượt đang chạy lúc commit (lượt cuối có giờ ≤ commit)
+        before = [x for x in tl if x[1] <= t1]
+        blk = [(*before[-1][:3], before[-1][3] + " [lượt đang chạy lúc commit]")] if before else []
+    return blk
+
+
+def nref_git(hw, feat, st, h):
+    """Bản đóng băng bước k của feature: lượt sau commit cuối của bước k−1 (hoặc commit trước đó trong repo) tới commit bước k."""
+    cs = all_commits()
+    idx = next((i for i, c in enumerate(cs) if c[0] == h), None)
+    if idx is None:
+        return "[#n: không khớp – không thấy commit]"
+    tag = f"HW02[{feat[0]}-{feat[2:]}]"
+    prev = [c for c in cs[:idx] if c[2].startswith(f"{tag} {st - 1}/7")] if st > 1 else []
+    t0 = prev[-1][1] if prev else (cs[idx - 1][1] if idx else None)
+    blk = turns_between(hw, t0, cs[idx][1])
+    return fmt_turns(blk, "; khớp theo: git") if blk else "[#n: không khớp – không có lượt giữa hai commit]"
+
+
+def nref_multi(hw, hashes):
+    """Artifact gồm nhiều commit: mỗi commit lấy lượt giữa commit trước đó trong repo và commit này; gộp theo feature."""
+    cs = all_commits()
+    pos = {c[0]: i for i, c in enumerate(cs)}
+    by = {}
+    for h in hashes:
+        i = pos.get(h)
+        if i is None:
+            continue
+        m = re.match(r"HW02\[([A-D])-FR(\d\d)\]", cs[i][2])
+        key = f"{m.group(1)}_FR{m.group(2)}" if m else "chung"
+        by.setdefault(key, []).extend(turns_between(hw, cs[i - 1][1] if i else None, cs[i][1]))
+    parts = []
+    for k, blk in by.items():
+        blk = sorted(dict.fromkeys(blk), key=lambda x: (x[1], x[0]))
+        parts.append(f"{k}: " + (fmt_turns(blk, "; khớp theo: git") if blk else "(không có lượt nào giữa các commit này và commit trước)"))
+    return " · ".join(parts) or "[#n: không khớp – không có lượt]"
+
+
 def freeze_rows(hw):
     final = {f: json.load(open(hw / f / "testcases.json", encoding="utf-8")) for f in FEATS.values()}
     groups = {}
@@ -234,7 +294,7 @@ def freeze_rows(hw):
         later = ("Commit cùng bước sau commit đầu: " + "; ".join(f"`{c[0]}` {c[2]}" for c in cs[1:]) + ". ") if cs[1:] else ""
         later += "Bản cuối (HEAD) so với bản đóng băng cuối của bước — " + diff_summary(d, final[feat], st)
         rows.append((f"{code}{st}", f"{feat} – bước {st} ({['', 'biến vào/ra', 'lớp tương đương', 'TC Domain', 'TC BVA', '', '', ''][st] or 'thủ tục chạy'})",
-                     f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {nref(hw, first[0] if first else None, f"{FEAT_NUM[feat]}.{st}")}",
+                     f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {nref_git(hw, feat, st, first[0]) if first else '[#n: không khớp – không có commit của bước]'}",
                      out, later))
     return rows
 
@@ -248,7 +308,7 @@ def extra_rows(hw):
                   if l and pat.search(l.split("|", 2)[2]) and "HW02[" in l]
             first = cs[0] if cs else None
             out = f"{len(cs)} commit: " + ", ".join(f"`{c[0]}`" for c in cs[:8]) + (" …" if len(cs) > 8 else "")
-            rows.append((code, name, f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · [#n: không khớp – artifact gồm {len(cs)} commit ở nhiều bước/feature]",
+            rows.append((code, name, f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {nref_multi(hw, [c[0] for c in cs])}",
                          out, "—"))
             continue
         existing = [p for p in paths if Path(p).exists()]
@@ -258,7 +318,7 @@ def extra_rows(hw):
             continue
         first = cs[0]
         if note == "chưa làm":
-            rows.append((code, name, "— · [#n: không khớp – chưa làm]", note, "—"))
+            rows.append((code, name, "— · [#n: form chưa làm]", note, "—"))
             continue
         out = "; ".join(f"`{p}`" + (f" — “{excerpt(p)}”" if excerpt(p) else "") for p in existing) + (f" · {note}" if note else "")
         sv = [c for c in cs[1:] if re.search(r"\bSV\b", c[2])]
@@ -273,7 +333,9 @@ def b_artifacts(hw):
     when = dt.datetime.fromtimestamp((hw / LOG).stat().st_mtime)
     head = (f"*#n theo bản trích {when:%H:%M %d/%m/%Y} ({len(tl)} lượt trong `{LOG}`); số có thể đổi ở lần trích cuối trước khi nộp. "
             "Cách khớp: khối lượt liên tiếp cùng section trong `prompt_log_notes.toml`, giờ ≤ giờ commit tạo artifact; "
-            "bản đóng băng bước k của feature phải có section \"n.k\" (n = mục của feature).*\n\n")
+            "riêng bản đóng băng bước k và artifact nhiều commit khớp theo git (ghi \"khớp theo: git\"): lượt sau commit cuối của bước k−1 "
+            "(hoặc commit trước đó) tới commit bước k — không có lượt nào trong khoảng đó (một lượt tạo nhiều commit) thì lấy lượt đang chạy lúc commit; "
+            "section hiện nhãn đang có trong notes.*\n\n")
     return head + table(["Mã", "Artifact", "(1) Tool · thời gian · commit tạo · #n", "(2) Output (trích + đường dẫn)",
                   "(5) Commit sửa sau đó (git log)"], rows) + \
         f"\n\n*{len(rows)} artifact. Sinh bằng `tools/audit_tables.py` từ `appendix/ai-outputs/`, `git log` (trailer Co-Authored-By cho tool), danh mục ở đầu script. " \
