@@ -22477,6 +22477,32 @@ Viết các mục chung (header, §1, §7–§15).
 Kiểm toàn bộ: link/ảnh, số liệu, idempotent, 🔒.
 
 SV vừa commit `129cfcc` xen giữa — kiểm có đụng report không.
+
+Đã điền hết phần dữ kiện chung của report và vá các chỗ lặt vặt, qua 3 commit, không push. Em không đụng mục 3.5–6.5 và không commit các file `gap_analysis_sv.md`. Giữa chừng SV commit `129cfcc` (4 file `gap_analysis_sv.md`). Commit này không đụng report, nên không bị ghi đè.
+
+### Báo cáo cho phiên thảo luận
+- Commit:
+  - `608df85` vá dữ kiện: ghi chú C19/C22, sửa `tests/README.md`, `git add -f` kết quả lượt chính thức A và C, sửa `C_FR15/RUN.md`. B và D đã có file kết quả từ trước.
+  - `6a21f55` SKILL.md định nghĩa quy tắc `output`; §2.3 trỏ tới định nghĩa này.
+  - `b210ba0` điền các mục chung: đầu file, §1, §7–§15, script mới `tools/audit_tables.py`.
+- Bảng Audit:
+  - 10.1 có **54 artifact**: 17 bản đóng băng (4 bước × 4 feature, thêm bước 6 của D) và 37 việc phụ.
+  - 10.3 đánh giá **295 TC** có nguồn AI/Both: 285 giữ nguyên bản AI, 2 khác bản AI, 8 không có trong bản AI đóng băng.
+- Kiểm tra:
+  - Bảng §8 và tổng từng feature khớp `summary.py`.
+  - 134 link/ảnh đều tồn tại.
+  - Chạy lại `report_tables.py` và `audit_tables.py` không đổi gì.
+  - Không mục 🔒 nào có khối AI nháp.
+  - `git archive HEAD HW02` = **14,5 MB** / 973 file.
+- Chỗ `<SV viết>`: 10.2 (54 hàng × 2 cột) · 10.3 (295 hàng) · 10.5 kết luận · §13 (6 ô điểm). Các bảng ở 3.5–6.5 vẫn giữ `<SV viết>` như cũ.
+- Chỗ `[...]`: ngày nộp, Node.js (§1), video (§7, §13), tỉ lệ ở 10.4, lượt chỉ rà soát (10.6), AI-06, số lượt prompt log, commit_log, `#n` của Audit, khung `sv_cases.md` của feature khác ngoài C.
+- Bảng 10.1 (artifact) và cây thư mục ở §15 sinh từ git, nên thay đổi sau mỗi commit. Cần chạy lại `audit_tables.py` sau commit cuối, trước khi zip.
+- Mâu thuẫn dữ kiện:
+  - `CLAUDE.md:90` ghi Sonnet 4.6 chỉ trả lời lượt #1–#3. Nhưng `appendix/A_prompt_log.md:22375` (dòng Tổng) đếm Sonnet 4.6 = 93 lượt (#116, #120…).
+  - `env/environment.md:7–12`: Máy, Node.js, Trình duyệt, Playwright, IP vẫn `[...]`. Các BUG-xx đã có giá trị thật (Chromium 130.0.6723.31, Playwright 1.48.2), §1 lấy từ đó.
+  - A_FR01 không có `RUN.md`, nên không có chỗ ghi file kết quả đã commit; em chỉ ghi ở `tests/README.md`.
+  - Bản đóng băng của A1–A4: SV sửa ngay trong cùng commit của bước, nên cột (5) không có commit riêng; em ghi số phần tử khác giữa bản cuối và bản AI thay vào.
+- Cần quyết định: không có điểm chặn.
 ```
 *File AI ghi/gửi trong lượt này:* `audit_tables.py`, `head.md`, `tail.md`
 
@@ -22484,4 +22510,53 @@ SV vừa commit `129cfcc` xen giữa — kiểm có đụng report không.
 
 ---
 
-**Tổng:** 368 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 276 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366, #367, #368); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #369 | 07:52 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: kiểm gap analysis SV + chép D vào report.
+Quyết định SV: M1=a G2=a G3=a  (còn <...> → DỪNG, hỏi)
+KHÔNG sửa HW02/*/gap_analysis_sv.md.
+
+1. Tạo HW02/appendix/gap_check.md (chỉ dữ kiện, không nhận xét câu chữ). Mỗi feature:
+   a) Mã trong file SV không có trong testcases.json → kèm lý do bỏ
+      (dòng/commit trong sv_cases.md, review_log, git log).
+   b) A: bảng SV-xx → TC-FR01-2xx, chép từ notes "Nguồn: SV-xx" trong JSON
+      (một SV-xx có thể ra nhiều TC). Ghi SV-xx nào không ánh xạ được.
+   c) Cột "AI đã nghĩ tới?" của SV so với nhãn trong ai_gap_answer.md:
+      liệt kê các TC hai bên khác nhau. Chỉ liệt kê, không kết luận ai đúng.
+   d) Bảng case thứ nhất của SV so với JSON: TC nào khác Tiêu đề / EC / Expected (đếm + liệt kê mã).
+   Commit `HW02: dữ kiện đối chiếu gap analysis SV`.
+2. CLAUDE.md:90 sửa theo thực tế log:
+   - Sonnet 4.6: #1–#3 (12/10) + các phiên claude.ai B (từ 10:13 20/10), C (16:19–18:06), đầu D (22:16–23:13).
+   - Opus 5.5: phần còn lại.
+   - Kèm dòng "Tổng" hiện tại của A_PROMPT log.
+   Thêm vào report_plan mục AI-03: "khai đủ 2 model theo dòng Tổng của prompt log".
+3. Chép D:
+   - Nếu D không có mục nào ở 1a/1c/1d: chép nguyên văn phần phân tích của D_FR20/gap_analysis_sv.md vào 6.5, ngoài marker.
+     G2=a: không chép bảng case thứ nhất.
+     Thay các ô <SV viết> tương ứng; còn ô không có nội dung SV thì để nguyên.
+   - Kiểm: phần chép = file gốc từng ký tự.
+   - Commit `HW02: report – chép gap analysis SV D_FR20`.
+   - Nếu D có vấn đề → không chép, báo.
+4. Báo cáo ≤ 12 dòng: số mục 1a/1c/1d mỗi feature, hash. DỪNG.
+```
+
+**Output:**
+```
+D có khác biệt ở 1c (TC-206, TC-204) → theo lệnh sẽ không chép. Làm tiếp bước 1, 2. Kiểm dải giờ Sonnet trong log.
+
+Sửa CLAUDE.md:90 và report_plan.
+
+Sinh `gap_check.md` bằng script (chỉ dữ kiện).
+
+Chỉnh: nhãn A hiển thị nguyên văn cả ô (b); cột commit đổi tên cho đúng.
+```
+*File AI ghi/gửi trong lượt này:* `gapcheck.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 369 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 277 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366, #367, #368, #369); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.

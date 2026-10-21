@@ -89,17 +89,13 @@ EC của JSON lấy `ec_target` (không có thì `covers`); EC của SV = các m
 | SV-23 | TC-FR01-222 | Tiêu đề, EC, Expected |
 | SV-24 | TC-FR01-223 | Tiêu đề, EC, Expected |
 
-Số đếm: file SV ghi "Số TC em bổ sung: 24"; bảng thứ nhất có 24 dòng; JSON có 25 case `origin: Human` (= cột "TC SV thêm" của `summary.py`).
+Số đếm: file SV ghi "Số TC em bổ sung: ?"; bảng thứ nhất có 24 dòng; JSON có 25 case `origin: Human` (= cột "TC SV thêm" của `summary.py`).
 
 ## B_FR07
 
 ### a) Mã trong file SV không có trong `testcases.json`
 
-| Mã | Lý do bỏ (notes suite trong JSON) | Commit đưa mã vào JSON (git log -S; giai đoạn bỏ ghi ở notes) |
-|---|---|---|
-| TC-FR07-202 | `TS-SV-UI` notes: TC-FR07-202: SRS không quy định đồng bộ giữa các tab (SV bỏ ở 5/7c). | 897a7c8 HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR07-204 | `TS-SV-UI` notes: TC-FR07-204: Kiểm AuthContext/token hỏng, không thuộc giỏ hàng; dựa vào tải lại trang (B10 ngoài phạm vi) (SV bỏ ở 5/7c). | 897a7c8 HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR07-207 | `TS-SV-API` notes: TC-FR07-207: Không có điểm quan sát / căn cứ SRS (SV bỏ ở 5/7c, cùng lý do EC32). | 897a7c8 HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
+Không có.
 
 ### c) Cột "AI đã nghĩ tới?" của SV khác nhãn trong `ai_gap_answer.md`
 
@@ -107,8 +103,7 @@ Quy ước so: nhãn AI chứa "Đã nghĩ tới"/"Một phần" hoặc "Nhóm 1
 
 | Mã | Dòng file SV | SV ghi | Nhãn AI (nguyên văn: ô (b) với A, tên nhóm với B–D) |
 |---|---|---|---|
-| TC-FR07-206 | dòng 28 | Có | Nhóm 2 – Không nghĩ tới |
-| TC-FR07-207 | dòng 29 | Không | Nhóm 1 – Đã nghĩ tới nhưng không đưa vào |
+| TC-FR07-206 | dòng 34 | Có | Nhóm 2 – Không nghĩ tới |
 
 ### d) Bảng case thứ nhất của SV so với JSON (Tiêu đề / EC / Expected, so chuỗi chính xác)
 
@@ -130,21 +125,13 @@ EC của JSON lấy `ec_target` (không có thì `covers`); EC của SV = các m
 | TC-FR07-214 | TC-FR07-214 | Tiêu đề, EC, Expected |
 | TC-FR07-215 | TC-FR07-215 | Tiêu đề, Expected |
 
-Số đếm: file SV ghi "Số TC em bổ sung: 16"; bảng thứ nhất có 16 dòng; JSON có 13 case `origin: Human` (= cột "TC SV thêm" của `summary.py`).
+Số đếm: file SV ghi "Số TC em bổ sung: 13"; bảng thứ nhất có 13 dòng; JSON có 13 case `origin: Human` (= cột "TC SV thêm" của `summary.py`).
 
 ## C_FR15
 
 ### a) Mã trong file SV không có trong `testcases.json`
 
-| Mã | Lý do bỏ (notes suite trong JSON) | Commit đưa mã vào JSON (git log -S; giai đoạn bỏ ghi ở notes) |
-|---|---|---|
-| TC-FR15-203 | `TS-SV-UI` notes: TC-FR15-203: SV bỏ: Expected không có căn cứ SRS (5/7c). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR15-204 | `TS-SV-UI` notes: TC-FR15-204: SV bỏ (C19 bỏ theo) (5/7c). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR15-210 | `TS-SV-API` notes: TC-FR15-210: SV bỏ: không có lớp tương ứng (5/7d). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR15-212 | `TS-SV-API` notes: TC-FR15-212: SV bỏ: Expected không có căn cứ SRS (5/7d). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR15-215 | `TS-SV-API` notes: TC-FR15-215: SV bỏ sau khi xét lại C1/C2 (5/7d). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR15-216 | `TS-SV-GUI` notes: TC-FR15-216: SV bỏ: Expected không có căn cứ SRS (5/7c). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
-| TC-FR15-217 | `TS-SV-GUI` notes: TC-FR15-217: SV bỏ: Expected không có căn cứ SRS (5/7c). | d1c71d8 HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer |
+Không có.
 
 ### c) Cột "AI đã nghĩ tới?" của SV khác nhãn trong `ai_gap_answer.md`
 
@@ -152,11 +139,9 @@ Quy ước so: nhãn AI chứa "Đã nghĩ tới"/"Một phần" hoặc "Nhóm 1
 
 | Mã | Dòng file SV | SV ghi | Nhãn AI (nguyên văn: ô (b) với A, tên nhóm với B–D) |
 |---|---|---|---|
-| TC-FR15-202 | dòng 30 | Có | Nhóm 2 – Không nghĩ tới |
-| TC-FR15-206 | dòng 30 | Có | Nhóm 2 – Không nghĩ tới |
-| TC-FR15-200 | dòng 31 | Không | Nhóm 1 – Đã nghĩ tới nhưng không đưa vào |
-| TC-FR15-204 | dòng 33 | Không | Nhóm 1 – Đã nghĩ tới nhưng không đưa vào |
-| TC-FR15-215 | dòng 34 | Không | Nhóm 1 – Đã nghĩ tới nhưng không đưa vào |
+| TC-FR15-202 | dòng 36 | Có | Nhóm 2 – Không nghĩ tới |
+| TC-FR15-206 | dòng 36 | Có | Nhóm 2 – Không nghĩ tới |
+| TC-FR15-200 | dòng 37 | Không | Nhóm 1 – Đã nghĩ tới nhưng không đưa vào |
 
 ### d) Bảng case thứ nhất của SV so với JSON (Tiêu đề / EC / Expected, so chuỗi chính xác)
 
@@ -176,7 +161,7 @@ EC của JSON lấy `ec_target` (không có thì `covers`); EC của SV = các m
 | TC-FR15-213 | TC-FR15-213 | Tiêu đề, EC, Expected |
 | TC-FR15-214 | TC-FR15-214 | Tiêu đề, EC, Expected |
 
-Số đếm: file SV ghi "Số TC em bổ sung: 18"; bảng thứ nhất có 18 dòng; JSON có 11 case `origin: Human` (= cột "TC SV thêm" của `summary.py`).
+Số đếm: file SV ghi "Số TC em bổ sung: 11"; bảng thứ nhất có 11 dòng; JSON có 11 case `origin: Human` (= cột "TC SV thêm" của `summary.py`).
 
 ## D_FR20
 
@@ -190,7 +175,7 @@ Quy ước so: nhãn AI chứa "Đã nghĩ tới"/"Một phần" hoặc "Nhóm 1
 
 | Mã | Dòng file SV | SV ghi | Nhãn AI (nguyên văn: ô (b) với A, tên nhóm với B–D) |
 |---|---|---|---|
-| TC-FR20-204 | dòng 21 | Không | Nhóm 3 – Đã có nhưng bị gỡ theo quyết định SV |
+| TC-FR20-204 | dòng 21 | Có | Nhóm 3 – Đã có nhưng bị gỡ theo quyết định SV |
 | TC-FR20-206 | dòng 22 | Không | Nhóm 1 – Đã nghĩ tới nhưng không đưa vào |
 
 ### d) Bảng case thứ nhất của SV so với JSON (Tiêu đề / EC / Expected, so chuỗi chính xác)
