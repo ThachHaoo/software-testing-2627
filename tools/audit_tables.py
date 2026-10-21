@@ -229,14 +229,71 @@ def fmt_turns(blk, extra=""):
             f"section trong notes: {' / '.join(f'“{s}”' for s in secs)}{extra})")
 
 
+_SRC = None
+
+
+def turn_sources(hw):
+    """#n → (nguồn, prompt): dựng lại danh sách lượt y như tools/extract_prompt_log.py (cùng thứ tự, cùng cách bỏ trùng),
+    nguồn = 'code' (transcript Claude Code), 'claude-ai' (file claude-ai_session_*), 'extra' (prompt_log_extra.toml).
+    Cần thư mục transcript cục bộ (gitignore); không khớp số lượt/giờ với prompt log → trả {}."""
+    global _SRC
+    if _SRC is not None:
+        return _SRC
+    import importlib.util, tomllib
+    cfg = tomllib.loads(Path("tools/hw.toml").read_text(encoding="utf-8"))
+    spec = importlib.util.spec_from_file_location("epl", "tools/extract_prompt_log.py")
+    epl = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(epl)
+    turns = []
+    for p in sorted(Path(cfg["transcripts"]).glob("*.jsonl")):
+        for t in epl.load_session(p):
+            t["src"] = "claude-ai" if p.name.startswith("claude-ai_session") else "code"
+            turns.append(t)
+    for e in epl.load_toml(cfg.get("extra")).get("entry", []):
+        turns.append({"time": dt.datetime.fromisoformat(e["time"]).replace(tzinfo=epl.LOCAL_TZ), "prompt": e["prompt"].strip(),
+                      "output": [e["output"].strip()], "src": "extra"})
+    uniq = {}
+    for t in turns:
+        k = (t["time"], t["prompt"])
+        if k not in uniq or len("".join(t["output"])) > len("".join(uniq[k]["output"])):
+            uniq[k] = t
+    turns = sorted(uniq.values(), key=lambda t: t["time"])
+    if cfg.get("since"):
+        turns = [t for t in turns if t["time"].date() >= dt.date.fromisoformat(cfg["since"])]
+    log = turns_of(hw)
+    if len(turns) != len(log) or any(t["time"].replace(tzinfo=None, second=0, microsecond=0) != x[1] for t, x in zip(turns, log)):
+        _SRC = {}
+    else:
+        _SRC = {x[0]: (t["src"], t["prompt"]) for t, x in zip(turns, log)}
+    return _SRC
+
+
+STEP_WORDS = re.compile(r"bước|Bước|\d/7|step", re.I)
+
+
+def step_excerpt(prompt, n=15):
+    """≤ n từ nguyên văn: dòng đầu tiên của prompt có nhắc bước (bước / k/7 / step), không có thì dòng đầu."""
+    lines = [l.strip() for l in prompt.splitlines() if l.strip()]
+    line = next((l for l in lines if STEP_WORDS.search(l)), lines[0] if lines else "")
+    w = line.split()
+    return " ".join(w[:n]) + (" …" if len(w) > n else "")
+
+
 def turns_between(hw, t0, t1):
-    """Lượt có giờ > t0 và ≤ t1 (t0 None = từ đầu); rỗng thì nới thành ≥ t0 (lượt cùng phút với commit trước)."""
+    """Lượt có giờ > t0 và ≤ t1 (t0 None = từ đầu); rỗng thì nới thành ≥ t0 (lượt cùng phút với commit trước).
+    Vẫn rỗng (một lượt AI tạo nhiều commit liên tiếp) → lượt Claude Code đang chạy lúc commit: lượt cuối có giờ ≤ commit
+    lấy từ transcript Claude Code (commit chỉ do Claude Code tạo), kèm trích prompt ≤ 15 từ."""
     tl = turns_of(hw)
     blk = [x for x in tl if (t0 is None or x[1] > t0) and x[1] <= t1]
     blk = blk or [x for x in tl if (t0 is None or x[1] >= t0) and x[1] <= t1]
-    if not blk:  # một lượt AI tạo nhiều commit liên tiếp: lấy lượt đang chạy lúc commit (lượt cuối có giờ ≤ commit)
-        before = [x for x in tl if x[1] <= t1]
-        blk = [(*before[-1][:3], before[-1][3] + " [lượt đang chạy lúc commit]")] if before else []
+    if not blk:
+        src = turn_sources(hw)
+        before = [x for x in tl if x[1] <= t1 and src.get(x[0], ("?",))[0] == "code"]
+        if before:
+            x = before[-1]
+            steps = list(dict.fromkeys(re.findall(r"[Bb]ước \d|\b\d/7[a-z]?\d?\b", src[x[0]][1])))
+            blk = [(*x[:3], x[3] + f" [lượt Claude Code đang chạy lúc commit; prompt: “{step_excerpt(src[x[0]][1])}”; "
+                                   f"bước nhắc trong prompt: {', '.join(steps) or 'không có'}]")]
     return blk
 
 

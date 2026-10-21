@@ -163,6 +163,7 @@ Skill dùng trong repo:
   - R4: AI Critique là một mục trong report chính; AI-02 tham chiếu mục đó, không chép riêng file.
   - P1: giữ nguyên các lượt "Claude (không rõ model)" — ban đầu #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên); không vá script. Mở rộng ở P3.
   - P3 (21/10): mở rộng P1 — giữ nguyên MỌI lượt 'Claude (không rõ model)' (hiện: #118, lượt 20:44 20/10, #387); lý do từng lượt do SV ghi trong prompt_log_notes.toml; trước khi nộp trích lại lần cuối, AI-03 liệt kê đủ các lượt này.
+  - N1 = c (21/10, Audit #n): bản đóng băng bước k của feature X ↔ các lượt có giờ > commit cuối của bước k−1 (hoặc commit trước đó) và ≤ commit bước k ("khớp theo: git"); artifact nhiều commit → mỗi feature một dải; section hiện nhãn trong notes, không sửa notes. Khoảng rỗng (một lượt tạo nhiều commit) → "lượt Claude Code đang chạy lúc commit": lượt cuối có giờ ≤ commit, CHỈ xét lượt từ transcript Claude Code (không tính claude-ai_session_*, prompt_log_extra), ghi kèm trích prompt ≤ 15 từ và các bước prompt nhắc tới. Cài ở `tools/audit_tables.py`.
   - P2: `prompt_log_notes.toml` có khoá khoảng `["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]`; gom khoảng theo `HW02/appendix/prompt_log_turns.txt` (`--list --commits`).
 
 **Việc còn mở:** repo bài nộp đã chuyển private (kiểm 21/10/2026); SV tự push; không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
