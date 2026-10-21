@@ -1,0 +1,691 @@
+{
+  "meta": {
+    "language": "vi",
+    "title": "Ví dụ — Cộng hai số (slide Domain Testing)",
+    "project": "Ví dụ bài giảng",
+    "feature": "Cộng hai số nguyên A, B",
+    "feature_code": "SUM",
+    "doc_id": "TCD-SUM-01",
+    "version": "1.0",
+    "date": "2026-10-19",
+    "author": "",
+    "sut_version": "ví dụ",
+    "environment": "bất kỳ",
+    "scope": "Chương trình nhận hai số nguyên A, B trong [-99, 99] và in tổng; ngoài miền hoặc không phải số nguyên thì báo 'Invalid Input'.",
+    "references": [
+      "Slide S04 Domain Testing, ví dụ 'The program adds 2 numbers'"
+    ],
+    "assumptions": [
+      "Thông báo lỗi đúng chữ 'Invalid Input'."
+    ],
+    "bva_model": "9 điểm theo slide; ví dụ dùng LB-1, LB, LB+1, UB-1, UB, UB+1"
+  },
+  "requirements": [
+    {
+      "id": "SUM-1",
+      "text": "Với -99 ≤ A ≤ 99 và -99 ≤ B ≤ 99 (số nguyên), hệ thống hiển thị SUM = A + B."
+    },
+    {
+      "id": "SUM-2",
+      "text": "Nếu A hoặc B ngoài [-99, 99] hoặc không phải số nguyên, hệ thống hiển thị 'Invalid Input'."
+    }
+  ],
+  "domain": {
+    "variables": [
+      {
+        "id": "V1",
+        "name": "A",
+        "io": "input",
+        "source": "ô A",
+        "type": "integer",
+        "constraint": "-99 ≤ A ≤ 99"
+      },
+      {
+        "id": "V2",
+        "name": "B",
+        "io": "input",
+        "source": "ô B",
+        "type": "integer",
+        "constraint": "-99 ≤ B ≤ 99"
+      },
+      {
+        "id": "V3",
+        "name": "Kết quả",
+        "io": "output",
+        "source": "vùng kết quả",
+        "type": "number | message",
+        "constraint": "SUM hoặc 'Invalid Input'"
+      }
+    ],
+    "partitions": [
+      {
+        "id": "EC1",
+        "variable": "V1",
+        "class": "-99 ≤ A ≤ 99",
+        "valid": true,
+        "guideline": "range"
+      },
+      {
+        "id": "EC2",
+        "variable": "V1",
+        "class": "A < -99",
+        "valid": false,
+        "guideline": "range"
+      },
+      {
+        "id": "EC3",
+        "variable": "V1",
+        "class": "A > 99",
+        "valid": false,
+        "guideline": "range"
+      },
+      {
+        "id": "EC4",
+        "variable": "V1",
+        "class": "A không phải số nguyên",
+        "valid": false,
+        "guideline": "type"
+      },
+      {
+        "id": "EC5",
+        "variable": "V2",
+        "class": "-99 ≤ B ≤ 99",
+        "valid": true,
+        "guideline": "range"
+      },
+      {
+        "id": "EC6",
+        "variable": "V2",
+        "class": "B < -99",
+        "valid": false,
+        "guideline": "range"
+      },
+      {
+        "id": "EC7",
+        "variable": "V2",
+        "class": "B > 99",
+        "valid": false,
+        "guideline": "range"
+      },
+      {
+        "id": "EC8",
+        "variable": "V2",
+        "class": "B không phải số nguyên",
+        "valid": false,
+        "guideline": "type"
+      },
+      {
+        "id": "EC9",
+        "variable": "V3",
+        "class": "SUM = A + B",
+        "valid": true,
+        "guideline": "output"
+      },
+      {
+        "id": "EC10",
+        "variable": "V3",
+        "class": "'Invalid Input'",
+        "valid": false,
+        "guideline": "output"
+      }
+    ]
+  },
+  "suites": [
+    {
+      "id": "TS-DOM",
+      "name": "Domain — minimum set",
+      "format": "matrix",
+      "procedure": [
+        {
+          "action": "Mở trang Cộng hai số; nhập giá trị A và B theo dòng dữ liệu",
+          "expected": "Hai ô hiển thị đúng giá trị đã gõ"
+        },
+        {
+          "action": "Nhấn nút 'Tính'",
+          "expected": "Hệ thống hiển thị SUM hoặc thông báo 'Invalid Input'"
+        }
+      ],
+      "columns": [
+        "A",
+        "B"
+      ],
+      "cases": [
+        {
+          "id": "TC-SUM-01",
+          "title": "Kiểm tra phép cộng với A, B trong miền hợp lệ (10, 9)",
+          "inputs": {
+            "A": "10",
+            "B": "9"
+          },
+          "expected_result": "Hiển thị 19",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC1",
+            "EC5",
+            "EC9"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Giá trị giữa miền, phủ cả hai lớp hợp lệ",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-02",
+          "title": "Kiểm tra phép cộng khi A nhỏ hơn -99 (-102)",
+          "inputs": {
+            "A": "-102",
+            "B": "9"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC2",
+            "EC10"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện lớp A < -99, B giữ hợp lệ",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-03",
+          "title": "Kiểm tra phép cộng khi A lớn hơn 99 (102)",
+          "inputs": {
+            "A": "102",
+            "B": "9"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC3",
+            "EC10"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện lớp A > 99",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-04",
+          "title": "Kiểm tra phép cộng khi A không phải số (Abc)",
+          "inputs": {
+            "A": "Abc",
+            "B": "9"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC4",
+            "EC10"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Sai kiểu dữ liệu",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-05",
+          "title": "Kiểm tra phép cộng khi B nhỏ hơn -99 (-200)",
+          "inputs": {
+            "A": "10",
+            "B": "-200"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC6",
+            "EC10"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện lớp B < -99",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-06",
+          "title": "Kiểm tra phép cộng khi B lớn hơn 99 (200)",
+          "inputs": {
+            "A": "10",
+            "B": "200"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC7",
+            "EC10"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Đại diện lớp B > 99",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-07",
+          "title": "Kiểm tra phép cộng khi B là số thực (1.25)",
+          "inputs": {
+            "A": "10",
+            "B": "1.25"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC8",
+            "EC10"
+          ],
+          "technique": "EP",
+          "bva_point": "",
+          "rationale": "Số không nguyên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "TS-BVA",
+      "name": "Boundary values",
+      "format": "matrix",
+      "procedure": [
+        {
+          "action": "Mở trang Cộng hai số; nhập giá trị A và B theo dòng dữ liệu",
+          "expected": "Hai ô hiển thị đúng giá trị đã gõ"
+        },
+        {
+          "action": "Nhấn nút 'Tính'",
+          "expected": "Hệ thống hiển thị SUM hoặc thông báo 'Invalid Input'"
+        }
+      ],
+      "columns": [
+        "A",
+        "B"
+      ],
+      "cases": [
+        {
+          "id": "TC-SUM-10",
+          "title": "Kiểm tra phép cộng khi A = -100 (LB-1)",
+          "inputs": {
+            "A": "-100",
+            "B": "9"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC2",
+            "EC10"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB-1",
+          "rationale": "Ngay dưới biên dưới",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-11",
+          "title": "Kiểm tra phép cộng khi A = -99 (LB)",
+          "inputs": {
+            "A": "-99",
+            "B": "9"
+          },
+          "expected_result": "Hiển thị -90",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC1",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "Biên dưới",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-12",
+          "title": "Kiểm tra phép cộng khi A = -98 (LB+1)",
+          "inputs": {
+            "A": "-98",
+            "B": "9"
+          },
+          "expected_result": "Hiển thị -89",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC1",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB+1",
+          "rationale": "Ngay trên biên dưới",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-13",
+          "title": "Kiểm tra phép cộng khi A = 98 (UB-1)",
+          "inputs": {
+            "A": "98",
+            "B": "9"
+          },
+          "expected_result": "Hiển thị 107",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC1",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "UB-1",
+          "rationale": "Ngay dưới biên trên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-14",
+          "title": "Kiểm tra phép cộng khi A = 99 (UB)",
+          "inputs": {
+            "A": "99",
+            "B": "9"
+          },
+          "expected_result": "Hiển thị 108",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC1",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "UB",
+          "rationale": "Biên trên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-15",
+          "title": "Kiểm tra phép cộng khi A = 100 (UB+1)",
+          "inputs": {
+            "A": "100",
+            "B": "9"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC3",
+            "EC10"
+          ],
+          "technique": "BVA",
+          "bva_point": "UB+1",
+          "rationale": "Ngay trên biên trên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-16",
+          "title": "Kiểm tra phép cộng khi B = -100 (LB-1)",
+          "inputs": {
+            "A": "10",
+            "B": "-100"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC6",
+            "EC10"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB-1",
+          "rationale": "Ngay dưới biên dưới",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-17",
+          "title": "Kiểm tra phép cộng khi B = -99 (LB)",
+          "inputs": {
+            "A": "10",
+            "B": "-99"
+          },
+          "expected_result": "Hiển thị -89",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC5",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB",
+          "rationale": "Biên dưới",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-18",
+          "title": "Kiểm tra phép cộng khi B = -98 (LB+1)",
+          "inputs": {
+            "A": "10",
+            "B": "-98"
+          },
+          "expected_result": "Hiển thị -88",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC5",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "LB+1",
+          "rationale": "Ngay trên biên dưới",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-19",
+          "title": "Kiểm tra phép cộng khi B = 98 (UB-1)",
+          "inputs": {
+            "A": "10",
+            "B": "98"
+          },
+          "expected_result": "Hiển thị 108",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC5",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "UB-1",
+          "rationale": "Ngay dưới biên trên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-20",
+          "title": "Kiểm tra phép cộng khi B = 99 (UB)",
+          "inputs": {
+            "A": "10",
+            "B": "99"
+          },
+          "expected_result": "Hiển thị 109",
+          "requirements": [
+            "SUM-1"
+          ],
+          "covers": [
+            "EC5",
+            "EC9"
+          ],
+          "technique": "BVA",
+          "bva_point": "UB",
+          "rationale": "Biên trên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        },
+        {
+          "id": "TC-SUM-21",
+          "title": "Kiểm tra phép cộng khi B = 100 (UB+1)",
+          "inputs": {
+            "A": "10",
+            "B": "100"
+          },
+          "expected_result": "Invalid Input",
+          "requirements": [
+            "SUM-2"
+          ],
+          "covers": [
+            "EC7",
+            "EC10"
+          ],
+          "technique": "BVA",
+          "bva_point": "UB+1",
+          "rationale": "Ngay trên biên trên",
+          "layer": "UI",
+          "origin": "AI",
+          "priority": "High",
+          "status": "Not run",
+          "actual_result": "",
+          "evidence": "",
+          "bug_id": "",
+          "notes": ""
+        }
+      ]
+    }
+  ]
+}

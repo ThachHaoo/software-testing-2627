@@ -1,6 +1,6 @@
 # Đối chiếu Lý do ở 10.2 với dữ kiện ở 10.1 (chỉ liệt kê)
 
-> AI sinh bằng `python tools/audit_tables.py HW02 --print auditcheck`. Hàng 10.2 và 10.1 ghép theo thứ tự hàng (mã B1–B4 xuất hiện hai lần: bản đóng băng B_FR07 và dữ kiện bug). Không sửa Lý do của em.
+> AI sinh bằng `python tools/audit_tables.py HW02 --print auditcheck`. Hàng 10.2 và 10.1 ghép theo thứ tự hàng. Không sửa Lý do của em.
 
 | Mã | Artifact | Lý do (10.2, nguyên văn) | Cột (5) ở 10.1 | Điểm cần xem |
 |---|---|---|---|---|

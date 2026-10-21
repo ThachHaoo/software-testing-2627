@@ -1,0 +1,76 @@
+# Phần mở rộng `domain` cho testcases.json
+
+File vẫn hợp lệ với schema của skill `test-case-writing` (meta, requirements, suites, cases), nên linter và script build Word/Excel của giảng viên vẫn chạy. Skill này thêm:
+
+```jsonc
+{
+  "meta": { "...": "như test-case-writing", "feature_code": "A_FR01", "bva_model": "9 điểm theo slide (LB-1, LB, LB+1, NOM, UB-1, UB, UB+1, MIN_UI, MAX_UI)" },
+  "requirements": [ {"id": "FR-01.1", "text": "..."} ],
+
+  "domain": {
+    "variables": [
+      {"id": "V1", "name": "Mật khẩu", "io": "input",  "source": "ô 'Mật khẩu' (Register.jsx) / body.password", "type": "string", "constraint": "trích đặc tả"},
+      // tuỳ chọn trên biến đầu vào: "no_upper_bound": "B1" (mã giả định khai miền không có cận trên)
+      {"id": "V9", "name": "Kết quả đăng ký", "io": "output", "source": "thông báo / chuyển trang / bản ghi DB", "type": "enum", "constraint": "..."}
+    ],
+    "partitions": [
+      {"id": "EC1", "variable": "V1", "class": "mô tả lớp, ví dụ 1 ≤ x ≤ 999", "valid": true,  "guideline": "range", "note": ""},
+      {"id": "EC2", "variable": "V1", "class": "x < 1",                        "valid": false, "guideline": "range", "note": ""}
+      // tuỳ chọn: "requirements": ["FR-01.6", "A4"] trên mỗi EC (cho phép mã giả định) → render_md.py sinh bảng truy vết từ ánh xạ EC → yêu cầu
+    ]
+  },
+
+  "suites": [
+    {
+      "id": "TS-DOM", "name": "Domain — minimum set", "format": "matrix",
+      "procedure": [ {"action": "...", "expected": "..."} ],
+      "columns": ["Tên cột = tên biến đầu vào"],
+      "cases": [
+        {
+          "id": "TC-FR01-01", "title": "Kiểm tra … khi …",
+          "inputs": {"...": "..."},
+          "expected_result": "oracle kiểm chứng được",
+          "requirements": ["FR-01.1"],
+          "covers": ["EC1", "EC5"],          // mảng mã EC (chuỗi "EC1, EC5" cũng được)
+          "ec_target": ["EC1"],             // tuỳ chọn: EC case được thiết kế để kiểm (lớp vào cần thử + lớp ra Expected khẳng định) ⊆ covers; truy vết sinh từ đây
+          "assumptions": ["B12"],           // tuỳ chọn: mã giả định quyết định Expected của case không gắn EC (GUI); không đặt mã giả định trong requirements vì linter giảng viên báo lỗi
+          "technique": "EP",                // EP | BVA | EG (error guessing) | ST (state transition)
+          "bva_point": "",                  // LB-1 | LB | LB+1 | NOM | UB-1 | UB | UB+1 | MIN_UI | MAX_UI
+          "approach": "gray-box",           // tuỳ chọn: black-box (mặc định khi vắng) | gray-box | white-box — case được chọn dựa trên hiểu biết về mã/cấu trúc SUT
+          "rationale": "vì sao chọn giá trị này",
+          "layer": "UI",                    // UI | API | Mobile
+          "origin": "AI",                   // AI | Human | Both
+          "priority": "High",
+          "status": "Not run",              // Not run | Pass | Fail | Blocked | Skipped
+          "actual_result": "", "evidence": "", "bug_id": "", "notes": ""
+        }
+      ]
+    },
+    { "id": "TS-BVA", "name": "Boundary values", "format": "matrix", "...": "..." },
+    { "id": "TS-SV",  "name": "Bổ sung của sinh viên", "format": "matrix", "...": "..." }
+  ]
+}
+```
+
+## Quy tắc cột Yêu cầu của EC
+
+- Chứa mã yêu cầu đặc tả mà lớp kiểm, và **chỉ những mã giả định quyết định Expected** của lớp (vd giả định về công thức, cách hiểu nhãn, mã lỗi).
+- **Không** đưa vào: giả định phạm vi (đưa feature/tầng/suite nào vào kiểm — vd B6, B7, B10, B16 của B_FR07) và giả định chọn đại diện (vd B19). Các giả định này vẫn nằm ở `meta.assumptions`.
+- Yêu cầu của lớp phải đúng cho mọi tầng mà lớp áp dụng; yêu cầu chỉ đúng ở một tầng thì tách lớp theo tầng.
+
+## Quy tắc `check_domain.py` kiểm
+
+| Mức | Kiểm tra |
+|---|---|
+| ERROR | `covers` trỏ tới EC không tồn tại; EC trỏ tới biến không tồn tại; trùng mã TC/EC |
+| ERROR | Một case phủ **từ 2 lớp không hợp lệ trở lên** (vi phạm quy tắc chọn case không hợp lệ) |
+| WARN | EC chưa được case nào phủ |
+| WARN | Biến đầu vào không có lớp không hợp lệ nào; biến đầu ra chưa phân lớp |
+| WARN | Case BVA thiếu `bva_point`; lớp `range` chưa có đủ LB/UB và hai láng giềng |
+| WARN | Case thiếu `rationale`, `origin`, `technique` |
+| WARN | `approach` có giá trị ngoài black-box/gray-box/white-box |
+| ERROR | `ec_target` có EC không nằm trong `covers`; case không hợp lệ không có đúng 1 EC không hợp lệ trong `ec_target` |
+| WARN | TC trong suite TS-DOM*/TS-BVA* thiếu `ec_target` (chỉ khi file đã dùng trường này) |
+| ERROR | `bva_point: "LARGE"` khi biến khoảng của case không có `no_upper_bound` trỏ tới giả định có thật, hoặc mã đó không nằm trong `assumptions` của case; `no_upper_bound` trỏ tới giả định không tồn tại |
+| — | Biến có `no_upper_bound`: kiểm thiếu điểm biên chỉ xét LB-1/LB/LB+1 |
+| INFO | Thống kê: số EC (hợp lệ/không), số case theo suite, theo origin, theo status |
