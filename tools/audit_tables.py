@@ -416,7 +416,109 @@ def b_aiforms(hw):
         f"\n\n*Kiểm bằng script lúc sinh report. File khác trong `ai-forms/`: {', '.join(other) or 'không có'}.*"
 
 
+REPORT = "23120255_HW02_Report.md"
+# Quyết định SV 21/10 (V1, V2) cho 10.3 — chép nguyên văn câu lý do SV chốt
+V1 = ("VALID", "đã đủ tốt ở các case AI tìm ra")
+V2 = ("INCOMPLETE", "hiểu nhầm context nên phải chỉnh sửa")
+
+
+def tc_states(hw):
+    """[(TC, suite, origin, trạng thái sửa, giữ nguyên?)] cho mọi TC origin AI/Both."""
+    return [(r[0], r[1], r[2], r[3], r[3].startswith("giữ nguyên")) for r in _tceval_rows(hw)]
+
+
+def b_tc103(hw):
+    st = tc_states(hw)
+    by = {}
+    for tc, suite, og, state, keep in st:
+        if keep:
+            key = (FEATS[re.search(r"FR\d\d", tc).group(0)], suite)
+            by[key] = by.get(key, 0) + 1
+    a = table(["Feature", "Suite", "Số TC giữ nguyên bản AI", "Verdict", "Lý do"], [(f, s, n, V1[0], V1[1]) for (f, s), n in by.items()])
+    ch = [(tc, state, V2[0], V2[1]) for tc, suite, og, state, keep in st if not keep]
+    b = table(["TC", "Thay đổi (git)", "Verdict", "Lý do"], ch)
+    return (f"**Bảng A – TC giữ nguyên bản AI (gộp theo suite)**\n\n{a}\n\n"
+            f"**Bảng B – TC khác bản AI hoặc không có trong bản đóng băng**\n\n{b}\n\n"
+            f"*{len(st)} TC có `origin` AI/Both: {sum(x[4] for x in st)} giữ nguyên, {sum(not x[4] for x in st)} khác/không có trong bản đóng băng. "
+            "Verdict và lý do theo quyết định của em (V1, V2, 21/10), áp theo trạng thái sửa trong git. "
+            "Bản đánh giá từng TC trước đó: `appendix/audit_103_sv_old.md`.*")
+
+
+def verdicts_102(hw):
+    """[(mã, artifact, verdict)] từ bảng 10.2 trong report (em viết), theo thứ tự hàng."""
+    t = (hw / REPORT).read_text(encoding="utf-8")
+    s = t[t.index("### 10.2"):t.index("### 10.3")]
+    out = []
+    for l in s.splitlines():
+        c = [x.strip() for x in l.strip().strip("|").split("|")]
+        if len(c) >= 4 and re.match(r"[A-Z]\d+$", c[0]):
+            out.append((c[0], c[1], c[2], c[3]))
+    return out
+
+
+def b_audit104(hw):
+    v = [x for x in verdicts_102(hw) if x[0] != "F1"]
+    st = tc_states(hw)
+    tcv = [V1[0] if x[4] else V2[0] for x in st]
+    def row(name, vs):
+        n = len(vs)
+        cnt = {k: sum(1 for x in vs if x.upper().startswith(k)) for k in ("VALID", "INVALID", "INCOMPLETE")}
+        other = n - sum(cnt.values())
+        pct = lambda k: f"{cnt[k]} ({cnt[k] / n:.1%})" if n else "0"
+        return (name, pct("VALID"), pct("INVALID"), pct("INCOMPLETE"), f"{n}" + (f" (khác: {other})" if other else ""))
+    return table(["", "VALID", "INVALID", "INCOMPLETE", "Tổng"],
+                 [row("Artifact (cột (3) ở 10.2, không tính F1)", [x[2] for x in v]),
+                  row("TC do AI sinh (theo số TC ở 10.3)", tcv)]) + \
+        "\n\n*Tỉ lệ = số verdict loại đó / tổng hàng (hoặc tổng TC). Đếm bằng script từ cột Verdict ở 10.2 và trạng thái TC ở 10.3.*"
+
+
+def b_auditcheck(hw):
+    """Hàng 10.2 có Lý do có thể mâu thuẫn với dữ kiện ở 10.1 (chỉ liệt kê, không kết luận)."""
+    arts = freeze_rows(hw) + extra_rows(hw)
+    v = verdicts_102(hw)
+    feats = {f: json.load(open(hw / f / "testcases.json", encoding="utf-8")) for f in FEATS.values()}
+    ids = {}
+    for f, d in feats.items():
+        s = {x["id"] for x in d["domain"]["variables"]} | {x["id"] for x in d["domain"]["partitions"]}
+        s |= {re.match(r"([A-Z]\d+[a-z]?)", a).group(1) for a in d["meta"]["assumptions"] if re.match(r"[A-Z]\d", a)}
+        s |= {c["id"] for x in d["suites"] for c in x["cases"]} | {c["id"].split("-")[-1] for x in d["suites"] for c in x["cases"]}
+        ids[f] = s
+    out = ["# Đối chiếu Lý do ở 10.2 với dữ kiện ở 10.1 (chỉ liệt kê)", "",
+           "> AI sinh bằng `python tools/audit_tables.py HW02 --print auditcheck`. Hàng 10.2 và 10.1 ghép theo thứ tự hàng (mã B1–B4 xuất hiện hai lần: bản đóng băng B_FR07 và dữ kiện bug). Không sửa Lý do của em.", ""]
+    rows = []
+    for i, (code, name, verdict, why) in enumerate(v):
+        if i >= len(arts):
+            break
+        a = arts[i]
+        data = f"{a[3]} {a[4]}"
+        issues = []
+        why_n = re.sub(r"(?i)bước\s*\d+", "", why)  # số bước (vd "bước 5") không phải số liệu
+        nums = [n for n in re.findall(r"(?<![\w.#/-])(\d+)(?![\w.:/])", why_n) if n not in re.findall(r"\d+", data)]
+        if nums:
+            issues.append(f"số trong Lý do không có ở cột (2)/(5): {', '.join(dict.fromkeys(nums))}")
+        if re.search(r"\bSV\b", why) and not re.search(r"\bSV\b", a[4]) and "Commit cùng bước" not in a[4]:
+            issues.append("Lý do nói SV làm/sửa nhưng cột (5) không có commit ghi \"SV\"")
+        feat = next((f for f in FEATS.values() if a[1].startswith(f)), None)
+        if feat:
+            toks = re.findall(r"\b(?:EC\d+|V\d+|[A-D]\d+[a-z]?|TC-\d+)\b", why)
+            miss = [x for x in toks if x.replace("TC-", "") not in ids[feat] and x not in ids[feat]]
+            if miss:
+                issues.append(f"mã không có trong `{feat}/testcases.json`: {', '.join(dict.fromkeys(miss))}")
+        if issues:
+            rows.append((code, name, why, a[4], "; ".join(issues)))
+    out.append(table(["Mã", "Artifact", "Lý do (10.2, nguyên văn)", "Cột (5) ở 10.1", "Điểm cần xem"], rows) if rows else "Không có hàng nào.")
+    out.append("")
+    out.append(f"*{len(rows)} hàng.*")
+    return "\n".join(out)
+
+
 def b_tceval(hw):
+    rows = _tceval_rows(hw)
+    return table(["TC", "Suite", "Nguồn", "Trạng thái sửa (so bản AI đóng băng cuối chứa TC; git)", "Verdict"], rows) + \
+        f"\n\n*{len(rows)} TC có `origin` AI hoặc Both. Bản AI đóng băng cuối của một bước có thể đã gồm các vòng AI sửa theo review (B, C, D có nhiều lần đóng băng mỗi bước). Sinh một lần bằng `python tools/audit_tables.py {hw.name} --print tceval`; không chạy lại sau khi em điền cột Verdict.*"
+
+
+def _tceval_rows(hw):
     rows = []
     for feat in FEATS.values():
         d = json.load(open(hw / feat / "testcases.json", encoding="utf-8"))
@@ -450,8 +552,7 @@ def b_tceval(hw):
                         ch = next((h for t, h, cs in hist if t > w and c["id"] in cs and any(cs[c["id"]].get(k) != base.get(k) for k in DESIGN)), "?")
                         state = f"khác bản AI `{n}` ở {', '.join(diff)}; commit đầu tiên khác: `{ch}`"
                 rows.append((c["id"], s["id"], c.get("origin"), state, "`<SV viết>`"))
-    return table(["TC", "Suite", "Nguồn", "Trạng thái sửa (so bản AI đóng băng cuối chứa TC; git)", "Verdict"], rows) + \
-        f"\n\n*{len(rows)} TC có `origin` AI hoặc Both. Bản AI đóng băng cuối của một bước có thể đã gồm các vòng AI sửa theo review (B, C, D có nhiều lần đóng băng mỗi bước). Sinh một lần bằng `python tools/audit_tables.py {hw.name} --print tceval`; không chạy lại sau khi em điền cột Verdict.*"
+    return rows
 
 
 def b_tree(hw):
@@ -484,8 +585,9 @@ def b_tree(hw):
         f"*{len(files)} file đang commit trong `{hw.name}/` (sinh từ `git ls-files {hw.name}`, đúng nội dung `git archive HEAD {hw.name}`).*"
 
 
-BLOCKS = {"summary": b_summary, "allbugs": b_allbugs, "artifacts": b_artifacts, "aiforms": b_aiforms, "tree": b_tree}
-ONCE = {"auditsv": b_auditsv, "tceval": b_tceval}
+BLOCKS = {"summary": b_summary, "allbugs": b_allbugs, "artifacts": b_artifacts, "aiforms": b_aiforms, "tree": b_tree,
+          "tc103": b_tc103, "audit104": b_audit104}
+ONCE = {"auditsv": b_auditsv, "tceval": b_tceval, "auditcheck": b_auditcheck}
 
 
 def main():
