@@ -3,14 +3,14 @@
 | Mục | Giá trị |
 |---|---|
 | SUT | EShop, fork nhóm `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã) |
-| Máy | [...] (OS, CPU/RAM) |
-| Node.js | [...] (`node -v`) |
-| Trình duyệt | [...] (tên + phiên bản) |
+| Máy | OS: Window 11, CPU: i5-13500H, RAM: 16GB |
+| Node.js | v24.15.0 |
+| Trình duyệt | Cốc Cốc: Phiên bản 158.0.124 (Phiên bản chính thức) (64 bit) |
 | Backend / Web / Admin | http://localhost:3000 · :5173 · :5174 |
-| Điện thoại | [...] (model, Android/iOS + phiên bản) |
-| Expo Go | [...] (bản cho SDK 54) |
-| Thay đổi SUT | `frontend-mobile/App.js` dòng 16 `API_URL` → IP LAN `[...]` (xem `mobile_api_url.patch`) |
-| Playwright | [...] (`npx playwright --version`) |
+| Điện thoại | POCO F5 · OS 1.0.5.0.UMRTWXM · Android 14 (UKQ1.230804.001)  (model, Android/iOS + phiên bản) |
+| Expo Go | 54.0.8 (SDK 54; `frontend-mobile/package.json`: `expo ~54.0.33`) |
+| Thay đổi SUT | `frontend-mobile/App.js` dòng 16 `API_URL` → IP LAN `http://192.168.2.12` |
+| Playwright | playwright@1.64.1 |
 
 ## D_FR20 (Mobile, chạy tay — D15)
 
