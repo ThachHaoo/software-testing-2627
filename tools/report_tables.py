@@ -6,7 +6,8 @@ Script KHÔNG dùng AI và không viết lời giải thích: chỉ thay nội d
   <!-- REPORT:<feature>:<khối>:START --> ... <!-- REPORT:<feature>:<khối>:END -->
 trong file report. Marker nào không có trong report thì bỏ qua.
 
-Khối: scope, req, assum, vars, parts, min, bva, exec, bugs.
+Khối: scope, req, assum, vars, parts, min, bva, exec, bugs, sv, gap, cmp (cmp: chỉ D_FR20, đọc compare_web_mobile.md).
+Khung bảng phân tích của SV (ngoài marker, in một lần rồi dán): --print gapsv
 
 Cách dùng (từ gốc repo):
   python tools/report_tables.py HW02 A_FR01 --report HW02/23120255_HW02_Report.md
@@ -21,7 +22,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-POINTS = ["LB-1", "LB", "LB+1", "NOM", "UB-1", "UB", "UB+1", "MIN_UI", "MAX_UI"]
+POINTS = ["LB-1", "LB", "LB+1", "NOM", "UB-1", "UB", "UB+1", "LARGE", "MIN_UI", "MAX_UI"]
 MAX_IDS = 4      # số mã TC tối đa hiện trong ô "TC phủ"
 SAMPLE = 3       # số case mẫu mỗi suite ở bảng minimum set
 
@@ -57,7 +58,7 @@ def git(*a):
 
 
 def aid(a):
-    m = re.match(r"(A\d+)", a)
+    m = re.match(r"([A-Z]\d+[a-z]?)", a)
     return m.group(1) if m else a[:4]
 
 
@@ -128,8 +129,11 @@ def assumption_history(ctx):
 
 def b_assum(ctx):
     hist = assumption_history(ctx)
-    rows = [(*(x.strip() for x in a.split(":", 1)), hist.get(aid(a), "")) if ":" in a else (aid(a), a, hist.get(aid(a), ""))
-            for a in ctx["d"]["meta"]["assumptions"]]
+    rows = []
+    for a in ctx["d"]["meta"]["assumptions"]:
+        # nhãn = mã + (tên) + [loại…] trước dấu ':' đầu tiên nằm ngoài ngoặc
+        m = re.match(r"([A-Z]\d+[a-z]?(?:\s*\([^)]*\))?(?:\s*\[[^\]]*\])?)\s*:\s*(.*)", a, re.S)
+        rows.append((m.group(1), m.group(2), hist.get(aid(a), "")) if m else (aid(a), a, hist.get(aid(a), "")))
     return table(["Mã", "Nội dung (nguyên văn, gồm ghi chú chốt)", "Nguồn gốc (ai-outputs + git)"], rows) + \
         f"\n\n*Nguồn: `{ctx['rel']}` → `meta.assumptions` (bản HEAD); cột cuối so với `appendix/ai-outputs/{ctx['feat']}_step*.json` và `git log -- {ctx['feat']}/testcases.json`.*"
 
@@ -168,44 +172,62 @@ def b_min(ctx):
         if not s["id"].startswith("TS-DOM"):
             continue
         cols = s.get("columns", [])
-        rows = [(c["id"], c["title"], ", ".join(c.get("covers", [])), *[show(c["inputs"].get(k, "")) for k in cols],
-                 c["expected_result"], c.get("origin", "")) for c in s["cases"][:SAMPLE]]
+        tgt = any("ec_target" in c for c in s["cases"])
+        rows = [(c["id"], c["title"], ", ".join(c.get("covers", [])), *([", ".join(c.get("ec_target", []))] if tgt else []),
+                 *[show(c["inputs"].get(k, "")) for k in cols], c["expected_result"], c.get("origin", "")) for c in s["cases"][:SAMPLE]]
         out.append(f"**{s['id']} — {s['name']}** ({len(s['cases'])} case; trích {min(SAMPLE, len(s['cases']))} case đầu)\n")
-        out.append(table(["#TC", "Tiêu đề", "EC phủ", *cols, "Expected", "Nguồn"], rows) + "\n")
+        out.append(table(["#TC", "Tiêu đề", "EC phủ", *(["EC mục tiêu"] if tgt else []), *cols, "Expected", "Nguồn"], rows) + "\n")
     out.append(f"*Đủ các case và cột \"Lý do chọn input\": `{ctx['feat']}/testcases.md` mục Bước 3b.*")
     return "\n".join(out)
 
 
 def b_bva(ctx):
-    var = {p["id"]: p for p in ctx["d"]["domain"]["partitions"]}
+    part = {p["id"]: p for p in ctx["d"]["domain"]["partitions"]}
+    vin = {v["id"] for v in ctx["d"]["domain"]["variables"] if v["io"] == "input"}
+    order = {p: i for i, p in enumerate(POINTS)}
     out = []
     for s in ctx["d"]["suites"]:
         if not s["id"].startswith("TS-BVA"):
             continue
-        # gom case liên tiếp thành từng chiều: chiều mới bắt đầu ở điểm LB-1
-        dims, cur = [], None
+        # chiều mới khi bva_dimension đổi, hoặc thứ tự điểm không tăng (LB-1 → LB → … rồi quay lại)
+        dims, cur, last = [], None, None
         for c in s["cases"]:
-            if c.get("bva_point") == "LB-1" or cur is None:
+            pt = order.get(c.get("bva_point"), -1)
+            if cur is None or pt <= last or c.get("bva_dimension") != cur[0].get("bva_dimension"):
                 cur = []
                 dims.append(cur)
             cur.append(c)
+            last = pt
         rows = []
         for dim in dims:
-            lb = next((c for c in dim if c.get("bva_point") == "LB"), dim[0])
-            ec = next((e for e in lb.get("covers", []) if e in var and var[e]["valid"]), "")
-            keys = [k for k in dim[0]["inputs"] if len({c["inputs"].get(k) for c in dim}) > 1 and "{ts}" not in str(dim[0]["inputs"].get(k))][:1]
-            label = f"{var[ec]['variable']} – {ec} {var[ec]['class']}" if ec else "?"
+            # biến đang xét = cột có nhiều giá trị khác nhau nhất trong chiều (bỏ cột chứa {ts}); bằng nhau → cột đứng trước
+            nval = {k: len({str(c["inputs"].get(k)) for c in dim}) for k in dim[0]["inputs"]
+                    if "{ts}" not in str(dim[0]["inputs"].get(k))}
+            best = max(nval.values(), default=1)
+            keys = [k for k, n in nval.items() if n == best and n > 1][:1]
+            ref = next((c for c in dim if c.get("bva_point") == "LB"), dim[0])
+            ecs = ref.get("ec_target") or ref.get("covers", [])
+            ec = next((e for e in ecs if e in part and part[e]["valid"] and part[e]["variable"] in vin), "")
+            name = dim[0].get("bva_dimension") or (keys[0] if keys else dim[0]["title"])
+            label = f"{name} – {ec} {part[ec]['class']}" if ec else name
             by = {c["bva_point"]: c for c in dim}
             row = [label]
             for pt in POINTS:
                 c = by.get(pt)
-                row.append(f"{short(c['id'])}: `{', '.join(str(c['inputs'].get(k)) for k in keys) or '∅'}`" if c else "—")
+                if not c:
+                    row.append("—")
+                elif keys:
+                    v = show(c["inputs"].get(keys[0]))
+                    row.append(f"{short(c['id'])}: " + (v if str(v).startswith("`") else f"`{v}`"))
+                else:
+                    row.append(short(c["id"]))
             rows.append(row)
         out.append(f"**{s['id']} — {s['name']}** ({len(s['cases'])} case)\n")
         out.append(table(["Chiều (biến – lớp hợp lệ ở LB)", *[p.replace("-", "−") for p in POINTS]], rows) + "\n")
         if s.get("notes"):
             out.append(f"Ghi chú suite (nguyên văn): {s['notes']}\n")
-    out.append("*Ô = số cuối mã TC: giá trị biến đang xét (`∅` = rỗng; ở tầng UI ô Xác nhận mật khẩu nhập cùng giá trị Mật khẩu theo cột dữ liệu); \"—\" = không có case ở điểm này. "
+    out.append("*Ô = số cuối mã TC: giá trị của biến đang xét; chiều chỉ có một case thì ô chỉ ghi mã TC (giá trị xem tiêu đề case). "
+               "\"—\" = không có case ở điểm này. "
                f"Expected từng case: `{ctx['feat']}/testcases.md` mục Bước 4.*")
     return "\n".join(out)
 
@@ -225,9 +247,12 @@ def b_exec(ctx):
     diff = [c for c in allc if c.get("auto_status") and c.get("auto_status") != c.get("status")]
     d2 = Counter((c["auto_status"], c["status"]) for c in diff)
     txt = table(["Suite", "Thiết kế", "Đã chạy (Pass+Fail)", "Pass", "Fail", "Blocked", "Chưa chạy", "Nguồn TC"], rows)
-    txt += f"\n\nVerdict cuối khác kết quả tự động gốc (`auto_status`): {len(diff)} case — " + \
-        "; ".join(f"{a}→{b}: {n}" for (a, b), n in sorted(d2.items())) + \
-        " (" + ", ".join(short(c["id"]) for c in diff) + ")."
+    if not any(c.get("auto_status") for c in allc):
+        txt += "\n\nKhông case nào có `auto_status` (chạy tay; `status` = verdict của em)."
+    else:
+        txt += f"\n\nVerdict cuối khác kết quả tự động gốc (`auto_status`): {len(diff)} case — " + \
+            "; ".join(f"{a}→{b}: {n}" for (a, b), n in sorted(d2.items())) + \
+            " (" + ", ".join(short(c["id"]) for c in diff) + ")."
     txt += f"\n\n*Nguồn: `{ctx['rel']}` (`status`, `auto_status`, `origin`); tổng khớp dòng {ctx['feat']} của `python tools/summary.py {ctx['hw'].name}`.*"
     return txt
 
@@ -242,8 +267,14 @@ def parse_bug(p):
 
 
 def b_bugs(ctx):
-    ids = sorted({b for c in all_cases(ctx["d"]) for b in re.findall(r"BUG-\d+", c.get("bug_id") or "")},
-                 key=lambda x: int(x[4:]))
+    cases = all_cases(ctx["d"])
+    ids = {b for c in cases for b in re.findall(r"BUG-\d+", c.get("bug_id") or "")}
+    tcs = {c["id"] for c in cases}
+    for f in (ctx["hw"] / "bugs").glob("BUG-*.md"):  # cùng cách đếm với summary.py: BUG-xx có TC của feature trong "TC liên quan"
+        sec = re.search(r"(?ms)^## TC liên quan\s*$(.*?)(?=^## )", f.read_text(encoding="utf-8"))
+        if sec and set(re.findall(r"TC-[A-Z0-9]+-\d+", sec.group(1))) & tcs:
+            ids.add(f.stem)
+    ids = sorted(ids, key=lambda x: int(x[4:]))
     rows = []
     for b in ids:
         p = ctx["hw"] / "bugs" / f"{b}.md"
@@ -254,11 +285,114 @@ def b_bugs(ctx):
         num = re.search(r"/issues/(\d+)", link)
         rows.append((f"[{bid}](bugs/{b}.md)", fail, title, sev, pri, f"[#{num.group(1)}]({link})" if num else link))
     return table(["Bug ID", "TC liên quan (dòng \"Fail\")", "Tiêu đề", "Severity", "Priority", "GitHub Issue"], rows) + \
-        f"\n\n*(AI chép) nguyên văn các trường `ID`, `Tiêu đề`, `Severity`, `Priority`, dòng \"Fail\" của mục \"TC liên quan\" và \"Link GitHub Issue\" từ `bugs/BUG-xx.md`; danh sách bug = các mã `BUG-xx` trong `bug_id` của `{ctx['rel']}` ({len(rows)} bug).*"
+        f"\n\n*(AI chép) nguyên văn các trường `ID`, `Tiêu đề`, `Severity`, `Priority`, dòng \"Fail\" của mục \"TC liên quan\" và \"Link GitHub Issue\" từ `bugs/BUG-xx.md`; danh sách bug = mã `BUG-xx` trong `bug_id` của `{ctx['rel']}` hoặc có TC của feature trong mục \"TC liên quan\" (cùng cách đếm với `summary.py`; {len(rows)} bug).*"
+
+
+def bugs_of(ctx):
+    """TC → mã BUG-xx: bug_id của case ∪ BUG-xx.md có TC đó trong mục "TC liên quan"."""
+    m = {}
+    for c in all_cases(ctx["d"]):
+        m.setdefault(c["id"], set()).update(re.findall(r"BUG-\d+", c.get("bug_id") or ""))
+    for f in (ctx["hw"] / "bugs").glob("BUG-*.md"):
+        sec = re.search(r"(?ms)^## TC liên quan\s*$(.*?)(?=^## )", f.read_text(encoding="utf-8"))
+        for tc in set(re.findall(r"TC-[A-Z0-9]+-\d+", sec.group(1) if sec else "")):
+            m.setdefault(tc, set()).add(f.stem)
+    return {k: ", ".join(sorted(v, key=lambda x: int(x[4:]))) for k, v in m.items()}
+
+
+def b_sv(ctx):
+    bug = bugs_of(ctx)
+    rows, n = [], Counter()
+    for s in ctx["d"]["suites"]:
+        if not s["id"].startswith("TS-SV"):
+            continue
+        for c in s["cases"]:
+            n[c.get("origin") or "?"] += 1
+            rows.append((c["id"], c["title"], c.get("layer", ""), c.get("technique", "") + (f" ({c['approach']})" if c.get("approach") else ""),
+                         ", ".join(c.get("ec_target") or c.get("covers", [])), c["expected_result"], c.get("origin", ""),
+                         c.get("status", ""), bug.get(c["id"]) or "—"))
+    human = sum(1 for c in all_cases(ctx["d"]) if c.get("origin") == "Human")
+    return table(["#TC", "Tiêu đề", "Tầng", "Kỹ thuật", "EC (ec_target / covers)", "Expected", "Nguồn", "Verdict", "Bug"], rows) + \
+        f"\n\nSố TC em bổ sung (`origin: Human` trong cả feature = cột \"TC SV thêm\" của `summary.py`): **{human}**. " \
+        f"Suite TS-SV*: {len(rows)} case (" + ", ".join(f"{k} {v}" for k, v in sorted(n.items())) + ")." + \
+        f"\n\n*Nguồn: `{ctx['rel']}` (suite TS-SV*), chép nguyên văn. Lý do chọn input, bước, notes: `{ctx['feat']}/testcases.md` mục Bước 5, `{ctx['feat']}/sv_cases.md`.*"
+
+
+def gap_rows(ctx):
+    """Đọc <feature>/ai_gap_answer.md → [(TC, nhãn AI tự nhận, ghi chú)].
+    Nhãn: chữ đậm ở cột (b), (c) (mẫu của A) hoặc tên nhóm "## …" chứa bảng (mẫu B–D)."""
+    p = ctx["hw"] / ctx["feat"] / "ai_gap_answer.md"
+    if not p.exists():
+        return []
+
+    def lab(x):
+        b = re.findall(r"\*\*(.+?)\*\*", x)
+        return " … ".join(b) if b else re.split(r"[;.]", x)[0].strip()
+
+    rows, cols, group = [], None, ""
+    for line in p.read_text(encoding="utf-8").splitlines():
+        if line.startswith("## "):
+            group, cols = line[3:].strip(), None
+        elif line.startswith("| Case SV"):
+            cols = [x.strip() for x in line.strip().strip("|").split("|")]
+        elif not line.startswith("|"):
+            if line.strip():
+                cols = None
+        elif cols and not line.startswith("|---"):
+            cells = [x.strip() for x in line.strip().strip("|").split("|")]
+            m = re.search(r"TC-[A-Z0-9]+-\d+", cells[0])
+            if not m:
+                continue
+            bi = next((i for i, c in enumerate(cols) if c.startswith("(b)")), None)
+            ci = next((i for i, c in enumerate(cols) if c.startswith("(c)")), None)
+            if bi is not None:
+                label = f"(b) {lab(cells[bi])}" + (f" · (c) {lab(cells[ci])}" if ci is not None and cells[ci] else "")
+            else:
+                label = group
+            rows.append((m.group(0), label, "SV đã bỏ (ghi trong ai_gap_answer.md)" if "đã bỏ" in cells[0] else ""))
+    return rows
+
+
+def b_gap(ctx):
+    byid = {c["id"]: c for c in all_cases(ctx["d"])}
+    bugmap = bugs_of(ctx)
+    rows = []
+    for tc, label, note in gap_rows(ctx):
+        c = byid.get(tc)
+        bug = (bugmap.get(tc) or "—") if c else "— (không còn trong JSON)"
+        rows.append((tc, bug, label + (f" — {note}" if note else "")))
+    return table(["TC", "BUG-xx", "AI tự nhận"], rows) + \
+        f"\n\n*Cột \"AI tự nhận\": chép nguyên văn nhãn phân loại trong `{ctx['feat']}/ai_gap_answer.md` " \
+        "(chữ đậm ở cột (b)/(c), hoặc tên nhóm chứa dòng). Đây là lời AI tự nhận, không phải phân tích của em. BUG-xx: `bug_id` của case và các `bugs/BUG-xx.md` có TC trong mục \"TC liên quan\".*"
+
+
+def b_gapsv(ctx):
+    return table(["TC", "Nguyên nhân theo em", "Giải thích"], [(tc, "`<SV viết>`", "`<SV viết>`") for tc, _, _ in gap_rows(ctx)])
+
+
+def b_cmp(ctx):
+    p = ctx["hw"] / ctx["feat"] / "compare_web_mobile.md"
+    if not p.exists():
+        return "(không có compare_web_mobile.md)"
+    lines = p.read_text(encoding="utf-8").splitlines()
+    main = [l for l in lines if l.startswith("| EC")]
+    head = [x.strip() for x in main[0].strip().strip("|").split("|")]
+    keep = [i for i, h in enumerate(head) if not h.startswith("Xử lý")]
+    rows = [[x.strip() for x in l.strip().strip("|").split("|")] for l in main[1:]]
+    out = [table([head[i] for i in keep], [[r[i] for i in keep] for r in rows])]
+    out += [l for l in lines if l.startswith("Tổng:")]
+    gi = next((i for i, l in enumerate(lines) if l.startswith("## GUI")), None)
+    if gi is not None:
+        out.append("**GUI (TS-GUI)**")
+        out.append("\n".join(l for l in lines[gi + 1:] if l.startswith("|")))
+        out += [l for l in lines[gi + 1:] if l.startswith("GUI:")]
+    out.append(f"*Chép từ `{ctx['feat']}/compare_web_mobile.md` (dữ kiện AI gom ở 7/7a); bỏ cột \"Xử lý theo tầng (dòng code)\" cho gọn, xem file gốc.*")
+    return "\n\n".join(out)
 
 
 BLOCKS = {"scope": b_scope, "req": b_req, "assum": b_assum, "vars": b_vars, "parts": b_parts,
-          "min": b_min, "bva": b_bva, "exec": b_exec, "bugs": b_bugs}
+          "min": b_min, "bva": b_bva, "exec": b_exec, "bugs": b_bugs, "sv": b_sv, "gap": b_gap, "cmp": b_cmp}
+EXTRA = {"gapsv": b_gapsv}  # chỉ in ra, không có marker: bảng SV viết, script không ghi đè
 
 
 def main():
@@ -271,13 +405,13 @@ def main():
     ap.add_argument("hw")
     ap.add_argument("feature")
     ap.add_argument("--report")
-    ap.add_argument("--print", dest="show", choices=list(BLOCKS))
+    ap.add_argument("--print", dest="show", choices=list(BLOCKS) + list(EXTRA))
     a = ap.parse_args()
     hw = Path(a.hw)
     ctx = {"hw": hw, "feat": a.feature, "rel": f"{a.feature}/testcases.json",
            "d": json.load(open(hw / a.feature / "testcases.json", encoding="utf-8"))}
     if a.show:
-        print(BLOCKS[a.show](ctx))
+        print({**BLOCKS, **EXTRA}[a.show](ctx))
         return
     if not a.report:
         sys.exit("Cần --report hoặc --print")

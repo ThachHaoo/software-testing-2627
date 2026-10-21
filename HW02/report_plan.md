@@ -107,6 +107,15 @@ Nguồn: đề §6, §7, §9, §10, §12, §14, §17 + Homework Policies (skill 
 | P1 | Giữ nguyên #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên) với model "Claude (không rõ model)"; không vá script. AI-03 cần 1 câu giải thích 2 lượt "không rõ model" |
 | P2 | Vá `tools/extract_prompt_log.py`: khoá khoảng trong `prompt_log_notes.toml` + `--list --commits` (file `appendix/prompt_log_turns.txt`) |
 
+## g) Khai cho Audit
+
+- Phiên thảo luận đưa sai hash `8d837f1` cho A3 bản 2 (đúng `1cfa163`); D5 trích hash sai (`D_FR20/step1_notes.md:121`), nội dung giống hệt. Đã sửa `CLAUDE.md:86`; không sửa file D.
+
+## h) Danh sách cho Mandatory Disclosure
+
+- Khối giải thích từng bước (3.x–6.x) trong report chính do AI nháp, em duyệt/sửa.
+- `tools/report_tables.py` (sinh bảng dữ kiện của report) do AI viết.
+
 ## e) File form gốc
 
 - Không có file `.docx` AI-02/03/05 trong repo (`find -iname "*.docx"` rỗng).

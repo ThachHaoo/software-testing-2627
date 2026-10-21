@@ -22219,7 +22219,30 @@ Quyết định SV: E1=a B1=a
 Phần 1: cảnh báo khoá không khớp.
 
 Hook `on_stop.py` chỉ ghi stderr khi lỗi → cảnh báo sẽ bị nuốt. Thêm 1 dòng để log cảnh báo.
+
+Phần 2: đọc dữ liệu A_FR01.
+
+Đang gom dữ liệu A_FR01 (BVA, suite notes, bug) để dựng bảng.
+
+Đo chênh lệch bản AI đóng băng ↔ bản cuối (làm dữ kiện "review/sửa").
+
+Viết `tools/report_tables.py` sinh bảng giữa marker (để số liệu tái tạo được, dùng lại cho B–D).
+
+Chỉnh 2 chỗ: chỉ hiện biến đầu tiên thay đổi ở BVA; lịch sử giả định liệt kê đủ commit đổi + giữ nhãn.
+
+My slicing bug; fix line directly.
+
+A17/A19 có trong git trước bản đóng băng chứa nó → nhãn "AI nháp bước N" sai. Sửa theo giờ commit ↔ giờ freeze.
+
+Bảng sinh ổn. Giờ viết mục 3 (marker + khối 📝 AI nháp), giữ nguyên 3.5 🔒.
+
+Regex marker rỗng không khớp; sửa.
+
+Kiểm link/ảnh, số so với summary.py, mục 🔒 3.5 không đổi.
+
+Dùng lại `show()` của render_md cho ô giá trị nhập (cùng quy ước ␣).
 ```
+*File AI ghi/gửi trong lượt này:* `report_tables.py`, `secA_top.md`, `secA_bottom.md`
 
 **Xử lý:** [...]
 
