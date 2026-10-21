@@ -23,9 +23,10 @@
 ### 1. Công cụ AI đã dùng:
 
 - **Claude Sonnet 4.6** – 94 lượt
-- **Claude Opus 5.5** – 303 lượt
+- **Claude Opus 5.5** – 307 lượt
 - **Claude (không rõ model)** – 3 lượt (#118, #272, #387)
-- Tổng 397 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md`; 3 lượt có output từ hơn một model nên được đếm ở cả hai. Danh sách mã `#n` từng model ở dòng đó.
+- **Claude Haiku 5.5** – 6 lượt
+- Tổng 407 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md`; 3 lượt có output từ hơn một model nên được đếm ở cả hai. Danh sách mã `#n` từng model ở dòng đó.
 - Trong đó 10 lượt chép tay vào `appendix/prompt_log_extra.toml` (2026-10-19 16:04 – 2026-10-19 17:22; công cụ ghi: Claude Opus 5.5), vì không có trong transcript tự động.
 - Các lượt ghi "Claude (không rõ model)" (#118, #272, #387): transcript không ghi model; giữ nguyên theo P3, lý do từng lượt em ghi trong `appendix/prompt_log_notes.toml`.
 - Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận, lập lệnh, review). Không dùng GitHub Copilot, Cursor, Gemini, ChatGPT.
@@ -72,7 +73,7 @@ Theo section em ghi trong prompt log:
 | Báo cáo HW02 – AI Critique & Hoàn thiện | #381–#386 | 07:52 21/10 – 08:12 21/10 |
 | Báo cáo HW02 – Hoàn thiện | #387–#387 | 08:13 21/10 – 08:13 21/10 |
 | Báo cáo HW02 – AI Critique & Hoàn thiện | #388–#391 | 08:13 21/10 – 08:23 21/10 |
-| Báo cáo HW02 – Hoàn thiện | #392–#397 | 08:26 21/10 – 09:18 21/10 |
+| Báo cáo HW02 – Hoàn thiện | #392–#407 | 08:26 21/10 – 10:30 21/10 |
 
 ### 3. Prompt / nhiệm vụ chính cho AI:
 
@@ -150,11 +151,13 @@ Harness: `CLAUDE.md`, Agent Skill `domain-bva-testing` (SKILL.md, references, `f
 
 ### 6. Trích dẫn tool AI sử dụng:
 
-[1] Anthropic. (2026). *Claude Opus 5.5* [Large language model]. https://claude.ai
+[1] Anthropic. (2026). *Claude Sonnet 4.6* [Large language model]. https://claude.ai
 
-[2] Anthropic. (2026). *Claude Sonnet 4.6* [Large language model]. https://claude.ai
+[2] Anthropic. (2026). *Claude Opus 5.5* [Large language model]. https://claude.ai
 
-[3] Anthropic. (2026). *Claude Code* [Software]. https://claude.com/claude-code
+[3] Anthropic. (2026). *Claude Haiku 5.5* [Large language model]. https://claude.ai
+
+[4] Anthropic. (2026). *Claude Code* [Software]. https://claude.com/claude-code
 
 ## 3. Cam đoan Trung thực
 

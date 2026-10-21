@@ -5,7 +5,7 @@
 # Bảng Kiểm Quyền Riêng tư & Sử dụng AI Có Trách nhiệm
 
 **Bài tập:** HW02-AI – Domain Testing on EShop
-**Công cụ AI:** Claude Sonnet 4.6 94 lượt; Claude Opus 5.5 303 lượt; Claude (không rõ model) 3 lượt (tổng 397 lượt, khớp AI-03 mục 1) – chi tiết ở AI-03 và `appendix/A_prompt_log.md`
+**Công cụ AI:** Claude Sonnet 4.6 94 lượt; Claude Opus 5.5 307 lượt; Claude (không rõ model) 3 lượt; Claude Haiku 5.5 6 lượt (tổng 407 lượt, khớp AI-03 mục 1) – chi tiết ở AI-03 và `appendix/A_prompt_log.md`
 
 *Chỉ tick mục có bằng chứng trong repo (ghi ở cuối dòng). Mục cam kết cá nhân để trống cho em tự xác nhận.*
 

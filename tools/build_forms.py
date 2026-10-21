@@ -172,9 +172,9 @@ def main():
           "- Đối chiếu dữ kiện bằng script: `appendix/gap_check.md` (gap analysis ↔ JSON), `appendix/audit_check.md` (Lý do Audit ↔ git), `tools/summary.py` (số liệu report ↔ JSON).",
           "- Cách tạo prompt log: " + cell(plog), "",
           "### 6. Trích dẫn tool AI sử dụng:", "",
-          "[1] Anthropic. (2026). *Claude Opus 5.5* [Large language model]. https://claude.ai", "",
-          "[2] Anthropic. (2026). *Claude Sonnet 4.6* [Large language model]. https://claude.ai", "",
-          "[3] Anthropic. (2026). *Claude Code* [Software]. https://claude.com/claude-code", "",
+          *[x for i, (m, _, _) in enumerate([y for y in models if "không rõ" not in y[0]], 1)
+            for x in (f"[{i}] Anthropic. (2026). *{m}* [Large language model]. https://claude.ai", "")],
+          f"[{len([y for y in models if 'không rõ' not in y[0]]) + 1}] Anthropic. (2026). *Claude Code* [Software]. https://claude.com/claude-code", "",
           "## 3. Cam đoan Trung thực", "",
           "*Bằng việc ký tên dưới đây, em cam đoan thông tin khai báo ở trên là chính xác và đầy đủ. Em hiểu rằng việc không khai báo hoặc khai báo sai lệch về việc dùng AI sẽ bị coi là vi phạm liêm chính học thuật và có thể dẫn đến điểm 0 cho bài tập cùng việc bị chuyển lên hội đồng kỷ luật.*", ""] + SIGN + REFS
     (hw / "ai-forms" / "AI-03_Disclosure_Form_23120255.md").write_text("\n".join(x for x in a3 if x is not None), encoding="utf-8")

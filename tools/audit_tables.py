@@ -120,7 +120,7 @@ EXTRA = [
     ("P2", "Khung report + bảng dữ kiện + 21 khối giải thích từng bước do AI nháp (§2, x.1–x.4, x.6) + các mục chung", ["HW02/23120255_HW02_Report.md"], ""),
     ("P3", "README HW02 (bảng tự đánh giá trống, khối SUMMARY)", ["HW02/README.md"], ""),
     ("P4", "File lượt chạy tay D (AI chép nguyên văn từ `Check.md` của SV)", ["HW02/D_FR20/results/D_FR20_manual_20261021-001500.json"], ""),
-    ("F1", "Biểu mẫu AI-02/03/05 (.md)", ["HW02/ai-forms"], "chưa làm"),
+    ("F1", "Biểu mẫu AI-02/03/05 (.md)", ["HW02/ai-forms/AI-02_Audit_Report_23120255.md", "HW02/ai-forms/AI-03_Disclosure_Form_23120255.md", "HW02/ai-forms/AI-05_Privacy_Checklist_23120255.md"], ""),
 ]
 
 
