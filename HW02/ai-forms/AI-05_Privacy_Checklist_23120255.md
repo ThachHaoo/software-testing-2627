@@ -21,7 +21,7 @@
 - [x] Không nhập dữ liệu cá nhân của bạn, khách hàng, bệnh nhân.
 - [x] Không paste nguyên si tài liệu có bản quyền lên AI.
 - [x] Không paste code công ty / code open-source giới hạn license.
-- [x] Đã ghi mọi prompt + phản hồi AI vào prompt log có timestamp. — *`appendix/A_prompt_log.md` (397 lượt, trích tự động)*
+- [x] Đã ghi mọi prompt + phản hồi AI vào prompt log có timestamp. — *`appendix/A_prompt_log.md` (407 lượt, trích tự động)*
 
 ## 3. Trước khi nộp bài
 

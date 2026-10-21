@@ -24678,6 +24678,14 @@ Bước 4: xoá 51 dòng `> 📝` trong report (form không có khối 📝; 5 c
 SV-COPY lệch — kiểm do em gộp dòng trống hay do file SV đổi sau đó.
 
 Do em gộp dòng trống làm lệch chữ SV. Làm lại: chỉ xoá dòng 📝 và dòng trống thừa ngay cạnh nó.
+
+Bước 5: trích log, chạy lại bảng. Sửa F1 ở audit_tables (form đã làm → khớp #n theo git).
+
+Prompt log có model mới: **Claude Haiku 5.5 – 6 lượt**. Kiểm các lượt đó.
+
+Số lượt khớp (407). Xuất commit log + 4 PDF.
+
+Bước 6: rà soát cuối bằng script của skill.
 ```
 
 **Xử lý:** Chấp nhận nội dung báo cáo hoàn chỉnh; đối chiếu số liệu đếm từ script để đảm bảo tính chính xác và đồng bộ dữ liệu toàn repo.
