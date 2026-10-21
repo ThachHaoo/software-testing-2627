@@ -14,7 +14,7 @@
 | Mã bài tập: | HW02-AI |
 | Tên bài tập: | Domain Testing on EShop |
 | Cấp độ AI (1–5): | Cấp 4 |
-| Ngày: | [...] |
+| Ngày: | 21/10/2026 |
 | Họ tên sinh viên: | Lê Tấn Hiệp |
 | MSSV: | 23120255 |
 
@@ -169,8 +169,8 @@ Harness: `CLAUDE.md`, Agent Skill `domain-bva-testing` (SKILL.md, references, `f
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Môn học: | CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | Thầy Lâm Quang Vũ, Thầy Trần Duy Hoàng, Cô Trần Thị Bích Hạnh, Thầy Trương Phước Lộc, Thầy Hồ Tuấn Thanh |
-| Ngày: | [...] |
-| Chữ ký: | [...] |
+| Ngày: | 21/10/2026 |
+| Chữ ký: | ![Chữ ký](signature.png) |
 
 ## Tham khảo
 

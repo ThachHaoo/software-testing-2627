@@ -243,8 +243,8 @@ Xem report chính `23120255_HW02_Report.md` mục 11 (R4: Critique chỉ nằm t
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Môn học: | CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | Thầy Lâm Quang Vũ, Thầy Trần Duy Hoàng, Cô Trần Thị Bích Hạnh, Thầy Trương Phước Lộc, Thầy Hồ Tuấn Thanh |
-| Ngày: | [...] |
-| Chữ ký: | [...] |
+| Ngày: | 21/10/2026 |
+| Chữ ký: | ![Chữ ký](signature.png) |
 
 ## Tham khảo
 

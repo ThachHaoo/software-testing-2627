@@ -21,6 +21,7 @@ const CSS = `
   pre { white-space: pre-wrap; word-break: break-word; background: #f6f6f6; padding: 4pt; font-size: 8pt; }
   blockquote { color: #444; border-left: 3px solid #bbb; margin: 4pt 0; padding-left: 6pt; }
   img { max-width: 100%; height: auto; page-break-inside: avoid; }
+  td img { max-height: 70px; width: auto; }  /* ảnh trong ô bảng (vd chữ ký) */
 `;
 
 (async () => {
