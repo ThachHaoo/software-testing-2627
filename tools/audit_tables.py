@@ -28,6 +28,59 @@ from pathlib import Path
 FEATS = {"FR01": "A_FR01", "FR07": "B_FR07", "FR15": "C_FR15", "FR20": "D_FR20"}
 DESIGN = ["title", "inputs", "expected_result", "covers", "ec_target", "bva_point", "rationale", "steps"]
 TBD = "[#n: chờ chốt transcript]"
+LOG = "appendix/A_prompt_log.md"
+FEAT_NUM = {"A_FR01": 3, "B_FR07": 4, "C_FR15": 5, "D_FR20": 6}  # mục của feature trong report = tiền tố section trong notes
+
+
+def turns_of(hw):
+    """Lượt trong prompt log: [(n, giờ, model, section)] theo thứ tự xuất hiện (bỏ tiêu đề nằm trong khối output)."""
+    out, fence = [], None
+    for l in (hw / LOG).read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^(`{3,})", l)
+        if m:
+            fence = None if fence and m.group(1).startswith(fence) and l.strip() == m.group(1) else (fence or m.group(1))
+            continue
+        if fence:
+            continue
+        m = re.match(r"## #(\d+) \| (\d\d:\d\d \d\d/\d\d/\d{4}) \| ([^|]+) \| (.*)$", l)
+        if m:
+            out.append((int(m.group(1)), dt.datetime.strptime(m.group(2), "%H:%M %d/%m/%Y"), m.group(3).strip(), m.group(4).strip()))
+    return out
+
+
+def seckey(sec):
+    """Khoá so section: mã "n.k" ở đầu nếu có (vd "4.1 B_FR07 Bước 1" và "4.1 B_FR07 Bước 1 – …" cùng khoá), không thì cả chuỗi."""
+    m = re.match(r"\d+\.\d+", sec)
+    return m.group(0) if m else sec
+
+
+def nref(hw, h, want=None):
+    """#n cho artifact tạo ở commit h: khối lượt liên tiếp cùng section (theo notes) có giờ ≤ giờ commit.
+    want = mã section bắt buộc ("n.k") với bản đóng băng bước k; không có thì lấy section của lượt cuối trước commit."""
+    if not h:
+        return "[#n: không khớp – chưa có commit]"
+    ts = dt.datetime.fromisoformat(git("log", "-1", "--format=%aI", h).strip()).replace(tzinfo=None, second=0)
+    tl = [x for x in turns_of(hw) if x[1] <= ts]
+    if not tl:
+        return "[#n: không khớp – không có lượt nào trước commit]"
+    if want:
+        cand = [i for i, x in enumerate(tl) if seckey(x[3]) == want]
+        if not cand:
+            return f"[#n: không khớp – notes không có lượt section {want} trước commit (lượt #{tl[-1][0]} ngay trước commit thuộc \"{tl[-1][3]}\")]"
+        end = cand[-1]
+    else:
+        end = len(tl) - 1
+    key = seckey(tl[end][3])
+    if key in ("", "[...]"):
+        return f"[#n: không khớp – lượt #{tl[end][0]} trước commit chưa có section trong notes]"
+    i = end
+    while i > 0 and seckey(tl[i - 1][3]) == key:
+        i -= 1
+    blk = tl[i:end + 1]
+    models = sorted({m for x in blk for m in x[2].split(" + ")})
+    a, b = blk[0], blk[-1]
+    return f"#{a[0]}–#{b[0]} ({a[1]:%H:%M %d/%m} – {b[1]:%H:%M %d/%m}; {', '.join(models)}; section \"{a[3]}\")"
+
 
 # Danh mục artifact ngoài bản đóng băng: (mã, tên, đường dẫn trong repo, ghi chú). Bản đóng băng bước 1–4 sinh tự động.
 EXTRA = [
@@ -181,7 +234,7 @@ def freeze_rows(hw):
         later = ("Commit cùng bước sau commit đầu: " + "; ".join(f"`{c[0]}` {c[2]}" for c in cs[1:]) + ". ") if cs[1:] else ""
         later += "Bản cuối (HEAD) so với bản đóng băng cuối của bước — " + diff_summary(d, final[feat], st)
         rows.append((f"{code}{st}", f"{feat} – bước {st} ({['', 'biến vào/ra', 'lớp tương đương', 'TC Domain', 'TC BVA', '', '', ''][st] or 'thủ tục chạy'})",
-                     f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {TBD}",
+                     f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {nref(hw, first[0] if first else None, f"{FEAT_NUM[feat]}.{st}")}",
                      out, later))
     return rows
 
@@ -195,25 +248,33 @@ def extra_rows(hw):
                   if l and pat.search(l.split("|", 2)[2]) and "HW02[" in l]
             first = cs[0] if cs else None
             out = f"{len(cs)} commit: " + ", ".join(f"`{c[0]}`" for c in cs[:8]) + (" …" if len(cs) > 8 else "")
-            rows.append((code, name, f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {TBD}",
+            rows.append((code, name, f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · [#n: không khớp – artifact gồm {len(cs)} commit ở nhiều bước/feature]",
                          out, "—"))
             continue
         existing = [p for p in paths if Path(p).exists()]
         cs = commits(existing) if existing else []
         if not cs:
-            rows.append((code, name, f"— · {TBD}", note or "(chưa có)", "—"))
+            rows.append((code, name, "— · [#n: không khớp – chưa có file/commit]", note or "(chưa có)", "—"))
             continue
         first = cs[0]
+        if note == "chưa làm":
+            rows.append((code, name, "— · [#n: không khớp – chưa làm]", note, "—"))
+            continue
         out = "; ".join(f"`{p}`" + (f" — “{excerpt(p)}”" if excerpt(p) else "") for p in existing) + (f" · {note}" if note else "")
         sv = [c for c in cs[1:] if re.search(r"\bSV\b", c[2])]
         later = (f"{len(cs) - 1} commit sau; có chữ \"SV\": " + ("; ".join(f"`{c[0]}` {c[2]}" for c in sv) if sv else "không")) if len(cs) > 1 else "không có commit sau"
-        rows.append((code, name, f"{model_of(first[0])} · {first[1]} · `{first[0]}` · {TBD}", out, later))
+        rows.append((code, name, f"{model_of(first[0])} · {first[1]} · `{first[0]}` · {nref(hw, first[0])}", out, later))
     return rows
 
 
 def b_artifacts(hw):
     rows = freeze_rows(hw) + extra_rows(hw)
-    return table(["Mã", "Artifact", "(1) Tool · thời gian · commit tạo · #n", "(2) Output (trích + đường dẫn)",
+    tl = turns_of(hw)
+    when = dt.datetime.fromtimestamp((hw / LOG).stat().st_mtime)
+    head = (f"*#n theo bản trích {when:%H:%M %d/%m/%Y} ({len(tl)} lượt trong `{LOG}`); số có thể đổi ở lần trích cuối trước khi nộp. "
+            "Cách khớp: khối lượt liên tiếp cùng section trong `prompt_log_notes.toml`, giờ ≤ giờ commit tạo artifact; "
+            "bản đóng băng bước k của feature phải có section \"n.k\" (n = mục của feature).*\n\n")
+    return head + table(["Mã", "Artifact", "(1) Tool · thời gian · commit tạo · #n", "(2) Output (trích + đường dẫn)",
                   "(5) Commit sửa sau đó (git log)"], rows) + \
         f"\n\n*{len(rows)} artifact. Sinh bằng `tools/audit_tables.py` từ `appendix/ai-outputs/`, `git log` (trailer Co-Authored-By cho tool), danh mục ở đầu script. " \
         "Cột (5) chỉ liệt kê commit, không diễn giải lý do. Cột (3) Verdict, (4) Lý do ở bảng ngay dưới (em viết).*"
