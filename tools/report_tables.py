@@ -354,15 +354,36 @@ def gap_rows(ctx):
     return rows
 
 
+def drop_commits(ctx, tcs):
+    """TC → commit đầu tiên mà TC không còn là case trong testcases.json (sau khi đã từng có)."""
+    path = f"{ctx['hw'].name}/{ctx['feat']}/testcases.json"
+    seen, out = set(), {}
+    for line in git("log", "--reverse", "--format=%h|%s", "--", path).splitlines():
+        h, s = line.split("|", 1)
+        try:
+            ids = {c["id"] for c in all_cases(json.loads(git("show", f"{h}:{path}")))}
+        except json.JSONDecodeError:
+            continue
+        for tc in tcs:
+            if tc in ids:
+                seen.add(tc)
+            elif tc in seen and tc not in out:
+                out[tc] = f"`{h}` {s}"
+    return out
+
+
 def b_gap(ctx):
     byid = {c["id"]: c for c in all_cases(ctx["d"])}
     bugmap = bugs_of(ctx)
-    rows = []
+    rows, gone = [], []
     for tc, label, note in gap_rows(ctx):
-        c = byid.get(tc)
-        bug = (bugmap.get(tc) or "—") if c else "— (không còn trong JSON)"
-        rows.append((tc, bug, label + (f" — {note}" if note else "")))
-    return table(["TC", "BUG-xx", "AI tự nhận"], rows) + \
+        if tc not in byid:  # case em đề xuất rồi bỏ: không đưa vào bảng
+            gone.append(tc)
+            continue
+        rows.append((tc, bugmap.get(tc) or "—", label))
+    dc = drop_commits(ctx, gone)
+    tail = "".join(f"\n\nCase em đề xuất rồi bỏ (không chạy): {tc} — {dc.get(tc, '(không thấy commit bỏ trong git)')}" for tc in gone)
+    return table(["TC", "BUG-xx", "AI tự nhận"], rows) + tail + \
         f"\n\n*Cột \"AI tự nhận\": chép nguyên văn nhãn phân loại trong `{ctx['feat']}/ai_gap_answer.md` " \
         "(chữ đậm ở cột (b)/(c), hoặc tên nhóm chứa dòng). Đây là lời AI tự nhận, không phải phân tích của em. BUG-xx: `bug_id` của case và các `bugs/BUG-xx.md` có TC trong mục \"TC liên quan\".*"
 
