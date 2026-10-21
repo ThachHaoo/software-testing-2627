@@ -15,7 +15,7 @@ Số TC em bổ sung: **6** (TC-FR20-200, TC-FR20-201, TC-FR20-203 đến TC-FR2
 
 | Case/bug AI bỏ sót | Loại nguyên nhân (prompt / giới hạn công cụ / độ phức tạp feature) | AI đã nghĩ tới nhưng không đưa vào? | Giải thích |
 |---|---|---|---|
-| TC-FR20-200 | Độ phức tạp feature (Mảng Security & Thao tác Clipboard Mobile) | Không | AI luôn nghĩ trang web hay app chạy trong một thế giới màu hồng. Nó không tự hình dung ra kịch bản người dùng dùng menu nhấn giữ để dán (paste) đoạn mã độc từ bộ nhớ tạm điện thoại vào ô nhập liệu. |
+| TC-FR20-200 | Độ phức tạp feature (Mảng Security & Thao tác Clipboard Mobile) | Không | AI nghĩ trang web hay app chạy trong một thế giới màu hồng. Nó không tự hình dung ra kịch bản người dùng dùng menu nhấn giữ để dán (paste) đoạn mã độc từ bộ nhớ tạm điện thoại vào ô nhập liệu. |
 | TC-FR20-201, TC-FR20-205 | Độ phức tạp feature (Đặc thù bàn phím di động & Unicode) | Không | AI không mô hình hóa được các thói quen gõ phím thực tế trên điện thoại, như việc người dùng gõ biểu tượng cảm xúc (emoji 4-byte) hay dùng các bộ gõ tiếng Trung/Nhật sinh ra số dạng kiểu béo (full-width) khác với mã số tiêu chuẩn. |
 | TC-FR20-203 | Độ phức tạp feature (Yếu tố thời gian & Chạm cảm ứng dồn dập) | Không | AI chỉ nhìn ứng dụng theo kiểu một người thao tác thong thả từng bước một. Nó hoàn toàn không hình dung được cảnh người dùng dùng ngón tay nhấn liên tục vào nút đăng ký trên màn hình cảm ứng do mạng chậm hoặc giật lag. |
 | TC-FR20-204 | Độ phức tạp feature (Hành vi Auto-correct của bàn phím Mobile) | Không | AI không tính đến các cơ chế thông minh nhưng dễ gây phiền của bàn phím di động, như việc tự động chèn thêm dấu cách sau các ký tự đặc biệt khiến email bị sai định dạng một cách vô ý. |
