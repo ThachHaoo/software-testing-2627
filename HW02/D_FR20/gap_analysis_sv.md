@@ -1,0 +1,22 @@
+Feature D - AI gap analysis
+
+| #TC | Tiêu đề | EC phủ | Tầng | Kỹ thuật | Expected | Lý do chọn input |
+|---|---|---|---|---|---|---|
+| TC-FR20-200 | Mobile - Paste chuỗi XSS `<script>alert(1)</script>` từ Clipboard vào ô Họ Tên | EC1, EC27, EC29, EC31 | Mobile | Security / Input Handling | Đăng ký thành công, app chuyển sang trang đăng nhập; khi vào web Admin xem danh sách người dùng thì tên hiện chữ thuần chứ không bị chạy mã độc. | Dán một đoạn mã độc từ bộ nhớ tạm điện thoại vào ô Họ Tên xem ứng dụng di động và trang web quản trị có bị lừa cho chạy mã độc không. |
+| TC-FR20-201 | Mobile - Nhập chuỗi Emoji 🐻 vào ô Họ Tên qua bàn phím di động | EC1, EC27, EC29, EC31 | Mobile | Unicode / Encoding | Đăng ký thành công, app chuyển sang trang đăng nhập; khi đăng nhập xong thì màn hình hiển thị đúng hình con gấu không bị lỗi font. | Thử dùng bàn phím điện thoại gõ mấy hình cảm xúc con gấu vào tên xem ứng dụng có lưu và hiển thị chuẩn chỉnh không. |
+| TC-FR20-203 | Mobile - Bấm chạm liên tục 10 lần nút 'Đăng Ký' khi form hợp lệ (Spam tap) | EC1, EC27, EC29, EC31 | Mobile | Concurrency / Double Tap | Đăng ký thành công, app chuyển sang trang đăng nhập; kiểm tra danh sách trên Admin chỉ tạo đúng 1 tài khoản duy nhất, không bị trùng lặp. | Giả lập thói quen người dùng tay nhanh hơn não hoặc mạng lag nên nhấn nút Đăng ký lia lịa xem ứng dụng có biết đường chặn để không tạo một đống tài khoản trùng không. |
+| TC-FR20-204 | Mobile - Email chứa khoảng trắng ở giữa do bàn phím di động tự động sửa (Auto-correct) | EC5, EC28, EC30, EC32 | Mobile | Mobile Keyboard Behavior | Báo lỗi email không hợp lệ ở màn hình app; không chuyển trang và không tạo tài khoản mới trong máy chủ. | Bàn phím điện thoại hay có trò tự động thêm dấu cách sau khi gõ, cố tình để khoảng trắng trong email xem app có biết đường chặn lại không. |
+| TC-FR20-205 | Mobile - Mật khẩu dùng chữ số Full-width `１２３４５６` từ bàn phím CJK di động | EC18, EC28, EC30, EC32 | Mobile | Unicode / Type Confusion | Báo lỗi mật khẩu thiếu chữ số (do số kiểu béo không được tính là số từ 0 đến 9); không cho đăng ký. | Dùng bộ số kiểu béo (full-width) từ bàn phím tiếng Trung/Nhật trên điện thoại nhìn y chang số thường xem ứng dụng có bị nhìn nhầm hay không. |
+| TC-FR20-206 | Mobile - Paste chuỗi Họ Tên siêu dài 10.000 ký tự từ bộ nhớ tạm điện thoại | EC1, EC27, EC29, EC31 | Mobile | Boundary / Overflow | Đăng ký thành công, app chuyển sang màn đăng nhập ngon lành; dùng tài khoản đó đăng nhập lại bình thường. | Copy một đoạn văn bản siêu dài 10.000 chữ dán vào ô Họ Tên trên điện thoại xem ứng dụng có bị đơ máy hay văng lỗi không. |
+
+Số TC em bổ sung: **6** (TC-FR20-200, TC-FR20-201, TC-FR20-203 đến TC-FR20-206)
+
+**Vì sao AI bỏ sót** 
+
+| Case/bug AI bỏ sót | Loại nguyên nhân (prompt / giới hạn công cụ / độ phức tạp feature) | AI đã nghĩ tới nhưng không đưa vào? | Giải thích |
+|---|---|---|---|
+| TC-FR20-200 | Độ phức tạp feature (Mảng Security & Thao tác Clipboard Mobile) | Không | AI luôn nghĩ trang web hay app chạy trong một thế giới màu hồng. Nó không tự hình dung ra kịch bản người dùng dùng menu nhấn giữ để dán (paste) đoạn mã độc từ bộ nhớ tạm điện thoại vào ô nhập liệu. |
+| TC-FR20-201, TC-FR20-205 | Độ phức tạp feature (Đặc thù bàn phím di động & Unicode) | Không | AI không mô hình hóa được các thói quen gõ phím thực tế trên điện thoại, như việc người dùng gõ biểu tượng cảm xúc (emoji 4-byte) hay dùng các bộ gõ tiếng Trung/Nhật sinh ra số dạng kiểu béo (full-width) khác với mã số tiêu chuẩn. |
+| TC-FR20-203 | Độ phức tạp feature (Yếu tố thời gian & Chạm cảm ứng dồn dập) | Không | AI chỉ nhìn ứng dụng theo kiểu một người thao tác thong thả từng bước một. Nó hoàn toàn không hình dung được cảnh người dùng dùng ngón tay nhấn liên tục vào nút đăng ký trên màn hình cảm ứng do mạng chậm hoặc giật lag. |
+| TC-FR20-204 | Độ phức tạp feature (Hành vi Auto-correct của bàn phím Mobile) | Không | AI không tính đến các cơ chế thông minh nhưng dễ gây phiền của bàn phím di động, như việc tự động chèn thêm dấu cách sau các ký tự đặc biệt khiến email bị sai định dạng một cách vô ý. |
+| TC-FR20-206 | Prompt (Ràng buộc nghiêm ngặt theo Scope SRS) | Không | AI chỉ chăm chăm bám sát vào tài liệu yêu cầu ban đầu. Do tài liệu không hề quy định độ dài tối đa cho Họ Tên, AI không bao giờ tự ý nghĩ ra kịch bản cố tình dán một chuỗi 10.000 ký tự để thử độ chịu tải của app di động. |
