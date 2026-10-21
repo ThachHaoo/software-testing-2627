@@ -104,7 +104,8 @@ Nguồn: đề §6, §7, §9, §10, §12, §14, §17 + Homework Policies (skill 
 | R2 | Zip bằng `git archive --format=zip -o 23120255_HW02_AI_DomainTesting_<ggg>.zip HEAD HW02`, sau khi commit hết (skill, PDF, commit log); vượt 20 MB → nén thêm ảnh evidence; vẫn vượt → split-and-zip |
 | R3 | PDF cho report chính + AI-02/03/05; README không cần PDF (người đọc xem README.md trực tiếp) |
 | R4 | AI Critique là một mục trong report chính; AI-02 tham chiếu mục đó |
-| P1 | Giữ nguyên #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên) với model "Claude (không rõ model)"; không vá script. AI-03 cần 1 câu giải thích 2 lượt "không rõ model" |
+| P1 | Giữ nguyên #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên) với model "Claude (không rõ model)"; không vá script. Mở rộng ở P3 |
+| P3 | P3 (21/10): mở rộng P1 — giữ nguyên MỌI lượt 'Claude (không rõ model)' (hiện: #118, lượt 20:44 20/10, #387); lý do từng lượt do SV ghi trong prompt_log_notes.toml; trước khi nộp trích lại lần cuối, AI-03 liệt kê đủ các lượt này. |
 | P2 | Vá `tools/extract_prompt_log.py`: khoá khoảng trong `prompt_log_notes.toml` + `--list --commits` (file `appendix/prompt_log_turns.txt`) |
 
 ## g) Khai cho Audit

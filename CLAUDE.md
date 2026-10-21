@@ -161,7 +161,8 @@ Skill dùng trong repo:
   - R2: zip bằng `git archive` (lệnh ở §5); vượt 20 MB → nén thêm ảnh evidence; vẫn vượt → split-and-zip.
   - R3: PDF chỉ cho report chính + AI-02/03/05; README không cần PDF (người đọc xem README.md trực tiếp).
   - R4: AI Critique là một mục trong report chính; AI-02 tham chiếu mục đó, không chép riêng file.
-  - P1: giữ nguyên 2 lượt "Claude (không rõ model)" — #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên); không vá script. AI-03 cần 1 câu giải thích 2 lượt "không rõ model".
+  - P1: giữ nguyên các lượt "Claude (không rõ model)" — ban đầu #118 (SV bấm Ctrl+C) và lượt 20:44 20/10 (chạm giới hạn phiên); không vá script. Mở rộng ở P3.
+  - P3 (21/10): mở rộng P1 — giữ nguyên MỌI lượt 'Claude (không rõ model)' (hiện: #118, lượt 20:44 20/10, #387); lý do từng lượt do SV ghi trong prompt_log_notes.toml; trước khi nộp trích lại lần cuối, AI-03 liệt kê đủ các lượt này.
   - P2: `prompt_log_notes.toml` có khoá khoảng `["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]`; gom khoảng theo `HW02/appendix/prompt_log_turns.txt` (`--list --commits`).
 
 **Việc còn mở:** repo bài nộp đã chuyển private (kiểm 21/10/2026); SV tự push; không push `.transcripts/`; hỏi thầy có skill `domain-testing-design` đi kèm `test-case-writing` không; deadline trên Moodle.
