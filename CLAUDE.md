@@ -87,7 +87,7 @@ Skill dùng trong repo:
 - 2026-10-19 (A_FR01 phạm vi): giữ FR-22.1–22.4, kiểm bằng suite GUI riêng, không phân lớp; bỏ FR-21 và SEC-01 khỏi phạm vi.
 - 2026-10-19: SUT = `tkob-team/eshop-sut` @ `de0f48f` (= `ttbhanh/eshop-sut` `85af3ba` + `.gitignore`, không đổi mã); ghi ở `meta.sut_version` và `HW02/env/environment.md`.
 - 2026-10-19: Dải mã TC mỗi feature — TS-DOM 01–59, TS-BVA 60–89 (tràn thì từ 100), TS-GUI 90–99, TS-SV (SV bổ sung) từ 200.
-- Transcript ghi nhận các lượt #1–#3 của session cloud ngày 12/10 do Claude Sonnet 4.6 trả lời, các lượt sau Claude Opus 5.5 → AI-03 khai cả hai.
+- Model theo transcript (kiểm 21/10 trên `HW02/appendix/A_prompt_log.md`): Claude Sonnet 4.6 trả lời #1–#3 (session cloud 12/10) và các phiên claude.ai của B (từ 10:13 20/10), C (16:19–18:06 20/10), đầu D (22:16–23:13 20/10); Claude Opus 5.5 phần còn lại. Dòng "Tổng" lúc kiểm: "368 lượt; Claude Sonnet 4.6 93 lượt; Claude Opus 5.5 276 lượt; Claude (không rõ model) 2 lượt. 3 lượt có output từ hơn một model nên được đếm ở cả hai." → AI-03 khai cả hai model theo dòng Tổng của bản trích cuối.
 - 2026-10-20 (từ A_FR01) Verdict: lệch do biến mục tiêu → Fail; do biến khác chặn → Blocked, ghi case gốc trong notes (A20); `auto_status` giữ kết quả tự động gốc; "Pass hộp đen" (ghi notes) khi bị từ chối đúng nhưng lý do không chứng minh luật mục tiêu.
 - A17: thiếu trường SRS yêu cầu → 1 case kiểm sự tồn tại (Fail), các case phụ thuộc trường đó Blocked.
 - Case "UI+API" phải tách thành 2 case (mỗi tầng một case); expected của case API không chứa yếu tố UI.

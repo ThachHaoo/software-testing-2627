@@ -22365,6 +22365,33 @@ Có 2 file lạ chưa track (`gap_analysis_sv.md` ở A, B) — không phải c�
 D: link issue lồng nhau (BUG-51–57 ghi link dạng markdown). Sửa parse.
 
 Dùng Edit trực tiếp.
+
+Đã sửa A, điền §2 và điền dữ kiện B, C, D, mỗi phần một commit; em dừng chờ review. Mọi kiểm tra đều đạt:
+- Số liệu từng feature khớp `summary.py`.
+- Link và ảnh đều tồn tại.
+- Chạy lại `report_tables.py` không đổi gì.
+- Không mục 🔒 nào có khối AI nháp.
+- Không marker nào chứa 🔒 hay `<SV viết>`.
+
+### Báo cáo cho phiên thảo luận
+- Commit:
+  - `1182899` sửa dữ kiện A_FR01 (gồm §2, CLAUDE.md:86, report_plan mục g/h)
+  - `1ff456e` B_FR07 · `91586b4` C_FR15 · `e7690d2` D_FR20
+- Số dòng: §2 = 87 · A = 399 · B = 383 · C = 420 · D = 329.
+- Khối 📝 AI nháp (21 khối): 1 khối cho cả §2, cộng 5 khối mỗi feature ở x.1, x.2, x.3, x.4, x.6.
+- Bước 5 (G1=a):
+  - Bảng case TS-SV (chép từ JSON) và bảng "AI tự nhận" nằm trong marker.
+  - Bảng "Nguyên nhân theo em / Giải thích" điền sẵn `<SV viết>` cho từng TC, nằm ngoài marker nên script không ghi đè.
+- Thêm vào script: cột LARGE, cách nhóm BVA cho B–D, bảng bug tính giống `summary.py`, bảng tóm tắt web ↔ mobile ở 6.8.
+- Mâu thuẫn dữ kiện:
+  - `D_FR20/testcases.json`: giả định D5 cũng ghi "A3 bản cuối (A_FR01, 8d837f1)". Đây là cùng hash sai như `D_FR20/step1_notes.md:121`; không sửa vì lệnh cấm sửa file D.
+  - `HW02/tests/README.md:6` ghi spec của các feature khác nằm ở `specs/`, nhưng thực tế ở `tests/B_FR07/`, `tests/C_FR15/`; `specs/` rỗng.
+  - `C_FR15/RUN.md:79–81` trỏ tới `tests/results/C_FR15_*.json`, nhưng các file này bị gitignore nên sẽ không có trong zip `git archive`.
+  - `C_FR15/testcases.json`: danh sách giả định nhảy từ C21 sang C23, không có C22.
+  - SKILL.md không định nghĩa quy tắc chia lớp `output`, nhưng A và D có dùng. Đã ghi rõ ở bảng §2.3, không suy diễn thêm.
+- Bất thường: có 2 file chưa track, không phải do em tạo: `HW02/A_FR01/gap_analysis_sv.md` và `HW02/B_FR07/gap_analysis_sv.md`. Em không đọc, không commit.
+- Cần quyết định:
+  - GA1 – nếu 2 file `gap_analysis_sv.md` là bản SV viết cho phần "vì sao AI bỏ sót": chép vào bảng `<SV viết>` trong report (a), hay chỉ đặt link tới file (b)?
 ```
 *File AI ghi/gửi trong lượt này:* `patch_rt.py`, `sec2.md`, `secB.md`, `secC.md`, `secD.md`
 
@@ -22372,4 +22399,89 @@ Dùng Edit trực tiếp.
 
 ---
 
-**Tổng:** 367 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 275 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366, #367); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
+## #368 | 07:33 21/10/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: điền mọi phần DỮ KIỆN còn trống của report + vá lặt vặt.
+SV tự viết gap analysis và tự commit → KHÔNG sửa mục 3.5/4.5/5.5/6.5,
+KHÔNG đọc/commit HW02/*/gap_analysis_sv.md.
+Quyết định SV: K1=a (commit file kết quả lượt chính thức; đổi nếu SV chọn b)
+
+1. Vá lặt vặt (commit `HW02: report – vá dữ kiện`):
+   - Dưới bảng giả định C: "C19 bỏ cùng TC-FR15-204; C22 không dùng; giữ khoảng trống mã theo quy ước"
+     (kiểm bằng git trước khi ghi).
+   - HW02/tests/README.md:6: sửa đường dẫn spec.
+   - K1=a: `git add -f` CHỈ file kết quả lượt chính thức của A, C (B đã có; D là file lượt chạy tay nếu chưa có);
+     cập nhật RUN.md.
+2. Vá skill (commit riêng `HW02: vá harness – SKILL.md định nghĩa quy tắc output`):
+   - Định nghĩa `output` rút từ cách A và D đã dùng; không thêm luật mới.
+   - §2.3 report trỏ tới định nghĩa này.
+3. Điền report (commit `HW02: report – điền các mục chung`):
+   - Đầu file: Công cụ AI = danh sách model trong header A_prompt_log.md.
+     Câu tuyên bố §9 giữ nguyên "I use AI tools for the following tasks," + liệt kê việc, khớp §12.
+     Ngày nộp để [...].
+   - §1 từ env/environment.md, env/mobile_api_url.patch, mục Môi trường của các BUG (giá trị thật).
+   - §7: skill domain-bva-testing (mục đích, 7 bước, script, cách gọi, cấu trúc thư mục);
+     link video để [...]. Ghi chú: skill sẽ chép sang HW02/skills/ trước khi nộp.
+   - §8: từ summary.py (có marker). Thêm 1 câu: Blocked = không chạy được do bug gốc, ghi ở notes.
+   - §9: bảng tổng 57 bug, chép nguyên văn từ BUG-xx.md, "(AI chép)", có marker.
+   - §10 AI Audit:
+     * Danh mục artifact = mọi output AI, kể cả việc phụ:
+       freeze bước 1–4 × 4 feature, script/harness, skill, khung sv_cases, _groups, khung BUG,
+       RUN.md, report_tables, khung report, các khối 📝, form, README, nén ảnh…
+       Nguồn: appendix/ai-outputs/, git log, CLAUDE.md "Khai cho Audit", report_plan.md.
+     * Mỗi hàng: (1) tool + thời gian + commit; #n = "[#n: chờ chốt transcript]";
+       (2) output: trích ngắn + đường dẫn file;
+       (5) bản SV sửa: tóm tắt diff từ review_log/git (commit SV sửa), không diễn giải lý do.
+       (3) Verdict và (4) Lý do = `<SV viết>`.
+     * Bảng đánh giá từng TC AI sinh: liệt kê TC origin AI/Both + trạng thái sửa theo git;
+       cột Verdict `<SV viết>`.
+     * Tỉ lệ VALID/INVALID/INCOMPLETE: công thức/đếm để [...] (tính sau khi SV điền verdict).
+   - §12 Mandatory Disclosure: nháp danh sách sự kiện theo mục 6 của skill cs423
+     (AI tạo bản đầu / SV xem xét và sửa / edge case SV bổ sung / SV tự viết hoàn toàn /
+      cách tạo prompt log / danh mục cấm), gồm cả việc AI nháp 21 khối 📝 và report_tables.py.
+     Đầu mục: "> 📝 AI nháp – SV xác nhận".
+   - §13: bảng tự đánh giá theo rubric đề §15; cột "Điểm tự chấm" = `<SV viết>`;
+     cột "Căn cứ" = dữ kiện (số TC, bug, link mục).
+   - §14: danh sách file trong ai-forms/ (trạng thái THIẾU/ĐÃ CÓ).
+   - §15: phụ lục + cây thư mục khớp repo thật.
+4. Không viết: Critique, gap analysis, verdict/lý do Audit, điểm tự chấm, link video, ngày nộp.
+   Không sửa 21 khối 📝 đã có.
+5. Kiểm: số liệu = summary.py; link/ảnh tồn tại; report_tables.py chạy lại không đổi;
+   đo `git archive HEAD HW02`.
+6. Báo cáo ≤ 20 dòng: hash, số hàng Audit, danh sách chỗ `<SV viết>` theo mục, mâu thuẫn dữ kiện (file:dòng).
+```
+
+**Output:**
+```
+Bắt đầu vá lặt vặt: kiểm C19/C22 qua git.
+
+Đã vá dữ kiện (`608df85`). Giờ vá SKILL.md định nghĩa `output`.
+
+Gom danh mục artifact cho Audit từ git.
+
+Viết `tools/audit_tables.py` (khối cấp bài: summary, allbugs, artifacts, aiforms; in-một-lần: auditsv, tceval).
+
+Chỉnh: cột (5) của bản đóng băng thêm diff bản cuối ↔ bản AI; trích dẫn bỏ shebang; định dạng.
+
+Dùng Edit trực tiếp.
+
+Bảng Audit ổn (54 artifact). Giờ gom dữ kiện §1 môi trường.
+
+Thêm khối `tree` (cây thư mục theo `git ls-files`) vào audit_tables.
+
+Viết các mục chung (header, §1, §7–§15).
+
+Kiểm toàn bộ: link/ảnh, số liệu, idempotent, 🔒.
+
+SV vừa commit `129cfcc` xen giữa — kiểm có đụng report không.
+```
+*File AI ghi/gửi trong lượt này:* `audit_tables.py`, `head.md`, `tail.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 368 lượt; Claude Sonnet 4.6 93 lượt (#1, #2, #3, #116, #120, #121, #122, #124, #125, #127, #128, #130, #131, #132, #134, #135, #137, #139, #141, #143, #145, #146, #147, #149, #151, #153, #154, #156, #158, #160, #163, #165, #166, #167, #169, #171, #172, #174, #175, #176, #178, #180, #181, #182, #184, #185, #186, #188, #190, #191, #192, #193, #195, #196, #197, #199, #201, #202, #203, #205, #207, #208, #210, #214, #216, #217, #218, #220, #221, #223, #224, #226, #227, #229, #230, #233, #234, #235, #237, #238, #239, #240, #242, #243, #245, #293, #294, #296, #298, #300, #302, #304, #306); Claude Opus 5.5 276 lượt (#3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #117, #119, #123, #126, #129, #133, #136, #138, #140, #142, #144, #148, #150, #152, #155, #157, #159, #161, #162, #164, #168, #170, #173, #177, #179, #183, #187, #189, #194, #198, #200, #204, #206, #209, #211, #212, #213, #215, #219, #222, #225, #228, #231, #232, #236, #241, #244, #245, #246, #247, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258, #259, #260, #261, #262, #263, #264, #265, #266, #267, #268, #269, #270, #271, #273, #274, #275, #276, #277, #278, #279, #280, #281, #282, #283, #284, #285, #286, #287, #288, #289, #290, #291, #292, #295, #297, #299, #301, #303, #305, #306, #307, #308, #309, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #326, #327, #328, #329, #330, #331, #332, #333, #334, #335, #336, #337, #338, #339, #340, #341, #342, #343, #344, #345, #346, #347, #348, #349, #350, #351, #352, #353, #354, #355, #356, #357, #358, #359, #360, #361, #362, #363, #364, #365, #366, #367, #368); Claude (không rõ model) 2 lượt (#118, #272). 3 lượt có output từ hơn một model nên được đếm ở cả hai.
