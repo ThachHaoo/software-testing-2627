@@ -1,0 +1,341 @@
+#!/usr/bin/env python3
+"""
+Sinh bảng dữ kiện cấp bài (không theo feature) cho report chính HW02. Không dùng AI, không viết lời đánh giá.
+
+Thay nội dung giữa marker <!-- REPORT:HW02:<khối>:START --> ... <!-- REPORT:HW02:<khối>:END -->:
+  summary   : bảng của tools/summary.py
+  allbugs   : mọi bugs/BUG-xx.md (chép nguyên văn ID, Tiêu đề, Severity, Priority, dòng "Fail", link issue)
+  artifacts : danh mục artifact AI tạo cho AI Audit — cột (1) tool/thời gian/commit, (2) output, (5) commit sửa sau đó
+  aiforms   : file trong ai-forms/ và trạng thái
+
+In một lần (không có marker, để SV điền — chạy lại sẽ không ghi đè report):
+  --print auditsv : khung bảng Verdict/Lý do cho từng artifact (`<SV viết>`)
+  --print tceval  : bảng đánh giá từng TC origin AI/Both (trạng thái sửa theo freeze + git; cột Verdict `<SV viết>`)
+
+Cách dùng (từ gốc repo):
+  python tools/audit_tables.py HW02 --report HW02/23120255_HW02_Report.md
+  python tools/audit_tables.py HW02 --print tceval
+"""
+import argparse
+import datetime as dt
+import glob
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+FEATS = {"FR01": "A_FR01", "FR07": "B_FR07", "FR15": "C_FR15", "FR20": "D_FR20"}
+DESIGN = ["title", "inputs", "expected_result", "covers", "ec_target", "bva_point", "rationale", "steps"]
+TBD = "[#n: chờ chốt transcript]"
+
+# Danh mục artifact ngoài bản đóng băng: (mã, tên, đường dẫn trong repo, ghi chú). Bản đóng băng bước 1–4 sinh tự động.
+EXTRA = [
+    ("H1", "Harness: CLAUDE.md", ["CLAUDE.md"], ""),
+    ("H2", "Agent Skill `domain-bva-testing` (SKILL.md, references, scripts freeze/check_domain/render_md/merge_results…)", [".claude/skills/domain-bva-testing"], ""),
+    ("H3", "Hook Stop + script trích prompt log", [".claude/settings.json", "tools/hooks/on_stop.py", "tools/extract_prompt_log.py", "tools/hw.toml"], ""),
+    ("H4", "Script tổng hợp số liệu `summary.py`", ["tools/summary.py"], ""),
+    ("H5", "Script xuất commit log", ["tools/export_commit_log.ps1"], ""),
+    ("H6", "Script nén ảnh chạy tay", ["tools/compress_manual.py"], ""),
+    ("H7", "Script sinh bảng report `report_tables.py`, `audit_tables.py`", ["tools/report_tables.py", "tools/audit_tables.py"], ""),
+    ("T1", "Playwright: cấu hình chung, global-setup, README", ["HW02/tests/playwright.config.ts", "HW02/tests/global-setup.ts", "HW02/tests/README.md"], ""),
+    ("T2", "Playwright A_FR01", ["HW02/tests/A_FR01"], ""),
+    ("T3", "Playwright B_FR07", ["HW02/tests/B_FR07"], ""),
+    ("T4", "Playwright C_FR15", ["HW02/tests/C_FR15"], ""),
+    ("R1", "RUN.md B_FR07", ["HW02/B_FR07/RUN.md"], ""),
+    ("R2", "RUN.md C_FR15", ["HW02/C_FR15/RUN.md"], ""),
+    ("R3", "RUN.md D_FR20 (chạy tay) + mẫu file lượt", ["HW02/D_FR20/RUN.md", "HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json"], ""),
+    ("N1", "Ghi chú bước 1 B_FR07", ["HW02/B_FR07/notes_step1.md"], ""),
+    ("N2", "Ghi chú bước 1 D_FR20", ["HW02/D_FR20/step1_notes.md"], ""),
+    ("G1", "Câu trả lời gap analysis của AI – A_FR01", ["HW02/A_FR01/ai_gap_answer.md"], ""),
+    ("G2", "Câu trả lời gap analysis của AI – B_FR07", ["HW02/B_FR07/ai_gap_answer.md"], ""),
+    ("G3", "Câu trả lời gap analysis của AI – C_FR15", ["HW02/C_FR15/ai_gap_answer.md"], ""),
+    ("G4", "Câu trả lời gap analysis của AI – D_FR20", ["HW02/D_FR20/ai_gap_answer.md"], ""),
+    ("G5", "Khung trống `sv_cases.md` (AI tạo khung, nội dung SV viết; commit chung với nội dung SV)", ["HW02/C_FR15/sv_cases.md"], "Feature khác: [...]"),
+    ("Q1", "Câu hỏi/trả lời bước 5 (`sv_questions.md`) B_FR07", ["HW02/B_FR07/sv_questions.md"], ""),
+    ("Q2", "Câu hỏi/trả lời bước 5 (`sv_questions.md`) C_FR15", ["HW02/C_FR15/sv_questions.md"], ""),
+    ("B1", "Dữ kiện bug `_groups` A_FR01", ["HW02/bugs/_groups_A_FR01.md"], ""),
+    ("B2", "Dữ kiện bug `_groups` B_FR07", ["HW02/bugs/_groups_B_FR07.md"], ""),
+    ("B3", "Dữ kiện bug `_groups` C_FR15 + script tái hiện", ["HW02/bugs/_groups_C_FR15.md", "HW02/bugs/_repro_C_FR15"], ""),
+    ("B4", "Dữ kiện bug `_groups` D_FR20 + bảng web ↔ mobile", ["HW02/bugs/_groups_D_FR20.md", "HW02/D_FR20/compare_web_mobile.md"], ""),
+    ("B5", "Quy ước bug (`bugs/README.md`), nhật ký đính chính A", ["HW02/bugs/README.md", "HW02/bugs/_edit_log_A.md"], ""),
+    ("B6", "Khung BUG-xx (trống, chỉ dữ kiện) và sửa dữ kiện theo evidence (7/7a, 7/7c)", [], "commits:7/7a|7/7c|7/7d3"),
+    ("B7", "Bản che ảnh để đăng issue", ["HW02/bugs/_issue_redacted"], ""),
+    ("B8", "Tạo GitHub Issues bằng `gh issue create` (nội dung SV viết) + ảnh trang Issues", [], "commits:Issues|issue"),
+    ("E1", "Môi trường + patch API_URL mobile", ["HW02/env/environment.md", "HW02/env/mobile_api_url.patch"], ""),
+    ("P1", "Kế hoạch nộp bài `report_plan.md`", ["HW02/report_plan.md"], ""),
+    ("P2", "Khung report + bảng dữ kiện + 21 khối giải thích từng bước do AI nháp (§2, x.1–x.4, x.6) + các mục chung", ["HW02/23120255_HW02_Report.md"], ""),
+    ("P3", "README HW02 (bảng tự đánh giá trống, khối SUMMARY)", ["HW02/README.md"], ""),
+    ("P4", "File lượt chạy tay D (AI chép nguyên văn từ `Check.md` của SV)", ["HW02/D_FR20/results/D_FR20_manual_20261021-001500.json"], ""),
+    ("F1", "Biểu mẫu AI-02/03/05 (.md)", ["HW02/ai-forms"], "chưa làm"),
+]
+
+
+def git(*a):
+    r = subprocess.run(["git", *a], capture_output=True, text=True, encoding="utf-8", errors="replace")
+    return r.stdout if r.returncode == 0 else ""
+
+
+def cell(s):
+    return str(s if s is not None else "").replace("|", "\\|").replace("\n", " ")
+
+
+def table(head, rows):
+    return "\n".join(["| " + " | ".join(head) + " |", "|" + "---|" * len(head)] +
+                     ["| " + " | ".join(cell(x) for x in r) + " |" for r in rows])
+
+
+def model_of(h):
+    m = re.search(r"Co-Authored-By: (Claude [^<]+?)\s*<", git("log", "-1", "--format=%B", h))
+    return m.group(1).strip() if m else "(commit không ghi Co-Authored-By; harness do AI hỗ trợ tạo – CLAUDE.md §3)"
+
+
+def commits(paths):
+    out = git("log", "--reverse", "--format=%h|%ad|%s", "--date=format:%d/%m/%Y %H:%M", "--", *paths)
+    return [l.split("|", 2) for l in out.splitlines() if l]
+
+
+def excerpt(path):
+    p = Path(path)
+    if p.is_dir():
+        files = sorted(x.as_posix() for x in p.rglob("*") if x.is_file() and "node_modules" not in x.parts)
+        return f"{len(files)} file: " + ", ".join(Path(f).name for f in files[:6]) + (" …" if len(files) > 6 else "")
+    if not p.exists():
+        return "(không có file)"
+    if p.suffix == ".json":
+        return f"JSON {p.stat().st_size // 1024} KB"
+    for l in p.read_text(encoding="utf-8", errors="replace").splitlines():
+        s = l.strip().lstrip("#").strip()
+        if s and not s.startswith(("```", "<!--", "import", "\"\"\"", "!", "//")):
+            return s[:90] + ("…" if len(s) > 90 else "")
+    return ""
+
+
+# ---------- khối ----------
+
+def b_summary(hw):
+    return subprocess.run([sys.executable, "tools/summary.py", str(hw)], capture_output=True, text=True,
+                          encoding="utf-8").stdout.strip() + f"\n\n*Nguồn: `python tools/summary.py {hw.name}`.*"
+
+
+def parse_bug(t):
+    f = lambda k: (re.search(rf"\*\*{k}:\*\*\s*(.+)", t) or [None, ""])[1].strip()
+    tc = re.search(r"## TC liên quan\s*\n(.*?)(?:\n## |\Z)", t, re.S)
+    lines = tc.group(1).splitlines() if tc else []
+    fail = next((l[2:].strip() for l in lines if l.startswith("- Fail")), "")
+    sec = re.search(r"## Link GitHub Issue\s*\n+(.*)", t)
+    link = re.search(r"https?://[^\s)\]]+", sec.group(1)) if sec else None
+    tcs = re.findall(r"TC-(FR\d\d)-\d+", tc.group(1) if tc else "")
+    return f("ID"), fail, f("Tiêu đề"), f("Severity"), f("Priority"), link.group(0) if link else "", tcs
+
+
+def b_allbugs(hw):
+    rows = []
+    for p in sorted((hw / "bugs").glob("BUG-*.md"), key=lambda x: int(x.stem[4:])):
+        bid, fail, title, sev, pri, link, tcs = parse_bug(p.read_text(encoding="utf-8"))
+        feat = ", ".join(dict.fromkeys(FEATS.get(x, x) for x in tcs))
+        num = re.search(r"/issues/(\d+)", link)
+        rows.append((f"[{bid}](bugs/{p.name})", feat, fail, title, sev, pri, f"[#{num.group(1)}]({link})" if num else link))
+    return table(["Bug ID", "Feature", "TC liên quan (dòng \"Fail\")", "Tiêu đề", "Severity", "Priority", "GitHub Issue"], rows) + \
+        f"\n\n*(AI chép) nguyên văn từ {len(rows)} file `bugs/BUG-xx.md`; Feature suy từ mã TC trong mục \"TC liên quan\". Mô tả bug do em viết.*"
+
+
+def diff_summary(fz, hd, st):
+    """Đếm phần tử khác giữa bản AI đóng băng và bản HEAD (chỉ phần mà bước đó tạo ra)."""
+    key = lambda l: {x["id"]: x for x in l}
+    items = [("biến", key(fz.get("domain", {}).get("variables", [])), key(hd["domain"]["variables"]))]
+    if st >= 2:
+        items.append(("lớp", key(fz.get("domain", {}).get("partitions", [])), key(hd["domain"]["partitions"])))
+    if st >= 3:
+        pick = lambda c: {f: c.get(f) for f in DESIGN}
+        items.append(("TC (trường thiết kế)", {c["id"]: pick(c) for s in fz.get("suites", []) for c in s["cases"]},
+                      {c["id"]: pick(c) for s in hd["suites"] for c in s["cases"]}))
+    out = []
+    for name, a, b in items:
+        ch = sum(1 for k in a if k in b and a[k] != b[k])
+        rm = sum(1 for k in a if k not in b)
+        add = sum(1 for k in b if k not in a)
+        out.append(f"{name}: {ch} đổi, {rm} bỏ" + (f", {add} thêm" if not name.startswith("TC") else ""))
+    return "; ".join(out) + "."
+
+
+def freeze_rows(hw):
+    final = {f: json.load(open(hw / f / "testcases.json", encoding="utf-8")) for f in FEATS.values()}
+    groups = {}
+    for f in sorted(glob.glob(str(hw / "appendix" / "ai-outputs" / "*_step*_*"))):
+        m = re.search(r"([A-D]_FR\d\d)_step(\d+)_(\d{8})-(\d{4,6})", f)
+        if m:
+            groups.setdefault((m.group(1), int(m.group(2))), []).append(Path(f).name)
+    rows = []
+    for (feat, st), files in sorted(groups.items()):
+        code = feat[0]
+        subj = f"HW02[{code}-{feat[2:]}] {st}/7"
+        cs = [c for c in commits([f"{hw.name}/{feat}/testcases.json"]) if c[2].startswith(subj)]
+        first = cs[0] if cs else None
+        js = sorted(x for x in files if x.endswith(".json"))
+        d = json.load(open(hw / "appendix" / "ai-outputs" / js[-1], encoding="utf-8")) if js else {}
+        dom = d.get("domain", {})
+        parts = [f"{len(dom.get('variables', []))} biến"] + ([f"{len(dom['partitions'])} lớp"] if dom.get("partitions") else []) + \
+                [f"{s['id']} {len(s['cases'])}" for s in d.get("suites", [])]
+        out = ", ".join(parts) + f" · `appendix/ai-outputs/{feat}_step{st}_*` ({len(js)} lần đóng băng)"
+        later = ("Commit cùng bước sau commit đầu: " + "; ".join(f"`{c[0]}` {c[2]}" for c in cs[1:]) + ". ") if cs[1:] else ""
+        later += "Bản cuối (HEAD) so với bản đóng băng cuối của bước — " + diff_summary(d, final[feat], st)
+        rows.append((f"{code}{st}", f"{feat} – bước {st} ({['', 'biến vào/ra', 'lớp tương đương', 'TC Domain', 'TC BVA', '', '', ''][st] or 'thủ tục chạy'})",
+                     f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {TBD}",
+                     out, later))
+    return rows
+
+
+def extra_rows(hw):
+    rows = []
+    for code, name, paths, note in EXTRA:
+        if note.startswith("commits:"):
+            pat = re.compile(note.split(":", 1)[1])
+            cs = [l.split("|", 2) for l in git("log", "--reverse", "--format=%h|%ad|%s", "--date=format:%d/%m/%Y %H:%M").splitlines()
+                  if l and pat.search(l.split("|", 2)[2]) and "HW02[" in l]
+            first = cs[0] if cs else None
+            out = f"{len(cs)} commit: " + ", ".join(f"`{c[0]}`" for c in cs[:8]) + (" …" if len(cs) > 8 else "")
+            rows.append((code, name, f"{model_of(first[0]) if first else '?'} · {first[1] if first else '?'} · `{first[0] if first else '?'}` · {TBD}",
+                         out, "—"))
+            continue
+        existing = [p for p in paths if Path(p).exists()]
+        cs = commits(existing) if existing else []
+        if not cs:
+            rows.append((code, name, f"— · {TBD}", note or "(chưa có)", "—"))
+            continue
+        first = cs[0]
+        out = "; ".join(f"`{p}`" + (f" — “{excerpt(p)}”" if excerpt(p) else "") for p in existing) + (f" · {note}" if note else "")
+        sv = [c for c in cs[1:] if re.search(r"\bSV\b", c[2])]
+        later = (f"{len(cs) - 1} commit sau; có chữ \"SV\": " + ("; ".join(f"`{c[0]}` {c[2]}" for c in sv) if sv else "không")) if len(cs) > 1 else "không có commit sau"
+        rows.append((code, name, f"{model_of(first[0])} · {first[1]} · `{first[0]}` · {TBD}", out, later))
+    return rows
+
+
+def b_artifacts(hw):
+    rows = freeze_rows(hw) + extra_rows(hw)
+    return table(["Mã", "Artifact", "(1) Tool · thời gian · commit tạo · #n", "(2) Output (trích + đường dẫn)",
+                  "(5) Commit sửa sau đó (git log)"], rows) + \
+        f"\n\n*{len(rows)} artifact. Sinh bằng `tools/audit_tables.py` từ `appendix/ai-outputs/`, `git log` (trailer Co-Authored-By cho tool), danh mục ở đầu script. " \
+        "Cột (5) chỉ liệt kê commit, không diễn giải lý do. Cột (3) Verdict, (4) Lý do ở bảng ngay dưới (em viết).*"
+
+
+def b_auditsv(hw):
+    rows = [(r[0], r[1], "`<SV viết>`", "`<SV viết>`") for r in freeze_rows(hw) + extra_rows(hw)]
+    return table(["Mã", "Artifact", "(3) Verdict (VALID / INVALID / INCOMPLETE)", "(4) Lý do (dẫn ISTQB/slide)"], rows)
+
+
+def b_aiforms(hw):
+    want = ["AI-02_Audit_Report_23120255", "AI-03_Disclosure_Form_23120255", "AI-05_Privacy_Checklist_23120255"]
+    rows = []
+    for w in want:
+        for ext in (".md", ".pdf"):
+            p = hw / "ai-forms" / f"{w}{ext}"
+            rows.append((w[:5], f"`ai-forms/{w}{ext}`", "ĐÃ CÓ" if p.exists() else "THIẾU"))
+    other = [p.name for p in (hw / "ai-forms").glob("*") if not any(p.name.startswith(w) for w in want)]
+    return table(["Mã", "File", "Trạng thái"], rows) + \
+        f"\n\n*Kiểm bằng script lúc sinh report. File khác trong `ai-forms/`: {', '.join(other) or 'không có'}.*"
+
+
+def b_tceval(hw):
+    rows = []
+    for feat in FEATS.values():
+        d = json.load(open(hw / feat / "testcases.json", encoding="utf-8"))
+        frz = []
+        for f in sorted(glob.glob(str(hw / "appendix" / "ai-outputs" / f"{feat}_step*.json"))):
+            m = re.search(r"_step(\d+)_(\d{8})-(\d{4})(\d{2})?", f)
+            when = dt.datetime.strptime(m.group(2) + m.group(3) + (m.group(4) or "00"), "%Y%m%d%H%M%S")
+            o = json.load(open(f, encoding="utf-8"))
+            frz.append((when, Path(f).name, {c["id"]: c for s in o.get("suites", []) for c in s["cases"]}))
+        path = f"{hw.name}/{feat}/testcases.json"
+        hist = []
+        for h, ts in (l.split("|") for l in git("log", "--reverse", "--format=%h|%cI", "--", path).splitlines()):
+            try:
+                hist.append((dt.datetime.fromisoformat(ts).replace(tzinfo=None), h,
+                             {c["id"]: c for s in json.loads(git("show", f"{h}:{path}"))["suites"] for c in s["cases"]}))
+            except Exception:
+                pass
+        for s in d["suites"]:
+            for c in s["cases"]:
+                if c.get("origin") not in ("AI", "Both"):
+                    continue
+                last = [(w, n, cs[c["id"]]) for w, n, cs in frz if c["id"] in cs]
+                if not last:
+                    state = "không có trong bản AI đóng băng"
+                else:
+                    w, n, base = last[-1]
+                    diff = [k for k in DESIGN if base.get(k) != c.get(k)]
+                    if not diff:
+                        state = f"giữ nguyên bản AI `{n}`"
+                    else:
+                        ch = next((h for t, h, cs in hist if t > w and c["id"] in cs and any(cs[c["id"]].get(k) != base.get(k) for k in DESIGN)), "?")
+                        state = f"khác bản AI `{n}` ở {', '.join(diff)}; commit đầu tiên khác: `{ch}`"
+                rows.append((c["id"], s["id"], c.get("origin"), state, "`<SV viết>`"))
+    return table(["TC", "Suite", "Nguồn", "Trạng thái sửa (so bản AI đóng băng cuối chứa TC; git)", "Verdict"], rows) + \
+        f"\n\n*{len(rows)} TC có `origin` AI hoặc Both. Bản AI đóng băng cuối của một bước có thể đã gồm các vòng AI sửa theo review (B, C, D có nhiều lần đóng băng mỗi bước). Sinh một lần bằng `python tools/audit_tables.py {hw.name} --print tceval`; không chạy lại sau khi em điền cột Verdict.*"
+
+
+def b_tree(hw):
+    """Cây thư mục của HW02 theo `git ls-files` (= nội dung `git archive HEAD HW02`), gộp thư mục sâu, đếm file."""
+    files = [f for f in git("ls-files", hw.name).splitlines() if f]
+    tree = {}
+    for f in files:
+        parts = f.split("/")[1:]
+        key = tuple(parts[:2]) if len(parts) > 2 else tuple(parts)
+        tree.setdefault(key[0], {}).setdefault("/".join(key[1:]) if len(key) > 1 else "", []).append(f)
+    lines = [f"{hw.name}/"]
+    tops = sorted(tree, key=lambda k: (bool(tree[k].get("") and len(tree[k]) == 1), k))
+    for i, top in enumerate(tops):
+        last = i == len(tops) - 1
+        subs = tree[top]
+        if list(subs) == [""]:
+            lines.append(("└── " if last else "├── ") + top)
+            continue
+        n = sum(len(v) for v in subs.values())
+        lines.append(("└── " if last else "├── ") + f"{top}/  ({n} file)")
+        names = sorted(k for k in subs if k)
+        shown = [k for k in names if len(subs[k]) > 1 or "/" not in k]
+        for j, k in enumerate(shown[:12]):
+            cnt = len(subs[k])
+            lines.append(("    " if last else "│   ") + ("└── " if j == min(len(shown), 12) - 1 else "├── ") +
+                         (f"{k}/  ({cnt} file)" if cnt > 1 or k.count("/") else k))
+        if len(shown) > 12:
+            lines.append(("    " if last else "│   ") + f"    … (+{len(shown) - 12})")
+    return "```\n" + "\n".join(lines) + "\n```\n\n" + \
+        f"*{len(files)} file đang commit trong `{hw.name}/` (sinh từ `git ls-files {hw.name}`, đúng nội dung `git archive HEAD {hw.name}`).*"
+
+
+BLOCKS = {"summary": b_summary, "allbugs": b_allbugs, "artifacts": b_artifacts, "aiforms": b_aiforms, "tree": b_tree}
+ONCE = {"auditsv": b_auditsv, "tceval": b_tceval}
+
+
+def main():
+    for s in (sys.stdout, sys.stderr):
+        try:
+            s.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+    ap = argparse.ArgumentParser()
+    ap.add_argument("hw")
+    ap.add_argument("--report")
+    ap.add_argument("--print", dest="show", choices=list(BLOCKS) + list(ONCE))
+    a = ap.parse_args()
+    hw = Path(a.hw)
+    if a.show:
+        print({**BLOCKS, **ONCE}[a.show](hw))
+        return
+    if not a.report:
+        sys.exit("Cần --report hoặc --print")
+    p = Path(a.report)
+    txt, n = p.read_text(encoding="utf-8"), 0
+    for name, fn in BLOCKS.items():
+        pat = re.compile(rf"(<!-- REPORT:{hw.name}:{name}:START -->\n)(?:.*?\n)?(<!-- REPORT:{hw.name}:{name}:END -->)", re.S)
+        if pat.search(txt):
+            body = fn(hw)
+            txt = pat.sub(lambda m: m.group(1) + body + "\n" + m.group(2), txt)
+            n += 1
+    p.write_text(txt, encoding="utf-8")
+    print(f"Đã cập nhật {n} khối cấp bài trong {p}")
+
+
+if __name__ == "__main__":
+    main()
