@@ -1,0 +1,2199 @@
+f9e8c1b | 14:50 19/10/2026 | TonKnight | HW02: khởi tạo thư mục và ghi nhận môi trường test
+A	HW02/env/.gitkeep
+
+d81747d | 16:08 19/10/2026 | TonKnight | HW02: thêm harness (CLAUDE.md, skill domain-bva-testing, tools) và khung thư mục
+A	HW02/A_FR01/.gitkeep
+A	HW02/B_FR07/.gitkeep
+A	HW02/C_FR15/.gitkeep
+A	HW02/D_FR20/.gitkeep
+A	HW02/README.md
+A	HW02/ai-forms/.gitkeep
+A	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/.gitkeep
+A	HW02/appendix/prompt_log_extra.toml
+A	HW02/appendix/prompt_log_notes.toml
+A	HW02/bugs/.gitkeep
+A	HW02/env/environment.md
+A	HW02/tests/README.md
+A	HW02/tests/package.json
+A	HW02/tests/playwright.config.ts
+A	HW02/tests/specs/.gitkeep
+
+4e30b25 | 16:33 19/10/2026 | TonKnight | HW02[A-FR01] 1/7: Phân tích biến vào/ra
+A	HW02/A_FR01/testcases.json
+A	HW02/A_FR01/testcases.md
+A	HW02/appendix/ai-outputs/A_FR01_step1_20261019-1613.json
+A	HW02/appendix/ai-outputs/A_FR01_step1_20261019-1613.md
+A	HW02/appendix/ai-outputs/INDEX.md
+M	HW02/env/environment.md
+
+c63cf73 | 16:38 19/10/2026 | TonKnight | HW02[A-FR01] 1/7: render lại bảng biến (thêm ghi chú V2, V5) + cập nhật prompt log
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+d799b74 | 16:48 19/10/2026 | TonKnight | HW02[A-FR01] 2/7: Phân lớp tương đương
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/A_FR01_step2_20261019-1641.json
+A	HW02/appendix/ai-outputs/A_FR01_step2_20261019-1641.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+448b10d | 17:11 19/10/2026 | TonKnight | HW02[A-FR01] 3/7: Test case Domain
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/A_FR01_step3_20261019-1656.json
+A	HW02/appendix/ai-outputs/A_FR01_step3_20261019-1656.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+1e5f539 | 17:17 19/10/2026 | TonKnight | HW02[A-FR01] 3/7: render lại (bước chi tiết TS-GUI, ghi chú suite)
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+b567dc2 | 17:25 19/10/2026 | TonKnight | HW02[A-FR01] 4/7: Test case BVA
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/A_FR01_step4_20261019-1719.json
+A	HW02/appendix/ai-outputs/A_FR01_step4_20261019-1719.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+6a5a17e | 17:46 19/10/2026 | TonKnight | HW02[A-FR01] 4/7b: SV sửa TC-90, TC-92 cô lập nguyên nhân thiếu ô Xác nhận mật khẩu
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+2448cf1 | 19:14 19/10/2026 | TonKnight | HW02[A-FR01] 5/7: SV tự bổ sung test case (chưa hỏi AI)
+A	HW02/A_FR01/sv_cases.md
+
+8d837f1 | 19:20 19/10/2026 | TonKnight | HW02[A-FR01] 5/7: đưa case SV vào TS-SV + câu trả lời gap analysis của AI
+A	HW02/A_FR01/ai_gap_answer.md
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+1cfa163 | 19:41 19/10/2026 | TonKnight | HW02[A-FR01] 5/7b: SV chuẩn hoá TS-SV (tách UI/API, giả định A20–A23, truy vết)
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+f3126b0 | 22:10 19/10/2026 | TonKnight | HW02[A-FR01] 5/7c: sửa nguồn và truy vết TS-SV
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+d840b73 | 22:40 19/10/2026 | TonKnight | HW02[A-FR01] 6/7a: script Playwright đọc testcases.json
+M	HW02/appendix/A_prompt_log.md
+A	HW02/tests/A_FR01/A_FR01.spec.ts
+A	HW02/tests/A_FR01/lib.ts
+M	HW02/tests/README.md
+A	HW02/tests/global-setup.ts
+A	HW02/tests/package-lock.json
+M	HW02/tests/playwright.config.ts
+
+32390b1 | 23:25 19/10/2026 | TonKnight | HW02[A-FR01] 6/7b: kết quả chạy + evidence + verdict theo A20 + kiểm tay TC-216
+A	HW02/A_FR01/evidence/TC-FR01-01_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-01_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-02_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-02_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-03_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-03_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-04_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-04_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-05_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-06_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-07_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-08_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-09_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-100_api.png
+A	HW02/A_FR01/evidence/TC-FR01-100_req.json
+A	HW02/A_FR01/evidence/TC-FR01-100_res.json
+A	HW02/A_FR01/evidence/TC-FR01-101_api.png
+A	HW02/A_FR01/evidence/TC-FR01-101_req.json
+A	HW02/A_FR01/evidence/TC-FR01-101_res.json
+A	HW02/A_FR01/evidence/TC-FR01-102_api.png
+A	HW02/A_FR01/evidence/TC-FR01-102_req.json
+A	HW02/A_FR01/evidence/TC-FR01-102_res.json
+A	HW02/A_FR01/evidence/TC-FR01-103_api.png
+A	HW02/A_FR01/evidence/TC-FR01-103_req.json
+A	HW02/A_FR01/evidence/TC-FR01-103_res.json
+A	HW02/A_FR01/evidence/TC-FR01-104_api.png
+A	HW02/A_FR01/evidence/TC-FR01-104_req.json
+A	HW02/A_FR01/evidence/TC-FR01-104_res.json
+A	HW02/A_FR01/evidence/TC-FR01-105_api.png
+A	HW02/A_FR01/evidence/TC-FR01-105_req.json
+A	HW02/A_FR01/evidence/TC-FR01-105_res.json
+A	HW02/A_FR01/evidence/TC-FR01-106_api.png
+A	HW02/A_FR01/evidence/TC-FR01-106_req.json
+A	HW02/A_FR01/evidence/TC-FR01-106_res.json
+A	HW02/A_FR01/evidence/TC-FR01-107_api.png
+A	HW02/A_FR01/evidence/TC-FR01-107_req.json
+A	HW02/A_FR01/evidence/TC-FR01-107_res.json
+A	HW02/A_FR01/evidence/TC-FR01-10_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-11_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-12_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-13_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-14_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-15_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-16_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-17_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-18_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-19_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-200_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-201_api.png
+A	HW02/A_FR01/evidence/TC-FR01-201_req.json
+A	HW02/A_FR01/evidence/TC-FR01-201_res.json
+A	HW02/A_FR01/evidence/TC-FR01-202_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-203_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-204_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-205_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-205_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-206_api.png
+A	HW02/A_FR01/evidence/TC-FR01-206_req.json
+A	HW02/A_FR01/evidence/TC-FR01-206_res.json
+A	HW02/A_FR01/evidence/TC-FR01-207_api.png
+A	HW02/A_FR01/evidence/TC-FR01-207_req.json
+A	HW02/A_FR01/evidence/TC-FR01-207_res.json
+A	HW02/A_FR01/evidence/TC-FR01-208_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-209_api.png
+A	HW02/A_FR01/evidence/TC-FR01-209_req.json
+A	HW02/A_FR01/evidence/TC-FR01-209_res.json
+A	HW02/A_FR01/evidence/TC-FR01-20_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-210_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-211_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-211_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-212_api.png
+A	HW02/A_FR01/evidence/TC-FR01-212_req.json
+A	HW02/A_FR01/evidence/TC-FR01-212_res.json
+A	HW02/A_FR01/evidence/TC-FR01-213_api.png
+A	HW02/A_FR01/evidence/TC-FR01-213_req.json
+A	HW02/A_FR01/evidence/TC-FR01-213_res.json
+A	HW02/A_FR01/evidence/TC-FR01-214_api.png
+A	HW02/A_FR01/evidence/TC-FR01-214_req.json
+A	HW02/A_FR01/evidence/TC-FR01-214_res.json
+A	HW02/A_FR01/evidence/TC-FR01-215_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-215_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-216_manual_alert.png
+A	HW02/A_FR01/evidence/TC-FR01-216_manual_header.png
+A	HW02/A_FR01/evidence/TC-FR01-216_manual_profile.png
+A	HW02/A_FR01/evidence/TC-FR01-216_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-217_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-217_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-218_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-218_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-219_api.png
+A	HW02/A_FR01/evidence/TC-FR01-219_req.json
+A	HW02/A_FR01/evidence/TC-FR01-219_res.json
+A	HW02/A_FR01/evidence/TC-FR01-21_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-220_api.png
+A	HW02/A_FR01/evidence/TC-FR01-220_req.json
+A	HW02/A_FR01/evidence/TC-FR01-220_res.json
+A	HW02/A_FR01/evidence/TC-FR01-221_api.png
+A	HW02/A_FR01/evidence/TC-FR01-221_req.json
+A	HW02/A_FR01/evidence/TC-FR01-221_res.json
+A	HW02/A_FR01/evidence/TC-FR01-222_api.png
+A	HW02/A_FR01/evidence/TC-FR01-222_req.json
+A	HW02/A_FR01/evidence/TC-FR01-222_res.json
+A	HW02/A_FR01/evidence/TC-FR01-223_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-223_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-224_api.png
+A	HW02/A_FR01/evidence/TC-FR01-224_req.json
+A	HW02/A_FR01/evidence/TC-FR01-224_res.json
+A	HW02/A_FR01/evidence/TC-FR01-225_api.png
+A	HW02/A_FR01/evidence/TC-FR01-225_req.json
+A	HW02/A_FR01/evidence/TC-FR01-225_res.json
+A	HW02/A_FR01/evidence/TC-FR01-226_api.png
+A	HW02/A_FR01/evidence/TC-FR01-226_req.json
+A	HW02/A_FR01/evidence/TC-FR01-226_res.json
+A	HW02/A_FR01/evidence/TC-FR01-227_api.png
+A	HW02/A_FR01/evidence/TC-FR01-227_req.json
+A	HW02/A_FR01/evidence/TC-FR01-227_res.json
+A	HW02/A_FR01/evidence/TC-FR01-228_api.png
+A	HW02/A_FR01/evidence/TC-FR01-228_req.json
+A	HW02/A_FR01/evidence/TC-FR01-228_res.json
+A	HW02/A_FR01/evidence/TC-FR01-229_api.png
+A	HW02/A_FR01/evidence/TC-FR01-229_req.json
+A	HW02/A_FR01/evidence/TC-FR01-229_res.json
+A	HW02/A_FR01/evidence/TC-FR01-22_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-230_api.png
+A	HW02/A_FR01/evidence/TC-FR01-230_req.json
+A	HW02/A_FR01/evidence/TC-FR01-230_res.json
+A	HW02/A_FR01/evidence/TC-FR01-231_api.png
+A	HW02/A_FR01/evidence/TC-FR01-231_req.json
+A	HW02/A_FR01/evidence/TC-FR01-231_res.json
+A	HW02/A_FR01/evidence/TC-FR01-232_api.png
+A	HW02/A_FR01/evidence/TC-FR01-232_req.json
+A	HW02/A_FR01/evidence/TC-FR01-232_res.json
+A	HW02/A_FR01/evidence/TC-FR01-23_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-24_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-25_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-26_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-27_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-28_api.png
+A	HW02/A_FR01/evidence/TC-FR01-28_req.json
+A	HW02/A_FR01/evidence/TC-FR01-28_res.json
+A	HW02/A_FR01/evidence/TC-FR01-29_api.png
+A	HW02/A_FR01/evidence/TC-FR01-29_req.json
+A	HW02/A_FR01/evidence/TC-FR01-29_res.json
+A	HW02/A_FR01/evidence/TC-FR01-30_api.png
+A	HW02/A_FR01/evidence/TC-FR01-30_req.json
+A	HW02/A_FR01/evidence/TC-FR01-30_res.json
+A	HW02/A_FR01/evidence/TC-FR01-31_api.png
+A	HW02/A_FR01/evidence/TC-FR01-31_req.json
+A	HW02/A_FR01/evidence/TC-FR01-31_res.json
+A	HW02/A_FR01/evidence/TC-FR01-32_api.png
+A	HW02/A_FR01/evidence/TC-FR01-32_req.json
+A	HW02/A_FR01/evidence/TC-FR01-32_res.json
+A	HW02/A_FR01/evidence/TC-FR01-33_api.png
+A	HW02/A_FR01/evidence/TC-FR01-33_req.json
+A	HW02/A_FR01/evidence/TC-FR01-33_res.json
+A	HW02/A_FR01/evidence/TC-FR01-34_api.png
+A	HW02/A_FR01/evidence/TC-FR01-34_req.json
+A	HW02/A_FR01/evidence/TC-FR01-34_res.json
+A	HW02/A_FR01/evidence/TC-FR01-35_api.png
+A	HW02/A_FR01/evidence/TC-FR01-35_req.json
+A	HW02/A_FR01/evidence/TC-FR01-35_res.json
+A	HW02/A_FR01/evidence/TC-FR01-36_api.png
+A	HW02/A_FR01/evidence/TC-FR01-36_req.json
+A	HW02/A_FR01/evidence/TC-FR01-36_res.json
+A	HW02/A_FR01/evidence/TC-FR01-37_api.png
+A	HW02/A_FR01/evidence/TC-FR01-37_req.json
+A	HW02/A_FR01/evidence/TC-FR01-37_res.json
+A	HW02/A_FR01/evidence/TC-FR01-38_api.png
+A	HW02/A_FR01/evidence/TC-FR01-38_req.json
+A	HW02/A_FR01/evidence/TC-FR01-38_res.json
+A	HW02/A_FR01/evidence/TC-FR01-39_api.png
+A	HW02/A_FR01/evidence/TC-FR01-39_req.json
+A	HW02/A_FR01/evidence/TC-FR01-39_res.json
+A	HW02/A_FR01/evidence/TC-FR01-40_api.png
+A	HW02/A_FR01/evidence/TC-FR01-40_req.json
+A	HW02/A_FR01/evidence/TC-FR01-40_res.json
+A	HW02/A_FR01/evidence/TC-FR01-41_api.png
+A	HW02/A_FR01/evidence/TC-FR01-41_req.json
+A	HW02/A_FR01/evidence/TC-FR01-41_res.json
+A	HW02/A_FR01/evidence/TC-FR01-42_api.png
+A	HW02/A_FR01/evidence/TC-FR01-42_req.json
+A	HW02/A_FR01/evidence/TC-FR01-42_res.json
+A	HW02/A_FR01/evidence/TC-FR01-43_api.png
+A	HW02/A_FR01/evidence/TC-FR01-43_req.json
+A	HW02/A_FR01/evidence/TC-FR01-43_res.json
+A	HW02/A_FR01/evidence/TC-FR01-44_api.png
+A	HW02/A_FR01/evidence/TC-FR01-44_req.json
+A	HW02/A_FR01/evidence/TC-FR01-44_res.json
+A	HW02/A_FR01/evidence/TC-FR01-45_api.png
+A	HW02/A_FR01/evidence/TC-FR01-45_req.json
+A	HW02/A_FR01/evidence/TC-FR01-45_res.json
+A	HW02/A_FR01/evidence/TC-FR01-46_api.png
+A	HW02/A_FR01/evidence/TC-FR01-46_req.json
+A	HW02/A_FR01/evidence/TC-FR01-46_res.json
+A	HW02/A_FR01/evidence/TC-FR01-47_api.png
+A	HW02/A_FR01/evidence/TC-FR01-47_req.json
+A	HW02/A_FR01/evidence/TC-FR01-47_res.json
+A	HW02/A_FR01/evidence/TC-FR01-48_api.png
+A	HW02/A_FR01/evidence/TC-FR01-48_req.json
+A	HW02/A_FR01/evidence/TC-FR01-48_res.json
+A	HW02/A_FR01/evidence/TC-FR01-49_api.png
+A	HW02/A_FR01/evidence/TC-FR01-49_req.json
+A	HW02/A_FR01/evidence/TC-FR01-49_res.json
+A	HW02/A_FR01/evidence/TC-FR01-50_api.png
+A	HW02/A_FR01/evidence/TC-FR01-50_req.json
+A	HW02/A_FR01/evidence/TC-FR01-50_res.json
+A	HW02/A_FR01/evidence/TC-FR01-51_api.png
+A	HW02/A_FR01/evidence/TC-FR01-51_req.json
+A	HW02/A_FR01/evidence/TC-FR01-51_res.json
+A	HW02/A_FR01/evidence/TC-FR01-52_api.png
+A	HW02/A_FR01/evidence/TC-FR01-52_req.json
+A	HW02/A_FR01/evidence/TC-FR01-52_res.json
+A	HW02/A_FR01/evidence/TC-FR01-53_api.png
+A	HW02/A_FR01/evidence/TC-FR01-53_req.json
+A	HW02/A_FR01/evidence/TC-FR01-53_res.json
+A	HW02/A_FR01/evidence/TC-FR01-54_api.png
+A	HW02/A_FR01/evidence/TC-FR01-54_req.json
+A	HW02/A_FR01/evidence/TC-FR01-54_res.json
+A	HW02/A_FR01/evidence/TC-FR01-55_api.png
+A	HW02/A_FR01/evidence/TC-FR01-55_req.json
+A	HW02/A_FR01/evidence/TC-FR01-55_res.json
+A	HW02/A_FR01/evidence/TC-FR01-56_api.png
+A	HW02/A_FR01/evidence/TC-FR01-56_req.json
+A	HW02/A_FR01/evidence/TC-FR01-56_res.json
+A	HW02/A_FR01/evidence/TC-FR01-57_api.png
+A	HW02/A_FR01/evidence/TC-FR01-57_req.json
+A	HW02/A_FR01/evidence/TC-FR01-57_res.json
+A	HW02/A_FR01/evidence/TC-FR01-60_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-61_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-61_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-62_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-62_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-63_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-64_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-64_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-65_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-65_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-66_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-66_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-67_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-68_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-68_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-69_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-69_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-70_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-71_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-71_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-72_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-72_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-73_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-74_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-74_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-75_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-75_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-76_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-77_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-77_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-78_failed.png
+A	HW02/A_FR01/evidence/TC-FR01-78_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-79_api.png
+A	HW02/A_FR01/evidence/TC-FR01-79_req.json
+A	HW02/A_FR01/evidence/TC-FR01-79_res.json
+A	HW02/A_FR01/evidence/TC-FR01-80_api.png
+A	HW02/A_FR01/evidence/TC-FR01-80_req.json
+A	HW02/A_FR01/evidence/TC-FR01-80_res.json
+A	HW02/A_FR01/evidence/TC-FR01-81_api.png
+A	HW02/A_FR01/evidence/TC-FR01-81_req.json
+A	HW02/A_FR01/evidence/TC-FR01-81_res.json
+A	HW02/A_FR01/evidence/TC-FR01-82_api.png
+A	HW02/A_FR01/evidence/TC-FR01-82_req.json
+A	HW02/A_FR01/evidence/TC-FR01-82_res.json
+A	HW02/A_FR01/evidence/TC-FR01-83_api.png
+A	HW02/A_FR01/evidence/TC-FR01-83_req.json
+A	HW02/A_FR01/evidence/TC-FR01-83_res.json
+A	HW02/A_FR01/evidence/TC-FR01-84_api.png
+A	HW02/A_FR01/evidence/TC-FR01-84_req.json
+A	HW02/A_FR01/evidence/TC-FR01-84_res.json
+A	HW02/A_FR01/evidence/TC-FR01-85_api.png
+A	HW02/A_FR01/evidence/TC-FR01-85_req.json
+A	HW02/A_FR01/evidence/TC-FR01-85_res.json
+A	HW02/A_FR01/evidence/TC-FR01-86_api.png
+A	HW02/A_FR01/evidence/TC-FR01-86_req.json
+A	HW02/A_FR01/evidence/TC-FR01-86_res.json
+A	HW02/A_FR01/evidence/TC-FR01-87_api.png
+A	HW02/A_FR01/evidence/TC-FR01-87_req.json
+A	HW02/A_FR01/evidence/TC-FR01-87_res.json
+A	HW02/A_FR01/evidence/TC-FR01-88_api.png
+A	HW02/A_FR01/evidence/TC-FR01-88_req.json
+A	HW02/A_FR01/evidence/TC-FR01-88_res.json
+A	HW02/A_FR01/evidence/TC-FR01-89_api.png
+A	HW02/A_FR01/evidence/TC-FR01-89_req.json
+A	HW02/A_FR01/evidence/TC-FR01-89_res.json
+A	HW02/A_FR01/evidence/TC-FR01-90_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-91_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-92_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-93_ui.png
+A	HW02/A_FR01/evidence/TC-FR01-94_ui.png
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/README.md
+M	HW02/appendix/A_prompt_log.md
+
+a6cd0ef | 23:29 19/10/2026 | TonKnight | HW02[A-FR01] 6/7c: chỉnh notes và evidence TC-216 theo quan sát trang admin
+A	HW02/A_FR01/evidence/TC-FR01-216_manual_admin.png
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+e899e06 | 23:36 19/10/2026 | TonKnight | HW02[A-FR01] 7/7a: gom dữ kiện Fail để SV viết bug report
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/README.md
+A	HW02/bugs/_groups_A_FR01.md
+
+11eaa75 | 23:37 19/10/2026 | TonKnight | HW02[A-FR01] 7/7a: sửa bảng chạy lại TC-209 (đánh số lần, thoát ký tự |)
+M	HW02/bugs/_groups_A_FR01.md
+
+7aa33f8 | 23:40 19/10/2026 | TonKnight | HW02[A-FR01] 7/7b: ghi case gốc A20 cho 200, 203, 204, 208
+M	HW02/A_FR01/testcases.json
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/_groups_A_FR01.md
+
+7b9c972 | 07:29 20/10/2026 | TonKnight | HW02[A-FR01] 7/7c: bug report BUG-01…14
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/BUG-01.md
+A	HW02/bugs/BUG-02.md
+A	HW02/bugs/BUG-03.md
+A	HW02/bugs/BUG-04.md
+A	HW02/bugs/BUG-05.md
+A	HW02/bugs/BUG-06.md
+A	HW02/bugs/BUG-07.md
+A	HW02/bugs/BUG-08.md
+A	HW02/bugs/BUG-09.md
+A	HW02/bugs/BUG-10.md
+A	HW02/bugs/BUG-11.md
+A	HW02/bugs/BUG-12.md
+A	HW02/bugs/BUG-13.md
+A	HW02/bugs/BUG-14.md
+M	HW02/bugs/README.md
+A	HW02/bugs/_issue_redacted/BUG-09.txt
+A	HW02/bugs/_issue_redacted/BUG-10.txt
+
+27da576 | 09:19 20/10/2026 | TonKnight | HW02[A-FR01] 7/7d: GitHub Issues #17–#30 + issues_page.png
+M	HW02/bugs/BUG-01.md
+M	HW02/bugs/BUG-02.md
+M	HW02/bugs/BUG-03.md
+M	HW02/bugs/BUG-04.md
+M	HW02/bugs/BUG-05.md
+M	HW02/bugs/BUG-06.md
+M	HW02/bugs/BUG-07.md
+M	HW02/bugs/BUG-08.md
+M	HW02/bugs/BUG-09.md
+M	HW02/bugs/BUG-10.md
+M	HW02/bugs/BUG-11.md
+M	HW02/bugs/BUG-12.md
+M	HW02/bugs/BUG-13.md
+M	HW02/bugs/BUG-14.md
+A	HW02/bugs/issues_page.png
+
+d4f0de1 | 09:19 20/10/2026 | TonKnight | HW02: cập nhật test summary
+M	HW02/README.md
+
+af48958 | 09:26 20/10/2026 | TonKnight | HW02[A-FR01]: ghi bug_id + tách cột Both trong summary
+M	HW02/A_FR01/testcases.json
+M	HW02/A_FR01/testcases.md
+M	HW02/README.md
+
+b812d33 | 09:40 20/10/2026 | TonKnight | HW02: vá harness – extract_prompt_log xử lý lượt không có model, tóm tắt nén, slash command
+M	HW02/appendix/A_prompt_log.md
+
+5bf0287 | 09:45 20/10/2026 | TonKnight | HW02: vá harness – notes theo khoá giờ
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/prompt_log_notes.toml
+
+8e2498c | 10:07 20/10/2026 | TonKnight | HW02: khôi phục 10 lượt prompt log 19/10 (chép tay từ claude.ai)
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/prompt_log_extra.toml
+
+7b30b58 | 10:11 20/10/2026 | TonKnight | Update A_prompt_log.md after finish pool A
+M	HW02/appendix/A_prompt_log.md
+
+b48929e | 10:18 20/10/2026 | TonKnight | HW02[B-FR07] 1/7: biến vào/ra
+D	HW02/B_FR07/.gitkeep
+A	HW02/B_FR07/testcases.json
+A	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step1_20261020-1018.json
+M	HW02/appendix/ai-outputs/INDEX.md
+
+e9ca12c | 10:30 20/10/2026 | TonKnight | HW02[B-FR07] 1/7b: notes bước 1 (trích SRS, khảo sát SUT, giả định)
+A	HW02/B_FR07/notes_step1.md
+M	HW02/appendix/A_prompt_log.md
+
+5badc45 | 10:31 20/10/2026 | TonKnight | HW02[B-FR07] 2/7: lớp tương đương
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step2_20261020-1031.json
+A	HW02/appendix/ai-outputs/B_FR07_step2_20261020-1031.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+4c69716 | 10:37 20/10/2026 | TonKnight | HW02[B-FR07] 3/7: TC domain
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1037.json
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1037.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+444474a | 10:51 20/10/2026 | TonKnight | HW02[B-FR07] 3/7b: sửa TC domain theo review
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1050.json
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1050.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+3013c2f | 10:58 20/10/2026 | TonKnight | HW02[B-FR07] 3/7c: ec_target, tách nhãn, B21
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1058.json
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1058.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+8c72dcc | 11:02 20/10/2026 | TonKnight | HW02[B-FR07] 3/7d: làm sạch truy vết
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1102.json
+A	HW02/appendix/ai-outputs/B_FR07_step3_20261020-1102.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+7dcb0a7 | 11:03 20/10/2026 | TonKnight | HW02[B-FR07] 4/7: TC BVA
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step4_20261020-1103.json
+A	HW02/appendix/ai-outputs/B_FR07_step4_20261020-1103.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+2572dc9 | 11:08 20/10/2026 | TonKnight | HW02[B-FR07] 4/7b: sửa TC BVA theo review
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step4_20261020-110812.json
+A	HW02/appendix/ai-outputs/B_FR07_step4_20261020-110812.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+1519b82 | 11:10 20/10/2026 | TonKnight | HW02[B-FR07] 4/7c: oracle tương đối cho phần không đổi
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/B_FR07_step4_20261020-111050.json
+A	HW02/appendix/ai-outputs/B_FR07_step4_20261020-111050.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+3d0cbca | 12:10 20/10/2026 | TonKnight | HW02[B-FR07] 5/7: SV thêm TC
+A	HW02/B_FR07/sv_cases.md
+
+897a7c8 | 12:14 20/10/2026 | TonKnight | HW02[B-FR07] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+A	HW02/B_FR07/ai_gap_answer.md
+A	HW02/B_FR07/sv_questions.md
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+21a989a | 12:41 20/10/2026 | TonKnight | HW02[B-FR07] 5/7c: áp trả lời SV
+M	HW02/B_FR07/sv_questions.md
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+1abe0a1 | 12:54 20/10/2026 | TonKnight | HW02[B-FR07] 6/7a: Playwright
+A	HW02/B_FR07/RUN.md
+M	HW02/B_FR07/testcases.json
+M	HW02/appendix/A_prompt_log.md
+A	HW02/tests/B_FR07/B_FR07.spec.ts
+A	HW02/tests/B_FR07/lib.ts
+M	HW02/tests/playwright.config.ts
+
+4ba84b8 | 13:23 20/10/2026 | TonKnight | HW02[B-FR07] 6/7b: kết quả chạy + verdict theo A20
+M	HW02/B_FR07/RUN.md
+A	HW02/B_FR07/evidence/TC-FR07-01_failed.png
+A	HW02/B_FR07/evidence/TC-FR07-01_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-02_failed.png
+A	HW02/B_FR07/evidence/TC-FR07-02_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-02_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-03_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-04_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-04_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-05_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-06_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-07_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-08_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-09_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-10_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-10_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-11_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-11_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-12_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-12_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-13_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-13_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-200_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-200_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-201_failed.png
+A	HW02/B_FR07/evidence/TC-FR07-201_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-203_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-203_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-205_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-205_ui-lan1.png
+A	HW02/B_FR07/evidence/TC-FR07-206_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-206_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-208_api.png
+A	HW02/B_FR07/evidence/TC-FR07-208_req.json
+A	HW02/B_FR07/evidence/TC-FR07-208_res.json
+A	HW02/B_FR07/evidence/TC-FR07-209_api.png
+A	HW02/B_FR07/evidence/TC-FR07-209_req.json
+A	HW02/B_FR07/evidence/TC-FR07-209_res.json
+A	HW02/B_FR07/evidence/TC-FR07-20_api.png
+A	HW02/B_FR07/evidence/TC-FR07-20_req.json
+A	HW02/B_FR07/evidence/TC-FR07-20_res.json
+A	HW02/B_FR07/evidence/TC-FR07-210_api.png
+A	HW02/B_FR07/evidence/TC-FR07-210_req.json
+A	HW02/B_FR07/evidence/TC-FR07-210_res.json
+A	HW02/B_FR07/evidence/TC-FR07-211_api.png
+A	HW02/B_FR07/evidence/TC-FR07-211_req.json
+A	HW02/B_FR07/evidence/TC-FR07-211_res.json
+A	HW02/B_FR07/evidence/TC-FR07-212_api.png
+A	HW02/B_FR07/evidence/TC-FR07-212_req.json
+A	HW02/B_FR07/evidence/TC-FR07-212_res.json
+A	HW02/B_FR07/evidence/TC-FR07-213_api.png
+A	HW02/B_FR07/evidence/TC-FR07-213_req.json
+A	HW02/B_FR07/evidence/TC-FR07-213_res.json
+A	HW02/B_FR07/evidence/TC-FR07-214_api.png
+A	HW02/B_FR07/evidence/TC-FR07-214_req.json
+A	HW02/B_FR07/evidence/TC-FR07-214_res.json
+A	HW02/B_FR07/evidence/TC-FR07-215_api.png
+A	HW02/B_FR07/evidence/TC-FR07-215_req.json
+A	HW02/B_FR07/evidence/TC-FR07-215_res.json
+A	HW02/B_FR07/evidence/TC-FR07-21_api.png
+A	HW02/B_FR07/evidence/TC-FR07-21_req.json
+A	HW02/B_FR07/evidence/TC-FR07-21_res.json
+A	HW02/B_FR07/evidence/TC-FR07-22_api.png
+A	HW02/B_FR07/evidence/TC-FR07-22_req.json
+A	HW02/B_FR07/evidence/TC-FR07-22_res.json
+A	HW02/B_FR07/evidence/TC-FR07-30_api.png
+A	HW02/B_FR07/evidence/TC-FR07-30_req.json
+A	HW02/B_FR07/evidence/TC-FR07-30_res.json
+A	HW02/B_FR07/evidence/TC-FR07-31_api.png
+A	HW02/B_FR07/evidence/TC-FR07-31_req.json
+A	HW02/B_FR07/evidence/TC-FR07-31_res.json
+A	HW02/B_FR07/evidence/TC-FR07-32_api.png
+A	HW02/B_FR07/evidence/TC-FR07-32_req.json
+A	HW02/B_FR07/evidence/TC-FR07-32_res.json
+A	HW02/B_FR07/evidence/TC-FR07-33_api.png
+A	HW02/B_FR07/evidence/TC-FR07-33_req.json
+A	HW02/B_FR07/evidence/TC-FR07-33_res.json
+A	HW02/B_FR07/evidence/TC-FR07-34_api.png
+A	HW02/B_FR07/evidence/TC-FR07-34_req.json
+A	HW02/B_FR07/evidence/TC-FR07-34_res.json
+A	HW02/B_FR07/evidence/TC-FR07-35_api.png
+A	HW02/B_FR07/evidence/TC-FR07-35_req.json
+A	HW02/B_FR07/evidence/TC-FR07-35_res.json
+A	HW02/B_FR07/evidence/TC-FR07-36_api.png
+A	HW02/B_FR07/evidence/TC-FR07-36_req.json
+A	HW02/B_FR07/evidence/TC-FR07-36_res.json
+A	HW02/B_FR07/evidence/TC-FR07-37_api.png
+A	HW02/B_FR07/evidence/TC-FR07-37_req.json
+A	HW02/B_FR07/evidence/TC-FR07-37_res.json
+A	HW02/B_FR07/evidence/TC-FR07-38_api.png
+A	HW02/B_FR07/evidence/TC-FR07-38_req.json
+A	HW02/B_FR07/evidence/TC-FR07-38_res.json
+A	HW02/B_FR07/evidence/TC-FR07-39_api.png
+A	HW02/B_FR07/evidence/TC-FR07-39_req.json
+A	HW02/B_FR07/evidence/TC-FR07-39_res.json
+A	HW02/B_FR07/evidence/TC-FR07-40_api.png
+A	HW02/B_FR07/evidence/TC-FR07-40_req.json
+A	HW02/B_FR07/evidence/TC-FR07-40_res.json
+A	HW02/B_FR07/evidence/TC-FR07-60_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-60_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-61_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-61_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-62_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-62_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-63_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-63_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-64_feedback.png
+A	HW02/B_FR07/evidence/TC-FR07-64_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-65_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-66_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-70_api.png
+A	HW02/B_FR07/evidence/TC-FR07-70_req.json
+A	HW02/B_FR07/evidence/TC-FR07-70_res.json
+A	HW02/B_FR07/evidence/TC-FR07-71_api.png
+A	HW02/B_FR07/evidence/TC-FR07-71_req.json
+A	HW02/B_FR07/evidence/TC-FR07-71_res.json
+A	HW02/B_FR07/evidence/TC-FR07-72_api.png
+A	HW02/B_FR07/evidence/TC-FR07-72_req.json
+A	HW02/B_FR07/evidence/TC-FR07-72_res.json
+A	HW02/B_FR07/evidence/TC-FR07-73_api.png
+A	HW02/B_FR07/evidence/TC-FR07-73_req.json
+A	HW02/B_FR07/evidence/TC-FR07-73_res.json
+A	HW02/B_FR07/evidence/TC-FR07-74_api.png
+A	HW02/B_FR07/evidence/TC-FR07-74_req.json
+A	HW02/B_FR07/evidence/TC-FR07-74_res.json
+A	HW02/B_FR07/evidence/TC-FR07-90_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-91_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-92_failed.png
+A	HW02/B_FR07/evidence/TC-FR07-92_ui-cart.png
+A	HW02/B_FR07/evidence/TC-FR07-92_ui-home.png
+A	HW02/B_FR07/evidence/TC-FR07-93_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-94_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-95_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-96_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-97_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-98_ui.png
+A	HW02/B_FR07/evidence/TC-FR07-99_failed.png
+A	HW02/B_FR07/evidence/TC-FR07-99_feedback.png
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/tests/B_FR07/B_FR07.spec.ts
+A	HW02/tests/results/B_FR07.json
+A	HW02/tests/results/B_FR07_rerun.json
+
+7f5b524 | 13:26 20/10/2026 | TonKnight | HW02[B-FR07] 7/7a: dữ kiện bug (AI chép)
+A	HW02/B_FR07/bugs_facts.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/BUG-15.md
+A	HW02/bugs/BUG-16.md
+A	HW02/bugs/BUG-17.md
+A	HW02/bugs/BUG-18.md
+A	HW02/bugs/BUG-19.md
+A	HW02/bugs/BUG-20.md
+A	HW02/bugs/BUG-21.md
+A	HW02/bugs/BUG-22.md
+A	HW02/bugs/BUG-23.md
+A	HW02/bugs/BUG-24.md
+A	HW02/bugs/BUG-25.md
+A	HW02/bugs/BUG-26.md
+A	HW02/bugs/BUG-27.md
+A	HW02/bugs/BUG-28.md
+A	HW02/bugs/BUG-29.md
+A	HW02/bugs/BUG-30.md
+A	HW02/bugs/BUG-31.md
+A	HW02/bugs/BUG-32.md
+A	HW02/bugs/BUG-33.md
+A	HW02/bugs/BUG-34.md
+A	HW02/bugs/BUG-35.md
+A	HW02/bugs/BUG-36.md
+
+103c8ec | 13:31 20/10/2026 | TonKnight | HW02[B-FR07] 7/7a2: sửa dữ kiện yêu cầu bị vi phạm
+M	HW02/B_FR07/bugs_facts.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-16.md
+M	HW02/bugs/BUG-17.md
+M	HW02/bugs/BUG-18.md
+M	HW02/bugs/BUG-19.md
+M	HW02/bugs/BUG-20.md
+M	HW02/bugs/BUG-21.md
+M	HW02/bugs/BUG-22.md
+M	HW02/bugs/BUG-23.md
+M	HW02/bugs/BUG-24.md
+M	HW02/bugs/BUG-25.md
+M	HW02/bugs/BUG-26.md
+M	HW02/bugs/BUG-27.md
+M	HW02/bugs/BUG-28.md
+M	HW02/bugs/BUG-29.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+M	HW02/bugs/BUG-35.md
+M	HW02/bugs/BUG-36.md
+
+d72d863 | 13:35 20/10/2026 | TonKnight | HW02[B-FR07] 7/7a3: khung bug theo cách gộp của SV
+M	HW02/B_FR07/bugs_facts.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-16.md
+M	HW02/bugs/BUG-17.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+D	HW02/bugs/BUG-35.md
+D	HW02/bugs/BUG-36.md
+
+d8d60ff | 13:45 20/10/2026 | TonKnight | HW02[B-FR07] 7/7a4: đổi tên file dữ kiện theo quy ước A
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-16.md
+M	HW02/bugs/BUG-17.md
+M	HW02/bugs/BUG-18.md
+M	HW02/bugs/BUG-19.md
+M	HW02/bugs/BUG-20.md
+M	HW02/bugs/BUG-21.md
+M	HW02/bugs/BUG-22.md
+M	HW02/bugs/BUG-23.md
+M	HW02/bugs/BUG-24.md
+M	HW02/bugs/BUG-25.md
+M	HW02/bugs/BUG-26.md
+M	HW02/bugs/BUG-27.md
+M	HW02/bugs/BUG-28.md
+M	HW02/bugs/BUG-29.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+R100	HW02/B_FR07/bugs_facts.md	HW02/bugs/_groups_B_FR07.md
+
+ddb74cf | 13:50 20/10/2026 | TonKnight | HW02[A-FR01] 7/7e: đính chính yêu cầu bị vi phạm
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-01.md
+M	HW02/bugs/BUG-04.md
+M	HW02/bugs/BUG-06.md
+M	HW02/bugs/BUG-08.md
+M	HW02/bugs/BUG-09.md
+M	HW02/bugs/BUG-10.md
+A	HW02/bugs/_edit_log_A.md
+M	HW02/bugs/_groups_A_FR01.md
+
+d0d0e05 | 14:01 20/10/2026 | TonKnight | HW02[B-FR07] 7/7a5: khung bug theo format BUG-14
+A	HW02/B_FR07/evidence/TC-FR07-201_manual_2lan.png
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-16.md
+M	HW02/bugs/BUG-17.md
+M	HW02/bugs/BUG-18.md
+M	HW02/bugs/BUG-19.md
+M	HW02/bugs/BUG-20.md
+M	HW02/bugs/BUG-21.md
+M	HW02/bugs/BUG-22.md
+M	HW02/bugs/BUG-23.md
+M	HW02/bugs/BUG-24.md
+M	HW02/bugs/BUG-25.md
+M	HW02/bugs/BUG-26.md
+M	HW02/bugs/BUG-27.md
+M	HW02/bugs/BUG-28.md
+M	HW02/bugs/BUG-29.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+A	HW02/bugs/_issue_redacted/BUG-34.txt
+
+ac34ea0 | 14:19 20/10/2026 | TonKnight | HW02[B-FR07] 7/7b: SV viết BUG-15–17
+A	HW02/B_FR07/evidence/TC-FR07-205_manual_3lan.png
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-16.md
+M	HW02/bugs/BUG-17.md
+
+8b52204 | 14:20 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: sửa dữ kiện BUG-15, 17 theo evidence
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-17.md
+
+bfafa61 | 14:36 20/10/2026 | TonKnight | HW02[B-FR07] 7/7b: SV viết BUG-18–20
+M	HW02/bugs/BUG-18.md
+M	HW02/bugs/BUG-19.md
+M	HW02/bugs/BUG-20.md
+
+dad34f8 | 14:38 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-19
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-19.md
+
+f38f271 | 14:45 20/10/2026 | TonKnight | HW02[B-FR07] 7/7b: SV viết BUG-21–24
+M	HW02/bugs/BUG-21.md
+M	HW02/bugs/BUG-22.md
+M	HW02/bugs/BUG-23.md
+M	HW02/bugs/BUG-24.md
+
+88a2a02 | 14:47 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-22, 24
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-22.md
+M	HW02/bugs/BUG-24.md
+
+f03edcd | 14:56 20/10/2026 | TonKnight | HW02[B-FR07] 7/7b: SV viết BUG-25–28
+M	HW02/bugs/BUG-25.md
+M	HW02/bugs/BUG-26.md
+M	HW02/bugs/BUG-27.md
+M	HW02/bugs/BUG-28.md
+
+adb033d | 14:59 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: sửa chi tiết nhỏ BUG-25, 27
+M	HW02/bugs/BUG-25.md
+M	HW02/bugs/BUG-27.md
+
+404a6bb | 15:06 20/10/2026 | TonKnight | HW02[B-FR07] 7/7b: SV viết BUG-29–31
+M	HW02/bugs/BUG-29.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+
+7c3026b | 15:10 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-30, 31
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+
+e4ef048 | 15:13 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: dữ kiện client dùng /api/cart
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+
+f5a5363 | 15:19 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: xoá nhận định BUG-31
+M	HW02/bugs/BUG-31.md
+
+a2ee5d4 | 15:30 20/10/2026 | TonKnight | HW02[B-FR07] 7/7b: SV viết BUG-32–34
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+
+b42d56d | 15:33 20/10/2026 | TonKnight | HW02[B-FR07] 7/7c: sửa bước tái hiện BUG-32–34
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+
+352a34d | 16:00 20/10/2026 | TonKnight | HW02[B-FR07] 7/7d: GitHub Issues #161–#180 + issues_page_B_FR07.png
+M	HW02/B_FR07/testcases.json
+M	HW02/B_FR07/testcases.md
+M	HW02/README.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-15.md
+M	HW02/bugs/BUG-16.md
+M	HW02/bugs/BUG-17.md
+M	HW02/bugs/BUG-18.md
+M	HW02/bugs/BUG-19.md
+M	HW02/bugs/BUG-20.md
+M	HW02/bugs/BUG-21.md
+M	HW02/bugs/BUG-22.md
+M	HW02/bugs/BUG-23.md
+M	HW02/bugs/BUG-24.md
+M	HW02/bugs/BUG-25.md
+M	HW02/bugs/BUG-26.md
+M	HW02/bugs/BUG-27.md
+M	HW02/bugs/BUG-28.md
+M	HW02/bugs/BUG-29.md
+M	HW02/bugs/BUG-30.md
+M	HW02/bugs/BUG-31.md
+M	HW02/bugs/BUG-32.md
+M	HW02/bugs/BUG-33.md
+M	HW02/bugs/BUG-34.md
+M	HW02/bugs/README.md
+M	HW02/bugs/_groups_B_FR07.md
+R100	HW02/bugs/issues_page.png	HW02/bugs/issues_page_A_FR01.png
+A	HW02/bugs/issues_page_B_FR07.png
+
+da73f82 | 16:08 20/10/2026 | TonKnight | HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10
+M	HW02/appendix/A_prompt_log.md
+
+422f9cc | 16:14 20/10/2026 | TonKnight | HW02: prompt log – phiên thảo luận p3 + Claude Code 20/10
+M	HW02/appendix/A_prompt_log.md
+
+ea82c96 | 16:16 20/10/2026 | TonKnight | HW02: cập nhật prompt log – p3 đầy đủ
+M	HW02/appendix/A_prompt_log.md
+
+224f147 | 16:26 20/10/2026 | TonKnight | HW02[C-FR15] 1/7: biến vào/ra
+A	HW02/C_FR15/testcases.json
+A	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/C_FR15_step1_20261020-162618.json
+A	HW02/appendix/ai-outputs/C_FR15_step1_20261020-162618.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+1012f71 | 16:37 20/10/2026 | TonKnight | HW02[C-FR15] 1/7b: SV chốt giả định C0–C14
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+d1e228a | 16:39 20/10/2026 | TonKnight | HW02[C-FR15] 2/7: lớp tương đương
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/C_FR15_step2_20261020-163945.json
+A	HW02/appendix/ai-outputs/C_FR15_step2_20261020-163945.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+f982e3b | 16:43 20/10/2026 | TonKnight | HW02[C-FR15] 2/7b: sửa lý do C9 và lớp số thập phân V3
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/C_FR15_step2_20261020-164315.json
+A	HW02/appendix/ai-outputs/C_FR15_step2_20261020-164315.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+b889942 | 16:46 20/10/2026 | TonKnight | HW02[C-FR15] 2/7c: SV chốt C9, C15
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+c3e971f | 16:52 20/10/2026 | TonKnight | HW02[C-FR15] 3/7: TC Domain
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/C_FR15_step3_20261020-165215.json
+A	HW02/appendix/ai-outputs/C_FR15_step3_20261020-165215.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+65c4bf2 | 16:57 20/10/2026 | TonKnight | HW02[C-FR15] 3/7b: tách suite API theo linter
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/C_FR15_step3_20261020-165700.json
+A	HW02/appendix/ai-outputs/C_FR15_step3_20261020-165700.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+af3946f | 16:57 20/10/2026 | TonKnight | HW02[C-FR15] 3/7c: SV chốt C16–C18
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+1593b82 | 16:58 20/10/2026 | TonKnight | HW02[C-FR15] 4/7: TC BVA
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/C_FR15_step4_20261020-165850.json
+A	HW02/appendix/ai-outputs/C_FR15_step4_20261020-165850.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+c22e3da | 17:16 20/10/2026 | TonKnight | HW02[C-FR15] 5/7: SV tự thêm TC
+A	HW02/C_FR15/sv_cases.md
+
+d1c71d8 | 17:20 20/10/2026 | TonKnight | HW02[C-FR15] 5/7b: chuẩn hoá TC SV + ai_gap_answer
+A	HW02/C_FR15/ai_gap_answer.md
+A	HW02/C_FR15/sv_questions.md
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+078c5b0 | 17:40 20/10/2026 | TonKnight | HW02[C-FR15] 5/7c: áp trả lời SV Q1–Q5
+M	HW02/C_FR15/ai_gap_answer.md
+M	HW02/C_FR15/sv_questions.md
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+7561a75 | 18:03 20/10/2026 | TonKnight | HW02[C-FR15] 5/7d: áp tiếp trả lời SV
+M	HW02/C_FR15/ai_gap_answer.md
+M	HW02/C_FR15/sv_questions.md
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+4c9655c | 18:05 20/10/2026 | TonKnight | HW02[C-FR15] 5/7e: SV chốt TC-201
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+ab466c8 | 18:12 20/10/2026 | TonKnight | HW02[C-FR15] 6/7a: Playwright + RUN.md
+A	HW02/C_FR15/RUN.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/tests/C_FR15/C_FR15.spec.ts
+A	HW02/tests/C_FR15/lib.ts
+A	HW02/tests/C_FR15/oracle.ts
+M	HW02/tests/global-setup.ts
+M	HW02/tests/playwright.config.ts
+
+def2f18 | 18:13 20/10/2026 | TonKnight | HW02: cập nhật prompt log
+M	HW02/appendix/A_prompt_log.md
+
+e4945b3 | 18:46 20/10/2026 | TonKnight | HW02[C-FR15] 6/7b: kết quả lượt 3 + lượt 5
+M	HW02/C_FR15/RUN.md
+A	HW02/C_FR15/evidence/TC-FR15-01_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-02_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-03_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-04_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-04_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-05_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-06_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-07_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-08_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-09_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-100_api.png
+A	HW02/C_FR15/evidence/TC-FR15-100_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-100_req.json
+A	HW02/C_FR15/evidence/TC-FR15-100_res.json
+A	HW02/C_FR15/evidence/TC-FR15-101_api.png
+A	HW02/C_FR15/evidence/TC-FR15-101_req.json
+A	HW02/C_FR15/evidence/TC-FR15-101_res.json
+A	HW02/C_FR15/evidence/TC-FR15-102_api.png
+A	HW02/C_FR15/evidence/TC-FR15-102_req.json
+A	HW02/C_FR15/evidence/TC-FR15-102_res.json
+A	HW02/C_FR15/evidence/TC-FR15-103_api.png
+A	HW02/C_FR15/evidence/TC-FR15-103_req.json
+A	HW02/C_FR15/evidence/TC-FR15-103_res.json
+A	HW02/C_FR15/evidence/TC-FR15-104_api.png
+A	HW02/C_FR15/evidence/TC-FR15-104_req.json
+A	HW02/C_FR15/evidence/TC-FR15-104_res.json
+A	HW02/C_FR15/evidence/TC-FR15-105_api.png
+A	HW02/C_FR15/evidence/TC-FR15-105_req.json
+A	HW02/C_FR15/evidence/TC-FR15-105_res.json
+A	HW02/C_FR15/evidence/TC-FR15-106_api.png
+A	HW02/C_FR15/evidence/TC-FR15-106_req.json
+A	HW02/C_FR15/evidence/TC-FR15-106_res.json
+A	HW02/C_FR15/evidence/TC-FR15-107_api.png
+A	HW02/C_FR15/evidence/TC-FR15-107_req.json
+A	HW02/C_FR15/evidence/TC-FR15-107_res.json
+A	HW02/C_FR15/evidence/TC-FR15-108_api.png
+A	HW02/C_FR15/evidence/TC-FR15-108_req.json
+A	HW02/C_FR15/evidence/TC-FR15-108_res.json
+A	HW02/C_FR15/evidence/TC-FR15-109_api.png
+A	HW02/C_FR15/evidence/TC-FR15-109_req.json
+A	HW02/C_FR15/evidence/TC-FR15-109_res.json
+A	HW02/C_FR15/evidence/TC-FR15-10_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-10_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-110_api.png
+A	HW02/C_FR15/evidence/TC-FR15-110_req.json
+A	HW02/C_FR15/evidence/TC-FR15-110_res.json
+A	HW02/C_FR15/evidence/TC-FR15-111_api.png
+A	HW02/C_FR15/evidence/TC-FR15-111_req.json
+A	HW02/C_FR15/evidence/TC-FR15-111_res.json
+A	HW02/C_FR15/evidence/TC-FR15-112_api.png
+A	HW02/C_FR15/evidence/TC-FR15-112_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-112_req.json
+A	HW02/C_FR15/evidence/TC-FR15-112_res.json
+A	HW02/C_FR15/evidence/TC-FR15-113_api.png
+A	HW02/C_FR15/evidence/TC-FR15-113_req.json
+A	HW02/C_FR15/evidence/TC-FR15-113_res.json
+A	HW02/C_FR15/evidence/TC-FR15-114_api.png
+A	HW02/C_FR15/evidence/TC-FR15-114_req.json
+A	HW02/C_FR15/evidence/TC-FR15-114_res.json
+A	HW02/C_FR15/evidence/TC-FR15-115_api.png
+A	HW02/C_FR15/evidence/TC-FR15-115_req.json
+A	HW02/C_FR15/evidence/TC-FR15-115_res.json
+A	HW02/C_FR15/evidence/TC-FR15-116_api.png
+A	HW02/C_FR15/evidence/TC-FR15-116_req.json
+A	HW02/C_FR15/evidence/TC-FR15-116_res.json
+A	HW02/C_FR15/evidence/TC-FR15-117_api.png
+A	HW02/C_FR15/evidence/TC-FR15-117_req.json
+A	HW02/C_FR15/evidence/TC-FR15-117_res.json
+A	HW02/C_FR15/evidence/TC-FR15-11_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-12_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-13_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-13_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-14_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-14_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-15_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-15_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-16_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-16_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-17_api.png
+A	HW02/C_FR15/evidence/TC-FR15-17_req.json
+A	HW02/C_FR15/evidence/TC-FR15-17_res.json
+A	HW02/C_FR15/evidence/TC-FR15-18_api.png
+A	HW02/C_FR15/evidence/TC-FR15-18_req.json
+A	HW02/C_FR15/evidence/TC-FR15-18_res.json
+A	HW02/C_FR15/evidence/TC-FR15-19_api.png
+A	HW02/C_FR15/evidence/TC-FR15-19_req.json
+A	HW02/C_FR15/evidence/TC-FR15-19_res.json
+A	HW02/C_FR15/evidence/TC-FR15-200_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-201_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-202_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-205_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-206_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-207_api.png
+A	HW02/C_FR15/evidence/TC-FR15-207_req.json
+A	HW02/C_FR15/evidence/TC-FR15-207_res.json
+A	HW02/C_FR15/evidence/TC-FR15-208_api.png
+A	HW02/C_FR15/evidence/TC-FR15-208_req.json
+A	HW02/C_FR15/evidence/TC-FR15-208_res.json
+A	HW02/C_FR15/evidence/TC-FR15-209_api.png
+A	HW02/C_FR15/evidence/TC-FR15-209_req.json
+A	HW02/C_FR15/evidence/TC-FR15-209_res.json
+A	HW02/C_FR15/evidence/TC-FR15-20_api.png
+A	HW02/C_FR15/evidence/TC-FR15-20_req.json
+A	HW02/C_FR15/evidence/TC-FR15-20_res.json
+A	HW02/C_FR15/evidence/TC-FR15-211_api.png
+A	HW02/C_FR15/evidence/TC-FR15-211_req.json
+A	HW02/C_FR15/evidence/TC-FR15-211_res.json
+A	HW02/C_FR15/evidence/TC-FR15-213_api.png
+A	HW02/C_FR15/evidence/TC-FR15-213_req.json
+A	HW02/C_FR15/evidence/TC-FR15-213_res.json
+A	HW02/C_FR15/evidence/TC-FR15-214_api.png
+A	HW02/C_FR15/evidence/TC-FR15-214_req.json
+A	HW02/C_FR15/evidence/TC-FR15-214_res.json
+A	HW02/C_FR15/evidence/TC-FR15-21_api.png
+A	HW02/C_FR15/evidence/TC-FR15-21_req.json
+A	HW02/C_FR15/evidence/TC-FR15-21_res.json
+A	HW02/C_FR15/evidence/TC-FR15-22_api.png
+A	HW02/C_FR15/evidence/TC-FR15-22_req.json
+A	HW02/C_FR15/evidence/TC-FR15-22_res.json
+A	HW02/C_FR15/evidence/TC-FR15-23_api.png
+A	HW02/C_FR15/evidence/TC-FR15-23_req.json
+A	HW02/C_FR15/evidence/TC-FR15-23_res.json
+A	HW02/C_FR15/evidence/TC-FR15-24_api.png
+A	HW02/C_FR15/evidence/TC-FR15-24_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-24_req.json
+A	HW02/C_FR15/evidence/TC-FR15-24_res.json
+A	HW02/C_FR15/evidence/TC-FR15-25_api.png
+A	HW02/C_FR15/evidence/TC-FR15-25_req.json
+A	HW02/C_FR15/evidence/TC-FR15-25_res.json
+A	HW02/C_FR15/evidence/TC-FR15-26_api.png
+A	HW02/C_FR15/evidence/TC-FR15-26_req.json
+A	HW02/C_FR15/evidence/TC-FR15-26_res.json
+A	HW02/C_FR15/evidence/TC-FR15-27_api.png
+A	HW02/C_FR15/evidence/TC-FR15-27_req.json
+A	HW02/C_FR15/evidence/TC-FR15-27_res.json
+A	HW02/C_FR15/evidence/TC-FR15-28_api.png
+A	HW02/C_FR15/evidence/TC-FR15-28_req.json
+A	HW02/C_FR15/evidence/TC-FR15-28_res.json
+A	HW02/C_FR15/evidence/TC-FR15-29_api.png
+A	HW02/C_FR15/evidence/TC-FR15-29_req.json
+A	HW02/C_FR15/evidence/TC-FR15-29_res.json
+A	HW02/C_FR15/evidence/TC-FR15-30_api.png
+A	HW02/C_FR15/evidence/TC-FR15-30_req.json
+A	HW02/C_FR15/evidence/TC-FR15-30_res.json
+A	HW02/C_FR15/evidence/TC-FR15-31_api.png
+A	HW02/C_FR15/evidence/TC-FR15-31_req.json
+A	HW02/C_FR15/evidence/TC-FR15-31_res.json
+A	HW02/C_FR15/evidence/TC-FR15-32_api.png
+A	HW02/C_FR15/evidence/TC-FR15-32_req.json
+A	HW02/C_FR15/evidence/TC-FR15-32_res.json
+A	HW02/C_FR15/evidence/TC-FR15-33_api.png
+A	HW02/C_FR15/evidence/TC-FR15-33_req.json
+A	HW02/C_FR15/evidence/TC-FR15-33_res.json
+A	HW02/C_FR15/evidence/TC-FR15-34_api.png
+A	HW02/C_FR15/evidence/TC-FR15-34_req.json
+A	HW02/C_FR15/evidence/TC-FR15-34_res.json
+A	HW02/C_FR15/evidence/TC-FR15-35_api.png
+A	HW02/C_FR15/evidence/TC-FR15-35_req.json
+A	HW02/C_FR15/evidence/TC-FR15-35_res.json
+A	HW02/C_FR15/evidence/TC-FR15-36_api.png
+A	HW02/C_FR15/evidence/TC-FR15-36_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-36_req.json
+A	HW02/C_FR15/evidence/TC-FR15-36_res.json
+A	HW02/C_FR15/evidence/TC-FR15-37_api.png
+A	HW02/C_FR15/evidence/TC-FR15-37_req.json
+A	HW02/C_FR15/evidence/TC-FR15-37_res.json
+A	HW02/C_FR15/evidence/TC-FR15-38_api.png
+A	HW02/C_FR15/evidence/TC-FR15-38_req.json
+A	HW02/C_FR15/evidence/TC-FR15-38_res.json
+A	HW02/C_FR15/evidence/TC-FR15-39_api.png
+A	HW02/C_FR15/evidence/TC-FR15-39_req.json
+A	HW02/C_FR15/evidence/TC-FR15-39_res.json
+A	HW02/C_FR15/evidence/TC-FR15-40_api.png
+A	HW02/C_FR15/evidence/TC-FR15-40_req.json
+A	HW02/C_FR15/evidence/TC-FR15-40_res.json
+A	HW02/C_FR15/evidence/TC-FR15-41_api.png
+A	HW02/C_FR15/evidence/TC-FR15-41_req.json
+A	HW02/C_FR15/evidence/TC-FR15-41_res.json
+A	HW02/C_FR15/evidence/TC-FR15-42_api.png
+A	HW02/C_FR15/evidence/TC-FR15-42_req.json
+A	HW02/C_FR15/evidence/TC-FR15-42_res.json
+A	HW02/C_FR15/evidence/TC-FR15-43_api.png
+A	HW02/C_FR15/evidence/TC-FR15-43_req.json
+A	HW02/C_FR15/evidence/TC-FR15-43_res.json
+A	HW02/C_FR15/evidence/TC-FR15-44_api.png
+A	HW02/C_FR15/evidence/TC-FR15-44_req.json
+A	HW02/C_FR15/evidence/TC-FR15-44_res.json
+A	HW02/C_FR15/evidence/TC-FR15-45_api.png
+A	HW02/C_FR15/evidence/TC-FR15-45_req.json
+A	HW02/C_FR15/evidence/TC-FR15-45_res.json
+A	HW02/C_FR15/evidence/TC-FR15-46_api.png
+A	HW02/C_FR15/evidence/TC-FR15-46_req.json
+A	HW02/C_FR15/evidence/TC-FR15-46_res.json
+A	HW02/C_FR15/evidence/TC-FR15-47_api.png
+A	HW02/C_FR15/evidence/TC-FR15-47_req.json
+A	HW02/C_FR15/evidence/TC-FR15-47_res.json
+A	HW02/C_FR15/evidence/TC-FR15-48_api.png
+A	HW02/C_FR15/evidence/TC-FR15-48_req.json
+A	HW02/C_FR15/evidence/TC-FR15-48_res.json
+A	HW02/C_FR15/evidence/TC-FR15-49_api.png
+A	HW02/C_FR15/evidence/TC-FR15-49_req.json
+A	HW02/C_FR15/evidence/TC-FR15-49_res.json
+A	HW02/C_FR15/evidence/TC-FR15-50_api.png
+A	HW02/C_FR15/evidence/TC-FR15-50_req.json
+A	HW02/C_FR15/evidence/TC-FR15-50_res.json
+A	HW02/C_FR15/evidence/TC-FR15-51_api.png
+A	HW02/C_FR15/evidence/TC-FR15-51_req.json
+A	HW02/C_FR15/evidence/TC-FR15-51_res.json
+A	HW02/C_FR15/evidence/TC-FR15-52_api.png
+A	HW02/C_FR15/evidence/TC-FR15-52_req.json
+A	HW02/C_FR15/evidence/TC-FR15-52_res.json
+A	HW02/C_FR15/evidence/TC-FR15-53_api.png
+A	HW02/C_FR15/evidence/TC-FR15-53_req.json
+A	HW02/C_FR15/evidence/TC-FR15-53_res.json
+A	HW02/C_FR15/evidence/TC-FR15-54_api.png
+A	HW02/C_FR15/evidence/TC-FR15-54_req.json
+A	HW02/C_FR15/evidence/TC-FR15-54_res.json
+A	HW02/C_FR15/evidence/TC-FR15-55_api.png
+A	HW02/C_FR15/evidence/TC-FR15-55_req.json
+A	HW02/C_FR15/evidence/TC-FR15-55_res.json
+A	HW02/C_FR15/evidence/TC-FR15-56_api.png
+A	HW02/C_FR15/evidence/TC-FR15-56_req.json
+A	HW02/C_FR15/evidence/TC-FR15-56_res.json
+A	HW02/C_FR15/evidence/TC-FR15-57_api.png
+A	HW02/C_FR15/evidence/TC-FR15-57_req.json
+A	HW02/C_FR15/evidence/TC-FR15-57_res.json
+A	HW02/C_FR15/evidence/TC-FR15-58_api.png
+A	HW02/C_FR15/evidence/TC-FR15-58_req.json
+A	HW02/C_FR15/evidence/TC-FR15-58_res.json
+A	HW02/C_FR15/evidence/TC-FR15-60_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-61_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-62_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-63_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-64_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-65_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-66_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-67_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-67_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-68_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-69_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-70_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-71_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-72_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-73_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-74_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-75_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-76_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-77_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-78_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-78_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-79_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-79_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-80_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-80_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-81_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-81_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-82_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-82_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-83_failed.png
+A	HW02/C_FR15/evidence/TC-FR15-83_ui.png
+A	HW02/C_FR15/evidence/TC-FR15-84_api.png
+A	HW02/C_FR15/evidence/TC-FR15-84_req.json
+A	HW02/C_FR15/evidence/TC-FR15-84_res.json
+A	HW02/C_FR15/evidence/TC-FR15-85_api.png
+A	HW02/C_FR15/evidence/TC-FR15-85_req.json
+A	HW02/C_FR15/evidence/TC-FR15-85_res.json
+A	HW02/C_FR15/evidence/TC-FR15-86_api.png
+A	HW02/C_FR15/evidence/TC-FR15-86_req.json
+A	HW02/C_FR15/evidence/TC-FR15-86_res.json
+A	HW02/C_FR15/evidence/TC-FR15-87_api.png
+A	HW02/C_FR15/evidence/TC-FR15-87_req.json
+A	HW02/C_FR15/evidence/TC-FR15-87_res.json
+A	HW02/C_FR15/evidence/TC-FR15-88_api.png
+A	HW02/C_FR15/evidence/TC-FR15-88_req.json
+A	HW02/C_FR15/evidence/TC-FR15-88_res.json
+A	HW02/C_FR15/evidence/TC-FR15-89_api.png
+A	HW02/C_FR15/evidence/TC-FR15-89_req.json
+A	HW02/C_FR15/evidence/TC-FR15-89_res.json
+A	HW02/C_FR15/evidence/TC-FR15-90_manual.png
+A	HW02/C_FR15/evidence/TC-FR15-91_manual_1.png
+A	HW02/C_FR15/evidence/TC-FR15-91_manual_2.png
+A	HW02/C_FR15/evidence/TC-FR15-92_manual.png
+A	HW02/C_FR15/evidence/TC-FR15-93_manual.png
+A	HW02/C_FR15/evidence/TC-FR15-94_manual.png
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+1ddb10f | 18:52 20/10/2026 | TonKnight | HW02: vá harness – C_FR15 H1–H4
+M	HW02/C_FR15/RUN.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/tests/C_FR15/C_FR15.spec.ts
+M	HW02/tests/C_FR15/lib.ts
+
+4979732 | 18:58 20/10/2026 | TonKnight | HW02[C-FR15] 6/7c: kết quả lượt 6 (chính thức)
+M	HW02/C_FR15/RUN.md
+M	HW02/C_FR15/evidence/TC-FR15-03_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-04_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-04_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-07_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-100_api.png
+M	HW02/C_FR15/evidence/TC-FR15-100_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-100_req.json
+M	HW02/C_FR15/evidence/TC-FR15-101_api.png
+M	HW02/C_FR15/evidence/TC-FR15-101_req.json
+M	HW02/C_FR15/evidence/TC-FR15-102_api.png
+M	HW02/C_FR15/evidence/TC-FR15-102_req.json
+M	HW02/C_FR15/evidence/TC-FR15-103_api.png
+M	HW02/C_FR15/evidence/TC-FR15-103_req.json
+M	HW02/C_FR15/evidence/TC-FR15-104_api.png
+M	HW02/C_FR15/evidence/TC-FR15-104_req.json
+M	HW02/C_FR15/evidence/TC-FR15-105_api.png
+M	HW02/C_FR15/evidence/TC-FR15-105_req.json
+M	HW02/C_FR15/evidence/TC-FR15-106_api.png
+M	HW02/C_FR15/evidence/TC-FR15-106_req.json
+M	HW02/C_FR15/evidence/TC-FR15-107_api.png
+M	HW02/C_FR15/evidence/TC-FR15-107_req.json
+M	HW02/C_FR15/evidence/TC-FR15-108_api.png
+M	HW02/C_FR15/evidence/TC-FR15-108_req.json
+M	HW02/C_FR15/evidence/TC-FR15-109_api.png
+M	HW02/C_FR15/evidence/TC-FR15-109_req.json
+D	HW02/C_FR15/evidence/TC-FR15-10_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-10_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-110_api.png
+M	HW02/C_FR15/evidence/TC-FR15-110_req.json
+M	HW02/C_FR15/evidence/TC-FR15-111_api.png
+M	HW02/C_FR15/evidence/TC-FR15-111_req.json
+M	HW02/C_FR15/evidence/TC-FR15-112_api.png
+M	HW02/C_FR15/evidence/TC-FR15-112_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-112_req.json
+M	HW02/C_FR15/evidence/TC-FR15-113_api.png
+M	HW02/C_FR15/evidence/TC-FR15-113_req.json
+M	HW02/C_FR15/evidence/TC-FR15-114_api.png
+M	HW02/C_FR15/evidence/TC-FR15-114_req.json
+M	HW02/C_FR15/evidence/TC-FR15-115_api.png
+M	HW02/C_FR15/evidence/TC-FR15-115_req.json
+M	HW02/C_FR15/evidence/TC-FR15-116_api.png
+M	HW02/C_FR15/evidence/TC-FR15-116_req.json
+M	HW02/C_FR15/evidence/TC-FR15-117_api.png
+M	HW02/C_FR15/evidence/TC-FR15-117_req.json
+M	HW02/C_FR15/evidence/TC-FR15-12_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-15_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-15_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-16_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-16_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-17_api.png
+M	HW02/C_FR15/evidence/TC-FR15-17_req.json
+M	HW02/C_FR15/evidence/TC-FR15-18_api.png
+M	HW02/C_FR15/evidence/TC-FR15-18_req.json
+M	HW02/C_FR15/evidence/TC-FR15-19_api.png
+M	HW02/C_FR15/evidence/TC-FR15-19_req.json
+M	HW02/C_FR15/evidence/TC-FR15-206_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-208_api.png
+M	HW02/C_FR15/evidence/TC-FR15-208_req.json
+M	HW02/C_FR15/evidence/TC-FR15-209_api.png
+M	HW02/C_FR15/evidence/TC-FR15-209_req.json
+M	HW02/C_FR15/evidence/TC-FR15-20_api.png
+M	HW02/C_FR15/evidence/TC-FR15-20_req.json
+M	HW02/C_FR15/evidence/TC-FR15-211_api.png
+M	HW02/C_FR15/evidence/TC-FR15-211_req.json
+M	HW02/C_FR15/evidence/TC-FR15-213_api.png
+M	HW02/C_FR15/evidence/TC-FR15-213_req.json
+M	HW02/C_FR15/evidence/TC-FR15-214_api.png
+M	HW02/C_FR15/evidence/TC-FR15-214_req.json
+M	HW02/C_FR15/evidence/TC-FR15-23_api.png
+M	HW02/C_FR15/evidence/TC-FR15-23_req.json
+M	HW02/C_FR15/evidence/TC-FR15-24_api.png
+M	HW02/C_FR15/evidence/TC-FR15-24_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-24_req.json
+M	HW02/C_FR15/evidence/TC-FR15-25_api.png
+M	HW02/C_FR15/evidence/TC-FR15-25_req.json
+M	HW02/C_FR15/evidence/TC-FR15-26_api.png
+M	HW02/C_FR15/evidence/TC-FR15-26_req.json
+M	HW02/C_FR15/evidence/TC-FR15-27_api.png
+M	HW02/C_FR15/evidence/TC-FR15-27_req.json
+M	HW02/C_FR15/evidence/TC-FR15-28_api.png
+M	HW02/C_FR15/evidence/TC-FR15-28_req.json
+M	HW02/C_FR15/evidence/TC-FR15-29_api.png
+M	HW02/C_FR15/evidence/TC-FR15-29_req.json
+M	HW02/C_FR15/evidence/TC-FR15-30_api.png
+M	HW02/C_FR15/evidence/TC-FR15-30_req.json
+M	HW02/C_FR15/evidence/TC-FR15-31_api.png
+M	HW02/C_FR15/evidence/TC-FR15-31_req.json
+M	HW02/C_FR15/evidence/TC-FR15-32_api.png
+M	HW02/C_FR15/evidence/TC-FR15-32_req.json
+M	HW02/C_FR15/evidence/TC-FR15-33_api.png
+M	HW02/C_FR15/evidence/TC-FR15-33_req.json
+M	HW02/C_FR15/evidence/TC-FR15-34_api.png
+M	HW02/C_FR15/evidence/TC-FR15-34_req.json
+M	HW02/C_FR15/evidence/TC-FR15-35_api.png
+M	HW02/C_FR15/evidence/TC-FR15-35_req.json
+M	HW02/C_FR15/evidence/TC-FR15-36_api.png
+M	HW02/C_FR15/evidence/TC-FR15-36_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-36_req.json
+M	HW02/C_FR15/evidence/TC-FR15-37_api.png
+M	HW02/C_FR15/evidence/TC-FR15-37_req.json
+M	HW02/C_FR15/evidence/TC-FR15-38_api.png
+M	HW02/C_FR15/evidence/TC-FR15-38_req.json
+M	HW02/C_FR15/evidence/TC-FR15-39_api.png
+M	HW02/C_FR15/evidence/TC-FR15-39_req.json
+M	HW02/C_FR15/evidence/TC-FR15-40_api.png
+M	HW02/C_FR15/evidence/TC-FR15-40_req.json
+M	HW02/C_FR15/evidence/TC-FR15-41_api.png
+M	HW02/C_FR15/evidence/TC-FR15-41_req.json
+M	HW02/C_FR15/evidence/TC-FR15-42_api.png
+M	HW02/C_FR15/evidence/TC-FR15-42_req.json
+M	HW02/C_FR15/evidence/TC-FR15-43_api.png
+M	HW02/C_FR15/evidence/TC-FR15-43_req.json
+M	HW02/C_FR15/evidence/TC-FR15-44_api.png
+M	HW02/C_FR15/evidence/TC-FR15-44_req.json
+M	HW02/C_FR15/evidence/TC-FR15-45_api.png
+M	HW02/C_FR15/evidence/TC-FR15-45_req.json
+M	HW02/C_FR15/evidence/TC-FR15-46_api.png
+M	HW02/C_FR15/evidence/TC-FR15-46_req.json
+M	HW02/C_FR15/evidence/TC-FR15-48_api.png
+M	HW02/C_FR15/evidence/TC-FR15-48_req.json
+M	HW02/C_FR15/evidence/TC-FR15-50_api.png
+M	HW02/C_FR15/evidence/TC-FR15-50_req.json
+M	HW02/C_FR15/evidence/TC-FR15-51_api.png
+M	HW02/C_FR15/evidence/TC-FR15-51_req.json
+M	HW02/C_FR15/evidence/TC-FR15-52_api.png
+M	HW02/C_FR15/evidence/TC-FR15-52_req.json
+M	HW02/C_FR15/evidence/TC-FR15-53_api.png
+M	HW02/C_FR15/evidence/TC-FR15-53_req.json
+M	HW02/C_FR15/evidence/TC-FR15-54_api.png
+M	HW02/C_FR15/evidence/TC-FR15-54_req.json
+M	HW02/C_FR15/evidence/TC-FR15-55_api.png
+M	HW02/C_FR15/evidence/TC-FR15-55_req.json
+M	HW02/C_FR15/evidence/TC-FR15-60_ui.png
+D	HW02/C_FR15/evidence/TC-FR15-67_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-67_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-69_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-70_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-71_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-72_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-75_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-77_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-78_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-78_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-79_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-79_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-80_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-80_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-81_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-81_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-82_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-82_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-83_failed.png
+M	HW02/C_FR15/evidence/TC-FR15-83_ui.png
+M	HW02/C_FR15/evidence/TC-FR15-84_api.png
+M	HW02/C_FR15/evidence/TC-FR15-84_req.json
+M	HW02/C_FR15/evidence/TC-FR15-85_api.png
+M	HW02/C_FR15/evidence/TC-FR15-85_req.json
+M	HW02/C_FR15/evidence/TC-FR15-86_api.png
+M	HW02/C_FR15/evidence/TC-FR15-86_req.json
+M	HW02/C_FR15/evidence/TC-FR15-87_api.png
+M	HW02/C_FR15/evidence/TC-FR15-87_req.json
+M	HW02/C_FR15/evidence/TC-FR15-88_api.png
+M	HW02/C_FR15/evidence/TC-FR15-88_req.json
+M	HW02/C_FR15/evidence/TC-FR15-89_api.png
+M	HW02/C_FR15/evidence/TC-FR15-89_req.json
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+afa074e | 19:05 20/10/2026 | TonKnight | HW02[C-FR15] 6/7d: chốt TC-92, TC-94
+R100	HW02/C_FR15/evidence/TC-FR15-94_manual.png	HW02/C_FR15/evidence/TC-FR15-94_manual_1.png
+A	HW02/C_FR15/evidence/TC-FR15-94_manual_2.png
+M	HW02/C_FR15/testcases.json
+M	HW02/C_FR15/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+ea4cfd6 | 19:11 20/10/2026 | TonKnight | HW02[C-FR15] 7/7a: dữ kiện bug
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/_groups_C_FR15.md
+A	HW02/bugs/_repro_C_FR15/G10.ps1
+A	HW02/bugs/_repro_C_FR15/G11.ps1
+A	HW02/bugs/_repro_C_FR15/G12.ps1
+A	HW02/bugs/_repro_C_FR15/G13.ps1
+A	HW02/bugs/_repro_C_FR15/G14.ps1
+A	HW02/bugs/_repro_C_FR15/G8.ps1
+A	HW02/bugs/_repro_C_FR15/G9.ps1
+A	HW02/bugs/_repro_C_FR15/prelude.ps1
+A	HW02/bugs/_repro_C_FR15/ui_repro.js
+
+2431b79 | 19:26 20/10/2026 | TonKnight | HW02[C-FR15] 7/7a2: khung BUG-35–50 (trống) + chép dữ kiện
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/BUG-35.md
+A	HW02/bugs/BUG-36.md
+A	HW02/bugs/BUG-37.md
+A	HW02/bugs/BUG-38.md
+A	HW02/bugs/BUG-39.md
+A	HW02/bugs/BUG-40.md
+A	HW02/bugs/BUG-41.md
+A	HW02/bugs/BUG-42.md
+A	HW02/bugs/BUG-43.md
+A	HW02/bugs/BUG-44.md
+A	HW02/bugs/BUG-45.md
+A	HW02/bugs/BUG-46.md
+A	HW02/bugs/BUG-47.md
+A	HW02/bugs/BUG-48.md
+A	HW02/bugs/BUG-49.md
+A	HW02/bugs/BUG-50.md
+M	HW02/bugs/_groups_C_FR15.md
+
+f57323e | 19:28 20/10/2026 | TonKnight | HW02[C-FR15] 7/7a3: chép môi trường vào khung bug
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-35.md
+M	HW02/bugs/BUG-36.md
+M	HW02/bugs/BUG-37.md
+M	HW02/bugs/BUG-38.md
+M	HW02/bugs/BUG-39.md
+M	HW02/bugs/BUG-40.md
+M	HW02/bugs/BUG-41.md
+M	HW02/bugs/BUG-42.md
+M	HW02/bugs/BUG-43.md
+M	HW02/bugs/BUG-44.md
+M	HW02/bugs/BUG-45.md
+M	HW02/bugs/BUG-46.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/BUG-49.md
+M	HW02/bugs/BUG-50.md
+
+1a35775 | 19:36 20/10/2026 | TonKnight | HW02[C-FR15] 7/7a4: định dạng khung BUG-35–50 theo mẫu B
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-35.md
+M	HW02/bugs/BUG-36.md
+M	HW02/bugs/BUG-37.md
+M	HW02/bugs/BUG-38.md
+M	HW02/bugs/BUG-39.md
+M	HW02/bugs/BUG-40.md
+M	HW02/bugs/BUG-41.md
+M	HW02/bugs/BUG-42.md
+M	HW02/bugs/BUG-43.md
+M	HW02/bugs/BUG-44.md
+M	HW02/bugs/BUG-45.md
+M	HW02/bugs/BUG-46.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/BUG-49.md
+M	HW02/bugs/BUG-50.md
+
+b06a775 | 20:30 20/10/2026 | TonKnight | HW02[C-FR15] 7/7b: SV viết BUG-35–50
+M	HW02/bugs/BUG-35.md
+M	HW02/bugs/BUG-36.md
+M	HW02/bugs/BUG-37.md
+M	HW02/bugs/BUG-38.md
+M	HW02/bugs/BUG-39.md
+M	HW02/bugs/BUG-40.md
+M	HW02/bugs/BUG-41.md
+M	HW02/bugs/BUG-42.md
+M	HW02/bugs/BUG-43.md
+M	HW02/bugs/BUG-44.md
+M	HW02/bugs/BUG-45.md
+M	HW02/bugs/BUG-46.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/BUG-49.md
+M	HW02/bugs/BUG-50.md
+
+8260da3 | 20:41 20/10/2026 | TonKnight | HW02[C-FR15] 7/7c: soát dữ kiện BUG-35–50
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-35.md
+M	HW02/bugs/BUG-36.md
+M	HW02/bugs/BUG-37.md
+M	HW02/bugs/BUG-38.md
+M	HW02/bugs/BUG-39.md
+M	HW02/bugs/BUG-40.md
+M	HW02/bugs/BUG-41.md
+M	HW02/bugs/BUG-43.md
+M	HW02/bugs/BUG-44.md
+M	HW02/bugs/BUG-45.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-49.md
+M	HW02/bugs/BUG-50.md
+M	HW02/bugs/_groups_C_FR15.md
+A	HW02/bugs/_repro_C_FR15/7c/api_7c.ps1
+A	HW02/bugs/_repro_C_FR15/7c/restart_backend.ps1
+A	HW02/bugs/_repro_C_FR15/7c/ui_7c.js
+
+a1ca0cd | 20:43 20/10/2026 | TonKnight | HW02: cập nhật prompt log (trước compact)
+M	HW02/appendix/A_prompt_log.md
+
+1f91e5f | 21:22 20/10/2026 | TonKnight | HW02[C-FR15] 7/7c2: BUG-47 bỏ token hết hạn; BUG-48 thêm dữ kiện sập backend
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/_groups_C_FR15.md
+A	HW02/bugs/_repro_C_FR15/7c/crash_48.ps1
+
+cf57743 | 21:31 20/10/2026 | TonKnight | HW02[C-FR15] 7/7d: SV sửa chữ theo 7c + viết phần sập backend BUG-48
+M	HW02/bugs/BUG-48.md
+
+8f97991 | 21:32 20/10/2026 | TonKnight | HW02[C-FR15] 7/7d2: SV sửa chữ theo 7c (bổ sung)
+M	HW02/bugs/BUG-36.md
+M	HW02/bugs/BUG-39.md
+M	HW02/bugs/BUG-45.md
+M	HW02/bugs/BUG-46.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-49.md
+
+b6c7d12 | 21:35 20/10/2026 | TonKnight | HW02[C-FR15] 7/7e: BUG-48 điền Yêu cầu + kiểm tái hiện sập backend
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/_groups_C_FR15.md
+
+4800a3c | 21:40 20/10/2026 | TonKnight | HW02[C-FR15] 7/7f0: BUG-48 bỏ căn cứ API spec theo SV
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/_groups_C_FR15.md
+
+9e34128 | 21:43 20/10/2026 | TonKnight | HW02[C-FR15] 7/7f: tạo issue BUG-35–50
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-35.md
+M	HW02/bugs/BUG-36.md
+M	HW02/bugs/BUG-37.md
+M	HW02/bugs/BUG-38.md
+M	HW02/bugs/BUG-39.md
+M	HW02/bugs/BUG-40.md
+M	HW02/bugs/BUG-41.md
+M	HW02/bugs/BUG-42.md
+M	HW02/bugs/BUG-43.md
+M	HW02/bugs/BUG-44.md
+M	HW02/bugs/BUG-45.md
+M	HW02/bugs/BUG-46.md
+M	HW02/bugs/BUG-47.md
+M	HW02/bugs/BUG-48.md
+M	HW02/bugs/BUG-49.md
+M	HW02/bugs/BUG-50.md
+M	HW02/bugs/_groups_C_FR15.md
+A	HW02/bugs/_issue_redacted/BUG-43.txt
+A	HW02/bugs/_issue_redacted/BUG-44.txt
+A	HW02/bugs/_issue_redacted/BUG-48.txt
+A	HW02/bugs/_issue_redacted/TC-FR15-209_api_redacted.png
+A	HW02/bugs/_issue_redacted/TC-FR15-211_api_redacted.png
+A	HW02/bugs/_repro_C_FR15/7c/redact_7f.js
+
+4d816d8 | 21:57 20/10/2026 | TonKnight | HW02[C-FR15] 7/7g: ảnh trang issue + README
+M	HW02/README.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/issues_page_C_FR15.png
+
+502e59f | 22:04 20/10/2026 | TonKnight | HW02: log thay ảnh #189 #190 (README không đổi: 10 TC A_FR01 origin Both)
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/_groups_C_FR15.md
+
+65d8135 | 22:05 20/10/2026 | TonKnight | HW02[C-FR15]: link comment đính chính #189 #190
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/_groups_C_FR15.md
+
+6ffde86 | 22:09 20/10/2026 | TonKnight | HW02: cập nhật prompt log (đóng C_FR15)
+M	HW02/appendix/A_prompt_log.md
+
+c678fa4 | 22:13 20/10/2026 | TonKnight | HW02: cập nhật prompt log (đóng C_FR15)
+M	HW02/appendix/A_prompt_log.md
+
+c266570 | 22:28 20/10/2026 | TonKnight | HW02[D-FR20] 1/7: Phân tích biến vào/ra
+A	HW02/D_FR20/step1_notes.md
+A	HW02/D_FR20/testcases.json
+A	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step1_20261020-222828.json
+A	HW02/appendix/ai-outputs/D_FR20_step1_20261020-222828.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+f420033 | 22:40 20/10/2026 | TonKnight | HW02[D-FR20] 1/7b: SV chốt giả định
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+8a85ee1 | 22:42 20/10/2026 | TonKnight | HW02[D-FR20] 2/7: Phân lớp tương đương
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step2_20261020-224243.json
+A	HW02/appendix/ai-outputs/D_FR20_step2_20261020-224243.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+af52010 | 22:46 20/10/2026 | TonKnight | HW02[D-FR20] 2/7b: sửa phân lớp theo review
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step2_20261020-224621.json
+A	HW02/appendix/ai-outputs/D_FR20_step2_20261020-224621.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+61b7e8c | 22:48 20/10/2026 | TonKnight | HW02[D-FR20] 3/7: Test case Domain
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step3_20261020-224808.json
+A	HW02/appendix/ai-outputs/D_FR20_step3_20261020-224808.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+de46981 | 22:51 20/10/2026 | TonKnight | HW02[D-FR20] 3/7b: sửa theo review
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step3_20261020-225134.json
+A	HW02/appendix/ai-outputs/D_FR20_step3_20261020-225134.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+c19c666 | 22:52 20/10/2026 | TonKnight | HW02[D-FR20] 4/7: Test case BVA
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step4_20261020-225208.json
+A	HW02/appendix/ai-outputs/D_FR20_step4_20261020-225208.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+f66b32f | 23:12 20/10/2026 | TonKnight | HW02[D-FR20] 5/7: case SV
+A	HW02/D_FR20/sv_cases.md
+
+b975f90 | 23:15 20/10/2026 | TonKnight | HW02[D-FR20] 5/7b: đưa case SV vào TS-SV + gap answer
+A	HW02/D_FR20/ai_gap_answer.md
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+0523610 | 23:19 20/10/2026 | TonKnight | Update A_prompt_log.md
+M	HW02/appendix/A_prompt_log.md
+
+7a9f887 | 23:24 20/10/2026 | TonKnight | HW02[D-FR20] 5/7c: SV sửa case SV
+M	HW02/D_FR20/sv_cases.md
+
+57191a7 | 23:25 20/10/2026 | TonKnight | HW02[D-FR20] 5/7d: đồng bộ case SV
+M	HW02/D_FR20/ai_gap_answer.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+e067035 | 23:32 20/10/2026 | TonKnight | HW02[D-FR20] 5/7e: SV sửa case SV (lần 2)
+M	HW02/D_FR20/sv_cases.md
+
+c32baff | 23:33 20/10/2026 | TonKnight | HW02[D-FR20] 5/7f: đồng bộ case SV
+M	HW02/D_FR20/ai_gap_answer.md
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+c177a09 | 23:38 20/10/2026 | TonKnight | HW02[D-FR20] 5/7g: SV sửa TC-205, D16
+M	HW02/D_FR20/sv_cases.md
+
+12b9cda | 23:39 20/10/2026 | TonKnight | HW02[D-FR20] 5/7h: đồng bộ case SV
+M	HW02/D_FR20/ai_gap_answer.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+06f4d14 | 23:41 20/10/2026 | TonKnight | HW02[D-FR20] 6/7a: RUN.md chạy tay
+A	HW02/D_FR20/RUN.md
+A	HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json
+M	HW02/appendix/A_prompt_log.md
+A	HW02/env/mobile_api_url.patch
+
+ff29af2 | 23:43 20/10/2026 | TonKnight | HW02[D-FR20] 5/7i: SV bỏ dẫn D8 ở TC-205
+M	HW02/D_FR20/sv_cases.md
+
+cc61c0b | 23:45 20/10/2026 | TonKnight | HW02[D-FR20] 5/7j: đồng bộ case SV
+M	HW02/D_FR20/ai_gap_answer.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+fdbef12 | 23:53 20/10/2026 | TonKnight | HW02[D-FR20] 6/7a2: RUN.md giới hạn 20 ảnh
+M	HW02/D_FR20/RUN.md
+M	HW02/D_FR20/results/D_FR20_manual_TEMPLATE.json
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+21b4a24 | 23:55 20/10/2026 | TonKnight | HW02[D-FR20] 6/7a3: procedure theo D0 mới
+M	HW02/D_FR20/RUN.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step6_20261020-235519.json
+A	HW02/appendix/ai-outputs/D_FR20_step6_20261020-235519.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+644d982 | 23:58 20/10/2026 | TonKnight | HW02[D-FR20] 6/7a4: ảnh theo RUN.md + cách đọc TRƯỚC/SAU
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step6_20261020-235828.json
+A	HW02/appendix/ai-outputs/D_FR20_step6_20261020-235828.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+690e797 | 23:59 20/10/2026 | TonKnight | HW02[D-FR20] 6/7a5: quy trình TS-GUI theo RUN.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/ai-outputs/D_FR20_step6_20261020-235937.json
+A	HW02/appendix/ai-outputs/D_FR20_step6_20261020-235937.md
+M	HW02/appendix/ai-outputs/INDEX.md
+
+74ecbb3 | 01:43 21/10/2026 | TonKnight | HW02[D-FR20] 6/7b: kết quả lượt chính thức
+M	HW02/D_FR20/RUN.md
+A	HW02/D_FR20/evidence/D_admin_sau_1.png
+A	HW02/D_FR20/evidence/D_admin_sau_2.png
+A	HW02/D_FR20/evidence/D_admin_truoc_1.png
+A	HW02/D_FR20/evidence/TC-FR20-01_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-02_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-03_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-04_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-05_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-06_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-07_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-08_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-09_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-10_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-11_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-12_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-13_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-14_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-15_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-200_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-201_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-203_admin_1.png
+A	HW02/D_FR20/evidence/TC-FR20-203_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-204_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-205_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-206_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-60_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-61_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-62_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-63_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-64_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-90_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-91_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-92_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-93_manual_1.png
+A	HW02/D_FR20/evidence/TC-FR20-94_manual_1.png
+A	HW02/D_FR20/results/Check.md
+A	HW02/D_FR20/results/D_FR20_manual_20261021-001500.json
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+f644140 | 02:04 21/10/2026 | TonKnight | HW02[D-FR20] 6/7b2: verdict SV chốt + ảnh đăng nhập thử
+M	HW02/D_FR20/RUN.md
+A	HW02/D_FR20/evidence/TC-FR20-01_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-02_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-200_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-201_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-206_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-61_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-62_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-63_manual_2.png
+A	HW02/D_FR20/evidence/TC-FR20-64_manual_2.png
+M	HW02/D_FR20/results/D_FR20_manual_20261021-001500.json
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+f5c893e | 02:11 21/10/2026 | TonKnight | HW02[D-FR20] 6/7b3: đồng bộ file lượt + Actual đăng nhập thử
+M	HW02/D_FR20/RUN.md
+M	HW02/D_FR20/results/D_FR20_manual_20261021-001500.json
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+
+3db7ddb | 02:16 21/10/2026 | TonKnight | HW02[D-FR20] 7/7a: gom dữ kiện bug + bảng web vs mobile
+A	HW02/D_FR20/compare_web_mobile.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/_groups_D_FR20.md
+
+3ad5c8f | 02:20 21/10/2026 | TonKnight | HW02: cập nhật env – mobile_api_url.patch + thiết bị D_FR20
+M	HW02/D_FR20/RUN.md
+M	HW02/env/environment.md
+M	HW02/env/mobile_api_url.patch
+
+65834b1 | 02:21 21/10/2026 | TonKnight | HW02[D-FR20] 7/7a2: dữ kiện vị trí cần sửa
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/_groups_D_FR20.md
+
+3b8131c | 02:33 21/10/2026 | TonKnight | HW02[D-FR20] 7/7a3: SV quyết mapping + khung BUG-51–57
+M	HW02/appendix/A_prompt_log.md
+A	HW02/bugs/BUG-51.md
+A	HW02/bugs/BUG-52.md
+A	HW02/bugs/BUG-53.md
+A	HW02/bugs/BUG-54.md
+A	HW02/bugs/BUG-55.md
+A	HW02/bugs/BUG-56.md
+A	HW02/bugs/BUG-57.md
+M	HW02/bugs/_groups_D_FR20.md
+
+75da144 | 02:37 21/10/2026 | TonKnight | HW02[D-FR20] 7/7a4: Liên quan BUG-54 + trường bug TC + bản che
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-54.md
+
+6d16d98 | 02:51 21/10/2026 | TonKnight | HW02[D-FR20] 7/7b: SV viết BUG-51–57
+M	HW02/bugs/BUG-51.md
+M	HW02/bugs/BUG-52.md
+M	HW02/bugs/BUG-53.md
+M	HW02/bugs/BUG-54.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/BUG-56.md
+M	HW02/bugs/BUG-57.md
+
+90f974b | 02:58 21/10/2026 | TonKnight | HW02[D-FR20] 7/7c: AI kiểm tái hiện + sửa dữ kiện
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-51.md
+M	HW02/bugs/BUG-52.md
+M	HW02/bugs/BUG-53.md
+M	HW02/bugs/BUG-54.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/BUG-56.md
+M	HW02/bugs/BUG-57.md
+M	HW02/bugs/_groups_D_FR20.md
+
+c589c54 | 03:03 21/10/2026 | TonKnight | HW02[D-FR20] 7/7c2: dữ kiện TC-204 + Yêu cầu BUG-55/56 + trích SRS
+M	HW02/D_FR20/step1_notes.md
+M	HW02/D_FR20/testcases.json
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-51.md
+M	HW02/bugs/BUG-52.md
+M	HW02/bugs/BUG-53.md
+M	HW02/bugs/BUG-54.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/BUG-56.md
+M	HW02/bugs/BUG-57.md
+M	HW02/bugs/_groups_D_FR20.md
+
+e2a7210 | 03:15 21/10/2026 | TonKnight | HW02[D-FR20] 7/7d: SV sửa chữ BUG-51–57
+M	HW02/bugs/BUG-51.md
+M	HW02/bugs/BUG-52.md
+M	HW02/bugs/BUG-53.md
+M	HW02/bugs/BUG-54.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/BUG-56.md
+M	HW02/bugs/BUG-57.md
+
+9ff87a7 | 03:25 21/10/2026 | TonKnight | HW02[D-FR20] 7/7d2: SV sửa tiền điều kiện + BUG-55/56
+M	HW02/bugs/BUG-51.md
+M	HW02/bugs/BUG-52.md
+M	HW02/bugs/BUG-53.md
+M	HW02/bugs/BUG-54.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/BUG-56.md
+M	HW02/bugs/BUG-57.md
+
+02cd393 | 03:29 21/10/2026 | TonKnight | HW02[D-FR20] 7/7d3: AI sửa dữ kiện code trích BUG-55
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/_groups_D_FR20.md
+
+279a0f8 | 03:32 21/10/2026 | TonKnight | HW02[D-FR20] 7/7d4: SV sửa tiêu đề BUG-56
+M	HW02/bugs/BUG-56.md
+
+ec4175d | 03:42 21/10/2026 | TonKnight | HW02[D-FR20] 7/7e: issue #197–#203 + README
+M	HW02/D_FR20/testcases.json
+M	HW02/D_FR20/testcases.md
+M	HW02/README.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/bugs/BUG-51.md
+M	HW02/bugs/BUG-52.md
+M	HW02/bugs/BUG-53.md
+M	HW02/bugs/BUG-54.md
+M	HW02/bugs/BUG-55.md
+M	HW02/bugs/BUG-56.md
+M	HW02/bugs/BUG-57.md
+M	HW02/bugs/_groups_D_FR20.md
+A	HW02/bugs/issues_page_D_FR20.png
+
+a8704ff | 06:35 21/10/2026 | TonKnight | Update A_prompt_log.md
+M	HW02/appendix/A_prompt_log.md
+
+d8627c7 | 06:48 21/10/2026 | TonKnight | HW02: kế hoạch nộp bài + khung report
+M	HW02/appendix/A_prompt_log.md
+A	HW02/report.md
+A	HW02/report_plan.md
+
+6f3b791 | 06:49 21/10/2026 | TonKnight | HW02: đổi tên khung report thành 23120255_HW02_Report.md
+R098	HW02/report.md	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/report_plan.md
+
+c33a7df | 06:59 21/10/2026 | TonKnight | HW02: vá harness – prompt log (khoá khoảng, --commits)
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/prompt_log_notes.toml
+A	HW02/appendix/prompt_log_turns.txt
+
+f38933d | 07:00 21/10/2026 | TonKnight | HW02: chốt R2–R4, P1–P2
+M	HW02/23120255_HW02_Report.md
+M	HW02/report_plan.md
+
+ec3719f | 07:04 21/10/2026 | TonKnight | HW02: vá harness – cảnh báo khoá ghi chú không khớp
+M	HW02/appendix/A_prompt_log.md
+
+8cf76b0 | 07:10 21/10/2026 | TonKnight | HW02: report – điền dữ kiện A_FR01
+M	HW02/23120255_HW02_Report.md
+
+1182899 | 07:26 21/10/2026 | TonKnight | HW02: report – sửa dữ kiện A_FR01
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/report_plan.md
+
+1ff456e | 07:26 21/10/2026 | TonKnight | HW02: report – điền dữ kiện B_FR07
+M	HW02/23120255_HW02_Report.md
+
+91586b4 | 07:27 21/10/2026 | TonKnight | HW02: report – điền dữ kiện C_FR15
+M	HW02/23120255_HW02_Report.md
+
+e7690d2 | 07:27 21/10/2026 | TonKnight | HW02: report – điền dữ kiện D_FR20
+M	HW02/23120255_HW02_Report.md
+
+608df85 | 07:34 21/10/2026 | TonKnight | HW02: report – vá dữ kiện
+M	HW02/23120255_HW02_Report.md
+M	HW02/C_FR15/RUN.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/tests/README.md
+A	HW02/tests/results/A_FR01.json
+A	HW02/tests/results/C_FR15_20261020-185355.json
+
+6a21f55 | 07:34 21/10/2026 | TonKnight | HW02: vá harness – SKILL.md định nghĩa quy tắc output
+M	HW02/23120255_HW02_Report.md
+
+129cfcc | 07:40 21/10/2026 | TonKnight | HW02[A-FR01]: SV viết gap analysis, 4 feature
+A	HW02/A_FR01/gap_analysis_sv.md
+A	HW02/B_FR07/gap_analysis_sv.md
+A	HW02/C_FR15/gap_analysis_sv.md
+A	HW02/D_FR20/gap_analysis_sv.md
+
+b210ba0 | 07:40 21/10/2026 | TonKnight | HW02: report – điền các mục chung
+M	HW02/23120255_HW02_Report.md
+
+0cc13c1 | 07:51 21/10/2026 | TonKnight | HW02 - report: Bỏ từ khẳng định
+M	HW02/A_FR01/gap_analysis_sv.md
+M	HW02/B_FR07/gap_analysis_sv.md
+M	HW02/C_FR15/gap_analysis_sv.md
+M	HW02/D_FR20/gap_analysis_sv.md
+
+1a5137f | 07:53 21/10/2026 | TonKnight | HW02: dữ kiện đối chiếu gap analysis SV
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/gap_check.md
+M	HW02/report_plan.md
+
+db3c193 | 08:02 21/10/2026 | TonKnight | HW02 - report: SV viết AI Critique, AI review
+M	HW02/23120255_HW02_Report.md
+
+5d082ad | 08:10 21/10/2026 | TonKnight | HW02: SV sửa gap analysis theo gap_check
+M	HW02/A_FR01/gap_analysis_sv.md
+M	HW02/B_FR07/gap_analysis_sv.md
+M	HW02/C_FR15/gap_analysis_sv.md
+M	HW02/D_FR20/gap_analysis_sv.md
+
+e2ae88e | 08:10 21/10/2026 | TonKnight | HW02: cập nhật gap_check sau SV sửa
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/gap_check.md
+
+23c61d6 | 08:11 21/10/2026 | TonKnight | HW02: report – chép gap analysis SV A–D
+M	HW02/23120255_HW02_Report.md
+
+0c9d807 | 08:14 21/10/2026 | TonKnight | HW02: report – lọc case đã bỏ khỏi bảng AI tự nhận
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+
+7aefc8f | 08:16 21/10/2026 | TonKnight | HW02/appendix/A_prompt_log.md
+M	HW02/appendix/A_prompt_log.md
+
+7f91b84 | 08:24 21/10/2026 | TonKnight | HW02: cập nhật prompt_log_turns (sau _p6)
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/prompt_log_turns.txt
+
+f679e60 | 08:26 21/10/2026 | TonKnight | HW02: chốt P3 (lượt không rõ model)
+M	HW02/report_plan.md
+
+9c197a0 | 08:28 21/10/2026 | TonKnight | HW02: đồng bộ P3
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/report_plan.md
+
+c9e2a93 | 08:39 21/10/2026 | TonKnight | HW02: SV ghi chú prompt log
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/prompt_log_notes.toml
+
+f4a7576 | 08:41 21/10/2026 | TonKnight | HW02: Audit – điền #n
+M	HW02/23120255_HW02_Report.md
+
+891411b | 08:45 21/10/2026 | TonKnight | HW02: Audit – luật khớp #n theo git
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+
+0784cd9 | 08:47 21/10/2026 | TonKnight | HW02: Audit – khớp #n theo lượt Claude Code
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+
+1dd750a | 09:06 21/10/2026 | TonKnight | HW02: SV viết verdict Audit
+M	HW02/23120255_HW02_Report.md
+
+658694a | 09:16 21/10/2026 | TonKnight | HW02: SV sửa verdict Audit
+M	HW02/23120255_HW02_Report.md
+
+7f57909 | 09:21 21/10/2026 | TonKnight | HW02: Audit – 10.3 theo suite + 10.4
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+A	HW02/appendix/audit_103_sv_old.md
+A	HW02/appendix/audit_check.md
+
+3cc035d | 09:22 21/10/2026 | TonKnight | HW02: Audit – đổi mã dữ kiện bug thành BG1–BG8
+M	HW02/23120255_HW02_Report.md
+M	HW02/appendix/A_prompt_log.md
+M	HW02/appendix/audit_check.md
+
+1745846 | 09:23 21/10/2026 | TonKnight | HW02: chép Agent Skill vào bài nộp + VideoLinks
+M	HW02/appendix/audit_check.md
+A	HW02/skills/VideoLinks.md
+A	HW02/skills/domain-bva-testing/SKILL.md
+A	HW02/skills/domain-bva-testing/assets/example-sum.json
+A	HW02/skills/domain-bva-testing/references/automation.md
+A	HW02/skills/domain-bva-testing/references/schema-domain.md
+A	HW02/skills/domain-bva-testing/scripts/check_domain.py
+A	HW02/skills/domain-bva-testing/scripts/freeze.py
+A	HW02/skills/domain-bva-testing/scripts/merge_results.py
+A	HW02/skills/domain-bva-testing/scripts/render_md.py
+
+6959802 | 09:25 21/10/2026 | TonKnight | HW02: biểu mẫu AI-02, AI-03, AI-05 (bản nháp sinh từ report + prompt log)
+M	HW02/23120255_HW02_Report.md
+A	HW02/ai-forms/AI-02_Audit_Report_23120255.md
+A	HW02/ai-forms/AI-03_Disclosure_Form_23120255.md
+A	HW02/ai-forms/AI-05_Privacy_Checklist_23120255.md
+
+64775c4 | 09:26 21/10/2026 | TonKnight | HW02: chạy lại summary, bảng report và Audit
+M	HW02/23120255_HW02_Report.md
+M	HW02/README.md
