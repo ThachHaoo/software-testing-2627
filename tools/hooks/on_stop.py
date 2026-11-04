@@ -77,6 +77,8 @@ def main():
         if cfg.get(key):
             val = str(ROOT / cfg[key]) if key in ("notes", "extra") else cfg[key]
             cmd += [flag, val]
+    for e in cfg.get("exclude", []):
+        cmd += ["--exclude", e]
     (ROOT / cfg["log"]).parent.mkdir(parents=True, exist_ok=True)
     # Windows: ép tiến trình con in UTF-8, nếu không stdout sẽ theo code page (cp1252/cp1258) và vỡ khi giải mã
     env = {**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"}

@@ -262,6 +262,7 @@ def turn_sources(hw):
         turns = [t for t in turns if t["time"] >= epl.parse_bound(cfg["since"], end=False)]
     if cfg.get("until"):
         turns = [t for t in turns if t["time"] < epl.parse_bound(cfg["until"], end=True)]
+    turns = epl.apply_exclude(turns, cfg.get("exclude", []))
     log = turns_of(hw)
     if len(turns) != len(log) or any(t["time"].replace(tzinfo=None, second=0, microsecond=0) != x[1] for t, x in zip(turns, log)):
         _SRC = {}

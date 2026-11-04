@@ -354,6 +354,31 @@ def parse_bound(s, end):
     return d + step if end else d
 
 
+def apply_exclude(turns, excl):
+    """Bỏ lượt theo danh sách khoá: "YYYY-MM-DD HH:MM", "YYYY-MM-DD HH:MM#k" (khoá giờ tính trên danh sách
+    trước khi bỏ) hoặc khoảng "A .. B" (theo phút, hai đầu tính cả). Khoá không khớp lượt nào → cảnh báo."""
+    if not excl:
+        return turns
+    keys = time_keys(turns)
+    ranges = []
+    for e in excl:
+        if RANGE_SEP in e:
+            ranges += [(a, b, e) for a, b, _ in parse_ranges({e: {}})]
+    singles = {e.strip() for e in excl if RANGE_SEP not in e}
+    keep, used = [], set()
+    for t, k in zip(turns, keys):
+        m = t["time"].replace(tzinfo=None, second=0, microsecond=0)
+        hit = [r[2] for r in ranges if r[0] <= m <= r[1]] + ([k] if k in singles else [])
+        if hit:
+            used.update(hit)
+        else:
+            keep.append(t)
+    for e in excl:
+        if e.strip() not in used and e not in used:
+            print(f'cảnh báo: exclude "{e}" không khớp lượt nào', file=sys.stderr)
+    return keep
+
+
 def main():
     for s in (sys.stdout, sys.stderr):  # Windows console không mặc định UTF-8
         try:
@@ -366,6 +391,8 @@ def main():
     ap.add_argument("--extra")
     ap.add_argument("--since", help="'YYYY-MM-DD' hoặc 'YYYY-MM-DD HH:MM' (giờ Asia/Saigon), bỏ các lượt trước mốc này")
     ap.add_argument("--until", help="'YYYY-MM-DD' (cả ngày) hoặc 'YYYY-MM-DD HH:MM' (cả phút đó), bỏ các lượt sau mốc này")
+    ap.add_argument("--exclude", action="append", default=[],
+                    help="bỏ lượt theo khoá giờ 'YYYY-MM-DD HH:MM[#k]' hoặc khoảng 'A .. B'; lặp lại được")
     ap.add_argument("--title", default="Prompt Log")
     ap.add_argument("--name", default="Lê Tấn Hiệp")
     ap.add_argument("--mssv", default="23120255")
@@ -397,6 +424,7 @@ def main():
     if args.until:
         hi = parse_bound(args.until, end=True)
         turns = [t for t in turns if t["time"] < hi]
+    turns = apply_exclude(turns, args.exclude)
 
     if args.migrate_notes:
         if not args.notes:

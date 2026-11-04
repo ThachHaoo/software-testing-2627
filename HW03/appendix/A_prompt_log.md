@@ -38,164 +38,7 @@ Báo cáo ≤ 10 dòng: kết quả từng bước + lỗi nguyên văn nếu c�
 
 ---
 
-## #2 | 17:24 04/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
-
-**Prompt:**
-```
-d:\HK7\Testing\Exercise\HW\software-testing-2627\HW02\appendix\A_prompt_log.md Xem chỗ nào đang yêu cầu tự động viết vào file này. Bắt nó dừng giúp tôi nhé. Vì tôi đã hoàn thành HW02 rồi
-```
-
-**Output:**
-````
-Hook đã gỡ. Thay đổi đang treo trong `A_prompt_log.md` là lượt HW03 (#408, 04/11) bị hook ghi lẫn vào log HW02 → khôi phục về bản đã commit.
-
-Đã tắt hook ghi tự động vào `A_prompt_log.md`.
-
-**Nguồn ghi:** hook `Stop` trong `.claude/settings.json`. Sau mỗi lượt trả lời, hook chạy `tools/hooks/on_stop.py`, script này gọi `extract_prompt_log.py` để tạo lại `A_prompt_log.md`. Ngoài hook này, không có chỗ nào khác tự ghi vào file. `audit_tables.py` và `build_forms.py` chỉ đọc file, hoặc chạy khi bạn gọi tay.
-
-**Đã làm:** xoá khối `"hooks"` khỏi `.claude/settings.json`. Từ lượt sau, file không bị ghi nữa. Em giữ nguyên các luật `deny` chặn sửa tay và script `on_stop.py`. Nếu cần trích log thì vẫn chạy tay được bằng `python tools/hooks/on_stop.py --manual`.
-
-**Còn 1 việc bạn cần tự làm:** `A_prompt_log.md` đang có thay đổi chưa commit. Hook đã chép lượt #408 của HW03 (04/11) vào log HW02, sửa 1 dòng và thêm 34 dòng. Em định khôi phục về bản đã commit nhưng lệnh bị chế độ auto chặn. Bạn chạy:
-
-```
-! git checkout -- HW02/appendix/A_prompt_log.md
-```
-
-Lệnh này bỏ lượt #408 khỏi log. Bản đã commit vẫn là log cuối của HW02, gồm 407 lượt.
-
-Thay đổi ở `settings.json` em chưa commit. Bạn có muốn em commit không?
-````
-
-**Xử lý:** [...]
-
----
-
-## #3 | 17:27 04/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
-
-**Prompt:**
-```
-Mình chỉ cần giữ lại tất cả lệnh của hôm nay, không giữ các lệnh chưa được commit trước đó
-```
-
-**Output:**
-```
-Phần chưa commit trong `A_prompt_log.md` không có lượt nào của những ngày trước. Nó chỉ có lượt **#408 (17:15 04/11, hôm nay)**, cộng dòng "Tổng" đổi từ 407 thành 408. Bản commit cuối là `076552c` (21/10), và trong log không có lượt nào chưa commit nằm giữa 21/10 và hôm nay.
-
-Vậy nếu giữ lệnh hôm nay thì chỉ cần **không chạy** `git checkout` như em đề nghị lúc nãy. #408 sẽ được giữ lại.
-
-Lưu ý: hai lượt của phiên này (tắt hook, và lượt bạn vừa gửi) **chưa có** trong log, vì hook đã bị gỡ trước khi kịp ghi. Nếu bạn muốn log có đủ mọi lượt hôm nay, em sẽ chạy một lần `python tools/hooks/on_stop.py --manual` để thêm hai lượt này. Sau đó hook vẫn tắt.
-
-Bạn chọn cách nào?
-1. Giữ nguyên như hiện tại: log có #408, không thêm hai lượt của phiên này.
-2. Chạy trích tay một lần để thêm hai lượt của phiên này, rồi commit cùng `settings.json`.
-```
-
-**Xử lý:** [...]
-
----
-
-## #4 | 17:28 04/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
-
-**Prompt:**
-```
-À thôi bỏ hết đi, vì log hiện tại không phải của HW02, xíu mình sẽ tự trích sang của HW03 sau
-```
-
-**Output:**
-```
-Đã bỏ phần chưa commit. `A_prompt_log.md` đã về đúng bản commit `076552c`, gồm 407 lượt của HW02 và không còn lượt #408.
-
-Hiện chỉ còn `.claude/settings.json` chưa commit, là thay đổi gỡ hook.
-
-Khi trích log cho HW03, bạn cần nhớ một điểm: hook đã tắt nên transcript của các phiên mới không còn được tự chép vào `.transcripts/`. Transcript gốc vẫn nằm ở `C:\Users\tanhi\.claude\projects\D--HK7-Testing-Exercise-HW-software-testing-2627\*.jsonl`. Lượt #408 cũng nằm trong đó, nên lúc trích bạn lấy từ thư mục này, hoặc chạy `on_stop.py --manual` khi cần.
-
-Bạn có muốn em commit `settings.json` không?
-```
-
-**Xử lý:** [...]
-
----
-
-## #5 | 17:29 04/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
-
-**Prompt:**
-```
-commit đi kiểu end HW02
-```
-
-**Output:**
-````
-Em đã commit: `99b64c3 HW02: kết thúc – gỡ hook Stop tự trích prompt log`. Thư mục làm việc không còn thay đổi nào. Commit này em chưa push, bạn tự push nhé.
-
-```
-### Báo cáo cho phiên thảo luận
-- Nhiệm vụ: kết thúc HW02, dừng việc tự ghi vào HW02/appendix/A_prompt_log.md
-- File đã sửa: .claude/settings.json (gỡ hook Stop → on_stop.py); A_prompt_log.md đã bỏ lượt #408 (HW03) bị ghi lẫn vào, giờ đúng bản 076552c (407 lượt)
-- Kết quả kiểm tra: Not run (chỉ sửa cấu hình)
-- Commit: 99b64c3 HW02: kết thúc – gỡ hook Stop tự trích prompt log
-- Cần quyết định / câu hỏi: không. Prompt log HW03 SV tự trích sau, từ transcript trong ~/.claude/projects/…/*.jsonl hoặc bằng on_stop.py --manual
-```
-````
-
-**Xử lý:** [...]
-
----
-
-## #6 | 17:30 04/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
-
-**Prompt:**
-```
-Ủa khoan, Undo lại nhé. Và giúp mình thêm để mình là người commit duy nhất, không có Claude Co-Authored
-```
-
-**Output:**
-````
-Đã undo. Commit chưa push nên an toàn, thay đổi trong `settings.json` vẫn giữ và đang ở trạng thái staged. Giờ em tắt dòng Co-Authored-By cho các commit/PR về sau:
-
-Em đã undo commit `99b64c3`. Commit đó chưa push nên không ảnh hưởng gì, HEAD giờ quay về `9e4eb45`.
-
-**Không còn Co-Authored-By:** em thêm vào `.claude/settings.json` hai thiết lập là `"attribution": { "commit": "", "pr": "" }` và `"includeCoAuthoredBy": false`. Từ phiên sau, Claude Code không thêm dòng `Co-Authored-By: Claude…` vào commit và PR trong repo này nữa. Riêng phiên này, em cũng sẽ không thêm dòng đó.
-
-**Trạng thái:** `settings.json` đang staged, gồm hai thay đổi: gỡ hook Stop và tắt Co-Authored-By. Em chưa commit. Bạn tự commit để chỉ có tên bạn, ví dụ:
-
-```
-! git commit -m "HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By"
-```
-
-Thiết lập này chỉ áp dụng cho repo này. Các commit cũ trong lịch sử HW02 do Claude tạo có thể vẫn còn dòng Co-Authored-By. Muốn xoá thì phải viết lại lịch sử và force-push. Việc này khó đảo ngược, và nó lệch với commit log `commit_log.txt` đã nộp, nên em không làm nếu bạn không yêu cầu rõ.
-````
-
-**Xử lý:** [...]
-
----
-
-## #7 | 17:31 04/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
-
-**Prompt:**
-```
-Rồi commit nhé
-```
-
-**Output:**
-```
-Em đã commit `be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By`.
-
-- Tác giả là TonKnight `<tanhiep24135@gmail.com>`, không có dòng Co-Authored-By.
-- Không còn thay đổi nào chưa commit.
-- Em chưa push, bạn tự push nhé.
-```
-
-**Xử lý:** [...]
-
----
-
-## #8 | 17:31 04/11/2026 | Claude Opus 5.5 | [...]
+## #2 | 17:31 04/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -223,7 +66,7 @@ Nếu rút cáp hoặc adb restart thì phải chạy lại 2 lệnh `adb revers
 
 ---
 
-## #9 | 17:34 04/11/2026 | Claude Opus 5.5 | [...]
+## #3 | 17:34 04/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -252,7 +95,7 @@ Kết quả bước 6, đã đăng nhập bình thường
 
 ---
 
-## #10 | 17:38 04/11/2026 | Claude Opus 5.5 | [...]
+## #4 | 17:38 04/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -295,7 +138,7 @@ Now dirs + CLAUDE.md.
 
 ---
 
-## #11 | 17:44 04/11/2026 | Claude Opus 5.5 | [...]
+## #5 | 17:44 04/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -365,7 +208,7 @@ Empty → seed reset OK. Run prompt log.
 
 ---
 
-## #12 | 17:57 04/11/2026 | Claude Opus 5.5 | [...]
+## #6 | 17:57 04/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -386,6 +229,41 @@ HW03 – cấu hình + K1 (commit "HW03: bật hook Stop, bảo vệ ai-outputs/
 epl module loaded → reuse parse_bound.
 
 Đang sửa report_plan mục e/f, rồi `.gitattributes` và commit.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** HW03 – bật lại hook Stop, chặn sửa file AI/prompt log, vá `since` theo giờ, chốt K1. Đã làm đủ, 2 commit.
+- **File:**
+  - `.claude/settings.json`: bật lại hook Stop, chép nguyên khối như trước `be8996e`; chặn Edit/Write `HW03/appendix/ai-outputs/**` và `HW03/appendix/A_prompt_log.md`.
+  - `tools/extract_prompt_log.py`: `--since`/`--until` nhận thêm `YYYY-MM-DD HH:MM`.
+  - `tools/audit_tables.py`: sửa theo, vì script này cũng đọc `since` — để nguyên sẽ báo lỗi với giá trị có giờ.
+  - `tools/hw.toml`: `since = "2026-11-04 12:26"`.
+  - `HW03/report_plan.md`: thêm K1 ở mục e, dòng "AI phát hiện" ở mục f, cột "Nộp?" ở mục c.
+  - `HW03/.gitattributes`: `report_plan.md` không vào zip. Đã thử `git archive`: zip không có `report_plan.md`, nhưng có chính file `.gitattributes`.
+- **Kiểm tra:**
+  - Lọc theo ngày như cũ cho HW02 vẫn ra 407 lượt (cũ: 407).
+  - Prompt log HW03 hiện có 12 lượt.
+  - Danh sách lượt 04/11 (giờ | đầu prompt):
+    - #1 17:15 | HW03 – kiểm chứng P3
+    - **#2 17:24 | `d:\…\HW02\append…`**
+    - **#3 17:27 | Mình chỉ cần giữ lại tất cả lệnh của hôm nay…**
+    - **#4 17:28 | À thôi bỏ hết đi, vì log hiện tại không phải của HW02…**
+    - **#5 17:29 | commit đi kiểu end HW02**
+    - **#6 17:30 | Ủa khoan, Undo lại nhé…**
+    - **#7 17:31 | Rồi commit nhé**
+    - #8 17:31 | HW03 – kiểm chứng P3, chạy lại bước 3, 5, 6
+    - #9 17:34 | Kết quả bước 6
+    - #10 17:38 | HW03 – khung bài
+    - #11 17:44 | HW03 – 3 việc
+- **Issue trùng:** mã giảm giá thuộc nhóm FR09 của henry-banana.
+  - SAVE10 tính sai: trùng **#126** "[FR09-03] A 10 percent coupon returns a negative discount and increases total".
+  - Ngưỡng dùng `>` thay vì `>=`: trùng **#124** (fixed) và **#125** (percent) "…rejected at its exact minimum total".
+  - Liên quan: #134 (mã 100% cho discount âm).
+- **Commit:**
+  - `eced5dd HW03: vá harness – since theo giờ`
+  - `e4dcd91 HW03: bật hook Stop, bảo vệ ai-outputs/prompt log, K1`
+- **Nhắc:** bạn tự push (`git push`).
+- **Cần quyết định:**
+  - **L1** – Lượt #2–#7 (17:24–17:31) là việc kết thúc HW02 nhưng nằm sau mốc 12:26 nên vẫn vào log HW03. Phương án: (a) dời `since` sang 17:32 (cũng loại luôn #1, vì #1 lúc 17:15); (b) giữ, ghi lý do trong `prompt_log_notes.toml`.
 ```
 *File AI ghi/gửi trong lượt này:* `.gitattributes`
 
@@ -393,4 +271,35 @@ epl module loaded → reuse parse_bound.
 
 ---
 
-**Tổng:** 12 lượt; Claude Opus 5.5 12 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12).
+## #7 | 18:10 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – harness, mỗi mục 1 commit. Phần skill dùng skill testing-technique-skill-template.
+1. "HW03: tách CLAUDE.md theo bài": CLAUDE.md gốc chỉ giữ phần chung (vai trò, khối báo cáo, giới hạn AI, prompt log, git/push/amend, zip git archive + export-ignore, mẹo PowerShell, SUT chung), ≤ 200 dòng. Chuyển §1 + quyết định HW02 NGUYÊN VĂN sang HW02/CLAUDE.md. Tạo HW03/CLAUDE.md ≤ 120 dòng: đề, rubric, phạm vi C2/U1, P1–P3 + adb reverse (D:\Tools\platform-tools, vite --host 127.0.0.1), quyết định (trỏ report_plan mục e), giới hạn riêng (🔒 item SV thêm, dữ liệu người tham gia, ảnh overlay, SUS do người tham gia điền), quy trình T1/T2/T3 + mẫu commit. Kiểm không mất dòng: in số dòng trước/sau từng file.
+2. "HW03: HARNESS_SETUP – bắt đầu bài mới": thêm mục checklist bắt đầu bài (hw.toml since theo giờ + exclude, deny ai-outputs/prompt log, HWxx/CLAUDE.md, slide → context/private, .gitattributes export-ignore, transcript claude-ai_session_<HW>_p1).
+3. L1=c: (như lệnh trước — exclude trong hw.toml, dry-run HW02 vẫn 407).
+4. "HW03: skill gui-checklist-testing (khung)": .claude/skills/gui-checklist-testing/ theo mẫu domain-bva-testing — SKILL.md 7 bước (0 khảo sát · 1 nháp theo 3 nguồn + freeze · 2 SV thêm 🔒 + gap · 3 RUN.md + dom_probe.js · 4 chạy từng nền tảng + merge · 5 Excel + test summary · 6 gom dữ kiện bug), references/schema-checklist.md, scripts check_checklist.py, freeze, render (từ tools/render_checklist.py), merge_platform.py, build_excel.py. Chạy check_checklist.py trên HW03/checklist/checklist.json để thử; chưa đổi dữ liệu HW03.
+on_stop.py --manual. Báo cáo ≤ 15 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Item 1: tách CLAUDE.md. Dựng HW02/CLAUDE.md bằng script (chép nguyên văn dòng 55–248).
+
+Giờ viết CLAUDE.md gốc (phần chung).
+
+Global gitignore chặn `CLAUDE.md` → thêm ngoại lệ trong `.gitignore` của repo, commit tiếp (không amend).
+
+Item 2: HARNESS_SETUP mục 6.
+
+Implement `--exclude` + wire into on_stop and audit_tables.
+```
+*File AI ghi/gửi trong lượt này:* `CLAUDE.md`, `CLAUDE.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 7 lượt; Claude Opus 5.5 7 lượt (#1, #2, #3, #4, #5, #6, #7).

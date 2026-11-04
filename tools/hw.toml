@@ -4,6 +4,9 @@
 hw    = "HW03"
 since = "2026-11-04 12:26"    # bỏ các lượt AI trước mốc này ("YYYY-MM-DD" hoặc "YYYY-MM-DD HH:MM", giờ Asia/Saigon)
 # until = "2026-11-07"        # bỏ các lượt sau mốc này (bật khi đã nộp)
+# Lượt của bài khác lọt sau mốc since (khoá giờ như notes: "YYYY-MM-DD HH:MM", "…#k", khoảng "A .. B").
+# L1 (04/11): 17:24–17:31 là lượt kết thúc HW02 (gỡ hook, commit end HW02); lượt 17:31#2 là của HW03 → giữ.
+exclude = ["2026-11-04 17:24 .. 2026-11-04 17:30", "2026-11-04 17:31"]
 title = "Prompt Log – HW03"
 name  = "Lê Tấn Hiệp"
 mssv  = "23120255"
