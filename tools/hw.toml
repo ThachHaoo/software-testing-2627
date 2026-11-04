@@ -1,15 +1,23 @@
 # Cấu hình bài đang làm — hook on_stop.py và các script đọc file này.
 # Đổi sang bài mới: sửa hw, since, until (nếu có), title.
 
-hw    = "HW02"
-since = "2026-10-12"          # bỏ các lượt AI trước ngày này
-# until = "2026-10-31"        # bỏ các lượt sau ngày này (bật khi đã nộp)
-title = "Prompt Log – HW02"
+hw    = "HW03"
+since = "2026-11-04"          # bỏ các lượt AI trước ngày này
+# until = "2026-11-07"        # bỏ các lượt sau ngày này (bật khi đã nộp)
+title = "Prompt Log – HW03"
 name  = "Lê Tấn Hiệp"
 mssv  = "23120255"
 
 # Đường dẫn tính từ gốc repo
-log   = "HW02/appendix/A_prompt_log.md"
-notes = "HW02/appendix/prompt_log_notes.toml"
-extra = "HW02/appendix/prompt_log_extra.toml"
+log   = "HW03/appendix/A_prompt_log.md"
+notes = "HW03/appendix/prompt_log_notes.toml"
+extra = "HW03/appendix/prompt_log_extra.toml"
 transcripts = ".transcripts"   # bản sao transcript (gitignore, KHÔNG nộp, KHÔNG push)
+
+# --- Cấu hình HW02 (đã nộp) ---
+# hw    = "HW02"
+# since = "2026-10-12"
+# title = "Prompt Log – HW02"
+# log   = "HW02/appendix/A_prompt_log.md"
+# notes = "HW02/appendix/prompt_log_notes.toml"
+# extra = "HW02/appendix/prompt_log_extra.toml"

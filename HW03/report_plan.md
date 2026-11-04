@@ -1,0 +1,95 @@
+# HW03 – GUI & Usability · Kế hoạch nộp bài (report_plan)
+
+Lê Tấn Hiệp – 23120255 · Deadline **07/11/2026** (giờ: `[...]`) · Cấp độ AI: **Cấp 4** · Bloom-AI: **G9.3 + G9.4** (theo đề §3, §8)
+
+## a. Biểu mẫu AI
+
+| Form | Bắt buộc | File | Ai làm |
+|---|---|---|---|
+| AI-02 Audit Report | Có | `ai-forms/AI-02_Audit_Report_23120255.md` + `.pdf` | AI điền dữ kiện, tỉ lệ; SV viết verdict + lý do, ký |
+| AI-03 Disclosure | Có | `ai-forms/AI-03_Disclosure_23120255.md` + `.pdf` | AI điền công cụ, số lượt, dải #; SV xác nhận, ký |
+| AI-04 Reflective | Không | — | HW thường, đề không yêu cầu |
+| AI-05 Privacy | Có (làm cuối) | `ai-forms/AI-05_Privacy_Checklist_23120255.md` + `.pdf` | AI tick mục có bằng chứng; SV tick cam kết, ký. Bài có dữ liệu người tham gia → ghi rõ đã che gì |
+| AI-06 | Đã nộp tuần 1 | — | — |
+
+Câu tuyên bố nguyên văn: *"I use AI tools for the following tasks,"*. Mẫu định dạng form: `HW02/ai-forms/*.md` (không chép số liệu).
+
+## b. Rubric (đề §15)
+
+| # | Mục | Max | Tự chấm |
+|---|---|---|---|
+| 1 | Task 1 – GUI Checklist (thiết kế + chạy + bug) | 30 | `<SV>` |
+| 2 | Task 2 – Usability (kịch bản + 7 phiên + phân tích) | 40 | `<SV>` |
+| 3 | Task 3 – Cross-platform (≥ 3 nền tảng) | 20 | `<SV>` |
+| 4 | Agent Skills (+ video YouTube) | 10 | `<SV>` |
+| | Tổng = 3 số trong tên zip | 100 | `<SV>` |
+
+## c. Danh sách nộp (đề §14) – trạng thái
+
+| # | Mục | Đường dẫn dự kiến | Trạng thái |
+|---|---|---|---|
+| 1 | Report chính (.md + PDF): checklist report + usability report | `23120255_HW03_Report.md/.pdf` | THIẾU |
+| 2 | Bug report + ảnh trang GitHub Issues | `bugs/BUG-58…md`, `bugs/issues_page_HW03.png` | THIẾU |
+| 3 | AI Critique (200–300 từ) + Audit (.md + PDF) | report §Critique; `ai-forms/AI-02…` | THIẾU |
+| 4 | Commit log (text) | `commit_log.txt` | THIẾU |
+| 5 | Excel checklist (> 40 item) + test summary | `excel/23120255_HW03_Checklist.xlsx` | THIẾU |
+| 6 | Bằng chứng usability: kịch bản, ghi chú quan sát, SUS, findings xếp hạng, video (nếu có), bảng 7 người | `usability/…` | THIẾU |
+| 7 | Ảnh cross-platform (có overlay) | `checklist/evidence/P1_chrome`, `P2_firefox`, `P3_android` | THIẾU |
+| 8 | README.md: tự đánh giá + test summary (số màn/flow, item thiết kế/chạy/Pass/Fail, số bug, số người, link video) | `README.md` | THIẾU |
+| 9 | Skill + video demo (YouTube) | `skills/…`, `skills/VideoLinks.md` | THIẾU |
+| 10 | Prompt log | `appendix/A_prompt_log.md` | THIẾU (đổi `tools/hw.toml` sang HW03) |
+
+Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<ggg>.zip`, đóng gói bằng `git archive` (như HW02 R2).
+
+## d. Mâu thuẫn / dễ sót trong đề
+
+| Mã | Nội dung | Cách xử lý |
+|---|---|---|
+| M1 | Overlay ảnh: §6 "username dạng email SV" ↔ §11 "MSSV + họ tên" | Overlay đủ email SV + MSSV + họ tên |
+| M2 | "Perform Task 1 across ≥ 3 platforms" | **SV chốt: chạy TOÀN BỘ checklist trên mỗi nền tảng** |
+| M3 | Đề chỉ có Passed/Failed | **SV chốt: thêm N/A, ghi giả định** (căn cứ slide: checklist chấm Yes/No/N/A) |
+| M4 | Không trùng màn chính/flow với thành viên nhóm | Chia C1/C2/C3, U1–U4 (tin nhắn nhóm 04/11) |
+| M5 | Bảng đầu "G9.1→G9.6" ↔ §3/§8 "G9.3 + G9.4"; Skill thuộc G9.5 | Ghi G9.3 + G9.4 |
+| M6 | Excel bắt buộc ↔ Homework Policies (bảng tổng hợp phải có trong .md) | Excel + chép bảng sang report |
+| M7 | Video phiên usability chứa giọng/màn hình người tham gia; 20 MB/file | Xin đồng ý; không đăng công khai; link Drive giới hạn quyền (`[...]` SV chốt) |
+| M8 | Commit cho mỗi bước, kể cả **mỗi phiên usability** | ≥ 9 commit Task 2 (plan, pilot, 7 phiên, phân tích) |
+| M9 | Flow U1 đi qua chỗ có bug HW02 đã biết (BUG-15…29 giỏ hàng) | Findings ghi "đã biết – BUG-xx", không tạo issue trùng |
+| M10 | Đề nói "spec không gán FR cho UI" ↔ SRS `README.md` §8 có **FR-21…FR-24** khớp IA-01…IA-04 | Report nêu ánh xạ IA ↔ FR một lần; dùng FR-21…24 (+ FR-02/03/04/11 phần UI) làm căn cứ Expected |
+| M11 | Đề nhắc BrowserStack/LambdaTest "strongly preferred" | Không dùng: trial 30 phút Live, 1 phút/thiết bị (BrowserStack), phiên 2 phút (LambdaTest/TestMu AI) → không đủ chạy toàn bộ checklist (M2). Đề cho phép thiết bị thật |
+
+## e. Quyết định đã chốt
+
+| Mã | Quyết định |
+|---|---|
+| S1 | Checklist **C2 – Tài khoản (web :5173)**: Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ đơn, navbar khi đã đăng nhập. **Không lấy Đăng ký** (đã kiểm ở HW02 A/D) |
+| U | Usability **U1**: đăng nhập (tài khoản cho sẵn) → tìm SP → thêm giỏ → thanh toán có mã giảm giá → xem đơn trong Hồ sơ. Moderated, trực tiếp trên PC của SV. Restart backend trước mỗi phiên |
+| M2 | Toàn bộ checklist × 3 nền tảng |
+| M3 | Có N/A + giả định |
+| P1 | Chrome trên Windows (localhost:5173) |
+| P2 | Firefox trên Windows (cài mới) |
+| P3 | Chrome Android trên POCO F5 qua `adb reverse tcp:5173` + `tcp:3000` — **đã kiểm chứng 04/11 17:35** (adb 37.0.1 ở `D:\Tools\platform-tools`, web chạy `--host 127.0.0.1`) |
+| BS | Không dùng BrowserStack/LambdaTest (M11) |
+| R | Người tham gia: 1 pilot + 7 chính, đã tuyển 04/11 (ngoài lớp; một phần IT, một phần non-IT) |
+
+**Còn chờ SV chốt:**
+- E1 – Excel: (a) file mới `excel/23120255_HW03_Checklist.xlsx` theo cấu trúc 3 sheet của HW01 (Test Cases / Checklist / Test Summary Report, cột HW) — đề xuất, vì HW01 là SUT khác (quạt); (b) thêm vào workbook HW01.
+- O1 – Overlay: PC = cửa sổ Sticky Notes ghi email SV + MSSV + họ tên, chụp toàn màn hình (thấy tên trình duyệt + URL); điện thoại = thêm chữ bằng trình sửa ảnh của máy ngay sau khi chụp. Email SV: `[...]`.
+- T – Thang: SUS (đề xuất, 10 câu, dễ tính) hay UEQ-S.
+
+## f. Khai cho Audit (ghi dần)
+
+- 04/11 phiên thảo luận: đọc đề + slide, lập bảng form, đề xuất chia C1/C2/C3 + U1–U4 cho nhóm, tin nhắn mời người tham gia (AI nháp), hướng dẫn bật Gỡ lỗi USB, lệnh kiểm chứng P3.
+- 04/11 Claude Code: tải platform-tools (SV đồng ý), chạy backend/web, `adb reverse`, liệt kê issue nhóm (158).
+- Lỗi phiên thảo luận: `[...]`.
+
+## g. Danh sách cho Mandatory Disclosure (ghi dần)
+
+- AI tạo bản đầu: `[...]` (checklist nháp, gói usability nháp, script/harness…).
+- SV xem xét và sửa: `[...]`.
+- Item SV bổ sung (🔒, kèm lý do AI bỏ sót): `[...]`.
+- SV tự làm hoàn toàn: tuyển + danh sách 7 người, điều phối phiên, ghi chú quan sát, câu trả lời SUS, ảnh cross-platform có overlay, bug report, Critique, verdict Audit, điểm tự chấm, giọng video.
+- Prompt log: trích tự động bằng `tools/extract_prompt_log.py` (hook `on_stop.py`); Section/Mục đích/Xử lý do em ghi.
+
+## h. Lịch (SV: làm trong 04/11)
+
+1. Khung HW03 + đổi `hw.toml` → 2. AI nháp checklist C2 → đóng băng → SV review + thêm item 🔒 → 3. AI nháp gói usability → SV duyệt → pilot → sửa → 4. Chạy checklist P1/P2/P3 (xen giữa các phiên) → 5. 7 phiên → 6. Bug (SV viết) + issue → 7. Phân tích usability → 8. Report, Critique, Audit, form, README, skill + video, zip.

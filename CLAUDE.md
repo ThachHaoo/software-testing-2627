@@ -34,8 +34,12 @@ Việc thảo luận, lên kế hoạch, review và hướng dẫn diễn ra ở
 1. File này.
 2. Skill khoá học **`cs423-ai-first-homework`** (đồng bộ từ tài khoản claude.ai) — luật AI-01, Homework Policies, biểu mẫu AI-02→AI-06. Nếu `/skills` không thấy skill này, báo người dùng ngay (có thể chưa đăng nhập bằng tài khoản claude.ai).
 3. `context/HW01_lessons.md` — bài học rút ra từ HW01 (riêng quy tắc prompt log đã đổi, xem mục 4).
-4. Đề bài hiện tại: `context/HW02_assignment.md`.
-5. Bài giảng: `context/private/*.pdf` (slide Domain Testing; không commit).
+4. Đề bài hiện tại: `context/HW03_assignment.md` (HW03 – GUI & Usability); kế hoạch `HW03/report_plan.md`. Đề HW02: `context/HW02_assignment.md`.
+5. Bài giảng: `context/private/*.pdf` (slide Domain Testing; slide GUI/Usability: `S13_GUI Testing & Usability Testing.pdf`, `EN.GUI + Usability + Compatibility Testing AI-First (Combined).pdf`; không commit).
+
+### Quyết định HW03
+
+Quyết định đã chốt của HW03 ghi ở `HW03/report_plan.md` mục **e** (S1, U, M2, M3, P1–P3, BS, R; mục "Còn chờ SV chốt"). Đọc mục đó đầu mỗi phiên HW03; không chép sang đây.
 
 Skill dùng trong repo:
 

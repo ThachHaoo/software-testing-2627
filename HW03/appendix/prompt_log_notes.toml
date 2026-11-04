@@ -1,0 +1,8 @@
+# Ghi chú cho prompt log HW03 — EM TỰ VIẾT (script không viết phần này).
+# Xem lượt: python tools/extract_prompt_log.py ".transcripts/*.jsonl" --since 2026-11-04 --list
+# Mỗi lượt: section, muc_dich, xu_ly; tuỳ chọn ai_output_file, dinh_kem.
+#
+# Cú pháp khoá:
+#   ["YYYY-MM-DD HH:MM"]                        một lượt (lượt thứ k cùng phút: "YYYY-MM-DD HH:MM#k")
+#   ["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]    mọi lượt trong khoảng, hai đầu tính cả (theo phút)
+# Khoá giờ đơn ưu tiên hơn khoá khoảng, ghi đè từng trường.
