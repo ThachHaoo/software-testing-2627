@@ -75,8 +75,13 @@ def render(doc):
                 notes.append(f"{p}: {n}")
             for p, ev in it.get("evidence", {}).items():
                 notes.append(f"{p} ảnh: " + ", ".join(f"`{e}`" for e in ev))
-            if it.get("ly_do_ai_bo_sot"):
-                notes.append(f"Vì sao AI bỏ sót: {it['ly_do_ai_bo_sot']}")
+            ly = it.get("ly_do_ai_bo_sot")
+            if isinstance(ly, dict):
+                notes.append(f"Vì sao AI bỏ sót ({ly.get('loai', '')}): {ly.get('giai_thich', '')}")
+            elif ly:
+                notes.append(f"Vì sao AI bỏ sót: {ly}")
+            if it.get("luc_them"):
+                notes.append(f"Lúc thêm: {it['luc_them']}")
             if it.get("notes"):
                 notes.append(it["notes"])
             row = [it["id"], it["man_hinh"], it["muc_kiem_tra"], f"{it['can_cu']} · *{it.get('loai_nguon', '')}*",

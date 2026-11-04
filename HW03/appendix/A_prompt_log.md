@@ -411,6 +411,27 @@ on_stop.py --manual (commit cả A_prompt_log.md). Báo cáo ≤ 10 dòng. Nhắ
 Đang kiểm `sv_items.md` (chỉ đọc): đối chiếu tên slide được trích.
 
 Viết `sv_items_check.md` và `ai_gap_answer.md`.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** HW03 – vá CL-07 + chốt E2, kiểm `sv_items.md` (chỉ đọc), AI trả lời vì sao bỏ sót. Xong cả 3, gộp thành 2 commit theo lệnh. Không sửa `sv_items.md` và `ai-outputs/`.
+- **A – vá CL-07:** thêm vế "Fail nếu chênh chiều cao > 2 px hoặc khác font-family/font-size", `nguon` đổi thành Both, `review_log` thêm mục S2. `report_plan` mục e thêm E2=b.
+  - `check_checklist`: 0 lỗi, 0 cảnh báo. 68 item: AI 48, Both 20.
+- **B – kiểm `sv_items.md`** (kết quả ở `HW03/checklist/sv_items_check.md`):
+  - Không thiếu trường nào; `ia` hợp lệ; id không trùng.
+  - Không item nào trích dòng SRS. 6 tên slide được trích đều có trong slide; riêng SV-01 gộp 2 slide thành một tên.
+  - SV-05: P1/P2 ghi N/A nhưng không kèm mã giả định.
+  - SV-06 trùng một phần với CL-53.
+  - `luc_them` ghi "trong lúc chạy P1/P2/P3", nhưng repo chưa có lượt chạy nào.
+  - 6 item SV chưa được đưa vào `checklist.json`.
+- **C – vì sao bỏ sót** (`HW03/checklist/ai_gap_answer.md`):
+  - Nhóm (1) đã nghĩ tới nhưng không đưa vào: SV-06, bằng chứng là CL-53 của v1.
+  - Nhóm (2) không nghĩ tới: SV-01…SV-05, đều "không có dấu vết trong v1". Riêng SV-03: đoạn slide có Golden Rule nằm trong phần AI đã đọc ở lượt 1/6 mà v1 vẫn không có item nào.
+  - Nhóm (3) bị gỡ theo quyết định SV: không có.
+- **Commit:**
+  - `9463442 HW03[T1] 2/6: vá CL-07`
+  - `de4c69a HW03[T1] 2/6c: AI trả lời vì sao bỏ sót` (gồm cả B và prompt log 9 lượt)
+- **Cần quyết định:** M1 – đưa 6 item SV vào `checklist.json` thế nào? (a) AI chép nguyên văn sang JSON với id SV-xx, `nguon` = SV; (b) SV tự chép.
+- **Nhắc:** bạn tự push (`git push`).
 ```
 *File AI ghi/gửi trong lượt này:* `sv_items_check.md`, `ai_gap_answer.md`
 
@@ -418,4 +439,59 @@ Viết `sv_items_check.md` và `ai_gap_answer.md`.
 
 ---
 
-**Tổng:** 9 lượt; Claude Opus 5.5 9 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9).
+## #10 | 19:47 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 2/6d – chốt checklist v2 (commit "HW03[T1] 2/6d: gộp item SV, chốt checklist v2"):
+1. Kiểm lại sv_items.md (chỉ đọc) như 2/6b; còn lỗi cấu trúc → DỪNG, báo tôi.
+2. M1=a: chép NGUYÊN VĂN SV-01…SV-06 vào checklist.json (id SV-xx, nguon="SV", thêm luc_them, ly_do_AI_bo_sot); giả định SV (nếu còn) vào assumptions. Không sửa chữ của tôi; trường trống → "(SV chưa ghi)".
+3. check_checklist + render; meta.version = "v2 – chốt sau review SV". In số item theo IA và theo nguồn (AI/Both/SV).
+on_stop.py --manual. Báo cáo ≤ 8 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Em đã dừng ở bước 1: `sv_items.md` (bản `d173b63`) còn một lỗi cấu trúc, nên chưa gộp vào `checklist.json` và chưa commit.
+
+- **Lỗi chặn – SV-05:** dòng 84 ghi `nen_tang: P3 (P1, P2 N/A)` nhưng không kèm mã giả định. Quy tắc ở đầu file yêu cầu N/A phải có mã, và `check_checklist.py` cũng đòi item có trường `na`. GA4 giờ đã ghi "không dùng" nên không còn mã nào để trỏ tới. Bạn chọn một trong ba cách:
+  - (a) Thêm giả định mới, ví dụ GA5/NA2, vào bảng giả định, rồi ghi `P1, P2 N/A theo <mã>`.
+  - (b) Dùng lại GA4 với nội dung mới.
+  - (c) Cho SV-05 áp dụng cả P1 và P2.
+- **Không chặn, ghi để bạn biết:**
+  - SV-02 dòng 44: tiền điều kiện đang nằm trong `expected`, dạng `*Tiền điều kiện:* …<br>`. Nếu chép nguyên văn thì nó vẫn ở trong `expected`, không sang trường `tien_dieu_kien`.
+  - Phần còn lại đạt: đủ trường, `ia` hợp lệ, id không trùng, mọi item có câu "Fail nếu", `luc_them` của cả 6 item đều ghi "trước khi chạy".
+
+Sửa xong thì báo em chạy lại 2/6d.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #11 | 19:53 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 2/6d – chốt checklist v2 (commit "HW03[T1] 2/6d: gộp item SV, chốt checklist v2"):
+1. Kiểm lại sv_items.md (chỉ đọc) như 2/6b; còn lỗi cấu trúc → DỪNG, báo tôi.
+2. M1=a: chép NGUYÊN VĂN SV-01…SV-06 vào checklist.json (id SV-xx, nguon="SV", thêm luc_them, ly_do_AI_bo_sot); giả định SV (nếu còn) vào assumptions. Không sửa chữ của tôi; trường trống → "(SV chưa ghi)".
+3. check_checklist + render; meta.version = "v2 – chốt sau review SV". In số item theo IA và theo nguồn (AI/Both/SV).
+on_stop.py --manual. Báo cáo ≤ 8 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Cấu trúc đã sạch (SV-05 → P1–P3, SV-02 tách tiền điều kiện). Gộp vào JSON.
+
+Chỉnh check (id SV-xx) + render (ly_do dạng dict).
+```
+*File AI ghi/gửi trong lượt này:* `merge_sv.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 11 lượt; Claude Opus 5.5 11 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11).

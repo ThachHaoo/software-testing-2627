@@ -44,8 +44,17 @@ def check(doc, min_items):
         for f in REQUIRED:
             if it.get(f) in (None, "", []):
                 err.append(f"{iid}: thiếu {f}")
-        if iid != "?" and not re.fullmatch(r"CL-\d{2,3}", iid):
-            err.append(f"{iid}: id phải dạng CL-xx")
+        if iid != "?" and not re.fullmatch(r"(CL|SV)-\d{2,3}", iid):
+            err.append(f"{iid}: id phải dạng CL-xx (AI/Both) hoặc SV-xx (SV)")
+        if iid.startswith("SV-") and it.get("nguon") != "SV":
+            err.append(f"{iid}: id SV-xx nhưng nguon khác 'SV'")
+        for f, v in it.items():
+            if isinstance(v, str) and v == "(SV chưa ghi)":
+                err.append(f"{iid}: {f} = (SV chưa ghi)")
+            if isinstance(v, dict):
+                for k2, v2 in v.items():
+                    if v2 == "(SV chưa ghi)":
+                        err.append(f"{iid}: {f}.{k2} = (SV chưa ghi)")
         if it.get("ia") not in IAS:
             err.append(f"{iid}: ia '{it.get('ia')}' ngoài {IAS}")
         if it.get("loai_nguon") not in SOURCES:

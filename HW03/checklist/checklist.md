@@ -1,6 +1,6 @@
 # Checklist GUI – C2 – Tài khoản (web frontend-web :5173): Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ đơn, navbar khi đã đăng nhập
 
-> Sinh tự động từ `checklist.json` bằng `tools/render_checklist.py` — không sửa tay. Phiên bản: v2 – SV review (T1 2/6).
+> Sinh tự động từ `checklist.json` bằng `tools/render_checklist.py` — không sửa tay. Phiên bản: v2 – chốt sau review SV.
 
 - SUT: tkob-team/eshop-sut @ de0f48f
 - Căn cứ: ../eshop-sut/README.md (SRS v2.0) FR-02, FR-03, FR-04, FR-10, FR-11, FR-21…FR-24, SEC-04; slide GUI/Usability (checklist theo control, Nielsen 10, Norman 6, Shneiderman 8)
@@ -10,13 +10,13 @@
 
 | IA | Số item |
 |---|---|
-| IA-01 General UI standards | 16 |
-| IA-02 Forms | 24 |
+| IA-01 General UI standards | 19 |
+| IA-02 Forms | 26 |
 | IA-03 Navigation | 13 |
-| IA-04 Feedback / state | 15 |
-| **Tổng** | **68** |
+| IA-04 Feedback / state | 16 |
+| **Tổng** | **74** |
 
-Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 48, Both 20 · Ưu tiên: Mandatory 51, Optional 17
+Loại căn cứ: (SV chưa ghi) 6, Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 48, Both 20, SV 6 · Ưu tiên: Mandatory 54, Optional 20
 
 ## Giả định
 
@@ -46,6 +46,9 @@ Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 48, Both 2
 | CL-14 | Tất cả màn C2 | Khai báo ngôn ngữ trang là tiếng Việt | WCAG 2.2 SC 3.1.1 (Language of Page) · *Heuristic* | Thẻ <html> có lang='vi'. Fail nếu lang khác 'vi' hoặc không có. | Optional | AI |  |  |  |  |
 | CL-15 | Hồ sơ + Lịch sử đơn | Bố cục không vỡ ở màn hình hẹp | Slide 'Broken layout on resize'; Nielsen #8 (thiết kế tối giản) · *Heuristic* | *Tiền điều kiện:* Có ≥ 1 đơn.<br>Ở chiều rộng 360–390 px (P3 thật; P1/P2 thu cửa sổ hoặc DevTools responsive 375 px): trang không có thanh cuộn ngang, không phần tử nào bị cắt/chồng lên nhau; bảng đơn cuộn trong khung riêng hoặc xuống dòng. Fail nếu có cuộn ngang toàn trang hoặc chữ bị che. | Mandatory | AI |  |  |  |  |
 | CL-16 | Navbar | Tên người dùng hiển thị an toàn (không render HTML) | SEC-04 (README.md:281) · *SRS* | *Tiền điều kiện:* Đăng nhập test@eshop.com; khôi phục Họ Tên 'Test User' sau khi kiểm.<br>Đổi Họ Tên thành `<b>Test</b>` rồi Cập nhật, tải lại trang: navbar hiển thị nguyên văn chuỗi `<b>Test</b>` (thấy dấu < >), chữ không in đậm. Fail nếu chữ 'Test' in đậm hoặc dấu < > biến mất. | Mandatory | AI |  |  |  |  |
+| SV-01 | Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ | Hiển thị con trỏ focus (Focus Ring/Indicator) rõ ràng khi duyệt bằng bàn phím | WCAG 2.2 SC 2.4.7 (Focus Visible); Norman #1 (Visibility); Slide "Checklist - Text Box", Slide "Checklist - Button" · *(SV chưa ghi)* | Bấm phím Tab để điều hướng qua các input/button trên form: phần tử đang nhận focus phải xuất hiện viền đổi màu hoặc khung viền bao quanh (focus ring) rõ ràng. Fail nếu không thấy con trỏ focus hoặc viền focus bị ẩn/mờ (`outline: none` không có viền thay thế). | Mandatory | SV |  |  | N/A | P3 N/A – P3 N/A theo NA1<br>Vì sao AI bỏ sót (giới hạn model): Ở bản v1, AI chỉ tập trung tạo item kiểm tra thứ tự Tab (Tab Order - CL-10..12) mà bỏ qua khía cạnh thị giác (Focus Visibility) của con trỏ bàn phím theo tiêu chuẩn Accessibility (WCAG).<br>Lúc thêm: trước khi chạy |
+| SV-04 | Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ | Độ tương phản màu sắc của văn bản và nhãn so với nền (Color Contrast Ratio) | WCAG 2.2 SC 1.4.3 (Contrast Minimum) · *(SV chưa ghi)* | Kiểm tra bằng công cụ DevTools Accessibility / Lighthouse: tỉ lệ tương phản màu sắc của chữ (văn bản, label, placeholder, text trên button) so với màu nền đạt tối thiểu 4.5:1 (đối với chữ thường). Fail nếu tỉ lệ tương phản < 4.5:1 khiến chữ mờ khó đọc. | Optional | SV |  |  |  | Vì sao AI bỏ sót (prompt): Prompt không nhắc đến các tiêu chuẩn khả năng truy cập (Accessibility) và AI không trực tiếp vận hành SUT để kiểm tra giao diện thực tế.<br>Lúc thêm: trước khi chạy |
+| SV-05 | Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ | Kích thước vùng tương tác của con trỏ (Target Size) đối với các nút và link | WCAG 2.2 SC 2.5.8 (Target Size Minimum - 24x24px) · *(SV chưa ghi)* | Dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm nhận con trỏ (chuột hoặc ngón tay) phải đạt kích thước tối thiểu 24x24 px. Fail nếu có nút/link kích thước < 24x24 px. | Mandatory | SV |  |  |  | Vì sao AI bỏ sót (đặc điểm giao diện): AI chỉ quét cấu trúc mã nguồn và kiểm tra kích thước mặc định của phần tử theo CSS mà không tự động đo đạc vùng tương tác (target size) theo tiêu chuẩn truy cập Accessibility.<br>Lúc thêm: trước khi chạy |
 
 ## IA-02 – Forms
 
@@ -75,6 +78,8 @@ Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 48, Both 2
 | CL-37 | Hồ sơ | Cập nhật hồ sơ được lưu bền | FR-04.1 (README.md:64) · *SRS* | *Tiền điều kiện:* Khôi phục giá trị cũ sau khi kiểm.<br>Đổi Họ Tên, SĐT hợp lệ, Địa chỉ → Cập nhật → tải lại trang (F5) → 3 trường hiển thị giá trị mới. Fail nếu ≥ 1 trường quay về giá trị cũ. | Mandatory | AI |  |  |  | Kiểm trùng issue FR-04 trước khi lập bug. |
 | CL-38 | Đăng nhập, Hồ sơ | Nhãn gắn với ô nhập (bấm nhãn → focus ô) | Checklist Text box – 'Correct label'; WCAG 2.2 SC 1.3.1 · *Control* | Bấm vào chữ nhãn (vd 'Mật khẩu', 'Họ Tên') → con trỏ nhảy vào ô tương ứng. Fail nếu bấm nhãn không có tác dụng. | Optional | AI |  |  |  |  |
 | CL-39 | Quên mật khẩu | Quay lại bước 1 vẫn giữ email đã nhập | Shneiderman #8 (giảm tải trí nhớ); Shneiderman #6 (cho phép đảo ngược) · *Heuristic* | Từ bước 2 bấm nút quay lại → bước 1 hiển thị lại email vừa nhập. Fail nếu ô email rỗng. | Optional | AI |  |  |  |  |
+| SV-02 | Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ | Khả năng tự động điền (Autofill/Autocompletion) và dán (Paste) dữ liệu vào các trường nhập liệu | Shneiderman #8 (Giảm tải trí nhớ ngắn hạn); Nielsen #7 (Linh hoạt và hiệu quả); Slide "Checklist - Text Box" · *(SV chưa ghi)* | *Tiền điều kiện:* Trình duyệt đã lưu thông tin đăng nhập/tài khoản trước đó.<br>Thực hiện thao tác Paste (Ctrl+V) hoặc chọn gợi ý Autofill của trình duyệt vào các ô Email, OTP, Mật khẩu: dữ liệu phải được điền chính xác vào ô nhập và form chấp nhận dữ liệu đó khi submit. Fail nếu bất kỳ vế nào (dán hoặc autofill) bị hệ thống ngăn chặn/làm sai lệch dữ liệu. | Optional | SV |  |  |  | Vì sao AI bỏ sót (đặc điểm giao diện): AI chỉ quét cấu trúc mã nguồn tĩnh (HTML/React JSX) nên chỉ kiểm tra thuộc tính `type`, `required`, `placeholder` mà không lường trước các hành vi tương tác thực tế của người dùng như dán mã OTP hoặc dùng trình quản lý mật khẩu Autofill.<br>Lúc thêm: trước khi chạy |
+| SV-03 | Đăng nhập, Quên mật khẩu B2, Hồ sơ | Trả lại con trỏ focus về đúng trường nhập liệu bị lỗi sau khi submit thất bại | Slide "Checklist - input-field validation" (Golden Rule: "On error, return focus to the offending field"); Shneiderman #5 (Xử lý lỗi đơn giản) · *(SV chưa ghi)* | Nhập dữ liệu sai quy tắc (ví dụ: SĐT sai định dạng ở Hồ sơ hoặc Mật khẩu mới không đủ điều kiện ở Quên mật khẩu B2) rồi bấm submit: sau khi thông báo lỗi xuất hiện, con trỏ gõ phím (cursor) phải tự động quay lại focus ở đúng ô bị lỗi đó. Fail nếu con trỏ nhảy mất focus hoặc không quay lại ô nhập bị lỗi. | Optional | SV |  |  |  | Vì sao AI bỏ sót (prompt): Prompt chưa chỉ định cụ thể nguyên tắc Golden Rule từ slide validation vào yêu cầu sinh, nên AI bỏ qua quy tắc xử lý con trỏ focus khi form gặp lỗi.<br>Lúc thêm: trước khi chạy |
 
 ## IA-03 – Navigation
 
@@ -113,4 +118,5 @@ Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 48, Both 2
 | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Nielsen #1 (hiển thị trạng thái hệ thống) · *Heuristic* | *Tiền điều kiện:* Có ≥ 1 đơn. P3: throttling qua chrome://inspect.<br>Network throttling 'Slow 3G', tải lại /profile → trong lúc chờ có chỉ báo đang tải; không hiện 'chưa có đơn hàng' trước khi dữ liệu về. Fail nếu hiện empty state rồi mới hiện bảng. | Optional | AI |  |  |  |  |
 | CL-64 | Hồ sơ | Lỗi kết nối khi cập nhật có thông báo dễ hiểu, không mất dữ liệu | Nielsen #9 (giúp nhận biết, chẩn đoán, khắc phục lỗi) · *Heuristic* | *Tiền điều kiện:* Khởi động lại backend sau khi kiểm (CSDL seed lại).<br>Tắt backend, bấm Cập nhật → thông báo tiếng Việt cho biết không kết nối được máy chủ / thử lại; dữ liệu đã nhập trong form vẫn còn. Fail nếu thông báo chung chung không nêu nguyên nhân hoặc form bị xoá. | Optional | AI |  |  |  |  |
 | CL-65 | Tất cả màn C2 | Phiên đăng nhập giữ sau khi tải lại trang | FR-02.3 (README.md:43) · *SRS* | Đăng nhập → ở /profile bấm F5 → vẫn đăng nhập, hồ sơ hiển thị, navbar có tên. Fail nếu bị đăng xuất. | Mandatory | AI |  |  |  |  |
+| SV-06 | Quên mật khẩu B1 / B2, Hồ sơ | Chống gửi trùng dữ liệu (Debounce/Disable) khi nhấp đúp/nhấp liên tiếp vào nút submit ở điều kiện mạng bình thường | Slide "Double-submit on double-click"; Nielsen #5 (Phòng ngừa lỗi) · *(SV chưa ghi)* | Ở điều kiện mạng bình thường (không bật throttling), nhấp chuột thật nhanh (double-click) vào nút 'Lấy mã OTP', 'Đặt lại mật khẩu' hoặc 'Cập nhật': hệ thống lập tức khóa nút hoặc debounce request sao cho chỉ có đúng 1 request API được gửi đi. Fail nếu gửi từ 2 request trở lên hoặc hiển thị nhiều thông báo trùng lặp. | Mandatory | SV |  |  |  | Vì sao AI bỏ sót (prompt): AI đã nghĩ tới trường hợp mạng chậm (CL-53), nhưng do slide "Double-submit" nằm ngoài phần ngữ cảnh AI đã đọc nên AI bỏ sót kịch bản người dùng nhấp đúp chuột nhanh ở điều kiện mạng bình thường cho các form khác Đăng nhập.<br>Lúc thêm: trước khi chạy |
 
