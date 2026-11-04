@@ -41,7 +41,8 @@
 - man_hinh: Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
 - muc_kiem_tra: Khả năng tự động điền (Autofill/Autocompletion) và dán (Paste) dữ liệu vào các trường nhập liệu
 - can_cu: Shneiderman #8 (Giảm tải trí nhớ ngắn hạn); Nielsen #7 (Linh hoạt và hiệu quả); Slide "Checklist - Text Box"
-- expected: *Tiền điều kiện:* Trình duyệt đã lưu thông tin đăng nhập/tài khoản trước đó.<br>Thực hiện thao tác Paste (Ctrl+V) hoặc chọn gợi ý Autofill của trình duyệt vào các ô Email, OTP, Mật khẩu: dữ liệu phải được điền chính xác vào ô nhập và form chấp nhận dữ liệu đó khi submit. Fail nếu bất kỳ vế nào (dán hoặc autofill) bị hệ thống ngăn chặn/làm sai lệch dữ liệu.
+- tien_dieu_kien: Trình duyệt đã lưu thông tin đăng nhập/tài khoản trước đó.
+- expected: Thực hiện thao tác Paste (Ctrl+V) hoặc chọn gợi ý Autofill của trình duyệt vào các ô Email, OTP, Mật khẩu: dữ liệu phải được điền chính xác vào ô nhập và form chấp nhận dữ liệu đó khi submit. Fail nếu bất kỳ vế nào (dán hoặc autofill) bị hệ thống ngăn chặn/làm sai lệch dữ liệu.
 - nen_tang: P1, P2, P3
 - uu_tien: Optional
 - luc_them: trước khi chạy
@@ -78,15 +79,15 @@
 ### SV-05
 - ia: IA-01
 - man_hinh: Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
-- muc_kiem_tra: Kích thước vùng tương tác cảm ứng (Touch Target Size) của các nút và link trên thiết bị di động
+- muc_kiem_tra: Kích thước vùng tương tác của con trỏ (Target Size) đối với các nút và link
 - can_cu: WCAG 2.2 SC 2.5.8 (Target Size Minimum - 24x24px)
-- expected: Trên màn hình di động P3, dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm phải đạt kích thước tối thiểu 24x24 px. Fail nếu có nút/link kích thước < 24x24 px.
-- nen_tang: P3 (P1, P2 N/A)
+- expected: Dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm nhận con trỏ (chuột hoặc ngón tay) phải đạt kích thước tối thiểu 24x24 px. Fail nếu có nút/link kích thước < 24x24 px.
+- nen_tang: P1, P2, P3
 - uu_tien: Mandatory
 - luc_them: trước khi chạy
 - ly_do_AI_bo_sot:
   - loai: đặc điểm giao diện
-  - giai_thich: AI xem nền tảng P3 tương tự như một trình duyệt web thông thường mà không nghĩ tới đặc thù thao tác bằng ngón tay trên màn hình cảm ứng di động.
+  - giai_thich: AI chỉ quét cấu trúc mã nguồn và kiểm tra kích thước mặc định của phần tử theo CSS mà không tự động đo đạc vùng tương tác (target size) theo tiêu chuẩn truy cập Accessibility.
 
 ### SV-06
 - ia: IA-04
