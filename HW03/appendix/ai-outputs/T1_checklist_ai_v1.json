@@ -1,0 +1,1100 @@
+{
+  "meta": {
+    "hw": "HW03",
+    "task": "T1 – GUI Checklist",
+    "scope": "C2 – Tài khoản (web frontend-web :5173): Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ đơn, navbar khi đã đăng nhập",
+    "sut_version": "tkob-team/eshop-sut @ de0f48f",
+    "test_basis": "../eshop-sut/README.md (SRS v2.0) FR-02, FR-03, FR-04, FR-10, FR-11, FR-21…FR-24, SEC-04; slide GUI/Usability (checklist theo control, Nielsen 10, Norman 6, Shneiderman 8)",
+    "platforms": {
+      "P1": "Chrome trên Windows",
+      "P2": "Firefox trên Windows",
+      "P3": "Chrome Android (POCO F5, adb reverse)"
+    },
+    "result_values": [
+      "Passed",
+      "Failed",
+      "N/A",
+      "Blocked"
+    ],
+    "inventory": "HW03/checklist/c2_inventory.md",
+    "version": "v1 – AI nháp (T1 1/6)"
+  },
+  "assumptions": {
+    "NA1": "P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường.",
+    "GA1": "Ngày hiển thị theo chuẩn Việt Nam dd/mm/yyyy, độc lập ngôn ngữ trình duyệt.",
+    "GA2": "Badge giỏ hàng = tổng số lượng các sản phẩm trong giỏ."
+  },
+  "items": [
+    {
+      "id": "CL-01",
+      "ia": "IA-01",
+      "man_hinh": "Tất cả màn C2",
+      "muc_kiem_tra": "Ngôn ngữ giao diện nhất quán tiếng Việt",
+      "can_cu": "FR-21.1 (README.md:244)",
+      "loai_nguon": "SRS",
+      "expected": "Mọi nhãn, nút, tiêu đề, placeholder, thông báo trên Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ, Lịch sử đơn, navbar đều bằng tiếng Việt. Fail nếu có ≥ 1 chuỗi tiếng Anh không phải thuật ngữ kỹ thuật chuẩn (chấp nhận: Email, OTP, EShop).",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-02",
+      "ia": "IA-01",
+      "man_hinh": "Đăng nhập, Quên mật khẩu, Hồ sơ",
+      "muc_kiem_tra": "Mỗi trang có đúng 1 thẻ <h1>",
+      "can_cu": "FR-21.4 (README.md:247)",
+      "loai_nguon": "SRS",
+      "expected": "Trên mỗi trang /login, /forgot-password, /profile, lệnh DevTools `document.querySelectorAll('h1').length` trả về đúng 1. Fail nếu một trang trả 0 hoặc ≥ 2.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "P3: mở DevTools qua chrome://inspect (adb).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-03",
+      "ia": "IA-01",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Tiêu đề trang mô tả đúng chức năng Đăng nhập",
+      "can_cu": "FR-21.4 (README.md:247); Nielsen #2 (khớp hệ thống – thế giới thực)",
+      "loai_nguon": "SRS",
+      "expected": "Tiêu đề chính hiển thị trên /login có nội dung 'Đăng nhập'. Fail nếu tiêu đề là chức năng khác (vd 'Đăng ký') hoặc không có tiêu đề.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-04",
+      "ia": "IA-01",
+      "man_hinh": "Tất cả màn C2",
+      "muc_kiem_tra": "Nút hành động tích cực màu xanh dương",
+      "can_cu": "FR-21.2 (README.md:245)",
+      "loai_nguon": "SRS",
+      "expected": "Nút 'Đăng nhập/Sign In', 'Lấy mã OTP', 'Đặt lại mật khẩu', 'Cập nhật' có nền xanh dương (họ blue). Fail nếu ≥ 1 nút tích cực có màu khác (xanh lá, xám…).",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-05",
+      "ia": "IA-01",
+      "man_hinh": "Navbar, Lịch sử đơn",
+      "muc_kiem_tra": "Nút nguy hiểm/huỷ bỏ màu đỏ",
+      "can_cu": "FR-21.2 (README.md:245)",
+      "loai_nguon": "SRS",
+      "expected": "Nút Đăng xuất và 'Hủy đơn' có nền đỏ. Fail nếu một trong hai nút không đỏ.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn ở trạng thái Chờ xác nhận (tạo qua Checkout).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-06",
+      "ia": "IA-01",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Nút chính và nút phụ phân biệt được bằng hình thức",
+      "can_cu": "Shneiderman #1 (nhất quán); checklist Button – 'colour signals intent'",
+      "loai_nguon": "Heuristic",
+      "expected": "Nút 'Đặt lại mật khẩu' (chính) và nút quay lại (phụ) khác nhau rõ về màu hoặc kiểu (viền/nền). Fail nếu hai nút cùng màu nền, cùng kích thước, cùng kiểu.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-07",
+      "ia": "IA-01",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Các nút trên cùng form đồng nhất kích thước và font",
+      "can_cu": "Checklist Button – 'All buttons similar size/shape, same font'",
+      "loai_nguon": "Control",
+      "expected": "Các nút trên cùng form có cùng chiều cao (chênh ≤ 2 px theo DevTools) và cùng font-family/font-size.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-08",
+      "ia": "IA-01",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Tổng tiền dùng ký hiệu ₫ và phân cách hàng nghìn",
+      "can_cu": "FR-21.3 (README.md:246); FR-11.1 (README.md:167)",
+      "loai_nguon": "SRS",
+      "expected": "Cột Tổng tiền của mọi dòng có ký hiệu '₫' và nhóm 3 chữ số được phân cách (vd 30.000.000 ₫ hoặc 30,000,000 ₫), cùng một kiểu phân cách trên cả 3 nền tảng. Fail nếu thiếu ₫, thiếu phân cách, hoặc kiểu phân cách khác nhau giữa các nền tảng.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn (tạo qua Checkout).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-09",
+      "ia": "IA-01",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Ngày đặt hiển thị nhất quán theo định dạng Việt Nam",
+      "can_cu": "Nielsen #4 (nhất quán và chuẩn); SRS im lặng → giả định GA1",
+      "loai_nguon": "Heuristic",
+      "expected": "Ngày đặt hiển thị dạng dd/mm/yyyy và giống nhau trên P1, P2, P3. Fail nếu định dạng khác (mm/dd/yyyy, yyyy-mm-dd) hoặc khác nhau giữa các nền tảng.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn.",
+      "gia_dinh": "GA1: ngày hiển thị theo chuẩn Việt Nam dd/mm/yyyy, độc lập ngôn ngữ trình duyệt.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-10",
+      "ia": "IA-01",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Thứ tự Tab từ trên xuống dưới",
+      "can_cu": "FR-21.5 (README.md:248)",
+      "loai_nguon": "SRS",
+      "expected": "Từ thanh địa chỉ bấm Tab lần lượt: navbar → ô Email → ô Mật khẩu → 'Quên mật khẩu?' → nút Đăng nhập → 'Đăng ký ngay'. Fail nếu focus nhảy ngược lên hoặc bỏ qua control.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2"
+      ],
+      "na": {
+        "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
+      },
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-11",
+      "ia": "IA-01",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Thứ tự Tab từ trên xuống dưới, trái sang phải",
+      "can_cu": "FR-21.5 (README.md:248)",
+      "loai_nguon": "SRS",
+      "expected": "Tab đi qua: Họ Tên → Số điện thoại → Địa chỉ giao hàng → Cập nhật → các nút 'Hủy đơn' theo thứ tự dòng. Ô Email bị khoá được bỏ qua. Fail nếu thứ tự khác.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2"
+      ],
+      "na": {
+        "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
+      },
+      "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-12",
+      "ia": "IA-01",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Thứ tự Tab ở bước 2",
+      "can_cu": "FR-21.5 (README.md:248)",
+      "loai_nguon": "SRS",
+      "expected": "Tab đi qua: ô OTP → Mật khẩu mới → Xác nhận mật khẩu (nếu có) → nút chính → nút quay lại. Fail nếu thứ tự khác.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2"
+      ],
+      "na": {
+        "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
+      },
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-13",
+      "ia": "IA-01",
+      "man_hinh": "Tất cả màn C2",
+      "muc_kiem_tra": "Tiêu đề tab trình duyệt mô tả trang",
+      "can_cu": "Nielsen #1 (hiển thị trạng thái hệ thống); WCAG 2.2 SC 2.4.2",
+      "loai_nguon": "Heuristic",
+      "expected": "Tiêu đề tab (document.title) chứa tên ứng dụng hoặc tên trang (vd 'Đăng nhập – EShop') và khác nhau giữa /login, /forgot-password, /profile. Fail nếu là tên kỹ thuật (vd tên thư mục dự án) hoặc giống nhau ở mọi trang.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-14",
+      "ia": "IA-01",
+      "man_hinh": "Tất cả màn C2",
+      "muc_kiem_tra": "Khai báo ngôn ngữ trang là tiếng Việt",
+      "can_cu": "WCAG 2.2 SC 3.1.1 (Language of Page)",
+      "loai_nguon": "Heuristic",
+      "expected": "Thẻ <html> có lang='vi'. Fail nếu lang khác 'vi' hoặc không có.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-15",
+      "ia": "IA-01",
+      "man_hinh": "Hồ sơ + Lịch sử đơn",
+      "muc_kiem_tra": "Bố cục không vỡ ở màn hình hẹp",
+      "can_cu": "Slide 'Broken layout on resize'; Nielsen #8 (thiết kế tối giản)",
+      "loai_nguon": "Heuristic",
+      "expected": "Ở chiều rộng 360–390 px (P3 thật; P1/P2 thu cửa sổ hoặc DevTools responsive 375 px): trang không có thanh cuộn ngang, không phần tử nào bị cắt/chồng lên nhau; bảng đơn cuộn trong khung riêng hoặc xuống dòng. Fail nếu có cuộn ngang toàn trang hoặc chữ bị che.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-16",
+      "ia": "IA-01",
+      "man_hinh": "Navbar",
+      "muc_kiem_tra": "Tên người dùng hiển thị an toàn (không render HTML)",
+      "can_cu": "SEC-04 (README.md:281)",
+      "loai_nguon": "SRS",
+      "expected": "Đổi Họ Tên thành `<b>Test</b>` rồi Cập nhật, tải lại trang: navbar hiển thị nguyên văn chuỗi `<b>Test</b>` (thấy dấu < >), chữ không in đậm. Fail nếu chữ 'Test' in đậm hoặc dấu < > biến mất.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Đăng nhập test@eshop.com; khôi phục Họ Tên 'Test User' sau khi kiểm.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-17",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập, Quên mật khẩu (bước 1)",
+      "muc_kiem_tra": "Ô Email dùng type=\"email\" và được validate định dạng",
+      "can_cu": "FR-02.4 (README.md:44); FR-22.2 (README.md:253)",
+      "loai_nguon": "SRS",
+      "expected": "DevTools: ô Email trên /login và bước 1 /forgot-password có type=\"email\". Nhập 'abc' rồi submit → trình duyệt chặn, hiện bong bóng validate, không gửi request. Fail nếu type khác hoặc form gửi đi.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-18",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Nhãn ô đăng nhập là 'Email'",
+      "can_cu": "FR-02.1 (README.md:40); Nielsen #2",
+      "loai_nguon": "SRS",
+      "expected": "Nhãn ô thứ nhất trên /login là 'Email' (hoặc chứa từ 'Email'). Fail nếu nhãn là thuật ngữ khác (vd 'Username', 'Tên đăng nhập').",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-19",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập, Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Ô mật khẩu che ký tự",
+      "can_cu": "FR-22.3 (README.md:254)",
+      "loai_nguon": "SRS",
+      "expected": "Mọi ô mật khẩu (Đăng nhập; Mật khẩu mới, Xác nhận mật khẩu ở bước 2) có type=\"password\": gõ 'Abc123!' chỉ thấy ký tự che (•). Fail nếu một ô hiển thị rõ ký tự.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-20",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập, Quên mật khẩu",
+      "muc_kiem_tra": "Dấu * trên nhãn trường bắt buộc",
+      "can_cu": "FR-22.1 (README.md:252); checklist Text box – 'Red asterisk on mandatory fields'",
+      "loai_nguon": "SRS",
+      "expected": "Nhãn Email, Mật khẩu (/login); Email (bước 1); OTP, Mật khẩu mới, Xác nhận mật khẩu (bước 2) đều có '*' cạnh nhãn. Fail nếu ≥ 1 nhãn thiếu '*'.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-21",
+      "ia": "IA-02",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Dấu * trên trường mà form bắt buộc nhập",
+      "can_cu": "FR-22.1 (README.md:252)",
+      "loai_nguon": "SRS",
+      "expected": "Với từng trường Họ Tên, Số điện thoại, Địa chỉ: để trống rồi bấm Cập nhật. Trường nào khiến form bị chặn thì nhãn phải có '*'; trường không bắt buộc thì không có '*'. Fail nếu một trường bị chặn khi trống mà nhãn không có '*'.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-22",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Thông báo lỗi đăng nhập nằm phía trên nút submit",
+      "can_cu": "FR-22.4 (README.md:255)",
+      "loai_nguon": "SRS",
+      "expected": "Đăng nhập với mật khẩu sai: khối thông báo lỗi xuất hiện phía trên nút Đăng nhập (toạ độ y của thông báo < y của nút). Fail nếu thông báo nằm dưới nút hoặc không hiện.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-23",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu, Hồ sơ",
+      "muc_kiem_tra": "Thông báo lỗi validate hiển thị trong trang, phía trên nút submit",
+      "can_cu": "FR-22.4 (README.md:255)",
+      "loai_nguon": "SRS",
+      "expected": "Gây lỗi: mật khẩu mới yếu (bước 2), SĐT sai định dạng (Hồ sơ). Thông báo lỗi xuất hiện trong trang, phía trên nút submit của form đó. Fail nếu lỗi hiện dưới nút hoặc chỉ hiện ở hộp thoại trình duyệt (alert) không gắn với vị trí nào trong form.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-24",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu",
+      "muc_kiem_tra": "Có chỉ báo bước (Step Indicator)",
+      "can_cu": "FR-03.3 (README.md:52); FR-22.5 (README.md:256)",
+      "loai_nguon": "SRS",
+      "expected": "Bước 1 hiển thị 'Bước 1 / 2' (hoặc chỉ báo tương đương thấy rõ bước hiện tại và tổng số bước); bước 2 hiển thị 'Bước 2 / 2'. Fail nếu một bước không có chỉ báo.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-25",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu (bước 1)",
+      "muc_kiem_tra": "Có nút 'Quay lại đăng nhập'",
+      "can_cu": "FR-03.4 (README.md:53)",
+      "loai_nguon": "SRS",
+      "expected": "Bước 1 có nút/link nhãn 'Quay lại đăng nhập'; bấm → về /login. Fail nếu không có, nhãn khác nghĩa, hoặc không về /login.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-26",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Có ô 'Xác nhận mật khẩu mới'",
+      "can_cu": "FR-03.5 (README.md:57)",
+      "loai_nguon": "SRS",
+      "expected": "Bước 2 có đủ 3 ô: OTP, Mật khẩu mới, Xác nhận mật khẩu mới. Fail nếu thiếu ô xác nhận.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-27",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Hai mật khẩu không khớp bị chặn",
+      "can_cu": "FR-03.7 (README.md:59)",
+      "loai_nguon": "SRS",
+      "expected": "Nhập Mật khẩu mới 'Abcdef1!' và Xác nhận 'Abcdef2!' rồi submit → không đổi mật khẩu, có thông báo hai mật khẩu không khớp. Fail nếu đổi thành công. Blocked nếu item 'Có ô Xác nhận mật khẩu mới' Failed.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-28",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Nhãn ô OTP khớp độ dài OTP 6 chữ số",
+      "can_cu": "FR-03.2 (README.md:51)",
+      "loai_nguon": "SRS",
+      "expected": "Nhãn/placeholder ô OTP nêu 6 chữ số và mã OTP hiển thị trên màn hình có đúng 6 chữ số. Fail nếu nhãn nêu số khác 6 hoặc mã hiển thị không phải 6 chữ số.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-29",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Mật khẩu mới hợp lệ theo FR-01 được chấp nhận",
+      "can_cu": "FR-03.6 (README.md:58, 34)",
+      "loai_nguon": "SRS",
+      "expected": "Với OTP đúng, Mật khẩu mới 'Abcdef1!' (8 ký tự, có hoa, thường, số, '!') → đổi thành công; đăng nhập lại bằng mật khẩu mới được. Fail nếu bị báo mật khẩu yếu.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Dùng tài khoản test@eshop.com; restart backend sau khi kiểm để khôi phục mật khẩu Test1234!.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-30",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "Mật khẩu yếu bị từ chối với thông báo nêu đúng quy tắc",
+      "can_cu": "FR-03.6 (README.md:58, 34); Nielsen #9 (giúp nhận biết và khắc phục lỗi)",
+      "loai_nguon": "SRS",
+      "expected": "Mật khẩu mới 'abcdefgh' bị từ chối; thông báo nêu quy tắc khớp FR-01 (≥ 8 ký tự, chữ hoa, chữ thường, số, ký tự đặc biệt). Fail nếu được chấp nhận hoặc thông báo nêu quy tắc khác SRS.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-31",
+      "ia": "IA-02",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "SĐT hợp lệ (bắt đầu 0, 10–11 số) được chấp nhận",
+      "can_cu": "FR-04.2 (README.md:65)",
+      "loai_nguon": "SRS",
+      "expected": "Lần lượt nhập '0912345678' (10 số) và '09123456789' (11 số), bấm Cập nhật → mỗi lần thành công, tải lại trang thấy giá trị đã lưu. Fail nếu một trong hai bị từ chối.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-32",
+      "ia": "IA-02",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "SĐT không hợp lệ bị từ chối, thông báo nêu đúng quy tắc",
+      "can_cu": "FR-04.2 (README.md:65); Nielsen #9",
+      "loai_nguon": "SRS",
+      "expected": "Nhập '912345678' (không bắt đầu bằng 0) → bị từ chối, không lưu; thông báo nêu 'bắt đầu bằng 0, 10–11 chữ số'. Fail nếu được lưu hoặc thông báo nêu quy tắc khác SRS.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-33",
+      "ia": "IA-02",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Email không sửa được và trông như trường bị khoá",
+      "can_cu": "FR-04.3 (README.md:66); checklist Text box – 'disabled = greyed, no cursor, not editable'",
+      "loai_nguon": "SRS",
+      "expected": "Ô Email không gõ được, nền xám, nhãn cho biết không đổi được. Fail nếu sửa được hoặc trông như ô thường.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-34",
+      "ia": "IA-02",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Họ Tên chỉ gồm khoảng trắng bị từ chối",
+      "can_cu": "Checklist Text box – 'Rejects spaces-only'",
+      "loai_nguon": "Control",
+      "expected": "Nhập Họ Tên '   ' (3 dấu cách), bấm Cập nhật → bị chặn với thông báo; tải lại trang, Họ Tên cũ giữ nguyên. Fail nếu lưu thành công.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-35",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Giữ lại Email sau khi đăng nhập thất bại",
+      "can_cu": "Shneiderman #8 (giảm tải trí nhớ); Nielsen #5",
+      "loai_nguon": "Heuristic",
+      "expected": "Sau một lần đăng nhập sai mật khẩu, ô Email vẫn giữ giá trị đã nhập. Fail nếu ô Email bị xoá.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-36",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Phím Enter gửi form đăng nhập",
+      "can_cu": "Checklist Button – 'One default button fires on Enter'",
+      "loai_nguon": "Control",
+      "expected": "Con trỏ ở ô Mật khẩu, bấm Enter (P3: phím Go/Enter của bàn phím ảo) → form được gửi như bấm nút Đăng nhập. Fail nếu không có gì xảy ra.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-37",
+      "ia": "IA-02",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Cập nhật hồ sơ được lưu bền",
+      "can_cu": "FR-04.1 (README.md:64)",
+      "loai_nguon": "SRS",
+      "expected": "Đổi Họ Tên, SĐT hợp lệ, Địa chỉ → Cập nhật → tải lại trang (F5) → 3 trường hiển thị giá trị mới. Fail nếu ≥ 1 trường quay về giá trị cũ.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Khôi phục giá trị cũ sau khi kiểm.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-38",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập, Hồ sơ",
+      "muc_kiem_tra": "Nhãn gắn với ô nhập (bấm nhãn → focus ô)",
+      "can_cu": "Checklist Text box – 'Correct label'; WCAG 2.2 SC 1.3.1",
+      "loai_nguon": "Control",
+      "expected": "Bấm vào chữ nhãn (vd 'Mật khẩu', 'Họ Tên') → con trỏ nhảy vào ô tương ứng. Fail nếu bấm nhãn không có tác dụng.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-39",
+      "ia": "IA-02",
+      "man_hinh": "Quên mật khẩu",
+      "muc_kiem_tra": "Quay lại bước 1 vẫn giữ email đã nhập",
+      "can_cu": "Shneiderman #8 (giảm tải trí nhớ); Shneiderman #6 (cho phép đảo ngược)",
+      "loai_nguon": "Heuristic",
+      "expected": "Từ bước 2 bấm nút quay lại → bước 1 hiển thị lại email vừa nhập. Fail nếu ô email rỗng.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-40",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "muc_kiem_tra": "Navbar highlight trang đang chọn",
+      "can_cu": "FR-23.1 (README.md:260)",
+      "loai_nguon": "SRS",
+      "expected": "Ở /profile, link tên người dùng có kiểu khác hẳn các link còn lại (màu/gạch chân/nền); ở /cart, link 'Giỏ hàng' được highlight. Kiểu highlight đổi theo trang. Fail nếu không link nào thay đổi kiểu theo trang hiện tại.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-41",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "muc_kiem_tra": "Link 'Giỏ hàng' có badge số lượng",
+      "can_cu": "FR-23.2 (README.md:261)",
+      "loai_nguon": "SRS",
+      "expected": "Thêm 1 sản phẩm × 2 → badge cạnh 'Giỏ hàng' hiển thị số đúng theo giả định GA2 và hiện ở mọi trang C2. Fail nếu không có badge.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Đăng nhập test@eshop.com; thêm sản phẩm từ trang chi tiết, điều hướng bằng navbar (không tải lại trang).",
+      "gia_dinh": "GA2: badge = tổng số lượng các sản phẩm trong giỏ (SRS không nói rõ tổng số lượng hay số dòng).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-42",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "muc_kiem_tra": "Nút đăng xuất có nhãn 'Đăng xuất'",
+      "can_cu": "FR-23.3 (README.md:262)",
+      "loai_nguon": "SRS",
+      "expected": "Khi đã đăng nhập, nút đăng xuất trên navbar có nhãn đúng 'Đăng xuất'. Fail nếu nhãn khác (vd 'Thoát', 'Logout').",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-43",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "muc_kiem_tra": "Đăng xuất đưa giao diện về trạng thái chưa đăng nhập",
+      "can_cu": "FR-02.3 (README.md:43); Norman – Feedback",
+      "loai_nguon": "SRS",
+      "expected": "Bấm Đăng xuất → navbar hiện 'Đăng nhập', 'Đăng ký'; tải lại trang vẫn ở trạng thái chưa đăng nhập; vào /profile không thấy dữ liệu hồ sơ. Fail nếu một điều không đúng.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-44",
+      "ia": "IA-03",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Đăng nhập thành công rời trang đăng nhập và navbar cập nhật",
+      "can_cu": "Shneiderman #4 (hội thoại có điểm kết)",
+      "loai_nguon": "Heuristic",
+      "expected": "Đăng nhập test@eshop.com/Test1234! → trong ≤ 2 giây rời /login và navbar hiển thị tên người dùng thay cho 'Đăng nhập'. Fail nếu vẫn ở /login hoặc navbar không đổi.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-45",
+      "ia": "IA-03",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Link 'Quên mật khẩu?' điều hướng trong ứng dụng (không tải lại trang)",
+      "can_cu": "Shneiderman #1 (nhất quán với các link khác); checklist Hyperlink – 'goes to the correct page'",
+      "loai_nguon": "Control",
+      "expected": "Bấm 'Quên mật khẩu?' → tới /forgot-password; DevTools Network (lọc Doc) không có request tài liệu mới, giống link 'Đăng ký ngay'. Fail nếu sai trang hoặc trang tải lại toàn bộ.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "P3: DevTools qua chrome://inspect.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-46",
+      "ia": "IA-03",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Link 'Đăng ký ngay' tới trang Đăng ký",
+      "can_cu": "Checklist Hyperlink – 'goes to the correct page'",
+      "loai_nguon": "Control",
+      "expected": "Bấm 'Đăng ký ngay' → URL /register và trang hiển thị form đăng ký. Fail nếu sai trang.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-47",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "muc_kiem_tra": "Logo 'EShop' về trang chủ từ mọi màn C2",
+      "can_cu": "Checklist Hyperlink; Nielsen #3 (người dùng làm chủ, có lối thoát)",
+      "loai_nguon": "Control",
+      "expected": "Từ /login, /forgot-password, /profile bấm logo → về '/'. Fail nếu một trang không về '/'.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-48",
+      "ia": "IA-03",
+      "man_hinh": "Quên mật khẩu",
+      "muc_kiem_tra": "Đặt lại mật khẩu thành công có lối đi tới đăng nhập",
+      "can_cu": "Shneiderman #4 (hội thoại có điểm kết)",
+      "loai_nguon": "Heuristic",
+      "expected": "Sau khi đổi mật khẩu thành công, người dùng được chuyển tới /login hoặc thấy link/nút tới Đăng nhập. Fail nếu ở lại form mà không có lối tới Đăng nhập.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Restart backend sau khi kiểm.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-49",
+      "ia": "IA-03",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "/profile khi chưa đăng nhập dẫn được tới Đăng nhập",
+      "can_cu": "Nielsen #3 (lối thoát); Nielsen #9",
+      "loai_nguon": "Heuristic",
+      "expected": "Chưa đăng nhập, mở /profile → hoặc tự chuyển tới /login, hoặc thông báo có link/nút tới Đăng nhập (1 lần bấm). Fail nếu chỉ có chữ, không có đường tới Đăng nhập ngoài navbar.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-50",
+      "ia": "IA-03",
+      "man_hinh": "Tất cả màn C2",
+      "muc_kiem_tra": "URL không tồn tại hiển thị trang 404 có lối về",
+      "can_cu": "Nielsen #9; Nielsen #3",
+      "loai_nguon": "Heuristic",
+      "expected": "Mở /profil (gõ sai) → trang báo không tìm thấy, có link về trang chủ. Fail nếu trang trắng (chỉ còn header/footer) không có thông báo.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-51",
+      "ia": "IA-04",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Thông báo đăng nhập sai không lộ nguyên nhân",
+      "can_cu": "FR-02.2 (README.md:42)",
+      "loai_nguon": "SRS",
+      "expected": "Đăng nhập (a) email không tồn tại, (b) email đúng + mật khẩu sai → hai thông báo giống hệt nhau, không nói trường nào sai. Fail nếu thông báo khác nhau hoặc chỉ rõ 'email không tồn tại'/'sai mật khẩu'.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-52",
+      "ia": "IA-04",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Sai 3 lần liên tiếp → khoá 30 giây",
+      "can_cu": "FR-02.2 (README.md:42)",
+      "loai_nguon": "SRS",
+      "expected": "Sai mật khẩu 3 lần liên tiếp, ngay sau đó đăng nhập đúng → bị từ chối kèm thông báo; chờ 30 giây (+ 5 giây dung sai) đăng nhập đúng → thành công. Fail nếu lần đúng ngay sau đó thành công, hoặc sau 35 giây vẫn bị từ chối.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Restart backend trước khi kiểm (bộ đếm = 0).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-53",
+      "ia": "IA-04",
+      "man_hinh": "Đăng nhập",
+      "muc_kiem_tra": "Có chỉ báo đang xử lý và chống gửi trùng",
+      "can_cu": "Norman – Feedback; Shneiderman #3 (phản hồi đầy đủ)",
+      "loai_nguon": "Heuristic",
+      "expected": "DevTools Network throttling 'Slow 3G': bấm Đăng nhập → trong lúc chờ, nút bị vô hiệu hoá hoặc có chỉ báo đang tải; bấm thêm 2 lần chỉ phát sinh 1 request /api/login. Fail nếu không có chỉ báo hoặc phát sinh nhiều request.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "P3: throttling qua chrome://inspect.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-54",
+      "ia": "IA-04",
+      "man_hinh": "Quên mật khẩu (bước 2)",
+      "muc_kiem_tra": "OTP hiển thị trên màn hình (môi trường demo)",
+      "can_cu": "FR-03.2 (README.md:51)",
+      "loai_nguon": "SRS",
+      "expected": "Sau khi gửi email test@eshop.com ở bước 1, bước 2 hiển thị mã OTP rõ ràng trên trang. Fail nếu không thấy mã.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-55",
+      "ia": "IA-04",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Cập nhật thành công có phản hồi rõ ràng",
+      "can_cu": "Nielsen #1; Shneiderman #3",
+      "loai_nguon": "Heuristic",
+      "expected": "Bấm Cập nhật với dữ liệu hợp lệ → trong ≤ 1 giây có thông báo thành công bằng tiếng Việt. Fail nếu không có phản hồi.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-56",
+      "ia": "IA-04",
+      "man_hinh": "Hồ sơ, Navbar",
+      "muc_kiem_tra": "Đổi Họ Tên cập nhật ngay trên navbar",
+      "can_cu": "Nielsen #1 (hiển thị trạng thái hệ thống); Shneiderman #1",
+      "loai_nguon": "Heuristic",
+      "expected": "Đổi Họ Tên thành 'Test Đổi' → Cập nhật → navbar hiển thị 'Test Đổi' mà không cần tải lại trang. Fail nếu navbar vẫn tên cũ cho tới khi F5.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Khôi phục 'Test User' sau khi kiểm.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-57",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Bảng đơn hiển thị đủ thông tin",
+      "can_cu": "FR-11.1 (README.md:167)",
+      "loai_nguon": "SRS",
+      "expected": "Sau khi đặt 1 đơn, Lịch sử đơn có dòng mới với đủ 4 thông tin: Mã đơn, Ngày đặt, Tổng tiền, Trạng thái. Fail nếu thiếu thông tin nào.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Đặt 1 đơn qua Checkout bằng test@eshop.com.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-58",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Trạng thái tiếng Việt và phân biệt màu",
+      "can_cu": "FR-11.2 (README.md:168)",
+      "loai_nguon": "SRS",
+      "expected": "Các đơn ở 5 trạng thái hiển thị nhãn tiếng Việt (vd Chờ xác nhận, Đã xác nhận, Đang giao, Đã giao, Đã hủy), mỗi trạng thái một màu khác nhau. Fail nếu có nhãn tiếng Anh/mã thô hoặc 2 trạng thái trùng màu.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Tạo 5 đơn; dùng admin (:5174, admin@eshop.com) chuyển trạng thái để có đủ 5 trạng thái.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-59",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Không cho người dùng huỷ đơn ở trạng thái không được huỷ",
+      "can_cu": "FR-10 (README.md:160–161); FR-20 (README.md:236)",
+      "loai_nguon": "SRS",
+      "expected": "Dòng đơn 'Đang giao', 'Đã giao', 'Đã hủy' không có nút 'Hủy đơn' (hoặc nút bị vô hiệu hoá); chỉ 'Chờ xác nhận', 'Đã xác nhận' có. Fail nếu nút dùng được ở trạng thái không được huỷ.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Như item trạng thái (đủ 5 trạng thái).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-60",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Huỷ đơn có hộp xác nhận",
+      "can_cu": "Shneiderman #6 (cho phép đảo ngược); checklist Button – 'Uncorrectable action → Yes/No confirmation'",
+      "loai_nguon": "Control",
+      "expected": "Bấm 'Hủy đơn' → hiện hộp xác nhận có lựa chọn huỷ thao tác; chọn không → đơn giữ nguyên trạng thái. Fail nếu đơn bị huỷ ngay khi bấm.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-61",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Sau huỷ, trạng thái cập nhật ngay",
+      "can_cu": "Nielsen #1; Shneiderman #3",
+      "loai_nguon": "Heuristic",
+      "expected": "Huỷ đơn thành công → không cần tải lại, dòng đó đổi sang 'Đã hủy' và nút 'Hủy đơn' biến mất. Fail nếu cần F5 mới thấy thay đổi.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-62",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Empty state có hình minh hoạ và thông báo thân thiện",
+      "can_cu": "FR-24.3 (README.md:269)",
+      "loai_nguon": "SRS",
+      "expected": "Tài khoản chưa có đơn → khu Lịch sử đơn có icon/hình minh hoạ và câu thông báo thân thiện (kèm gợi ý mua sắm). Fail nếu chỉ có chữ, không có icon/hình.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Backend vừa restart (test@eshop.com chưa có đơn).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-63",
+      "ia": "IA-04",
+      "man_hinh": "Lịch sử đơn",
+      "muc_kiem_tra": "Có trạng thái đang tải khi lấy lịch sử đơn",
+      "can_cu": "Nielsen #1 (hiển thị trạng thái hệ thống)",
+      "loai_nguon": "Heuristic",
+      "expected": "Network throttling 'Slow 3G', tải lại /profile → trong lúc chờ có chỉ báo đang tải; không hiện 'chưa có đơn hàng' trước khi dữ liệu về. Fail nếu hiện empty state rồi mới hiện bảng.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Có ≥ 1 đơn. P3: throttling qua chrome://inspect.",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-64",
+      "ia": "IA-04",
+      "man_hinh": "Hồ sơ",
+      "muc_kiem_tra": "Lỗi kết nối khi cập nhật có thông báo dễ hiểu, không mất dữ liệu",
+      "can_cu": "Nielsen #9 (giúp nhận biết, chẩn đoán, khắc phục lỗi)",
+      "loai_nguon": "Heuristic",
+      "expected": "Tắt backend, bấm Cập nhật → thông báo tiếng Việt cho biết không kết nối được máy chủ / thử lại; dữ liệu đã nhập trong form vẫn còn. Fail nếu thông báo chung chung không nêu nguyên nhân hoặc form bị xoá.",
+      "uu_tien": "Optional",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "tien_dieu_kien": "Khởi động lại backend sau khi kiểm (CSDL seed lại).",
+      "nguon": "AI"
+    },
+    {
+      "id": "CL-65",
+      "ia": "IA-04",
+      "man_hinh": "Tất cả màn C2",
+      "muc_kiem_tra": "Phiên đăng nhập giữ sau khi tải lại trang",
+      "can_cu": "FR-02.3 (README.md:43)",
+      "loai_nguon": "SRS",
+      "expected": "Đăng nhập → ở /profile bấm F5 → vẫn đăng nhập, hồ sơ hiển thị, navbar có tên. Fail nếu bị đăng xuất.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "AI"
+    }
+  ]
+}
