@@ -67,6 +67,18 @@
         "ma": "L2",
         "noi_dung": "loai_nguon item SV theo quy tắc 'nguồn đứng đầu can_cu' (giống v1): SV-01/02/04/05/06 Heuristic, SV-03 Control.",
         "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-05",
+        "ma": "H1",
+        "noi_dung": "Ngưỡng màu auto: CL-04 'xanh dương' = hue 190–250°, CL-05 'đỏ' = hue 340–20°, độ bão hoà ≥ 0,3 (đã có trong oracle.src.json, không đổi expected). SV: 'nhìn thấy đúng xanh dương/đỏ là được'.",
+        "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-05",
+        "ma": "P3A",
+        "noi_dung": "Playwright _android chạy được với POCO F5 (Chrome 156): thêm project P3 cho item auto; P3 chạy tay chỉ còn manual/mixed + item auto_nen_tang không có P3 (13 item). Item ngoài nen_tang (NA1) bỏ qua, không ghi.",
+        "ket_luan": "SV chốt (lệnh 3/6b)"
       }
     ]
   },

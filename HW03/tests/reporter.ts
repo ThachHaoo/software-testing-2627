@@ -21,7 +21,8 @@ export default class ChecklistReporter implements Reporter {
     const project = test.parent.project()?.name ?? '?';
     const P = (this.byProject[project] ??= { results: {}, manual: [], browser: '' });
     const id = test.title.split(' ')[0];
-    const ann = [...test.annotations, ...r.annotations];
+    const ann = [...test.annotations, ...((r as any).annotations ?? [])];   // TestResult.annotations chưa có ở 1.48
+    if (r.status === 'skipped' && ann.some(a => a.type === 'na')) return;   // N/A theo thiết kế (nen_tang) – không ghi
     if (r.status === 'skipped' && ann.some(a => a.type === 'manual')) { P.manual.push(id); return; }
     const blocked = ann.find(a => a.type === 'blocked');
     const status = r.status === 'passed' ? 'Passed' : r.status === 'skipped' ? (blocked ? 'Blocked' : 'Skipped') : 'Failed';
@@ -40,7 +41,9 @@ export default class ChecklistReporter implements Reporter {
     const dir = path.resolve(__dirname, '../checklist/runs');
     fs.mkdirSync(dir, { recursive: true });
     for (const [project, P] of Object.entries(this.byProject)) {
-      const env = project === 'P1' ? 'Google Chrome đã cài (Playwright channel "chrome")' : 'Firefox bản build của Playwright (không phải Firefox đã cài)';
+      const env = project === 'P1' ? 'Google Chrome đã cài (Playwright channel "chrome")'
+        : project === 'P3' ? 'Chrome Android thật trên POCO F5 (Playwright _android, adb reverse)'
+        : 'Firefox bản build của Playwright (không phải Firefox đã cài)';
       const out = { platform: project, kind: 'auto', run_at: ts.toISOString(), env, manual: P.manual, results: P.results };
       const file = path.join(dir, `${project}_auto_${stamp}.json`);
       fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n', 'utf-8');

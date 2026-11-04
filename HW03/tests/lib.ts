@@ -8,6 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { test as base, expect, APIRequestContext, Page, Locator, TestInfo } from '@playwright/test';
+import { _android, AndroidDevice } from 'playwright';
 import { ORACLE, Oracle } from './oracle';
 
 export const API = 'http://localhost:3000';
@@ -28,7 +29,44 @@ export function oracle(id: string): Oracle {
   return o;
 }
 
-export const test = base;
+/**
+ * P3 = Chrome Android thật (POCO F5) qua Playwright `_android` (adb server :5037, `adb reverse` 5173 + 3000 đã bật).
+ * launchBrowser() trả về context BỀN của Chrome trên máy (không phải context sạch) → đầu mỗi test xoá cookie +
+ * storage của origin web/API để tương đương context mới của P1/P2. Viewport = màn hình thật (không dùng 1280×800).
+ * Item có Px ngoài nen_tang (N/A theo thiết kế, vd NA1 trên P3) → bỏ qua, reporter không ghi.
+ */
+export const test = base.extend<{ naGate: void }, { androidDevice: AndroidDevice | null }>({
+  androidDevice: [async ({}, use, w) => {
+    if (w.project.name !== 'P3') return use(null);
+    const [dev] = await _android.devices();
+    if (!dev) throw new Error('[P3] adb không thấy thiết bị — cắm cáp, bật USB debugging; `adb devices` phải ra "device".');
+    await use(dev);
+    await dev.close();
+  }, { scope: 'worker' }],
+  naGate: [async ({}, use, info) => {
+    const it = ITEMS[info.title.split(' ')[0]];
+    if (it && !it.nen_tang.includes(info.project.name)) {
+      info.annotations.push({ type: 'na', description: `${info.project.name} N/A theo thiết kế` });
+      info.skip(true, `${info.project.name} N/A theo thiết kế`);
+    }
+    await use();
+  }, { auto: true }],
+  context: async ({ context, androidDevice }, use) => {
+    if (!androidDevice) return use(context);
+    const ctx = await androidDevice.launchBrowser({ baseURL: WEB, locale: 'vi-VN', timezoneId: 'Asia/Ho_Chi_Minh' });
+    await ctx.clearCookies();
+    const p = ctx.pages()[0] ?? await ctx.newPage();
+    const cdp = await ctx.newCDPSession(p);
+    for (const origin of [WEB, API]) await cdp.send('Storage.clearDataForOrigin', { origin, storageTypes: 'all' });
+    await cdp.detach();
+    await use(ctx);
+    await ctx.close();
+  },
+  // P3: dùng tab có sẵn của context Android (tab mới mở thêm có thể nằm nền → chụp ảnh/hiển thị không chạy)
+  page: async ({ context, androidDevice }, use) => {
+    await use(androidDevice ? (context.pages()[0] ?? await context.newPage()) : await context.newPage());
+  },
+});
 export { expect };
 
 // ---------------- ghi quan sát / ảnh ----------------

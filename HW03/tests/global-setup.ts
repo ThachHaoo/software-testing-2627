@@ -7,13 +7,19 @@
 import fs from 'fs';
 import path from 'path';
 import { request } from '@playwright/test';
+import { _android } from 'playwright';
 import { API, WEB, ADMIN, USER, EVIDENCE_DIR } from './lib';
 
 const HINT = '→ Khởi động lại backend (cd ..\\eshop-sut\\backend; node server.js) để CSDL seed sạch, chạy web (cd ..\\eshop-sut\\frontend-web; npx vite --host 127.0.0.1 --port 5173), rồi chạy lại.';
 
 export default async function globalSetup() {
   const projects = process.argv.flatMap((a, i, all) => a === '--project' ? [all[i + 1]] : a.startsWith('--project=') ? [a.slice(10)] : []);
-  if (projects.length !== 1) throw new Error('[global-setup] Chạy đúng MỘT nền tảng mỗi lượt: --project=P1 hoặc --project=P2 (restart backend giữa hai lượt).');
+  if (projects.length !== 1) throw new Error('[global-setup] Chạy đúng MỘT nền tảng mỗi lượt: --project=P1, P2 hoặc P3 (restart backend giữa các lượt).');
+  if (projects[0] === 'P3') {
+    const devs = await _android.devices().catch((e: Error) => { throw new Error(`[global-setup] P3: không nối được adb server (${e.message}) — chạy D:\\Tools\\platform-tools\\adb.exe devices.`); });
+    if (!devs.length) throw new Error('[global-setup] P3: adb không thấy thiết bị — cắm cáp, bật USB debugging; rồi adb reverse tcp:5173 tcp:5173 và tcp:3000 tcp:3000.');
+    await Promise.all(devs.map(d => d.close()));
+  }
   const ctx = await request.newContext();
   const fail = (m: string): never => { throw new Error(`[global-setup] ${m}\n${HINT}`); };
   try {

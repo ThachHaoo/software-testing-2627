@@ -33,7 +33,7 @@ def screen(it):
 
 
 def look(it, P):
-    if P == "P3" or it.get("che_do") == "manual" or (it.get("auto_nen_tang") and P not in it["auto_nen_tang"]):
+    if it.get("che_do") == "manual" or (it.get("auto_nen_tang") and P not in it["auto_nen_tang"]):
         return it["expected"]
     return f"Phần chạy tay: {it.get('che_do_ghi_chu', '')}. Phần tự động: xem `runs/{P}_auto_*.json`."
 
@@ -43,9 +43,7 @@ def rows(P):
     for it in items:
         if P not in it.get("nen_tang", []):
             continue
-        if P == "P3":
-            sel.append(it)
-        elif it.get("che_do") in ("manual", "mixed") or (it.get("auto_nen_tang") and P not in it["auto_nen_tang"]):
+        if it.get("che_do") in ("manual", "mixed") or (it.get("auto_nen_tang") and P not in it["auto_nen_tang"]):
             sel.append(it)
     return sel
 
@@ -82,7 +80,7 @@ def table(P, sel):
 md = [
     "# RUN – chạy tay checklist C2 (T1 bước 3, sinh bằng `HW03/tests/gen_run.py`)",
     "",
-    f"Nguồn: `checklist.json` ({doc['meta'].get('version', '')}); {len(items)} item. Phần tự động (Playwright, P1 Chrome + P2 Firefox của Playwright) chạy trước, ghi `auto_status`; **verdict chính thức = lượt chạy tay trên trình duyệt thật** (report_plan E2). Expected không đổi; procedure sai → sửa RUN.md trước khi chạy.",
+    f"Nguồn: `checklist.json` ({doc['meta'].get('version', '')}); {len(items)} item. Phần tự động (Playwright, P1 Chrome + P2 Firefox của Playwright + P3 Chrome Android thật qua `_android`) chạy trước, ghi `auto_status`; **verdict chính thức = lượt chạy tay trên trình duyệt thật** (report_plan E2). Expected không đổi; procedure sai → sửa RUN.md trước khi chạy.",
     "",
     "## 1. Mỗi nền tảng = 1 lượt",
     "",
@@ -102,7 +100,9 @@ md = [
     "D:\\Tools\\platform-tools\\adb.exe reverse --list",
     "```",
     "",
-    "Mở `http://localhost:5173` trên Chrome điện thoại. Item cần DOM/đo (h1, type, toạ độ, màu…): PC mở `chrome://inspect` → *inspect* tab của điện thoại → Console, dán `HW03/checklist/dom_probe.js`, chép JSON vào file kết quả. Rút cáp / restart adb → chạy lại 2 lệnh `reverse`.",
+    "Lượt auto P3: `npx playwright test --project=P3` trong `HW03/tests` (Playwright `_android`; cần adb server đang chạy, điện thoại mở khoá, flag Chrome *Enable command line on non-rooted devices* bật). Playwright sẽ đóng rồi mở lại Chrome trên máy, xoá cookie/storage của `localhost:5173` và `localhost:3000` trước mỗi test.",
+    "",
+    "Chạy tay P3: mở `http://localhost:5173` trên Chrome điện thoại. Item cần DOM/đo (h1, type, toạ độ, màu…): PC mở `chrome://inspect` → *inspect* tab của điện thoại → Console, dán `HW03/checklist/dom_probe.js`, chép JSON vào file kết quả. Rút cáp / restart adb → chạy lại 2 lệnh `reverse`.",
     "",
     "## 2. Ảnh",
     "",

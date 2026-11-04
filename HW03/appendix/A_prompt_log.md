@@ -545,7 +545,7 @@ on_stop.py --manual. Báo cáo ≤ 12 dòng. Nhắc tôi push.
 ```
 
 **Output:**
-```
+````
 Đang dựng harness Playwright; đọc API đổi trạng thái đơn để dựng dữ liệu.
 
 Còn chặn: máy không có Chrome/Firefox cài sẵn (chỉ Cốc Cốc) — ghi vào báo cáo, vẫn dựng harness. Viết cấu hình Playwright.
@@ -563,11 +563,156 @@ Gán `che_do` vào checklist.json + vá merge_platform cho file lượt `kind: a
 Generate oracle, npm install, `--list`.
 
 Harness Playwright list OK (142 = 71×2). Giờ RUN.md + mẫu ghi kết quả + script dựng đơn cho lượt tay.
+
+Đã dựng xong phần chạy tự động (Playwright cho P1/P2) và RUN.md cho phần chạy tay. Mới chạy `--list`, chưa chạy lượt thật. Có một chỗ chặn: máy chưa cài Google Chrome và Firefox, chỉ thấy Cốc Cốc.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** HW03[T1] 3/6 – Playwright P1/P2 + RUN.md. Không sửa `expected`; `check_checklist` 0 lỗi, 0 cảnh báo.
+- **Phân loại `che_do` (74 item):**
+
+  | Chế độ | Số item |
+  |---|---|
+  | auto | 59 |
+  | mixed | 12 |
+  | manual | 3 (CL-01, CL-52, CL-64) |
+
+  - Firefox của Playwright không giả lập được mạng chậm và không cấp quyền clipboard, nên CL-53, CL-63, SV-02 chỉ chạy tự động trên P1; trên P2 chạy tay.
+- **Playwright – `HW03/tests/`:**
+  - Một test cho mỗi item auto/mixed: 71 test × 2 nền tảng = 142.
+  - Ngưỡng đo nằm ở `oracle.src.json`; `oracle.ts` sinh từ đó, khoá bằng sha1 của `expected` như HW02. Hai ngưỡng màu không có số trong Expected (CL-04 xanh dương, CL-05 đỏ) em tự đặt theo dải hue và ghi lý do — bạn duyệt.
+  - Dữ liệu: CL-62 chạy đầu khi tài khoản chưa có đơn; ngay sau đó dựng 7 đơn qua API (đủ 5 trạng thái + 2 đơn chờ để thử huỷ).
+  - Kết quả mỗi lượt ghi vào `checklist/runs/<P>_auto_<ts>.json` (`auto_status`), ảnh vào `evidence/auto/`. `merge_platform.py` đã sửa để file lượt tự động chỉ ghi `auto_status`, không đụng `ket_qua`.
+- **RUN.md** (sinh bằng `gen_run.py`): xếp theo màn hình — Bước A (CL-62) → dựng đơn → M1…M6 → cuối lượt (CL-52, CL-64).
+  - Số item chạy tay: P1 15, P2 15, P3 70.
+  - Có lệnh adb + `chrome://inspect` cho P3, quy tắc ảnh/overlay, cảnh báo khoá tài khoản.
+  - Kèm `dom_probe.js`, `seed_orders.py` (dựng đơn, đặt lại mật khẩu) và 3 mẫu `runs/P{1,2,3}_manual_TEMPLATE.md`.
+- **Bất thường:**
+  - Backend: mỗi lần sai mật khẩu bộ đếm tăng 2 (`server.js:54`) và khoá 180 giây (`server.js:57`), trong khi SRS ghi tăng 1 và khoá 30 giây. Hệ quả: sai 2 lần là bị khoá; script tự đăng nhập đúng ngay sau mỗi lần sai để tránh.
+  - Môi trường: không thấy Google Chrome và Firefox (đã tìm đường dẫn cài đặt, registry, Start Menu). Playwright mới có sẵn chromium-1140, chưa có bản Firefox.
+- **Kết quả kiểm tra:** `npx playwright test --list` → 142 test, chưa chạy lượt thật.
+- **Commit:** `07982fc HW03[T1] 3/6: Playwright P1/P2 + RUN.md` (gồm prompt log 13 lượt).
+- **Cần quyết định:** C1 – P1 cần Google Chrome thật. (a) Bạn tự cài Chrome; (b) dùng `npx playwright install chrome` (cài Chrome chính thức, cần quyền admin). Firefox: cài bản thật cho lượt chạy tay P2, còn lượt tự động dùng `npx playwright install firefox`.
+
+Lệnh chạy, mỗi nền tảng một lượt, restart backend trước mỗi lượt:
+
+```powershell
+cd HW03\tests
+npx playwright install firefox          # một lần, bản build Firefox của Playwright
+# P1: restart backend (CSDL seed) rồi:
+npx playwright test --project=P1
+python ..\..\.claude\skills\gui-checklist-testing\scripts\merge_platform.py ..\checklist\checklist.json (Get-ChildItem ..\checklist\runs\P1_auto_*.json | Sort LastWriteTime | Select -Last 1).FullName --platform P1 --dry-run
+# P2: restart backend lần nữa rồi:
+npx playwright test --project=P2
 ```
+
+Bạn tự push (`git push`).
+````
 *File AI ghi/gửi trong lượt này:* `package.json`, `playwright.config.ts`, `global-setup.ts`, `lib.ts`, `oracle.src.json`, `gen_oracle.py`, `C2.spec.ts`, `reporter.ts`, `seed_orders.py`, `gen_run.py`
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 13 lượt; Claude Opus 5.5 13 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13).
+## #14 | 20:27 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Ghi nhớ những cái đang chạy. Tắt giúp mình để mình chạy về phòng. Rồi mình sẽ bảo bạn bật lại nhé
+```
+
+**Output:**
+```
+Em đã tắt hết, không còn tiến trình `node` hay `adb` nào chạy; bạn mang máy đi được.
+
+Lúc tắt có:
+- backend `:3000`;
+- web vite `:5173`;
+- adb server, với 2 cổng 5173 và 3000 đang nối sang POCO F5 (`da87b223`).
+
+Em đã gỡ 2 cổng đó trước khi tắt adb.
+
+Em đã ghi vào bộ nhớ danh sách này, cách bật lại, và việc HW03 đang chờ: bạn cài Chrome/Firefox (C1) rồi chạy Playwright cho P1/P2. Khi bạn nói "bật lại", em chạy lại backend và vite, rồi `adb devices` và 2 lệnh `adb reverse`. Lúc đó cắm cáp điện thoại và để USB debugging bật.
+
+Backend khởi động lại sẽ seed lại CSDL, nên dữ liệu thử cũ sẽ mất (vốn không cần giữ). Mọi thay đổi đã commit (`07982fc`); nhớ `git push`.
+```
+*File AI ghi/gửi trong lượt này:* `hw03-runtime-state.md`
+
+**Xử lý:** [...]
+
+---
+
+## #15 | 02:03 05/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+bật lại nhé
+```
+
+**Output:**
+```
+Bật lại xong, đủ như lúc tắt:
+- **Backend** đang chạy ở `:3000`. CSDL vừa seed lại, nên đúng là trạng thái cần có trước lượt Playwright.
+- **Web** đang chạy ở `127.0.0.1:5173`.
+- **Điện thoại**: adb thấy `da87b223 device`, hai cổng `5173` và `3000` đã nối sang máy.
+
+Việc tiếp theo bên bạn vẫn là C1: cài Chrome và Firefox, rồi chạy `npx playwright test --project=P1` trong `HW03\tests`. Restart backend trước mỗi lượt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #16 | 02:17 05/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – bật lại + chuẩn bị chạy (commit "HW03[T1] 3/6b: C1, H1, P3A"):
+1. Bật lại backend + vite (--host 127.0.0.1) + adb devices + adb reverse 2 cổng.
+2. C1: Chrome 157 đã cài lại ở C:\Program Files\Google\Chrome\Application\chrome.exe (dùng channel "chrome"); Firefox thật đã cài cho chạy tay P2; npx playwright install firefox cho lượt auto. Chạy --list lại. Ghi phiên bản Chrome/Firefox/Firefox-Playwright vào HW03/env/environment.md (không ghi đường dẫn có tên người dùng Windows).
+3. H1: CL-04 hue 190–250, CL-05 hue 340–20, sat ≥ 0,3 — SV chốt ("nhìn thấy đúng xanh dương/đỏ là được"); ghi review_log + report_plan mục e.
+4. report_plan mục f: "AI phát hiện khi đọc code: login_attempts +2 (server.js:54), khoá 180 s (server.js:57) ≠ FR-02 – chờ CL-52 chạy tay"; kiểm trùng issue FR-02 trong issues.json → in kết quả.
+5. P3A (giới hạn 15 phút): thử Playwright _android với POCO (flag "Enable command line on non-rooted devices" đã bật); được → thêm project P3 chạy item auto, cập nhật RUN.md (P3 chỉ còn manual/mixed); không được → báo lỗi nguyên văn, giữ P3 chạy tay.
+on_stop.py --manual. Báo cáo ≤ 10 dòng.
+```
+
+**Output:**
+```
+Đã có version. Giờ ghi environment.md, rồi H1, mục f, kiểm issue, thử P3A.
+
+Ngưỡng H1 đã khớp oracle.src.json. Chỉ ghi review_log + report_plan.
+
+Kiểm trùng FR-02: tải lại issue kèm body để quét đủ.
+
+Trùng nhiều: #1, #2, #3 khớp đúng finding. Ghi vào file, rồi thử P3A.
+
+Giờ thử P3A (Playwright `_android`, giới hạn 15 phút).
+
+P3A chạy được. Xem config/fixture để thêm project P3.
+
+P3A chạy được (kết nối 5,7 s). Thêm project P3 vào harness.
+
+Giờ sửa lib.ts (fixture P3), global-setup, reporter, config.
+
+Giờ gen_run.py: P3 chỉ còn manual/mixed.
+
+213 test (71 × 3). Smoke 1 test đọc-only (CL-03) trên P3 để kiểm fixture, xong xoá file kết quả.
+
+Fixture chạy được trên máy thật. Nhưng reporter ghi 0 item và lượt chạy mất 1,1 phút. Đang xem log đầy đủ.
+
+P1 cũng ghi 0 item. Đây là lỗi có sẵn của reporter, không riêng P3. Đang debug.
+
+Reporter đã sửa xong: nguyên nhân là `r.annotations` chưa có ở Playwright 1.48. Còn lỗi ảnh phần tử trên P3: chụp không ra file và không báo lỗi. Đang kiểm.
+
+Script lẻ chạy nhanh, ảnh phần tử chụp được. Nghi do fixture `page` mặc định mở tab mới trên Android. Sửa để P3 dùng tab sẵn có.
+
+Đã sửa: smoke P3 chạy 4 s, ảnh và reporter đều đúng. Kiểm thêm cổng N/A (CL-10 trên P3) rồi dọn file smoke.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 16 lượt; Claude Opus 5.5 16 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16).

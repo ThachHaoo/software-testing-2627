@@ -78,6 +78,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | X1 | (a) Cài `openpyxl` cho Python các script dùng (`C:\msys64\ucrt64\bin\python.exe` 3.14; Python này không có pip → `pacman -S mingw-w64-ucrt-x86_64-python-openpyxl`) → `build_excel.py` chạy được |
 | X2 | (a) `HW03/CLAUDE.md` không nộp: `export-ignore` trong `HW03/.gitattributes` |
 | E2 | (b) Playwright tự chạy các item kiểm được qua DOM/bàn phím trên P1 (Chrome channel) + P2 (Firefox của Playwright) → `auto_status`; SV chạy tay phần còn lại + toàn bộ P3. **Verdict chính thức = lượt trên trình duyệt thật** |
+| H1 | Ngưỡng màu cho auto: CL-04 xanh dương = hue 190–250°, CL-05 đỏ = hue 340–20°, độ bão hoà ≥ 0,3 (SV: "nhìn thấy đúng xanh dương/đỏ là được"); expected không đổi |
 
 **Còn chờ SV chốt:** (không còn)
 
@@ -86,6 +87,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 04/11 phiên thảo luận: đọc đề + slide, lập bảng form, đề xuất chia C1/C2/C3 + U1–U4 cho nhóm, tin nhắn mời người tham gia (AI nháp), hướng dẫn bật Gỡ lỗi USB, lệnh kiểm chứng P3.
 - 04/11 Claude Code: tải platform-tools (SV đồng ý), chạy backend/web, `adb reverse`, liệt kê issue nhóm (158).
 - AI phát hiện khi kiểm luồng U1: SAVE10 tính sai (server.js:400), ngưỡng dùng > thay vì >= (server.js:379) – chưa quyết lập bug.
+- AI phát hiện khi đọc code: login_attempts +2 (server.js:54), khoá 180 s (server.js:57) ≠ FR-02 – chờ CL-52 chạy tay. Kiểm trùng: đã có #1, #2, #3 (`checklist/issue_dup_FR02.md`).
+- 05/11 Claude Code: cài Firefox của Playwright (131.0), thêm project P3 (Playwright `_android`) vào harness; sửa lỗi reporter.ts ghi 0 item (`TestResult.annotations` chưa có ở 1.48) – phát hiện khi smoke CL-03.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
