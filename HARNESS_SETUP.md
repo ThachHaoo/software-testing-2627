@@ -61,3 +61,19 @@ Sau mỗi bước: đọc `HW02/A_FR01/testcases.md`, sửa nếu cần, rồi b
 
 Ghi chú prompt log: mở `HW02/appendix/prompt_log_notes.toml`, xem số lượt bằng
 `python tools/extract_prompt_log.py .transcripts/*.jsonl --since 2026-10-12 --list`, ghi Section/Mục đích/Xử lý. Log tự cập nhật sau mỗi lượt.
+
+## 6. Bắt đầu bài mới (HWxx) – checklist
+
+Làm trong commit đầu của bài (`HWxx: khung bài …`), trước lượt AI đầu tiên của bài.
+
+1. **`tools/hw.toml`**: `hw = "HWxx"`, `title`, `log`/`notes`/`extra` → `HWxx/appendix/…`; cấu hình bài cũ giữ dạng comment.
+   - `since` **theo giờ** (`"YYYY-MM-DD HH:MM"`, giờ Asia/Saigon) = lượt đầu của bài mới, không theo ngày (cùng ngày có thể còn lượt kết thúc bài cũ).
+   - Lượt bài cũ vẫn lọt sau mốc → thêm vào `exclude` (khoá giờ như notes: `"YYYY-MM-DD HH:MM"`, `"…#k"`, khoảng `"A .. B"`).
+   - Kiểm: `python tools/extract_prompt_log.py ".transcripts/*.jsonl" --since "<mốc>" --list`; chạy lại cho bài cũ với `--since/--until` cũ → số lượt không đổi.
+   - Tạo `HWxx/appendix/prompt_log_notes.toml` và `prompt_log_extra.toml` (chỉ phần hướng dẫn).
+2. **`.claude/settings.json`**: thêm 4 luật deny `Edit`/`Write` cho `/HWxx/appendix/ai-outputs/**` và `/HWxx/appendix/A_prompt_log.md`; kiểm hook **Stop** còn bật (`/hooks`).
+3. **`HWxx/CLAUDE.md`** (≤ 120 dòng): đề, rubric, phạm vi, môi trường riêng, quyết định (hoặc trỏ tới `report_plan.md`), giới hạn riêng của bài, quy trình + mẫu commit. Cập nhật bảng bài ở đầu `CLAUDE.md` gốc. Phần chung chỉ sửa ở `CLAUDE.md` gốc.
+4. **Đề + slide**: `context/HWxx_assignment.md` (pdftotext từ PDF đề); slide → `context/private/` (gitignore, không commit).
+5. **`HWxx/.gitattributes`**: file không nộp (vd `report_plan.md`) → `export-ignore`; thử `git archive --format=zip -o <tmp>.zip HEAD HWxx` rồi liệt kê để chắc file đó không có trong zip.
+6. **Transcript phiên thảo luận claude.ai** của bài: tải về, đặt `.transcripts/claude-ai_session_<HW>_p1.jsonl` (phần tiếp theo `_p2`, `_p3`…); không push, không nộp.
+7. `python tools/hooks/on_stop.py --manual` → commit prompt log; nhắc SV push.
