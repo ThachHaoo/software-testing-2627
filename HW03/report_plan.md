@@ -26,18 +26,19 @@ Câu tuyên bố nguyên văn: *"I use AI tools for the following tasks,"*. Mẫ
 
 ## c. Danh sách nộp (đề §14) – trạng thái
 
-| # | Mục | Đường dẫn dự kiến | Trạng thái |
-|---|---|---|---|
-| 1 | Report chính (.md + PDF): checklist report + usability report | `23120255_HW03_Report.md/.pdf` | THIẾU |
-| 2 | Bug report + ảnh trang GitHub Issues | `bugs/BUG-58…md`, `bugs/issues_page_HW03.png` | THIẾU |
-| 3 | AI Critique (200–300 từ) + Audit (.md + PDF) | report §Critique; `ai-forms/AI-02…` | THIẾU |
-| 4 | Commit log (text) | `commit_log.txt` | THIẾU |
-| 5 | Excel checklist (> 40 item) + test summary | `excel/23120255_HW03_Checklist.xlsx` | THIẾU |
-| 6 | Bằng chứng usability: kịch bản, ghi chú quan sát, SUS, findings xếp hạng, video (nếu có), bảng 7 người | `usability/…` | THIẾU |
-| 7 | Ảnh cross-platform (có overlay) | `checklist/evidence/P1_chrome`, `P2_firefox`, `P3_android` | THIẾU |
-| 8 | README.md: tự đánh giá + test summary (số màn/flow, item thiết kế/chạy/Pass/Fail, số bug, số người, link video) | `README.md` | THIẾU |
-| 9 | Skill + video demo (YouTube) | `skills/…`, `skills/VideoLinks.md` | THIẾU |
-| 10 | Prompt log | `appendix/A_prompt_log.md` | THIẾU (đổi `tools/hw.toml` sang HW03) |
+| # | Mục | Đường dẫn dự kiến | Trạng thái | Nộp? |
+|---|---|---|---|---|
+| 1 | Report chính (.md + PDF): checklist report + usability report | `23120255_HW03_Report.md/.pdf` | THIẾU | Có |
+| 2 | Bug report + ảnh trang GitHub Issues | `bugs/BUG-58…md`, `bugs/issues_page_HW03.png` | THIẾU | Có |
+| 3 | AI Critique (200–300 từ) + Audit (.md + PDF) | report §Critique; `ai-forms/AI-02…` | THIẾU | Có |
+| 4 | Commit log (text) | `commit_log.txt` | THIẾU | Có |
+| 5 | Excel checklist (> 40 item) + test summary | `excel/23120255_HW03_Checklist.xlsx` | THIẾU | Có |
+| 6 | Bằng chứng usability: kịch bản, ghi chú quan sát, SUS, findings xếp hạng, video (nếu có), bảng 7 người | `usability/…` | THIẾU | Có |
+| 7 | Ảnh cross-platform (có overlay) | `checklist/evidence/P1_chrome`, `P2_firefox`, `P3_android` | THIẾU | Có |
+| 8 | README.md: tự đánh giá + test summary (số màn/flow, item thiết kế/chạy/Pass/Fail, số bug, số người, link video) | `README.md` | THIẾU | Có |
+| 9 | Skill + video demo (YouTube) | `skills/…`, `skills/VideoLinks.md` | THIẾU | Có |
+| 10 | Prompt log | `appendix/A_prompt_log.md` | THIẾU (đổi `tools/hw.toml` sang HW03) | Có |
+| — | Kế hoạch nộp bài (file này) | `report_plan.md` | — | Không (`HW03/.gitattributes`: export-ignore) |
 
 Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<ggg>.zip`, đóng gói bằng `git archive` (như HW02 R2).
 
@@ -73,6 +74,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | E1 | Excel **mới** `excel/23120255_HW03_Checklist.xlsx`, 3 sheet như HW01 (Test Cases / Checklist / Test Summary Report) |
 | O1 | Overlay: `23120255 · Lê Tấn Hiệp · 23120255@student.hcmus.edu.vn`. PC = cửa sổ Sticky Notes + chụp toàn màn hình (thấy tên trình duyệt + URL); điện thoại = thêm chữ bằng trình sửa ảnh của máy ngay sau khi chụp |
 | T | Thang: **SUS** (10 câu tiếng Việt) + **SEQ** (1 câu sau nhiệm vụ); bộ câu hỏi tối giản vì có người non-IT |
+| K1 | Mã giảm giá trong nhiệm vụ U1 = **VIP100** (a). Lý do: usability đo thiết kế, không để bug tính tiền đã biết (SAVE10) làm nhiễu SUS |
 
 **Còn chờ SV chốt:** (không còn)
 
@@ -80,6 +82,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 
 - 04/11 phiên thảo luận: đọc đề + slide, lập bảng form, đề xuất chia C1/C2/C3 + U1–U4 cho nhóm, tin nhắn mời người tham gia (AI nháp), hướng dẫn bật Gỡ lỗi USB, lệnh kiểm chứng P3.
 - 04/11 Claude Code: tải platform-tools (SV đồng ý), chạy backend/web, `adb reverse`, liệt kê issue nhóm (158).
+- AI phát hiện khi kiểm luồng U1: SAVE10 tính sai (server.js:400), ngưỡng dùng > thay vì >= (server.js:379) – chưa quyết lập bug.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)

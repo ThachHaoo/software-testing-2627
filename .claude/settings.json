@@ -24,7 +24,27 @@
       "Edit(/HW02/appendix/ai-outputs/**)",
       "Write(/HW02/appendix/ai-outputs/**)",
       "Edit(/HW02/appendix/A_prompt_log.md)",
-      "Write(/HW02/appendix/A_prompt_log.md)"
+      "Write(/HW02/appendix/A_prompt_log.md)",
+      "Edit(/HW03/appendix/ai-outputs/**)",
+      "Write(/HW03/appendix/ai-outputs/**)",
+      "Edit(/HW03/appendix/A_prompt_log.md)",
+      "Write(/HW03/appendix/A_prompt_log.md)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/tools/hooks/on_stop.py"
+            ],
+            "timeout": 60
+          }
+        ]
+      }
     ]
   }
 }
