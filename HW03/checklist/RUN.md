@@ -4,7 +4,7 @@ Nguồn: `checklist.json` (v2 – chốt sau review SV); 74 item. Phần tự đ
 
 ## 1. Mỗi nền tảng = 1 lượt
 
-1. Restart backend: dừng `node server.js` rồi `cd ..\eshop-sut\backend; node server.js` (CSDL seed lại). Web: `cd ..\eshop-sut\frontend-web; npx vite --host 127.0.0.1 --port 5173`.
+1. Restart backend (CSDL seed lại): ở gốc repo chạy `powershell -ExecutionPolicy Bypass -File tools\restart_backend.ps1` (in "backend restart xong: N sản phẩm"). Lượt auto: `npm run p1` / `p2` / `p3` trong `HW03/tests` (đã gồm restart). Web: `cd ..\eshop-sut\frontend-web; npx vite --host 127.0.0.1 --port 5173`.
 2. Ghi phiên bản trình duyệt + OS (+ máy) vào đầu file kết quả.
 3. Làm Bước A → Bước B → M1…M6 → Cuối lượt, theo bảng của nền tảng đó (mục 4).
 4. Item đổi mật khẩu (CL-27, CL-29, CL-48, SV-06): xong thì `python HW03/tests/seed_orders.py --restore-password`.
@@ -45,7 +45,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 |---|---|---|---|---|---|
 | ☐ | CL-62 | Lịch sử đơn | Empty state có hình minh hoạ và thông báo thân thiện | Backend vừa restart (test@eshop.com chưa có đơn). | Phần chạy tay: auto: có img/svg/icon trong khu lịch sử đơn + có câu thông báo; 'thân thiện' → SV. Phần tự động: xem `runs/P1_auto_*.json`. |
 
-**Bước B – dựng đơn:** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.
+**Bước B – dựng đơn (lượt cần đơn, ngay sau restart + Bước A):** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.
 
 #### M1 – Đăng nhập · ảnh tổng quan bắt buộc: `P1_M1_1.png`
 
@@ -99,7 +99,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 |---|---|---|---|---|---|
 | ☐ | CL-62 | Lịch sử đơn | Empty state có hình minh hoạ và thông báo thân thiện | Backend vừa restart (test@eshop.com chưa có đơn). | Phần chạy tay: auto: có img/svg/icon trong khu lịch sử đơn + có câu thông báo; 'thân thiện' → SV. Phần tự động: xem `runs/P2_auto_*.json`. |
 
-**Bước B – dựng đơn:** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.
+**Bước B – dựng đơn (lượt cần đơn, ngay sau restart + Bước A):** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.
 
 #### M1 – Đăng nhập · ảnh tổng quan bắt buộc: `P2_M1_1.png`
 
@@ -153,7 +153,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 |---|---|---|---|---|---|
 | ☐ | CL-62 | Lịch sử đơn | Empty state có hình minh hoạ và thông báo thân thiện | Backend vừa restart (test@eshop.com chưa có đơn). | Phần chạy tay: auto: có img/svg/icon trong khu lịch sử đơn + có câu thông báo; 'thân thiện' → SV. Phần tự động: xem `runs/P3_auto_*.json`. |
 
-**Bước B – dựng đơn:** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.
+**Bước B – dựng đơn (lượt cần đơn, ngay sau restart + Bước A):** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.
 
 #### M1 – Đăng nhập · ảnh tổng quan bắt buộc: `P3_M1_1.png`
 

@@ -79,6 +79,12 @@
         "ma": "P3A",
         "noi_dung": "Playwright _android chạy được với POCO F5 (Chrome 156): thêm project P3 cho item auto; P3 chạy tay chỉ còn manual/mixed + item auto_nen_tang không có P3 (13 item). Item ngoài nen_tang (NA1) bỏ qua, không ghi.",
         "ket_luan": "SV chốt (lệnh 3/6b)"
+      },
+      {
+        "ngay": "2026-11-05",
+        "ma": "R2",
+        "noi_dung": "Tiền điều kiện CL-58, CL-59 → 'Sau restart backend, chạy seed_orders.py để có đủ đơn 5 trạng thái' (bỏ 'dựng một lần dùng chung 3 nền tảng, không restart'); expected không đổi.",
+        "ket_luan": "SV chốt"
       }
     ]
   },
@@ -1164,7 +1170,7 @@
         "P2",
         "P3"
       ],
-      "tien_dieu_kien": "Dựng một lần, dùng chung cho cả 3 nền tảng: đặt 5 đơn bằng test@eshop.com; dùng admin (:5174, admin@eshop.com) chuyển trạng thái để có đủ Chờ xác nhận, Đã xác nhận, Đang giao, Đã giao, Đã hủy. Không restart backend cho tới khi chạy xong CL-58, CL-59 trên P1, P2, P3.",
+      "tien_dieu_kien": "Sau restart backend, chạy seed_orders.py để có đủ đơn 5 trạng thái",
       "nguon": "Both",
       "che_do": "auto"
     },
@@ -1182,7 +1188,7 @@
         "P2",
         "P3"
       ],
-      "tien_dieu_kien": "Dùng chung bộ đơn 5 trạng thái của CL-58.",
+      "tien_dieu_kien": "Sau restart backend, chạy seed_orders.py để có đủ đơn 5 trạng thái",
       "nguon": "Both",
       "che_do": "auto"
     },

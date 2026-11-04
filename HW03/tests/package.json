@@ -3,7 +3,10 @@
   "private": true,
   "scripts": {
     "test": "playwright test",
-    "list": "playwright test --list"
+    "list": "playwright test --list",
+    "p1": "powershell -ExecutionPolicy Bypass -File ../../tools/restart_backend.ps1 && playwright test --project=P1",
+    "p2": "powershell -ExecutionPolicy Bypass -File ../../tools/restart_backend.ps1 && playwright test --project=P2",
+    "p3": "powershell -ExecutionPolicy Bypass -File ../../tools/restart_backend.ps1 && playwright test --project=P3"
   },
   "devDependencies": {
     "@playwright/test": "1.48.2"

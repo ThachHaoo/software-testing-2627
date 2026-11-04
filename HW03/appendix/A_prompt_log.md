@@ -1,5 +1,5 @@
 # Prompt Log – HW03
-**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude Opus 5.5
+**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Công cụ AI:** Claude (không rõ model), Claude Opus 5.5
 
 > Prompt và output được trích tự động, nguyên văn, từ transcript của công cụ AI bằng script `tools/extract_prompt_log.py` (không qua AI). Section, Mục đích và Xử lý do em tự ghi.
 
@@ -709,10 +709,67 @@ Reporter đã sửa xong: nguyên nhân là `r.annotations` chưa có ở Playwr
 Script lẻ chạy nhanh, ảnh phần tử chụp được. Nghi do fixture `page` mặc định mở tab mới trên Android. Sửa để P3 dùng tab sẵn có.
 
 Đã sửa: smoke P3 chạy 4 s, ảnh và reporter đều đúng. Kiểm thêm cổng N/A (CL-10 trên P3) rồi dọn file smoke.
+
+Thêm 1 dòng log P3A rồi commit.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** 3/6b xong, commit `1172c20 HW03[T1] 3/6b: C1, H1, P3A`. Backend :3000 và vite :5173 đang chạy, CSDL sạch (test@eshop.com chưa có đơn). adb thấy `da87b223 device`, đã reverse 2 cổng.
+- **C1:** `HW03/env/environment.md` có Chrome 157.0.8103.39, Firefox thật 159.0.1, Firefox của Playwright 131.0, Chrome Android 156.0.8078.79. `--list` ra 213 test (71 × P1/P2/P3).
+- **H1:** ngưỡng trong `oracle.src.json` vốn đã đúng H1, không phải đổi. Đã ghi review_log và thêm dòng H1 vào report_plan mục e.
+- **Mục f:** đã ghi. Kiểm 158 issue: lỗi đếm +2 và khoá 180 s **đã có #1, #2, #3**. Các issue FR-02 khác (#4–#9, #62–#64) liệt kê ở `HW03/checklist/issue_dup_FR02.md`.
+- **P3A:** chạy được. Đã thêm project P3; P3 chạy tay giờ còn 13 item (RUN.md và template đã sinh lại). Item N/A theo NA1 tự bỏ qua, không ghi vào kết quả. Chrome trên máy bị đóng/mở lại và xoá storage của localhost:5173/3000 trước mỗi test.
+- **Bất thường harness (đã sửa):**
+  - `tests/reporter.ts:24` ghi 0 item trên cả P1 lẫn P2 vì Playwright 1.48 chưa có `TestResult.annotations`. Không sửa thì lượt auto chạy thật sẽ ra JSON rỗng.
+  - P3: fixture page mặc định mở tab mới trên điện thoại, làm ảnh phần tử chụp hỏng mà không báo lỗi. Đã đổi sang dùng tab sẵn có.
+- **Kiểm tra:** check_checklist 0 lỗi. Chạy thử CL-03 (chỉ đọc) trên P3 và P1 để kiểm fixture/reporter, đã xoá file kết quả và ảnh của lượt thử. Lượt thật: Not run (SV chạy).
+- **Cần quyết định:** không. Bước kế tiếp của SV: restart backend rồi chạy `npx playwright test --project=P1`, lặp lại cho P2 và P3, sau đó push.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 16 lượt; Claude Opus 5.5 16 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16).
+## #17 | 02:31 05/11/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+──
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #18 | 02:31 05/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – R1, R2 (commit "HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều kiện CL-58/59"):
+1. Chép HW02/bugs/_repro_C_FR15/7c/restart_backend.ps1 → tools/restart_backend.ps1 (giữ nguyên bản HW02). Tắt backend nền của phiên này.
+2. HW03/tests/package.json thêm script: "p1"/"p2"/"p3" = restart_backend.ps1 rồi playwright test --project=Px (powershell -ExecutionPolicy Bypass -File ../../tools/restart_backend.ps1 && …).
+3. RUN.md (sửa gen_run.py rồi sinh lại): bước restart = `powershell -ExecutionPolicy Bypass -File tools\restart_backend.ps1`; sau restart chạy seed_orders.py khi lượt cần đơn.
+4. R2: tiền điều kiện CL-58, CL-59 trong checklist.json → "Sau restart backend, chạy seed_orders.py để có đủ đơn 5 trạng thái" (expected không đổi); review_log ghi R2 "SV chốt".
+5. Chạy thử restart_backend.ps1 một lần, in kết quả. on_stop.py --manual. Báo cáo ≤ 6 dòng.
+```
+
+**Output:**
+```
+Backend nền đã tắt. Giờ sửa package.json, gen_run.py, CL-58/59.
+
+package.json và checklist.json đã ghi. gen_run.py sửa bằng Edit.
+
+Chạy thử restart_backend.ps1.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 18 lượt; Claude Opus 5.5 17 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18); Claude (không rõ model) 1 lượt (#17).

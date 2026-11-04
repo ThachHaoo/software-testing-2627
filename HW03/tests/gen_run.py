@@ -68,7 +68,7 @@ def table(P, sel):
             out.append(f"| ☐ | {it['id']} | {cell(it['man_hinh'])} | {cell(it['muc_kiem_tra'])} | {cell(it.get('tien_dieu_kien', ''))} | {cell(look(it, P))} |")
         out.append("")
     block("Bước A – ngay sau khi restart backend (tài khoản chưa có đơn)", first)
-    out.append(f"**Bước B – dựng đơn:** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.\n")
+    out.append(f"**Bước B – dựng đơn (lượt cần đơn, ngay sau restart + Bước A):** `python HW03/tests/seed_orders.py` → ghi lại bảng mã đơn ↔ trạng thái vào file kết quả.\n")
     for code, name in SCREENS:
         its = [i for i in mid if screen(i) == code]
         if its:
@@ -84,7 +84,7 @@ md = [
     "",
     "## 1. Mỗi nền tảng = 1 lượt",
     "",
-    "1. Restart backend: dừng `node server.js` rồi `cd ..\\eshop-sut\\backend; node server.js` (CSDL seed lại). Web: `cd ..\\eshop-sut\\frontend-web; npx vite --host 127.0.0.1 --port 5173`.",
+    "1. Restart backend (CSDL seed lại): ở gốc repo chạy `powershell -ExecutionPolicy Bypass -File tools\\restart_backend.ps1` (in \"backend restart xong: N sản phẩm\"). Lượt auto: `npm run p1` / `p2` / `p3` trong `HW03/tests` (đã gồm restart). Web: `cd ..\\eshop-sut\\frontend-web; npx vite --host 127.0.0.1 --port 5173`.",
     "2. Ghi phiên bản trình duyệt + OS (+ máy) vào đầu file kết quả.",
     "3. Làm Bước A → Bước B → M1…M6 → Cuối lượt, theo bảng của nền tảng đó (mục 4).",
     "4. Item đổi mật khẩu (CL-27, CL-29, CL-48, SV-06): xong thì `python HW03/tests/seed_orders.py --restore-password`.",
