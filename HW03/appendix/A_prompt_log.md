@@ -307,6 +307,35 @@ Scripts: check, freeze, render, merge, excel.
 Update render to include per-platform notes; then build_excel + assets.
 
 Kiểm thử script (không đổi dữ liệu HW03; merge/freeze chạy trên bản sao trong tmp).
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** HW03 – 4 việc harness. Xong cả 4, tổng 5 commit: mục 1 tốn 2 commit vì một chỗ chặn của gitignore toàn cục. Chưa đổi dữ liệu HW03.
+- **1. Tách CLAUDE.md:**
+  - Số dòng trước: `CLAUDE.md` 248. Sau: `CLAUDE.md` gốc 112, `HW02/CLAUDE.md` 205 (§1, §2, §5, §6 và các dòng HW02 của §3–§4, chép nguyên văn), `HW03/CLAUDE.md` 91.
+  - Script so từng dòng: chỉ 6 dòng gốc không còn nguyên văn — các dòng 10, 34, 37, 38, 40, 42 (quy tắc ghi quyết định, danh sách "đọc gì trước", mục Quyết định HW03). Nội dung vẫn còn, chỉ viết lại cho chung.
+- **2. HARNESS_SETUP:** thêm mục 6, checklist bắt đầu bài mới gồm 7 bước.
+- **3. L1=c:**
+  - `extract_prompt_log.py` thêm `--exclude` (lặp được); `on_stop.py` và `audit_tables.py` đọc `exclude` từ `hw.toml`.
+  - `exclude` bỏ 17:24–17:30 và lượt 17:31 đầu tiên; lượt 17:31#2 là của HW03 nên giữ.
+  - Prompt log HW03 còn 7 lượt. Lọc lại HW02 vẫn ra 407 lượt.
+- **4. Skill `.claude/skills/gui-checklist-testing/`:**
+  - `SKILL.md` 7 bước, `references/schema-checklist.md`, `assets/dom_probe.js`, `assets/RUN_template.md`.
+  - Scripts: `check_checklist`, `freeze`, `render_checklist` (chuyển từ `tools/`, ở `tools/` để lại script chuyển tiếp), `merge_platform`, `build_excel`.
+- **Kết quả kiểm tra:**
+  - `check_checklist` trên `HW03/checklist/checklist.json`: 0 lỗi, 1 cảnh báo (CL-07 chưa có câu "Fail nếu").
+  - `render_checklist` chạy lại cho ra `checklist.md` giống hệt bản đã commit.
+  - Thử `merge_platform` và `freeze` trên bản sao trong thư mục tạm: chặn kết quả mâu thuẫn khi không có `--force`, từ chối N/A trên nền tảng đang áp dụng.
+  - `build_excel`: **chưa chạy được** vì máy chưa cài `openpyxl`; mới chỉ kiểm cú pháp.
+- **Commit:**
+  - `e781197`, `24f1345` – tách CLAUDE.md (2 commit)
+  - `2d16283` – HARNESS_SETUP
+  - `b2e7ef8` – exclude
+  - `a1df52c` – skill (khung)
+- **Bất thường:** `~/.gitignore_global` dòng 5 chặn mọi file `CLAUDE.md` nên lần commit đầu thiếu `HW02/` và `HW03/CLAUDE.md`. Em thêm `!CLAUDE.md` vào `.gitignore` của repo và commit bổ sung, không amend.
+- **Cần quyết định:**
+  - X1 – cài `openpyxl` để chạy được `build_excel` (bước 5)? (a) `python -m pip install openpyxl`; (b) để tới bước 5.
+  - X2 – `HW03/CLAUDE.md` có nộp trong zip không? (a) thêm `export-ignore`; (b) nộp như tài liệu harness.
+- **Nhắc:** bạn tự push (`git push`).
 ```
 *File AI ghi/gửi trong lượt này:* `CLAUDE.md`, `CLAUDE.md`, `xl.py`, `SKILL.md`, `schema-checklist.md`, `check_checklist.py`, `freeze.py`, `merge_platform.py`, `build_excel.py`, `dom_probe.js`, `RUN_template.md`
 
@@ -314,4 +343,35 @@ Kiểm thử script (không đổi dữ liệu HW03; merge/freeze chạy trên b
 
 ---
 
-**Tổng:** 7 lượt; Claude Opus 5.5 7 lượt (#1, #2, #3, #4, #5, #6, #7).
+## #8 | 18:41 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – 2 commit. Không sửa ai-outputs/.
+
+A. "HW03: X1, X2": cài openpyxl đúng trình Python các script đang dùng, chạy thử build_excel.py ra thư mục tạm (không commit xlsx). HW03/.gitattributes thêm CLAUDE.md export-ignore; report_plan mục e: X1=a, X2=a. Tạo khung trống HW03/checklist/sv_items.md (chỉ tiêu đề cột: id SV-xx, ia, man_hinh, muc_kiem_tra, can_cu, expected, nen_tang, ly_do_AI_bo_sot; không ví dụ, không danh mục).
+
+B. "HW03[T1] 2/6: SV review checklist AI": item sửa → nguon="Both"; ghi meta.review_log (ngày, mã quyết định, "SV chốt").
+- G1=a: heuristic/WCAG/checklist theo control là căn cứ hợp lệ (slide GUI "Where checklists come from"); severity bug từ các item này do SV quyết.
+- G2: NA1 giữ; GA1 giữ; GA2 bỏ → CL-41 chỉ kiểm có badge hiển thị số > 0 sau khi thêm 1 SP (FR-23.2); GA3 mới "Thông báo lỗi chỉ ở hộp thoại alert không thoả FR-22.4" (AI đề xuất, SV chấp nhận).
+- G3: CL-44, CL-55 ngưỡng ≤ 1 s, can_cu thêm "Nielsen – response time limits (1 s)".
+- G4=a: giữ CL-31/32/34/37, notes "kiểm trùng issue FR-04 trước khi lập bug".
+- Sửa: CL-10/11/12 Expected = thứ tự theo vị trí hiển thị (trên→dưới, trái→phải), bỏ chuỗi lấy từ code · CL-13 bỏ vế tên kỹ thuật · CL-45 thành "link tới đúng /forgot-password" (bỏ vế tải lại trang) · CL-28 chỉ giữ "mã hiển thị 6 chữ số" · CL-33 bỏ vế nhãn · CL-17 tách type=email / chặn sai định dạng · CL-43 tách 3 vế · CL-23 căn cứ thêm GA3 · CL-40 bỏ /cart · CL-59 bỏ FR-20 · CL-58 thêm tiền điều kiện dựng đơn 5 trạng thái một lần qua admin, dùng chung 3 nền tảng.
+- Item tách: id mới từ CL-66, ghi "tách từ CL-xx"; không đánh số lại.
+check_checklist + render; in số item theo IA và theo nguồn (AI/Both). on_stop.py --manual. Báo cáo ≤ 10 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Excel chạy được (openpyxl qua pacman MSYS2). Giờ commit A.
+
+Part B: áp review SV vào checklist.json.
+```
+*File AI ghi/gửi trong lượt này:* `review_b.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 8 lượt; Claude Opus 5.5 8 lượt (#1, #2, #3, #4, #5, #6, #7, #8).

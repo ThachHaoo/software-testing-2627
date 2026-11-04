@@ -17,12 +17,45 @@
       "Blocked"
     ],
     "inventory": "HW03/checklist/c2_inventory.md",
-    "version": "v1 – AI nháp (T1 1/6)"
+    "version": "v2 – SV review (T1 2/6)",
+    "step": 2,
+    "review_log": [
+      {
+        "ngay": "2026-11-04",
+        "ma": "G1",
+        "noi_dung": "Heuristic/WCAG/checklist theo control là căn cứ hợp lệ (slide GUI 'Where checklists come from'); severity bug từ các item này do SV quyết.",
+        "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-04",
+        "ma": "G2",
+        "noi_dung": "Giữ NA1, GA1; bỏ GA2 (CL-41 chỉ kiểm badge số > 0, FR-23.2); thêm GA3 (alert không thoả FR-22.4, AI đề xuất, SV chấp nhận).",
+        "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-04",
+        "ma": "G3",
+        "noi_dung": "CL-44, CL-55 ngưỡng ≤ 1 s, căn cứ thêm Nielsen – response time limits (1 s).",
+        "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-04",
+        "ma": "G4",
+        "noi_dung": "Giữ CL-31/32/34/37; notes 'kiểm trùng issue FR-04 trước khi lập bug'.",
+        "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-04",
+        "ma": "S",
+        "noi_dung": "Sửa CL-10/11/12 (Tab theo vị trí hiển thị), CL-13, CL-45, CL-28, CL-33, CL-17 (tách CL-66), CL-43 (tách CL-67, CL-68), CL-23 (GA3), CL-40, CL-59, CL-58.",
+        "ket_luan": "SV chốt"
+      }
+    ]
   },
   "assumptions": {
     "NA1": "P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường.",
     "GA1": "Ngày hiển thị theo chuẩn Việt Nam dd/mm/yyyy, độc lập ngôn ngữ trình duyệt.",
-    "GA2": "Badge giỏ hàng = tổng số lượng các sản phẩm trong giỏ."
+    "GA3": "Thông báo lỗi chỉ hiện ở hộp thoại alert() của trình duyệt không thoả FR-22.4 (không có vị trí 'trên nút submit' trong form)."
   },
   "items": [
     {
@@ -178,10 +211,10 @@
       "id": "CL-10",
       "ia": "IA-01",
       "man_hinh": "Đăng nhập",
-      "muc_kiem_tra": "Thứ tự Tab từ trên xuống dưới",
+      "muc_kiem_tra": "Thứ tự Tab theo vị trí hiển thị (trên→dưới, trái→phải)",
       "can_cu": "FR-21.5 (README.md:248)",
       "loai_nguon": "SRS",
-      "expected": "Từ thanh địa chỉ bấm Tab lần lượt: navbar → ô Email → ô Mật khẩu → 'Quên mật khẩu?' → nút Đăng nhập → 'Đăng ký ngay'. Fail nếu focus nhảy ngược lên hoặc bỏ qua control.",
+      "expected": "Từ đầu trang bấm Tab liên tục: focus đi qua mọi control tương tác được theo vị trí hiển thị — từ trên xuống dưới; cùng một hàng thì từ trái sang phải. Fail nếu focus nhảy tới control nằm phía trên control trước đó (cùng hàng: nằm bên trái), hoặc bỏ qua một control tương tác được.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
@@ -190,16 +223,16 @@
       "na": {
         "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
       },
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-11",
       "ia": "IA-01",
       "man_hinh": "Hồ sơ",
-      "muc_kiem_tra": "Thứ tự Tab từ trên xuống dưới, trái sang phải",
+      "muc_kiem_tra": "Thứ tự Tab theo vị trí hiển thị (trên→dưới, trái→phải)",
       "can_cu": "FR-21.5 (README.md:248)",
       "loai_nguon": "SRS",
-      "expected": "Tab đi qua: Họ Tên → Số điện thoại → Địa chỉ giao hàng → Cập nhật → các nút 'Hủy đơn' theo thứ tự dòng. Ô Email bị khoá được bỏ qua. Fail nếu thứ tự khác.",
+      "expected": "Từ đầu trang bấm Tab liên tục: focus đi qua mọi control tương tác được theo vị trí hiển thị — từ trên xuống dưới; cùng một hàng thì từ trái sang phải. Ô bị khoá (disabled) được bỏ qua. Fail nếu focus nhảy tới control nằm phía trên control trước đó (cùng hàng: nằm bên trái), hoặc bỏ qua một control tương tác được.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
@@ -209,16 +242,16 @@
         "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
       },
       "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-12",
       "ia": "IA-01",
       "man_hinh": "Quên mật khẩu (bước 2)",
-      "muc_kiem_tra": "Thứ tự Tab ở bước 2",
+      "muc_kiem_tra": "Thứ tự Tab ở bước 2 theo vị trí hiển thị (trên→dưới, trái→phải)",
       "can_cu": "FR-21.5 (README.md:248)",
       "loai_nguon": "SRS",
-      "expected": "Tab đi qua: ô OTP → Mật khẩu mới → Xác nhận mật khẩu (nếu có) → nút chính → nút quay lại. Fail nếu thứ tự khác.",
+      "expected": "Từ đầu trang bấm Tab liên tục: focus đi qua mọi control tương tác được theo vị trí hiển thị — từ trên xuống dưới; cùng một hàng thì từ trái sang phải. Fail nếu focus nhảy tới control nằm phía trên control trước đó (cùng hàng: nằm bên trái), hoặc bỏ qua một control tương tác được.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
@@ -227,7 +260,7 @@
       "na": {
         "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
       },
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-13",
@@ -236,14 +269,14 @@
       "muc_kiem_tra": "Tiêu đề tab trình duyệt mô tả trang",
       "can_cu": "Nielsen #1 (hiển thị trạng thái hệ thống); WCAG 2.2 SC 2.4.2",
       "loai_nguon": "Heuristic",
-      "expected": "Tiêu đề tab (document.title) chứa tên ứng dụng hoặc tên trang (vd 'Đăng nhập – EShop') và khác nhau giữa /login, /forgot-password, /profile. Fail nếu là tên kỹ thuật (vd tên thư mục dự án) hoặc giống nhau ở mọi trang.",
+      "expected": "Tiêu đề tab (document.title) chứa tên ứng dụng hoặc tên trang (vd 'Đăng nhập – EShop') và khác nhau giữa /login, /forgot-password, /profile. Fail nếu không chứa tên ứng dụng/tên trang hoặc giống nhau ở cả 3 trang.",
       "uu_tien": "Optional",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-14",
@@ -299,17 +332,34 @@
       "id": "CL-17",
       "ia": "IA-02",
       "man_hinh": "Đăng nhập, Quên mật khẩu (bước 1)",
-      "muc_kiem_tra": "Ô Email dùng type=\"email\" và được validate định dạng",
+      "muc_kiem_tra": "Ô Email dùng type=\"email\"",
       "can_cu": "FR-02.4 (README.md:44); FR-22.2 (README.md:253)",
       "loai_nguon": "SRS",
-      "expected": "DevTools: ô Email trên /login và bước 1 /forgot-password có type=\"email\". Nhập 'abc' rồi submit → trình duyệt chặn, hiện bong bóng validate, không gửi request. Fail nếu type khác hoặc form gửi đi.",
+      "expected": "DevTools: ô Email trên /login và bước 1 /forgot-password có type=\"email\". Fail nếu type khác \"email\".",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
+    },
+    {
+      "id": "CL-66",
+      "ia": "IA-02",
+      "man_hinh": "Đăng nhập, Quên mật khẩu (bước 1)",
+      "muc_kiem_tra": "Email sai định dạng bị chặn trước khi gửi",
+      "can_cu": "FR-02.4 (README.md:44); FR-22.2 (README.md:253)",
+      "loai_nguon": "SRS",
+      "expected": "Nhập 'abc' vào ô Email rồi submit → form bị chặn, có thông báo validate, DevTools Network không có request gửi đi. Fail nếu form gửi request.",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "nguon": "Both",
+      "notes": "Tách từ CL-17."
     },
     {
       "id": "CL-18",
@@ -396,7 +446,7 @@
       "ia": "IA-02",
       "man_hinh": "Quên mật khẩu, Hồ sơ",
       "muc_kiem_tra": "Thông báo lỗi validate hiển thị trong trang, phía trên nút submit",
-      "can_cu": "FR-22.4 (README.md:255)",
+      "can_cu": "FR-22.4 (README.md:255); giả định GA3",
       "loai_nguon": "SRS",
       "expected": "Gây lỗi: mật khẩu mới yếu (bước 2), SĐT sai định dạng (Hồ sơ). Thông báo lỗi xuất hiện trong trang, phía trên nút submit của form đó. Fail nếu lỗi hiện dưới nút hoặc chỉ hiện ở hộp thoại trình duyệt (alert) không gắn với vị trí nào trong form.",
       "uu_tien": "Mandatory",
@@ -405,7 +455,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both",
+      "gia_dinh": "GA3: thông báo lỗi chỉ ở hộp thoại alert() không thoả FR-22.4."
     },
     {
       "id": "CL-24",
@@ -475,17 +526,17 @@
       "id": "CL-28",
       "ia": "IA-02",
       "man_hinh": "Quên mật khẩu (bước 2)",
-      "muc_kiem_tra": "Nhãn ô OTP khớp độ dài OTP 6 chữ số",
+      "muc_kiem_tra": "Mã OTP hiển thị có đúng 6 chữ số",
       "can_cu": "FR-03.2 (README.md:51)",
       "loai_nguon": "SRS",
-      "expected": "Nhãn/placeholder ô OTP nêu 6 chữ số và mã OTP hiển thị trên màn hình có đúng 6 chữ số. Fail nếu nhãn nêu số khác 6 hoặc mã hiển thị không phải 6 chữ số.",
+      "expected": "Sau khi gửi email ở bước 1, mã OTP hiển thị trên màn hình có đúng 6 chữ số. Fail nếu mã có số chữ số khác 6.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-29",
@@ -534,7 +585,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
     },
     {
       "id": "CL-32",
@@ -550,7 +602,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
     },
     {
       "id": "CL-33",
@@ -559,14 +612,14 @@
       "muc_kiem_tra": "Email không sửa được và trông như trường bị khoá",
       "can_cu": "FR-04.3 (README.md:66); checklist Text box – 'disabled = greyed, no cursor, not editable'",
       "loai_nguon": "SRS",
-      "expected": "Ô Email không gõ được, nền xám, nhãn cho biết không đổi được. Fail nếu sửa được hoặc trông như ô thường.",
+      "expected": "Ô Email không gõ được và có nền xám như trường bị khoá. Fail nếu sửa được hoặc trông như ô thường.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-34",
@@ -582,7 +635,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
     },
     {
       "id": "CL-35",
@@ -631,7 +685,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Khôi phục giá trị cũ sau khi kiểm.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
     },
     {
       "id": "CL-38",
@@ -672,14 +727,14 @@
       "muc_kiem_tra": "Navbar highlight trang đang chọn",
       "can_cu": "FR-23.1 (README.md:260)",
       "loai_nguon": "SRS",
-      "expected": "Ở /profile, link tên người dùng có kiểu khác hẳn các link còn lại (màu/gạch chân/nền); ở /cart, link 'Giỏ hàng' được highlight. Kiểu highlight đổi theo trang. Fail nếu không link nào thay đổi kiểu theo trang hiện tại.",
+      "expected": "Ở /profile, link tên người dùng (trỏ tới /profile) có kiểu khác hẳn các link còn lại trên navbar (màu/gạch chân/nền), và kiểu đó mất khi rời /profile. Fail nếu link không khác kiểu hoặc không đổi theo trang hiện tại.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-41",
@@ -688,7 +743,7 @@
       "muc_kiem_tra": "Link 'Giỏ hàng' có badge số lượng",
       "can_cu": "FR-23.2 (README.md:261)",
       "loai_nguon": "SRS",
-      "expected": "Thêm 1 sản phẩm × 2 → badge cạnh 'Giỏ hàng' hiển thị số đúng theo giả định GA2 và hiện ở mọi trang C2. Fail nếu không có badge.",
+      "expected": "Thêm 1 sản phẩm vào giỏ (từ trang chi tiết, điều hướng bằng navbar) → cạnh link 'Giỏ hàng' có badge hiển thị số > 0. Fail nếu không có badge hoặc badge không hiển thị số > 0.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
@@ -696,8 +751,7 @@
         "P3"
       ],
       "tien_dieu_kien": "Đăng nhập test@eshop.com; thêm sản phẩm từ trang chi tiết, điều hướng bằng navbar (không tải lại trang).",
-      "gia_dinh": "GA2: badge = tổng số lượng các sản phẩm trong giỏ (SRS không nói rõ tổng số lượng hay số dòng).",
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-42",
@@ -719,50 +773,83 @@
       "id": "CL-43",
       "ia": "IA-03",
       "man_hinh": "Navbar",
-      "muc_kiem_tra": "Đăng xuất đưa giao diện về trạng thái chưa đăng nhập",
+      "muc_kiem_tra": "Đăng xuất: navbar về trạng thái chưa đăng nhập",
       "can_cu": "FR-02.3 (README.md:43); Norman – Feedback",
       "loai_nguon": "SRS",
-      "expected": "Bấm Đăng xuất → navbar hiện 'Đăng nhập', 'Đăng ký'; tải lại trang vẫn ở trạng thái chưa đăng nhập; vào /profile không thấy dữ liệu hồ sơ. Fail nếu một điều không đúng.",
+      "expected": "Bấm Đăng xuất → navbar hiện 'Đăng nhập', 'Đăng ký' và không còn tên người dùng. Fail nếu navbar còn tên người dùng hoặc không có 'Đăng nhập'.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
+    },
+    {
+      "id": "CL-67",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "can_cu": "FR-02.3 (README.md:43); Norman – Feedback",
+      "loai_nguon": "SRS",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "muc_kiem_tra": "Đăng xuất giữ nguyên sau khi tải lại trang",
+      "expected": "Sau khi Đăng xuất, tải lại trang (F5) → vẫn ở trạng thái chưa đăng nhập (navbar có 'Đăng nhập'). Fail nếu tự đăng nhập lại.",
+      "nguon": "Both",
+      "notes": "Tách từ CL-43."
+    },
+    {
+      "id": "CL-68",
+      "ia": "IA-03",
+      "man_hinh": "Navbar",
+      "can_cu": "FR-02.3 (README.md:43); Norman – Feedback",
+      "loai_nguon": "SRS",
+      "uu_tien": "Mandatory",
+      "nen_tang": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "muc_kiem_tra": "Sau đăng xuất, /profile không hiển thị dữ liệu tài khoản cũ",
+      "expected": "Sau khi Đăng xuất, mở /profile → không thấy email, họ tên, lịch sử đơn của tài khoản vừa đăng xuất. Fail nếu còn thấy dữ liệu đó.",
+      "nguon": "Both",
+      "notes": "Tách từ CL-43."
     },
     {
       "id": "CL-44",
       "ia": "IA-03",
       "man_hinh": "Đăng nhập",
       "muc_kiem_tra": "Đăng nhập thành công rời trang đăng nhập và navbar cập nhật",
-      "can_cu": "Shneiderman #4 (hội thoại có điểm kết)",
+      "can_cu": "Shneiderman #4 (hội thoại có điểm kết); Nielsen – response time limits (1 s)",
       "loai_nguon": "Heuristic",
-      "expected": "Đăng nhập test@eshop.com/Test1234! → trong ≤ 2 giây rời /login và navbar hiển thị tên người dùng thay cho 'Đăng nhập'. Fail nếu vẫn ở /login hoặc navbar không đổi.",
+      "expected": "Đăng nhập test@eshop.com/Test1234! → trong ≤ 1 giây rời /login và navbar hiển thị tên người dùng thay cho 'Đăng nhập'. Fail nếu vẫn ở /login, quá 1 giây, hoặc navbar không đổi.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-45",
       "ia": "IA-03",
       "man_hinh": "Đăng nhập",
-      "muc_kiem_tra": "Link 'Quên mật khẩu?' điều hướng trong ứng dụng (không tải lại trang)",
-      "can_cu": "Shneiderman #1 (nhất quán với các link khác); checklist Hyperlink – 'goes to the correct page'",
+      "muc_kiem_tra": "Link 'Quên mật khẩu?' tới đúng /forgot-password",
+      "can_cu": "Checklist Hyperlink – 'goes to the correct page'",
       "loai_nguon": "Control",
-      "expected": "Bấm 'Quên mật khẩu?' → tới /forgot-password; DevTools Network (lọc Doc) không có request tài liệu mới, giống link 'Đăng ký ngay'. Fail nếu sai trang hoặc trang tải lại toàn bộ.",
+      "expected": "Bấm 'Quên mật khẩu?' → URL là /forgot-password và trang hiển thị form Quên mật khẩu. Fail nếu sai trang hoặc không chuyển trang.",
       "uu_tien": "Optional",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "tien_dieu_kien": "P3: DevTools qua chrome://inspect.",
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-46",
@@ -916,16 +1003,16 @@
       "ia": "IA-04",
       "man_hinh": "Hồ sơ",
       "muc_kiem_tra": "Cập nhật thành công có phản hồi rõ ràng",
-      "can_cu": "Nielsen #1; Shneiderman #3",
+      "can_cu": "Nielsen #1; Shneiderman #3; Nielsen – response time limits (1 s)",
       "loai_nguon": "Heuristic",
-      "expected": "Bấm Cập nhật với dữ liệu hợp lệ → trong ≤ 1 giây có thông báo thành công bằng tiếng Việt. Fail nếu không có phản hồi.",
+      "expected": "Bấm Cập nhật với dữ liệu hợp lệ → trong ≤ 1 giây có thông báo thành công bằng tiếng Việt. Fail nếu không có phản hồi hoặc phản hồi sau 1 giây.",
       "uu_tien": "Mandatory",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-56",
@@ -975,15 +1062,15 @@
         "P2",
         "P3"
       ],
-      "tien_dieu_kien": "Tạo 5 đơn; dùng admin (:5174, admin@eshop.com) chuyển trạng thái để có đủ 5 trạng thái.",
-      "nguon": "AI"
+      "tien_dieu_kien": "Dựng một lần, dùng chung cho cả 3 nền tảng: đặt 5 đơn bằng test@eshop.com; dùng admin (:5174, admin@eshop.com) chuyển trạng thái để có đủ Chờ xác nhận, Đã xác nhận, Đang giao, Đã giao, Đã hủy. Không restart backend cho tới khi chạy xong CL-58, CL-59 trên P1, P2, P3.",
+      "nguon": "Both"
     },
     {
       "id": "CL-59",
       "ia": "IA-04",
       "man_hinh": "Lịch sử đơn",
       "muc_kiem_tra": "Không cho người dùng huỷ đơn ở trạng thái không được huỷ",
-      "can_cu": "FR-10 (README.md:160–161); FR-20 (README.md:236)",
+      "can_cu": "FR-10 (README.md:160–161)",
       "loai_nguon": "SRS",
       "expected": "Dòng đơn 'Đang giao', 'Đã giao', 'Đã hủy' không có nút 'Hủy đơn' (hoặc nút bị vô hiệu hoá); chỉ 'Chờ xác nhận', 'Đã xác nhận' có. Fail nếu nút dùng được ở trạng thái không được huỷ.",
       "uu_tien": "Mandatory",
@@ -992,8 +1079,8 @@
         "P2",
         "P3"
       ],
-      "tien_dieu_kien": "Như item trạng thái (đủ 5 trạng thái).",
-      "nguon": "AI"
+      "tien_dieu_kien": "Dùng chung bộ đơn 5 trạng thái của CL-58.",
+      "nguon": "Both"
     },
     {
       "id": "CL-60",
