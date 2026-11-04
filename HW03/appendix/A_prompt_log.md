@@ -367,6 +367,26 @@ check_checklist + render; in số item theo IA và theo nguồn (AI/Both). on_st
 Excel chạy được (openpyxl qua pacman MSYS2). Giờ commit A.
 
 Part B: áp review SV vào checklist.json.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** HW03 – chốt X1, X2 và áp bản review của SV vào checklist (T1 2/6). Xong cả hai. Lệnh yêu cầu 2 commit, thực tế là 3: lần commit A, lệnh sửa `report_plan.md` bị lỗi mà em không thấy, nên phải thêm 1 commit ghi X1/X2 (không amend).
+- **X1:** `python` của các script là MSYS2 (`C:\msys64\ucrt64\bin\python.exe` 3.14) và không có pip, nên em cài bằng `pacman -S mingw-w64-ucrt-x86_64-python-openpyxl`. Lệnh này kéo thêm `python-pillow` và vài thư viện ảnh. `openpyxl` 3.1.5 đã chạy được.
+  - `build_excel.py` ra thư mục tạm: đủ 3 sheet, có công thức COUNTIF; file xlsx không commit.
+- **X2:** `HW03/.gitattributes` thêm `CLAUDE.md export-ignore`. Thử `git archive`: zip không còn `report_plan.md` lẫn `CLAUDE.md`. Đã tạo khung `HW03/checklist/sv_items.md` (chỉ tiêu đề cột).
+- **Review:** `checklist.json` và `.md` cập nhật đủ G1–G4 và các sửa.
+  - Item tách: CL-66 (từ CL-17); CL-67, CL-68 (từ CL-43).
+  - `assumptions`: bỏ GA2, thêm GA3.
+  - `meta.review_log` có 5 mục (G1–G4, S), mỗi mục ghi "SV chốt".
+  - `ai-outputs/` không sửa.
+- **Số item: 68.** Theo IA: IA-01 16 · IA-02 24 · IA-03 13 · IA-04 15. Theo nguồn: AI 49 · Both 19.
+  - CL-31/32/34/37 chỉ thêm notes nên em giữ `nguon` = AI. Nếu bạn muốn tính là "sửa" thì đổi thành Both.
+- **Kết quả kiểm tra:** `check_checklist` 0 lỗi, 1 cảnh báo (CL-07 chưa có câu "Fail nếu"). Prompt log 8 lượt.
+- **Commit:**
+  - `b8a86e9 HW03: X1, X2`
+  - `d7dc423 HW03: X1, X2 – ghi quyết định vào report_plan mục e`
+  - `a8b8560 HW03[T1] 2/6: SV review checklist AI`
+- **Cần quyết định:** không có điểm chặn. Lưu ý: commit 2/6 hiện mới là phần review; item SV tự thêm (`sv_items.md`) chưa có, và `HW03/CLAUDE.md` đang định nghĩa bước 2 gồm cả phần đó.
+- **Nhắc:** bạn tự push (`git push`).
 ```
 *File AI ghi/gửi trong lượt này:* `review_b.py`
 
@@ -374,4 +394,28 @@ Part B: áp review SV vào checklist.json.
 
 ---
 
-**Tổng:** 8 lượt; Claude Opus 5.5 8 lượt (#1, #2, #3, #4, #5, #6, #7, #8).
+## #9 | 19:27 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – 3 commit. Không sửa sv_items.md, không sửa ai-outputs/.
+A. "HW03[T1] 2/6: vá CL-07": thêm vế "Fail nếu chênh chiều cao > 2 px hoặc khác font-family/font-size". report_plan mục e: E2=b (Playwright tự chạy item DOM/bàn phím trên P1 Chrome channel + P2 Firefox Playwright → auto_status; SV chạy tay phần còn lại + toàn bộ P3; verdict chính thức = lượt trên trình duyệt thật).
+B. Kiểm sv_items.md (CHỈ ĐỌC): trường thiếu/"(SV chưa ghi)", ia hợp lệ, id trùng, can_cu trỏ tới dòng SRS có thật, item trùng nội dung CL-xx → ghi HW03/checklist/sv_items_check.md (chỉ liệt kê, không đề xuất câu chữ). Commit chung với C.
+C. "HW03[T1] 2/6c: AI trả lời vì sao bỏ sót": HW03/checklist/ai_gap_answer.md — mỗi SV-xx xếp đúng 1 nhóm: (1) đã nghĩ tới nhưng không đưa vào, (2) không nghĩ tới, (3) đã có nhưng bị gỡ theo quyết định SV. Bằng chứng phải lấy từ bản v1 (T1_checklist_ai_v1.json, c2_inventory.md, prompt của lệnh 1/6): nhóm (1) chỉ khi inventory/v1 có nhắc tới; không có bằng chứng → nhóm (2) và ghi "không có dấu vết trong v1". Nêu nguyên nhân khả dĩ (prompt / giới hạn model / đặc điểm giao diện), ghi rõ là nhận định của AI. Không viết thay cột ly_do_AI_bo_sot của SV.
+on_stop.py --manual (commit cả A_prompt_log.md). Báo cáo ≤ 10 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Đang kiểm `sv_items.md` (chỉ đọc): đối chiếu tên slide được trích.
+
+Viết `sv_items_check.md` và `ai_gap_answer.md`.
+```
+*File AI ghi/gửi trong lượt này:* `sv_items_check.md`, `ai_gap_answer.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 9 lượt; Claude Opus 5.5 9 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9).
