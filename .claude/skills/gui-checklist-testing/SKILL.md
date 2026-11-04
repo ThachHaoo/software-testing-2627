@@ -38,6 +38,7 @@ Gọi: `/gui-checklist-testing <thư-mục-checklist> <bước>` — vd `HW03/ch
 
 ### Bước 2 — SV bổ sung 🔒 + gap analysis
 - SV sửa item AI (đổi `nguon` → `Both`), thêm item `nguon: "SV"` với `ly_do_ai_bo_sot` (SV viết). **AI không gợi ý.**
+- AI chỉ được dựng khung trống `<dir>/sv_items.md` từ `assets/sv_items_template.md` (có đủ trường, gồm `loai_nguon`). Sau khi SV commit: AI kiểm cấu trúc (chỉ đọc), rồi chép nguyên văn vào JSON (id `SV-xx`); trường trống → "(SV chưa ghi)" và `check_checklist.py` báo lỗi cho tới khi SV điền.
 - Sau khi SV commit, nếu SV hỏi: trả lời vì sao AI bỏ sót theo quy tắc 8; SV tự viết phần phân tích trong report.
 - `render_checklist.py` + `check_checklist.py`. Dừng.
 

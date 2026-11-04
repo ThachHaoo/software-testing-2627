@@ -487,6 +487,22 @@ on_stop.py --manual. Báo cáo ≤ 8 dòng. Nhắc tôi push.
 Cấu trúc đã sạch (SV-05 → P1–P3, SV-02 tách tiền điều kiện). Gộp vào JSON.
 
 Chỉnh check (id SV-xx) + render (ly_do dạng dict).
+
+Đã gộp 6 item SV vào checklist và commit, nhưng `check_checklist` còn báo 12 lỗi vì 6 item SV chưa có trường `loai_nguon`.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** HW03[T1] 2/6d – gộp item SV, chốt checklist v2.
+- **Kiểm `sv_items.md` @ `0600998`:** hết lỗi cấu trúc (SV-05 áp dụng cả P1–P3, tiền điều kiện của SV-02 đã tách thành trường riêng).
+- **File:** `HW03/checklist/checklist.json` và `checklist.md`.
+  - SV-01…SV-06 chép nguyên văn, `nguon` = SV, có `luc_them` và `ly_do_ai_bo_sot` (loại + giải thích). SV-01 ghi P3 N/A theo NA1.
+  - GA4 bạn ghi "không dùng" nên không đưa vào `assumptions`.
+  - Phiên bản: "v2 – chốt sau review SV".
+  - Hai script của skill sửa theo: `check_checklist` nhận id dạng SV-xx và báo trường "(SV chưa ghi)"; `render_checklist` hiện lý do và lúc thêm của item SV.
+- **Số item: 74.** Theo IA: IA-01 19 · IA-02 26 · IA-03 13 · IA-04 16. Theo nguồn: AI 48 · Both 20 · SV 6.
+- **Kết quả kiểm tra:** `check_checklist` **Fail – 12 lỗi**, tất cả là `loai_nguon = (SV chưa ghi)` ở SV-01…SV-06, mỗi item 2 lỗi.
+- **Commit:** `3f2328f HW03[T1] 2/6d: gộp item SV, chốt checklist v2`
+- **Cần quyết định:** L2 – `loai_nguon` của SV-01…SV-06 phải là SRS, Control hoặc Heuristic; mẫu `sv_items.md` không có trường này nên em để "(SV chưa ghi)". Phương án: (a) bạn ghi vào `sv_items.md`, em gộp lại; (b) bạn đọc giá trị cho từng item, em điền vào JSON.
+- **Nhắc:** bạn tự push (`git push`).
 ```
 *File AI ghi/gửi trong lượt này:* `merge_sv.py`
 
@@ -494,4 +510,22 @@ Chỉnh check (id SV-xx) + render (ly_do dạng dict).
 
 ---
 
-**Tổng:** 11 lượt; Claude Opus 5.5 11 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11).
+## #12 | 19:55 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 2/6d2 (commit "HW03[T1] 2/6d2: SV chốt loai_nguon item SV"): L2=b — điền loai_nguon vào checklist.json: SV-01 Heuristic, SV-02 Heuristic, SV-03 Control, SV-04 Heuristic, SV-05 Heuristic, SV-06 Heuristic (SV chốt theo quy tắc "nguồn đứng đầu can_cu", giống v1). Thêm trường loai_nguon vào khung mẫu RUN/sv_items của skill để lần sau không thiếu. check_checklist phải 0 lỗi; render. on_stop.py --manual. Báo cáo ≤ 5 dòng.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+*File AI ghi/gửi trong lượt này:* `sv_items_template.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 12 lượt; Claude Opus 5.5 12 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12).
