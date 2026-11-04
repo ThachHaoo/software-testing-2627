@@ -75,6 +75,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | O1 | Overlay: `23120255 · Lê Tấn Hiệp · 23120255@student.hcmus.edu.vn`. PC = cửa sổ Sticky Notes + chụp toàn màn hình (thấy tên trình duyệt + URL); điện thoại = thêm chữ bằng trình sửa ảnh của máy ngay sau khi chụp |
 | T | Thang: **SUS** (10 câu tiếng Việt) + **SEQ** (1 câu sau nhiệm vụ); bộ câu hỏi tối giản vì có người non-IT |
 | K1 | Mã giảm giá trong nhiệm vụ U1 = **VIP100** (a). Lý do: usability đo thiết kế, không để bug tính tiền đã biết (SAVE10) làm nhiễu SUS |
+| X1 | (a) Cài `openpyxl` cho Python các script dùng (`C:\msys64\ucrt64\bin\python.exe` 3.14; Python này không có pip → `pacman -S mingw-w64-ucrt-x86_64-python-openpyxl`) → `build_excel.py` chạy được |
+| X2 | (a) `HW03/CLAUDE.md` không nộp: `export-ignore` trong `HW03/.gitattributes` |
 
 **Còn chờ SV chốt:** (không còn)
 
