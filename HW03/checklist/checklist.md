@@ -16,7 +16,7 @@
 | IA-04 Feedback / state | 15 |
 | **Tổng** | **68** |
 
-Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 49, Both 19 · Ưu tiên: Mandatory 51, Optional 17
+Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 48, Both 20 · Ưu tiên: Mandatory 51, Optional 17
 
 ## Giả định
 
@@ -36,7 +36,7 @@ Loại căn cứ: Control 8, Heuristic 17, SRS 43 · Nguồn item: AI 49, Both 1
 | CL-04 | Tất cả màn C2 | Nút hành động tích cực màu xanh dương | FR-21.2 (README.md:245) · *SRS* | Nút 'Đăng nhập/Sign In', 'Lấy mã OTP', 'Đặt lại mật khẩu', 'Cập nhật' có nền xanh dương (họ blue). Fail nếu ≥ 1 nút tích cực có màu khác (xanh lá, xám…). | Mandatory | AI |  |  |  |  |
 | CL-05 | Navbar, Lịch sử đơn | Nút nguy hiểm/huỷ bỏ màu đỏ | FR-21.2 (README.md:245) · *SRS* | *Tiền điều kiện:* Có ≥ 1 đơn ở trạng thái Chờ xác nhận (tạo qua Checkout).<br>Nút Đăng xuất và 'Hủy đơn' có nền đỏ. Fail nếu một trong hai nút không đỏ. | Mandatory | AI |  |  |  |  |
 | CL-06 | Quên mật khẩu (bước 2) | Nút chính và nút phụ phân biệt được bằng hình thức | Shneiderman #1 (nhất quán); checklist Button – 'colour signals intent' · *Heuristic* | Nút 'Đặt lại mật khẩu' (chính) và nút quay lại (phụ) khác nhau rõ về màu hoặc kiểu (viền/nền). Fail nếu hai nút cùng màu nền, cùng kích thước, cùng kiểu. | Optional | AI |  |  |  |  |
-| CL-07 | Quên mật khẩu (bước 2) | Các nút trên cùng form đồng nhất kích thước và font | Checklist Button – 'All buttons similar size/shape, same font' · *Control* | Các nút trên cùng form có cùng chiều cao (chênh ≤ 2 px theo DevTools) và cùng font-family/font-size. | Optional | AI |  |  |  |  |
+| CL-07 | Quên mật khẩu (bước 2) | Các nút trên cùng form đồng nhất kích thước và font | Checklist Button – 'All buttons similar size/shape, same font' · *Control* | Các nút trên cùng form có cùng chiều cao (chênh ≤ 2 px theo DevTools) và cùng font-family/font-size. Fail nếu chênh chiều cao > 2 px hoặc khác font-family/font-size. | Optional | Both |  |  |  |  |
 | CL-08 | Lịch sử đơn | Tổng tiền dùng ký hiệu ₫ và phân cách hàng nghìn | FR-21.3 (README.md:246); FR-11.1 (README.md:167) · *SRS* | *Tiền điều kiện:* Có ≥ 1 đơn (tạo qua Checkout).<br>Cột Tổng tiền của mọi dòng có ký hiệu '₫' và nhóm 3 chữ số được phân cách (vd 30.000.000 ₫ hoặc 30,000,000 ₫), cùng một kiểu phân cách trên cả 3 nền tảng. Fail nếu thiếu ₫, thiếu phân cách, hoặc kiểu phân cách khác nhau giữa các nền tảng. | Mandatory | AI |  |  |  |  |
 | CL-09 | Lịch sử đơn | Ngày đặt hiển thị nhất quán theo định dạng Việt Nam | Nielsen #4 (nhất quán và chuẩn); SRS im lặng → giả định GA1 · *Heuristic* | *Tiền điều kiện:* Có ≥ 1 đơn.<br>Ngày đặt hiển thị dạng dd/mm/yyyy và giống nhau trên P1, P2, P3. Fail nếu định dạng khác (mm/dd/yyyy, yyyy-mm-dd) hoặc khác nhau giữa các nền tảng. | Mandatory | AI |  |  |  | GA1: ngày hiển thị theo chuẩn Việt Nam dd/mm/yyyy, độc lập ngôn ngữ trình duyệt. |
 | CL-10 | Đăng nhập | Thứ tự Tab theo vị trí hiển thị (trên→dưới, trái→phải) | FR-21.5 (README.md:248) · *SRS* | Từ đầu trang bấm Tab liên tục: focus đi qua mọi control tương tác được theo vị trí hiển thị — từ trên xuống dưới; cùng một hàng thì từ trái sang phải. Fail nếu focus nhảy tới control nằm phía trên control trước đó (cùng hàng: nằm bên trái), hoặc bỏ qua một control tương tác được. | Mandatory | Both |  |  | N/A | P3 N/A – Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường. |

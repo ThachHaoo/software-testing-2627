@@ -77,6 +77,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | K1 | Mã giảm giá trong nhiệm vụ U1 = **VIP100** (a). Lý do: usability đo thiết kế, không để bug tính tiền đã biết (SAVE10) làm nhiễu SUS |
 | X1 | (a) Cài `openpyxl` cho Python các script dùng (`C:\msys64\ucrt64\bin\python.exe` 3.14; Python này không có pip → `pacman -S mingw-w64-ucrt-x86_64-python-openpyxl`) → `build_excel.py` chạy được |
 | X2 | (a) `HW03/CLAUDE.md` không nộp: `export-ignore` trong `HW03/.gitattributes` |
+| E2 | (b) Playwright tự chạy các item kiểm được qua DOM/bàn phím trên P1 (Chrome channel) + P2 (Firefox của Playwright) → `auto_status`; SV chạy tay phần còn lại + toàn bộ P3. **Verdict chính thức = lượt trên trình duyệt thật** |
 
 **Còn chờ SV chốt:** (không còn)
 

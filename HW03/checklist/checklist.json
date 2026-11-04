@@ -49,6 +49,12 @@
         "ma": "S",
         "noi_dung": "Sửa CL-10/11/12 (Tab theo vị trí hiển thị), CL-13, CL-45, CL-28, CL-33, CL-17 (tách CL-66), CL-43 (tách CL-67, CL-68), CL-23 (GA3), CL-40, CL-59, CL-58.",
         "ket_luan": "SV chốt"
+      },
+      {
+        "ngay": "2026-11-04",
+        "ma": "S2",
+        "noi_dung": "CL-07 thêm vế 'Fail nếu chênh chiều cao > 2 px hoặc khác font-family/font-size'.",
+        "ket_luan": "SV chốt"
       }
     ]
   },
@@ -163,14 +169,14 @@
       "muc_kiem_tra": "Các nút trên cùng form đồng nhất kích thước và font",
       "can_cu": "Checklist Button – 'All buttons similar size/shape, same font'",
       "loai_nguon": "Control",
-      "expected": "Các nút trên cùng form có cùng chiều cao (chênh ≤ 2 px theo DevTools) và cùng font-family/font-size.",
+      "expected": "Các nút trên cùng form có cùng chiều cao (chênh ≤ 2 px theo DevTools) và cùng font-family/font-size. Fail nếu chênh chiều cao > 2 px hoặc khác font-family/font-size.",
       "uu_tien": "Optional",
       "nen_tang": [
         "P1",
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "Both"
     },
     {
       "id": "CL-08",
