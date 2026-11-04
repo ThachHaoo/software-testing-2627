@@ -19,7 +19,7 @@
 
 | Mã | Nội dung | Loại (quyết định Expected / phạm vi) | Lý do em chốt |
 |---|---|---|---|
-| GA4 | Bàn phím ảo trên mobile (P3) khi bật lên đẩy viewport hoặc che một phần form không được làm che khuất nút submit hoặc input đang focus. | Phạm vi UI/Usability trên Mobile (P3) | Đặc thù của thiết bị di động thật khi người dùng nhập dữ liệu form. |
+| GA4 | (không dùng – SV-05 đổi nội dung ở 1e3b806) | - | - |
 
 ## Item
 
@@ -79,9 +79,9 @@
 - ia: IA-01
 - man_hinh: Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
 - muc_kiem_tra: Kích thước vùng tương tác cảm ứng (Touch Target Size) của các nút và link trên thiết bị di động
-- can_cu: WCAG 2.2 SC 2.5.8 (Target Size Minimum - 24x24px / 44x44px)
-- expected: Trên màn hình di động P3 (hoặc DevTools Mobile Emulator), dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm phải đạt tối thiểu 24x24 px (khuyến nghị 44x44 px) và không nằm quá sát nhau gây bấm nhầm. Fail nếu nút/link quá nhỏ (< 24px) khó thao tác bằng ngón tay.
-- nen_tang: P1, P2 (P3 N/A theo NA1)
+- can_cu: WCAG 2.2 SC 2.5.8 (Target Size Minimum - 24x24px)
+- expected: Trên màn hình di động P3, dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm phải đạt kích thước tối thiểu 24x24 px. Fail nếu có nút/link kích thước < 24x24 px.
+- nen_tang: P3 (P1, P2 N/A)
 - uu_tien: Mandatory
 - luc_them: trước khi chạy
 - ly_do_AI_bo_sot:
