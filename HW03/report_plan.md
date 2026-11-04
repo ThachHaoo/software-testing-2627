@@ -70,11 +70,11 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | P3 | Chrome Android trên POCO F5 qua `adb reverse tcp:5173` + `tcp:3000` — **đã kiểm chứng 04/11 17:35** (adb 37.0.1 ở `D:\Tools\platform-tools`, web chạy `--host 127.0.0.1`) |
 | BS | Không dùng BrowserStack/LambdaTest (M11) |
 | R | Người tham gia: 1 pilot + 7 chính, đã tuyển 04/11 (ngoài lớp; một phần IT, một phần non-IT) |
+| E1 | Excel **mới** `excel/23120255_HW03_Checklist.xlsx`, 3 sheet như HW01 (Test Cases / Checklist / Test Summary Report) |
+| O1 | Overlay: `23120255 · Lê Tấn Hiệp · 23120255@student.hcmus.edu.vn`. PC = cửa sổ Sticky Notes + chụp toàn màn hình (thấy tên trình duyệt + URL); điện thoại = thêm chữ bằng trình sửa ảnh của máy ngay sau khi chụp |
+| T | Thang: **SUS** (10 câu tiếng Việt) + **SEQ** (1 câu sau nhiệm vụ); bộ câu hỏi tối giản vì có người non-IT |
 
-**Còn chờ SV chốt:**
-- E1 – Excel: (a) file mới `excel/23120255_HW03_Checklist.xlsx` theo cấu trúc 3 sheet của HW01 (Test Cases / Checklist / Test Summary Report, cột HW) — đề xuất, vì HW01 là SUT khác (quạt); (b) thêm vào workbook HW01.
-- O1 – Overlay: PC = cửa sổ Sticky Notes ghi email SV + MSSV + họ tên, chụp toàn màn hình (thấy tên trình duyệt + URL); điện thoại = thêm chữ bằng trình sửa ảnh của máy ngay sau khi chụp. Email SV: `[...]`.
-- T – Thang: SUS (đề xuất, 10 câu, dễ tính) hay UEQ-S.
+**Còn chờ SV chốt:** (không còn)
 
 ## f. Khai cho Audit (ghi dần)
 
