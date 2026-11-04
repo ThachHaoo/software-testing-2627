@@ -295,8 +295,20 @@ Global gitignore chặn `CLAUDE.md` → thêm ngoại lệ trong `.gitignore` c�
 Item 2: HARNESS_SETUP mục 6.
 
 Implement `--exclude` + wire into on_stop and audit_tables.
+
+Item 4: load skill template.
+
+Đang dựng skill `gui-checklist-testing`; đọc cấu trúc Excel HW01 (qua zipfile, máy chưa có openpyxl).
+
+Viết SKILL.md + schema.
+
+Scripts: check, freeze, render, merge, excel.
+
+Update render to include per-platform notes; then build_excel + assets.
+
+Kiểm thử script (không đổi dữ liệu HW03; merge/freeze chạy trên bản sao trong tmp).
 ```
-*File AI ghi/gửi trong lượt này:* `CLAUDE.md`, `CLAUDE.md`
+*File AI ghi/gửi trong lượt này:* `CLAUDE.md`, `CLAUDE.md`, `xl.py`, `SKILL.md`, `schema-checklist.md`, `check_checklist.py`, `freeze.py`, `merge_platform.py`, `build_excel.py`, `dom_probe.js`, `RUN_template.md`
 
 **Xử lý:** [...]
 
