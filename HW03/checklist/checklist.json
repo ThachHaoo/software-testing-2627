@@ -18,7 +18,7 @@
     ],
     "inventory": "HW03/checklist/c2_inventory.md",
     "version": "v2 – chốt sau review SV",
-    "step": 2,
+    "step": 3,
     "review_log": [
       {
         "ngay": "2026-11-04",
@@ -90,7 +90,9 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "manual",
+      "che_do_ghi_chu": "Đọc toàn bộ chữ trên 4 màn – phán đoán chuỗi tiếng Anh/thuật ngữ cần mắt người"
     },
     {
       "id": "CL-02",
@@ -107,7 +109,8 @@
         "P3"
       ],
       "tien_dieu_kien": "P3: mở DevTools qua chrome://inspect (adb).",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-03",
@@ -123,7 +126,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-04",
@@ -139,7 +143,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-05",
@@ -156,7 +161,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn ở trạng thái Chờ xác nhận (tạo qua Checkout).",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-06",
@@ -172,7 +178,9 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: Fail khi hai nút trùng cả màu nền, kích thước, viền; khác nhau → SV xác nhận 'khác nhau rõ'"
     },
     {
       "id": "CL-07",
@@ -188,7 +196,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-08",
@@ -205,7 +214,9 @@
         "P3"
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn (tạo qua Checkout).",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: định dạng trên từng nền tảng; so kiểu phân cách giữa P1/P2/P3 khi gộp (P3 chạy tay)"
     },
     {
       "id": "CL-09",
@@ -223,7 +234,9 @@
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn.",
       "gia_dinh": "GA1: ngày hiển thị theo chuẩn Việt Nam dd/mm/yyyy, độc lập ngôn ngữ trình duyệt.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: định dạng trên từng nền tảng; so giữa P1/P2/P3 khi gộp"
     },
     {
       "id": "CL-10",
@@ -241,7 +254,8 @@
       "na": {
         "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
       },
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-11",
@@ -260,7 +274,9 @@
         "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
       },
       "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: thứ tự theo toạ độ; bố cục 2 cột → SV đọc chuỗi Tab trong notes để xác nhận 'cùng hàng'"
     },
     {
       "id": "CL-12",
@@ -278,7 +294,8 @@
       "na": {
         "P3": "Giả định NA1: P3 dùng bàn phím ảo cảm ứng, không có phím Tab → thứ tự focus bằng Tab không quan sát được bằng thao tác thường."
       },
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-13",
@@ -294,7 +311,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-14",
@@ -310,7 +328,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-15",
@@ -327,7 +346,9 @@
         "P3"
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: thanh cuộn ngang toàn trang; phần tử bị cắt/chồng → SV xem ảnh"
     },
     {
       "id": "CL-16",
@@ -344,7 +365,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Đăng nhập test@eshop.com; khôi phục Họ Tên 'Test User' sau khi kiểm.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-17",
@@ -360,7 +382,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-66",
@@ -377,7 +400,8 @@
         "P3"
       ],
       "nguon": "Both",
-      "notes": "Tách từ CL-17."
+      "notes": "Tách từ CL-17.",
+      "che_do": "auto"
     },
     {
       "id": "CL-18",
@@ -393,7 +417,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-19",
@@ -409,7 +434,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-20",
@@ -425,7 +451,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-21",
@@ -441,7 +468,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-22",
@@ -457,7 +485,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-23",
@@ -474,7 +503,8 @@
         "P3"
       ],
       "nguon": "Both",
-      "gia_dinh": "GA3: thông báo lỗi chỉ ở hộp thoại alert() không thoả FR-22.4."
+      "gia_dinh": "GA3: thông báo lỗi chỉ ở hộp thoại alert() không thoả FR-22.4.",
+      "che_do": "auto"
     },
     {
       "id": "CL-24",
@@ -490,7 +520,9 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: tìm chữ 'Bước k / 2'; không thấy → SV xác nhận không có chỉ báo tương đương"
     },
     {
       "id": "CL-25",
@@ -506,7 +538,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-26",
@@ -522,7 +555,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-27",
@@ -538,7 +572,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-28",
@@ -554,7 +589,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-29",
@@ -571,7 +607,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Dùng tài khoản test@eshop.com; restart backend sau khi kiểm để khôi phục mật khẩu Test1234!.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-30",
@@ -587,7 +624,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-31",
@@ -604,7 +642,8 @@
         "P3"
       ],
       "nguon": "AI",
-      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug.",
+      "che_do": "auto"
     },
     {
       "id": "CL-32",
@@ -621,7 +660,8 @@
         "P3"
       ],
       "nguon": "AI",
-      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug.",
+      "che_do": "auto"
     },
     {
       "id": "CL-33",
@@ -637,7 +677,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-34",
@@ -654,7 +695,8 @@
         "P3"
       ],
       "nguon": "AI",
-      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug.",
+      "che_do": "auto"
     },
     {
       "id": "CL-35",
@@ -670,7 +712,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-36",
@@ -686,7 +729,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-37",
@@ -704,7 +748,8 @@
       ],
       "tien_dieu_kien": "Khôi phục giá trị cũ sau khi kiểm.",
       "nguon": "AI",
-      "notes": "Kiểm trùng issue FR-04 trước khi lập bug."
+      "notes": "Kiểm trùng issue FR-04 trước khi lập bug.",
+      "che_do": "auto"
     },
     {
       "id": "CL-38",
@@ -720,7 +765,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-39",
@@ -736,7 +782,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-40",
@@ -752,7 +799,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-41",
@@ -769,7 +817,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Đăng nhập test@eshop.com; thêm sản phẩm từ trang chi tiết, điều hướng bằng navbar (không tải lại trang).",
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-42",
@@ -785,7 +834,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-43",
@@ -801,7 +851,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-67",
@@ -818,7 +869,8 @@
       "muc_kiem_tra": "Đăng xuất giữ nguyên sau khi tải lại trang",
       "expected": "Sau khi Đăng xuất, tải lại trang (F5) → vẫn ở trạng thái chưa đăng nhập (navbar có 'Đăng nhập'). Fail nếu tự đăng nhập lại.",
       "nguon": "Both",
-      "notes": "Tách từ CL-43."
+      "notes": "Tách từ CL-43.",
+      "che_do": "auto"
     },
     {
       "id": "CL-68",
@@ -835,7 +887,8 @@
       "muc_kiem_tra": "Sau đăng xuất, /profile không hiển thị dữ liệu tài khoản cũ",
       "expected": "Sau khi Đăng xuất, mở /profile → không thấy email, họ tên, lịch sử đơn của tài khoản vừa đăng xuất. Fail nếu còn thấy dữ liệu đó.",
       "nguon": "Both",
-      "notes": "Tách từ CL-43."
+      "notes": "Tách từ CL-43.",
+      "che_do": "auto"
     },
     {
       "id": "CL-44",
@@ -851,7 +904,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-45",
@@ -867,7 +921,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-46",
@@ -883,7 +938,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-47",
@@ -899,7 +955,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-48",
@@ -916,7 +973,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Restart backend sau khi kiểm.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-49",
@@ -932,7 +990,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-50",
@@ -948,7 +1007,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-51",
@@ -964,7 +1024,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-52",
@@ -981,7 +1042,9 @@
         "P3"
       ],
       "tien_dieu_kien": "Restart backend trước khi kiểm (bộ đếm = 0).",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "manual",
+      "che_do_ghi_chu": "Đợi thời gian khoá (30 s + dung sai) – chạy tay"
     },
     {
       "id": "CL-53",
@@ -998,7 +1061,12 @@
         "P3"
       ],
       "tien_dieu_kien": "P3: throttling qua chrome://inspect.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto (P1, CDP Slow 3G): nút disabled/đổi chữ/aria-busy + số request; chỉ báo khác → SV; P2 chạy tay",
+      "auto_nen_tang": [
+        "P1"
+      ]
     },
     {
       "id": "CL-54",
@@ -1014,7 +1082,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-55",
@@ -1030,7 +1099,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-56",
@@ -1047,7 +1117,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Khôi phục 'Test User' sau khi kiểm.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-57",
@@ -1064,7 +1135,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Đặt 1 đơn qua Checkout bằng test@eshop.com.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-58",
@@ -1081,7 +1153,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Dựng một lần, dùng chung cho cả 3 nền tảng: đặt 5 đơn bằng test@eshop.com; dùng admin (:5174, admin@eshop.com) chuyển trạng thái để có đủ Chờ xác nhận, Đã xác nhận, Đang giao, Đã giao, Đã hủy. Không restart backend cho tới khi chạy xong CL-58, CL-59 trên P1, P2, P3.",
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-59",
@@ -1098,7 +1171,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Dùng chung bộ đơn 5 trạng thái của CL-58.",
-      "nguon": "Both"
+      "nguon": "Both",
+      "che_do": "auto"
     },
     {
       "id": "CL-60",
@@ -1115,7 +1189,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-61",
@@ -1132,7 +1207,8 @@
         "P3"
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn Chờ xác nhận.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "CL-62",
@@ -1149,7 +1225,9 @@
         "P3"
       ],
       "tien_dieu_kien": "Backend vừa restart (test@eshop.com chưa có đơn).",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: có img/svg/icon trong khu lịch sử đơn + có câu thông báo; 'thân thiện' → SV"
     },
     {
       "id": "CL-63",
@@ -1166,7 +1244,12 @@
         "P3"
       ],
       "tien_dieu_kien": "Có ≥ 1 đơn. P3: throttling qua chrome://inspect.",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto (P1, CDP Slow 3G): empty state hiện trước khi dữ liệu về / có chỉ báo tải; P2 chạy tay",
+      "auto_nen_tang": [
+        "P1"
+      ]
     },
     {
       "id": "CL-64",
@@ -1183,7 +1266,9 @@
         "P3"
       ],
       "tien_dieu_kien": "Khởi động lại backend sau khi kiểm (CSDL seed lại).",
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "manual",
+      "che_do_ghi_chu": "Cần tắt backend giữa chừng – chạy tay"
     },
     {
       "id": "CL-65",
@@ -1199,7 +1284,8 @@
         "P2",
         "P3"
       ],
-      "nguon": "AI"
+      "nguon": "AI",
+      "che_do": "auto"
     },
     {
       "id": "SV-01",
@@ -1223,7 +1309,9 @@
         "loai": "giới hạn model",
         "giai_thich": "Ở bản v1, AI chỉ tập trung tạo item kiểm tra thứ tự Tab (Tab Order - CL-10..12) mà bỏ qua khía cạnh thị giác (Focus Visibility) của con trỏ bàn phím theo tiêu chuẩn Accessibility (WCAG)."
       },
-      "nen_tang_goc": "P1, P2 (P3 N/A theo NA1)"
+      "nen_tang_goc": "P1, P2 (P3 N/A theo NA1)",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: so outline/box-shadow/border lúc có và không có focus; 'rõ ràng' → SV"
     },
     {
       "id": "SV-02",
@@ -1246,7 +1334,12 @@
         "loai": "đặc điểm giao diện",
         "giai_thich": "AI chỉ quét cấu trúc mã nguồn tĩnh (HTML/React JSX) nên chỉ kiểm tra thuộc tính `type`, `required`, `placeholder` mà không lường trước các hành vi tương tác thực tế của người dùng như dán mã OTP hoặc dùng trình quản lý mật khẩu Autofill."
       },
-      "nen_tang_goc": "P1, P2, P3"
+      "nen_tang_goc": "P1, P2, P3",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto (P1): dán bằng Ctrl+V vào ô Email; Autofill + P2 → chạy tay",
+      "auto_nen_tang": [
+        "P1"
+      ]
     },
     {
       "id": "SV-03",
@@ -1268,7 +1361,8 @@
         "loai": "prompt",
         "giai_thich": "Prompt chưa chỉ định cụ thể nguyên tắc Golden Rule từ slide validation vào yêu cầu sinh, nên AI bỏ qua quy tắc xử lý con trỏ focus khi form gặp lỗi."
       },
-      "nen_tang_goc": "P1, P2, P3"
+      "nen_tang_goc": "P1, P2, P3",
+      "che_do": "auto"
     },
     {
       "id": "SV-04",
@@ -1290,7 +1384,9 @@
         "loai": "prompt",
         "giai_thich": "Prompt không nhắc đến các tiêu chuẩn khả năng truy cập (Accessibility) và AI không trực tiếp vận hành SUT để kiểm tra giao diện thực tế."
       },
-      "nen_tang_goc": "P1, P2, P3"
+      "nen_tang_goc": "P1, P2, P3",
+      "che_do": "mixed",
+      "che_do_ghi_chu": "auto: tỉ lệ tương phản chữ/nền tính từ màu CSS; placeholder + Lighthouse → SV"
     },
     {
       "id": "SV-05",
@@ -1312,7 +1408,8 @@
         "loai": "đặc điểm giao diện",
         "giai_thich": "AI chỉ quét cấu trúc mã nguồn và kiểm tra kích thước mặc định của phần tử theo CSS mà không tự động đo đạc vùng tương tác (target size) theo tiêu chuẩn truy cập Accessibility."
       },
-      "nen_tang_goc": "P1, P2, P3"
+      "nen_tang_goc": "P1, P2, P3",
+      "che_do": "auto"
     },
     {
       "id": "SV-06",
@@ -1334,7 +1431,8 @@
         "loai": "prompt",
         "giai_thich": "AI đã nghĩ tới trường hợp mạng chậm (CL-53), nhưng do slide \"Double-submit\" nằm ngoài phần ngữ cảnh AI đã đọc nên AI bỏ sót kịch bản người dùng nhấp đúp chuột nhanh ở điều kiện mạng bình thường cho các form khác Đăng nhập."
       },
-      "nen_tang_goc": "P1, P2, P3"
+      "nen_tang_goc": "P1, P2, P3",
+      "che_do": "auto"
     }
   ]
 }

@@ -520,7 +520,10 @@ HW03[T1] 2/6d2 (commit "HW03[T1] 2/6d2: SV chốt loai_nguon item SV"): L2=b —
 
 **Output:**
 ```
-(không có output dạng văn bản)
+- `checklist.json`: đã điền `loai_nguon` cho SV-01…06 đúng như bạn chốt (5 Heuristic, SV-03 Control), ghi thêm mục L2 vào `review_log`. `check_checklist` giờ **0 lỗi, 0 cảnh báo**; tổng 74 item (SRS 43, Control 9, Heuristic 22); đã render lại `checklist.md`.
+- Skill: thêm khung `assets/sv_items_template.md`, có trường `loai_nguon` và `tien_dieu_kien`. `SKILL.md` bước 2 ghi rõ AI chỉ dựng khung trống. Mẫu RUN không sửa vì RUN không có trường này.
+- Commit: `17f747d HW03[T1] 2/6d2: SV chốt loai_nguon item SV` (gồm prompt log, 12 lượt).
+- Bạn tự push (`git push`).
 ```
 *File AI ghi/gửi trong lượt này:* `sv_items_template.md`
 
@@ -528,4 +531,43 @@ HW03[T1] 2/6d2 (commit "HW03[T1] 2/6d2: SV chốt loai_nguon item SV"): L2=b —
 
 ---
 
-**Tổng:** 12 lượt; Claude Opus 5.5 12 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12).
+## #13 | 19:57 04/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 3/6 – theo skill gui-checklist-testing bước 3 (commit "HW03[T1] 3/6: Playwright P1/P2 + RUN.md"). Không sửa expected trong checklist.json.
+1. Phân loại 74 item vào trường che_do: auto (đo được bằng DOM/bàn phím/Network trên Playwright) / manual (cần mắt, thiết bị thật, đợi thời gian, tắt backend…) / mixed. In bảng đếm.
+2. Playwright (HW03/tests/): chỉ item auto + phần auto của mixed. P1 = channel "chrome" (Chrome đã cài), P2 = firefox của Playwright (ghi rõ đây là bản build Playwright, không phải Firefox đã cài). expect.soft; oracle lấy từ expected của checklist.json (khoá sha1 như HW02). Dựng dữ liệu bằng API trước khi chạy (đơn 5 trạng thái qua admin, tài khoản seed). Ghi kết quả theo lượt có timestamp vào HW03/checklist/runs/<P>_auto_<ts>.json (auto_status) + ảnh phần tử vào evidence/auto/. Item nào Firefox Playwright không làm được (vd throttling) → để manual cho P2.
+3. HW03/checklist/RUN.md cho phần chạy tay, theo thứ tự màn hình (không theo số item): mỗi nền tảng 1 lượt, đầu lượt restart backend + dựng dữ liệu; P3 nhắc adb reverse 2 cổng + chrome://inspect để dán dom_probe.js; mỗi item ghi cần nhìn gì, ảnh nào bắt buộc (item Failed + 1 ảnh/màn/nền tảng cho Task 3, có overlay Sticky Notes "23120255 · Lê Tấn Hiệp · 23120255@student.hcmus.edu.vn", thấy tên trình duyệt + URL), tên ảnh P<n>_<id>_<k>.png. Kèm file trống HW03/checklist/runs/<P>_manual_TEMPLATE.md để tôi ghi kết quả.
+4. Chỉ chạy `npx playwright test --list`; KHÔNG chạy lượt thật (tôi chạy). In lệnh tôi cần chạy cho P1, P2.
+on_stop.py --manual. Báo cáo ≤ 12 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Đang dựng harness Playwright; đọc API đổi trạng thái đơn để dựng dữ liệu.
+
+Còn chặn: máy không có Chrome/Firefox cài sẵn (chỉ Cốc Cốc) — ghi vào báo cáo, vẫn dựng harness. Viết cấu hình Playwright.
+
+Giờ `lib.ts` (helper đo DOM, API dựng dữ liệu, oracle khoá sha1).
+
+Viết `oracle.ts` (tham số đo theo từng item) — hash điền bằng script.
+
+Viết spec (một test cho mỗi item auto/mixed).
+
+PowerShell nuốt `${}` — sửa bằng Edit.
+
+Gán `che_do` vào checklist.json + vá merge_platform cho file lượt `kind: auto`.
+
+Generate oracle, npm install, `--list`.
+
+Harness Playwright list OK (142 = 71×2). Giờ RUN.md + mẫu ghi kết quả + script dựng đơn cho lượt tay.
+```
+*File AI ghi/gửi trong lượt này:* `package.json`, `playwright.config.ts`, `global-setup.ts`, `lib.ts`, `oracle.src.json`, `gen_oracle.py`, `C2.spec.ts`, `reporter.ts`, `seed_orders.py`, `gen_run.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 13 lượt; Claude Opus 5.5 13 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13).

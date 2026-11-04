@@ -1,0 +1,11 @@
+{
+  "name": "hw03-gui-checklist-tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "list": "playwright test --list"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.48.2"
+  }
+}

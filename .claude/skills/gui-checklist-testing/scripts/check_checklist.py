@@ -65,6 +65,10 @@ def check(doc, min_items):
             err.append(f"{iid}: nguon phải AI/SV/Both")
         if it.get("nguon") == "SV" and not it.get("ly_do_ai_bo_sot"):
             warn.append(f"{iid}: item SV chưa có ly_do_ai_bo_sot")
+        if "che_do" in it and it["che_do"] not in ("auto", "mixed", "manual"):
+            err.append(f"{iid}: che_do '{it['che_do']}' ngoài auto/mixed/manual")
+        if it.get("che_do") == "mixed" and not it.get("che_do_ghi_chu"):
+            warn.append(f"{iid}: mixed nhưng chưa ghi phần nào chạy tay (che_do_ghi_chu)")
         nt = it.get("nen_tang", [])
         for p in nt:
             if p not in plats:
