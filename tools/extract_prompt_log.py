@@ -340,6 +340,20 @@ def render(turns, notes, args):
     return "\n".join(out) + "\n"
 
 
+def parse_bound(s, end):
+    """'YYYY-MM-DD' hoặc 'YYYY-MM-DD HH:MM' → mốc giờ địa phương.
+    end=False: đầu ngày / đầu phút (tính cả). end=True: mốc mở ngay sau ngày / phút đó."""
+    s = s.strip()
+    if len(s) <= 10:
+        d = dt.datetime.combine(dt.date.fromisoformat(s), dt.time())
+        step = dt.timedelta(days=1)
+    else:
+        d = dt.datetime.strptime(s.replace("T", " "), "%Y-%m-%d %H:%M")
+        step = dt.timedelta(minutes=1)
+    d = d.replace(tzinfo=LOCAL_TZ)
+    return d + step if end else d
+
+
 def main():
     for s in (sys.stdout, sys.stderr):  # Windows console không mặc định UTF-8
         try:
@@ -350,8 +364,8 @@ def main():
     ap.add_argument("sessions", nargs="+", help="file .jsonl hoặc mẫu glob, vd ...\\*.jsonl")
     ap.add_argument("--notes")
     ap.add_argument("--extra")
-    ap.add_argument("--since", help="YYYY-MM-DD, bỏ các lượt trước ngày này")
-    ap.add_argument("--until", help="YYYY-MM-DD, bỏ các lượt sau ngày này")
+    ap.add_argument("--since", help="'YYYY-MM-DD' hoặc 'YYYY-MM-DD HH:MM' (giờ Asia/Saigon), bỏ các lượt trước mốc này")
+    ap.add_argument("--until", help="'YYYY-MM-DD' (cả ngày) hoặc 'YYYY-MM-DD HH:MM' (cả phút đó), bỏ các lượt sau mốc này")
     ap.add_argument("--title", default="Prompt Log")
     ap.add_argument("--name", default="Lê Tấn Hiệp")
     ap.add_argument("--mssv", default="23120255")
@@ -378,9 +392,11 @@ def main():
     turns = list(uniq.values())
     turns.sort(key=lambda t: t["time"])
     if args.since:
-        turns = [t for t in turns if t["time"].date() >= dt.date.fromisoformat(args.since)]
+        lo = parse_bound(args.since, end=False)
+        turns = [t for t in turns if t["time"] >= lo]
     if args.until:
-        turns = [t for t in turns if t["time"].date() <= dt.date.fromisoformat(args.until)]
+        hi = parse_bound(args.until, end=True)
+        turns = [t for t in turns if t["time"] < hi]
 
     if args.migrate_notes:
         if not args.notes:

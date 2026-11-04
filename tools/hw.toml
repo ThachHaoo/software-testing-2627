@@ -2,8 +2,8 @@
 # Đổi sang bài mới: sửa hw, since, until (nếu có), title.
 
 hw    = "HW03"
-since = "2026-11-04"          # bỏ các lượt AI trước ngày này
-# until = "2026-11-07"        # bỏ các lượt sau ngày này (bật khi đã nộp)
+since = "2026-11-04 12:26"    # bỏ các lượt AI trước mốc này ("YYYY-MM-DD" hoặc "YYYY-MM-DD HH:MM", giờ Asia/Saigon)
+# until = "2026-11-07"        # bỏ các lượt sau mốc này (bật khi đã nộp)
 title = "Prompt Log – HW03"
 name  = "Lê Tấn Hiệp"
 mssv  = "23120255"

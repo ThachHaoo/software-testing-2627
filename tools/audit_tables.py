@@ -259,7 +259,9 @@ def turn_sources(hw):
             uniq[k] = t
     turns = sorted(uniq.values(), key=lambda t: t["time"])
     if cfg.get("since"):
-        turns = [t for t in turns if t["time"].date() >= dt.date.fromisoformat(cfg["since"])]
+        turns = [t for t in turns if t["time"] >= epl.parse_bound(cfg["since"], end=False)]
+    if cfg.get("until"):
+        turns = [t for t in turns if t["time"] < epl.parse_bound(cfg["until"], end=True)]
     log = turns_of(hw)
     if len(turns) != len(log) or any(t["time"].replace(tzinfo=None, second=0, microsecond=0) != x[1] for t, x in zip(turns, log)):
         _SRC = {}
