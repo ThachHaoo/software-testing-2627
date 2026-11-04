@@ -11,3 +11,6 @@ HW02/tests/results/
 
 # ảnh gốc chạy tay D (bản nén nằm ở evidence/)
 HW02/D_FR20/manual_raw/
+
+# ~/.gitignore_global chặn CLAUDE.md — repo này cần commit CLAUDE.md của từng bài
+!CLAUDE.md
