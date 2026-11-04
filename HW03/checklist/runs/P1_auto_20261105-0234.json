@@ -1,0 +1,478 @@
+{
+  "platform": "P1",
+  "kind": "auto",
+  "run_at": "2026-11-04T19:34:13.473Z",
+  "env": "Google Chrome đã cài (Playwright channel \"chrome\")",
+  "manual": [],
+  "results": {
+    "CL-62": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có icon/hình minh hoạ trong khu Lịch sử đơn · khu lịch sử: 0 icon/hình; chữ: [\"Bạn chưa có đơn hàng nào.\"]",
+      "evidence": [
+        "evidence/auto/P1_CL-62_1.png",
+        "evidence/auto/P1_CL-62_2.png"
+      ],
+      "partial": true
+    },
+    "CL-02": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login: có 0 thẻ <h1> · Lỗi: Error: /forgot-password: có 0 thẻ <h1> · Lỗi: Error: /profile: có 0 thẻ <h1> · /login: 0 h1 · /forgot-password: 0 h1 · /profile: 0 h1",
+      "evidence": [
+        "evidence/auto/P1_CL-02_1.png"
+      ]
+    },
+    "CL-03": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: tiêu đề là \"Đăng Ký\" · tiêu đề chính: \"Đăng Ký\"",
+      "evidence": [
+        "evidence/auto/P1_CL-03_1.png",
+        "evidence/auto/P1_CL-03_2.png"
+      ]
+    },
+    "CL-13": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: title \"frontend-web\" không chứa tên ứng dụng/tên trang · Lỗi: Error: title \"frontend-web\" không chứa tên ứng dụng/tên trang · Lỗi: Error: title \"frontend-web\" không chứa tên ứng dụng/tên trang · Lỗi: Error: title giống nhau giữa các trang · title: [\"frontend-web\",\"frontend-web\",\"frontend-web\"]",
+      "evidence": [
+        "evidence/auto/P1_CL-13_1.png"
+      ]
+    },
+    "CL-14": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: lang = \"en\" · <html lang=\"en\">",
+      "evidence": [
+        "evidence/auto/P1_CL-14_1.png"
+      ]
+    },
+    "CL-17": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login ô Email type=\"text\" · Lỗi: Error: /forgot-password ô Email type=\"text\" · /login: type=\"text\"; /forgot-password bước 1: type=\"text\"",
+      "evidence": [
+        "evidence/auto/P1_CL-17_1.png"
+      ]
+    },
+    "CL-66": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true",
+      "evidence": [
+        "evidence/auto/P1_CL-66_1.png"
+      ]
+    },
+    "CL-18": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: nhãn là \"Username\" · nhãn ô thứ nhất: \"Username\"",
+      "evidence": [
+        "evidence/auto/P1_CL-18_1.png"
+      ]
+    },
+    "CL-19": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login ô Mật khẩu type=\"text\" · /login ô Mật khẩu type=\"text\" · bước 2 \"Mật khẩu mới\": type=\"password\"",
+      "evidence": [
+        "evidence/auto/P1_CL-19_1.png"
+      ]
+    },
+    "CL-20": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login: nhãn \"Username\" thiếu '*' · Lỗi: Error: /login: nhãn \"Mật khẩu\" thiếu '*' · Lỗi: Error: bước 1: nhãn \"Nhập Email của bạn\" thiếu '*' · Lỗi: Error: bước 2: nhãn \"Mã OTP (4 số)\" thiếu '*' · Lỗi: Error: bước 2: nhãn \"Mật khẩu mới\" thiếu '*' · /login \"Username\" · /login \"Mật khẩu\" · bước 1 \"Nhập Email của bạn\" · bước 2 \"Mã OTP (4 số)\" · bước 2 \"Mật khẩu mới\"",
+      "evidence": [
+        "evidence/auto/P1_CL-20_1.png"
+      ]
+    },
+    "CL-22": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: thông báo \"Đăng nhập thất bại. Vui lòng kiểm tra lại.\" nằm dưới nút submit · chữ mới: [\"Đăng nhập thất bại. Vui lòng kiểm tra lại.\"]; hộp thoại: [] · \"Đăng nhập thất bại. Vui lòng kiểm tra lại.\" y=517; nút submit y=425",
+      "evidence": [
+        "evidence/auto/P1_CL-22_1.png",
+        "evidence/auto/P1_CL-22_2.png"
+      ]
+    },
+    "CL-35": {
+      "status": "Passed",
+      "notes": "ô Email sau lỗi: \"test@eshop.com\"",
+      "evidence": []
+    },
+    "CL-36": {
+      "status": "Passed",
+      "notes": "sau Enter: http://localhost:5173/",
+      "evidence": []
+    },
+    "CL-44": {
+      "status": "Passed",
+      "notes": "rời /login: true; navbar có link hồ sơ: true; 111 ms",
+      "evidence": []
+    },
+    "CL-51": {
+      "status": "Passed",
+      "notes": "email không tồn tại: \"Đăng nhập thất bại. Vui lòng kiểm tra lại.\"; sai mật khẩu: \"Đăng nhập thất bại. Vui lòng kiểm tra lại.\"",
+      "evidence": []
+    },
+    "CL-45": {
+      "status": "Passed",
+      "notes": "URL: /forgot-password; số ô nhập: 1",
+      "evidence": []
+    },
+    "CL-46": {
+      "status": "Passed",
+      "notes": "URL: /register",
+      "evidence": []
+    },
+    "CL-10": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: nhảy ngược: 'Sign In'(449,425) → 'EShop'(16,16) · chuỗi Tab: button'Sign In'@(449,425) → a'EShop'@(16,16) → a'Giỏ hàng'@(1032,20) → a'Đăng nhập'@(1112,20) → a'Đăng ký'@(1206,20) → input'text'@(449,241) → input'text'@(449,331) → a'Quên mật khẩu?'@(729,389) → a'Đăng ký ngay'@(659,481)",
+      "evidence": [
+        "evidence/auto/P1_CL-10_1.png"
+      ]
+    },
+    "CL-38": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login: bấm nhãn \"Username\" không focus ô · Lỗi: Error: /login: bấm nhãn \"Mật khẩu\" không focus ô · Lỗi: Error: /profile: bấm nhãn \"Họ Tên\" không focus ô · Lỗi: Error: /profile: bấm nhãn \"Số điện thoại\" không focus ô · Lỗi: Error: /profile: bấm nhãn \"Địa chỉ giao hàng\" không focus ô · /login \"Username\": không focus · /login \"Mật khẩu\": không focus · /profile \"Họ Tên\": không focus · /profile \"Số điện thoại\": không focus · /profile \"Địa chỉ giao hàng\": không focus",
+      "evidence": [
+        "evidence/auto/P1_CL-38_1.png"
+      ]
+    },
+    "CL-49": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không tự chuyển và không có link/nút tới Đăng nhập · URL: /profile; link/nút tới Đăng nhập trong trang: 0",
+      "evidence": [
+        "evidence/auto/P1_CL-49_1.png",
+        "evidence/auto/P1_CL-49_2.png"
+      ]
+    },
+    "CL-50": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có thông báo không tìm thấy · Lỗi: Error: không có link về trang chủ trong trang · nội dung main: \"\"; link về '/': 0",
+      "evidence": [
+        "evidence/auto/P1_CL-50_1.png",
+        "evidence/auto/P1_CL-50_2.png"
+      ]
+    },
+    "CL-24": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: bước 1 không có chữ chỉ báo bước (SV xác nhận có/không chỉ báo tương đương) · Lỗi: Error: bước 2 không có chữ chỉ báo bước (SV xác nhận có/không chỉ báo tương đương) · bước 1 có \"Bước 1 / 2\": false; bước 2 có \"Bước 2 / 2\": false",
+      "evidence": [
+        "evidence/auto/P1_CL-24_1.png",
+        "evidence/auto/P1_CL-24_2.png"
+      ],
+      "partial": true
+    },
+    "CL-25": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: bước 1 không có \"Quay lại đăng nhập\" · bước 1 có \"Quay lại đăng nhập\": false",
+      "evidence": [
+        "evidence/auto/P1_CL-25_1.png"
+      ]
+    },
+    "CL-26": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có ô Xác nhận mật khẩu mới · bước 2: 2 ô – [\"Mã OTP (4 số)\",\"Mật khẩu mới\"]",
+      "evidence": [
+        "evidence/auto/P1_CL-26_1.png"
+      ]
+    },
+    "CL-27": {
+      "status": "Blocked",
+      "notes": "Blocked – không có ô Xác nhận mật khẩu mới (item gốc CL-26)",
+      "evidence": []
+    },
+    "CL-28": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: mã có 4 chữ số · mã hiển thị: 8514",
+      "evidence": [
+        "evidence/auto/P1_CL-28_1.png",
+        "evidence/auto/P1_CL-28_2.png"
+      ]
+    },
+    "CL-54": {
+      "status": "Passed",
+      "notes": "mã hiển thị: 1363",
+      "evidence": []
+    },
+    "CL-29": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: mật khẩu \"Abcdef1!\" không được chấp nhận · đăng nhập bằng \"Abcdef1!\": false; thông báo: [\"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"]",
+      "evidence": [
+        "evidence/auto/P1_CL-29_1.png"
+      ]
+    },
+    "CL-48": {
+      "status": "Blocked",
+      "notes": "Blocked – không đổi được mật khẩu bằng \"Abcdef1!\" (item gốc CL-29)",
+      "evidence": []
+    },
+    "CL-30": {
+      "status": "Passed",
+      "notes": "bị đổi: false; thông báo: \"mật khẩu quá yếu! phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.\"",
+      "evidence": []
+    },
+    "CL-39": {
+      "status": "Passed",
+      "notes": "ô email bước 1 sau khi quay lại: \"test@eshop.com\"",
+      "evidence": []
+    },
+    "CL-12": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: bỏ qua: a'EShop'@(16,16) → a'Giỏ hàng'@(1032,20) → a'Đăng nhập'@(1112,20) → a'Đăng ký'@(1206,20) · chuỗi Tab: input'text'@(449,301) → input'password'@(449,391) → button'Đặt lại mật khẩu'@(449,449) → button'← Quay lại'@(449,505)",
+      "evidence": [
+        "evidence/auto/P1_CL-12_1.png"
+      ]
+    },
+    "CL-06": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: hai nút cùng màu nền, viền, kích thước · nút chính {\"background-color\":\"rgb(22, 163, 74)\",\"border-top-width\":\"0px\",\"border-top-color\":\"rgb(229, 231, 235)\",\"height\":\"40px\",\"width\":\"382px\"}; nút phụ {\"background-color\":\"rgb(22, 163, 74)\",\"border-top-width\":\"0px\",\"border-top-color\":\"rgb(229, 231, 235)\",\"height\":\"40px\",\"width\":\"382px\"}",
+      "evidence": [
+        "evidence/auto/P1_CL-06_1.png",
+        "evidence/auto/P1_CL-06_2.png"
+      ],
+      "partial": true
+    },
+    "CL-07": {
+      "status": "Passed",
+      "notes": "[{\"font-family\":\"ui-sans-serif, system-ui, sans-serif, \\\"Apple Color Emoji\\\", \\\"Segoe UI Emoji\\\", \\\"Segoe UI Symbol\\\", \\\"Noto Color Emoji\\\"\",\"font-size\":\"16px\",\"h\":40},{\"font-family\":\"ui-sans-serif, system-ui, sans-serif, \\\"Apple Color Emoji\\\", \\\"Segoe UI Emoji\\\", \\\"Segoe UI Symbol\\\", \\\"Noto Color Emoji\\\"\",\"font-size\":\"16px\",\"h\":40}]",
+      "evidence": []
+    },
+    "CL-16": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: chuỗi HTML bị render (mất dấu < >) · navbar: \"Chào, Test\"; số thẻ <b>: 1",
+      "evidence": [
+        "evidence/auto/P1_CL-16_1.png",
+        "evidence/auto/P1_CL-16_2.png"
+      ]
+    },
+    "CL-21": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: \"Họ Tên\" bị chặn khi trống nhưng nhãn không có '*' · Lỗi: Error: \"Số điện thoại\" bị chặn khi trống nhưng nhãn không có '*' · Lỗi: Error: \"Địa chỉ giao hàng\" bị chặn khi trống nhưng nhãn không có '*' · \"Họ Tên\" trống: bị chặn; nhãn \"Họ Tên\" · \"Số điện thoại\" trống: bị chặn; nhãn \"Số điện thoại\" · \"Địa chỉ giao hàng\" trống: bị chặn; nhãn \"Địa chỉ giao hàng\"",
+      "evidence": [
+        "evidence/auto/P1_CL-21_1.png"
+      ]
+    },
+    "CL-23": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: bước 2 mật khẩu yếu: lỗi chỉ ở hộp thoại hoặc không có (GA3) · Lỗi: Error: Hồ sơ SĐT sai: lỗi chỉ ở hộp thoại hoặc không có (GA3) · bước 2 mật khẩu yếu: chữ mới []; hộp thoại [\"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"] · Hồ sơ SĐT sai: chữ mới []; hộp thoại [\"Cập nhật thành công!\"]",
+      "evidence": [
+        "evidence/auto/P1_CL-23_1.png"
+      ]
+    },
+    "CL-31": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: 0912345678 không được lưu (sau F5: \"\") · Lỗi: Error: 09123456789 không được lưu (sau F5: \"\") · nhập 0912345678 → sau F5: \"\" · nhập 09123456789 → sau F5: \"\"",
+      "evidence": [
+        "evidence/auto/P1_CL-31_1.png"
+      ]
+    },
+    "CL-32": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: \"Cập nhật thành công!\"; sau F5: \"912345678\"",
+      "evidence": [
+        "evidence/auto/P1_CL-32_1.png"
+      ]
+    },
+    "CL-33": {
+      "status": "Passed",
+      "notes": "disabled=true; giá trị trước/sau gõ: \"test@eshop.com\"/\"test@eshop.com\"; nền Email rgb(243, 244, 246), nền Họ Tên rgb(255, 255, 255)",
+      "evidence": []
+    },
+    "CL-34": {
+      "status": "Passed",
+      "notes": "thông báo: [\"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"]; Họ Tên sau F5: \"Test User\"",
+      "evidence": []
+    },
+    "CL-37": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: có trường quay về giá trị cũ · sau F5: [\"Test User\",\"\",\"\"]",
+      "evidence": [
+        "evidence/auto/P1_CL-37_1.png"
+      ]
+    },
+    "CL-55": {
+      "status": "Passed",
+      "notes": "phản hồi sau 88 ms: \"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"",
+      "evidence": []
+    },
+    "CL-56": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: navbar vẫn tên cũ khi chưa tải lại · navbar sau 3000 ms (không tải lại): \"EShop | Giỏ hàng | Chào, Test User | Thoát\"",
+      "evidence": [
+        "evidence/auto/P1_CL-56_1.png"
+      ]
+    },
+    "CL-65": {
+      "status": "Passed",
+      "notes": "sau F5: navbar có tên true; form hồ sơ true",
+      "evidence": []
+    },
+    "CL-40": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: kiểu link không đổi theo trang hiện tại · link hồ sơ ở /profile {\"color\":\"rgb(253, 224, 71)\",\"background-color\":\"rgba(0, 0, 0, 0)\",\"text-decoration-line\":\"none\",\"font-weight\":\"400\",\"border-bottom-width\":\"0px\"}; ở / {\"color\":\"rgb(253, 224, 71)\",\"background-color\":\"rgba(0, 0, 0, 0)\",\"text-decoration-line\":\"none\",\"font-weight\":\"400\",\"border-bottom-width\":\"0px\"}; link Giỏ hàng {\"color\":\"rgb(255, 255, 255)\",\"background-color\":\"rgba(0, 0, 0, 0)\",\"text-decoration-line\":\"none\",\"font-weight\":\"400\",\"border-bottom-width\":\"0px\"}",
+      "evidence": [
+        "evidence/auto/P1_CL-40_1.png"
+      ]
+    },
+    "CL-47": {
+      "status": "Passed",
+      "notes": "/login → / · /forgot-password → / · /profile → /",
+      "evidence": []
+    },
+    "CL-41": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có badge số > 0 · link Giỏ hàng: \"Giỏ hàng\"",
+      "evidence": [
+        "evidence/auto/P1_CL-41_1.png",
+        "evidence/auto/P1_CL-41_2.png"
+      ]
+    },
+    "CL-42": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: nhãn là \"Thoát\" · nhãn nút: \"Thoát\"",
+      "evidence": [
+        "evidence/auto/P1_CL-42_1.png"
+      ]
+    },
+    "CL-43": {
+      "status": "Passed",
+      "notes": "sau đăng xuất: link Đăng nhập true; link tên người dùng 0",
+      "evidence": []
+    },
+    "CL-67": {
+      "status": "Passed",
+      "notes": "sau F5: link Đăng nhập true",
+      "evidence": []
+    },
+    "CL-68": {
+      "status": "Passed",
+      "notes": "main sau đăng xuất: \"Vui lòng đăng nhập\"",
+      "evidence": []
+    },
+    "CL-57": {
+      "status": "Passed",
+      "notes": "dòng đơn #1: [\"#1\",\"4/11/2026\",\"6.000.000 ₫\",\"Chờ xác nhận\",\"Hủy đơn\"]",
+      "evidence": []
+    },
+    "CL-08": {
+      "status": "Passed",
+      "notes": "P1 Tổng tiền: [\"6.000.000 ₫\",\"6.000.000 ₫\",\"6.000.000 ₫\",\"6.000.000 ₫\",\"6.000.000 ₫\",\"6.000.000 ₫\",\"6.000.000 ₫\"] (so kiểu phân cách giữa nền tảng khi gộp)",
+      "evidence": [],
+      "partial": true
+    },
+    "CL-09": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không phải dd/mm/yyyy: [\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\"] · P1 Ngày đặt: [\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\",\"4/11/2026\"] (so giữa nền tảng khi gộp)",
+      "evidence": [
+        "evidence/auto/P1_CL-09_1.png"
+      ],
+      "partial": true
+    },
+    "CL-58": {
+      "status": "Passed",
+      "notes": "[{\"st\":\"pending\",\"text\":\"Chờ xác nhận\",\"bg\":\"rgb(254, 249, 195)\"},{\"st\":\"confirmed\",\"text\":\"Đã xác nhận\",\"bg\":\"rgb(224, 231, 255)\"},{\"st\":\"shipping\",\"text\":\"Đang giao\",\"bg\":\"rgb(219, 234, 254)\"},{\"st\":\"delivered\",\"text\":\"Đã giao\",\"bg\":\"rgb(220, 252, 231)\"},{\"st\":\"canceled\",\"text\":\"Đã hủy\",\"bg\":\"rgb(254, 226, 226)\"}]",
+      "evidence": [
+        "evidence/auto/P1_CL-58_1.png"
+      ]
+    },
+    "CL-59": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: shipping: nút \"Hủy đơn\" dùng được · pending (#8): nút \"Hủy đơn\" dùng được = true · confirmed (#9): nút \"Hủy đơn\" dùng được = true · shipping (#10): nút \"Hủy đơn\" dùng được = true · delivered (#11): nút \"Hủy đơn\" dùng được = false · canceled (#12): nút \"Hủy đơn\" dùng được = false",
+      "evidence": [
+        "evidence/auto/P1_CL-59_1.png",
+        "evidence/auto/P1_CL-59_2.png"
+      ]
+    },
+    "CL-05": {
+      "status": "Passed",
+      "notes": "Đăng xuất: rgb(239, 68, 68); Hủy đơn: rgb(239, 68, 68)",
+      "evidence": []
+    },
+    "CL-04": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: nút Đặt lại mật khẩu màu rgb(22, 163, 74) · {\"Đăng nhập\":\"rgb(37, 99, 235)\",\"Lấy mã OTP\":\"rgb(37, 99, 235)\",\"Đặt lại mật khẩu\":\"rgb(22, 163, 74)\",\"Cập nhật\":\"rgb(37, 99, 235)\"} (dải hue 190–250°)",
+      "evidence": [
+        "evidence/auto/P1_CL-04_1.png"
+      ]
+    },
+    "CL-11": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: nhảy ngược theo toạ độ: 'Cập nhật'(169,557) → 'Hủy đơn'(1010,203) · chuỗi Tab: a'EShop'@(16,16) → a'Giỏ hàng'@(996,20) → a'Chào, Test User'@(1076,20) → button'Thoát'@(1200,16) → input'Test User'@(169,267) → input'VD: 0912345678'@(169,353) → textarea'Nhập địa chỉ của bạn'@(169,439) → button'Cập nhật'@(169,557) → button'Hủy đơn'@(1010,203) → button'Hủy đơn'@(1010,245) → button'Hủy đơn'@(1010,369) → button'Hủy đơn'@(1010,411) → button'Hủy đơn'@(1010,453) → button'Hủy đơn'@(1010,495) → button'Hủy đơn'@(1010,537) → button'Hủy đơn'@(1010,661) → button'Hủy đơn'@(1010,703) → button'Hủy đơn'@(1010,745) → button'Hủy đơn'@(1010,787) → button'Hủy đơn'@(1010,829) → button'Hủy đơn'@(1010,953) → button'Hủy đơn'@(1010,995) → button'Hủy đơn'@(1010,1037) → button'Hủy đơn'@(1010,1079) → button'Hủy đơn'@(1010,1121) → button'Hủy đơn'@(1010,1245) → button'Hủy đơn'@(1010,1287) → button'Hủy đơn'@(1010,1329)",
+      "evidence": [
+        "evidence/auto/P1_CL-11_1.png"
+      ],
+      "partial": true
+    },
+    "CL-15": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: có thanh cuộn ngang toàn trang (381 > 375) · scrollWidth=381, clientWidth=375 (chồng lấn/bị cắt: SV xem ảnh)",
+      "evidence": [
+        "evidence/auto/P1_CL-15_1.png",
+        "evidence/auto/P1_CL-15_2.png"
+      ],
+      "partial": true
+    },
+    "CL-63": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có chỉ báo đang tải (SV xác nhận nếu chỉ báo không nhận diện được bằng DOM) · empty state hiện khi chưa có dữ liệu: false; chỉ báo tải: false",
+      "evidence": [
+        "evidence/auto/P1_CL-63_1.png"
+      ],
+      "partial": true
+    },
+    "CL-60": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có hộp xác nhận · Lỗi: Error: đơn bị huỷ ngay (trạng thái canceled) · hộp thoại: [\"alert: Hủy đơn thành công!\"]; trạng thái đơn sau khi chọn \"không\": canceled",
+      "evidence": [
+        "evidence/auto/P1_CL-60_1.png"
+      ]
+    },
+    "CL-61": {
+      "status": "Passed",
+      "notes": "dòng trước: \"#56 4/11/2026 6.000.000 ₫ Chờ xác nhận Hủy đơn\"; sau 3000 ms (không tải lại): \"#56 4/11/2026 6.000.000 ₫ Đã hủy \"",
+      "evidence": []
+    },
+    "CL-53": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: không có chỉ báo đang xử lý trên nút (SV xác nhận chỉ báo khác) · Lỗi: Error: phát sinh 3 request /api/login · trong lúc chờ: {\"disabled\":false,\"busy\":null,\"text\":\"Sign In\"} (chữ ban đầu \"Sign In\"); 3 request /api/login sau 3 lần bấm",
+      "evidence": [
+        "evidence/auto/P1_CL-53_1.png"
+      ],
+      "partial": true
+    },
+    "SV-01": {
+      "status": "Passed",
+      "notes": "/login: 9 control nhận focus, 0 không đổi kiểu khi focus · /forgot-password: 6 control nhận focus, 0 không đổi kiểu khi focus · /profile: 40 control nhận focus, 0 không đổi kiểu khi focus",
+      "evidence": [],
+      "partial": true
+    },
+    "SV-02": {
+      "status": "Passed",
+      "notes": "/login ô 1: sau Ctrl+V = \"test@eshop.com\" · /login ô 2: sau Ctrl+V = \"test@eshop.com\"",
+      "evidence": [],
+      "partial": true
+    },
+    "SV-03": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: Đăng nhập: focus không về ô Mật khẩu · Lỗi: Error: Quên mật khẩu B2: focus không về ô Mật khẩu mới · Lỗi: Error: Hồ sơ: focus không về ô Số điện thoại · focus về ô lỗi – Đăng nhập (Mật khẩu): false; Quên MK B2 (Mật khẩu mới): false; Hồ sơ (SĐT): false",
+      "evidence": [
+        "evidence/auto/P1_SV-03_1.png"
+      ]
+    },
+    "SV-04": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: /login: tương phản < 4.5:1 ở \"Quên mật khẩu?\" 3.68 · Lỗi: Error: /profile: tương phản < 4.5:1 ở \"Chào, Test User\" 3.92, \"Thoát\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76, \"Hủy đơn\" 3.76 · /login: 1 phần tử < 4.5:1 [\"Quên mật khẩu? 3.68\"] · /forgot-password: 0 phần tử < 4.5:1 [] · /profile: 40 phần tử < 4.5:1 [\"Chào, Test User 3.92\",\"Thoát 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\",\"Hủy đơn 3.76\"]",
+      "evidence": [
+        "evidence/auto/P1_SV-04_1.png"
+      ],
+      "partial": true
+    },
+    "SV-05": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: Quên mật khẩu? < 24×24 px · Lỗi: Error: Đăng ký ngay < 24×24 px · Sign In: 382×40 · Quên mật khẩu?: 102×19 · Đăng ký ngay: 85×19 · Lấy mã OTP: 382×40 · Cập nhật: 271×40",
+      "evidence": [
+        "evidence/auto/P1_SV-05_1.png"
+      ]
+    },
+    "SV-06": {
+      "status": "Failed",
+      "notes": "Lỗi: Error: Lấy mã OTP: 2 request · Lỗi: Error: Đặt lại mật khẩu: 0 request, 2 hộp thoại · Lỗi: Error: Cập nhật: 0 request PUT, 2 hộp thoại · Lấy mã OTP: 2 request · Đặt lại mật khẩu: 0 request, 2 hộp thoại · Cập nhật: 0 request PUT, 2 hộp thoại",
+      "evidence": [
+        "evidence/auto/P1_SV-06_1.png"
+      ]
+    }
+  }
+}
