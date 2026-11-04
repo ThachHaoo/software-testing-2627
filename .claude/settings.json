@@ -4,6 +4,11 @@
     "PYTHONUTF8": "1"
   },
   "cleanupPeriodDays": 365,
+  "includeCoAuthoredBy": false,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Bash(python tools/*)",
@@ -20,22 +25,6 @@
       "Write(/HW02/appendix/ai-outputs/**)",
       "Edit(/HW02/appendix/A_prompt_log.md)",
       "Write(/HW02/appendix/A_prompt_log.md)"
-    ]
-  },
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python",
-            "args": [
-              "${CLAUDE_PROJECT_DIR}/tools/hooks/on_stop.py"
-            ],
-            "timeout": 60
-          }
-        ]
-      }
     ]
   }
 }
