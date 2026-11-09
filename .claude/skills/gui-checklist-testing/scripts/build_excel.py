@@ -137,6 +137,8 @@ def main():
         sm.cell(row=i, column=2, value=v)
 
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
+    from openpyxl.workbook.properties import CalcProperties
+    wb.calculation = CalcProperties(fullCalcOnLoad=True)  # Excel/LibreOffice tính lại công thức khi mở
     wb.save(a.out)
     print(f"Đã ghi {a.out} ({len(items)} item, {len(plats)} nền tảng)")
 

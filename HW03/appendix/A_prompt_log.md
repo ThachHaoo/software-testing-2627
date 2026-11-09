@@ -1075,4 +1075,44 @@ Bước 6: viết `RUN_retake.md`.
 
 ---
 
-**Tổng:** 27 lượt; Claude Opus 5.5 25 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27); Claude (không rõ model) 2 lượt (#17, #21).
+## #28 | 02:47 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 4/6b:
+1. R-M5: dùng lại ảnh M3/M4 nếu thấy đủ navbar đã đăng nhập (tên, Đăng xuất, Giỏ hàng) → ghi tham chiếu trong RUN_retake/report, không chép file trùng; ảnh nào không đủ → báo. B3, B4 (phần tráo tên): đổi tên theo tên đích trong RUN_retake.md (SV đồng ý), nén, commit "HW03[T1] 4/6a2: sửa nhãn ảnh B3/B4, M5 dùng ảnh M3/M4".
+2. merge_platform.py: gộp auto + manual vào checklist.json theo V1 (lệch → kết quả trình duyệt thật + ghi nguyên nhân lệch). build_excel.py → excel/23120255_HW03_Checklist.xlsx (recalc, 0 lỗi công thức). HW03/bugs/failed_list.md: Failed (item × nền tảng), kiểm trùng issues.json + HW02 BUG-xx của tôi → cột "issue trùng"/"MỚI".
+3. D1=a: chèn khung marker REPORT:U1 (sessions, summary) và REPORT:T1 (checklist summary, cross-platform) vào report; điền bảng T1 từ checklist.json.
+Commit "HW03[T1] 4/6b: gộp kết quả, Excel, danh sách Failed". on_stop.py --manual. Báo cáo ≤ 12 dòng: Passed/Failed/N/A/Blocked theo nền tảng; số Failed MỚI / trùng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Step 1 first: check navbar in M3/M4 images.
+
+Ảnh khớp. Cập nhật RUN_retake.md.
+
+Step 2: merge. Read merge_platform.py.
+
+Gộp kết quả: thấy đúng 8 chỗ lệch L1–L8 và auto Blocked CL-27/CL-48. Giờ viết script gộp.
+
+Excel COM có sẵn → recalc + đếm lỗi công thức qua Excel.
+
+Viết script PowerShell recalc có retry khi Excel báo bận.
+
+Excel: 21 công thức, 0 lỗi, khớp JSON. Giờ làm failed_list — tìm issues.json và BUG HW02.
+
+Step 3: report markers. Xem cấu trúc report.
+
+Chèn marker vào report (giữ dòng 📝 của SV).
+
+Phát hiện: P3 CL-30/CL-48 Failed do `TimeoutError` của harness, không phải do SUT. Rà toàn bộ ô auto Failed vì lỗi kỹ thuật.
+```
+*File AI ghi/gửi trong lượt này:* `RUN_retake.md`, `merge_hw03.py`, `recalc_xlsx.ps1`, `failed_list_hw03.py`, `report_t1_hw03.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 28 lượt; Claude Opus 5.5 26 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28); Claude (không rõ model) 2 lượt (#17, #21).

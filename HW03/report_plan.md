@@ -96,6 +96,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 05/11 Claude Code: cài Firefox của Playwright (131.0), thêm project P3 (Playwright `_android`) vào harness; sửa lỗi reporter.ts ghi 0 item (`TestResult.annotations` chưa có ở 1.48) – phát hiện khi smoke CL-03.
 - 10/11 Claude Code: tạo skill `usability-evaluation` (SKILL.md, 2 reference, 3 asset, 6 script); kiểm plan/kit HW03 bằng `check_kit.py` (0 lỗi, không sửa); thử `sus_score.py` trên 2 phiếu giả ở thư mục tạm (không commit).
 - 10/11 Claude Code: kiểm ảnh/kết quả chạy tay (`checklist/run_check.md`), nén + đổi tên ảnh đạt (`tools/compress_hw03.py`, gốc ở `evidence_raw/` không nộp), chuẩn hoá giá trị Pass/Fail → Passed/Failed, CL-64 → Blocked (Q2) và metadata (tiêu đề P2, Android 14) trong `runs/*_manual_*` theo yêu cầu SV; không sửa notes.
+- 10/11 Claude Code (4/6a2–4/6b): đổi tên/nén ảnh B3/B4 theo bảng SV duyệt, M5 dùng lại ảnh M3/M4; gộp auto + tay vào `checklist.json` (`tools/merge_hw03.py`: CSV từ file tay, ánh xạ tên ảnh, V1, ghi `nguon_kq` + `lech_auto_tay`); Excel (`build_excel.py`, thêm fullCalcOnLoad; kiểm bằng Excel: 21 công thức, 0 lỗi); `bugs/issues.json` (gh issue list) + `bugs/failed_list.md` (`tools/failed_list_hw03.py`, AI đối chiếu trùng theo tiêu đề issue, SV xác nhận); chèn marker REPORT:T1/U1 vào report và điền 2 bảng T1 (`tools/report_t1_hw03.py`).
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
