@@ -1,6 +1,6 @@
 # HW03 – GUI & Usability · Kế hoạch nộp bài (report_plan)
 
-Lê Tấn Hiệp – 23120255 · Deadline **07/11/2026** (giờ: `[...]`) · Cấp độ AI: **Cấp 4** · Bloom-AI: **G9.3 + G9.4** (theo đề §3, §8)
+Lê Tấn Hiệp – 23120255 · Deadline **10:00 11/11/2026** · Cấp độ AI: **Cấp 4** · Bloom-AI: **G9.3 + G9.4** (theo đề §3, §8)
 
 ## a. Biểu mẫu AI
 
@@ -99,6 +99,11 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - SV tự làm hoàn toàn: tuyển + danh sách 7 người, điều phối phiên, ghi chú quan sát, câu trả lời SUS, ảnh cross-platform có overlay, bug report, Critique, verdict Audit, điểm tự chấm, giọng video.
 - Prompt log: trích tự động bằng `tools/extract_prompt_log.py` (hook `on_stop.py`); Section/Mục đích/Xử lý do em ghi.
 
-## h. Lịch (SV: làm trong 04/11)
+## h. Lịch (deadline 10:00 thứ Tư 11/11/2026)
 
-1. Khung HW03 + đổi `hw.toml` → 2. AI nháp checklist C2 → đóng băng → SV review + thêm item 🔒 → 3. AI nháp gói usability → SV duyệt → pilot → sửa → 4. Chạy checklist P1/P2/P3 (xen giữa các phiên) → 5. 7 phiên → 6. Bug (SV viết) + issue → 7. Phân tích usability → 8. Report, Critique, Audit, form, README, skill + video, zip.
+| Khi | Việc |
+|---|---|
+| T2 09/11 tối | Chạy tay checklist (P1, P2, P3) theo RUN.md |
+| T3 10/11 ngày | T1 bước 4/6 (gộp kết quả P1–P3) + form AI-02/03/05 |
+| T3 10/11 tối | Pilot + 7 phiên usability (S1–S7) |
+| Đêm T3 → sáng T4 11/11 | Phân tích usability + report + zip; nộp trước 10:00 |

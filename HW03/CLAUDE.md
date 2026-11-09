@@ -5,7 +5,7 @@ Phần chung (vai trò, khối báo cáo, giới hạn AI, prompt log, git, zip,
 ## 1. Đề và rubric
 
 - Đề: `context/HW03_assignment.md` (pdftotext từ `2026.HW03.GUI Usability_En.pdf`). Slide: `context/private/S13_GUI Testing & Usability Testing.pdf`, `context/private/EN.GUI + Usability + Compatibility Testing AI-First (Combined).pdf`.
-- Cấp độ AI **Cấp 4**, Bloom-AI **G9.3 + G9.4**. Deadline 07/11/2026 (giờ xem Moodle).
+- Cấp độ AI **Cấp 4**, Bloom-AI **G9.3 + G9.4**. Deadline **10:00 11/11/2026** (Moodle).
 - Kế hoạch nộp, mâu thuẫn trong đề (M1–M11), quyết định, khai Audit/Disclosure: **`HW03/report_plan.md`** (không nộp – `export-ignore`).
 
 | # | Mục | Điểm |
