@@ -80,7 +80,7 @@ def table(P, sel):
 md = [
     "# RUN – chạy tay checklist C2 (T1 bước 3, sinh bằng `HW03/tests/gen_run.py`)",
     "",
-    f"Nguồn: `checklist.json` ({doc['meta'].get('version', '')}); {len(items)} item. Phần tự động (Playwright, P1 Chrome + P2 Firefox của Playwright + P3 Chrome Android thật qua `_android`) chạy trước, ghi `auto_status`; **verdict chính thức = lượt chạy tay trên trình duyệt thật** (report_plan E2). Expected không đổi; procedure sai → sửa RUN.md trước khi chạy.",
+    f"Nguồn: `checklist.json` ({doc['meta'].get('version', '')}); {len(items)} item. Phần tự động (Playwright, P1 Chrome 157 – chỉ tham chiếu vì P1 chạy tay trên Cốc Cốc 160 (Q1) + P2 Firefox của Playwright + P3 Chrome Android thật qua `_android`) chạy trước, ghi `auto_status`; **verdict chính thức = lượt chạy tay trên trình duyệt thật** (report_plan E2). Expected không đổi; procedure sai → sửa RUN.md trước khi chạy.",
     "",
     "## 1. Mỗi nền tảng = 1 lượt",
     "",

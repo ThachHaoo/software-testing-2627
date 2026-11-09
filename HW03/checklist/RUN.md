@@ -1,6 +1,6 @@
 # RUN – chạy tay checklist C2 (T1 bước 3, sinh bằng `HW03/tests/gen_run.py`)
 
-Nguồn: `checklist.json` (v2 – chốt sau review SV); 74 item. Phần tự động (Playwright, P1 Chrome + P2 Firefox của Playwright + P3 Chrome Android thật qua `_android`) chạy trước, ghi `auto_status`; **verdict chính thức = lượt chạy tay trên trình duyệt thật** (report_plan E2). Expected không đổi; procedure sai → sửa RUN.md trước khi chạy.
+Nguồn: `checklist.json` (v2 – chốt sau review SV); 74 item. Phần tự động (Playwright, P1 Chrome 157 – chỉ tham chiếu vì P1 chạy tay trên Cốc Cốc 160 (Q1) + P2 Firefox của Playwright + P3 Chrome Android thật qua `_android`) chạy trước, ghi `auto_status`; **verdict chính thức = lượt chạy tay trên trình duyệt thật** (report_plan E2). Expected không đổi; procedure sai → sửa RUN.md trước khi chạy.
 
 ## 1. Mỗi nền tảng = 1 lượt
 
@@ -37,7 +37,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 
 ## 4. Bảng theo nền tảng
 
-### P1 – Chrome trên Windows (15 item chạy tay)
+### P1 – Cốc Cốc (Chromium) trên Windows (15 item chạy tay)
 
 #### Bước A – ngay sau khi restart backend (tài khoản chưa có đơn)
 

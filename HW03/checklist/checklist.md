@@ -4,7 +4,7 @@
 
 - SUT: tkob-team/eshop-sut @ de0f48f
 - Căn cứ: ../eshop-sut/README.md (SRS v2.0) FR-02, FR-03, FR-04, FR-10, FR-11, FR-21…FR-24, SEC-04; slide GUI/Usability (checklist theo control, Nielsen 10, Norman 6, Shneiderman 8)
-- Nền tảng: P1 = Chrome trên Windows; P2 = Firefox trên Windows; P3 = Chrome Android (POCO F5, adb reverse)
+- Nền tảng: P1 = Cốc Cốc (Chromium) trên Windows; P2 = Firefox trên Windows; P3 = Chrome Android (POCO F5, adb reverse)
 
 ## Thống kê
 

@@ -5,7 +5,8 @@
 | OS (PC) | Windows 11 Home Single Language 10.0.26200 | P1, P2 |
 | Node.js | v24.15.0 | backend :3000, vite :5173 |
 | Playwright | 1.48.2 | `HW03/tests` |
-| P1 – Google Chrome (Windows) | 157.0.8103.39 | cài mặc định ở Program Files; Playwright dùng `channel: "chrome"` (cả lượt auto và chạy tay) |
+| P1 – Cốc Cốc (Windows) | 160.0.106 (64 bit) | **lượt chạy tay chính thức P1** (nhân Chromium; quyết định Q1) – máy Asus Vivobook X1505VA |
+| P1 tham chiếu – Google Chrome (Windows) | 157.0.8103.39 | chỉ lượt auto Playwright `channel: "chrome"` (tham chiếu, không phải verdict) |
 | P2 – Mozilla Firefox (Windows, bản thật) | 159.0.1 | chạy tay P2 (verdict chính thức) |
 | P2 – Firefox của Playwright (`firefox-1465`) | 131.0 | chỉ lượt auto (`auto_status`); khác bản thật → không thay chạy tay |
 | P3 – Chrome Android | 156.0.8078.79 | POCO F5 (model 23049PCD8G), Android 14, USB debugging + `adb reverse` |

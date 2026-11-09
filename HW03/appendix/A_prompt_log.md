@@ -981,6 +981,21 @@ Lỗi ở script (regex bắt nhầm "Lời mở đầu"), không phải kit. S�
 HW03 plan + kit: 0 lỗi, trùng bản đóng băng v1. Sửa placeholder template cho khỏi cảnh báo, rồi thử sus_score.
 
 Số tay khớp: S01 = 82,5, S02 = 57,5, SD = 17,7. Lỗi nhỏ: dòng chú thích dính ngay sau bảng (GFM sẽ coi là hàng bảng). Sửa.
+
+Skill chạy đúng. Ghi khai Audit, chạy on_stop, commit chỉ skill + prompt log (không đụng file chạy tay của SV).
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** A + B xong, 2 commit: `99a64dc HW03: deadline thật 11/11 10:00` và `78c13d8 HW03[T2] 2/10: skill usability-evaluation`.
+- **A:** đã sửa deadline thành 10:00 11/11/2026 ở `HW03/CLAUDE.md:8` và report_plan dòng 3. Mục h thay bằng bảng lịch 4 mốc (T2 tối → sáng T4).
+- **B:** skill ở `.claude/skills/usability-evaluation/`, gồm SKILL.md (bước 0–6 và giới hạn AI), 2 reference, 3 asset, 6 script. `sus_score.py` báo lỗi thay vì điền thay khi phiếu thiếu SUS/SEQ, và từ chối phiếu có chuỗi số giống SĐT hoặc có email.
+- **Áp bước 0–1 cho HW03:** `check_kit.py` trên plan.md + participant_kit.md ra 0 lỗi; hai file trùng bản đóng băng v1, không sửa.
+- **Thử 2 phiếu giả (thư mục tạm, không commit):** SUS 82,5 và 57,5, khớp tính tay; SD 17,7; thời gian, hoàn thành, benchmark tính đúng; ghi bảng giữa marker được. kit_diff, bug_facts, new_session cũng chạy đúng.
+- **Lỗi script, đã sửa:** check_kit bắt nhầm mục "Lời mở đầu"; sus_score để dòng chú thích dính vào bảng.
+- **Kiểm tra:** check_kit 0 lỗi; sus_score đã chạy thử; on_stop.py --manual: prompt log 25 lượt. Không có lint/test tự động cho skill (Not run).
+- **Cần quyết định:**
+  - D1 – Report chưa có marker `<!-- REPORT:U1:usability_sessions/usability_summary:START/END -->`. Phương án: (a) AI chèn khung marker vào report, (b) SV tự chèn.
+  - D2 – Có nhiều file chạy tay của bạn chưa commit: ảnh `evidence/P1–P3`, `runs/*_manual_*`, `runs/*_auto_*.json`, ảnh auto bị ghi đè, xoá 3 `.gitkeep`. Mình không động vào. Phương án: (a) bạn tự commit, (b) bảo mình commit cùng bước 4/6 gộp kết quả.
+- **Nhắc push:** bạn tự push 2 commit mới (`99a64dc`, `78c13d8`); `7ba0785` cũng chưa push nếu bạn chưa push trước đó.
 ```
 *File AI ghi/gửi trong lượt này:* `SKILL.md`, `plan-9-parts.md`, `schema-session.md`, `session_template.json`, `participant_kit_template.md`, `findings_template.md`, `sus_score.py`, `freeze.py`, `check_kit.py`, `kit_diff.py`, `new_session.py`, `bug_facts.py`
 
@@ -988,4 +1003,76 @@ Số tay khớp: S01 = 82,5, S02 = 57,5, SD = 17,7. Lỗi nhỏ: dòng chú thí
 
 ---
 
-**Tổng:** 25 lượt; Claude Opus 5.5 23 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25); Claude (không rõ model) 2 lượt (#17, #21).
+## #26 | 02:11 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 4/6 – kiểm + gộp. KHÔNG sửa chữ tôi viết trong runs/*_manual_*; chỉ liệt kê.
+1. Kiểm (chỉ đọc) → HW03/checklist/run_check.md:
+   a. Ảnh evidence/P1–P3 (xem từng ảnh): có overlay "23120255 · Lê Tấn Hiệp · email"; thấy tên trình duyệt/thiết bị + URL localhost; không lộ đường dẫn C:\Users\…, token, chrome://version; ảnh nhoè/cắt mất vùng lỗi. Đủ: mỗi item manual Failed ≥ 1 ảnh; mỗi màn × nền tảng 1 ảnh Task 3 (Z1: item auto Failed dùng ảnh phần tử).
+   b. runs/*_manual_*: item nào chưa có kết quả; giá trị ngoài Passed/Failed/N/A; Failed thiếu Notes; N/A thiếu mã giả định; Notes mâu thuẫn với expected (vd ghi số liệu đạt ngưỡng mà chấm Failed).
+   c. So auto ↔ manual cùng item/nền tảng: lệch → bảng để tôi quyết verdict.
+   Dừng, báo cáo phần a–c nếu có lỗi chặn (thiếu kết quả/ảnh); không chặn thì làm tiếp.
+2. Nén + đổi tên ảnh như HW02D (compress_manual.py; bản gốc → thư mục gitignore), tên P<n>_<id>_<k>.png. Commit "HW03[T1] 4/6a: SV chạy tay P1/P2/P3" (runs/, evidence/ đã nén, khôi phục .gitkeep nếu cần).
+3. merge_platform.py: gộp auto + manual vào checklist.json (ket_qua theo nền tảng; item lệch để "CHỜ SV" trong bảng 1c, không tự chọn). build_excel.py → excel/23120255_HW03_Checklist.xlsx (recalc, 0 lỗi công thức). Danh sách Failed (item × nền tảng) + kiểm trùng issues.json (trùng → số issue; HW02 BUG-xx của tôi) → HW03/bugs/failed_list.md. Commit "HW03[T1] 4/6b: gộp kết quả, Excel, danh sách Failed".
+4. D1=a: chèn khung marker REPORT:U1 (sessions, summary) và REPORT:T1 (checklist summary, cross-platform) vào report; chạy script điền bảng T1.
+on_stop.py --manual. Báo cáo ≤ 15 dòng: số item Passed/Failed/N/A theo nền tảng, số Failed mới (chưa có issue) / trùng, các điểm cần tôi quyết.
+```
+
+**Output:**
+```
+Bắt đầu bước 1: đọc file kết quả chạy tay.
+
+Ảnh nhỏ sẵn (≤ 225 KB). Xem 1 ảnh mẫu để biết bố cục trước.
+
+Đang xem ảnh: P1 + P2 xong (phát hiện nhãn M lệch, ảnh hoán đổi, lộ tài khoản đã lưu). Còn P3.
+
+P3 không có overlay. Xem nốt các ảnh P3 còn lại để xác nhận.
+
+Ảnh xem xong. Giờ so auto ↔ manual (1c).
+
+Đủ dữ kiện. Có lỗi chặn (thiếu ảnh M5, 26 ảnh P3 không overlay, ảnh đặt nhầm tên) → ghi `run_check.md` rồi dừng theo lệnh.
+```
+*File AI ghi/gửi trong lượt này:* `run_check.md`
+
+**Xử lý:** [...]
+
+---
+
+## #27 | 02:40 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 4/6 – xử lý run_check (chưa gộp):
+1. Kiểm lại ảnh evidence/P1–P3 (xem từng ảnh, chỉ đọc): B1 – mọi ảnh P3 có overlay "23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn"; B5 – P1_SV-02-3/4 không còn lộ Gmail/tài khoản khác. Liệt kê ảnh còn lỗi cùng B2 (thiếu M5), B3 (nhãn ảnh sai), B4 (CL-52/CL-64 tráo; P3_CL-52_1 sai màn).
+2. Ảnh đạt → nén + đổi tên P<n>_<id>_<k> như HW02D (bản gốc → evidence_raw/, thêm .gitignore). Ảnh còn lỗi hoặc còn lộ thông tin → để evidence_raw/, KHÔNG commit.
+3. runs/*_manual_*: chỉ chuẩn hoá giá trị (Pass→Passed, Fail→Failed) và metadata theo R-list (tiêu đề file P2, Android 14); không sửa Notes.
+4. report_plan mục e: Q1 – P1 chính thức = Cốc Cốc 160/Windows 11 (Chromium; SV không dùng Chrome), lượt auto P1 = Chrome 157 Playwright chỉ tham chiếu, ghi vào "lệch so với kế hoạch"; Q2=a – CL-64 Blocked bởi #111; V1 – lệch auto↔tay lấy trình duyệt thật, ghi nguyên nhân; overlay = "23120255 - Lê Tấn Hiệp - email" (P1/P2 Sticky Notes; P3 thêm chữ bằng trình sửa ảnh); B5 che bằng ô đen (khai AI-05). Sửa environment.md + gen_run.py theo P1 = Cốc Cốc.
+5. Commit "HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt" (message ghi "AI chuẩn hoá giá trị/metadata, nén/đổi tên ảnh theo yêu cầu SV").
+6. HW03/checklist/RUN_retake.md: chỉ những ảnh/item còn phải làm (liệt kê tên đích).
+on_stop.py --manual. Báo cáo ≤ 8 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Ảnh P3 (trừ M1–M4) và P1_SV-02-3/4 vừa được sửa. Xem lại.
+
+Kết quả kiểm lại: P3 CL/SV có overlay, nhưng 5 ảnh P3 M1–M4 vẫn chưa có. B5 đã che. B2/B3/B4 chưa sửa. Xem `compress_manual.py`.
+
+Kiểm overlay còn đọc được sau nén.
+
+Ảnh nén vẫn đọc rõ chữ. Bước 3: chuẩn hoá runs (chỉ cột status + metadata).
+
+Bước 4: report_plan, environment.md, gen_run.py.
+
+Bước 6: viết `RUN_retake.md`.
+```
+*File AI ghi/gửi trong lượt này:* `RUN_retake.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 27 lượt; Claude Opus 5.5 25 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27); Claude (không rõ model) 2 lượt (#17, #21).

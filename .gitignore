@@ -14,3 +14,6 @@ HW02/D_FR20/manual_raw/
 
 # ~/.gitignore_global chặn CLAUDE.md — repo này cần commit CLAUDE.md của từng bài
 !CLAUDE.md
+
+# ảnh gốc chạy tay HW03 (bản nén nằm ở evidence/)
+HW03/checklist/evidence_raw/

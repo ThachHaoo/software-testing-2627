@@ -1,4 +1,4 @@
-# P1 – kết quả chạy tay (Chrome trên Windows)
+# P1 – kết quả chạy tay (Cốc Cốc (Chromium) trên Windows)
 
 - Trình duyệt / phiên bản:
 - OS / thiết bị:

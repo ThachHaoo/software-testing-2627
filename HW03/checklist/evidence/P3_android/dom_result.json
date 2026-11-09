@@ -1,0 +1,132 @@
+{
+  "url": "http://localhost:5173/login",
+  "ua": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+  "viewport": "392x766",
+  "title": "frontend-web",
+  "lang": "en",
+  "h1": [],
+  "headings": [
+    "H2: Đăng Ký"
+  ],
+  "horizontal_scroll": false,
+  "fields": [
+    {
+      "tag": "input",
+      "type": "text",
+      "required": true,
+      "disabled": false,
+      "label": "Username",
+      "label_linked": false,
+      "label_has_asterisk": false,
+      "placeholder": null
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "required": true,
+      "disabled": false,
+      "label": "Mật khẩu",
+      "label_linked": false,
+      "label_has_asterisk": false,
+      "placeholder": null
+    }
+  ],
+  "buttons": [
+    {
+      "text": "Sign In",
+      "type": "submit",
+      "bg": "rgb(37, 99, 235)",
+      "color": "rgb(255, 255, 255)",
+      "font": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\" 16px",
+      "x": 49,
+      "y": 424,
+      "w": 295,
+      "h": 40
+    }
+  ],
+  "tab_order": [
+    {
+      "tag": "button",
+      "text": "Sign In",
+      "tabindex": 1,
+      "y": 424
+    },
+    {
+      "tag": "a",
+      "text": "EShop",
+      "tabindex": 0,
+      "y": 16
+    },
+    {
+      "tag": "a",
+      "text": "Giỏ hàng",
+      "tabindex": 0,
+      "y": 20
+    },
+    {
+      "tag": "a",
+      "text": "Đăng nhập",
+      "tabindex": 0,
+      "y": 20
+    },
+    {
+      "tag": "a",
+      "text": "Đăng ký",
+      "tabindex": 0,
+      "y": 20
+    },
+    {
+      "tag": "input",
+      "text": "text",
+      "tabindex": 0,
+      "y": 241
+    },
+    {
+      "tag": "input",
+      "text": "text",
+      "tabindex": 0,
+      "y": 330
+    },
+    {
+      "tag": "a",
+      "text": "Quên mật khẩu?",
+      "tabindex": 0,
+      "y": 389
+    },
+    {
+      "tag": "a",
+      "text": "Đăng ký ngay",
+      "tabindex": 0,
+      "y": 481
+    }
+  ],
+  "messages": [],
+  "nav_links": [
+    {
+      "text": "EShop",
+      "href": "/",
+      "aria_current": null,
+      "cls": "text-2xl font-bold"
+    },
+    {
+      "text": "Giỏ hàng",
+      "href": "/cart",
+      "aria_current": null,
+      "cls": "hover:underline"
+    },
+    {
+      "text": "Đăng nhập",
+      "href": "/login",
+      "aria_current": null,
+      "cls": "hover:underline"
+    },
+    {
+      "text": "Đăng ký",
+      "href": "/register",
+      "aria_current": null,
+      "cls": "hover:underline"
+    }
+  ],
+  "innerhtml_risk": []
+}
+{url: 'http://localhost:5173/login', ua: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537…like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36', viewport: '392x766', title: 'frontend-web', lang: 'en', …}

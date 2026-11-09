@@ -66,7 +66,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | U | Usability **U1**: đăng nhập (tài khoản cho sẵn) → tìm SP → thêm giỏ → thanh toán có mã giảm giá → xem đơn trong Hồ sơ. Moderated, trực tiếp trên PC của SV. Restart backend trước mỗi phiên |
 | M2 | Toàn bộ checklist × 3 nền tảng |
 | M3 | Có N/A + giả định |
-| P1 | Chrome trên Windows (localhost:5173) |
+| P1 | ~~Chrome trên Windows~~ → **Cốc Cốc 160 trên Windows 11** (Q1, 10/11) (localhost:5173) |
 | P2 | Firefox trên Windows (cài mới) |
 | P3 | Chrome Android trên POCO F5 qua `adb reverse tcp:5173` + `tcp:3000` — **đã kiểm chứng 04/11 17:35** (adb 37.0.1 ở `D:\Tools\platform-tools`, web chạy `--host 127.0.0.1`) |
 | BS | Không dùng BrowserStack/LambdaTest (M11) |
@@ -79,6 +79,11 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | X2 | (a) `HW03/CLAUDE.md` không nộp: `export-ignore` trong `HW03/.gitattributes` |
 | E2 | (b) Playwright tự chạy các item kiểm được qua DOM/bàn phím trên P1 (Chrome channel) + P2 (Firefox của Playwright) → `auto_status`; SV chạy tay phần còn lại + toàn bộ P3. **Verdict chính thức = lượt trên trình duyệt thật** |
 | H1 | Ngưỡng màu cho auto: CL-04 xanh dương = hue 190–250°, CL-05 đỏ = hue 340–20°, độ bão hoà ≥ 0,3 (SV: "nhìn thấy đúng xanh dương/đỏ là được"); expected không đổi |
+| Q1 | P1 chính thức = **Cốc Cốc 160.0.106 / Windows 11** (nhân Chromium; SV không dùng Chrome hằng ngày). Lượt auto P1 = Chrome 157 qua Playwright `channel: "chrome"`: chỉ để tham chiếu. Ghi vào mục "lệch so với kế hoạch" của report |
+| Q2 | (a) CL-64 = **Blocked** trên P1/P2/P3: form Hồ sơ chặn bởi validation SĐT (issue nhóm #111) trước khi kiểm được trường hợp tắt backend |
+| V1 | Lệch auto ↔ tay: **verdict lấy lượt trên trình duyệt thật** (tay), ghi nguyên nhân lệch (vd auto giả lập locale vi-VN, còn Firefox/Chrome Android thật của SV dùng locale máy → khác định dạng tiền/ngày) |
+| O2 | Overlay thực tế = `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn` (dấu "-" thay "·" của O1). P1/P2: cửa sổ Sticky Notes; P3: thêm chữ bằng trình sửa ảnh của máy |
+| B5 | Ảnh `P1_SV-02_3/4` lộ email cá nhân và tài khoản đã lưu → SV che bằng ô đen (khai trong AI-05) |
 
 **Còn chờ SV chốt:** (không còn)
 
@@ -90,6 +95,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - AI phát hiện khi đọc code: login_attempts +2 (server.js:54), khoá 180 s (server.js:57) ≠ FR-02 – chờ CL-52 chạy tay. Kiểm trùng: đã có #1, #2, #3 (`checklist/issue_dup_FR02.md`).
 - 05/11 Claude Code: cài Firefox của Playwright (131.0), thêm project P3 (Playwright `_android`) vào harness; sửa lỗi reporter.ts ghi 0 item (`TestResult.annotations` chưa có ở 1.48) – phát hiện khi smoke CL-03.
 - 10/11 Claude Code: tạo skill `usability-evaluation` (SKILL.md, 2 reference, 3 asset, 6 script); kiểm plan/kit HW03 bằng `check_kit.py` (0 lỗi, không sửa); thử `sus_score.py` trên 2 phiếu giả ở thư mục tạm (không commit).
+- 10/11 Claude Code: kiểm ảnh/kết quả chạy tay (`checklist/run_check.md`), nén + đổi tên ảnh đạt (`tools/compress_hw03.py`, gốc ở `evidence_raw/` không nộp), chuẩn hoá giá trị Pass/Fail → Passed/Failed, CL-64 → Blocked (Q2) và metadata (tiêu đề P2, Android 14) trong `runs/*_manual_*` theo yêu cầu SV; không sửa notes.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
