@@ -76,4 +76,7 @@ Làm trong commit đầu của bài (`HWxx: khung bài …`), trước lượt A
 4. **Đề + slide**: `context/HWxx_assignment.md` (pdftotext từ PDF đề); slide → `context/private/` (gitignore, không commit).
 5. **`HWxx/.gitattributes`**: file không nộp (vd `report_plan.md`) → `export-ignore`; thử `git archive --format=zip -o <tmp>.zip HEAD HWxx` rồi liệt kê để chắc file đó không có trong zip.
 6. **Transcript phiên thảo luận claude.ai** của bài: tải về, đặt `.transcripts/claude-ai_session_<HW>_p1.jsonl` (phần tiếp theo `_p2`, `_p3`…); không push, không nộp.
-7. `python tools/hooks/on_stop.py --manual` → commit prompt log; nhắc SV push.
+7. **Hỏi SV ngay từ đầu** (ghi vào `HWxx/CLAUDE.md`): **deadline thật** (giờ + ngày, đối chiếu Moodle, không chỉ đề) và **trình duyệt/thiết bị SV dùng thật** (phiên bản) – nền tảng kế hoạch phải là thứ SV chạy tay được.
+8. **Quy tắc ảnh chốt trước lượt chạy tay** (ghi vào RUN/hướng dẫn): nội dung overlay theo đề, chụp gì (item Failed, ảnh tổng quan…), tên file theo item `P<n>_<id>_<k>.png`, thư mục gốc gitignore (`evidence_raw/`) + thư mục nộp.
+9. **Khung cho SV điền** (file kết quả chạy, item SV bổ sung, phiếu phiên…) sinh từ schema/check script của skill, không viết tay – để check script bắt được trường trống/sai giá trị.
+10. `python tools/hooks/on_stop.py --manual` → commit prompt log; nhắc SV push.

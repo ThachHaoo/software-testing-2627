@@ -110,3 +110,15 @@ Skill dùng trong repo:
 - Lỗi 4xx/5xx đọc body bằng `try/catch` + `GetResponseStream()` (đặt `Position = 0`).
 - Mảng JSON rỗng: đọc `.Content` của `Invoke-WebRequest` (bọc `@(Invoke-RestMethod …)` cho `[]` ra Count = 1).
 - Dừng server nền: tìm PID theo cổng `(Get-NetTCPConnection -State Listen -LocalPort 3000).OwningProcess`.
+
+## 6. Bài học kỹ thuật (rút từ HW03)
+
+- Playwright 1.48: `TestResult` không có `annotations` → reporter đọc `(r as any).annotations ?? []`.
+- Firefox của Playwright không hỗ trợ CDP throttle / quyền clipboard → item cần mạng chậm/dán chạy tay trên Firefox.
+- Locale/viewport giả lập (`locale: 'vi-VN'`) ≠ trình duyệt thật của SV (định dạng tiền/ngày khác) → verdict lấy lượt tay, ghi nguyên nhân lệch.
+- Ô auto Failed chỉ vì `TimeoutError` (không assertion nào fail) = lỗi harness → **Blocked**, không Failed, không lập bug.
+- Playwright `_android`: bật flag Chrome *Enable command line on non-rooted devices*; dùng tab có sẵn (tab nền mới chụp phần tử lỗi).
+- `adb reverse` chỉ tới được Vite khi chạy `npx vite --host 127.0.0.1` (không dùng `localhost` ⇄ IPv6).
+- Web SUT gọi cứng `http://localhost:3000` → chạy qua tunnel cần nhánh local đổi sang `/api` + Vite `proxy` + `server.allowedHosts`.
+- Python của MSYS2 (`/c/msys64/ucrt64`) cài gói bằng `pacman -S mingw-w64-ucrt-x86_64-python-<gói>`, không `pip`. Script `.ps1` có tiếng Việt chạy bằng Windows PowerShell 5.1 phải lưu **UTF-8 có BOM**; `param()` phải đứng đầu file.
+- Ảnh: xem **từng ảnh** trước khi commit (repo có thể public: email, tài khoản đã lưu, SĐT); ảnh gốc để thư mục gitignore (`evidence_raw/`), chỉ commit bản đã kiểm + nén.

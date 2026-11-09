@@ -4349,12 +4349,38 @@ Bạn nhớ push nhé: `git push` (còn 1 commit chưa push là `cfa861e`).
 
 ---
 
-## #90 | 03:35 10/11/2026 | Claude (không rõ model) | [...]
+## #90 | 03:35 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
 ```
 Tôi mới thêm transcript của claude.ai, giúp tôi chạy on_stop.py --manual rồi commit nó nhé
+```
+
+**Output:**
+```
+Đã chạy `on_stop.py --manual` và commit prompt log. Log giờ có 90 lượt (trước là 35); phần tăng thêm là từ `claude-ai_session_HW03_p1.jsonl`.
+
+- Commit: `c6e9465` HW03: prompt log thêm transcript phiên claude.ai (p1)
+- Git status sạch.
+- Bạn nên xem lại 55 lượt mới. Lượt nào thuộc bài khác lẫn vào thì thêm vào `exclude` trong `tools/hw.toml`. Phần Section / Mục đích / Xử lý của từng lượt bạn tự ghi trong `HW03/appendix/prompt_log_notes.toml`.
+
+Bạn nhớ push nhé: `git push`.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #91 | 03:41 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – bài học dùng chung (commit "harness: bài học từ HW03"):
+1. CLAUDE.md gốc: thêm mục "Bài học kỹ thuật" ≤ 15 dòng (giữ tổng ≤ 200 dòng): Playwright 1.48 không có TestResult.annotations; Firefox Playwright không throttle/clipboard; locale giả lập ≠ trình duyệt thật; timeout = Blocked không Failed; Playwright _android cần flag "Enable command line on non-rooted devices"; adb reverse cần vite --host 127.0.0.1; web gọi cứng localhost:3000 → tunnel cần nhánh đổi /api + proxy + allowedHosts; Python MSYS2 cài gói bằng pacman; kiểm từng ảnh trước khi commit (repo public), ảnh gốc ở thư mục gitignore.
+2. HARNESS_SETUP.md mục 6 (bắt đầu bài mới) thêm: hỏi SV deadline thật + trình duyệt/thiết bị dùng thật; quy tắc ảnh (overlay, tên file theo item) chốt trước lượt chạy tay; khung cho SV điền sinh từ schema/check script.
+on_stop.py --manual. Báo cáo ≤ 4 dòng. Nhắc tôi push.
 ```
 
 **Output:**
@@ -4366,4 +4392,4 @@ Tôi mới thêm transcript của claude.ai, giúp tôi chạy on_stop.py --manu
 
 ---
 
-**Tổng:** 90 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 81 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89); Claude (không rõ model) 7 lượt (#4, #51, #57, #69, #70, #79, #90).
+**Tổng:** 91 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 83 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).
