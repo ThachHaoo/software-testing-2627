@@ -1,33 +1,28 @@
-# Còn phải làm trước khi gộp (T1 4/6) – sau lượt kiểm 10/11
+# Còn phải làm trước khi nộp (T1 4/6) – cập nhật 10/11 sau 4/6a2
 
-Ảnh đạt đã nén + đổi tên vào `evidence/P*/` (commit 4/6a1). Ảnh dưới đây **đang ở `evidence_raw/`** (gitignore, chưa commit). Sửa xong → đặt vào `evidence_raw/<Px_dir>/` đúng tên đích → báo AI chạy `tools/compress_hw03.py`.
+Ảnh đạt đã nén + đổi tên vào `evidence/P*/`. Ảnh còn lỗi **đang ở `evidence_raw/`** (gitignore, chưa commit). Sửa xong → đặt vào `evidence_raw/<Px_dir>/` đúng tên đích → báo AI chạy `tools/compress_hw03.py`.
 
-## 1. Chụp / sửa ảnh (SV)
+## 1. Còn phải làm (SV)
 
 | # | Việc | Tên đích (`evidence_raw/...`) | Ghi chú |
 |---|---|---|---|
-| 1 | Thêm overlay `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn` (trình sửa ảnh của máy) | `P3_android/P3_M1_1.jpg`, `P3_M2_1.jpg`, `P3_M2_2.jpg`, `P3_M3_1.jpg`, `P3_M4_1.jpg` | 5 ảnh tổng quan Task 3 của P3 còn thiếu overlay. Nội dung đã đúng màn |
-| 2 | Chụp **M5 – Navbar khi đã đăng nhập** (có overlay, thấy URL) | `P1_chrome/P1_M5_1.png`, `P2_firefox/P2_M5_1.png`, `P3_android/P3_M5_1.jpg` | Hoặc chốt dùng ảnh M3/M4 (navbar có ở đầu trang) làm M5: báo AI để ghi vào README/report thay vì chụp |
-| 3 | P3 CL-52: ảnh khoá đăng nhập | `P3_android/P3_CL-52_1.jpg` | Ảnh hiện tại `P3_CL-52_1.jpg` chụp bảng Lịch sử đơn (sai màn). Có thể dùng ảnh `P3_CL-64_1.jpg` hiện tại (đăng nhập thất bại, có overlay) nếu đó đúng là ảnh của CL-52: xem mục 2 |
+| 1 | Thêm overlay `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn` (trình sửa ảnh của máy) | `P3_android/P3_M1_1.jpg`, `P3_M2_1.jpg`, `P3_M2_2.jpg`, `P3_M3_1.jpg`, `P3_M4_1.jpg` | 5 ảnh tổng quan Task 3 của P3. Nội dung đúng màn, chỉ thiếu overlay |
 
-## 2. Đổi tên (SV xác nhận → AI làm)
+## 2. M5 – Navbar khi đã đăng nhập: dùng lại ảnh M3/M4 (R-M5, không chép file trùng)
 
-| Ảnh hiện tại (`evidence_raw/`) | Nội dung thấy trong ảnh | Đổi thành (đề xuất) |
+| Nền tảng | Ảnh dùng cho M5 | Thấy trong ảnh |
 |---|---|---|
-| `P1_chrome/P1_M3_1.png` | Quên MK bước 2 | `P1_M2_1.png` (M2 = Quên MK; B1 đã có ở `P1_M2_2`) |
-| `P1_chrome/P1_M2_1.png` | /profile (Hồ sơ, chưa có đơn) | `P1_M3_1.png` |
-| `P2_firefox/P2_M2_1.png` | /login | `P2_M1_1.png` |
-| `P2_firefox/P2_M3_1.png` | Quên MK bước 2 | `P2_M2_1.png` (B1 đã có ở `P2_M2_2`) |
-| `P2_firefox/P2_M1_1.png` | /profile (Hồ sơ, chưa có đơn) | `P2_M3_1.png` |
-| `P2_firefox/P2_CL-52_1.png` | alert "Số điện thoại không hợp lệ…" (nội dung CL-64) | `P2_CL-64_1.png` |
-| `P2_firefox/P2_CL-64_1.png` | đăng nhập thất bại + Network (nội dung CL-52) | `P2_CL-52_1.png` |
-| `P3_android/P3_CL-64_1.jpg` | đăng nhập thất bại (nội dung CL-52) | `P3_CL-52_1.jpg` (thay ảnh sai màn ở mục 1.3) |
-| `P3_android/P3_CL-52_1.jpg` | bảng Lịch sử đơn | bỏ (không thuộc item nào) |
-| `evidence/P3_android/P3_CL-64_2.png` (đã commit) | alert SĐT (CL-64) | giữ, hoặc đổi thành `P3_CL-64_1.png` |
+| P1 | `evidence/P1_chrome/P1_M4_1.png` (cũng thấy ở `P1_M3_1.png`) | Giỏ hàng · Chào, Test User · Thoát |
+| P2 | `evidence/P2_firefox/P2_M4_1.png` (cũng thấy ở `P2_M3_1.png`) | Giỏ hàng · Chào, Test User · Thoát |
+| P3 | `evidence/P3_android/P3_M3_1.png` (sau khi xong mục 1) | Giỏ hàng · Chào, Test User · Thoát. `P3_M4_1` đã cuộn qua navbar → không dùng |
 
-## 3. File kết quả (SV)
+## 3. Đã xong ở 4/6a2 (SV đồng ý)
+
+- B3: P1 `M2_1` ↔ `M3_1`; P2 `M2_1`→`M1_1`, `M3_1`→`M2_1`, `M1_1`→`M3_1`.
+- B4: P2 `CL-52_1` ↔ `CL-64_1`; P3 ảnh khoá đăng nhập → `P3_CL-52_1`; ảnh Lịch sử đơn sai màn đổi thành `evidence_raw/P3_android/_bo_P3_lichsudon_sai-man.jpg` (không dùng). CL-64 P3 dùng `P3_CL-64_2.png`.
+
+## 4. File kết quả (SV)
 
 - `runs/P1_manual_20261109-2257.md`: dòng "Bắt đầu – kết thúc" và "Restart backend lúc" lệch ngày (R4).
-- Cả 3 file: "Mã đơn (seed_orders.py)" trống; bảng "Ảnh tổng quan Task 3" trống (AI điền bảng ảnh sau khi xong mục 1–2).
-- Cột `ảnh` ghi tên cũ (`P1_CL01_1.png`, `P1_SV01_1.png`…). AI tự ánh xạ sang tên mới khi gộp, không sửa file của SV.
-- Verdict cần SV xem lại (`run_check.md`): R9 (CL-08 P1), R11 (CL-09 P1), bảng lệch auto ↔ tay L1–L8. Theo V1 thì lấy kết quả tay, nhưng SV vẫn chốt từng dòng.
+- Cả 3 file: "Mã đơn (seed_orders.py)" trống (R8).
+- Cột `ảnh` trong file của SV ghi tên cũ; AI ánh xạ sang tên mới khi gộp (`evidence` trong `checklist.json`), không sửa file của SV.
