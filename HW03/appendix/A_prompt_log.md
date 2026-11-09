@@ -1167,4 +1167,38 @@ Chuyển CL-01 sang TRÙNG rồi chạy.
 
 ---
 
-**Tổng:** 29 lượt; Claude Opus 5.5 27 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29); Claude (không rõ model) 2 lượt (#17, #21).
+## #30 | 03:10 10/11/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 5/6b: tách G-02 → CL-13, CL-14 riêng; tách G-23 → CL-08, CL-09 riêng; G-13 <giữ | tách>. Kết quả kiểm trùng issue mới của tôi: <#160: trùng/liên quan, #165: …, #167: …, #169: …, #170: …> → nhóm trùng bỏ khung, ghi "trùng #xxx" vào failed_list. Đánh lại số BUG liên tục, sinh lại khung (chỉ dữ kiện), cập nhật bug_groups.md. Commit "HW03[T1] 5/6b: SV chốt nhóm bug". on_stop.py --manual. Báo cáo ≤ 5 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #31 | 03:12 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+G-13 gộp; #160 trùng, #165 trùng #167 trùng #169 trùng #170 trùng
+```
+
+**Output:**
+```
+Khung chưa ai sửa → xoá được và sinh lại. Cập nhật DUP + nhóm.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 31 lượt; Claude Opus 5.5 28 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31); Claude (không rõ model) 3 lượt (#17, #21, #30).

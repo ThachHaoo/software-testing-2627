@@ -1,7 +1,7 @@
 # BUG-69
 
 - **ID:** BUG-69
-- **Nhóm dữ kiện:** G-12 (CL-29)
+- **Nhóm dữ kiện:** G-12 (CL-28)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,11 +14,11 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### CL-29 – Mật khẩu mới hợp lệ theo FR-01 được chấp nhận
+### CL-28 – Mã OTP hiển thị có đúng 6 chữ số
 
 - Màn hình: Quên mật khẩu (bước 2)
-- Căn cứ: FR-03.6 (README.md:58, 34)
-- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #17 (#17 cùng thông báo "Mật khẩu quá yếu!" ở Đăng ký; Quên MK bước 2 chưa có issue)
+- Căn cứ: FR-03.2 (README.md:51)
+- Nền tảng Failed: P1, P2, P3
 
 **Môi trường**
 
@@ -29,22 +29,22 @@
 
 **Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
 
-- Tiền điều kiện (checklist): Dùng tài khoản test@eshop.com; restart backend sau khi kiểm để khôi phục mật khẩu Test1234!.
+- Tiền điều kiện (checklist): –
 - Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:334`
+- Test tự động: `HW03/tests/C2.spec.ts:321`
 
 **Expected (chép từ checklist)**
 
-> Với OTP đúng, Mật khẩu mới 'Abcdef1!' (8 ký tự, có hoa, thường, số, '!') → đổi thành công; đăng nhập lại bằng mật khẩu mới được. Fail nếu bị báo mật khẩu yếu.
+> Sau khi gửi email ở bước 1, mã OTP hiển thị trên màn hình có đúng 6 chữ số. Fail nếu mã có số chữ số khác 6.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: mật khẩu "Abcdef1!" không được chấp nhận · đăng nhập bằng "Abcdef1!": false; thông báo: ["Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."]
-- P2 (auto): Lỗi: Error: mật khẩu "Abcdef1!" không được chấp nhận · đăng nhập bằng "Abcdef1!": false; thông báo: ["Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."]
-- P3 (auto): Lỗi: Error: mật khẩu "Abcdef1!" không được chấp nhận · đăng nhập bằng "Abcdef1!": false; thông báo: ["Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."]
+- P1 (auto): Lỗi: Error: mã có 4 chữ số · mã hiển thị: 1846
+- P2 (auto): Lỗi: Error: mã có 4 chữ số · mã hiển thị: 9894
+- P3 (auto): Lỗi: Error: mã có 4 chữ số · mã hiển thị: 8382
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_CL-29_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-29_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-29_1.png`
+- P1: `../checklist/evidence/auto/P1_CL-28_1.png`, `../checklist/evidence/auto/P1_CL-28_2.png`
+- P2: `../checklist/evidence/auto/P2_CL-28_1.png`, `../checklist/evidence/auto/P2_CL-28_2.png`
+- P3: `../checklist/evidence/auto/P3_CL-28_1.png`, `../checklist/evidence/auto/P3_CL-28_2.png`

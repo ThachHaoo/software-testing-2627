@@ -88,6 +88,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | CL34 | CL-34 P2: giữ kết quả auto (Failed), ghi "chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật"; **loại khỏi danh sách lập bug** (5/6a) |
 | Q1-auto | 59 item auto của P1 lấy kết quả lượt Chrome 157 (Playwright), không chạy lại trên Cốc Cốc; khai trong mục "lệch so với kế hoạch" của report (5/6a) |
 | CL52-P3 | CL-52 P3: notes ghi "thiếu ảnh" (ảnh `P3_CL-52_1` chỉ thấy "Đăng nhập thất bại", không thấy trạng thái khoá) (5/6a) |
+| G-SV | SV chốt nhóm bug (5/6b): tách G-02 cũ (CL-13, CL-14) và G-23 cũ (CL-08, CL-09); G-13 giữ gộp; CL-04, CL-08, CL-40, CL-60, CL-62 trùng #160, #170, #169, #165, #167 → bỏ khung. Còn 28 nhóm → BUG-58…85 |
 
 **Còn chờ SV chốt:** (không còn)
 

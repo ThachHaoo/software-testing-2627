@@ -1,7 +1,7 @@
 # BUG-64
 
 - **ID:** BUG-64
-- **Nhóm dữ kiện:** G-07 (CL-38)
+- **Nhóm dữ kiện:** G-07 (CL-23)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,10 +14,10 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### CL-38 – Nhãn gắn với ô nhập (bấm nhãn → focus ô)
+### CL-23 – Thông báo lỗi validate hiển thị trong trang, phía trên nút submit
 
-- Màn hình: Đăng nhập, Hồ sơ
-- Căn cứ: Checklist Text box – 'Correct label'; WCAG 2.2 SC 1.3.1
+- Màn hình: Quên mật khẩu, Hồ sơ
+- Căn cứ: FR-22.4 (README.md:255); giả định GA3
 - Nền tảng Failed: P1, P2, P3
 
 **Môi trường**
@@ -31,20 +31,20 @@
 
 - Tiền điều kiện (checklist): –
 - Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:239`
+- Test tự động: `HW03/tests/C2.spec.ts:453`
 
 **Expected (chép từ checklist)**
 
-> Bấm vào chữ nhãn (vd 'Mật khẩu', 'Họ Tên') → con trỏ nhảy vào ô tương ứng. Fail nếu bấm nhãn không có tác dụng.
+> Gây lỗi: mật khẩu mới yếu (bước 2), SĐT sai định dạng (Hồ sơ). Thông báo lỗi xuất hiện trong trang, phía trên nút submit của form đó. Fail nếu lỗi hiện dưới nút hoặc chỉ hiện ở hộp thoại trình duyệt (alert) không gắn với vị trí nào trong form.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: /login: bấm nhãn "Username" không focus ô · Lỗi: Error: /login: bấm nhãn "Mật khẩu" không focus ô · Lỗi: Error: /profile: bấm nhãn "Họ Tên" không focus ô · Lỗi: Error: /profile: bấm nhãn "Số điện thoại" không focus ô · Lỗi: Error: /profile: bấm nhãn "Địa chỉ giao hàng" không focus ô · /login "Username": không focus · /login "Mật khẩu": không focus · /profile "Họ Tên": không focus · /profile "Số điện thoại": không focus · /profile "Địa chỉ giao hàng": không focus
-- P2 (auto): Lỗi: Error: /login: bấm nhãn "Username" không focus ô · Lỗi: Error: /login: bấm nhãn "Mật khẩu" không focus ô · Lỗi: Error: /profile: bấm nhãn "Họ Tên" không focus ô · Lỗi: Error: /profile: bấm nhãn "Số điện thoại" không focus ô · Lỗi: Error: /profile: bấm nhãn "Địa chỉ giao hàng" không focus ô · /login "Username": không focus · /login "Mật khẩu": không focus · /profile "Họ Tên": không focus · /profile "Số điện thoại": không focus · /profile "Địa chỉ giao hàng": không focus
-- P3 (auto): Lỗi: Error: /login: bấm nhãn "Username" không focus ô · Lỗi: Error: /login: bấm nhãn "Mật khẩu" không focus ô · Lỗi: Error: /profile: bấm nhãn "Họ Tên" không focus ô · Lỗi: Error: /profile: bấm nhãn "Số điện thoại" không focus ô · Lỗi: Error: /profile: bấm nhãn "Địa chỉ giao hàng" không focus ô · /login "Username": không focus · /login "Mật khẩu": không focus · /profile "Họ Tên": không focus · /profile "Số điện thoại": không focus · /profile "Địa chỉ giao hàng": không focus
+- P1 (auto): Lỗi: Error: bước 2 mật khẩu yếu: lỗi chỉ ở hộp thoại hoặc không có (GA3) · Lỗi: Error: Hồ sơ SĐT sai: lỗi chỉ ở hộp thoại hoặc không có (GA3) · bước 2 mật khẩu yếu: chữ mới []; hộp thoại ["Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."] · Hồ sơ SĐT sai: chữ mới []; hộp thoại ["Cập nhật thành công!"]
+- P2 (auto): Lỗi: Error: bước 2 mật khẩu yếu: lỗi chỉ ở hộp thoại hoặc không có (GA3) · Lỗi: Error: Hồ sơ SĐT sai: lỗi chỉ ở hộp thoại hoặc không có (GA3) · Lỗi: Error: Protocol error (Browser.removeBrowserContext): this._windows[aWindow.__SSi] is undefined · bước 2 mật khẩu yếu: chữ mới []; hộp thoại ["Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."] · Hồ sơ SĐT sai: chữ mới []; hộp thoại ["Cập nhật thành công!"]
+- P3 (auto): Lỗi: Error: bước 2 mật khẩu yếu: lỗi chỉ ở hộp thoại hoặc không có (GA3) · Lỗi: Error: Hồ sơ SĐT sai: lỗi chỉ ở hộp thoại hoặc không có (GA3) · bước 2 mật khẩu yếu: chữ mới []; hộp thoại ["Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."] · Hồ sơ SĐT sai: chữ mới []; hộp thoại ["Cập nhật thành công!"]
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_CL-38_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-38_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-38_1.png`
+- P1: `../checklist/evidence/auto/P1_CL-23_1.png`
+- P2: `../checklist/evidence/auto/P2_CL-23_1.png`
+- P3: `../checklist/evidence/auto/P3_CL-23_1.png`

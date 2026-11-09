@@ -1,7 +1,7 @@
 # BUG-71
 
 - **ID:** BUG-71
-- **Nhóm dữ kiện:** G-14 (CL-32)
+- **Nhóm dữ kiện:** G-14 (CL-06)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,37 +14,37 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### CL-32 – SĐT không hợp lệ bị từ chối, thông báo nêu đúng quy tắc
+### CL-06 – Nút chính và nút phụ phân biệt được bằng hình thức
 
-- Màn hình: Hồ sơ
-- Căn cứ: FR-04.2 (README.md:65); Nielsen #9
-- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #97, #113 (#97 (API lưu SĐT 9 số), #113 (Web nhận đầu khác 0); phần thông báo không nêu quy tắc chưa có issue)
+- Màn hình: Quên mật khẩu (bước 2)
+- Căn cứ: Shneiderman #1 (nhất quán); checklist Button – 'colour signals intent'
+- Nền tảng Failed: P1, P2, P3
 
 **Môi trường**
 
-- P1 – Google Chrome 157.0.8103.39 qua Playwright 1.48.2 (tham chiếu, Q1) / Windows 11
-- P2 – Firefox 131.0 bản build của Playwright 1.48.2 / Windows 11
-- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 qua Playwright _android
+- P1 – Cốc Cốc 160.0.106 / Windows 11 Home (Asus Vivobook X1505VA) – chạy tay
+- P2 – Firefox 159.0.1 / Windows 11 – chạy tay
+- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 (adb reverse) – chạy tay
 - SUT: tkob-team/eshop-sut @ de0f48f · web http://localhost:5173 · backend :3000 (CSDL seed lại mỗi lần khởi động)
 
 **Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
 
 - Tiền điều kiện (checklist): –
-- Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:488`
+- Cách kiểm (checklist): auto: Fail khi hai nút trùng cả màu nền, kích thước, viền; khác nhau → SV xác nhận 'khác nhau rõ'
+- Test tự động: `HW03/tests/C2.spec.ts:399`
 
 **Expected (chép từ checklist)**
 
-> Nhập '912345678' (không bắt đầu bằng 0) → bị từ chối, không lưu; thông báo nêu 'bắt đầu bằng 0, 10–11 chữ số'. Fail nếu được lưu hoặc thông báo nêu quy tắc khác SRS.
+> Nút 'Đặt lại mật khẩu' (chính) và nút quay lại (phụ) khác nhau rõ về màu hoặc kiểu (viền/nền). Fail nếu hai nút cùng màu nền, cùng kích thước, cùng kiểu.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"
-- P2 (auto): Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"
-- P3 (auto): Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"
+- P1 (tay): Nút chính và nút phụ giống nhau
+- P2 (tay): Nút chính và nút phụ giống nhau
+- P3 (tay): Nút chính và nút phụ giống nhau
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_CL-32_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-32_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-32_1.png`
+- P1: `../checklist/evidence/P1_chrome/P1_CL-06_1.png`
+- P2: `../checklist/evidence/P2_firefox/P2_CL-06_1.png`
+- P3: `../checklist/evidence/P3_android/P3_CL-06_1.png`

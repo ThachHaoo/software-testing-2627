@@ -1,7 +1,7 @@
 # BUG-73
 
 - **ID:** BUG-73
-- **Nhóm dữ kiện:** G-16 (CL-40)
+- **Nhóm dữ kiện:** G-16 (CL-37)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,11 +14,11 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### CL-40 – Navbar highlight trang đang chọn
+### CL-37 – Cập nhật hồ sơ được lưu bền
 
-- Màn hình: Navbar
-- Căn cứ: FR-23.1 (README.md:260)
-- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #169 (#169 là trang Giỏ; /profile chưa có issue)
+- Màn hình: Hồ sơ
+- Căn cứ: FR-04.1 (README.md:64)
+- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #111, #123 (SV xem: trường quay về giá trị cũ sau F5, có thể do #111 chặn lưu hoặc #123)
 
 **Môi trường**
 
@@ -29,22 +29,22 @@
 
 **Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
 
-- Tiền điều kiện (checklist): –
+- Tiền điều kiện (checklist): Khôi phục giá trị cũ sau khi kiểm.
 - Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:583`
+- Test tự động: `HW03/tests/C2.spec.ts:527`
 
 **Expected (chép từ checklist)**
 
-> Ở /profile, link tên người dùng (trỏ tới /profile) có kiểu khác hẳn các link còn lại trên navbar (màu/gạch chân/nền), và kiểu đó mất khi rời /profile. Fail nếu link không khác kiểu hoặc không đổi theo trang hiện tại.
+> Đổi Họ Tên, SĐT hợp lệ, Địa chỉ → Cập nhật → tải lại trang (F5) → 3 trường hiển thị giá trị mới. Fail nếu ≥ 1 trường quay về giá trị cũ.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: kiểu link không đổi theo trang hiện tại · link hồ sơ ở /profile {"color":"rgb(253, 224, 71)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}; ở / {"color":"rgb(253, 224, 71)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}; link Giỏ hàng {"color":"rgb(255, 255, 255)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}
-- P2 (auto): Lỗi: Error: kiểu link không đổi theo trang hiện tại · link hồ sơ ở /profile {"color":"rgb(253, 224, 71)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}; ở / {"color":"rgb(253, 224, 71)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}; link Giỏ hàng {"color":"rgb(255, 255, 255)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}
-- P3 (auto): Lỗi: Error: kiểu link không đổi theo trang hiện tại · link hồ sơ ở /profile {"color":"rgb(253, 224, 71)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}; ở / {"color":"rgb(253, 224, 71)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}; link Giỏ hàng {"color":"rgb(255, 255, 255)","background-color":"rgba(0, 0, 0, 0)","text-decoration-line":"none","font-weight":"400","border-bottom-width":"0px"}
+- P1 (auto): Lỗi: Error: có trường quay về giá trị cũ · sau F5: ["Test User","",""]
+- P2 (auto): Lỗi: Error: có trường quay về giá trị cũ · sau F5: ["Test User","",""]
+- P3 (auto): Lỗi: Error: có trường quay về giá trị cũ · sau F5: ["Test User","",""]
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_CL-40_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-40_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-40_1.png`
+- P1: `../checklist/evidence/auto/P1_CL-37_1.png`
+- P2: `../checklist/evidence/auto/P2_CL-37_1.png`
+- P3: `../checklist/evidence/auto/P3_CL-37_1.png`

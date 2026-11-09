@@ -28,14 +28,14 @@ DUP = {
     "CL-32": ("MỘT PHẦN", [97, 113], "#97 (API lưu SĐT 9 số), #113 (Web nhận đầu khác 0); phần thông báo không nêu quy tắc chưa có issue"),
     "CL-41": ("TRÙNG", [166], "badge Giỏ hàng trên navbar (HW02 của SV)"),
     "CL-52": ("TRÙNG", [1, 2, 3], "bộ đếm +2, khoá từ lần 2, khoá 180 s"),
-    "CL-04": ("LIÊN QUAN", [160], "#160 là nút Mobile; nút C2 trên Web chưa có issue"),
-    "CL-08": ("LIÊN QUAN", [170], "#170 là 'VND' ở trang chủ; Lịch sử đơn chưa có issue"),
+    "CL-04": ("TRÙNG", [160], "SV chốt trùng (5/6b): #160 nút tích cực màu xanh lá"),
+    "CL-08": ("TRÙNG", [170], "SV chốt trùng (5/6b): #170 định dạng tiền"),
     "CL-26": ("LIÊN QUAN", [30], "#30 là form Đăng ký; Quên MK bước 2 chưa có issue"),
     "CL-29": ("LIÊN QUAN", [17], "#17 cùng thông báo \"Mật khẩu quá yếu!\" ở Đăng ký; Quên MK bước 2 chưa có issue"),
     "CL-37": ("LIÊN QUAN", [111, 123], "SV xem: trường quay về giá trị cũ sau F5, có thể do #111 chặn lưu hoặc #123"),
-    "CL-40": ("LIÊN QUAN", [169], "#169 là trang Giỏ; /profile chưa có issue"),
-    "CL-60": ("LIÊN QUAN", [165], "#165 là xoá dòng giỏ; huỷ đơn chưa có issue"),
-    "CL-62": ("LIÊN QUAN", [167], "#167 là giỏ trống; Lịch sử đơn trống chưa có issue"),
+    "CL-40": ("TRÙNG", [169], "SV chốt trùng (5/6b): #169 navbar không highlight trang hiện tại"),
+    "CL-60": ("TRÙNG", [165], "SV chốt trùng (5/6b): #165 thao tác huỷ/xoá không có hộp xác nhận"),
+    "CL-62": ("TRÙNG", [167], "SV chốt trùng (5/6b): #167 empty state không có hình minh hoạ"),
 }
 
 

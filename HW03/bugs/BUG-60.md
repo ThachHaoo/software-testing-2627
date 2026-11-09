@@ -1,7 +1,7 @@
 # BUG-60
 
 - **ID:** BUG-60
-- **Nhóm dữ kiện:** G-03 (CL-02)
+- **Nhóm dữ kiện:** G-03 (CL-14)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,10 +14,10 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### CL-02 – Mỗi trang có đúng 1 thẻ <h1>
+### CL-14 – Khai báo ngôn ngữ trang là tiếng Việt
 
-- Màn hình: Đăng nhập, Quên mật khẩu, Hồ sơ
-- Căn cứ: FR-21.4 (README.md:247)
+- Màn hình: Tất cả màn C2
+- Căn cứ: WCAG 2.2 SC 3.1.1 (Language of Page)
 - Nền tảng Failed: P1, P2, P3
 
 **Môi trường**
@@ -29,22 +29,22 @@
 
 **Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
 
-- Tiền điều kiện (checklist): P3: mở DevTools qua chrome://inspect (adb).
+- Tiền điều kiện (checklist): –
 - Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:52`
+- Test tự động: `HW03/tests/C2.spec.ts:82`
 
 **Expected (chép từ checklist)**
 
-> Trên mỗi trang /login, /forgot-password, /profile, lệnh DevTools `document.querySelectorAll('h1').length` trả về đúng 1. Fail nếu một trang trả 0 hoặc ≥ 2.
+> Thẻ <html> có lang='vi'. Fail nếu lang khác 'vi' hoặc không có.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: /login: có 0 thẻ <h1> · Lỗi: Error: /forgot-password: có 0 thẻ <h1> · Lỗi: Error: /profile: có 0 thẻ <h1> · /login: 0 h1 · /forgot-password: 0 h1 · /profile: 0 h1
-- P2 (auto): Lỗi: Error: /login: có 0 thẻ <h1> · Lỗi: Error: /forgot-password: có 0 thẻ <h1> · Lỗi: Error: /profile: có 0 thẻ <h1> · /login: 0 h1 · /forgot-password: 0 h1 · /profile: 0 h1
-- P3 (auto): Lỗi: Error: /login: có 0 thẻ <h1> · Lỗi: Error: /forgot-password: có 0 thẻ <h1> · Lỗi: Error: /profile: có 0 thẻ <h1> · /login: 0 h1 · /forgot-password: 0 h1 · /profile: 0 h1
+- P1 (auto): Lỗi: Error: lang = "en" · <html lang="en">
+- P2 (auto): Lỗi: Error: lang = "en" · <html lang="en">
+- P3 (auto): Lỗi: Error: lang = "en" · <html lang="en">
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_CL-02_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-02_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-02_1.png`
+- P1: `../checklist/evidence/auto/P1_CL-14_1.png`
+- P2: `../checklist/evidence/auto/P2_CL-14_1.png`
+- P3: `../checklist/evidence/auto/P3_CL-14_1.png`

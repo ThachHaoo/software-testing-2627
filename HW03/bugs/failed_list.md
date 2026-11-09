@@ -1,7 +1,7 @@
 # Danh sách Failed – T1 checklist C2 (sinh bằng `tools/failed_list_hw03.py` từ `checklist.json`)
 
 47 item Failed · ô Failed theo nền tảng: P1 44, P2 47, P3 44 (tổng 135).
-Đối chiếu `HW03/bugs/issues.json` (158 issue nhóm, tới #203) và BUG-01…57 HW02 của em: **trùng 9**, **trùng một phần 4** (màn còn lại là MỚI), **MỚI 33**; loại khỏi lập bug: CL-34 (quyết định 5/6a).
+Đối chiếu `HW03/bugs/issues.json` (158 issue nhóm, tới #203) và BUG-01…57 HW02 của em: **trùng 14**, **trùng một phần 4** (màn còn lại là MỚI), **MỚI 28**; loại khỏi lập bug: CL-34 (quyết định 5/6a).
 CL-30, CL-48 trên P3 = Blocked (T-P3: Playwright timeout) nên không còn trong danh sách.
 
 Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật; `auto` = lượt Playwright (P1 Chrome 157 tham chiếu – Q1; P2 Firefox 131 của Playwright; P3 Chrome Android thật). Đối chiếu trùng do AI làm theo tiêu đề issue + màn hình + notes; **SV xác nhận** trước khi viết BUG-58… (T1 bước 6). Mỗi item = một ứng viên bug, chưa phải bug.
@@ -11,9 +11,9 @@ Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật
 | 1 | CL-01 | Tất cả màn C2 | Ngôn ngữ giao diện nhất quán tiếng Việt | P1, P2, P3 | tay | trùng #9 | notes cả 3 nền tảng chỉ nêu chuỗi tiếng Anh ở Đăng nhập ("Username", "Sign In") |
 | 2 | CL-02 | Đăng nhập, Quên mật khẩu, Hồ sơ | Mỗi trang có đúng 1 thẻ <h1> | P1, P2, P3 | auto | **MỚI** |  |
 | 3 | CL-03 | Đăng nhập | Tiêu đề trang mô tả đúng chức năng Đăng nhập | P1, P2, P3 | auto | trùng #9 | tiêu đề form Đăng nhập là "Đăng Ký" |
-| 4 | CL-04 | Tất cả màn C2 | Nút hành động tích cực màu xanh dương | P1, P2, P3 | auto | **MỚI** (liên quan #160) | #160 là nút Mobile; nút C2 trên Web chưa có issue |
+| 4 | CL-04 | Tất cả màn C2 | Nút hành động tích cực màu xanh dương | P1, P2, P3 | auto | trùng #160 | SV chốt trùng (5/6b): #160 nút tích cực màu xanh lá |
 | 5 | CL-06 | Quên mật khẩu (bước 2) | Nút chính và nút phụ phân biệt được bằng hình thức | P1, P2, P3 | tay | **MỚI** |  |
-| 6 | CL-08 | Lịch sử đơn | Tổng tiền dùng ký hiệu ₫ và phân cách hàng nghìn | P2, P3 | tay | **MỚI** (liên quan #170 (BUG-24)) | #170 là 'VND' ở trang chủ; Lịch sử đơn chưa có issue |
+| 6 | CL-08 | Lịch sử đơn | Tổng tiền dùng ký hiệu ₫ và phân cách hàng nghìn | P2, P3 | tay | trùng #170 (BUG-24) | SV chốt trùng (5/6b): #170 định dạng tiền |
 | 7 | CL-09 | Lịch sử đơn | Ngày đặt hiển thị nhất quán theo định dạng Việt Nam | P2, P3 | tay | **MỚI** |  |
 | 8 | CL-10 | Đăng nhập | Thứ tự Tab theo vị trí hiển thị (trên→dưới, trái→phải) | P1, P2 | auto | **MỚI** |  |
 | 9 | CL-12 | Quên mật khẩu (bước 2) | Thứ tự Tab ở bước 2 theo vị trí hiển thị (trên→dưới, trái→phải) | P1, P2 | auto | **MỚI** |  |
@@ -38,7 +38,7 @@ Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật
 | 28 | CL-34 | Hồ sơ | Họ Tên chỉ gồm khoảng trắng bị từ chối | P2 | auto | loại khỏi lập bug (5/6a) | xem notes |
 | 29 | CL-37 | Hồ sơ | Cập nhật hồ sơ được lưu bền | P1, P2, P3 | auto | **MỚI** (liên quan #111, #123) | SV xem: trường quay về giá trị cũ sau F5, có thể do #111 chặn lưu hoặc #123 |
 | 30 | CL-38 | Đăng nhập, Hồ sơ | Nhãn gắn với ô nhập (bấm nhãn → focus ô) | P1, P2, P3 | auto | **MỚI** |  |
-| 31 | CL-40 | Navbar | Navbar highlight trang đang chọn | P1, P2, P3 | auto | **MỚI** (liên quan #169 (BUG-23)) | #169 là trang Giỏ; /profile chưa có issue |
+| 31 | CL-40 | Navbar | Navbar highlight trang đang chọn | P1, P2, P3 | auto | trùng #169 (BUG-23) | SV chốt trùng (5/6b): #169 navbar không highlight trang hiện tại |
 | 32 | CL-41 | Navbar | Link 'Giỏ hàng' có badge số lượng | P1, P2, P3 | auto | trùng #166 (BUG-20) | badge Giỏ hàng trên navbar (HW02 của SV) |
 | 33 | CL-42 | Navbar | Nút đăng xuất có nhãn 'Đăng xuất' | P1, P2, P3 | auto | **MỚI** |  |
 | 34 | CL-49 | Hồ sơ | /profile khi chưa đăng nhập dẫn được tới Đăng nhập | P1, P2, P3 | auto | **MỚI** |  |
@@ -47,8 +47,8 @@ Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật
 | 37 | CL-53 | Đăng nhập | Có chỉ báo đang xử lý và chống gửi trùng | P1, P2, P3 | tay | **MỚI** |  |
 | 38 | CL-56 | Hồ sơ, Navbar | Đổi Họ Tên cập nhật ngay trên navbar | P1, P2, P3 | auto | **MỚI** |  |
 | 39 | CL-59 | Lịch sử đơn | Không cho người dùng huỷ đơn ở trạng thái không được huỷ | P1, P2, P3 | auto | **MỚI** |  |
-| 40 | CL-60 | Lịch sử đơn | Huỷ đơn có hộp xác nhận | P1, P2, P3 | auto | **MỚI** (liên quan #165 (BUG-19)) | #165 là xoá dòng giỏ; huỷ đơn chưa có issue |
-| 41 | CL-62 | Lịch sử đơn | Empty state có hình minh hoạ và thông báo thân thiện | P1, P2, P3 | tay | **MỚI** (liên quan #167 (BUG-21)) | #167 là giỏ trống; Lịch sử đơn trống chưa có issue |
+| 40 | CL-60 | Lịch sử đơn | Huỷ đơn có hộp xác nhận | P1, P2, P3 | auto | trùng #165 (BUG-19) | SV chốt trùng (5/6b): #165 thao tác huỷ/xoá không có hộp xác nhận |
+| 41 | CL-62 | Lịch sử đơn | Empty state có hình minh hoạ và thông báo thân thiện | P1, P2, P3 | tay | trùng #167 (BUG-21) | SV chốt trùng (5/6b): #167 empty state không có hình minh hoạ |
 | 42 | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | P1, P2, P3 | tay | **MỚI** |  |
 | 43 | SV-02 | Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ | Khả năng tự động điền (Autofill/Autocompletion) và dán (Paste) dữ liệu vào các trường nhập liệu | P1, P2, P3 | tay | **MỚI** |  |
 | 44 | SV-03 | Đăng nhập, Quên mật khẩu B2, Hồ sơ | Trả lại con trỏ focus về đúng trường nhập liệu bị lỗi sau khi submit thất bại | P1, P2, P3 | auto | **MỚI** |  |

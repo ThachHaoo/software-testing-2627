@@ -1,7 +1,7 @@
 # BUG-72
 
 - **ID:** BUG-72
-- **Nhóm dữ kiện:** G-15 (CL-37)
+- **Nhóm dữ kiện:** G-15 (CL-32)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,11 +14,11 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### CL-37 – Cập nhật hồ sơ được lưu bền
+### CL-32 – SĐT không hợp lệ bị từ chối, thông báo nêu đúng quy tắc
 
 - Màn hình: Hồ sơ
-- Căn cứ: FR-04.1 (README.md:64)
-- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #111, #123 (SV xem: trường quay về giá trị cũ sau F5, có thể do #111 chặn lưu hoặc #123)
+- Căn cứ: FR-04.2 (README.md:65); Nielsen #9
+- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #97, #113 (#97 (API lưu SĐT 9 số), #113 (Web nhận đầu khác 0); phần thông báo không nêu quy tắc chưa có issue)
 
 **Môi trường**
 
@@ -29,22 +29,22 @@
 
 **Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
 
-- Tiền điều kiện (checklist): Khôi phục giá trị cũ sau khi kiểm.
+- Tiền điều kiện (checklist): –
 - Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:527`
+- Test tự động: `HW03/tests/C2.spec.ts:488`
 
 **Expected (chép từ checklist)**
 
-> Đổi Họ Tên, SĐT hợp lệ, Địa chỉ → Cập nhật → tải lại trang (F5) → 3 trường hiển thị giá trị mới. Fail nếu ≥ 1 trường quay về giá trị cũ.
+> Nhập '912345678' (không bắt đầu bằng 0) → bị từ chối, không lưu; thông báo nêu 'bắt đầu bằng 0, 10–11 chữ số'. Fail nếu được lưu hoặc thông báo nêu quy tắc khác SRS.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: có trường quay về giá trị cũ · sau F5: ["Test User","",""]
-- P2 (auto): Lỗi: Error: có trường quay về giá trị cũ · sau F5: ["Test User","",""]
-- P3 (auto): Lỗi: Error: có trường quay về giá trị cũ · sau F5: ["Test User","",""]
+- P1 (auto): Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"
+- P2 (auto): Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"
+- P3 (auto): Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_CL-37_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-37_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-37_1.png`
+- P1: `../checklist/evidence/auto/P1_CL-32_1.png`
+- P2: `../checklist/evidence/auto/P2_CL-32_1.png`
+- P3: `../checklist/evidence/auto/P3_CL-32_1.png`

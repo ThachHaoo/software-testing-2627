@@ -1,7 +1,7 @@
 # BUG-85
 
 - **ID:** BUG-85
-- **Nhóm dữ kiện:** G-28 (SV-03)
+- **Nhóm dữ kiện:** G-28 (SV-05)
 - **Tiêu đề:** 🔒 SV viết
 - **Mô tả:** 🔒 SV viết
 - **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
@@ -14,10 +14,10 @@
 
 ## Dữ kiện (AI chép từ `checklist.json`, không sửa)
 
-### SV-03 – Trả lại con trỏ focus về đúng trường nhập liệu bị lỗi sau khi submit thất bại
+### SV-05 – Kích thước vùng tương tác của con trỏ (Target Size) đối với các nút và link
 
-- Màn hình: Đăng nhập, Quên mật khẩu B2, Hồ sơ
-- Căn cứ: Slide "Checklist - input-field validation" (Golden Rule: "On error, return focus to the offending field"); Shneiderman #5 (Xử lý lỗi đơn giản)
+- Màn hình: Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
+- Căn cứ: WCAG 2.2 SC 2.5.8 (Target Size Minimum - 24x24px)
 - Nền tảng Failed: P1, P2, P3
 
 **Môi trường**
@@ -31,20 +31,20 @@
 
 - Tiền điều kiện (checklist): –
 - Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:868`
+- Test tự động: `HW03/tests/C2.spec.ts:900`
 
 **Expected (chép từ checklist)**
 
-> Nhập dữ liệu sai quy tắc (ví dụ: SĐT sai định dạng ở Hồ sơ hoặc Mật khẩu mới không đủ điều kiện ở Quên mật khẩu B2) rồi bấm submit: sau khi thông báo lỗi xuất hiện, con trỏ gõ phím (cursor) phải tự động quay lại focus ở đúng ô bị lỗi đó. Fail nếu con trỏ nhảy mất focus hoặc không quay lại ô nhập bị lỗi.
+> Dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm nhận con trỏ (chuột hoặc ngón tay) phải đạt kích thước tối thiểu 24x24 px. Fail nếu có nút/link kích thước < 24x24 px.
 
 **Actual (chép notes / số đo)**
 
-- P1 (auto): Lỗi: Error: Đăng nhập: focus không về ô Mật khẩu · Lỗi: Error: Quên mật khẩu B2: focus không về ô Mật khẩu mới · Lỗi: Error: Hồ sơ: focus không về ô Số điện thoại · focus về ô lỗi – Đăng nhập (Mật khẩu): false; Quên MK B2 (Mật khẩu mới): false; Hồ sơ (SĐT): false
-- P2 (auto): Lỗi: Error: Đăng nhập: focus không về ô Mật khẩu · Lỗi: Error: Quên mật khẩu B2: focus không về ô Mật khẩu mới · Lỗi: Error: Hồ sơ: focus không về ô Số điện thoại · focus về ô lỗi – Đăng nhập (Mật khẩu): false; Quên MK B2 (Mật khẩu mới): false; Hồ sơ (SĐT): false
-- P3 (auto): Lỗi: Error: Đăng nhập: focus không về ô Mật khẩu · Lỗi: Error: Quên mật khẩu B2: focus không về ô Mật khẩu mới · Lỗi: Error: Hồ sơ: focus không về ô Số điện thoại · focus về ô lỗi – Đăng nhập (Mật khẩu): false; Quên MK B2 (Mật khẩu mới): false; Hồ sơ (SĐT): false
+- P1 (auto): Lỗi: Error: Quên mật khẩu? < 24×24 px · Lỗi: Error: Đăng ký ngay < 24×24 px · Sign In: 382×40 · Quên mật khẩu?: 102×19 · Đăng ký ngay: 85×19 · Lấy mã OTP: 382×40 · Cập nhật: 271×40
+- P2 (auto): Lỗi: Error: Quên mật khẩu? < 24×24 px · Lỗi: Error: Đăng ký ngay < 24×24 px · Sign In: 382×40 · Quên mật khẩu?: 102×19 · Đăng ký ngay: 85×19 · Lấy mã OTP: 382×40 · Cập nhật: 271×40
+- P3 (auto): Lỗi: Error: Quên mật khẩu? < 24×24 px · Lỗi: Error: Đăng ký ngay < 24×24 px · Sign In: 295×40 · Quên mật khẩu?: 100×16 · Đăng ký ngay: 82×16 · Lấy mã OTP: 295×40 · Cập nhật: 311×40
 
 **Ảnh**
 
-- P1: `../checklist/evidence/auto/P1_SV-03_1.png`
-- P2: `../checklist/evidence/auto/P2_SV-03_1.png`
-- P3: `../checklist/evidence/auto/P3_SV-03_1.png`
+- P1: `../checklist/evidence/auto/P1_SV-05_1.png`
+- P2: `../checklist/evidence/auto/P2_SV-05_1.png`
+- P3: `../checklist/evidence/auto/P3_SV-05_1.png`
