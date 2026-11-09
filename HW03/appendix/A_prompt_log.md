@@ -1317,6 +1317,24 @@ Heredoc quá dài bị shell cắt. Ghi script ra file tạm rồi chạy.
 Giờ skill usability-evaluation, bước 0.
 
 Ghi vào report_plan mục c.
+
+Đã cập nhật 2 skill và chuyển 3 script vào skill. Chạy lại trên dữ liệu HW03 thì mọi output giống hệt.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: cập nhật 2 skill theo cách làm thực tế.
+- `gui-checklist-testing` (`SKILL.md` + `references/schema-checklist.md`):
+  - Bước 1: đọc toàn bộ phần nguồn checklist trong slide trước khi sinh item.
+  - Bước 3: chế độ Playwright (phân loại `che_do`, oracle khoá sha1) và quy tắc ảnh.
+  - Bước 4: gộp auto + tay theo V1, lỗi harness → Blocked.
+  - Đã sửa quy tắc 9, cập nhật bảng Script.
+  - Schema thêm các trường của lượt auto (`auto_status`, `nguon_kq`, `lech_auto_tay`, `lap_bug`…).
+- Script mới trong skill, tổng quát, nhận config JSON: `merge_runs.py`, `failed_list.py`, `bug_groups.py`. Ba file `tools/*_hw03.py` giờ chỉ giữ dữ liệu riêng HW03 rồi gọi sang skill.
+- `usability-evaluation`: bước 0 thêm lựa chọn trực tiếp hoặc remote synchronous (Meet, tunnel, reset dữ liệu và link mới mỗi phiên, quay khi được đồng ý), lấy `tools/usability_session.ps1` làm ví dụ.
+- Kiểm tra: các file sau chạy lại giống hệt từng byte: `checklist.json`, 3 CSV, `checklist.md`, `failed_list.md`, `bug_groups.md`, BUG-58…85, report. Excel so từng ô: 2144 ô, 0 ô khác. check_checklist 0 lỗi.
+- Chưa chép sang `HW03/skills`; đã ghi việc này vào `report_plan.md` mục c (dòng 9), mục f thêm khai báo. Prompt log 34 lượt.
+- Commit: `d811ea2` HW03: cập nhật skill theo cách làm thực tế
+
+Bạn nhớ push nhé: `git push` (còn 1 commit chưa push là `d811ea2`).
 ```
 *File AI ghi/gửi trong lượt này:* `merge_runs.py`, `failed_list.py`, `bug_groups.py`, `upd_skill.py`
 
@@ -1324,4 +1342,24 @@ Ghi vào report_plan mục c.
 
 ---
 
-**Tổng:** 34 lượt; Claude Opus 5.5 31 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31, #32, #33, #34); Claude (không rõ model) 3 lượt (#17, #21, #30).
+## #35 | 03:33 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – handoff trước khi nghỉ (commit "HW03: handoff 10/11"):
+1. HW03/CLAUDE.md: thêm/ghi đè mục "Trạng thái 10/11 03:35" (≤ 25 dòng): deadline 10:00 11/11; T1 xong tới khung BUG-58…85 (SV chưa viết); treo: 5 ảnh P3_M* chưa overlay, R9/R11; T2 chưa có phiên – quy trình mỗi phiên (usability_session.ps1 → new_session.py → Meet → nhập JSON → sus_score --check → commit "HW03[T2] k/10: phiên S0x"); SUT đang ở nhánh usability-tunnel (sut_main.ps1 để về main); skill chưa chép sang HW03/skills; việc còn lại theo thứ tự (bug → T2 → skill/README/form/zip).
+2. Kiểm git status sạch (trừ evidence_raw/ bị ignore); liệt kê nếu còn file chưa commit.
+on_stop.py --manual. Báo cáo ≤ 5 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 35 lượt; Claude Opus 5.5 32 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31, #32, #33, #34, #35); Claude (không rõ model) 3 lượt (#17, #21, #30).

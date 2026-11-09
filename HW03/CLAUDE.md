@@ -89,3 +89,18 @@ Skill: `gui-checklist-testing` (`.claude/skills/`), mỗi lần gọi một bư�
 | 10 | AI tính, **SV** phân tích 🔒 | Điểm SUS/SEQ, gom pain point, findings theo severity | `HW03[T2] 10/10: Phân tích + findings` |
 
 Commit chung khác: `HW03: …` (harness, report, form, README, nộp). Bug kế tiếp: **BUG-58**; issue nhóm tiếp theo ≥ #204 (kiểm lại bằng `gh issue list` trước khi tạo).
+
+## 7. Trạng thái 10/11 03:35 (handoff – ghi đè mỗi lần handoff)
+
+- **Deadline 10:00 11/11/2026** (Moodle). Chưa push gì thì SV push trước.
+- **T1 xong tới khung bug:** checklist gộp (P1 27/44/0/3 · P2 24/47/0/3 · P3 22/44/4/4 Passed/Failed/N/A/Blocked), Excel, `bugs/failed_list.md`, `bugs/bug_groups.md` (28 nhóm SV đã chốt), khung `bugs/BUG-58…85.md` chỉ dữ kiện – **SV chưa viết** Tiêu đề/Mô tả/Steps/Severity/Priority, chưa tạo GitHub Issue (kiểm `gh issue list`, số ≥ #204).
+- **Treo T1:** 5 ảnh `P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1` chưa overlay (đang ở `checklist/evidence_raw/P3_android/`, xong → `python tools/compress_hw03.py --exclude ""` rồi commit); R9/R11 (verdict P1 CL-08/CL-09) chờ SV (`checklist/run_check.md`). Script gộp/sinh: `tools/merge_hw03.py` → `failed_list_hw03.py` → `bug_groups_hw03.py` → `report_t1_hw03.py` (+ `build_excel.py`).
+- **T2 chưa có phiên nào** (plan/kit remote đã chốt, check_kit 0 lỗi). Mỗi phiên S0x:
+  1. `powershell -ExecutionPolicy Bypass -File tools\usability_session.ps1` → link mới (gửi qua Meet chat).
+  2. `python .claude/skills/usability-evaluation/scripts/new_session.py HW03/usability/sessions S0x` (khung trống).
+  3. Meet: người tham gia chia sẻ màn hình, think-aloud; quay Game Bar/OBS khi đồng ý; Ctrl+C tắt tunnel.
+  4. SV nhập JSON phiên (AI không điền) → `sus_score.py HW03/usability/sessions --check`.
+  5. Commit `HW03[T2] k/10: Phiên S0x` (pilot = 2/10; S1…S7 = 3/10…9/10).
+- **SUT `../eshop-sut` đang ở nhánh `usability-tunnel`** (commit `e33212d`, local). Về main: `tools\sut_main.ps1` (trước khi chạy lại checklist/HW khác).
+- **Skill chưa chép sang `HW03/skills`** (`gui-checklist-testing`, `usability-evaluation`) – làm lúc đóng gói (report_plan mục c).
+- **Việc còn lại theo thứ tự:** (1) SV viết BUG-58…85 + tạo Issue + ảnh trang Issues; (2) T2: pilot + 7 phiên → `sus_score.py --report` vào marker REPORT:U1 → SV phân tích/findings; (3) chép skill + video, README/test summary, report + PDF, form AI-02/03/05, commit log, `hw-submission-audit`, zip `git archive`.
