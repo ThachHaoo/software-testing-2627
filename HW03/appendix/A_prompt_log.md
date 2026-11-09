@@ -1108,6 +1108,26 @@ Step 3: report markers. Xem cấu trúc report.
 Chèn marker vào report (giữ dòng 📝 của SV).
 
 Phát hiện: P3 CL-30/CL-48 Failed do `TimeoutError` của harness, không phải do SUT. Rà toàn bộ ô auto Failed vì lỗi kỹ thuật.
+
+Đã gộp kết quả, xuất Excel và lập danh sách Failed. Còn 2 ô P3 Failed chưa đáng tin vì Playwright bị Timeout, cần chạy lại (xem "Cần quyết định").
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: 4/6a2 (sửa nhãn ảnh B3/B4; M5 dùng lại `P1_M4_1`, `P2_M4_1`, `P3_M3_1`) + 4/6b (gộp kết quả, Excel, `failed_list`, marker trong report).
+- File đã tạo/sửa:
+  - `checklist.json`, `excel/23120255_HW03_Checklist.xlsx`, `bugs/failed_list.md`, `bugs/issues.json`, `runs/*_manual_*.csv`
+  - report (đã chèn marker T1 + U1, đã điền 2 bảng T1), `RUN_retake.md`
+  - script mới: `tools/merge_hw03.py`, `failed_list_hw03.py`, `report_t1_hw03.py`
+- Kết quả theo nền tảng (Passed/Failed/N/A/Blocked): **P1 27/44/0/3 · P2 24/47/0/3 · P3 22/46/4/2**. Có 8 ô lệch auto↔tay (đúng L1–L8), đều lấy kết quả tay theo V1, nguyên nhân ghi trong cột `lech_auto_tay`.
+- Failed: 49 item. Đối chiếu với issue nhóm và BUG HW02: **trùng 8**, **trùng một phần 5** (màn còn lại tính là mới), **MỚI 36**. Phân loại trùng do em làm theo tiêu đề issue, bạn cần xác nhận lại.
+- Kiểm tra: check_checklist 0 lỗi; Excel mở bằng Excel thật: 21 công thức, 0 lỗi, số liệu khớp JSON; prompt log 28 lượt.
+- Commit: `61858d4` 4/6a2 · `3ee3158` 4/6b
+- Bất thường: P3 CL-30 và CL-48 Failed chỉ vì `TimeoutError` của Playwright, chưa có assertion nào fail (đã đánh dấu ⚠ trong `failed_list.md`). P2 CL-34 Failed chỉ trên Firefox Playwright (Họ Tên lưu thành ""), cần xem lại.
+- Cần quyết định:
+  - T-P3: chạy lại `npm run p3` cho CL-30/CL-48, hay bạn chạy tay 2 item này trên P3?
+  - Q1-auto: 59 item auto của P1 đang lấy kết quả Chrome 157 vì Cốc Cốc chưa có lượt auto. Giữ như vậy và khai trong mục lệch kế hoạch, hay chạy lại auto bằng Cốc Cốc?
+- Chưa xong: 5 ảnh `P3_M*` chưa có overlay (`RUN_retake.md` mục 1); R9/R11 (verdict CL-08/CL-09 trên P1) vẫn chờ bạn xem lại.
+
+Bạn nhớ push nhé: `git push` (còn 2 commit chưa push).
 ```
 *File AI ghi/gửi trong lượt này:* `RUN_retake.md`, `merge_hw03.py`, `recalc_xlsx.ps1`, `failed_list_hw03.py`, `report_t1_hw03.py`
 
@@ -1115,4 +1135,36 @@ Phát hiện: P3 CL-30/CL-48 Failed do `TimeoutError` của harness, không ph�
 
 ---
 
-**Tổng:** 28 lượt; Claude Opus 5.5 26 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28); Claude (không rõ model) 2 lượt (#17, #21).
+## #29 | 03:03 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T1] 5/6a:
+1. Quyết định (report_plan mục e + checklist.json): T-P3 – CL-30, CL-48 P3 = Blocked (Playwright timeout, không assertion fail), không lập bug; CL-34 P2 – giữ auto, ghi "chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật", loại khỏi danh sách lập bug; Q1-auto – giữ Chrome 157, khai lệch kế hoạch; CL-52 P3 – Notes "thiếu ảnh". Cập nhật Excel + failed_list + bảng T1 report.
+2. bugs/bug_groups.md: gom Failed MỚI theo DỮ KIỆN giống nhau (cùng phần tử/cùng hành vi quan sát, khác màn/nền tảng) → nhóm G-xx kèm item, nền tảng, ảnh, expected (chép), actual (chép Notes/auto). Chỉ đề xuất nhóm, tôi xác nhận.
+3. Mỗi nhóm 1 khung bugs/BUG-<số kế tiếp sau HW02>.md CHỈ dữ kiện: item, nền tảng, môi trường, bước tái hiện từ RUN/test, expected chép, actual chép, ảnh; để trống Tiêu đề / Mô tả / Severity / Priority / Nhận định (🔒 SV viết).
+Commit "HW03[T1] 5/6a: quyết định treo + khung bug (dữ kiện)". on_stop.py --manual. Báo cáo ≤ 8 dòng: số nhóm, số khung. Nhắc tôi push.
+```
+
+**Output:**
+```
+Bước 1: ghi quyết định vào `merge_hw03.py` dạng override, chạy lại thì không bị mất.
+
+Quyết định đã áp, chạy lại vẫn giữ nguyên. Giờ ghi vào report_plan và cập nhật failed_list, Excel, report.
+
+Giờ sửa failed_list để bỏ các ô `lap_bug: false`.
+
+Bước 2: xuất dữ kiện các item MỚI để gom nhóm.
+
+Viết script sinh `bug_groups.md` và các khung BUG.
+
+Chuyển CL-01 sang TRÙNG rồi chạy.
+```
+*File AI ghi/gửi trong lượt này:* `bug_groups_hw03.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 29 lượt; Claude Opus 5.5 27 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29); Claude (không rõ model) 2 lượt (#17, #21).

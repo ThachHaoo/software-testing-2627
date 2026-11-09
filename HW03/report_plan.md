@@ -84,6 +84,10 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | V1 | Lệch auto ↔ tay: **verdict lấy lượt trên trình duyệt thật** (tay), ghi nguyên nhân lệch (vd auto giả lập locale vi-VN, còn Firefox/Chrome Android thật của SV dùng locale máy → khác định dạng tiền/ngày) |
 | O2 | Overlay thực tế = `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn` (dấu "-" thay "·" của O1). P1/P2: cửa sổ Sticky Notes; P3: thêm chữ bằng trình sửa ảnh của máy |
 | B5 | Ảnh `P1_SV-02_3/4` lộ email cá nhân và tài khoản đã lưu → SV che bằng ô đen (khai trong AI-05) |
+| T-P3 | CL-30, CL-48 trên P3 = **Blocked**: lượt auto Playwright `TimeoutError` (locator.click 30 s), không có assertion fail → không lập bug (5/6a, 10/11) |
+| CL34 | CL-34 P2: giữ kết quả auto (Failed), ghi "chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật"; **loại khỏi danh sách lập bug** (5/6a) |
+| Q1-auto | 59 item auto của P1 lấy kết quả lượt Chrome 157 (Playwright), không chạy lại trên Cốc Cốc; khai trong mục "lệch so với kế hoạch" của report (5/6a) |
+| CL52-P3 | CL-52 P3: notes ghi "thiếu ảnh" (ảnh `P3_CL-52_1` chỉ thấy "Đăng nhập thất bại", không thấy trạng thái khoá) (5/6a) |
 
 **Còn chờ SV chốt:** (không còn)
 
@@ -97,6 +101,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 Claude Code: tạo skill `usability-evaluation` (SKILL.md, 2 reference, 3 asset, 6 script); kiểm plan/kit HW03 bằng `check_kit.py` (0 lỗi, không sửa); thử `sus_score.py` trên 2 phiếu giả ở thư mục tạm (không commit).
 - 10/11 Claude Code: kiểm ảnh/kết quả chạy tay (`checklist/run_check.md`), nén + đổi tên ảnh đạt (`tools/compress_hw03.py`, gốc ở `evidence_raw/` không nộp), chuẩn hoá giá trị Pass/Fail → Passed/Failed, CL-64 → Blocked (Q2) và metadata (tiêu đề P2, Android 14) trong `runs/*_manual_*` theo yêu cầu SV; không sửa notes.
 - 10/11 Claude Code (4/6a2–4/6b): đổi tên/nén ảnh B3/B4 theo bảng SV duyệt, M5 dùng lại ảnh M3/M4; gộp auto + tay vào `checklist.json` (`tools/merge_hw03.py`: CSV từ file tay, ánh xạ tên ảnh, V1, ghi `nguon_kq` + `lech_auto_tay`); Excel (`build_excel.py`, thêm fullCalcOnLoad; kiểm bằng Excel: 21 công thức, 0 lỗi); `bugs/issues.json` (gh issue list) + `bugs/failed_list.md` (`tools/failed_list_hw03.py`, AI đối chiếu trùng theo tiêu đề issue, SV xác nhận); chèn marker REPORT:T1/U1 vào report và điền 2 bảng T1 (`tools/report_t1_hw03.py`).
+- 10/11 Claude Code (5/6a): ghi quyết định T-P3/CL-34/Q1-auto/CL-52 P3 vào `merge_hw03.py` (OVERRIDE, nối notes, không sửa chữ SV); CL-01 đổi thành trùng #9 theo notes; `bugs/bug_groups.md` (30 nhóm dữ kiện, AI đề xuất, SV xác nhận) + khung `bugs/BUG-58…87.md` chỉ chép dữ kiện (`tools/bug_groups_hw03.py`); Tiêu đề/Mô tả/Steps/Severity/Priority/Nhận định để trống cho SV.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)

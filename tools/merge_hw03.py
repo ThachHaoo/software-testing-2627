@@ -35,6 +35,14 @@ CAUSE = {  # nguyên nhân lệch, dữ kiện từ run_check.md mục 1c (L1–
     ("CL-15", "P2"): "auto đo ở viewport 375 px: scrollWidth 382 > 375; lượt tay không đo ở đúng 375 px (ảnh chụp cửa sổ hẹp, không thấy thanh cuộn)",
     ("SV-02", "P1"): "auto chỉ kiểm vế dán (Ctrl+V); vế autofill kiểm tay",
 }
+# Quyết định 5/6a (report_plan mục e: T-P3, CL-34, CL-52 P3). Áp sau cùng → chạy lại script vẫn giữ.
+# ket_qua: đổi kết quả; them: nối vào notes (không sửa chữ SV); lap_bug False: loại khỏi danh sách lập bug.
+OVERRIDE = {
+    ("CL-30", "P3"): {"ket_qua": "Blocked", "them": "Blocked (T-P3): Playwright TimeoutError, không có assertion fail – không lập bug", "lap_bug": False},
+    ("CL-48", "P3"): {"ket_qua": "Blocked", "them": "Blocked (T-P3): Playwright TimeoutError, không có assertion fail – không lập bug", "lap_bug": False},
+    ("CL-34", "P2"): {"them": "chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật – không lập bug (5/6a)", "lap_bug": False},
+    ("CL-52", "P3"): {"them": "thiếu ảnh (ảnh P3_CL-52_1 chỉ thấy \"Đăng nhập thất bại\", không thấy trạng thái khoá) – 5/6a"},
+}
 RX = re.compile(r"(P[123])_((?:CL|SV)-?\d{2}|M\d)[-_](\d+)", re.I)
 
 
@@ -116,6 +124,16 @@ def main():
                 it.setdefault("run", {})[P] = it.get("auto_run", {}).get(P, "")
                 it.setdefault("nguon_kq", {})[P] = "auto"
                 filled += 1
+    items = {i["id"]: i for i in doc["items"]}
+    for (iid, P), o in OVERRIDE.items():
+        it = items[iid]
+        if "ket_qua" in o:
+            it["ket_qua"][P] = o["ket_qua"]
+        if o.get("them") and o["them"] not in it.get("notes_nt", {}).get(P, ""):
+            old = it.setdefault("notes_nt", {}).get(P, "")
+            it["notes_nt"][P] = (old + " · " if old else "") + "[" + o["them"] + "]"
+        if "lap_bug" in o:
+            it.setdefault("lap_bug", {})[P] = o["lap_bug"]
     jp.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     miss = [f"{i['id']} {P}" for i in doc["items"] for P in i.get("nen_tang", []) if not i.get("ket_qua", {}).get(P)]
     print(f"ket_qua từ auto: {filled} ô; lệch auto↔tay: {len(lech)} ({', '.join(lech)}); thiếu kết quả: {len(miss)} {miss}")

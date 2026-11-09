@@ -15,7 +15,7 @@ HW02 = {**{17 + k: f"BUG-{k + 1:02d}" for k in range(14)}, **{161 + k: f"BUG-{k 
 # (loại, [issue], ghi chú đối chiếu). loại: TRÙNG = cùng màn + cùng lỗi; MỘT PHẦN = issue phủ một màn, màn khác chưa có issue;
 # LIÊN QUAN = cùng kiểu lỗi nhưng khác màn → vẫn tính MỚI
 DUP = {
-    "CL-01": ("MỘT PHẦN", [9], "#9 phủ chuỗi tiếng Anh ở Đăng nhập; màn khác: SV xem notes từng nền tảng"),
+    "CL-01": ("TRÙNG", [9], "notes cả 3 nền tảng chỉ nêu chuỗi tiếng Anh ở Đăng nhập (\"Username\", \"Sign In\")"),
     "CL-03": ("TRÙNG", [9], "tiêu đề form Đăng nhập là \"Đăng Ký\""),
     "CL-16": ("TRÙNG", [122], "cùng lời chào navbar; HW02 BUG-11/#27 là XSS ở Đăng ký (nguồn dữ liệu khác)"),
     "CL-17": ("MỘT PHẦN", [4], "#4 phủ /login; /forgot-password bước 1 chưa có issue"),
@@ -43,7 +43,7 @@ def main():
     doc = json.loads((ROOT / "checklist" / "checklist.json").read_text(encoding="utf-8"))
     issues = {i["number"]: i for i in json.loads((ROOT / "bugs" / "issues.json").read_text(encoding="utf-8"))}
     plats = list(doc["meta"]["platforms"])
-    rows, n, harness, pend = [], {"TRÙNG": 0, "MỘT PHẦN": 0, "MỚI": 0}, [], 0
+    rows, n, harness, pend, excl = [], {"TRÙNG": 0, "MỘT PHẦN": 0, "MỚI": 0}, [], 0, []
     cells = {P: 0 for P in plats}
     for it in doc["items"]:
         f = [P for P in plats if it.get("ket_qua", {}).get(P) == "Failed"]
@@ -55,6 +55,12 @@ def main():
         bad = [x for x in nums if x not in issues]
         if bad:
             raise SystemExit(f"{it['id']}: issue {bad} không có trong issues.json")
+        nobug = [P for P in f if it.get("lap_bug", {}).get(P) is False]
+        if nobug == f:   # mọi ô Failed đều bị quyết định loại khỏi lập bug
+            excl.append(it["id"])
+            rows.append(f"| {len(rows) + 1} | {it['id']} | {it['man_hinh']} | {it['muc_kiem_tra'].replace('|', '/')} | {', '.join(f)} | "
+                        f"{'/'.join(sorted({it.get('nguon_kq', {}).get(P, '?') for P in f}))} | loại khỏi lập bug (5/6a) | {note or 'xem notes'} |")
+            continue
         refs = ", ".join(f"#{x}" + (f" ({HW02[x]})" if x in HW02 else "") for x in nums)
         col = {"TRÙNG": f"trùng {refs}", "MỘT PHẦN": f"trùng một phần {refs} + MỚI", "LIÊN QUAN": f"**MỚI** (liên quan {refs})"}.get(kind, "**MỚI**")
         n["MỚI" if kind == "LIÊN QUAN" else kind] += 1
@@ -74,8 +80,8 @@ def main():
         "",
         f"{len(rows)} item Failed · ô Failed theo nền tảng: " + ", ".join(f"{P} {cells[P]}" for P in plats) + f" (tổng {sum(cells.values())}).",
         f"Đối chiếu `HW03/bugs/issues.json` ({len(issues)} issue nhóm, tới #{max(issues)}) và BUG-01…57 HW02 của em: "
-        f"**trùng {n['TRÙNG']}**, **trùng một phần {n['MỘT PHẦN']}** (màn còn lại là MỚI), **MỚI {n['MỚI']}** (trong đó {pend} item chỉ Failed do Timeout harness, chờ chạy lại).",
-        f"Ô Failed do Timeout harness: {', '.join(harness) or 'không'}.",
+        f"**trùng {n['TRÙNG']}**, **trùng một phần {n['MỘT PHẦN']}** (màn còn lại là MỚI), **MỚI {n['MỚI']}**; loại khỏi lập bug: {', '.join(excl) or 'không'} (quyết định 5/6a).",
+        "CL-30, CL-48 trên P3 = Blocked (T-P3: Playwright timeout) nên không còn trong danh sách.",
         "",
         "Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật; `auto` = lượt Playwright (P1 Chrome 157 tham chiếu – Q1; P2 Firefox 131 của Playwright; P3 Chrome Android thật). "
         "Đối chiếu trùng do AI làm theo tiêu đề issue + màn hình + notes; **SV xác nhận** trước khi viết BUG-58… (T1 bước 6). Mỗi item = một ứng viên bug, chưa phải bug.",
@@ -86,7 +92,7 @@ def main():
         "",
     ]
     (ROOT / "bugs" / "failed_list.md").write_text("\n".join(out), encoding="utf-8")
-    print(f"{len(rows)} item, ô {cells}, {n}, timeout harness: {harness}, MỚI chờ chạy lại: {pend}")
+    print(f"{len(rows)} item, ô {cells}, {n}, loại: {excl}, timeout harness: {harness}")
 
 
 if __name__ == "__main__":

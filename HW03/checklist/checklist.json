@@ -2317,12 +2317,12 @@
       "ket_qua": {
         "P1": "Passed",
         "P2": "Passed",
-        "P3": "Failed"
+        "P3": "Blocked"
       },
       "notes_nt": {
         "P1": "[auto – Chrome 157 qua Playwright (Q1: P1 chính thức là Cốc Cốc 160, cùng nhân Chromium)] bị đổi: false; thông báo: \"mật khẩu quá yếu! phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.\"",
         "P2": "[auto – Firefox 131 bản build của Playwright] bị đổi: false; thông báo: \"mật khẩu quá yếu! phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.\"",
-        "P3": "[auto – Chrome Android 156 thật trên POCO F5 (Playwright _android)] Lỗi: TimeoutError: locator.click: Timeout 30000ms exceeded."
+        "P3": "[auto – Chrome Android 156 thật trên POCO F5 (Playwright _android)] Lỗi: TimeoutError: locator.click: Timeout 30000ms exceeded. · [Blocked (T-P3): Playwright TimeoutError, không có assertion fail – không lập bug]"
       },
       "evidence": {
         "P1": [],
@@ -2340,6 +2340,9 @@
         "P1": "auto",
         "P2": "auto",
         "P3": "auto"
+      },
+      "lap_bug": {
+        "P3": false
       }
     },
     {
@@ -2600,7 +2603,7 @@
       },
       "notes_nt": {
         "P1": "[auto – Chrome 157 qua Playwright (Q1: P1 chính thức là Cốc Cốc 160, cùng nhân Chromium)] thông báo: [\"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"]; Họ Tên sau F5: \"Test User\"",
-        "P2": "[auto – Firefox 131 bản build của Playwright] Lỗi: Error: Họ Tên được lưu thành \"\" · thông báo: [\"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"]; Họ Tên sau F5: \"\"",
+        "P2": "[auto – Firefox 131 bản build của Playwright] Lỗi: Error: Họ Tên được lưu thành \"\" · thông báo: [\"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"]; Họ Tên sau F5: \"\" · [chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật – không lập bug (5/6a)]",
         "P3": "[auto – Chrome Android 156 thật trên POCO F5 (Playwright _android)] thông báo: [\"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"]; Họ Tên sau F5: \"Test User\""
       },
       "evidence": {
@@ -2619,6 +2622,9 @@
         "P1": "auto",
         "P2": "auto",
         "P3": "auto"
+      },
+      "lap_bug": {
+        "P2": false
       }
     },
     {
@@ -3664,12 +3670,12 @@
       "ket_qua": {
         "P1": "Blocked",
         "P2": "Blocked",
-        "P3": "Failed"
+        "P3": "Blocked"
       },
       "notes_nt": {
         "P1": "[auto – Chrome 157 qua Playwright (Q1: P1 chính thức là Cốc Cốc 160, cùng nhân Chromium)] Blocked – không đổi được mật khẩu bằng \"Abcdef1!\" (item gốc CL-29)",
         "P2": "[auto – Firefox 131 bản build của Playwright] Blocked – không đổi được mật khẩu bằng \"Abcdef1!\" (item gốc CL-29)",
-        "P3": "[auto – Chrome Android 156 thật trên POCO F5 (Playwright _android)] Lỗi: TimeoutError: locator.click: Timeout 30000ms exceeded."
+        "P3": "[auto – Chrome Android 156 thật trên POCO F5 (Playwright _android)] Lỗi: TimeoutError: locator.click: Timeout 30000ms exceeded. · [Blocked (T-P3): Playwright TimeoutError, không có assertion fail – không lập bug]"
       },
       "evidence": {
         "P1": [],
@@ -3687,6 +3693,9 @@
         "P1": "auto",
         "P2": "auto",
         "P3": "auto"
+      },
+      "lap_bug": {
+        "P3": false
       }
     },
     {
@@ -3937,7 +3946,7 @@
       "notes_nt": {
         "P1": "Không hề gửi thông báo, check request thì lần thì đã bị chặn, tức là chặn sau 2 lần sai",
         "P2": "Không hề gửi thông báo, check request thì lần thì đã bị chặn, tức là chặn sau 2 lần sai",
-        "P3": "Không hề gửi thông báo, check request thì lần thì đã bị chặn, tức là chặn sau 2 lần sai"
+        "P3": "Không hề gửi thông báo, check request thì lần thì đã bị chặn, tức là chặn sau 2 lần sai · [thiếu ảnh (ảnh P3_CL-52_1 chỉ thấy \"Đăng nhập thất bại\", không thấy trạng thái khoá) – 5/6a]"
       },
       "evidence": {
         "P1": [
