@@ -4,11 +4,17 @@ và BUG-xx HW02 của SV (BUG-01…14 = #17–30, BUG-15…57 = #161–203).
 
     python tools/failed_list_hw03.py
 
+Wrapper: dữ liệu đối chiếu riêng HW03 ở đây; code ở skill `gui-checklist-testing/scripts/failed_list.py`.
+
 DUP do AI đối chiếu theo tiêu đề issue + màn hình + notes; SV xác nhận trước khi viết bug (T1 bước 6).
 Chỉ nêu mã issue/màn, không mô tả bug.
 """
-import json
+import sys
 from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / ".claude" / "skills" / "gui-checklist-testing" / "scripts"))
+from failed_list import run  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1] / "HW03"
 HW02 = {**{17 + k: f"BUG-{k + 1:02d}" for k in range(14)}, **{161 + k: f"BUG-{k + 15:02d}" for k in range(43)}}
@@ -39,60 +45,21 @@ DUP = {
 }
 
 
+
+def cfg():
+    return {
+        "checklist": str(ROOT / "checklist" / "checklist.json"), "issues": str(ROOT / "bugs" / "issues.json"),
+        "issues_label": "HW03/bugs/issues.json", "out": str(ROOT / "bugs" / "failed_list.md"),
+        "dup": DUP, "issue_alias": HW02, "compare_label": "BUG-01…57 HW02 của em", "exclude_note": "5/6a",
+        "title": "# Danh sách Failed – T1 checklist C2 (sinh bằng `tools/failed_list_hw03.py` từ `checklist.json`)",
+        "extra_lines": ["CL-30, CL-48 trên P3 = Blocked (T-P3: Playwright timeout) nên không còn trong danh sách."],
+        "source_note": "Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật; `auto` = lượt Playwright (P1 Chrome 157 tham chiếu – Q1; P2 Firefox 131 của Playwright; P3 Chrome Android thật). "
+                       "Đối chiếu trùng do AI làm theo tiêu đề issue + màn hình + notes; **SV xác nhận** trước khi viết BUG-58… (T1 bước 6). Mỗi item = một ứng viên bug, chưa phải bug.",
+    }
+
+
 def main():
-    doc = json.loads((ROOT / "checklist" / "checklist.json").read_text(encoding="utf-8"))
-    issues = {i["number"]: i for i in json.loads((ROOT / "bugs" / "issues.json").read_text(encoding="utf-8"))}
-    plats = list(doc["meta"]["platforms"])
-    rows, n, harness, pend, excl = [], {"TRÙNG": 0, "MỘT PHẦN": 0, "MỚI": 0}, [], 0, []
-    cells = {P: 0 for P in plats}
-    for it in doc["items"]:
-        f = [P for P in plats if it.get("ket_qua", {}).get(P) == "Failed"]
-        if not f:
-            continue
-        for P in f:
-            cells[P] += 1
-        kind, nums, note = DUP.get(it["id"], ("MỚI", [], ""))
-        bad = [x for x in nums if x not in issues]
-        if bad:
-            raise SystemExit(f"{it['id']}: issue {bad} không có trong issues.json")
-        nobug = [P for P in f if it.get("lap_bug", {}).get(P) is False]
-        if nobug == f:   # mọi ô Failed đều bị quyết định loại khỏi lập bug
-            excl.append(it["id"])
-            rows.append(f"| {len(rows) + 1} | {it['id']} | {it['man_hinh']} | {it['muc_kiem_tra'].replace('|', '/')} | {', '.join(f)} | "
-                        f"{'/'.join(sorted({it.get('nguon_kq', {}).get(P, '?') for P in f}))} | loại khỏi lập bug (5/6a) | {note or 'xem notes'} |")
-            continue
-        refs = ", ".join(f"#{x}" + (f" ({HW02[x]})" if x in HW02 else "") for x in nums)
-        col = {"TRÙNG": f"trùng {refs}", "MỘT PHẦN": f"trùng một phần {refs} + MỚI", "LIÊN QUAN": f"**MỚI** (liên quan {refs})"}.get(kind, "**MỚI**")
-        n["MỚI" if kind == "LIÊN QUAN" else kind] += 1
-        src = "/".join(sorted({it.get("nguon_kq", {}).get(P, "?") for P in f}))
-        # ô auto Failed chỉ vì lỗi harness (Timeout, không có assertion nào fail) → chưa cô lập nguyên nhân, cần chạy lại
-        hx = [P for P in f if it.get("nguon_kq", {}).get(P) == "auto" and "TimeoutError" in it.get("notes_nt", {}).get(P, "")
-              and "Lỗi: Error:" not in it.get("notes_nt", {}).get(P, "")]
-        if hx:
-            harness.append(f"{it['id']} {'/'.join(hx)}")
-            note = (note + "; " if note else "") + f"⚠ {'/'.join(hx)}: Failed do TimeoutError của Playwright, chưa có assertion fail → chạy lại trước khi coi là lỗi"
-            if hx == f:
-                col += " ⚠ chờ chạy lại"
-                pend += 1
-        rows.append(f"| {len(rows) + 1} | {it['id']} | {it['man_hinh']} | {it['muc_kiem_tra'].replace('|', '/')} | {', '.join(f)} | {src} | {col} | {note} |")
-    out = [
-        "# Danh sách Failed – T1 checklist C2 (sinh bằng `tools/failed_list_hw03.py` từ `checklist.json`)",
-        "",
-        f"{len(rows)} item Failed · ô Failed theo nền tảng: " + ", ".join(f"{P} {cells[P]}" for P in plats) + f" (tổng {sum(cells.values())}).",
-        f"Đối chiếu `HW03/bugs/issues.json` ({len(issues)} issue nhóm, tới #{max(issues)}) và BUG-01…57 HW02 của em: "
-        f"**trùng {n['TRÙNG']}**, **trùng một phần {n['MỘT PHẦN']}** (màn còn lại là MỚI), **MỚI {n['MỚI']}**; loại khỏi lập bug: {', '.join(excl) or 'không'} (quyết định 5/6a).",
-        "CL-30, CL-48 trên P3 = Blocked (T-P3: Playwright timeout) nên không còn trong danh sách.",
-        "",
-        "Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật; `auto` = lượt Playwright (P1 Chrome 157 tham chiếu – Q1; P2 Firefox 131 của Playwright; P3 Chrome Android thật). "
-        "Đối chiếu trùng do AI làm theo tiêu đề issue + màn hình + notes; **SV xác nhận** trước khi viết BUG-58… (T1 bước 6). Mỗi item = một ứng viên bug, chưa phải bug.",
-        "",
-        "| # | Item | Màn hình | Mục kiểm tra | Failed trên | Kết quả từ | Issue trùng / MỚI | Ghi chú đối chiếu |",
-        "|---|---|---|---|---|---|---|---|",
-        *rows,
-        "",
-    ]
-    (ROOT / "bugs" / "failed_list.md").write_text("\n".join(out), encoding="utf-8")
-    print(f"{len(rows)} item, ô {cells}, {n}, loại: {excl}, timeout harness: {harness}")
+    run(cfg())
 
 
 if __name__ == "__main__":

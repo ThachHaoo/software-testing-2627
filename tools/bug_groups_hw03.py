@@ -1,23 +1,16 @@
-"""Gom item Failed MỚI của HW03 thành nhóm dữ kiện G-xx + sinh khung bugs/BUG-<n>.md CHỈ chứa dữ kiện chép lại.
+"""Wrapper HW03: nhóm dữ kiện bug G-xx + khung bugs/BUG-<n>.md (chỉ dữ kiện) bằng script tổng quát của skill
+`gui-checklist-testing/scripts/bug_groups.py`. File này chỉ giữ dữ liệu riêng HW03 (nhóm SV chốt, môi trường, SUT).
 
     python tools/bug_groups_hw03.py [--skeleton]       # --skeleton: tạo khung BUG chưa có (không ghi đè file đã có)
-
-- Nhóm (GROUPS) do AI đề xuất theo dữ kiện quan sát giống nhau (cùng phần tử / cùng hành vi, khác màn/nền tảng);
-  SV xác nhận/tách/gộp rồi mới viết bug. Item MỘT PHẦN (failed_list) chỉ lấy phần màn chưa có issue.
-- Khung BUG: item, nền tảng, môi trường, nguồn bước (chép nguyên văn từ checklist/test, không phải Steps), Expected chép,
-  Actual chép notes, ảnh. Tiêu đề / Mô tả / Steps / Severity / Priority / Nhận định để trống – SV viết 🔒.
 """
-import argparse, json, re, sys
+import argparse, sys
 from pathlib import Path
 
+REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(REPO / ".claude" / "skills" / "gui-checklist-testing" / "scripts"))
 from failed_list_hw03 import DUP  # noqa: E402
-
-for _s in (sys.stdout,):
-    try:
-        _s.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+from bug_groups import run  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1] / "HW03"
 FIRST_BUG = 58   # HW02 dừng ở BUG-57
@@ -63,82 +56,16 @@ GROUPS = [
 ]
 
 
-def strip(n):
-    return re.sub(r"^\[auto – [^\]]*\] ", "", n or "")
-
-
-def spec_line(iid):
-    for k, l in enumerate((ROOT / "tests" / "C2.spec.ts").read_text(encoding="utf-8").splitlines(), 1):
-        if l.startswith(f"test('{iid} "):
-            return f"`HW03/tests/C2.spec.ts:{k}`"
-    return None
-
-
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--skeleton", action="store_true")
-    a = ap.parse_args()
-    doc = json.loads((ROOT / "checklist" / "checklist.json").read_text(encoding="utf-8"))
-    items = {i["id"]: i for i in doc["items"]}
-    plats = list(doc["meta"]["platforms"])
-
-    def failed(it):
-        return [P for P in plats if it.get("ket_qua", {}).get(P) == "Failed" and it.get("lap_bug", {}).get(P) is not False]
-
-    new = {iid for iid, it in items.items() if failed(it) and DUP.get(iid, ("MỚI",))[0] != "TRÙNG"}
-    grouped = [x for _, _, its in GROUPS for x in its]
-    dupl = {x for x in grouped if grouped.count(x) > 1}
-    if set(grouped) != new or dupl:
-        sys.exit(f"Nhóm chưa khớp danh sách MỚI: thiếu {sorted(new - set(grouped))}, thừa {sorted(set(grouped) - new)}, lặp {sorted(dupl)}")
-
-    md = ["# Nhóm dữ kiện bug – T1 checklist C2 (đề xuất, SV xác nhận 🔒)", "",
-          f"Sinh bằng `tools/bug_groups_hw03.py` từ `checklist.json` + `failed_list.md`. {len(new)} item Failed MỚI / trùng một phần → **{len(GROUPS)} nhóm**. "
-          "Gom theo dữ kiện quan sát giống nhau (cùng phần tử hoặc cùng hành vi, khác màn/nền tảng); AI không kết luận nguyên nhân. "
-          "SV tách/gộp nhóm, rồi viết BUG từ khung tương ứng. Expected/Actual chép nguyên văn từ checklist (Actual = notes chạy tay hoặc số đo auto).", "",
-          "| Nhóm | Khung | Dữ kiện chung | Item | Nền tảng Failed | Trùng / liên quan |", "|---|---|---|---|---|---|"]
-    detail, made = [], []
-    for k, (g, fact, its) in enumerate(GROUPS):
-        bug = f"BUG-{FIRST_BUG + k}"
-        ps = sorted({P for x in its for P in failed(items[x])})
-        rel = "; ".join(f"{x}: {DUP[x][0].lower()} " + ", ".join(f"#{n}" for n in DUP[x][1]) for x in its if x in DUP)
-        md.append(f"| {g} | `{bug}.md` | {fact} | {', '.join(its)} | {', '.join(ps)} | {rel or '–'} |")
-        detail.append(f"## {g} → `{bug}.md` – {fact}\n")
-        body = []
-        for x in its:
-            it = items[x]
-            f = failed(it)
-            detail.append(f"### {x} – {it['muc_kiem_tra']} ({it['man_hinh']})\n")
-            detail.append(f"- Căn cứ: {it.get('can_cu', '')}")
-            detail.append(f"- Expected (chép): {it['expected']}")
-            for P in f:
-                ev = ", ".join(f"`{e}`" for e in it.get("evidence", {}).get(P, [])) or "–"
-                detail.append(f"- Actual {P} ({it.get('nguon_kq', {}).get(P)}): {strip(it['notes_nt'].get(P, ''))} · ảnh: {ev}")
-            detail.append("")
-            body += [f"### {x} – {it['muc_kiem_tra']}", "", f"- Màn hình: {it['man_hinh']}", f"- Căn cứ: {it.get('can_cu', '')}",
-                     f"- Nền tảng Failed: {', '.join(f)}" + (f" · trùng một phần/liên quan: {', '.join('#' + str(n) for n in DUP[x][1])} ({DUP[x][2]})" if x in DUP else ""),
-                     "", "**Môi trường**", ""] + [f"- {ENV[(P, it.get('nguon_kq', {}).get(P))]}" for P in f] + [f"- SUT: {SUT}", "",
-                     "**Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**", "",
-                     f"- Tiền điều kiện (checklist): {it.get('tien_dieu_kien') or '–'}",
-                     f"- Cách kiểm (checklist): {it.get('che_do_ghi_chu') or '–'}",
-                     f"- Test tự động: {spec_line(x) or '– (item chạy tay, xem `checklist/RUN.md`)'}", "",
-                     "**Expected (chép từ checklist)**", "", f"> {it['expected']}", "", "**Actual (chép notes / số đo)**", ""]
-            for P in f:
-                body.append(f"- {P} ({it.get('nguon_kq', {}).get(P)}): {strip(it['notes_nt'].get(P, ''))}")
-            body += ["", "**Ảnh**", ""] + [f"- {P}: " + (", ".join(f"`../checklist/{e}`" for e in it.get("evidence", {}).get(P, [])) or "–") for P in f] + [""]
-        if a.skeleton:
-            p = ROOT / "bugs" / f"{bug}.md"
-            if p.exists():
-                print(f"giữ {p.name} (đã có)")
-                continue
-            head = [f"# {bug}", "", f"- **ID:** {bug}", f"- **Nhóm dữ kiện:** {g} ({', '.join(its)})",
-                    "- **Tiêu đề:** 🔒 SV viết", "- **Mô tả:** 🔒 SV viết", "- **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)",
-                    "- **Severity:** 🔒 SV chọn", "- **Priority:** 🔒 SV chọn", "- **Nhận định:** 🔒 SV viết", "- **GitHub Issue:** (sau khi tạo)", "",
-                    "---", "", "## Dữ kiện (AI chép từ `checklist.json`, không sửa)", ""]
-            p.write_text("\n".join(head + body), encoding="utf-8")
-            made.append(p.name)
-    (ROOT / "bugs" / "bug_groups.md").write_text("\n".join(md + [""] + detail), encoding="utf-8")
-    print(f"{len(new)} item MỚI → {len(GROUPS)} nhóm; khung mới: {len(made)} ({made[0] if made else '–'} … {made[-1] if made else '–'})")
+def cfg():
+    return {
+        "checklist": str(ROOT / "checklist" / "checklist.json"), "bugs_dir": str(ROOT / "bugs"), "groups_md": str(ROOT / "bugs" / "bug_groups.md"),
+        "dup": DUP, "groups": GROUPS, "env": {f"{P}|{k}": v for (P, k), v in ENV.items()}, "sut": SUT, "first_bug": FIRST_BUG,
+        "spec_files": [[str(ROOT / "tests" / "C2.spec.ts"), "HW03/tests/C2.spec.ts"]], "image_prefix": "../checklist/", "owner": "SV",
+        "title": "# Nhóm dữ kiện bug – T1 checklist C2 (đề xuất, SV xác nhận 🔒)", "generator": "tools/bug_groups_hw03.py",
+    }
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--skeleton", action="store_true")
+    run(cfg(), ap.parse_args().skeleton)

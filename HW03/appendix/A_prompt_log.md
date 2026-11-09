@@ -1257,10 +1257,71 @@ Kiểm tra link từ phía Internet (qua tunnel) trước khi bạn mở bằng 
 **Output:**
 ```
 check_kit: 0 lỗi. Tắt tunnel (không để SUT công khai khi không có phiên), ghi khai báo, commit.
+
+Đã xong bước 4 và commit. Môi trường usability từ xa đã sẵn sàng.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: T2 2b – dựng môi trường usability từ xa qua Cloudflare tunnel.
+- SUT `../eshop-sut`: nhánh local `usability-tunnel`, commit `e33212d`, không push. Thay đổi: 8 file, +21/−13 (7 file `frontend-web` đổi `http://localhost:3000/api` thành `/api`; `vite.config.js` thêm proxy `/api` sang `:3000` và cho phép host `.trycloudflare.com`). Không có `/uploads` nên không cần proxy.
+- Ổ đĩa: C trống 146G, D trống 83G. Cloudflared 2026.10.7 cài vào `D:\Tools\cloudflared\` (bạn đã đồng ý), chữ ký Cloudflare hợp lệ.
+- Script mới:
+  - `tools/usability_session.ps1`: restart backend → Vite → tunnel → in link; Ctrl+C để tắt.
+  - `tools/sut_main.ps1`: đưa SUT về nhánh `main`.
+- Kiểm tra:
+  - Tunnel chạy được: trang trả HTTP 200, API qua tunnel trả 5 sản phẩm.
+  - Bạn đã thử hết luồng U1 qua 4G, đơn có giảm giá VIP100 hiện trong Hồ sơ.
+  - check_kit: 0 lỗi. Prompt log: 33 lượt.
+- File trong repo bài: `usability/plan.md` (mục 5 hình thức remote qua Meet; mục 6 môi trường và khác biệt so với checklist), `usability/participant_kit.md` (thêm dòng dùng máy tính, mở link), `report_plan.md` (mục e thêm U-R, mục f thêm khai báo).
+- Commit: `4199810` HW03[T2] 2b/10: môi trường usability từ xa (tunnel)
+- Trạng thái máy: đã tắt tunnel, Vite và backend để SUT không bị công khai khi không có phiên.
+- Cần quyết định: không có.
+
+SUT đang ở nhánh `usability-tunnel`; trước khi chạy lại checklist hay HW khác, nhớ chạy `tools/sut_main.ps1`.
+
+Bạn nhớ push repo bài nhé: `git push` (còn 1 commit chưa push là `4199810`). Repo `eshop-sut` thì không push.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 33 lượt; Claude Opus 5.5 30 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31, #32, #33); Claude (không rõ model) 3 lượt (#17, #21, #30).
+## #34 | 03:24 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – hoàn thiện 2 skill theo cách làm thực tế (commit "HW03: cập nhật skill theo cách làm thực tế"):
+1. gui-checklist-testing: thêm chế độ Playwright (bước 3: phân loại che_do auto/manual/mixed, oracle khoá sha1; bước 4: lượt auto → auto_status, gộp auto+tay theo V1, lỗi harness → Blocked không lập bug); quy tắc ảnh: item Failed + 1 ảnh/màn/nền tảng cho cross-platform, overlay theo đề; bước 1 thêm "đọc toàn bộ phần nguồn checklist trong slide trước khi sinh item"; sửa quy tắc 9 cho khớp; đưa tools/merge_hw03.py, failed_list_hw03.py, bug_groups_hw03.py vào scripts/ dạng tổng quát (tham số hoá, không gắn HW03), tools/ giữ wrapper gọi sang skill; cập nhật bảng Script.
+2. usability-evaluation: bước 0 thêm lựa chọn remote synchronous (Meet, người tham gia chia sẻ màn hình, tunnel + reset dữ liệu mỗi phiên, link mới mỗi phiên, mỗi lần 1 người, quay khi được đồng ý); thêm tham chiếu tools/usability_session.ps1 như ví dụ.
+3. Chạy lại các script đã chuyển trên dữ liệu HW03: checklist.json, Excel, failed_list, bug_groups phải giống hệt (diff, Excel so số liệu). check_checklist 0 lỗi.
+4. CHƯA chép sang HW03/skills (để lúc đóng gói). Ghi vào report_plan mục c: "chép 2 skill → HW03/skills khi đóng gói".
+on_stop.py --manual. Báo cáo ≤ 8 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Lưu bản chuẩn trước khi chuyển script để so sánh sau.
+
+Viết `merge_runs.py` tổng quát trong skill.
+
+merge giống hệt. Giờ chuyển failed_list.
+
+Giờ bug_groups.
+
+Toàn bộ `failed_list`, `bug_groups`, BUG-58…85 giống hệt. Kiểm checklist.md + Excel.
+
+Kết quả trùng khớp hoàn toàn (Excel: 2144 ô, 0 ô khác). Khôi phục file xlsx đã commit để khỏi phát sinh diff nhị phân, rồi cập nhật SKILL.md.
+
+Heredoc quá dài bị shell cắt. Ghi script ra file tạm rồi chạy.
+
+Giờ skill usability-evaluation, bước 0.
+
+Ghi vào report_plan mục c.
+```
+*File AI ghi/gửi trong lượt này:* `merge_runs.py`, `failed_list.py`, `bug_groups.py`, `upd_skill.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 34 lượt; Claude Opus 5.5 31 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31, #32, #33, #34); Claude (không rõ model) 3 lượt (#17, #21, #30).

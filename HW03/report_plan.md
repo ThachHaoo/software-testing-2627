@@ -36,7 +36,7 @@ Câu tuyên bố nguyên văn: *"I use AI tools for the following tasks,"*. Mẫ
 | 6 | Bằng chứng usability: kịch bản, ghi chú quan sát, SUS, findings xếp hạng, video (nếu có), bảng 7 người | `usability/…` | THIẾU | Có |
 | 7 | Ảnh cross-platform (có overlay) | `checklist/evidence/P1_chrome`, `P2_firefox`, `P3_android` | THIẾU | Có |
 | 8 | README.md: tự đánh giá + test summary (số màn/flow, item thiết kế/chạy/Pass/Fail, số bug, số người, link video) | `README.md` | THIẾU | Có |
-| 9 | Skill + video demo (YouTube) | `skills/…`, `skills/VideoLinks.md` | THIẾU | Có |
+| 9 | Skill + video demo (YouTube) | `skills/…`, `skills/VideoLinks.md` | THIẾU – **chép 2 skill → HW03/skills khi đóng gói** (`gui-checklist-testing`, `usability-evaluation` từ `.claude/skills/`; cập nhật theo cách làm thực tế 10/11) | Có |
 | 10 | Prompt log | `appendix/A_prompt_log.md` | THIẾU (đổi `tools/hw.toml` sang HW03) | Có |
 | — | Kế hoạch nộp bài (file này) | `report_plan.md` | — | Không (`HW03/.gitattributes`: export-ignore) |
 
@@ -105,6 +105,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 Claude Code (4/6a2–4/6b): đổi tên/nén ảnh B3/B4 theo bảng SV duyệt, M5 dùng lại ảnh M3/M4; gộp auto + tay vào `checklist.json` (`tools/merge_hw03.py`: CSV từ file tay, ánh xạ tên ảnh, V1, ghi `nguon_kq` + `lech_auto_tay`); Excel (`build_excel.py`, thêm fullCalcOnLoad; kiểm bằng Excel: 21 công thức, 0 lỗi); `bugs/issues.json` (gh issue list) + `bugs/failed_list.md` (`tools/failed_list_hw03.py`, AI đối chiếu trùng theo tiêu đề issue, SV xác nhận); chèn marker REPORT:T1/U1 vào report và điền 2 bảng T1 (`tools/report_t1_hw03.py`).
 - 10/11 Claude Code (5/6a): ghi quyết định T-P3/CL-34/Q1-auto/CL-52 P3 vào `merge_hw03.py` (OVERRIDE, nối notes, không sửa chữ SV); CL-01 đổi thành trùng #9 theo notes; `bugs/bug_groups.md` (30 nhóm dữ kiện, AI đề xuất, SV xác nhận) + khung `bugs/BUG-58…87.md` chỉ chép dữ kiện (`tools/bug_groups_hw03.py`); Tiêu đề/Mô tả/Steps/Severity/Priority/Nhận định để trống cho SV.
 - 10/11 Claude Code (T2 2b): nhánh local `usability-tunnel` trong eshop-sut (commit `e33212d`: 7 file frontend-web đổi `http://localhost:3000/api` → `/api`, `vite.config.js` proxy + allowedHosts); tải cloudflared 2026.10.7 vào `D:\Tools\cloudflared` (SV đồng ý, chữ ký Cloudflare hợp lệ); `tools/usability_session.ps1`, `tools/sut_main.ps1`; sửa plan.md mục 5–6 và thêm 1 dòng vào participant_kit.md theo lệnh SV; check_kit 0 lỗi. SV tự thử luồng qua 4G.
+- 10/11 Claude Code (skill): cập nhật `gui-checklist-testing` (chế độ Playwright, gộp V1, quy tắc ảnh, đọc slide trước bước 1, quy tắc 9; chuyển `merge_hw03.py`/`failed_list_hw03.py`/`bug_groups_hw03.py` thành `scripts/merge_runs.py`/`failed_list.py`/`bug_groups.py` tổng quát, `tools/` giữ wrapper dữ liệu HW03; schema thêm trường auto) và `usability-evaluation` (bước 0: lựa chọn remote synchronous + tunnel). Chạy lại trên dữ liệu HW03: checklist.json, CSV, checklist.md, failed_list, bug_groups, BUG-58…85, report giống hệt; Excel 2144 ô, 0 ô khác.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)

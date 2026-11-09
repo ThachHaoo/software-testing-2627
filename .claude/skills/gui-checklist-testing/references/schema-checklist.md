@@ -46,6 +46,13 @@ Một file cho một phạm vi (nhóm màn hình). UTF-8, `ensure_ascii=False`, 
 | `evidence` | Failed | `{Px: ["checklist/evidence/P1_chrome/CL-05_failed.png"]}` | ảnh có overlay |
 | `run` | sau bước 4 | `{Px: "runs/P1_20261105-0930.csv"}` | lượt đã gộp |
 | `notes` | | chuỗi | ghi chú chung |
+| `che_do` | bước 3 | `auto` / `manual` / `mixed` | cách chạy (chế độ Playwright) |
+| `che_do_ghi_chu` | mixed/manual | chuỗi | phần chạy tay / lý do cần mắt người |
+| `auto_nen_tang` | | mảng mã nền tảng | nền tảng chạy auto được (thiếu = mọi nền tảng) |
+| `auto_status`, `auto_notes`, `auto_evidence`, `auto_run` | sau lượt auto | `{Px: …}` | kết quả Playwright, không phải verdict |
+| `nguon_kq` | sau gộp | `{Px: "tay"/"auto"}` | `ket_qua` lấy từ lượt nào |
+| `lech_auto_tay` | khi lệch | `{Px: "auto X ≠ tay Y → lấy tay (V1): nguyên nhân"}` | |
+| `lap_bug` | quyết định | `{Px: false}` | ô Failed không lập bug (vd chỉ trên trình duyệt Playwright) |
 
 ## File lượt chạy (đầu vào `merge_platform.py`)
 

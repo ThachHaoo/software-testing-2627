@@ -19,7 +19,7 @@ Dữ liệu của một phạm vi (một nhóm màn hình) nằm trong **một f
 6. **Đóng băng output AI** sau mỗi bước AI (`scripts/freeze.py`) trước khi người dùng sửa; không sửa file đã đóng băng.
 7. **Nguồn từng item:** `nguon` = `AI` / `SV` / `Both` (AI đề xuất, SV sửa đáng kể).
 8. **Bước 2 (SV bổ sung) – AI không gợi ý** item hay khía cạnh nào. Chỉ trả lời "vì sao AI bỏ sót" sau khi SV đã commit item của mình; tách *đã nghĩ tới nhưng không đưa vào* / *không nghĩ tới* / *bị gỡ theo quyết định SV*; nêu nguyên nhân (prompt, giới hạn công cụ, đặc thù giao diện).
-9. **Kết quả do người chạy quan sát.** AI chỉ chạy `dom_probe.js` (đọc DOM, đo) và gộp. Item chỉ quan sát bằng mắt (màu, bố cục, cảm nhận) do SV chấm. Bug report do SV viết; AI chỉ gom dữ kiện.
+9. **Verdict chính thức = lượt chạy tay trên trình duyệt/thiết bị thật.** Lượt Playwright (chế độ auto, bước 3–4) chỉ ghi `auto_status`; item không có trong lượt tay thì lấy kết quả auto (ghi `nguon_kq = auto` + môi trường auto). Lệch auto ↔ tay → lấy lượt tay, ghi nguyên nhân lệch (V1). Ô auto Failed vì lỗi harness (Timeout, không assertion nào fail) → người dùng quyết **Blocked**, không lập bug. AI chỉ chạy test/`dom_probe.js` (đọc DOM, đo) và gộp; item chỉ quan sát bằng mắt (màu, bố cục, cảm nhận) do SV chấm. Bug report do SV viết; AI chỉ gom dữ kiện.
 10. Quy định khoá học / `CLAUDE.md` hạn chế AI → quy định đó thắng skill này.
 
 ## Các bước
@@ -31,6 +31,7 @@ Gọi: `/gui-checklist-testing <thư-mục-checklist> <bước>` — vd `HW03/ch
 - Tạo `checklist.json` với `meta` (scope, sut_version, test_basis, platforms, result_values, inventory), `assumptions` rỗng, `items` rỗng. Dừng.
 
 ### Bước 1 — Nháp checklist theo 3 nguồn
+- **Đọc toàn bộ phần nguồn checklist trong slide** (*Where checklists come from 1–3*, *From heuristics to a review checklist*, *Test every control*, các slide checklist theo control) **trước khi sinh item**; không sinh từ trí nhớ về heuristic.
 - Sinh item từ: (a) **điều khoản đặc tả** (mỗi điều khoản áp dụng cho màn trong phạm vi), (b) **checklist theo control** (text box, button, link, validation… – chỉ control có trong inventory), (c) **heuristic** Nielsen 10 / Norman 6 / Shneiderman 8 / WCAG khi đặc tả im lặng. Ghi `loai_nguon` = `SRS` / `Control` / `Heuristic`.
 - Mỗi item: `id` CL-xx, `ia` (IA-01…IA-04), `man_hinh`, `muc_kiem_tra`, `can_cu` (mã + dòng), `expected` có ngưỡng, `uu_tien` Mandatory/Optional, `nen_tang`, `nguon: "AI"`; tuỳ chọn `tien_dieu_kien`, `gia_dinh`, `na`.
 - Đủ 4 IA; số item ≥ ngưỡng đề (vd > 40).
@@ -42,14 +43,18 @@ Gọi: `/gui-checklist-testing <thư-mục-checklist> <bước>` — vd `HW03/ch
 - Sau khi SV commit, nếu SV hỏi: trả lời vì sao AI bỏ sót theo quy tắc 8; SV tự viết phần phân tích trong report.
 - `render_checklist.py` + `check_checklist.py`. Dừng.
 
-### Bước 3 — RUN.md + dom_probe.js
-- `RUN.md` (mẫu `assets/RUN_template.md`): thứ tự nhóm item (gom theo tiền điều kiện để ít restart), lệnh khởi động SUT, tài khoản, bảng ảnh (chỉ chụp item Failed + overlay theo đề), cách ghi kết quả vào file lượt `runs/<Px>_<YYYYMMDD-HHMM>.csv`.
+### Bước 3 — RUN.md + dom_probe.js (+ chế độ Playwright)
+- **Phân loại cách chạy từng item** (`che_do`): `auto` (kiểm được hoàn toàn qua DOM/bàn phím/mạng – Playwright), `manual` (cần mắt người: màu, bố cục, cảm nhận, autofill…), `mixed` (một phần auto, phần còn lại tay – mô tả phần tay trong `che_do_ghi_chu`); nền tảng chạy auto được ghi `auto_nen_tang` nếu không phải mọi nền tảng.
+- **Chế độ Playwright** (tuỳ chọn, khi có nhiều item `auto`): mỗi test đọc ngưỡng/đầu vào từ oracle **khoá theo `sha1(expected)[0:8]`** – `oracle.src.json` → `gen_oracle.py` → `oracle.ts`; Expected đổi thì test dừng với "oracle cũ" thay vì chạy theo bản cũ (không sinh lại oracle chỉ để hết lỗi). Mỗi project = một nền tảng (vd Chrome channel, Firefox của Playwright, Chrome Android thật qua `_android`); reporter ghi file lượt JSON `kind: "auto"` + ảnh phần tử vào `evidence/auto/`. Ví dụ: `HW03/tests/` (`C2.spec.ts`, `lib.ts`, `gen_oracle.py`, `gen_run.py`). Locale/viewport giả lập của Playwright có thể khác trình duyệt thật → ghi vào RUN.md để giải thích lệch ở bước 4.
+- `RUN.md` (mẫu `assets/RUN_template.md`; chế độ Playwright: sinh bằng script kiểu `gen_run.py`, chỉ còn item `manual`/`mixed`): thứ tự nhóm item (gom theo tiền điều kiện để ít restart), lệnh khởi động SUT, tài khoản, quy tắc ảnh (dưới), cách ghi kết quả vào file lượt `runs/<Px>_manual_<YYYYMMDD-HHMM>.md|.csv`.
+- **Quy tắc ảnh:** (a) mỗi item **Failed** trên mỗi nền tảng: `P<n>_<id>_<k>.png`; (b) cross-platform: **1 ảnh tổng quan mỗi màn hình / nền tảng** `P<n>_M<k>_1.png` (ảnh màn khác thấy đủ vùng đó thì dùng lại, ghi tham chiếu, không chép trùng); không chụp item Passed/N/A. **Overlay theo đề** trên mọi ảnh (thấy tên trình duyệt + URL); AI không tạo/ghép overlay, chỉ kiểm, đổi tên, nén (bản gốc để thư mục `evidence_raw/` gitignore).
 - `dom_probe.js` (từ `assets/dom_probe.js`): dán vào DevTools Console từng trang; in JSON số `<h1>`, `type` các ô, nhãn có `*`, `lang`, `title`, thứ tự focus, vị trí thông báo so với nút submit. Chỉ là dữ kiện cho SV chấm.
 - Procedure phải khớp cách chạy thật trước khi chạy; sửa thì freeze lại, Expected không đổi. Dừng.
 
 ### Bước 4 — Chạy từng nền tảng + gộp
-- SV chạy toàn bộ checklist trên từng nền tảng, ghi file lượt (CSV: `id,status,notes,evidence`). Mỗi nền tảng một commit.
-- `merge_platform.py <json> <file-lượt> --platform Px` (thử `--dry-run` trước): ghi `ket_qua[Px]`, `notes_nt[Px]`, `evidence[Px]`; không ghi đè kết quả khác đã có trừ `--force`.
+- Chế độ Playwright: chạy lượt auto từng nền tảng trước (restart/seed dữ liệu trong lệnh) → file `runs/<Px>_auto_<ts>.json` → `auto_status`.
+- SV chạy tay phần còn lại trên trình duyệt/thiết bị thật, ghi file lượt (bảng Markdown `| ID | status | notes | ảnh |` hoặc CSV `id,status,notes,evidence`). Mỗi nền tảng một commit. AI kiểm ảnh/kết quả (chỉ đọc, ghi `run_check.md`), chỉ chuẩn hoá giá trị (Pass→Passed…) khi người dùng yêu cầu, không sửa notes.
+- Gộp: `merge_runs.py --config <cfg>` (một lệnh cho mọi lượt; gọi `merge_platform.py` bên trong): lượt auto → `auto_status`; lượt tay → `ket_qua`; item chỉ có auto → `ket_qua` = auto (`nguon_kq`); lệch auto ↔ tay → giữ tay + `lech_auto_tay` (nguyên nhân trong `cause`); quyết định người dùng (lỗi harness → Blocked, loại khỏi lập bug `lap_bug: false`, nối câu vào notes) trong `override`, áp sau cùng nên chạy lại vẫn giữ. Gộp một lượt lẻ: `merge_platform.py <json> <file-lượt> --platform Px [--dry-run]`.
 - `check_checklist.py`: mọi item Failed có notes + ảnh. Dừng.
 
 ### Bước 5 — Excel + test summary
@@ -57,7 +62,8 @@ Gọi: `/gui-checklist-testing <thư-mục-checklist> <bước>` — vd `HW03/ch
 - Bảng tổng (thiết kế / đã chạy / Passed / Failed / N/A / Blocked theo nền tảng; theo IA; theo nguồn) chép sang README + report. Dừng.
 
 ### Bước 6 — Gom dữ kiện bug
-- Từ item Failed: gom nhóm theo nguyên nhân chung (một chỗ sửa), mỗi nhóm: item, nền tảng, notes nguyên văn, ảnh, code trích (file:dòng), yêu cầu bị vi phạm → `bugs/_groups_<scope>.md`. Kiểm trùng issue nhóm (`gh issue list`).
+- `gh issue list --state all --limit 500 --json number,title,state,labels,author > bugs/issues.json`; `failed_list.py --config <cfg>` → `bugs/failed_list.md` (item × nền tảng Failed, cột trùng/MỚI; AI đối chiếu theo tiêu đề issue + màn + notes, người dùng xác nhận).
+- `bug_groups.py --config <cfg> [--skeleton]`: gom item MỚI theo **dữ kiện quan sát giống nhau** (cùng phần tử / cùng hành vi, khác màn/nền tảng) → `bugs/bug_groups.md`; người dùng tách/gộp, chốt; rồi `--skeleton` sinh khung `BUG-<n>.md` (số nối tiếp bug cũ) **chỉ chứa dữ kiện chép lại** (item, nền tảng, môi trường, nguồn bước nguyên văn, Expected, Actual, ảnh); Tiêu đề / Mô tả / Steps / Severity / Priority để trống.
 - **Không** viết mô tả bug. SV chốt danh sách, viết bug; AI chạy bước tái hiện SV viết, sửa dữ kiện theo evidence, tạo issue bằng `--body-file` của SV.
 
 ## Script
@@ -68,11 +74,17 @@ Gọi: `/gui-checklist-testing <thư-mục-checklist> <bước>` — vd `HW03/ch
 | `scripts/freeze.py <json> --step k --out <hw>/appendix/ai-outputs [--note "#n"]` | Đóng băng json + md, có timestamp, không ghi đè, ghi `INDEX.md` |
 | `scripts/render_checklist.py <json> -o <md>` | Bảng theo IA, thống kê, giả định, cột kết quả từng nền tảng |
 | `scripts/merge_platform.py <json> <lượt.csv\|json> --platform Px [--dry-run] [--force]` | Gộp kết quả một lượt chạy |
-| `scripts/build_excel.py <json> -o <xlsx>` | Excel 3 sheet (cần `openpyxl`) |
+| `scripts/build_excel.py <json> -o <xlsx> [--tester …]` | Excel 3 sheet (cần `openpyxl`; đặt fullCalcOnLoad – mở Excel là tính lại) |
+| `scripts/merge_runs.py --config <cfg> [--dry-run]` | Gộp mọi lượt auto + tay theo V1 (md → CSV, ánh xạ tên ảnh, `nguon_kq`, `lech_auto_tay`, `override`) |
+| `scripts/failed_list.py --config <cfg>` | `failed_list.md`: Failed × nền tảng, đối chiếu trùng issue, loại `lap_bug: false`, cảnh báo lỗi harness |
+| `scripts/bug_groups.py --config <cfg> [--skeleton]` | `bug_groups.md` + khung `BUG-<n>.md` chỉ dữ kiện; dừng nếu nhóm không phủ đúng tập item MỚI |
+
+`merge_runs.py`, `failed_list.py`, `bug_groups.py` nhận config JSON (khoá mô tả trong docstring) hoặc được import và gọi `run(cfg)` từ wrapper của bài – ví dụ `tools/merge_hw03.py`, `tools/failed_list_hw03.py`, `tools/bug_groups_hw03.py` chỉ giữ dữ liệu riêng HW03 (tên file lượt, nguyên nhân lệch, quyết định, bảng trùng, nhóm).
 
 ## Quy ước verdict
 
 - Lệch Expected → **Failed** (notes ghi Actual nguyên văn + lý do). Bị lỗi khác chặn (vd thiếu control mà item phụ thuộc) → **Blocked** + item gốc trong notes.
+- Lượt auto lỗi harness (Timeout, không assertion fail) → người dùng quyết **Blocked**, ghi lý do, không lập bug. Kết quả chỉ có trên trình duyệt của Playwright, chưa xác nhận trên trình duyệt thật → giữ, ghi rõ, loại khỏi lập bug (`lap_bug: false`).
 - Nền tảng không áp dụng (theo `na`) → **N/A**; N/A không có giả định = lỗi check.
 - Expected sai phát hiện sau khi có Actual → không sửa Expected; ghi "Failed do lỗi thiết kế item, không lập bug".
 - Lượt chính thức = chạy toàn bộ trên một nền tảng sau khi reset dữ liệu; ghi nhật ký trong `RUN.md`.
