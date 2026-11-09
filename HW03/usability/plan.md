@@ -32,15 +32,21 @@ Người từng mua hàng online ít nhất 1 lần, chưa dùng EShop, không h
 
 ## 5. Phương pháp và thiết kế
 
-- Moderated, trực tiếp, think-aloud; 1 pilot + 7 phiên chính, mỗi phiên 1 người, cùng một nhiệm vụ.
+- **Remote synchronous moderated** (từ xa, đồng bộ, có điều phối) qua **Google Meet**: người tham gia dùng máy tính của mình, mở link em gửi, **chia sẻ màn hình** và think-aloud; em quan sát, ghi phiếu. 1 pilot + 7 phiên chính, mỗi phiên 1 người, cùng một nhiệm vụ.
+- Quay phiên trên máy em bằng **Xbox Game Bar hoặc OBS** (màn hình Meet + tiếng) chỉ khi người tham gia đồng ý (lời mở đầu của kit).
 - Thứ tự mỗi phiên (~20 phút): giới thiệu + xin đồng ý (3') → nhiệm vụ (≤ 10') → SEQ (1') → SUS (3') → câu hỏi mở (5').
 - Pilot dùng để kiểm: câu chữ nhiệm vụ có rõ không, flow có chạy hết không, thời gian; sửa xong mới chạy phiên chính. Kết quả pilot không tính vào 7 phiên.
 
 ## 6. Môi trường và thiết bị
 
-- PC của em, Chrome trên Windows (= P1), `http://localhost:5173`; backend `:3000`.
-- **Restart backend trước mỗi phiên** (seed lại CSDL: xoá đơn và lượt dùng mã của phiên trước).
-- Quay màn hình + ghi âm khi người tham gia đồng ý; công cụ quay 📝.
+- SUT chạy trên PC của em: backend `:3000` + web Vite `:5173` của nhánh local **`usability-tunnel`** (`../eshop-sut`, commit `e33212d`, không push), công khai tạm thời qua **Cloudflare quick tunnel** (`https://<ngẫu nhiên>.trycloudflare.com`, link đổi mỗi lần chạy).
+- Mỗi phiên: `powershell -ExecutionPolicy Bypass -File tools/usability_session.ps1` (restart backend → Vite → tunnel → in link) → gửi link qua Meet chat; xong phiên Ctrl+C. Hết đợt usability: `tools/sut_main.ps1` đưa SUT về `main`.
+- **Restart backend trước mỗi phiên** (seed lại CSDL: xoá đơn và lượt dùng mã của phiên trước) – đã nằm trong `usability_session.ps1`.
+- Đã thử 10/11: em mở link bằng điện thoại qua 4G, đi hết luồng đăng nhập → tìm SP → thêm giỏ → VIP100 → đặt hàng → thấy đơn đã giảm giá trong Hồ sơ.
+- **Khác biệt so với môi trường chạy checklist (T1/T3):**
+  - Trình duyệt, hệ điều hành, độ phân giải là **của người tham gia** (ghi vào phiếu quan sát), không phải P1/P2/P3.
+  - Truy cập **qua Internet** (tunnel Cloudflare) thay vì `localhost` → độ trễ cao hơn; thời gian hoàn thành có thể bao gồm độ trễ mạng.
+  - Nhánh `usability-tunnel` **chỉ đổi URL API**: `http://localhost:3000/api` → đường dẫn tương đối `/api` (Vite proxy sang `:3000`) + cho phép host `*.trycloudflare.com`; giao diện và logic giống `main` @ `de0f48f`.
 - Lưu ý khi chuẩn bị (AI phát hiện khi kiểm flow bằng API 04/11, em quyết):
   - Mã `SAVE10` trả `discount_amount` âm, `final_amount` gấp 10 lần tổng (vd tổng 6.000.000 → 60.000.000) — `../eshop-sut/backend/server.js:363` trở đi. Vì vậy kit dùng `VIP100` (fixed 100.000 ₫, ngưỡng 300.000 ₫, 2 lượt/người); `BIGBUY` cũng cho kết quả đúng.
   - Giỏ hàng ở web là state React: tải lại trang (F5) hoặc gõ URL làm mất giỏ (bài học HW02). Không nhắc người tham gia; nếu xảy ra thì ghi vào phiếu quan sát.

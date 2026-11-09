@@ -6,6 +6,7 @@ Mã phiên: ______ · Ngày: ____/____/2026 · Giờ bắt đầu: ______
 
 Cảm ơn bạn đã tham gia. Hôm nay mình đang **kiểm tra trang web, không kiểm tra bạn** — không có câu trả lời đúng hay sai; chỗ nào bạn thấy khó là chỗ trang web cần sửa.
 
+- Bạn **dùng máy tính**, mở link người hướng dẫn gửi (qua Google Meet) và chia sẻ màn hình trong lúc làm.
 - Trong lúc làm, bạn hãy **nói to những gì mình đang nghĩ** (đang tìm gì, thấy gì lạ, định bấm gì).
 - Mình sẽ không hướng dẫn trong lúc bạn làm. Bạn có thể dừng bất cứ lúc nào.
 - Mình xin phép **quay màn hình và ghi âm** để xem lại. Bản ghi chỉ dùng cho bài tập môn học, không đăng công khai.

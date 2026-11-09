@@ -1195,10 +1195,72 @@ G-13 gộp; #160 trùng, #165 trùng #167 trùng #169 trùng #170 trùng
 **Output:**
 ```
 Khung chưa ai sửa → xoá được và sinh lại. Cập nhật DUP + nhóm.
+
+Đã chốt nhóm bug theo quyết định của bạn: còn 28 nhóm, sinh lại khung BUG-58…85 (chỉ dữ kiện).
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: 5/6b – tách G-02 cũ thành CL-13 và CL-14; tách G-23 cũ, trong đó CL-08 trùng #170 nên chỉ còn nhóm CL-09; bỏ khung các item trùng (CL-04 #160, CL-08 #170, CL-40 #169, CL-60 #165, CL-62 #167). G-13 bạn chọn gộp, nhưng vì CL-04 đã trùng #160 nên nhóm này chỉ còn CL-06.
+- File: `bugs/failed_list.md` (trùng 14 / trùng một phần 4 / mới 28), `bugs/bug_groups.md` (28 nhóm G-01…G-28), khung `bugs/BUG-58…85.md` sinh lại, `report_plan.md` mục e thêm dòng G-SV.
+- Commit: `3ab505e` HW03[T1] 5/6b: SV chốt nhóm bug
+- Cần quyết định: không có. Bước kế tiếp là bạn viết Tiêu đề/Mô tả/Steps/Severity/Priority cho 28 khung (🔒).
+
+Bạn nhớ push nhé: `git push` (còn 1 commit chưa push là `3ab505e`).
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 31 lượt; Claude Opus 5.5 28 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31); Claude (không rõ model) 3 lượt (#17, #21, #30).
+## #32 | 03:14 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03[T2] – môi trường usability từ xa (commit trong repo bài: "HW03[T2] 2b/10: môi trường usability từ xa (tunnel)"):
+1. Repo ..\eshop-sut: tạo nhánh local usability-tunnel (KHÔNG push). frontend-web: thay "http://localhost:3000" → đường dẫn tương đối; vite.config: proxy /api (và /uploads nếu có) → http://localhost:3000, server.allowedHosts cho .trycloudflare.com. Commit trên nhánh đó. In git diff --stat.
+2. In dung lượng trống ổ C/D. Cài cloudflared (winget hoặc bản exe vào D:\Tools; hỏi tôi trước khi cài). tools/usability_session.ps1: restart_backend.ps1 → vite (nhánh tunnel, --host 127.0.0.1) → cloudflared tunnel --url http://localhost:5173 → in link; Ctrl+C tắt tunnel. Kèm tools/sut_main.ps1 để quay SUT về nhánh main.
+3. Chạy usability_session.ps1, in link, DỪNG chờ tôi mở link trên điện thoại dùng 4G: đăng nhập test@eshop.com, tìm SP, thêm giỏ, áp VIP100, đặt hàng, thấy đơn trong Hồ sơ.
+4. usability/plan.md: hình thức = remote synchronous moderated (Google Meet, người tham gia chia sẻ màn hình, think-aloud; quay bằng Game Bar/OBS khi được đồng ý); khác biệt môi trường so với checklist (trình duyệt của người tham gia, qua Internet, nhánh usability-tunnel chỉ đổi URL API). participant_kit.md: thêm dòng "dùng máy tính, mở link người hướng dẫn gửi". Chạy check_kit.py của skill usability-evaluation.
+on_stop.py --manual. Báo cáo ≤ 10 dòng. Nhắc tôi push repo bài.
+```
+
+**Output:**
+```
+Bước 1: xem SUT.
+
+Ổ đĩa: C trống 146G, D trống 83G. Chưa có cloudflared. Em viết script trước, hỏi cài sau.
+
+Chữ ký hợp lệ (Cloudflare, Inc.). Chạy phiên ở chế độ nền.
+
+Windows PowerShell 5.1 đọc file UTF-8 không BOM sai mã. Thêm BOM như `restart_backend.ps1`.
+
+Check parse lỗi, chạy lại luôn.
+
+`param` phải đứng đầu file. Tắt lượt đang chạy, sửa lại.
+
+Kiểm tra link từ phía Internet (qua tunnel) trước khi bạn mở bằng điện thoại.
+```
+*File AI ghi/gửi trong lượt này:* `usability_session.ps1`, `sut_main.ps1`
+
+**Xử lý:** [...]
+
+---
+
+## #33 | 03:21 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã thử hết luồng bạn nói, vào hồ sơ kiểm tra thì thấy 1 đơn hàng đã được giảm giá nhé. Thực hiện tiếp bước 4 nhé
+```
+
+**Output:**
+```
+check_kit: 0 lỗi. Tắt tunnel (không để SUT công khai khi không có phiên), ghi khai báo, commit.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 33 lượt; Claude Opus 5.5 30 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25, #26, #27, #28, #29, #31, #32, #33); Claude (không rõ model) 3 lượt (#17, #21, #30).

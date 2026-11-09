@@ -89,6 +89,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | Q1-auto | 59 item auto của P1 lấy kết quả lượt Chrome 157 (Playwright), không chạy lại trên Cốc Cốc; khai trong mục "lệch so với kế hoạch" của report (5/6a) |
 | CL52-P3 | CL-52 P3: notes ghi "thiếu ảnh" (ảnh `P3_CL-52_1` chỉ thấy "Đăng nhập thất bại", không thấy trạng thái khoá) (5/6a) |
 | G-SV | SV chốt nhóm bug (5/6b): tách G-02 cũ (CL-13, CL-14) và G-23 cũ (CL-08, CL-09); G-13 giữ gộp; CL-04, CL-08, CL-40, CL-60, CL-62 trùng #160, #170, #169, #165, #167 → bỏ khung. Còn 28 nhóm → BUG-58…85 |
+| U-R | T2 chạy **remote synchronous moderated** qua Google Meet (người tham gia dùng máy tính của mình, chia sẻ màn hình, think-aloud; quay Game Bar/OBS khi đồng ý). SUT công khai tạm thời qua Cloudflare quick tunnel, nhánh local `usability-tunnel` của eshop-sut (chỉ đổi URL API sang `/api` + Vite proxy), không push (10/11) |
 
 **Còn chờ SV chốt:** (không còn)
 
@@ -103,6 +104,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 Claude Code: kiểm ảnh/kết quả chạy tay (`checklist/run_check.md`), nén + đổi tên ảnh đạt (`tools/compress_hw03.py`, gốc ở `evidence_raw/` không nộp), chuẩn hoá giá trị Pass/Fail → Passed/Failed, CL-64 → Blocked (Q2) và metadata (tiêu đề P2, Android 14) trong `runs/*_manual_*` theo yêu cầu SV; không sửa notes.
 - 10/11 Claude Code (4/6a2–4/6b): đổi tên/nén ảnh B3/B4 theo bảng SV duyệt, M5 dùng lại ảnh M3/M4; gộp auto + tay vào `checklist.json` (`tools/merge_hw03.py`: CSV từ file tay, ánh xạ tên ảnh, V1, ghi `nguon_kq` + `lech_auto_tay`); Excel (`build_excel.py`, thêm fullCalcOnLoad; kiểm bằng Excel: 21 công thức, 0 lỗi); `bugs/issues.json` (gh issue list) + `bugs/failed_list.md` (`tools/failed_list_hw03.py`, AI đối chiếu trùng theo tiêu đề issue, SV xác nhận); chèn marker REPORT:T1/U1 vào report và điền 2 bảng T1 (`tools/report_t1_hw03.py`).
 - 10/11 Claude Code (5/6a): ghi quyết định T-P3/CL-34/Q1-auto/CL-52 P3 vào `merge_hw03.py` (OVERRIDE, nối notes, không sửa chữ SV); CL-01 đổi thành trùng #9 theo notes; `bugs/bug_groups.md` (30 nhóm dữ kiện, AI đề xuất, SV xác nhận) + khung `bugs/BUG-58…87.md` chỉ chép dữ kiện (`tools/bug_groups_hw03.py`); Tiêu đề/Mô tả/Steps/Severity/Priority/Nhận định để trống cho SV.
+- 10/11 Claude Code (T2 2b): nhánh local `usability-tunnel` trong eshop-sut (commit `e33212d`: 7 file frontend-web đổi `http://localhost:3000/api` → `/api`, `vite.config.js` proxy + allowedHosts); tải cloudflared 2026.10.7 vào `D:\Tools\cloudflared` (SV đồng ý, chữ ký Cloudflare hợp lệ); `tools/usability_session.ps1`, `tools/sut_main.ps1`; sửa plan.md mục 5–6 và thêm 1 dòng vào participant_kit.md theo lệnh SV; check_kit 0 lỗi. SV tự thử luồng qua 4G.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
