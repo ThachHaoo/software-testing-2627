@@ -1,0 +1,24 @@
+{
+  "phien": null,
+  "pilot": false,
+  "ngay": null,
+  "nguoi_tham_gia": null,
+  "nhom": null,
+  "nen_tang": null,
+  "reset_du_lieu": null,
+  "dong_y": { "quay_man_hinh": null, "ghi_am": null, "lien_he_xac_nhan": null },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": null,
+    "hoan_thanh": null,
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [],
+  "tro_giup": [],
+  "seq": null,
+  "sus": [null, null, null, null, null, null, null, null, null, null],
+  "cau_hoi_mo": { "ro_rang": null, "khoi_phuc_loi": null, "toc_do": null, "tin_cay": null },
+  "ghi_chu": ""
+}

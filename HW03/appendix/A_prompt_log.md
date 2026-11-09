@@ -766,10 +766,226 @@ Backend nền đã tắt. Giờ sửa package.json, gen_run.py, CL-58/59.
 package.json và checklist.json đã ghi. gen_run.py sửa bằng Edit.
 
 Chạy thử restart_backend.ps1.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** R1 + R2 xong. Commit `9dfb111 HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều kiện CL-58/59`.
+- **R1:** `tools/restart_backend.ps1` chép nguyên bản từ HW02 (so `cmp`: giống hệt). Backend nền của phiên đã tắt. `HW03/tests/package.json` có `npm run p1`, `p2`, `p3` (restart rồi mới chạy `--project=Px`).
+- **RUN.md:** sinh lại từ `gen_run.py`. Bước 1 dùng `restart_backend.ps1`. Bước B ghi rõ: chạy `seed_orders.py` ngay sau restart và Bước A, khi lượt đó cần đơn.
+- **R2:** tiền điều kiện CL-58 và CL-59 giờ là "Sau restart backend, chạy seed_orders.py để có đủ đơn 5 trạng thái". Expected không đổi. review_log có R2 "SV chốt".
+- **Kiểm tra:**
+  - check_checklist: 0 lỗi.
+  - Chạy thử `restart_backend.ps1`: in "backend restart xong: 5 sản phẩm", exit 0. Cổng 3000 đang listen (backend mới); vite :5173 vẫn chạy.
+  - Đã chạy on_stop.py --manual: prompt log có 18 lượt.
+- **Cần quyết định:** không. Lưu ý: backend giờ do script bật trong một cửa sổ riêng (thu nhỏ), không còn là tiến trình nền của phiên này.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 18 lượt; Claude Opus 5.5 17 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18); Claude (không rõ model) 1 lượt (#17).
+## #19 | 02:49 05/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Lưu lại những gì đang chạy hiện tại, để lần sau mình yêu cầu bật lại thì mở lại hết như vậy nhé. Giờ tắt tất cả những gì đang chạy giúp mình
+```
+
+**Output:**
+```
+Đã ghi lại những gì đang chạy và tắt hết. Các cổng 3000, 5173, 5037 giờ không còn gì nghe, không còn tiến trình `node` hay `adb` nào.
+
+Lúc tắt có 3 thứ chạy, lần sau bạn bảo "bật lại" mình sẽ mở lại đúng như vậy:
+- **Backend `:3000`**: bật lại bằng `tools\restart_backend.ps1`. Mỗi lần bật, CSDL tự seed lại.
+- **Web `:5173`**: vite chạy ở `127.0.0.1`.
+- **adb**: điện thoại POCO `da87b223`, nối cổng `5173` và `3000` sang máy. Mình đã gỡ hai cổng này rồi tắt adb.
+
+Admin `:5174` lúc đó không chạy nên sẽ không bật.
+
+Khi bật lại, điện thoại cần cắm cáp và bật gỡ lỗi USB. Nếu adb báo `unauthorized`, mình sẽ dừng và báo bạn.
+
+Việc tiếp theo bên bạn: chạy `npm run p1`, `npm run p2`, `npm run p3` trong `HW03/tests` (mỗi lệnh đã tự restart backend), rồi chạy tay theo RUN.md.
+```
+*File AI ghi/gửi trong lượt này:* `hw03-runtime-state.md`
+
+**Xử lý:** [...]
+
+---
+
+## #20 | 22:31 09/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+mở lại nhé
+```
+
+**Output:**
+```
+Đã bật lại đủ như lúc tắt:
+- **Backend** đang chạy ở `:3000` (bật bằng `restart_backend.ps1`), CSDL vừa seed lại.
+- **Web** đang chạy ở `127.0.0.1:5173`.
+- **Điện thoại**: adb thấy `da87b223 device`, hai cổng `5173` và `3000` đã nối sang máy.
+
+Việc tiếp theo bên bạn: chạy `npm run p1`, `npm run p2`, `npm run p3` trong `HW03\tests` (mỗi lệnh tự restart backend), rồi chạy tay theo RUN.md.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #21 | 22:34 09/11/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+chạy npm run p1, npm run p2, npm run p3 trong HW03/tests (mỗi lệnh đã tự restart backend)
+Để làm gì nhỉ
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #22 | 23:30 09/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+khi chạy tay theo RUN.md có cần đọc thêm file khác không vậy?
+```
+
+**Output:**
+```
+Gần như không cần. RUN.md đã đủ thứ tự chạy, tiền điều kiện, ngưỡng Pass/Fail ("Cần nhìn" chép nguyên văn Expected), quy tắc chụp ảnh và lệnh cần chạy. Chỉ có 3 file đi kèm:
+
+| File | Khi nào | Dùng để |
+|---|---|---|
+| `checklist/runs/Px_manual_TEMPLATE.md` | Đầu mỗi lượt | Chép thành `Px_manual_<YYYYMMDD-HHMM>.md`, ghi status, notes và tên ảnh từng item |
+| `checklist/runs/Px_auto_*.json` | Item **mixed** | Cột "Cần nhìn" của item mixed ghi "Phần tự động: xem `runs/Px_auto_*.json`". Mở file, tìm mã item, đọc `notes` (số đo, chuỗi Tab, mã màu…) rồi bạn chấm phần còn lại bằng mắt. Vì vậy phải chạy `npm run px` **trước** lượt tay của nền tảng đó |
+| `checklist/dom_probe.js` | Chỉ trên P3, khi cần đo DOM | Dán vào Console của `chrome://inspect`, chép JSON vào file kết quả. Giờ P3 đã có lượt auto nên ít khi cần |
+
+Không cần đọc thêm:
+- `checklist.md`/`checklist.json`: chỉ mở nếu muốn xem căn cứ SRS hoặc giả định của một item. Item N/A không có trong bảng RUN.md.
+- `seed_orders.py`: chỉ chạy (Bước B) rồi chép bảng mã đơn mà nó in ra vào file kết quả.
+- `issue_dup_FR02.md`: để dành cho bước viết bug (6/6), khi kiểm trùng issue.
+
+Thứ tự mỗi nền tảng: `npm run px`, rồi mình gộp file auto, rồi bạn chạy tay theo RUN.md, ghi vào bản sao template.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #23 | 23:31 09/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Màn hình này là sao: "Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ" là bao nhiêu màn hình
+```
+
+**Output:**
+```
+Chuỗi đó là **3 trang (URL) nhưng 4 màn hình cần xem**:
+
+| # | Màn hình | URL | Nhận biết |
+|---|---|---|---|
+| 1 | Đăng nhập | `/login` | Form email + mật khẩu |
+| 2 | Quên mật khẩu **B1** | `/forgot-password` | Ô "Nhập Email của bạn" + nút "Lấy mã OTP" |
+| 3 | Quên mật khẩu **B2** | `/forgot-password` (cùng URL) | Bấm "Lấy mã OTP" xong thì hiện hộp xanh "Mã OTP của bạn là: …", ô OTP, ô mật khẩu mới, nút "← Quay lại" |
+| 4 | Hồ sơ | `/profile` (phải đăng nhập) | Phần form hồ sơ. Lịch sử đơn cũng nằm ở trang này nhưng tính là màn M4 riêng |
+
+B1 và B2 là hai bước trên cùng một trang, đổi bằng state (`setStep`), URL không đổi (`c2_inventory.md:38–53`).
+
+Gặp item có màn hình như vậy, bạn kiểm cả 4 màn. Item **Failed** nếu **ít nhất 1 màn** vi phạm ngưỡng; notes ghi rõ màn nào, ví dụ "B2: …".
+
+Ảnh tổng quan cho Task 3 vẫn theo M1–M5 (B1 và B2 chung M2), không phải mỗi item chụp riêng 4 màn.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #24 | 00:53 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+<task-notification>
+<task-id>bnddydt0w</task-id>
+<tool-use-id>toolu_019QpNyDpQYTeKpbzaPss5Pg</tool-use-id>
+<output-file>C:\Users\tanhi\AppData\Local\Temp\claude\3d1ee2708df72d7d\e3928b55-32bd-47d5-a8e1-a4900f6a6dea\tasks\bnddydt0w.output</output-file>
+<status>killed</status>
+<summary>Background command "Start web frontend dev server" was stopped because the system is running low on memory</summary>
+<note>This is not a failure of the command. Claude Code stopped it because the system was critically low on memory while the session was idle, which says nothing about the command or its own memory use, so there is nothing in it to debug. Do not start it again on your own, even if the work seems to need it: memory may still be short. Report what was stopped and why, and start it again only when asked. The user can turn this behavior off by starting Claude Code with CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1 in its environment; setting it from a shell command has no effect.</note>
+</task-notification>
+```
+
+**Output:**
+````
+Web `:5173` (vite) vừa bị Claude Code tự dừng vì máy gần hết RAM lúc phiên đang rảnh. Không phải lỗi của vite. Mình chưa bật lại.
+
+Backend `:3000` và adb (2 cổng) vẫn chạy: hai cái này không do phiên quản lý nên không bị dừng.
+
+Cần web thì bảo mình bật lại, hoặc bạn tự chạy:
+
+```powershell
+cd ..\eshop-sut\frontend-web; npx vite --host 127.0.0.1 --port 5173
+```
+
+Bạn tự chạy trong cửa sổ riêng thì vite không bị Claude Code dừng theo kiểu này nữa. Trước lượt Playwright nên đóng bớt ứng dụng nặng.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #25 | 02:00 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW03 – 2 việc (mỗi việc 1 commit):
+A. "HW03: deadline thật 11/11 10:00": report_plan + HW03/CLAUDE.md: deadline = 10:00 11/11/2026; lịch mục h theo bảng: T2 tối chạy tay; T3 ngày 4/6 + form; T3 tối pilot + 7 phiên; đêm T3–sáng T4 phân tích + report + zip.
+B. "HW03[T2] 2/10: skill usability-evaluation": .claude/skills/usability-evaluation/ theo mẫu domain-bva-testing/gui-checklist-testing, mỗi lần gọi 1 bước rồi dừng:
+  0 plan 9 phần (Rubin, slide) · 1 participant kit 1 trang (nhiệm vụ dạng mục tiêu, SEQ, SUS 10 câu tiếng Việt, 4 câu hỏi mở) + freeze · 2 pilot → sửa kit (diff + lý do SV) · 3 phiếu quan sát/phiên (sessions/S0x.json: thời gian, hoàn thành, lỗi, do dự, trích lời, SEQ, 10 câu SUS) · 4 scripts/sus_score.py (SUS chuẩn: lẻ −1, chẵn 5−x, ×2,5; trung bình, SD, min/max; SEQ; tỉ lệ hoàn thành; thời gian) → bảng giữa marker REPORT · 5 khung findings (SV viết: điểm đau, tách bug lẻ / vấn đề thiết kế, severity × probability) · 6 gom dữ kiện bug (SV viết mô tả).
+  Giới hạn trong SKILL.md: AI không tạo danh sách người tham gia, ghi chú quan sát, câu trả lời SUS, phần tổng hợp/findings; không đưa dữ liệu cá nhân người tham gia cho AI (che 4 số giữa SĐT).
+  Áp bước 0–1 cho HW03 bằng file đã có (usability/plan.md, participant_kit.md: chỉ kiểm khớp skill, không viết lại); thử sus_score.py trên 2 phiếu GIẢ trong thư mục tạm (không commit dữ liệu giả).
+on_stop.py --manual. Báo cáo ≤ 10 dòng. Nhắc tôi push.
+```
+
+**Output:**
+```
+Task A trước: sửa deadline + lịch mục h.
+
+Xong A (`99a64dc`). Sang B: đọc mẫu skill + file usability hiện có.
+
+Slide khớp plan.md (9 phần, criticality = severity × probability, thống kê thời gian mean/median/range/SD). Viết skill.
+
+Giờ assets.
+
+Assets xong. Giờ viết scripts (sus_score trước, quan trọng nhất).
+
+Còn 5 script nhỏ: freeze, check_kit, kit_diff, new_session, bug_facts.
+
+Scripts xong. Áp bước 0–1 cho HW03 (chỉ kiểm) + thử sus_score trên 2 phiếu giả ở scratchpad.
+
+Lỗi ở script (regex bắt nhầm "Lời mở đầu"), không phải kit. Sửa.
+
+HW03 plan + kit: 0 lỗi, trùng bản đóng băng v1. Sửa placeholder template cho khỏi cảnh báo, rồi thử sus_score.
+
+Số tay khớp: S01 = 82,5, S02 = 57,5, SD = 17,7. Lỗi nhỏ: dòng chú thích dính ngay sau bảng (GFM sẽ coi là hàng bảng). Sửa.
+```
+*File AI ghi/gửi trong lượt này:* `SKILL.md`, `plan-9-parts.md`, `schema-session.md`, `session_template.json`, `participant_kit_template.md`, `findings_template.md`, `sus_score.py`, `freeze.py`, `check_kit.py`, `kit_diff.py`, `new_session.py`, `bug_facts.py`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 25 lượt; Claude Opus 5.5 23 lượt (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #18, #19, #20, #22, #23, #24, #25); Claude (không rõ model) 2 lượt (#17, #21).

@@ -89,6 +89,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - AI phát hiện khi kiểm luồng U1: SAVE10 tính sai (server.js:400), ngưỡng dùng > thay vì >= (server.js:379) – chưa quyết lập bug.
 - AI phát hiện khi đọc code: login_attempts +2 (server.js:54), khoá 180 s (server.js:57) ≠ FR-02 – chờ CL-52 chạy tay. Kiểm trùng: đã có #1, #2, #3 (`checklist/issue_dup_FR02.md`).
 - 05/11 Claude Code: cài Firefox của Playwright (131.0), thêm project P3 (Playwright `_android`) vào harness; sửa lỗi reporter.ts ghi 0 item (`TestResult.annotations` chưa có ở 1.48) – phát hiện khi smoke CL-03.
+- 10/11 Claude Code: tạo skill `usability-evaluation` (SKILL.md, 2 reference, 3 asset, 6 script); kiểm plan/kit HW03 bằng `check_kit.py` (0 lỗi, không sửa); thử `sus_score.py` trên 2 phiếu giả ở thư mục tạm (không commit).
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
