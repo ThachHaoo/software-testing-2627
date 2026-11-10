@@ -11,6 +11,7 @@ Quy trình:
 2. merge_platform.py: lượt auto → auto_status/auto_notes/auto_evidence; lượt tay → ket_qua/notes_nt/evidence.
 3. Item không có trong lượt tay → ket_qua = auto_status, notes "[auto – <env>] …", nguon_kq[Px] = "auto".
 4. Có cả hai mà khác nhau → giữ lượt tay (V1), lech_auto_tay[Px] = "auto X ≠ tay Y → lấy tay (V1): <nguyên nhân>".
+   Override làm tay = auto → bỏ lech_auto_tay[Px], nguyên nhân chuyển vào notes "[trước quyết định: …]".
 5. override (quyết định của người dùng, áp sau cùng nên chạy lại vẫn giữ): đổi ket_qua (vd lỗi harness → Blocked),
    nối câu vào notes (không sửa chữ người chạy), lap_bug=false (loại khỏi danh sách lập bug).
 
@@ -134,6 +135,17 @@ def run(cfg, dry=False):
         it = items[iid]
         if "ket_qua" in o:
             it["ket_qua"][P] = o["ket_qua"]
+            l = it.get("lech_auto_tay", {}).get(P)
+            if l and it.get("auto_status", {}).get(P) == o["ket_qua"]:
+                # quyết định người dùng làm tay = auto → hết lệch: bỏ lech_auto_tay, giữ nguyên nhân trong notes
+                it["lech_auto_tay"].pop(P)
+                if not it["lech_auto_tay"]:
+                    it.pop("lech_auto_tay")
+                old = it.setdefault("notes_nt", {}).get(P, "")
+                why = "[trước quyết định: " + l.split(" → lấy tay (V1): ", 1)[0] + "; " + l.split(" → lấy tay (V1): ", 1)[-1] + "]"
+                if why not in old:
+                    it["notes_nt"][P] = (old + " · " if old else "") + why
+                lech = [x for x in lech if x != f"{iid} {P}"]
         if o.get("them") and o["them"] not in it.get("notes_nt", {}).get(P, ""):
             old = it.setdefault("notes_nt", {}).get(P, "")
             it["notes_nt"][P] = (old + " · " if old else "") + "[" + o["them"] + "]"

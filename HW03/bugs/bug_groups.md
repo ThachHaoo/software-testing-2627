@@ -289,7 +289,7 @@ Sinh bằng `tools/bug_groups_hw03.py` từ `checklist.json` + `failed_list.md`.
 
 - Căn cứ: Nielsen #4 (nhất quán và chuẩn); SRS im lặng → giả định GA1
 - Expected (chép): Ngày đặt hiển thị dạng dd/mm/yyyy và giống nhau trên P1, P2, P3. Fail nếu định dạng khác (mm/dd/yyyy, yyyy-mm-dd) hoặc khác nhau giữa các nền tảng.
-- Actual P1 (tay): [SV chốt R11=b: Expected "dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1; ảnh P1_CL-09_1 hiện "9/11/2026" (ngày 1 chữ số, không phải dd/mm/yyyy), P2/P3 hiện "11/9/2026" → khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R11, SV có thể sửa)] · ảnh: `evidence/P1_chrome/P1_CL-09_1.png`
+- Actual P1 (tay): [SV chốt R11=b: Expected "dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1; ảnh P1_CL-09_1 hiện "9/11/2026" (ngày 1 chữ số, không phải dd/mm/yyyy), P2/P3 hiện "11/9/2026" → khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R11, SV có thể sửa)] · [trước quyết định: auto Failed ≠ tay Passed; cả hai cùng thấy "9/11/2026" (ảnh P1_CL-09_1); khác ở cách chấm ngưỡng dd/mm/yyyy (run_check R11)] · ảnh: `evidence/P1_chrome/P1_CL-09_1.png`
 - Actual P2 (tay): Sử dụng định dạng mm/dd/yyyy thay vì dd/mm/yyyy của người Việt · ảnh: `evidence/P2_firefox/P2_CL-09_1.png`
 - Actual P3 (tay): Sử dụng định dạng mm/dd/yyyy thay vì dd/mm/yyyy của người Việt · ảnh: `evidence/P3_android/P3_CL-09_1.png`
 

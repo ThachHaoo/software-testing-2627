@@ -21,7 +21,8 @@ AUTO_ENV = {"P1": "Chrome 157 qua Playwright (Q1: P1 chính thức là Cốc C�
 LOCALE = "auto ép locale vi-VN (playwright.config) nên hiện \"6.000.000 ₫\"; trình duyệt thật của SV theo locale máy hiện \"6,000,000 ₫\""
 CAUSE = {  # nguyên nhân lệch, dữ kiện từ run_check.md mục 1c (L1–L8)
     ("CL-08", "P2"): LOCALE, ("CL-08", "P3"): LOCALE,
-    ("CL-09", "P1"): "cả hai cùng thấy \"9/11/2026\" (ảnh P1_CL-09_1); khác ở cách chấm ngưỡng dd/mm/yyyy (run_check R11) – SV chốt R11=b: Failed (override)",
+    ("CL-08", "P1"): "auto chấm riêng từng nền tảng (P1 thấy \"6.000.000 ₫\", đạt ngưỡng ký hiệu + phân cách); Failed do so kiểu phân cách giữa P1/P2/P3 theo R9=b (override)",
+    ("CL-09", "P1"): "cả hai cùng thấy \"9/11/2026\" (ảnh P1_CL-09_1); khác ở cách chấm ngưỡng dd/mm/yyyy (run_check R11)",
     ("CL-11", "P1"): "auto so toạ độ, bố cục 2 cột nên 'Cập nhật' → 'Hủy đơn' bị tính là nhảy ngược; SV đọc chuỗi Tab theo cột/hàng",
     ("CL-11", "P2"): "auto so toạ độ, bố cục 2 cột nên 'Cập nhật' → 'Hủy đơn' bị tính là nhảy ngược; SV đọc chuỗi Tab theo cột/hàng",
     ("CL-15", "P1"): "auto đo ở viewport 375 px: scrollWidth 381 > 375; lượt tay không đo ở đúng 375 px (ảnh chụp cửa sổ hẹp, không thấy thanh cuộn)",

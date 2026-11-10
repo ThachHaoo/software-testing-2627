@@ -3,9 +3,10 @@
     python tools/report_t1_hw03.py [--print]
 
 Ghi đè nội dung giữa <!-- REPORT:T1:<khối>:START --> … END --> trong HW03/23120255_HW03_Report.md.
-Khối: checklist_summary (mục 3.5), cross_platform (mục 4.1). Marker chưa có → báo, không tự chèn.
+Khối: checklist_table (3.3), execution + checklist_summary (3.5), failed_items (3.6), cross_platform (4.1), overlay (4.3).
+Marker chưa có → báo, không tự chèn.
 """
-import argparse, json, re, sys
+import argparse, datetime as dt, json, re, sys
 from collections import Counter
 from pathlib import Path
 
@@ -66,7 +67,11 @@ def cross(doc):
             l = i.get("lech_auto_tay", {}).get(P)
             if l:
                 out.append(f"| {i['id']} | {P} | {i['auto_status'][P]} | {i['ket_qua'][P]} | {cell(l.split(': ', 1)[-1], 160)} |")
-    out += ["", "**Ảnh tổng quan Task 3 (có overlay, `checklist/evidence/`)**", "", "| Màn | " + " | ".join(plats) + " |", "|---|" + "---|" * len(plats)]
+    return "\n".join(out) + "\n"
+
+
+def overview(plats):
+    out = ["| Màn | " + " | ".join(plats) + " |", "|---|" + "---|" * len(plats)]
     ev = ROOT / "checklist" / "evidence"
     for code, name in SCREENS:
         row = []
@@ -78,7 +83,129 @@ def cross(doc):
                 fs = sorted(x.stem for x in (ev / DIRS[P]).glob(f"{P}_{code}_*.png"))
                 row.append(", ".join(f"`{x}`" for x in fs) or "**chưa có**")
         out.append(f"| {code} – {name} | " + " | ".join(row) + " |")
+    return out
+
+
+NGUON = {"AI": "AI", "Both": "AI + SV sửa", "SV": "SV"}
+
+
+def table(doc):
+    plats = list(doc["meta"]["platforms"])
+    out = ["| ID | IA | Màn hình | Item | Căn cứ | Loại nguồn | Nguồn | Ưu tiên | " + " | ".join(plats) + " | Ghi chú |",
+           "|---|---|---|---|---|---|---|---|" + "---|" * len(plats) + "---|"]
+    for i in doc["items"]:
+        r = [res(i, P) for P in plats]
+        note = []
+        g = i.get("gia_dinh")
+        if g:
+            note.append("giả định " + (", ".join(g) if isinstance(g, list) else str(g)))
+        if i.get("na"):
+            note.append("N/A: " + cell(i["na"], 50))
+        if "Failed" in r:
+            note.append("xem 3.6")
+        elif "Blocked" in r:
+            note.append("Blocked – notes ở Excel")
+        out.append(f"| {i['id']} | {i['ia']} | {cell(i['man_hinh'], 40)} | {cell(i['muc_kiem_tra'], 80)} | {cell(i.get('can_cu', ''), 60)} | "
+                   f"{i.get('loai_nguon', '')} | {NGUON.get(i['nguon'], i['nguon'])} | {i.get('uu_tien', '')} | " + " | ".join(r) + f" | {'; '.join(note)} |")
+    n = Counter(NGUON.get(i["nguon"], i["nguon"]) for i in doc["items"])
+    lo = Counter(i.get("loai_nguon") for i in doc["items"])
+    ia = Counter(i["ia"] for i in doc["items"])
+    out += ["", f"{len(doc['items'])} item · IA: " + ", ".join(f"{k} {v}" for k, v in sorted(ia.items())) + " · loại nguồn: " + ", ".join(f"{k} {v}" for k, v in lo.items())
+            + " · nguồn: " + ", ".join(f"{k} {v}" for k, v in n.items()) + ". Expected đầy đủ, tiền điều kiện, notes: `checklist/checklist.md` và Excel sheet Checklist. Sinh bằng `tools/report_t1_hw03.py`."]
     return "\n".join(out) + "\n"
+
+
+def _hdr(md):
+    h = {}
+    for line in md.read_text(encoding="utf-8").splitlines()[:10]:
+        m = re.match(r"- ([^:]+): ?(.*)", line)
+        if m:
+            h[m.group(1).strip()] = m.group(2).strip()
+    return h
+
+
+def execution(doc):
+    plats = list(doc["meta"]["platforms"])
+    runs = ROOT / "checklist" / "runs"
+    rows = []
+    for P in plats:
+        files = sorted({Path(r).name for i in doc["items"] for r in [i.get("auto_run", {}).get(P, ""), i.get("run", {}).get(P, "")] if r})
+        for f in files:
+            if f.endswith(".json"):
+                j = json.loads((runs / f).read_text(encoding="utf-8"))
+                t = dt.datetime.fromisoformat(j["run_at"].replace("Z", "+00:00")) + dt.timedelta(hours=7)
+                n = sum(1 for i in doc["items"] if i.get("nguon_kq", {}).get(P) == "auto")
+                rows.append((t.strftime("%Y-%m-%d %H:%M"), P, "auto (Playwright)", f"`runs/{f}`", j.get("env", ""), t.strftime("%H:%M %d/%m/%Y"), str(n)))
+            else:
+                h = _hdr(runs / f.replace(".csv", ".md"))
+                se = next((v for k, v in h.items() if k.startswith("Bắt đầu")), "")
+                n = sum(1 for i in doc["items"] if i.get("nguon_kq", {}).get(P) == "tay")
+                m = re.match(r"(\d{2}):(\d{2}) (\d{2})/(\d{2})/(\d{4})", se)
+                key = f"{m.group(5)}-{m.group(4)}-{m.group(3)} {m.group(1)}:{m.group(2)}" if m else "9999"
+                rs = h.get("Restart backend lúc")
+                rows.append((key, P, "tay", f"`runs/{f.replace('.csv', '.md')}`", f"{h.get('Trình duyệt / phiên bản', '')} · {h.get('OS / thiết bị', '')}",
+                             se + (f" (restart backend: {rs})" if rs else ""), str(n)))
+    rows.sort()
+    out = ["| # | Nền tảng | Lượt | File | Môi trường | Thời gian (lượt tay: nguyên văn file lượt; auto: run_at giờ VN) | Số item lấy kết quả từ lượt này |", "|---|---|---|---|---|---|---|"]
+    for k, r in enumerate(rows, 1):
+        out.append(f"| {k} | " + " | ".join(cell(x, 130) for x in r[1:]) + " |")
+    out += ["", "Thứ tự: lượt auto P1 → P2 → P3 (lệnh `npm run p1|p2|p3` đã gồm restart backend), sau đó chạy tay P1 → P2 → P3 trên trình duyệt/thiết bị thật, restart backend trước mỗi lượt tay. "
+            "Thời gian lượt tay chép nguyên văn file lượt (run_check R4: giờ P1 chưa khớp nhau). Sinh bằng `tools/report_t1_hw03.py`."]
+    return "\n".join(out) + "\n"
+
+
+def _map_failed():
+    dup, grp = {}, {}
+    for line in (ROOT / "bugs" / "failed_list.md").read_text(encoding="utf-8").splitlines():
+        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        if len(c) >= 7 and re.fullmatch(r"(CL|SV)-\d+", c[1]):
+            dup[c[1]] = c[6].replace("**", "")
+    for line in (ROOT / "bugs" / "bug_groups.md").read_text(encoding="utf-8").splitlines():
+        m = re.match(r"\| (G-\d+) \| `(BUG-\d+)\.md` \| [^|]* \| ([^|]*) \|", line)
+        if m:
+            for iid in re.findall(r"(?:CL|SV)-\d+", m.group(3)):
+                grp[iid] = f"{m.group(1)} → {m.group(2)}"
+    return dup, grp
+
+
+def failed(doc):
+    plats = list(doc["meta"]["platforms"])
+    dup, grp = _map_failed()
+    out = ["| ID | Màn hình | Item | Failed trên | Notes (theo nền tảng) | Ảnh | Issue trùng / nhóm bug |", "|---|---|---|---|---|---|---|"]
+    n = 0
+    for i in doc["items"]:
+        fp = [P for P in plats if res(i, P) == "Failed"]
+        if not fp:
+            continue
+        n += 1
+        notes = "<br>".join(f"{P}{' (auto)' if i.get('nguon_kq', {}).get(P) == 'auto' else ''}: "
+                            + cell(re.sub(r"^\[auto – [^\]]*\] (Lỗi: Error: )?", "", i.get("notes_nt", {}).get(P, "")).replace("Lỗi: Error: ", ""), 140) for P in fp)
+        ev = "<br>".join(f"`{Path(e).name}`" for P in fp for e in (i.get("evidence", {}).get(P) or [])[:2])
+        link = grp.get(i["id"], "")
+        d = dup.get(i["id"], "")
+        if d and d != "MỚI":
+            link = d + (f"; {link}" if link else "")
+        if any(i.get("lap_bug", {}).get(P) is False for P in fp):
+            link = (link + "; " if link else "") + "không lập bug (5/6a)"
+        out.append(f"| {i['id']} | {cell(i['man_hinh'], 40)} | {cell(i['muc_kiem_tra'], 70)} | {', '.join(fp)} | {notes} | {ev} | {link} |")
+    out += ["", f"{n} item Failed trên ít nhất 1 nền tảng. Notes chép từ lượt chạy (auto: số đo Playwright). Ảnh: `checklist/evidence/<Px>_*/` (lượt tay), `checklist/evidence/auto/` (lượt auto); bảng này hiện tối đa 2 ảnh/nền tảng. "
+            "Đối chiếu trùng đầy đủ: `bugs/failed_list.md`, `bugs/dup_check.md`; nhóm bug: `bugs/bug_groups.md`. Sinh bằng `tools/report_t1_hw03.py`."]
+    return "\n".join(out) + "\n"
+
+
+def overlay(doc):
+    plats = list(doc["meta"]["platforms"])
+    ev = ROOT / "checklist" / "evidence"
+    out = ["| Nền tảng | Thư mục | Ảnh item (lượt tay) | Ảnh tổng quan màn |", "|---|---|---|---|"]
+    for P in plats:
+        fs = sorted(x.name for x in (ev / DIRS[P]).glob("*.png"))
+        ov = [f for f in fs if re.match(rf"{P}_M\d", f)]
+        out.append(f"| {P} – {doc['meta']['platforms'][P]} | `checklist/evidence/{DIRS[P]}/` | {len(fs) - len(ov)} | {len(ov)} |")
+    out += ["", "**Ảnh tổng quan Task 3 (mỗi màn × nền tảng)**", ""] + overview(plats)
+    out += ["", "Overlay (O2): `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn`; P1/P2 bằng Sticky Notes trên ảnh chụp toàn màn hình (thấy tên trình duyệt + URL), P3 thêm chữ bằng trình sửa ảnh ngay sau khi chụp. "
+            "Ảnh lượt auto (`evidence/auto/`, ảnh phần tử Playwright chụp) không có overlay, chỉ là bằng chứng phụ. Sinh bằng `tools/report_t1_hw03.py`."]
+    return "\n".join(out) + "\n"
+
 
 
 def put(text, block, body):
@@ -93,7 +220,8 @@ def main():
     ap.add_argument("--print", action="store_true")
     a = ap.parse_args()
     doc = json.loads((ROOT / "checklist" / "checklist.json").read_text(encoding="utf-8"))
-    blocks = {"checklist_summary": summary(doc), "cross_platform": cross(doc)}
+    blocks = {"checklist_table": table(doc), "execution": execution(doc), "checklist_summary": summary(doc),
+              "failed_items": failed(doc), "cross_platform": cross(doc), "overlay": overlay(doc)}
     if a.print:
         for k, v in blocks.items():
             print(f"--- {k}\n{v}")
