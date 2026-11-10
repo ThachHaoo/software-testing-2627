@@ -92,6 +92,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | U-R | T2 chạy **remote synchronous moderated** qua Google Meet (người tham gia dùng máy tính của mình, chia sẻ màn hình, think-aloud; quay Game Bar/OBS khi đồng ý). SUT công khai tạm thời qua Cloudflare quick tunnel, nhánh local `usability-tunnel` của eshop-sut (chỉ đổi URL API sang `/api` + Vite proxy), không push (10/11) |
 | R9 | CL-08 P1 = **Failed** (4/6c, 10/11): Expected "cùng một kiểu phân cách trên cả 3 nền tảng" áp cho cả P1 ("30.000.000 ₫" ≠ "6,000,000 ₫" P2/P3); lý do lấy từ khuyến nghị run_check R9, SV có thể sửa. Áp bằng override `tools/merge_hw03.py`, không sửa file lượt tay. CL-08 trùng #170 → không khung bug |
 | R11 | CL-09 P1 = **Failed** (4/6c, 10/11): Expected "dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1 ("9/11/2026" ≠ "11/9/2026" P2/P3); L1 đóng. Hệ quả: G-23/`BUG-80` thêm nền tảng P1 (khung BUG-80 chưa sửa – chờ SV) |
+| D1 | Skill tự đủ (Skill 1/3b, 10/11): `gen_oracle.py`, `gen_run.py` gắn cứng HW03 (đường dẫn `HW03/checklist`, màn C2, overlay, adb) → **không chép** vào `scripts/`; SKILL.md ghi "chỉ có ở repo ví dụ". Sửa chữ nguồn trong `render_checklist.py` (không còn trỏ `tools/`). `.claude/skills` ↔ `HW03/skills` diff = 0 |
+| D2 | Lượt Claude Code khi quay demo skill **vào prompt log** (khai mục đích "demo skill"), không thêm `exclude` vào `tools/hw.toml` |
 
 **Còn chờ SV chốt:** (không còn)
 

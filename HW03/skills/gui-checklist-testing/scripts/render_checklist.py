@@ -30,7 +30,7 @@ def render(doc):
     meta, items = doc["meta"], doc["items"]
     plats = list(meta.get("platforms", {}))
     out = [f"# Checklist GUI – {meta.get('scope', '')}", ""]
-    out.append(f"> Sinh tự động từ `checklist.json` bằng `tools/render_checklist.py` — không sửa tay. Phiên bản: {meta.get('version', '')}.")
+    out.append(f"> Sinh tự động từ `checklist.json` bằng `render_checklist.py` (skill gui-checklist-testing) — không sửa tay. Phiên bản: {meta.get('version', '')}.")
     out.append("")
     out.append(f"- SUT: {meta.get('sut_version', '')}")
     out.append(f"- Căn cứ: {meta.get('test_basis', '')}")
