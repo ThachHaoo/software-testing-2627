@@ -150,7 +150,7 @@ def execution(doc):
     for k, r in enumerate(rows, 1):
         out.append(f"| {k} | " + " | ".join(cell(x, 130) for x in r[1:]) + " |")
     out += ["", "Thứ tự: lượt auto P1 → P2 → P3 (lệnh `npm run p1|p2|p3` đã gồm restart backend), sau đó chạy tay P1 → P2 → P3 trên trình duyệt/thiết bị thật, restart backend trước mỗi lượt tay. "
-            "Thời gian lượt tay chép nguyên văn file lượt (run_check R4: giờ P1 chưa khớp nhau). Sinh bằng `tools/report_t1_hw03.py`."]
+            "Thời gian lượt tay chép nguyên văn file lượt; giờ P1 đã sửa theo R4 (mtime ảnh .png gốc, 4/6d). Sinh bằng `tools/report_t1_hw03.py`."]
     return "\n".join(out) + "\n"
 
 

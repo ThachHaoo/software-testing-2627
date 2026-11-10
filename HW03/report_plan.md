@@ -94,6 +94,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | R11 | CL-09 P1 = **Failed** (4/6c, 10/11): Expected "dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1 ("9/11/2026" ≠ "11/9/2026" P2/P3); L1 đóng. Hệ quả: G-23/`BUG-80` thêm nền tảng P1 (khung BUG-80 chưa sửa – chờ SV) |
 | D1 | Skill tự đủ (Skill 1/3b, 10/11): `gen_oracle.py`, `gen_run.py` gắn cứng HW03 (đường dẫn `HW03/checklist`, màn C2, overlay, adb) → **không chép** vào `scripts/`; SKILL.md ghi "chỉ có ở repo ví dụ". Sửa chữ nguồn trong `render_checklist.py` (không còn trỏ `tools/`). `.claude/skills` ↔ `HW03/skills` diff = 0 |
 | D2 | Lượt Claude Code khi quay demo skill **vào prompt log** (khai mục đích "demo skill"), không thêm `exclude` vào `tools/hw.toml` |
+| R4 | Giờ lượt tay P1 (4/6d, 10/11): SV giải thích ".jpg là ảnh lấy từ điện thoại, .png là ảnh chụp màn hình máy tính"; ảnh P1 đều .png → giờ lấy từ mtime ảnh gốc `evidence_raw/P1_chrome/`: kết thúc 00:10 10/11 (P1_CL-64_1), restart 22:56 09/11 (trước ảnh đầu 23:24). Kiểm chéo bằng P2 (mtime 00:13–00:36 khớp file lượt 00:10–00:38) |
 
 **Còn chờ SV chốt:** (không còn)
 

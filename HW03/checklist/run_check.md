@@ -30,7 +30,7 @@ AI kiểm ngày 10/11/2026: đã xem từng ảnh trong `evidence/P1_chrome` (34
 | R1 | cả 3 | Giá trị `Pass` / `Fail`, ngoài tập `Passed/Failed/N/A/Blocked` | AI ánh xạ Pass→Passed, Fail→Failed khi chuyển sang CSV gộp (không sửa file gốc) |
 | R2 | cả 3 | **CL-64 = N/A** nhưng P1/P2/P3 đều nằm trong `nen_tang`, notes không có mã giả định NAx. Notes: "Bị chặn bởi form, mặc dù nhập số điện thoại đúng" | Theo quy ước skill: bị lỗi khác chặn → **Blocked** + item gốc. `merge_platform.py` từ chối N/A ở nền tảng áp dụng |
 | R3 | P1 | Trình duyệt ghi **Cốc Cốc 160.0.106**, trong khi P1 = "Chrome trên Windows" (env: Chrome 157.0.8103.39; lượt auto P1 chạy Chrome 157) | Xem quyết định Q1 |
-| R4 | P1 | Thời gian "22:58 09/11/2026 - 22:06 10/11/2026", restart "22:56 10/11/2026": ngày/giờ không khớp nhau (kết thúc trước khi restart?) | SV sửa |
+| R4 | P1 | Thời gian "22:58 09/11/2026 - 22:06 10/11/2026", restart "22:56 10/11/2026": ngày/giờ không khớp nhau (kết thúc trước khi restart?) | **Đã sửa (4/6d):** SV giải thích R4 (.jpg = ảnh điện thoại, .png = chụp màn hình máy tính); giờ lấy từ mtime ảnh .png gốc `evidence_raw/P1_chrome/` (P1_CL-62_1 23:24 09/11 … P1_CL-64_1 00:10 10/11) → kết thúc 00:10 10/11, restart 22:56 09/11. Kiểm chéo cách lấy giờ: ảnh P2 gốc 00:13–00:36 khớp giờ file lượt P2 (00:10–00:38) |
 | R5 | P2 | Tiêu đề file ghi "# P1 – kết quả chạy tay (Chrome trên Windows)", nhưng nội dung là Firefox 159.0.1 | SV sửa |
 | R6 | P3 | OS ghi "Android 12"; `adb getprop ro.build.version.release` = **14** (env/environment.md) | SV kiểm lại |
 | R7 | P2, P3 | Tên file thiếu đuôi `.md` (`P2_manual_20261110-0010`, `P3_manual_20261110_0046`; P3 dùng "_" thay "-") | AI đổi tên khi commit (nội dung không đổi) |
