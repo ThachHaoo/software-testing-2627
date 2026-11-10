@@ -1,0 +1,72 @@
+{
+  "phien": "S03",
+  "pilot": false,
+  "ngay": "2026-11-10",
+  "nguoi_tham_gia": "P03",
+  "nhom": null,
+  "nen_tang": "<SV điền>",
+  "reset_du_lieu": "<SV điền>",
+  "dong_y": {
+    "quay_man_hinh": true,
+    "ghi_am": true,
+    "lien_he_xac_nhan": true
+  },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Chưa thấy hình của sản phẩm",
+      "bug": null,
+      "nguon": "notes/S03.txt:1"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Không rành, nhưng mà kiểu thấy nó nhạy hơn",
+      "bug": null,
+      "nguon": "notes/S03.txt:2"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Các luồng thực hiện nhanh hơn so với Shopee.",
+      "bug": null,
+      "nguon": "notes/S03.txt:3"
+    }
+  ],
+  "tro_giup": "<SV điền>",
+  "seq": 7,
+  "sus": [
+    5,
+    1,
+    4,
+    1,
+    5,
+    1,
+    5,
+    1,
+    5,
+    1
+  ],
+  "cau_hoi_mo": {
+    "ro_rang": "không có",
+    "khoi_phuc_loi": "có biết, có nút xóa khi thêm nhầm sản phẩm ngay cạnh, thuận tiện.",
+    "toc_do": "không có",
+    "tin_cay": "có, giá tiềm tiền giảm hiện thị rõ ràng, chuẩn xác."
+  },
+  "ghi_chu": "",
+  "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
+  "nghe_nghiep": "Vật lý học",
+  "nghe_nghiep_nguon": "SV cung cấp"
+}
