@@ -1,0 +1,2 @@
+S00: Thấy nút thêm vào giỏ hàng bị lag, thấy bấm không hiện, sau đó đã được.
+Làm theo từng bước thì đúng như yêu cầu, còn mật khẩu hơi kỳ kỳ.

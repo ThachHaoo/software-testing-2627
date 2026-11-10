@@ -1,0 +1,7 @@
+S01: Bấm đăng nhập mà thấy chữ đăng ký.
+Mình nghĩ là cần thêm hình ảnh sinh động xí
+Mình tự giảm số tiền khi checkout thì sao. Đã giảm tổng giá trị xuống 300000. Và nói mình chưa hiểu chỗ này lắm
+Thêm giỏ hàng ở detail thì được, còn ở list thì không được.
+Bạn ấy ngồi test hơi quá đà.
+Đơn hàng đang ở trạng thái chờ xác nhận.
+Fact: Bạn ngồi làm khách hàng gian lận

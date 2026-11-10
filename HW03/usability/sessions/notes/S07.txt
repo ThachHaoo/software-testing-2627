@@ -1,0 +1,3 @@
+S07: Bấm 1 đơn thành 2 đơn.
+Không cần nhập địa chỉ, số điện thoại vẫn đặt được đơn.
+Tên cũng không cần đổi vẫn đặt được.
