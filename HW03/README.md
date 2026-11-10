@@ -8,34 +8,37 @@
 
 | No. | Tiêu chí | Điểm | Tự đánh giá | Căn cứ |
 |---|---|---|---|---|
-| 1 | Task 1 – GUI Checklist (thiết kế + chạy + bug report) | 30 | 📝 | 📝 |
-| 2 | Task 2 – Usability Evaluation (kịch bản + 7 phiên + phân tích) | 40 | 📝 | 📝 |
-| 3 | Task 3 – Cross-Browser / Cross-Platform (≥ 3 nền tảng) | 20 | 📝 | 📝 |
-| 4 | Agent Skills (+ video YouTube) | 10 | 📝 | 📝 |
-|  | **Tổng** (= 3 chữ số trong tên zip) | **100** | 📝 | |
+| 1 | Task 1 – GUI Checklist (thiết kế + chạy + bug report) | 30 | `<SV điền>` | `<SV điền>` |
+| 2 | Task 2 – Usability Evaluation (kịch bản + 7 phiên + phân tích) | 40 | `<SV điền>` | `<SV điền>` |
+| 3 | Task 3 – Cross-Browser / Cross-Platform (≥ 3 nền tảng) | 20 | `<SV điền>` | `<SV điền>` |
+| 4 | Agent Skills (+ video YouTube) | 10 | `<SV điền>` | `<SV điền>` |
+|  | **Tổng** (= 3 chữ số trong tên zip) | **100** | `<SV điền>` | |
 
 ## Test summary
 
 <!-- SUMMARY:START -->
-| Chỉ số | P1 Chrome (Windows) | P2 Firefox (Windows) | P3 Chrome Android | Tổng |
+| Chỉ số | P1 – Cốc Cốc (Chromium) trên Windows | P2 – Firefox trên Windows | P3 – Chrome Android (POCO F5, adb reverse) | Tổng |
 |---|---|---|---|---|
-| Màn hình / flow kiểm | | | | |
-| Item checklist thiết kế | | | | |
-| Item đã chạy | | | | |
-| Passed | | | | |
-| Failed | | | | |
-| N/A | | | | |
-| Bug (GitHub Issues) | | | | |
+| Màn hình kiểm (M1–M5) | 5 | 5 | 5 | 5 |
+| Item checklist thiết kế | 74 | 74 | 74 | 74 |
+| Item đã chạy (trừ N/A) | 74 | 74 | 70 | 218 ô |
+| Passed | 25 | 24 | 22 | 71 ô |
+| Failed | 46 | 47 | 44 | 137 ô |
+| N/A | 0 | 0 | 4 | 4 ô |
+| Blocked | 3 | 3 | 4 | 10 ô |
 
-- Flow usability: U1 – 📝 · Số người tham gia: 1 pilot + 7 chính · SUS trung bình: 
-- Nguồn item checklist: AI · AI + SV sửa · SV bổ sung: 
+- Bug: item Failed đối chiếu issue nhóm → **trùng 14**, **trùng một phần 4**, **MỚI 28** (`bugs/failed_list.md`, `bugs/dup_check.md`); MỚI + phần mới gom thành **28 bug** `BUG-58…85` (`bugs/bug_groups.md`); đã có link GitHub Issue: 0/28.
+- Nguồn item checklist: AI 48 · AI + SV sửa 20 · SV bổ sung 6.
+- Usability (Task 2): không thực hiện phiên usability nào (report §5.4–5.9); kế hoạch, phiếu người tham gia, phiếu quan sát ở `usability/`.
+- Video Agent Skill: `skills/VideoLinks.md`.
+- Sinh bằng `tools/summary_hw03.py` từ `checklist/checklist.json`, `bugs/`.
 <!-- SUMMARY:END -->
 
 ## Video demo (YouTube)
 
 | Nội dung | Link |
 |---|---|
-| Agent Skill (checklist GUI + usability) chạy end-to-end | 📝 |
+| Agent Skill `gui-checklist-testing`, `usability-evaluation` | xem `skills/VideoLinks.md` |
 
 ## Tài liệu trong bài nộp
 
