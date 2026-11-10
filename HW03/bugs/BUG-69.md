@@ -1,9 +1,9 @@
 # BUG-69
 
 - **ID:** BUG-69
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên MK B2] Mã OTP hiển thị 4 chữ số thay vì 6 chữ số theo SRS
+- **Severity:** High
+- **Priority:** High
 - Tiền tố GitHub: [HW03-C2-69]
 
 ## Môi trường
@@ -18,21 +18,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart và hoạt động bình thường. Trạng thái người dùng chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
+2. Nhập email hợp lệ (`test@eshop.com`) ở bước 1 và bấm nút 'Lấy mã OTP'.
+3. Chuyển sang bước 2, quan sát mã OTP hiển thị trên màn hình.
 
 ## Expected (trích căn cứ)
 
 - CL-28 – căn cứ: FR-03.2 (README.md:51)
   - FR-03.2, README.md:51 (AI chép nguyên văn): Hệ thống sinh mã OTP **6 chữ số ngẫu nhiên** và gửi qua Email (trong môi trường demo: hiển thị trực tiếp trên màn hình).
-- Expected của bug: `<SV viết>`
+- Expected của bug: Sau khi nhập email và bấm gửi ở bước 1, hệ thống phải sinh và hiển thị mã OTP có đúng 6 chữ số ngẫu nhiên.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Mã OTP hiển thị trên màn hình ở bước 2 chỉ có 4 chữ số (P1 hiển thị "1846", P2 hiển thị "9894", P3 hiển thị "8382") thay vì 6 chữ số.
 
 ## Bằng chứng
 
@@ -62,7 +64,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Mã OTP chỉ gồm 4 chữ số làm giảm độ an toàn bảo mật của tính năng khôi phục mật khẩu so với tiêu chuẩn 6 chữ số được định nghĩa trong SRS (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

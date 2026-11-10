@@ -1,9 +1,9 @@
 # BUG-61
 
 - **ID:** BUG-61
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK, Hồ sơ] Các trang thiếu thẻ <h1> tiêu đề chính
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-61]
 
 ## Môi trường
@@ -18,21 +18,22 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`/profile`) yêu cầu đã đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập lần lượt các trang: Đăng nhập (`http://localhost:5173/login`), Quên mật khẩu (`http://localhost:5173/forgot-password`), và Hồ sơ (`http://localhost:5173/profile`).
+2. Mở DevTools -> tab Elements (hoặc Console) và kiểm tra số lượng thẻ `<h1>` trên từng trang bằng lệnh: `document.querySelectorAll('h1').length`.
 
 ## Expected (trích căn cứ)
 
 - CL-02 – căn cứ: FR-21.4 (README.md:247)
   - FR-21.4, README.md:247 (AI chép nguyên văn): **Tiêu đề trang**: Mỗi trang có đúng 1 thẻ `<h1>` mô tả nội dung trang.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Trên mỗi trang `/login`, `/forgot-password`, và `/profile`, lệnh DevTools `document.querySelectorAll('h1').length` phải trả về đúng 1.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Trên cả 3 trang (`/login`, `/forgot-password`, `/profile`), lệnh kiểm tra DevTools đều trả về 0 thẻ `<h1>` (`/login: 0 h1`, `/forgot-password: 0 h1`, `/profile: 0 h1`).
 
 ## Bằng chứng
 
@@ -62,7 +63,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Trang web thiếu thẻ `<h1>` làm giảm tính tiếp cận (Accessibility) đối với người dùng sử dụng trình đọc màn hình và ảnh hưởng tới chuẩn cấu trúc ngữ nghĩa của trang (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

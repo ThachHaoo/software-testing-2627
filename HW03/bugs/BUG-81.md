@@ -1,9 +1,9 @@
 # BUG-81
 
 - **ID:** BUG-81
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Lịch sử đơn] Nút 'Hủy đơn' vẫn hiển thị và thao tác được ở đơn hàng trạng thái 'Đang giao'
+- **Severity:** High
+- **Priority:** High
 - Tiền tố GitHub: [HW03-C2-81]
 
 ## Môi trường
@@ -18,22 +18,26 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart. Chạy script `seed_orders.py` để khởi tạo dữ liệu đơn hàng ở 5 trạng thái (`pending`, `confirmed`, `shipping`, `delivered`, `canceled`). Đã đăng nhập tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`) và đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
+2. Truy cập vào trang Hồ sơ / Lịch sử đơn hàng (`http://localhost:5173/profile`).
+3. Tìm đến dòng đơn hàng có trạng thái 'Đang giao' (`shipping`, ví dụ đơn #10).
+4. Quan sát nút 'Hủy đơn' tại dòng đơn hàng đó và kiểm tra khả năng tương tác của nút.
 
 ## Expected (trích căn cứ)
 
 - CL-59 – căn cứ: FR-10 (README.md:160–161)
   - FR-10, README.md:160 (AI chép nguyên văn): Trạng thái `delivered` và `canceled` là **trạng thái kết thúc** — không được phép chuyển sang bất kỳ trạng thái nào khác.
   - FR-10, README.md:161 (AI chép nguyên văn): Khi đơn hàng đã ở trạng thái `shipping`, **User không được phép tự hủy** — chỉ Admin mới có thể thao tác.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Dòng đơn hàng ở các trạng thái 'Đang giao' (`shipping`), 'Đã giao' (`delivered`), 'Đã hủy' (`canceled`) không được phép có nút 'Hủy đơn' (hoặc nút bị vô hiệu hóa); người dùng chỉ được phép tự hủy các đơn ở trạng thái 'Chờ xác nhận' (`pending`) và 'Đã xác nhận' (`confirmed`).
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Dòng đơn hàng có trạng thái 'Đang giao' (`shipping`, đơn #10) nút 'Hủy đơn' vẫn hiển thị và cho phép người dùng bấm thao tác bình thường (`shipping (#10): nút "Hủy đơn" dùng được = true`).
+- Đơn 'Chờ xác nhận' (#8) và 'Đã xác nhận' (#9) có nút 'Hủy đơn' dùng được (`true`); đơn 'Đã giao' (#11) và 'Đã hủy' (#12) nút 'Hủy đơn' không dùng được (`false`).
 
 ## Bằng chứng
 
@@ -63,7 +67,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Cho phép người dùng tự hủy đơn hàng khi đã chuyển sang trạng thái đang giao (`shipping`) làm vi phạm trực tiếp quy định nghiệp vụ FR-10 trong SRS, gây sai lệch luồng xử lý và phát sinh mâu thuẫn dữ liệu với hệ thống vận chuyển (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

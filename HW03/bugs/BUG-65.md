@@ -1,9 +1,9 @@
 # BUG-65
 
 - **ID:** BUG-65
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Hồ sơ] Bấm vào nhãn không focus vào ô nhập tương ứng
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-65]
 
 ## Môi trường
@@ -18,20 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`http://localhost:5173/profile`) yêu cầu đã đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`).
+2. Nhấp chuột vào chữ nhãn "Username" và "Mật khẩu", quan sát xem con trỏ gõ phím có nhảy vào ô nhập tương ứng hay không.
+3. Đăng nhập tài khoản `test@eshop.com` / `Test1234!` và truy cập trang Hồ sơ (`http://localhost:5173/profile`).
+4. Nhấp chuột lần lượt vào chữ nhãn "Họ Tên", "Số điện thoại", "Địa chỉ giao hàng", quan sát xem con trỏ gõ phím có nhảy vào ô nhập tương ứng hay không.
 
 ## Expected (trích căn cứ)
 
 - CL-38 – căn cứ: Checklist Text box – 'Correct label'; WCAG 2.2 SC 1.3.1
-- Expected của bug: `<SV viết>`
+- Expected của bug: Nhấp chuột vào chữ của nhãn (ví dụ 'Username', 'Mật khẩu', 'Họ Tên', 'Số điện thoại', 'Địa chỉ giao hàng') thì con trỏ gõ phím (focus) phải tự động nhảy vào ô nhập tương ứng.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3:
+  - **Tại trang Đăng nhập (/login):** Bấm nhãn "Username" không focus ô nhập Username; bấm nhãn "Mật khẩu" không focus ô nhập Mật khẩu.
+  - **Tại trang Hồ sơ (/profile):** Bấm nhãn "Họ Tên" không focus ô nhập Họ Tên; bấm nhãn "Số điện thoại" không focus ô nhập Số điện thoại; bấm nhãn "Địa chỉ giao hàng" không focus ô nhập Địa chỉ giao hàng.
 
 ## Bằng chứng
 
@@ -61,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Nhãn không liên kết với ô nhập làm giảm tiện ích thao tác, gây bất tiện cho người dùng khi nhấp vào nhãn chữ nhưng con trỏ không tự nhảy vào ô nhập liệu (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

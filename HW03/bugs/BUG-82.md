@@ -1,9 +1,9 @@
 # BUG-82
 
 - **ID:** BUG-82
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK, Hồ sơ] Không sử dụng được tính năng tự động điền (Autofill) của trình duyệt
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-82]
 
 ## Môi trường
@@ -18,20 +18,26 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trình duyệt đã được lưu sẵn thông tin biểu mẫu / tài khoản tự động điền (Autofill). Màn hình Hồ sơ (`http://localhost:5173/profile`) yêu cầu đã đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Sử dụng trình duyệt đã có lưu thông tin Autofill.
+2. Truy cập lần lượt các trang: Đăng nhập (`http://localhost:5173/login`), Quên mật khẩu (`http://localhost:5173/forgot-password`), và Hồ sơ (`http://localhost:5173/profile`).
+3. Nhấp vào các ô nhập liệu (Email, Mật khẩu, OTP, Họ Tên, SĐT, Địa chỉ) và kiểm tra khả năng xuất hiện/chọn gợi ý tự động điền (Autofill) của trình duyệt.
+4. Thử thực hiện thao tác dán dữ liệu (Paste / Ctrl+V) vào từng ô nhập liệu.
 
 ## Expected (trích căn cứ)
 
 - SV-02 – căn cứ: Shneiderman #8 (Giảm tải trí nhớ ngắn hạn); Nielsen #7 (Linh hoạt và hiệu quả); Slide "Checklist - Text Box"
-- Expected của bug: `<SV viết>`
+- Expected của bug: Thực hiện thao tác Paste (Ctrl+V) hoặc chọn gợi ý Autofill của trình duyệt vào các ô Email, OTP, Mật khẩu: dữ liệu phải được điền chính xác vào ô nhập và form chấp nhận dữ liệu đó khi submit.
 
 ## Actual
 
-`<SV viết>`
+- **Thao tác Dán (Paste):** Tất cả các ô nhập liệu trên P1, P2 và P3 đều dán được bình thường.
+- **Tính năng Tự động điền (Autofill):**
+  - **Trên P1 (Cốc Cốc):** Gợi ý Autofill chỉ xuất hiện và sử dụng được ở trang Quên mật khẩu (`/forgot-password`). Màn hình Đăng nhập và Hồ sơ không Autofill được.
+  - **Trên P2 (Firefox) và P3 (Chrome Android):** Tất cả các ô nhập liệu ở cả 3 trang đều hoàn toàn không sử dụng được tính năng Autofill.
 
 ## Bằng chứng
 
@@ -61,7 +67,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Các trường nhập liệu có thể đang thiếu thuộc tính HTML chuẩn (`autocomplete`, `name`, `id` phù hợp) khiến trình duyệt không nhận diện đúng ngữ cảnh để hỗ trợ điền nhanh, làm tăng thao tác nhập tay của người dùng (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

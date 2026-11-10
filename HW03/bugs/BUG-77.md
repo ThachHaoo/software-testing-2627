@@ -1,9 +1,9 @@
 # BUG-77
 
 - **ID:** BUG-77
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Tất cả màn C2] URL không tồn tại hiển thị vùng nội dung trống và thiếu link về trang chủ
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-77]
 
 ## Môi trường
@@ -18,20 +18,21 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào một đường dẫn không tồn tại trên hệ thống (ví dụ gõ sai: `http://localhost:5173/profil`).
+2. Quan sát giao diện hiển thị tại vùng nội dung chính (thẻ `<main>`) và kiểm tra sự tồn tại của thông báo lỗi 404 cùng đường dẫn quay về trang chủ (`/`).
 
 ## Expected (trích căn cứ)
 
 - CL-50 – căn cứ: Nielsen #9; Nielsen #3
-- Expected của bug: `<SV viết>`
+- Expected của bug: Mở URL không tồn tại (ví dụ `/profil`), trang phải hiển thị thông báo không tìm thấy (trang 404) và cung cấp đường dẫn/nút quay về trang chủ.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Khi mở đường dẫn không tồn tại (`/profil`), hệ thống không hiển thị thông báo không tìm thấy (nội dung thẻ `main` bị rỗng `""`) và không có đường dẫn quay về trang chủ trong vùng nội dung trang (số link về `'/'` trong trang = 0).
 
 ## Bằng chứng
 
@@ -61,7 +62,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Giao diện vùng nội dung bị rỗng khi người dùng gõ sai đường dẫn làm thiếu thông báo trạng thái lỗi và mất lối thoát chuyển hướng về trang chủ theo các nguyên tắc Usability Heuristics (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

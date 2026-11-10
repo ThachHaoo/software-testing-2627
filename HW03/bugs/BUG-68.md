@@ -1,9 +1,9 @@
 # BUG-68
 
 - **ID:** BUG-68
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên MK B2] Màn hình thiếu ô nhập 'Xác nhận mật khẩu mới'
+- **Severity:** High
+- **Priority:** High
 - Tiền tố GitHub: [HW03-C2-68]
 
 ## Môi trường
@@ -18,21 +18,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trạng thái chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
+2. Nhập email hợp lệ ở bước 1 và bấm nút 'Lấy mã OTP' để chuyển sang bước 2.
+3. Quan sát các ô nhập liệu xuất hiện ở biểu mẫu bước 2.
 
 ## Expected (trích căn cứ)
 
 - CL-26 – căn cứ: FR-03.5 (README.md:57)
   - FR-03.5, README.md:57 (AI chép nguyên văn): Người dùng nhập OTP, Mật khẩu mới, và **Xác nhận mật khẩu mới**.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Màn hình Quên mật khẩu bước 2 phải hiển thị đủ 3 ô nhập liệu: Mã OTP, Mật khẩu mới, và Xác nhận mật khẩu mới.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Màn hình Quên mật khẩu bước 2 chỉ có 2 ô nhập liệu là "Mã OTP (4 số)" và "Mật khẩu mới", hoàn toàn thiếu ô "Xác nhận mật khẩu mới".
 
 ## Bằng chứng
 
@@ -62,7 +64,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Việc thiếu ô nhập Xác nhận mật khẩu mới làm tăng rủi ro người dùng gõ sai mật khẩu mà không phát hiện ra, ảnh hưởng trực tiếp đến quy trình khôi phục tài khoản an toàn (chưa kiểm chứng). Liên quan issue #30.
 
 ## Link GitHub Issue
 

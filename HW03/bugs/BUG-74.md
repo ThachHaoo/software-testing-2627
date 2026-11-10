@@ -1,9 +1,9 @@
 # BUG-74
 
 - **ID:** BUG-74
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Navbar] Nút đăng xuất hiển thị nhãn "Thoát" thay vì "Đăng xuất"
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-74]
 
 ## Môi trường
@@ -18,21 +18,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart. Người dùng đã đăng nhập thành công bằng tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`).
+2. Đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
+3. Quan sát nhãn nút đăng xuất ở thanh điều hướng Navbar phía trên cùng của trang.
 
 ## Expected (trích căn cứ)
 
 - CL-42 – căn cứ: FR-23.3 (README.md:262)
   - FR-23.3, README.md:262 (AI chép nguyên văn): Nút Đăng xuất phải nhãn là "Đăng xuất" (không phải "Thoát").
-- Expected của bug: `<SV viết>`
+- Expected của bug: Khi đã đăng nhập, nút đăng xuất trên thanh Navbar phải hiển thị đúng nhãn 'Đăng xuất'.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Khi ở trạng thái đã đăng nhập, nút đăng xuất trên thanh Navbar hiển thị nhãn là "Thoát" thay vì "Đăng xuất".
 
 ## Bằng chứng
 
@@ -62,7 +64,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Nhãn của nút đăng xuất không tuân thủ chính xác quy định FR-23.3 trong SRS, làm ảnh hưởng đến tính nhất quán thuật ngữ trên giao diện (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

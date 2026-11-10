@@ -1,9 +1,9 @@
 # BUG-79
 
 - **ID:** BUG-79
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Lịch sử đơn] Thiếu trạng thái đang tải (loading indicator) khi lấy dữ liệu lịch sử đơn hàng
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-79]
 
 ## Môi trường
@@ -18,20 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Tài khoản `test@eshop.com` / `Test1234!` đã được đăng nhập và có sẵn ít nhất 1 đơn hàng trong lịch sử. Đã bật Network Throttling ở chế độ Slow 3G.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập tài khoản `test@eshop.com` / `Test1234!` và đảm bảo tài khoản đã có lịch sử đơn hàng.
+2. Mở DevTools -> tab Network -> chỉnh tốc độ mạng sang **Slow 3G**.
+3. Tải lại trang Hồ sơ / Lịch sử đơn (`http://localhost:5173/profile`).
+4. Quan sát giao diện khu vực danh sách đơn hàng trong quá trình chờ dữ liệu từ API gửi về.
 
 ## Expected (trích căn cứ)
 
 - CL-63 – căn cứ: Nielsen #1 (hiển thị trạng thái hệ thống)
-- Expected của bug: `<SV viết>`
+- Expected của bug: Khi bật Network throttling 'Slow 3G' và tải lại `/profile`, trong lúc chờ phản hồi từ máy chủ giao diện phải có chỉ báo đang tải (loading indicator/spinner); không được hiển thị trạng thái rỗng "chưa có đơn hàng" trước khi dữ liệu trả về.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1 (Cốc Cốc), P2 (Firefox) và P3 (Chrome Android): Hoàn toàn không có chỉ báo trạng thái đang tải khi hệ thống đang lấy dữ liệu lịch sử đơn.
+- Trên P1: Màn hình hiển thị trạng thái rỗng ("chưa có đơn hàng") trước khi danh sách đơn hàng thực tế kịp tải ra.
+- Trên P2 và P3: Khi trang tải xong thì toàn bộ dữ liệu hiển thị cùng lúc mà không có phản hồi trung gian trong quá trình tải dữ liệu.
 
 ## Bằng chứng
 
@@ -61,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Thiếu phản hồi trạng thái đang tải khi kết nối mạng chậm gây ra hiểu nhầm là tài khoản chưa có đơn hàng hoặc ứng dụng bị đơ, không tuân thủ nguyên tắc Nielsen #1 về phản hồi trạng thái hệ thống (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

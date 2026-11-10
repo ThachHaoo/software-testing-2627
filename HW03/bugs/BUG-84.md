@@ -1,9 +1,9 @@
 # BUG-84
 
 - **ID:** BUG-84
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Hồ sơ] Độ tương phản màu sắc của chữ/nhãn so với nền không đạt tối thiểu 4.5:1
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-84]
 
 ## Môi trường
@@ -18,20 +18,26 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`http://localhost:5173/profile`) đã đăng nhập tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập trang Đăng nhập (`http://localhost:5173/login`).
+2. Mở DevTools -> dùng công cụ **Accessibility** / **Lighthouse** (hoặc Inspect phần tử) để đo tỉ lệ tương phản màu sắc (Color Contrast Ratio) giữa chữ/nhãn và màu nền.
+3. Đăng nhập tài khoản `test@eshop.com` / `Test1234!` và truy cập trang Hồ sơ (`http://localhost:5173/profile`).
+4. Tiến hành đo tỉ lệ tương phản màu sắc của chữ/nhãn tại trang Hồ sơ.
+5. So sánh với trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
 
 ## Expected (trích căn cứ)
 
 - SV-04 – căn cứ: WCAG 2.2 SC 1.4.3 (Contrast Minimum)
-- Expected của bug: `<SV viết>`
+- Expected của bug: Kiểm tra bằng công cụ DevTools Accessibility / Lighthouse: tỉ lệ tương phản màu sắc của chữ (văn bản, label, placeholder, text trên button) so với màu nền đạt tối thiểu 4.5:1 (đối với chữ thường).
 
 ## Actual
 
-`<SV viết>`
+- Trên cả P1 (Cốc Cốc), P2 (Firefox) và P3 (Chrome Android):
+  - Trang Quên mật khẩu (`/forgot-password`) đạt tỉ lệ tương phản tối thiểu 4.5:1.
+  - Trang Đăng nhập (`/login`) và trang Hồ sơ (`/profile`) không đạt tỉ lệ tương phản tối thiểu 4.5:1 so với màu nền.
 
 ## Bằng chứng
 
@@ -61,7 +67,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Màu chữ và nhãn trên trang Đăng nhập và Hồ sơ không đạt độ tương phản tối thiểu 4.5:1 theo tiêu chuẩn WCAG 2.2 SC 1.4.3 khiến văn bản bị mờ và có thể khó đọc đối với người dùng có thị lực kém hoặc khi xem màn hình ở điều kiện ánh sáng mạnh (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

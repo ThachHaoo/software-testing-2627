@@ -1,9 +1,9 @@
 # BUG-72
 
 - **ID:** BUG-72
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Hồ sơ] SĐT không bắt đầu bằng 0 ('912345678') vẫn được lưu và thông báo không nêu quy tắc
+- **Severity:** High
+- **Priority:** Medium
 - Tiền tố GitHub: [HW03-C2-72]
 
 ## Môi trường
@@ -18,21 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart. Đã đăng nhập tài khoản `test@eshop.com` / `Test1234!` và truy cập trang Hồ sơ (`http://localhost:5173/profile`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập trang Đăng nhập (`http://localhost:5173/login`), đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
+2. Truy cập vào trang Hồ sơ (`http://localhost:5173/profile`).
+3. Nhập giá trị `912345678` (SĐT không bắt đầu bằng 0, gồm 9 chữ số) vào ô nhập "Số điện thoại".
+4. Bấm nút 'Cập nhật' và quan sát nội dung thông báo hiển thị.
+5. Tải lại trang (nhấn F5) và kiểm tra lại giá trị hiển thị ở ô "Số điện thoại".
 
 ## Expected (trích căn cứ)
 
 - CL-32 – căn cứ: FR-04.2 (README.md:65); Nielsen #9
   - FR-04.2, README.md:65 (AI chép nguyên văn): **Số điện thoại hợp lệ**: bắt đầu bằng số `0`, từ 10–11 chữ số.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Nhập '912345678' (không bắt đầu bằng 0) phải bị hệ thống từ chối, không lưu vào cơ sở dữ liệu; thông báo phải nêu rõ quy tắc (bắt đầu bằng 0, 10–11 chữ số).
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Khi nhập '912345678' và bấm 'Cập nhật', hệ thống hiển thị thông báo "Cập nhật thành công!" (không nêu quy tắc SĐT hợp lệ phải bắt đầu bằng 0 và dài 10–11 chữ số). Sau khi nhấn F5 tải lại trang, ô "Số điện thoại" vẫn lưu và hiển thị giá trị không hợp lệ "912345678".
 
 ## Bằng chứng
 
@@ -62,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Hệ thống cho phép lưu thông tin số điện thoại sai định dạng vào cơ sở dữ liệu làm sai lệch dữ liệu người dùng. Việc thông báo thành công thay vì báo lỗi không hướng dẫn người dùng nhập đúng quy tắc SRS (chưa kiểm chứng). Liên quan issue #97, #113.
 
 ## Link GitHub Issue
 

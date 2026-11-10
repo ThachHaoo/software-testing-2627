@@ -1,9 +1,9 @@
 # BUG-80
 
 - **ID:** BUG-80
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Lịch sử đơn] Ngày đặt không đúng định dạng dd/mm/yyyy và không nhất quán giữa các nền tảng
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-80]
 
 ## Môi trường
@@ -18,21 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Đã đăng nhập tài khoản `test@eshop.com` / `Test1234!` và tài khoản có sẵn ít nhất 1 đơn hàng trong lịch sử.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`) và đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
+2. Truy cập vào trang Hồ sơ / Lịch sử đơn hàng (`http://localhost:5173/profile`).
+3. Quan sát định dạng hiển thị của cột/dòng "Ngày đặt" trong danh sách đơn hàng.
 
 ## Expected (trích căn cứ)
 
 - CL-09 – căn cứ: Nielsen #4 (nhất quán và chuẩn); SRS im lặng → giả định GA1
   - Giả định trong checklist (AI chép nguyên văn): GA1: ngày hiển thị theo chuẩn Việt Nam dd/mm/yyyy, độc lập ngôn ngữ trình duyệt.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Ngày đặt hiển thị dạng dd/mm/yyyy và giống nhau trên P1, P2, P3.
 
 ## Actual
 
-`<SV viết>`
+- **Trên P1 (Cốc Cốc):** Ngày đặt hiển thị dạng "9/11/2026" (ngày 1 chữ số, không đúng chuẩn 2 chữ số dd/mm/yyyy).
+- **Trên P2 (Firefox) và P3 (Chrome Android):** Ngày đặt hiển thị dạng mm/dd/yyyy ("11/9/2026") thay vì định dạng dd/mm/yyyy của người Việt.
+- Định dạng ngày đặt hiển thị không nhất quán giữa các nền tảng (P1 hiện "9/11/2026" trong khi P2 và P3 hiện "11/9/2026").
 
 ## Bằng chứng
 
@@ -62,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Ngày đặt hiển thị không đồng nhất giữa các nền tảng và vi phạm chuẩn định dạng dd/mm/yyyy của Việt Nam, gây nhầm lẫn cho người dùng khi đọc thông tin ngày tháng.
 
 ## Link GitHub Issue
 

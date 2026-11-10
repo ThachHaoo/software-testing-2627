@@ -1,9 +1,9 @@
 # BUG-70
 
 - **ID:** BUG-70
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên MK B2] Mật khẩu hợp lệ 'Abcdef1!' bị từ chối với thông báo "Mật khẩu quá yếu!"
+- **Severity:** High
+- **Priority:** High
 - Tiền tố GitHub: [HW03-C2-70]
 
 ## Môi trường
@@ -18,22 +18,26 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart và hoạt động bình thường. Đã thực hiện bước 1 lấy mã OTP cho tài khoản `test@eshop.com`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
+2. Nhập email `test@eshop.com` ở bước 1 và bấm nút 'Lấy mã OTP' để chuyển sang bước 2.
+3. Tại bước 2, nhập đúng mã OTP vừa hiển thị và nhập ô Mật khẩu mới là `Abcdef1!` (đủ 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt `!`).
+4. Bấm nút 'Đặt lại mật khẩu' và kiểm tra phản hồi của hệ thống.
+5. Thử dùng mật khẩu mới `Abcdef1!` để đăng nhập lại tại trang `/login`.
 
 ## Expected (trích căn cứ)
 
 - CL-29 – căn cứ: FR-03.6 (README.md:58, 34)
   - FR-03.6, README.md:58 (AI chép nguyên văn): Mật khẩu mới phải tuân thủ điều kiện như FR-01.
   - FR-03.6, README.md:34 (AI chép nguyên văn): **Yêu cầu mật khẩu mạnh**: Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`).
-- Expected của bug: `<SV viết>`
+- Expected của bug: Với OTP đúng, Mật khẩu mới 'Abcdef1!' (8 ký tự, có hoa, thường, số, '!') phải được hệ thống chấp nhận đổi thành công; sau đó người dùng đăng nhập lại bằng mật khẩu mới được.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Mật khẩu "Abcdef1!" không được chấp nhận. Hệ thống từ chối đổi mật khẩu và xuất hiện thông báo lỗi: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT." Đăng nhập lại bằng mật khẩu "Abcdef1!" trả về thất bại (`false`).
 
 ## Bằng chứng
 
@@ -63,7 +67,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Bộ kiểm tra độ mạnh mật khẩu (regex/validation) ở bước 2 Quên mật khẩu bị bắt lỗi sai cấu trúc, chặn người dùng sử dụng mật khẩu hoàn toàn đạt chuẩn SRS. Liên quan issue #17 (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

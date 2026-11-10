@@ -1,9 +1,9 @@
 # BUG-58
 
 - **ID:** BUG-58
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK] Focus nhảy ngược và bỏ qua Navbar khi nhấn Tab
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-58]
 
 ## Môi trường
@@ -19,11 +19,13 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend đang hoạt động. Trạng thái người dùng chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang Đăng nhập (http://localhost:5173/login).
+2. Từ lúc trang vừa tải xong, nhấn phím `Tab` liên tục và quan sát thứ tự focus của các phần tử trên màn hình.
+3. Chuyển sang màn hình Quên mật khẩu bước 2 (http://localhost:5173/forgot-password, nhập email rồi qua bước 2), tiếp tục nhấn phím `Tab` liên tục từ đầu trang và quan sát.
 
 ## Expected (trích căn cứ)
 
@@ -31,11 +33,16 @@
   - FR-21.5, README.md:248 (AI chép nguyên văn): **Tab Order**: Thứ tự focus theo Tab phải đi từ trên xuống dưới, trái sang phải.
 - CL-12 – căn cứ: FR-21.5 (README.md:248)
   - FR-21.5, README.md:248 (AI chép nguyên văn): **Tab Order**: Thứ tự focus theo Tab phải đi từ trên xuống dưới, trái sang phải.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Từ đầu trang bấm Tab liên tục, focus phải đi qua mọi control tương tác được theo vị trí hiển thị — từ trên xuống dưới, trái sang phải. Không được nhảy tới control nằm phía trên (hoặc bên trái) control trước đó, và không được bỏ qua các control trên Navbar.
 
 ## Actual
 
-`<SV viết>`
+- **Tại trang Đăng nhập (CL-10):**
+  - Cả P1 và P2: Focus nhảy ngược vị trí hiển thị. Điểm focus đầu tiên rơi vào nút 'Sign In' ở form, sau đó mới nhảy ngược lên liên kết 'EShop' ở Navbar rồi đi tiếp tuần tự.
+  - Trên P2: Khi focus đến liên kết 'Đăng ký ngay', tiếp tục bấm Tab sẽ bị lặp vô tận tại liên kết này.
+- **Tại trang Quên mật khẩu B2 (CL-12):**
+  - Cả P1 và P2: Focus bỏ qua hoàn toàn các liên kết trên Navbar ('EShop', 'Giỏ hàng', 'Đăng nhập', 'Đăng ký'), chỉ đi qua các ô nhập liệu và nút trong form.
+  - Trên P2: Khi focus đến nút '← Quay lại', tiếp tục bấm Tab sẽ bị lặp vô tận tại nút này.
 
 ## Bằng chứng
 
@@ -70,7 +77,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Người dùng điều hướng bằng bàn phím sẽ gặp rắc rối lớn do con trỏ focus bị nhảy lộn xộn, không tuân thủ thứ tự hiển thị tự nhiên của mắt. Tại màn Quên mật khẩu B2, họ hoàn toàn không thể truy cập được các chức năng trên Navbar. Hiện tượng vòng lặp focus trên Firefox (P2) sẽ gây kẹt và chặn thao tác bàn phím (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-83
 
 - **ID:** BUG-83
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK B2, Hồ sơ] Submit thất bại không tự động focus về ô nhập bị lỗi
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-83]
 
 ## Môi trường
@@ -18,20 +18,22 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`http://localhost:5173/profile`) đã đăng nhập tài khoản `test@eshop.com` / `Test1234!`. Màn hình Quên mật khẩu B2 đã gửi mã OTP ở bước 1.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. **Trang Đăng nhập (`http://localhost:5173/login`):** Nhập mật khẩu sai quy tắc/không đúng rồi bấm nút submit ('Sign In'). Sau khi thông báo xuất hiện, quan sát vị trí con trỏ focus.
+2. **Trang Quên mật khẩu B2 (`http://localhost:5173/forgot-password`):** Nhập OTP đúng, nhập Mật khẩu mới không đủ điều kiện (ví dụ '123') rồi bấm nút 'Đặt lại mật khẩu'. Quan sát vị trí con trỏ focus.
+3. **Trang Hồ sơ (`http://localhost:5173/profile`):** Nhập Số điện thoại sai định dạng (ví dụ '123') rồi bấm nút 'Cập nhật'. Quan sát vị trí con trỏ focus.
 
 ## Expected (trích căn cứ)
 
 - SV-03 – căn cứ: Slide "Checklist - input-field validation" (Golden Rule: "On error, return focus to the offending field"); Shneiderman #5 (Xử lý lỗi đơn giản)
-- Expected của bug: `<SV viết>`
+- Expected của bug: Nhập dữ liệu sai quy tắc (ví dụ: SĐT sai định dạng ở Hồ sơ hoặc Mật khẩu mới không đủ điều kiện ở Quên mật khẩu B2) rồi bấm submit: sau khi thông báo lỗi xuất hiện, con trỏ gõ phím (cursor) phải tự động quay lại focus ở đúng ô bị lỗi đó.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Sau khi submit thất bại, con trỏ gõ phím không tự động quay lại focus ở ô bị lỗi trên cả 3 màn hình (`focus về ô lỗi – Đăng nhập (Mật khẩu): false; Quên MK B2 (Mật khẩu mới): false; Hồ sơ (SĐT): false`). Con trỏ bị mất focus hoặc không nhảy về đúng ô nhập liệu gây lỗi.
 
 ## Bằng chứng
 
@@ -61,7 +63,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Không trả con trỏ focus về đúng trường bị lỗi khiến người dùng phải mất thêm thao tác di chuyển chuột hoặc bấm Tab để chọn lại ô lỗi, làm gián đoạn luồng sửa lỗi biểu mẫu (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

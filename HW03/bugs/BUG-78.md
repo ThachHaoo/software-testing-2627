@@ -1,9 +1,9 @@
 # BUG-78
 
 - **ID:** BUG-78
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK, Hồ sơ] Nút submit không khóa và thiếu chỉ báo khi bấm nhiều lần
+- **Severity:** Medium
+- **Priority:** Medium
 - Tiền tố GitHub: [HW03-C2-78]
 
 ## Môi trường
@@ -21,21 +21,28 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`http://localhost:5173/profile`) đã đăng nhập tài khoản `test@eshop.com` / `Test1234!`. Kiểm tra CL-53 cần bật DevTools Network Throttling ở chế độ Slow 3G.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. **Tại trang Đăng nhập (`http://localhost:5173/login`):** Bật throttling mạng Slow 3G, nhập thông tin đăng nhập rồi bấm nút 'Sign In' liên tục (3 lần). Quan sát trạng thái nút và số request phát sinh trong DevTools Network.
+2. **Tại trang Quên mật khẩu B1 (`http://localhost:5173/forgot-password`):** Ở điều kiện mạng bình thường, nhập email hợp lệ rồi nhấp chuột thật nhanh (double-click) vào nút 'Lấy mã OTP'. Kiểm tra số request gửi đi.
+3. **Tại trang Quên mật khẩu B2:** Nhập OTP đúng và mật khẩu mới, nhấp chuột thật nhanh vào nút 'Đặt lại mật khẩu'. Kiểm tra số request và số hộp thoại hiển thị.
+4. **Tại trang Hồ sơ (`http://localhost:5173/profile`):** Nhập thông tin cập nhật, nhấp chuột thật nhanh vào nút 'Cập nhật'. Kiểm tra số request và số hộp thoại hiển thị.
 
 ## Expected (trích căn cứ)
 
 - CL-53 – căn cứ: Norman – Feedback; Shneiderman #3 (phản hồi đầy đủ)
 - SV-06 – căn cứ: Slide "Double-submit on double-click"; Nielsen #5 (Phòng ngừa lỗi)
-- Expected của bug: `<SV viết>`
+- Expected của bug: Bấm nút submit, trong lúc chờ xử lý (kể cả mạng Slow 3G), nút phải bị vô hiệu hóa hoặc có chỉ báo đang tải, bấm nhiều lần chỉ phát sinh 1 request. Ở điều kiện mạng bình thường, nhấp đúp nhanh vào nút submit ('Lấy mã OTP', 'Đặt lại mật khẩu', 'Cập nhật') hệ thống phải lập tức khóa nút hoặc debounce sao cho chỉ phát sinh đúng 1 request API và không hiển thị nhiều thông báo trùng lặp.
 
 ## Actual
 
-`<SV viết>`
+- **Tại trang Đăng nhập (CL-53):** Ở cả P1, P2, P3 khi thử nghiệm với Slow 3G, nút submit 'Sign In' không có chỉ báo đang xử lý (loading) và không vô hiệu hóa để chống gửi trùng.
+- **Khi nhấp đúp nhanh ở điều kiện mạng bình thường (SV-06):**
+  - **Nút 'Lấy mã OTP' (Quên MK B1):** Phát sinh 2 request API gửi lên server ở cả P1, P2 và P3.
+  - **Nút 'Đặt lại mật khẩu' (Quên MK B2):** Bị phát sinh 0 request và xuất hiện 2 hộp thoại alert trùng lặp ở P1, P2.
+  - **Nút 'Cập nhật' (Hồ sơ):** Bị phát sinh 0 request PUT và xuất hiện 2 hộp thoại alert trùng lặp ở P1, P2. Trên P3 bị TimeoutError do dblclick.
 
 ## Bằng chứng
 
@@ -74,7 +81,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Không khóa nút submit hoặc debounce khi bấm liên tục/nhấp đúp dẫn đến việc gửi trùng lặp request API hoặc xuất hiện nhiều hộp thoại thông báo trùng lặp, tiềm ẩn rủi ro lãng phí tài nguyên máy chủ và gửi dữ liệu lặp lại (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-73
 
 - **ID:** BUG-73
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Hồ sơ] Thông tin Số điện thoại và Địa chỉ quay về giá trị cũ sau khi Cập nhật và F5
+- **Severity:** High
+- **Priority:** High
 - Tiền tố GitHub: [HW03-C2-73]
 
 ## Môi trường
@@ -18,21 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart. Đã đăng nhập tài khoản `test@eshop.com` / `Test1234!` và truy cập trang Hồ sơ (`http://localhost:5173/profile`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`), đăng nhập tài khoản `test@eshop.com` / `Test1234!`.
+2. Mở trang Hồ sơ (`http://localhost:5173/profile`).
+3. Nhập thông tin mới hợp lệ vào cả 3 trường: Họ Tên, Số điện thoại (ví dụ: `0912345678`), và Địa chỉ giao hàng.
+4. Bấm nút 'Cập nhật'.
+5. Tải lại trang (nhấn F5) và kiểm tra giá trị hiển thị ở 3 ô nhập liệu.
 
 ## Expected (trích căn cứ)
 
 - CL-37 – căn cứ: FR-04.1 (README.md:64)
   - FR-04.1, README.md:64 (AI chép nguyên văn): Người dùng đã đăng nhập có thể cập nhật: **Họ Tên**, **Số điện thoại**, **Địa chỉ giao hàng mặc định**.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Đổi Họ Tên, SĐT hợp lệ, Địa chỉ -> bấm Cập nhật -> tải lại trang (F5) -> cả 3 trường phải lưu bền vững và hiển thị đúng các giá trị mới cập nhật.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Sau khi thay đổi thông tin Họ Tên, SĐT hợp lệ, Địa chỉ giao hàng rồi bấm 'Cập nhật' và tải lại trang (F5), các trường bị quay về giá trị cũ (`["Test User","",""]`). Thông tin Số điện thoại và Địa chỉ giao hàng bị rỗng, không lưu lại dữ liệu mới.
 
 ## Bằng chứng
 
@@ -62,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Dữ liệu cập nhật hồ sơ không được lưu bền vững vào hệ thống backend/CSDL, khiến thông tin người dùng nhập vào bị mất sạch sau khi tải lại trang (chưa kiểm chứng). Lỗi này có thể liên quan đến issue #111 hoặc #123.
 
 ## Link GitHub Issue
 

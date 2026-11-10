@@ -1,9 +1,9 @@
 # BUG-71
 
 - **ID:** BUG-71
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên MK B2] Nút chính 'Đặt lại mật khẩu' và nút phụ quay lại giống nhau về hình thức
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-71]
 
 ## Môi trường
@@ -18,20 +18,22 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trạng thái người dùng chưa đăng nhập. Đã thực hiện xong bước 1 của tính năng Quên mật khẩu.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
+2. Nhập email hợp lệ ở bước 1 (`test@eshop.com`) và bấm nút 'Lấy mã OTP' để chuyển sang bước 2.
+3. Tại giao diện bước 2, quan sát hình thức (màu nền, kích thước, kiểu dáng) của nút chính ('Đặt lại mật khẩu') và nút phụ ('← Quay lại').
 
 ## Expected (trích căn cứ)
 
 - CL-06 – căn cứ: Shneiderman #1 (nhất quán); checklist Button – 'colour signals intent'
-- Expected của bug: `<SV viết>`
+- Expected của bug: Nút 'Đặt lại mật khẩu' (chính) và nút quay lại (phụ) phải phân biệt được rõ ràng với nhau bằng hình thức (màu nền hoặc kiểu viền/nền).
 
 ## Actual
 
-`<SV viết>`
+- Cả P1 (Cốc Cốc), P2 (Firefox) và P3 (Chrome Android): Nút chính 'Đặt lại mật khẩu' và nút phụ '← Quay lại' hoàn toàn giống nhau về hình thức (cùng màu nền, kích thước và kiểu dáng).
 
 ## Bằng chứng
 
@@ -61,7 +63,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Nút chính và nút phụ không có sự phân biệt về mặt trực quan gây giảm tính định hướng thao tác của giao diện, dễ làm người dùng nhầm lẫn giữa hành động xác nhận và quay lại (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

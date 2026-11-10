@@ -1,9 +1,9 @@
 # BUG-85
 
 - **ID:** BUG-85
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập] Link 'Quên mật khẩu?' và 'Đăng ký ngay' có chiều cao vùng tương tác nhỏ hơn 24px
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-85]
 
 ## Môi trường
@@ -18,20 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`http://localhost:5173/profile`) đã đăng nhập tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập trang Đăng nhập (`http://localhost:5173/login`).
+2. Mở DevTools -> Inspect phần tử các liên kết ('Quên mật khẩu?', 'Đăng ký ngay') và nút 'Sign In' để đo kích thước vùng bấm (Target Size).
+3. Truy cập trang Quên mật khẩu (`http://localhost:5173/forgot-password`) và trang Hồ sơ (`http://localhost:5173/profile`) để đo kích thước vùng bấm của các nút 'Lấy mã OTP' và 'Cập nhật'.
 
 ## Expected (trích căn cứ)
 
 - SV-05 – căn cứ: WCAG 2.2 SC 2.5.8 (Target Size Minimum - 24x24px)
-- Expected của bug: `<SV viết>`
+- Expected của bug: Dùng thước đo DevTools kiểm tra chiều cao và chiều rộng vùng bấm của các nút ('Sign In', 'Lấy mã OTP', 'Cập nhật') và các liên kết ('Quên mật khẩu?', 'Đăng ký ngay'): vùng bấm nhận con trỏ (chuột hoặc ngón tay) phải đạt kích thước tối thiểu 24x24 px.
 
 ## Actual
 
-`<SV viết>`
+- Các nút 'Sign In', 'Lấy mã OTP', 'Cập nhật' trên cả P1, P2 và P3 đều đạt kích thước tối thiểu 24x24 px (P1/P2: Sign In 382×40, Lấy mã OTP 382×40, Cập nhật 271×40; P3: Sign In 295×40, Lấy mã OTP 295×40, Cập nhật 311×40).
+- Tuy nhiên, vùng bấm của các liên kết 'Quên mật khẩu?' và 'Đăng ký ngay' trên trang Đăng nhập có chiều cao nhỏ hơn 24 px ở cả 3 nền tảng:
+  - **Trên P1 và P2:** Link 'Quên mật khẩu?' kích thước 102×19 px (< 24 px chiều cao); Link 'Đăng ký ngay' kích thước 85×19 px (< 24 px chiều cao).
+  - **Trên P3 (Chrome Android):** Link 'Quên mật khẩu?' kích thước 100×16 px (< 24 px chiều cao); Link 'Đăng ký ngay' kích thước 82×16 px (< 24 px chiều cao).
 
 ## Bằng chứng
 
@@ -61,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Chiều cao vùng tương tác của các liên kết 'Quên mật khẩu?' và 'Đăng ký ngay' nhỏ hơn chuẩn 24px (chỉ từ 16px - 19px), vi phạm WCAG 2.2 SC 2.5.8 có thể gây khó khăn cho việc nhấp chuột chính xác hoặc thao tác chạm ngón tay trên màn hình di động P3 (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

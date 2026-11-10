@@ -1,9 +1,9 @@
 # BUG-75
 
 - **ID:** BUG-75
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Hồ sơ, Navbar] Đổi Họ Tên không cập nhật ngay trên Navbar khi chưa tải lại trang
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-75]
 
 ## Môi trường
@@ -18,20 +18,24 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Đã đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!` (tên hiển thị mặc định là "Test User") và đang ở trang Hồ sơ (`http://localhost:5173/profile`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`) và đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
+2. Mở trang Hồ sơ (`http://localhost:5173/profile`).
+3. Nhập tên mới 'Test Đổi' vào ô "Họ Tên".
+4. Bấm nút 'Cập nhật'.
+5. Quan sát thông tin tên người dùng hiển thị trên thanh Navbar mà không bấm tải lại trang (F5).
 
 ## Expected (trích căn cứ)
 
 - CL-56 – căn cứ: Nielsen #1 (hiển thị trạng thái hệ thống); Shneiderman #1
-- Expected của bug: `<SV viết>`
+- Expected của bug: Đổi Họ Tên thành 'Test Đổi' -> bấm Cập nhật -> Navbar phải cập nhật ngay tên mới 'Test Đổi' mà không cần tải lại trang.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Sau khi đổi Họ Tên thành 'Test Đổi' và bấm 'Cập nhật', thanh Navbar vẫn giữ nguyên tên cũ ("EShop | Giỏ hàng | Chào, Test User | Thoát") dù đã chờ 3000 ms, chỉ cập nhật tên mới sau khi tải lại trang (F5).
 
 ## Bằng chứng
 
@@ -61,7 +65,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+State quản lý thông tin người dùng trên Navbar chưa phản ánh kịp thời sự thay đổi dữ liệu ở giao diện Hồ sơ, làm giảm khả năng phản hồi trạng thái hệ thống theo thời gian thực (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

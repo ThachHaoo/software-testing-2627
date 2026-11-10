@@ -1,9 +1,9 @@
 # BUG-67
 
 - **ID:** BUG-67
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên MK B1] Không có nút hoặc liên kết 'Quay lại đăng nhập'
+- **Severity:** Medium
+- **Priority:** Medium
 - Tiền tố GitHub: [HW03-C2-67]
 
 ## Môi trường
@@ -18,21 +18,22 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trạng thái người dùng chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập vào trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
+2. Quan sát toàn bộ giao diện form ở bước 1 (nhập Email).
 
 ## Expected (trích căn cứ)
 
 - CL-25 – căn cứ: FR-03.4 (README.md:53)
   - FR-03.4, README.md:53 (AI chép nguyên văn): Có nút **Quay lại đăng nhập**.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Tại bước 1 của trang Quên mật khẩu phải có nút hoặc liên kết mang nhãn 'Quay lại đăng nhập'; khi bấm vào phải điều hướng người dùng quay về trang Đăng nhập (`/login`).
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Màn hình Quên mật khẩu bước 1 hoàn toàn không có nút hoặc liên kết 'Quay lại đăng nhập'.
 
 ## Bằng chứng
 
@@ -62,7 +63,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Người dùng khi đổi ý hoặc lỡ bấm nhầm vào màn hình Quên mật khẩu bước 1 sẽ không thấy nút quay lại trực tiếp trong form, làm gián đoạn luồng thao tác tự nhiên (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

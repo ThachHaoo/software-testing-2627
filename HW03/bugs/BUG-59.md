@@ -1,9 +1,9 @@
 # BUG-59
 
 - **ID:** BUG-59
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Tất cả màn C2] Tiêu đề tab hiển thị "frontend-web" giống hệt nhau ở mọi trang
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-59]
 
 ## Môi trường
@@ -18,20 +18,21 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend đang hoạt động bình thường.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập lần lượt vào các trang: Đăng nhập (`/login`), Quên mật khẩu (`/forgot-password`), và Hồ sơ (`/profile`).
+2. Quan sát tiêu đề thẻ tab hiển thị trên trình duyệt (hoặc mở DevTools -> Console và kiểm tra giá trị `document.title`).
 
 ## Expected (trích căn cứ)
 
 - CL-13 – căn cứ: Nielsen #1 (hiển thị trạng thái hệ thống); WCAG 2.2 SC 2.4.2
-- Expected của bug: `<SV viết>`
+- Expected của bug: Tiêu đề tab (`document.title`) phải chứa tên ứng dụng hoặc tên trang tương ứng (ví dụ: 'Đăng nhập – EShop') và phải khác biệt giữa các trang `/login`, `/forgot-password`, `/profile`.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Tiêu đề tab ở cả 3 trang (`/login`, `/forgot-password`, `/profile`) đều hiển thị chung một chuỗi là `"frontend-web"`. Tiêu đề hoàn toàn giống nhau và không hề chứa tên ứng dụng hay tên trang cụ thể.
 
 ## Bằng chứng
 
@@ -61,7 +62,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Người dùng sẽ gặp khó khăn trong việc nhận diện và điều hướng giữa các trang khi mở nhiều tab cùng lúc do tiêu đề đều hiển thị "frontend-web", làm giảm khả năng nhận biết trạng thái hệ thống (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

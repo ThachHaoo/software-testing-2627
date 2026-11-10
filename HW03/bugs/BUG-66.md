@@ -1,9 +1,9 @@
 # BUG-66
 
 - **ID:** BUG-66
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên mật khẩu] Thiếu chỉ báo bước (Step Indicator) ở cả bước 1 và bước 2
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-66]
 
 ## Môi trường
@@ -18,22 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trạng thái chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang Quên mật khẩu (`http://localhost:5173/forgot-password`).
+2. Quan sát giao diện ở bước 1 (nhập Email).
+3. Nhập email hợp lệ (`test@eshop.com`) và bấm nút 'Lấy mã OTP' để chuyển sang bước 2.
+4. Quan sát giao diện ở bước 2 (nhập OTP và Mật khẩu mới).
 
 ## Expected (trích căn cứ)
 
 - CL-24 – căn cứ: FR-03.3 (README.md:52); FR-22.5 (README.md:256)
   - FR-03.3, README.md:52 (AI chép nguyên văn): Giao diện phải hiển thị **chỉ báo bước (Step Indicator)** — ví dụ: "Bước 1 / 2".
   - FR-22.5, README.md:256 (AI chép nguyên văn): Các form có từ 2 bước trở lên phải có **Step Indicator** rõ ràng.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Bước 1 hiển thị 'Bước 1 / 2' (hoặc chỉ báo tương đương thấy rõ bước hiện tại và tổng số bước); bước 2 hiển thị 'Bước 2 / 2'.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1 (Cốc Cốc), P2 (Firefox) và P3 (Chrome Android): Ở cả bước 1 và bước 2 của quy trình Quên mật khẩu đều hoàn toàn không hiển thị chỉ báo bước (Step Indicator).
 
 ## Bằng chứng
 
@@ -63,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Người dùng không nhận biết được vị trí tiến trình hiện tại và tổng số bước cần thực hiện trong quy trình quên mật khẩu (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

@@ -1,9 +1,9 @@
 # BUG-64
 
 - **ID:** BUG-64
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Quên MK B2, Hồ sơ] Thông báo lỗi validate chỉ hiện ở hộp thoại alert trình duyệt
+- **Severity:** Medium
+- **Priority:** Medium
 - Tiền tố GitHub: [HW03-C2-64]
 
 ## Môi trường
@@ -18,22 +18,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Backend vừa restart. Màn hình Hồ sơ (`http://localhost:5173/profile`) đã đăng nhập tài khoản `test@eshop.com` / `Test1234!`. Màn hình Quên mật khẩu bước 2 đã hoàn thành gửi OTP từ bước 1.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Quên mật khẩu bước 2 (`http://localhost:5173/forgot-password`). Nhập OTP đúng và Mật khẩu mới yếu (ví dụ '123'), sau đó bấm nút 'Đặt lại mật khẩu'. Quan sát vị trí xuất hiện thông báo lỗi.
+2. Đăng nhập tài khoản `test@eshop.com` / `Test1234!` và truy cập trang Hồ sơ (`http://localhost:5173/profile`).
+3. Nhập Số điện thoại sai định dạng (ví dụ '123') vào ô Số điện thoại rồi bấm nút 'Cập nhật'. Quan sát vị trí xuất hiện thông báo lỗi.
 
 ## Expected (trích căn cứ)
 
 - CL-23 – căn cứ: FR-22.4 (README.md:255); giả định GA3
   - FR-22.4, README.md:255 (AI chép nguyên văn): Thông báo lỗi phải xuất hiện **trên** nút submit, không phải bên dưới.
   - Giả định trong checklist (AI chép nguyên văn): GA3: thông báo lỗi chỉ ở hộp thoại alert() không thoả FR-22.4.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Khi nhập dữ liệu vi phạm quy tắc validate (mật khẩu mới yếu ở Quên mật khẩu B2, SĐT sai định dạng ở Hồ sơ), thông báo lỗi phải xuất hiện trực tiếp trong trang web tại vị trí phía trên nút submit, không phải chỉ hiển thị ở hộp thoại trình duyệt (alert).
 
 ## Actual
 
-`<SV viết>`
+- **Tại trang Quên mật khẩu B2 (mật khẩu yếu):** Cả P1, P2 và P3 không có chữ thông báo lỗi nào xuất hiện trong trang phía trên nút submit; thông báo lỗi chỉ hiện ở hộp thoại alert trình duyệt ("Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.").
+- **Tại trang Hồ sơ (SĐT sai định dạng):** Cả P1, P2 và P3 không hiển thị chữ thông báo lỗi trong trang; hệ thống chỉ hiển thị hộp thoại alert với nội dung "Cập nhật thành công!".
 
 ## Bằng chứng
 
@@ -63,7 +66,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Thông báo lỗi hiển thị qua hộp thoại alert làm gián đoạn trải nghiệm người dùng, không tuân thủ tiêu chuẩn thiết kế phản hồi lỗi trong trang (FR-22.4) và gây nhầm lẫn khi hệ thống báo "Cập nhật thành công!" dù SĐT nhập sai định dạng (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

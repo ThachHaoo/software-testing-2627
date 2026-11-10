@@ -1,9 +1,9 @@
 # BUG-76
 
 - **ID:** BUG-76
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Hồ sơ] Truy cập /profile khi chưa đăng nhập không tự chuyển và thiếu link tới Đăng nhập
+- **Severity:** Medium
+- **Priority:** Medium
 - Tiền tố GitHub: [HW03-C2-76]
 
 ## Môi trường
@@ -18,20 +18,22 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trạng thái người dùng chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đảm bảo trình duyệt ở trạng thái chưa đăng nhập tài khoản.
+2. Mở trình duyệt và truy cập trực tiếp vào đường dẫn trang Hồ sơ (`http://localhost:5173/profile`).
+3. Quan sát hành vi điều hướng URL của trình duyệt và kiểm tra sự tồn tại của nút/liên kết Đăng nhập trong vùng nội dung trang.
 
 ## Expected (trích căn cứ)
 
 - CL-49 – căn cứ: Nielsen #3 (lối thoát); Nielsen #9
-- Expected của bug: `<SV viết>`
+- Expected của bug: Khi chưa đăng nhập, mở đường dẫn `/profile` hệ thống phải tự động chuyển hướng tới `/login`, hoặc hiển thị thông báo kèm theo liên kết/nút dẫn tới trang Đăng nhập (thực hiện trong 1 lần bấm).
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Khi chưa đăng nhập, mở `/profile` hệ thống không tự động chuyển hướng về `/login` (URL vẫn giữ nguyên `/profile`). Trong vùng nội dung trang không có bất kỳ nút hoặc liên kết nào dẫn tới trang Đăng nhập (số liên kết/nút tới Đăng nhập trong trang = 0, ngoại trừ thanh Navbar).
 
 ## Bằng chứng
 
@@ -61,7 +63,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Trang không có cơ chế bảo vệ tuyến đường (route guard) hoặc không cung cấp lối thoát/điều hướng phù hợp cho người dùng chưa xác thực, làm ảnh hưởng đến luồng trải nghiệm người dùng (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

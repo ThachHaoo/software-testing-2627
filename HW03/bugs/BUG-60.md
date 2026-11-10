@@ -1,9 +1,9 @@
 # BUG-60
 
 - **ID:** BUG-60
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Tất cả màn C2] Thẻ <html> khai báo lang="en" thay vì tiếng Việt
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-60]
 
 ## Môi trường
@@ -18,20 +18,22 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Mở trình duyệt và truy cập bất kỳ trang nào thuộc nhóm màn C2 (ví dụ: `http://localhost:5173/login`, `/forgot-password`, hoặc `/profile`).
+2. Mở DevTools -> chuyển sang tab **Elements** (hoặc xem mã nguồn trang).
+3. Quan sát thẻ `<html>` ở ngay đầu cấu trúc DOM của trang.
 
 ## Expected (trích căn cứ)
 
 - CL-14 – căn cứ: WCAG 2.2 SC 3.1.1 (Language of Page)
-- Expected của bug: `<SV viết>`
+- Expected của bug: Thẻ `<html>` phải khai báo thuộc tính `lang="vi"` đại diện cho ngôn ngữ tiếng Việt của trang.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3: Thẻ `<html>` đang khai báo thuộc tính `lang="en"` (`<html lang="en">`) thay vì `lang="vi"`.
 
 ## Bằng chứng
 
@@ -61,7 +63,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Trình đọc màn hình (screen reader) hỗ trợ tiếp cận người dùng khuyết thị có thể đọc và phát âm sai ngôn ngữ tiếng Việt của giao diện do thẻ `<html>` bị khai báo là tiếng Anh (`lang="en"`) (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

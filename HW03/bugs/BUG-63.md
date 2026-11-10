@@ -1,9 +1,9 @@
 # BUG-63
 
 - **ID:** BUG-63
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK, Hồ sơ] Nhãn các trường bắt buộc thiếu dấu '*'
+- **Severity:** Low
+- **Priority:** Low
 - Tiền tố GitHub: [HW03-C2-63]
 
 ## Môi trường
@@ -21,11 +21,14 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Màn hình Hồ sơ (`/profile`) yêu cầu đăng nhập tài khoản `test@eshop.com` / `Test1234!`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Đăng nhập (`http://localhost:5173/login`) và trang Quên mật khẩu (`http://localhost:5173/forgot-password` ở bước 1 và bước 2).
+2. Quan sát các nhãn (label) cạnh từng ô nhập liệu.
+3. Đăng nhập tài khoản `test@eshop.com` / `Test1234!`, truy cập trang Hồ sơ (`http://localhost:5173/profile`).
+4. Quan sát các nhãn "Họ Tên", "Số điện thoại", "Địa chỉ giao hàng" và lần lượt thử xóa trống từng trường rồi bấm nút 'Cập nhật' để kiểm tra tính bắt buộc của form.
 
 ## Expected (trích căn cứ)
 
@@ -33,11 +36,14 @@
   - FR-22.1, README.md:252 (AI chép nguyên văn): Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn.
 - CL-21 – căn cứ: FR-22.1 (README.md:252)
   - FR-22.1, README.md:252 (AI chép nguyên văn): Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Tất cả các nhãn trường bắt buộc nhập trên form (bao gồm Email, Mật khẩu ở Đăng nhập; Email ở Quên mật khẩu bước 1; OTP, Mật khẩu mới, Xác nhận mật khẩu ở Quên mật khẩu bước 2; và các trường bị chặn khi để trống ở Hồ sơ như Họ Tên, Số điện thoại, Địa chỉ giao hàng) đều phải hiển thị dấu `*` bên cạnh nhãn.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3:
+  - **Màn hình Đăng nhập (/login):** Nhãn "Username" và nhãn "Mật khẩu" đều thiếu dấu `*`.
+  - **Màn hình Quên mật khẩu (/forgot-password):** Nhãn "Nhập Email của bạn" ở bước 1, nhãn "Mã OTP (4 số)" và "Mật khẩu mới" ở bước 2 đều thiếu dấu `*`.
+  - **Màn hình Hồ sơ (/profile):** Cả 3 trường "Họ Tên", "Số điện thoại", "Địa chỉ giao hàng" khi để trống đều khiến form bị chặn không cho cập nhật, nhưng nhãn của cả 3 trường này đều thiếu dấu `*`.
 
 ## Bằng chứng
 
@@ -76,7 +82,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Người dùng gặp khó khăn trong việc nhận biết các trường dữ liệu nào bắt buộc phải điền, dễ dẫn đến thao tác thiếu và gây nhầm lẫn khi thực thi biểu mẫu (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

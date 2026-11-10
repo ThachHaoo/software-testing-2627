@@ -1,9 +1,9 @@
 # BUG-62
 
 - **ID:** BUG-62
-- **Tiêu đề:** `<SV viết>`
-- **Severity:** `<SV viết>`
-- **Priority:** `<SV viết>`
+- **Tiêu đề:** [Đăng nhập, Quên MK B1] Ô Email type="text", email sai định dạng không bị chặn
+- **Severity:** High
+- **Priority:** Medium
 - Tiền tố GitHub: [HW03-C2-62]
 
 ## Môi trường
@@ -21,11 +21,15 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+Hệ thống frontend web và backend server đang hoạt động bình thường. Trạng thái người dùng chưa đăng nhập.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập vào trang Đăng nhập (`http://localhost:5173/login`) hoặc trang Quên mật khẩu bước 1 (`http://localhost:5173/forgot-password`).
+2. Mở DevTools -> tab Elements, kiểm tra thuộc tính `type` của ô nhập Email.
+3. Nhập giá trị sai định dạng email `abc` vào ô Email.
+4. Bấm nút submit ('Sign In' hoặc 'Lấy mã OTP').
+5. Mở DevTools -> tab Network và kiểm tra request gửi đi.
 
 ## Expected (trích căn cứ)
 
@@ -35,11 +39,13 @@
 - CL-66 – căn cứ: FR-02.4 (README.md:44); FR-22.2 (README.md:253)
   - FR-02.4, README.md:44 (AI chép nguyên văn): Trường email phải dùng `type="email"` (có validate HTML5 format).
   - FR-22.2, README.md:253 (AI chép nguyên văn): Trường Email phải dùng `type="email"`.
-- Expected của bug: `<SV viết>`
+- Expected của bug: Ô Email tại trang Đăng nhập và bước 1 Quên mật khẩu phải có `type="email"`. Khi nhập email sai định dạng (ví dụ 'abc') rồi submit, form phải bị chặn ở frontend, có thông báo validate và không gửi request API lên server.
 
 ## Actual
 
-`<SV viết>`
+- Cả P1, P2 và P3 tại hai màn hình (/login và /forgot-password bước 1):
+  - Ô nhập Email khai báo `type="text"` thay vì `type="email"`.
+  - Khi nhập `abc` và bấm submit, hệ thống không có thông báo validate nào và vẫn gửi 1 request API lên server (`/api/login` tại Đăng nhập, `/api/forgot-password` tại Quên mật khẩu).
 
 ## Bằng chứng
 
@@ -78,7 +84,7 @@
 
 ### Nhận định
 
-`<SV viết>`
+Không kiểm tra định dạng email ở phía giao diện khiến các chuỗi không phải email vẫn phát sinh request gửi lên backend, gây lãng phí tài nguyên xử lý của server và không cảnh báo sớm cho người dùng (chưa kiểm chứng).
 
 ## Link GitHub Issue
 
