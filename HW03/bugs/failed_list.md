@@ -1,7 +1,7 @@
 # Danh sách Failed – T1 checklist C2 (sinh bằng `tools/failed_list_hw03.py` từ `checklist.json`)
 
 47 item Failed · ô Failed theo nền tảng: P1 46, P2 47, P3 44 (tổng 137).
-Đối chiếu `HW03/bugs/issues.json` (158 issue nhóm, tới #203) và BUG-01…57 HW02 của em: **trùng 14**, **trùng một phần 4** (màn còn lại là MỚI), **MỚI 28**; loại khỏi lập bug: CL-34 (quyết định 5/6a).
+Đối chiếu `HW03/bugs/issues.json` (179 issue nhóm, tới #224) và BUG-01…57 HW02 của em: **trùng 14**, **trùng một phần 4** (màn còn lại là MỚI), **MỚI 28**; loại khỏi lập bug: CL-34 (quyết định 5/6a).
 CL-30, CL-48 trên P3 = Blocked (T-P3: Playwright timeout) nên không còn trong danh sách.
 
 Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật; `auto` = lượt Playwright (P1 Chrome 157 tham chiếu – Q1; P2 Firefox 131 của Playwright; P3 Chrome Android thật). Đối chiếu trùng do AI làm theo tiêu đề issue + màn hình + notes; **SV xác nhận** trước khi viết BUG-58… (T1 bước 6). Mỗi item = một ứng viên bug, chưa phải bug.
