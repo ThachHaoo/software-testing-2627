@@ -1,0 +1,104 @@
+{
+  "phien": "S01",
+  "pilot": false,
+  "ngay": "2026-11-10",
+  "nguoi_tham_gia": "P01",
+  "nhom": null,
+  "nen_tang": "<SV điền>",
+  "reset_du_lieu": "<SV điền>",
+  "dong_y": {
+    "quay_man_hinh": true,
+    "ghi_am": true,
+    "lien_he_xac_nhan": true
+  },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Bấm đăng nhập mà thấy chữ đăng ký.",
+      "bug": null,
+      "nguon": "notes/S01.txt:1"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Mình nghĩ là cần thêm hình ảnh sinh động xí",
+      "bug": null,
+      "nguon": "notes/S01.txt:2"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Mình tự giảm số tiền khi checkout thì sao. Đã giảm tổng giá trị xuống 300000. Và nói mình chưa hiểu chỗ này lắm",
+      "bug": null,
+      "nguon": "notes/S01.txt:3"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Thêm giỏ hàng ở detail thì được, còn ở list thì không được.",
+      "bug": null,
+      "nguon": "notes/S01.txt:4"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Bạn ấy ngồi test hơi quá đà.",
+      "bug": null,
+      "nguon": "notes/S01.txt:5"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Đơn hàng đang ở trạng thái chờ xác nhận.",
+      "bug": null,
+      "nguon": "notes/S01.txt:6"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Fact: Bạn ngồi làm khách hàng gian lận",
+      "bug": null,
+      "nguon": "notes/S01.txt:7"
+    }
+  ],
+  "tro_giup": "<SV điền>",
+  "seq": 6,
+  "sus": [
+    2,
+    2,
+    4,
+    2,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3
+  ],
+  "cau_hoi_mo": {
+    "ro_rang": "không có",
+    "khoi_phuc_loi": "chưa thấy lỗi cản trở việc hoàn thành nhiệm vụ hệ thống, chỉ thấy lỗi ở bên logic, nên chắc không thể sửa",
+    "toc_do": "không có",
+    "tin_cay": "không, vì mình có thể trực tiếp chỉnh sửa giá đơn hàng khi thanh toán"
+  },
+  "ghi_chu": "Người tham gia gõ nhầm mã phiên trong form (\"SO1\", chữ O) – AI ghép vào S01.",
+  "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
+  "nghe_nghiep": "SWE",
+  "nghe_nghiep_nguon": "SV cung cấp"
+}
