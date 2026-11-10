@@ -119,6 +119,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 Claude Code (4/6c, Skill 1/3, 1/3b, report): R9/R11 áp bằng override `merge_hw03.py`; `merge_runs.py` bỏ `lech_auto_tay` khi quyết định làm tay = auto (nguyên nhân chuyển vào notes); chép skill sang `HW03/skills/` + `VideoLinks.md` + `demo_plan.md` (đề xuất demo); D1 sửa SKILL.md/`render_checklist.py`; `bugs/dup_check.md` (kiểm trùng 179 issue, AI đề xuất mức, SV quyết); `report_t1_hw03.py` thêm khối §3.3, §3.5 (thực thi), §3.6, §4.3; **AI nháp §3.2 và §4.2 của report** (dòng "📝 AI nháp – SV duyệt/sửa", chỉ dùng dữ kiện trong repo).
 - **Lỗi RUN.md do AI** (phát hiện 10/11 khi lập `missing_photos.md`): `gen_run.py` (AI viết, 3/6) ghi "ảnh tổng quan bắt buộc: `P<n>_M6_1.png`" cho nhóm M6, mâu thuẫn mục 2 của chính RUN.md (M1…M5) → sửa 4/6e.
 - 10/11 Claude Code (4/6e): sửa tiêu đề M6 (`RUN.md`, `gen_run.py`), bỏ tham chiếu `P3_CL-64_1.jpg` theo SV, ghi chú `P3_M4_1`; xem 5 ảnh P3_M* – chưa có overlay → dừng, chưa nén.
+- 10/11 Claude Code (4/6f): xem từng ảnh P3_M1_1…P3_M4_1 sau khi SV overlay (đủ overlay, URL localhost, không lộ thông tin riêng), nén bằng `tools/compress_hw03.py`, chạy lại report §4.3.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
