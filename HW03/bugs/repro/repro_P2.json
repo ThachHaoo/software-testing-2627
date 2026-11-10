@@ -1,0 +1,404 @@
+{
+ "project": "P2",
+ "run_at": "2026-11-10T13:30:48.060Z",
+ "bugs": {
+  "BUG-58": {
+   "login: Tab từ khi tải trang": "button'Sign In'@(449,425) → a'EShop'@(16,16) → a'Giỏ hàng'@(1032,20) → a'Đăng nhập'@(1112,20) → a'Đăng ký'@(1206,20) → input'text'@(449,241) → input'text'@(449,331) → a'Quên mật khẩu?'@(729,390) → a'Đăng ký ngay'@(658,482) → a'Đăng ký ngay'@(658,482) → a'Đăng ký ngay'@(658,482) → a'Đăng ký ngay'@(658,482) → a'Đăng ký ngay'@(658,482) → a'Đăng ký ngay'@(658,482) → a'Đăng ký ngay'@(658,482)",
+   "quên MK B2: Tab từ đầu trang": "input'text'@(449,301) → input'password'@(449,391) → button'Đặt lại mật khẩu'@(449,449) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505) → button'← Quay lại'@(449,505)"
+  },
+  "BUG-59": {
+   "title /login, /forgot-password, /profile": [
+    "frontend-web",
+    "frontend-web",
+    "frontend-web"
+   ]
+  },
+  "BUG-60": {
+   "<html lang>": "en"
+  },
+  "BUG-61": {
+   "document.querySelectorAll('h1').length": {
+    "/login": 0,
+    "/forgot-password": 0,
+    "/profile": 0
+   }
+  },
+  "BUG-62": {
+   "/login đúng Steps SV (chỉ nhập abc, Mật khẩu để trống)": {
+    "request": "0 request /api/login",
+    "validationMessage_o_Email": "",
+    "validationMessage_o_MatKhau": "Please fill out this field."
+   },
+   "/login (cô lập: có nhập Mật khẩu Test1234!)": {
+    "type": "text",
+    "request": "1 request /api/login",
+    "validationMessage": "",
+    "hop_thoai": [],
+    "chu_moi": [
+     "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+    ]
+   },
+   "/forgot-password": {
+    "type": "text",
+    "request": "1 request /api/forgot-password",
+    "validationMessage": "",
+    "hop_thoai": [
+     "Lỗi: User not found"
+    ],
+    "chu_moi": []
+   }
+  },
+  "BUG-63": {
+   "nhãn /login": [
+    "Username",
+    "Mật khẩu"
+   ],
+   "nhãn quên MK B1": [
+    "Nhập Email của bạn"
+   ],
+   "nhãn quên MK B2": [
+    "Mã OTP (4 số)",
+    "Mật khẩu mới"
+   ],
+   "nhãn /profile": [
+    "Email (Không đổi)",
+    "Họ Tên",
+    "Số điện thoại",
+    "Địa chỉ giao hàng"
+   ],
+   "giá trị ban đầu Hồ sơ (sau restart)": [
+    "Test User",
+    "",
+    ""
+   ],
+   "xoá trống từng trường (các trường khác giữ nguyên) → Cập nhật": {
+    "Họ Tên": {
+     "hop_thoai": [],
+     "validationMessage": "Please fill out this field.",
+     "request_PUT": 0
+    },
+    "Số điện thoại": {
+     "hop_thoai": [
+      "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
+     ],
+     "validationMessage": "",
+     "request_PUT": 0
+    },
+    "Địa chỉ giao hàng": {
+     "hop_thoai": [
+      "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
+     ],
+     "validationMessage": "",
+     "request_PUT": 0
+    }
+   }
+  },
+  "BUG-64": {
+   "quên MK B2: OTP đúng + mật khẩu '123'": {
+    "hop_thoai": [
+     "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."
+    ],
+    "chu_moi_trong_trang": []
+   },
+   "Hồ sơ: SĐT '123' → Cập nhật": {
+    "hop_thoai": [
+     "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
+    ],
+    "chu_moi_trong_trang": []
+   }
+  },
+  "BUG-65": {
+   "phần tử đang focus sau khi bấm nhãn": {
+    "/login \"Username\"": "body",
+    "/login \"Mật khẩu\"": "body",
+    "/profile \"Họ Tên\"": "body",
+    "/profile \"Số điện thoại\"": "body",
+    "/profile \"Địa chỉ giao hàng\"": "body"
+   }
+  },
+  "BUG-66": {
+   "B1: chữ dạng \"Bước x / y\" trong trang": "không có",
+   "B2: chữ dạng \"Bước x / y\" trong trang": "không có"
+  },
+  "BUG-67": {
+   "B1: link/nút trong vùng nội dung": [
+    "Lấy mã OTP"
+   ],
+   "B1: có chữ \"Quay lại đăng nhập\"": false
+  },
+  "BUG-68": {
+   "B2: nhãn + type các ô nhập": [
+    "Mã OTP (4 số) [text]",
+    "Mật khẩu mới [password]"
+   ]
+  },
+  "BUG-69": {
+   "B2: dòng chứa mã OTP": "Mã OTP của bạn là: 1875",
+   "số chữ số của mã": 4
+  },
+  "BUG-70": {
+   "B2 Abcdef1!": {
+    "hop_thoai": [
+     "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."
+    ],
+    "request_reset_password": 0,
+    "url_sau": "/forgot-password"
+   },
+   "đăng nhập bằng Abcdef1!": {
+    "url_sau": "/login",
+    "chu_trong_trang": [
+     "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+    ]
+   }
+  },
+  "BUG-71": {
+   "'Đặt lại mật khẩu'": {
+    "background-color": "rgb(22, 163, 74)",
+    "color": "rgb(255, 255, 255)",
+    "width": "382px",
+    "height": "40px",
+    "border-top-style": "solid",
+    "border-top-color": "rgb(229, 231, 235)",
+    "font-weight": "400",
+    "border-radius": "4px"
+   },
+   "'← Quay lại'": {
+    "background-color": "rgb(22, 163, 74)",
+    "color": "rgb(255, 255, 255)",
+    "width": "382px",
+    "height": "40px",
+    "border-top-style": "solid",
+    "border-top-color": "rgb(229, 231, 235)",
+    "font-weight": "400",
+    "border-radius": "4px"
+   }
+  },
+  "BUG-72": {
+   "Steps SV": {
+    "nhap": {
+     "phone": "912345678"
+    },
+    "hop_thoai": [
+     "Cập nhật thành công!"
+    ],
+    "request_users_me_sau_bam": 1,
+    "navbar_khong_tai_lai": "EShop | Giỏ hàng | Chào, Test User | Thoát",
+    "sau_F5": [
+     "Test User",
+     "912345678",
+     ""
+    ],
+    "navbar_sau_F5": "EShop | Giỏ hàng | Chào, Test User | Thoát"
+   }
+  },
+  "BUG-73": {
+   "Steps SV (SĐT 0912345678)": {
+    "nhap": {
+     "name": "Test Repro",
+     "phone": "0912345678",
+     "addr": "1 Repro, Q1"
+    },
+    "hop_thoai": [
+     "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
+    ],
+    "request_users_me_sau_bam": 0,
+    "navbar_khong_tai_lai": "EShop | Giỏ hàng | Chào, Test User | Thoát",
+    "sau_F5": [
+     "Test User",
+     "",
+     ""
+    ],
+    "navbar_sau_F5": "EShop | Giỏ hàng | Chào, Test User | Thoát"
+   },
+   "(cô lập) cùng thao tác, SĐT 912345678": {
+    "nhap": {
+     "name": "Test Repro",
+     "phone": "912345678",
+     "addr": "1 Repro, Q1"
+    },
+    "hop_thoai": [
+     "Cập nhật thành công!"
+    ],
+    "request_users_me_sau_bam": 1,
+    "navbar_khong_tai_lai": "EShop | Giỏ hàng | Chào, Test User | Thoát",
+    "sau_F5": [
+     "Test Repro",
+     "912345678",
+     "1 Repro, Q1"
+    ],
+    "navbar_sau_F5": "EShop | Giỏ hàng | Chào, Test Repro | Thoát"
+   }
+  },
+  "BUG-74": {
+   "navbar sau đăng nhập": "EShop | Giỏ hàng | Chào, Test User | Thoát"
+  },
+  "BUG-75": {
+   "Steps SV (chỉ đổi Họ Tên = 'Test Đổi')": {
+    "nhap": {
+     "name": "Test Đổi"
+    },
+    "hop_thoai": [
+     "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
+    ],
+    "request_users_me_sau_bam": 0,
+    "navbar_khong_tai_lai": "EShop | Giỏ hàng | Chào, Test User | Thoát",
+    "sau_F5": [
+     "Test User",
+     "",
+     ""
+    ],
+    "navbar_sau_F5": "EShop | Giỏ hàng | Chào, Test User | Thoát"
+   },
+   "(cô lập) Họ Tên 'Test Đổi' + SĐT 912345678": {
+    "nhap": {
+     "name": "Test Đổi",
+     "phone": "912345678"
+    },
+    "hop_thoai": [
+     "Cập nhật thành công!"
+    ],
+    "request_users_me_sau_bam": 1,
+    "navbar_khong_tai_lai": "EShop | Giỏ hàng | Chào, Test User | Thoát",
+    "sau_F5": [
+     "Test Đổi",
+     "912345678",
+     ""
+    ],
+    "navbar_sau_F5": "EShop | Giỏ hàng | Chào, Test Đổi | Thoát"
+   }
+  },
+  "BUG-76": {
+   "URL sau 1,5 s": "/profile",
+   "chữ trong main": "Vui lòng đăng nhập",
+   "link/nút tới Đăng nhập trong main": 0
+  },
+  "BUG-77": {
+   "nội dung main": "",
+   "link về '/' trong main": 0
+  },
+  "BUG-81": {
+   "seed_orders.py": [
+    "#1\tChờ xác nhận\r",
+    "#2\tĐã xác nhận\r",
+    "#3\tĐang giao\r",
+    "#4\tĐã giao\r",
+    "#5\tĐã hủy\r",
+    "#6\tChờ xác nhận – dùng cho CL-60\r",
+    "#7\tChờ xác nhận – dùng cho CL-61"
+   ],
+   "các dòng đơn": [
+    "#7 Chờ xác nhận: nút \"Hủy đơn\" disabled=false",
+    "#6 Chờ xác nhận: nút \"Hủy đơn\" disabled=false",
+    "#5 Đã hủy: nút không có",
+    "#4 Đã giao: nút không có",
+    "#3 Đang giao: nút \"Hủy đơn\" disabled=false",
+    "#2 Đã xác nhận: nút \"Hủy đơn\" disabled=false",
+    "#1 Chờ xác nhận: nút \"Hủy đơn\" disabled=false"
+   ],
+   "bấm 'Hủy đơn' ở dòng Đang giao": {
+    "hop_thoai": [
+     "Hủy đơn thành công!"
+    ],
+    "trang_thai_don_sau_bam_API": [
+     "#7 pending",
+     "#6 pending",
+     "#5 canceled",
+     "#4 delivered",
+     "#3 canceled",
+     "#2 confirmed",
+     "#1 pending"
+    ]
+   }
+  },
+  "BUG-79": {
+   "cách giảm tốc": "route trễ 3000 ms cho request chứa \"/api/orders\" (thay cho Slow 3G)",
+   "chuỗi trạng thái khối Lịch sử đơn khi tải lại": [
+    "(chưa có khối)",
+    "rỗng: \"Bạn chưa có đơn hàng nào.\"",
+    "bảng đơn"
+   ]
+  },
+  "BUG-80": {
+   "ngày đặt (navigator.language = en-US)": "11/10/2026",
+   "ngày đặt (context locale vi-VN, navigator.language = vi-VN)": "10/11/2026"
+  },
+  "BUG-82": {
+   "Autofill": "không chạy được bằng Playwright (profile trình duyệt sạch, không có dữ liệu Autofill đã lưu) – cần chạy tay",
+   "Paste": "Firefox Playwright không cấp quyền clipboard – không chạy"
+  },
+  "BUG-83": {
+   "phần tử đang focus sau submit lỗi": {
+    "Đăng nhập (mật khẩu 'Wrong123!')": "button \"Sign In\"",
+    "Đăng nhập – chữ báo lỗi": "Đăng nhập thất bại. Vui lòng kiểm tra lại.",
+    "Quên MK B2 (mật khẩu '123')": "button \"Đặt lại mật khẩu\" · hộp thoại [\"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"]",
+    "Hồ sơ (SĐT '123')": "button \"Cập nhật\" · hộp thoại [\"Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.\"]"
+   }
+  },
+  "BUG-84": {
+   "/login: phần tử chữ < 4.5:1": [
+    "\"Quên mật khẩu?\" rgb(59, 130, 246) / rgb(255, 255, 255) = 3.68"
+   ],
+   "/forgot-password: phần tử chữ < 4.5:1": [],
+   "/profile: phần tử chữ < 4.5:1": [
+    "\"Chào, Test User\" rgb(253, 224, 71) / rgb(37, 99, 235) = 3.92",
+    "\"Thoát\" rgb(255, 255, 255) / rgb(239, 68, 68) = 3.76",
+    "\"Hủy đơn\" rgb(255, 255, 255) / rgb(239, 68, 68) = 3.76",
+    "\"Hủy đơn\" rgb(255, 255, 255) / rgb(239, 68, 68) = 3.76",
+    "\"Hủy đơn\" rgb(255, 255, 255) / rgb(239, 68, 68) = 3.76",
+    "\"Hủy đơn\" rgb(255, 255, 255) / rgb(239, 68, 68) = 3.76"
+   ],
+   "ghi chú": "đo bằng màu tính toán (computed color, nền = nền không trong suốt gần nhất), không phải Lighthouse; placeholder không đo"
+  },
+  "BUG-85": {
+   "boundingBox (CSS px)": {
+    "Sign In": "382×40",
+    "Quên mật khẩu?": "102×19",
+    "Đăng ký ngay": "85×19",
+    "Lấy mã OTP": "382×40",
+    "Cập nhật": "271×40"
+   }
+  },
+  "BUG-78": {
+   "Đăng nhập: bấm Sign In 3 lần khi mạng chậm": {
+    "cach_giam_toc": "route trễ 3000 ms cho request chứa \"/api/login\" (thay cho Slow 3G)",
+    "nhan_truoc": "Sign In",
+    "ngay_sau_lan_1": {
+     "disabled": false,
+     "text": "Sign In"
+    },
+    "request_api_login": 3
+   },
+   "Quên MK B1: nhấp đúp 'Lấy mã OTP'": {
+    "request_api_forgot_password": 2
+   },
+   "Quên MK B2: nhấp đúp 'Đặt lại mật khẩu' (Abcdef1!)": {
+    "request_api_reset_password": 0,
+    "hop_thoai": [
+     "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.",
+     "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT."
+    ]
+   },
+   "Hồ sơ: nhấp đúp 'Cập nhật' – Steps SV (SĐT 0912345678)": {
+    "request_users_me": 0,
+    "hop_thoai": [
+     "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.",
+     "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
+    ]
+   },
+   "Hồ sơ: nhấp đúp 'Cập nhật' – (cô lập) SĐT 912345678": {
+    "request_users_me": 2,
+    "hop_thoai": [
+     "Cập nhật thành công!",
+     "Cập nhật thành công!"
+    ]
+   },
+   "(cô lập) Quên MK B2: nhấp đúp với 'Abcd efg1'": {
+    "request_api_reset_password": 2,
+    "hop_thoai": [
+     "Đổi mật khẩu thành công!",
+     "Mã OTP không đúng hoặc có lỗi xảy ra."
+    ]
+   }
+  }
+ }
+}
