@@ -67,7 +67,7 @@ Trang web thiếu thẻ `<h1>` làm giảm tính tiếp cận (Accessibility) đ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/249
 
 ---
 

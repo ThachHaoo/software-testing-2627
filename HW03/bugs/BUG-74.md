@@ -68,7 +68,7 @@ Nhãn của nút đăng xuất không tuân thủ chính xác quy định FR-23.
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/256
 
 ---
 

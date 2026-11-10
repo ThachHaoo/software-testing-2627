@@ -68,7 +68,7 @@ Việc thiếu ô nhập Xác nhận mật khẩu mới làm tăng rủi ro ngư
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/253
 
 ---
 

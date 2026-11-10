@@ -66,7 +66,7 @@ Người dùng sẽ gặp khó khăn trong việc nhận diện và điều hư�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/247
 
 ---
 

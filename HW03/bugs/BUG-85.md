@@ -70,7 +70,7 @@ Chiều cao vùng tương tác của các liên kết 'Quên mật khẩu?' và 
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/260
 
 ---
 

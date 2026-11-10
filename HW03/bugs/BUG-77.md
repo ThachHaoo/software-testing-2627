@@ -66,7 +66,7 @@ Giao diện vùng nội dung bị rỗng khi người dùng gõ sai đường d�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/257
 
 ---
 

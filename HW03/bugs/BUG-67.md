@@ -67,7 +67,7 @@ Người dùng khi đổi ý hoặc lỡ bấm nhầm vào màn hình Quên mậ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/252
 
 ---
 

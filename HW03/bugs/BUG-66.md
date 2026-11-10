@@ -70,7 +70,7 @@ Người dùng không nhận biết được vị trí tiến trình hiện tạ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/251
 
 ---
 

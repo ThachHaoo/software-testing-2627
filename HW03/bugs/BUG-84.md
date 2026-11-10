@@ -71,7 +71,7 @@ Màu chữ và nhãn trên trang Đăng nhập và Hồ sơ không đạt độ 
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/259
 
 ---
 

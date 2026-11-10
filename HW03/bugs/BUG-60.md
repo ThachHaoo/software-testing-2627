@@ -67,7 +67,7 @@ Trình đọc màn hình (screen reader) hỗ trợ tiếp cận người dùng 
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/248
 
 ---
 

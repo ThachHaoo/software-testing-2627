@@ -70,7 +70,7 @@ Nhãn không liên kết với ô nhập làm giảm tiện ích thao tác, gây
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/250
 
 ---
 

@@ -68,7 +68,7 @@ Mã OTP chỉ gồm 4 chữ số làm giảm độ an toàn bảo mật của t�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/254
 
 ---
 
