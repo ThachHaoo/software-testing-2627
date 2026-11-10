@@ -21,19 +21,21 @@ AUTO_ENV = {"P1": "Chrome 157 qua Playwright (Q1: P1 chính thức là Cốc C�
 LOCALE = "auto ép locale vi-VN (playwright.config) nên hiện \"6.000.000 ₫\"; trình duyệt thật của SV theo locale máy hiện \"6,000,000 ₫\""
 CAUSE = {  # nguyên nhân lệch, dữ kiện từ run_check.md mục 1c (L1–L8)
     ("CL-08", "P2"): LOCALE, ("CL-08", "P3"): LOCALE,
-    ("CL-09", "P1"): "cả hai cùng thấy \"9/11/2026\" (ảnh P1_CL-09_1); khác ở cách chấm ngưỡng dd/mm/yyyy (run_check R11)",
+    ("CL-09", "P1"): "cả hai cùng thấy \"9/11/2026\" (ảnh P1_CL-09_1); khác ở cách chấm ngưỡng dd/mm/yyyy (run_check R11) – SV chốt R11=b: Failed (override)",
     ("CL-11", "P1"): "auto so toạ độ, bố cục 2 cột nên 'Cập nhật' → 'Hủy đơn' bị tính là nhảy ngược; SV đọc chuỗi Tab theo cột/hàng",
     ("CL-11", "P2"): "auto so toạ độ, bố cục 2 cột nên 'Cập nhật' → 'Hủy đơn' bị tính là nhảy ngược; SV đọc chuỗi Tab theo cột/hàng",
     ("CL-15", "P1"): "auto đo ở viewport 375 px: scrollWidth 381 > 375; lượt tay không đo ở đúng 375 px (ảnh chụp cửa sổ hẹp, không thấy thanh cuộn)",
     ("CL-15", "P2"): "auto đo ở viewport 375 px: scrollWidth 382 > 375; lượt tay không đo ở đúng 375 px (ảnh chụp cửa sổ hẹp, không thấy thanh cuộn)",
     ("SV-02", "P1"): "auto chỉ kiểm vế dán (Ctrl+V); vế autofill kiểm tay",
 }
-# Quyết định 5/6a (report_plan mục e: T-P3, CL-34, CL-52 P3). Áp sau cùng → chạy lại script vẫn giữ.
+# Quyết định 5/6a (report_plan mục e: T-P3, CL-34, CL-52 P3) và 4/6c (R9, R11). Áp sau cùng → chạy lại script vẫn giữ.
 # ket_qua: đổi kết quả; them: nối vào notes (không sửa chữ SV); lap_bug False: loại khỏi danh sách lập bug.
 OVERRIDE = {
     ("CL-30", "P3"): {"ket_qua": "Blocked", "them": "Blocked (T-P3): Playwright TimeoutError, không có assertion fail – không lập bug", "lap_bug": False},
     ("CL-48", "P3"): {"ket_qua": "Blocked", "them": "Blocked (T-P3): Playwright TimeoutError, không có assertion fail – không lập bug", "lap_bug": False},
     ("CL-34", "P2"): {"them": "chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật – không lập bug (5/6a)", "lap_bug": False},
+    ("CL-08", "P1"): {"ket_qua": "Failed", "them": "SV chốt R9=b: Expected \"cùng một kiểu phân cách trên cả 3 nền tảng\" áp cho cả P1; P1 hiện \"30.000.000 ₫\", P2/P3 hiện \"6,000,000 ₫\" → kiểu phân cách khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R9, SV có thể sửa)"},
+    ("CL-09", "P1"): {"ket_qua": "Failed", "them": "SV chốt R11=b: Expected \"dd/mm/yyyy và giống nhau trên P1, P2, P3\" áp cho cả P1; ảnh P1_CL-09_1 hiện \"9/11/2026\" (ngày 1 chữ số, không phải dd/mm/yyyy), P2/P3 hiện \"11/9/2026\" → khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R11, SV có thể sửa)"},
     ("CL-52", "P3"): {"them": "thiếu ảnh (ảnh P3_CL-52_1 chỉ thấy \"Đăng nhập thất bại\", không thấy trạng thái khoá) – 5/6a"},
 }
 

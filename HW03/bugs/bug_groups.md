@@ -26,7 +26,7 @@ Sinh bằng `tools/bug_groups_hw03.py` từ `checklist.json` + `failed_list.md`.
 | G-20 | `BUG-77.md` | URL không tồn tại: vùng nội dung trống, không có link về trang chủ | CL-50 | P1, P2, P3 | – |
 | G-21 | `BUG-78.md` | Nút submit không khoá / không có chỉ báo khi bấm nhiều lần (Đăng nhập, Quên MK B1/B2, Hồ sơ) | CL-53, SV-06 | P1, P2, P3 | – |
 | G-22 | `BUG-79.md` | Lịch sử đơn: không có trạng thái đang tải | CL-63 | P1, P2, P3 | – |
-| G-23 | `BUG-80.md` | Lịch sử đơn: Ngày đặt khác định dạng giữa các nền tảng | CL-09 | P2, P3 | – |
+| G-23 | `BUG-80.md` | Lịch sử đơn: Ngày đặt khác định dạng giữa các nền tảng | CL-09 | P1, P2, P3 | – |
 | G-24 | `BUG-81.md` | Lịch sử đơn: nút 'Hủy đơn' dùng được ở đơn đang giao | CL-59 | P1, P2, P3 | – |
 | G-25 | `BUG-82.md` | Autofill của trình duyệt không điền được (dán được) | SV-02 | P1, P2, P3 | – |
 | G-26 | `BUG-83.md` | Submit thất bại: focus không về ô lỗi | SV-03 | P1, P2, P3 | – |
@@ -289,6 +289,7 @@ Sinh bằng `tools/bug_groups_hw03.py` từ `checklist.json` + `failed_list.md`.
 
 - Căn cứ: Nielsen #4 (nhất quán và chuẩn); SRS im lặng → giả định GA1
 - Expected (chép): Ngày đặt hiển thị dạng dd/mm/yyyy và giống nhau trên P1, P2, P3. Fail nếu định dạng khác (mm/dd/yyyy, yyyy-mm-dd) hoặc khác nhau giữa các nền tảng.
+- Actual P1 (tay): [SV chốt R11=b: Expected "dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1; ảnh P1_CL-09_1 hiện "9/11/2026" (ngày 1 chữ số, không phải dd/mm/yyyy), P2/P3 hiện "11/9/2026" → khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R11, SV có thể sửa)] · ảnh: `evidence/P1_chrome/P1_CL-09_1.png`
 - Actual P2 (tay): Sử dụng định dạng mm/dd/yyyy thay vì dd/mm/yyyy của người Việt · ảnh: `evidence/P2_firefox/P2_CL-09_1.png`
 - Actual P3 (tay): Sử dụng định dạng mm/dd/yyyy thay vì dd/mm/yyyy của người Việt · ảnh: `evidence/P3_android/P3_CL-09_1.png`
 

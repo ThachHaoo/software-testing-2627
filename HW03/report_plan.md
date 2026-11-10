@@ -90,6 +90,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | CL52-P3 | CL-52 P3: notes ghi "thiếu ảnh" (ảnh `P3_CL-52_1` chỉ thấy "Đăng nhập thất bại", không thấy trạng thái khoá) (5/6a) |
 | G-SV | SV chốt nhóm bug (5/6b): tách G-02 cũ (CL-13, CL-14) và G-23 cũ (CL-08, CL-09); G-13 giữ gộp; CL-04, CL-08, CL-40, CL-60, CL-62 trùng #160, #170, #169, #165, #167 → bỏ khung. Còn 28 nhóm → BUG-58…85 |
 | U-R | T2 chạy **remote synchronous moderated** qua Google Meet (người tham gia dùng máy tính của mình, chia sẻ màn hình, think-aloud; quay Game Bar/OBS khi đồng ý). SUT công khai tạm thời qua Cloudflare quick tunnel, nhánh local `usability-tunnel` của eshop-sut (chỉ đổi URL API sang `/api` + Vite proxy), không push (10/11) |
+| R9 | CL-08 P1 = **Failed** (4/6c, 10/11): Expected "cùng một kiểu phân cách trên cả 3 nền tảng" áp cho cả P1 ("30.000.000 ₫" ≠ "6,000,000 ₫" P2/P3); lý do lấy từ khuyến nghị run_check R9, SV có thể sửa. Áp bằng override `tools/merge_hw03.py`, không sửa file lượt tay. CL-08 trùng #170 → không khung bug |
+| R11 | CL-09 P1 = **Failed** (4/6c, 10/11): Expected "dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1 ("9/11/2026" ≠ "11/9/2026" P2/P3); L1 đóng. Hệ quả: G-23/`BUG-80` thêm nền tảng P1 (khung BUG-80 chưa sửa – chờ SV) |
 
 **Còn chờ SV chốt:** (không còn)
 

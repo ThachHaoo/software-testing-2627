@@ -35,9 +35,9 @@ AI kiểm ngày 10/11/2026: đã xem từng ảnh trong `evidence/P1_chrome` (34
 | R6 | P3 | OS ghi "Android 12"; `adb getprop ro.build.version.release` = **14** (env/environment.md) | SV kiểm lại |
 | R7 | P2, P3 | Tên file thiếu đuôi `.md` (`P2_manual_20261110-0010`, `P3_manual_20261110_0046`; P3 dùng "_" thay "-") | AI đổi tên khi commit (nội dung không đổi) |
 | R8 | cả 3 | "Mã đơn (seed_orders.py)" trống; bảng "Ảnh tổng quan Task 3" trống | SV điền, hoặc AI điền bảng ảnh sau khi chốt B2/B3 |
-| R9 | P1 | **CL-08 Passed** trong khi P2, P3 Failed vì phân cách khác ("30.000.000 ₫" trên P1 so với "6,000,000 ₫" trên P2/P3). Expected: "cùng một kiểu phân cách trên cả 3 nền tảng… Fail nếu… kiểu phân cách khác nhau giữa các nền tảng" → vế này áp dụng cho cả P1 | SV xem lại verdict P1 |
+| R9 | P1 | **CL-08 Passed** trong khi P2, P3 Failed vì phân cách khác ("30.000.000 ₫" trên P1 so với "6,000,000 ₫" trên P2/P3). Expected: "cùng một kiểu phân cách trên cả 3 nền tảng… Fail nếu… kiểu phân cách khác nhau giữa các nền tảng" → vế này áp dụng cho cả P1 | **Đã chốt (4/6c): SV chọn b → P1 Failed** (override trong `tools/merge_hw03.py`, không sửa file lượt tay) |
 | R10 | P2, P3 | CL-08 notes "phân cách hàng nghìn lại dùng ','": Expected **chấp nhận** dấu phẩy ("vd 30.000.000 ₫ hoặc 30,000,000 ₫"); lý do Fail đúng theo Expected là *khác kiểu giữa nền tảng*, không phải *dùng dấu phẩy* | SV chỉnh câu notes (lý do) |
-| R11 | P1 | **CL-09 Passed**, nhưng ảnh `P1_CL-09_1` hiện "9/11/2026" (ngày 1 chữ số, không phải dd/mm/yyyy) và khác P2/P3 ("11/9/2026"). Expected: "dd/mm/yyyy và giống nhau trên P1, P2, P3" | SV xem lại verdict P1 |
+| R11 | P1 | **CL-09 Passed**, nhưng ảnh `P1_CL-09_1` hiện "9/11/2026" (ngày 1 chữ số, không phải dd/mm/yyyy) và khác P2/P3 ("11/9/2026"). Expected: "dd/mm/yyyy và giống nhau trên P1, P2, P3" | **Đã chốt (4/6c): SV chọn b → P1 Failed** (override trong `tools/merge_hw03.py`, không sửa file lượt tay) |
 | R12 | P1 | SV-02 notes "Autofill chỉ có ở Forgot Password": Expected Fail khi autofill "bị hệ thống ngăn chặn/làm sai lệch". Notes chưa nói hệ thống chặn hay trình duyệt không gợi ý | SV ghi rõ (không chặn gộp) |
 
 Không có item nào thiếu kết quả: P1 15/15, P2 15/15, P3 13/13 so với template.
@@ -48,7 +48,7 @@ Lượt auto: `P1_auto_20261109-2236.json` (Chrome 157), `P2_auto_20261109-2240.
 
 | # | Item | Nền tảng | Manual | Auto | Số đo auto (notes) | Ghi chú AI | Verdict SV |
 |---|---|---|---|---|---|---|---|
-| L1 | CL-09 | P1 | Pass | Failed | "không phải dd/mm/yyyy: 9/11/2026" | Ảnh manual cũng là "9/11/2026" (xem R11) | CHỜ SV |
+| L1 | CL-09 | P1 | Pass | Failed | "không phải dd/mm/yyyy: 9/11/2026" | Ảnh manual cũng là "9/11/2026" (xem R11) | **Đã chốt: Failed (R11=b)** |
 | L2 | CL-11 | P1 | Pass | Failed | "nhảy ngược theo toạ độ: 'Cập nhật'(169,557) → 'Hủy đơn'(1010,203)" | Bố cục 2 cột: theo che_do_ghi_chu, SV đọc chuỗi Tab để xác nhận "cùng hàng" | CHỜ SV |
 | L3 | CL-11 | P2 | Pass | Failed | "'Cập nhật'(169,553) → 'Hủy đơn'(1009,204)" | như L2 | CHỜ SV |
 | L4 | CL-15 | P1 | Pass | Failed | "thanh cuộn ngang toàn trang (381 > 375)" | Ảnh manual P1 chụp cửa sổ hẹp, không thấy thanh cuộn ngang | CHỜ SV |

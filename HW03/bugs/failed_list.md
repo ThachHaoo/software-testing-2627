@@ -1,6 +1,6 @@
 # Danh sách Failed – T1 checklist C2 (sinh bằng `tools/failed_list_hw03.py` từ `checklist.json`)
 
-47 item Failed · ô Failed theo nền tảng: P1 44, P2 47, P3 44 (tổng 135).
+47 item Failed · ô Failed theo nền tảng: P1 46, P2 47, P3 44 (tổng 137).
 Đối chiếu `HW03/bugs/issues.json` (158 issue nhóm, tới #203) và BUG-01…57 HW02 của em: **trùng 14**, **trùng một phần 4** (màn còn lại là MỚI), **MỚI 28**; loại khỏi lập bug: CL-34 (quyết định 5/6a).
 CL-30, CL-48 trên P3 = Blocked (T-P3: Playwright timeout) nên không còn trong danh sách.
 
@@ -13,8 +13,8 @@ Cột *kết quả từ*: `tay` = lượt chạy tay trên trình duyệt thật
 | 3 | CL-03 | Đăng nhập | Tiêu đề trang mô tả đúng chức năng Đăng nhập | P1, P2, P3 | auto | trùng #9 | tiêu đề form Đăng nhập là "Đăng Ký" |
 | 4 | CL-04 | Tất cả màn C2 | Nút hành động tích cực màu xanh dương | P1, P2, P3 | auto | trùng #160 | SV chốt trùng (5/6b): #160 nút tích cực màu xanh lá |
 | 5 | CL-06 | Quên mật khẩu (bước 2) | Nút chính và nút phụ phân biệt được bằng hình thức | P1, P2, P3 | tay | **MỚI** |  |
-| 6 | CL-08 | Lịch sử đơn | Tổng tiền dùng ký hiệu ₫ và phân cách hàng nghìn | P2, P3 | tay | trùng #170 (BUG-24) | SV chốt trùng (5/6b): #170 định dạng tiền |
-| 7 | CL-09 | Lịch sử đơn | Ngày đặt hiển thị nhất quán theo định dạng Việt Nam | P2, P3 | tay | **MỚI** |  |
+| 6 | CL-08 | Lịch sử đơn | Tổng tiền dùng ký hiệu ₫ và phân cách hàng nghìn | P1, P2, P3 | tay | trùng #170 (BUG-24) | SV chốt trùng (5/6b): #170 định dạng tiền |
+| 7 | CL-09 | Lịch sử đơn | Ngày đặt hiển thị nhất quán theo định dạng Việt Nam | P1, P2, P3 | tay | **MỚI** |  |
 | 8 | CL-10 | Đăng nhập | Thứ tự Tab theo vị trí hiển thị (trên→dưới, trái→phải) | P1, P2 | auto | **MỚI** |  |
 | 9 | CL-12 | Quên mật khẩu (bước 2) | Thứ tự Tab ở bước 2 theo vị trí hiển thị (trên→dưới, trái→phải) | P1, P2 | auto | **MỚI** |  |
 | 10 | CL-13 | Tất cả màn C2 | Tiêu đề tab trình duyệt mô tả trang | P1, P2, P3 | auto | **MỚI** |  |
