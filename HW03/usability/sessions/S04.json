@@ -201,7 +201,7 @@
     "toc_do": "Bước chỉnh giá để rồi phải xác nhận xem đơn hàng có hợp lệ không",
     "tin_cay": "Vì có nút chỉnh tổng thanh toán cuối cùng nên số tiền thanh toán sẽ bị sai lệch, còn bước nhập voucher và tiền giảm giá khá chính xác"
   },
-  "ghi_chu": "",
+  "ghi_chu": "Dòng notes \"Nhắc lại nhiệm vụ.\": nhắc lại đề bài, không gợi ý thao tác, không tính trợ giúp (SV chốt).",
   "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
   "nghe_nghiep": "Tự động hoá",
   "nghe_nghiep_nguon": "SV cung cấp"
