@@ -4385,11 +4385,406 @@ on_stop.py --manual. Báo cáo ≤ 4 dòng. Nhắc tôi push.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã thêm bài học vào `CLAUDE.md` gốc và bổ sung `HARNESS_SETUP.md` mục 6, đã commit.
+
+### Báo cáo cho phiên thảo luận
+- `CLAUDE.md` gốc: thêm mục 6 "Bài học kỹ thuật" (11 dòng, tổng file 124 dòng). Ngoài danh sách của lệnh, em thêm 2 ý gặp trong phiên này: file `.ps1` có tiếng Việt phải lưu UTF-8 có BOM và `param()` phải đứng đầu file; `_android` phải dùng tab có sẵn.
+- `HARNESS_SETUP.md` mục 6: thêm bước 7–9 (hỏi deadline thật và trình duyệt/thiết bị thật; chốt quy tắc ảnh trước lượt chạy tay; khung cho SV điền sinh từ schema/check script). Bước prompt log cũ chuyển thành bước 10.
+- Commit: `a46ea4d` harness: bài học từ HW03. Prompt log 91 lượt, git status sạch.
+
+Bạn nhớ push nhé: `git push`.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 91 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 83 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).
+## #92 | 18:24 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: chuẩn bị phần Skill để nộp HW03. Không push, không amend.
+1. Chép .claude/skills/gui-checklist-testing và .claude/skills/usability-evaluation → HW03/skills/ (giữ cấu trúc). Kiểm mỗi skill tự đủ: mọi script SKILL.md gọi tới nằm trong scripts/ của skill, không trỏ tools/*_hw03.py; thiếu thì liệt kê, KHÔNG tự sửa.
+2. Tạo HW03/skills/VideoLinks.md: 2 dòng, link = `<SV điền>`; ghi chú usability-evaluation "chưa dùng trên phiên thật".
+3. Đề xuất phạm vi demo video cho gui-checklist-testing (1 màn nhỏ, chạy được trong ≤ 10 phút, nhánh tạm demo-video, không freeze vào ai-outputs): chỉ liệt kê bước + lệnh, ghi ra HW03/skills/demo_plan.md (file này export-ignore).
+Commit `HW03[Skill] 1/3: chép skill + VideoLinks`.
+Báo cáo ≤ 12 dòng: file chép, script thiếu (nếu có), tóm tắt demo_plan, hash.
+```
+
+**Output:**
+```
+Đang chép skill, kiểm tham chiếu script xong; giờ tạo file và commit.
+
+Sửa demo_plan: Quên mật khẩu nằm trong C2 → đổi sang màn Đăng ký, rồi commit.
+
+Xong. Đã chép 2 skill vào `HW03/skills/`, tạo `VideoLinks.md` và `demo_plan.md`, commit `fcab9e1`. Không push, không amend.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: chép skill vào `HW03/skills/`, tạo `VideoLinks.md`, đề xuất phạm vi demo video.
+- File đã tạo/sửa: `HW03/skills/gui-checklist-testing/` (13 file, không lấy `__pycache__`), `HW03/skills/usability-evaluation/` (12 file); `diff -r` so với `.claude/skills` không khác gì. Thêm `HW03/skills/VideoLinks.md` (2 link `<SV điền>`, usability ghi "chưa dùng trên phiên thật") và `HW03/skills/demo_plan.md`. Thêm dòng `skills/demo_plan.md export-ignore` vào `HW03/.gitattributes`; `git archive` đã loại file này. Xoá `.gitkeep`.
+- Script thiếu: không có. Mọi script mà `SKILL.md` gọi để chạy đều nằm trong `scripts/`, script trong đó chỉ gọi nhau trong cùng thư mục. Có 4 chỗ ngoài skill, chưa sửa:
+  - `gui-checklist-testing/SKILL.md:48-49` nhắc `gen_oracle.py`, `gen_run.py` ở `HW03/tests/`. Đây là phần chế độ Playwright (tuỳ chọn), skill không kèm 2 script này nên chế độ đó chưa tự đủ.
+  - `gui-checklist-testing/SKILL.md:82` nhắc `tools/*_hw03.py`. Chỉ là ví dụ wrapper, không bắt buộc.
+  - `usability-evaluation/SKILL.md:45` nhắc `tools/usability_session.ps1`, `tools/sut_main.ps1`. Cũng chỉ là ví dụ.
+  - `scripts/render_checklist.py:33`: file sinh ra ghi nguồn là `tools/render_checklist.py`, sai đường dẫn (chỉ ảnh hưởng chữ hiển thị).
+- Tóm tắt demo_plan: màn Đăng ký `/register` (nằm ngoài C2), chạy tay trên P1, trên nhánh `demo-video`. Freeze vào `HW03/demo/ai-outputs`, không vào `appendix/ai-outputs`. Đi qua bước 0 → 1 (`--min 8`) → bước 2 SV chỉ nói bằng lời → 3 (`dom_probe`) → 4 (`merge_platform`) → 5 (`build_excel`), tổng khoảng 10 phút.
+- Kết quả kiểm tra: diff Pass; `check_checklist.py --help` chạy được từ bản đã chép.
+- Commit: `fcab9e1` HW03[Skill] 1/3: chép skill + VideoLinks
+- Cần quyết định:
+  - D1 – Có đưa `gen_oracle.py`/`gen_run.py` vào skill không? Phương án: (a) chép vào `scripts/`; (b) ghi rõ trong SKILL.md là chỉ có ở repo ví dụ; (c) giữ nguyên.
+  - D2 – Các lượt Claude lúc quay demo: (a) khai trong prompt log; (b) thêm `exclude` vào `tools/hw.toml`.
+```
+*File AI ghi/gửi trong lượt này:* `demo_plan.md`
+
+**Xử lý:** [...]
+
+---
+
+## #93 | 18:27 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: R9/R11 + D1/D2 + điền chữ report T1/T3. SV chốt: R9=b, R11=b (lý do: Expected "cùng kiểu phân cách / dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1 – lấy từ khuyến nghị, SV có thể sửa); D1 = chép gen_oracle.py, gen_run.py vào scripts/ nếu không hardcode HW03 (sửa SKILL.md:48-49 trỏ scripts/), nếu có thì ghi rõ trong SKILL.md "chỉ có ở repo ví dụ" (cập nhật cả .claude/skills và HW03/skills, diff -r = 0); sửa chữ nguồn render_checklist.py:33; D2 = a (lượt demo vào prompt log, KHÔNG exclude). Ghi các quyết định vào report_plan mục e. Không push, không amend.
+1. R9/R11: đổi verdict P1 CL-08, CL-09 = Failed ở lượt tay P1 (ghi "SV chốt R9=b/R11=b" + lý do vào notes, cập nhật run_check.md R9/R11/L1 = đã chốt). Chạy lại chuỗi merge_hw03 → failed_list_hw03 → bug_groups_hw03 → report_t1_hw03 → build_excel (recalc 0 lỗi). Nếu 2 Failed mới làm đổi bug_groups (nhóm mới/G nào thêm item/BUG-xx khung nào đổi) → DỪNG, báo, chưa sửa khung BUG.
+2. Report: §3.3 (bảng checklist từ dữ liệu), §3.5, §3.6, §4.3 sinh bằng script giữa marker mới. §3.2 và §4.2: AI nháp, giọng "em", mở đầu dòng "📝 AI nháp – SV duyệt/sửa", chỉ dùng dữ kiện trong repo (lượt, commit, run_check, report_plan). KHÔNG đụng §3.4 (🔒 SV viết).
+3. Ghi report_plan mục f (khai Audit): AI nháp §3.2, §4.2.
+Commit riêng: `HW03[T1] 4/6c: SV chốt R9, R11`; `HW03[Skill] 1/3b: D1`; `HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2`.
+Báo cáo ≤ 15 dòng: số liệu P1 mới, bug_groups có đổi không, marker mới, hash.
+```
+
+**Output:**
+```
+Dùng `override` trong `merge_hw03.py` (skill cấm sửa file lượt tay của SV), rồi chạy lại chuỗi gộp.
+
+Now apply override + run chain.
+
+bug_groups đổi: G-23/BUG-80 thêm nền tảng P1 → theo lệnh sẽ dừng sau khi xong bước 1. Chạy nốt report_t1 + build_excel.
+
+Recalc kiểm bằng Excel COM.
+
+Em đã làm xong bước 1 (chốt R9/R11) rồi dừng theo lệnh, vì kết quả làm đổi `bug_groups.md`. D1 và phần report (bước 2, 3) chưa làm.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: chốt R9/R11 rồi chạy lại chuỗi merge → failed_list → bug_groups → report_t1 → build_excel. Dừng ở điều kiện "bug_groups đổi".
+- Cách đổi verdict: thêm `override` cho CL-08/CL-09 P1 trong `tools/merge_hw03.py` (ket_qua = Failed, notes ghi "SV chốt R9=b/R11=b" + lý do). File lượt tay của SV không sửa, vì skill quy định file này không được sửa.
+- File đã sửa: `checklist.json`, `run_check.md` (R9, R11, L1 = đã chốt), `failed_list.md`, `bug_groups.md`, Report §3.5/§4.1 (marker cũ), Excel, `report_plan.md` mục e (thêm dòng R9, R11).
+- Kết quả kiểm tra: chuỗi script chạy hết, không thiếu kết quả nào; Excel tính lại bằng Excel: 21 công thức, 0 lỗi.
+- Số liệu P1 mới (Passed/Failed/N/A/Blocked): **25/46/0/3**, trước là 27/44/0/3; tỉ lệ Passed 33,8%. Ô Failed tổng là 137. P2, P3 giữ nguyên.
+- bug_groups có đổi: vẫn 28 nhóm, không có nhóm hay item mới. Riêng G-23 (`BUG-80`, CL-09) thêm nền tảng P1 và thêm dòng Actual P1. CL-08 trùng #170 nên không có khung bug.
+- Khung `HW03/bugs/BUG-80.md` chưa sửa, vẫn ghi "Nền tảng Failed: P2, P3" (dòng 21), chưa có môi trường, Actual, ảnh của P1 (dòng 25, 41, 46).
+- Bất thường: mục "lệch auto/tay" của report còn dòng CL-09 P1 "auto Failed / tay Failed", vì dữ liệu lệch ghi theo verdict tay trước khi override. Phần nguyên nhân có ghi "SV chốt R11=b".
+- Commit: `090cabb` HW03[T1] 4/6c: SV chốt R9, R11
+- Chưa làm: D1 (commit `1/3b`), bước 2 report, bước 3 report_plan mục f. Chưa ghi D1, D2 vào mục e.
+- Cần quyết định:
+  - B80 – Cập nhật khung BUG-80 thêm dữ kiện P1? (a) AI sinh lại khung bằng `--skeleton`, chỉ phần dữ kiện; (b) SV tự thêm vào bản đang viết.
+  - TIẾP – Làm tiếp D1 và phần report với số liệu mới? (a) làm tiếp; (b) chờ chốt B80 xong.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #94 | 18:35 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: kiểm trùng issue + dựng lại khung BUG-58…85 theo mẫu HW02. SV chốt: B80=a; tiền tố GitHub = [FR-xx] lấy từ Căn cứ của item đầu nhóm (chỉ trên GitHub, không vào tiêu đề trong file). Không push, không amend. KHÔNG viết/sửa chữ SV.
+1. `gh auth status` phải là ThachHaoo. `gh issue list -R tkob-team/eshop-sut --state all --limit 1000 --json number,title,author,state,createdAt,labels,body` → cập nhật HW03/bugs/issues.json.
+2. Đối chiếu lại 28 nhóm MỚI + 4 trùng một phần + 14 trùng với MỌI issue (mọi tác giả, mọi trạng thái; chú ý issue > #203 của henry-banana, nphoang-itus). Ghi HW03/bugs/dup_check.md: mỗi G – issue nghi trùng (số, tác giả, tiêu đề, câu chứng cứ) – mức (trùng/một phần/không). Chỉ liệt kê, SV quyết. Liệt kê luôn tiền tố tiêu đề bạn nhóm dùng cho HW03; nếu khác [FR-xx] → DỪNG ở bước 3, báo.
+3. Nếu file BUG nào đã có chữ SV (dòng 🔒 đã bị thay) → không đụng file đó, báo. Còn lại sinh lại khung theo `git show d0d0e05:HW02/bugs/BUG-22.md`: ID; Tiêu đề / Severity / Priority = `<SV viết>`; dòng "Tiền tố GitHub: [FR-xx]"; Môi trường (gạch đầu dòng giá trị thật từng nền tảng Failed, gồm P1 cho BUG-80); Tiền điều kiện, Các bước tái hiện, Expected (trích căn cứ – câu SRS chép nguyên văn có nhãn "(AI chép nguyên văn)"), Actual = `<SV viết>`; Bằng chứng (ảnh từng nền tảng); Item liên quan; Yêu cầu (AI điền từ bug_groups, SV duyệt); Ghi chú cô lập → Dữ kiện (AI chép: Actual nguyên văn theo nền tảng + Nguồn bước tái hiện) và Nhận định `<SV viết>`; Link GitHub Issue. Không chép Expected vào Dữ kiện. Sinh bằng script (đặt cạnh bug_groups_hw03.py), không viết tay.
+Commit `HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02`.
+Báo cáo ≤ 15 dòng: số issue mới so với snapshot cũ, G nào đổi mức trùng, tiền tố bạn nhóm, file bị bỏ qua, hash.
+```
+
+**Output:**
+```
+Snapshot cũ 158 → mới 179 (21 issue mới, đều của nphoang-itus, tiền tố `[HW03-C3-xx]`). Giờ đối chiếu với các nhóm.
+
+Now dup_check.md (generated by script for the table rows, evidence quoted from issue titles/bodies).
+
+Em đã làm bước 1 và 2, rồi dừng trước bước 3 (dựng khung bug), vì bạn nhóm đặt tiền tố HW03 khác `[FR-xx]` mà SV đã chốt.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: kiểm trùng issue. Bước 3 (khung BUG theo mẫu HW02) chưa làm.
+- File đã tạo/sửa: `HW03/bugs/issues.json` (lấy lại, có thêm `body`/`createdAt`), `HW03/bugs/dup_check.md` (mới), `HW03/bugs/failed_list.md` (chạy lại, chỉ đổi dòng đầu "179 issue, tới #224").
+- Kiểm tra: `gh auth status` = ThachHaoo. Mọi issue dùng làm căn cứ trùng vẫn OPEN.
+- Issue mới: snapshot cũ có 158 issue (tới #203), bây giờ 179 (tới #224). Có **21 issue mới, #204–#224, đều của nphoang-itus**. henry-banana không có issue nào sau #203.
+- 21 issue mới đều thuộc ứng dụng **admin** (body ghi "Admin cô lập http://localhost:5175"). C2 của SV là web người dùng nên không trùng nhóm nào.
+- Đổi mức trùng: **không G nào** (đây là đề xuất của AI). 28 nhóm vẫn MỚI, 4 trùng một phần, 14 trùng.
+- Một số issue cùng loại nhưng khác ứng dụng hoặc khác màn được liệt kê để SV xét: #221 → G-01, #206 → G-04, #209/#121 → G-05, #205/#195 → G-06, #210 → G-07, #222 → G-21/G-22, #219 → G-24. Chi tiết trong `dup_check.md` §3–4.
+- Tiền tố bạn nhóm: nphoang-itus dùng `[HW03-C3-xx]` cho HW03 (`[BUG-FRxx-xx]` ở HW02). henry-banana dùng `[FRxx-xx]`, SV dùng `[FR-xx]`, cả hai chỉ có ở HW02.
+- File bị bỏ qua: không có. Cả 28 file `BUG-58…85.md` vẫn đủ 6 dòng 🔒, chưa có chữ SV.
+- Commit: `e9a2c85` HW03[T1] 5/6c: kiểm trùng issue (khung bug chờ chốt tiền tố). Em đổi message so với lệnh vì phần khung bug chưa làm. Commit khung sẽ dùng message gốc `HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02`.
+- Cần quyết định:
+  - PFX – Tiền tố tiêu đề GitHub: (a) giữ `[FR-xx]` như HW02 của SV; (b) theo bạn nhóm `[HW03-C2-xx]`; (c) kết hợp, ví dụ `[HW03-C2-xx][FR-xx]`.
+  - DUP – SV xác nhận "không đổi mức trùng" cho cả 28 nhóm, nhất là G-16 với #123 (đang ghi "liên quan").
+- Việc còn treo từ lượt trước: D1 (`1/3b`), phần report §3.2/§3.3/§3.5/§3.6/§4.2/§4.3, `report_plan` mục f, và ghi D1/D2 vào mục e.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #95 | 18:37 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Làm tiếp phần còn dở của lệnh trước: D1 (commit 1/3b), bước 2 report (§3.3, 3.5, 3.6, 4.3 bằng script; AI nháp §3.2, §4.2), bước 3 report_plan mục f; ghi D1, D2 vào mục e. Sửa luôn dòng "lệch auto/tay" CL-09 P1: hiển thị đúng sau override (tay = Failed theo R11 → không còn lệch thì bỏ dòng, ghi nguyên nhân trong notes). Báo cáo ≤ 10 dòng + hash.
+```
+
+**Output:**
+```
+gen_oracle/gen_run hardcode HW03 (đường dẫn, màn C2, overlay, adb) → ghi "chỉ có ở repo ví dụ".
+
+Giờ phần report. Xem cấu trúc report §3–§4 và script hiện có.
+
+Sửa `merge_runs.py` (bỏ lệch khi override làm tay = auto, chép nguyên nhân vào notes), rồi thêm 4 khối mới vào report script.
+
+Phát sinh: CL-08 P1 thành lệch (auto Passed ≠ kết quả cuối Failed). Lệch này có thật nên em giữ, thêm nguyên nhân; đồng thời dọn phần notes CL-09 bị lặp.
+
+Thêm 4 khối vào `report_t1_hw03.py`.
+
+Đang viết nháp §3.2, §4.2 (chỉ dùng dữ kiện trong repo), rồi ghi mục f và commit.
+
+Phần còn dở đã xong, 2 commit. Không push, không amend, không đụng §3.4.
+
+### Báo cáo cho phiên thảo luận
+- **D1:** `gen_oracle.py` và `gen_run.py` gắn cứng HW03 (đường dẫn, màn C2, overlay, adb) nên em không chép vào `scripts/`. `SKILL.md` ghi "chỉ có ở repo ví dụ". Đã sửa chữ nguồn trong `render_checklist.py`. `.claude/skills` và `HW03/skills` giống nhau hoàn toàn (`diff -r` = 0). D1, D2 đã ghi vào `report_plan` mục e.
+- **Lệch auto/tay CL-09 P1:** dòng này đã bỏ khỏi report. `merge_runs.py` giờ tự bỏ dòng lệch khi quyết định của SV làm kết quả tay trùng auto, và chép nguyên nhân vào notes "[trước quyết định: …]".
+- **Phát sinh CL-08 P1:** sau override R9, auto Passed còn kết quả cuối là Failed, nên thành một dòng lệch mới. Lệch này có thật: auto chấm riêng từng nền tảng, thấy "6.000.000 ₫". Em giữ dòng và ghi nguyên nhân. P1 vẫn 25/46/0/3 (Passed/Failed/N/A/Blocked).
+- **Marker mới trong report:**
+  - `REPORT:T1:checklist_table` cho §3.3 (74 dòng)
+  - `REPORT:T1:execution` cho §3.5, nằm trước bảng tổng: 6 lượt, thứ tự và giờ
+  - `REPORT:T1:failed_items` cho §3.6 (47 item, gồm notes, ảnh, issue trùng / nhóm bug)
+  - `REPORT:T1:overlay` cho §4.3. Bảng ảnh tổng quan chuyển từ §4.1 sang đây; P3 vẫn chưa có ảnh nào.
+- **AI nháp §3.2 và §4.2:** đều mở đầu bằng dòng "📝 AI nháp – SV duyệt/sửa", chỉ dùng dữ kiện có trong repo. Phần khai Audit đã ghi vào `report_plan` mục f.
+- **Kiểm tra:** `check_checklist` 0 lỗi; Excel tính lại 21 công thức, 0 lỗi; `checklist.md` sinh lại (bản cũ còn ghi P1 Passed từ trước 4/6c).
+- **Commit:** `0d8fd34` HW03[Skill] 1/3b: D1 · `ad992bc` HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2
+- **Còn chờ:** PFX (tiền tố tiêu đề GitHub) để dựng khung BUG-58…85; giờ chạy tay P1 trong file lượt chưa khớp nhau (run_check R4).
+```
+*File AI ghi/gửi trong lượt này:* `patch_report.py`, `report_blocks.py`, `drafts.py`
+
+**Xử lý:** [...]
+
+---
+
+## #96 | 18:48 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: dựng khung BUG-58…85 (bước 3 lệnh trước, message gốc). SV chốt: PFX=b → tiền tố GitHub [HW03-C2-<số BUG>] (vd [HW03-C2-58]); DUP=a (giữ nguyên mức trùng cả 28 nhóm, kể cả G-16 ↔ #123 = liên quan); R4: SV giải thích ".jpg là ảnh lấy từ điện thoại, .png là ảnh chụp màn hình máy tính". Ghi PFX, DUP, R4 vào report_plan mục e. Không push, không amend, KHÔNG viết chữ SV.
+1. Bước 3 lệnh trước: sinh khung theo mẫu d0d0e05:HW02/bugs/BUG-22.md bằng script (BUG-80 có P1); dòng "Tiền tố GitHub: [HW03-C2-xx]".
+2. R4: dựa vào giải thích SV, lấy giờ thật lượt tay P1 từ ảnh (EXIF DateTimeOriginal cho .jpg nếu còn trong bản gốc evidence_raw, mtime cho .png). Khớp được → sửa giờ trong file lượt/report, ghi "SV giải thích R4 + giờ lấy từ ảnh <tên>". Không suy được → giữ nguyên, ghi vào run_check R4 lý do, KHÔNG đoán.
+3. Liệt kê ảnh còn thiếu so với RUN.md/report (mọi nền tảng, gồm 5 ảnh P3_M*): tên file cần có, item, nền tảng, nội dung cần thấy trong ảnh. Ghi HW03/checklist/missing_photos.md.
+Commit `HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02` (+ `HW03[T1] 4/6d: R4` nếu có sửa).
+Báo cáo ≤ 12 dòng: số khung sinh, R4 kết quả, danh sách ảnh thiếu (tên), hash.
+```
+
+**Output:**
+```
+Trước khi sinh khung, xử lý R4 (giờ lượt tay P1) vì khung sẽ ghi giờ chạy.
+
+Ảnh P1 đều là `.png` (mtime). Ảnh item P1 có mtime từ 23:24 09/11 đến 00:10 10/11, khớp với giờ bắt đầu 22:58 09/11. Không có `.jpg` nên không dùng EXIF.
+
+P2 kiểm chéo khớp (mtime ảnh 00:13–00:36, file lượt ghi 00:10–00:38), nên dùng mtime được. Sửa header P1.
+
+Giờ viết script sinh khung bug.
+
+Write generator script.
+
+Ghi missing_photos.md rồi commit.
+
+Đã sinh lại 28 khung bug theo mẫu HW02, sửa giờ R4 từ ảnh, và lập danh sách ảnh thiếu. Không push, không amend, không viết chữ SV.
+
+### Báo cáo cho phiên thảo luận
+- **Khung bug:** sinh lại 28 khung BUG-58…85 bằng `tools/bug_skeleton_hw03.py`. Không file nào bị bỏ qua: cả 28 vẫn còn đủ 🔒, chưa có chữ SV.
+  - Mỗi khung có dòng "Tiền tố GitHub: [HW03-C2-xx]". Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước, Expected của bug, Actual, Nhận định để `<SV viết>`.
+  - 14 khung có câu SRS chép nguyên văn từ README @ de0f48f, gắn nhãn "(AI chép nguyên văn)". Khung căn cứ heuristic chỉ chép căn cứ + giả định.
+  - BUG-80 có thêm P1.
+- **R4 đã sửa:** ảnh P1 đều là `.png` nên lấy giờ từ mtime ảnh gốc trong `evidence_raw/P1_chrome`. Ảnh item từ 23:24 09/11 đến 00:10 10/11 (`P1_CL-64_1`).
+  - File lượt P1 giờ ghi: kết thúc 00:10 10/11, restart 22:56 09/11 (vì restart phải trước ảnh đầu tiên). Giờ bản gốc vẫn giữ trong dòng ghi chú.
+  - Kiểm chéo cách lấy giờ: mtime ảnh P2 (00:13–00:36) khớp giờ file lượt P2 (00:10–00:38).
+  - Đã cập nhật run_check R4 và report §3.5.
+- **Ảnh còn thiếu (bắt buộc):** `P3_M1_1`, `P3_M2_1`, `P3_M2_2`, `P3_M3_1` (dùng lại cho M5), `P3_M4_1`. Bản gốc `.jpg` có trong `evidence_raw/P3_android/` nhưng chưa overlay. Ảnh item Failed không thiếu cái nào.
+- **Ghi thêm (không bắt buộc), trong `HW03/checklist/missing_photos.md`:**
+  - `RUN.md` ghi "bắt buộc" ảnh `P1/P2/P3_M6_1` ở tiêu đề nhóm M6, ngược với mục 2 của chính nó (chỉ M1…M5).
+  - File lượt P3 trỏ tới `P3_CL-64_1.jpg` nhưng file không có (CL-64 Blocked, đã có `P3_CL-64_2.png`).
+- PFX, DUP, R4 đã ghi vào `report_plan` mục e.
+- **Commit:** `4b4c64c` HW03[T1] 4/6d: R4 · `9ede85b` HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02
+- **Cần quyết định:** M6 – Ảnh `P*_M6_1` (nhóm "Chung – tất cả màn C2"): (a) bỏ, vì M6 không phải một màn; (b) chụp.
+```
+*File AI ghi/gửi trong lượt này:* `bug_skeleton_hw03.py`, `missing_photos.md`
+
+**Xử lý:** [...]
+
+---
+
+## #97 | 18:54 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: ảnh tổng quan P3 + dọn RUN.md. SV chốt M6=a (bỏ ảnh P*_M6_1 vì M6 không phải một màn; sửa tiêu đề nhóm M6 trong RUN.md cho khớp mục 2, ghi report_plan mục e + mục f "lỗi RUN.md do AI"). Không push, không amend.
+1. SV đã overlay 5 ảnh P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1 trong checklist/evidence_raw/P3_android/. Mở xem từng ảnh: có dòng overlay "23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn", thấy trình duyệt + URL localhost, không lộ thông tin khác (tài khoản lưu, Gmail, thông báo riêng). Ảnh nào không đạt → DỪNG, báo tên + lý do.
+2. Đạt → `python tools/compress_hw03.py --exclude ""` → chạy lại report (bảng ảnh §4.3 hết "chưa có").
+3. Tham chiếu P3_CL-64_1.jpg không tồn tại: nếu ảnh cùng item đã có (tên khác) thì sửa tham chiếu về file thật, ghi notes; không có thì liệt kê, KHÔNG tự tạo.
+Commit `HW03[T1] 4/6e: ảnh tổng quan P3 + M6`.
+Báo cáo ≤ 8 dòng: 5 ảnh đạt/không, §4.3 còn ô trống không, CL-64, hash.
+```
+
+**Output:**
+```
+Em dừng ở bước 1: cả 5 ảnh tổng quan P3 đều chưa đạt nên chưa nén, chưa chạy lại report, chưa sửa RUN.md và CL-64, chưa commit gì.
+
+### Báo cáo cho phiên thảo luận
+- **5 ảnh P3_M\* chưa đạt:** `P3_M1_1`, `P3_M2_1`, `P3_M2_2`, `P3_M3_1`, `P3_M4_1` (.jpg trong `evidence_raw/P3_android/`) **đều không có dòng overlay** "23120255 - Lê Tấn Hiệp - …".
+  - Giờ sửa file của cả 5 vẫn là 01:53 10/11, tức là chưa được lưu lại sau khi chụp. Có thể bản overlay đang nằm ở chỗ khác trên điện thoại hoặc trong thư mục khác.
+  - Phần còn lại đạt: thấy thanh URL `localhost:5173/...` (Chrome Android), không lộ thông tin riêng. Chỉ hiện `test@eshop.com` (tài khoản seed) và "Test User".
+- **P3_M4_1:** ảnh hiện "Bạn chưa có đơn hàng nào" (Lịch sử đơn trống) và gần trùng `P3_M3_1` (cùng `/profile`, chỉ cuộn xuống). Nếu cần ảnh có ≥ 1 đơn như các nền tảng khác thì phải chụp lại sau khi chạy `seed_orders.py`.
+- **§4.3:** P3 vẫn "chưa có" ở M1–M5, vì chưa nén.
+- **CL-64 P3 (chỉ đọc, chưa sửa):** file lượt P3 dòng 21 trỏ `P3_CL-64_1.jpg` và `P3_CL-64_2.jpg`. Chỉ có `_2` (raw `.jpg`, bản nén `.png`); `P3_CL-64_1` không có ở thư mục nào nên không có file để sửa tham chiếu về.
+- **M6 (sửa RUN.md, ghi report_plan e/f):** chưa làm, sẽ làm cùng commit `HW03[T1] 4/6e: ảnh tổng quan P3 + M6`.
+- **Commit:** không có.
+- **Cần quyết định:**
+  - IMG – Thêm overlay cho 5 ảnh rồi lưu đè vào `evidence_raw/P3_android/` (tên giữ nguyên), hoặc chỉ đường dẫn bản đã overlay.
+  - M6 – Làm trước phần M6 + CL-64 rồi commit riêng, hay chờ có ảnh?
+```
+
+**Xử lý:** [...]
+
+---
+
+## #98 | 18:56 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+SV chốt: M6 làm ngay (commit riêng `HW03[T1] 4/6e: M6 + tham chiếu CL-64`); CL-64 P3: bỏ tham chiếu P3_CL-64_1.jpg (file không tồn tại ở đâu), giữ _2, ghi notes "ảnh _1 không có; chỉ _2" + run_check; P3_M4_1 giữ ảnh Lịch sử đơn trống, ghi notes "lịch sử đơn trống lúc chụp". Ghi report_plan e/f. Không push, không amend.
+Sau đó DỪNG chờ SV báo đã overlay 5 ảnh, rồi mới làm bước 1–2 của lệnh trước (commit `HW03[T1] 4/6f: ảnh tổng quan P3`).
+Báo cáo ≤ 5 dòng + hash.
+```
+
+**Output:**
+```
+Đã xong phần M6, CL-64 và ghi chú P3_M4_1. Em dừng ở đây chờ SV báo đã overlay 5 ảnh.
+
+### Báo cáo cho phiên thảo luận
+- **M6:** tiêu đề 3 nhóm M6 trong `RUN.md` giờ ghi "không chụp ảnh tổng quan", khớp mục 2 (chỉ M1…M5). Đã sửa cả `tests/gen_run.py` để sinh lại không ra lỗi cũ. `report_plan` mục e có thêm dòng M6, CL64-P3, M4-P3; mục f ghi "Lỗi RUN.md do AI".
+- **CL-64 P3:** đã bỏ tham chiếu `P3_CL-64_1.jpg` khỏi file lượt P3, chỉ còn `_2`. Notes ghi "ảnh _1 không có; chỉ _2". Đã cập nhật `run_check.md` và `missing_photos.md`.
+- **P3_M4_1:** report §4.3 ghi "(lịch sử đơn trống lúc chụp)". Ô P3 vẫn là "chưa có" vì 5 ảnh chưa overlay nên chưa nén.
+- **Kiểm tra:** chạy lại chuỗi gộp và report, không còn cảnh báo thiếu ảnh CL-64.
+- **Commit:** `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64. Commit `4/6f` sẽ làm sau khi SV báo đã overlay.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #99 | 19:02 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+overlay xong 5 ảnh rồi nhé
+```
+
+**Output:**
+```
+Cả 5 đạt (overlay rõ, URL localhost, Chrome Android, không lộ thông tin riêng). Nén + chạy lại report.
+
+Em đã xem từng ảnh: cả 5 ảnh tổng quan P3 đều đạt, đã nén và đưa vào report.
+
+### Báo cáo cho phiên thảo luận
+- **5 ảnh đạt:** `P3_M1_1`, `P3_M2_1`, `P3_M2_2`, `P3_M3_1`, `P3_M4_1`. Ảnh nào cũng có dòng overlay "23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn", thấy thanh URL `localhost:5173/...` trên Chrome Android, không lộ thông tin riêng (chỉ có tài khoản seed `test@eshop.com`).
+  - Ở `P3_M3_1`, dòng overlay đè nhẹ lên tiêu đề "Hồ sơ của bạn" nhưng vẫn đọc được.
+  - Ở `P3_M4_1`, overlay nằm ngay trên khung Lịch sử đơn.
+- **Nén:** `tools/compress_hw03.py` đã tạo 5 file `.png` trong `evidence/P3_android/`. Chạy lại report thì §4.3 không còn ô "chưa có"; P3 M4 có ghi chú "(lịch sử đơn trống lúc chụp)". Đã cập nhật `missing_photos.md` (không còn ảnh thiếu) và `report_plan` mục f.
+- **Commit:** `6069790` HW03[T1] 4/6f: ảnh tổng quan P3
+```
+
+**Xử lý:** [...]
+
+---
+
+## #100 | 19:04 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: chuẩn bị đóng gói HW03 (phần không cần SV). Không push, không amend, KHÔNG viết phần 🔒 / <SV viết>.
+1. Report §5 Task 2: giữ phần plan/kịch bản/công cụ đã có (trỏ usability/plan.md, participant_kit.md, observation_sheet.md); §5.4–5.9 thay bằng 1 dòng "Không thực hiện phiên usability nào" + `<SV viết lý do>`. Không bịa số liệu.
+2. README HW03: test summary sinh bằng script (checklist P1/P2/P3, số bug 28 + trùng 14 + một phần 4, link VideoLinks), chỗ tự chấm = `<SV điền>`.
+3. Dựng khung AI-02 (artifact lấy từ git: bản đóng băng + việc phụ, cột #n = "[chờ chốt transcript]", verdict/lý do = <SV viết>), AI-03 (khai Opus 5.5 + Sonnet 4.6 + lượt không rõ model theo dòng Tổng của A_prompt_log.md), Mandatory Disclosure §11 (📝 AI nháp – SV xác nhận) theo report_plan mục f, g. Mẫu định dạng: HW02/ai-forms (không chép số liệu). AI-05 CHƯA làm.
+4. Thêm Task 2 = <SV điền> vào §12, tên zip chờ điểm.
+Commit theo từng việc. Báo cáo ≤ 12 dòng + hash; liệt kê mọi chỗ <SV viết>/<SV điền> còn lại (file:dòng).
+```
+
+**Output:**
+```
+Việc 1: §5.
+
+Việc 2: script test summary cho README (và §8 report, cùng bảng).
+
+Việc 3: script sinh khung AI-02, AI-03, §11.
+
+Sửa: "commit tạo" lấy theo file chính (đường dẫn đầu) thay vì file sớm nhất (vd `restart_backend.ps1` từ HW02).
+
+Việc 4: §12.
+
+Bốn việc đóng gói đã xong, mỗi việc một commit. Không push, không amend, không viết phần 🔒 / `<SV viết>`.
+
+### Báo cáo cho phiên thảo luận
+- **Report §5:** giữ nguyên các dòng 📝 cũ của §5.1–5.3, thêm dòng trỏ tới `usability/plan.md`, `participant_kit.md`, `observation_sheet.md`. §5.4–5.9 gộp thành một dòng "Không thực hiện phiên usability nào. Lý do: `<SV viết lý do>`", bỏ luôn 2 marker U1. `c51665d`
+- **README + report §8:** test summary sinh bằng `tools/summary_hw03.py`. Số liệu:
+  - P1/P2/P3 (Passed/Failed/N/A/Blocked): 25/46/0/3 · 24/47/0/3 · 22/44/4/4
+  - item trùng 14, trùng một phần 4, MỚI 28 → 28 bug BUG-58…85; chưa bug nào có link GitHub Issue (0/28)
+  - nguồn item: AI 48, AI + SV sửa 20, SV 6; usability: không có phiên
+  - link video trỏ `skills/VideoLinks.md`; bảng tự chấm để `<SV điền>`. `70aa585`
+- **AI-02, AI-03, §11** (`tools/forms_hw03.py`): `c2aa7ae`
+  - AI-02 có 22 artifact, commit tạo/sửa lấy từ git, cột #n = "[chờ chốt transcript]", Verdict/Lý do = `<SV viết>`.
+  - AI-03 lấy theo dòng Tổng của prompt log lúc 19:03 10/11: tổng 99 lượt = Sonnet 4.6 2, Opus 5.5 91, không rõ model 6 (#4, #51, #57, #69, #70, #79). Cần chạy lại script sau lần trích prompt log cuối.
+  - §11 mở đầu "📝 AI nháp – SV xác nhận", gồm 7 việc AI làm; phần "em xem xét và sửa" / "em tự làm" để `<SV viết>`.
+- **Report §12:** bảng tự chấm 4 tiêu chí (gồm Task 2) để `<SV điền>`; tên zip `23120255_HW03_AI_GUIUsability_<ggg>.zip` chờ điểm. `00cea6a`
+- **Bất thường:** report §5.3 (dòng 📝 cũ) ghi "SUS / UEQ-S", nhưng plan và participant kit dùng SEQ + SUS.
+- **Chỗ `<SV viết>` / `<SV điền>` còn lại:**
+  - `HW03/23120255_HW03_Report.md`: 326 (lý do không có phiên), 379, 381 (§11), 394–398 (§12)
+  - `HW03/README.md`: 11–15 (tự chấm)
+  - `HW03/ai-forms/AI-02_Audit_Report_23120255.md`: 52 (S3: link video), 64–85 (Verdict/Lý do 22 hàng), 89 (kết luận chung)
+  - `HW03/ai-forms/AI-03_Disclosure_Form_23120255.md`: 34, 44, 50 và mục 5 (cách rà soát)
+  - `HW03/skills/VideoLinks.md`: 5, 6
+  - `HW03/bugs/BUG-58…85.md`: mỗi file 8 chỗ
+  - Ngoài ra còn các dòng 📝 cũ trong report (§3.1, §4.1, §5.1–5.3, §7, §9, §13D) và `[...]` ở Ngày / Chữ ký / Cam đoan của AI-02, AI-03.
+```
+*File AI ghi/gửi trong lượt này:* `summary_hw03.py`, `forms_hw03.py`
+
+**Xử lý:** [...]
+
+---
+
+## #101 | 19:10 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. P3_M2_2.png (evidence/P3_android) chưa được add trong 6069790 → kiểm 4 ảnh còn lại đã tracked, report §4.3 trỏ đúng; add + commit `HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót`. Tìm vì sao sót (compress_hw03.py có git add không, hay add theo danh sách) – nếu do script thì vá, commit riêng `HW03: vá harness – compress_hw03 add đủ ảnh`.
+2. Report §5.3: sửa "SUS / UEQ-S" → "SEQ + SUS" cho khớp usability/plan.md (dữ kiện, không phải chữ SV). Commit `HW03[T2]: sửa thang đo §5.3`.
+3. Commit prompt log: `HW03: cập nhật prompt log`.
+4. `git status --short` phải sạch. Không push, không amend.
+Báo cáo ≤ 6 dòng: nguyên nhân sót ảnh, hash.
+```
+
+**Output:**
+```
+Script không add (không có lệnh git) → lỗi do lệnh add tay của em, không vá harness. Giờ §5.3.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 101 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 93 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).
