@@ -4,8 +4,8 @@
   "ngay": "2026-11-11",
   "nguoi_tham_gia": "P07",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Chrome / Windows 11",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "02:02",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "02:52",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Bấm 1 đơn thành 2 đơn.",
@@ -29,7 +29,7 @@
       "nguon": "notes/S07.txt:1"
     },
     {
-      "t": "<SV điền>",
+      "t": "03:12",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Không cần nhập địa chỉ, số điện thoại vẫn đặt được đơn.",
@@ -37,7 +37,7 @@
       "nguon": "notes/S07.txt:2"
     },
     {
-      "t": "<SV điền>",
+      "t": "03:29",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Tên cũng không cần đổi vẫn đặt được.",
@@ -45,7 +45,7 @@
       "nguon": "notes/S07.txt:3"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 7,
   "sus": [
     3,

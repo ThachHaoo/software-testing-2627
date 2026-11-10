@@ -26,6 +26,20 @@ def res(it, P):
     return "N/A" if P not in it.get("nen_tang", []) else it.get("ket_qua", {}).get(P, "")
 
 
+def usability_line():
+    """Số liệu U1 từ usability/sessions/S*.json (pilot không tính), cùng công thức với sus_score.py."""
+    ss = [json.loads(f.read_text(encoding="utf-8")) for f in sorted((ROOT / "usability" / "sessions").glob("S*.json"))]
+    main = [d for d in ss if not d.get("pilot")]
+    if not main:
+        return "- Usability (Task 2): chưa có phiếu phiên (`usability/sessions/`)."
+    sus = [2.5 * sum((v - 1) if i % 2 == 0 else (5 - v) for i, v in enumerate(d["sus"])) for d in main]
+    seq = [d["seq"] for d in main]
+    done = sum(1 for d in main if d["nhiem_vu"]["hoan_thanh"] != "khong_hoan_thanh")
+    f = lambda x: f"{x:.1f}".replace(".", ",")
+    return (f"- Usability (Task 2, U1): {len(main)} phiên chính S01–S{len(main):02d} + 1 pilot S00; hoàn thành {done}/{len(main)}; "
+            f"**SUS TB {f(sum(sus) / len(sus))}**, **SEQ TB {f(sum(seq) / len(seq))}** (report §5.6–5.7, `usability/sessions/`).")
+
+
 def block():
     doc = json.loads((ROOT / "checklist" / "checklist.json").read_text(encoding="utf-8"))
     items, plats = doc["items"], list(doc["meta"]["platforms"])
@@ -46,7 +60,7 @@ def block():
     out += ["", f"- Bug: item Failed đối chiếu issue nhóm → **trùng {dup}**, **trùng một phần {part}**, **MỚI {new}** (`bugs/failed_list.md`, `bugs/dup_check.md`); "
             f"MỚI + phần mới gom thành **{len(bugs)} bug** `BUG-{bugs[0].stem.split('-')[1]}…{bugs[-1].stem.split('-')[1]}` (`bugs/bug_groups.md`); đã có link GitHub Issue: {len(linked)}/{len(bugs)}.",
             "- Nguồn item checklist: " + " · ".join(f"{k} {v}" for k, v in n.items()) + ".",
-            "- Usability (Task 2): không thực hiện phiên usability nào (report §5.4–5.9); kế hoạch, phiếu người tham gia, phiếu quan sát ở `usability/`.",
+            usability_line(),
             "- Video Agent Skill: `skills/VideoLinks.md`.",
             "- Sinh bằng `tools/summary_hw03.py` từ `checklist/checklist.json`, `bugs/`."]
     return "\n".join(out) + "\n"

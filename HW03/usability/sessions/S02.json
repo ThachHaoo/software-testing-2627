@@ -4,8 +4,8 @@
   "ngay": "2026-11-10",
   "nguoi_tham_gia": "P02",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Chrome / Linux",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "03:10",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "02:29",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Bấm nút thêm vào giỏ hàng mà mà",
@@ -29,7 +29,7 @@
       "nguon": "notes/S02.txt:1"
     },
     {
-      "t": "<SV điền>",
+      "t": "04:05",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Ủa kiểm tra đơn hàng ở đâu vậy",
@@ -37,7 +37,7 @@
       "nguon": "notes/S02.txt:2"
     },
     {
-      "t": "<SV điền>",
+      "t": "04:28",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Thấy là cái web này tính năng từ việc chọn đơn hàng rồi xác nhận đơn hàng đến xác nhận mã giảm giá rất hợp lý, không có vấn đề gì. Mình nghĩ cái web rất là ổn.",
@@ -45,7 +45,7 @@
       "nguon": "notes/S02.txt:3"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 7,
   "sus": [
     5,

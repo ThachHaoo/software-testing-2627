@@ -4,8 +4,8 @@
   "ngay": "2026-11-10",
   "nguoi_tham_gia": "P00",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Chrome / Windows 11",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "02:55",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "03:15",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Thấy nút thêm vào giỏ hàng bị lag, thấy bấm không hiện, sau đó đã được.",
@@ -29,7 +29,7 @@
       "nguon": "notes/S00.txt:1"
     },
     {
-      "t": "<SV điền>",
+      "t": "05:30",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Làm theo từng bước thì đúng như yêu cầu, còn mật khẩu hơi kỳ kỳ.",
@@ -37,7 +37,7 @@
       "nguon": "notes/S00.txt:2"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 6,
   "sus": [
     4,

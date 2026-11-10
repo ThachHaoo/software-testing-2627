@@ -4,8 +4,8 @@
   "ngay": "2026-11-11",
   "nguoi_tham_gia": "P06",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Cốc Cốc / Windows 11",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "02:15",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "02:58",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Nó cũng oke á.",
@@ -29,7 +29,7 @@
       "nguon": "notes/S06.txt:1"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 6,
   "sus": [
     3,

@@ -4,8 +4,8 @@
   "ngay": "2026-11-10",
   "nguoi_tham_gia": "P04",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Cốc Cốc / Windows 11",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "10:35",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "02:24",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "I clicked the button but it doesn't having anything. What is going on.",
@@ -29,7 +29,7 @@
       "nguon": "notes/S04.txt:1"
     },
     {
-      "t": "<SV điền>",
+      "t": "02:47",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "It's show the AirPods Pro, doesn't have number 2 in it (picture). Oohh, look it, perfect (Description). It's already in the Cart. Oh I forgot to Sign In. Let's sign in. My account is:... Sign In. Wait a minute, how can I click put it in the Cart the outside in.",
@@ -37,7 +37,7 @@
       "nguon": "notes/S04.txt:2"
     },
     {
-      "t": "<SV điền>",
+      "t": "04:17",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Ý là mình thậm chí còn chưa đăng nhập vào nữa sao có thể thêm vào giỏ hàng. Là mình thêm vào giỏ hàng nào á.",
@@ -45,7 +45,7 @@
       "nguon": "notes/S04.txt:3"
     },
     {
-      "t": "<SV điền>",
+      "t": "04:35",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "I got a voucher VIP100.",
@@ -53,7 +53,7 @@
       "nguon": "notes/S04.txt:4"
     },
     {
-      "t": "<SV điền>",
+      "t": "04:44",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Có vẻ như nút thêm vào giỏ chả làm gì cả (ở list, trang chủ).",
@@ -61,7 +61,7 @@
       "nguon": "notes/S04.txt:5"
     },
     {
-      "t": "<SV điền>",
+      "t": "04:59",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Thử tìm có ra không.",
@@ -69,7 +69,7 @@
       "nguon": "notes/S04.txt:6"
     },
     {
-      "t": "<SV điền>",
+      "t": "05:46",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Oke, ấn thêm vào giỏ cũng không được luôn. Aaaaaa, Oh, bấm thêm vào giỏ hàng không được nhưng nó không có tín hiệu gì cả, không có thông tin nhận biết cho thấy mình đã thêm vào giỏ hàng. Bấm xoá này cũng không xoá được luôn à. À xoá được xoá được xoá được.",
@@ -77,7 +77,7 @@
       "nguon": "notes/S04.txt:7"
     },
     {
-      "t": "<SV điền>",
+      "t": "06:21",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Oke xoá được xoá được, tiếp tục mua hàng vẫn được. Thêm vào giỏ nhưng nó không hiện thông tin gì mình đã thêm vào giỏ cả. Còn bấm vào chi tiết bấm thêm vào giỏ hàng thì hắn thêm rồi nè.",
@@ -85,7 +85,7 @@
       "nguon": "notes/S04.txt:8"
     },
     {
-      "t": "<SV điền>",
+      "t": "06:50",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Vấn đề làm sao để nhập voucher VIP100.",
@@ -93,7 +93,7 @@
       "nguon": "notes/S04.txt:9"
     },
     {
-      "t": "<SV điền>",
+      "t": "07:10",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Ở đây nhiệm vụ cần nhập voucher thì mới hoàn thành, nhưng mà nó mới (ý là ở cart).",
@@ -101,7 +101,7 @@
       "nguon": "notes/S04.txt:10"
     },
     {
-      "t": "<SV điền>",
+      "t": "7:26",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Ủa, sao tổng tiền thanh toán có thể điều chỉnh được.",
@@ -109,7 +109,7 @@
       "nguon": "notes/S04.txt:11"
     },
     {
-      "t": "<SV điền>",
+      "t": "07:45",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Ủa mình có thể trả ít hơn tiền à. Hmmm. Lạ thế. Cái nút này là sao ta. Oke mình cứ áp mã VIP100 vào xem thử giảm được bao nhiêu tiền, ừ giảm đúng rồi đỏ.",
@@ -117,7 +117,7 @@
       "nguon": "notes/S04.txt:12"
     },
     {
-      "t": "<SV điền>",
+      "t": "08:11",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Trả 100000 thôi được không, ok thanh toán (điều chỉnh số tiền), thanh toán thành công luôn. Mình thậm chí có thể trả ít tiền hơn.",
@@ -125,7 +125,7 @@
       "nguon": "notes/S04.txt:13"
     },
     {
-      "t": "<SV điền>",
+      "t": "08:40",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Giờ vào mua lại với voucher VIP100, VIP1000 thì sao, à không tồn tại. Oke xác nhận thanh toán. Oke mình thanh toán thành công rồi nhưng mà kiểm tra xem đơn hàng đã được ghi nhận chưa và đang ở trạng thái nào.",
@@ -133,7 +133,7 @@
       "nguon": "notes/S04.txt:14"
     },
     {
-      "t": "<SV điền>",
+      "t": "09:08",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Là mình về trang chủ và sau đó mình, sau đó mình xem giỏ hàng à, chỉ xem được giỏ hàng thôi. À đây đây (ở profile). A, chờ xác nhận nữa, vậy là nếu mình không trả đủ tiền thì có thể từ chối đơn à. Ngay từ đầu mình không cho khách hàng chỉnh giá thì đâu cần có trạng thái \"Chờ xác nhận\" đâu.",
@@ -141,7 +141,7 @@
       "nguon": "notes/S04.txt:15"
     },
     {
-      "t": "<SV điền>",
+      "t": "10:23",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Thanh toán đơn hàng rồi mới nhập số điện thoại và địa chỉ giao hàng à.",
@@ -149,7 +149,7 @@
       "nguon": "notes/S04.txt:16"
     },
     {
-      "t": "<SV điền>",
+      "t": "10:50",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Let's input my phone number to watch see will happen. and my adress.",
@@ -157,7 +157,7 @@
       "nguon": "notes/S04.txt:17"
     },
     {
-      "t": "<SV điền>",
+      "t": "11:23",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "I put the button, thông báo gì đây, ủa số điện thoại đủ 10 số mà...",
@@ -165,7 +165,7 @@
       "nguon": "notes/S04.txt:18"
     },
     {
-      "t": "<SV điền>",
+      "t": "11:39",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Nhắc lại nhiệm vụ.",
@@ -173,7 +173,7 @@
       "nguon": "notes/S04.txt:19"
     },
     {
-      "t": "<SV điền>",
+      "t": "13:12",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Điền form: nhiệm vụ vừa rồi khá là dễ, nhưng nó khá là dễ với người thông minh.",
@@ -181,7 +181,7 @@
       "nguon": "notes/S04.txt:20"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 4,
   "sus": [
     2,

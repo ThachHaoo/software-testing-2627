@@ -4,8 +4,8 @@
   "ngay": "2026-11-10",
   "nguoi_tham_gia": "P03",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Edge / Windows 10",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "05:12",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "07:00",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Chưa thấy hình của sản phẩm",
@@ -29,7 +29,7 @@
       "nguon": "notes/S03.txt:1"
     },
     {
-      "t": "<SV điền>",
+      "t": "07:50",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Không rành, nhưng mà kiểu thấy nó nhạy hơn",
@@ -37,7 +37,7 @@
       "nguon": "notes/S03.txt:2"
     },
     {
-      "t": "<SV điền>",
+      "t": "08:19",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Các luồng thực hiện nhanh hơn so với Shopee.",
@@ -45,7 +45,7 @@
       "nguon": "notes/S03.txt:3"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 7,
   "sus": [
     5,

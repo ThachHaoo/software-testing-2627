@@ -4,8 +4,8 @@
   "ngay": "2026-11-10",
   "nguoi_tham_gia": "P05",
   "nhom": null,
-  "nen_tang": "<SV điền>",
-  "reset_du_lieu": "<SV điền>",
+  "nen_tang": "Safari / MacOS",
+  "reset_du_lieu": true,
   "dong_y": {
     "quay_man_hinh": true,
     "ghi_am": true,
@@ -14,14 +14,14 @@
   "video": null,
   "nhiem_vu": {
     "moc": {},
-    "ket_thuc": "<SV điền>",
-    "hoan_thanh": "<SV điền>",
+    "ket_thuc": "02:30",
+    "hoan_thanh": "khong_tro_giup",
     "noi_dung_trang_thai": null,
     "cau_tra_loi_trang_thai": null
   },
   "su_kien": [
     {
-      "t": "<SV điền>",
+      "t": "03:32",
       "man_hinh": null,
       "loai": "N",
       "mo_ta": "Mình nghĩ là khi ấn thêm vào giỏ thì phải hiện thông báo đơn hàng này phải thêm vào giỏ để người dùng dễ nhận biết hơn. Ví dụ thêm vào rồi thì ở cái chỗ giỏ hàng hiển thị số 1 để biết có 1 đơn hàng trong giỏ hàng.",
@@ -29,7 +29,7 @@
       "nguon": "notes/S05.txt:1"
     }
   ],
-  "tro_giup": "<SV điền>",
+  "tro_giup": [],
   "seq": 7,
   "sus": [
     3,
