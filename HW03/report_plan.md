@@ -95,6 +95,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | D1 | Skill tự đủ (Skill 1/3b, 10/11): `gen_oracle.py`, `gen_run.py` gắn cứng HW03 (đường dẫn `HW03/checklist`, màn C2, overlay, adb) → **không chép** vào `scripts/`; SKILL.md ghi "chỉ có ở repo ví dụ". Sửa chữ nguồn trong `render_checklist.py` (không còn trỏ `tools/`). `.claude/skills` ↔ `HW03/skills` diff = 0 |
 | D2 | Lượt Claude Code khi quay demo skill **vào prompt log** (khai mục đích "demo skill"), không thêm `exclude` vào `tools/hw.toml` |
 | R4 | Giờ lượt tay P1 (4/6d, 10/11): SV giải thích ".jpg là ảnh lấy từ điện thoại, .png là ảnh chụp màn hình máy tính"; ảnh P1 đều .png → giờ lấy từ mtime ảnh gốc `evidence_raw/P1_chrome/`: kết thúc 00:10 10/11 (P1_CL-64_1), restart 22:56 09/11 (trước ảnh đầu 23:24). Kiểm chéo bằng P2 (mtime 00:13–00:36 khớp file lượt 00:10–00:38) |
+| PFX | Tiền tố tiêu đề GitHub Issue = **`[HW03-C2-<số BUG>]`** (vd `[HW03-C2-58]`), theo cách bạn nhóm đặt `[HW03-C3-xx]`; chỉ dùng trên GitHub, không đưa vào tiêu đề trong file BUG (5/6c, 10/11) |
+| DUP | Giữ nguyên mức trùng của cả 28 nhóm theo `bugs/dup_check.md` (21 issue mới #204–#224 đều là admin C3); G-16 ↔ #123 = liên quan (5/6c, 10/11) |
 
 **Còn chờ SV chốt:** (không còn)
 

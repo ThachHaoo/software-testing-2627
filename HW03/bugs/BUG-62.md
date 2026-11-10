@@ -1,85 +1,89 @@
 # BUG-62
 
 - **ID:** BUG-62
-- **Nhóm dữ kiện:** G-05 (CL-17, CL-66)
-- **Tiêu đề:** 🔒 SV viết
-- **Mô tả:** 🔒 SV viết
-- **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
-- **Severity:** 🔒 SV chọn
-- **Priority:** 🔒 SV chọn
-- **Nhận định:** 🔒 SV viết
-- **GitHub Issue:** (sau khi tạo)
+- **Tiêu đề:** `<SV viết>`
+- **Severity:** `<SV viết>`
+- **Priority:** `<SV viết>`
+- Tiền tố GitHub: [HW03-C2-62]
+
+## Môi trường
+
+- SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+- Máy: Windows 11 Home (Asus Vivobook X1505VA), backend `node server.js` :3000 (CSDL seed lại mỗi lần khởi động), web http://localhost:5173 (frontend-web)
+- P1 – Google Chrome 157.0.8103.39 qua Playwright 1.48.2 (tham chiếu, Q1) / Windows 11 · CL-17: lượt `runs/P1_auto_20261109-2236.json`, 22:36 09/11/2026
+- P1 – Google Chrome 157.0.8103.39 qua Playwright 1.48.2 (tham chiếu, Q1) / Windows 11 · CL-66: lượt `runs/P1_auto_20261109-2236.json`, 22:36 09/11/2026
+- P2 – Firefox 131.0 bản build của Playwright 1.48.2 / Windows 11 · CL-17: lượt `runs/P2_auto_20261109-2240.json`, 22:40 09/11/2026
+- P2 – Firefox 131.0 bản build của Playwright 1.48.2 / Windows 11 · CL-66: lượt `runs/P2_auto_20261109-2240.json`, 22:40 09/11/2026
+- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 qua Playwright _android · CL-17: lượt `runs/P3_auto_20261109-2244.json`, 22:44 09/11/2026
+- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 qua Playwright _android · CL-66: lượt `runs/P3_auto_20261109-2244.json`, 22:44 09/11/2026
+- Màn hình: CL-17 – Đăng nhập, Quên mật khẩu (bước 1); CL-66 – Đăng nhập, Quên mật khẩu (bước 1)
+- Chi tiết: `HW03/env/environment.md`, thứ tự lượt chạy ở report §3.5
+
+## Tiền điều kiện
+
+`<SV viết>`
+
+## Các bước tái hiện
+
+`<SV viết>`
+
+## Expected (trích căn cứ)
+
+- CL-17 – căn cứ: FR-02.4 (README.md:44); FR-22.2 (README.md:253)
+  - FR-02.4, README.md:44 (AI chép nguyên văn): Trường email phải dùng `type="email"` (có validate HTML5 format).
+  - FR-22.2, README.md:253 (AI chép nguyên văn): Trường Email phải dùng `type="email"`.
+- CL-66 – căn cứ: FR-02.4 (README.md:44); FR-22.2 (README.md:253)
+  - FR-02.4, README.md:44 (AI chép nguyên văn): Trường email phải dùng `type="email"` (có validate HTML5 format).
+  - FR-22.2, README.md:253 (AI chép nguyên văn): Trường Email phải dùng `type="email"`.
+- Expected của bug: `<SV viết>`
+
+## Actual
+
+`<SV viết>`
+
+## Bằng chứng
+
+- CL-17 P1 (auto): `../checklist/evidence/auto/P1_CL-17_1.png`
+- CL-17 P2 (auto): `../checklist/evidence/auto/P2_CL-17_1.png`
+- CL-17 P3 (auto): `../checklist/evidence/auto/P3_CL-17_1.png`
+- CL-66 P1 (auto): `../checklist/evidence/auto/P1_CL-66_1.png`
+- CL-66 P2 (auto): `../checklist/evidence/auto/P2_CL-66_1.png`
+- CL-66 P3 (auto): `../checklist/evidence/auto/P3_CL-66_1.png`
+
+## Item liên quan
+
+- CL-17 – Ô Email dùng type="email" – Failed: P1, P2, P3 · một phần #4 (#4 phủ /login; /forgot-password bước 1 chưa có issue)
+- CL-66 – Email sai định dạng bị chặn trước khi gửi – Failed: P1, P2, P3 · một phần #4 (#4 (không kiểm tra định dạng) phủ /login; /forgot-password chưa có issue)
+- Nhóm dữ kiện: G-05 trong `HW03/bugs/bug_groups.md` (Ô Email bước 1 Quên mật khẩu: type="text", email sai định dạng vẫn gửi request (phần /login trùng #4)); kiểm trùng: `HW03/bugs/dup_check.md`
+
+## Yêu cầu
+
+(AI điền từ `bug_groups.md`, SV duyệt)
+
+- **FR-02.4 (README.md:44); FR-22.2 (README.md:253):** Ô Email dùng type="email" (CL-17)
+- **FR-02.4 (README.md:44); FR-22.2 (README.md:253):** Email sai định dạng bị chặn trước khi gửi (CL-66)
+
+## Ghi chú cô lập
+
+### Dữ kiện (AI chép)
+
+- Actual nguyên văn CL-17 P1 (auto): `Lỗi: Error: /login ô Email type="text" · Lỗi: Error: /forgot-password ô Email type="text" · /login: type="text"; /forgot-password bước 1: type="text"`
+- Actual nguyên văn CL-17 P2 (auto): `Lỗi: Error: /login ô Email type="text" · Lỗi: Error: /forgot-password ô Email type="text" · /login: type="text"; /forgot-password bước 1: type="text"`
+- Actual nguyên văn CL-17 P3 (auto): `Lỗi: Error: /login ô Email type="text" · Lỗi: Error: /forgot-password ô Email type="text" · /login: type="text"; /forgot-password bước 1: type="text"`
+- Nguồn bước tái hiện CL-17: tiền điều kiện (checklist): – · cách kiểm: auto · test tự động: `HW03/tests/C2.spec.ts:89`
+- Actual nguyên văn CL-66 P1 (auto): `Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true`
+- Actual nguyên văn CL-66 P2 (auto): `Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true`
+- Actual nguyên văn CL-66 P3 (auto): `Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true`
+- Nguồn bước tái hiện CL-66: tiền điều kiện (checklist): – · cách kiểm: auto · test tự động: `HW03/tests/C2.spec.ts:99`
+
+### Nhận định
+
+`<SV viết>`
+
+## Link GitHub Issue
+
+`<sau khi tạo issue>`
 
 ---
 
-## Dữ kiện (AI chép từ `checklist.json`, không sửa)
-
-### CL-17 – Ô Email dùng type="email"
-
-- Màn hình: Đăng nhập, Quên mật khẩu (bước 1)
-- Căn cứ: FR-02.4 (README.md:44); FR-22.2 (README.md:253)
-- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #4 (#4 phủ /login; /forgot-password bước 1 chưa có issue)
-
-**Môi trường**
-
-- P1 – Google Chrome 157.0.8103.39 qua Playwright 1.48.2 (tham chiếu, Q1) / Windows 11
-- P2 – Firefox 131.0 bản build của Playwright 1.48.2 / Windows 11
-- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 qua Playwright _android
-- SUT: tkob-team/eshop-sut @ de0f48f · web http://localhost:5173 · backend :3000 (CSDL seed lại mỗi lần khởi động)
-
-**Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
-
-- Tiền điều kiện (checklist): –
-- Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:89`
-
-**Expected (chép từ checklist)**
-
-> DevTools: ô Email trên /login và bước 1 /forgot-password có type="email". Fail nếu type khác "email".
-
-**Actual (chép notes / số đo)**
-
-- P1 (auto): Lỗi: Error: /login ô Email type="text" · Lỗi: Error: /forgot-password ô Email type="text" · /login: type="text"; /forgot-password bước 1: type="text"
-- P2 (auto): Lỗi: Error: /login ô Email type="text" · Lỗi: Error: /forgot-password ô Email type="text" · /login: type="text"; /forgot-password bước 1: type="text"
-- P3 (auto): Lỗi: Error: /login ô Email type="text" · Lỗi: Error: /forgot-password ô Email type="text" · /login: type="text"; /forgot-password bước 1: type="text"
-
-**Ảnh**
-
-- P1: `../checklist/evidence/auto/P1_CL-17_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-17_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-17_1.png`
-
-### CL-66 – Email sai định dạng bị chặn trước khi gửi
-
-- Màn hình: Đăng nhập, Quên mật khẩu (bước 1)
-- Căn cứ: FR-02.4 (README.md:44); FR-22.2 (README.md:253)
-- Nền tảng Failed: P1, P2, P3 · trùng một phần/liên quan: #4 (#4 (không kiểm tra định dạng) phủ /login; /forgot-password chưa có issue)
-
-**Môi trường**
-
-- P1 – Google Chrome 157.0.8103.39 qua Playwright 1.48.2 (tham chiếu, Q1) / Windows 11
-- P2 – Firefox 131.0 bản build của Playwright 1.48.2 / Windows 11
-- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 qua Playwright _android
-- SUT: tkob-team/eshop-sut @ de0f48f · web http://localhost:5173 · backend :3000 (CSDL seed lại mỗi lần khởi động)
-
-**Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
-
-- Tiền điều kiện (checklist): –
-- Cách kiểm (checklist): –
-- Test tự động: `HW03/tests/C2.spec.ts:99`
-
-**Expected (chép từ checklist)**
-
-> Nhập 'abc' vào ô Email rồi submit → form bị chặn, có thông báo validate, DevTools Network không có request gửi đi. Fail nếu form gửi request.
-
-**Actual (chép notes / số đo)**
-
-- P1 (auto): Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true
-- P2 (auto): Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true
-- P3 (auto): Lỗi: Error: /login: form gửi 1 request /api/login · Lỗi: Error: /login: không có thông báo validate · Lỗi: Error: /forgot-password: form gửi 1 request /api/forgot-password · Lỗi: Error: /forgot-password: không có thông báo validate · /login: 1 request /api/login; validity.valid=true · /forgot-password: 1 request /api/forgot-password; validity.valid=true
-
-**Ảnh**
-
-- P1: `../checklist/evidence/auto/P1_CL-66_1.png`
-- P2: `../checklist/evidence/auto/P2_CL-66_1.png`
-- P3: `../checklist/evidence/auto/P3_CL-66_1.png`
+Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần dữ kiện (Môi trường, căn cứ, Bằng chứng, Item liên quan, Yêu cầu, Dữ kiện).

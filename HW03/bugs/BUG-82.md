@@ -1,50 +1,72 @@
 # BUG-82
 
 - **ID:** BUG-82
-- **Nhóm dữ kiện:** G-25 (SV-02)
-- **Tiêu đề:** 🔒 SV viết
-- **Mô tả:** 🔒 SV viết
-- **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
-- **Severity:** 🔒 SV chọn
-- **Priority:** 🔒 SV chọn
-- **Nhận định:** 🔒 SV viết
-- **GitHub Issue:** (sau khi tạo)
+- **Tiêu đề:** `<SV viết>`
+- **Severity:** `<SV viết>`
+- **Priority:** `<SV viết>`
+- Tiền tố GitHub: [HW03-C2-82]
+
+## Môi trường
+
+- SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+- Máy: Windows 11 Home (Asus Vivobook X1505VA), backend `node server.js` :3000 (CSDL seed lại mỗi lần khởi động), web http://localhost:5173 (frontend-web)
+- P1 – Cốc Cốc 160.0.106 / Windows 11 Home (Asus Vivobook X1505VA) – chạy tay · SV-02: lượt `runs/P1_manual_20261109-2257.md`, 22:58 09/11/2026 - 00:10 10/11/2026
+- P2 – Firefox 159.0.1 / Windows 11 – chạy tay · SV-02: lượt `runs/P2_manual_20261110-0010.md`, 00:10 10/11/2026 - 00:38 10/11/2026
+- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 (adb reverse) – chạy tay · SV-02: lượt `runs/P3_manual_20261110-0046.md`, 00:46 10/11/2026 - 01:54 10/11/2026
+- Màn hình: SV-02 – Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
+- Chi tiết: `HW03/env/environment.md`, thứ tự lượt chạy ở report §3.5
+
+## Tiền điều kiện
+
+`<SV viết>`
+
+## Các bước tái hiện
+
+`<SV viết>`
+
+## Expected (trích căn cứ)
+
+- SV-02 – căn cứ: Shneiderman #8 (Giảm tải trí nhớ ngắn hạn); Nielsen #7 (Linh hoạt và hiệu quả); Slide "Checklist - Text Box"
+- Expected của bug: `<SV viết>`
+
+## Actual
+
+`<SV viết>`
+
+## Bằng chứng
+
+- SV-02 P1 (tay): `../checklist/evidence/P1_chrome/P1_SV-02_1.png`, `../checklist/evidence/P1_chrome/P1_SV-02_2.png`, `../checklist/evidence/P1_chrome/P1_SV-02_3.png`, `../checklist/evidence/P1_chrome/P1_SV-02_4.png`
+- SV-02 P2 (tay): `../checklist/evidence/P2_firefox/P2_SV-02_1.png`, `../checklist/evidence/P2_firefox/P2_SV-02_2.png`, `../checklist/evidence/P2_firefox/P2_SV-02_3.png`, `../checklist/evidence/P2_firefox/P2_SV-02_4.png`
+- SV-02 P3 (tay): `../checklist/evidence/P3_android/P3_SV-02_1.png`, `../checklist/evidence/P3_android/P3_SV-02_2.png`, `../checklist/evidence/P3_android/P3_SV-02_3.png`, `../checklist/evidence/P3_android/P3_SV-02_4.png`
+
+## Item liên quan
+
+- SV-02 – Khả năng tự động điền (Autofill/Autocompletion) và dán (Paste) dữ liệu vào các trường nhập liệu – Failed: P1, P2, P3
+- Nhóm dữ kiện: G-25 trong `HW03/bugs/bug_groups.md` (Autofill của trình duyệt không điền được (dán được)); kiểm trùng: `HW03/bugs/dup_check.md`
+
+## Yêu cầu
+
+(AI điền từ `bug_groups.md`, SV duyệt)
+
+- **Shneiderman #8 (Giảm tải trí nhớ ngắn hạn); Nielsen #7 (Linh hoạt và hiệu quả); Slide "Checklist - Text Box":** Khả năng tự động điền (Autofill/Autocompletion) và dán (Paste) dữ liệu vào các trường nhập liệu (SV-02)
+
+## Ghi chú cô lập
+
+### Dữ kiện (AI chép)
+
+- Actual nguyên văn SV-02 P1 (tay): `Tất cả đều có thể Paste vào, nhưng Autofill chỉ có ở Forgot Password.`
+- Actual nguyên văn SV-02 P2 (tay): `Tất cả đều có thể Paste vào, nhưng không thể Autofill`
+- Actual nguyên văn SV-02 P3 (tay): `Tất cả đều có thể Paste vào, nhưng không thể Autofill`
+- Nguồn bước tái hiện SV-02: tiền điều kiện (checklist): Trình duyệt đã lưu thông tin đăng nhập/tài khoản trước đó. · cách kiểm: auto (P1): dán bằng Ctrl+V vào ô Email; Autofill + P2 → chạy tay · test tự động: `HW03/tests/C2.spec.ts:854`
+
+### Nhận định
+
+`<SV viết>`
+
+## Link GitHub Issue
+
+`<sau khi tạo issue>`
 
 ---
 
-## Dữ kiện (AI chép từ `checklist.json`, không sửa)
-
-### SV-02 – Khả năng tự động điền (Autofill/Autocompletion) và dán (Paste) dữ liệu vào các trường nhập liệu
-
-- Màn hình: Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
-- Căn cứ: Shneiderman #8 (Giảm tải trí nhớ ngắn hạn); Nielsen #7 (Linh hoạt và hiệu quả); Slide "Checklist - Text Box"
-- Nền tảng Failed: P1, P2, P3
-
-**Môi trường**
-
-- P1 – Cốc Cốc 160.0.106 / Windows 11 Home (Asus Vivobook X1505VA) – chạy tay
-- P2 – Firefox 159.0.1 / Windows 11 – chạy tay
-- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 (adb reverse) – chạy tay
-- SUT: tkob-team/eshop-sut @ de0f48f · web http://localhost:5173 · backend :3000 (CSDL seed lại mỗi lần khởi động)
-
-**Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
-
-- Tiền điều kiện (checklist): Trình duyệt đã lưu thông tin đăng nhập/tài khoản trước đó.
-- Cách kiểm (checklist): auto (P1): dán bằng Ctrl+V vào ô Email; Autofill + P2 → chạy tay
-- Test tự động: `HW03/tests/C2.spec.ts:854`
-
-**Expected (chép từ checklist)**
-
-> Thực hiện thao tác Paste (Ctrl+V) hoặc chọn gợi ý Autofill của trình duyệt vào các ô Email, OTP, Mật khẩu: dữ liệu phải được điền chính xác vào ô nhập và form chấp nhận dữ liệu đó khi submit. Fail nếu bất kỳ vế nào (dán hoặc autofill) bị hệ thống ngăn chặn/làm sai lệch dữ liệu.
-
-**Actual (chép notes / số đo)**
-
-- P1 (tay): Tất cả đều có thể Paste vào, nhưng Autofill chỉ có ở Forgot Password.
-- P2 (tay): Tất cả đều có thể Paste vào, nhưng không thể Autofill
-- P3 (tay): Tất cả đều có thể Paste vào, nhưng không thể Autofill
-
-**Ảnh**
-
-- P1: `../checklist/evidence/P1_chrome/P1_SV-02_1.png`, `../checklist/evidence/P1_chrome/P1_SV-02_2.png`, `../checklist/evidence/P1_chrome/P1_SV-02_3.png`, `../checklist/evidence/P1_chrome/P1_SV-02_4.png`
-- P2: `../checklist/evidence/P2_firefox/P2_SV-02_1.png`, `../checklist/evidence/P2_firefox/P2_SV-02_2.png`, `../checklist/evidence/P2_firefox/P2_SV-02_3.png`, `../checklist/evidence/P2_firefox/P2_SV-02_4.png`
-- P3: `../checklist/evidence/P3_android/P3_SV-02_1.png`, `../checklist/evidence/P3_android/P3_SV-02_2.png`, `../checklist/evidence/P3_android/P3_SV-02_3.png`, `../checklist/evidence/P3_android/P3_SV-02_4.png`
+Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần dữ kiện (Môi trường, căn cứ, Bằng chứng, Item liên quan, Yêu cầu, Dữ kiện).

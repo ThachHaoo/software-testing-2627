@@ -1,50 +1,72 @@
 # BUG-84
 
 - **ID:** BUG-84
-- **Nhóm dữ kiện:** G-27 (SV-04)
-- **Tiêu đề:** 🔒 SV viết
-- **Mô tả:** 🔒 SV viết
-- **Steps to reproduce:** 🔒 SV viết (từ nguồn bước bên dưới)
-- **Severity:** 🔒 SV chọn
-- **Priority:** 🔒 SV chọn
-- **Nhận định:** 🔒 SV viết
-- **GitHub Issue:** (sau khi tạo)
+- **Tiêu đề:** `<SV viết>`
+- **Severity:** `<SV viết>`
+- **Priority:** `<SV viết>`
+- Tiền tố GitHub: [HW03-C2-84]
+
+## Môi trường
+
+- SUT: `ttbhanh/eshop-sut` @ `85af3ba` (chạy từ fork `tkob-team/eshop-sut` @ `de0f48f` = 85af3ba + .gitignore, không đổi mã)
+- Máy: Windows 11 Home (Asus Vivobook X1505VA), backend `node server.js` :3000 (CSDL seed lại mỗi lần khởi động), web http://localhost:5173 (frontend-web)
+- P1 – Cốc Cốc 160.0.106 / Windows 11 Home (Asus Vivobook X1505VA) – chạy tay · SV-04: lượt `runs/P1_manual_20261109-2257.md`, 22:58 09/11/2026 - 00:10 10/11/2026
+- P2 – Firefox 159.0.1 / Windows 11 – chạy tay · SV-04: lượt `runs/P2_manual_20261110-0010.md`, 00:10 10/11/2026 - 00:38 10/11/2026
+- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 (adb reverse) – chạy tay · SV-04: lượt `runs/P3_manual_20261110-0046.md`, 00:46 10/11/2026 - 01:54 10/11/2026
+- Màn hình: SV-04 – Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
+- Chi tiết: `HW03/env/environment.md`, thứ tự lượt chạy ở report §3.5
+
+## Tiền điều kiện
+
+`<SV viết>`
+
+## Các bước tái hiện
+
+`<SV viết>`
+
+## Expected (trích căn cứ)
+
+- SV-04 – căn cứ: WCAG 2.2 SC 1.4.3 (Contrast Minimum)
+- Expected của bug: `<SV viết>`
+
+## Actual
+
+`<SV viết>`
+
+## Bằng chứng
+
+- SV-04 P1 (tay): `../checklist/evidence/P1_chrome/P1_SV-04_1.png`, `../checklist/evidence/P1_chrome/P1_SV-04_2.png`, `../checklist/evidence/P1_chrome/P1_SV-04_3.png`, `../checklist/evidence/P1_chrome/P1_SV-04_4.png`
+- SV-04 P2 (tay): `../checklist/evidence/P2_firefox/P2_SV-04_1.png`, `../checklist/evidence/P2_firefox/P2_SV-04_2.png`, `../checklist/evidence/P2_firefox/P2_SV-04_3.png`, `../checklist/evidence/P2_firefox/P2_SV-04_4.png`
+- SV-04 P3 (tay): `../checklist/evidence/P3_android/P3_SV-04_1.png`, `../checklist/evidence/P3_android/P3_SV-04_2.png`, `../checklist/evidence/P3_android/P3_SV-04_3.png`, `../checklist/evidence/P3_android/P3_SV-04_4.png`
+
+## Item liên quan
+
+- SV-04 – Độ tương phản màu sắc của văn bản và nhãn so với nền (Color Contrast Ratio) – Failed: P1, P2, P3
+- Nhóm dữ kiện: G-27 trong `HW03/bugs/bug_groups.md` (Độ tương phản chữ/nhãn dưới 4.5:1 ở Đăng nhập, Hồ sơ); kiểm trùng: `HW03/bugs/dup_check.md`
+
+## Yêu cầu
+
+(AI điền từ `bug_groups.md`, SV duyệt)
+
+- **WCAG 2.2 SC 1.4.3 (Contrast Minimum):** Độ tương phản màu sắc của văn bản và nhãn so với nền (Color Contrast Ratio) (SV-04)
+
+## Ghi chú cô lập
+
+### Dữ kiện (AI chép)
+
+- Actual nguyên văn SV-04 P1 (tay): `Quên mật khẩu đạt nhưng mà Đăng nhập và Hồ sơ thì không`
+- Actual nguyên văn SV-04 P2 (tay): `Quên mật khẩu đạt nhưng mà Đăng nhập và Hồ sơ thì không`
+- Actual nguyên văn SV-04 P3 (tay): `Quên mật khẩu đạt nhưng mà Đăng nhập và Hồ sơ thì không`
+- Nguồn bước tái hiện SV-04: tiền điều kiện (checklist): – · cách kiểm: auto: tỉ lệ tương phản chữ/nền tính từ màu CSS; placeholder + Lighthouse → SV · test tự động: `HW03/tests/C2.spec.ts:891`
+
+### Nhận định
+
+`<SV viết>`
+
+## Link GitHub Issue
+
+`<sau khi tạo issue>`
 
 ---
 
-## Dữ kiện (AI chép từ `checklist.json`, không sửa)
-
-### SV-04 – Độ tương phản màu sắc của văn bản và nhãn so với nền (Color Contrast Ratio)
-
-- Màn hình: Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ
-- Căn cứ: WCAG 2.2 SC 1.4.3 (Contrast Minimum)
-- Nền tảng Failed: P1, P2, P3
-
-**Môi trường**
-
-- P1 – Cốc Cốc 160.0.106 / Windows 11 Home (Asus Vivobook X1505VA) – chạy tay
-- P2 – Firefox 159.0.1 / Windows 11 – chạy tay
-- P3 – Chrome Android 156.0.8078.79 / Android 14, POCO F5 (adb reverse) – chạy tay
-- SUT: tkob-team/eshop-sut @ de0f48f · web http://localhost:5173 · backend :3000 (CSDL seed lại mỗi lần khởi động)
-
-**Nguồn bước tái hiện (chép nguyên văn – SV viết lại thành Steps)**
-
-- Tiền điều kiện (checklist): –
-- Cách kiểm (checklist): auto: tỉ lệ tương phản chữ/nền tính từ màu CSS; placeholder + Lighthouse → SV
-- Test tự động: `HW03/tests/C2.spec.ts:891`
-
-**Expected (chép từ checklist)**
-
-> Kiểm tra bằng công cụ DevTools Accessibility / Lighthouse: tỉ lệ tương phản màu sắc của chữ (văn bản, label, placeholder, text trên button) so với màu nền đạt tối thiểu 4.5:1 (đối với chữ thường). Fail nếu tỉ lệ tương phản < 4.5:1 khiến chữ mờ khó đọc.
-
-**Actual (chép notes / số đo)**
-
-- P1 (tay): Quên mật khẩu đạt nhưng mà Đăng nhập và Hồ sơ thì không
-- P2 (tay): Quên mật khẩu đạt nhưng mà Đăng nhập và Hồ sơ thì không
-- P3 (tay): Quên mật khẩu đạt nhưng mà Đăng nhập và Hồ sơ thì không
-
-**Ảnh**
-
-- P1: `../checklist/evidence/P1_chrome/P1_SV-04_1.png`, `../checklist/evidence/P1_chrome/P1_SV-04_2.png`, `../checklist/evidence/P1_chrome/P1_SV-04_3.png`, `../checklist/evidence/P1_chrome/P1_SV-04_4.png`
-- P2: `../checklist/evidence/P2_firefox/P2_SV-04_1.png`, `../checklist/evidence/P2_firefox/P2_SV-04_2.png`, `../checklist/evidence/P2_firefox/P2_SV-04_3.png`, `../checklist/evidence/P2_firefox/P2_SV-04_4.png`
-- P3: `../checklist/evidence/P3_android/P3_SV-04_1.png`, `../checklist/evidence/P3_android/P3_SV-04_2.png`, `../checklist/evidence/P3_android/P3_SV-04_3.png`, `../checklist/evidence/P3_android/P3_SV-04_4.png`
+Mô tả bug do SV viết (AI-01 §11); AI chỉ điền phần dữ kiện (Môi trường, căn cứ, Bằng chứng, Item liên quan, Yêu cầu, Dữ kiện).
