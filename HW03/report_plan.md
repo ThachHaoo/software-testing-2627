@@ -97,6 +97,9 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | R4 | Giờ lượt tay P1 (4/6d, 10/11): SV giải thích ".jpg là ảnh lấy từ điện thoại, .png là ảnh chụp màn hình máy tính"; ảnh P1 đều .png → giờ lấy từ mtime ảnh gốc `evidence_raw/P1_chrome/`: kết thúc 00:10 10/11 (P1_CL-64_1), restart 22:56 09/11 (trước ảnh đầu 23:24). Kiểm chéo bằng P2 (mtime 00:13–00:36 khớp file lượt 00:10–00:38) |
 | PFX | Tiền tố tiêu đề GitHub Issue = **`[HW03-C2-<số BUG>]`** (vd `[HW03-C2-58]`), theo cách bạn nhóm đặt `[HW03-C3-xx]`; chỉ dùng trên GitHub, không đưa vào tiêu đề trong file BUG (5/6c, 10/11) |
 | DUP | Giữ nguyên mức trùng của cả 28 nhóm theo `bugs/dup_check.md` (21 issue mới #204–#224 đều là admin C3); G-16 ↔ #123 = liên quan (5/6c, 10/11) |
+| M6 | Bỏ ảnh `P*_M6_1`: M6 "Chung – tất cả màn C2" là nhóm item, không phải một màn; ảnh tổng quan chỉ M1…M5 (RUN.md mục 2). Sửa tiêu đề nhóm M6 trong `RUN.md` + `tests/gen_run.py` (4/6e, 10/11) |
+| CL64-P3 | CL-64 P3: bỏ tham chiếu `P3_CL-64_1.jpg` (không tồn tại ở đâu), giữ `_2`; notes "ảnh _1 không có; chỉ _2" (4/6e) |
+| M4-P3 | Giữ `P3_M4_1` dù Lịch sử đơn trống; report §4.3 ghi "lịch sử đơn trống lúc chụp" (4/6e) |
 
 **Còn chờ SV chốt:** (không còn)
 
@@ -114,6 +117,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 Claude Code (T2 2b): nhánh local `usability-tunnel` trong eshop-sut (commit `e33212d`: 7 file frontend-web đổi `http://localhost:3000/api` → `/api`, `vite.config.js` proxy + allowedHosts); tải cloudflared 2026.10.7 vào `D:\Tools\cloudflared` (SV đồng ý, chữ ký Cloudflare hợp lệ); `tools/usability_session.ps1`, `tools/sut_main.ps1`; sửa plan.md mục 5–6 và thêm 1 dòng vào participant_kit.md theo lệnh SV; check_kit 0 lỗi. SV tự thử luồng qua 4G.
 - 10/11 Claude Code (skill): cập nhật `gui-checklist-testing` (chế độ Playwright, gộp V1, quy tắc ảnh, đọc slide trước bước 1, quy tắc 9; chuyển `merge_hw03.py`/`failed_list_hw03.py`/`bug_groups_hw03.py` thành `scripts/merge_runs.py`/`failed_list.py`/`bug_groups.py` tổng quát, `tools/` giữ wrapper dữ liệu HW03; schema thêm trường auto) và `usability-evaluation` (bước 0: lựa chọn remote synchronous + tunnel). Chạy lại trên dữ liệu HW03: checklist.json, CSV, checklist.md, failed_list, bug_groups, BUG-58…85, report giống hệt; Excel 2144 ô, 0 ô khác.
 - 10/11 Claude Code (4/6c, Skill 1/3, 1/3b, report): R9/R11 áp bằng override `merge_hw03.py`; `merge_runs.py` bỏ `lech_auto_tay` khi quyết định làm tay = auto (nguyên nhân chuyển vào notes); chép skill sang `HW03/skills/` + `VideoLinks.md` + `demo_plan.md` (đề xuất demo); D1 sửa SKILL.md/`render_checklist.py`; `bugs/dup_check.md` (kiểm trùng 179 issue, AI đề xuất mức, SV quyết); `report_t1_hw03.py` thêm khối §3.3, §3.5 (thực thi), §3.6, §4.3; **AI nháp §3.2 và §4.2 của report** (dòng "📝 AI nháp – SV duyệt/sửa", chỉ dùng dữ kiện trong repo).
+- **Lỗi RUN.md do AI** (phát hiện 10/11 khi lập `missing_photos.md`): `gen_run.py` (AI viết, 3/6) ghi "ảnh tổng quan bắt buộc: `P<n>_M6_1.png`" cho nhóm M6, mâu thuẫn mục 2 của chính RUN.md (M1…M5) → sửa 4/6e.
+- 10/11 Claude Code (4/6e): sửa tiêu đề M6 (`RUN.md`, `gen_run.py`), bỏ tham chiếu `P3_CL-64_1.jpg` theo SV, ghi chú `P3_M4_1`; xem 5 ảnh P3_M* – chưa có overlay → dừng, chưa nén.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)

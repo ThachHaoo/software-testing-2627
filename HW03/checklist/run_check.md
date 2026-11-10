@@ -64,3 +64,9 @@ Ghi chú: cột Ngày đặt của auto P2/P3 cũng là "9/11/2026" (locale vi-V
 - **Q1 (P1 = Cốc Cốc):** (a) chạy lại 15 item manual P1 trên Chrome 157; (b) giữ Cốc Cốc 160 làm P1 (cùng nhân Chromium), đổi tên nền tảng P1 trong report/env/meta và khai lệch so với kế hoạch; (c) giữ kết quả, ghi giới hạn.
 - **Q2 (CL-64 ×3):** (a) Blocked; (b) chạy lại, bỏ trống ô SĐT (chỉ sửa Họ Tên) để kiểm đúng việc "tắt backend". Dữ kiện: ảnh P2 nhập 10 chữ số `0934…` vẫn bị alert "…đúng 9-10 chữ số", trùng tiêu đề issue nhóm **#111** "Web rejects a valid 10-digit 0-prefixed phone"; P1 nhập 9 chữ số.
 - B1–B5 ở mục 0.
+
+## 4/6e (10/11)
+
+- CL-64 P3: file lượt trỏ `P3_CL-64_1.jpg` + `P3_CL-64_2.jpg`; `_1` không tồn tại ở `evidence/` lẫn `evidence_raw/` → SV chốt bỏ tham chiếu `_1`, giữ `_2`; notes: "ảnh _1 không có; chỉ _2".
+- `P3_M4_1`: SV giữ ảnh Lịch sử đơn trống; ghi chú "lịch sử đơn trống lúc chụp" ở report §4.3.
+- M6: SV chốt bỏ ảnh `P*_M6_1` (M6 không phải một màn); sửa tiêu đề nhóm M6 trong `RUN.md` + `tests/gen_run.py`.

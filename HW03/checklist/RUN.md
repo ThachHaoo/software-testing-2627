@@ -78,7 +78,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 | ☐ | CL-15 | Hồ sơ + Lịch sử đơn | Bố cục không vỡ ở màn hình hẹp | Có ≥ 1 đơn. | Phần chạy tay: auto: thanh cuộn ngang toàn trang; phần tử bị cắt/chồng → SV xem ảnh. Phần tự động: xem `runs/P1_auto_*.json`. |
 | ☐ | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Có ≥ 1 đơn. P3: throttling qua chrome://inspect. | Phần chạy tay: auto (P1, CDP Slow 3G): empty state hiện trước khi dữ liệu về / có chỉ báo tải; P2 chạy tay. Phần tự động: xem `runs/P1_auto_*.json`. |
 
-#### M6 – Chung – tất cả màn C2 · ảnh tổng quan bắt buộc: `P1_M6_1.png`
+#### M6 – Chung – tất cả màn C2 · không chụp ảnh tổng quan (M6 là nhóm item chung, không phải một màn – mục 2: M1…M5)
 
 | ☐ | Item | Màn hình | Mục kiểm tra | Tiền điều kiện | Cần nhìn (ngưỡng Pass/Fail) |
 |---|---|---|---|---|---|
@@ -132,7 +132,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 | ☐ | CL-15 | Hồ sơ + Lịch sử đơn | Bố cục không vỡ ở màn hình hẹp | Có ≥ 1 đơn. | Phần chạy tay: auto: thanh cuộn ngang toàn trang; phần tử bị cắt/chồng → SV xem ảnh. Phần tự động: xem `runs/P2_auto_*.json`. |
 | ☐ | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Có ≥ 1 đơn. P3: throttling qua chrome://inspect. | Network throttling 'Slow 3G', tải lại /profile → trong lúc chờ có chỉ báo đang tải; không hiện 'chưa có đơn hàng' trước khi dữ liệu về. Fail nếu hiện empty state rồi mới hiện bảng. |
 
-#### M6 – Chung – tất cả màn C2 · ảnh tổng quan bắt buộc: `P2_M6_1.png`
+#### M6 – Chung – tất cả màn C2 · không chụp ảnh tổng quan (M6 là nhóm item chung, không phải một màn – mục 2: M1…M5)
 
 | ☐ | Item | Màn hình | Mục kiểm tra | Tiền điều kiện | Cần nhìn (ngưỡng Pass/Fail) |
 |---|---|---|---|---|---|
@@ -179,7 +179,7 @@ Ghi vào bản sao của `runs/<P>_manual_TEMPLATE.md` → `runs/<P>_manual_<YYY
 | ☐ | CL-15 | Hồ sơ + Lịch sử đơn | Bố cục không vỡ ở màn hình hẹp | Có ≥ 1 đơn. | Phần chạy tay: auto: thanh cuộn ngang toàn trang; phần tử bị cắt/chồng → SV xem ảnh. Phần tự động: xem `runs/P3_auto_*.json`. |
 | ☐ | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Có ≥ 1 đơn. P3: throttling qua chrome://inspect. | Network throttling 'Slow 3G', tải lại /profile → trong lúc chờ có chỉ báo đang tải; không hiện 'chưa có đơn hàng' trước khi dữ liệu về. Fail nếu hiện empty state rồi mới hiện bảng. |
 
-#### M6 – Chung – tất cả màn C2 · ảnh tổng quan bắt buộc: `P3_M6_1.png`
+#### M6 – Chung – tất cả màn C2 · không chụp ảnh tổng quan (M6 là nhóm item chung, không phải một màn – mục 2: M1…M5)
 
 | ☐ | Item | Màn hình | Mục kiểm tra | Tiền điều kiện | Cần nhìn (ngưỡng Pass/Fail) |
 |---|---|---|---|---|---|

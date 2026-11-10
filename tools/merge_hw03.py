@@ -37,6 +37,7 @@ OVERRIDE = {
     ("CL-34", "P2"): {"them": "chỉ Firefox Playwright, chưa xác nhận trên trình duyệt thật – không lập bug (5/6a)", "lap_bug": False},
     ("CL-08", "P1"): {"ket_qua": "Failed", "them": "SV chốt R9=b: Expected \"cùng một kiểu phân cách trên cả 3 nền tảng\" áp cho cả P1; P1 hiện \"30.000.000 ₫\", P2/P3 hiện \"6,000,000 ₫\" → kiểu phân cách khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R9, SV có thể sửa)"},
     ("CL-09", "P1"): {"ket_qua": "Failed", "them": "SV chốt R11=b: Expected \"dd/mm/yyyy và giống nhau trên P1, P2, P3\" áp cho cả P1; ảnh P1_CL-09_1 hiện \"9/11/2026\" (ngày 1 chữ số, không phải dd/mm/yyyy), P2/P3 hiện \"11/9/2026\" → khác nhau giữa các nền tảng (lý do lấy từ khuyến nghị run_check R11, SV có thể sửa)"},
+    ("CL-64", "P3"): {"them": "ảnh _1 không có; chỉ _2 (4/6e: bỏ tham chiếu P3_CL-64_1.jpg trong file lượt, file không tồn tại ở đâu)"},
     ("CL-52", "P3"): {"them": "thiếu ảnh (ảnh P3_CL-52_1 chỉ thấy \"Đăng nhập thất bại\", không thấy trạng thái khoá) – 5/6a"},
 }
 

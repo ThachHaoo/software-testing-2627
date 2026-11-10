@@ -21,6 +21,7 @@ VALS = ["Passed", "Failed", "N/A", "Blocked"]
 DIRS = {"P1": "P1_chrome", "P2": "P2_firefox", "P3": "P3_android"}
 SCREENS = [("M1", "Đăng nhập"), ("M2", "Quên mật khẩu (B1, B2)"), ("M3", "Hồ sơ"), ("M4", "Lịch sử đơn"), ("M5", "Navbar khi đã đăng nhập")]
 M5_REF = {"P1": "P1_M4_1", "P2": "P2_M4_1", "P3": "P3_M3_1"}   # R-M5: dùng lại ảnh có navbar đã đăng nhập
+OV_NOTE = {("P3", "M4"): "lịch sử đơn trống lúc chụp"}   # 4/6e: SV giữ ảnh
 
 
 def res(it, P):
@@ -81,7 +82,7 @@ def overview(plats):
                 row.append(f"dùng lại `{M5_REF[P]}`" + ("" if f.exists() else " (chưa có)"))
             else:
                 fs = sorted(x.stem for x in (ev / DIRS[P]).glob(f"{P}_{code}_*.png"))
-                row.append(", ".join(f"`{x}`" for x in fs) or "**chưa có**")
+                row.append((", ".join(f"`{x}`" for x in fs) or "**chưa có**") + (f" ({OV_NOTE[(P, code)]})" if (P, code) in OV_NOTE else ""))
         out.append(f"| {code} – {name} | " + " | ".join(row) + " |")
     return out
 

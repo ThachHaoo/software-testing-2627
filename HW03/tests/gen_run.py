@@ -72,7 +72,7 @@ def table(P, sel):
     for code, name in SCREENS:
         its = [i for i in mid if screen(i) == code]
         if its:
-            block(f"{code} – {name} · ảnh tổng quan bắt buộc: `P{n}_{code}_1.png`", its)
+            block(f"{code} – {name} · ảnh tổng quan bắt buộc: `P{n}_{code}_1.png`" if code != "M6" else f"{code} – {name} · không chụp ảnh tổng quan (M6 là nhóm item chung, không phải một màn – mục 2: M1…M5)", its)
     block("Cuối lượt (khoá tài khoản / tắt backend – làm sau cùng)", last)
     return out
 
