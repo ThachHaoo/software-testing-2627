@@ -52,7 +52,7 @@
 | S3 | `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · [chờ chốt transcript] | link `<SV điền>` · `HW03/skills/VideoLinks.md`, `HW03/skills/demo_plan.md` | không có |
 | R1 | Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3) + nháp §3.2, §4.2 (📝 AI nháp) | Claude Code · 10/11/2026 02:55 · `3ee3158` (HW03[T1] 4/6b: gộp kết quả, Excel, danh sách Failed) · [chờ chốt transcript] | khối giữa marker REPORT:T1 · `tools/report_t1_hw03.py` | `ad992bc` HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2; `4b4c64c` HW03[T1] 4/6d: R4; `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64 |
 | R2 | Test summary README + report §8 | Claude Code · 10/11/2026 19:05 · `70aa585` (HW03: README test summary (script) + chỗ tự chấm) · [chờ chốt transcript] | khối SUMMARY · `tools/summary_hw03.py` | không có |
-| R3 | Khung AI-02, AI-03, khối Mandatory Disclosure §11 | chưa commit | file này | – |
+| R3 | Khung AI-02, AI-03, khối Mandatory Disclosure §11 | Claude Code · 10/11/2026 19:07 · `c2aa7ae` (HW03: khung AI-02, AI-03 + Mandatory Disclosure §11 (script)) · [chờ chốt transcript] | file này · `tools/forms_hw03.py` | không có |
 | E1 | Mô tả môi trường (`env/environment.md`) | Claude Code · 05/11/2026 02:26 · `1172c20` (HW03[T1] 3/6b: C1, H1, P3A) · [chờ chốt transcript] | phiên bản trình duyệt/OS/thiết bị · `HW03/env/environment.md` | `107b67f` HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt |
 
 *22 artifact. Sinh bằng `tools/forms_hw03.py` từ danh mục trong script + `git log` (commit tạo = commit đầu tiên thêm file chính – đường dẫn đầu ở cột (2)). Cột (5) chỉ liệt kê commit, không diễn giải.*
