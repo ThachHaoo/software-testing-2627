@@ -1,0 +1,64 @@
+{
+  "phien": "S00",
+  "pilot": true,
+  "ngay": "2026-11-10",
+  "nguoi_tham_gia": "P00",
+  "nhom": null,
+  "nen_tang": "<SV điền>",
+  "reset_du_lieu": "<SV điền>",
+  "dong_y": {
+    "quay_man_hinh": true,
+    "ghi_am": true,
+    "lien_he_xac_nhan": true
+  },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Thấy nút thêm vào giỏ hàng bị lag, thấy bấm không hiện, sau đó đã được.",
+      "bug": null,
+      "nguon": "notes/S00.txt:1"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Làm theo từng bước thì đúng như yêu cầu, còn mật khẩu hơi kỳ kỳ.",
+      "bug": null,
+      "nguon": "notes/S00.txt:2"
+    }
+  ],
+  "tro_giup": "<SV điền>",
+  "seq": 6,
+  "sus": [
+    4,
+    2,
+    5,
+    2,
+    4,
+    2,
+    5,
+    1,
+    4,
+    1
+  ],
+  "cau_hoi_mo": {
+    "ro_rang": "không",
+    "khoi_phuc_loi": "mình không biết cách sửa",
+    "toc_do": "không",
+    "tin_cay": "có vì có hiện số tiền trước và sau giảm giá"
+  },
+  "ghi_chu": "PILOT – không tính vào thống kê. Sau pilot giữ nguyên kịch bản; từ S01 bổ sung \"hỏi lại ngay khi nhận xét mơ hồ\" (SV chốt 11/11).",
+  "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
+  "nghe_nghiep": "DA",
+  "nghe_nghiep_nguon": "SV cung cấp"
+}

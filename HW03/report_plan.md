@@ -101,6 +101,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 | CL64-P3 | CL-64 P3: bỏ tham chiếu `P3_CL-64_1.jpg` (không tồn tại ở đâu), giữ `_2`; notes "ảnh _1 không có; chỉ _2" (4/6e) |
 | M4-P3 | Giữ `P3_M4_1` dù Lịch sử đơn trống; report §4.3 ghi "lịch sử đơn trống lúc chụp" (4/6e) |
 
+| PILOT | S00 = pilot (P00), không tính thống kê; sau pilot giữ nguyên kịch bản, từ S01 bổ sung "hỏi lại ngay khi nhận xét mơ hồ"; S01–S07 = 7 phiên chính. Mã "SO1" (chữ O) trong form = S01. Nghề nghiệp S00…S07 do SV cung cấp (không lấy cột "Bạn là" của form) (11/11) |
 **Còn chờ SV chốt:** (không còn)
 
 ## f. Khai cho Audit (ghi dần)
@@ -123,6 +124,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 phiên thảo luận 19:23: AI dựng Google Form (Apps Script) cho SEQ + SUS + 4 câu hỏi mở từ `participant_kit.md`; CSV form có họ tên/SĐT không vào repo.
 - 10/11 phiên thảo luận 19:29–19:31: AI nháp kịch bản điều phối `usability/moderator_script.md` (phiên ~10 phút); Claude Code commit nguyên văn (2c/10), sửa plan mục 3, 5 theo SV chốt (2d/10).
 - 10/11 Claude Code (5/6e): **AI viết `tests/repro_bugs.spec.ts` + `tests/repro.config.ts`** (Playwright chạy lại Steps SV của BUG-58…85 trên P1/P2, số đo `bugs/repro/repro_P*.json`) và `bugs/bug_check.md` (kiểm dữ kiện, chỉ liệt kê, không đề xuất câu chữ).
+- 11/11 Claude Code (T2 2/10–9/10): **AI dựng 8 phiếu `usability/sessions/S00…S07.json`** từ notes SV ghi tay (`sessions/notes/`) + CSV Google Form (chỉ cột mã phiên, đồng ý, SEQ, SUS, 4 câu mở) bằng `tools/usability_fill_hw03.py` (AI viết); nhãn "AI chép, SV duyệt"; thời gian / hoàn thành / trợ giúp để SV điền. Thêm `HW03/usability/evidence_raw/` vào `.gitignore`.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
@@ -131,6 +133,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - SV xem xét và sửa: `[...]`.
 - Item SV bổ sung (🔒, kèm lý do AI bỏ sót): `[...]`.
 - SV tự làm hoàn toàn: tuyển + danh sách 7 người, điều phối phiên, ghi chú quan sát, câu trả lời SUS, ảnh cross-platform có overlay, bug report, Critique, verdict Audit, điểm tự chấm, giọng video.
+- Dữ liệu người tham gia (cho AI-05): SV đã gửi CSV có họ tên/SĐT người tham gia cho phiên thảo luận claude.ai lúc 00:43 11/11; AI chỉ dùng cột SEQ/SUS. CSV (`usability/evidence_raw/responses.csv`) không commit; Claude Code chỉ đọc cột mã phiên, đồng ý, SEQ, SUS, câu hỏi mở.
 - Prompt log: trích tự động bằng `tools/extract_prompt_log.py` (hook `on_stop.py`); Section/Mục đích/Xử lý do em ghi.
 
 ## h. Lịch (deadline 10:00 thứ Tư 11/11/2026)
