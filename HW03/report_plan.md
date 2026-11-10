@@ -120,6 +120,8 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - **Lỗi RUN.md do AI** (phát hiện 10/11 khi lập `missing_photos.md`): `gen_run.py` (AI viết, 3/6) ghi "ảnh tổng quan bắt buộc: `P<n>_M6_1.png`" cho nhóm M6, mâu thuẫn mục 2 của chính RUN.md (M1…M5) → sửa 4/6e.
 - 10/11 Claude Code (4/6e): sửa tiêu đề M6 (`RUN.md`, `gen_run.py`), bỏ tham chiếu `P3_CL-64_1.jpg` theo SV, ghi chú `P3_M4_1`; xem 5 ảnh P3_M* – chưa có overlay → dừng, chưa nén.
 - 10/11 Claude Code (4/6f): xem từng ảnh P3_M1_1…P3_M4_1 sau khi SV overlay (đủ overlay, URL localhost, không lộ thông tin riêng), nén bằng `tools/compress_hw03.py`, chạy lại report §4.3.
+- 10/11 phiên thảo luận 19:23: AI dựng Google Form (Apps Script) cho SEQ + SUS + 4 câu hỏi mở từ `participant_kit.md`; CSV form có họ tên/SĐT không vào repo.
+- 10/11 phiên thảo luận 19:29–19:31: AI nháp kịch bản điều phối `usability/moderator_script.md` (phiên ~10 phút); Claude Code commit nguyên văn (2c/10), sửa plan mục 3, 5 theo SV chốt (2d/10).
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)

@@ -22,7 +22,7 @@ Theo khung **9 phần** của slide (*The 9-part test plan*). Flow U1 chốt ở
 | Trạng thái đầu | Backend vừa khởi động lại (CSDL seed); trình duyệt mở `http://localhost:5173`, **chưa đăng nhập**, giỏ trống |
 | Thông tin phát cho người tham gia | Tài khoản `test@eshop.com` / `Test1234!`; mã giảm giá `VIP100` (xem ghi chú ở mục 6) |
 | Tiêu chí thành công | Trong Hồ sơ → Lịch sử đơn hàng có 1 đơn mới, Tổng tiền = giá tai nghe − 100.000 ₫ (6.000.000 − 100.000 = 5.900.000 ₫), và người tham gia **nói được** trạng thái đơn |
-| Mốc thời gian (benchmark) | ≤ 5 phút — giả định, chỉnh sau pilot 📝 |
+| Mốc thời gian (benchmark) | ≤ 6 phút (SV chốt 10/11: người tham gia chỉ có 5–10 phút) |
 
 Nhiệm vụ chỉ nêu mục tiêu, không nêu bước (không nói "dùng ô tìm kiếm", "vào Hồ sơ").
 
@@ -34,7 +34,8 @@ Người từng mua hàng online ít nhất 1 lần, chưa dùng EShop, không h
 
 - **Remote synchronous moderated** (từ xa, đồng bộ, có điều phối) qua **Google Meet**: người tham gia dùng máy tính của mình, mở link em gửi, **chia sẻ màn hình** và think-aloud; em quan sát, ghi phiếu. 1 pilot + 7 phiên chính, mỗi phiên 1 người, cùng một nhiệm vụ.
 - Quay phiên trên máy em bằng **Xbox Game Bar hoặc OBS** (màn hình Meet + tiếng) chỉ khi người tham gia đồng ý (lời mở đầu của kit).
-- Thứ tự mỗi phiên (~20 phút): giới thiệu + xin đồng ý (3') → nhiệm vụ (≤ 10') → SEQ (1') → SUS (3') → câu hỏi mở (5').
+- Thứ tự mỗi phiên (~10 phút): mở đầu 1' → nhiệm vụ ≤ 6' → Google Form (SEQ + SUS + 4 câu mở) 3'. Lý do: người tham gia chỉ có 5–10 phút (SV chốt 10/11). Kịch bản chi tiết: `usability/moderator_script.md`.
+- SEQ, SUS và 4 câu hỏi mở thu bằng **Google Form** (AI dựng bằng Apps Script từ `participant_kit.md`, 19:23 10/11). CSV/Responses của form có họ tên + SĐT → **không đưa vào repo**; chỉ chép điểm SEQ/SUS và câu trả lời mở (theo mã P0x) vào JSON phiên.
 - Pilot dùng để kiểm: câu chữ nhiệm vụ có rõ không, flow có chạy hết không, thời gian; sửa xong mới chạy phiên chính. Kết quả pilot không tính vào 7 phiên.
 
 ## 6. Môi trường và thiết bị
