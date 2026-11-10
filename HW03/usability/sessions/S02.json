@@ -1,0 +1,72 @@
+{
+  "phien": "S02",
+  "pilot": false,
+  "ngay": "2026-11-10",
+  "nguoi_tham_gia": "P02",
+  "nhom": null,
+  "nen_tang": "<SV điền>",
+  "reset_du_lieu": "<SV điền>",
+  "dong_y": {
+    "quay_man_hinh": true,
+    "ghi_am": true,
+    "lien_he_xac_nhan": true
+  },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Bấm nút thêm vào giỏ hàng mà mà",
+      "bug": null,
+      "nguon": "notes/S02.txt:1"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Ủa kiểm tra đơn hàng ở đâu vậy",
+      "bug": null,
+      "nguon": "notes/S02.txt:2"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Thấy là cái web này tính năng từ việc chọn đơn hàng rồi xác nhận đơn hàng đến xác nhận mã giảm giá rất hợp lý, không có vấn đề gì. Mình nghĩ cái web rất là ổn.",
+      "bug": null,
+      "nguon": "notes/S02.txt:3"
+    }
+  ],
+  "tro_giup": "<SV điền>",
+  "seq": 7,
+  "sus": [
+    5,
+    1,
+    5,
+    2,
+    5,
+    2,
+    5,
+    2,
+    5,
+    2
+  ],
+  "cau_hoi_mo": {
+    "ro_rang": "Không có",
+    "khoi_phuc_loi": "Mình nghĩ mình đều biết cách sửa",
+    "toc_do": "Không có",
+    "tin_cay": "Có. Vì lúc mình thanh toán đơn hàng giá 6 triệu và áp dụng mã giảm giá thì số tiền được giảm được tính rất chính xác."
+  },
+  "ghi_chu": "",
+  "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
+  "nghe_nghiep": "DE",
+  "nghe_nghiep_nguon": "SV cung cấp"
+}
