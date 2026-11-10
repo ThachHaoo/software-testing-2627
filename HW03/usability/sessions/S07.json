@@ -1,0 +1,72 @@
+{
+  "phien": "S07",
+  "pilot": false,
+  "ngay": "2026-11-11",
+  "nguoi_tham_gia": "P07",
+  "nhom": null,
+  "nen_tang": "<SV điền>",
+  "reset_du_lieu": "<SV điền>",
+  "dong_y": {
+    "quay_man_hinh": true,
+    "ghi_am": true,
+    "lien_he_xac_nhan": false
+  },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Bấm 1 đơn thành 2 đơn.",
+      "bug": null,
+      "nguon": "notes/S07.txt:1"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Không cần nhập địa chỉ, số điện thoại vẫn đặt được đơn.",
+      "bug": null,
+      "nguon": "notes/S07.txt:2"
+    },
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Tên cũng không cần đổi vẫn đặt được.",
+      "bug": null,
+      "nguon": "notes/S07.txt:3"
+    }
+  ],
+  "tro_giup": "<SV điền>",
+  "seq": 7,
+  "sus": [
+    3,
+    1,
+    4,
+    1,
+    4,
+    1,
+    4,
+    1,
+    4,
+    1
+  ],
+  "cau_hoi_mo": {
+    "ro_rang": "Không",
+    "khoi_phuc_loi": "Không",
+    "toc_do": "Không",
+    "tin_cay": "Đúng, tính giá sau khi giảm hợp lý"
+  },
+  "ghi_chu": "KHÔNG đồng ý để trợ giảng liên hệ xác nhận.",
+  "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
+  "nghe_nghiep": "IT",
+  "nghe_nghiep_nguon": "SV cung cấp"
+}
