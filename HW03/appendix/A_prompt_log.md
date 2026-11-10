@@ -4781,10 +4781,83 @@ Báo cáo ≤ 6 dòng: nguyên nhân sót ảnh, hash.
 **Output:**
 ```
 Script không add (không có lệnh git) → lỗi do lệnh add tay của em, không vá harness. Giờ §5.3.
+
+sed không khớp (UTF-8), commit §5.3 chưa tạo. Sửa bằng Python.
+
+Đã thêm ảnh bị sót, sửa §5.3 và commit prompt log; `git status --short` hiện sạch.
+
+### Báo cáo cho phiên thảo luận
+- **Vì sao sót `P3_M2_2.png`:** lỗi ở lệnh add tay của em, không phải do script. Em add bằng mẫu `P3_M*_1.png` nên không khớp file `_2`. `compress_hw03.py` không chạy lệnh git nào, nên không vá harness. 4 ảnh còn lại đã được commit từ `6069790`; report §4.3 dòng 296 trỏ đúng `P3_M2_1`, `P3_M2_2`.
+- **Commit:** `df6a396` HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót · `62280b4` HW03[T2]: sửa thang đo §5.3 (giờ ghi "SEQ + SUS (`usability/plan.md` mục 8)") · `5fddef5` HW03: cập nhật prompt log
+- **Thứ tự commit khác lệnh:** lần sửa §5.3 đầu bằng `sed` không khớp nên commit sau prompt log.
+- **Lưu ý:** hook Stop sẽ sinh lại `A_prompt_log.md` sau lượt này, nên trước khi zip cần commit prompt log thêm một lần.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 101 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 93 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).
+## #102 | 19:35 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. HW03/usability/moderator_script.md (SV đặt vào, AI nháp ở phiên thảo luận 19:29–19:31 10/11): giữ nguyên nội dung, add + commit `HW03[T2] 2c/10: kịch bản điều phối (AI nháp)`.
+2. usability/plan.md: mục 3 benchmark → "≤ 6 phút", mục 5 thứ tự phiên → "~10 phút: mở đầu 1' → nhiệm vụ ≤ 6' → Google Form (SEQ + SUS + 4 câu mở) 3'"; lý do: người tham gia chỉ có 5–10 phút (SV chốt). Thêm dòng: SEQ/SUS/câu mở thu bằng Google Form (AI dựng bằng Apps Script từ participant_kit.md, 19:23 10/11); CSV form có họ tên/SĐT → KHÔNG vào repo. Commit `HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form`.
+3. report_plan mục f: khai 2 việc AI (Google Form, kịch bản điều phối). Không push, không amend.
+Báo cáo ≤ 4 dòng + hash.
+```
+
+**Output:**
+```
+Kịch bản không chứa dữ liệu cá nhân (chỉ placeholder `[tên]`, `[link Meet]` và tài khoản seed). `BUG-58/59` đang có thay đổi chưa commit của SV, em không đụng.
+
+Đã commit kịch bản điều phối và cập nhật plan. Không push, không amend.
+
+### Báo cáo cho phiên thảo luận
+- **Kịch bản điều phối:** commit `moderator_script.md` nguyên văn, sau khi đọc hết (chỉ có placeholder `[tên]`, `[link Meet]` và tài khoản seed, không có dữ liệu cá nhân). `70f26ef` HW03[T2] 2c/10: kịch bản điều phối (AI nháp)
+- **plan.md:** mục 3 benchmark đổi thành ≤ 6 phút. Mục 5 thứ tự phiên đổi thành ~10 phút (mở đầu 1' → nhiệm vụ ≤ 6' → Google Form 3'), kèm lý do 5–10 phút và dòng Google Form: CSV/Responses có họ tên + SĐT không vào repo. `report_plan` mục f có thêm 2 dòng khai (Google Form, kịch bản điều phối). `2485116` HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+- **Chưa commit:** `BUG-58.md`, `BUG-59.md` đang có thay đổi chưa commit, em đoán là SV đang viết nên không đụng. `A_prompt_log.md` hook tự sinh lại sau mỗi lượt.
+- **Có thể lệch:** `participant_kit.md` vẫn ghi theo phiên dài cũ, em chưa kiểm vì lệnh không yêu cầu sửa file này.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #103 | 20:14 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: kiểm bug SV viết (BUG-58…85) – T1 bước 5/6e. KHÔNG sửa chữ SV (Tiêu đề, Mô tả/Steps, Expected, Actual, Severity, Priority, Nhận định). Không push, không amend.
+1. Kiểm (chỉ đọc), ghi HW03/bugs/bug_check.md, mỗi BUG 1 khối: còn `<SV viết>`/🔒 không; thang Severity (Critical/High/Medium/Low) + Priority (High/Medium/Low); tiêu đề có tiền tố [HW03-C2] không (KHÔNG được có trong file); Actual khớp Dữ kiện (AI chép) không; Expected có căn cứ (SRS/Căn cứ item) không, có quá 1 nhánh không; Yêu cầu chỉ ghi yêu cầu bị vi phạm; câu Tác động/khẳng định không có dữ kiện → đề nghị "(chưa kiểm chứng)"; tên trường/màn/nút không có trong SUT. Chỉ liệt kê, không đề xuất câu chữ.
+2. Tái hiện: `tools\sut_main.ps1` (SUT về main) → restart backend → chạy thật Steps SV viết (UI: Playwright hoặc tay theo nền tảng ghi trong bug; ít nhất P1/P2 trên máy này; P3 chỉ đối chiếu ảnh). Ghi kết quả từng bug vào bug_check.md: tái hiện được / không / bước nào không chạy được. Không sửa Steps.
+3. Xong: đưa SUT về nhánh usability-tunnel (`git -C ..\eshop-sut switch usability-tunnel`), kiểm `git -C ..\eshop-sut log -1` = e33212d.
+Commit `HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI)`.
+Báo cáo ≤ 15 dòng: số bug sạch / có điểm cần SV sửa (liệt kê mã), số bug không tái hiện được, hash.
+```
+
+**Output:**
+```
+Đang đọc Dữ kiện BUG-66…85 để đối chiếu Actual, sau đó viết bug_check.md rồi tái hiện.
+
+Đã đọc xong 28 bug + Dữ kiện. Giờ dựng script Playwright tái hiện Steps SV (P1 Chromium, P2 Firefox).
+
+Đã viết script tái hiện. Giờ đưa SUT về main, khởi động backend + web.
+
+P1 xong lượt đầu; sửa 3 chỗ đo (throttle, Steps login, kiểm huỷ đơn), chạy lại P1 rồi P2.
+
+Tái hiện P1/P2 xong (23/23 chạy). Giờ đối chiếu ảnh P3.
+
+Ảnh P3 đã xem xong. Viết bug_check.md.
+
+Lines đúng. Đưa SUT về usability-tunnel, tắt Vite, commit.
+```
+*File AI ghi/gửi trong lượt này:* `repro.config.ts`, `repro_bugs.spec.ts`, `bug_check.md`
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 103 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 95 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).

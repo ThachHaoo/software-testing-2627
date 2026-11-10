@@ -122,6 +122,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 Claude Code (4/6f): xem từng ảnh P3_M1_1…P3_M4_1 sau khi SV overlay (đủ overlay, URL localhost, không lộ thông tin riêng), nén bằng `tools/compress_hw03.py`, chạy lại report §4.3.
 - 10/11 phiên thảo luận 19:23: AI dựng Google Form (Apps Script) cho SEQ + SUS + 4 câu hỏi mở từ `participant_kit.md`; CSV form có họ tên/SĐT không vào repo.
 - 10/11 phiên thảo luận 19:29–19:31: AI nháp kịch bản điều phối `usability/moderator_script.md` (phiên ~10 phút); Claude Code commit nguyên văn (2c/10), sửa plan mục 3, 5 theo SV chốt (2d/10).
+- 10/11 Claude Code (5/6e): **AI viết `tests/repro_bugs.spec.ts` + `tests/repro.config.ts`** (Playwright chạy lại Steps SV của BUG-58…85 trên P1/P2, số đo `bugs/repro/repro_P*.json`) và `bugs/bug_check.md` (kiểm dữ kiện, chỉ liệt kê, không đề xuất câu chữ).
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
