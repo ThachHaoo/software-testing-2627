@@ -1,0 +1,56 @@
+{
+  "phien": "S06",
+  "pilot": false,
+  "ngay": "2026-11-11",
+  "nguoi_tham_gia": "P06",
+  "nhom": null,
+  "nen_tang": "<SV điền>",
+  "reset_du_lieu": "<SV điền>",
+  "dong_y": {
+    "quay_man_hinh": true,
+    "ghi_am": true,
+    "lien_he_xac_nhan": true
+  },
+  "video": null,
+  "nhiem_vu": {
+    "moc": {},
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+    "noi_dung_trang_thai": null,
+    "cau_tra_loi_trang_thai": null
+  },
+  "su_kien": [
+    {
+      "t": "<SV điền>",
+      "man_hinh": null,
+      "loai": "N",
+      "mo_ta": "Nó cũng oke á.",
+      "bug": null,
+      "nguon": "notes/S06.txt:1"
+    }
+  ],
+  "tro_giup": "<SV điền>",
+  "seq": 6,
+  "sus": [
+    3,
+    2,
+    5,
+    3,
+    4,
+    1,
+    4,
+    1,
+    4,
+    3
+  ],
+  "cau_hoi_mo": {
+    "ro_rang": "Không",
+    "khoi_phuc_loi": "Không",
+    "toc_do": "Không",
+    "tin_cay": "Có"
+  },
+  "ghi_chu": "",
+  "_nguon": "AI chép, SV duyệt: ngày/đồng ý/SEQ/SUS/câu hỏi mở từ responses.csv (cột Mã phiên); su_kien từ notes; nghề nghiệp SV cung cấp. Các ô <SV điền> do SV nhập.",
+  "nghe_nghiep": "Thực phẩm",
+  "nghe_nghiep_nguon": "SV cung cấp"
+}
