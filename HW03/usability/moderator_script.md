@@ -1,4 +1,4 @@
-# Kịch bản điều phối phiên usability – U1 (📝 AI nháp – SV duyệt/sửa)
+# Kịch bản điều phối phiên usability – U1
 
 Dựa trên `usability/plan.md`, `participant_kit.md`, `observation_sheet.md`. Mỗi phiên **~10 phút** (mở đầu 1' · nhiệm vụ ≤ 6' · form 3'), mỗi lần 1 người.
 

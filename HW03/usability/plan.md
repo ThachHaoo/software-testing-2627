@@ -1,6 +1,6 @@
 # Kế hoạch đánh giá usability – U1 (AI nháp, T2 1/10)
 
-Theo khung **9 phần** của slide (*The 9-part test plan*). Flow U1 chốt ở `report_plan.md` mục e. 📝 = em chốt/sửa.
+Theo khung **9 phần** của slide (*The 9-part test plan*). Flow U1 chốt ở `report_plan.md` mục e.
 
 ## 1. Mục đích
 
@@ -28,7 +28,7 @@ Nhiệm vụ chỉ nêu mục tiêu, không nêu bước (không nói "dùng ô 
 
 ## 4. Hồ sơ người dùng
 
-Người từng mua hàng online ít nhất 1 lần, chưa dùng EShop, không học lớp Software Testing HW03. Ưu tiên non-IT; cơ cấu IT/non-IT theo danh sách em đã tuyển 📝. Thông tin nhân khẩu ghi ở bảng người tham gia (em tự lập).
+Người từng mua hàng online ít nhất 1 lần, chưa dùng EShop, không học lớp Software Testing HW03. Ưu tiên non-IT; cơ cấu IT/non-IT theo danh sách em đã tuyển. Thông tin nhân khẩu ghi ở bảng người tham gia (em tự lập).
 
 ## 5. Phương pháp và thiết kế
 
@@ -69,4 +69,4 @@ Tính SUS: câu lẻ (điểm − 1), câu chẵn (5 − điểm), tổng × 2,5
 
 ## 9. Nội dung báo cáo
 
-Mục tiêu và nhiệm vụ; bảng 7 người tham gia (che 4 số giữa); tóm tắt từng phiên; SEQ/SUS từng người + trung bình; tỉ lệ hoàn thành và thời gian; nhóm pain point (lỗi riêng lẻ ↔ vấn đề thiết kế); findings xếp theo severity; bug thật → GitHub Issues; giới hạn của nghiên cứu. Thang severity 📝.
+Mục tiêu và nhiệm vụ; bảng 7 người tham gia (che 4 số giữa); tóm tắt từng phiên; SEQ/SUS từng người + trung bình; tỉ lệ hoàn thành và thời gian; nhóm pain point (lỗi riêng lẻ ↔ vấn đề thiết kế); findings xếp theo severity; bug thật → GitHub Issues; giới hạn của nghiên cứu. Thang severity: theo thang severity ở report §5.9 (SV viết).
