@@ -1,43 +1,33 @@
-# Chỗ còn `<SV viết>` / `<SV điền>` / 📝 (sinh 11/11 sau bfe1e36; không nộp)
+# Chỗ còn `<SV viết>` / `<SV điền>` / 📝 (sinh 11/11, sau 29b56da + bảng §6; không nộp)
 
-Bỏ qua dòng quy ước (report:5, README:5), dòng 📝 là nhãn "AI nháp – SV duyệt" vẫn cần SV xác nhận/xoá nhãn.
+Bỏ qua dòng quy ước. Dòng 📝 "AI nháp" = nhãn chờ SV duyệt rồi xoá.
 
-## HW03/23120255_HW03_Report.md (34)
+## HW03/23120255_HW03_Report.md (24)
 
 - 23120255_HW03_Report.md:9: 📝 (sinh khi hoàn thiện)
-- 23120255_HW03_Report.md:13: - SUT: `tkob-team/eshop-sut` @ 📝 (commit) · backend :3000, web :5173 (`--host 127.0.0.1`).
-- 23120255_HW03_Report.md:14: - Nền tảng: P1 Chrome trên Windows · P2 Firefox trên Windows · P3 Chrome Android (POCO F5, `adb reverse tcp:51
-- 23120255_HW03_Report.md:15: - Không dùng BrowserStack/LambdaTest (M11): 📝 lý do.
-- 23120255_HW03_Report.md:22: 📝 C1/C2/C3, U1–U4 — ai chọn gì.
-- 23120255_HW03_Report.md:28: | IA-01 General UI standards | 📝 | |
-- 23120255_HW03_Report.md:29: | IA-02 Forms | 📝 | |
-- 23120255_HW03_Report.md:30: | IA-03 Navigation | 📝 | |
-- 23120255_HW03_Report.md:31: | IA-04 Feedback / state | 📝 | |
-- 23120255_HW03_Report.md:35: - Kết quả item: Passed / Failed / N/A (M3) — 📝 giả định khi dùng N/A.
-- 23120255_HW03_Report.md:37: - Overlay ảnh: email SV + MSSV + họ tên (M1) — 📝 cách làm.
-- 23120255_HW03_Report.md:43: 📝 Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ đơn, navbar khi đã đăng nhập.
-- 23120255_HW03_Report.md:273: 📝
-- 23120255_HW03_Report.md:299: 📝 AI nháp – SV duyệt/sửa
-- 23120255_HW03_Report.md:336: 📝
-- 23120255_HW03_Report.md:342: 📝 U1: đăng nhập → tìm SP → thêm giỏ → thanh toán có mã giảm giá → xem đơn trong Hồ sơ.
-- 23120255_HW03_Report.md:348: 📝 SEQ + SUS (`usability/plan.md` mục 8) · probe: clarity, error recovery, speed, trust.
-- 23120255_HW03_Report.md:354: 📝 bảng 7 người (tên, hồ sơ IT/non-IT, Zalo/SĐT che 4 số giữa) — chi tiết `usability/`.
-- 23120255_HW03_Report.md:364: 📝 quy trình mỗi phiên, xin đồng ý ghi hình (M7), restart backend trước mỗi phiên.
-- 23120255_HW03_Report.md:380: 📝
-- 23120255_HW03_Report.md:436: 📝 bảng BUG-58…, link GitHub Issues.
-- 23120255_HW03_Report.md:446: 📝 skill, cách dùng, link video.
-- 23120255_HW03_Report.md:470: 📝 tham chiếu `ai-forms/AI-02_Audit_Report_23120255.md`; verdict 🔒.
-- 23120255_HW03_Report.md:485: 📝 AI nháp – SV xác nhận
-- 23120255_HW03_Report.md:495: 7. Sinh bảng cho report/README (§3.3, §3.5, §3.6, §4.1, §4.3, §8), nháp §3.2, §4.2 (đánh dấu 📝 AI nháp), khung
-- 23120255_HW03_Report.md:502: Em xem xét và sửa: `<SV viết>`
-- 23120255_HW03_Report.md:504: Em tự làm hoàn toàn: `<SV viết>`
-- 23120255_HW03_Report.md:513: 📝 (đồng bộ với README)
-- 23120255_HW03_Report.md:517: | 1 | Task 1 – GUI Checklist | 30 | `<SV điền>` |
-- 23120255_HW03_Report.md:518: | 2 | Task 2 – Usability Evaluation | 40 | `<SV điền>` |
-- 23120255_HW03_Report.md:519: | 3 | Task 3 – Cross-Browser / Cross-Platform | 20 | `<SV điền>` |
-- 23120255_HW03_Report.md:520: | 4 | Agent Skills (+ video) | 10 | `<SV điền>` |
-- 23120255_HW03_Report.md:521: |  | **Tổng** | **100** | `<SV điền>` |
-- 23120255_HW03_Report.md:530: - D. Cây thư mục nộp bài: 📝
+- 23120255_HW03_Report.md:31: | IA-01 General UI standards | 📝 | |
+- 23120255_HW03_Report.md:32: | IA-02 Forms | 📝 | |
+- 23120255_HW03_Report.md:33: | IA-03 Navigation | 📝 | |
+- 23120255_HW03_Report.md:34: | IA-04 Feedback / state | 📝 | |
+- 23120255_HW03_Report.md:38: - Kết quả item: Passed / Failed / N/A (M3) — 📝 giả định khi dùng N/A.
+- 23120255_HW03_Report.md:40: - Overlay ảnh: email SV + MSSV + họ tên (M1) — 📝 cách làm.
+- 23120255_HW03_Report.md:46: 📝 Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ đơn, navbar khi đã đăng nhập.
+- 23120255_HW03_Report.md:276: 📝
+- 23120255_HW03_Report.md:337: `<SV viết>`
+- 23120255_HW03_Report.md:355: `<SV viết>` bảng 7 người (tên, hồ sơ IT/non-IT, Zalo/SĐT che 4 số giữa). Mã P01–P07 và nghề nghiệp (em cung cấ
+- 23120255_HW03_Report.md:385: 📝
+- 23120255_HW03_Report.md:487: Cách dùng: `<SV viết>`
+- 23120255_HW03_Report.md:511: 📝 tham chiếu `ai-forms/AI-02_Audit_Report_23120255.md`; verdict 🔒.
+- 23120255_HW03_Report.md:526: 📝 AI nháp – SV xác nhận
+- 23120255_HW03_Report.md:536: 7. Sinh bảng cho report/README (§3.3, §3.5, §3.6, §4.1, §4.3, §8), nháp §3.2, §4.2 (đánh dấu 📝 AI nháp), khung
+- 23120255_HW03_Report.md:543: Em xem xét và sửa: `<SV viết>`
+- 23120255_HW03_Report.md:545: Em tự làm hoàn toàn: `<SV viết>`
+- 23120255_HW03_Report.md:554: 📝 (đồng bộ với README)
+- 23120255_HW03_Report.md:558: | 1 | Task 1 – GUI Checklist | 30 | `<SV điền>` |
+- 23120255_HW03_Report.md:559: | 2 | Task 2 – Usability Evaluation | 40 | `<SV điền>` |
+- 23120255_HW03_Report.md:560: | 3 | Task 3 – Cross-Browser / Cross-Platform | 20 | `<SV điền>` |
+- 23120255_HW03_Report.md:561: | 4 | Agent Skills (+ video) | 10 | `<SV điền>` |
+- 23120255_HW03_Report.md:562: |  | **Tổng** | **100** | `<SV điền>` |
 
 ## HW03/README.md (6)
 
@@ -50,7 +40,7 @@ Bỏ qua dòng quy ước (report:5, README:5), dòng 📝 là nhãn "AI nháp �
 
 ## HW03/ai-forms/AI-02_Audit_Report_23120255.md (37)
 
-- 3.2: 34 hàng × (Verdict, Lý do) – dòng 63–111; §4 Kết luận chung dòng 115
+- 3.2: Verdict + Lý do – dòng 63–111; §4 Kết luận chung dòng 115
 
 ## HW03/ai-forms/AI-03_Disclosure_Form_23120255.md (12)
 
