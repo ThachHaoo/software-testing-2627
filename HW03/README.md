@@ -27,7 +27,7 @@
 | N/A | 0 | 0 | 4 | 4 ô |
 | Blocked | 3 | 3 | 4 | 10 ô |
 
-- Bug: item Failed đối chiếu issue nhóm → **trùng 14**, **trùng một phần 4**, **MỚI 28** (`bugs/failed_list.md`, `bugs/dup_check.md`); MỚI + phần mới gom thành **28 bug** `BUG-58…85` (`bugs/bug_groups.md`); đã có link GitHub Issue: 14/28.
+- Bug: item Failed đối chiếu issue nhóm → **trùng 14**, **trùng một phần 4**, **MỚI 28** (`bugs/failed_list.md`, `bugs/dup_check.md`); MỚI + phần mới gom thành **28 bug** `BUG-58…85` (`bugs/bug_groups.md`); đã có link GitHub Issue: 28/28.
 - Nguồn item checklist: AI 48 · AI + SV sửa 20 · SV bổ sung 6.
 - Usability (Task 2, U1): 7 phiên chính S01–S07 + 1 pilot S00; hoàn thành 7/7; **SUS TB 77,9**, **SEQ TB 6,3** (report §5.6–5.7, `usability/sessions/`).
 - Video Agent Skill: `skills/VideoLinks.md`.

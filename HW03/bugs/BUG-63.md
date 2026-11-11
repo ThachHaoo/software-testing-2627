@@ -86,7 +86,7 @@ Người dùng gặp khó khăn trong việc nhận biết các trường dữ l
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/263
 
 ---
 

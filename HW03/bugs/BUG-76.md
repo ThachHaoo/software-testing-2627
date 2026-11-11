@@ -67,7 +67,7 @@ Trang không có cơ chế bảo vệ tuyến đường (route guard) hoặc kh�
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/269
 
 ---
 

@@ -70,7 +70,7 @@ Thiếu phản hồi trạng thái đang tải khi kết nối mạng chậm gâ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/271
 
 ---
 

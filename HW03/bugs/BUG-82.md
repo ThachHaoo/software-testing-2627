@@ -71,7 +71,7 @@ Các trường nhập liệu có thể đang thiếu thuộc tính HTML chuẩn 
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/274
 
 ---
 

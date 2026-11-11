@@ -72,7 +72,7 @@ Hệ thống cho phép lưu thông tin số điện thoại sai định dạng v
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/266
 
 ---
 

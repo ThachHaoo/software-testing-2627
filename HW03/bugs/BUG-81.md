@@ -71,7 +71,7 @@ Cho phép người dùng tự hủy đơn hàng khi đã chuyển sang trạng t
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/273
 
 ---
 

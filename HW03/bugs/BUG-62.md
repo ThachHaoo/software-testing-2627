@@ -88,7 +88,7 @@ Không kiểm tra định dạng email ở phía giao diện khiến các chuỗ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/262
 
 ---
 

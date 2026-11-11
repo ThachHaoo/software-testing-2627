@@ -85,7 +85,7 @@ Không khóa nút submit hoặc debounce khi bấm liên tục/nhấp đúp dẫ
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/270
 
 ---
 

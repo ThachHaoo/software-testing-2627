@@ -69,7 +69,7 @@ State quản lý thông tin người dùng trên Navbar chưa phản ánh kịp 
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/268
 
 ---
 

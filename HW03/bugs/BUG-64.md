@@ -70,7 +70,7 @@ Thông báo lỗi hiển thị qua hộp thoại alert làm gián đoạn trải
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/264
 
 ---
 

@@ -70,7 +70,7 @@ Dữ liệu cập nhật hồ sơ không được lưu bền vững vào hệ th
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/267
 
 ---
 

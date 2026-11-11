@@ -71,7 +71,7 @@ Bộ kiểm tra độ mạnh mật khẩu ở bước 2 Quên mật khẩu (`For
 
 ## Link GitHub Issue
 
-`<sau khi tạo issue>`
+https://github.com/tkob-team/eshop-sut/issues/265
 
 ---
 
