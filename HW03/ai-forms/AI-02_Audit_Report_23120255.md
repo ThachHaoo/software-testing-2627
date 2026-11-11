@@ -77,35 +77,35 @@
 |---|---|---|---|
 | H1 | #21–#23 | VALID | Khung bài và kế hoạch tuân thủ đúng yêu cầu đề bài; SV đã chủ động bổ sung các quyết định X1, X2 và điều chỉnh mốc thời gian hoàn thành. |
 | T1 | #17 | VALID | Bảng khảo sát control liệt kê chính xác các phần tử JSX thực tế trong mã nguồn C2; làm cơ sở dữ liệu đầu vào chuẩn xác để đối chiếu checklist. |
-| T2 | #17 | VALID | Bản nháp checklist v1 đáp ứng tiêu chí khởi tạo ban đầu với 65 item bám sát SRS và 3 bộ heuristic; làm mốc đóng băng để đánh giá sự thiên lệch của AI. |
-| T3 | #33 | VALID | Khung `sv_items.md` dựng đúng cấu trúc chuẩn của bài tập, tạo môi trường kiểm tra định dạng chính xác trước khi SV tự viết 6 item bổ sung. |
+| T2 | #17 | INCOMPLETE | Bản nháp v1 có 20 item thuộc nhóm "Both" (AI + SV sửa) và 6 item SV bổ sung; đồng thời có sự thiên lệch về SRS như đã nêu trong Critique. |
+| T3 | #33 | INCOMPLETE | Khung `sv_items.md` dựng đúng cấu trúc nhưng thiếu trường `loai_nguon` (L2) và báo 12 lỗi khi chạy script kiểm tra, đúng như điểm hạn chế đã nêu trong Critique. |
 | T4 | #33 | VALID | AI phân tích và tự nhận diện chính xác các nhóm nguyên nhân bỏ sót dựa trên 3 nguồn prompt; cung cấp dữ kiện đối chiếu minh bạch cho §3.4. |
-| T5 | #42 | VALID | Mã Playwright tự động hóa chính xác 59 item trên P1/P2; cơ chế kiểm tra oracle sha1 và seed dữ liệu vận hành ổn định theo tiêu chí ISTQB Test Automation. |
-| T6 | #42 | VALID | Kế hoạch chạy tay `RUN.md` phân định rõ ràng các item không thể tự động hóa; script hỗ trợ `dom_probe.js` hoạt động tốt trên các môi trường. |
+| T5 | #42 | INCOMPLETE | Mã tự động hóa sinh ra hữu ích nhưng có sai sót làm lệch kết quả (ép locale `vi-VN` làm sai CL-08, so tọa độ sai CL-11 và ghi nhầm TimeoutError của harness vào SV-06 trên P3 như Critique đã nêu). |
+| T6 | #42 | INCOMPLETE | Kế hoạch `RUN.md` giúp định hướng chạy tay nhưng phần M6 mâu thuẫn chính nó và đã được SV sửa lại trong quá trình thực thi. |
 | T7 | #66–#73 | VALID | Script kiểm tra và nén ảnh tự động vận hành chính xác; đảm bảo toàn bộ ảnh chứng minh kết quả chạy tay P1/P2/P3 khớp đúng với nhật ký kiểm thử. |
 | T8 | #75 | VALID | Script gộp kết quả `merge_hw03.py` xử lý chính xác quy tắc ghi đè (override) từ lượt chạy tay của SV, đảm bảo tính toàn vẹn dữ liệu kết quả kiểm thử. |
 | T9 | #75 | VALID | File Excel 3 sheet xuất ra đầy đủ, đúng cấu trúc mẫu báo cáo kiểm thử chuẩn; các công thức tổng hợp số liệu chính xác theo kết quả gộp. |
 | T10 | #75 | VALID | Danh sách lỗi Failed và kết quả gom nhóm trùng issue khớp với SRS và các lỗi đã biết trên repository gốc. |
-| T11 | #76–#77 | VALID | Khung 28 nhóm bug được phân loại chính xác dựa trên tiêu đề và hành vi lỗi; làm tiền đề để SV điền chi tiết các bước tái hiện và mức độ nghiêm trọng. |
+| T11 | #76–#77 | INCOMPLETE | Khung bug do AI dựng cần phải được tái cấu trúc lại theo đúng mẫu quy định của HW02 (B2) và bổ sung thiếu sót trường hợp P1 ở BUG-80. |
 | T12 | #105 | VALID | Danh sách rà soát ảnh minh họa phản ánh đúng các vị trí còn thiếu, giúp SV nhanh chóng bổ sung ảnh thực tế trên P3. |
-| B1 | #100–#102 | VALID | Kết quả đối chiếu 179 issue có sẵn hỗ trợ SV đánh giá chính xác các lỗi trùng lặp và lỗi mới phát sinh theo đúng nguyên tắc Bug Triage. |
+| B1 | #100–#102 | VALID | Kết quả đối chiếu 179 issue có sẵn hỗ trợ SV đánh giá chính xác các lỗi trùng lặp và lỗi mới phát sinh. |
 | B2 | #105 | VALID | Script sinh khung bug hoạt động chính xác theo mẫu HW02, đảm bảo tính nhất quán trong hồ sơ báo cáo lỗi. |
-| B3 | #130 | VALID | Kịch bản tự động tái hiện bug (`repro_bugs.spec.ts`) xác nhận chính xác trạng thái lỗi trên P1/P2, đáp ứng tiêu chuẩn tính lặp lại (Repeatability) của ISTQB. |
-| B4 | #177 | VALID | Kết quả kiểm tra lại 14 bug SV sửa phản ánh đúng thực tế mã nguồn, xác nhận chính xác các lỗi đã được xử lý triệt để. |
+| B3 | #130 | VALID | Kịch bản tự động tái hiện bug (`repro_bugs.spec.ts`) xác nhận chính xác trạng thái lỗi trên P1/P2. |
+| B4 | #177 | INCOMPLETE | Bản kiểm tra này chỉ rà soát câu chữ sửa đổi của SV trong file bug chứ không phải lỗi SUT được sửa, vì mã nguồn SUT không thay đổi. |
 | B5 | #167–#169 | VALID | Tự động hóa tạo 28 GitHub Issue (#247–#274) thành công; các liên kết tham chiếu được chèn chính xác vào tài liệu báo cáo. |
-| B6 | #181 | VALID | Nhật ký cập nhật issue ghi chép đầy đủ các thao tác chỉnh sửa body và comment; đảm bảo tính truy vết (Traceability) của hồ sơ quản lý lỗi. |
+| B6 | #181 | VALID | Nhật ký cập nhật issue ghi chép đầy đủ các thao tác chỉnh sửa body và comment; đảm bảo tính truy vết của hồ sơ quản lý lỗi. |
 | B7 | #181 | VALID | Ảnh chụp danh sách GitHub Issue minh chứng đầy đủ số lượng lỗi đã được đăng tải công khai trên repository dự án. |
-| U1 | #17 | INVALID | Gói tài liệu usability nháp v1 quá lý thuyết và cồng kềnh; đã được gỡ bỏ và thay thế bằng phiên bản tinh gọn theo kịch bản thực tế 10 phút. |
+| U1 | #17 | INCOMPLETE | Gói tài liệu nháp không bị bỏ hoàn toàn mà vẫn được tận dụng: form và kịch bản dùng lại từ kit, plan chỉ cần chỉnh sửa mục 3 và 5 cho phiên 10 phút. |
 | U2 | #82–#85 | VALID | Môi trường test từ xa và các script điều khiển backend vận hành ổn định, tạo điều kiện thuận lợi cho người tham gia thử nghiệm thực tế. |
 | U3 | #118–#128 | VALID | Mẫu biểu khảo sát Google Form (SEQ + SUS + câu hỏi mở) thu thập chính xác cả định lượng lẫn định tính theo phương pháp của Rubin & Chisnell. |
 | U4 | #118–#128 | VALID | Kịch bản điều phối `moderator_script.md` thiết kế hợp lý, giữ thời lượng phiên trong mức 10 phút và không dẫn dắt người tham gia. |
 | U5 | #158 | VALID | Script tổng hợp dữ liệu từ phiếu ghi chép và CSV hoạt động chính xác; bảo đảm dữ liệu khảo sát người dùng được ghi nhận trung thực. |
 | U6 | #184 | VALID | Bảng đối chiếu 7 pain point trải nghiệm người dùng với các issue nhóm phản ánh đúng mối liên hệ giữa lỗi giao diện và cảm nhận người dùng. |
 | S1 | #92–#97 | VALID | Agent Skill `gui-checklist-testing` chứa đầy đủ các kịch bản kiểm thử GUI per-control và tài liệu tham khảo theo đúng chuẩn cấu trúc skill. |
-| S2 | #92–#97 | VALID | Agent Skill `usability-evaluation` đóng gói tốt quy trình đánh giá độ khả dụng 6 thành phần của Rubin & Chisnell. |
+| S2 | #92–#97 | INCOMPLETE | Skill này áp dụng cấu trúc kế hoạch 9 phần theo tài liệu của Rubin & Chisnell và slide môn học. |
 | S3 | #92–#97 | VALID | File tham chiếu video được cấu trúc đúng quy định, sẵn sàng chứa link minh chứng sau khi hoàn tất quay video demo. |
 | R1 | #75 | VALID | Bảng tổng hợp báo cáo T1/T3 xuất chính xác số liệu từ kết quả gộp; đảm bảo các con số thống kê nhất quán toàn bộ báo cáo. |
-| R4 | #102 | VALID | Bản nháp báo cáo §3.2 và §4.2 bám sát dữ kiện thực tế trong repo; SV đã rà soát và điều chỉnh lại câu chữ chuẩn xác trước khi chốt. |
+| R4 | #102 | VALID | SV đã duyệt và giữ nguyên bản nháp do commit duyệt eb9c78a chỉ thực hiện xoá 2 dòng 📝 mà không thay đổi câu chữ nào. |
 | R2 | #114 | VALID | Script cập nhật file README và §8 báo cáo tự động tính toán chính xác các chỉ số bao phủ và tỷ lệ đạt/nối của bài kiểm thử. |
 | R3 | #114 | VALID | Khung báo cáo minh bạch AI (AI-02, AI-03) sinh ra đúng cấu trúc mẫu quy định; hỗ trợ kê khai chi tiết các lượt tương tác AI. |
 | E1 | #43–#48 | VALID | Tài liệu mô tả môi trường kiểm thử `environment.md` ghi nhận đầy đủ chi tiết phiên bản OS, trình duyệt và thông số thiết bị thật P1/P2/P3. |
