@@ -9843,11 +9843,212 @@ Báo ≤ 6 dòng + hash.
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Cập nhật số lượt AI-02/AI-05 cho khớp, rồi xuất PDF.
+
+Đã commit bản nộp cuối, hash `f6e2726`, chưa push, chưa zip.
+
+- **Commit SV:** `9ab18d2` (`HW03: SV điền form + §11`).
+- **Số lượt:** log trích lại ra 225 lượt (Sonnet 4.6: 3, Opus 5.5: 215, không rõ model: 7). Em sửa tay số này ở AI-03, và ở AI-02, AI-05 để khớp.
+- **Lý do #203, #204 không còn trong AI-03:** file SV commit không có dòng lý do của #196, #203, #204, và cũng không có chữ "chạy nhầm" ở đâu cả.
+  - Sau lần trích này, #203/#204 cũ thành #223/#224; #224 nay đã có model Opus.
+  - Em thêm 1 dòng cho #223, chép từ log ("[Request interrupted by user]" – lượt bị ngắt). SV muốn ghi "chạy nhầm" thì thay dòng này rồi xuất lại PDF AI-03.
+- **Đã xuất lại:** 4 PDF và `appendix/commit_log.txt`.
+- **(a) File rỗng hoặc < 100 byte trong zip:** 7 file `.gitkeep` 0 byte (ai-forms, bugs, 3 thư mục evidence, excel, sessions) và `usability/sessions/notes/S06.txt` 22 byte (ghi chú tay của SV, em không sửa).
+- **(b) File không cần nộp:** report_plan, CLAUDE.md, placeholders_left, demo_plan đã loại (export-ignore). `tests/node_modules` không có trong git nên không vào zip. Không có file tạm. Zip cũ ở gốc repo là bản trước, chưa làm lại.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 225 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 215 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195, #196, #197, #198, #199, #200, #201, #202, #203, #204, #205, #206, #207, #208, #209, #210, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #224, #225); Claude (không rõ model) 7 lượt (#4, #51, #57, #69, #70, #79, #223).
+## #226 | 11:24 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+GẤP: git archive --format=zip -o 23120255_HW03_AI_GUIUsability_091.zip HEAD HW03 (ghi đè zip cũ). Báo 2 dòng: dung lượng byte (phải < 20.000.000) và HEAD hash. Không làm gì khác.
+```
+
+**Output:**
+```
+Zip mới **20.956.141 byte, vượt giới hạn 20.000.000** khoảng 956 KB. Lần trước chỉ 19.887.726 byte; phần tăng có lẽ do PDF AI-05 xuất lại nặng hơn (108 KB lên 1139 KB), em chưa kiểm.
+HEAD `f6e2726`. Em không làm gì thêm; cần SV chọn cách xử lý (nén lại PDF hoặc ảnh, hoặc tách zip theo CLAUDE.md).
+```
+
+**Xử lý:** [...]
+
+---
+
+## #227 | 11:25 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+GẤP 2 phút: HW03/ai-forms/AI-05_*.pdf đang 1139 KB (bản trước 108 KB). Xuất lại AI-05 PDF bằng đúng cách đã xuất 3 PDF kia (cùng công cụ, không nhúng font/ảnh thừa) hoặc nén bằng pypdf (compress_identical_objects + compress_content_streams) / ghostscript -dPDFSETTINGS=/ebook nếu có. Mục tiêu < 200 KB. Commit `HW03: nén PDF AI-05`, rồi git archive --format=zip -o 23120255_HW03_AI_GUIUsability_091.zip HEAD HW03. Báo 2 dòng: dung lượng zip, hash.
+```
+
+**Output:**
+```
+Zip **17.840.268 byte** (dưới 20.000.000), HEAD `f8578ba`.
+Ảnh chữ ký 1,2 MB bị nhúng nguyên trong cả 3 PDF form, nên em xuất lại AI-02, AI-03, AI-05 (không chỉ AI-05) bằng bản chữ ký thu nhỏ (400 px, 9 KB) để ở thư mục tạm: PDF còn 161 / 142 / 120 KB. `signature.png` trong repo giữ nguyên; SV nên mở 3 PDF xem chữ ký còn rõ không.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #228 | 11:28 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: rà soát HW03 sau khi nộp (bản nộp = tag hw03-submitted). BƯỚC 1 CHỈ ĐỌC, không xoá/sửa.
+Quét toàn bộ HW03/ (file đã track) và liệt kê vào HW03/cleanup_scan.md, mỗi mục: file:dòng – loại – đề xuất (xoá / giữ / để SV quyết):
+1. File rỗng hoặc chỉ placeholder (.gitkeep ở thư mục đã có file thật, file < 100 byte).
+2. Chữ sót: "📝", "<SV viết>", "<SV điền>", "[...]", "AI nháp – SV duyệt", "TODO", "chờ", "[chờ chốt", marker REPORT rỗng.
+3. File không thuộc danh sách nộp trong report_plan mục c (script tạm, file nháp, bản trùng, demo, log tạm).
+4. Link/ảnh trong .md trỏ tới file không tồn tại.
+KHÔNG đụng: appendix/ai-outputs/, A_prompt_log.md, evidence/, bugs/BUG-*.md, usability/sessions/, phần chữ SV viết.
+Báo ≤ 8 dòng: số mục từng loại. Dừng chờ SV chọn mục nào dọn.
+```
+
+**Output:**
+```
+Đã quét xong, kết quả ở `HW03/cleanup_scan.md` (chưa commit). Chưa xoá hay sửa gì.
+
+- **Tag:** repo không có tag `hw03-submitted`. Em quét theo HEAD `f8578ba` (commit "nén PDF AI-05", đúng là bản em zip lần cuối); em không tự tạo tag.
+- **Loại 1 – file rỗng/placeholder (8):** 7 file `.gitkeep` ở thư mục đã có file thật, đề xuất xoá. `usability/sessions/notes/S06.txt` 22 byte là ghi chú SV, đề xuất giữ.
+- **Loại 2 – chữ sót (112):**
+  - 55 nằm trong file không nộp (`placeholders_left` 44, `report_plan` 9, `CLAUDE.md` 2).
+  - Report 13 dòng, AI-02 5, AI-03 1: còn `<SV viết>`/`<SV điền>`/📝/`[...]`, cần SV xem.
+  - Còn lại nằm trong script, JSON, `RUN.md`, checklist, phần lớn là chữ "chờ" hoặc chuỗi "TODO" thuộc mã, đề xuất giữ.
+  - Không có marker REPORT nào rỗng.
+- **Loại 3 – file ngoài danh sách nộp ở report_plan mục c (56):** file làm việc trong `tests/`, `checklist/` (RUN, runs, kiểm ảnh), `bugs/` (bug_check, dup_check, repro…), phụ trợ prompt log, `env/`, và file đã export-ignore. Đề xuất cho từng file ghi trong `cleanup_scan.md`, chủ yếu "để SV quyết".
+- **Loại 4 – link/ảnh hỏng trong .md:** 0.
+
+SV chọn mục nào cần dọn thì em làm tiếp.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #229 | 11:31 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: dọn HW03 trước khi nộp lại (hạn 12:30). Bản backup = tag hw03-backup. Không push, không amend, KHÔNG sửa chữ SV, KHÔNG chạy forms_hw03.py.
+1. Xoá 7 .gitkeep (loại 1). Giữ S06.txt và toàn bộ file loại 3. Thêm cleanup_scan.md + placeholders_left.md vào export-ignore.
+2. Report, điền dữ kiện (không viết nhận định): dòng 9 mục lục từ tiêu đề; §2.2 dòng 31–34 FR theo từng IA lấy từ can_cu trong checklist.json; dòng 38 liệt kê giả định NAx từ checklist.json; dòng 40 cách overlay từ RUN.md/report_plan; dòng 546 câu trỏ AI-02 + tỉ lệ VALID/INVALID/INCOMPLETE đếm từ bảng 3.2; xoá 📝 thừa ở 46, 276, 402; xoá dòng 5 "Quy ước 📝" nếu hết 📝. Sau đó grep lại report + README + AI-02/03/05: không còn 📝 / <SV viết> / <SV điền> / [...] (trừ chỗ chỉ nhắc ký hiệu trong câu).
+3. Xuất lại 4 PDF (dùng ảnh chữ ký đã thu nhỏ), commit log; commit `HW03: dọn dẹp + điền dữ kiện trước nộp lại`.
+4. git archive --format=zip -o 23120255_HW03_AI_GUIUsability_091.zip HEAD HW03 → dung lượng (< 20.000.000), số file, kiểm không có .gitkeep, cleanup_scan, placeholders_left, report_plan, CLAUDE.md.
+Báo ≤ 8 dòng + hash.
+```
+
+**Output:**
+```
+Điền xong, sửa anchor mục lục (heading có 🔒) rồi gitkeep/export-ignore.
+
+Đã dọn và điền xong, commit `c517642`, chưa push.
+
+- **Zip:** `23120255_HW03_AI_GUIUsability_091.zip` 17.849.274 byte (< 20.000.000), 409 file. Không có .gitkeep, cleanup_scan, placeholders_left, report_plan, CLAUDE.md.
+- **Dọn:** đã xoá 7 file .gitkeep, giữ `S06.txt` và toàn bộ file loại 3. Thêm `cleanup_scan.md` vào export-ignore (`placeholders_left.md` đã có từ trước).
+- **Report, điền dữ kiện:**
+  - Mục lục: 13 mục có link tới tiêu đề.
+  - §2.2: FR-21/22/23/24 cho IA-01…04, kèm FR phụ và số item (19 / 26 / 13 / 16) đếm từ `can_cu` trong `checklist.json`.
+  - Dòng 38: giả định N/A trong `checklist.json` chỉ có NA1 (P3 không có phím Tab).
+  - Dòng 40: cách overlay theo O2 (Sticky Notes cho P1/P2, trình sửa ảnh cho P3).
+  - §9: trỏ AI-02, 36 artifact, VALID 28 / INVALID 0 / INCOMPLETE 8.
+  - Đã xoá 📝 thừa ở 4.1, 5.7, 3.1. Dòng 5 vẫn giữ, chỉ bỏ phần "📝 = chỗ em viết", còn lại "🔒".
+- **Grep lại:** report, README, AI-03, AI-05 không còn 📝 / `<SV viết>` / `<SV điền>` / `[...]`. AI-02 còn 3 dòng có 📝 (dòng 63, 66, 111) nhưng là nhắc ký hiệu trong câu, đúng phần lệnh cho giữ.
+- **PDF:** xuất lại 4 PDF (3 form dùng chữ ký thu nhỏ) và commit log.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #230 | 11:34 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: rà soát lần cuối NỘI DUNG ZIP sẽ nộp (HEAD c517642). CHỈ ĐỌC, không sửa, không commit.
+Giải nén git archive HEAD HW03 vào thư mục tạm ngoài repo, rồi kiểm:
+1. File thừa: rỗng / < 100 byte (trừ notes SV); file tạm (__pycache__, .pyc, .DS_Store, ~$*, *.bak, *.tmp, *.log, node_modules); zip lồng trong zip; file trùng nội dung (cùng hash, khác tên); bản nháp cũ (*_old, *_v0, *copy*).
+2. Không được có: report_plan, CLAUDE.md, cleanup_scan, placeholders_left, demo_plan, evidence_raw, CSV/thông tin người tham gia (grep chuỗi ≥ 9 chữ số liền, email khác test@/admin@eshop.com và email SV), token/mật khẩu thật, transcript .jsonl.
+3. Chữ sót trong .md nộp: 📝, <SV viết>, <SV điền>, [...], "AI nháp – SV duyệt", "chờ chốt", "TODO" (trừ trong code).
+4. Link nội bộ trong .md (ảnh + file) trỏ tới file không có trong zip.
+5. Khớp số liệu: tổng tự chấm (report §12 = README = 091 trong tên zip); số lượt prompt log ở AI-03 = AI-05 = dòng Tổng A_prompt_log.md; số artifact + tỉ lệ verdict report §9 = AI-02; 28 bug ↔ 28 link issue.
+6. Mỗi .md form chính (report, AI-02, AI-03, AI-05) có PDF cùng tên và PDF mới hơn .md.
+7. File > 5 MB (liệt kê), tổng dung lượng zip.
+Báo ≤ 12 dòng: mỗi mục OK hoặc danh sách file:dòng cần xử lý. Xoá thư mục tạm.
+```
+
+**Output:**
+```
+Now step 5 numbers.
+
+Đã kiểm zip theo HEAD `c517642`: 409 file, 17.849.274 byte, không file nào > 5 MB. Cần SV xem 2 điểm: email cá nhân trong prompt log (mục 2) và các dòng còn 📝 (mục 3). Thư mục tạm đã xoá, không sửa và không commit gì.
+
+1. **File thừa: không có file nào cần xoá.**
+   - Không có file rỗng hay < 100 byte, file tạm, zip lồng, hay bản nháp cũ.
+   - Có 34 nhóm file trùng nội dung, đều hợp lý:
+     - 32 nhóm là ảnh auto `checklist/evidence/auto/` (cùng màn hình, khác item).
+     - `dom_probe.js` có ở `checklist/` và cũng nằm trong skill.
+     - `observation_sheet.md` trùng bản đóng băng trong `ai-outputs`.
+2. **Thông tin không được có:** không có report_plan, CLAUDE.md, cleanup_scan, placeholders_left, demo_plan, evidence_raw, CSV người tham gia, transcript hay token.
+   - ⚠ `appendix/A_prompt_log.md:5641` chứa email cá nhân của SV (`tanhiep24135@gmail.com`), là nguyên văn output AI. Theo luật repo AI không được sửa tay file này; SV quyết có che (sửa script trích rồi trích lại) hay giữ.
+   - `checklist/run_check.md:21` có 2 số điện thoại nhập thử, đã ghi rõ "SV xác nhận đây là số giả".
+   - Các chuỗi ≥ 9 chữ số còn lại là dữ liệu test (`0912345678`…), revision của Chrome, ID comment GitHub. Các email còn lại là email test trong issue và oracle.
+3. **Chữ sót ngoài code:** còn 📝 ở các dòng sau:
+   - `usability/plan.md:3`, `:31`, `:72`
+   - `usability/moderator_script.md:1` ("📝 AI nháp – SV duyệt/sửa")
+   - `skills/usability-evaluation/SKILL.md:42`
+   - `skills/usability-evaluation/assets/findings_template.md:5`
+   - AI-02:48, 66, 111 và AI-03:59 chỉ nhắc ký hiệu hoặc chữ "chờ chốt" trong tên commit, nên OK.
+4. **Link nội bộ:** OK. Chỉ có `A_prompt_log.md:7513 → …` là nguyên văn output AI, không phải link thật.
+5. **Khớp số liệu:** OK.
+   - Tự chấm: report §12 91/100 = README 91/100 = `091` trong tên zip.
+   - Số lượt: AI-02 = AI-03 = AI-05 = dòng Tổng = 225 (Sonnet 4.6: 3, Opus 5.5: 215, không rõ model: 7).
+   - §9 khớp AI-02: 36 artifact, VALID 28 / INVALID 0 / INCOMPLETE 8.
+   - 28 file BUG có 28 link issue khác nhau.
+6. **PDF:** OK. Đủ 4 PDF cùng tên với .md. 3 PDF form nằm ở commit sau .md (`c517642` so với `f6e2726`); PDF report được xuất sau khi sửa .md và commit cùng `c517642`.
+7. **Dung lượng:** OK, như dòng đầu.
+
+`A_prompt_log.md` trong working tree đã được hook trích lại, mới hơn bản ở HEAD, chưa commit. Zip lấy theo HEAD nên số liệu vẫn khớp.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #231 | 11:35 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa nhanh (dữ kiện SV đã chốt), không đụng file khác:
+1. usability/plan.md: dòng 31 thay 📝 bằng "≤ 6 phút (SV chốt, 2d/10)"; dòng 72 thay 📝 bằng "theo thang severity ở report §5.9 (SV viết)"; dòng 3 bỏ phần chú thích 📝.
+2. usability/moderator_script.md: xoá dòng 1 "📝 AI nháp – SV duyệt/sửa" (SV đã duyệt; AI-02 U4 vẫn ghi AI nháp).
+3. KHÔNG commit A_prompt_log.md (giữ số lượt khớp form). Commit `HW03: bỏ 📝 sót ở plan + kịch bản`.
+4. git archive --format=zip -o 23120255_HW03_AI_GUIUsability_091.zip HEAD HW03; báo dung lượng + hash.
+```
+
+**Output:**
+```
+Đã sửa, commit `1d45e0f`, zip làm lại 17.849.244 byte. `A_prompt_log.md` không commit.
+
+Có 2 chỗ em làm khác lệnh:
+- **plan.md dòng 31:** câu ở dòng này nói về cơ cấu IT/non-IT của người tham gia, không nói về thời gian. Chèn "≤ 6 phút" vào đó sẽ sai nghĩa, nên em chỉ xoá 📝. Mốc "≤ 6 phút (SV chốt 10/11…)" đã có sẵn ở dòng 25. Nếu SV muốn chữ khác ở dòng 31 thì báo em.
+- **moderator_script.md dòng 1:** dòng này là tiêu đề file, nên em chỉ bỏ đoạn "(📝 AI nháp – SV duyệt/sửa)" và giữ tiêu đề.
+
+Dòng 3 (bỏ chú thích 📝) và dòng 72 (trỏ thang severity ở report §5.9) đã sửa đúng lệnh.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 231 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 221 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195, #196, #197, #198, #199, #200, #201, #202, #203, #204, #205, #206, #207, #208, #209, #210, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #224, #225, #226, #227, #228, #229, #230, #231); Claude (không rõ model) 7 lượt (#4, #51, #57, #69, #70, #79, #223).
