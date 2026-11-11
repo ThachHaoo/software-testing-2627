@@ -14,7 +14,7 @@
 | MSSV: | 23120255 |
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Mã bài tập: | HW03-AI – GUI & Usability on EShop |
-| Ngày làm bài: | 04/11/2026 – [...] |
+| Ngày làm bài: | 04/11/2026 – 11/11/2026 |
 | Công cụ AI đã dùng: | Claude (Anthropic) qua Claude Code và claude.ai — Claude Sonnet 4.6 3 lượt; Claude Opus 5.5 193 lượt; Claude (không rõ model) 8 lượt (tổng 204 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, bản trích 11:05 11/11/2026) |
 | Có sử dụng AI: | [x] Có [ ] Không |
 
@@ -49,7 +49,7 @@
 | B2 | Khung BUG-58…85 theo mẫu HW02 (chỉ dữ kiện) + script `bug_skeleton_hw03.py` | Claude Code · 10/11/2026 18:51 · `9ede85b` (HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02) · #105 | 28 file khung; Tiêu đề/Steps/Severity… để SV viết · `tools/bug_skeleton_hw03.py` | không có |
 | B3 | Kiểm dữ kiện 28 bug + tái hiện Steps SV bằng Playwright (`bug_check.md`, `repro_bugs.spec.ts`) | Claude Code · 10/11/2026 20:33 · `715c4eb` (HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI)) · #130 | sạch 14 / còn điểm 14; P1, P2 · `HW03/bugs/bug_check.md`, `HW03/tests/repro_bugs.spec.ts`, `HW03/tests/repro.config.ts` … | không có |
 | B4 | Kiểm lại 14 bug SV sửa (`bug_check2.md`) | Claude Code · 11/11/2026 07:51 · `de6882e` (HW03[T1] 5/6g: kiểm lại 14 bug SV sửa (AI)) · #177 | đã xử lý 6 / còn điểm 8 · `HW03/bugs/bug_check2.md` | không có |
-| B5 | Tạo 28 GitHub Issue bằng `gh issue create --body-file` (file SV viết) + ghi link vào BUG-xx, README, report | Claude Code · 11/11/2026 05:18 · `bf715c0` (HW03[T1] 6/6: link GitHub Issue #247–#260 cho 14 bug) · #167–#169 | #247–#274 trên tkob-team/eshop-sut · `HW03/README.md` | `77a351f` HW03[T1] 6/6: link GitHub Issue #261–#274 cho 14 bug còn lại; `0185a48` HW03: SV tự chấm; `066cf3c` HW03: SV sửa căn cứ tự chấm |
+| B5 | Tạo 28 GitHub Issue bằng `gh issue create --body-file` (file SV viết) + ghi link vào BUG-xx, README, report | Claude Code · 11/11/2026 05:18 · `bf715c0` (HW03[T1] 6/6: link GitHub Issue #247–#260 cho 14 bug) · #167–#169 | #247–#274 trên tkob-team/eshop-sut · `HW03/README.md` | `77a351f` HW03[T1] 6/6: link GitHub Issue #261–#274 cho 14 bug còn lại |
 | B6 | Sửa body issue #266 + comment theo lệnh SV (`issue_edits.md`) | Claude Code · 11/11/2026 08:11 · `99a9e27` (HW03[T1]: khôi phục dữ kiện BUG-72 (#266)) · #181 | nhật ký lệnh `gh issue edit`/comment · `HW03/bugs/issue_edits.md` | không có |
 | B7 | Ảnh trang Issues `[HW03-C2]` (Playwright chụp) chèn report §6 | Claude Code · 11/11/2026 08:13 · `08fe5ab` (HW03[T1]: ảnh trang Issues) · #181 | 25 + 3 issue · `HW03/bugs/issues_page_HW03-C2_1.png`, `HW03/bugs/issues_page_HW03-C2_2.png` | không có |
 | U1 | Gói usability nháp – bản đóng băng (plan 9 phần, participant kit, phiếu quan sát) | Claude Code · 04/11/2026 17:51 · `c081f96` (HW03[T2] 1/10: AI nháp gói usability) · #17 | chưa dùng trong phiên thật · `HW03/appendix/ai-outputs/T2_plan_v1.md`, `HW03/appendix/ai-outputs/T2_participant_kit_v1.md`, `HW03/appendix/ai-outputs/T2_observation_sheet_v1.md` | không có |
@@ -57,19 +57,19 @@
 | U3 | Google Form SEQ + SUS + 4 câu hỏi mở (Apps Script – phiên thảo luận claude.ai) | Claude Code · 10/11/2026 19:36 · `2485116` (HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form) · #118–#128 | form trên Google, không có file trong repo; CSV trả lời không commit · `HW03/usability/plan.md` | không có |
 | U4 | Kịch bản điều phối `moderator_script.md` (phiên thảo luận nháp, Claude Code commit nguyên văn) | Claude Code · 10/11/2026 19:36 · `70f26ef` (HW03[T2] 2c/10: kịch bản điều phối (AI nháp)) · #118–#128 | phiên ~10 phút · `HW03/usability/moderator_script.md` | không có |
 | U5 | Phiếu phiên S00…S07.json AI chép từ notes SV + CSV (`usability_fill_hw03.py`) | Claude Code · 11/11/2026 00:49 · `750cfdd` (HW03[T2] 2/10: pilot S00) · #158 | nhãn "AI chép, SV duyệt"; thời gian/hoàn thành/trợ giúp SV điền · `tools/usability_fill_hw03.py`, `HW03/usability/sessions/S00.json` | `d9919c9` HW03[T2] 10/10: số liệu U1 |
-| U6 | Đối chiếu 7 pain point §5.8 ↔ issue nhóm (chỉ đọc, trả lời trong phiên) | Claude Code · 11/11/2026 08:39 · `afc81da` (HW03[T2]: SV ghi issue liên quan vào findings) · #184 | bảng trùng / liên quan / chưa có; SV tự ghi vào report · `HW03/23120255_HW03_Report.md` | `f96dfb2` HW03[T2]: Thêm quy định Severity; `cf4e6b7` HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI bỏ sót; `557c0fe` HW03[T1]: SV sửa §3.4 theo kiểm dữ kiện; `1d0683b` HW03[T1]: SV sửa câu từ 3.4; … (+14) |
+| U6 | Đối chiếu 7 pain point §5.8 ↔ issue nhóm (chỉ đọc, trả lời trong phiên) | Claude Code · 11/11/2026 08:39 · `afc81da` (HW03[T2]: SV ghi issue liên quan vào findings) · #184 | bảng trùng / liên quan / chưa có; SV tự ghi vào report · `HW03/23120255_HW03_Report.md` | `f96dfb2` HW03[T2]: Thêm quy định Severity; `cf4e6b7` HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI bỏ sót; `557c0fe` HW03[T1]: SV sửa §3.4 theo kiểm dữ kiện; `1d0683b` HW03[T1]: SV sửa câu từ 3.4; … (+5) |
 | S1 | Agent Skill `gui-checklist-testing` (SKILL.md, reference, asset, 8 script) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | chép từ `.claude/skills/` · `HW03/skills/gui-checklist-testing` | `0d8fd34` HW03[Skill] 1/3b: D1; `ad992bc` HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2 |
 | S2 | Agent Skill `usability-evaluation` (SKILL.md, reference, asset, 6 script) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | chưa dùng trên phiên thật · `HW03/skills/usability-evaluation` | không có |
-| S3 | `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | link `<SV điền>` · `HW03/skills/VideoLinks.md`, `HW03/skills/demo_plan.md` | `5cd2ebb` HW03[Skill] 3/3: link video demo |
+| S3 | `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | link `<SV điền>` · `HW03/skills/VideoLinks.md`, `HW03/skills/demo_plan.md` | không có |
 | R1 | Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3) | Claude Code · 10/11/2026 02:55 · `3ee3158` (HW03[T1] 4/6b: gộp kết quả, Excel, danh sách Failed) · #75 | khối giữa marker REPORT:T1 · `tools/report_t1_hw03.py` | `ad992bc` HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2; `4b4c64c` HW03[T1] 4/6d: R4; `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64 |
-| R4 | AI nháp report §3.2, §4.2 (📝 AI nháp – SV duyệt/sửa) | Claude Code · 10/11/2026 18:42 · `ad992bc` (HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2) · #102 | chỉ dùng dữ kiện trong repo · `HW03/23120255_HW03_Report.md` | `4b4c64c` HW03[T1] 4/6d: R4; `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64; `6069790` HW03[T1] 4/6f: ảnh tổng quan P3; `c51665d` HW03: report §5 – không có phiên usability; … (+30) |
+| R4 | AI nháp report §3.2, §4.2 (📝 AI nháp – SV duyệt/sửa) | Claude Code · 10/11/2026 18:42 · `ad992bc` (HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2) · #102 | chỉ dùng dữ kiện trong repo · `HW03/23120255_HW03_Report.md` | `4b4c64c` HW03[T1] 4/6d: R4; `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64; `6069790` HW03[T1] 4/6f: ảnh tổng quan P3; `c51665d` HW03: report §5 – không có phiên usability; … (+21) |
 | R2 | Test summary README + report §8 (11/11 thêm dòng U1 từ phiếu phiên) | Claude Code · 10/11/2026 19:05 · `70aa585` (HW03: README test summary (script) + chỗ tự chấm) · #114 | khối SUMMARY · `tools/summary_hw03.py` | `d9919c9` HW03[T2] 10/10: số liệu U1 |
 | R3 | Khung AI-02, AI-03, khối Mandatory Disclosure §11 | Claude Code · 10/11/2026 19:07 · `c2aa7ae` (HW03: khung AI-02, AI-03 + Mandatory Disclosure §11 (script)) · #114 | file này · `tools/forms_hw03.py` | `d4fa9e4` HW03: AI-02 – thêm artifact AI từ tối 10/11, cột #n theo prompt log; `47b96b1` HW03: AI-03 – số lượt theo dòng Tổng, lượt không rõ model chờ lý do; `f33f7d5` HW03: §11 Mandatory Disclosure + report_plan f/g – việc AI từ tối 10/11, dòng CSV (AI-05) |
 | E1 | Mô tả môi trường (`env/environment.md`) | Claude Code · 05/11/2026 02:26 · `1172c20` (HW03[T1] 3/6b: C1, H1, P3A) · #43–#48 | phiên bản trình duyệt/OS/thiết bị · `HW03/env/environment.md` | `107b67f` HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt |
 
 *34 artifact. Sinh bằng `tools/forms_hw03.py` từ danh mục trong script + `git log` (commit tạo = commit đầu tiên thêm file chính – đường dẫn đầu ở cột (2)). Cột (5) chỉ liệt kê commit, không diễn giải.*
 
-### 3.2 Mục (3), (4) – em điền
+### 3.2 Mục (3), (4)
 
 *Verdict: VALID / INVALID / INCOMPLETE. Lý do: 1–2 câu, dẫn ISTQB/slide. #n để mở `appendix/A_prompt_log.md`.*
 
@@ -129,8 +129,8 @@ Xem report chính `23120255_HW03_Report.md` §10.
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Môn học: | CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | Thầy Lâm Quang Vũ, Thầy Trần Duy Hoàng, Cô Trần Thị Bích Hạnh, Thầy Trương Phước Lộc, Thầy Hồ Tuấn Thanh |
-| Ngày: | [...] |
-| Chữ ký: | [...] |
+| Ngày: | 11/11/2026 |
+| Chữ ký: | ![Chữ ký](signature.png) |
 
 ## Tham khảo
 
