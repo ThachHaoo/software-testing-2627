@@ -47,8 +47,8 @@
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Môn học: | CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | Thầy Lâm Quang Vũ, Thầy Trần Duy Hoàng, Cô Trần Thị Bích Hạnh, Thầy Trương Phước Lộc, Thầy Hồ Tuấn Thanh |
-| Ngày: | [...] |
-| Chữ ký: | [...] |
+| Ngày: | 11/11/2026 |
+| Chữ ký: | ![Chữ ký](signature.png) |
 
 ## Tham khảo
 

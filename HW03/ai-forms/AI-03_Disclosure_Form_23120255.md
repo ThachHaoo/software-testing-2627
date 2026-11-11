@@ -33,9 +33,6 @@
   - #69 (`2026-11-10 02:23`): Lượt chạy lệnh CLI để rà soát ảnh chạy tay; script tự động xuất log thô không kèm tên model.
   - #70 (`2026-11-10 02:23#2`): Lượt chạy lệnh script nén ảnh tự động `compress_hw03.py` trên CLI.
   - #79 (`2026-11-10 03:10`): Lượt hỗ trợ cập nhật kịch bản Playwright ngắn trên Claude Code CLI.
-  - #196 (`2026-11-11 09:13`): Lượt rà soát đóng gói cuối cùng trước khi nộp trên Claude Code CLI.
-  - #203 (`2026-11-11 11:04#2`): `<SV viết>`
-  - #204 (`2026-11-11 11:05`): `<SV viết>`
 - Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận, lập lệnh, review).
 
 ### 2. Giai đoạn nào của bài tập có dùng AI:
@@ -88,7 +85,7 @@ Theo bảng artifact của AI-02 (mục 3.1): H1 Harness HW03: `HW03/CLAUDE.md`,
 
 ## 3. Cam đoan Trung thực
 
-*Bằng việc ký tên dưới đây, em cam đoan thông tin khai báo ở trên là chính xác và đầy đủ.* [...]
+*Bằng việc ký tên dưới đây, em cam đoan thông tin khai báo ở trên là chính xác và đầy đủ.*
 
 ## Chữ ký
 

@@ -106,10 +106,10 @@
 | S1 | #92–#97 | VALID | Agent Skill `gui-checklist-testing` chứa đầy đủ các kịch bản kiểm thử GUI per-control và tài liệu tham khảo theo đúng chuẩn cấu trúc skill. |
 | S2 | #92–#97 | INCOMPLETE | Skill này áp dụng cấu trúc kế hoạch 9 phần theo tài liệu của Rubin & Chisnell và slide môn học. |
 | S3 | #92–#97 | VALID | File tham chiếu video được cấu trúc đúng quy định, sẵn sàng chứa link minh chứng sau khi hoàn tất quay video demo. |
-| S4 | #199–#201 | `<SV viết>` | `<SV viết>` |
+| S4 | #199–#201 | VALID | Kịch bản quay video demo do AI đề xuất bám sát cấu trúc yêu cầu của bài tập, giúp em định hình rõ các mốc thao tác thực tế. |
 | R1 | #75 | VALID | Bảng tổng hợp báo cáo T1/T3 xuất chính xác số liệu từ kết quả gộp; đảm bảo các con số thống kê nhất quán toàn bộ báo cáo. |
 | R4 | #102 | VALID | SV đã duyệt và giữ nguyên bản nháp do commit duyệt eb9c78a chỉ thực hiện xoá 2 dòng 📝 mà không thay đổi câu chữ nào. |
-| R5 | #198 | `<SV viết>` | `<SV viết>` |
+| R5 | #198 | VALID | Phần §7 hướng dẫn cách dùng được AI hỗ trợ tổng hợp chuẩn xác, em đã kiểm tra và giữ nguyên nội dung. |
 | R2 | #114 | VALID | Script cập nhật file README và §8 báo cáo tự động tính toán chính xác các chỉ số bao phủ và tỷ lệ đạt/nối của bài kiểm thử. |
 | R3 | #114 | VALID | Khung báo cáo minh bạch AI (AI-02, AI-03) sinh ra đúng cấu trúc mẫu quy định; hỗ trợ kê khai chi tiết các lượt tương tác AI. |
 | E1 | #43–#48 | VALID | Tài liệu mô tả môi trường kiểm thử `environment.md` ghi nhận đầy đủ chi tiết phiên bản OS, trình duyệt và thông số thiết bị thật P1/P2/P3. |
