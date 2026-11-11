@@ -61,13 +61,15 @@
 | S1 | Agent Skill `gui-checklist-testing` (SKILL.md, reference, asset, 8 script) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | chép từ `.claude/skills/` · `HW03/skills/gui-checklist-testing` | `0d8fd34` HW03[Skill] 1/3b: D1; `ad992bc` HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2 |
 | S2 | Agent Skill `usability-evaluation` (SKILL.md, reference, asset, 6 script) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | chưa dùng trên phiên thật · `HW03/skills/usability-evaluation` | không có |
 | S3 | `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp) | Claude Code · 10/11/2026 18:25 · `fcab9e1` (HW03[Skill] 1/3: chép skill + VideoLinks) · #92–#97 | link `<SV điền>` · `HW03/skills/VideoLinks.md`, `HW03/skills/demo_plan.md` | không có |
+| S4 | Kịch bản quay video demo skill (phiên thảo luận claude.ai) + lượt chạy demo skill trong Claude Code | Claude Code / claude.ai · 11/11/2026 11:01 · `5cd2ebb` (HW03[Skill] 3/3: link video demo) · #199–#201 | video https://youtu.be/2E0pcpoG7Mk · `HW03/skills/VideoLinks.md` | không có |
 | R1 | Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3) | Claude Code · 10/11/2026 02:55 · `3ee3158` (HW03[T1] 4/6b: gộp kết quả, Excel, danh sách Failed) · #75 | khối giữa marker REPORT:T1 · `tools/report_t1_hw03.py` | `ad992bc` HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2; `4b4c64c` HW03[T1] 4/6d: R4; `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64 |
 | R4 | AI nháp report §3.2, §4.2 (📝 AI nháp – SV duyệt/sửa) | Claude Code · 10/11/2026 18:42 · `ad992bc` (HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2) · #102 | chỉ dùng dữ kiện trong repo · `HW03/23120255_HW03_Report.md` | `4b4c64c` HW03[T1] 4/6d: R4; `f6e85c3` HW03[T1] 4/6e: M6 + tham chiếu CL-64; `6069790` HW03[T1] 4/6f: ảnh tổng quan P3; `c51665d` HW03: report §5 – không có phiên usability; … (+21) |
+| R5 | AI nháp report §7 "Cách dùng" 2 skill | Claude Code · 11/11/2026 10:02 · `f7dfae8` (HW03: §7 cách dùng skill) · #198 | `HW03/23120255_HW03_Report.md` §7 | không có |
 | R2 | Test summary README + report §8 (11/11 thêm dòng U1 từ phiếu phiên) | Claude Code · 10/11/2026 19:05 · `70aa585` (HW03: README test summary (script) + chỗ tự chấm) · #114 | khối SUMMARY · `tools/summary_hw03.py` | `d9919c9` HW03[T2] 10/10: số liệu U1 |
 | R3 | Khung AI-02, AI-03, khối Mandatory Disclosure §11 | Claude Code · 10/11/2026 19:07 · `c2aa7ae` (HW03: khung AI-02, AI-03 + Mandatory Disclosure §11 (script)) · #114 | file này · `tools/forms_hw03.py` | `d4fa9e4` HW03: AI-02 – thêm artifact AI từ tối 10/11, cột #n theo prompt log; `47b96b1` HW03: AI-03 – số lượt theo dòng Tổng, lượt không rõ model chờ lý do; `f33f7d5` HW03: §11 Mandatory Disclosure + report_plan f/g – việc AI từ tối 10/11, dòng CSV (AI-05) |
 | E1 | Mô tả môi trường (`env/environment.md`) | Claude Code · 05/11/2026 02:26 · `1172c20` (HW03[T1] 3/6b: C1, H1, P3A) · #43–#48 | phiên bản trình duyệt/OS/thiết bị · `HW03/env/environment.md` | `107b67f` HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt |
 
-*34 artifact. Sinh bằng `tools/forms_hw03.py` từ danh mục trong script + `git log` (commit tạo = commit đầu tiên thêm file chính – đường dẫn đầu ở cột (2)). Cột (5) chỉ liệt kê commit, không diễn giải.*
+*36 artifact. Sinh bằng `tools/forms_hw03.py` từ danh mục trong script + `git log` (commit tạo = commit đầu tiên thêm file chính – đường dẫn đầu ở cột (2)). Cột (5) chỉ liệt kê commit, không diễn giải.*
 
 ### 3.2 Mục (3), (4)
 
@@ -104,8 +106,10 @@
 | S1 | #92–#97 | VALID | Agent Skill `gui-checklist-testing` chứa đầy đủ các kịch bản kiểm thử GUI per-control và tài liệu tham khảo theo đúng chuẩn cấu trúc skill. |
 | S2 | #92–#97 | INCOMPLETE | Skill này áp dụng cấu trúc kế hoạch 9 phần theo tài liệu của Rubin & Chisnell và slide môn học. |
 | S3 | #92–#97 | VALID | File tham chiếu video được cấu trúc đúng quy định, sẵn sàng chứa link minh chứng sau khi hoàn tất quay video demo. |
+| S4 | #199–#201 | `<SV viết>` | `<SV viết>` |
 | R1 | #75 | VALID | Bảng tổng hợp báo cáo T1/T3 xuất chính xác số liệu từ kết quả gộp; đảm bảo các con số thống kê nhất quán toàn bộ báo cáo. |
 | R4 | #102 | VALID | SV đã duyệt và giữ nguyên bản nháp do commit duyệt eb9c78a chỉ thực hiện xoá 2 dòng 📝 mà không thay đổi câu chữ nào. |
+| R5 | #198 | `<SV viết>` | `<SV viết>` |
 | R2 | #114 | VALID | Script cập nhật file README và §8 báo cáo tự động tính toán chính xác các chỉ số bao phủ và tỷ lệ đạt/nối của bài kiểm thử. |
 | R3 | #114 | VALID | Khung báo cáo minh bạch AI (AI-02, AI-03) sinh ra đúng cấu trúc mẫu quy định; hỗ trợ kê khai chi tiết các lượt tương tác AI. |
 | E1 | #43–#48 | VALID | Tài liệu mô tả môi trường kiểm thử `environment.md` ghi nhận đầy đủ chi tiết phiên bản OS, trình duyệt và thông số thiết bị thật P1/P2/P3. |

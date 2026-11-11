@@ -131,6 +131,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 11/11 Claude Code: khôi phục dòng Dữ kiện BUG-72 về đúng `checklist.json`, `gh issue edit #266` + comment theo lệnh SV, nhật ký `bugs/issue_edits.md`; ảnh trang Issues `[HW03-C2]` (Playwright chụp, `bugs/issues_page_HW03-C2_*.png`) chèn report §6.
 - 11/11 Claude Code (T2 10/10): `sus_score.py --check/--report` → REPORT:U1; `tools/summary_hw03.py` thêm dòng U1; đối chiếu 7 pain point §5.8 ↔ issue nhóm (chỉ đọc, trả lời trong phiên – SV tự ghi cột liên quan).
 - 11/11 Claude Code: prompt log thêm transcript claude.ai p2; `prompt_log_turns.txt`; `tools/forms_hw03.py` thêm artifact B1–B7, U3–U6, R4, cột #n theo dải lượt trước commit, lý do lượt không rõ model chờ SV; §11 thêm mục 8–12.
+- 11/11 Claude Code: AI nháp report §7 "Cách dùng" (f7dfae8); chạy demo 2 skill cho video (#199–#201); phiên thảo luận nháp kịch bản quay video. **Lỗi AI:** `forms_hw03.py` chạy lại lúc 11:05 ghi đè ngày/chữ ký AI-02 và phần SV điền AI-03 (91adc3f) → khôi phục bản SV (35d5c32), script không chạy lại trên form nữa.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)

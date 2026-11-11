@@ -36,7 +36,7 @@
 
 | Nội dung | Link |
 |---|---|
-| Agent Skill `gui-checklist-testing`, `usability-evaluation` | xem `skills/VideoLinks.md` |
+| Agent Skill `gui-checklist-testing`, `usability-evaluation` | [YouTube](https://youtu.be/2E0pcpoG7Mk) (`skills/VideoLinks.md`) |
 
 ## Tài liệu trong bài nộp
 

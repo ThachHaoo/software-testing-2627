@@ -275,6 +275,8 @@ def disclosure():
 
 
 def main():
+    if "signature.png" in (HW / "ai-forms" / "AI-02_Audit_Report_23120255.md").read_text(encoding="utf-8"):
+        raise SystemExit("AI-02 đã có phần SV (chữ ký) – không ghi đè; sửa tay.")
     tot = totals()
     (HW / "ai-forms").mkdir(exist_ok=True)
     (HW / "ai-forms" / "AI-02_Audit_Report_23120255.md").write_text(ai02(tot), encoding="utf-8")
