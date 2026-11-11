@@ -1,7 +1,7 @@
 # Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list --commits). Dùng để gom khoá khoảng trong prompt_log_notes.toml.
 # Commit kế tiếp = commit đầu tiên có giờ commit sau giờ lượt (git log --all).
 
-# Khoảng gợi ý (51 khoảng; tách khi tiền tố bước của commit kế tiếp đổi hoặc hai lượt cách > 60 phút)
+# Khoảng gợi ý (53 khoảng; tách khi tiền tố bước của commit kế tiếp đổi hoặc hai lượt cách > 60 phút)
 # khoá khoảng | số lượt | #đầu–#cuối | model | commit kế tiếp đầu / cuối
 ["2026-11-04 12:26 .. 2026-11-04 12:33"] | 5 | #1–#5 | Claude (không rõ model), Claude Opus 5.5, Claude Sonnet 4.6 | be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By / be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
 ["2026-11-04 17:02 .. 2026-11-04 17:21"] | 5 | #6–#10 | Claude Opus 5.5 | be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By / be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
@@ -53,7 +53,9 @@
 ["2026-11-11 08:01 .. 2026-11-11 08:11"] | 2 | #180–#181 | Claude Opus 5.5 | 99a9e27 HW03[T1]: khôi phục dữ kiện BUG-72 (#266) / 99a9e27 HW03[T1]: khôi phục dữ kiện BUG-72 (#266)
 ["2026-11-11 08:25 .. 2026-11-11 08:39"] | 6 | #182–#187 | Claude Opus 5.5 | f68ec0d HW03[T2]: SV sửa findings theo kiểm dữ kiện / f96dfb2 HW03[T2]: Thêm quy định Severity
 ["2026-11-11 08:41 .. 2026-11-11 08:54"] | 4 | #188–#191 | Claude Opus 5.5 | cf4e6b7 HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI  / 1d0683b HW03[T1]: SV sửa câu từ 3.4
-["2026-11-11 09:03 .. 2026-11-11 09:13"] | 5 | #192–#196 | Claude (không rõ model), Claude Opus 5.5 | 4eb5a8d HW03: SV sửa Critique (số từ + dữ kiện) / 0c96555 HW03: prompt log thêm transcript phiên claude.ai (
+["2026-11-11 09:03 .. 2026-11-11 09:28"] | 7 | #192–#198 | Claude Opus 5.5 | 4eb5a8d HW03: SV sửa Critique (số từ + dữ kiện) / 3f96664 HW03: report §6 bảng bug (AI chép) + điền dữ kiện
+["2026-11-11 10:31 .. 2026-11-11 10:50"] | 3 | #199–#201 | Claude Opus 5.5 | 5cd2ebb HW03[Skill] 3/3: link video demo / 5cd2ebb HW03[Skill] 3/3: link video demo
+["2026-11-11 11:04 .. 2026-11-11 11:05"] | 3 | #202–#204 | Claude (không rõ model), Claude Opus 5.5 | (chưa có) / (chưa có)
 
 #1   ["2026-11-04 12:26"]  Claude Sonnet 4.6 Giờ tôi sẽ bắt đầu thực hiện HW03 nhé /cs423-ai-first-homework . Đầu tiên đọc đề
       → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
@@ -445,5 +447,21 @@
       → commit kế tiếp: 3bb0fe7 (09:12 11/11) HW03: SV rút gọn Critique
 #195 ["2026-11-11 09:12"]  Claude Opus 5.5  285 từ rồi, kiểm tra giúp mình nhé
       → commit kế tiếp: 0c96555 (09:15 11/11) HW03: prompt log thêm transcript phiên claude.ai (p2)
-#196 ["2026-11-11 09:13"]  Claude (không rõ model) NHIỆM VỤ: chuẩn bị Audit + form. Không push, không amend, KHÔNG viết verdict/lý 
+#196 ["2026-11-11 09:13"]  Claude Opus 5.5  NHIỆM VỤ: chuẩn bị Audit + form. Không push, không amend, KHÔNG viết verdict/lý 
       → commit kế tiếp: 0c96555 (09:15 11/11) HW03: prompt log thêm transcript phiên claude.ai (p2)
+#197 ["2026-11-11 09:20"]  Claude Opus 5.5  1. Report §1: điền dữ kiện (không viết thêm ý): SUT tkob-team/eshop-sut @ de0f48
+      → commit kế tiếp: 4c3b0b2 (09:21 11/11) HW03: report §1 môi trường (dữ kiện)
+#198 ["2026-11-11 09:28"]  Claude Opus 5.5  Không sửa phần SV, không push. Trước khi ghi report: git status phải sạch (SV đã
+      → commit kế tiếp: 3f96664 (09:30 11/11) HW03: report §6 bảng bug (AI chép) + điền dữ kiện
+#199 ["2026-11-11 10:31"]  Claude Opus 5.5  /gui-checklist-testing HW03/demo/register
+      → commit kế tiếp: 5cd2ebb (11:01 11/11) HW03[Skill] 3/3: link video demo
+#200 ["2026-11-11 10:37"]  Claude Opus 5.5  tiếp
+      → commit kế tiếp: 5cd2ebb (11:01 11/11) HW03[Skill] 3/3: link video demo
+#201 ["2026-11-11 10:50"]  Claude Opus 5.5  /usability-evaluation HW03/demo/usability
+      → commit kế tiếp: 5cd2ebb (11:01 11/11) HW03[Skill] 3/3: link video demo
+#202 ["2026-11-11 11:04"]  Claude Opus 5.5  claude attach a0a67d1c
+      → commit kế tiếp: (chưa có)
+#203 ["2026-11-11 11:04#2"]  Claude (không rõ model) [Request interrupted by user]
+      → commit kế tiếp: (chưa có)
+#204 ["2026-11-11 11:05"]  Claude (không rõ model) NHIỆM VỤ: ĐÓNG GÓI HW03 – hạn 11:30, làm nhanh, không hỏi lại trừ lỗi chặn. Khôn
+      → commit kế tiếp: (chưa có)

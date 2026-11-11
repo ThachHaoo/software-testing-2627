@@ -8534,4 +8534,187 @@ Commit `HW03: report §6 bảng bug (AI chép) + điền dữ kiện`. Báo ≤ 
 
 ---
 
-**Tổng:** 198 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 189 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195, #196, #197, #198); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).
+## #199 | 10:31 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+/gui-checklist-testing HW03/demo/register
+Demo video E2E: chạy lần lượt bước 0 → 6, xong mỗi bước in 1 dòng tóm tắt rồi chuyển ngay sang bước kế. Phạm vi: chỉ màn Đăng ký web /register của ../eshop-sut, nền tảng P1 (Cốc Cốc / Windows 11), tối thiểu 8 item, chỉ chế độ tay, demo không cần ảnh.
+- Bước 2: SV bỏ qua trong demo – không dựng item, không gợi ý item; ghi meta "bước 2 bỏ qua (demo)" rồi sang bước 3.
+- Bước 4: tạo file lượt tay trống theo RUN.md rồi DỪNG chờ tôi gõ "tiếp"; KHÔNG tự điền verdict; khi tôi gõ "tiếp" thì để ket_qua trống ("chưa chạy – demo") và sang bước 5.
+Nhánh demo-video: freeze vào HW03/demo/ai-outputs (KHÔNG appendix/ai-outputs), không commit, không push.
+```
+
+**Output:**
+```
+Đã đọc SRS + Register.jsx @ de0f48f. Giờ làm bước 0.
+
+**Bước 1:** đã đọc slide (Nielsen/Norman/Shneiderman, *From heuristics…*, *Test every control*: text box, button, hyperlink, validation). Sinh item.
+
+**Bước 2 bỏ qua (demo):** ghi `meta.step2`, không dựng item SV.
+
+**Bước 3 xong:** `RUN.md` (3 nhóm G1–G3, chỉ tay, không ảnh) + `dom_probe.js`, 16 item `che_do: manual`, freeze step3, check 0 lỗi.
+
+**Bước 4 – dừng:** file lượt tay trống `HW03/demo/register/runs/P1_manual_20261111-1034.md` (16 dòng theo thứ tự nhóm G1→G3 của RUN.md, cột status/notes trống). Em không điền verdict.
+
+Anh/chị gõ **"tiếp"** khi muốn sang bước 5. Khi đó `ket_qua` sẽ để trống, ghi "chưa chạy – demo".
+```
+
+**Xử lý:** [...]
+
+---
+
+## #200 | 10:37 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp
+```
+
+**Output:**
+````
+**Bước 4 tiếp:** `ket_qua` để trống, `meta.step4` = "chưa chạy – demo".
+
+**Bước 5 xong:** Excel `HW03/demo/register/excel/demo_register_checklist.xlsx` + `test_summary.md` (16 thiết kế / 0 đã chạy).
+
+Đã chạy demo trên màn Đăng ký từ bước 0 đến bước 6. Chưa có verdict nào vì lượt tay chưa chạy, nên bước 6 ra danh sách Failed rỗng. Không commit, không push.
+
+- **Bước 0:** khảo sát được 10 control và 5 điều khoản đặc tả (FR-01, FR-21, FR-22, FR-23, SEC-04), ghi vào `register_inventory.md`. Mã không có trường "Xác nhận mật khẩu" mà FR-01 yêu cầu, và trang không có `<h1>`.
+- **Bước 1:** 16 item, đủ 4 IA (IA-01: 4, IA-02: 6, IA-03: 2, IA-04: 4). Theo nguồn: SRS 11, control 3, heuristic 2. Có 4 giả định GA1–GA4. Đã freeze vào `HW03/demo/ai-outputs`, `check_checklist` 0 lỗi.
+- **Bước 2:** bỏ qua, ghi `meta.step2 = "bước 2 bỏ qua (demo)"`. Không dựng item, không gợi ý.
+- **Bước 3:** `RUN.md` chia 3 nhóm G1–G3, chỉ chạy tay, không ảnh; kèm `dom_probe.js`. Cả 16 item để `che_do: manual`. Đã freeze RUN.md, dom_probe và checklist.
+- **Bước 4:** file lượt tay để trống, `ket_qua` không điền, ghi "chưa chạy – demo".
+- **Bước 5:** Excel 3 sheet và `test_summary.md` (16 item thiết kế, 0 đã chạy).
+- **Bước 6:** lấy 229 issue về `issues.json`; `failed_list.md` có 0 item. `bug_groups.py` không chạy vì không có item MỚI để gom.
+
+`HW03/appendix/A_prompt_log.md` đang hiện modified: hook Stop tự sinh lại, em không sửa tay. Nhánh demo-video không commit nên cứ để nguyên.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: demo video gui-checklist-testing bước 0→6, màn Đăng ký web /register, P1 Cốc Cốc/Win11, chỉ tay, không ảnh (nhánh demo-video)
+- File đã tạo: HW03/demo/register/{register_inventory.md, checklist.json, checklist.md, RUN.md, dom_probe.js, runs/P1_manual_20261111-1034.md, excel/demo_register_checklist.xlsx, test_summary.md, bugs/{issues.json, failed_cfg.json, failed_list.md}}; HW03/demo/ai-outputs/ (freeze step1, step3 + INDEX.md)
+- Kết quả kiểm tra: check_checklist 0 lỗi 0 cảnh báo (16 item, --min 8); lượt tay P1: Not run (demo); failed_list 0 item
+- Commit: không (theo lệnh); không push
+- Bất thường SUT: Register.jsx:47 Email type="text"; :72 nút submit bg-red-500; :32 chỉ có <h2>, không <h1>; thiếu trường Xác nhận mật khẩu; index.html:2,7 lang="en", title "frontend-web" (chỉ là dữ kiện mã, chưa phải verdict)
+- Ghi chú: SUT ../eshop-sut vẫn ở nhánh usability-tunnel; A_prompt_log.md do hook tự sinh lại (modified, chưa commit)
+- Cần quyết định: không
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #201 | 10:50 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+/usability-evaluation HW03/demo/usability
+Demo video E2E: chạy lần lượt bước 0 → 6, xong mỗi bước in 1 dòng tóm tắt rồi chuyển ngay sang bước kế. Flow: đăng nhập test@eshop.com → tìm tai nghe chống ồn → thêm giỏ → mã VIP100 → xem đơn trong Hồ sơ; remote synchronous moderated (Google Meet); 7 người + 1 pilot; SEQ + SUS + 4 câu hỏi mở.
+- Bước 2 (pilot): SV bỏ qua trong demo – ghi "bước 2 bỏ qua (demo)".
+- Bước 3: chỉ tạo khung trống sessions/S01.json bằng new_session.py, KHÔNG điền gì.
+- Bước 4: KHÔNG dùng phiếu demo; chạy sus_score.py --check và --report trên dữ liệu thật HW03/usability/sessions, chỉ IN bảng ra màn hình, không ghi vào report.
+- Bước 5–6: chỉ dựng khung findings trống và gom dữ kiện bug; không viết nội dung.
+Nhánh demo-video: không commit, không push, không sửa report thật.
+```
+
+**Output:**
+````
+Bước 0: plan.md đủ 9 phần, check_kit 0 lỗi, đã freeze. Bước 1: participant_kit.md, check_kit 0 lỗi, đã freeze. Bước 2 bỏ qua (demo). Giờ làm bước 3–6.
+
+Đã chạy đủ bước 0 → 6 trên nhánh `demo-video`. Không commit, không push, report thật không sửa.
+
+- **Bước 0:** `HW03/demo/usability/plan.md` đủ 9 phần, `check_kit` báo 0 lỗi, đã đóng băng thành `demo_usability_plan_step0_20261111-105143.md`.
+- **Bước 1:** `participant_kit.md` có nhiệm vụ dạng mục tiêu, SEQ, 10 câu SUS và 4 câu hỏi mở; `check_kit` báo 0 lỗi, đã đóng băng thành `demo_usability_participant_kit_step1_20261111-105143.md`.
+- **Bước 2:** bỏ qua (demo).
+- **Bước 3:** `sessions/S01.json` là khung trống do `new_session.py` tạo, mọi giá trị `null`.
+- **Bước 4:** `--check` trên `HW03/usability/sessions`: 8 phiếu, 7 phiên chính, 0 lỗi. Bảng chỉ in ra màn hình: SUS trung bình 77,9 ± 17,8, median 85,0; SEQ trung bình 6,3; hoàn thành không trợ giúp 7/7; trong mốc 06:00 là 5/7; thời gian median 03:10.
+- **Bước 5:** `findings.md` chép nguyên khung trống, chưa có nội dung.
+- **Bước 6:** `bugs/_groups_usability.md` có 0 sự kiện, vì phiếu thật chưa có sự kiện nào đánh dấu `"bug": true`. Đã liệt kê issue của nhóm để em kiểm trùng.
+
+Hai file đóng băng nằm trong `HW03/demo/ai-outputs/`, không đụng `HW03/appendix/ai-outputs/`.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: demo video /usability-evaluation bước 0→6 trong HW03/demo/usability (nhánh demo-video)
+- File đã tạo/sửa: HW03/demo/usability/{plan.md, participant_kit.md, sessions/S01.json (trống), findings.md (khung trống), bugs/_groups_usability.md (0 sự kiện)}; freeze 2 file vào HW03/demo/ai-outputs/ (+ INDEX.md)
+- Kết quả kiểm tra: check_kit plan+kit 0 lỗi; sus_score --check dữ liệu thật 8 phiếu / 7 phiên / 0 lỗi; bảng chỉ in màn hình, không ghi report (Pass)
+- Commit: không (nhánh demo, theo lệnh)
+- Cần quyết định / câu hỏi: không có điểm chặn
+- Bất thường: cả 7 phiếu thật HW03/usability/sessions/S0*.json chỉ có sự kiện loại N → cột Lỗi (L) / Do dự (D) / Trợ giúp (T) trong bảng đều bằng 0. SV xem lại: phiên đó thật sự không có L/D/T hay lúc nhập phiếu đã ghi hết thành N.
+- Bước 6 trên dữ liệu thật ra 0 sự kiện vì chưa phiếu nào có "bug": true.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #202 | 11:04 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+claude attach a0a67d1c
+```
+
+**Output:**
+```
+`claude attach a0a67d1c` là lệnh shell, không phải yêu cầu gửi cho tôi. Gõ vào đây thì nó chỉ thành tin nhắn chat, nên chưa attach được.
+
+Cách mở phiên nền "Checklist GUI màn /register HW03":
+- **Xem/tương tác với phiên đó:** mở một terminal PowerShell riêng, chạy `claude attach a0a67d1c`. Đừng dùng tiền tố `!` ở đây, vì attach cần terminal tương tác.
+- **Tiếp tục phiên đó ngay trong cửa sổ này:** chạy `claude stop a0a67d1c` trong ter
+```
+
+**Xử lý:** [...]
+
+---
+
+## #203 | 11:04 11/11/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+[Request interrupted by user]
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #204 | 11:05 11/11/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: ĐÓNG GÓI HW03 – hạn 11:30, làm nhanh, không hỏi lại trừ lỗi chặn. Không amend. KHÔNG sửa phần SV viết.
+1. python tools/hooks/on_stop.py --manual (đã có _p2 bản cuối) → forms_hw03.py (số lượt AI-02/03 theo dòng Tổng) → commit `HW03: prompt log + form – lần trích cuối`.
+2. AI-02 + §11 + report_plan f: thêm artifact "AI nháp §7 Cách dùng skill" và "kịch bản quay video (phiên thảo luận)" – verdict/lý do để `<SV viết>` (nếu chưa có). Video: link đã có ở VideoLinks.md, chép vào §7 report + README.
+3. AI-05 (mẫu HW02/ai-forms, không chép số liệu): tick mục có bằng chứng; mục cam kết cá nhân để [ ] "(em tự xác nhận)"; dòng minh bạch "SV đã gửi CSV có họ tên/SĐT người tham gia cho phiên thảo luận claude.ai 00:43 11/11"; số lượt = dòng Tổng.
+4. Chạy lại report_t1, sus_score --report, summary_hw03 (README/§8), cây thư mục Phụ lục D.
+5. Xuất commit log HW03/commit_log.txt (tools/export_commit_log.ps1 hoặc git log), commit `HW03: commit log`.
+6. PDF: report, AI-02, AI-03, AI-05 (cùng tên .md → .pdf), commit `HW03: PDF`.
+7. hw-submission-audit: liệt kê còn `<SV viết>`/`<SV điền>`/📝/[...] (file:dòng) – chỉ báo.
+8. git archive --format=zip -o 23120255_HW03_AI_GUIUsability_091.zip HEAD HW03 → đo dung lượng; liệt kê file; kiểm KHÔNG có report_plan, CLAUDE.md, evidence_raw, placeholders_left, demo_plan, CSV, transcript; mỗi file ≤ 20 MB, tổng ≤ 20 file đính kèm Moodle.
+Báo ≤ 12 dòng: chỗ trống còn lại, dung lượng zip, hash cuối.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 204 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 193 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195, #196, #197, #198, #199, #200, #201, #202); Claude (không rõ model) 8 lượt (#4, #51, #57, #69, #70, #79, #203, #204).
