@@ -63,7 +63,7 @@ Backend vừa restart. Đã đăng nhập tài khoản `test@eshop.com` / `Test1
 
 - Actual nguyên văn CL-32 P1 (auto): `Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
 - Actual nguyên văn CL-32 P2 (auto): `Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
-- Actual nguyên văn CL-32 P3 (auto): `Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
+- Actual nguyên văn CL-32 P3 (auto): `Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
 - Nguồn bước tái hiện CL-32: tiền điều kiện (checklist): – · cách kiểm: auto · test tự động: `HW03/tests/C2.spec.ts:488`
 
 ### Nhận định
