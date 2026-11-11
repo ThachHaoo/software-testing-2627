@@ -5,7 +5,7 @@
 # Bảng Kiểm Quyền Riêng tư & Sử dụng AI Có Trách nhiệm
 
 **Bài tập:** HW03-AI – GUI & Usability on EShop
-**Công cụ AI:** Claude Sonnet 4.6 3 lượt; Claude Opus 5.5 193 lượt; Claude (không rõ model) 8 lượt (tổng 204 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, khớp AI-03 mục 1)
+**Công cụ AI:** Claude Sonnet 4.6 3 lượt; Claude Opus 5.5 215 lượt; Claude (không rõ model) 7 lượt (tổng 225 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, khớp AI-03 mục 1)
 
 *Chỉ tick mục có bằng chứng trong repo (ghi ở cuối dòng). Mục cam kết cá nhân để trống "(em tự xác nhận)".*
 
@@ -22,7 +22,7 @@
   - **Minh bạch:** SV đã gửi CSV có họ tên/SĐT người tham gia cho phiên thảo luận claude.ai 00:43 11/11; AI chỉ dùng cột SEQ/SUS. CSV không commit (`usability/evidence_raw/` trong `.gitignore`); Claude Code chỉ đọc cột mã phiên, đồng ý, SEQ, SUS, câu hỏi mở (`tools/usability_fill_hw03.py`). Report §11 mục 12.
 - [ ] Không paste nguyên si tài liệu có bản quyền lên AI. *(em tự xác nhận)*
 - [ ] Không paste code công ty / code open-source giới hạn license. *(em tự xác nhận)*
-- [x] Đã ghi mọi prompt + phản hồi AI vào prompt log có timestamp. — *`appendix/A_prompt_log.md` (204 lượt, trích tự động, giờ Asia/Saigon)*
+- [x] Đã ghi mọi prompt + phản hồi AI vào prompt log có timestamp. — *`appendix/A_prompt_log.md` (225 lượt, trích tự động, giờ Asia/Saigon)*
 
 ## 3. Trước khi nộp bài
 

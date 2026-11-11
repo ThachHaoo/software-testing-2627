@@ -8406,11 +8406,32 @@ Sau đó sang **Audit**. Lệnh chuẩn bị Audit anh gửi ngay sau đây.
 ```
 
 **Output:**
-```
+````
 Critique đạt: **285 từ**, nằm trong khoảng 200–300, dữ kiện đã đúng. Xong.
 
 Anh xuất transcript phiên này (`_p2`) ngay bây giờ, để Claude Code điền #n vào Audit. File sẽ tới trong giây lát.
+
+Transcript `claude-ai_session_HW03_p2.jsonl` đã xuất. Phiên này chạy từ 18:18 10/11 tới 09:12 11/11 và không bị nén: lượt đầu trùng giờ bắt đầu.
+
+Lúc kết thúc phiên (trước khi nộp), anh sẽ xuất lại **cùng tên `_p2`** để có thêm các lượt từ giờ tới lúc đó. Em ghi đè file cũ, rồi trích prompt log lần cuối.
+
+**Bây giờ em làm:**
+1. Đặt file vào `.transcripts\`.
+2. Dán cho Claude Code:
+
 ```
+NHIỆM VỤ: chuẩn bị Audit + form. Không push, không amend, KHÔNG viết verdict/lý do/Critique/tự chấm.
+1. python tools/hooks/on_stop.py --manual (đã có .transcripts/claude-ai_session_HW03_p2.jsonl) → commit `HW03: prompt log thêm transcript phiên claude.ai (p2)`. Chạy --list --commits.
+2. AI-02: cập nhật danh mục artifact từ git (thêm các việc AI làm từ tối 10/11: khung bug theo mẫu HW02 + script, kiểm trùng issue, bug_check/bug_check2 + tests/repro_bugs.spec.ts, issue_edits, Google Form (Apps Script, phiên thảo luận), moderator_script, usability_fill_hw03.py + JSON phiên AI chép, summary_hw03 sửa, ảnh trang Issues, AI nháp §3.2/§4.2). Điền cột #n theo prompt log (dải lượt trước commit của artifact); verdict/lý do = <SV viết>. Bảng in gọn để SV điền nhanh.
+3. AI-03: cập nhật số lượt theo dòng "Tổng" (đủ model + lượt không rõ model + lý do = <SV viết> nếu notes chưa có).
+4. §11 Mandatory Disclosure + report_plan f/g: thêm các việc AI mới ở trên; dòng AI-05 về CSV có họ tên/SĐT.
+5. Chạy lại mọi script sinh bảng (report_t1, sus_score --report, summary_hw03, forms_hw03). Liệt kê mọi <SV viết>/<SV điền>/📝 còn lại (file:dòng).
+Commit theo từng việc. Báo cáo ≤ 12 dòng + hash.
+```
+
+Trong lúc Claude Code chạy, em **duyệt các khối 📝** trong report: §3.2, §4.2 (AI nháp) và §5.5. Đọc, sửa chỗ sai, rồi xoá dòng 📝.
+````
+*File AI ghi/gửi trong lượt này:* `claude-ai_session_HW03_p2.jsonl`
 
 **Xử lý:** [...]
 
@@ -8481,7 +8502,68 @@ Xong 5 việc, 6 commit, chưa push. Không đụng verdict, lý do, Critique, t
 
 ---
 
-## #197 | 09:20 11/11/2026 | Claude Opus 5.5 | [...]
+## #197 | 09:16 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+Trong lúc chờ Claude Code chạy.
+
+```markdown
+## 1. Môi trường và SUT
+
+- SUT: `tkob-team/eshop-sut` @ 📝 (commit) · backend :3000, web :5173 (`--host 127.0.0.1`).
+- Nền tảng: P1 Chrome trên Windows · P2 Firefox trên Windows · P3 Chrome Android (POCO F5, `adb reverse tcp:5173` + `tcp:3000`). Phiên bản trình duyệt/OS: 📝
+- Không dùng BrowserStack/LambdaTest (M11): 📝 lý do.
+- Tài khoản dùng: `test@eshop.com`; backend seed lại mỗi lần khởi động.
+```
+
+Phần này mình nhớ là mình có đưa thông tin hết sao mà chưa điền nhỉ
+===
+GIúp mình kiểm tra trên issues phần này luôn nhé:
+
+```markdown
+### 2.1 Phân chia trong nhóm (M4)
+
+📝Tấn Hiệp: C2 - U1; Thái Hoà: C1 - U2; Phúc Hoàng: C3 - U3
+```
+
+===
+Đợi chút, hay là bạn chỉ kêu tôi duyệt các khối ở 3.2 4.2 5.5 thôi nhỉ?
+````
+
+**Output:**
+````
+Ba câu trả lời:
+
+**3. Không chỉ 3.2, 4.2, 5.5.** Lúc nãy anh chỉ nêu các khối **AI nháp** cần em duyệt. Ngoài ra report còn các dòng 📝 là **chỗ trống chờ dữ kiện**, như §1 và §2.1 em vừa thấy. Trước khi nộp, **mọi 📝 phải hết**. Lệnh anh vừa đưa có bước 5 bắt Claude Code liệt kê đủ mọi 📝 còn lại (file:dòng), để em không phải tự dò.
+
+**1. §1 Môi trường.** Đúng, em đã đưa đủ thông tin; chỉ là khung report viết từ đầu chưa được điền. Đây là dữ kiện nên Claude Code điền được. **Lưu ý:** khung đang ghi *"P1 Chrome trên Windows"* là **sai**: P1 là **Cốc Cốc** (quyết định Q1), Chrome 157 chỉ là lượt auto tham chiếu. Dữ kiện có trong repo:
+- SUT: `tkob-team/eshop-sut` @ `de0f48f` (= `85af3ba` + .gitignore). Riêng Task 2 dùng nhánh local `usability-tunnel` @ `e33212d`.
+- P1 Cốc Cốc 160 / Win 11 (auto tham chiếu Chrome 157, Playwright 1.48.2) · P2 Firefox 159 / Win 11 (auto Firefox 131 của Playwright) · P3 Chrome Android 156 / POCO F5 / Android 14.
+- Không dùng BrowserStack/LambdaTest: trial quá ít (report_plan M11).
+
+**2. §2.1 Phân chia nhóm.** Anh chỉ đối chiếu được một phần qua bản `issues.json` trong repo (chụp tới #224):
+- **C3 = nphoang-itus**: khớp, có 21 issue `[HW03-C3-01…23]` (#204–#224).
+- **C1**: Claude Code từng thấy issue **#242 `[HW03-C1][FR-08]`** lúc kiểm trùng, nhưng anh không xem được tác giả (snapshot chưa có, API từ chối). Cần kiểm xem tác giả là ai.
+- **U1/U2/U3**: issue không cho biết, vì usability thường không có issue. Nguồn là tin nhắn nhóm 04/11 (report_plan M4), em tự xác nhận.
+- Report nên ghi kèm tài khoản GitHub để người chấm đối chiếu được, ví dụ `Phúc Hoàng (nphoang-itus): C3 – U3`.
+
+Gửi thêm lệnh nhỏ này cho Claude Code sau lệnh lớn (đừng chen vào giữa lúc nó đang chạy):
+```
+1. Report §1: điền dữ kiện (không viết thêm ý): SUT tkob-team/eshop-sut @ de0f48f (= 85af3ba + .gitignore), Task 2 nhánh local usability-tunnel @ e33212d; P1 = Cốc Cốc 160 / Windows 11 (lượt auto tham chiếu Chrome 157, Playwright 1.48.2 – Q1), P2 = Firefox 159 / Windows 11 (auto Firefox 131 của Playwright), P3 = Chrome Android 156 / POCO F5 / Android 14; lý do không dùng BrowserStack/LambdaTest lấy nguyên câu ở report_plan M11. Sửa "P1 Chrome" sai. Xoá các 📝 đã điền.
+2. §2.1: gh issue list -R tkob-team/eshop-sut --state all --search "HW03-C1 in:title" và "HW03-C3 in:title" → báo tác giả (login) của issue C1, C3. KHÔNG sửa §2.1 (SV tự viết).
+Commit `HW03: report §1 môi trường (dữ kiện)`. Báo ≤ 4 dòng + hash.
+```
+
+Có tên login của C1 rồi thì em tự viết lại §2.1 kèm login, và xoá 📝.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #198 | 09:20 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8502,7 +8584,97 @@ Commit `HW03: report §1 môi trường (dữ kiện)`. Báo ≤ 4 dòng + hash.
 
 ---
 
-## #198 | 09:28 11/11/2026 | Claude Opus 5.5 | [...]
+## #199 | 09:22 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+response lệnh lớn:
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: chuẩn bị Audit + form (bước 1–5).
+- Commit:
+  - 0c96555 prompt log thêm transcript claude.ai p2.
+  - d4fa9e4 AI-02.
+  - 47b96b1 AI-03.
+  - f33f7d5 §11 + report_plan f/g.
+  - bfe1e36 chạy lại script.
+  - 3b2f412 thêm HW03/placeholders_left.md (đánh dấu export-ignore, không nộp).
+- Prompt log: 196 lượt (Sonnet 4.6: 3, Opus 5.5: 186, không rõ model: 7). --list --commits ghi ra appendix/prompt_log_turns.txt, dùng cùng since/exclude với log nên số #n khớp log.
+- AI-02: từ 22 lên 34 artifact (thêm B1–B7, U3–U6, R4; R1/R4 tách phần AI nháp §3.2, §4.2).
+  - Cột #n lấy lượt nằm giữa commit liền trước và commit tạo artifact. Nếu khoảng đó rỗng thì lấy lượt cuối trước commit. U6 (đối chiếu pain point) đặt tay #184.
+  - Bảng 3.2 rút còn 4 cột: Mã | #n | Verdict | Lý do. Chạy lại script vẫn giữ ô SV đã điền.
+- AI-03: số lượt theo dòng Tổng; 7 lượt không rõ model, mỗi lượt một dòng lý do <SV viết> (notes chưa có khoá).
+- §11: thêm mục 8–12, mục 12 là dòng CSV có họ tên/SĐT (cho AI-05). report_plan f thêm 6 dòng, g điền dòng "AI tạo bản đầu".
+- Kiểm tra: sus_score --check 8 phiếu, 7 phiên tính được, 0 lỗi. report_t1, sus_score --report, summary chạy xong, report/README không đổi. forms_hw03.py chạy lại xong.
+- Chỗ trống còn lại: chi tiết từng dòng ở HW03/placeholders_left.md.
+  - Report: 34 chỗ. Gồm §1, §2, §5.1–5.4, §6, §7, §9, §11 (2 dòng), §12 tự chấm, phụ lục D, và nhãn 📝 "AI nháp" ở §3.2, §4.2, §11.
+  - README:11–15 (tự chấm).
+  - AI-02: 34 × 2 ô (dòng 63–111) + §4 (dòng 115).
+  - AI-03: dòng 30–36, 41, 45, 51, 57.
+  - skills/VideoLinks.md:5–6 (link video).
+- Bất thường:
+  - HW03/23120255_HW03_Report.md đang có thay đổi chưa commit, không phải em sửa: bỏ nhãn "📝 AI nháp – SV duyệt/sửa" ở §3.2 hoặc §4.2. Em để nguyên, không commit.
+  - Lúc 09:16 trên đĩa có dòng §2.1 sửa thành "📝Tấn Hiệp: C2 - U1; Thái Hoà: C1 - U2; Phúc Hoàng: C3 - U3", sau đó dòng này mất. Script chỉ ghi lại khối §11 nên đáng ra không đụng §2.1, nhưng em không xác định được dòng đó mất vì đâu. SV kiểm lại editor, nếu mất thì gõ lại.
+  - #196 là lượt hiện tại, đang ghi "không rõ model" vì lượt chưa kết thúc. Sau lần trích log cuối, chạy lại python tools/forms_hw03.py để cập nhật số lượt.
+- Cần quyết định: không có điểm chặn.
+===
+response lệnh nhỏ:
+- Report §1 đã điền dữ kiện theo lệnh, sửa "P1 Chrome" thành Cốc Cốc 160, câu lý do M11 chép nguyên văn từ report_plan, đã bỏ 3 chỗ 📝. Commit 4c3b0b2.
+- Tác giả issue: 19 issue [HW03-C1] đều của henry-banana; 24 issue [HW03-C3] đều của nphoang-itus (gồm 3 issue C3-T2). Em không sửa §2.1.
+- Report còn 2 chỗ xoá nhãn "📝 AI nháp" chưa commit (dòng 49, 301), em không làm nên không commit cùng. A_prompt_log.md vừa được hook trích lại, chưa commit.
+===
+push rồi nhé
+```
+
+**Output:**
+````
+Đã có đủ dữ kiện. Bây giờ là 09:22, còn **2 giờ 08 phút** tới 11:30.
+
+**Về dòng §2.1 bị mất:** gần như chắc chắn do em đang mở report trong editor đúng lúc script của Claude Code ghi lại file, nên một bên đã đè bên kia. Từ giờ **đừng sửa report trong lúc Claude Code đang chạy script trên report**. Lưu và commit phần của em trước, rồi mới đưa lệnh.
+
+**Em làm ngay (5 phút):**
+1. Gõ lại §2.1, kèm login cho người chấm đối chiếu. Theo issue thì C1 = henry-banana, C3 = nphoang-itus, nên Thái Hoà = henry-banana; em xác nhận lại tên. Ví dụ:
+   `Tấn Hiệp (ThachHaoo): C2 – U1 · Thái Hoà (henry-banana): C1 – U2 · Phúc Hoàng (nphoang-itus): C3 – U3`
+   Xoá 📝 của dòng này.
+2. Commit cả phần bỏ nhãn 📝 ở §3.2 và §4.2 em đã làm, cùng prompt log:
+```
+git add HW03/23120255_HW03_Report.md HW03/appendix/A_prompt_log.md
+git commit -m "HW03: SV duyệt §3.2, §4.2, viết §2.1"
+git push
+```
+
+**Rồi dán cho Claude Code** (việc dữ kiện, trong lúc em làm Audit):
+```
+Không sửa phần SV, không push. Trước khi ghi report: git status phải sạch (SV đã commit).
+1. Report §6: bảng bug BUG-58…85 chép NGUYÊN VĂN từ file BUG (Tiêu đề, Severity, Priority, issue #) nhãn "(AI chép)"; + ảnh trang Issues đã có. Xoá 📝 đã điền.
+2. §5.1–5.4, §7, Phụ lục D: điền chỗ 📝 là dữ kiện (trỏ file, số liệu, link VideoLinks) – chỗ nào cần chữ/nhận định SV thì để `<SV viết>`.
+3. Liệt kê lại chỗ trống còn lại (placeholders_left.md).
+Commit `HW03: report §6 bảng bug (AI chép) + điền dữ kiện`. Báo ≤ 6 dòng + hash.
+```
+
+**Sau đó em làm Audit (35 phút):** mở `HW03/ai-forms/AI-02_Audit_Report_23120255.md`, điền 34 hàng. Mỗi hàng gồm:
+- **Verdict:** VALID (dùng nguyên) · INVALID (sai, bỏ) · INCOMPLETE (đúng một phần, phải sửa).
+- **Lý do:** một câu, khớp với dữ kiện ở cột (5). Ví dụ có commit "SV sửa" thì là INCOMPLETE, kèm số commit.
+
+Sau đó viết §4 kết luận (2–3 câu): khi nào nên và không nên dùng AI.
+
+Lưu ý: **chỉ mở AI-02 khi Claude Code không chạy `forms_hw03.py`**. Lệnh trên không đụng AI-02, nên làm song song được.
+
+**Mốc thời gian:**
+- 10:05: xong Audit.
+- 10:05–10:20: tự chấm §12 và README, lý do 7 lượt không rõ model (notes), ngày.
+- 10:20–10:50: Claude Code xuất transcript lần cuối, form, PDF, AI-05 (em tick và ký), commit log, `hw-submission-audit`, zip.
+- 11:00: nộp.
+
+Video: còn dư giờ sau 10:50 thì quay nhanh. Không thì trừ điểm skill.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #200 | 09:28 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8534,7 +8706,831 @@ Commit `HW03: report §6 bảng bug (AI chép) + điền dữ kiện`. Báo ≤ 
 
 ---
 
-## #199 | 10:31 11/11/2026 | Claude Opus 5.5 | [...]
+## #201 | 09:30 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã ghi xong, commit 3f96664, chưa push. Trước khi ghi, working tree chỉ còn A_prompt_log.md (hook tự trích lại), em không commit file đó.
+
+- §6: bảng 28 bug BUG-58…85, chép nguyên văn Tiêu đề / Severity / Priority / link issue #247–#274, có nhãn "(AI chép)", ảnh trang Issues giữ nguyên. Chỉ đổi cách viết dấu <, > trong 2 tiêu đề (<html>, <h1>) thành &lt;/&gt; để markdown không nuốt thẻ; chữ hiển thị không đổi.
+- §5:
+  - §5.1 và §5.4 cần chữ của SV nên để <SV viết>; §5.4 có thêm câu trỏ tới mã P01–P07 và nghề nghiệp trong S0x.json.
+  - §5.2 thêm VIP100 (K1) và mốc 06:00; §5.3 ghi SEQ/SUS, 4 câu hỏi mở, Google Form.
+  - §5.6 ghi dữ kiện: Meet, usability_session.ps1, moderator_script.md, đồng ý quay màn hình 8/8 · ghi âm 8/8 · liên hệ 7/8 (S07 không), nền tảng người tham gia.
+- §7: bảng 2 skill (thư mục, thành phần, trỏ skills/VideoLinks.md); phần "Cách dùng" để <SV viết>. Link video trong VideoLinks vẫn <SV điền>.
+- Phụ lục D: cây thư mục lấy từ git ls-files, bỏ file export-ignore, chưa có PDF và commit_log.txt nên cần sinh lại sau khi thêm.
+- Chỗ trống còn lại (chi tiết ở HW03/placeholders_left.md): report 24 chỗ, README 6, AI-02 bảng 3.2 + §4, AI-03 12, VideoLinks 2.
+
+===
+xong chưa nhỉ
+```
+
+**Output:**
+````
+Phần của Claude Code đã xong. Còn lại **chỉ phần của em** (khoảng 24 chỗ trong report và form), sau đó là đóng gói. Bây giờ là 09:30, còn 2 giờ.
+
+**Push trước** (`3f96664`) và commit luôn prompt log:
+```
+git add HW03/appendix/A_prompt_log.md
+git commit -m "HW03: cập nhật prompt log"
+git push
+```
+
+**Việc của em, theo thứ tự (danh sách đủ ở `HW03/placeholders_left.md`)**
+
+| # | Việc | File | Ước |
+|---|---|---|---|
+| 1 | **Audit:** verdict + lý do 34 hàng, §4 kết luận khi nào nên/không nên dùng AI | `ai-forms/AI-02_…md` | 35' |
+| 2 | §5.1 mục tiêu (2–3 câu, có thể dựa plan mục 1–2) | report | 3' |
+| 3 | §5.4 bảng 7 người tham gia: mã P01–P07, nghề, IT/non-IT, SĐT **che 4 số giữa**, ngày, đồng ý liên hệ (S07 = Không) | report | 10' |
+| 4 | §7 "Cách dùng" 2 skill (vài dòng mỗi skill) | report | 5' |
+| 5 | Lý do 7 lượt không rõ model: ghi khoá giờ vào `prompt_log_notes.toml` | notes | 5' |
+| 6 | Tự chấm: §12 report + README (Task 1 /30, Task 2 /40, Task 3 /20, Skill /10), tổng = 3 số trong tên zip | report, README | 5' |
+| 7 | Video: quay, hoặc ghi rõ "chưa có video" trong VideoLinks và trừ điểm Skill | VideoLinks | 1' / 40' |
+| 8 | Duyệt §11 Mandatory Disclosure (đọc, xoá 📝) | report | 3' |
+
+Mỗi việc xong thì commit và push. Nhớ **không sửa report hay form trong lúc Claude Code đang chạy script**.
+
+**Khi em xong cả 8 việc** (dự kiến khoảng 10:40), anh làm 3 việc:
+1. Xuất lại transcript `_p2` lần cuối.
+2. Đưa lệnh đóng gói cho Claude Code: trích prompt log, `forms_hw03.py`, AI-05 (em tick, ký), PDF (report, AI-02, AI-03, AI-05), commit log, `hw-submission-audit`, `git archive` zip, kiểm danh sách file và dung lượng.
+3. Em nộp lên Moodle trước 11:30, mục tiêu 11:15.
+
+Bắt đầu Audit ngay. Gặp hàng nào phân vân verdict thì hỏi anh.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #202 | 09:32 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+chỉ viết ai-forms 02 và 03 thôi nhỉ
+```
+
+**Output:**
+```
+Đúng, phần **em viết** chỉ ở AI-02 và AI-03. Bài này cần 3 form:
+
+| Form | Ai làm | Việc của em |
+|---|---|---|
+| **AI-02 Audit** | Claude Code dựng xong (34 artifact, #n) | Verdict + lý do 34 hàng, §4 kết luận, ký |
+| **AI-03 Disclosure** | Claude Code dựng xong (số lượt, model) | 12 chỗ trống: lý do 7 lượt không rõ model, phần cách xác minh và xác nhận, ký |
+| **AI-05 Privacy Checklist** | Claude Code dựng **cuối cùng**, sau khi AI-02/03 xong | Tick các mục cam kết cá nhân, ký. Có sẵn dòng minh bạch về CSV họ tên/SĐT |
+| AI-04 | Không cần (đề HW03 không yêu cầu) | — |
+| AI-06 | Đã nộp tuần 1 | — |
+
+Với **7 lượt không rõ model** ở AI-03: lý do nên ghi vào `prompt_log_notes.toml` theo khoá giờ (giống HW02), để script tự đưa vào log và form. Như vậy khỏi phải gõ hai nơi. Nếu thiếu giờ thì gõ thẳng vào AI-03 cũng được.
+
+Làm AI-02 trước (nặng nhất), rồi AI-03.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #203 | 09:44 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+điền xong 2 form rồi commit message gì
+```
+
+**Output:**
+````
+```
+git add HW03/ai-forms/AI-02_Audit_Report_23120255.md HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+git commit -m "HW03: SV viết verdict Audit (AI-02) + điền AI-03"
+git push
+```
+
+Nếu em có ghi lý do 7 lượt vào `prompt_log_notes.toml` thì add thêm file đó vào cùng commit.
+
+Push xong em báo, anh soát nhanh một lượt. Chủ yếu kiểm verdict có khớp cột (5) không: hàng nào có commit "SV sửa" mà ghi VALID là mâu thuẫn. Trong lúc anh soát, em làm tiếp §5.1, §5.4 (bảng người tham gia), §7 và tự chấm.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #204 | 09:45 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Push rồi, soát giúp tôi nhé
+```
+
+**Output:**
+```
+Anh đã soát AI-02. Cấu trúc đủ, nhưng có vấn đề lớn: **33/34 hàng ghi VALID**, mâu thuẫn với chính Critique của em và với dữ kiện git. Người chấm sẽ thấy ngay chỗ này. Verdict là của em, anh chỉ chỉ ra chỗ mâu thuẫn dữ kiện:
+
+**Mâu thuẫn giữa VALID và lỗi em đã nêu trong Critique hoặc commit sửa**
+
+| Hàng | Em ghi | Dữ kiện |
+|---|---|---|
+| **T3** khung `sv_items.md` | VALID, "đúng cấu trúc chuẩn" | Thiếu trường `loai_nguon`, check_checklist báo 12 lỗi (L2). Chính Critique em nêu lỗi này |
+| **T5** Playwright | VALID, "chính xác" | Critique em nêu: ép locale vi-VN làm sai CL-08, so toạ độ sai CL-11, TimeoutError ghi nhầm SV-06 P3 |
+| **T6** RUN.md | VALID | RUN.md M6 mâu thuẫn chính nó (AI sai, đã sửa) |
+| **T2** checklist v1 | VALID | 20 item thuộc "Both" (AI + SV sửa) và 6 item SV bổ sung. Critique em nói v1 thiên lệch SRS |
+| **T11** khung bug | VALID | Phải dựng lại theo mẫu HW02 (B2); BUG-80 thiếu P1 |
+
+**Lý do sai dữ kiện**
+
+| Hàng | Câu sai | Đúng là |
+|---|---|---|
+| **U1** | INVALID, "đã được gỡ bỏ và thay thế" | Plan, kit, phiếu quan sát **vẫn dùng**: form và kịch bản dựng từ kit, plan chỉ sửa mục 3 và 5 cho phiên 10 phút. Không bị bỏ, nên là INCOMPLETE |
+| **B4** | "xác nhận các lỗi đã được xử lý triệt để" | B4 kiểm **chữ em sửa trong file bug**, không phải lỗi SUT đã được sửa. SUT không sửa gì |
+| **R4** | "SV đã rà soát và điều chỉnh lại câu chữ" | Commit duyệt `eb9c78a` của em **chỉ xoá 2 dòng 📝**, không đổi chữ nào. Ghi "SV duyệt, giữ nguyên" thì VALID mới đúng |
+| **S2** | "quy trình 6 thành phần của Rubin & Chisnell" | Skill dùng kế hoạch **9 phần** (Rubin & Chisnell, slide) |
+| **T5, B3, B1** | "theo tiêu chí ISTQB Test Automation", "Repeatability của ISTQB", "Bug Triage" | Chỉ giữ nếu em chỉ ra được mục cụ thể trong tài liệu ISTQB của môn. Không chắc thì bỏ tên tiêu chuẩn |
+
+**§4 Kết luận:** "hoàn toàn thiếu vắng WCAG" là quá mức, vì v1 có dùng WCAG cho `lang`, `title`, nhãn (CL-13, CL-14, CL-38). Viết "thiếu các tiêu chí WCAG về tương phản, focus, kích thước vùng bấm" là đúng.
+
+**Gợi ý nguyên tắc chọn verdict** (em tự áp dụng):
+- **VALID:** dùng nguyên, không có commit sửa vì lỗi của AI.
+- **INCOMPLETE:** dùng được nhưng phải sửa. Cột (5) có commit sửa, hoặc Critique có nêu lỗi.
+- **INVALID:** bỏ hẳn.
+
+Sửa xong 5–8 hàng này mất khoảng 10 phút. Commit `HW03: SV sửa verdict Audit theo kiểm dữ kiện`, push. Rồi làm §5.1, §5.4, §7, tự chấm. Bây giờ là 09:47.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #205 | 09:54 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã viết lại rồi, kiểm tra cũng như đã viết xong 5.1 và 5.4 rồi nhé. Push hết rồi
+```
+
+**Output:**
+```
+Audit đã ổn: 26 VALID / 8 INCOMPLETE, các hàng mâu thuẫn đều đã sửa đúng dữ kiện. §5.1 cũng ổn, bám đúng plan mục 1–3.
+
+**§5.4 có lỗi nghiêm trọng, phải sửa ngay: cột SĐT không khớp số thật.** Anh đối chiếu với CSV form (file em gửi lúc 00:43): **không số nào khớp**. Các số trong bảng có dạng `…456`, `…789`, `…321`, `…654`, `…987`, trông như số mẫu. Đề nói TA **gọi ngẫu nhiên 2 người để xác minh**, và *"Impersonation results in 0 points for Task 2"*. Số sai thì TA không liên lạc được, mất trắng Task 2.
+
+Số đúng (đã che 4 số giữa, lấy từ CSV):
+
+| Phiên | SĐT che |
+|---|---|
+| S01 | `091****280` |
+| S02 | `035****689` |
+| S03 | `079****218` |
+| S04 | `091****230` |
+| S05 | `097****074` |
+| S06 | `036****273` |
+| S07 | `086****517` |
+
+(S00 pilot: `039****875`, nếu em muốn liệt kê pilot riêng.)
+
+**Bổ sung khác cho §5.4**
+- Thêm cột **"Đồng ý TA liên hệ"**: S07 = **Không**, các phiên khác = Có. TA cần biết để không gọi S07.
+- Nghề và trình duyệt khớp với JSON. Riêng S07 ghi nghề là "IT", hơi chung; nếu biết cụ thể hơn thì ghi.
+- Trường `nhom` trong JSON đang **trống** (null), trong khi bảng đã có IT/Non-IT. Bảo Claude Code chép `nhom` từ bảng §5.4 vào JSON rồi chạy lại `--report`, để bảng U1 tách được IT/non-IT. Không bắt buộc, nhưng chỉ mất 1 phút.
+
+**AI-02 §4 Kết luận:** câu "hoàn toàn thiếu vắng các tiêu chuẩn khả năng truy cập" vẫn còn. Đổi thành "thiếu các tiêu chí WCAG về tương phản, focus, kích thước vùng bấm", vì v1 có dùng WCAG cho `lang`, `title`, nhãn.
+
+Sửa 2 chỗ trên, commit `HW03: SV sửa SĐT bảng người tham gia + kết luận Audit`, push. Rồi làm §7 "Cách dùng" và tự chấm. Bây giờ là 09:56, mốc kế tiếp là 10:15 bắt đầu đóng gói.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #206 | 09:59 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình đã sửa xong rồi, push rồi. 5.4 vậy mình đánh giá là xong rồi đấy (nếu bạn cần thêm cột nào khác)
+```
+
+**Output:**
+```
+§5.4 xong, đủ cột: SĐT khớp CSV, có cột đồng ý liên hệ (S07 = Không). Kết luận Audit cũng đã sửa.
+
+Còn lại **3 việc của em**, sau đó là đóng gói:
+
+1. **§7 "Cách dùng"** 2 skill: vài dòng mỗi skill (gọi thế nào, chạy bước nào, ra file gì).
+2. **Video:** quay hay bỏ? Bây giờ là 10:00, quay một bản 10 phút cộng upload vẫn kịp nếu bắt đầu ngay sau bước 3. Nếu bỏ, ghi trong `skills/VideoLinks.md` câu "Chưa có video demo (không kịp thời gian)" và tự chấm Skill tương ứng.
+3. **Tự chấm** ở §12 report và README: Task 1 /30, Task 2 /40, Task 3 /20, Skill /10. Mỗi mục kèm 1 dòng căn cứ. Tổng phải bằng 3 số trong tên zip.
+
+Commit `HW03: SV viết §7, tự chấm`, push, rồi **báo anh tổng điểm**. Anh sẽ xuất transcript `_p2` lần cuối và đưa lệnh đóng gói (AI-05, PDF, commit log, `hw-submission-audit`, zip `23120255_HW03_AI_GUIUsability_<điểm>.zip`).
+```
+
+**Xử lý:** [...]
+
+---
+
+## #207 | 10:00 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+```markdown
+## 7. Agent Skill
+
+| Skill | Thư mục | Thành phần | Video |
+|---|---|---|---|
+| `gui-checklist-testing` | `skills/gui-checklist-testing/` | SKILL.md, 1 reference, 3 asset, 8 script | `skills/VideoLinks.md` |
+| `usability-evaluation` | `skills/usability-evaluation/` | SKILL.md, 2 reference, 3 asset, 6 script | `skills/VideoLinks.md` |
+
+Cách dùng: `<SV viết>`
+
+```
+
+===
+Ủa phần này bạn hỗ trợ mình viết được mà nhỉ. Chỉ có video là bắt buộc mình xíu nữa phải tự demo thôi
+````
+
+**Output:**
+````
+Đúng, phần này anh viết nháp được: nó chỉ mô tả cách gọi skill, lấy từ SKILL.md, không thuộc phần cấm. Anh gắn nhãn 📝 để em duyệt và khai trong Audit/§11. Em dán thay dòng `Cách dùng: <SV viết>`:
+
+```markdown
+📝 AI nháp – SV duyệt/sửa
+
+**Cách dùng**
+
+Cả hai skill chạy trong Claude Code, **mỗi lần gọi làm một bước rồi dừng** để em review và commit. Output AI của từng bước được đóng băng (`scripts/freeze.py`) trước khi em sửa. Quy định môn học (AI-01, `CLAUDE.md`) thắng skill khi mâu thuẫn.
+
+- **`gui-checklist-testing`** – gọi `/gui-checklist-testing <thư-mục-checklist> <bước>` (vd `HW03/checklist 1`). Toàn bộ dữ liệu của một phạm vi nằm trong một file `checklist.json`; bảng Markdown, Excel, danh sách Failed, nhóm bug đều sinh từ file này.
+  - Bước 0 khảo sát control và điều khoản UI → `<scope>_inventory.md`.
+  - Bước 1 AI nháp checklist từ 3 nguồn (đặc tả UI, checklist theo control, heuristic Nielsen/Norman/Shneiderman/WCAG); mỗi item có Expected quan sát được, có ngưỡng "Fail nếu…".
+  - Bước 2 SV bổ sung item (AI không gợi ý, chỉ dựng khung trống) → AI trả lời vì sao bỏ sót.
+  - Bước 3 phân loại item auto / manual / mixed, sinh `RUN.md`, `dom_probe.js` (tuỳ chọn Playwright, oracle khoá theo sha1 của Expected).
+  - Bước 4 chạy từng nền tảng, gộp bằng `merge_runs.py` (verdict chính thức = lượt chạy tay).
+  - Bước 5–6 Excel + test summary (`build_excel.py`), danh sách Failed, gom nhóm bug (`failed_list.py`, `bug_groups.py`) – SV viết bug.
+- **`usability-evaluation`** – gọi `/usability-evaluation <thư-mục> <bước>` (vd `HW03/usability 4`).
+  - Bước 0 kế hoạch 9 phần (Rubin & Chisnell, slide) → `plan.md`; bước 1 participant kit + phiếu quan sát (`check_kit.py`).
+  - Bước 2 pilot (`S00`) → `kit_diff.py` ghi thay đổi, SV ghi lý do.
+  - Bước 3 mỗi phiên `new_session.py` tạo khung JSON trống, SV nhập (mã ẩn danh P0x, không SĐT/email).
+  - Bước 4 `sus_score.py --check` / `--report` tính SUS, SEQ, tỉ lệ hoàn thành, thời gian vào marker report.
+  - Bước 5–6 khung findings và gom dữ kiện bug (`bug_facts.py`) – SV viết findings và bug.
+
+Trong HW03, skill `gui-checklist-testing` được dùng cho toàn bộ Task 1 và Task 3 (C2, 3 nền tảng); `usability-evaluation` cho Task 2 (pilot S00 + 7 phiên S01–S07).
+```
+
+Một điểm cần biết khi em duyệt: skill `usability-evaluation` quy định **AI không điền JSON phiên** và **không đưa dữ liệu cá nhân cho AI**. Ở bài này cả hai đã xảy ra: Claude Code chép số từ CSV vào JSON, và em gửi CSV lên phiên thảo luận. Cả hai đã được khai ở report_plan f/g và §11, nên không cần sửa §7. Chỉ cần đúng là em biết, phòng khi vấn đáp.
+
+Dán xong em sửa câu chữ nếu muốn, xoá dòng 📝, rồi làm tự chấm. Khi giao lệnh đóng gói, anh sẽ nhắc Claude Code thêm vào Audit và §11 một dòng "AI nháp §7 Cách dùng".
+````
+
+**Xử lý:** [...]
+
+---
+
+## #208 | 10:02 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+duyệt oke rồi, commit sao đây
+```
+
+**Output:**
+````
+```
+git add HW03/23120255_HW03_Report.md
+git commit -m "HW03: §7 cách dùng skill (AI nháp, SV duyệt)"
+git push
+```
+
+Tiếp theo là **tự chấm** ở §12 report và README, mỗi mục kèm 1 dòng căn cứ:
+
+| Mục | Tối đa | Căn cứ để em tự cân |
+|---|---|---|
+| Task 1 – GUI checklist | 30 | 74 item, 3 nền tảng, Excel, 28 bug + 28 issue, ảnh trang Issues, §3.4 |
+| Task 2 – Usability | 40 | Plan 9 phần, kit, pilot S00, 7 phiên, SUS/SEQ, findings có severity, bảng người tham gia. **Chưa có:** mốc thời gian đo thật (ước theo trí nhớ, nếu đúng vậy), chưa lập bug Task 2 |
+| Task 3 – Cross-platform | 20 | 3 nền tảng thật, ảnh overlay đủ, bảng khác biệt |
+| Skill + video | 10 | 2 skill tự đủ. **Video:** quay được thì tính, không thì trừ phần video |
+
+Tổng là 3 số trong tên zip. Điểm của em, em tự quyết; anh chỉ nhắc là phần nào có chỗ thiếu thì trừ tương ứng, cho trung thực.
+
+Viết xong commit `HW03: SV tự chấm`, push, rồi báo anh **tổng điểm** và **có quay video không**. Anh đưa lệnh đóng gói ngay.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #209 | 10:08 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+push rồi nhé. Vì mình dự định sẽ quay video nên chấm trước đó luôn nhé
+```
+
+**Output:**
+````
+Anh đã đọc §12 và README. Điểm là quyền của em, anh chỉ soát dữ kiện trong cột căn cứ:
+
+**Sai dữ kiện ở README, cần sửa**
+- Task 1: "74 item (65 item nháp v1 + 6 item SV bổ sung + cấu trúc chuẩn)". 65 + 6 = 71, không ra 74. Dữ kiện đúng: **74 item = AI 48 · Both 20 · SV 6**, bản v1 có 65 item.
+- Task 1: "đối chiếu **137 item Failed**". 137 là số **ô** Failed (item × nền tảng); số item Failed là **47**. Từ đó ra 14 trùng, 4 trùng một phần, 28 bug mới.
+- Task 2: "kịch bản 9 phần" → **kế hoạch** 9 phần (`plan.md`). Kịch bản là nhiệm vụ U1.
+- Dòng đầu README: "Công cụ AI: 📝" còn trống. Ghi: Claude (Opus 5.5, Sonnet 4.6) qua claude.ai và Claude Code.
+
+**Report §12:** xoá dòng "📝 (đồng bộ với README)", và điền tên zip `23120255_HW03_AI_GUIUsability_094.zip`.
+
+**Lưu ý trung thực:**
+- Skill 9/10 chỉ đúng **nếu có video**. Không kịp quay thì phải hạ điểm Skill và **đổi tên zip** cho khớp.
+- Task 2 38/40: phần đề chấm có "analysis". Bài có findings, nhưng chưa lập bug cho các pain point chưa có issue. Mốc thời gian thì ước theo trí nhớ (nếu đúng như vậy). Em cân nhắc lại cho khớp căn cứ.
+
+Sửa xong commit `HW03: SV sửa căn cứ tự chấm`, push.
+
+**Kế hoạch còn lại (bây giờ 10:10, deadline 11:30):**
+
+| Giờ | Em | Claude Code |
+|---|---|---|
+| 10:15–10:50 | Quay video (giọng em), upload YouTube Unlisted | Chuẩn bị đóng gói (lệnh dưới) |
+| 10:50 | Dán link vào `VideoLinks.md` + §7 + README, commit, push | |
+| 10:55 | | Anh xuất transcript lần cuối → trích log → form → PDF → zip |
+| 11:05 | Kiểm zip, ký PDF (nếu cần) | |
+| 11:15 | **Nộp** | |
+
+**Video:** chạy lại các bước AI từ đầu sẽ không kịp. Nên quay bản **walkthrough cách em đã dùng 2 skill**, khoảng 8 phút:
+- Mỗi skill: mở SKILL.md và nói các bước.
+- Chỉ commit từng bước trong git log (`HW03[T1] 1/6…`, `HW03[T2] k/10…`).
+- Chạy thật vài script nhanh: `check_checklist.py`, `merge_runs.py --help`, `sus_score.py --check` / `--report`.
+- Mở output: Excel, report.
+
+Video nói đúng là "cách em đã dùng skill trong bài", không phải chạy mới. Không quay token, mật khẩu hay CSV có SĐT.
+
+**Lệnh chuẩn bị đóng gói cho Claude Code** (dán ngay, chạy trong lúc em quay):
+```
+NHIỆM VỤ: chuẩn bị đóng gói HW03 (chưa zip). Không push, không amend, KHÔNG sửa phần SV.
+1. report_plan f + §11 + AI-02: thêm artifact "AI nháp report §7 Cách dùng skill (phiên thảo luận 10:00 11/11)" (verdict/lý do <SV viết>).
+2. Dựng AI-05 (mẫu HW02/ai-forms, không chép số liệu): tick mục có bằng chứng; mục cam kết cá nhân để [ ] "(em tự xác nhận)"; dòng minh bạch CSV họ tên/SĐT gửi phiên thảo luận 00:43 11/11; số lượt AI = dòng Tổng prompt log.
+3. Kiểm placeholders_left: liệt kê mọi 📝 / <SV viết> / <SV điền> / [...] còn lại (file:dòng).
+4. Chạy thử: pandoc/xuất PDF cho report, AI-02, AI-03, AI-05 vào HW03/ (đúng tên đề); git archive thử → đo dung lượng + liệt kê file trong zip (không có report_plan, CLAUDE.md, evidence_raw, placeholders_left, demo_plan, CSV).
+Commit từng việc. Báo ≤ 10 dòng + hash + danh sách chỗ trống còn lại.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #210 | 10:13 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mình đã sửa và push lại README cùng với report. Bạn kiểm tra xem oke chưa nhé
+```
+
+**Output:**
+```
+Ổn rồi. README và §12 khớp nhau: 28 + 35 + 19 + 9 = **91**, tên zip `…_091.zip` đúng. Căn cứ đã đúng dữ kiện (74 = 48 + 20 + 6; 47 item Failed; kế hoạch 9 phần), dòng công cụ AI đã điền.
+
+Còn một lỗi định dạng nhỏ: dòng Task 2 trong README **thiếu dấu `|` ở cuối** (và dấu chấm). Đa số trình xem vẫn hiển thị được, nhưng thêm vào cho chắc, sửa lúc nào commit tiếp cũng được.
+
+Điều kiện còn treo: **Skill 9/10 chỉ đúng nếu có video.** Không kịp quay thì hạ Skill, đổi tổng và tên zip ở cả README lẫn §12.
+
+Giờ em **quay video** ngay. Đừng quên dán lệnh chuẩn bị đóng gói cho Claude Code trước khi quay, để nó chạy song song. Upload xong, dán link vào `skills/VideoLinks.md`, commit, push, rồi báo anh. Mốc chậm nhất là **10:50**.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #211 | 10:14 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Phải quay 2 video demo 2 skill nhỉ.
+```
+
+**Output:**
+```
+Nên quay **2 video ngắn, mỗi skill một video, khoảng 4–5 phút**. Lý do:
+- Đề viết "demonstration **videos**" và yêu cầu mỗi video cho thấy "end to end" cách dùng skill.
+- `VideoLinks.md` đã có sẵn 2 dòng.
+
+Tổng thời gian không hơn một video dài. Nếu gấp quá, quay **1 video có 2 phần**, ghi mốc thời gian cho từng skill trong mô tả YouTube, và dán cùng link vào cả 2 dòng kèm mốc (`?t=…`).
+
+**Ý chính mỗi video** (em tự nói bằng lời của em):
+
+**Video 1: `gui-checklist-testing`** (C2, Task 1 + 3)
+1. Mở `HW03/skills/gui-checklist-testing/SKILL.md`: mục đích và 6 bước, mỗi lần gọi một bước rồi dừng.
+2. `git log --oneline --grep "HW03\[T1\]"`: cho thấy mỗi bước một commit.
+3. Bước 1–2: mở bản đóng băng v1 trong `appendix/ai-outputs/` và `sv_items.md` (6 item em tự thêm).
+4. Bước 3–4: `RUN.md`, thư mục ảnh 3 nền tảng, chạy thật `python HW03/skills/gui-checklist-testing/scripts/check_checklist.py …`.
+5. Bước 5–6: mở Excel, `failed_list.md`, một file BUG và issue tương ứng trên GitHub.
+
+**Video 2: `usability-evaluation`** (U1, Task 2)
+1. Mở SKILL.md: kế hoạch 9 phần, giới hạn AI (không điền phiếu, không dữ liệu cá nhân).
+2. `plan.md`, `participant_kit.md`, `moderator_script.md`.
+3. Chạy thật `new_session.py` (tạo khung S99 rồi xoá, không commit) để thấy khung trống.
+4. Mở một `S0x.json` (mã P0x, không SĐT); chạy `sus_score.py HW03/usability/sessions --check` và `--report`.
+5. Mở report §5.7–5.9: số liệu do script tính, findings do em viết.
+
+**Lưu ý khi quay:**
+- Không mở CSV form, tab Responses của Google Form, hay bảng có SĐT đầy đủ.
+- Không quay token hay đường dẫn có tên người dùng nếu tránh được.
+- Tải lên YouTube ở chế độ **Unlisted**.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #212 | 10:16 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Giờ tôi muốn bạn giúp tôi lên kịch bản cả 2 video. Bật gì và nói gì.
+Tôi định sử dụng mỗi Claude Opus 5.5 Medium mới hẳn (tức là mở session) ở cả 2 video nhé
+```
+
+**Output:**
+````
+Lưu ý trước: theo AI-01, **giọng thuyết minh phải là của em**, nên anh không viết lời thoại. Anh đưa bảng thời gian, việc cần bật, lệnh gõ vào Claude Code và **ý chính** từng đoạn; em tự nói bằng lời của mình.
+
+---
+
+## Chuẩn bị chung (5 phút, chưa quay)
+
+1. Mở PowerShell tại repo, tạo nhánh tạm để demo không lẫn vào bài nộp:
+   ```
+   git switch -c demo-video
+   ```
+2. Đóng mọi cửa sổ có CSV, Google Form Responses, Gmail, mật khẩu.
+3. Bật sẵn: VS Code mở repo, trình duyệt có tab GitHub Issues đã lọc `"HW03-C2" author:ThachHaoo`, Excel `23120255_HW03_Checklist.xlsx`.
+4. Quay bằng **Win + Alt + R** (Game Bar), có micro.
+5. Mỗi video mở **một session Claude Code mới**, chọn Opus 5.5 (Medium).
+
+---
+
+## Video 1: `gui-checklist-testing` (~6 phút)
+
+Ý tưởng: **chạy thật bước 0–1 trên một màn nhỏ ngoài C2** (Đăng ký `/register`) để thấy skill hoạt động, rồi dùng các bước 2–6 đã làm trên C2 để cho thấy trọn quy trình.
+
+| Mốc | Bật / làm gì | Ý chính em nói |
+|---|---|---|
+| 0:00 | VS Code mở `HW03/skills/gui-checklist-testing/SKILL.md` | Skill dùng để làm gì; 3 nguồn checklist (đặc tả UI, theo control, heuristic); mỗi lần gọi một bước rồi dừng để người review; quy tắc AI không gợi ý ở bước 2 |
+| 0:45 | Session Claude Code mới, gõ **lệnh 1** (dưới) | Demo trên màn khác C2 để thấy skill dùng lại được |
+| 1:30 | Mở `HW03/demo/register/register_inventory.md` vừa sinh | Bước 0: AI khảo sát control thật từ code, có file:dòng, không bịa |
+| 2:00 | Gõ **lệnh 2** | Bước 1: sinh nháp theo 3 nguồn, có ngưỡng "Fail nếu…" |
+| 3:00 | Mở `checklist.md` vừa sinh, chỉ 1–2 item; chỉ dòng `check_checklist` báo 0 lỗi, thư mục đóng băng | Expected lấy từ đặc tả chứ không lấy từ hành vi hiện tại; output được đóng băng trước khi người sửa |
+| 3:30 | Chuyển sang bài thật: `git log --oneline --grep "HW03\[T1\]"` | Trong bài, mỗi bước là một commit |
+| 4:00 | Mở `HW03/checklist/sv_items.md` | Bước 2: em tự bổ sung 6 item, sau đó mới hỏi AI vì sao bỏ sót |
+| 4:20 | Mở `RUN.md`, thư mục `evidence/P1_chrome`, `P2_firefox`, `P3_android` | Bước 3–4: chạy 3 nền tảng, auto + tay, verdict chính thức là lượt tay |
+| 5:00 | Mở Excel, rồi `failed_list.md`, rồi 1 file `BUG-xx.md`, rồi tab GitHub Issues | Bước 5–6: Excel và test summary; nhóm bug do skill gom, **bug do em viết**, issue tạo từ file của em |
+| 5:45 | Kết | Tóm 1 câu: skill làm gì, phần nào người làm |
+
+**Lệnh 1:**
+```
+/gui-checklist-testing HW03/demo/register 0
+Phạm vi demo: chỉ màn Đăng ký web (/register) của ../eshop-sut. Đây là demo video trên nhánh demo-video: freeze vào HW03/demo/ai-outputs (KHÔNG vào appendix/ai-outputs), không commit.
+```
+
+**Lệnh 2:**
+```
+/gui-checklist-testing HW03/demo/register 1
+Demo: tối thiểu 8 item, đủ IA-01…IA-04 nếu có. Chạy render → freeze (HW03/demo/ai-outputs) → check_checklist. Không commit.
+```
+
+Nếu AI chạy quá 2 phút thì em **tạm dừng quay** (Win + Alt + R), chạy xong mới quay tiếp.
+
+---
+
+## Video 2: `usability-evaluation` (~5 phút)
+
+Ý tưởng: **chạy thật bước 3 (tạo khung phiên) và bước 4 (tính số liệu)** trên dữ liệu thật của U1, còn bước 0–2 và 5 cho xem kết quả đã làm.
+
+| Mốc | Bật / làm gì | Ý chính em nói |
+|---|---|---|
+| 0:00 | VS Code mở `HW03/skills/usability-evaluation/SKILL.md` | Usability test moderated, kế hoạch 9 phần theo slide; **giới hạn AI**: không điền phiếu, không viết findings, không nhận dữ liệu cá nhân |
+| 0:45 | Mở `usability/plan.md`, `participant_kit.md`, `moderator_script.md` | Bước 0–1: AI nháp, em chốt; nhiệm vụ chỉ nêu mục tiêu, không nêu bước |
+| 1:30 | Session Claude Code mới, gõ **lệnh 3** | Bước 3: trước mỗi phiên, script tạo khung trống |
+| 2:00 | Mở `S99.json` vừa tạo (mọi giá trị null), rồi mở `S04.json` thật | Khung trống so với phiếu thật; chỉ có mã P0x, không SĐT |
+| 2:45 | Gõ **lệnh 4** | Bước 4: script kiểm phiếu và tính SUS, SEQ, tỉ lệ hoàn thành |
+| 3:30 | Mở report §5.7 (bảng U1) | SUS 77,9, SEQ 6,3; 7/7 hoàn thành; số do script tính, không gõ tay |
+| 4:00 | Mở report §5.8–5.9 | Bước 5: findings do **em** viết, gom pain point và severity, đối chiếu issue |
+| 4:40 | Kết | Tóm 1 câu |
+
+**Lệnh 3:**
+```
+/usability-evaluation HW03/usability 3
+Demo video (nhánh demo-video): chỉ chạy new_session.py tạo khung HW03/usability/sessions/S99.json để minh hoạ, không điền gì, không commit.
+```
+
+**Lệnh 4:**
+```
+/usability-evaluation HW03/usability 4
+Demo video: bỏ qua S99 (xoá file S99.json trước), chạy sus_score.py --check rồi --report vào marker REPORT:U1, báo kết quả. Không commit.
+```
+
+---
+
+## Sau khi quay (3 phút)
+
+```
+git restore .
+git clean -fd HW03/demo HW03/usability/sessions/S99.json
+git switch main
+git branch -D demo-video
+```
+
+- Upload 2 video lên YouTube, chế độ **Unlisted**. Tiêu đề gợi ý: `23120255 HW03 – Demo skill gui-checklist-testing` và `… usability-evaluation`.
+- Dán 2 link vào `skills/VideoLinks.md`; thêm vào §7 report và README nếu có chỗ.
+- Commit `HW03[Skill] 3/3: link video demo`, push, báo anh.
+- Các lượt demo vẫn vào prompt log (D2 = a), không cần làm gì thêm: lần trích log cuối sẽ tự lấy.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #213 | 10:22 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Skill có bước 0 đến bước 6. mà chỉ chạy bước 0 và 1 thôi sao? Vậy sao gọi là demo end to end skill nhỉ
+```
+
+**Output:**
+```
+Em nói đúng: chạy bước 0–1 rồi chiếu các bước 2–6 từ bài cũ là **walkthrough**, không hẳn là "end to end". Anh nói thẳng cái được và mất của từng cách:
+
+| Cách | Làm gì | Thời gian | Rủi ro |
+|---|---|---|---|
+| **A. Nửa chạy, nửa chiếu** (kịch bản lúc nãy) | Chạy thật 0–1; bước 2–6 chiếu kết quả C2 đã làm | ~25' cả 2 video | Người chấm có thể cho là chưa end to end |
+| **B. Chạy thật đủ 0–6, phạm vi rất nhỏ** | Một màn (`/register`), khoảng 8 item, **1 nền tảng**, mỗi bước gọi skill thật; tạm dừng quay khi AI đang chạy | ~35–40' cả 2 video | Sát giờ: xong khoảng 11:00, còn khoảng 25' đóng gói và nộp |
+
+Còn 68 phút. Anh khuyên chọn **B**: đề chấm đúng điểm này, và nếu vấn đáp thì em cũng nói được là đã chạy thật. Điều kiện là **chốt cứng 11:00**: tới giờ đó, video nào chưa xong thì dừng ở bước đang làm, nói rõ trong video là dừng ở bước nào, và trừ điểm tương ứng.
+
+---
+
+## Video 1 (B): `gui-checklist-testing` trên `/register`, 1 nền tảng P1
+
+Mọi lệnh đều thêm câu: *"Demo video trên nhánh demo-video, freeze vào HW03/demo/ai-outputs, không commit."*
+
+| Bước | Lệnh | Em làm / nói ý chính |
+|---|---|---|
+| 0 | `/gui-checklist-testing HW03/demo/register 0` (phạm vi: màn Đăng ký web, nền tảng P1) | Khảo sát control có file:dòng |
+| 1 | `… 1` (tối thiểu 8 item) | 3 nguồn, Expected có ngưỡng, freeze |
+| 2 | **Em** gõ thêm 1 item vào `sv_items.md` (khung AI dựng), rồi gọi `… 2` | AI không gợi ý; sau đó hỏi "vì sao bỏ sót" |
+| 3 | `… 3` (chỉ chế độ tay, không Playwright) | Phân loại auto/manual, `RUN.md`, `dom_probe.js` |
+| 4 | **Em** chạy tay 3–4 item trên Cốc Cốc (dán `dom_probe.js` vào Console), ghi file lượt; gọi `… 4` | Verdict chính thức là lượt tay |
+| 5 | `… 5` | Excel và test summary sinh từ JSON |
+| 6 | `… 6` | Danh sách Failed và nhóm bug; nói rõ **bug do em viết**, không quay phần viết |
+
+## Video 2 (B): `usability-evaluation` trên một thư mục demo
+
+| Bước | Lệnh | Em làm / nói ý chính |
+|---|---|---|
+| 0 | `/usability-evaluation HW03/demo/usability 0` (flow U1 thu nhỏ) | Kế hoạch 9 phần, nhiệm vụ dạng mục tiêu |
+| 1 | `… 1` | Participant kit, `check_kit` |
+| 2 | Em sửa 1 dòng kit; gọi `… 2` | `kit_diff`: em ghi lý do, AI không suy diễn |
+| 3 | `… 3` tạo `S01` | Khung trống. Để có số mà demo, **chép `HW03/usability/sessions/S01.json` thật vào thư mục demo**; không bịa dữ liệu |
+| 4 | `… 4` | SUS, SEQ, tỉ lệ hoàn thành tính bằng script |
+| 5–6 | `… 5`, `… 6` | Khung findings trống và gom dữ kiện bug; nói: **findings và bug do em viết** (chỉ ra §5.8–5.9 thật) |
+
+---
+
+**Mẹo giữ giờ:**
+- AI chạy lâu thì **tạm dừng quay** (Win + Alt + R), xong mới quay tiếp.
+- Mỗi bước nói 15–20 giây là đủ.
+- Bước 4 của video 1 chỉ chạy 3–4 item, không chụp ảnh. Nói rõ là demo.
+
+Dọn dẹp sau khi quay, upload và commit link: làm như lúc nãy. Mốc **11:00** là phải có link trong repo; nếu không, nộp với điểm Skill đã hạ.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #214 | 10:23 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Gửi cho mình cả quy trình giống như lúc nãy nhé
+```
+
+**Output:**
+````
+Toàn bộ quy trình quay 2 video theo cách B (chạy thật đủ bước 0–6 trên phạm vi nhỏ). Lời thuyết minh là của em; anh chỉ ghi ý chính.
+
+---
+
+## 0. Chuẩn bị (5 phút, chưa quay)
+
+1. PowerShell tại repo:
+   ```
+   git status --short        # phải sạch; còn A_prompt_log.md thì commit trước
+   git switch -c demo-video
+   ```
+2. Backend + web chạy được cho màn `/register` trên Cốc Cốc. SUT đang ở nhánh `usability-tunnel`, giao diện giống main nên dùng được:
+   ```
+   powershell -ExecutionPolicy Bypass -File tools\restart_backend.ps1
+   ```
+   Web: `npm run dev -- --host 127.0.0.1` trong `..\eshop-sut\frontend-web` nếu chưa chạy.
+3. Đóng mọi cửa sổ có CSV, Google Form Responses, Gmail, mật khẩu, token.
+4. Mở sẵn: VS Code (repo), Cốc Cốc tab `http://localhost:5173/register`, Excel.
+5. Quay bằng **Win + Alt + R**, có micro. **AI chạy lâu thì tạm dừng quay.**
+6. Mỗi video mở **session Claude Code mới**, chọn **Opus 5.5 – Medium**.
+
+**Câu thêm vào cuối mọi lệnh** (gọi là [DEMO]):
+```
+Demo video trên nhánh demo-video: freeze vào HW03/demo/ai-outputs (KHÔNG appendix/ai-outputs), không commit, không push.
+```
+
+---
+
+## 1. Video 1: `gui-checklist-testing` (khoảng 15 phút thực, khoảng 7 phút sau khi cắt)
+
+| Mốc | Lệnh / thao tác | Ý chính em nói |
+|---|---|---|
+| Mở đầu | Mở `HW03/skills/gui-checklist-testing/SKILL.md` | Skill làm gì; 3 nguồn; mỗi lần một bước rồi dừng; phần AI không được làm |
+| **Bước 0** | `/gui-checklist-testing HW03/demo/register 0` + "Phạm vi: chỉ màn Đăng ký web /register của ../eshop-sut, nền tảng chỉ P1 (Cốc Cốc / Windows 11)." + [DEMO] → mở `register_inventory.md` | Control lấy từ code thật, có file:dòng |
+| **Bước 1** | `/gui-checklist-testing HW03/demo/register 1` + "Tối thiểu 8 item." + [DEMO] → mở `checklist.md` | 3 nguồn; Expected có ngưỡng "Fail nếu…", lấy từ đặc tả, không lấy từ hành vi SUT; đã đóng băng |
+| **Bước 2** | `/gui-checklist-testing HW03/demo/register 2` + "Chỉ dựng khung trống sv_items.md." + [DEMO] → **em tự gõ 1 item** vào khung → gọi lại `… 2` + "SV đã điền 1 item; kiểm cấu trúc, chép vào JSON, trả lời vì sao AI bỏ sót." + [DEMO] | AI không gợi ý; em thêm trước rồi mới hỏi AI |
+| **Bước 3** | `/gui-checklist-testing HW03/demo/register 3` + "Chỉ chế độ tay, không Playwright." + [DEMO] → mở `RUN.md` | Phân loại item; quy tắc ảnh; `dom_probe.js` |
+| **Bước 4** | Cốc Cốc → F12 → Console → dán `dom_probe.js` → em chấm **3–4 item**, ghi file lượt `runs/P1_manual_demo.md` theo mẫu trong RUN.md (bảng `ID | status | notes | ảnh`) → `/gui-checklist-testing HW03/demo/register 4` + "Gộp lượt tay P1 vừa ghi; demo nên bỏ yêu cầu ảnh." + [DEMO] | Verdict chính thức là lượt tay; dom_probe chỉ là dữ kiện, người chấm Pass/Fail |
+| **Bước 5** | `/gui-checklist-testing HW03/demo/register 5` + [DEMO] → mở Excel vừa sinh | Excel và test summary sinh từ JSON, có công thức |
+| **Bước 6** | `/gui-checklist-testing HW03/demo/register 6` + [DEMO] → mở danh sách Failed / nhóm bug | Skill gom dữ kiện; **bug do em viết** (chiếu 1 file BUG thật + issue GitHub của C2) |
+| Kết | — | Tóm 1 câu: skill lo phần nào, em lo phần nào |
+
+---
+
+## 2. Video 2: `usability-evaluation` (khoảng 12 phút thực, khoảng 6 phút sau khi cắt)
+
+| Mốc | Lệnh / thao tác | Ý chính em nói |
+|---|---|---|
+| Mở đầu | Mở `HW03/skills/usability-evaluation/SKILL.md` | Moderated usability test; kế hoạch 9 phần; giới hạn AI (không điền phiếu, không findings, không dữ liệu cá nhân) |
+| **Bước 0** | `/usability-evaluation HW03/demo/usability 0` + "Flow: đăng nhập test@eshop.com → tìm tai nghe → thêm giỏ → VIP100 → xem đơn trong Hồ sơ; remote moderated; 7 người; SEQ + SUS." + [DEMO] → mở `plan.md` | Đủ 9 phần; nhiệm vụ chỉ nêu mục tiêu |
+| **Bước 1** | `/usability-evaluation HW03/demo/usability 1` + [DEMO] → mở `participant_kit.md` | Lời mở đầu, xin đồng ý, SEQ, SUS, 4 câu hỏi mở; `check_kit` |
+| **Bước 2** | **Em sửa 1 dòng** trong kit (ví dụ câu nhiệm vụ) → `/usability-evaluation HW03/demo/usability 2` + [DEMO] → mở `pilot_changes.md` | Pilot rồi sửa kit; **em ghi lý do**, AI không suy diễn |
+| **Bước 3** | `/usability-evaluation HW03/demo/usability 3` + "Tạo khung S01." + [DEMO] → mở `S01.json` trống → **em chép** `HW03\usability\sessions\S01.json` thật đè lên (nói rõ: dữ liệu phiên thật, không bịa) | Khung trống; chỉ mã P0x, không SĐT |
+| **Bước 4** | `/usability-evaluation HW03/demo/usability 4` + "Tính số liệu, in bảng (không cần ghi vào report thật)." + [DEMO] | SUS, SEQ, hoàn thành, thời gian do script tính |
+| **Bước 5–6** | `/usability-evaluation HW03/demo/usability 5` + [DEMO] → mở khung findings trống; `… 6` + [DEMO] → mở dữ kiện bug | Khung trống; **findings và bug do em viết** (chiếu report §5.8–5.9 thật) |
+| Kết | — | Tóm 1 câu |
+
+---
+
+## 3. Sau khi quay (5 phút)
+
+1. Dọn demo, về main:
+   ```
+   git restore .
+   git clean -fd HW03/demo
+   git switch main
+   git branch -D demo-video
+   git status --short
+   ```
+   Nếu còn `A_prompt_log.md` (M) thì giữ lại, commit chung ở bước 3.
+2. Upload 2 video lên YouTube, chế độ **Unlisted**:
+   - `23120255 HW03 – Demo skill gui-checklist-testing`
+   - `23120255 HW03 – Demo skill usability-evaluation`
+3. Dán link vào `HW03/skills/VideoLinks.md`, rồi:
+   ```
+   git add HW03/skills/VideoLinks.md HW03/appendix/A_prompt_log.md
+   git commit -m "HW03[Skill] 3/3: link video demo"
+   git push
+   ```
+4. Báo anh, anh xuất transcript lần cuối và đưa lệnh zip.
+
+**Mốc cứng: 11:00 phải có link trong repo.** Không kịp thì dừng ở bước đang làm, upload phần đã quay, ghi trong VideoLinks là "demo tới bước k", và hạ điểm Skill cùng tên zip.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #215 | 10:26 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Lúc đang làm có thể bỏ qua bước con người. Để thể hiện gõ xong skill là nó tự chạy E2E từ đầu tới cuối luôn được không?
+```
+
+**Output:**
+````
+Được một phần, nhưng có giới hạn. Anh nói rõ để video không phản tác dụng.
+
+**Không nên để AI "làm thay người" ở các bước của người.** Các bước đó là:
+- Bước 2: item SV bổ sung.
+- Bước 4: verdict chạy tay.
+- Usability bước 3: phiếu phiên.
+- Usability bước 5–6: findings, bug.
+
+Nếu AI tự điền mấy chỗ này thì video cho thấy:
+1. AI làm đúng những việc AI-01 và chính skill của em **cấm**: gợi ý item, bịa dữ liệu phiên, viết findings.
+2. Skill bỏ qua điểm dừng để người review. Đây lại là điểm thiết kế chính mà em nói trong video và Critique.
+
+Người chấm xem sẽ thấy mâu thuẫn, và nếu bị vấn đáp thì khó giải thích.
+
+**Cách đạt gần như ý em (khuyến nghị):** gõ **một lệnh duy nhất**, AI tự chạy liên tiếp mọi bước của AI. Tới bước cần người thì nó **dừng, nói rõ cần em làm gì**; em làm phần đó trong khoảng 20–30 giây (hoặc chỉ gõ "bỏ qua") rồi gõ **"tiếp"**. Video vẫn liền mạch từ đầu tới cuối, mà vẫn đúng thiết kế.
+
+**Lệnh cho Video 1** (session mới, Opus 5.5 Medium):
+```
+/gui-checklist-testing HW03/demo/register
+Demo video E2E: chạy lần lượt bước 0 → 6, xong mỗi bước in 1 dòng tóm tắt rồi CHUYỂN NGAY sang bước kế, trừ bước cần người:
+- Bước 2: dựng khung sv_items.md rồi DỪNG chờ tôi gõ "tiếp" (tôi tự điền hoặc gõ "bỏ qua" → ghi "SV bỏ qua trong demo").
+- Bước 4: tạo file lượt tay trống theo RUN.md rồi DỪNG chờ tôi chấm 3–4 item và gõ "tiếp". Không tự điền verdict.
+Phạm vi: chỉ màn Đăng ký /register, nền tảng P1 (Cốc Cốc/Windows 11), tối thiểu 8 item, chỉ chế độ tay, demo không cần ảnh. Nhánh demo-video: freeze vào HW03/demo/ai-outputs, không commit, không push.
+```
+
+**Lệnh cho Video 2:**
+```
+/usability-evaluation HW03/demo/usability
+Demo video E2E: chạy lần lượt bước 0 → 6 (flow U1: đăng nhập test@eshop.com → tìm tai nghe → thêm giỏ → VIP100 → xem đơn trong Hồ sơ; remote moderated; SEQ + SUS), xong mỗi bước in 1 dòng rồi chuyển ngay bước kế, trừ bước cần người:
+- Bước 2: DỪNG chờ tôi sửa 1 dòng kit và gõ "tiếp"; cột lý do để tôi ghi.
+- Bước 3: tạo khung S01 rồi DỪNG; tôi chép phiếu thật HW03/usability/sessions/S01.json vào và gõ "tiếp". Không tự điền.
+- Bước 5–6: chỉ dựng khung findings và gom dữ kiện, không viết nội dung.
+Nhánh demo-video: không ghi vào report thật, không commit, không push.
+```
+
+Phần còn lại giữ như quy trình lúc nãy: chuẩn bị, tạm dừng quay khi AI chạy lâu, dọn nhánh, upload Unlisted, commit link, mốc 11:00.
+
+Nếu em vẫn muốn bản "gõ một lần, không dừng" thì phải để các bước người **trống và ghi rõ "bỏ qua trong demo"**, chứ không để AI điền. Trong video, nói thẳng là những bước đó do người làm và đã làm trong bài thật.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #216 | 10:27 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Ý là kiểu bước 2 mình sẽ không làm. Còn bước 4 thì mình sẽ nói sơ qua là cần phải kiểm tra lại chạy tay
+---
+Giờ lên kịch bản cho GUI trước đã
+```
+
+**Output:**
+````
+## Kịch bản Video 1: `gui-checklist-testing` (khoảng 6–7 phút sau khi cắt)
+
+Nguyên tắc: **gõ một lệnh, AI tự chạy 0 → 6**. Bước 2 em **bỏ qua**. Bước 4 em chỉ **nói** là cần chạy tay rồi gõ "tiếp". Bước 5–6 trên dữ liệu demo sẽ gần như trống, nên chuyển sang chiếu **kết quả thật của C2**.
+
+### Chuẩn bị (chưa quay)
+```
+git status --short          # sạch (còn A_prompt_log.md thì commit trước)
+git switch -c demo-video
+```
+- Đóng cửa sổ có CSV, Google Form, Gmail, mật khẩu.
+- Mở sẵn VS Code (repo), Excel `HW03\excel\23120255_HW03_Checklist.xlsx`, tab GitHub Issues đã lọc `"HW03-C2" author:ThachHaoo`.
+- Mở **session Claude Code mới**, chọn **Opus 5.5 – Medium**.
+- Win + Alt + R để quay. AI chạy lâu thì tạm dừng quay.
+
+### Lệnh duy nhất (dán khi tới mốc 0:40)
+```
+/gui-checklist-testing HW03/demo/register
+Demo video E2E: chạy lần lượt bước 0 → 6, xong mỗi bước in 1 dòng tóm tắt rồi chuyển ngay sang bước kế. Phạm vi: chỉ màn Đăng ký web /register của ../eshop-sut, nền tảng P1 (Cốc Cốc / Windows 11), tối thiểu 8 item, chỉ chế độ tay, demo không cần ảnh.
+- Bước 2: SV bỏ qua trong demo – không dựng item, không gợi ý item; ghi meta "bước 2 bỏ qua (demo)" rồi sang bước 3.
+- Bước 4: tạo file lượt tay trống theo RUN.md rồi DỪNG chờ tôi gõ "tiếp"; KHÔNG tự điền verdict; khi tôi gõ "tiếp" thì để ket_qua trống ("chưa chạy – demo") và sang bước 5.
+Nhánh demo-video: freeze vào HW03/demo/ai-outputs (KHÔNG appendix/ai-outputs), không commit, không push.
+```
+
+### Dòng thời gian
+
+| Mốc | Trên màn hình | Ý chính em nói |
+|---|---|---|
+| **0:00** | VS Code: `HW03/skills/gui-checklist-testing/SKILL.md` (cuộn qua "Quy tắc bắt buộc", "Các bước") | Skill dùng cho checklist GUI theo bài giảng; 3 nguồn checklist; 7 bước, mỗi bước có điểm dừng cho người; những gì AI không được làm (gợi ý item ở bước 2, lấy Expected từ hành vi SUT) |
+| **0:40** | Claude Code: dán lệnh | Demo trên màn Đăng ký, ngoài phạm vi C2 của bài, để cho thấy skill dùng lại được |
+| **~1:10** | Bước 0 xong: mở `HW03/demo/register/register_inventory.md` | Control lấy từ code thật, có file:dòng, kèm điều khoản SRS |
+| **~1:50** | Bước 1 xong: mở `HW03/demo/register/checklist.md`, chỉ 1–2 item | Item theo 3 nguồn; Expected có ngưỡng "Fail nếu…", căn cứ là đặc tả; output đã đóng băng |
+| **~2:20** | Log: "bước 2 bỏ qua" | Bước này người tự bổ sung item, AI không được gợi ý; trong bài thật em thêm 6 item (mở nhanh `HW03/checklist/sv_items.md`) |
+| **~2:50** | Bước 3 xong: mở `HW03/demo/register/RUN.md` | Phân loại cách chạy; quy tắc ảnh (overlay, tên file); `dom_probe.js` hỗ trợ đọc DOM |
+| **~3:20** | Claude Code dừng ở bước 4 | Verdict chính thức phải là **lượt chạy tay** trên trình duyệt thật; trong bài thật em chạy tay 3 nền tảng. Gõ **"tiếp"** |
+| **~3:50** | Bước 5–6 xong: Excel và danh sách Failed demo (trống) | Hai bước này sinh từ kết quả chạy; demo không chạy tay nên trống. Chuyển sang kết quả thật |
+| **~4:20** | Mở Excel thật: sheet Checklist, Test Summary | Kết quả thật 74 item × 3 nền tảng; số liệu là công thức |
+| **~4:50** | Mở `HW03/bugs/failed_list.md`, rồi `bug_groups.md` | Skill gom Failed thành nhóm và kiểm trùng issue |
+| **~5:20** | Mở 1 file `HW03/bugs/BUG-xx.md`, rồi tab GitHub có issue tương ứng | **Bug do em viết**; skill chỉ gom dữ kiện; issue tạo từ file của em |
+| **~6:00** | Terminal: `git log --oneline --grep "HW03\[T1\]"` | Mỗi bước một commit, output AI đóng băng trước khi em sửa |
+| **~6:30** | Kết | Tóm 1–2 câu: skill lo phần nào, người lo phần nào |
+
+### Quay xong video 1
+- **Chưa dọn nhánh**, để quay tiếp video 2 trên cùng nhánh `demo-video`.
+- Báo anh "xong video 1", anh đưa kịch bản video 2.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #217 | 10:31 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8565,7 +9561,7 @@ Anh/chị gõ **"tiếp"** khi muốn sang bước 5. Khi đó `ket_qua` sẽ đ
 
 ---
 
-## #200 | 10:37 11/11/2026 | Claude Opus 5.5 | [...]
+## #218 | 10:37 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8607,7 +9603,70 @@ tiếp
 
 ---
 
-## #201 | 10:50 11/11/2026 | Claude Opus 5.5 | [...]
+## #219 | 10:43 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+xong video 1
+```
+
+**Output:**
+````
+## Kịch bản Video 2: `usability-evaluation` (khoảng 5–6 phút sau khi cắt)
+
+Bây giờ là 10:43. **Quay xong trước 10:58**, rồi upload cả 2 video trong lúc Claude Code đóng gói.
+
+### Chuẩn bị (1 phút)
+- Vẫn ở nhánh `demo-video`.
+- Mở **session Claude Code mới**, Opus 5.5 – Medium.
+- Mở sẵn VS Code: `HW03/skills/usability-evaluation/SKILL.md`, report `HW03/23120255_HW03_Report.md` (§5.7–5.9).
+
+### Lệnh duy nhất (dán ở mốc 0:40)
+```
+/usability-evaluation HW03/demo/usability
+Demo video E2E: chạy lần lượt bước 0 → 6, xong mỗi bước in 1 dòng tóm tắt rồi chuyển ngay sang bước kế. Flow: đăng nhập test@eshop.com → tìm tai nghe chống ồn → thêm giỏ → mã VIP100 → xem đơn trong Hồ sơ; remote synchronous moderated (Google Meet); 7 người + 1 pilot; SEQ + SUS + 4 câu hỏi mở.
+- Bước 2 (pilot): SV bỏ qua trong demo – ghi "bước 2 bỏ qua (demo)".
+- Bước 3: chỉ tạo khung trống sessions/S01.json bằng new_session.py, KHÔNG điền gì.
+- Bước 4: KHÔNG dùng phiếu demo; chạy sus_score.py --check và --report trên dữ liệu thật HW03/usability/sessions, chỉ IN bảng ra màn hình, không ghi vào report.
+- Bước 5–6: chỉ dựng khung findings trống và gom dữ kiện bug; không viết nội dung.
+Nhánh demo-video: không commit, không push, không sửa report thật.
+```
+
+### Dòng thời gian
+
+| Mốc | Trên màn hình | Ý chính em nói |
+|---|---|---|
+| **0:00** | `SKILL.md` (bảng file theo bước, "Giới hạn của AI") | Skill cho usability test moderated theo bài giảng (kế hoạch 9 phần); mỗi bước một file; **AI không** tạo danh sách người tham gia, không điền phiếu, không viết findings, không nhận dữ liệu cá nhân |
+| **0:40** | Claude Code: dán lệnh | Chạy cả quy trình trên một thư mục demo |
+| **~1:20** | Bước 0 xong: mở `HW03/demo/usability/plan.md` | Đủ 9 phần đúng thứ tự; nhiệm vụ chỉ nêu mục tiêu, có tiêu chí thành công và benchmark |
+| **~1:50** | Bước 1 xong: mở `participant_kit.md` | Lời mở đầu, xin đồng ý quay và liên hệ, SEQ, SUS, 4 câu hỏi mở; `check_kit` kiểm đủ phần |
+| **~2:10** | Log: "bước 2 bỏ qua" | Pilot do người chạy; bài thật pilot S00, sau đó em bổ sung cách hỏi lại khi người tham gia nhận xét mơ hồ |
+| **~2:30** | Bước 3: mở `sessions/S01.json` trống, rồi mở `HW03/usability/sessions/S04.json` thật | Khung trống; người điều phối nhập; chỉ mã ẩn danh P0x, không SĐT |
+| **~3:10** | Bước 4: bảng SUS/SEQ in trong terminal | Số liệu do script tính trên 7 phiên thật: SUS 77,9, SEQ 6,3, 7/7 hoàn thành; pilot không tính |
+| **~3:40** | Bước 5–6: khung findings trống | Khung do skill dựng, nội dung phải là người viết |
+| **~4:00** | Report §5.8–5.9 thật | Findings em tự viết: gom pain point, tách lỗi riêng lẻ với thiết kế, severity, đối chiếu issue |
+| **~4:40** | Kết | Tóm 1–2 câu |
+
+### Quay xong (làm ngay)
+1. Dọn nhánh:
+   ```
+   git restore .
+   git clean -fd HW03/demo
+   git switch main
+   git branch -D demo-video
+   git status --short
+   ```
+2. **Dán lệnh chuẩn bị đóng gói** (lệnh anh gửi lúc 10:10) cho Claude Code nếu chưa dán.
+3. Upload 2 video lên YouTube, **Unlisted**. Trong lúc upload, em làm tiếp phần khác.
+4. Dán 2 link vào `HW03/skills/VideoLinks.md`, commit `HW03[Skill] 3/3: link video demo` (add cả `A_prompt_log.md` nếu M), push, báo anh.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #220 | 10:50 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8653,7 +9712,27 @@ Hai file đóng băng nằm trong `HW03/demo/ai-outputs/`, không đụng `HW03/
 
 ---
 
-## #202 | 11:04 11/11/2026 | Claude Opus 5.5 | [...]
+## #221 | 11:01 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Testing Software: Demo Skill GUI: https://youtu.be/2E0pcpoG7Mk
+Testing Software: Demo Skill Usability: https://youtu.be/KsJLMV-y4UQ
+===
+Thêm vào VideoLinks rồi nhé, push luôn rồi nhé
+```
+
+**Output:**
+```
+Video đã có link, Skill 9/10 có căn cứ. Còn **29 phút**. Anh xuất transcript `_p2` bản cuối ngay; ngay sau đó là lệnh đóng gói. Tới đây em **không sửa repo** nữa, trừ phần ký/tick và điền ngày ở form.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #222 | 11:04 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8674,7 +9753,7 @@ Cách mở phiên nền "Checklist GUI màn /register HW03":
 
 ---
 
-## #203 | 11:04 11/11/2026 | Claude (không rõ model) | [...]
+## #223 | 11:04 11/11/2026 | Claude (không rõ model) | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8691,7 +9770,7 @@ Cách mở phiên nền "Checklist GUI màn /register HW03":
 
 ---
 
-## #204 | 11:05 11/11/2026 | Claude (không rõ model) | [...]
+## #224 | 11:05 11/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -8710,6 +9789,60 @@ Báo ≤ 12 dòng: chỗ trống còn lại, dung lượng zip, hash cuối.
 
 **Output:**
 ```
+Lỗi: lần chạy lại `forms_hw03.py` ghi đè phần SV trong AI-02 (ngày, chữ ký) và AI-03. Khôi phục bản SV ngay.
+
+Viết AI-05.
+
+Bước 4: chạy lại script + cây thư mục.
+
+Thiếu thư viện `marked` để xuất PDF; cài tạm vào HW03/tests.
+
+Đã xong danh sách chỗ trống. Giờ tạo zip.
+
+Đã đóng gói HW03, chưa push. Zip `23120255_HW03_AI_GUIUsability_091.zip` ở gốc repo, 19.887.726 B (≈ 19,0 MiB), dưới giới hạn 20 MB; Moodle chỉ cần 1 file. Hash cuối: `7cee321` (PDF).
+
+- **Sự cố em gây ra:** khi chạy lại `forms_hw03.py` (commit `91adc3f`), em đã ghi đè phần SV điền: ngày + chữ ký trong AI-02, và lý do 7 lượt "không rõ model" trong AI-03. Đã khôi phục bản SV ở `35d5c32`, chỉ cập nhật số lượt. Script giờ tự dừng nếu AI-02 đã có chữ ký. SV nên xem lại AI-02, AI-03 cho chắc.
+- **Số lượt:** dòng Tổng = 204 lượt (Sonnet 4.6: 3, Opus 5.5: 193, không rõ model: 8). #196 nay ghi Opus 5.5, nhưng AI-03 vẫn còn dòng lý do của #196 do SV viết; em không xoá, SV tự quyết.
+- **Đã làm:**
+  - AI-02 thêm S4 (kịch bản quay video + chạy demo skill) và R5 (AI nháp §7 Cách dùng); §11 thêm mục 13; report_plan f ghi thêm.
+  - Link video vào §7 và README.
+  - AI-05: tick 8 mục có bằng chứng, 7 mục để `[ ]` "(em tự xác nhận)", có dòng minh bạch về CSV.
+  - Chạy lại các script sinh bảng: report và README không đổi; Phụ lục D cập nhật.
+  - Commit log ở `appendix/commit_log.txt`; 4 PDF cùng tên với file .md.
+- **Kiểm zip:** 416 file, file lớn nhất ≈ 1,2 MB. Không có report_plan, CLAUDE.md, evidence_raw, placeholders_left, demo_plan, transcript hay CSV người tham gia. Có 3 file `checklist/runs/*_manual_*.csv` là kết quả chạy checklist, không phải dữ liệu người tham gia.
+- **Chỗ trống còn lại** (bảng dưới).
+- **Lưu ý trước khi nộp:**
+  - Commit log và PDF sinh trước khi SV điền chỗ trống. Sửa gì nữa thì phải xuất lại PDF, commit log và zip.
+  - #203, #204 (lượt này) sẽ đổi model sau lần trích prompt log sau.
+  - Em cài `marked@12.0.2` vào `HW03/tests` bằng `--no-save` để xuất PDF; file zip chưa được gitignore.
+
+| File | Dòng còn trống |
+|---|---|
+| Report (📝) | 9 (mục lục), 31–34 (IA ↔ FR), 38, 40, 46, 276, 402, 546, 561 + 571 (nhãn "AI nháp"), 579, 581 (`<SV viết>`) |
+| AI-02 | 109 (S4), 112 (R5): verdict + lý do |
+| AI-03 | 37–38 (lý do #203, #204), 91 (cam đoan `[...]`) |
+| AI-05 | 50–51 (ngày, chữ ký) |
+```
+
+**Xử lý:** [...]
+
+---
+
+## #225 | 11:20 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+GẤP – hạn 11:30. SV đã sửa xong, chưa commit. KHÔNG chạy forms_hw03.py, KHÔNG sửa chữ SV. KHÔNG zip.
+1. Commit phần SV: `HW03: SV điền form + §11`.
+2. on_stop.py --manual. AI-03: chỉ sửa tay số lượt ở dòng Tổng; dòng lý do #203, #204 GIỮ (SV ghi "chạy nhầm"); xoá dòng lý do #196 nếu #196 nay có model.
+3. Xuất lại 4 PDF (report, AI-02, AI-03, AI-05) + commit log. Commit `HW03: bản nộp cuối (PDF + log)`.
+4. Kiểm nội dung sẽ vào zip (git archive --format=tar HEAD HW03 | liệt kê): báo (a) file rỗng hoặc < 100 byte, (b) file không cần nộp (report_plan, CLAUDE.md, placeholders_left, demo_plan, tests/node_modules, file tạm). Đã export-ignore thì ghi "đã loại". CHỈ BÁO, không xoá, không đổi .gitattributes.
+Báo ≤ 6 dòng + hash.
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -8717,4 +9850,4 @@ Báo ≤ 12 dòng: chỗ trống còn lại, dung lượng zip, hash cuối.
 
 ---
 
-**Tổng:** 204 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 193 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195, #196, #197, #198, #199, #200, #201, #202); Claude (không rõ model) 8 lượt (#4, #51, #57, #69, #70, #79, #203, #204).
+**Tổng:** 225 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 215 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195, #196, #197, #198, #199, #200, #201, #202, #203, #204, #205, #206, #207, #208, #209, #210, #211, #212, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #224, #225); Claude (không rõ model) 7 lượt (#4, #51, #57, #69, #70, #79, #223).

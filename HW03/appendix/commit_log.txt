@@ -1027,3 +1027,20 @@ A	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.md
 
 3cb75b1 | 11:07 11/11/2026 | TonKnight | HW03: Phß╗Ñ lß╗Ñc D c├óy th╞░ mß╗Ñc (─æ├│ng g├│i)
 M	HW03/23120255_HW03_Report.md
+
+1ee37f2 | 11:07 11/11/2026 | TonKnight | HW03: commit log
+M	HW03/23120255_HW03_Report.md
+A	HW03/appendix/commit_log.txt
+
+7cee321 | 11:08 11/11/2026 | TonKnight | HW03: PDF
+A	HW03/23120255_HW03_Report.pdf
+M	HW03/README.md
+A	HW03/ai-forms/AI-02_Audit_Report_23120255.pdf
+A	HW03/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+A	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+
+9ab18d2 | 11:20 11/11/2026 | TonKnight | HW03: SV ─æiß╗ün form + ┬º11
+M	HW03/23120255_HW03_Report.md
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.md

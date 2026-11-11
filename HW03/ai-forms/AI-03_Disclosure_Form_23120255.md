@@ -23,9 +23,9 @@
 ### 1. Công cụ AI đã dùng:
 
 - **Claude Sonnet 4.6** – 3 lượt
-- **Claude Opus 5.5** – 193 lượt
-- **Claude (không rõ model)** – 8 lượt (#4, #51, #57, #69, #70, #79, #203, #204)
-- Tổng 204 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 11:05 11/11/2026; chạy lại sau lần trích cuối). Danh sách mã `#n` từng model ở dòng đó.
+- **Claude Opus 5.5** – 215 lượt
+- **Claude (không rõ model)** – 7 lượt (#4, #51, #57, #69, #70, #79, #223)
+- Tổng 225 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 11:21 11/11/2026; chạy lại sau lần trích cuối). Danh sách mã `#n` từng model ở dòng đó.
 - Các lượt "Claude (không rõ model)": transcript không ghi model; giữ nguyên trong log. Lý do từng lượt (em ghi, nguồn `appendix/prompt_log_notes.toml`):
   - #4 (`2026-11-04 12:32`): Lượt khởi tạo phiên chạy dòng lệnh đầu tiên; file cấu hình prompt log chưa gán nhãn model cụ thể.
   - #51 (`2026-11-05 02:31`): Lượt thao tác nhanh qua CLI để cập nhật tệp môi trường; metadata ghi nhận thiếu trường thông tin model.
@@ -33,6 +33,7 @@
   - #69 (`2026-11-10 02:23`): Lượt chạy lệnh CLI để rà soát ảnh chạy tay; script tự động xuất log thô không kèm tên model.
   - #70 (`2026-11-10 02:23#2`): Lượt chạy lệnh script nén ảnh tự động `compress_hw03.py` trên CLI.
   - #79 (`2026-11-10 03:10`): Lượt hỗ trợ cập nhật kịch bản Playwright ngắn trên Claude Code CLI.
+  - #223 (`2026-11-11 11:04#2`): log ghi "[Request interrupted by user]" – lượt bị ngắt, không có output (AI chép từ log).
 - Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận, lập lệnh, review).
 
 ### 2. Giai đoạn nào của bài tập có dùng AI:

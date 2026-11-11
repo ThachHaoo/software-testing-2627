@@ -15,7 +15,7 @@
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Mã bài tập: | HW03-AI – GUI & Usability on EShop |
 | Ngày làm bài: | 04/11/2026 – 11/11/2026 |
-| Công cụ AI đã dùng: | Claude (Anthropic) qua Claude Code và claude.ai — Claude Sonnet 4.6 3 lượt; Claude Opus 5.5 193 lượt; Claude (không rõ model) 8 lượt (tổng 204 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, bản trích 11:05 11/11/2026) |
+| Công cụ AI đã dùng: | Claude (Anthropic) qua Claude Code và claude.ai — Claude Sonnet 4.6 3 lượt; Claude Opus 5.5 215 lượt; Claude (không rõ model) 7 lượt (tổng 225 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, bản trích 11:21 11/11/2026) |
 | Có sử dụng AI: | [x] Có [ ] Không |
 
 **Tuyên bố sử dụng AI (đề):** xem report chính §11 Mandatory Disclosure.
