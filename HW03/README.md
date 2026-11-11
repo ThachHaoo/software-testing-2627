@@ -1,18 +1,16 @@
 # HW03 – GUI & Usability on EShop
 
-**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Cấp độ AI:** Cấp 4 | **Bloom-AI:** G9.3 + G9.4 | **Công cụ AI:** 📝
-
-> Quy ước: 📝 = chỗ em viết · 🔒 = phần AI không được viết hộ.
+**Họ tên:** Lê Tấn Hiệp | **MSSV:** 23120255 | **Cấp độ AI:** Cấp 4 | **Bloom-AI:** G9.3 + G9.4 | **Công cụ AI:** Claude (Opus 5.5, Sonnet 4.6) qua claude.ai và Claude Code
 
 ## Tự đánh giá 🔒
 
 | No. | Tiêu chí | Điểm | Tự đánh giá | Căn cứ |
 |---|---|---|---|---|
-| 1 | Task 1 – GUI Checklist (thiết kế + chạy + bug report) | 30 | 28 / 30 | Đã thiết kế 74 item (65 item nháp v1 + 6 item SV bổ sung SV-01…06 + cấu trúc chuẩn), thực thi trên 3 nền tảng P1/P2/P3, đối chiếu 137 item Failed ra 28 bug `BUG-58…85`, lập đủ 28 GitHub Issues (#247–#274). |
-| 2 | Task 2 – Usability Evaluation (kịch bản + 7 phiên + phân tích) | 40 | 38 / 40 | Hoàn thành kịch bản 9 phần, điều phối 7 phiên chính thức S01–S07 (và 1 pilot S00), thu thập dữ liệu SEQ trung bình 6,3 và SUS trung bình 77,9, phân tích 7 pain point cốt lõi đối chiếu với issue nhóm. |
+| 1 | Task 1 – GUI Checklist (thiết kế + chạy + bug report) | 30 | 28 / 30 | Đã thiết kế 74 item (AI 48 · Both 20 · SV 6; bản v1 có 65 item), thực thi trên 3 nền tảng P1/P2/P3, đối chiếu 47 item Failed ra 14 trùng, 4 trùng một phần, 28 bug mới `BUG-58…85`, lập đủ 28 GitHub Issues (#247–#274). |
+| 2 | Task 2 – Usability Evaluation (kịch bản + 7 phiên + phân tích) | 40 | 35 / 40 | Hoàn thành kế hoạch 9 phần (`plan.md`), điều phối 7 phiên chính thức S01–S07 (và 1 pilot S00), thu thập dữ liệu SEQ trung bình 6,3 và SUS trung bình 77,9, phân tích các pain point nhưng phần lập bug cho các pain point chưa có issue và mốc thời gian còn mang tính ước lượng. |
 | 3 | Task 3 – Cross-Browser / Cross-Platform (≥ 3 nền tảng) | 20 | 19 / 20 | Kiểm thử toàn diện trên 3 nền tảng khác nhau gồm P1 (Cốc Cốc/Chromium trên Windows), P2 (Firefox trên Windows) và P3 (Chrome Android trên POCO F5 qua adb reverse), có đầy đủ ảnh chụp bằng chứng overlay thông tin sinh viên. |
 | 4 | Agent Skills (+ video YouTube) | 10 | 9 / 10 | Đã đóng gói đầy đủ 2 Agent Skills (`gui-checklist-testing`, `usability-evaluation`) kèm theo cấu trúc script chuẩn và khai báo link video demo trong `skills/VideoLinks.md`. |
-|  | **Tổng** (= 3 chữ số trong tên zip) | **100** | **94 / 100** | Tổng điểm tự đánh giá phản ánh mức độ hoàn thành toàn diện các task theo đúng yêu cầu chi tiết của đề bài HW03. |
+|  | **Tổng** (= 3 chữ số trong tên zip) | **100** | **91 / 100** | Tổng điểm tự đánh giá phản ánh mức độ hoàn thành toàn diện các task theo đúng yêu cầu chi tiết của đề bài HW03. |
 
 ## Test summary
 
