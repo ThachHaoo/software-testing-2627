@@ -36,7 +36,7 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
   - FR-22.1, README.md:252 (AI chép nguyên văn): Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn.
 - CL-21 – căn cứ: FR-22.1 (README.md:252)
   - FR-22.1, README.md:252 (AI chép nguyên văn): Tất cả trường bắt buộc phải có ký hiệu `*` bên cạnh nhãn.
-- Expected của bug: Tất cả các nhãn trường bắt buộc nhập trên form (bao gồm Email, Mật khẩu ở Đăng nhập; Email ở Quên mật khẩu bước 1; OTP, Mật khẩu mới, Xác nhận mật khẩu ở Quên mật khẩu bước 2; và các trường bị chặn khi để trống ở Hồ sơ như Họ Tên, Số điện thoại, Địa chỉ giao hàng) đều phải hiển thị dấu `*` bên cạnh nhãn.
+- Expected của bug: Tất cả các nhãn trường bắt buộc nhập trên form (bao gồm Username, Mật khẩu ở Đăng nhập; Nhập Email của bạn ở Quên mật khẩu bước 1; Mã OTP (4 số), Mật khẩu mới ở Quên mật khẩu bước 2; và các trường bị chặn khi để trống ở Hồ sơ như Họ Tên, Số điện thoại, Địa chỉ giao hàng) đều phải hiển thị dấu `*` bên cạnh nhãn.
 
 ## Actual
 

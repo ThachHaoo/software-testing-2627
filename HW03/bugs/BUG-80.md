@@ -66,7 +66,7 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 
 ### Nhận định
 
-Ngày đặt hiển thị không đồng nhất giữa các nền tảng và vi phạm chuẩn định dạng dd/mm/yyyy của Việt Nam, gây nhầm lẫn cho người dùng khi đọc thông tin ngày tháng.
+Ngày đặt hiển thị không đồng nhất giữa các nền tảng và vi phạm chuẩn định dạng dd/mm/yyyy của Việt Nam, gây nhầm lẫn cho người dùng khi đọc thông tin ngày tháng (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

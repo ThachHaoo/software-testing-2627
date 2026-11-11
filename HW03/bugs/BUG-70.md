@@ -67,7 +67,7 @@ Backend vừa restart và hoạt động bình thường. Đã thực hiện bư
 
 ### Nhận định
 
-Bộ kiểm tra độ mạnh mật khẩu (regex/validation) ở bước 2 Quên mật khẩu bị bắt lỗi sai cấu trúc, chặn người dùng sử dụng mật khẩu hoàn toàn đạt chuẩn SRS. Liên quan issue #17 (chưa kiểm chứng).
+Bộ kiểm tra độ mạnh mật khẩu ở bước 2 Quên mật khẩu (`ForgotPassword.jsx:26` regex bắt buộc khoảng trắng) chặn người dùng sử dụng mật khẩu hoàn toàn đạt chuẩn SRS, làm ảnh hưởng đến quy trình khôi phục tài khoản (chưa kiểm chứng). Liên quan issue #17.
 
 ## Link GitHub Issue
 

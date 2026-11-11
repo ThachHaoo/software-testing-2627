@@ -77,7 +77,7 @@ Hệ thống frontend web và backend đang hoạt động. Trạng thái ngư�
 
 ### Nhận định
 
-Người dùng điều hướng bằng bàn phím sẽ gặp rắc rối lớn do con trỏ focus bị nhảy lộn xộn, không tuân thủ thứ tự hiển thị tự nhiên của mắt. Tại màn Quên mật khẩu B2, họ hoàn toàn không thể truy cập được các chức năng trên Navbar. Hiện tượng vòng lặp focus trên Firefox (P2) sẽ gây kẹt và chặn thao tác bàn phím (chưa kiểm chứng).
+Người dùng điều hướng bằng bàn phím sẽ gặp rắc rối lớn do con trỏ focus bị nhảy lộn xộn, không tuân thủ thứ tự hiển thị tự nhiên của mắt (chưa kiểm chứng). Tại màn Quên mật khẩu B2, họ không thể truy cập các chức năng trên Navbar theo chiều bấm Tab thông thường (chưa kiểm chứng). Hiện tượng vòng lặp focus trên Firefox (P2) sẽ gây kẹt và chặn thao tác bàn phím (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

@@ -18,13 +18,13 @@
 
 ## Tiền điều kiện
 
-Hệ thống frontend web và backend server đang hoạt động bình thường. Đã đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!` (tên hiển thị mặc định là "Test User") và đang ở trang Hồ sơ (`http://localhost:5173/profile`).
+Hệ thống frontend web và backend server đang hoạt động bình thường. Đã đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!` (tên hiển thị mặc định là "Test User") và đang ở trang Hồ sơ (`http://localhost:5173/profile`). Ô Số điện thoại cần có giá trị/nhập giá trị hợp lệ (ví dụ `912345678`) để form gửi cập nhật thành công.
 
 ## Các bước tái hiện
 
 1. Truy cập trang Đăng nhập (`http://localhost:5173/login`) và đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
 2. Mở trang Hồ sơ (`http://localhost:5173/profile`).
-3. Nhập tên mới 'Test Đổi' vào ô "Họ Tên".
+3. Nhập tên mới 'Test Đổi' vào ô "Họ Tên" và nhập Số điện thoại hợp lệ (ví dụ `912345678`).
 4. Bấm nút 'Cập nhật'.
 5. Quan sát thông tin tên người dùng hiển thị trên thanh Navbar mà không bấm tải lại trang (F5).
 
@@ -35,7 +35,7 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 
 ## Actual
 
-- Cả P1, P2 và P3: Sau khi đổi Họ Tên thành 'Test Đổi' và bấm 'Cập nhật', thanh Navbar vẫn giữ nguyên tên cũ ("EShop | Giỏ hàng | Chào, Test User | Thoát") dù đã chờ 3000 ms, chỉ cập nhật tên mới sau khi tải lại trang (F5).
+- Cả P1, P2 và P3: Sau khi đổi Họ Tên thành 'Test Đổi' và bấm 'Cập nhật', thanh Navbar vẫn giữ nguyên tên cũ ("EShop | Giỏ hàng | Chào, Test User | Thoát") dù đã chờ 3000 ms (chưa tải lại trang).
 
 ## Bằng chứng
 

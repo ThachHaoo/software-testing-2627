@@ -25,10 +25,10 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 
 ## Các bước tái hiện
 
-1. **Tại trang Đăng nhập (`http://localhost:5173/login`):** Bật throttling mạng Slow 3G, nhập thông tin đăng nhập rồi bấm nút 'Sign In' liên tục (3 lần). Quan sát trạng thái nút và số request phát sinh trong DevTools Network.
-2. **Tại trang Quên mật khẩu B1 (`http://localhost:5173/forgot-password`):** Ở điều kiện mạng bình thường, nhập email hợp lệ rồi nhấp chuột thật nhanh (double-click) vào nút 'Lấy mã OTP'. Kiểm tra số request gửi đi.
-3. **Tại trang Quên mật khẩu B2:** Nhập OTP đúng và mật khẩu mới, nhấp chuột thật nhanh vào nút 'Đặt lại mật khẩu'. Kiểm tra số request và số hộp thoại hiển thị.
-4. **Tại trang Hồ sơ (`http://localhost:5173/profile`):** Nhập thông tin cập nhật, nhấp chuột thật nhanh vào nút 'Cập nhật'. Kiểm tra số request và số hộp thoại hiển thị.
+1. **Tại trang Đăng nhập (`http://localhost:5173/login`):** Bật throttling mạng Slow 3G, nhập thông tin đăng nhập (`test@eshop.com` / `Test1234!`) rồi bấm nút 'Sign In' liên tục (3 lần). Quan sát trạng thái nút và số request phát sinh trong DevTools Network.
+2. **Tại trang Quên mật khẩu B1 (`http://localhost:5173/forgot-password`):** Ở điều kiện mạng bình thường, nhập email hợp lệ (`test@eshop.com`) rồi nhấp chuột thật nhanh (double-click) vào nút 'Lấy mã OTP'. Kiểm tra số request gửi đi.
+3. **Tại trang Quên mật khẩu B2:** Nhập OTP đúng và mật khẩu mới (ví dụ `Abcd efg1`), nhấp chuột thật nhanh (double-click) vào nút 'Đặt lại mật khẩu'. Kiểm tra số request và số hộp thoại hiển thị.
+4. **Tại trang Hồ sơ (`http://localhost:5173/profile`):** Nhập thông tin cập nhật với SĐT hợp lệ (ví dụ `912345678`), nhấp chuột thật nhanh (double-click) vào nút 'Cập nhật'. Kiểm tra số request và số hộp thoại hiển thị.
 
 ## Expected (trích căn cứ)
 
@@ -41,8 +41,8 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 - **Tại trang Đăng nhập (CL-53):** Ở cả P1, P2, P3 khi thử nghiệm với Slow 3G, nút submit 'Sign In' không có chỉ báo đang xử lý (loading) và không vô hiệu hóa để chống gửi trùng.
 - **Khi nhấp đúp nhanh ở điều kiện mạng bình thường (SV-06):**
   - **Nút 'Lấy mã OTP' (Quên MK B1):** Phát sinh 2 request API gửi lên server ở cả P1, P2 và P3.
-  - **Nút 'Đặt lại mật khẩu' (Quên MK B2):** Bị phát sinh 0 request và xuất hiện 2 hộp thoại alert trùng lặp ở P1, P2.
-  - **Nút 'Cập nhật' (Hồ sơ):** Bị phát sinh 0 request PUT và xuất hiện 2 hộp thoại alert trùng lặp ở P1, P2. Trên P3 bị TimeoutError do dblclick.
+  - **Nút 'Đặt lại mật khẩu' (Quên MK B2):** Bị phát sinh 0 request và xuất hiện 2 hộp thoại alert trùng lặp ở P1, P2 (do bị bộ kiểm tra mật khẩu của web chặn trước khi gửi API).
+  - **Nút 'Cập nhật' (Hồ sơ):** Bị phát sinh 0 request PUT và xuất hiện 2 hộp thoại alert trùng lặp ở P1, P2 (do SĐT trong dữ liệu tự động bị bộ kiểm tra SĐT của web chặn trước khi gửi API).
 
 ## Bằng chứng
 

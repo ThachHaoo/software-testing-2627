@@ -36,7 +36,7 @@ Backend vừa restart. Màn hình Hồ sơ (`http://localhost:5173/profile`) đ�
 ## Actual
 
 - **Tại trang Quên mật khẩu B2 (mật khẩu yếu):** Cả P1, P2 và P3 không có chữ thông báo lỗi nào xuất hiện trong trang phía trên nút submit; thông báo lỗi chỉ hiện ở hộp thoại alert trình duyệt ("Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.").
-- **Tại trang Hồ sơ (SĐT sai định dạng):** Cả P1, P2 và P3 không hiển thị chữ thông báo lỗi trong trang; hệ thống chỉ hiển thị hộp thoại alert với nội dung "Cập nhật thành công!".
+- **Tại trang Hồ sơ (SĐT sai định dạng '123'):** Cả P1, P2 và P3 không hiển thị chữ thông báo lỗi trong trang phía trên nút submit; hệ thống chỉ hiển thị hộp thoại alert trình duyệt với nội dung "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số.".
 
 ## Bằng chứng
 
@@ -66,7 +66,7 @@ Backend vừa restart. Màn hình Hồ sơ (`http://localhost:5173/profile`) đ�
 
 ### Nhận định
 
-Thông báo lỗi hiển thị qua hộp thoại alert làm gián đoạn trải nghiệm người dùng, không tuân thủ tiêu chuẩn thiết kế phản hồi lỗi trong trang (FR-22.4) và gây nhầm lẫn khi hệ thống báo "Cập nhật thành công!" dù SĐT nhập sai định dạng (chưa kiểm chứng).
+Thông báo lỗi hiển thị qua hộp thoại alert làm gián đoạn trải nghiệm người dùng, không tuân thủ tiêu chuẩn thiết kế phản hồi lỗi trực tiếp trong trang theo quy định FR-22.4 (chưa kiểm chứng).
 
 ## Link GitHub Issue
 

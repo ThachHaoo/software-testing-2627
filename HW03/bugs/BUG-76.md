@@ -29,8 +29,8 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 ## Expected (trích căn cứ)
 
 - CL-49 – căn cứ: Nielsen #3 (lối thoát); Nielsen #9
-- Expected của bug: Khi chưa đăng nhập, mở đường dẫn `/profile` hệ thống phải tự động chuyển hướng tới `/login`, hoặc hiển thị thông báo kèm theo liên kết/nút dẫn tới trang Đăng nhập (thực hiện trong 1 lần bấm).
-
+- Expected của bug: Khi chưa đăng nhập, truy cập đường dẫn `/profile` hệ thống phải tự động chuyển hướng người dùng về trang Đăng nhập (`/login`).
+- 
 ## Actual
 
 - Cả P1, P2 và P3: Khi chưa đăng nhập, mở `/profile` hệ thống không tự động chuyển hướng về `/login` (URL vẫn giữ nguyên `/profile`). Trong vùng nội dung trang không có bất kỳ nút hoặc liên kết nào dẫn tới trang Đăng nhập (số liên kết/nút tới Đăng nhập trong trang = 0, ngoại trừ thanh Navbar).

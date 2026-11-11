@@ -26,8 +26,8 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 ## Các bước tái hiện
 
 1. Truy cập vào trang Đăng nhập (`http://localhost:5173/login`) hoặc trang Quên mật khẩu bước 1 (`http://localhost:5173/forgot-password`).
-2. Mở DevTools -> tab Elements, kiểm tra thuộc tính `type` của ô nhập Email.
-3. Nhập giá trị sai định dạng email `abc` vào ô Email.
+2. Mở DevTools -> tab Elements, kiểm tra thuộc tính `type` của ô nhập Email (trên trang Đăng nhập có nhãn "Username", trên trang Quên mật khẩu bước 1 có nhãn "Nhập Email của bạn").
+3. Nhập giá trị sai định dạng email `abc` vào ô Email (Username). Nếu ở trang Đăng nhập, nhập thêm mật khẩu bất kỳ (ví dụ `Test1234!`).
 4. Bấm nút submit ('Sign In' hoặc 'Lấy mã OTP').
 5. Mở DevTools -> tab Network và kiểm tra request gửi đi.
 
@@ -39,12 +39,12 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 - CL-66 – căn cứ: FR-02.4 (README.md:44); FR-22.2 (README.md:253)
   - FR-02.4, README.md:44 (AI chép nguyên văn): Trường email phải dùng `type="email"` (có validate HTML5 format).
   - FR-22.2, README.md:253 (AI chép nguyên văn): Trường Email phải dùng `type="email"`.
-- Expected của bug: Ô Email tại trang Đăng nhập và bước 1 Quên mật khẩu phải có `type="email"`. Khi nhập email sai định dạng (ví dụ 'abc') rồi submit, form phải bị chặn ở frontend, có thông báo validate và không gửi request API lên server.
+- Expected của bug: Ô Email tại trang Đăng nhập (nhãn "Username") và bước 1 Quên mật khẩu (nhãn "Nhập Email của bạn") phải có `type="email"`. Khi nhập email sai định dạng (ví dụ 'abc') rồi submit, form phải bị chặn ở frontend, có thông báo validate và không gửi request API lên server.
 
 ## Actual
 
 - Cả P1, P2 và P3 tại hai màn hình (/login và /forgot-password bước 1):
-  - Ô nhập Email khai báo `type="text"` thay vì `type="email"`.
+  - Ô nhập Email (nhãn "Username" ở Đăng nhập, "Nhập Email của bạn" ở Quên mật khẩu bước 1) khai báo `type="text"` thay vì `type="email"`.
   - Khi nhập `abc` và bấm submit, hệ thống không có thông báo validate nào và vẫn gửi 1 request API lên server (`/api/login` tại Đăng nhập, `/api/forgot-password` tại Quên mật khẩu).
 
 ## Bằng chứng

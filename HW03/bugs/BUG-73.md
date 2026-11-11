@@ -1,7 +1,7 @@
 # BUG-73
 
 - **ID:** BUG-73
-- **Tiêu đề:** [Hồ sơ] Thông tin Số điện thoại và Địa chỉ quay về giá trị cũ sau khi Cập nhật và F5
+- **Tiêu đề:** [Hồ sơ] Thông tin Họ Tên, Số điện thoại và Địa chỉ quay về giá trị cũ sau khi Cập nhật và F5
 - **Severity:** High
 - **Priority:** High
 - Tiền tố GitHub: [HW03-C2-73]
@@ -36,7 +36,7 @@ Backend vừa restart. Đã đăng nhập tài khoản `test@eshop.com` / `Test1
 
 ## Actual
 
-- Cả P1, P2 và P3: Sau khi thay đổi thông tin Họ Tên, SĐT hợp lệ, Địa chỉ giao hàng rồi bấm 'Cập nhật' và tải lại trang (F5), các trường bị quay về giá trị cũ (`["Test User","",""]`). Thông tin Số điện thoại và Địa chỉ giao hàng bị rỗng, không lưu lại dữ liệu mới.
+- Cả P1, P2 và P3: Sau khi nhập thông tin Họ Tên, SĐT (ví dụ `0912345678`), Địa chỉ giao hàng rồi bấm 'Cập nhật', hệ thống xuất hiện hộp thoại alert "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số." và không gửi request API nào. Khi tải lại trang (F5), cả 3 trường (Họ Tên, SĐT, Địa chỉ) đều bị quay về giá trị cũ (`["Test User","",""]`).
 
 ## Bằng chứng
 

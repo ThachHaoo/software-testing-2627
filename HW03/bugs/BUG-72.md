@@ -28,6 +28,8 @@ Backend vừa restart. Đã đăng nhập tài khoản `test@eshop.com` / `Test1
 4. Bấm nút 'Cập nhật' và quan sát nội dung thông báo hiển thị.
 5. Tải lại trang (nhấn F5) và kiểm tra lại giá trị hiển thị ở ô "Số điện thoại".
 
+*(Tái hiện trên P1, P2, P3)*
+
 ## Expected (trích căn cứ)
 
 - CL-32 – căn cứ: FR-04.2 (README.md:65); Nielsen #9
@@ -61,12 +63,12 @@ Backend vừa restart. Đã đăng nhập tài khoản `test@eshop.com` / `Test1
 
 - Actual nguyên văn CL-32 P1 (auto): `Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
 - Actual nguyên văn CL-32 P2 (auto): `Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
-- Actual nguyên văn CL-32 P3 (auto): `Lỗi: Error: 912345678 được lưu · Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
+- Actual nguyên văn CL-32 P3 (auto): `Lỗi: Error: thông báo không nêu: 0, 10, 11 · thông báo: "Cập nhật thành công!"; sau F5: "912345678"`
 - Nguồn bước tái hiện CL-32: tiền điều kiện (checklist): – · cách kiểm: auto · test tự động: `HW03/tests/C2.spec.ts:488`
 
 ### Nhận định
 
-Hệ thống cho phép lưu thông tin số điện thoại sai định dạng vào cơ sở dữ liệu làm sai lệch dữ liệu người dùng. Việc thông báo thành công thay vì báo lỗi không hướng dẫn người dùng nhập đúng quy tắc SRS (chưa kiểm chứng). Liên quan issue #97, #113.
+Hệ thống cho phép lưu thông tin số điện thoại sai định dạng vào cơ sở dữ liệu làm sai lệch dữ liệu người dùng (chưa kiểm chứng). Việc thông báo thành công thay vì báo lỗi không hướng dẫn người dùng nhập đúng quy tắc SRS (chưa kiểm chứng). Liên quan issue #97, #113.
 
 ## Link GitHub Issue
 

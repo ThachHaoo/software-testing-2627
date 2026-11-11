@@ -36,7 +36,7 @@ Hệ thống frontend web và backend server đang hoạt động bình thườn
 
 - Cả P1 (Cốc Cốc), P2 (Firefox) và P3 (Chrome Android): Hoàn toàn không có chỉ báo trạng thái đang tải khi hệ thống đang lấy dữ liệu lịch sử đơn.
 - Trên P1: Màn hình hiển thị trạng thái rỗng ("chưa có đơn hàng") trước khi danh sách đơn hàng thực tế kịp tải ra.
-- Trên P2 và P3: Khi trang tải xong thì toàn bộ dữ liệu hiển thị cùng lúc mà không có phản hồi trung gian trong quá trình tải dữ liệu.
+- Trên P2 và P3: Trang tải xong là tất cả dữ liệu cũng xong hết (không giống Chrome khi tải từng phần).
 
 ## Bằng chứng
 

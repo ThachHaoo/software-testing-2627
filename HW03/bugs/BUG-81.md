@@ -24,7 +24,7 @@ Backend vừa restart. Chạy script `seed_orders.py` để khởi tạo dữ li
 
 1. Truy cập trang Đăng nhập (`http://localhost:5173/login`) và đăng nhập bằng tài khoản `test@eshop.com` / `Test1234!`.
 2. Truy cập vào trang Hồ sơ / Lịch sử đơn hàng (`http://localhost:5173/profile`).
-3. Tìm đến dòng đơn hàng có trạng thái 'Đang giao' (`shipping`, ví dụ đơn #10).
+3. Tìm đến dòng đơn hàng có trạng thái 'Đang giao' (`shipping`, ví dụ đơn #3).
 4. Quan sát nút 'Hủy đơn' tại dòng đơn hàng đó và kiểm tra khả năng tương tác của nút.
 
 ## Expected (trích căn cứ)
@@ -36,8 +36,8 @@ Backend vừa restart. Chạy script `seed_orders.py` để khởi tạo dữ li
 
 ## Actual
 
-- Cả P1, P2 và P3: Dòng đơn hàng có trạng thái 'Đang giao' (`shipping`, đơn #10) nút 'Hủy đơn' vẫn hiển thị và cho phép người dùng bấm thao tác bình thường (`shipping (#10): nút "Hủy đơn" dùng được = true`).
-- Đơn 'Chờ xác nhận' (#8) và 'Đã xác nhận' (#9) có nút 'Hủy đơn' dùng được (`true`); đơn 'Đã giao' (#11) và 'Đã hủy' (#12) nút 'Hủy đơn' không dùng được (`false`).
+- Cả P1, P2 và P3: Dòng đơn hàng có trạng thái 'Đang giao' (`shipping`, ví dụ đơn #3 khi thực hiện theo Tiền điều kiện hoặc đơn #10 trong lượt auto) nút 'Hủy đơn' vẫn hiển thị và cho phép người dùng bấm thao tác bình thường (`shipping: nút "Hủy đơn" dùng được = true`).
+- Đơn 'Chờ xác nhận' (đơn #1 hoặc #8) và 'Đã xác nhận' (đơn #2 hoặc #9) có nút 'Hủy đơn' dùng được (`true`); đơn 'Đã giao' (đơn #4 hoặc #11) và 'Đã hủy' (đơn #5 hoặc #12) nút 'Hủy đơn' không dùng được (`false`).
 
 ## Bằng chứng
 
