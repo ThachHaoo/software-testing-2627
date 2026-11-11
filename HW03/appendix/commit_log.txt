@@ -1,0 +1,1029 @@
+﻿c409e1c | 17:41 04/11/2026 | TonKnight | HW03: khung b├ái + report_plan
+A	HW03/23120255_HW03_Report.md
+A	HW03/README.md
+A	HW03/ai-forms/.gitkeep
+A	HW03/appendix/A_prompt_log.md
+A	HW03/appendix/ai-outputs/.gitkeep
+A	HW03/appendix/prompt_log_extra.toml
+A	HW03/appendix/prompt_log_notes.toml
+A	HW03/bugs/.gitkeep
+A	HW03/checklist/evidence/P1_chrome/.gitkeep
+A	HW03/checklist/evidence/P2_firefox/.gitkeep
+A	HW03/checklist/evidence/P3_android/.gitkeep
+A	HW03/excel/.gitkeep
+A	HW03/report_plan.md
+A	HW03/skills/.gitkeep
+A	HW03/usability/sessions/.gitkeep
+
+4ab90da | 17:44 04/11/2026 | TonKnight | HW03: chß╗æt E1, O1, T
+M	HW03/report_plan.md
+
+39f685c | 17:49 04/11/2026 | TonKnight | HW03[T1] 1/6: AI nh├íp checklist C2
+D	HW03/appendix/ai-outputs/.gitkeep
+A	HW03/appendix/ai-outputs/T1_checklist_ai_v1.json
+A	HW03/checklist/c2_inventory.md
+A	HW03/checklist/checklist.json
+A	HW03/checklist/checklist.md
+
+c081f96 | 17:51 04/11/2026 | TonKnight | HW03[T2] 1/10: AI nh├íp g├│i usability
+A	HW03/appendix/ai-outputs/T2_observation_sheet_v1.md
+A	HW03/appendix/ai-outputs/T2_participant_kit_v1.md
+A	HW03/appendix/ai-outputs/T2_plan_v1.md
+A	HW03/usability/observation_sheet.md
+A	HW03/usability/participant_kit.md
+A	HW03/usability/plan.md
+
+e4dcd91 | 18:01 04/11/2026 | TonKnight | HW03: bß║¡t hook Stop, bß║úo vß╗ç ai-outputs/prompt log, K1
+A	HW03/.gitattributes
+M	HW03/appendix/A_prompt_log.md
+M	HW03/report_plan.md
+
+24f1345 | 18:12 04/11/2026 | TonKnight | HW03: t├ích CLAUDE.md theo b├ái ΓÇô th├¬m HW02/HW03 CLAUDE.md (bß╗Å chß║╖n cß╗ºa gitignore to├án cß╗Ñc)
+A	HW03/CLAUDE.md
+
+b2e7ef8 | 18:13 04/11/2026 | TonKnight | HW03: L1=c ΓÇô exclude l╞░ß╗út kß║┐t th├║c HW02 trong hw.toml
+M	HW03/appendix/A_prompt_log.md
+
+a1df52c | 18:17 04/11/2026 | TonKnight | HW03: skill gui-checklist-testing (khung)
+M	HW03/appendix/A_prompt_log.md
+
+b8a86e9 | 18:44 04/11/2026 | TonKnight | HW03: X1, X2
+M	HW03/.gitattributes
+A	HW03/checklist/sv_items.md
+
+d7dc423 | 18:44 04/11/2026 | TonKnight | HW03: X1, X2 ΓÇô ghi quyß║┐t ─æß╗ïnh v├áo report_plan mß╗Ñc e
+M	HW03/report_plan.md
+
+a8b8560 | 18:44 04/11/2026 | TonKnight | HW03[T1] 2/6: SV review checklist AI
+M	HW03/appendix/A_prompt_log.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+
+823f7b9 | 19:27 04/11/2026 | TonKnight | HW03[T1] 2/6b: SV bß╗ò sung item checklist (sv_items.md)
+M	HW03/checklist/sv_items.md
+
+9463442 | 19:27 04/11/2026 | TonKnight | HW03[T1] 2/6: v├í CL-07
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+M	HW03/report_plan.md
+
+de4c69a | 19:29 04/11/2026 | TonKnight | HW03[T1] 2/6c: AI trß║ú lß╗¥i v├¼ sao bß╗Å s├│t
+M	HW03/appendix/A_prompt_log.md
+A	HW03/checklist/ai_gap_answer.md
+A	HW03/checklist/sv_items_check.md
+
+1e3b806 | 19:43 04/11/2026 | TonKnight | HW03[T1] 2/6b2: SV sß╗¡a item theo kiß╗âm dß╗» kiß╗çn
+M	HW03/checklist/sv_items.md
+
+d173b63 | 19:46 04/11/2026 | TonKnight | HW03[T1] 2/6b3: SV sß╗¡a SV-05, GA4
+M	HW03/checklist/sv_items.md
+
+0600998 | 19:52 04/11/2026 | TonKnight | HW03[T1] 2/6b4: SV sß╗¡a N/A SV-05, t├ích tiß╗ün ─æiß╗üu kiß╗çn SV-02
+M	HW03/checklist/sv_items.md
+
+3f2328f | 19:54 04/11/2026 | TonKnight | HW03[T1] 2/6d: gß╗Öp item SV, chß╗æt checklist v2
+M	HW03/appendix/A_prompt_log.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+
+17f747d | 19:56 04/11/2026 | TonKnight | HW03[T1] 2/6d2: SV chß╗æt loai_nguon item SV
+M	HW03/appendix/A_prompt_log.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+
+07982fc | 20:09 04/11/2026 | TonKnight | HW03[T1] 3/6: Playwright P1/P2 + RUN.md
+M	HW03/appendix/A_prompt_log.md
+A	HW03/checklist/RUN.md
+M	HW03/checklist/checklist.json
+A	HW03/checklist/dom_probe.js
+A	HW03/checklist/runs/P1_manual_TEMPLATE.md
+A	HW03/checklist/runs/P2_manual_TEMPLATE.md
+A	HW03/checklist/runs/P3_manual_TEMPLATE.md
+A	HW03/tests/C2.spec.ts
+A	HW03/tests/gen_oracle.py
+A	HW03/tests/gen_run.py
+A	HW03/tests/global-setup.ts
+A	HW03/tests/lib.ts
+A	HW03/tests/oracle.src.json
+A	HW03/tests/oracle.ts
+A	HW03/tests/package-lock.json
+A	HW03/tests/package.json
+A	HW03/tests/playwright.config.ts
+A	HW03/tests/reporter.ts
+A	HW03/tests/seed_orders.py
+
+1172c20 | 02:26 05/11/2026 | TonKnight | HW03[T1] 3/6b: C1, H1, P3A
+M	HW03/appendix/A_prompt_log.md
+M	HW03/checklist/RUN.md
+M	HW03/checklist/checklist.json
+A	HW03/checklist/issue_dup_FR02.md
+M	HW03/checklist/runs/P3_manual_TEMPLATE.md
+A	HW03/env/environment.md
+M	HW03/report_plan.md
+M	HW03/tests/gen_run.py
+M	HW03/tests/global-setup.ts
+M	HW03/tests/lib.ts
+M	HW03/tests/playwright.config.ts
+M	HW03/tests/reporter.ts
+
+9dfb111 | 02:32 05/11/2026 | TonKnight | HW03[T1] 3/6c: restart_backend d├╣ng chung, sß╗¡a tiß╗ün ─æiß╗üu kiß╗çn CL-58/59
+M	HW03/appendix/A_prompt_log.md
+M	HW03/checklist/RUN.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+M	HW03/tests/gen_run.py
+M	HW03/tests/package.json
+
+7ba0785 | 02:49 05/11/2026 | TonKnight | HW03[T1] 4/6a: SV chß║íy Playwright P1/P2/P3
+A	HW03/checklist/evidence/auto/P1_CL-02_1.png
+A	HW03/checklist/evidence/auto/P1_CL-03_1.png
+A	HW03/checklist/evidence/auto/P1_CL-03_2.png
+A	HW03/checklist/evidence/auto/P1_CL-04_1.png
+A	HW03/checklist/evidence/auto/P1_CL-06_1.png
+A	HW03/checklist/evidence/auto/P1_CL-06_2.png
+A	HW03/checklist/evidence/auto/P1_CL-09_1.png
+A	HW03/checklist/evidence/auto/P1_CL-10_1.png
+A	HW03/checklist/evidence/auto/P1_CL-11_1.png
+A	HW03/checklist/evidence/auto/P1_CL-12_1.png
+A	HW03/checklist/evidence/auto/P1_CL-13_1.png
+A	HW03/checklist/evidence/auto/P1_CL-14_1.png
+A	HW03/checklist/evidence/auto/P1_CL-15_1.png
+A	HW03/checklist/evidence/auto/P1_CL-15_2.png
+A	HW03/checklist/evidence/auto/P1_CL-16_1.png
+A	HW03/checklist/evidence/auto/P1_CL-16_2.png
+A	HW03/checklist/evidence/auto/P1_CL-17_1.png
+A	HW03/checklist/evidence/auto/P1_CL-18_1.png
+A	HW03/checklist/evidence/auto/P1_CL-19_1.png
+A	HW03/checklist/evidence/auto/P1_CL-20_1.png
+A	HW03/checklist/evidence/auto/P1_CL-21_1.png
+A	HW03/checklist/evidence/auto/P1_CL-22_1.png
+A	HW03/checklist/evidence/auto/P1_CL-22_2.png
+A	HW03/checklist/evidence/auto/P1_CL-23_1.png
+A	HW03/checklist/evidence/auto/P1_CL-24_1.png
+A	HW03/checklist/evidence/auto/P1_CL-24_2.png
+A	HW03/checklist/evidence/auto/P1_CL-25_1.png
+A	HW03/checklist/evidence/auto/P1_CL-26_1.png
+A	HW03/checklist/evidence/auto/P1_CL-28_1.png
+A	HW03/checklist/evidence/auto/P1_CL-28_2.png
+A	HW03/checklist/evidence/auto/P1_CL-29_1.png
+A	HW03/checklist/evidence/auto/P1_CL-31_1.png
+A	HW03/checklist/evidence/auto/P1_CL-32_1.png
+A	HW03/checklist/evidence/auto/P1_CL-37_1.png
+A	HW03/checklist/evidence/auto/P1_CL-38_1.png
+A	HW03/checklist/evidence/auto/P1_CL-40_1.png
+A	HW03/checklist/evidence/auto/P1_CL-41_1.png
+A	HW03/checklist/evidence/auto/P1_CL-41_2.png
+A	HW03/checklist/evidence/auto/P1_CL-42_1.png
+A	HW03/checklist/evidence/auto/P1_CL-49_1.png
+A	HW03/checklist/evidence/auto/P1_CL-49_2.png
+A	HW03/checklist/evidence/auto/P1_CL-50_1.png
+A	HW03/checklist/evidence/auto/P1_CL-50_2.png
+A	HW03/checklist/evidence/auto/P1_CL-53_1.png
+A	HW03/checklist/evidence/auto/P1_CL-56_1.png
+A	HW03/checklist/evidence/auto/P1_CL-58_1.png
+A	HW03/checklist/evidence/auto/P1_CL-59_1.png
+A	HW03/checklist/evidence/auto/P1_CL-59_2.png
+A	HW03/checklist/evidence/auto/P1_CL-60_1.png
+A	HW03/checklist/evidence/auto/P1_CL-62_1.png
+A	HW03/checklist/evidence/auto/P1_CL-62_2.png
+A	HW03/checklist/evidence/auto/P1_CL-63_1.png
+A	HW03/checklist/evidence/auto/P1_CL-66_1.png
+A	HW03/checklist/evidence/auto/P1_SV-03_1.png
+A	HW03/checklist/evidence/auto/P1_SV-04_1.png
+A	HW03/checklist/evidence/auto/P1_SV-05_1.png
+A	HW03/checklist/evidence/auto/P1_SV-06_1.png
+A	HW03/checklist/evidence/auto/P2_CL-02_1.png
+A	HW03/checklist/evidence/auto/P2_CL-03_1.png
+A	HW03/checklist/evidence/auto/P2_CL-03_2.png
+A	HW03/checklist/evidence/auto/P2_CL-04_1.png
+A	HW03/checklist/evidence/auto/P2_CL-06_1.png
+A	HW03/checklist/evidence/auto/P2_CL-06_2.png
+A	HW03/checklist/evidence/auto/P2_CL-09_1.png
+A	HW03/checklist/evidence/auto/P2_CL-10_1.png
+A	HW03/checklist/evidence/auto/P2_CL-11_1.png
+A	HW03/checklist/evidence/auto/P2_CL-12_1.png
+A	HW03/checklist/evidence/auto/P2_CL-13_1.png
+A	HW03/checklist/evidence/auto/P2_CL-14_1.png
+A	HW03/checklist/evidence/auto/P2_CL-15_1.png
+A	HW03/checklist/evidence/auto/P2_CL-15_2.png
+A	HW03/checklist/evidence/auto/P2_CL-16_1.png
+A	HW03/checklist/evidence/auto/P2_CL-16_2.png
+A	HW03/checklist/evidence/auto/P2_CL-17_1.png
+A	HW03/checklist/evidence/auto/P2_CL-18_1.png
+A	HW03/checklist/evidence/auto/P2_CL-19_1.png
+A	HW03/checklist/evidence/auto/P2_CL-20_1.png
+A	HW03/checklist/evidence/auto/P2_CL-21_1.png
+A	HW03/checklist/evidence/auto/P2_CL-22_1.png
+A	HW03/checklist/evidence/auto/P2_CL-22_2.png
+A	HW03/checklist/evidence/auto/P2_CL-23_1.png
+A	HW03/checklist/evidence/auto/P2_CL-24_1.png
+A	HW03/checklist/evidence/auto/P2_CL-24_2.png
+A	HW03/checklist/evidence/auto/P2_CL-25_1.png
+A	HW03/checklist/evidence/auto/P2_CL-26_1.png
+A	HW03/checklist/evidence/auto/P2_CL-28_1.png
+A	HW03/checklist/evidence/auto/P2_CL-28_2.png
+A	HW03/checklist/evidence/auto/P2_CL-29_1.png
+A	HW03/checklist/evidence/auto/P2_CL-31_1.png
+A	HW03/checklist/evidence/auto/P2_CL-32_1.png
+A	HW03/checklist/evidence/auto/P2_CL-37_1.png
+A	HW03/checklist/evidence/auto/P2_CL-38_1.png
+A	HW03/checklist/evidence/auto/P2_CL-40_1.png
+A	HW03/checklist/evidence/auto/P2_CL-41_1.png
+A	HW03/checklist/evidence/auto/P2_CL-41_2.png
+A	HW03/checklist/evidence/auto/P2_CL-42_1.png
+A	HW03/checklist/evidence/auto/P2_CL-49_1.png
+A	HW03/checklist/evidence/auto/P2_CL-49_2.png
+A	HW03/checklist/evidence/auto/P2_CL-50_1.png
+A	HW03/checklist/evidence/auto/P2_CL-50_2.png
+A	HW03/checklist/evidence/auto/P2_CL-56_1.png
+A	HW03/checklist/evidence/auto/P2_CL-58_1.png
+A	HW03/checklist/evidence/auto/P2_CL-59_1.png
+A	HW03/checklist/evidence/auto/P2_CL-59_2.png
+A	HW03/checklist/evidence/auto/P2_CL-60_1.png
+A	HW03/checklist/evidence/auto/P2_CL-62_1.png
+A	HW03/checklist/evidence/auto/P2_CL-62_2.png
+A	HW03/checklist/evidence/auto/P2_CL-66_1.png
+A	HW03/checklist/evidence/auto/P2_SV-03_1.png
+A	HW03/checklist/evidence/auto/P2_SV-04_1.png
+A	HW03/checklist/evidence/auto/P2_SV-05_1.png
+A	HW03/checklist/evidence/auto/P2_SV-06_1.png
+A	HW03/checklist/evidence/auto/P3_CL-02_1.png
+A	HW03/checklist/evidence/auto/P3_CL-03_1.png
+A	HW03/checklist/evidence/auto/P3_CL-03_2.png
+A	HW03/checklist/evidence/auto/P3_CL-04_1.png
+A	HW03/checklist/evidence/auto/P3_CL-06_1.png
+A	HW03/checklist/evidence/auto/P3_CL-06_2.png
+A	HW03/checklist/evidence/auto/P3_CL-09_1.png
+A	HW03/checklist/evidence/auto/P3_CL-13_1.png
+A	HW03/checklist/evidence/auto/P3_CL-14_1.png
+A	HW03/checklist/evidence/auto/P3_CL-15_1.png
+A	HW03/checklist/evidence/auto/P3_CL-16_1.png
+A	HW03/checklist/evidence/auto/P3_CL-16_2.png
+A	HW03/checklist/evidence/auto/P3_CL-17_1.png
+A	HW03/checklist/evidence/auto/P3_CL-18_1.png
+A	HW03/checklist/evidence/auto/P3_CL-19_1.png
+A	HW03/checklist/evidence/auto/P3_CL-20_1.png
+A	HW03/checklist/evidence/auto/P3_CL-21_1.png
+A	HW03/checklist/evidence/auto/P3_CL-22_1.png
+A	HW03/checklist/evidence/auto/P3_CL-22_2.png
+A	HW03/checklist/evidence/auto/P3_CL-23_1.png
+A	HW03/checklist/evidence/auto/P3_CL-24_1.png
+A	HW03/checklist/evidence/auto/P3_CL-24_2.png
+A	HW03/checklist/evidence/auto/P3_CL-25_1.png
+A	HW03/checklist/evidence/auto/P3_CL-26_1.png
+A	HW03/checklist/evidence/auto/P3_CL-28_1.png
+A	HW03/checklist/evidence/auto/P3_CL-28_2.png
+A	HW03/checklist/evidence/auto/P3_CL-29_1.png
+A	HW03/checklist/evidence/auto/P3_CL-30_1.png
+A	HW03/checklist/evidence/auto/P3_CL-31_1.png
+A	HW03/checklist/evidence/auto/P3_CL-32_1.png
+A	HW03/checklist/evidence/auto/P3_CL-37_1.png
+A	HW03/checklist/evidence/auto/P3_CL-38_1.png
+A	HW03/checklist/evidence/auto/P3_CL-40_1.png
+A	HW03/checklist/evidence/auto/P3_CL-41_1.png
+A	HW03/checklist/evidence/auto/P3_CL-41_2.png
+A	HW03/checklist/evidence/auto/P3_CL-42_1.png
+A	HW03/checklist/evidence/auto/P3_CL-48_1.png
+A	HW03/checklist/evidence/auto/P3_CL-49_1.png
+A	HW03/checklist/evidence/auto/P3_CL-49_2.png
+A	HW03/checklist/evidence/auto/P3_CL-50_1.png
+A	HW03/checklist/evidence/auto/P3_CL-50_2.png
+A	HW03/checklist/evidence/auto/P3_CL-56_1.png
+A	HW03/checklist/evidence/auto/P3_CL-58_1.png
+A	HW03/checklist/evidence/auto/P3_CL-59_1.png
+A	HW03/checklist/evidence/auto/P3_CL-59_2.png
+A	HW03/checklist/evidence/auto/P3_CL-60_1.png
+A	HW03/checklist/evidence/auto/P3_CL-62_1.png
+A	HW03/checklist/evidence/auto/P3_CL-62_2.png
+A	HW03/checklist/evidence/auto/P3_CL-66_1.png
+A	HW03/checklist/evidence/auto/P3_SV-03_1.png
+A	HW03/checklist/evidence/auto/P3_SV-04_1.png
+A	HW03/checklist/evidence/auto/P3_SV-05_1.png
+A	HW03/checklist/evidence/auto/P3_SV-06_1.png
+A	HW03/checklist/runs/P1_auto_20261105-0234.json
+A	HW03/checklist/runs/P2_auto_20261105-0237.json
+A	HW03/checklist/runs/P3_auto_20261105-0241.json
+
+99a64dc | 02:00 10/11/2026 | TonKnight | HW03: deadline thß║¡t 11/11 10:00
+M	HW03/CLAUDE.md
+M	HW03/report_plan.md
+
+78c13d8 | 02:07 10/11/2026 | TonKnight | HW03[T2] 2/10: skill usability-evaluation
+M	HW03/appendix/A_prompt_log.md
+M	HW03/report_plan.md
+
+107b67f | 02:45 10/11/2026 | TonKnight | HW03[T1] 4/6a1: SV chß║íy tay P1/P2/P3 ΓÇô kß║┐t quß║ú + ß║únh ─æß║ít
+M	HW03/appendix/A_prompt_log.md
+M	HW03/checklist/RUN.md
+A	HW03/checklist/RUN_retake.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+A	HW03/checklist/evidence/P1_chrome/P1_CL-01_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-01_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-01_3.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-01_4.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-06_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-08_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-09_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-11_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-15_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-24_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-52_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-52_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-53_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-62_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-63_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-63_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_CL-64_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_M1_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_M2_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_M4_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-01_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-01_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-01_3.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-01_4.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-02_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-02_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-02_3.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-02_4.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-04_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-04_2.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-04_3.png
+A	HW03/checklist/evidence/P1_chrome/P1_SV-04_4.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-01_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-01_2.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-01_3.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-01_4.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-06_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-08_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-09_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-11_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-15_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-24_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-53_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-62_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-63_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_M2_2.png
+A	HW03/checklist/evidence/P2_firefox/P2_M4_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-01_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-01_2.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-01_3.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-01_4.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-02_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-02_2.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-02_3.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-02_4.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-04_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-04_2.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-04_3.png
+A	HW03/checklist/evidence/P2_firefox/P2_SV-04_4.png
+A	HW03/checklist/evidence/P3_android/P3_CL-01_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-01_2.png
+A	HW03/checklist/evidence/P3_android/P3_CL-01_3.png
+A	HW03/checklist/evidence/P3_android/P3_CL-01_4.png
+A	HW03/checklist/evidence/P3_android/P3_CL-06_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-08_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-09_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-15_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-24_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-53_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-62_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-63_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-63_2.png
+A	HW03/checklist/evidence/P3_android/P3_CL-64_2.png
+A	HW03/checklist/evidence/P3_android/P3_SV-02_1.png
+A	HW03/checklist/evidence/P3_android/P3_SV-02_2.png
+A	HW03/checklist/evidence/P3_android/P3_SV-02_3.png
+A	HW03/checklist/evidence/P3_android/P3_SV-02_4.png
+A	HW03/checklist/evidence/P3_android/P3_SV-04_1.png
+A	HW03/checklist/evidence/P3_android/P3_SV-04_2.png
+A	HW03/checklist/evidence/P3_android/P3_SV-04_3.png
+A	HW03/checklist/evidence/P3_android/P3_SV-04_4.png
+A	HW03/checklist/evidence/P3_android/dom_result.json
+M	HW03/checklist/evidence/auto/P1_CL-04_1.png
+M	HW03/checklist/evidence/auto/P1_CL-06_1.png
+M	HW03/checklist/evidence/auto/P1_CL-06_2.png
+M	HW03/checklist/evidence/auto/P1_CL-09_1.png
+M	HW03/checklist/evidence/auto/P1_CL-11_1.png
+M	HW03/checklist/evidence/auto/P1_CL-12_1.png
+M	HW03/checklist/evidence/auto/P1_CL-16_2.png
+M	HW03/checklist/evidence/auto/P1_CL-19_1.png
+M	HW03/checklist/evidence/auto/P1_CL-20_1.png
+M	HW03/checklist/evidence/auto/P1_CL-24_1.png
+M	HW03/checklist/evidence/auto/P1_CL-24_2.png
+M	HW03/checklist/evidence/auto/P1_CL-26_1.png
+M	HW03/checklist/evidence/auto/P1_CL-28_1.png
+M	HW03/checklist/evidence/auto/P1_CL-28_2.png
+M	HW03/checklist/evidence/auto/P1_CL-29_1.png
+M	HW03/checklist/evidence/auto/P1_CL-58_1.png
+M	HW03/checklist/evidence/auto/P1_CL-59_1.png
+M	HW03/checklist/evidence/auto/P1_CL-59_2.png
+M	HW03/checklist/evidence/auto/P1_CL-60_1.png
+M	HW03/checklist/evidence/auto/P1_CL-63_1.png
+M	HW03/checklist/evidence/auto/P1_SV-03_1.png
+M	HW03/checklist/evidence/auto/P1_SV-04_1.png
+M	HW03/checklist/evidence/auto/P1_SV-05_1.png
+M	HW03/checklist/evidence/auto/P1_SV-06_1.png
+M	HW03/checklist/evidence/auto/P2_CL-04_1.png
+M	HW03/checklist/evidence/auto/P2_CL-06_1.png
+M	HW03/checklist/evidence/auto/P2_CL-06_2.png
+M	HW03/checklist/evidence/auto/P2_CL-09_1.png
+M	HW03/checklist/evidence/auto/P2_CL-11_1.png
+M	HW03/checklist/evidence/auto/P2_CL-12_1.png
+M	HW03/checklist/evidence/auto/P2_CL-16_2.png
+M	HW03/checklist/evidence/auto/P2_CL-19_1.png
+M	HW03/checklist/evidence/auto/P2_CL-20_1.png
+M	HW03/checklist/evidence/auto/P2_CL-21_1.png
+M	HW03/checklist/evidence/auto/P2_CL-24_1.png
+M	HW03/checklist/evidence/auto/P2_CL-24_2.png
+M	HW03/checklist/evidence/auto/P2_CL-26_1.png
+M	HW03/checklist/evidence/auto/P2_CL-28_1.png
+M	HW03/checklist/evidence/auto/P2_CL-28_2.png
+M	HW03/checklist/evidence/auto/P2_CL-29_1.png
+A	HW03/checklist/evidence/auto/P2_CL-34_1.png
+M	HW03/checklist/evidence/auto/P2_CL-58_1.png
+M	HW03/checklist/evidence/auto/P2_CL-59_1.png
+M	HW03/checklist/evidence/auto/P2_CL-59_2.png
+M	HW03/checklist/evidence/auto/P2_CL-60_1.png
+M	HW03/checklist/evidence/auto/P2_SV-03_1.png
+M	HW03/checklist/evidence/auto/P2_SV-04_1.png
+M	HW03/checklist/evidence/auto/P2_SV-05_1.png
+M	HW03/checklist/evidence/auto/P2_SV-06_1.png
+M	HW03/checklist/evidence/auto/P3_CL-03_2.png
+M	HW03/checklist/evidence/auto/P3_CL-04_1.png
+M	HW03/checklist/evidence/auto/P3_CL-06_1.png
+M	HW03/checklist/evidence/auto/P3_CL-06_2.png
+M	HW03/checklist/evidence/auto/P3_CL-09_1.png
+M	HW03/checklist/evidence/auto/P3_CL-14_1.png
+M	HW03/checklist/evidence/auto/P3_CL-19_1.png
+M	HW03/checklist/evidence/auto/P3_CL-20_1.png
+M	HW03/checklist/evidence/auto/P3_CL-23_1.png
+M	HW03/checklist/evidence/auto/P3_CL-24_1.png
+M	HW03/checklist/evidence/auto/P3_CL-24_2.png
+M	HW03/checklist/evidence/auto/P3_CL-25_1.png
+M	HW03/checklist/evidence/auto/P3_CL-26_1.png
+M	HW03/checklist/evidence/auto/P3_CL-28_1.png
+M	HW03/checklist/evidence/auto/P3_CL-28_2.png
+M	HW03/checklist/evidence/auto/P3_CL-29_1.png
+M	HW03/checklist/evidence/auto/P3_CL-30_1.png
+M	HW03/checklist/evidence/auto/P3_CL-38_1.png
+M	HW03/checklist/evidence/auto/P3_CL-48_1.png
+M	HW03/checklist/evidence/auto/P3_CL-58_1.png
+M	HW03/checklist/evidence/auto/P3_CL-59_1.png
+M	HW03/checklist/evidence/auto/P3_CL-59_2.png
+M	HW03/checklist/evidence/auto/P3_CL-60_1.png
+M	HW03/checklist/evidence/auto/P3_CL-62_2.png
+M	HW03/checklist/evidence/auto/P3_SV-03_1.png
+M	HW03/checklist/evidence/auto/P3_SV-04_1.png
+M	HW03/checklist/evidence/auto/P3_SV-05_1.png
+M	HW03/checklist/evidence/auto/P3_SV-06_1.png
+A	HW03/checklist/run_check.md
+A	HW03/checklist/runs/P1_auto_20261109-2236.json
+A	HW03/checklist/runs/P1_manual_20261109-2257.md
+M	HW03/checklist/runs/P1_manual_TEMPLATE.md
+A	HW03/checklist/runs/P2_auto_20261109-2240.json
+A	HW03/checklist/runs/P2_manual_20261110-0010.md
+A	HW03/checklist/runs/P3_auto_20261109-2244.json
+A	HW03/checklist/runs/P3_manual_20261110-0046.md
+M	HW03/env/environment.md
+M	HW03/report_plan.md
+M	HW03/tests/gen_run.py
+
+61858d4 | 02:48 10/11/2026 | TonKnight | HW03[T1] 4/6a2: sß╗¡a nh├ún ß║únh B3/B4, M5 d├╣ng ß║únh M3/M4
+M	HW03/checklist/RUN_retake.md
+A	HW03/checklist/evidence/P1_chrome/P1_M2_1.png
+A	HW03/checklist/evidence/P1_chrome/P1_M3_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-52_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_CL-64_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_M1_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_M2_1.png
+A	HW03/checklist/evidence/P2_firefox/P2_M3_1.png
+A	HW03/checklist/evidence/P3_android/P3_CL-52_1.png
+
+3ee3158 | 02:55 10/11/2026 | TonKnight | HW03[T1] 4/6b: gß╗Öp kß║┐t quß║ú, Excel, danh s├ích Failed
+M	HW03/23120255_HW03_Report.md
+M	HW03/appendix/A_prompt_log.md
+A	HW03/bugs/failed_list.md
+A	HW03/bugs/issues.json
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+A	HW03/checklist/runs/P1_manual_20261109-2257.csv
+A	HW03/checklist/runs/P2_manual_20261110-0010.csv
+A	HW03/checklist/runs/P3_manual_20261110-0046.csv
+A	HW03/excel/23120255_HW03_Checklist.xlsx
+M	HW03/report_plan.md
+
+0679e25 | 03:07 10/11/2026 | TonKnight | HW03[T1] 5/6a: quyß║┐t ─æß╗ïnh treo + khung bug (dß╗» kiß╗çn)
+M	HW03/23120255_HW03_Report.md
+M	HW03/appendix/A_prompt_log.md
+A	HW03/bugs/BUG-58.md
+A	HW03/bugs/BUG-59.md
+A	HW03/bugs/BUG-60.md
+A	HW03/bugs/BUG-61.md
+A	HW03/bugs/BUG-62.md
+A	HW03/bugs/BUG-63.md
+A	HW03/bugs/BUG-64.md
+A	HW03/bugs/BUG-65.md
+A	HW03/bugs/BUG-66.md
+A	HW03/bugs/BUG-67.md
+A	HW03/bugs/BUG-68.md
+A	HW03/bugs/BUG-69.md
+A	HW03/bugs/BUG-70.md
+A	HW03/bugs/BUG-71.md
+A	HW03/bugs/BUG-72.md
+A	HW03/bugs/BUG-73.md
+A	HW03/bugs/BUG-74.md
+A	HW03/bugs/BUG-75.md
+A	HW03/bugs/BUG-76.md
+A	HW03/bugs/BUG-77.md
+A	HW03/bugs/BUG-78.md
+A	HW03/bugs/BUG-79.md
+A	HW03/bugs/BUG-80.md
+A	HW03/bugs/BUG-81.md
+A	HW03/bugs/BUG-82.md
+A	HW03/bugs/BUG-83.md
+A	HW03/bugs/BUG-84.md
+A	HW03/bugs/BUG-85.md
+A	HW03/bugs/BUG-86.md
+A	HW03/bugs/BUG-87.md
+A	HW03/bugs/bug_groups.md
+M	HW03/bugs/failed_list.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+M	HW03/excel/23120255_HW03_Checklist.xlsx
+M	HW03/report_plan.md
+
+3ab505e | 03:13 10/11/2026 | TonKnight | HW03[T1] 5/6b: SV chß╗æt nh├│m bug
+M	HW03/appendix/A_prompt_log.md
+M	HW03/bugs/BUG-59.md
+M	HW03/bugs/BUG-60.md
+M	HW03/bugs/BUG-61.md
+M	HW03/bugs/BUG-62.md
+M	HW03/bugs/BUG-63.md
+M	HW03/bugs/BUG-64.md
+M	HW03/bugs/BUG-65.md
+M	HW03/bugs/BUG-66.md
+M	HW03/bugs/BUG-67.md
+M	HW03/bugs/BUG-68.md
+M	HW03/bugs/BUG-69.md
+M	HW03/bugs/BUG-70.md
+M	HW03/bugs/BUG-71.md
+M	HW03/bugs/BUG-72.md
+M	HW03/bugs/BUG-73.md
+M	HW03/bugs/BUG-80.md
+M	HW03/bugs/BUG-82.md
+M	HW03/bugs/BUG-83.md
+M	HW03/bugs/BUG-84.md
+M	HW03/bugs/BUG-85.md
+D	HW03/bugs/BUG-86.md
+D	HW03/bugs/BUG-87.md
+M	HW03/bugs/bug_groups.md
+M	HW03/bugs/failed_list.md
+M	HW03/report_plan.md
+
+4199810 | 03:22 10/11/2026 | TonKnight | HW03[T2] 2b/10: m├┤i tr╞░ß╗¥ng usability tß╗½ xa (tunnel)
+M	HW03/appendix/A_prompt_log.md
+M	HW03/report_plan.md
+M	HW03/usability/participant_kit.md
+M	HW03/usability/plan.md
+
+d811ea2 | 03:29 10/11/2026 | TonKnight | HW03: cß║¡p nhß║¡t skill theo c├ích l├ám thß╗▒c tß║┐
+M	HW03/appendix/A_prompt_log.md
+M	HW03/report_plan.md
+
+cfa861e | 03:34 10/11/2026 | TonKnight | HW03: handoff 10/11
+M	HW03/CLAUDE.md
+M	HW03/appendix/A_prompt_log.md
+
+c6e9465 | 03:36 10/11/2026 | TonKnight | HW03: prompt log th├¬m transcript phi├¬n claude.ai (p1)
+M	HW03/appendix/A_prompt_log.md
+
+a46ea4d | 03:41 10/11/2026 | TonKnight | harness: b├ái hß╗ìc tß╗½ HW03
+M	HW03/appendix/A_prompt_log.md
+
+fcab9e1 | 18:25 10/11/2026 | TonKnight | HW03[Skill] 1/3: ch├⌐p skill + VideoLinks
+M	HW03/.gitattributes
+D	HW03/skills/.gitkeep
+A	HW03/skills/VideoLinks.md
+A	HW03/skills/demo_plan.md
+A	HW03/skills/gui-checklist-testing/SKILL.md
+A	HW03/skills/gui-checklist-testing/assets/RUN_template.md
+A	HW03/skills/gui-checklist-testing/assets/dom_probe.js
+A	HW03/skills/gui-checklist-testing/assets/sv_items_template.md
+A	HW03/skills/gui-checklist-testing/references/schema-checklist.md
+A	HW03/skills/gui-checklist-testing/scripts/bug_groups.py
+A	HW03/skills/gui-checklist-testing/scripts/build_excel.py
+A	HW03/skills/gui-checklist-testing/scripts/check_checklist.py
+A	HW03/skills/gui-checklist-testing/scripts/failed_list.py
+A	HW03/skills/gui-checklist-testing/scripts/freeze.py
+A	HW03/skills/gui-checklist-testing/scripts/merge_platform.py
+A	HW03/skills/gui-checklist-testing/scripts/merge_runs.py
+A	HW03/skills/gui-checklist-testing/scripts/render_checklist.py
+A	HW03/skills/usability-evaluation/SKILL.md
+A	HW03/skills/usability-evaluation/assets/findings_template.md
+A	HW03/skills/usability-evaluation/assets/participant_kit_template.md
+A	HW03/skills/usability-evaluation/assets/session_template.json
+A	HW03/skills/usability-evaluation/references/plan-9-parts.md
+A	HW03/skills/usability-evaluation/references/schema-session.md
+A	HW03/skills/usability-evaluation/scripts/bug_facts.py
+A	HW03/skills/usability-evaluation/scripts/check_kit.py
+A	HW03/skills/usability-evaluation/scripts/freeze.py
+A	HW03/skills/usability-evaluation/scripts/kit_diff.py
+A	HW03/skills/usability-evaluation/scripts/new_session.py
+A	HW03/skills/usability-evaluation/scripts/sus_score.py
+
+090cabb | 18:31 10/11/2026 | TonKnight | HW03[T1] 4/6c: SV chß╗æt R9, R11
+M	HW03/23120255_HW03_Report.md
+M	HW03/bugs/bug_groups.md
+M	HW03/bugs/failed_list.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/run_check.md
+M	HW03/excel/23120255_HW03_Checklist.xlsx
+M	HW03/report_plan.md
+
+e9a2c85 | 18:37 10/11/2026 | TonKnight | HW03[T1] 5/6c: kiß╗âm tr├╣ng issue (khung bug chß╗¥ chß╗æt tiß╗ün tß╗æ)
+A	HW03/bugs/dup_check.md
+M	HW03/bugs/failed_list.md
+M	HW03/bugs/issues.json
+
+0d8fd34 | 18:38 10/11/2026 | TonKnight | HW03[Skill] 1/3b: D1
+M	HW03/report_plan.md
+M	HW03/skills/gui-checklist-testing/SKILL.md
+M	HW03/skills/gui-checklist-testing/scripts/render_checklist.py
+
+ad992bc | 18:42 10/11/2026 | TonKnight | HW03: report T1/T3 ΓÇô bß║úng + AI nh├íp 3.2, 4.2
+M	HW03/23120255_HW03_Report.md
+M	HW03/bugs/bug_groups.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+M	HW03/excel/23120255_HW03_Checklist.xlsx
+M	HW03/report_plan.md
+M	HW03/skills/gui-checklist-testing/scripts/merge_runs.py
+
+4b4c64c | 18:49 10/11/2026 | TonKnight | HW03[T1] 4/6d: R4
+M	HW03/23120255_HW03_Report.md
+M	HW03/checklist/run_check.md
+M	HW03/checklist/runs/P1_manual_20261109-2257.md
+M	HW03/report_plan.md
+
+9ede85b | 18:51 10/11/2026 | TonKnight | HW03[T1] 5/6c: kiß╗âm tr├╣ng issue + khung bug theo mß║½u HW02
+M	HW03/bugs/BUG-58.md
+M	HW03/bugs/BUG-59.md
+M	HW03/bugs/BUG-60.md
+M	HW03/bugs/BUG-61.md
+M	HW03/bugs/BUG-62.md
+M	HW03/bugs/BUG-63.md
+M	HW03/bugs/BUG-64.md
+M	HW03/bugs/BUG-65.md
+M	HW03/bugs/BUG-66.md
+M	HW03/bugs/BUG-67.md
+M	HW03/bugs/BUG-68.md
+M	HW03/bugs/BUG-69.md
+M	HW03/bugs/BUG-70.md
+M	HW03/bugs/BUG-71.md
+M	HW03/bugs/BUG-72.md
+M	HW03/bugs/BUG-73.md
+M	HW03/bugs/BUG-74.md
+M	HW03/bugs/BUG-75.md
+M	HW03/bugs/BUG-76.md
+M	HW03/bugs/BUG-77.md
+M	HW03/bugs/BUG-78.md
+M	HW03/bugs/BUG-79.md
+M	HW03/bugs/BUG-80.md
+M	HW03/bugs/BUG-81.md
+M	HW03/bugs/BUG-82.md
+M	HW03/bugs/BUG-83.md
+M	HW03/bugs/BUG-84.md
+M	HW03/bugs/BUG-85.md
+A	HW03/checklist/missing_photos.md
+M	HW03/report_plan.md
+
+f6e85c3 | 18:57 10/11/2026 | TonKnight | HW03[T1] 4/6e: M6 + tham chiß║┐u CL-64
+M	HW03/23120255_HW03_Report.md
+M	HW03/checklist/RUN.md
+M	HW03/checklist/checklist.json
+M	HW03/checklist/checklist.md
+M	HW03/checklist/missing_photos.md
+M	HW03/checklist/run_check.md
+M	HW03/checklist/runs/P3_manual_20261110-0046.md
+M	HW03/report_plan.md
+M	HW03/tests/gen_run.py
+
+6069790 | 19:03 10/11/2026 | TonKnight | HW03[T1] 4/6f: ß║únh tß╗òng quan P3
+M	HW03/23120255_HW03_Report.md
+A	HW03/checklist/evidence/P3_android/P3_M1_1.png
+A	HW03/checklist/evidence/P3_android/P3_M2_1.png
+A	HW03/checklist/evidence/P3_android/P3_M3_1.png
+A	HW03/checklist/evidence/P3_android/P3_M4_1.png
+M	HW03/checklist/missing_photos.md
+M	HW03/report_plan.md
+
+c51665d | 19:04 10/11/2026 | TonKnight | HW03: report ┬º5 ΓÇô kh├┤ng c├│ phi├¬n usability
+M	HW03/23120255_HW03_Report.md
+
+70aa585 | 19:05 10/11/2026 | TonKnight | HW03: README test summary (script) + chß╗ù tß╗▒ chß║Ñm
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+
+c2aa7ae | 19:07 10/11/2026 | TonKnight | HW03: khung AI-02, AI-03 + Mandatory Disclosure ┬º11 (script)
+M	HW03/23120255_HW03_Report.md
+A	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+A	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+
+00cea6a | 19:07 10/11/2026 | TonKnight | HW03: report ┬º12 tß╗▒ chß║Ñm (chß╗¥ SV) + t├¬n zip chß╗¥ ─æiß╗âm
+M	HW03/23120255_HW03_Report.md
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+
+df6a396 | 19:10 10/11/2026 | TonKnight | HW03[T1] 4/6g: th├¬m ß║únh P3_M2_2 bß╗ï s├│t
+A	HW03/checklist/evidence/P3_android/P3_M2_2.png
+
+5fddef5 | 19:10 10/11/2026 | TonKnight | HW03: cß║¡p nhß║¡t prompt log
+M	HW03/appendix/A_prompt_log.md
+
+62280b4 | 19:10 10/11/2026 | TonKnight | HW03[T2]: sß╗¡a thang ─æo ┬º5.3
+M	HW03/23120255_HW03_Report.md
+
+70f26ef | 19:36 10/11/2026 | TonKnight | HW03[T2] 2c/10: kß╗ïch bß║ún ─æiß╗üu phß╗æi (AI nh├íp)
+A	HW03/usability/moderator_script.md
+
+2485116 | 19:36 10/11/2026 | TonKnight | HW03[T2] 2d/10: plan theo phi├¬n 10 ph├║t + Google Form
+M	HW03/report_plan.md
+M	HW03/usability/plan.md
+
+af92e6d | 20:14 10/11/2026 | TonKnight | HW03[T1] 5/6d: SV viß║┐t BUG-58ΓÇª85
+M	HW03/bugs/BUG-58.md
+M	HW03/bugs/BUG-59.md
+M	HW03/bugs/BUG-60.md
+M	HW03/bugs/BUG-61.md
+M	HW03/bugs/BUG-62.md
+M	HW03/bugs/BUG-63.md
+M	HW03/bugs/BUG-64.md
+M	HW03/bugs/BUG-65.md
+M	HW03/bugs/BUG-66.md
+M	HW03/bugs/BUG-67.md
+M	HW03/bugs/BUG-68.md
+M	HW03/bugs/BUG-69.md
+M	HW03/bugs/BUG-70.md
+M	HW03/bugs/BUG-71.md
+M	HW03/bugs/BUG-72.md
+M	HW03/bugs/BUG-73.md
+M	HW03/bugs/BUG-74.md
+M	HW03/bugs/BUG-75.md
+M	HW03/bugs/BUG-76.md
+M	HW03/bugs/BUG-77.md
+M	HW03/bugs/BUG-78.md
+M	HW03/bugs/BUG-79.md
+M	HW03/bugs/BUG-80.md
+M	HW03/bugs/BUG-81.md
+M	HW03/bugs/BUG-82.md
+M	HW03/bugs/BUG-83.md
+M	HW03/bugs/BUG-84.md
+M	HW03/bugs/BUG-85.md
+
+715c4eb | 20:33 10/11/2026 | TonKnight | HW03[T1] 5/6e: kiß╗âm dß╗» kiß╗çn + t├íi hiß╗çn bug (AI)
+A	HW03/bugs/bug_check.md
+A	HW03/bugs/repro/repro_P1.json
+A	HW03/bugs/repro/repro_P2.json
+A	HW03/tests/repro.config.ts
+A	HW03/tests/repro_bugs.spec.ts
+
+575b28c | 21:56 10/11/2026 | TonKnight | HW03: cß║¡p nhß║¡t prompt log
+M	HW03/appendix/A_prompt_log.md
+M	HW03/report_plan.md
+
+411c7ca | 00:48 11/11/2026 | TonKnight | HW03[T2]: phiß║┐u ghi tay S00ΓÇôS07
+A	HW03/usability/sessions/notes/S00.txt
+A	HW03/usability/sessions/notes/S01.txt
+A	HW03/usability/sessions/notes/S02.txt
+A	HW03/usability/sessions/notes/S03.txt
+A	HW03/usability/sessions/notes/S04.txt
+A	HW03/usability/sessions/notes/S05.txt
+A	HW03/usability/sessions/notes/S06.txt
+A	HW03/usability/sessions/notes/S07.txt
+
+750cfdd | 00:49 11/11/2026 | TonKnight | HW03[T2] 2/10: pilot S00
+M	HW03/23120255_HW03_Report.md
+M	HW03/report_plan.md
+A	HW03/usability/sessions/S00.json
+
+8c9145d | 00:49 11/11/2026 | TonKnight | HW03[T2] 3/10: phi├¬n S01
+A	HW03/usability/sessions/S01.json
+
+b16cb69 | 00:50 11/11/2026 | TonKnight | HW03[T2] 4/10: phi├¬n S02
+A	HW03/usability/sessions/S02.json
+
+9c581cc | 00:50 11/11/2026 | TonKnight | HW03[T2] 5/10: phi├¬n S03
+A	HW03/usability/sessions/S03.json
+
+9dc76d0 | 00:50 11/11/2026 | TonKnight | HW03[T2] 6/10: phi├¬n S04
+A	HW03/usability/sessions/S04.json
+
+ab0c82a | 00:50 11/11/2026 | TonKnight | HW03[T2] 7/10: phi├¬n S05
+A	HW03/usability/sessions/S05.json
+
+cf2515d | 00:50 11/11/2026 | TonKnight | HW03[T2] 8/10: phi├¬n S06
+A	HW03/usability/sessions/S06.json
+
+52ea483 | 00:50 11/11/2026 | TonKnight | HW03[T2] 9/10: phi├¬n S07
+A	HW03/usability/sessions/S07.json
+
+d9919c9 | 05:15 11/11/2026 | TonKnight | HW03[T2] 10/10: sß╗æ liß╗çu U1
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+M	HW03/usability/sessions/S00.json
+M	HW03/usability/sessions/S01.json
+M	HW03/usability/sessions/S02.json
+M	HW03/usability/sessions/S03.json
+M	HW03/usability/sessions/S04.json
+M	HW03/usability/sessions/S05.json
+M	HW03/usability/sessions/S06.json
+M	HW03/usability/sessions/S07.json
+
+bf715c0 | 05:18 11/11/2026 | TonKnight | HW03[T1] 6/6: link GitHub Issue #247ΓÇô#260 cho 14 bug
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+M	HW03/bugs/BUG-59.md
+M	HW03/bugs/BUG-60.md
+M	HW03/bugs/BUG-61.md
+M	HW03/bugs/BUG-65.md
+M	HW03/bugs/BUG-66.md
+M	HW03/bugs/BUG-67.md
+M	HW03/bugs/BUG-68.md
+M	HW03/bugs/BUG-69.md
+M	HW03/bugs/BUG-71.md
+M	HW03/bugs/BUG-74.md
+M	HW03/bugs/BUG-77.md
+M	HW03/bugs/BUG-83.md
+M	HW03/bugs/BUG-84.md
+M	HW03/bugs/BUG-85.md
+
+c19c3ab | 05:31 11/11/2026 | TonKnight | HW03[T2]: S04 ghi ch├║ nhß║»c lß║íi nhiß╗çm vß╗Ñ (SV chß╗æt a)
+M	HW03/usability/sessions/S04.json
+
+496ad20 | 07:49 11/11/2026 | TonKnight | HW03[T1] 5/6f: SV sß╗¡a BUG theo kiß╗âm dß╗» kiß╗çn
+M	HW03/bugs/BUG-58.md
+M	HW03/bugs/BUG-62.md
+M	HW03/bugs/BUG-63.md
+M	HW03/bugs/BUG-64.md
+M	HW03/bugs/BUG-70.md
+M	HW03/bugs/BUG-72.md
+M	HW03/bugs/BUG-73.md
+M	HW03/bugs/BUG-75.md
+M	HW03/bugs/BUG-76.md
+M	HW03/bugs/BUG-78.md
+M	HW03/bugs/BUG-79.md
+M	HW03/bugs/BUG-80.md
+M	HW03/bugs/BUG-81.md
+M	HW03/bugs/BUG-82.md
+
+de6882e | 07:51 11/11/2026 | TonKnight | HW03[T1] 5/6g: kiß╗âm lß║íi 14 bug SV sß╗¡a (AI)
+A	HW03/bugs/bug_check2.md
+
+77a351f | 07:56 11/11/2026 | TonKnight | HW03[T1] 6/6: link GitHub Issue #261ΓÇô#274 cho 14 bug c├▓n lß║íi
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+M	HW03/bugs/BUG-58.md
+M	HW03/bugs/BUG-62.md
+M	HW03/bugs/BUG-63.md
+M	HW03/bugs/BUG-64.md
+M	HW03/bugs/BUG-70.md
+M	HW03/bugs/BUG-72.md
+M	HW03/bugs/BUG-73.md
+M	HW03/bugs/BUG-75.md
+M	HW03/bugs/BUG-76.md
+M	HW03/bugs/BUG-78.md
+M	HW03/bugs/BUG-79.md
+M	HW03/bugs/BUG-80.md
+M	HW03/bugs/BUG-81.md
+M	HW03/bugs/BUG-82.md
+
+524926e | 08:01 11/11/2026 | TonKnight | HW03[T2]: SV viß║┐t findings
+M	HW03/23120255_HW03_Report.md
+
+99a9e27 | 08:11 11/11/2026 | TonKnight | HW03[T1]: kh├┤i phß╗Ñc dß╗» kiß╗çn BUG-72 (#266)
+M	HW03/bugs/BUG-72.md
+A	HW03/bugs/issue_edits.md
+
+08fe5ab | 08:13 11/11/2026 | TonKnight | HW03[T1]: ß║únh trang Issues
+M	HW03/23120255_HW03_Report.md
+A	HW03/bugs/issues_page_HW03-C2_1.png
+A	HW03/bugs/issues_page_HW03-C2_2.png
+
+f68ec0d | 08:32 11/11/2026 | TonKnight | HW03[T2]: SV sß╗¡a findings theo kiß╗âm dß╗» kiß╗çn
+M	HW03/23120255_HW03_Report.md
+
+afc81da | 08:39 11/11/2026 | TonKnight | HW03[T2]: SV ghi issue li├¬n quan v├áo findings
+M	HW03/23120255_HW03_Report.md
+
+f96dfb2 | 08:41 11/11/2026 | TonKnight | HW03[T2]: Th├¬m quy ─æß╗ïnh Severity
+M	HW03/23120255_HW03_Report.md
+
+cf4e6b7 | 08:48 11/11/2026 | TonKnight | HW03[T1]: SV viß║┐t ┬º3.4 ΓÇô item bß╗ò sung + v├¼ sao AI bß╗Å s├│t
+M	HW03/23120255_HW03_Report.md
+
+557c0fe | 08:54 11/11/2026 | TonKnight | HW03[T1]: SV sß╗¡a ┬º3.4 theo kiß╗âm dß╗» kiß╗çn
+M	HW03/23120255_HW03_Report.md
+
+1d0683b | 08:56 11/11/2026 | TonKnight | HW03[T1]: SV sß╗¡a c├óu tß╗½ 3.4
+M	HW03/23120255_HW03_Report.md
+
+a66b1f2 | 09:03 11/11/2026 | TonKnight | HW03: SV viß║┐t Critique
+M	HW03/23120255_HW03_Report.md
+
+4eb5a8d | 09:08 11/11/2026 | TonKnight | HW03: SV sß╗¡a Critique (sß╗æ tß╗½ + dß╗» kiß╗çn)
+M	HW03/23120255_HW03_Report.md
+
+8fda931 | 09:10 11/11/2026 | TonKnight | HW03: SV sß╗¡a Critique (2 dß╗» kiß╗çn)
+M	HW03/23120255_HW03_Report.md
+
+3bb0fe7 | 09:12 11/11/2026 | TonKnight | HW03: SV r├║t gß╗ìn Critique
+M	HW03/23120255_HW03_Report.md
+
+0c96555 | 09:15 11/11/2026 | TonKnight | HW03: prompt log th├¬m transcript phi├¬n claude.ai (p2)
+M	HW03/appendix/A_prompt_log.md
+
+d4fa9e4 | 09:18 11/11/2026 | TonKnight | HW03: AI-02 ΓÇô th├¬m artifact AI tß╗½ tß╗æi 10/11, cß╗Öt #n theo prompt log
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+A	HW03/appendix/prompt_log_turns.txt
+
+47b96b1 | 09:18 11/11/2026 | TonKnight | HW03: AI-03 ΓÇô sß╗æ l╞░ß╗út theo d├▓ng Tß╗òng, l╞░ß╗út kh├┤ng r├╡ model chß╗¥ l├╜ do
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+
+f33f7d5 | 09:19 11/11/2026 | TonKnight | HW03: ┬º11 Mandatory Disclosure + report_plan f/g ΓÇô viß╗çc AI tß╗½ tß╗æi 10/11, d├▓ng CSV (AI-05)
+M	HW03/23120255_HW03_Report.md
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/report_plan.md
+
+bfe1e36 | 09:19 11/11/2026 | TonKnight | HW03: chß║íy lß║íi script sinh bß║úng (report_t1, sus_score, summary, forms)
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+
+3b2f412 | 09:20 11/11/2026 | TonKnight | HW03: danh s├ích chß╗ù SV c├▓n ─æiß╗ün (kh├┤ng nß╗Öp)
+M	HW03/.gitattributes
+A	HW03/placeholders_left.md
+
+4c3b0b2 | 09:21 11/11/2026 | TonKnight | HW03: report ┬º1 m├┤i tr╞░ß╗¥ng (dß╗» kiß╗çn)
+M	HW03/23120255_HW03_Report.md
+
+eb9c78a | 09:22 11/11/2026 | TonKnight | HW03: duyß╗çt report
+M	HW03/23120255_HW03_Report.md
+
+29b56da | 09:28 11/11/2026 | TonKnight | HW03: SV viß║┐t ┬º2.1
+M	HW03/23120255_HW03_Report.md
+
+3f96664 | 09:30 11/11/2026 | TonKnight | HW03: report ┬º6 bß║úng bug (AI ch├⌐p) + ─æiß╗ün dß╗» kiß╗çn
+M	HW03/23120255_HW03_Report.md
+M	HW03/placeholders_left.md
+
+30defda | 09:31 11/11/2026 | TonKnight | HW03: cß║¡p nhß║¡t prompt log
+M	HW03/appendix/A_prompt_log.md
+
+26a62b6 | 09:45 11/11/2026 | TonKnight | HW03: SV viß║┐t verdict Audit (AI-02) + ─æiß╗ün AI-03
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+A	HW03/ai-forms/signature.png
+
+2151491 | 09:53 11/11/2026 | TonKnight | HW03: SV sß╗¡a verdict Audit theo kiß╗âm dß╗» kiß╗çn
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+
+9dcf6bd | 09:54 11/11/2026 | TonKnight | HW03: SV viß║┐t ┬º5.1 v├á ┬º5.4
+M	HW03/23120255_HW03_Report.md
+
+570aac3 | 09:59 11/11/2026 | TonKnight | HW03: SV sß╗¡a S─ÉT bß║úng ng╞░ß╗¥i tham gia + kß║┐t luß║¡n Audit
+M	HW03/23120255_HW03_Report.md
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+
+f7dfae8 | 10:02 11/11/2026 | TonKnight | HW03: ┬º7 c├ích d├╣ng skill
+M	HW03/23120255_HW03_Report.md
+
+0185a48 | 10:08 11/11/2026 | TonKnight | HW03: SV tß╗▒ chß║Ñm
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+
+066cf3c | 10:12 11/11/2026 | TonKnight | HW03: SV sß╗¡a c─ân cß╗⌐ tß╗▒ chß║Ñm
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+
+5cd2ebb | 11:01 11/11/2026 | TonKnight | HW03[Skill] 3/3: link video demo
+M	HW03/skills/VideoLinks.md
+
+91adc3f | 11:05 11/11/2026 | TonKnight | HW03: prompt log + form ΓÇô lß║ºn tr├¡ch cuß╗æi
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW03/appendix/A_prompt_log.md
+M	HW03/appendix/prompt_log_turns.txt
+
+35d5c32 | 11:06 11/11/2026 | TonKnight | HW03: kh├┤i phß╗Ñc AI-02/AI-03 bß║ún SV (script ghi ─æ├¿ ß╗ƒ 91adc3f), chß╗ë cß║¡p nhß║¡t sß╗æ l╞░ß╗út
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+
+2eee71f | 11:06 11/11/2026 | TonKnight | HW03: AI-02/┬º11/report_plan ΓÇô artifact ┬º7 c├ích d├╣ng + kß╗ïch bß║ún video; link video v├áo ┬º7, README
+M	HW03/23120255_HW03_Report.md
+M	HW03/README.md
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/report_plan.md
+
+cd135f5 | 11:07 11/11/2026 | TonKnight | HW03: AI-05 Privacy Checklist (khung, tick theo bß║▒ng chß╗⌐ng)
+A	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.md
+
+3cb75b1 | 11:07 11/11/2026 | TonKnight | HW03: Phß╗Ñ lß╗Ñc D c├óy th╞░ mß╗Ñc (─æ├│ng g├│i)
+M	HW03/23120255_HW03_Report.md
