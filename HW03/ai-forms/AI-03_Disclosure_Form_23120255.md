@@ -22,11 +22,18 @@
 
 ### 1. Công cụ AI đã dùng:
 
-- **Claude Sonnet 4.6** – 2 lượt
-- **Claude Opus 5.5** – 91 lượt
-- **Claude (không rõ model)** – 6 lượt (#4, #51, #57, #69, #70, #79)
-- Tổng 99 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 19:03 10/11/2026; chạy lại sau lần trích cuối). Danh sách mã `#n` từng model ở dòng đó.
-- Các lượt "Claude (không rõ model)": transcript không ghi model; giữ nguyên, lý do từng lượt em ghi trong `appendix/prompt_log_notes.toml` (`<SV điền>`).
+- **Claude Sonnet 4.6** – 3 lượt
+- **Claude Opus 5.5** – 186 lượt
+- **Claude (không rõ model)** – 7 lượt (#4, #51, #57, #69, #70, #79, #196)
+- Tổng 196 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 09:14 11/11/2026; chạy lại sau lần trích cuối). Danh sách mã `#n` từng model ở dòng đó.
+- Các lượt "Claude (không rõ model)": transcript không ghi model; giữ nguyên trong log. Lý do từng lượt (em ghi, nguồn `appendix/prompt_log_notes.toml`):
+  - #4 (`2026-11-04 12:32`): `<SV viết>`
+  - #51 (`2026-11-05 02:31`): `<SV viết>`
+  - #57 (`2026-11-09 22:34`): `<SV viết>`
+  - #69 (`2026-11-10 02:23`): `<SV viết>`
+  - #70 (`2026-11-10 02:23#2`): `<SV viết>`
+  - #79 (`2026-11-10 03:10`): `<SV viết>`
+  - #196 (`2026-11-11 09:13`): `<SV viết>`
 - Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận, lập lệnh, review).
 
 ### 2. Giai đoạn nào của bài tập có dùng AI:
@@ -39,7 +46,7 @@
 
 ### 4. Phần cụ thể AI đóng góp:
 
-Theo bảng artifact của AI-02 (mục 3.1): H1 Harness HW03: `HW03/CLAUDE.md`, kế hoạch nộp `report_plan.md` (không nộp), khung report/README; T1 Khảo sát control C2 (`c2_inventory.md`); T2 Checklist nháp 3 nguồn – bản đóng băng v1 (bước 1); T3 Khung trống `sv_items.md` + kiểm cấu trúc item SV (`sv_items_check.md`); T4 Câu trả lời "vì sao AI bỏ sót" (sau khi SV commit item); T5 Playwright C2 + oracle khoá sha1 + reporter + seed đơn; T6 `RUN.md` (phần chạy tay) + mẫu file lượt + `dom_probe.js`; T7 Kiểm ảnh/kết quả chạy tay (`run_check.md`), nén + đổi tên ảnh; T8 Gộp lượt auto + tay vào `checklist.json` (V1, override theo quyết định SV) + `checklist.md`; T9 Excel 3 sheet; T10 Danh sách Failed + đối chiếu trùng issue (`failed_list.md`, `dup_check.md`, `issues.json`, `issue_dup_FR02.md`); T11 Nhóm dữ kiện bug + khung BUG-58…85 (chỉ dữ kiện); T12 Danh sách ảnh thiếu (`missing_photos.md`); U1 Gói usability nháp – bản đóng băng (plan 9 phần, participant kit, phiếu quan sát); U2 Môi trường usability từ xa (script phiên, tunnel, đưa SUT về main) + sửa plan mục 5–6; S1 Agent Skill `gui-checklist-testing` (SKILL.md, reference, asset, 8 script); S2 Agent Skill `usability-evaluation` (SKILL.md, reference, asset, 6 script); S3 `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp); R1 Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3) + nháp §3.2, §4.2 (📝 AI nháp); R2 Test summary README + report §8; R3 Khung AI-02, AI-03, khối Mandatory Disclosure §11; E1 Mô tả môi trường (`env/environment.md`).
+Theo bảng artifact của AI-02 (mục 3.1): H1 Harness HW03: `HW03/CLAUDE.md`, kế hoạch nộp `report_plan.md` (không nộp), khung report/README; T1 Khảo sát control C2 (`c2_inventory.md`); T2 Checklist nháp 3 nguồn – bản đóng băng v1 (bước 1); T3 Khung trống `sv_items.md` + kiểm cấu trúc item SV (`sv_items_check.md`); T4 Câu trả lời "vì sao AI bỏ sót" (sau khi SV commit item); T5 Playwright C2 + oracle khoá sha1 + reporter + seed đơn; T6 `RUN.md` (phần chạy tay) + mẫu file lượt + `dom_probe.js`; T7 Kiểm ảnh/kết quả chạy tay (`run_check.md`), nén + đổi tên ảnh; T8 Gộp lượt auto + tay vào `checklist.json` (V1, override theo quyết định SV) + `checklist.md`; T9 Excel 3 sheet; T10 Danh sách Failed + đối chiếu trùng issue theo tiêu đề (`failed_list.md`, `issues.json`, `issue_dup_FR02.md`); T11 Nhóm dữ kiện bug + khung BUG-58…85 (chỉ dữ kiện); T12 Danh sách ảnh thiếu (`missing_photos.md`); B1 Kiểm trùng 179 issue nhóm (`dup_check.md`; AI đề xuất mức, SV quyết); B2 Khung BUG-58…85 theo mẫu HW02 (chỉ dữ kiện) + script `bug_skeleton_hw03.py`; B3 Kiểm dữ kiện 28 bug + tái hiện Steps SV bằng Playwright (`bug_check.md`, `repro_bugs.spec.ts`); B4 Kiểm lại 14 bug SV sửa (`bug_check2.md`); B5 Tạo 28 GitHub Issue bằng `gh issue create --body-file` (file SV viết) + ghi link vào BUG-xx, README, report; B6 Sửa body issue #266 + comment theo lệnh SV (`issue_edits.md`); B7 Ảnh trang Issues `[HW03-C2]` (Playwright chụp) chèn report §6; U1 Gói usability nháp – bản đóng băng (plan 9 phần, participant kit, phiếu quan sát); U2 Môi trường usability từ xa (script phiên, tunnel, đưa SUT về main) + sửa plan mục 5–6; U3 Google Form SEQ + SUS + 4 câu hỏi mở (Apps Script – phiên thảo luận claude.ai); U4 Kịch bản điều phối `moderator_script.md` (phiên thảo luận nháp, Claude Code commit nguyên văn); U5 Phiếu phiên S00…S07.json AI chép từ notes SV + CSV (`usability_fill_hw03.py`); U6 Đối chiếu 7 pain point §5.8 ↔ issue nhóm (chỉ đọc, trả lời trong phiên); S1 Agent Skill `gui-checklist-testing` (SKILL.md, reference, asset, 8 script); S2 Agent Skill `usability-evaluation` (SKILL.md, reference, asset, 6 script); S3 `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp); R1 Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3); R4 AI nháp report §3.2, §4.2 (📝 AI nháp – SV duyệt/sửa); R2 Test summary README + report §8 (11/11 thêm dòng U1 từ phiếu phiên); R3 Khung AI-02, AI-03, khối Mandatory Disclosure §11; E1 Mô tả môi trường (`env/environment.md`).
 
 **Phần AI KHÔNG đóng góp (em tự làm):** `<SV điền>`
 

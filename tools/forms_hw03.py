@@ -201,6 +201,24 @@ def ai02(tot):
     return "\n".join(L)
 
 
+def unknown_lines(parts):
+    """Mỗi lượt không rõ model một dòng; notes đã có khoá giờ đơn → trỏ tới notes, chưa có → <SV viết>."""
+    turns = {}
+    f = HW / "appendix" / "prompt_log_turns.txt"
+    if f.exists():
+        turns = {int(m.group(1)): m.group(2) for m in re.finditer(r'^#(\d+)\s+\["([^"]+)"\]', f.read_text(encoding="utf-8"), re.M)}
+    notes = (HW / "appendix" / "prompt_log_notes.toml").read_text(encoding="utf-8")
+    out = []
+    for name, _, ids in parts:
+        if "không rõ" not in name:
+            continue
+        for x in re.findall(r"#(\d+)", ids):
+            k = turns.get(int(x), "?")
+            has = re.search(r'^\["' + re.escape(k) + r'"\]', notes, re.M)
+            out.append(f"  - #{x} (`{k}`): " + ("xem notes khoá này" if has else SV))
+    return out
+
+
 def ai03(tot):
     n, parts, when = tot
     L = HEAD + ["# Biểu mẫu Khai báo Sử dụng AI", "", "*Đính kèm cho mọi bài tập có dùng AI ở bất kỳ mức nào.*", "",
@@ -211,7 +229,8 @@ def ai03(tot):
         extra = f" ({ids})" if "không rõ" in name else ""
         L.append(f"- **{name}** – {k} lượt{extra}")
     L += [f"- Tổng {n} lượt theo dòng \"Tổng\" của `appendix/A_prompt_log.md` (bản trích {when}; chạy lại sau lần trích cuối). Danh sách mã `#n` từng model ở dòng đó.",
-          "- Các lượt \"Claude (không rõ model)\": transcript không ghi model; giữ nguyên, lý do từng lượt em ghi trong `appendix/prompt_log_notes.toml` (`<SV điền>`).",
+          "- Các lượt \"Claude (không rõ model)\": transcript không ghi model; giữ nguyên trong log. Lý do từng lượt (em ghi, nguồn `appendix/prompt_log_notes.toml`):",
+          *unknown_lines(parts),
           "- Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận, lập lệnh, review).", "",
           "### 2. Giai đoạn nào của bài tập có dùng AI:", "", "`<SV điền>` (tick: brainstorm / outline / viết nháp / phản hồi / sửa chữa / code / phân tích dữ liệu / thiết kế đồ hoạ / khác)", "",
           "### 3. Prompt / nhiệm vụ chính cho AI:", "", "`<SV điền>` (chọn 2–3 lượt tiêu biểu theo mã `#n` trong `appendix/A_prompt_log.md`)", "",
