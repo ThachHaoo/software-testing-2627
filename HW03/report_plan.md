@@ -125,11 +125,17 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW03_AI_GUIUsability_<
 - 10/11 phiên thảo luận 19:29–19:31: AI nháp kịch bản điều phối `usability/moderator_script.md` (phiên ~10 phút); Claude Code commit nguyên văn (2c/10), sửa plan mục 3, 5 theo SV chốt (2d/10).
 - 10/11 Claude Code (5/6e): **AI viết `tests/repro_bugs.spec.ts` + `tests/repro.config.ts`** (Playwright chạy lại Steps SV của BUG-58…85 trên P1/P2, số đo `bugs/repro/repro_P*.json`) và `bugs/bug_check.md` (kiểm dữ kiện, chỉ liệt kê, không đề xuất câu chữ).
 - 11/11 Claude Code (T2 2/10–9/10): **AI dựng 8 phiếu `usability/sessions/S00…S07.json`** từ notes SV ghi tay (`sessions/notes/`) + CSV Google Form (chỉ cột mã phiên, đồng ý, SEQ, SUS, 4 câu mở) bằng `tools/usability_fill_hw03.py` (AI viết); nhãn "AI chép, SV duyệt"; thời gian / hoàn thành / trợ giúp để SV điền. Thêm `HW03/usability/evidence_raw/` vào `.gitignore`.
+- 10/11 Claude Code (5/6c): `bugs/dup_check.md` (kiểm trùng 179 issue, AI đề xuất mức, SV quyết); khung `BUG-58…85` theo mẫu HW02 bằng `tools/bug_skeleton_hw03.py` (chỉ dữ kiện); `checklist/missing_photos.md`.
+- 11/11 Claude Code (6/6): tạo 28 issue #247–#274 bằng `gh issue create --body-file` với file BUG SV viết (SV xác nhận bảng trước khi tạo); ghi link vào BUG-xx, README, report.
+- 11/11 Claude Code (5/6g): `bugs/bug_check2.md` (kiểm lại 14 bug SV sửa; chỉ liệt kê, không đề xuất câu chữ).
+- 11/11 Claude Code: khôi phục dòng Dữ kiện BUG-72 về đúng `checklist.json`, `gh issue edit #266` + comment theo lệnh SV, nhật ký `bugs/issue_edits.md`; ảnh trang Issues `[HW03-C2]` (Playwright chụp, `bugs/issues_page_HW03-C2_*.png`) chèn report §6.
+- 11/11 Claude Code (T2 10/10): `sus_score.py --check/--report` → REPORT:U1; `tools/summary_hw03.py` thêm dòng U1; đối chiếu 7 pain point §5.8 ↔ issue nhóm (chỉ đọc, trả lời trong phiên – SV tự ghi cột liên quan).
+- 11/11 Claude Code: prompt log thêm transcript claude.ai p2; `prompt_log_turns.txt`; `tools/forms_hw03.py` thêm artifact B1–B7, U3–U6, R4, cột #n theo dải lượt trước commit, lý do lượt không rõ model chờ SV; §11 thêm mục 8–12.
 - Lỗi phiên thảo luận: `[...]`.
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
 
-- AI tạo bản đầu: `[...]` (checklist nháp, gói usability nháp, script/harness…).
+- AI tạo bản đầu (danh mục đủ: AI-02 mục 3.1, report §11 mục 1–12): checklist nháp 65 item, gói usability nháp, Playwright + RUN.md, Excel, bảng report, khung BUG (chỉ dữ kiện), kiểm trùng issue, bug_check/bug_check2 + repro, Google Form + moderator_script (phiên thảo luận), phiếu phiên S00…S07 AI chép, khung AI-02/AI-03, script/harness.
 - SV xem xét và sửa: `[...]`.
 - Item SV bổ sung (🔒, kèm lý do AI bỏ sót): `[...]`.
 - SV tự làm hoàn toàn: tuyển + danh sách 7 người, điều phối phiên, ghi chú quan sát, câu trả lời SUS, ảnh cross-platform có overlay, bug report, Critique, verdict Audit, điểm tự chấm, giọng video.

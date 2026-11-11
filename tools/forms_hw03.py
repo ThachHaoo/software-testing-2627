@@ -261,6 +261,11 @@ def disclosure():
         "Đối chiếu item Failed với issue nhóm (`bugs/failed_list.md`, `bugs/dup_check.md`), đề xuất nhóm dữ kiện bug, dựng khung `BUG-58…85` chỉ chứa dữ kiện.",
         "Nháp gói usability (plan 9 phần, participant kit, phiếu quan sát; đóng băng ở `appendix/ai-outputs/T2_*`) và script môi trường usability từ xa.",
         "Sinh bảng cho report/README (§3.3, §3.5, §3.6, §4.1, §4.3, §8), nháp §3.2, §4.2 (đánh dấu 📝 AI nháp), khung AI-02, AI-03.",
+        "Kiểm trùng 179 issue nhóm (`bugs/dup_check.md`), dựng khung `BUG-58…85` theo mẫu HW02 (chỉ dữ kiện); kiểm dữ kiện bug em viết và tái hiện Steps bằng Playwright (`bugs/bug_check.md`, `bugs/bug_check2.md`, `tests/repro_bugs.spec.ts`) – chỉ liệt kê điểm lệch, không đề xuất câu chữ.",
+        "Tạo 28 GitHub Issue bằng `gh issue create --body-file` với file BUG em viết, sửa body #266 + comment theo lệnh em (`bugs/issue_edits.md`), chụp ảnh trang Issues cho §6.",
+        "Phiên thảo luận claude.ai dựng Google Form (Apps Script) cho SEQ + SUS + 4 câu hỏi mở và nháp kịch bản điều phối `usability/moderator_script.md`.",
+        "Chép phiếu phiên `usability/sessions/S00…S07.json` từ ghi chú tay của em + CSV Google Form (chỉ cột mã phiên, đồng ý, SEQ, SUS, câu hỏi mở) bằng `tools/usability_fill_hw03.py`; tính SUS/SEQ (`sus_score.py`); đối chiếu pain point với issue nhóm (chỉ đọc).",
+        "Dữ liệu cá nhân: CSV Google Form có họ tên/SĐT người tham gia đã được em gửi cho phiên thảo luận claude.ai (00:43 11/11); AI chỉ dùng cột SEQ/SUS. CSV không commit (`usability/evidence_raw/` trong .gitignore) – khai ở AI-05.",
     ]
     L += [f"{k}. {t}" for k, t in enumerate(items, 1)]
     L += ["", "Em xem xét và sửa: `<SV viết>`", "", "Em tự làm hoàn toàn: `<SV viết>`", "",
