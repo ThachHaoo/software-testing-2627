@@ -1,0 +1,192 @@
+# Rà soát dọn dẹp HW03 (AI, chỉ đọc)
+
+Quét `git ls-files HW03` tại HEAD `f8578ba` (không có tag `hw03-submitted`). Bỏ qua: `appendix/ai-outputs/`, `A_prompt_log.md`, `checklist/evidence/`, `bugs/BUG-*.md`, `usability/sessions/` (trừ mục 1 chỉ ghi nhận). Chưa xoá/sửa gì.
+
+## 1. File rỗng / placeholder (8)
+
+- `HW03/ai-forms/.gitkeep` – .gitkeep, thư mục có 7 file thật – xoá
+- `HW03/bugs/.gitkeep` – .gitkeep, thư mục có 39 file thật – xoá
+- `HW03/checklist/evidence/P1_chrome/.gitkeep` – .gitkeep, thư mục có 34 file thật – xoá
+- `HW03/checklist/evidence/P2_firefox/.gitkeep` – .gitkeep, thư mục có 32 file thật – xoá
+- `HW03/checklist/evidence/P3_android/.gitkeep` – .gitkeep, thư mục có 29 file thật – xoá
+- `HW03/excel/.gitkeep` – .gitkeep, thư mục có 1 file thật – xoá
+- `HW03/usability/sessions/.gitkeep` – .gitkeep, thư mục có 16 file thật – xoá
+- `HW03/usability/sessions/notes/S06.txt` – file 22 byte – giữ (dữ liệu SV, vùng không đụng)
+
+## 2. Chữ sót / marker (112)
+
+- `HW03/23120255_HW03_Report.md:9` – "📝" – để SV quyết · `📝 (sinh khi hoàn thiện)`
+- `HW03/23120255_HW03_Report.md:31` – "📝" – để SV quyết · `| IA-01 General UI standards | 📝 | |`
+- `HW03/23120255_HW03_Report.md:32` – "📝" – để SV quyết · `| IA-02 Forms | 📝 | |`
+- `HW03/23120255_HW03_Report.md:33` – "📝" – để SV quyết · `| IA-03 Navigation | 📝 | |`
+- `HW03/23120255_HW03_Report.md:34` – "📝" – để SV quyết · `| IA-04 Feedback / state | 📝 | |`
+- `HW03/23120255_HW03_Report.md:38` – "📝" – để SV quyết · `- Kết quả item: Passed / Failed / N/A (M3) — 📝 giả định khi dùng N/A.`
+- `HW03/23120255_HW03_Report.md:40` – "📝" – để SV quyết · `- Overlay ảnh: email SV + MSSV + họ tên (M1) — 📝 cách làm.`
+- `HW03/23120255_HW03_Report.md:46` – "📝" – để SV quyết · `📝 Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ đơn, navbar khi đã đăng nhập.`
+- `HW03/23120255_HW03_Report.md:177` – "chờ" – để SV quyết · `* *Nguyên nhân bỏ sót:* AI viết CL-53 dựa trên heuristic về phản hồi (Norman Feedback), lấ`
+- `HW03/23120255_HW03_Report.md:276` – "📝" – để SV quyết · `📝`
+- `HW03/23120255_HW03_Report.md:402` – "📝" – để SV quyết · `📝`
+- `HW03/23120255_HW03_Report.md:446` – "chờ" – để SV quyết · `| 5 | **Đường dẫn đến trang Kiểm tra / Lịch sử đơn hàng khó tìm** | **Medium** | 2/7 (S02,`
+- `HW03/23120255_HW03_Report.md:546` – "📝" – để SV quyết · `📝 tham chiếu `ai-forms/AI-02_Audit_Report_23120255.md`; verdict 🔒.`
+- `HW03/CLAUDE.md:66` – "chờ" (đã export-ignore) – giữ – không nộp · `Skill: `gui-checklist-testing` (`.claude/skills/`), mỗi lần gọi một bước rồi dừng chờ SV r`
+- `HW03/CLAUDE.md:97` – "chờ" (đã export-ignore) – giữ – không nộp · `- **Treo T1:** 5 ảnh `P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1` chưa overlay (đang ở `c`
+- `HW03/ai-forms/AI-02_Audit_Report_23120255.md:48` – "chờ" – để SV quyết · `| B1 | Kiểm trùng 179 issue nhóm (`dup_check.md`; AI đề xuất mức, SV quyết) | Claude Code `
+- `HW03/ai-forms/AI-02_Audit_Report_23120255.md:63` – "<SV điền>" – để SV quyết · `| S3 | `skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp) | Claude Code · 1`
+- `HW03/ai-forms/AI-02_Audit_Report_23120255.md:66` – "📝" – để SV quyết · `| R4 | AI nháp report §3.2, §4.2 (📝 AI nháp – SV duyệt/sửa) | Claude Code · 10/11/2026 18:`
+- `HW03/ai-forms/AI-02_Audit_Report_23120255.md:69` – "chờ" – để SV quyết · `| R3 | Khung AI-02, AI-03, khối Mandatory Disclosure §11 | Claude Code · 10/11/2026 19:07 `
+- `HW03/ai-forms/AI-02_Audit_Report_23120255.md:111` – "📝" – để SV quyết · `| R4 | #102 | VALID | SV đã duyệt và giữ nguyên bản nháp do commit duyệt eb9c78a chỉ thực `
+- `HW03/ai-forms/AI-03_Disclosure_Form_23120255.md:59` – "📝" – để SV quyết · `Theo bảng artifact của AI-02 (mục 3.1): H1 Harness HW03: `HW03/CLAUDE.md`, kế hoạch nộp `r`
+- `HW03/bugs/bug_check.md:7` – "<SV viết>" – để SV quyết · `- **Phần 1 (đọc):** với từng BUG kiểm (a) còn `<SV viết>` / 🔒 · (b) thang Severity (Critic`
+- `HW03/bugs/bug_check.md:8` – "<SV viết>" – để SV quyết · `- **Kết quả chung (a)(b)(c):** 28/28 không còn `<SV viết>`/🔒; Severity: High 7, Medium 4, `
+- `HW03/bugs/bug_check.md:164` – "chờ" – để SV quyết · `- P3: ảnh `P3_CL-53_1` là màn Đăng nhập tĩnh (đã nhập email/mật khẩu, nút "Sign In"); ảnh `
+- `HW03/bugs/bug_check2.md:5` – "<SV viết>" – để SV quyết · `Chung: 14/14 không còn `<SV viết>`/🔒; Severity/Priority không đổi (đúng thang); 0/14 tiêu `
+- `HW03/bugs/bug_groups.md:263` – "chờ" – để SV quyết · `- Expected (chép): DevTools Network throttling 'Slow 3G': bấm Đăng nhập → trong lúc chờ, n`
+- `HW03/bugs/bug_groups.md:281` – "chờ" – để SV quyết · `- Expected (chép): Network throttling 'Slow 3G', tải lại /profile → trong lúc chờ có chỉ b`
+- `HW03/bugs/dup_check.md:16` – "chờ" – để SV quyết · `→ Bạn nhóm dùng `[HW03-C3-xx]` cho HW03 (ví dụ #204 · nphoang-itus · OPEN · [HW03-C3-01] G`
+- `HW03/bugs/issues.json:1` – "chờ" – giữ (mã/chuỗi trong script) · `[{"author":{"id":"U_kgDOCgiXAw","is_bot":false,"login":"nphoang-itus","name":"Hoang Nguyen`
+- `HW03/checklist/RUN.md:91` – "chờ" – để SV quyết · `| ☐ | CL-52 | Đăng nhập | Sai 3 lần liên tiếp → khoá 30 giây | Restart backend trước khi k`
+- `HW03/checklist/RUN.md:108` – "chờ" – để SV quyết · `| ☐ | CL-53 | Đăng nhập | Có chỉ báo đang xử lý và chống gửi trùng | P3: throttling qua ch`
+- `HW03/checklist/RUN.md:133` – "chờ" – để SV quyết · `| ☐ | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Có ≥ 1 đơn. P3: t`
+- `HW03/checklist/RUN.md:145` – "chờ" – để SV quyết · `| ☐ | CL-52 | Đăng nhập | Sai 3 lần liên tiếp → khoá 30 giây | Restart backend trước khi k`
+- `HW03/checklist/RUN.md:162` – "chờ" – để SV quyết · `| ☐ | CL-53 | Đăng nhập | Có chỉ báo đang xử lý và chống gửi trùng | P3: throttling qua ch`
+- `HW03/checklist/RUN.md:180` – "chờ" – để SV quyết · `| ☐ | CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Có ≥ 1 đơn. P3: t`
+- `HW03/checklist/RUN.md:192` – "chờ" – để SV quyết · `| ☐ | CL-52 | Đăng nhập | Sai 3 lần liên tiếp → khoá 30 giây | Restart backend trước khi k`
+- `HW03/checklist/ai_gap_answer.md:55` – "chờ" – để SV quyết · `- Nguyên nhân khả dĩ (nhận định của AI): CL-53 được viết từ heuristic phản hồi (Norman Fee`
+- `HW03/checklist/checklist.json:3930` – "chờ" – giữ (mã/chuỗi trong script) · `"expected": "Sai mật khẩu 3 lần liên tiếp, ngay sau đó đăng nhập đúng → bị từ chối kèm thô`
+- `HW03/checklist/checklist.json:3981` – "chờ" – giữ (mã/chuỗi trong script) · `"expected": "DevTools Network throttling 'Slow 3G': bấm Đăng nhập → trong lúc chờ, nút bị `
+- `HW03/checklist/checklist.json:3999` – "chờ" – giữ (mã/chuỗi trong script) · `"P1": "Lỗi: Error: không có chỉ báo đang xử lý trên nút (SV xác nhận chỉ báo khác) · Lỗi: `
+- `HW03/checklist/checklist.json:4683` – "chờ" – giữ (mã/chuỗi trong script) · `"expected": "Network throttling 'Slow 3G', tải lại /profile → trong lúc chờ có chỉ báo đan`
+- `HW03/checklist/checklist.md:107` – "chờ" – để SV quyết · `| CL-52 | Đăng nhập | Sai 3 lần liên tiếp → khoá 30 giây | FR-02.2 (README.md:42) · *SRS* `
+- `HW03/checklist/checklist.md:108` – "chờ" – để SV quyết · `| CL-53 | Đăng nhập | Có chỉ báo đang xử lý và chống gửi trùng | Norman – Feedback; Shneid`
+- `HW03/checklist/checklist.md:118` – "chờ" – để SV quyết · `| CL-63 | Lịch sử đơn | Có trạng thái đang tải khi lấy lịch sử đơn | Nielsen #1 (hiển thị `
+- `HW03/checklist/runs/P1_auto_20261105-0234.json:430` – "chờ" – giữ (mã/chuỗi trong script) · `"notes": "Lỗi: Error: không có chỉ báo đang xử lý trên nút (SV xác nhận chỉ báo khác) · Lỗ`
+- `HW03/checklist/runs/P1_auto_20261109-2236.json:430` – "chờ" – giữ (mã/chuỗi trong script) · `"notes": "Lỗi: Error: không có chỉ báo đang xử lý trên nút (SV xác nhận chỉ báo khác) · Lỗ`
+- `HW03/placeholders_left.md:1` – "📝" (đã export-ignore) – giữ – không nộp · `# Chỗ còn `<SV viết>` / `<SV điền>` / 📝 (sinh 11/11, sau 29b56da + bảng §6; không nộp)`
+- `HW03/placeholders_left.md:3` – "📝" (đã export-ignore) – giữ – không nộp · `Bỏ qua dòng quy ước. Dòng 📝 "AI nháp" = nhãn chờ SV duyệt rồi xoá.`
+- `HW03/placeholders_left.md:7` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:9: 📝 (sinh khi hoàn thiện)`
+- `HW03/placeholders_left.md:8` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:31: | IA-01 General UI standards | 📝 | |`
+- `HW03/placeholders_left.md:9` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:32: | IA-02 Forms | 📝 | |`
+- `HW03/placeholders_left.md:10` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:33: | IA-03 Navigation | 📝 | |`
+- `HW03/placeholders_left.md:11` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:34: | IA-04 Feedback / state | 📝 | |`
+- `HW03/placeholders_left.md:12` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:38: - Kết quả item: Passed / Failed / N/A (M3) — 📝 giả định khi `
+- `HW03/placeholders_left.md:13` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:40: - Overlay ảnh: email SV + MSSV + họ tên (M1) — 📝 cách làm.`
+- `HW03/placeholders_left.md:14` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:46: 📝 Đăng nhập, Quên mật khẩu (2 bước), Hồ sơ + Lịch sử đơn/huỷ`
+- `HW03/placeholders_left.md:15` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:276: 📝`
+- `HW03/placeholders_left.md:16` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:337: `<SV viết>``
+- `HW03/placeholders_left.md:17` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:355: `<SV viết>` bảng 7 người (tên, hồ sơ IT/non-IT, Zalo/SĐT ch`
+- `HW03/placeholders_left.md:18` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:385: 📝`
+- `HW03/placeholders_left.md:19` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:487: Cách dùng: `<SV viết>``
+- `HW03/placeholders_left.md:20` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:511: 📝 tham chiếu `ai-forms/AI-02_Audit_Report_23120255.md`; ver`
+- `HW03/placeholders_left.md:21` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:526: 📝 AI nháp – SV xác nhận`
+- `HW03/placeholders_left.md:22` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:536: 7. Sinh bảng cho report/README (§3.3, §3.5, §3.6, §4.1, §4.`
+- `HW03/placeholders_left.md:23` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:543: Em xem xét và sửa: `<SV viết>``
+- `HW03/placeholders_left.md:24` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:545: Em tự làm hoàn toàn: `<SV viết>``
+- `HW03/placeholders_left.md:25` – "📝" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:554: 📝 (đồng bộ với README)`
+- `HW03/placeholders_left.md:26` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:558: | 1 | Task 1 – GUI Checklist | 30 | `<SV điền>` |`
+- `HW03/placeholders_left.md:27` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:559: | 2 | Task 2 – Usability Evaluation | 40 | `<SV điền>` |`
+- `HW03/placeholders_left.md:28` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:560: | 3 | Task 3 – Cross-Browser / Cross-Platform | 20 | `<SV đ`
+- `HW03/placeholders_left.md:29` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:561: | 4 | Agent Skills (+ video) | 10 | `<SV điền>` |`
+- `HW03/placeholders_left.md:30` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- 23120255_HW03_Report.md:562: |  | **Tổng** | **100** | `<SV điền>` |`
+- `HW03/placeholders_left.md:35` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- README.md:11: | 1 | Task 1 – GUI Checklist (thiết kế + chạy + bug report) | 30 | `<SV đi`
+- `HW03/placeholders_left.md:36` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- README.md:12: | 2 | Task 2 – Usability Evaluation (kịch bản + 7 phiên + phân tích) | 40 `
+- `HW03/placeholders_left.md:37` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- README.md:13: | 3 | Task 3 – Cross-Browser / Cross-Platform (≥ 3 nền tảng) | 20 | `<SV đ`
+- `HW03/placeholders_left.md:38` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- README.md:14: | 4 | Agent Skills (+ video YouTube) | 10 | `<SV điền>` | `<SV điền>` |`
+- `HW03/placeholders_left.md:39` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- README.md:15: |  | **Tổng** (= 3 chữ số trong tên zip) | **100** | `<SV điền>` | |`
+- `HW03/placeholders_left.md:47` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:30: - #4 (`2026-11-04 12:32`): `<SV viết>``
+- `HW03/placeholders_left.md:48` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:31: - #51 (`2026-11-05 02:31`): `<SV viết>``
+- `HW03/placeholders_left.md:49` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:32: - #57 (`2026-11-09 22:34`): `<SV viết>``
+- `HW03/placeholders_left.md:50` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:33: - #69 (`2026-11-10 02:23`): `<SV viết>``
+- `HW03/placeholders_left.md:51` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:34: - #70 (`2026-11-10 02:23#2`): `<SV viết>``
+- `HW03/placeholders_left.md:52` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:35: - #79 (`2026-11-10 03:10`): `<SV viết>``
+- `HW03/placeholders_left.md:53` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:36: - #196 (`2026-11-11 09:13`): `<SV viết>``
+- `HW03/placeholders_left.md:54` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:41: `<SV điền>` (tick: brainstorm / outline / viết nhá`
+- `HW03/placeholders_left.md:55` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:45: `<SV điền>` (chọn 2–3 lượt tiêu biểu theo mã `#n` `
+- `HW03/placeholders_left.md:57` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:51: **Phần AI KHÔNG đóng góp (em tự làm):** `<SV điền>`
+- `HW03/placeholders_left.md:58` – "<SV viết>" (đã export-ignore) – giữ – không nộp · `- AI-03_Disclosure_Form_23120255.md:57: `<SV viết>``
+- `HW03/placeholders_left.md:62` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- VideoLinks.md:5: | `gui-checklist-testing` | `<SV điền>` | Demo trên 1 màn nhỏ, nhánh tạ`
+- `HW03/placeholders_left.md:63` – "<SV điền>" (đã export-ignore) – giữ – không nộp · `- VideoLinks.md:6: | `usability-evaluation` | `<SV điền>` | Chưa dùng trên phiên thật (chư`
+- `HW03/report_plan.md:55` – "[...]" (đã export-ignore) – giữ – không nộp · `| M7 | Video phiên usability chứa giọng/màn hình người tham gia; 20 MB/file | Xin đồng ý; `
+- `HW03/report_plan.md:94` – "chờ" (đã export-ignore) – giữ – không nộp · `| R11 | CL-09 P1 = **Failed** (4/6c, 10/11): Expected "dd/mm/yyyy và giống nhau trên P1, P`
+- `HW03/report_plan.md:105` – "chờ" (đã export-ignore) – giữ – không nộp · `**Còn chờ SV chốt:** (không còn)`
+- `HW03/report_plan.md:112` – "chờ" (đã export-ignore) – giữ – không nộp · `- AI phát hiện khi đọc code: login_attempts +2 (server.js:54), khoá 180 s (server.js:57) ≠`
+- `HW03/report_plan.md:120` – "📝" (đã export-ignore) – giữ – không nộp · `- 10/11 Claude Code (4/6c, Skill 1/3, 1/3b, report): R9/R11 áp bằng override `merge_hw03.p`
+- `HW03/report_plan.md:133` – "chờ" (đã export-ignore) – giữ – không nộp · `- 11/11 Claude Code: prompt log thêm transcript claude.ai p2; `prompt_log_turns.txt`; `too`
+- `HW03/report_plan.md:135` – "[...]" (đã export-ignore) – giữ – không nộp · `- Lỗi phiên thảo luận: `[...]`.`
+- `HW03/report_plan.md:140` – "[...]" (đã export-ignore) – giữ – không nộp · `- SV xem xét và sửa: `[...]`.`
+- `HW03/report_plan.md:141` – "[...]" (đã export-ignore) – giữ – không nộp · `- Item SV bổ sung (🔒, kèm lý do AI bỏ sót): `[...]`.`
+- `HW03/skills/gui-checklist-testing/scripts/failed_list.py:7` – "chờ" – giữ (mã/chuỗi trong script) · `- Ô auto Failed chỉ vì lỗi harness (TimeoutError, không có assertion "Lỗi: Error:") → cảnh`
+- `HW03/skills/gui-checklist-testing/scripts/failed_list.py:62` – "chờ" – giữ (mã/chuỗi trong script) · `col += " ⚠ chờ chạy lại"`
+- `HW03/skills/usability-evaluation/SKILL.md:42` – "📝" – để SV quyết · `- Nhiệm vụ lấy từ **mô hình người dùng, không từ code**: nêu mục tiêu + trạng thái đầu + t`
+- `HW03/skills/usability-evaluation/assets/findings_template.md:5` – "📝" – để SV quyết · `## Thang (📝 thang mặc định của skill – SV chốt hoặc sửa trước khi chấm)`
+- `HW03/skills/usability-evaluation/scripts/kit_diff.py:16` – "TODO" – giữ (mã/chuỗi trong script) · `TODO = "(SV chưa ghi)"`
+- `HW03/skills/usability-evaluation/scripts/kit_diff.py:34` – "TODO" – giữ (mã/chuỗi trong script) · `if "| C" in body and body.count(TODO) < body.count("\n| C"):`
+- `HW03/skills/usability-evaluation/scripts/kit_diff.py:48` – "TODO" – giữ (mã/chuỗi trong script) · `out += [f"| C{k} | {r[0]} | {r[1]} | {r[2]} | {r[3]} | {r[4]} | {TODO} |" for k, r in enum`
+- `HW03/skills/usability-evaluation/scripts/sus_score.py:7` – "[...]" – giữ (mã/chuỗi trong script) · `python sus_score.py <sessions-dir> --report <report.md> --scope U1 [...]`
+- `HW03/tests/C2.spec.ts:835` – "chờ" – giữ (mã/chuỗi trong script) · `obs(info, `trong lúc chờ: ${JSON.stringify(st)} (chữ ban đầu "${label0}"); ${c.n} request `
+- `HW03/usability/moderator_script.md:1` – "📝" – để SV quyết · `# Kịch bản điều phối phiên usability – U1 (📝 AI nháp – SV duyệt/sửa)`
+- `HW03/usability/plan.md:3` – "📝" – để SV quyết · `Theo khung **9 phần** của slide (*The 9-part test plan*). Flow U1 chốt ở `report_plan.md` `
+- `HW03/usability/plan.md:31` – "📝" – để SV quyết · `Người từng mua hàng online ít nhất 1 lần, chưa dùng EShop, không học lớp Software Testing `
+- `HW03/usability/plan.md:72` – "📝" – để SV quyết · `Mục tiêu và nhiệm vụ; bảng 7 người tham gia (che 4 số giữa); tóm tắt từng phiên; SEQ/SUS t`
+
+## 3. File ngoài danh sách nộp (report_plan mục c) (56)
+
+- `HW03/CLAUDE.md` – đã export-ignore (không vào zip) – giữ trong repo hoặc SV quyết
+- `HW03/appendix/prompt_log_extra.toml` – phụ trợ prompt log (không có trong mục c) – để SV quyết
+- `HW03/appendix/prompt_log_notes.toml` – phụ trợ prompt log (không có trong mục c) – để SV quyết
+- `HW03/appendix/prompt_log_turns.txt` – phụ trợ prompt log (không có trong mục c) – để SV quyết
+- `HW03/bugs/bug_check.md` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/bug_check2.md` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/bug_groups.md` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/dup_check.md` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/failed_list.md` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/issue_edits.md` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/issues.json` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/repro/repro_P1.json` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/bugs/repro/repro_P2.json` – file làm việc AI (kiểm bug/trùng issue) – để SV quyết
+- `HW03/checklist/RUN.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/RUN_retake.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/ai_gap_answer.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/c2_inventory.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/dom_probe.js` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/issue_dup_FR02.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/missing_photos.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/run_check.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P1_auto_20261105-0234.json` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P1_auto_20261109-2236.json` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P1_manual_20261109-2257.csv` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P1_manual_20261109-2257.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P1_manual_TEMPLATE.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P2_auto_20261105-0237.json` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P2_auto_20261109-2240.json` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P2_manual_20261110-0010.csv` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P2_manual_20261110-0010.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P2_manual_TEMPLATE.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P3_auto_20261105-0241.json` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P3_auto_20261109-2244.json` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P3_manual_20261110-0046.csv` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P3_manual_20261110-0046.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/runs/P3_manual_TEMPLATE.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/sv_items.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/checklist/sv_items_check.md` – file làm việc checklist (RUN, runs, kiểm ảnh…) – để SV quyết
+- `HW03/env/environment.md` – mô tả môi trường (không có trong mục c, report trỏ tới) – giữ
+- `HW03/placeholders_left.md` – đã export-ignore (không vào zip) – giữ trong repo hoặc SV quyết
+- `HW03/report_plan.md` – đã export-ignore (không vào zip) – giữ trong repo hoặc SV quyết
+- `HW03/skills/demo_plan.md` – đã export-ignore (không vào zip) – giữ trong repo hoặc SV quyết
+- `HW03/tests/C2.spec.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/gen_oracle.py` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/gen_run.py` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/global-setup.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/lib.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/oracle.src.json` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/oracle.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/package-lock.json` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/package.json` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/playwright.config.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/reporter.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/repro.config.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/repro_bugs.spec.ts` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+- `HW03/tests/seed_orders.py` – harness Playwright (không có trong mục c; là artifact AI T5/B3) – để SV quyết
+
+## 4. Link/ảnh hỏng trong .md (0)
+
+- (không có)

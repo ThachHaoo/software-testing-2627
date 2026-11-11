@@ -1044,3 +1044,19 @@ M	HW03/23120255_HW03_Report.md
 M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
 M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
 M	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.md
+
+f6e2726 | 11:21 11/11/2026 | TonKnight | HW03: bß║ún nß╗Öp cuß╗æi (PDF + log)
+M	HW03/23120255_HW03_Report.pdf
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.md
+M	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+M	HW03/appendix/A_prompt_log.md
+M	HW03/appendix/commit_log.txt
+
+f8578ba | 11:26 11/11/2026 | TonKnight | HW03: n├⌐n PDF AI-05
+M	HW03/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW03/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW03/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
