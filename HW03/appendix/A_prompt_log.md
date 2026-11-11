@@ -4399,7 +4399,154 @@ Bạn nhớ push nhé: `git push`.
 
 ---
 
-## #92 | 18:24 10/11/2026 | Claude Opus 5.5 | [...]
+## #92 | 18:18 10/11/2026 | Claude Sonnet 4.6 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+/cs423-ai-first-homework Tiếp tục HW03 (GUI & Usability), deadline 10:00 11/11/2026.
+1. Đọc Project doc claude/HW03_handoff.md (toàn bộ, gồm mục 6 Bài học) và claude/HW02_handoff.md mục 1, 3, 4 (Bug), 5b (quy ước chung, xuất transcript). Dùng kèm skill two-session-workflow.
+2. Clone repo ThachHaoo/software-testing-2627 (đọc), kiểm HEAD + HW03/CLAUDE.md mục 7 "Trạng thái" — tin repo hơn handoff nếu lệch.
+3. Báo ngắn: trạng thái hiện tại, việc còn lại theo thứ tự, việc tôi cần làm tiếp theo.
+Transcript phiên này là _p2.
+```
+
+**Output:**
+```
+Em đọc skill, clone repo rồi đối chiếu trạng thái với handoff.
+
+No response requested.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #93 | 18:18 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Continue with the task described in the conversation above. Your most recent mcp__claude-code-remote__add_repo call has not run yet; nothing is wrong with the tool or its input. Run it now from the beginning with the tools you have, without assuming any result, file or state from it, and use the working directory and file locations you have now rather than ones earlier steps assumed.
+
+The user's timezone is Asia/Saigon (UTC+07:00).
+```
+
+**Output:**
+```
+Đã kiểm repo. Nó khớp handoff, chỉ có thêm 1 commit.
+
+**Trạng thái (repo, HEAD `a46ea4d` 03:41 10/11, đã push)**
+- `a46ea4d` "harness: bài học từ HW03" nằm sau `c6e9465`. Commit này chỉ sửa CLAUDE.md gốc, HARNESS_SETUP.md và prompt log (hiện 91 lượt).
+- **Task 1:** checklist, Excel và bảng T1 trong report đã xong. Cả 28 khung `BUG-58…85.md` vẫn còn `🔒 SV viết`, chưa có issue nào.
+- **Task 1 còn treo:** R9/R11 (verdict P1 của CL-08 và CL-09, `checklist/run_check.md` dòng 38–51). Còn 5 ảnh `P3_M*` chưa overlay; thư mục `evidence_raw` không có trên repo vì bị gitignore, ảnh nằm trên máy em.
+- **Task 2 (40đ, phần nặng nhất):** `usability/sessions/` đang trống, chưa có phiên nào, kể cả pilot. Em cũng chưa duyệt kit (plan, participant_kit, observation_sheet).
+- **Skill:** chưa chép sang `HW03/skills/`, chưa quay video.
+- **Báo cáo:** chưa có Critique, Audit, AI-02/03/05, README test summary, commit log và zip.
+
+**Việc còn lại theo thứ tự.** Còn khoảng 16 giờ. Tối nay là đường găng vì phụ thuộc người khác.
+1. **Trước phiên (khoảng 30 phút):** đọc lướt `participant_kit.md` và `observation_sheet.md` vì đây là thứ em sẽ đọc to cho người tham gia. Sau đó chạy pilot S00: `tools\usability_session.ps1` → `new_session.py … S00` → tự chạy hoặc nhờ 1 người chạy U1 → nhập JSON → `sus_score.py --check` → commit `HW03[T2] 2/10`.
+2. **Tối nay:** chạy S01…S07, mỗi phiên một commit. Giữa các phiên, nếu có thời gian chết thì viết bug T1.
+3. **Sau phiên:** chạy `sus_score.py --report` vào REPORT:U1. Em viết findings và bug Task 2.
+4. **Bug T1:** em viết 28 bug. Sau đó Claude Code kiểm dữ kiện, rồi tái hiện; bước này phải đưa SUT về main bằng `sut_main.ps1`, nên làm **sau** các phiên usability. Cuối cùng tạo issue và chụp ảnh trang Issues.
+5. **Đóng gói:** chép skill, README/test summary, AI-02/03/05, Mandatory Disclosure, commit log, `hw-submission-audit`, zip. Em lo phần Critique, verdict Audit, điểm tự chấm, ký, quay video (cắt nếu thiếu giờ) và nộp trước 10:00 ngày 11/11.
+
+**Việc em cần làm tiếp theo**
+- Cho anh biết **mấy giờ phiên đầu tiên bắt đầu** và đã chốt đủ 7 người chưa. Anh sẽ xếp lịch ngược lại cho pilot và bug.
+- Trả lời nhanh R9 và R11, giữ Passed hay đổi Failed (chữ của em). Hai việc này chỉ mất vài phút và chặn bảng T1 cuối cùng.
+- Nếu muốn, anh đưa ngay khối lệnh cho Claude Code để chuẩn bị pilot S00: kiểm SUT đang ở `usability-tunnel`, chạy thử tunnel, tạo khung S00.
+
+Transcript phiên này sẽ xuất thành `_p2`. Anh sẽ đề nghị xuất sau khi xong các phiên usability.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #94 | 18:20 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Thôi giờ tôi chấp nhận bỏ Task 2, có thể làm full Task 1, 3 cùng với skill để ăn các điểm còn lại được không?
+```
+
+**Output:**
+```
+Được, nhưng có một rủi ro cần xử lý trước.
+
+**Rủi ro lớn nhất: "thiếu tài liệu bắt buộc = 0 điểm"**
+Đề §14 liệt kê trong danh sách bắt buộc của zip cả "báo cáo usability" và "bằng chứng phiên usability (kịch bản, ghi chú quan sát, SUS, findings, bảng 7 người)". §17 ghi: *"Missing any required document results in 0 points."* Nếu bỏ hẳn Task 2 mà không có gì, người chấm có thể đọc thành thiếu tài liệu → 0 cả bài, không chỉ mất 40đ.
+
+Cách giảm rủi ro:
+- Vẫn nộp phần Task 2 đã có: `plan.md` (có task scenario U1), `participant_kit.md`, `observation_sheet.md`, câu hỏi probe, SUS. Kèm một mục "Task 2" trong report ghi thẳng: đã thiết kế nhưng **không chạy phiên nào**, lý do do em viết. Ghi rõ không có ghi chú quan sát, SUS, findings hay bảng người tham gia.
+- Tự chấm Task 2 trung thực: 0, hoặc vài điểm cho task scenario nếu em thấy hợp lý. **Không** để trống mục mà không giải thích.
+- Nếu kịp, email hoặc đăng forum hỏi TA tối nay: "nộp thiếu phần chạy phiên của Task 2 thì có bị coi là thiếu tài liệu không". Đây là cách duy nhất chắc chắn.
+
+**Điểm tối đa thực tế**
+- Task 1 = 30 khi viết đủ 28 bug, tạo issue và ảnh trang Issues.
+- Task 3 = 20; số liệu P1/P2/P3 và ảnh đã có, chỉ còn R9/R11 và 5 ảnh `P3_M*`.
+- Skill = 10, nhưng có rủi ro mất một phần. Đề yêu cầu video cho thấy dùng skill "end to end trên một screen hoặc flow". Skill `gui-checklist-testing` demo được; skill `usability-evaluation` không có phiên thật để demo. Nên nộp cả 2 skill, video chỉ demo trọn skill GUI checklist, còn skill usability ghi rõ là chưa dùng trên phiên thật.
+- Tổng khoảng **60**, cộng vài điểm T2 nếu có. Tên zip phải khớp tổng tự chấm.
+
+**Một lựa chọn trung gian**
+Chạy pilot và 1–2 phiên với bạn cùng phòng tối nay, mỗi phiên khoảng 20 phút. Điều đó vẫn có điểm một phần cho "sessions + analysis" và giảm rủi ro "thiếu tài liệu". Nếu em đã quyết bỏ thì bỏ qua lựa chọn này.
+
+**Thứ tự nếu bỏ Task 2**
+1. R9/R11 và 5 ảnh `P3_M*`. Mất khoảng 15 phút, xong Task 3.
+2. Viết 28 bug. Đây là việc nặng nhất, khoảng 3–5 giờ. Sau đó Claude Code đưa SUT về main bằng `sut_main.ps1`, kiểm dữ kiện, tái hiện, tạo issue và chụp ảnh trang Issues.
+3. Chép skill, quay video skill GUI checklist.
+4. Report mục Task 2 (ghi chưa chạy), Critique, Audit, AI-02/03/05, README, commit log, `hw-submission-audit`, zip.
+
+Em chốt bỏ hẳn hay chạy 1–2 phiên? Nếu bỏ, em trả lời luôn R9/R11 để anh đưa lệnh đầu tiên cho Claude Code.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #95 | 18:23 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Giờ tôi muốn hoàn thành Task 1 hoặc Task 3 cũng như Skill ngay, Còn Task 2 thì nếu dư thời gian sẽ làm, nếu không thì nộp các phần kia (plan, participant_kit, observation_sheet,...) nhưng không có phiên nào nên để là 10 điểm cũng được
+```
+
+**Output:**
+````
+Được. Về 10 điểm Task 2: mức này em tự quyết. Đề chấm "task scenario + 7 sessions + analysis", mà em mới có phần đầu và chưa chạy cả pilot. Nên ở §13 cần một dòng căn cứ: đã có plan, kịch bản U1, công cụ SUS/SEQ và câu hỏi probe; chưa có phiên, chưa có analysis. Không có căn cứ thì 10 dễ bị coi là tự chấm quá tay.
+
+**Ngay bây giờ, 2 việc chạy song song**
+
+**A. Em quyết R9/R11**, trả lời theo mẫu `R9=a/b, R11=a/b`:
+
+| Mã | Câu hỏi | Phương án | Khuyến nghị |
+|---|---|---|---|
+| R9 | CL-08 trên P1 (Cốc Cốc hiện "30.000.000 ₫", P2/P3 hiện "6,000,000 ₫") | a) giữ Passed · b) đổi Failed | **b**: Expected ghi "Fail nếu kiểu phân cách khác nhau giữa các nền tảng", vế này cũng áp cho P1 |
+| R11 | CL-09 trên P1 (ảnh hiện "9/11/2026") | a) giữ Passed · b) đổi Failed | **b**: Expected yêu cầu dd/mm/yyyy và giống nhau trên cả 3 nền tảng, trong khi ảnh có ngày 1 chữ số và khác P2/P3 |
+
+Sau đó em overlay 5 ảnh `P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1` bằng trình sửa ảnh trên điện thoại rồi chép vào `checklist/evidence_raw/P3_android/`. Xong hai việc này là xong Task 3.
+
+**B. Dán lệnh này cho Claude Code** (việc không phụ thuộc em, chạy trong lúc em làm A):
+
+```
+NHIỆM VỤ: chuẩn bị phần Skill để nộp HW03. Không push, không amend.
+1. Chép .claude/skills/gui-checklist-testing và .claude/skills/usability-evaluation → HW03/skills/ (giữ cấu trúc). Kiểm mỗi skill tự đủ: mọi script SKILL.md gọi tới nằm trong scripts/ của skill, không trỏ tools/*_hw03.py; thiếu thì liệt kê, KHÔNG tự sửa.
+2. Tạo HW03/skills/VideoLinks.md: 2 dòng, link = `<SV điền>`; ghi chú usability-evaluation "chưa dùng trên phiên thật".
+3. Đề xuất phạm vi demo video cho gui-checklist-testing (1 màn nhỏ, chạy được trong ≤ 10 phút, nhánh tạm demo-video, không freeze vào ai-outputs): chỉ liệt kê bước + lệnh, ghi ra HW03/skills/demo_plan.md (file này export-ignore).
+Commit `HW03[Skill] 1/3: chép skill + VideoLinks`.
+Báo cáo ≤ 12 dòng: file chép, script thiếu (nếu có), tóm tắt demo_plan, hash.
+```
+
+**Tiếp theo: em viết 28 bug.** Viết thẳng vào `HW03/bugs/BUG-58…85.md`, thay các dòng `🔒`: Tiêu đề, Mô tả, Steps, Severity (Critical/High/Medium/Low), Priority (High/Medium/Low), Nhận định. Steps viết lại từ "Nguồn bước tái hiện" có sẵn trong mỗi file. Nên viết theo lô khoảng 7 file, commit lô đó (`HW03[T1] 5/6c: SV viết BUG-58…64`) rồi push. Anh kiểm dữ kiện từng lô trên repo luôn, không đợi đủ 28.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #96 | 18:24 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4441,7 +4588,102 @@ Xong. Đã chép 2 skill vào `HW03/skills/`, tạo `VideoLinks.md` và `demo_pl
 
 ---
 
-## #93 | 18:27 10/11/2026 | Claude Opus 5.5 | [...]
+## #97 | 18:24 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Hiện tại Task 1 chỉ còn viết 28 bug là xong nhỉ. Vậy còn Task 3 đã làm gì chưa nhỉ
+```
+
+**Output:**
+```
+Chưa đúng hẳn: Task 1 còn nhiều hơn 28 bug. Task 3 thì phần chạy đã xong, chỉ còn ảnh và chữ trong report.
+
+**Task 3: đã làm gì**
+- **Chạy:** cả 74 item đã chạy trên 3 nền tảng: P1 Cốc Cốc/Win 11, P2 Firefox/Win 11, P3 Chrome Android/POCO F5. Mỗi nền tảng có lượt auto và lượt tay. Kết quả gộp: P1 27/44/0/3 · P2 24/47/0/3 · P3 22/44/4/4.
+- **Ảnh có overlay:** P1 34 ảnh, P2 32 ảnh, P3 24 ảnh (`checklist/evidence/`).
+- **Report §4.1 đã sinh bằng script:** bảng 4 item khác kết quả giữa các nền tảng (CL-08, CL-09, CL-30, CL-34), bảng 8 chỗ lệch auto ↔ tay, bảng ảnh tổng quan theo màn.
+
+**Task 3 còn thiếu**
+1. **5 ảnh tổng quan P3** (`P3_M1_1, M2_1, M2_2, M3_1, M4_1`) chưa overlay, nên cột P3 trong bảng ảnh tổng quan đang ghi "chưa có". Đề bắt mỗi ảnh có overlay email, nên đây là phần bắt buộc.
+2. **R9/R11:** verdict P1 của CL-08 và CL-09. Hai item này ảnh hưởng thẳng bảng "khác nhau giữa các nền tảng".
+3. **Chữ report:** §4.2 "Khác biệt giữa các nền tảng" và §4.3 "Ảnh có overlay" vẫn là khối 📝 trống. Đây là phần phân tích, em quyết AI nháp (gắn 📝 "AI nháp – SV duyệt" như HW02) hay em tự viết.
+
+**Task 1 thực tế còn**
+- 28 bug (em viết, 🔒), sau đó tái hiện, tạo issue và chụp ảnh trang Issues.
+- Report §3.2, 3.3 (bảng checklist chép từ Excel, script làm được), 3.5, 3.6 vẫn là 📝 trống. Claude Code sinh hoặc nháp được.
+- **§3.4 "Item em bổ sung + vì sao AI bỏ sót" là 🔒, em tự viết** (giống gap analysis HW02). Dữ kiện có sẵn ở `sv_items.md` và `ai_gap_answer.md`.
+
+Để tiết kiệm giờ, anh đề xuất 3 việc chạy song song:
+- **Em:** quyết R9/R11, overlay 5 ảnh, rồi viết bug.
+- **Claude Code:** chép skill (lệnh lúc nãy), sau đó sinh §3.3, 3.5, 3.6, 4.3 bằng script và nháp §3.2, 4.2 có nhãn 📝.
+- **Em viết §3.4** sau hoặc xen giữa các lô bug.
+
+Em trả lời `R9=?, R11=?` và chọn §4.2: AI nháp hay em viết?
+```
+
+**Xử lý:** [...]
+
+---
+
+## #98 | 18:26 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xong. Đã chép 2 skill vào HW03/skills/, tạo VideoLinks.md và demo_plan.md, commit fcab9e1. Không push, không amend.
+
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: chép skill vào HW03/skills/, tạo VideoLinks.md, đề xuất phạm vi demo video.
+- File đã tạo/sửa: HW03/skills/gui-checklist-testing/ (13 file, không lấy __pycache__), HW03/skills/usability-evaluation/ (12 file); diff -r so với .claude/skills không khác gì. Thêm HW03/skills/VideoLinks.md (2 link <SV điền>, usability ghi "chưa dùng trên phiên thật") và HW03/skills/demo_plan.md. Thêm dòng skills/demo_plan.md export-ignore vào HW03/.gitattributes; git archive đã loại file này. Xoá .gitkeep.
+- Script thiếu: không có. Mọi script mà SKILL.md gọi để chạy đều nằm trong scripts/, script trong đó chỉ gọi nhau trong cùng thư mục. Có 4 chỗ ngoài skill, chưa sửa:
+  - gui-checklist-testing/SKILL.md:48-49 nhắc gen_oracle.py, gen_run.py ở HW03/tests/. Đây là phần chế độ Playwright (tuỳ chọn), skill không kèm 2 script này nên chế độ đó chưa tự đủ.
+  - gui-checklist-testing/SKILL.md:82 nhắc tools/*_hw03.py. Chỉ là ví dụ wrapper, không bắt buộc.
+  - usability-evaluation/SKILL.md:45 nhắc tools/usability_session.ps1, tools/sut_main.ps1. Cũng chỉ là ví dụ.
+  - scripts/render_checklist.py:33: file sinh ra ghi nguồn là tools/render_checklist.py, sai đường dẫn (chỉ ảnh hưởng chữ hiển thị).
+- Tóm tắt demo_plan: màn Đăng ký /register (nằm ngoài C2), demo-video. Freeze vào HW03/demo/ai-outputs, không vàoappendix/ai-outputs. Đi qua bước 0 → 1 (--min 8) → bước 2 SV chỉ nói bằng lời → 3 (dom_probe) → 4 (merge_platform) → 5 (build_excel), tổng khoảng 10 phút.
+- Kết quả kiểm tra: diff Pass; check_checklist.py --help chạy được từ bản đã chép.
+- Commit: fcab9e1 HW03[Skill] 1/3: chép skill + VideoLinks                                                                                            n quyết định:
+  - D1 – Có đưa gen_oracle.py/gen_run.py vào skill không? Phương án: (a) chép vào scripts/; (b) ghi rõ trong SKILL.md là chỉ có ở repo ví dụ; (c) giữ nguyên.
+  - D2 – Các lượt Claude lúc quay demo: (a) khai trong prompt log; (b) thêm exclude vào tools/hw.toml.
+===
+R9: b
+R11: b
+4.2: AI nháp
+```
+
+**Output:**
+````
+Anh ghi các quyết định như sau. Riêng R9/R11 em chưa ghi lý do, nên anh lấy lý do từ khuyến nghị lúc nãy (Expected áp cho cả P1); em sửa nếu muốn.
+
+**D1, D2**
+- **D2 = a, không có lựa chọn khác.** Các lượt demo vẫn là lượt dùng AI, AI-01 bắt buộc khai. Thêm `exclude` để giấu chúng là vi phạm khai báo.
+- **D1:** chép `gen_oracle.py`/`gen_run.py` vào skill nếu không dính đường dẫn cứng HW03 (a); nếu dính thì ghi rõ trong SKILL.md (b). Lý do: skill được chấm theo tính dùng lại được, và video cũng không dùng chế độ Playwright.
+- Phạm vi demo là màn /register: dùng được, vì demo trên màn ngoài C2 cho thấy skill dùng lại được. Video đừng nói đây là kết quả của bài.
+
+Dán cho Claude Code:
+
+```
+NHIỆM VỤ: R9/R11 + D1/D2 + điền chữ report T1/T3. SV chốt: R9=b, R11=b (lý do: Expected "cùng kiểu phân cách / dd/mm/yyyy và giống nhau trên P1, P2, P3" áp cho cả P1 – lấy từ khuyến nghị, SV có thể sửa); D1 = chép gen_oracle.py, gen_run.py vào scripts/ nếu không hardcode HW03 (sửa SKILL.md:48-49 trỏ scripts/), nếu có thì ghi rõ trong SKILL.md "chỉ có ở repo ví dụ" (cập nhật cả .claude/skills và HW03/skills, diff -r = 0); sửa chữ nguồn render_checklist.py:33; D2 = a (lượt demo vào prompt log, KHÔNG exclude). Ghi các quyết định vào report_plan mục e. Không push, không amend.
+1. R9/R11: đổi verdict P1 CL-08, CL-09 = Failed ở lượt tay P1 (ghi "SV chốt R9=b/R11=b" + lý do vào notes, cập nhật run_check.md R9/R11/L1 = đã chốt). Chạy lại chuỗi merge_hw03 → failed_list_hw03 → bug_groups_hw03 → report_t1_hw03 → build_excel (recalc 0 lỗi). Nếu 2 Failed mới làm đổi bug_groups (nhóm mới/G nào thêm item/BUG-xx khung nào đổi) → DỪNG, báo, chưa sửa khung BUG.
+2. Report: §3.3 (bảng checklist từ dữ liệu), §3.5, §3.6, §4.3 sinh bằng script giữa marker mới. §3.2 và §4.2: AI nháp, giọng "em", mở đầu dòng "📝 AI nháp – SV duyệt/sửa", chỉ dùng dữ kiện trong repo (lượt, commit, run_check, report_plan). KHÔNG đụng §3.4 (🔒 SV viết).
+3. Ghi report_plan mục f (khai Audit): AI nháp §3.2, §4.2.
+Commit riêng: `HW03[T1] 4/6c: SV chốt R9, R11`; `HW03[Skill] 1/3b: D1`; `HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2`.
+Báo cáo ≤ 15 dòng: số liệu P1 mới, bug_groups có đổi không, marker mới, hash.
+```
+
+Việc của em lúc này:
+1. Overlay 5 ảnh `P3_M*` rồi chép vào `checklist/evidence_raw/P3_android/`. Xong thì báo một câu, anh đưa lệnh nén và commit.
+2. Bắt đầu viết bug lô 1 (BUG-58…64). Nhớ chờ Claude Code báo bug_groups có đổi không đã: nếu R9/R11 làm thêm nhóm thì số BUG có thể dịch.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #99 | 18:27 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4486,7 +4728,61 @@ Em đã làm xong bước 1 (chốt R9/R11) rồi dừng theo lệnh, vì kết 
 
 ---
 
-## #94 | 18:35 10/11/2026 | Claude Opus 5.5 | [...]
+## #100 | 18:33 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: chốt R9/R11 rồi chạy lại chuỗi merge → failed_list → bug_groups → report_t1 → build_excel. Dừng ở điều kiện "bug_groups đổi".
+- Cách đổi verdict: thêm override cho CL-08/CL-09 P1 trong tools/merge_hw03.py (ket_qua = Failed, notes ghi "SV chốt R9=b/R11=b" + lý do). File lượt tay của SV không sửa, vì skill quy định file này không được sửa.
+- File đã sửa: checklist.json, run_check.md (R9, R11, L1 = đã chốt), failed_list.md, bug_groups.md, Report §3.5/§4.1 (marker cũ), Excel, report_plan.md mục e (thêm dòng R9, R11).
+- Kết quả kiểm tra: chuỗi script chạy hết, không thiếu kết quả nào; Excel tính lại bằng Excel: 21 công thức, 0 lỗi.
+- Số liệu P1 mới (Passed/Failed/N/A/Blocked): 25/46/0/3, trước là 27/44/0/3; tỉ lệ Passed 33,8%. Ô Failed tổng là 137. P2, P3 giữ nguyên.
+- bug_groups có đổi: vẫn 28 nhóm, không có nhóm hay item mới. Riêng G-23 (BUG-80, CL-09) thêm nền tảng P1 và thêm dòng Actual P1. CL-08 trùng #170 nên không có khung bug.
+- Khung HW03/bugs/BUG-80.md chưa sửa, vẫn ghi "Nền tảng Failed: P2, P3" (dòng 21), chưa có môi trường, Actual, ảnh của P1 (dòng 25, 41, 46).
+- Bất thường: mục "lệch auto/tay" của report còn dòng CL-09 P1 "auto Failed / tay Failed", vì dữ liệu lệch ghi theo verdict tay trước khi override. Phần nguyên nhân có ghi "SV chốt R11=b".
+- Commit: 090cabb HW03[T1] 4/6c: SV chốt R9, R11
+- Chưa làm: D1 (commit 1/3b), bước 2 report, bước 3 report_plan mục f. Chưa ghi D1, D2 vào mục e.
+- Cần quyết định:
+  - B80 – Cập nhật khung BUG-80 thêm dữ kiện P1? (a) AI sinh lại khung bằng --skeleton, chỉ phần dữ kiện; (b) SV tự thêm vào bản đang viết.
+  - TIẾP – Làm tiếp D1 và phần report
+===
+Giúp mình viết thêm prompt để kiểm trùng các issues mà mình đã đăng trên github nhé: https://github.com/tkob-team/eshop-sut/issues/17. Cũng như đổi lại khung bug theo mẫu HW02, chỉnh lại tiền tố tiêu đề của Github nữa nhé
+```
+
+**Output:**
+````
+Có 3 điểm cần nói trước khi đưa lệnh:
+
+- **Kiểm trùng phải làm lại.** `issues.json` hiện là ảnh chụp lúc 02:55 10/11, gồm 158 issue tới #203, tức chưa có issue HW03 nào của bạn cùng nhóm. Bạn nhóm vẫn đang đăng, nên cần lấy danh sách mới (mọi tác giả, kể cả đã đóng) rồi đối chiếu lại cả 28 nhóm "MỚI" lẫn 4 nhóm "trùng một phần".
+- **Tiền tố:** HW02 dùng `[FR-xx]` theo feature (#17 là `[FR-01]`). C2 trải nhiều FR, nên anh đề xuất lấy FR trong cột Căn cứ của item đầu nhóm, ví dụ CL-10 → FR-21.5 → `[FR-21]`. Tiền tố chỉ đặt trên GitHub, không ghi vào file. Nếu bạn nhóm đã dùng tiền tố khác cho HW03 thì Claude Code dừng để em chọn theo nhóm.
+- **B80 = a**, làm luôn trong lần dựng lại khung. Khung mới theo mẫu B `d0d0e05:HW02/bugs/BUG-22.md`, giống cấu trúc #17.
+
+```
+NHIỆM VỤ: kiểm trùng issue + dựng lại khung BUG-58…85 theo mẫu HW02. SV chốt: B80=a; tiền tố GitHub = [FR-xx] lấy từ Căn cứ của item đầu nhóm (chỉ trên GitHub, không vào tiêu đề trong file). Không push, không amend. KHÔNG viết/sửa chữ SV.
+1. `gh auth status` phải là ThachHaoo. `gh issue list -R tkob-team/eshop-sut --state all --limit 1000 --json number,title,author,state,createdAt,labels,body` → cập nhật HW03/bugs/issues.json.
+2. Đối chiếu lại 28 nhóm MỚI + 4 trùng một phần + 14 trùng với MỌI issue (mọi tác giả, mọi trạng thái; chú ý issue > #203 của henry-banana, nphoang-itus). Ghi HW03/bugs/dup_check.md: mỗi G – issue nghi trùng (số, tác giả, tiêu đề, câu chứng cứ) – mức (trùng/một phần/không). Chỉ liệt kê, SV quyết. Liệt kê luôn tiền tố tiêu đề bạn nhóm dùng cho HW03; nếu khác [FR-xx] → DỪNG ở bước 3, báo.
+3. Nếu file BUG nào đã có chữ SV (dòng 🔒 đã bị thay) → không đụng file đó, báo. Còn lại sinh lại khung theo `git show d0d0e05:HW02/bugs/BUG-22.md`: ID; Tiêu đề / Severity / Priority = `<SV viết>`; dòng "Tiền tố GitHub: [FR-xx]"; Môi trường (gạch đầu dòng giá trị thật từng nền tảng Failed, gồm P1 cho BUG-80); Tiền điều kiện, Các bước tái hiện, Expected (trích căn cứ – câu SRS chép nguyên văn có nhãn "(AI chép nguyên văn)"), Actual = `<SV viết>`; Bằng chứng (ảnh từng nền tảng); Item liên quan; Yêu cầu (AI điền từ bug_groups, SV duyệt); Ghi chú cô lập → Dữ kiện (AI chép: Actual nguyên văn theo nền tảng + Nguồn bước tái hiện) và Nhận định `<SV viết>`; Link GitHub Issue. Không chép Expected vào Dữ kiện. Sinh bằng script (đặt cạnh bug_groups_hw03.py), không viết tay.
+Commit `HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02`.
+Báo cáo ≤ 15 dòng: số issue mới so với snapshot cũ, G nào đổi mức trùng, tiền tố bạn nhóm, file bị bỏ qua, hash.
+```
+
+Lệnh này chạy xong thì gửi tiếp lệnh ngắn sau. Cách này tách khỏi lệnh trên để không bị lẫn:
+
+```
+Làm tiếp phần còn dở của lệnh trước: D1 (commit 1/3b), bước 2 report (§3.3, 3.5, 3.6, 4.3 bằng script; AI nháp §3.2, §4.2), bước 3 report_plan mục f; ghi D1, D2 vào mục e. Sửa luôn dòng "lệch auto/tay" CL-09 P1: hiển thị đúng sau override (tay = Failed theo R11 → không còn lệch thì bỏ dòng, ghi nguyên nhân trong notes). Báo cáo ≤ 10 dòng + hash.
+```
+
+Em đợi `dup_check.md` rồi hãy viết bug: nhóm nào thành trùng thì khỏi viết, đỡ được vài file. Trong lúc chờ, em làm overlay 5 ảnh `P3_M*`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #101 | 18:35 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4528,7 +4824,7 @@ Em đã làm bước 1 và 2, rồi dừng trước bước 3 (dựng khung bug)
 
 ---
 
-## #95 | 18:37 10/11/2026 | Claude Opus 5.5 | [...]
+## #102 | 18:37 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4572,7 +4868,108 @@ Phần còn dở đã xong, 2 commit. Không push, không amend, không đụng 
 
 ---
 
-## #96 | 18:48 10/11/2026 | Claude Opus 5.5 | [...]
+## #103 | 18:44 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: kiểm trùng issue. Bước 3 (khung BUG theo mẫu HW02) chưa làm.
+- File đã tạo/sửa: HW03/bugs/issues.json (lấy lại, có thêm body/createdAt), HW03/bugs/dup_check.md (mới), HW03/bugs/failed_list.md (chạy lại, chỉ đổi dòng đầu "179 issue, tới #224").
+- Kiểm tra: gh auth status = ThachHaoo. Mọi issue dùng làm căn cứ trùng vẫn OPEN.
+- Issue mới: snapshot cũ có 158 issue (tới #203), bây giờ 179 (tới #224). Có 21 issue mới, #204–#224, đều của nphoang-itus. henry-banana không có issue nào sau #203.
+- 21 issue mới đều thuộc ứng dụng admin (body ghi "Admin cô lập http://localhost:5175"). C2 của SV là web người dùng nên không trùng nhóm nào.
+- Đổi mức trùng: không G nào (đây là đề xuất của AI). 28 nhóm vẫn MỚI, 4 trùng một phần, 14 trùng.
+- Một số issue cùng loại nhưng khác ứng dụng hoặc khác màn được liệt kê để SV xét: #221 → G-01, #206 → G-04, #209/#121 → G-05, #205/#195 → G-06, #210 → G-07, #222 → G-21/G-22, #219 → G-24. Chi tiết trong dup_check.md §3–4.
+- Tiền tố bạn nhóm: nphoang-itus dùng [HW03-C3-xx] cho HW03 ([BUG-FRxx-xx] ở HW02). henry-banana dùng [FRxx-xx], SV dùng [FR-xx], cả hai chỉ có ở HW02.
+- File bị bỏ qua: không có. Cả 28 file BUG-58…85.md vẫn đủ 6 dòng 🔒, chưa có chữ SV.
+- Commit: e9a2c85 HW03[T1] 5/6c: kiểm trùng issue (khung bug chờ chốt tiền tố). Em đổi message so với lệnh vì phần khung bug chưa làm. Commit khung sẽ dùng message gốc HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02.
+- Cần quyết định:
+  - PFX – Tiền tố tiêu đề GitHub: (a) giữ [FR-xx] như HW02 của SV; (b) theo bạn nhóm [HW03-C2-xx]; (c) kết hợp, ví dụ [HW03-C2-xx][FR-xx].
+  - DUP – SV xác nhận "không đổi mức trùng" cho cả 28 nhóm, nhất là G-16 với #123 (đang ghi "liên quan").
+- Việc còn treo từ lượt trước: D1 (1/3b), phần report §3.2/§3.3/§3.5/§3.6/§4.2/§4.3, report_plan mục f, và ghi D1/D2 vào mục e.
+
+===
+Báo cáo cho phiên thảo luận
+
+- D1: gen_oracle.py và gen_run.py gắn cứng HW03 (đường dẫn, màn C2, overlay, adb) nên em không chép vào scripts/. SKILL.md ghi "chỉ có ở repo ví dụ". Đã sửa chữ nguồn trong render_checklist.py. .claude/skills và HW03/skills giống nhau hoàn toàn (diff -r = 0). D1, D2 đã ghi vào report_plan mục e.
+- Lệch auto/tay CL-09 P1: dòng này đã bỏ khỏi report. merge_runs.py giờ tự bỏ dòng lệch khi quyết định của SV làm kết quả tay trùng auto, và chép nguyên nhân vào notes "[trước quyết định: …]".
+- Phát sinh CL-08 P1: sau override R9, auto Passed còn kết quả cuối là Failed, nên thành một dòng lệch mới. Lệch này có thật: auto chấm riêng từng nền tảng, thấy "6.000.000 ₫". Em giữ dòng và ghi nguyên nhân. P1 vẫn 25/46/0/3 (Passed/Failed/N/A/Blocked).
+- Marker mới trong report:
+  - REPORT:T1:checklist_table cho §3.3 (74 dòng)
+  - REPORT:T1:execution cho §3.5, nằm trước bảng tổng: 6 lượt, thứ tự và giờ
+  - REPORT:T1:failed_items cho §3.6 (47 item, gồm notes, ảnh, issue trùng / nhóm bug)
+  - REPORT:T1:overlay cho §4.3. Bảng ảnh tổng quan chuyển từ §4.1 sang đây; P3 vẫn chưa có ảnh nào.
+- AI nháp §3.2 và §4.2: đều mở đầu bằng dòng "📝 AI nháp – SV duyệt/sửa", chỉ dùng dữ kiện có trong repo. Phần khai Audit đã ghi vào report_plan mục f.
+- Kiểm tra: check_checklist 0 lỗi; Excel tính lại 21 công thức, 0 lỗi; checklist.md sinh lại (bản cũ còn ghi P1 Passed từ trước 4/6c).
+- Commit: 0d8fd34 HW03[Skill] 1/3b: D1 · ad992bc HW03: report T1/T3 – bảng + AI nháp 3.2, 4.2
+- Còn chờ: PFX (tiền tố tiêu đề GitHub) để dựng khung BUG-58…85; giờ chạy tay P1 trong file lượt chưa khớp nhau (run_check R4).
+```
+
+**Output:**
+````
+Hai lượt báo cáo đều ổn: D1 hợp lý và dòng lệch CL-08 P1 giữ là đúng. Còn 3 quyết định:
+
+| Mã | Câu hỏi | Phương án | Khuyến nghị |
+|---|---|---|---|
+| PFX | Tiền tố tiêu đề GitHub | a) `[FR-xx]` như HW02 · b) `[HW03-C2-xx]` theo bạn nhóm · c) `[HW03-C2-xx][FR-xx]` | **b**, với xx = số BUG (58…85). Lý do: cùng quy ước HW03 của nhóm; ảnh trang Issues lọc được bằng một chuỗi `"HW03-C2"` + `author:ThachHaoo`. Với (a), C2 trải nhiều FR nên phải lọc nhiều lần. Số BUG trong tiêu đề còn truy ngược được về file |
+| DUP | Giữ "không đổi mức trùng" cho cả 28 nhóm? | a) giữ · b) đổi một số G (ghi G nào → mức nào) | Em quyết. Tiêu chí như HW02: **trùng = cùng app + cùng màn + cùng triệu chứng**. 21 issue mới là app admin, không cùng app nên không trùng. Riêng **G-16 với #123** em đọc kỹ trong `dup_check.md` |
+| R4 | Giờ chạy tay P1 trong file lượt không khớp nhau | Em mở `checklist/run_check.md` dòng R4 xem lệch gì | Nếu chỉ là giờ ghi trong file khác giờ thật thì sửa theo giờ thật em nhớ hoặc theo giờ chụp ảnh, ghi "SV chốt". Không đoán |
+
+Em trả lời theo mẫu `PFX=b, DUP=a, R4=<...>` rồi dán lệnh này (thay đúng các chỗ `<...>`):
+
+```
+NHIỆM VỤ: dựng khung BUG-58…85 (bước 3 lệnh trước, message gốc). SV chốt: PFX=<...> (nếu b: tiền tố [HW03-C2-<số BUG>]); DUP=<...>; R4=<...>. Còn <...> → DỪNG. Ghi PFX, DUP, R4 vào report_plan mục e. Không push, không amend, KHÔNG viết chữ SV.
+1. Làm bước 3 lệnh trước (khung theo mẫu d0d0e05:HW02/bugs/BUG-22.md, sinh bằng script, BUG-80 có P1); dòng "Tiền tố GitHub" theo PFX. Nhóm DUP đổi thành trùng → không sinh khung, ghi lại trong bug_groups/failed_list, đánh lại số BUG KHÔNG được (giữ khoảng trống số, ghi lý do).
+2. R4: sửa theo SV chốt, chạy lại chuỗi report nếu giờ hiện trong report.
+Commit `HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02` (+ `HW03[T1] 4/6d: R4` nếu có sửa).
+Báo cáo ≤ 10 dòng: số khung sinh, số dòng <SV viết> mỗi file, hash. Rồi push giúp? KHÔNG – SV tự push.
+```
+
+Khung xong thì em push và viết bug theo lô 7 file. Mỗi lô commit và push xong, báo anh để anh kiểm dữ kiện trên repo.
+
+Ảnh `P3_M*` vẫn là phần duy nhất Task 3 còn thiếu, P3 hiện chưa có ảnh tổng quan nào. Em làm xen trong lúc Claude Code chạy lệnh.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #104 | 18:47 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+PFX=B; DUP=a; R4=phần jpg do mình lấy từ điện thoại, còn png là do chụp screenshot từ máy tính, nếu thấy thiếu ảnh nào cứ kêu tôi chụp thêm.
+```
+
+**Output:**
+````
+Câu trả lời R4 của em là giải thích nguồn gốc ảnh, chưa phải một mốc giờ. Anh đưa nó vào lệnh như căn cứ: Claude Code lấy giờ từ ảnh (EXIF với .jpg điện thoại, mtime với .png máy tính) để xác định giờ thật của lượt tay P1. Suy không ra thì nó liệt kê, không đoán. Ảnh nào thiếu nó cũng liệt kê để em chụp thêm.
+
+Dán cho Claude Code:
+
+```
+NHIỆM VỤ: dựng khung BUG-58…85 (bước 3 lệnh trước, message gốc). SV chốt: PFX=b → tiền tố GitHub [HW03-C2-<số BUG>] (vd [HW03-C2-58]); DUP=a (giữ nguyên mức trùng cả 28 nhóm, kể cả G-16 ↔ #123 = liên quan); R4: SV giải thích ".jpg là ảnh lấy từ điện thoại, .png là ảnh chụp màn hình máy tính". Ghi PFX, DUP, R4 vào report_plan mục e. Không push, không amend, KHÔNG viết chữ SV.
+1. Bước 3 lệnh trước: sinh khung theo mẫu d0d0e05:HW02/bugs/BUG-22.md bằng script (BUG-80 có P1); dòng "Tiền tố GitHub: [HW03-C2-xx]".
+2. R4: dựa vào giải thích SV, lấy giờ thật lượt tay P1 từ ảnh (EXIF DateTimeOriginal cho .jpg nếu còn trong bản gốc evidence_raw, mtime cho .png). Khớp được → sửa giờ trong file lượt/report, ghi "SV giải thích R4 + giờ lấy từ ảnh <tên>". Không suy được → giữ nguyên, ghi vào run_check R4 lý do, KHÔNG đoán.
+3. Liệt kê ảnh còn thiếu so với RUN.md/report (mọi nền tảng, gồm 5 ảnh P3_M*): tên file cần có, item, nền tảng, nội dung cần thấy trong ảnh. Ghi HW03/checklist/missing_photos.md.
+Commit `HW03[T1] 5/6c: kiểm trùng issue + khung bug theo mẫu HW02` (+ `HW03[T1] 4/6d: R4` nếu có sửa).
+Báo cáo ≤ 12 dòng: số khung sinh, R4 kết quả, danh sách ảnh thiếu (tên), hash.
+```
+
+Xong lệnh này thì em làm theo thứ tự:
+1. Push.
+2. Chụp các ảnh trong `missing_photos.md`, nhớ overlay email.
+3. Viết bug lô 1, BUG-58…64.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #105 | 18:48 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4624,7 +5021,58 @@ Ghi missing_photos.md rồi commit.
 
 ---
 
-## #97 | 18:54 10/11/2026 | Claude Opus 5.5 | [...]
+## #106 | 18:52 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Khung bug: sinh lại 28 khung BUG-58…85 bằng tools/bug_skeleton_hw03.py. Không file nào bị bỏ qua: cả 28 vẫn còn đủ 🔒, chưa có chữ SV.
+  - Mỗi khung có dòng "Tiền tố GitHub: [HW03-C2-xx]". Tiêu đề, Severity, Priority, Tiền điều kiện, Các bước, Expected của bug, Actual, Nhận định để <SV viết>.
+  - 14 khung có câu SRS chép nguyên văn từ README @ de0f48f, gắn nhãn "(AI chép nguyên văn)". Khung căn cứ heuristic chỉ chép căn cứ + giả định.
+  - BUG-80 có thêm P1.
+- R4 đã sửa: ảnh P1 đều là .png nên lấy giờ từ mtime ảnh gốc trong evidence_raw/P1_chrome. Ảnh item từ 23:24 09/11 đến 00:10 10/11 (P1_CL-64_1).
+  - File lượt P1 giờ ghi: kết thúc 00:10 10/11, restart 22:56 09/11 (vì restart phải trước ảnh đầu tiên). Giờ bản gốc vẫn giữ trong dòng ghi chú.
+  - Kiểm chéo cách lấy giờ: mtime ảnh P2 (00:13–00:36) khớp giờ file lượt P2 (00:10–00:38).
+  - Đã cập nhật run_check R4 và report §3.5.
+- Ảnh còn thiếu (bắt buộc): P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1 (dùng lại cho M5), P3_M4_1. Bản gốc .jpg có trong evidence_raw/P3_android/ nhưng chưa overlay. Ảnh item Failed không thiếu cái nào.
+- Ghi thêm (không bắt buộc), trong HW03/checklist/missing_photos.md:
+  - RUN.md ghi "bắt buộc" ảnh P1/P2/P3_M6_1 ở tiêu đề nhóm M6, ngược với mục 2 của chính nó (chỉ M1…M5).
+  - File lượt P3 trỏ tới P3_CL-64_1.jpg nhưng file không có64_2.png).
+- PFX, DUP, R4 đã ghi vào report_plan mục e.
+- Commit: 4b4c64c HW03[T1] 4/6d: R4 · 9ede85b HW03[T1] 5/6cg theo mẫu HW02
+- Cần quyết định: M6 – Ảnh P*_M6_1 (nhóm "Chung – tất cả màn C2"): (a) bỏ, vì M6 không phải một màn; (b) chụp.
+```
+
+**Output:**
+````
+Khung ổn, R4 kiểm chéo bằng P2 là đủ chắc.
+
+**M6 = a (khuyến nghị):** M6 là nhóm "Chung – tất cả màn C2", không phải một màn. Mục 2 của RUN.md cũng chỉ yêu cầu ảnh M1…M5. Lỗi nằm ở tiêu đề nhóm trong RUN.md do AI viết, nên sửa RUN.md và khai Audit, không cần chụp thêm. Nếu em muốn khác thì trả lời `M6=b`.
+
+**Việc của em bây giờ:**
+1. **Push** (repo đang có 5–6 commit chưa push).
+2. **Overlay 5 ảnh:** `P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1`. Bản gốc .jpg đang ở `evidence_raw/P3_android/` trên máy em; mở bằng Paint/Photos, hoặc chép sang điện thoại sửa rồi chép lại. Overlay đúng dòng `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn`, ghi đè vào cùng thư mục, cùng tên.
+3. Xong thì dán lệnh dưới cho Claude Code, rồi bắt đầu viết bug lô 1 (BUG-58…64).
+
+```
+NHIỆM VỤ: ảnh tổng quan P3 + dọn RUN.md. SV chốt M6=a (bỏ ảnh P*_M6_1 vì M6 không phải một màn; sửa tiêu đề nhóm M6 trong RUN.md cho khớp mục 2, ghi report_plan mục e + mục f "lỗi RUN.md do AI"). Không push, không amend.
+1. SV đã overlay 5 ảnh P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1 trong checklist/evidence_raw/P3_android/. Mở xem từng ảnh: có dòng overlay "23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn", thấy trình duyệt + URL localhost, không lộ thông tin khác (tài khoản lưu, Gmail, thông báo riêng). Ảnh nào không đạt → DỪNG, báo tên + lý do.
+2. Đạt → `python tools/compress_hw03.py --exclude ""` → chạy lại report (bảng ảnh §4.3 hết "chưa có").
+3. Tham chiếu P3_CL-64_1.jpg không tồn tại: nếu ảnh cùng item đã có (tên khác) thì sửa tham chiếu về file thật, ghi notes; không có thì liệt kê, KHÔNG tự tạo.
+Commit `HW03[T1] 4/6e: ảnh tổng quan P3 + M6`.
+Báo cáo ≤ 8 dòng: 5 ảnh đạt/không, §4.3 còn ô trống không, CL-64, hash.
+```
+
+Sau lệnh này, Task 3 coi như xong. Phần còn lại của T1/T3 là 28 bug của em và §3.4 (🔒).
+````
+
+**Xử lý:** [...]
+
+---
+
+## #107 | 18:54 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4659,7 +5107,51 @@ Em dừng ở bước 1: cả 5 ảnh tổng quan P3 đều chưa đạt nên ch
 
 ---
 
-## #98 | 18:56 10/11/2026 | Claude Opus 5.5 | [...]
+## #108 | 18:55 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- 5 ảnh P3_M* chưa đạt: P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1 (.jpg trong evidence_raw/P3_android/) đều không có dòng overlay "23120255 - Lê Tấn Hiệp - …".
+  - Giờ sửa file của cả 5 vẫn là 01:53 10/11, tức là chưa được lưu lại sau khi chụp. Có thể bản overlay đang nằm ở chỗ khác trên điện thoại hoặc trong thư mục khác.
+  - Phần còn lại đạt: thấy thanh URL localhost:5173/... (Chrome Android), không lộ thông tin riêng. Chỉ hiện test@eshop.com (tài khoản seed) và "Test User".
+- P3_M4_1: ảnh hiện "Bạn chưa có đơn hàng nào" (Lịch sử đơn trống) và gần trùng P3_M3_1 (cùng /profile, chỉ cuộn xuống). Nếu cần ảnh có ≥ 1 đơn như các nền tảng khác thì phải chụp lại sau khi chạy seed_ord
+- §4.3: P3 vẫn "chưa có" ở M1–M5, vì chưa nén.
+- CL-64 P3 (chỉ đọc, chưa sửa): file lượt P3 dòng 21 trỏ P3_CL-64_1.jpg và P3_CL-64_2.jpg. Chỉ có _2 (raw .jpg, bản nén .png); P3_CL-64_1 không có ở thư mục nào nên không có file để sửa tham chiếu về.
+- M6 (sửa RUN.md, ghi report_plan e/f): chưa làm, sẽ làm cùng commit HW03[T1] 4/6e: ảnh tổng quan P3 + M6.
+- Commit: không có.
+- Cần quyết định:
+  - IMG – Thêm overlay cho 5 ảnh rồi lưu đè vào evidence_ra), hoặc chỉ đường dẫn bản đã overlay.
+  - M6 – Làm trước phần M6 + CL-64 rồi commit riêng, hay chờ có ảnh?
+```
+
+**Output:**
+````
+Ảnh chưa đạt vì em chưa overlay: giờ sửa file vẫn là 01:53 sáng nay. Phần overlay phải do em làm, không giao cho Claude Code được: AI-01 xếp ảnh có username vào danh mục chống gian lận, AI không được tạo.
+
+**Quyết định**
+- **IMG:** em overlay 5 ảnh rồi lưu đè đúng tên vào `evidence_raw/P3_android/`. Trên PC chỉ cần Paint: mở ảnh → Text → gõ dòng `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn` → Ctrl+S. Mỗi ảnh khoảng 1 phút.
+- **P3_M4_1 (Lịch sử đơn trống):** khuyến nghị **giữ**. Ảnh vẫn là màn M4, đủ cho mục đích ảnh tổng quan nền tảng. Chụp lại sẽ phải dựng lại SUT, adb reverse và seed_orders, mất 15–20 phút. Ghi notes "P3: lịch sử đơn trống lúc chụp". Nếu em muốn đồng bộ với P1/P2 thì trả lời `M4=chụp lại`.
+- **M6 + CL-64:** làm ngay, commit riêng, không chờ ảnh. Với CL-64: bỏ tham chiếu `_1` không tồn tại, giữ `_2`. Việc này chỉ là sửa đường dẫn trỏ sai, không tạo bằng chứng mới.
+
+Dán cho Claude Code luôn:
+
+```
+SV chốt: M6 làm ngay (commit riêng `HW03[T1] 4/6e: M6 + tham chiếu CL-64`); CL-64 P3: bỏ tham chiếu P3_CL-64_1.jpg (file không tồn tại ở đâu), giữ _2, ghi notes "ảnh _1 không có; chỉ _2" + run_check; P3_M4_1 giữ ảnh Lịch sử đơn trống, ghi notes "lịch sử đơn trống lúc chụp". Ghi report_plan e/f. Không push, không amend.
+Sau đó DỪNG chờ SV báo đã overlay 5 ảnh, rồi mới làm bước 1–2 của lệnh trước (commit `HW03[T1] 4/6f: ảnh tổng quan P3`).
+Báo cáo ≤ 5 dòng + hash.
+```
+
+Overlay xong thì em gõ cho Claude Code một câu "đã overlay 5 ảnh, làm tiếp", rồi chuyển sang viết bug.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #109 | 18:56 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4685,7 +5177,41 @@ Báo cáo ≤ 5 dòng + hash.
 
 ---
 
-## #99 | 19:02 10/11/2026 | Claude Opus 5.5 | [...]
+## #110 | 18:58 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+overlay 5 ảnh nào đây nhỉ
+```
+
+**Output:**
+```
+Đây là 5 ảnh tổng quan màn hình chụp trên điện thoại (P3 = Chrome Android, POCO F5). Trên máy em, chúng nằm ở:
+
+`HW03\checklist\evidence_raw\P3_android\`
+
+| File | Màn |
+|---|---|
+| `P3_M1_1.jpg` | Đăng nhập |
+| `P3_M2_1.jpg` | Quên mật khẩu – bước 1 |
+| `P3_M2_2.jpg` | Quên mật khẩu – bước 2 |
+| `P3_M3_1.jpg` | Hồ sơ (dùng lại cho M5 Navbar) |
+| `P3_M4_1.jpg` | Lịch sử đơn (đang trống, giữ nguyên) |
+
+Cách làm với từng file:
+1. Mở bằng Paint.
+2. Chọn công cụ Text (chữ A) và gõ đúng dòng `23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn`. Đặt ở chỗ không che nội dung, ví dụ mép dưới, chữ đủ to để đọc được.
+3. Lưu đè bằng Ctrl+S, giữ nguyên tên và định dạng .jpg.
+
+Xong cả 5 file thì gõ cho Claude Code: "đã overlay 5 ảnh, làm tiếp".
+```
+
+**Xử lý:** [...]
+
+---
+
+## #111 | 19:02 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4711,7 +5237,136 @@ Em đã xem từng ảnh: cả 5 ảnh tổng quan P3 đều đạt, đã nén v
 
 ---
 
-## #100 | 19:04 10/11/2026 | Claude Opus 5.5 | [...]
+## #112 | 19:03 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Em đã xem từng ảnh: cả 5 ảnh tổng quan P3 đều đạt, đã nén và đưa vào report.
+
+Báo cáo cho phiên thảo luận
+
+- 5 ảnh đạt: P3_M1_1, P3_M2_1, P3_M2_2, P3_M3_1, P3_M4_1. Ảnh nào cũng có dòng overlay "23120255 - Lê Tấn Hiệp - 23120255@student.hcmus.edu.vn", thấy thanh URL localhost:5173/... trên Chrome Android, không lộ thông tin riêng (chỉ có tài khoản seed test@eshop.com).
+  - Ở P3_M3_1, dòng overlay đè nhẹ lên tiêu đề "Hồ sơ của bạn" nhưng vẫn đọc được.
+  - Ở P3_M4_1, overlay nằm ngay trên khung Lịch sử đơn.
+- Nén: tools/compress_hw03.py đã tạo 5 file .png trong evidence/P3_android/. Chạy lại report thì §4.3 không còn ô "chưa có"; P3 M4 có ghi chú "(lịch sử đơn trống lúc chụp)". Đã cập nhật missing_photos.md (không còn ảnh thiếu) và report_plan mục f.
+- Commit: 6069790 HW03[T1] 4/6f: ảnh tổng quan P3
+```
+
+**Output:**
+````
+Task 3 coi như xong: ảnh tổng quan đủ 3 nền tảng, ma trận kết quả có, chỗ lệch có ghi chú.
+
+Một điểm cần kiểm: báo cáo chỉ có commit `6069790` (4/6f), không thấy commit `4/6e: M6 + tham chiếu CL-64`. Em hỏi Claude Code một câu "4/6e đã commit chưa?". Nếu chưa thì bảo nó làm luôn.
+
+**Em làm tiếp, theo thứ tự**
+1. **Push.**
+2. **Viết bug lô 1, BUG-58…64:** thay mọi `` `<SV viết>` `` trong file. Commit `HW03[T1] 5/6d: SV viết BUG-58…64`, push, báo anh kiểm dữ kiện. Lô sau làm tương tự, mỗi lô 7 file.
+3. **§3.4 trong report (🔒):** item em bổ sung và vì sao AI bỏ sót. Dữ kiện ở `checklist/sv_items.md` và `ai_gap_answer.md`.
+4. **Video skill:** theo `HW03/skills/demo_plan.md`, giọng em, khoảng 10 phút.
+
+**Song song, Claude Code làm phần đóng gói không cần em:**
+
+```
+NHIỆM VỤ: chuẩn bị đóng gói HW03 (phần không cần SV). Không push, không amend, KHÔNG viết phần 🔒 / <SV viết>.
+1. Report §5 Task 2: giữ phần plan/kịch bản/công cụ đã có (trỏ usability/plan.md, participant_kit.md, observation_sheet.md); §5.4–5.9 thay bằng 1 dòng "Không thực hiện phiên usability nào" + `<SV viết lý do>`. Không bịa số liệu.
+2. README HW03: test summary sinh bằng script (checklist P1/P2/P3, số bug 28 + trùng 14 + một phần 4, link VideoLinks), chỗ tự chấm = `<SV điền>`.
+3. Dựng khung AI-02 (artifact lấy từ git: bản đóng băng + việc phụ, cột #n = "[chờ chốt transcript]", verdict/lý do = <SV viết>), AI-03 (khai Opus 5.5 + Sonnet 4.6 + lượt không rõ model theo dòng Tổng của A_prompt_log.md), Mandatory Disclosure §11 (📝 AI nháp – SV xác nhận) theo report_plan mục f, g. Mẫu định dạng: HW02/ai-forms (không chép số liệu). AI-05 CHƯA làm.
+4. Thêm Task 2 = <SV điền> vào §12, tên zip chờ điểm.
+Commit theo từng việc. Báo cáo ≤ 12 dòng + hash; liệt kê mọi chỗ <SV viết>/<SV điền> còn lại (file:dòng).
+```
+
+Viết xong lô bug nào thì báo anh lô đó.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #113 | 19:04 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Cho tôi xem tiến độ các task hiện tại (bao gồm cả task 2)
+```
+
+**Output:**
+```
+Tiến độ dưới đây lấy theo các báo cáo của Claude Code tới 19:03. Trên GitHub vẫn chỉ có tới `a46ea4d` (03:41 sáng): **chưa push** khoảng 9 commit của tối nay, em nên push ngay.
+
+**Task 1 – GUI Checklist (30đ): ~70%**
+
+| Hạng mục | Trạng thái |
+|---|---|
+| Checklist 74 item (AI 48 · Both 20 · SV 6), bản AI đóng băng | ✅ |
+| Chạy auto và tay trên P1/P2/P3, gộp kết quả, Excel 0 lỗi | ✅ |
+| R9/R11 chốt, P1 mới là 25/46/0/3 | ✅ |
+| Kiểm trùng issue (179 issue, tới #224): 28 mới · 4 một phần · 14 trùng | ✅ |
+| Khung BUG-58…85 theo mẫu HW02, tiền tố `[HW03-C2-xx]` | ✅ |
+| Report §3.3, 3.5, 3.6 (sinh bằng script) | ✅ |
+| Report §3.2 (AI nháp) | ⏳ em duyệt và xoá dòng 📝 |
+| **Viết 28 bug (🔒)** | ❌ chưa bắt đầu, việc nặng nhất |
+| Tái hiện bug, tạo 28 issue, ảnh trang Issues | ❌ phụ thuộc bước trên |
+| **Report §3.4: item em bổ sung, vì sao AI bỏ sót (🔒)** | ❌ |
+
+**Task 3 – Cross-platform (20đ): ~95%**
+
+| Hạng mục | Trạng thái |
+|---|---|
+| 3 nền tảng: Cốc Cốc, Firefox, Chrome Android | ✅ |
+| Ma trận kết quả, bảng lệch auto ↔ tay | ✅ |
+| Ảnh overlay đủ (gồm 5 ảnh tổng quan P3 vừa xong) | ✅ |
+| Report §4.1, §4.3 | ✅ |
+| Report §4.2 (AI nháp) | ⏳ em duyệt và xoá dòng 📝 |
+| M6 và tham chiếu CL-64 (commit 4/6e) | ❓ chưa thấy báo, cần hỏi Claude Code |
+
+**Task 2 – Usability (40đ): ~15%, chỉ có phần chuẩn bị**
+
+| Hạng mục | Trạng thái |
+|---|---|
+| Plan (9 phần), kịch bản U1, SUS và SEQ, câu hỏi probe | ✅ (AI nháp, **em chưa duyệt**) |
+| Môi trường remote (tunnel), đã thử luồng U1 qua 4G | ✅ |
+| Pilot S00 | ❌ |
+| 7 phiên, bảng 7 người tham gia | ❌ |
+| Kết quả SUS, pain point, findings, bug Task 2 | ❌ |
+| Report §5.4–5.9 ghi "không thực hiện" kèm lý do của em | ⏳ trong lệnh vừa gửi Claude Code |
+
+Lưu ý: kit đang là AI nháp mà em chưa duyệt. Nếu nộp làm căn cứ cho 10 điểm Task 2, em nên đọc lướt một lượt, khoảng 15 phút.
+
+**Skill (10đ): ~50%**
+
+| Hạng mục | Trạng thái |
+|---|---|
+| 2 skill chép vào `HW03/skills/`, tự đủ (D1 đã xử lý) | ✅ |
+| VideoLinks.md, demo_plan.md | ✅ |
+| **Quay video demo (giọng em) và link YouTube** | ❌ |
+
+**Báo cáo và form: ~20%**
+
+| Hạng mục | Trạng thái |
+|---|---|
+| README test summary, khung AI-02/AI-03, Mandatory Disclosure | ⏳ Claude Code đang làm |
+| Critique 200–300 từ, verdict Audit, điểm tự chấm, ký (em) | ❌ |
+| AI-05, PDF, commit log, `hw-submission-audit`, zip | ❌ làm cuối |
+| Xuất transcript `_p2` và trích prompt log | ❌ làm trước khi điền #n vào Audit |
+
+**Thời gian còn lại khoảng 15 giờ.** Ước lượng việc của em:
+- 28 bug: 3–4 giờ
+- §3.4: 30 phút
+- Video: 45 phút
+- Critique: 30 phút
+- Verdict Audit: 1 giờ
+- Duyệt §3.2, §4.2, kit Task 2: 30 phút
+
+Tổng khoảng 6–7 giờ, nên vẫn còn dư cho pilot và 1–2 phiên usability nếu em muốn gỡ thêm điểm Task 2 tối nay. Muốn làm thì làm **trước** khi tái hiện bug, vì bước tái hiện sẽ đưa SUT về nhánh main.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #114 | 19:04 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4766,7 +5421,97 @@ Bốn việc đóng gói đã xong, mỗi việc một commit. Không push, khô
 
 ---
 
-## #101 | 19:10 10/11/2026 | Claude Opus 5.5 | [...]
+## #115 | 19:09 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Report §5: giữ nguyên các dòng 📝 cũ của §5.1–5.3, thêm dòng trỏ tới usability/plan.md, participant_kit.md, observation_sheet.md. §5.4–5.9 gộp thành một dòng "Không thực hiện phiên usability nào. Lý do: <SV viết lý do>", bỏ luôn 2 marker U1. c51665d
+- README + report §8: test summary sinh bằng tools/summary_hw03.py. Số liệu:
+  - P1/P2/P3 (Passed/Failed/N/A/Blocked): 25/46/0/3 · 24/47/0/3 · 22/44/4/4
+  - item trùng 14, trùng một phần 4, MỚI 28 → 28 bug BUG-58…85; chưa bug nào có link GitHub Issue (0/28)
+  - nguồn item: AI 48, AI + SV sửa 20, SV 6; usability: không có phiên
+  - link video trỏ skills/VideoLinks.md; bảng tự chấm để <SV điền>. 70aa585
+- AI-02, AI-03, §11 (tools/forms_hw03.py): c2aa7ae
+  - AI-02 có 22 artifact, commit tạo/sửa lấy từ git, cột #n = "[chờ chốt transcript]", Verdict/Lý do = <SV viết>.
+  - AI-03 lấy theo dòng Tổng của prompt log lúc 19:03 10/11: tổng 99 lượt = Sonnet 4.6 2, Opus 5.5 91, không rõ model 6 (#4, #51, #57, #69, #70, #79). Cần chạy lại script sau lần trích prompt log cuối.
+  - §11 mở đầu "📝 AI nháp – SV xác nhận", gồm 7 việc AI làm; phần "em xem xét và sửa" / "em tự làm" để <SV viết>.
+- Report §12: bảng tự chấm 4 tiêu chí (gồm Task 2) để <SV điền>; tên zip 23120255_HW03_AI_GUIUsability_<ggg>.zip chờ điểm. 00cea6a
+- Bất thường: report §5.3 (dòng 📝 cũ) ghi "SUS / UEQ-S", nhưng plan và participant kit dùng SEQ + SUS.
+- Chỗ <SV viết> / <SV điền> còn lại:
+  - HW03/23120255_HW03_Report.md: 326 (lý do không có phiên), 379, 381 (§11), 394–398 (§12)
+  - HW03/README.md: 11–15 (tự chấm)
+  - HW03/ai-forms/AI-02_Audit_Report_23120255.md: 52 (S3: l do 22 hàng), 89 (kết luận chung)
+  - HW03/ai-forms/AI-03_Disclosure_Form_23120255.md: 34, 44, 50 và mục 5 (cách rà soát)
+  - HW03/skills/VideoLinks.md: 5, 6
+  - HW03/bugs/BUG-58…85.md: mỗi file 8 chỗ
+  - Ngoài ra còn các dòng 📝 cũ trong report (§3.1, §4.1, §5.1–5.3, §7, §9, §13D) và [...] ở Ngày / Chữ ký / Cam đoan của AI-02, AI-03.
+===
+Sao có ảnh này chưa commit nhỉ
+```
+
+**Output:**
+````
+Anh không thấy ảnh nào đính kèm trong tin nhắn này, có thể bị rơi khi gửi. Em dán lại ảnh, hoặc dán output của:
+
+```
+git status --short
+```
+
+Nếu đó là file ảnh untracked, thường có 3 khả năng:
+1. **Ảnh gốc trong `evidence_raw/`:** bị gitignore có chủ đích, không commit (bài học B5: ảnh gốc có thể lộ thông tin). Trường hợp này `git status` không hiện nó.
+2. **Ảnh nén trong `evidence/` mà script không `git add`:** cần commit. Bảo Claude Code kiểm xem report có trỏ tới ảnh đó không rồi commit.
+3. **Ảnh lẻ em vừa chụp hoặc ảnh tạm** (ví dụ chụp màn hình Paint lúc overlay): không thuộc bài thì xoá hoặc bỏ qua.
+
+Gửi tên file hoặc ảnh, anh nói cụ thể là loại nào.
+
+Về báo cáo vừa rồi: §5.3 ghi "SUS / UEQ-S" là sai so với plan, vì plan dùng SEQ + SUS. Đây là dòng 📝 cũ nên em sửa thành "SEQ + SUS" khi duyệt §5, hoặc bảo Claude Code sửa vì đó là dữ kiện chứ không phải chữ của em.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #116 | 19:09 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627> git status --short
+ M HW03/appendix/A_prompt_log.md
+?? HW03/checklist/evidence/P3_android/P3_M2_2.png
+===
+bảo Claude Code sửa nhé, mà cái đó là của task 2 nhỉ
+```
+
+**Output:**
+````
+Đúng, §5.3 thuộc Task 2: nó là phần "Công cụ: thang đo + câu hỏi probe" của usability.
+
+Còn `P3_M2_2.png` là 1 trong 5 ảnh tổng quan P3 vừa nén (Quên mật khẩu bước 2). Commit `6069790` bỏ sót file này, trong khi report §4.3 đã trỏ tới nó. Không commit thì ảnh không vào zip (`git archive` chỉ lấy file đã commit), và report sẽ có link ảnh hỏng.
+
+`A_prompt_log.md` (M) là hook Stop tự trích sau mỗi lượt, bình thường. Commit riêng là được.
+
+Dán cho Claude Code:
+
+```
+1. P3_M2_2.png (evidence/P3_android) chưa được add trong 6069790 → kiểm 4 ảnh còn lại đã tracked, report §4.3 trỏ đúng; add + commit `HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót`. Tìm vì sao sót (compress_hw03.py có git add không, hay add theo danh sách) – nếu do script thì vá, commit riêng `HW03: vá harness – compress_hw03 add đủ ảnh`.
+2. Report §5.3: sửa "SUS / UEQ-S" → "SEQ + SUS" cho khớp usability/plan.md (dữ kiện, không phải chữ SV). Commit `HW03[T2]: sửa thang đo §5.3`.
+3. Commit prompt log: `HW03: cập nhật prompt log`.
+4. `git status --short` phải sạch. Không push, không amend.
+Báo cáo ≤ 6 dòng: nguyên nhân sót ảnh, hash.
+```
+
+Sau đó em push, rồi bắt đầu viết bug lô 1.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #117 | 19:10 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4797,7 +5542,330 @@ sed không khớp (UTF-8), commit §5.3 chưa tạo. Sửa bằng Python.
 
 ---
 
-## #102 | 19:35 10/11/2026 | Claude Opus 5.5 | [...]
+## #118 | 19:11 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã thêm ảnh bị sót, sửa §5.3 và commit prompt log; git status --short hiện sạch.
+
+Báo cáo cho phiên thảo luận
+
+- Vì sao sót P3_M2_2.png: lỗi ở lệnh add tay của em, không phải do script. Em add bằng mẫu P3_M*_1.png nên không khớp file _2. compress_hw03.py không chạy lệnh git nào, nên không vá harness. 4 ảnh còn lại đã được commit từ 6069790; report §4.3 dòng 296 trỏ đúng P3_M2_1, P3_M2_2.
+- Commit: df6a396 HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót · 62280b4 HW03[T2]: sửa thang đo §5.3 (giờ ghi "SEQ + SUS (usability/plan.md mục 8)") · 5fddef5 HW03: cập nhật prompt log
+- Thứ tự commit khác lệnh: lần sửa §5.3 đầu bằng sed không khớp nên commit sau prompt log.
+- Lưu ý: hook Stop sẽ sinh lại A_prompt_log.md sau lượt này, nên trước khi zip cần commit prompt log thêm một lần.
+===
+Rồi giờ mình viết từng bug nhỉ
+```
+
+**Output:**
+```
+Đúng, giờ em viết bug. Trước hết em **push**: GitHub vẫn đang ở `a46ea4d`, chưa push thì anh không kiểm được bài em viết.
+
+**Cách làm**
+- Viết thẳng vào `HW03/bugs/BUG-58.md` … `BUG-85.md`, thay từng `` `<SV viết>` ``. Mỗi file có 8 chỗ.
+- Mỗi lô 7 file: BUG-58…64, 65…71, 72…78, 79…85.
+- Xong lô nào thì commit `HW03[T1] 5/6d: SV viết BUG-58…64`, push và báo anh. Anh kiểm dữ kiện lô đó trong lúc em viết lô sau.
+
+**Quy ước viết (giống HW02, anh chỉ nhắc cách viết, không gợi nội dung)**
+- **Tiêu đề:** nêu triệu chứng, màn hình, điều kiện. **Không** ghi tiền tố `[HW03-C2-xx]` trong file; tiền tố chỉ thêm khi tạo issue.
+- **Severity:** Critical/High/Medium/Low. **Priority:** High/Medium/Low. Không dùng "Major".
+- **Tiền điều kiện:** nêu trạng thái quan sát được. Màn cần đăng nhập thì ghi rõ `test@eshop.com`/`Test1234!` và backend vừa restart.
+- **Các bước tái hiện:** viết lại từ "Nguồn bước tái hiện" ở phần Dữ kiện. Phải chạy được, vì Claude Code sẽ chạy thật từng bước của em. Ghi rõ URL, nền tảng, thao tác (bấm gì, Tab mấy lần, viewport bao nhiêu).
+- **Expected:** có căn cứ là câu SRS hoặc Căn cứ của item. Được dùng câu "(AI chép nguyên văn)" có sẵn trong khung. Mỗi Expected chỉ một nhánh.
+- **Actual:** đối chiếu với Dữ kiện (AI chép); nhiều nền tảng thì ghi theo từng nền tảng.
+- **Nhận định:** câu tác động phải có dữ kiện. Không có dữ kiện thì ghi "(chưa kiểm chứng)" hoặc bỏ. Tránh khẳng định quá mức.
+- Trường **Yêu cầu** do AI điền sẵn: em chỉ duyệt, sai thì báo anh.
+- Lô đầu viết xong để anh xem cách viết đã ổn chưa. Ổn rồi thì các lô sau em viết nhanh hơn.
+
+Push xong em báo một câu "đã push", anh mở BUG-58 kiểm khung trước khi em viết.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #119 | 19:16 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Theo bạn, giờ tôi đưa link cho bạn tôi để làm task 2. Thì họ cần làm những gì, điền những form gì. Họ có thể làm trong 5 phút được không?
+```
+
+**Output:**
+```
+Không thể chỉ gửi link cho bạn tự làm. Đề yêu cầu **moderated**: em phải có mặt (qua Meet), quan sát người tham gia làm và ghi chú. Bạn tự làm một mình thì thành unmoderated, sai đề và không có ghi chú quan sát. Link tunnel cũng chỉ sống khi script trên máy em đang chạy.
+
+**5 phút thì không đủ. Thực tế khoảng 10 phút một người:**
+
+| Bước | Người tham gia làm | Em làm | Thời gian |
+|---|---|---|---|
+| 1. Mở đầu | Vào Meet, chia sẻ màn hình, tick 3 ô đồng ý (quay màn hình, ghi âm, TA liên hệ) | Đọc lời mở đầu, bật quay Game Bar | ~1 phút |
+| 2. Nhiệm vụ U1 | Mở link, đăng nhập `test@eshop.com`, tìm tai nghe, thêm giỏ, thanh toán mã VIP100, xem đơn trong Hồ sơ. Vừa làm vừa nói to suy nghĩ | **Im lặng quan sát**, ghi `observation_sheet.md`: chỗ dừng, lỗi, câu than | 3–5 phút |
+| 3. SEQ | Chọn 1 số từ 1–7: khó hay dễ | Ghi | 10 giây |
+| 4. SUS | 10 câu, mỗi câu chọn 1–5 | Ghi | 1–2 phút |
+| 5. 4 câu hỏi mở | Trả lời về rõ ràng, khôi phục lỗi, tốc độ, tin cậy | Hỏi sâu vào chỗ khó vừa thấy, ghi lại | 2–3 phút |
+
+**Người tham gia điền gì:** chỉ 3 ô đồng ý, SEQ (1 số), SUS (10 số) và trả lời 4 câu hỏi, đúng nội dung `participant_kit.md`. Cho nhanh, em đưa các câu này vào **Google Form** (khoảng 10 phút làm một lần, dùng chung cho cả 7 người) hoặc cho bạn gõ số vào chat Meet.
+
+**Em cần thêm cho mỗi người:** họ tên và SĐT (để TA gọi xác minh; trong bảng 7 người thì che 4 số giữa), ngày giờ phiên. Trong JSON phiên chỉ ghi mã P01…P07.
+
+**Mấy điểm quan trọng:**
+- **Mỗi lần 1 người.** Cả 7 người dùng chung tài khoản `test@eshop.com`, và script restart backend làm reset CSDL giữa các phiên.
+- **Pilot S00 trước**, có thể với bạn cùng phòng, để kiểm link, luồng và thời gian.
+- **Tổng thời gian:** 8 phiên × 10 phút + chuẩn bị khoảng **1,5–2 giờ** nếu bạn em có mặt liên tục. Sau đó phân tích và viết findings (🔒, em viết) thêm khoảng 1 giờ.
+- Phải chạy **trước** bước tái hiện bug, vì bước đó đưa SUT về nhánh main, còn tunnel cần nhánh `usability-tunnel`.
+
+Nếu em có thể gom đủ 7 người tối nay thì đây là 30 điểm còn lại của Task 2, đáng làm hơn bất kỳ việc nào khác. Em muốn anh đưa lệnh chuẩn bị Google Form và các bước bật phiên S00 không?
+```
+
+**Xử lý:** [...]
+
+---
+
+## #120 | 19:19 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Giúp tôi làm google form cho những cái cần thiết luôn được không, bạn có thể thao tác trên trình duyệt của tôi mà
+```
+
+**Output:**
+```
+Đã viết sẵn script tạo form trong Apps Script, giờ Google đòi cấp quyền. Bước cấp quyền OAuth này anh không tự bấm thay em được.
+
+Em mở tab **Apps Script ("Untitled project")** trong Chrome và làm:
+1. Bấm **Review permissions**, chọn tài khoản `tanhiep24135@gmail.com`.
+2. Google sẽ báo "Google hasn't verified this app", vì đây là script của chính em. Bấm **Advanced** → **Go to Untitled project (unsafe)**.
+3. Bấm **Allow**. Script chỉ xin quyền tạo và quản lý Google Forms của em.
+
+Xong em báo "đã cấp quyền". Anh sẽ chạy script, lấy 2 link (link sửa form và link gửi người tham gia), rồi mở form ra kiểm từng câu.
+
+Form gồm 4 trang, nội dung theo đúng `participant_kit.md`:
+- **Thông tin:** mã phiên, họ tên, SĐT/Zalo (để TA xác minh), nghề nghiệp (không bắt buộc), 3 câu đồng ý Có/Không (quay màn hình, ghi âm, TA liên hệ).
+- **SEQ:** thang 1–7, từ Rất khó tới Rất dễ.
+- **SUS:** lưới 10 câu × 5 mức.
+- **4 câu hỏi mở:** rõ ràng, khôi phục lỗi, tốc độ, tin cậy.
+
+Form không thu email người điền. Đây là bản AI dựng từ kit, cần khai Audit và Mandatory Disclosure.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #121 | 19:23 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+https://docs.google.com/forms/d/1JMFzxKdVIvbXoNI9PLH4s3CK_d8PA_ehi7Pw4QCPUug/edit
+===
+https://docs.google.com/forms/d/e/1FAIpQLScZPV1xgaQLVw8nUl8wmY8EqEol7BeoMwhDjaCw1rEXGoNuqQ/viewform
+===
+2 link này à
+```
+
+**Output:**
+```
+Đúng hai link đó. Anh đã mở form kiểm: 4 trang đúng nội dung kit, câu bắt buộc đúng chỗ, form không thu email.
+
+- **Link gửi người tham gia** (dán vào chat Meet): `https://docs.google.com/forms/d/e/1FAIpQLScZPV1xgaQLVw8nUl8wmY8EqEol7BeoMwhDjaCw1rEXGoNuqQ/viewform`
+- **Link sửa** (chỉ em dùng, không gửi ai): `…/1JMFzxKdVIvbXoNI9PLH4s3CK_d8PA_ehi7Pw4QCPUug/edit`. Câu trả lời xem ở tab Responses.
+
+**Cách dùng trong mỗi phiên**
+1. Đọc lời mở đầu, lấy đồng ý bằng lời, bật quay.
+2. Người tham gia làm nhiệm vụ U1 với link tunnel. Em quan sát và ghi `observation_sheet`.
+3. Xong nhiệm vụ: gửi link form, đọc mã phiên (S01…), bạn điền khoảng 3–4 phút.
+4. Trong lúc bạn điền câu hỏi mở, em hỏi sâu thêm vào chỗ khó vừa thấy.
+
+**Lưu ý quan trọng**
+- **Repo đang public.** Câu trả lời form có họ tên và SĐT, nên **không được** commit bản CSV xuất từ form. Vào repo chỉ có JSON phiên với mã P0x và các số SEQ/SUS. Bảng 7 người tham gia thì che 4 số giữa SĐT.
+- **Trước phiên đầu, em tự điền thử 1 lần (pilot)** để biết form chạy đúng. Điền xong thì xoá câu trả lời thử trong tab Responses.
+- Form do AI dựng từ kit, nên phải khai vào Audit và Mandatory Disclosure. Khi rảnh, gõ cho Claude Code: "ghi report_plan mục f: AI dựng Google Form từ participant_kit.md bằng Apps Script (phiên thảo luận, 19:23 10/11)".
+
+Em định chạy phiên mấy giờ? Nếu bắt đầu luôn thì chạy `tools\usability_session.ps1` để lấy link tunnel, rồi `new_session.py HW03/usability/sessions S00` cho pilot.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #122 | 19:26 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tưởng có 2 form chứ, có 1 form thôi à
+```
+*Đính kèm:* `EShop_-_Phi_u_ng__i_tham_gia___nh_gi__HW03.csv`
+
+**Output:**
+```
+Chỉ có **1 form**. Hai link là hai cách mở **cùng một form**:
+- `…/edit` là link **chủ form**: sửa câu hỏi, xem tab Responses, tải CSV. Chỉ em dùng.
+- `…/viewform` là link **điền form**: gửi cho người tham gia. Người có link này chỉ điền được, không xem được câu trả lời của người khác.
+
+File CSV em vừa tải là câu trả lời thử ("z") của chính em. Nó cho thấy form chạy đúng: đủ 23 cột, gồm mã phiên, 3 câu đồng ý, SEQ, 10 câu SUS và 4 câu hỏi mở.
+
+Hai việc nhỏ:
+1. **Xoá câu trả lời thử** để tab Responses sạch trước phiên thật: link edit → Responses → ⋮ → *Delete all responses*.
+2. Cột SUS ở mức 1 và 5 ghi kèm nhãn ("5 - Hoàn toàn đồng ý"), còn mức 2–4 chỉ là số. Khi nhập JSON phiên, em lấy chữ số đầu là được. Nếu sau này cần thì Claude Code viết script đọc CSV, nhưng CSV có họ tên và SĐT nên **chỉ để ngoài repo** (ví dụ `evidence_raw/` đã gitignore).
+
+Em chạy pilot luôn chưa?
+```
+
+**Xử lý:** [...]
+
+---
+
+## #123 | 19:28 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+SEQ và 10 câu SUS là gì nhỉ
+```
+
+**Output:**
+```
+Đây là hai thang đo chuẩn trong đánh giá usability, cả hai nằm trong form vừa tạo.
+
+**SEQ (Single Ease Question): 1 câu, hỏi ngay sau nhiệm vụ**
+- Câu hỏi: "Nhìn chung, nhiệm vụ vừa rồi khó hay dễ?", chọn từ 1 (Rất khó) tới 7 (Rất dễ).
+- Nó đo độ khó của **riêng nhiệm vụ U1**: đăng nhập, tìm sản phẩm, thêm giỏ, thanh toán VIP100, xem đơn.
+- Trung bình thường gặp khoảng 5,5. Thấp hơn nghĩa là nhiệm vụ khó hơn bình thường, rất hợp để đối chiếu với chỗ người tham gia bị vấp trong ghi chú quan sát.
+
+**SUS (System Usability Scale): 10 câu, hỏi sau SEQ**
+- Đây là bảng câu hỏi chuẩn (Brooke, 1986) đo **cảm nhận chung về cả trang web**, không riêng nhiệm vụ. Mỗi câu chấm 1–5, từ Hoàn toàn không đồng ý tới Hoàn toàn đồng ý.
+- Câu lẻ (1, 3, 5, 7, 9) là câu khen: dễ dùng, tự tin, muốn dùng thường xuyên…
+- Câu chẵn (2, 4, 6, 8, 10) là câu chê: phức tạp, rườm rà, phải học nhiều…
+- Cách tính điểm:
+  - Câu lẻ = điểm − 1.
+  - Câu chẵn = 5 − điểm.
+  - Cộng 10 câu rồi nhân 2,5, ra **điểm 0–100**.
+- Trung bình khoảng 68. Dưới 68 là dưới mức trung bình, trên 80 là tốt.
+- Hai câu đảo chiều có chủ đích, để phát hiện người chọn bừa (ví dụ chọn 5 hết).
+
+Em không cần tự tính: `sus_score.py` trong skill tính điểm cho từng người và trung bình cả nhóm.
+
+Riêng câu trả lời thử của em lúc nãy cho thấy đúng hiện tượng đó: em chọn 4–5 cho cả câu khen lẫn câu chê. Điểm ra khoảng 50, mâu thuẫn với SEQ = 7. Đây là ví dụ hay để biết đọc kết quả, nhưng nhớ xoá trước phiên thật.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #124 | 19:29 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Rồi, giúp tôi viết các kịch bản: 
+Kịch bản mời bạn và moderated, quay phim,...
+Kịch bản đưa bạn nhiệm vụ,...
+```
+
+**Output:**
+```
+File `moderator_script.md` có đủ các phần:
+
+- **A. Tin nhắn mời và câu lọc:** đã mua online, chưa dùng EShop, không học HW03.
+- **B. Tin nhắn chốt giờ.**
+- **C. Việc em chuẩn bị trước mỗi phiên:** tunnel, `new_session.py`, phiếu quan sát.
+- **D. Mở đầu:** cảm ơn, xin quay (bật quay rồi hỏi lại để lời đồng ý có trong video), chia sẻ màn hình, think-aloud.
+- **E. Khối nhiệm vụ** dán vào chat Meet. Chỉ nêu mục tiêu, không nêu bước.
+- **F. Trong phiên:** câu nhắc trung tính, cách đáp khi bị hỏi "bấm đâu?", 3 mức can thiệp, những điều không được làm.
+- **G. Sau nhiệm vụ:** gửi form kèm mã phiên, gợi ý câu hỏi sâu.
+- **H. Kết thúc.**
+- **I. Việc sau mỗi phiên:** tắt tunnel, JSON phiên, commit.
+
+Một số điểm:
+- Phiên rút còn khoảng **12–15 phút**, plan cũ ghi 20 phút. Nếu giữ con số này thì sửa plan mục 5 cho khớp.
+- Đây là bản **AI nháp**, em đọc lại và sửa giọng cho tự nhiên. Muốn đưa vào bài thì đặt ở `HW03/usability/moderator_script.md`, commit, và khai vào Audit cùng Google Form.
+- Repo public, nên video có mặt hoặc giọng người tham gia để ngoài repo, chỉ ghi tên file trong phiếu.
+
+Pilot với bạn cùng phòng trước để canh giờ, rồi gửi tin mời 7 người với khung giờ cụ thể.
+```
+*File AI ghi/gửi trong lượt này:* `moderator_script.md`
+
+**Xử lý:** [...]
+
+---
+
+## #125 | 19:31 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+12-15 phút luôn à. Có thể rút gọn còn 10 phút được không. Vì mấy người tôi nhờ nó bảo chỉ làm tối đa 5-10 phút
+```
+
+**Output:**
+```
+Rút được còn khoảng 10 phút. Anh đã sửa file `moderator_script.md`:
+
+| Phần | Trước | Giờ |
+|---|---|---|
+| Mở đầu (xin quay, chia sẻ màn hình, think-aloud) | 2' | **1'**, nói nhanh, gộp 4 ý |
+| Nhiệm vụ U1 | ≤ 10' | **≤ 6'**. Quá 6 phút thì dừng, ghi "Không hoàn thành". Can thiệp khi kẹt 1,5 phút |
+| Form (SEQ, SUS, 4 câu mở) | 4' | **3'**, câu mở chỉ cần trả lời 1 câu ngắn |
+| Hỏi sâu | bắt buộc | **chỉ khi người tham gia không vội**, 1 câu |
+| Kết thúc | 1' | 10 giây |
+
+Không cắt thêm được nữa, vì:
+- **4 câu hỏi mở** (rõ ràng, khôi phục lỗi, tốc độ, tin cậy) là yêu cầu tối thiểu của đề. Chúng vẫn nằm trong form, chỉ rút thành 1 câu mỗi ý.
+- **SUS 10 câu** là thang chuẩn, bỏ câu thì không tính được điểm.
+
+Còn 2 việc nhỏ:
+1. Plan mục 3 đang ghi benchmark ≤ 5 phút, mục 5 ghi phiên khoảng 20 phút. Bảo Claude Code sửa thành "~10 phút, nhiệm vụ ≤ 6 phút" cho khớp, và ghi lý do: người tham gia chỉ có 5–10 phút.
+2. Lúc mời, cứ nói **10 phút**. Bạn đến muộn hay nói chuyện ngoài lề là sẽ lố, nên giữ đúng nhịp.
+
+Nhờ được bạn cùng phòng thì pilot ngay để canh giờ thật. Nếu pilot ra trên 10 phút, chỗ bị lố gần như chắc chắn là phần nhiệm vụ, và đó cũng là một finding.
+```
+*File AI ghi/gửi trong lượt này:* `moderator_script.md`
+
+**Xử lý:** [...]
+
+---
+
+## #126 | 19:34 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Có cần lưu file này vào trong software-testing không
+```
+
+**Output:**
+````
+Nên lưu, vì 3 lý do:
+- Đề chấm theo "quantity and quality of the deliverables", trong đó có **usability-evaluation design**. Kịch bản điều phối là một phần của thiết kế đó, cạnh plan, kit và observation sheet.
+- Nó là bằng chứng phiên của em đúng kiểu **moderated**: có lời mở đầu, xin đồng ý, câu nhắc trung tính, quy tắc can thiệp. Khi TA vấn đáp, em có file để chỉ.
+- File do AI nháp nên phải có trong repo thì Audit mới có artifact để chấm.
+
+Cách lưu:
+1. Tải file `moderator_script.md` trong chat về, đặt vào `HW03\usability\moderator_script.md`.
+2. Dán cho Claude Code:
+
+```
+1. HW03/usability/moderator_script.md (SV đặt vào, AI nháp ở phiên thảo luận 19:29–19:31 10/11): giữ nguyên nội dung, add + commit `HW03[T2] 2c/10: kịch bản điều phối (AI nháp)`.
+2. usability/plan.md: mục 3 benchmark → "≤ 6 phút", mục 5 thứ tự phiên → "~10 phút: mở đầu 1' → nhiệm vụ ≤ 6' → Google Form (SEQ + SUS + 4 câu mở) 3'"; lý do: người tham gia chỉ có 5–10 phút (SV chốt). Thêm dòng: SEQ/SUS/câu mở thu bằng Google Form (AI dựng bằng Apps Script từ participant_kit.md, 19:23 10/11); CSV form có họ tên/SĐT → KHÔNG vào repo. Commit `HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form`.
+3. report_plan mục f: khai 2 việc AI (Google Form, kịch bản điều phối). Không push, không amend.
+Báo cáo ≤ 4 dòng + hash.
+```
+
+Lưu ý: file vẫn còn dòng "📝 AI nháp – SV duyệt/sửa" ở đầu. Em đọc và sửa giọng xong thì xoá dòng đó, rồi commit lại.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #127 | 19:35 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4825,7 +5893,75 @@ Kịch bản không chứa dữ liệu cá nhân (chỉ placeholder `[tên]`, `[
 
 ---
 
-## #103 | 20:14 10/11/2026 | Claude Opus 5.5 | [...]
+## #128 | 19:36 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Kịch bản điều phối: commit moderator_script.md nguyên văn, sau khi đọc hết (chỉ có placeholder [tên], [link Meet] và tài khoản seed, không có dữ liệu cá nhân). 70f26ef HW03[T2] 2c/10: kịch bản điều phối (AI nháp)
+- plan.md: mục 3 benchmark đổi thành ≤ 6 phút. Mục 5 thứ tự phiên đổi thành ~10 phút (mở đầu 1' → nhiệm vụ ≤ 6' → Google Form 3'), kèm lý do 5–10 phút và dòng Google Form: CSV/Responses có họ tên + SĐT không vào repo. report_plan mục f có thêm 2 dòng khai (Google Form, kịch bản điều phối). 2485116 HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+- Chưa commit: BUG-58.md, BUG-59.md đang có thay đổi chưa commit, em đoán là SV đang viết nên không đụng. A_prompt_log.md hook tự sinh lại sau mỗi lượt.
+- Có thể lệch: participant_kit.md vẫn ghi theo phiên dài cũ, em chưa kiểm vì lệnh không yêu cầu sửa file này.
+```
+
+**Output:**
+```
+Hai commit đều ổn.
+
+`participant_kit.md` không cần sửa. Anh đã đọc file này lúc đầu phiên: nó không ghi thời lượng, và nội dung câu hỏi trùng khớp Google Form. Chỗ lệch duy nhất là chữ "khoanh một số" của bản giấy. Muốn gọn thì thêm một dòng đầu file: "Bản thu thực tế: Google Form, nội dung giống phiếu này". Việc nhỏ, để lúc đóng gói làm cũng được.
+
+Anh thấy em đang viết BUG-58, 59. Giờ em cần chốt thứ tự cho tối nay:
+- **Nếu bạn em hẹn được trong 1–2 giờ tới:** viết bug trong lúc chờ. Tới giờ hẹn thì commit lô bug đang dở (kể cả chưa đủ 7 file), chạy pilot rồi các phiên.
+- **Nếu bạn hẹn muộn (sau 22:00):** viết xong lô 1 (58…64), push, báo anh kiểm, rồi viết tiếp lô 2.
+
+Bạn em hẹn mấy giờ, và đã được bao nhiêu người đồng ý?
+```
+
+**Xử lý:** [...]
+
+---
+
+## #129 | 20:13 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Viết xong các bug rồi, commit luôn hay là bảo Claude Code check rồi mới commit nhỉ
+```
+
+**Output:**
+````
+**Commit luôn, trước khi Claude Code kiểm.** Đây là quy ước từ HW02: bản em viết phải được commit trước, để lịch sử git chứng minh chữ là của em. Mọi chỗ AI sửa sau đó (dữ kiện sai) sẽ nằm ở commit riêng, so diff được.
+
+Em chạy:
+```
+git add HW03/bugs/BUG-*.md
+git commit -m "HW03[T1] 5/6d: SV viết BUG-58…85"
+git push
+```
+(Nếu chưa xong cả 28 file thì ghi đúng dải đã viết vào message.)
+
+Push xong, dán lệnh này cho Claude Code:
+
+```
+NHIỆM VỤ: kiểm bug SV viết (BUG-58…85) – T1 bước 5/6e. KHÔNG sửa chữ SV (Tiêu đề, Mô tả/Steps, Expected, Actual, Severity, Priority, Nhận định). Không push, không amend.
+1. Kiểm (chỉ đọc), ghi HW03/bugs/bug_check.md, mỗi BUG 1 khối: còn `<SV viết>`/🔒 không; thang Severity (Critical/High/Medium/Low) + Priority (High/Medium/Low); tiêu đề có tiền tố [HW03-C2] không (KHÔNG được có trong file); Actual khớp Dữ kiện (AI chép) không; Expected có căn cứ (SRS/Căn cứ item) không, có quá 1 nhánh không; Yêu cầu chỉ ghi yêu cầu bị vi phạm; câu Tác động/khẳng định không có dữ kiện → đề nghị "(chưa kiểm chứng)"; tên trường/màn/nút không có trong SUT. Chỉ liệt kê, không đề xuất câu chữ.
+2. Tái hiện: `tools\sut_main.ps1` (SUT về main) → restart backend → chạy thật Steps SV viết (UI: Playwright hoặc tay theo nền tảng ghi trong bug; ít nhất P1/P2 trên máy này; P3 chỉ đối chiếu ảnh). Ghi kết quả từng bug vào bug_check.md: tái hiện được / không / bước nào không chạy được. Không sửa Steps.
+3. Xong: đưa SUT về nhánh usability-tunnel (`git -C ..\eshop-sut switch usability-tunnel`), kiểm `git -C ..\eshop-sut log -1` = e33212d.
+Commit `HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI)`.
+Báo cáo ≤ 15 dòng: số bug sạch / có điểm cần SV sửa (liệt kê mã), số bug không tái hiện được, hash.
+```
+
+Trong lúc Claude Code chạy, anh cũng đọc trên repo và góp ý riêng các chỗ dữ kiện hoặc khẳng định quá mức. Sau đó em sửa theo cả hai danh sách, commit `5/6f`, rồi mới tạo issue.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #130 | 20:14 10/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4853,6 +5989,29 @@ Tái hiện P1/P2 xong (23/23 chạy). Giờ đối chiếu ảnh P3.
 Ảnh P3 đã xem xong. Viết bug_check.md.
 
 Lines đúng. Đưa SUT về usability-tunnel, tắt Vite, commit.
+
+Xong bước 5/6e. Có 14 bug sạch, 14 bug có điểm SV cần xem. Không bug nào hoàn toàn không tái hiện được, nhưng 4 bug chỉ tái hiện được một phần.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: T1 5/6e – kiểm BUG-58…85 (chỉ đọc) + tái hiện trên P1 (Chrome), P2 (Firefox Playwright); P3 đối chiếu 8 ảnh lượt tay.
+- File: `HW03/bugs/bug_check.md` (28 khối, chi tiết từng điểm); `HW03/bugs/repro/repro_P1.json`, `repro_P2.json` (số đo thô); `HW03/tests/repro_bugs.spec.ts` + `repro.config.ts` (script tái hiện, AI viết → cần khai Audit).
+- Chung: không file nào còn `<SV viết>`/🔒; Severity/Priority đều đúng thang; không tiêu đề nào có `[HW03-C2]`.
+- Sạch: 14 – BUG-59, 60, 61, 65, 66, 67, 68, 69, 71, 74, 77, 83, 84, 85.
+- Cần SV xem: 14 – BUG-58, 70, 72, 80 (Nhận định có câu khẳng định chưa ghi "(chưa kiểm chứng)"); 62, 63 (tên trường không có trong SUT: "Email" ở trang Đăng nhập, nhãn thật là "Username"; BUG-63 Expected còn nêu ô "Xác nhận mật khẩu"); 73 (tiêu đề bỏ sót Họ Tên); 75, 79 (Actual có ý không có trong Dữ kiện; ảnh P3 CL-63 trái với Actual P3); 76, 82 (Expected 2 nhánh; tiêu đề 82 trái Actual P1); 78 (Actual nêu TimeoutError là lỗi của test tự động, không phải hành vi SUT); 64 (hộp thoại khác Actual); 81 (số đơn #8…#12 không khớp khi làm đúng Tiền điều kiện).
+- Không tái hiện được: 0. Tái hiện một phần: 4.
+  - BUG-62: làm đúng Steps thì ô Mật khẩu trống chặn submit, 0 request.
+  - BUG-64: SĐT `123` ra hộp thoại "Số điện thoại không hợp lệ…", không phải "Cập nhật thành công!".
+  - BUG-75: làm theo Steps thì sau F5 tên vẫn "Test User", phần "cập nhật sau F5" không ra.
+  - BUG-82: bước Autofill không chạy được bằng Playwright, cần SV chạy tay.
+- "Slow 3G" thay bằng trễ request 3000 ms (route của Playwright), không phải throttling thật.
+- Cô lập (bất thường SUT):
+  - `Profile.jsx:43` regex SĐT `^[1-9][0-9]{8,9}$` chặn SĐT bắt đầu bằng 0. Đây là nguyên nhân trực tiếp ở BUG-73, 75, 78 (Hồ sơ) và CL-21. Với SĐT `912345678` thì cả 3 trường lưu bền; nhấp đúp gửi 2 PUT.
+  - `ForgotPassword.jsx:26` regex mật khẩu bắt buộc có khoảng trắng (BUG-70, 78).
+- 1 điểm ngoài 28 bug: `Login.jsx:24` tiêu đề form là "Đăng Ký"; `Login.jsx:40` ô Mật khẩu `type="text"`.
+- Kết quả kiểm tra: repro P1 23/23, P2 23/23 chạy hết (sau 2 lần sửa script); lint không chạy.
+- SUT đã về `usability-tunnel` @ `e33212d`; Vite và backend đã tắt.
+- Commit: `715c4eb HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI)` (chưa push, `A_prompt_log.md` chưa commit).
+- Cần quyết định: BUG-73/75/78 – kết quả cô lập cho thấy gốc là regex SĐT (liên quan #113) – SV giữ bug như đang viết / viết lại theo nguyên nhân / gộp với #113.
 ```
 *File AI ghi/gửi trong lượt này:* `repro.config.ts`, `repro_bugs.spec.ts`, `bug_check.md`
 
@@ -4860,4 +6019,2424 @@ Lines đúng. Đưa SUT về usability-tunnel, tắt Vite, commit.
 
 ---
 
-**Tổng:** 103 lượt; Claude Sonnet 4.6 2 lượt (#1, #2); Claude Opus 5.5 95 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #92, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103); Claude (không rõ model) 6 lượt (#4, #51, #57, #69, #70, #79).
+## #131 | 21:54 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: T1 5/6e – kiểm BUG-58…85 (chỉ đọc) + tái hiện trên P1 (Chrome), P2 (Firefox Playwright); P3 đối chiếu 8 ảnh lượt tay.
+- File: HW03/bugs/bug_check.md (28 khối, chi tiết từng điểm); HW03/bugs/repro/repro_P1.json, repro_P2.json (số đo thô); HW03/tests/repro_bugs.spec.ts + repro.config.ts (script tái hiện, AI viết → cần khai Audit).
+- Chung: không file nào còn <SV viết>/🔒; Severity/Priority đều đúng thang; không tiêu đề nào có [HW03-C2].
+- Sạch: 14 – BUG-59, 60, 61, 65, 66, 67, 68, 69, 71, 74, 77, 83, 84, 85.
+- Cần SV xem: 14 – BUG-58, 70, 72, 80 (Nhận định có câu khẳng định chưa ghi "(chưa kiểm chứng)"); 62, 63 (tên trường không có trong SUT: "Email" ở trang Đăng nhập, nhãn thật là "Username"; BUG-63 Expected còn nêu ô "Xác nhận mật khẩu"); 73 (tiêu đề bỏ sót Họ Tên); 75, 79 (Actual có ý không có trong Dữ kiện; ảnh P3 CL-63 trái với Actual P3); 76, 82 (Expected 2 nhánh; tiêu đề 82 trái Actual P1); 78 (Actual nêu TimeoutError là lỗi của test tự động, không phải hành vi SUT); 64 (hộp thoại khác Actual); 81 (số đơn #8…#12 không khớp khi làm đúng Tiền điều kiện).
+- Không tái hiện được: 0. Tái hiện một phần: 4.
+  - BUG-62: làm đúng Steps thì ô Mật khẩu trống chặn submit, 0 request.
+  - BUG-64: SĐT 123 ra hộp thoại "Số điện thoại không hợp lệ…", không phải "Cập nhật thành công!".
+  - BUG-75: làm theo Steps thì sau F5 tên vẫn "Test User", phần "cập nhật sau F5" không ra.
+  - BUG-82: bước Autofill không chạy được bằng Playwright, cần SV chạy tay.
+- "Slow 3G" thay bằng trễ request 3000 ms (route của Playwright), không phải throttling thật.
+- Cô lập (bất thường SUT):
+  - Profile.jsx:43 regex SĐT ^[1-9][0-9]{8,9}$ chặn SĐT bắt đầu bằng 0. Đây là nguyên nhân trực tiếp ở BUG-73, 75, 78 (Hồ sơ) và CL-21. Với SĐT 912345678 thì cả 3 trường lưu bền; nhấp đúp gửi 2 PUT.
+  - ForgotPassword.jsx:26 regex mật khẩu bắt buộc có khoảng trắng (BUG-70, 78).
+- 1 điểm ngoài 28 bug: Login.jsx:24 tiêu đề form Mật khẩu type="text".
+- Kết quả kiểm tra: repro P1 23/23, P2 23/23 chạy hết (sau 2 lần sửa script); lint không chạy.
+- SUT đã về usability-tunnel @ e33212d; Vite và
+- Commit: 715c4eb HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI) (chưa push, A_prompt_log.md chưa commit).
+- Cần quyết định: BUG-73/75/78 – kết quả cô lập ên quan #113) – SV giữ bug như đang viết / viếtlại theo nguyên nhân / gộp với #113.
+===
+thực hiện xong cái này thì giúp mình bảo Claude Code mở tunnel nhá
+```
+
+**Output:**
+````
+Bug đã push (`af92e6d`), còn bản kiểm `715c4eb` của Claude Code thì chưa push.
+
+**Về BUG-73/75/78 và #113:** anh đã đọc #113. Đó là issue của henry-banana về trang **Đăng ký**, triệu chứng là SĐT 10 số có đầu số khác 0 không hợp lệ mà vẫn **được nhận**. Bug của em là trang **Hồ sơ**, và theo cô lập của Claude Code thì triệu chứng **ngược lại**: SĐT bắt đầu bằng 0 bị chặn. Khác màn và khác triệu chứng, nên theo tiêu chí trùng (cùng app + cùng màn + cùng triệu chứng) thì **không gộp** với #113. Có thể ghi #113 vào mục "Liên quan" vì cùng loại regex.
+
+Còn giữ nguyên hay viết lại theo nguyên nhân là em quyết. Câu hỏi để em tự soát: nếu đổi sang SĐT không bắt đầu bằng 0 (ví dụ 912345678) mà triệu chứng mất, thì Tiền điều kiện và Nhận định của em đang mô tả đúng lỗi chưa?
+
+**Thứ tự đề xuất, vì đã 21:54:** nếu bạn em có mặt bây giờ thì làm **usability trước**. Sửa 14 bug để sau, vì phần đó chỉ phụ thuộc em, còn người tham gia thì có giờ giấc của họ.
+
+Dán cho Claude Code:
+
+```
+1. Commit A_prompt_log.md (`HW03: cập nhật prompt log`). Ghi report_plan mục f: AI viết tests/repro_bugs.spec.ts + repro.config.ts (5/6e).
+2. Mở tunnel cho phiên usability: kiểm SUT ..\eshop-sut đang ở usability-tunnel @ e33212d; chạy `powershell -ExecutionPolicy Bypass -File tools\usability_session.ps1` ở chế độ nền (run_in_background), đợi tới khi in link https://….trycloudflare.com, mở link bằng curl/Playwright kiểm trang chủ tải được (200, có danh sách sản phẩm).
+3. Báo ≤ 3 dòng: link tunnel, kiểm trang chủ OK/không. Giữ tunnel chạy; KHÔNG tự tắt.
+Giữa các phiên khi SV nói "phiên mới": dừng tunnel cũ, chạy lại script (restart backend + link mới), báo link mới.
+```
+
+Lưu ý: link tunnel đổi mỗi lần chạy, nên mỗi phiên em phải gửi link mới cho người tham gia. Nếu muốn tự chủ hơn, em có thể chạy script trong một cửa sổ PowerShell riêng, rồi Ctrl+C và chạy lại khi sang phiên mới, khỏi phụ thuộc Claude Code.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #132 | 21:55 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Commit A_prompt_log.md (`HW03: cập nhật prompt log`). Ghi report_plan mục f: AI viết tests/repro_bugs.spec.ts + repro.config.ts (5/6e).
+2. Mở tunnel cho phiên usability: kiểm SUT ..\eshop-sut đang ở usability-tunnel @ e33212d; chạy `powershell -ExecutionPolicy Bypass -File tools\usability_session.ps1` ở chế độ nền (run_in_background), đợi tới khi in link https://….trycloudflare.com, mở link bằng curl/Playwright kiểm trang chủ tải được (200, có danh sách sản phẩm).
+3. Báo ≤ 3 dòng: link tunnel, kiểm trang chủ OK/không. Giữ tunnel chạy; KHÔNG tự tắt.
+Giữa các phiên khi SV nói "phiên mới": dừng tunnel cũ, chạy lại script (restart backend + link mới), báo link mới.
+```
+
+**Output:**
+```
+Có link. Kiểm trang chủ qua tunnel bằng Playwright.
+
+Tunnel đang chạy, trang chủ tải được: https://scheduling-shipped-oakland-immigration.trycloudflare.com
+- Trang chủ trả 200 và hiện danh sách sản phẩm (có AirPods, 5 nút "Thêm"); `/api/products` cũng trả 200. Tunnel để chạy, AI không tắt.
+- Đã commit `575b28c HW03: cập nhật prompt log` (gồm prompt log và report_plan mục f ghi `repro_bugs.spec.ts`, `repro.config.ts`).
+```
+
+**Xử lý:** [...]
+
+---
+
+## #133 | 21:56 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đưa tôi mấy cái sheet luôn nhé, tôi bắt đầu mở meet rồi
+```
+
+**Output:**
+````
+Đây là bản rút gọn để em mở bên cạnh Meet.
+
+**1. Trước khi bạn vào (S00 = pilot)**
+- Tunnel đã có link → copy sẵn.
+- Claude Code (hoặc em) chạy `python .claude/skills/usability-evaluation/scripts/new_session.py HW03/usability/sessions S00`.
+
+**2. Nói khi bạn vào (1 phút)**
+> Cảm ơn bạn. Mình kiểm tra trang web, không kiểm tra bạn, nên không có đúng sai. Mình xin quay màn hình và ghi âm, chỉ dùng cho bài tập; trợ giảng có thể liên hệ bạn để xác nhận. Bạn đồng ý không?
+
+→ Bật **Win + Alt + R**, rồi nói: *"Mình quay rồi, bạn xác nhận đồng ý giúp mình."*
+> Bạn chia sẻ màn hình giúp mình. Trong lúc làm, bạn nói to mình đang nghĩ gì, định bấm gì. Mình sẽ không hướng dẫn.
+
+**3. Dán vào chat Meet**
+```
+Link: <link tunnel>
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+→ **Bấm đồng hồ** khi bạn mở link.
+
+**4. Trong lúc làm (≤ 6 phút)**
+- Im lặng, ghi chép.
+- Bạn im lặng hơn 20 giây: *"Bạn đang nghĩ gì?"*
+- Bạn hỏi "bấm đâu?": *"Nếu không có mình thì bạn sẽ làm gì?"*
+- Kẹt hơn 1,5 phút: *"Bạn thử nhìn lại toàn bộ trang xem?"* (ghi **T**).
+- Quá 6 phút: *"Không sao, mình dừng ở đây nhé."* (Không hoàn thành).
+- Khi bạn nói Xong: *"Đơn của bạn đang ở trạng thái nào?"*
+
+**5. Gửi form**
+```
+https://docs.google.com/forms/d/e/1FAIpQLScZPV1xgaQLVw8nUl8wmY8EqEol7BeoMwhDjaCw1rEXGoNuqQ/viewform
+Mã phiên: S00
+```
+> 4 câu cuối bạn trả lời 1 câu ngắn là đủ.
+
+Bạn bấm Gửi thì nói: *"Cảm ơn bạn, bạn dừng chia sẻ màn hình giúp mình."* Rồi dừng quay (**Win + Alt + R**).
+
+**6. Phiếu ghi nhanh (chép vào Notepad)**
+```
+Phiên: S0_   Ngày: 10/11/2026   Quay: có/không   Video: ________
+Trình duyệt/OS của bạn: ________
+
+MỐC (mm:ss)
+Đăng nhập xong:
+Thấy tai nghe:
+Thêm giỏ:
+Áp mã VIP100:
+Đặt hàng xong:
+Thấy đơn trong lịch sử:
+Nói Xong / bỏ cuộc:
+
+Kết quả: Hoàn thành không trợ giúp / có trợ giúp / Không hoàn thành
+Nói đúng trạng thái đơn: có/không – "_____"
+
+DIỄN BIẾN (L=lỗi/chọn sai · D=do dự · N=câu nói nguyên văn · T=trợ giúp)
+mm:ss | màn hình | loại | mô tả
+     |          |      |
+
+Tổng: lỗi __  do dự __  trợ giúp __
+```
+
+**7. Sau phiên**
+- Bảo Claude Code "phiên mới": tunnel và backend restart, ra link mới.
+- Sang phiên tiếp theo thì đổi mã thành S01, S02, …
+
+Chúc em chạy pilot suôn sẻ. Xong S00 thì báo anh: hết bao nhiêu phút, đề bài có chỗ nào bạn hỏi lại.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #134 | 22:14 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S00: Thấy nút thêm vào giỏ hàng bị lag, thấy bấm không hiện, sau đó đã được.
+Làm theo từng bước thì đúng như yêu cầu, còn mật khẩu hơi kỳ kỳ.
+===
+đây là những gì bạn ấy trả lời trong lúc làm, còn những lúc làm thì bạn ấy cũng làm nhanh thôi.
+```
+
+**Output:**
+````
+Pilot ổn: luồng chạy hết, đề bài không bị hỏi lại. Vài điểm trước khi sang S01.
+
+**Ghi vào phiếu S00 đúng như bạn nói** (ghi nguyên văn, chưa diễn giải):
+- N: "nút thêm vào giỏ hàng bị lag, bấm không hiện, sau đó đã được" (ghi kèm mm:ss nếu em có).
+- N: "mật khẩu hơi kỳ kỳ".
+- Bạn làm theo từng bước và hoàn thành. Ghi rõ không trợ giúp hay có trợ giúp.
+
+Một dữ kiện liên quan đã có từ HW02: `ProductDetail.jsx:21–31` bỏ qua lần bấm lẻ ở nút thêm giỏ (handoff HW02 mục 5). Nhận định đây là lỗi riêng lẻ hay vấn đề thiết kế là phần findings của em.
+
+**Rút kinh nghiệm từ pilot cho S01–S07:**
+1. **Hỏi sâu ngay khi người tham gia nói mơ hồ.** "Mật khẩu hơi kỳ kỳ" mà không hỏi lại thì không dùng được. Lần sau hỏi ngay: *"Kỳ ở chỗ nào?"* hoặc *"Bạn mong nó thế nào?"*. Riêng S00 thì nhắn hỏi lại bạn ấy luôn, khi bạn còn nhớ.
+2. **Ghi mốc thời gian.** Em bảo bạn làm nhanh, nhưng plan cần số: tổng mấy phút, mốc đăng nhập và đặt hàng. Nếu có video thì lấy lại mốc từ video.
+3. Kịch bản không cần sửa. Ghi vào report §5.5: "pilot: đề bài rõ, không sửa; bổ sung: hỏi lại ngay khi người tham gia nhận xét mơ hồ".
+
+**Lưu S00:** em điền JSON phiên S00 (mã P00, SEQ/SUS lấy trong tab Responses của form, ghi chú quan sát), rồi bảo Claude Code:
+```
+Phiên S00 (pilot) xong: SV đã nhập HW03/usability/sessions/S00.json → chạy sus_score.py HW03/usability/sessions --check; lỗi thì báo, KHÔNG tự sửa số SV nhập. Commit `HW03[T2] 2/10: pilot S00`. Rồi "phiên mới": restart tunnel, báo link mới.
+```
+
+Xong là sang S01. Bạn tiếp theo vào Meet lúc mấy giờ?
+````
+
+**Xử lý:** [...]
+
+---
+
+## #135 | 22:15 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Bạn tiếp theo đã vào rồi. Mình thực hiện tiếp luôn nhé. Ghi note từng lần, còn đưa vào trong kia thì để sau nehs
+```
+
+**Output:**
+```
+Được, em ghi phiếu ra Notepad trước, JSON và commit để sau khi xong hết các phiên.
+
+**Ngay bây giờ cho S01:**
+1. Bảo Claude Code: **"phiên mới"**. Nó restart backend và tunnel, ra link mới. Đừng dùng link cũ: CSDL vẫn còn đơn của S00.
+2. Đổi mã trong khối chat Meet thành **S01**, dán link mới.
+3. Chạy theo phiếu như pilot. Nhớ hai điểm vừa rút ra: **hỏi lại ngay** khi bạn nói mơ hồ, và **ghi mm:ss** các mốc.
+
+Sau mỗi phiên, em lưu Notepad thành file riêng (`S01.txt`, `S02.txt`, …) để khỏi ghi đè, và đổi tên video tương ứng.
+
+Xong cả lượt thì gửi anh các file phiếu. Anh đưa lệnh cho Claude Code dựng khung JSON; em điền số SEQ/SUS từ form rồi commit từng phiên.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #136 | 22:16 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+phiên mới
+```
+
+**Output:**
+```
+Link mới cho phiên này: https://golf-mechanical-involves-attorneys.trycloudflare.com
+- Đã tắt tunnel cũ và chạy lại script, backend được khởi động lại (dữ liệu seed lại từ đầu).
+- Trang chủ trả 200; `/api/products` có đủ 5 sản phẩm (iPhone 15 Pro Max … Keychron Q1). Lượt này em chỉ kiểm bằng curl, chưa mở bằng Playwright như lần trước. Tunnel để chạy, AI không tắt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #137 | 22:17 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+https://golf-mechanical-involves-attorneys.trycloudflare.com/
+```
+
+**Output:**
+````
+Anh không mở thử được link (trang chặn công cụ đọc web của anh), nên em tự mở nhanh trên máy hoặc điện thoại cho chắc trước khi gửi.
+
+Khối dán vào chat Meet cho S01:
+
+```
+Link: https://golf-mechanical-involves-attorneys.trycloudflare.com/
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+
+Form sau nhiệm vụ: `https://docs.google.com/forms/d/e/1FAIpQLScZPV1xgaQLVw8nUl8wmY8EqEol7BeoMwhDjaCw1rEXGoNuqQ/viewform`, mã phiên **S01**.
+
+Nhớ bật quay sau khi bạn đồng ý, và bấm đồng hồ khi bạn mở link.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #138 | 22:30 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+phiên mới
+```
+
+**Output:**
+```
+Link mới: https://chances-tel-allow-beyond.trycloudflare.com
+- Đã tắt tunnel cũ và chạy lại script; backend khởi động lại nên dữ liệu seed lại.
+- Trang chủ trả 200, `/api/products` trả đủ 5 sản phẩm (chỉ kiểm bằng curl). Tunnel đang chạy, em không tự tắt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #139 | 22:32 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S01: Bấm đăng nhập mà thấy chữ đăng ký.
+Mình nghĩ là cần thêm hình ảnh sinh động xí
+Mình tự giảm số tiền khi checkout thì sao. Đã giảm tổng giá trị xuống 300000. Và nói mình chưa hiểu chỗ này lắm
+Thêm giỏ hàng ở detail thì được, còn ở list thì không được.
+Bạn ấy ngồi test hơi quá đà.
+Đơn hàng đang ở trạng thái chờ xác nhận.
+Fact: Bạn ngồi làm khách hàng gian lận
+===
+MÌnh đã gõ phiên mới ở Claude Code:
+Đây là link mới: https://chances-tel-allow-beyond.trycloudflare.com
+```
+
+**Output:**
+````
+S01 có dữ kiện tốt. Ghi phiếu tách bạch như sau:
+
+**Ghi vào phiếu S01 (nguyên văn, không diễn giải)**
+- N: "Bấm đăng nhập mà thấy chữ đăng ký".
+- N: "cần thêm hình ảnh sinh động xí".
+- L/N: thêm giỏ ở trang chi tiết thì được, ở danh sách thì không được.
+- **Lệch nhiệm vụ:** bạn tự giảm số tiền lúc checkout, tổng còn 300.000, và nói chưa hiểu chỗ này lắm. **Ghi rõ bạn làm bằng cách nào**: sửa trên giao diện, DevTools hay sửa request? Không nhớ thì xem lại video. Chi tiết này quyết định nó là finding gì.
+- Bạn trả lời trạng thái đơn: "chờ xác nhận".
+- Ghi chú người điều phối: người tham gia làm vượt nhiệm vụ, thử như khách hàng gian lận.
+
+Hai điểm cần lưu ý cho phần phân tích:
+- **Tiêu chí thành công** là tổng = 5.900.000 ₫. Đơn của S01 có tổng 300.000 do bạn tự sửa, nên em phải quyết khi phân tích: hoàn thành, hoàn thành có lệch, hay không hoàn thành. Ghi lại để quyết sau, đừng sửa số.
+- **Hồ sơ người tham gia:** "ngồi test quá đà" thường là người làm IT. Ghi nghề nghiệp của bạn ấy (form có cột này) để bảng 7 người và phần giới hạn nghiên cứu phản ánh đúng.
+
+Với các phiên sau, nếu người tham gia rẽ khỏi nhiệm vụ, em có thể nói câu trung tính: *"Bạn cứ làm như một người mua bình thường nhé."* Ghi lại câu đó (T).
+
+**Khối chat cho S02:**
+```
+Link: https://chances-tel-allow-beyond.trycloudflare.com
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+Form: mã phiên **S02**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #140 | 22:47 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+phiên mới
+```
+
+**Output:**
+```
+Link mới: https://inexpensive-runner-manufacturing-convert.trycloudflare.com
+- Đã tắt tunnel cũ, restart backend (dữ liệu seed lại). Trang chủ trả 200, `/api/products` có đủ 5 sản phẩm (kiểm bằng curl). Tunnel đang chạy, em không tự tắt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #141 | 22:49 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S02: Bấm nút thêm vào giỏ hàng mà mà 
+Ủa kiểm tra đơn hàng ở đâu vậy
+Thấy là cái web này tính năng từ việc chọn đơn hàng rồi xác nhận đơn hàng đến xác nhận mã giảm giá rất hợp lý, không có vấn đề gì. Mình nghĩ cái web rất là ổn.
+===
+link mới:
+https://inexpensive-runner-manufacturing-convert.trycloudflare.com/
+```
+
+**Output:**
+````
+Ghi phiếu S02:
+- **N:** "Bấm nút thêm vào giỏ hàng mà mà…". Câu bị cụt, em bổ sung từ trí nhớ hoặc video xem bạn nói gì tiếp và có bấm lại không.
+- **D/N:** "Ủa kiểm tra đơn hàng ở đâu vậy". Ghi mm:ss và bạn tìm thấy bằng cách nào: tự tìm hay có trợ giúp.
+- **N (nhận xét chung):** chọn hàng, xác nhận đơn, mã giảm giá đều hợp lý; web ổn.
+
+Đây là phiên thứ hai có vấn đề ở nút thêm giỏ (S00 bị lag, S01 ở danh sách không được, S02 thì câu bị cụt nên chưa rõ). Em chỉ ghi lại, tới phần findings mới gom.
+
+**Khối chat S03:**
+```
+Link: https://inexpensive-runner-manufacturing-convert.trycloudflare.com/
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+Form: mã phiên **S03**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #142 | 23:05 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+phiên mới
+```
+
+**Output:**
+```
+Link mới: https://imaging-knowledgestorm-bikes-ages.trycloudflare.com
+- Đã tắt tunnel cũ, restart backend (dữ liệu seed lại). Trang chủ trả 200, `/api/products` có đủ 5 sản phẩm (kiểm bằng curl). Tunnel đang chạy, em không tự tắt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #143 | 23:06 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S03: Chưa thấy hình của sản phẩm
+Không rành, nhưng mà kiểu thấy nó nhạy hơn
+Các luồng thực hiện nhanh hơn so với Shopee.
+===
+https://imaging-knowledgestorm-bikes-ages.trycloudflare.com/
+```
+
+**Output:**
+````
+Ghi phiếu S03:
+- **N:** "Chưa thấy hình của sản phẩm".
+- **N:** "Không rành, nhưng mà kiểu thấy nó nhạy hơn". Câu này mơ hồ: nhạy hơn cái gì, so với gì? Nếu lúc đó em đã hỏi lại thì ghi câu trả lời. Chưa hỏi thì ghi "không hỏi lại" để khỏi diễn giải hộ.
+- **N:** "Các luồng thực hiện nhanh hơn so với Shopee".
+- Ghi nghề nghiệp nếu bạn tự nói "không rành": đây là người non-IT, đúng hồ sơ ưu tiên.
+
+Đã xong S00 và S01–S03, còn 4 phiên. Khoảng 15 phút mỗi phiên tính cả đổi người, nên dự kiến xong lúc 00:10.
+
+**Khối chat S04:**
+```
+Link: https://imaging-knowledgestorm-bikes-ages.trycloudflare.com/
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+Form: mã phiên **S04**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #144 | 23:39 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+phiên mới
+```
+
+**Output:**
+```
+Link mới: https://protecting-creativity-repeat-gene.trycloudflare.com
+- Đã tắt tunnel cũ, restart backend (dữ liệu seed lại). Trang chủ trả 200, `/api/products` có đủ 5 sản phẩm (kiểm bằng curl). Tunnel đang chạy, em không tự tắt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #145 | 23:41 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S04: I clicked the button but it doesn't having anything. What is going on. 
+It's show the AirPods Pro, doesn't have number 2 in it (picture). Oohh, look it, perfect (Description). It's already in the Cart. Oh I forgot to Sign In. Let's sign in. My account is:... Sign In. Wait a minute, how can I click put it in the Cart the outside in.
+Ý là mình thậm chí còn chưa đăng nhập vào nữa sao có thể thêm vào giỏ hàng. Là mình thêm vào giỏ hàng nào á.
+I got a voucher VIP100. 
+Có vẻ như nút thêm vào giỏ chả làm gì cả (ở list, trang chủ).
+Thử tìm có ra không.
+Oke, ấn thêm vào giỏ cũng không được luôn. Aaaaaa, Oh, bấm thêm vào giỏ hàng không được nhưng nó không có tín hiệu gì cả, không có thông tin nhận biết cho thấy mình đã thêm vào giỏ hàng. Bấm xoá này cũng không xoá được luôn à. À xoá được xoá được xoá được.
+Oke xoá được xoá được, tiếp tục mua hàng vẫn được. Thêm vào giỏ nhưng nó không hiện thông tin gì mình đã thêm vào giỏ cả. Còn bấm vào chi tiết bấm thêm vào giỏ hàng thì hắn thêm rồi nè.
+Vấn đề làm sao để nhập voucher VIP100.
+Ở đây nhiệm vụ cần nhập voucher thì mới hoàn thành, nhưng mà nó mới (ý là ở cart).
+Ủa, sao tổng tiền thanh toán có thể điều chỉnh được.
+Ủa mình có thể trả ít hơn tiền à. Hmmm. Lạ thế. Cái nút này là sao ta. Oke mình cứ áp mã VIP100 vào xem thử giảm được bao nhiêu tiền, ừ giảm đúng rồi đỏ.
+Trả 100000 thôi được không, ok thanh toán (điều chỉnh số tiền), thanh toán thành công luôn. Mình thậm chí có thể trả ít tiền hơn.
+Giờ vào mua lại với voucher VIP100, VIP1000 thì sao, à không tồn tại. Oke xác nhận thanh toán. Oke mình thanh toán thành công rồi nhưng mà kiểm tra xem đơn hàng đã được ghi nhận chưa và đang ở trạng thái nào.
+Là mình về trang chủ và sau đó mình, sau đó mình xem giỏ hàng à, chỉ xem được giỏ hàng thôi. À đây đây (ở profile). A, chờ xác nhận nữa, vậy là nếu mình không trả đủ tiền thì có thể từ chối đơn à. Ngay từ đầu mình không cho khách hàng chỉnh giá thì đâu cần có trạng thái "Chờ xác nhận" đâu.
+Thanh toán đơn hàng rồi mới nhập số điện thoại và địa chỉ giao hàng à.
+Let's input my phone number to watch see will happen. and my adress.
+I put the button, thông báo gì đây, ủa số điện thoại đủ 10 số mà...
+Nhắc lại nhiệm vụ.
+Điền form: nhiệm vụ vừa rồi khá là dễ, nhưng nó khá là dễ với người thông minh.
+===
+https://protecting-creativity-repeat-gene.trycloudflare.com/
+```
+
+**Output:**
+````
+S04 là phiên rất giàu dữ kiện. Khi ghi phiếu, em giữ nguyên văn (cả tiếng Anh) và tách theo loại:
+
+- **L/N – thêm giỏ ở danh sách và trang chủ:** bấm không có phản hồi, không biết đã thêm chưa. Ở trang chi tiết thì thêm được.
+- **N – giỏ khi chưa đăng nhập:** "chưa đăng nhập sao có thể thêm vào giỏ hàng, giỏ hàng nào".
+- **D – nút xoá trong giỏ:** lúc đầu tưởng xoá không được, sau đó xoá được.
+- **D – tìm ô voucher.**
+- **L/N – tổng tiền ở checkout sửa được:** bạn tự sửa trả 100.000, thanh toán thành công, rồi đặt lại đơn với VIP100. Đây là **phiên thứ hai** (sau S01) có người tham gia sửa được số tiền.
+- **N – thử mã VIP1000:** thông báo không tồn tại.
+- **D – tìm đơn hàng:** về trang chủ, vào giỏ, cuối cùng thấy ở Hồ sơ. Bạn nói trạng thái "Chờ xác nhận", kèm nhận xét về trạng thái này.
+- **N – thứ tự bước:** "Thanh toán đơn hàng rồi mới nhập số điện thoại và địa chỉ giao hàng à".
+- **L – Hồ sơ:** SĐT đủ 10 số bị báo lỗi. Dữ kiện liên quan: Claude Code cô lập ở 5/6e rằng `Profile.jsx:43` chặn SĐT bắt đầu bằng 0, đúng chỗ BUG-73/75/78 của em.
+- **T:** em nhắc lại nhiệm vụ. Ghi câu em nói và mm:ss.
+- **Form:** "khá là dễ, nhưng dễ với người thông minh".
+
+**Lưu ý giờ:** S04 kéo dài khoảng 30 phút, gấp 3 lần kế hoạch. Ghi thời gian thật vào phiếu, đây cũng là dữ kiện. Còn S05–S07, nếu mỗi phiên khoảng 15 phút thì xong lúc 00:30. Từ giờ em giữ mốc 6 phút: hết giờ thì *"Mình dừng ở đây nhé"*, trừ khi bạn đang sắp xong.
+
+**Khối chat S05:**
+```
+Link: https://protecting-creativity-repeat-gene.trycloudflare.com/
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+Form: mã phiên **S05**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #146 | 23:55 10/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+phiên mới
+```
+
+**Output:**
+```
+Link mới: https://translate-clients-storage-friday.trycloudflare.com
+- Đã tắt tunnel cũ, restart backend (dữ liệu seed lại). Trang chủ trả 200, `/api/products` có đủ 5 sản phẩm (kiểm bằng curl). Tunnel đang chạy, em không tự tắt.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #147 | 00:00 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S05: Mình nghĩ là khi ấn thêm vào giỏ thì phải hiện thông báo đơn hàng này phải thêm vào giỏ để người dùng dễ nhận biết hơn. Ví dụ thêm vào rồi thì ở cái chỗ giỏ hàng hiển thị số 1 để biết có 1 đơn hàng trong giỏ hàng.
+===
+https://translate-clients-storage-friday.trycloudflare.com/
+```
+
+**Output:**
+````
+Ghi phiếu S05:
+- **N:** "khi ấn thêm vào giỏ thì phải hiện thông báo… để người dùng dễ nhận biết hơn". Bạn gợi ý: biểu tượng giỏ hiện số 1 khi có 1 món. Ghi nguyên văn, đây là đề xuất của người tham gia.
+- Ghi thêm mốc thời gian, kết quả hoàn thành, trạng thái đơn bạn nói, và có lần sửa tổng tiền hay không. Thông tin này để so với S01/S04.
+
+Hiện tại phiên thứ 4 trên 5 có nhắc tới phản hồi của nút thêm giỏ (S00, S01, S04, S05). Em chỉ ghi lại, tới phần findings mới gom.
+
+Còn S06 và S07. Bây giờ là 00:00, deadline 10:00.
+
+**Khối chat S06:**
+```
+Link: https://translate-clients-storage-friday.trycloudflare.com/
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+Form: mã phiên **S06**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #148 | 00:02 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Không làm pilot đâu nhé. Hết người rồi. Nên là nộp cả S00 đến S06 đấy nhé
+```
+
+**Output:**
+```
+Được. Vì kịch bản không đổi sau S00, dữ liệu S00 vẫn so sánh được với các phiên sau. Nhưng có 2 điểm phải ghi trung thực:
+
+1. **Đề yêu cầu pilot** ("Run a pilot session with one person… refine before the real sessions"). Nếu S00 thành phiên chính thì bài **không có pilot**. Report §5.5 và §12 phải nói rõ:
+   - S00 dự kiến là pilot. Do không tuyển thêm được người, em tính S00 là 1 trong 7 phiên.
+   - Sau S00 không sửa kịch bản nhiệm vụ, chỉ bổ sung cách điều phối: hỏi lại ngay khi người tham gia nhận xét mơ hồ, áp dụng từ S01.
+   - Phần "pilot" trong tự chấm Task 2 trừ tương ứng.
+
+   Không được ghi là có pilot, cũng không được dùng S00 vừa làm pilot vừa tính vào 7 phiên.
+2. **Khác biệt nhỏ về cách điều phối** giữa S00 và S01–S06 (S00 không hỏi lại "mật khẩu hơi kỳ kỳ") nên ghi vào phần giới hạn của nghiên cứu.
+
+Theo kế hoạch cũ, commit pilot là `2/10` và các phiên là `3/10…9/10`. Giờ sẽ là S00–S06 tương ứng `3/10…9/10`. Anh sẽ đưa vào lệnh nhập dữ liệu sau.
+
+**S06 (phiên cuối):** dùng khối chat vừa gửi, link `https://translate-clients-storage-friday.trycloudflare.com/`, mã phiên **S06**.
+
+Xong S06, em làm theo thứ tự:
+1. Bảo Claude Code tắt tunnel.
+2. Gửi anh 7 file phiếu (`S00.txt`…`S06.txt`) và nghề nghiệp của từng bạn (không cần tên, SĐT).
+3. Anh đưa lệnh dựng JSON và tính SUS. Em kiểm số rồi viết findings.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #149 | 00:21 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tắt tunnel
+```
+
+**Output:**
+```
+Đã tắt tunnel: cloudflared và Vite (:5173) không còn chạy.
+- Backend :3000 vẫn chạy (script để backend lại sau mỗi phiên), dữ liệu của phiên cuối vẫn nằm trong đó. Lần restart backend tới sẽ xoá và seed lại. Muốn tắt backend luôn thì báo em.
+- SUT vẫn ở nhánh `usability-tunnel`. Trước khi chạy lại checklist hoặc làm bài khác, chạy `tools\sut_main.ps1` để về `main`.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #150 | 00:22 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Vậy S07 ngày mai thêm được không, vì giờ mọi người đi ngủ hết rồi á.
+Nghề nghiệp theo thứ tự: DA, SWE, DE, Vật lý học, Tự động hoá, Dược, Thực phẩm
+```
+*Đính kèm:* `S00.txt`, `S01.txt`, `S02.txt`, `S03.txt`, `S04.txt`, `S05.txt`, `S06..txt`
+
+**Output:**
+````
+**Không cần S07.** S00–S06 đã đủ 7 phiên, đúng số đề yêu cầu. Thêm S07 sáng mai cũng không thành pilot, vì pilot phải chạy *trước* các phiên chính. Thêm phiên nữa chỉ tốn giờ, còn sáng mai em cần thời gian cho findings, Critique và nộp bài trước 10:00.
+
+**Hồ sơ 7 người:** DA, SWE, DE là 3 người IT; Vật lý, Tự động hoá, Dược, Thực phẩm là 4 người non-IT (Tự động hoá em tự xếp, ghi rõ trong bảng). Ghi tỉ lệ này vào phần giới hạn của nghiên cứu.
+
+**Điểm yếu cần biết:** phiếu quan sát hiện chỉ có câu nói. Chưa có **mốc thời gian, kết quả hoàn thành (có/không trợ giúp), số lỗi, do dự, trợ giúp** của từng phiên, trong khi plan mục 8 đo những thứ này. Cách gỡ nhanh:
+- Có video thì tua lại, mỗi phiên lấy **tổng thời gian + kết quả hoàn thành + có trợ giúp không**. Khoảng 3 phút một phiên.
+- Không có video hoặc không kịp thì ghi theo trí nhớ, ghi rõ "theo ghi nhớ của người điều phối, không có mốc mm:ss", và đưa vào phần giới hạn. Không được bịa số.
+
+Em gửi anh 7 dòng theo mẫu này (điền từ video hoặc trí nhớ):
+```
+S00: thời gian ~__ phút · hoàn thành: không trợ giúp/có trợ giúp/không · nói đúng trạng thái đơn: có/không · có sửa tổng tiền: có/không
+```
+
+Rồi tải CSV từ tab Responses của form, đặt vào `HW03\usability\evidence_raw\responses.csv`, và dán cho Claude Code:
+
+```
+NHIỆM VỤ: nhập 7 phiên usability S00–S06 (T2 3/10…9/10). SV chốt: không có pilot – S00 (dự kiến pilot) tính là phiên chính vì không tuyển thêm được người; sau S00 không sửa kịch bản, chỉ thêm "hỏi lại ngay khi nhận xét mơ hồ" từ S01. Ghi report_plan mục e. Không push, không amend.
+1. Tắt tunnel. Đảm bảo HW03/usability/evidence_raw/ bị gitignore (CSV có họ tên/SĐT – KHÔNG commit, KHÔNG in ra báo cáo).
+2. SV đặt phiếu ghi tay S00.txt…S06.txt vào HW03/usability/sessions/notes/ → commit nguyên văn (không sửa chữ).
+3. Mỗi phiên: new_session.py tạo khung S0x; điền (nhãn "AI chép, SV duyệt"): mã P0x, nghề nghiệp theo thứ tự S00…S06 = DA, SWE, DE, Vật lý học, Tự động hoá, Dược, Thực phẩm; SEQ + 10 câu SUS chép từ responses.csv theo cột "Mã phiên" (chữ số đầu của ô); câu nói nguyên văn từ notes/S0x.txt; thời gian/kết quả = `<SV điền>`. Mã phiên trong CSV trùng/thiếu/có dòng thử ("z") → bỏ dòng thử, thiếu thì DỪNG báo.
+4. sus_score.py HW03/usability/sessions --check (lỗi → báo, không tự sửa số).
+5. Commit mỗi phiên 1 commit `HW03[T2] k/10: phiên S0x` (S00=3/10 … S06=9/10).
+Báo cáo ≤ 10 dòng: SEQ + SUS từng phiên (đã tính), trung bình, lỗi check, hash.
+```
+
+Sau đó: em điền thời gian và kết quả vào JSON, Claude Code chạy `sus_score.py --report`, rồi em viết findings (§5.8, 5.9). Ngủ được thì ngủ vài tiếng trước khi viết findings; đầu óc tỉnh viết sẽ nhanh hơn.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #151 | 00:30 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mở lại tunnel
+```
+
+**Output:**
+```
+Tunnel đã mở lại: https://medicine-thee-flush-soldier.trycloudflare.com
+- Trang chủ trả 200, `/api/products` có đủ 5 sản phẩm (kiểm bằng curl). SUT vẫn ở `usability-tunnel` @ `e33212d`.
+- Lần này em không restart backend để giữ dữ liệu của phiên trước (tài khoản, đơn hàng); chỉ bật lại Vite và cloudflared bằng tay. Cần phiên sạch (seed lại) thì nói "phiên mới".
+```
+
+**Xử lý:** [...]
+
+---
+
+## #152 | 00:32 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+https://medicine-thee-flush-soldier.trycloudflare.com/
+---
+mới mở lại cho lượt 7, viết nhé
+```
+
+**Output:**
+````
+Khối chat cho **S07**:
+
+```
+Link: https://medicine-thee-flush-soldier.trycloudflare.com/
+
+NHIỆM VỤ: Bạn muốn mua một chiếc tai nghe chống ồn cho mình trên trang EShop.
+Cửa hàng đã tặng bạn mã giảm giá VIP100. Hãy đặt mua tai nghe với giá đã được giảm,
+sau đó kiểm tra xem đơn hàng của bạn đã được ghi nhận chưa và đang ở trạng thái nào.
+
+Tài khoản: test@eshop.com / Test1234!
+Xong thì nói "Xong".
+```
+
+Form: `https://docs.google.com/forms/d/e/1FAIpQLScZPV1xgaQLVw8nUl8wmY8EqEol7BeoMwhDjaCw1rEXGoNuqQ/viewform`, mã phiên **S07**.
+
+Nhớ bật quay sau khi bạn đồng ý, bấm đồng hồ khi bạn mở link, và hỏi lại ngay khi bạn nhận xét mơ hồ.
+
+Có S07 thì bài có 8 người, nhiều hơn mức 7 của đề, nên cũng tốt. Nhưng S00 vẫn là phiên chính, không phải pilot. Khi dán lệnh nhập dữ liệu cho Claude Code, em sửa mấy chỗ:
+- "S00–S06" thành "S00–S07".
+- Thêm nghề nghiệp của S07 vào cuối danh sách.
+- Commit S07 thành `HW03[T2] 10/10: phiên S07`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #153 | 00:41 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xong luôn rồi, vẫn để pilot nhé. Nên là quay tới S07 là đúng nhỉ
+```
+*Đính kèm:* `S07.txt`
+
+**Output:**
+````
+Đúng: **S00 là pilot, S01–S07 là 7 phiên chính**. Cách này hợp lệ và tốt hơn phương án lúc nãy, vì S00 thật sự chạy *trước* các phiên chính và có rút kinh nghiệm (hỏi lại ngay khi người tham gia nhận xét mơ hồ, áp dụng từ S01). Như vậy đủ cả pilot lẫn 7 phiên theo đề.
+
+Ghi phiếu S07 (nguyên văn):
+- **L/N:** "Bấm 1 đơn thành 2 đơn". Nếu em nhớ thì ghi bạn bấm nút nào, bấm mấy lần.
+- **N:** "Không cần nhập địa chỉ, số điện thoại vẫn đặt được đơn".
+- **N:** "Tên cũng không cần đổi vẫn đặt được".
+
+**Cần em bổ sung:** nghề nghiệp lúc nãy em đưa 7 cái cho S00–S06. Giờ cần nghề của **S07**, và xác nhận thứ tự vẫn là S00 = DA, S01 = SWE, …, S06 = Thực phẩm.
+
+Lệnh cho Claude Code (thay `<...>`):
+
+```
+NHIỆM VỤ: nhập pilot + 7 phiên usability. SV chốt: S00 = pilot (chạy trước, sau pilot giữ nguyên kịch bản, bổ sung "hỏi lại ngay khi nhận xét mơ hồ" từ S01); S01–S07 = 7 phiên chính. Ghi report_plan mục e + report §5.5. Còn <...> → DỪNG. Không push, không amend.
+1. Tắt tunnel. Kiểm HW03/usability/evidence_raw/ bị gitignore (responses.csv có họ tên/SĐT – KHÔNG commit, KHÔNG in ra báo cáo).
+2. SV đặt notes S00.txt…S07.txt vào HW03/usability/sessions/notes/ → commit nguyên văn.
+3. Mỗi phiên: new_session.py tạo khung; điền (nhãn "AI chép, SV duyệt"): mã P00…P07; nghề nghiệp S00…S07 = DA, SWE, DE, Vật lý học, Tự động hoá, Dược, Thực phẩm, <nghề S07>; SEQ + 10 câu SUS từ responses.csv theo "Mã phiên" (chữ số đầu; bỏ dòng thử "z"; thiếu/trùng → DỪNG báo); câu nói nguyên văn từ notes; thời gian/kết quả/trợ giúp = `<SV điền>`. S00 đánh dấu pilot, không tính vào thống kê 7 phiên.
+4. sus_score.py HW03/usability/sessions --check.
+5. Commit: S00 `HW03[T2] 2/10: pilot S00`; S01…S07 `HW03[T2] 3/10…9/10: phiên S0x`.
+Báo cáo ≤ 10 dòng: SEQ + SUS từng phiên, trung bình S01–S07, lỗi check, hash.
+```
+
+Trong lúc Claude Code chạy, em gửi anh dòng tóm tắt từng phiên theo mẫu: thời gian, hoàn thành có/không trợ giúp, nói đúng trạng thái đơn, có sửa tổng tiền. Em lấy từ video hoặc trí nhớ, ghi rõ nguồn nào.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #154 | 00:43 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Vậy prompt ở trên kia có cần sử dụng không nhỉ (prompt mà có tải CSV ấy)
+```
+*Đính kèm:* `EShop_-_Phi_u_ng__i_tham_gia___nh_gi__HW03.csv`
+
+**Output:**
+```
+Vẫn dùng prompt đó: Claude Code cần đọc CSV trên máy em để chép số SEQ/SUS vào JSON. Nhưng phải sửa 3 chỗ, và có 1 việc khai báo.
+
+**1. Sửa trong prompt**
+- **Mã "SO1" (chữ O):** dòng S01 trong form bị gõ nhầm. Thêm vào prompt: *"dòng 'SO1' (chữ O) = S01, ghi notes 'mã phiên người tham gia gõ nhầm'"*. Không thêm thì Claude Code sẽ DỪNG vì thiếu S01.
+- **Nghề S07:** em chưa đưa. Lưu ý cột "Bạn là" trong form chủ yếu ghi "Năm 4" hoặc "4", không trùng danh sách nghề em gửi anh. Dùng danh sách của em, ghi nguồn "SV cung cấp".
+- **S07 chọn "Không" ở câu đồng ý để TA liên hệ.** Ghi vào bảng người tham gia. Đề nói TA có thể gọi ngẫu nhiên 2 người, nên trong bảng em đánh dấu S07 "không đồng ý liên hệ" để TA chọn người khác.
+
+**2. Khai báo quyền riêng tư**
+File CSV em vừa gửi lên đây có **họ tên và SĐT thật của 8 người**. AI-01 cấm tải dữ liệu cá nhân lên AI công cộng. Đã gửi rồi thì không rút lại được, nên ở **AI-05** không tick im lặng mục này. Ghi một dòng minh bạch, ví dụ: "em đã lỡ gửi file CSV có họ tên và SĐT người tham gia cho Claude ở phiên thảo luận lúc 00:43 11/11; AI chỉ dùng cột số SEQ/SUS". Từ giờ chỉ đưa CSV cho Claude Code ở `evidence_raw/` trên máy em.
+
+**3. Số liệu anh tính thử** (chỉ để em đối chiếu khi Claude Code báo về):
+
+| Phiên | SEQ | SUS |
+|---|---|---|
+| S00 (pilot) | 6 | 85,0 |
+| S01 | 6 | 55,0 |
+| S02 | 7 | 90,0 |
+| S03 | 7 | 97,5 |
+| S04 | 4 | 52,5 |
+| S05 | 7 | 90,0 |
+| S06 | 6 | 75,0 |
+| S07 | 7 | 85,0 |
+| **TB S01–S07** | **6,29** | **77,9** |
+
+Bảng chỉ để em kiểm. Report phải lấy số từ `sus_score.py --report`. Nếu Claude Code ra khác thì báo anh.
+
+Một điểm cho phần findings của em: hai phiên SUS thấp nhất (S01, S04) cũng là hai phiên người tham gia sửa được tổng tiền và trả lời "không tin" ở câu tin cậy.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #155 | 00:44 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Là dùng cả prompt trên và prompt dưới luôn sao, có thể giúp tôi gộp lại không
+```
+
+**Output:**
+````
+Dùng một prompt này thay cho cả hai. Em chỉ cần điền `<nghề S07>`:
+
+```
+NHIỆM VỤ: nhập pilot + 7 phiên usability. SV chốt: S00 = pilot (chạy trước; sau pilot giữ nguyên kịch bản, bổ sung "hỏi lại ngay khi nhận xét mơ hồ" từ S01); S01–S07 = 7 phiên chính. Ghi report_plan mục e + report §5.5. Còn <...> → DỪNG. Không push, không amend.
+1. Tắt tunnel. SV đặt CSV form ở HW03/usability/evidence_raw/responses.csv – kiểm thư mục này bị gitignore (CSV có họ tên/SĐT: KHÔNG commit, KHÔNG in ra báo cáo/log).
+2. SV đặt notes S00.txt…S07.txt vào HW03/usability/sessions/notes/ → commit nguyên văn.
+3. Mỗi phiên: new_session.py tạo khung; điền (nhãn "AI chép, SV duyệt"):
+   - mã P00…P07; nghề nghiệp (nguồn "SV cung cấp", không lấy cột "Bạn là" của form) S00…S07 = DA, SWE, DE, Vật lý học, Tự động hoá, Dược, Thực phẩm, <nghề S07>;
+   - SEQ + 10 câu SUS từ responses.csv theo "Mã phiên" (lấy chữ số đầu ô). Dòng "SO1" (chữ O) = S01, ghi notes "người tham gia gõ nhầm mã phiên". Thiếu/trùng mã khác → DỪNG báo;
+   - 3 câu đồng ý (Có/Không) – S07 "đồng ý TA liên hệ" = Không, đánh dấu rõ;
+   - câu nói nguyên văn từ notes; câu trả lời 4 câu mở chép nguyên văn từ CSV;
+   - thời gian / kết quả hoàn thành / trợ giúp = `<SV điền>`.
+   S00 đánh dấu pilot, không tính vào thống kê.
+4. sus_score.py HW03/usability/sessions --check (lỗi → báo, không tự sửa số SV).
+5. report_plan mục f: AI dựng JSON từ notes + CSV. Mục g (cho AI-05): "SV đã gửi CSV có họ tên/SĐT người tham gia cho phiên thảo luận claude.ai lúc 00:43 11/11; AI chỉ dùng cột SEQ/SUS" – ghi để SV khai minh bạch.
+6. Commit: notes `HW03[T2]: phiếu ghi tay S00–S07`; S00 `HW03[T2] 2/10: pilot S00`; S01…S07 `HW03[T2] 3/10…9/10: phiên S0x`.
+Báo cáo ≤ 10 dòng: SEQ + SUS từng phiên, trung bình S01–S07, lỗi check, hash. (Đối chiếu: phiên thảo luận tính được S01–S07 SUS TB 77,9, SEQ TB 6,29.)
+```
+
+Trước khi dán, em làm 2 việc:
+1. Đặt `responses.csv` vào `HW03\usability\evidence_raw\`.
+2. Đặt 8 file `S00.txt`…`S07.txt` vào `HW03\usability\sessions\notes\`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #156 | 00:45 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: nhập pilot + 7 phiên usability. SV chốt: S00 = pilot (chạy trước; sau pilot giữ nguyên kịch bản, bổ sung "hỏi lại ngay khi nhận xét mơ hồ" từ S01); S01–S07 = 7 phiên chính. Ghi report_plan mục e + report §5.5. Còn <...> → DỪNG. Không push, không amend.
+1. Tắt tunnel. SV đặt CSV form ở HW03/usability/evidence_raw/responses.csv – kiểm thư mục này bị gitignore (CSV có họ tên/SĐT: KHÔNG commit, KHÔNG in ra báo cáo/log).
+2. SV đặt notes S00.txt…S07.txt vào HW03/usability/sessions/notes/ → commit nguyên văn.
+3. Mỗi phiên: new_session.py tạo khung; điền (nhãn "AI chép, SV duyệt"):
+   - mã P00…P07; nghề nghiệp (nguồn "SV cung cấp", không lấy cột "Bạn là" của form) S00…S07 = DA, SWE, DE, Vật lý học, Tự động hoá, Dược, Thực phẩm, IT;
+   - SEQ + 10 câu SUS từ responses.csv theo "Mã phiên" (lấy chữ số đầu ô). Dòng "SO1" (chữ O) = S01, ghi notes "người tham gia gõ nhầm mã phiên". Thiếu/trùng mã khác → DỪNG báo;
+   - 3 câu đồng ý (Có/Không) – S07 "đồng ý TA liên hệ" = Không, đánh dấu rõ;
+   - câu nói nguyên văn từ notes; câu trả lời 4 câu mở chép nguyên văn từ CSV;
+   - thời gian / kết quả hoàn thành / trợ giúp = `<SV điền>`.
+   S00 đánh dấu pilot, không tính vào thống kê.
+4. sus_score.py HW03/usability/sessions --check (lỗi → báo, không tự sửa số SV).
+5. report_plan mục f: AI dựng JSON từ notes + CSV. Mục g (cho AI-05): "SV đã gửi CSV có họ tên/SĐT người tham gia cho phiên thảo luận claude.ai lúc 00:43 11/11; AI chỉ dùng cột SEQ/SUS" – ghi để SV khai minh bạch.
+6. Commit: notes `HW03[T2]: phiếu ghi tay S00–S07`; S00 `HW03[T2] 2/10: pilot S00`; S01…S07 `HW03[T2] 3/10…9/10: phiên S0x`.
+Báo cáo ≤ 10 dòng: SEQ + SUS từng phiên, trung bình S01–S07, lỗi check, hash. (Đối chiếu: phiên thảo luận tính được S01–S07 SUS TB 77,9, SEQ TB 6,29.)
+```
+
+**Output:**
+```
+Em dừng ở bước 2: chưa có file CSV và notes nên chưa nhập được phiên nào.
+- Tunnel đã tắt (cloudflared và Vite :5173); backend :3000 vẫn chạy.
+- `HW03/usability/evidence_raw/` lúc đầu chưa bị gitignore. Em đã thêm dòng `HW03/usability/evidence_raw/` vào `.gitignore` và kiểm lại thì `responses.csv` đã bị ignore. Thay đổi này chưa commit; em sẽ commit chung với commit notes.
+- Thiếu `HW03/usability/evidence_raw/responses.csv` (cả thư mục chưa có).
+- Thiếu `HW03/usability/sessions/notes/S00.txt…S07.txt` (trong `sessions/` hiện chỉ có `.gitkeep`).
+
+SV đặt CSV và 8 file notes vào đúng đường dẫn trên rồi báo em làm tiếp từ bước 2.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #157 | 00:46 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đã đặt CSV và notes rồi, làm tiếp
+```
+
+**Output:**
+```
+Em dừng ở bước 2: CSV đã có nhưng notes vẫn chưa thấy, nên chưa tạo phiên và chưa commit gì.
+- **Notes:** chưa có `HW03/usability/sessions/notes/` (thư mục chưa tồn tại). Em tìm mọi file mới trong repo cũng không thấy file `S0*.txt` nào. Có thể SV đã lưu sang chỗ khác.
+- **CSV:** có 8 dòng, mã phiên S00, SO1 (chữ O, sẽ tính là S01), S02 … S07; không thiếu hay trùng mã nào khác. S07 chọn "Không" ở câu đồng ý trợ giảng liên hệ. File bị gitignore; em chỉ đọc cột mã phiên, đồng ý, SEQ, SUS, không in họ tên/SĐT.
+- **Tính thử từ CSV** (chưa ghi vào file nào):
+
+| Phiên | SEQ | SUS |
+|---|---|---|
+| S00 (pilot) | 6 | 85 |
+| S01 | 6 | 55 |
+| S02 | 7 | 90 |
+| S03 | 7 | 97,5 |
+| S04 | 4 | 52,5 |
+| S05 | 7 | 90 |
+| S06 | 6 | 75 |
+| S07 | 7 | 85 |
+
+  Trung bình S01–S07: SUS 77,86, SEQ 6,29, khớp số phiên thảo luận (77,9 và 6,29).
+
+SV đặt `S00.txt … S07.txt` vào `HW03/usability/sessions/notes/` (hoặc báo đường dẫn đang lưu) rồi em làm tiếp từ bước 2.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #158 | 00:47 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đã đặt notes rồi, làm tiếp
+```
+
+**Output:**
+```
+Notes + CSV có đủ. Đang xem report §5 và report_plan để ghi quyết định, rồi dựng JSON phiên.
+
+Notes đã commit. Đang viết script dựng 8 phiếu JSON từ notes + CSV.
+
+Đã nhập pilot S00 và 7 phiên chính S01–S07: mỗi phiên một file JSON, đã commit; `--check` báo 16 lỗi, đều do các ô `<SV điền>`.
+
+| Phiên | SEQ | SUS |
+|---|---|---|
+| S00 (pilot, không tính) | 6 | 85 |
+| S01 | 6 | 55 |
+| S02 | 7 | 90 |
+| S03 | 7 | 97,5 |
+| S04 | 4 | 52,5 |
+| S05 | 7 | 90 |
+| S06 | 6 | 75 |
+| S07 | 7 | 85 |
+
+- **Trung bình S01–S07:** SUS 77,86, SEQ 6,29, khớp số phiên thảo luận (77,9 / 6,29).
+- **Kết quả `sus_score.py --check`:** 16 lỗi, đúng 2 ô mỗi phiếu (`hoan_thanh`, `ket_thuc` đang để `<SV điền>`). Vì vậy chưa phiên nào được tính vào bảng thống kê cho tới khi SV điền. Còn một số cảnh báo `t` / `reset_du_lieu` cũng do ô `<SV điền>`. Không có lỗi dữ liệu cá nhân (SĐT, email).
+- **Ghi chú trong phiếu:** S01 ghi "gõ nhầm mã phiên (SO1, chữ O)"; S07 ghi `lien_he_xac_nhan` = false, kèm câu "KHÔNG đồng ý để trợ giảng liên hệ xác nhận".
+- **CSV:** `HW03/usability/evidence_raw/` đã bị gitignore, không commit. Em chỉ đọc cột mã phiên, ngày, đồng ý, SEQ, SUS, 4 câu mở; không in họ tên/SĐT ra đâu.
+- **Notes:** file `S06..txt` (dư dấu chấm) em đã đổi tên thành `S06.txt`, nội dung giữ nguyên văn.
+- **Report:** khôi phục lại khung §5.4–5.9 trước đó, §5.5 ghi quyết định pilot; report_plan đã ghi mục e (PILOT), f (`tools/usability_fill_hw03.py` do AI viết), g (dòng CSV gửi lúc 00:43 11/11).
+- **Commit:** `411c7ca` (notes), `750cfdd` (2/10 pilot S00), `8c9145d` … `52ea483` (3/10 … 9/10, S01–S07). Chưa push.
+- **Còn treo:**
+  - Ô `<SV điền>` (thời gian, hoàn thành, trợ giúp, nền tảng, reset dữ liệu) do SV nhập.
+  - Mọi dòng notes đang để loại N (câu nói nguyên văn). Có vài dòng là ghi chú của SV chứ không phải lời người tham gia, cần đổi loại: S01 dòng 5–7, S04 dòng 17 "Nhắc lại nhiệm vụ." (có thể là một lần trợ giúp).
+  - Test summary ở README/report vẫn ghi "không thực hiện phiên usability", cần sinh lại bằng `summary_hw03.py`.
+```
+*File AI ghi/gửi trong lượt này:* `usability_fill_hw03.py`
+
+**Xử lý:** [...]
+
+---
+
+## #159 | 00:50 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+- Trung bình S01–S07: SUS 77,86, SEQ 6,29, khớp số phiên thảo luận (77,9 / 6,29).
+- Kết quả sus_score.py --check: 16 lỗi, đúng 2 ô mỗi phiếu (hoan_thanh, ket_thuc đang để <SV điền>). Vì vậy chưa phiên nào được tính vào bảng thống kê cho tới khi SV điền. Còn một số cảnh báo t / reset_du_lieu cũng do ô <SV điền>. Không có lỗi dữ liệu cá nhân (SĐT, email).
+- Ghi chú trong phiếu: S01 ghi "gõ nhầm mã phiên (SO1, chữ O)"; S07 ghi lien_he_xac_nhan = false, kèm câu "KHÔNG đồng ý để trợ giảng liên hệ xác nhận".
+- CSV: HW03/usability/evidence_raw/ đã bị gitignore, không commit. Em chỉ đọc cột mã phiên, ngày, đồng ý, SEQ, SUS, 4 câu mở; không in họ tên/SĐT ra đâu.
+- Notes: file S06..txt (dư dấu chấm) em đã đổi tên thành S06.txt, nội dung giữ nguyên văn.
+- Report: khôi phục lại khung §5.4–5.9 trước đó, §5.5 ghi quyết định pilot; report_plan đã ghi mục e (PILOT), f (tools/usability_fill_hw03.py do AI viết), g (dòng CSV gửi lúc 00:43 11/11).
+- Commit: 411c7ca (notes), 750cfdd (2/10 pilot S00), 8c9145d … 52ea483 (3/10 … 9/10, S01–S07). Chưa push.
+- Còn treo:
+  - Ô <SV điền> (thời gian, hoàn thành, trợ giúp, nền tảng, reset dữ liệu) do SV nhập.
+  - Mọi dòng notes đang để loại N (câu nói nguyên văn). Có vài dòng là ghi chú của SV chứ không phải lời người tham gia, cần đổi loại: S01 dòng 5–7, S04 dòng 17 "Nhắc lạần trợ giúp).
+  - Test summary ở README/report vẫn ghi "không thực hiện phiên usability", cần sinh lại bằng summary_hw03.py.
+```
+
+**Output:**
+````
+Số liệu đã khớp. Phần Task 2 còn phải làm như sau.
+
+**1. Em điền JSON (khoảng 15 phút).** Mở `HW03/usability/sessions/S0x.json`, thay các ô `<SV điền>`:
+- `hoan_thanh`: không trợ giúp / có trợ giúp / không hoàn thành.
+- `ket_thuc` và thời gian `t`: lấy từ video hoặc trí nhớ, kèm ghi chú nguồn.
+- `tro_giup`.
+- `nen_tang`: trình duyệt và OS của người tham gia. Không biết thì ghi "không ghi nhận".
+- `reset_du_lieu`: = true nếu phiên đó em có bảo Claude Code "phiên mới", vì script restart backend.
+
+Sửa luôn loại dòng: S01 dòng 5–7 là ghi chú của em (chuyển sang loại ghi chú, không phải N). S04 "Nhắc lại nhiệm vụ" là **T**.
+Không nhớ số thì ghi đúng như vậy, **không ước lượng cho đẹp**.
+
+Xong thì commit `HW03[T2]: SV điền kết quả phiên S00–S07`, push, rồi dán:
+```
+sus_score.py HW03/usability/sessions --check phải 0 lỗi → --report vào marker REPORT:U1; chạy lại summary_hw03.py (README + report §8 hết dòng "không thực hiện phiên"). Commit `HW03[T2] 10/10: số liệu U1`. Báo ≤ 5 dòng + hash.
+```
+
+**2. Em viết findings §5.8–5.9 (🔒, khoảng 45 phút).** Gom pain point, tách lỗi riêng lẻ với vấn đề thiết kế, xếp theo severity.
+
+**Ước thời gian còn lại (bây giờ 00:50, deadline 10:00):**
+
+| Giờ | Việc | Ai |
+|---|---|---|
+| 00:50–01:10 | Điền JSON phiên | Em |
+| 01:10–02:10 | Sửa 14 bug theo `bug_check.md`, commit `5/6f`, push | Em |
+| 02:10–03:00 | Tạo 28 issue và chụp ảnh trang Issues (em xác nhận bảng tiêu đề, kéo ảnh) | Claude Code + em |
+| 02:10–03:00 | Song song: findings §5.8–5.9, §3.4 | Em |
+| 03:00–07:00 | Ngủ | |
+| 07:00–09:30 | Duyệt khối 📝, Critique, verdict Audit, tự chấm, AI-05, PDF, xuất transcript `_p2`, commit log, zip | Em + Claude Code |
+| Nếu còn giờ | Video skill. Không kịp thì trừ điểm skill tương ứng | Em |
+
+Nếu phải cắt, **video là thứ cắt đầu tiên**. Thiếu bug hay thiếu Audit thì rủi ro lớn hơn nhiều.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #160 | 00:52 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+```json
+  "reset_du_lieu": "<SV điền>",
+```
+
+này điền gì giờ?
+````
+
+**Output:**
+````
+Điền `true` (boolean, **không có ngoặc kép**):
+
+```json
+  "reset_du_lieu": true,
+```
+
+Trường này hỏi: trước phiên này, backend có được khởi động lại để CSDL seed lại sạch không (xoá đơn và lượt dùng mã của người trước). Script tunnel tự restart backend mỗi lần chạy, nên:
+- **S00:** `true`. Tunnel mở lần đầu lúc 21:56.
+- **S01–S06:** `true` nếu trước mỗi phiên em đều gõ "phiên mới" cho Claude Code. Mỗi phiên em đều gửi link tunnel mới, link mới đồng nghĩa script đã chạy lại, nên là `true`.
+- **S07:** `true`. Em đã mở lại tunnel.
+
+Phiên nào em **không** chạy lại tunnel (dùng lại link cũ) thì ghi `false`. Theo các link em gửi anh tối nay, phiên nào cũng có link riêng.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #161 | 00:53 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+nen_tang là Chrome hay Firefox gì đó à
+```
+
+**Output:**
+````
+Đúng, ghi **trình duyệt + hệ điều hành mà người tham gia dùng trong phiên**, không phải P1/P2/P3. Mẫu trong schema ghi `"P1"` là của lúc chạy checklist, còn plan mục 6 nói rõ trình duyệt và OS ở Task 2 là **của người tham gia**.
+
+Ví dụ:
+```json
+  "nen_tang": "Chrome / Windows 11",
+```
+
+Cách điền:
+- **Thấy được trong video** (thanh tab, logo trình duyệt, taskbar Windows/macOS) thì ghi theo video, ví dụ `"Edge / Windows 11"`, `"Safari / macOS"`.
+- **Không chắc OS** thì chỉ ghi trình duyệt, ví dụ `"Chrome / không ghi nhận OS"`.
+- **Không có video và không nhớ** thì ghi `"không ghi nhận"`. Đừng đoán.
+
+Tiện thể điền luôn trường `nhom` theo nghề: DA, SWE, DE là `"IT"`; Vật lý học, Dược, Thực phẩm là `"non-IT"`; Tự động hoá do em tự quyết (đã nói là sẽ xếp và ghi rõ). S07 thì theo nghề em sẽ bổ sung.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #162 | 00:55 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+```json
+    "ket_thuc": "<SV điền>",
+    "hoan_thanh": "<SV điền>",
+```
+
+Là sao, tưởng hỏi thời gian?
+````
+
+**Output:**
+````
+Có hai ô khác nhau: một ô là thời gian, một ô là kết quả.
+
+**`ket_thuc` là thời gian**: tổng thời gian làm nhiệm vụ, tính từ lúc bạn mở link (00:00) tới lúc nói "Xong" hoặc bỏ cuộc. Định dạng bắt buộc là `mm:ss`:
+```json
+    "ket_thuc": "05:30",
+```
+Script báo lỗi nếu không đúng `mm:ss`. Nếu em không bấm giờ, lấy từ video. Không có video thì ước theo trí nhớ, nhưng ghi vào `ghi_chu` ví dụ `"ket_thuc ước theo trí nhớ, không bấm giờ"`.
+
+**`hoan_thanh` là kết quả**, chỉ nhận đúng 1 trong 3 giá trị:
+
+| Giá trị | Khi nào |
+|---|---|
+| `"khong_tro_giup"` | Bạn tự làm xong, em không nhắc gì |
+| `"co_tro_giup"` | Xong nhưng em có can thiệp (ví dụ S04 em nhắc lại nhiệm vụ) |
+| `"khong_hoan_thanh"` | Bỏ cuộc, hết giờ, hoặc không đạt tiêu chí thành công |
+
+Lưu ý:
+- Script kiểm chéo: có sự kiện loại **T** hoặc mục trong `tro_giup` mà lại ghi `khong_tro_giup` là báo lỗi. Vì vậy S04 phải là `co_tro_giup`.
+- **S01 và S04 có sửa tổng tiền.** Tiêu chí thành công trong plan là tổng 5.900.000 ₫ và nói được trạng thái đơn. Nếu đơn cuối cùng của bạn không đúng số này, em quyết là `khong_hoan_thanh`, hay vẫn tính hoàn thành và ghi rõ lý do trong `ghi_chu`. S04 có đặt lại một đơn đúng với VIP100, nên xem đơn đó.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #163 | 00:57 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+````
+```json
+      "t": "<SV điền>",
+```
+
+Mấy cái t này điền sao
+````
+
+**Output:**
+````
+`t` là **thời điểm** xảy ra sự kiện (hoặc lần trợ giúp), tính từ lúc bắt đầu nhiệm vụ, định dạng `mm:ss`. Mỗi dòng trong `su_kien` và `tro_giup` có một `t` riêng:
+
+```json
+"su_kien": [
+  { "t": "01:20", "man_hinh": "Trang chủ", "loai": "L", "mo_ta": "Bấm thêm vào giỏ ở danh sách không có phản hồi", "bug": true }
+],
+"tro_giup": [
+  { "t": "08:30", "ly_do": "...", "cau_noi": "..." }
+]
+```
+
+Em điền như sau:
+- **Có video:** tua tới đúng câu nói hoặc hành động đó, lấy số phút:giây trên video trừ đi lúc bạn mở link.
+- **Không có video, nhớ đại khái thứ tự:** vẫn điền `mm:ss` ước lượng theo thứ tự trước sau, và thêm một dòng vào `ghi_chu` của phiên: `"t của su_kien ước theo trí nhớ, không có mốc thật"`.
+- **Hoàn toàn không nhớ:** điền `"00:00"` cho mọi dòng, và ghi rõ trong `ghi_chu`: `"không ghi mốc thời gian; t = 00:00 chỉ để đúng định dạng"`. Như vậy script không lỗi, và người chấm biết đây không phải số đo thật.
+
+Quan trọng nhất là **không bịa mốc chính xác** khi em không đo. Ghi chú trung thực sẽ tốt hơn số đẹp mà không có căn cứ; nếu bị vấn đáp, em giải thích được.
+
+Tiện thể: dòng `"bug"` để `true` khi sự kiện đó trùng hoặc liên quan một bug đã biết (ví dụ nút thêm giỏ, sửa được tổng tiền, SĐT bị chặn). Đánh `true` hay `false` là em quyết, vì đó là một phần phân tích của em.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #164 | 05:12 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã điền xong hết rồi. làm gì tiếp nhỉ
+```
+
+**Output:**
+````
+Bây giờ là 05:12, còn khoảng **4 giờ 45 phút**. Trên GitHub vẫn chỉ tới `af92e6d` (20:14), tức các commit phiên usability chưa lên. Em **commit JSON và push ngay**.
+
+**Kế hoạch tới 10:00**, theo thứ tự và chạy song song chỗ được:
+
+| Giờ | Em | Claude Code |
+|---|---|---|
+| 05:15 | Commit + push JSON phiên | Số liệu U1 + chuẩn bị issue cho 14 bug sạch (lệnh 1) |
+| 05:20–06:05 | Sửa 14 bug theo `bug_check.md`, commit `5/6f`, push | Tạo issue 14 bug sạch (em xác nhận bảng tiêu đề, kéo ảnh) |
+| 06:05–06:50 | **Findings §5.8–5.9** (🔒) | Tạo 14 issue còn lại, chụp ảnh trang Issues |
+| 06:50–07:10 | §3.4 (🔒) + duyệt khối 📝 (§3.2, §4.2, §5.5, §11) | |
+| 07:10–07:40 | **Critique 200–300 từ** | |
+| 07:40 | | Anh xuất transcript `_p2`, em trích prompt log, Claude Code điền #n vào AI-02/03 |
+| 07:50–08:30 | Verdict + lý do Audit, tự chấm §12, ngày | |
+| 08:30–09:15 | Ký | AI-05, PDF, commit log, `hw-submission-audit`, zip |
+| 09:15–09:45 | Kiểm zip, nộp Moodle | |
+| Dư giờ | Video skill. Không kịp thì trừ điểm skill | |
+
+**Lệnh 1 cho Claude Code** (dán sau khi em push):
+```
+1. sus_score.py HW03/usability/sessions --check phải 0 lỗi (lỗi → báo, không sửa số SV) → --report vào marker REPORT:U1; summary_hw03.py chạy lại (README/report §8 có số U1). Report §5: bỏ dòng "Không thực hiện phiên…" nếu còn. Commit `HW03[T2] 10/10: số liệu U1`.
+2. Chuẩn bị issue cho 14 bug "sạch" theo bug_check.md (59, 60, 61, 65, 66, 67, 68, 69, 71, 74, 77, 83, 84, 85): gh = ThachHaoo; lấy lại danh sách issue kiểm trùng lần cuối; in bảng: BUG – tiêu đề GitHub = "[HW03-C2-xx] " + Tiêu đề trong file – label bug – ảnh cần kéo (bản đã che, từ evidence/). DỪNG chờ SV xác nhận bảng. Body lấy nguyên file BUG-xx.md (--body-file), không sửa chữ.
+Báo ≤ 10 dòng + bảng + hash. Không push.
+```
+
+Sau khi em xác nhận bảng, Claude Code tạo issue tuần tự. Theo quy ước HW02 có 2 điểm dừng: (1) em xác nhận bảng tiêu đề, (2) em kéo ảnh vào issue rồi báo xong. Trong lúc đó em vẫn sửa 14 bug còn lại.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #165 | 05:13 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. sus_score.py HW03/usability/sessions --check phải 0 lỗi (lỗi → báo, không sửa số SV) → --report vào marker REPORT:U1; summary_hw03.py chạy lại (README/report §8 có số U1). Report §5: bỏ dòng "Không thực hiện phiên…" nếu còn. Commit `HW03[T2] 10/10: số liệu U1`.
+2. Chuẩn bị issue cho 14 bug "sạch" theo bug_check.md (59, 60, 61, 65, 66, 67, 68, 69, 71, 74, 77, 83, 84, 85): gh = ThachHaoo; lấy lại danh sách issue kiểm trùng lần cuối; in bảng: BUG – tiêu đề GitHub = "[HW03-C2-xx] " + Tiêu đề trong file – label bug – ảnh cần kéo (bản đã che, từ evidence/). DỪNG chờ SV xác nhận bảng. Body lấy nguyên file BUG-xx.md (--body-file), không sửa chữ.
+Báo ≤ 10 dòng + bảng + hash. Không push.
+```
+
+**Output:**
+```
+Bước 1 dừng: `tro_giup` SV ghi chuỗi `"khong_tro_giup"` thay vì danh sách `[]` → script đếm là có trợ giúp. Không sửa số SV. Làm tiếp bước 2.
+
+Bước 1 chưa làm được vì `--check` còn 8 lỗi; em đã dừng, không sửa số SV và chưa commit `10/10`. Bước 2 đã xong và đang chờ SV xác nhận bảng.
+
+**Bước 1**
+- **Lỗi:** cả 8 phiếu S00–S07 báo "có trợ giúp nhưng `hoan_thanh = khong_tro_giup`". Nguyên nhân là trường `tro_giup` SV ghi chuỗi `"khong_tro_giup"`, trong khi schema cần danh sách: `[]` nếu không có trợ giúp, hoặc mỗi lần trợ giúp một mục. Script đếm độ dài chuỗi nên tưởng là có trợ giúp.
+- Các trường khác SV đã điền đúng định dạng (`ket_thuc`, `hoan_thanh`, `nen_tang`, `reset_du_lieu` = true). SV sửa `tro_giup` (riêng S04 có dòng "Nhắc lại nhiệm vụ.", SV quyết có tính là trợ giúp không) rồi báo, em chạy lại bước 1.
+- 8 file `S0*.json` SV vừa sửa vẫn chưa commit.
+
+**Bước 2**
+- **Kiểm trùng lần cuối:** `tkob-team/eshop-sut` hiện có issue tới #246; 22 issue mới (#225–#246) từ lần kiểm trước. Tất cả thuộc C1 (trang chủ, giỏ, checkout, chi tiết sản phẩm) hoặc C3 (admin), không trùng 14 bug của C2. #228–#230 cũng về thẻ h1 nhưng ở trang khác. Chưa có issue nào mang tiền tố `[HW03-C2…]`.
+- **Label:** `bug` có trong repo. Ảnh lấy từ `HW03/checklist/evidence/`, cả 14 bộ ảnh đều tồn tại.
+
+| BUG | Tiêu đề GitHub | Label | Ảnh cần kéo (`HW03/checklist/evidence/`) |
+|---|---|---|---|
+| 59 | [HW03-C2-59] [Tất cả màn C2] Tiêu đề tab hiển thị "frontend-web" giống hệt nhau ở mọi trang | bug | auto/P1,P2,P3_CL-13_1.png |
+| 60 | [HW03-C2-60] [Tất cả màn C2] Thẻ <html> khai báo lang="en" thay vì tiếng Việt | bug | auto/P1,P2,P3_CL-14_1.png |
+| 61 | [HW03-C2-61] [Đăng nhập, Quên MK, Hồ sơ] Các trang thiếu thẻ <h1> tiêu đề chính | bug | auto/P1,P2,P3_CL-02_1.png |
+| 65 | [HW03-C2-65] [Đăng nhập, Hồ sơ] Bấm vào nhãn không focus vào ô nhập tương ứng | bug | auto/P1,P2,P3_CL-38_1.png |
+| 66 | [HW03-C2-66] [Quên mật khẩu] Thiếu chỉ báo bước (Step Indicator) ở cả bước 1 và bước 2 | bug | P1_chrome/P1_CL-24_1, P2_firefox/P2_CL-24_1, P3_android/P3_CL-24_1 |
+| 67 | [HW03-C2-67] [Quên MK B1] Không có nút hoặc liên kết 'Quay lại đăng nhập' | bug | auto/P1,P2,P3_CL-25_1.png |
+| 68 | [HW03-C2-68] [Quên MK B2] Màn hình thiếu ô nhập 'Xác nhận mật khẩu mới' | bug | auto/P1,P2,P3_CL-26_1.png |
+| 69 | [HW03-C2-69] [Quên MK B2] Mã OTP hiển thị 4 chữ số thay vì 6 chữ số theo SRS | bug | auto/P1,P2,P3_CL-28_1/_2.png (6 ảnh) |
+| 71 | [HW03-C2-71] [Quên MK B2] Nút chính 'Đặt lại mật khẩu' và nút phụ quay lại giống nhau về hình thức | bug | P1_chrome/P1_CL-06_1, P2_firefox/P2_CL-06_1, P3_android/P3_CL-06_1 |
+| 74 | [HW03-C2-74] [Navbar] Nút đăng xuất hiển thị nhãn "Thoát" thay vì "Đăng xuất" | bug | auto/P1,P2,P3_CL-42_1.png |
+| 77 | [HW03-C2-77] [Tất cả màn C2] URL không tồn tại hiển thị vùng nội dung trống và thiếu link về trang chủ | bug | auto/P1,P2,P3_CL-50_1/_2.png (6 ảnh) |
+| 83 | [HW03-C2-83] [Đăng nhập, Quên MK B2, Hồ sơ] Submit thất bại không tự động focus về ô nhập bị lỗi | bug | auto/P1,P2,P3_SV-03_1.png |
+| 84 | [HW03-C2-84] [Đăng nhập, Hồ sơ] Độ tương phản màu sắc của chữ/nhãn so với nền không đạt tối thiểu 4.5:1 | bug | P1_chrome, P2_firefox, P3_android: SV-04_1…_4 (12 ảnh) |
+| 85 | [HW03-C2-85] [Đăng nhập] Link 'Quên mật khẩu?' và 'Đăng ký ngay' có chiều cao vùng tương tác nhỏ hơn 24px | bug | auto/P1,P2,P3_SV-05_1.png |
+
+- **Lưu ý body:** `--body-file BUG-xx.md` giữ nguyên chữ, nhưng các đường dẫn ảnh dạng `../checklist/evidence/...` trong file sẽ không mở được trên GitHub. Ảnh phải kéo tay vào issue (hoặc comment), như cột cuối bảng.
+- **Commit:** chưa có commit mới; HEAD vẫn là `52ea483`.
+
+Cần SV quyết:
+1. Sửa `tro_giup` trong 8 phiếu: `[]` hoặc danh sách các lần trợ giúp.
+2. Xác nhận bảng issue, hoặc sửa tiêu đề / danh sách ảnh.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #166 | 05:15 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Tất cả đều không có trợ giúp. 2. Xác nhận
+```
+
+**Output:**
+```
+Bước 1 xong (`d9919c9`). Tạo 14 issue.
+
+Xong cả hai việc: số liệu U1 đã vào report và README, 14 issue đã tạo (#247–#260).
+
+**1. Số liệu U1**
+- Theo SV chốt, em đổi `tro_giup` của S00–S07 thành `[]`. `sus_score.py --check` chạy lại còn 0 lỗi, 7/7 phiên chính được tính.
+- `--report` đã ghi bảng 7 phiên và bảng tổng hợp vào marker `REPORT:U1`; benchmark là 06:00 lấy theo plan.md (≤ 6 phút):
+  - SUS trung bình 77,9 ± 17,8, SEQ trung bình 6,3 ± 1,1.
+  - 7/7 phiên hoàn thành, không ai cần trợ giúp; 5/7 phiên xong trong 06:00.
+- `tools/summary_hw03.py`: em sửa script cho tự tính dòng U1 từ `usability/sessions/` (pilot không tính), thay dòng cũ "không thực hiện phiên usability" đang gắn cứng. README và report §8 đã chạy lại, có số U1.
+- Report §5 không còn dòng "Không thực hiện phiên…".
+- Commit `d9919c9 HW03[T2] 10/10: số liệu U1`.
+
+**2. GitHub Issues**
+- Đã tạo 14 issue #247–#260 trên `tkob-team/eshop-sut` bằng tài khoản ThachHaoo, đều có label `bug`. Tiêu đề và body đúng như bảng SV đã xác nhận (body nguyên file BUG-xx.md, không sửa chữ).
+- Danh sách đầy đủ để đối chiếu:
+
+| BUG | Issue |
+|---|---|
+| BUG-59 | #247 |
+| BUG-60 | #248 |
+| BUG-61 | #249 |
+| BUG-65 | #250 |
+| BUG-66 | #251 |
+| BUG-67 | #252 |
+| BUG-68 | #253 |
+| BUG-69 | #254 |
+| BUG-71 | #255 |
+| BUG-74 | #256 |
+| BUG-77 | #257 |
+| BUG-83 | #258 |
+| BUG-84 | #259 |
+| BUG-85 | #260 |
+
+- Chưa push.
+
+**Việc SV làm tiếp**
+- Kéo ảnh vào từng issue theo cột ảnh trong bảng trước: đường dẫn `../checklist/...` trong body không hiện được trên GitHub.
+- Muốn em ghi link issue vào mục "Link GitHub Issue" của 14 file BUG thì báo em. Ghi rồi thì chạy lại `summary_hw03.py` để dòng "đã có link GitHub Issue" lên 14/28 (hiện là 0/28).
+- 14 bug còn lại (bug_check.md) chờ SV sửa xong mới tạo issue.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #167 | 05:17 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xong cả hai việc: số liệu U1 đã vào report và README, 14 issue đã tạo (#247–#260).
+
+1. Số liệu U1
+- Theo SV chốt, em đổi tro_giup của S00–S07 thành []. sus_score.py --check chạy lại còn 0 lỗi, 7/7 phiên chính được tính.
+- --report đã ghi bảng 7 phiên và bảng tổng hợp vào marker REPORT:U1; benchmark là 06:00 lấy theo plan.md (≤ 6 phút):
+  - SUS trung bình 77,9 ± 17,8, SEQ trung bình 6,3 ± 1,1.
+  - 7/7 phiên hoàn thành, không ai cần trợ giúp; 5/7 phiên xong trong 06:00.
+- tools/summary_hw03.py: em sửa script cho tự tính dòng U1 từ usability/sessions/ (pilot không tính), thay dòng cũ "không thực hiện phiên usability" đang gắn cứng. README và report §8 đã chạy lại, có số U1.
+- Report §5 không còn dòng "Không thực hiện phiên…".
+- Commit d9919c9 HW03[T2] 10/10: số liệu U1.
+
+2. GitHub Issues
+- Đã tạo 14 issue #247–#260 trên tkob-team/eshop-sut bằng tài khoản ThachHaoo, đều có label bug. Tiêu đề và body đúng như bảng SV đã xác nhận (body nguyên file BUG-xx.md, không sửa chữ).
+- Danh sách đầy đủ để đối chiếu:
+
+┌────────┬───────┐
+│  BUG   │ Issue │
+├────────┼───────┤
+│ BUG-59 │ #247  │
+├────────┼───────┤
+│ BUG-60 │ #248  │
+├────────┼───────┤
+│ BUG-61 │ #249  │
+├────────┼───────┤
+│ BUG-65 │ #250  │
+├────────┼───────┤
+│ BUG-66 │ #251  │
+├────────┼───────┤
+│ BUG-68 │ #253  │
+├────────┼───────┤
+│ BUG-69 │ #254  │
+├────────┼───────┤
+│ BUG-71 │ #255  │
+├────────┼───────┤
+│ BUG-74 │ #256  │
+├────────┼───────┤
+│ BUG-77 │ #257  │
+├────────┼───────┤
+│ BUG-83 │ #258  │
+├────────┼───────┤
+│ BUG-84 │ #259  │
+├────────┼───────┤
+│ BUG-85 │ #260  │
+└────────┴───────┘
+
+- Chưa push.
+
+Việc SV làm tiếp
+- Kéo ảnh vào từng issue theo cột ảnh trong bảng trước: đường dẫn ../checklist/... trong body không hiện được trên GitHub.
+- Muốn em ghi link issue vào mục "Link GitHub Issue" của 14 file BUG thì báo em. Ghi rồi thì chạy lại summary_hw03.py để dòng "đã có link GitHub Issue" lên 14/28 (hiện là 0/28).
+- 14 bug còn lại (bug_check.md) chờ SV sửa xong mới tạo issue.
+```
+
+**Output:**
+````
+Hai việc đều xong. Có 2 điểm em cần kiểm:
+
+**1. Bảng chỉ có 13 dòng, thiếu #252.** Theo thứ tự thì #252 là **BUG-67**. Bảo Claude Code xác nhận lại `#252 = BUG-67`, tiêu đề đúng, có label bug.
+
+**2. S04 "Nhắc lại nhiệm vụ" có tính là trợ giúp không.** Phiếu ghi tay S04 (đã commit nguyên văn) có dòng "Nhắc lại nhiệm vụ", nhưng JSON giờ ghi S04 hoàn thành **không trợ giúp**, nên trong report là 7/7 không ai cần trợ giúp. Cả hai cách đều được, nhưng phải nhất quán với phiếu:
+- (a) Nhắc lại **đề bài** không gợi ý giao diện, nên không tính là trợ giúp. Ghi một dòng `ghi_chu` cho S04: "nhắc lại đề bài, không gợi ý thao tác, không tính trợ giúp (SV chốt)".
+- (b) Tính là trợ giúp: S04 = `co_tro_giup`, thêm mục `tro_giup`.
+
+Plan mục 7 chỉ coi là trợ giúp khi can thiệp lúc bế tắc. Nếu S04 không bế tắc thì (a) hợp lý, nhưng phải có dòng ghi chú để người chấm khỏi thấy mâu thuẫn với phiếu.
+
+**Việc tiếp:**
+- **Em kéo ảnh** vào 14 issue theo cột ảnh, dùng bản đã che trong `evidence/`. Kiểm từng ảnh là bản che, đừng lặp lại sự cố #189/#190 ở HW02.
+- Dán cho Claude Code:
+```
+1. Xác nhận #252 = BUG-67 (tiêu đề, label). 2. S04: SV chốt <a: ghi_chu "nhắc lại đề bài, không gợi ý thao tác, không tính trợ giúp (SV chốt)" | b: co_tro_giup + tro_giup>; chạy lại --check/--report/summary. 3. Ghi link issue vào "Link GitHub Issue" của 14 file BUG (đúng số), chạy lại summary_hw03.py. Commit từng việc. Không push. Báo ≤ 5 dòng + hash.
+```
+- Rồi **push**, và sửa 14 bug còn lại theo `bug_check.md`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #168 | 05:17 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. Xác nhận #252 = BUG-67 (tiêu đề, label). 2. S04: SV chốt <a: ghi_chu "nhắc lại đề bài, không gợi ý thao tác, không tính trợ giúp (SV chốt)" | b: co_tro_giup + tro_giup>; chạy lại --check/--report/summary. 3. Ghi link issue vào "Link GitHub Issue" của 14 file BUG (đúng số), chạy lại summary_hw03.py. Commit từng việc. Không push. Báo ≤ 5 dòng + hash.
+```
+
+**Output:**
+```
+Làm xong việc 1 và 3; việc 2 em dừng chờ SV chọn a hay b.
+
+- **#252 = BUG-67:** đúng. Tiêu đề trên GitHub là `[HW03-C2-67] [Quên MK B1] Không có nút hoặc liên kết 'Quay lại đăng nhập'`, khớp tiêu đề trong file, label `bug`.
+- **Link issue:** đã ghi #247–#260 vào mục "Link GitHub Issue" của 14 file BUG, chạy lại `summary_hw03.py` → "đã có link GitHub Issue: 14/28". Commit `bf715c0`.
+- **S04 chưa làm:** lệnh còn để nguyên `<a … | b …>` nên em chưa sửa S04 và chưa chạy lại `--check`/`--report`/summary. SV chốt a hoặc b, em làm tiếp và commit riêng.
+- Chưa push.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #169 | 05:18 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+link để kéo ảnh đâu nhỉ?
+```
+
+**Output:**
+```
+Mỗi issue có link `https://github.com/tkob-team/eshop-sut/issues/<số>`:
+
+| BUG | Issue |
+|---|---|
+| BUG-59 | https://github.com/tkob-team/eshop-sut/issues/247 |
+| BUG-60 | https://github.com/tkob-team/eshop-sut/issues/248 |
+| BUG-61 | https://github.com/tkob-team/eshop-sut/issues/249 |
+| BUG-65 | https://github.com/tkob-team/eshop-sut/issues/250 |
+| BUG-66 | https://github.com/tkob-team/eshop-sut/issues/251 |
+| BUG-67 | https://github.com/tkob-team/eshop-sut/issues/252 (chờ xác nhận) |
+| BUG-68 | https://github.com/tkob-team/eshop-sut/issues/253 |
+| BUG-69 | https://github.com/tkob-team/eshop-sut/issues/254 |
+| BUG-71 | https://github.com/tkob-team/eshop-sut/issues/255 |
+| BUG-74 | https://github.com/tkob-team/eshop-sut/issues/256 |
+| BUG-77 | https://github.com/tkob-team/eshop-sut/issues/257 |
+| BUG-83 | https://github.com/tkob-team/eshop-sut/issues/258 |
+| BUG-84 | https://github.com/tkob-team/eshop-sut/issues/259 |
+| BUG-85 | https://github.com/tkob-team/eshop-sut/issues/260 |
+
+**Cách kéo ảnh vào từng issue:**
+1. Mở link, bấm **⋯** ở góc bài đầu (body), chọn **Edit**.
+2. Tìm mục **Bằng chứng**. Chỗ đường dẫn `../checklist/evidence/…png` không hiện ảnh trên GitHub.
+3. Mở thư mục `HW03\checklist\evidence\` trên máy, kéo đúng file ảnh vào ô soạn thảo, đặt ngay dưới dòng đường dẫn đó. GitHub tự upload và chèn `![tên-file](https://github.com/user-attachments/…)`.
+4. Sửa phần alt thành tên file (ví dụ `![P1_CL-10_1.png](…)`) cho dễ đối chiếu.
+5. Bấm **Update comment**.
+
+Ảnh cần kéo cho từng issue nằm ở cột ảnh trong bảng mà Claude Code đã in lúc em xác nhận. Không còn bảng đó thì hỏi Claude Code: "in lại bảng BUG – issue – ảnh cần kéo".
+
+Kéo xong cả 14 issue thì báo Claude Code "đã kéo ảnh". Nó sẽ kiểm mỗi issue có ảnh và ảnh đúng bản che.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #170 | 05:29 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đã kéo ảnh
+```
+
+**Output:**
+```
+Em đã kiểm cả 14 issue #247–#260: mỗi issue có đủ số ảnh như bảng đã chốt. #254 và #257 có 6 ảnh, #259 có 12 ảnh, 11 issue còn lại mỗi cái 3 ảnh. Ảnh nằm trong phần mô tả của issue, không ở comment.
+
+Còn chờ SV: chọn a hay b cho S04 để em chạy lại `--check`/`--report`/summary.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #171 | 05:30 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Em đã kiểm cả 14 issue #247–#260: mỗi issue có đủ số ảnh như bảng đã chốt. #254 và #257 có 6 ảnh, #259 có 12 ảnh, 11 issue còn lại mỗi cái 3 ảnh. Ảnh nằm trong phần mô tả của issue, không ở comment.
+
+Còn chờ SV: chọn a hay b cho S04 để em chạy lại --check/--report/summary.
+```
+
+**Output:**
+````
+Ảnh đã đủ. Còn hai việc:
+
+**1. Em chọn S04, trả lời Claude Code `S04=a` hoặc `S04=b`:**
+- **a:** nhắc lại **đề bài**, không gợi ý thao tác, nên không tính trợ giúp. Thêm `ghi_chu` cho S04. Kết quả vẫn 7/7 không trợ giúp.
+- **b:** tính là trợ giúp. S04 = `co_tro_giup`, kết quả thành 6/7 không trợ giúp, 1/7 có trợ giúp.
+
+Anh khuyến nghị **a** nếu lúc đó S04 không bế tắc mà chỉ hỏi lại đề, vì plan mục 7 chỉ tính trợ giúp khi can thiệp lúc bế tắc. Nếu em nhắc vì bạn đang kẹt thì chọn **b**.
+
+**2. Thêm một yêu cầu kiểm ảnh** trong cùng lệnh: Claude Code mới đếm số ảnh, chưa xác nhận ảnh đúng bản đã che.
+```
+S04=<a|b>. Sau đó: kiểm alt/tên ảnh trong 14 issue khớp file trong HW03/checklist/evidence/ (bản đã nén/che, không phải evidence_raw); lệch → báo số issue + tên ảnh. Ghi link issue vào 14 file BUG + summary_hw03.py nếu chưa làm. Commit, không push. Báo ≤ 5 dòng + hash.
+```
+
+Rồi **push** và chuyển sang sửa 14 bug còn lại theo `bug_check.md`. Đây là việc đường găng tiếp theo.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #172 | 05:31 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Ở lần này mình không làm alt nhé, nên không cần quan tâm
+```
+
+**Output:**
+````
+Được, bỏ phần alt. Riêng việc ảnh là **bản đã che** thì vẫn quan trọng, vì repo và issue đều public. Không có alt thì Claude Code không đối chiếu tên được, nên em tự xác nhận một câu: **em kéo ảnh từ `HW03\checklist\evidence\`**, không phải từ `evidence_raw\`. Nếu đúng vậy thì xong.
+
+Lệnh rút gọn:
+```
+S04=<a|b>. Chạy lại --check/--report/summary. Ghi link issue vào 14 file BUG + summary_hw03.py nếu chưa làm. Bỏ qua alt ảnh (SV chốt). Commit, không push. Báo ≤ 4 dòng + hash.
+```
+
+Sau đó em push rồi sửa 14 bug còn lại.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #173 | 05:31 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S04=a. Chạy lại --check/--report/summary. Ghi link issue vào 14 file BUG + summary_hw03.py nếu chưa làm. Bỏ qua alt ảnh (SV chốt). Commit, không push. Báo ≤ 4 dòng + hash.
+```
+
+**Output:**
+```
+S04 đã ghi ghi_chu theo phương án a: dòng "Nhắc lại nhiệm vụ." là nhắc lại đề bài, không gợi ý thao tác, không tính trợ giúp.
+- Chạy lại `--check` 0 lỗi; `--report` và `summary_hw03.py` cho số liệu U1 không đổi (vẫn 0 trợ giúp).
+- Link issue #247–#260 đã ghi vào 14 file BUG từ trước (`bf715c0`); summary hiện "đã có link GitHub Issue: 14/28". Bỏ qua alt ảnh theo SV chốt.
+- Commit `c19c3ab HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a)`, chưa push.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #174 | 05:32 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+S04 đã ghi ghi_chu theo phương án a: dòng "Nhắc lại nhiệm vụ." là nhắc lại đề bài, không gợi ý thao tác, không tính trợ giúp.
+- Chạy lại --check 0 lỗi; --report và summary_hw03.py cho số liệu U1 không đổi (vẫn 0 trợ giúp).
+- Link issue #247–#260 đã ghi vào 14 file BUG từ trước (bf715c0); summary hiện "đã có link GitHub Issue: 14/28". Bỏ qua alt ảnh theo SV chốt.
+- Commit c19c3ab HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a), chưa push.
+===
+đã push rồi nhé, làm gì tiếp nhỉ
+```
+
+**Output:**
+````
+Việc tiếp theo là **sửa 14 bug còn lại** theo `HW03/bugs/bug_check.md`. Anh tóm tắt điểm cần xem của từng bug. Đây chỉ là dữ kiện; sửa thế nào là chữ của em.
+
+| BUG | Cần xem |
+|---|---|
+| **58** | Nhận định câu 1 ("rắc rối lớn") và câu 2 ("hoàn toàn không thể truy cập Navbar" ở B2) chưa có dữ kiện. Thêm "(chưa kiểm chứng)" hoặc bỏ |
+| **62** | Trang Đăng nhập nhãn thật là **"Username"**, không phải "Email". Steps làm đúng thì ô Mật khẩu trống chặn submit (0 request), nên Steps cần bước nhập mật khẩu |
+| **63** | Expected nhắc ô "Xác nhận mật khẩu" ở B2, nhưng ô này **không tồn tại** (đó chính là BUG-68). Gọi "Email" ở Đăng nhập trong khi nhãn thật là "Username" |
+| **64** | Hồ sơ với SĐT `123` hiện hộp thoại **"Số điện thoại không hợp lệ…"**, không phải "Cập nhật thành công!" như Actual/Nhận định đang viết |
+| **70** | Câu nguyên nhân ("regex/validation… sai cấu trúc") chưa có dữ kiện. "(chưa kiểm chứng)" đang gắn sai câu. Dữ kiện có sẵn: `ForgotPassword.jsx:26` bắt buộc có khoảng trắng |
+| **72** | Nhận định câu 1 ("làm sai lệch dữ liệu") chưa đánh dấu |
+| **73** | Tiêu đề thiếu **Họ Tên** (cả 3 trường đều về giá trị cũ). Actual chưa nhắc hộp thoại sau khi bấm Cập nhật. **Cô lập:** web chặn ngay (0 request) vì regex không nhận SĐT bắt đầu bằng 0 (`Profile.jsx:43`); với `912345678` thì cả 3 trường lưu bền. Em quyết: giữ hiện tượng hay viết lại theo nguyên nhân |
+| **75** | Actual "cập nhật sau F5" **không có trong Dữ kiện**. Làm đúng Steps (SĐT trống) thì bị chặn, không lưu. Cô lập: khi lưu được (SĐT `912345678`) thì navbar không cập nhật ngay, sau F5 mới đổi. Tiền điều kiện cần SĐT hợp lệ |
+| **76** | Expected có **2 nhánh** (chuyển `/login` *hoặc* thông báo kèm link) |
+| **78** | Câu "P3 bị TimeoutError do dblclick" là **lỗi của harness**, không phải SUT. Steps B2 và Hồ sơ chưa nêu giá trị nhập. Có số cô lập: Hồ sơ với `912345678` gửi 2 PUT, B2 với `Abcd efg1` gửi 2 request |
+| **79** | Actual P1 "hiển thị trạng thái rỗng trước" không có trong Dữ kiện P1. Repro thì **có thấy** trạng thái rỗng, nhưng dùng trễ 3000 ms, không phải throttling thật |
+| **80** | Nhận định chưa có "(chưa kiểm chứng)" |
+| **81** | Làm đúng Tiền điều kiện (restart + `seed_orders.py`) thì đơn Đang giao là **#3**, không phải #10 hay #8…#12 |
+| **82** | Tiêu đề nói Autofill không dùng được ở cả 3 màn, nhưng Actual P1 ghi **dùng được ở Quên MK**. Expected "Paste *hoặc* Autofill" đọc được thành 2 nhánh. Bước Autofill Playwright không chạy được, cần em tự xác nhận tay trên P1 |
+
+**Bất thường ngoài 28 bug** (em quyết có lập bug mới không):
+- `Login.jsx:24`: tiêu đề form Đăng nhập là "Đăng Ký". Đã **trùng #9** (CL-03), nên không lập.
+- `Login.jsx:40`: ô Mật khẩu `type="text"`, mật khẩu hiện rõ (thấy trong ảnh P3). Chưa có trong 28 bug, chưa kiểm trùng. Nếu muốn lập thì bảo Claude Code kiểm trùng trước. Thiếu giờ thì ghi vào report là "phát hiện, chưa lập".
+
+Sửa xong: commit `HW03[T1] 5/6f: SV sửa BUG theo kiểm dữ kiện`, push. Rồi dán:
+```
+Kiểm lại 14 bug SV vừa sửa (58,62,63,64,70,72,73,75,76,78,79,80,81,82) theo bug_check.md – chỉ đọc, ghi bug_check2.md; còn điểm nào chưa xử lý thì liệt kê, không sửa chữ SV. Sạch → in bảng tiêu đề [HW03-C2-xx], DỪNG chờ SV xác nhận rồi tạo issue (--body-file), ghi link vào file BUG, summary_hw03.py. Không push. Báo ≤ 8 dòng + hash.
+```
+
+Em xử lý trong khoảng **35 phút** (khoảng 2–3 phút mỗi bug). Phần lớn chỉ cần thêm "(chưa kiểm chứng)" hoặc sửa tên trường. BUG-73 và 75 lâu hơn chút vì cần em quyết.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #175 | 05:33 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Giờ mình định đi ngủ, hiện tại khối lượng công việc tổng lại còn bao nhiêu nhỉ
+```
+
+**Output:**
+```
+Còn khoảng **4,5 giờ tới deadline 10:00**. Việc còn lại, nặng nhất ở trên:
+
+**Phần em bắt buộc tự làm (🔒), khoảng 3 giờ 15 phút**
+
+| Việc | Thời gian ước |
+|---|---|
+| Sửa 14 bug theo `bug_check.md` | 35–45' |
+| Findings Task 2 §5.8–5.9 (gom pain point, lỗi riêng lẻ ↔ thiết kế, severity) | 40' |
+| §3.4 item em bổ sung + vì sao AI bỏ sót | 15' |
+| Critique 200–300 từ | 25' |
+| Verdict + lý do Audit (khoảng 25 artifact) | 30' |
+| Duyệt khối 📝 (§3.2, §4.2, §5.5, §11, moderator_script) | 15' |
+| Tự chấm §12, ngày nộp, tick + ký AI-05/AI-02/AI-03 | 15' |
+| Bảng 7 người tham gia (che 4 số giữa SĐT) | 10' |
+
+**Phần AI làm, chạy song song, khoảng 1 giờ (cần em xác nhận vài lần)**
+- Tạo 14 issue còn lại, chụp ảnh trang Issues (em xác nhận bảng tiêu đề, kéo ảnh): 20'.
+- Xuất transcript `_p2`, trích prompt log, điền #n vào AI-02/AI-03: 10'.
+- AI-05, PDF, commit log, `hw-submission-audit`, zip, đo dung lượng: 30'.
+
+**Có thể cắt:** video skill (45' nếu làm). Không làm thì trừ điểm skill tương ứng khi tự chấm.
+
+**Lời khuyên thẳng:** khối lượng của em khoảng 3 giờ 15 phút cộng 1 giờ phối hợp. Nếu ngủ tới 07:00 thì còn 3 giờ, **không đủ** cho tất cả, phải cắt bớt. Có hai cách:
+- **Ngủ 1 tiếng (05:40–06:40):** còn khoảng 3h20, đủ nếu bỏ video và làm liền tay. Đặt 2 báo thức.
+- **Làm 14 bug bây giờ (~40') rồi mới ngủ tới 07:15.** Trong lúc em ngủ, Claude Code tạo 14 issue (nó sẽ dừng ở bước xác nhận, sáng em xác nhận). Sáng còn khoảng 2h45 cho findings, Critique, Audit và nộp.
+
+Anh nghiêng về **cách 2**. Bug là phần nhiều điểm nhất của Task 1 (30đ) và cần chạy qua issue, nên làm xong trước khi ngủ thì sáng chỉ còn phần viết.
+
+Dù chọn cách nào, đừng để sát giờ: **nhắm nộp lúc 09:30**, vì zip, Moodle và PDF đều có thể trục trặc.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #176 | 07:49 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Kiểm lại 14 bug SV vừa sửa (58,62,63,64,70,72,73,75,76,78,79,80,81,82) theo bug_check.md – chỉ đọc, ghi bug_check2.md; còn điểm nào chưa xử lý thì liệt kê, không sửa chữ SV. Sạch → in bảng tiêu đề [HW03-C2-xx], DỪNG chờ SV xác nhận rồi tạo issue (--body-file), ghi link vào file BUG, summary_hw03.py. Không push. Báo ≤ 8 dòng + hash.
+```
+
+**Output:**
+```
+Đang đối chiếu từng chỗ SV sửa với bug_check.md; còn xem BUG-79/81/82.
+
+Kiểm lại xong 14 bug SV sửa: 6 bug sạch, 8 bug còn điểm. Chi tiết từng điểm trong `HW03/bugs/bug_check2.md` (commit `de6882e`). Chưa tạo issue nào, chưa push.
+
+**8 bug còn điểm:**
+- **BUG-72:** SV đã sửa dòng "Dữ kiện (AI chép)" của CL-32 P3 (bỏ đoạn "912345678 được lưu"), nên dòng này không còn khớp `checklist.json`. Ngoài ra file ghi "Tái hiện trên P1, P2, P3" trong khi lượt tái hiện chỉ chạy P1, P2.
+- **BUG-64, BUG-73, BUG-75:** Actual mới ghi "Cả P1, P2 và P3", nhưng P3 chưa có dữ kiện cho điều kiện mới. BUG-64 còn thêm: Actual mới khác với mục Dữ kiện trong file.
+- **BUG-75, BUG-78:** gọi SĐT `912345678` là "hợp lệ", trái với FR-04.2 và với chính BUG-72. Riêng BUG-78: Steps mới dùng giá trị lọt kiểm tra, mà làm theo thì ra 2 request, khác Actual đang ghi 0 request.
+- **BUG-76:** Expected chỉ còn 1 nhánh (chuyển hướng về `/login`), hẹp hơn Expected của item CL-49; có thêm một dòng `- ` rỗng.
+- **BUG-63, BUG-79:** chưa xử lý điểm cũ của `bug_check.md`. BUG-63: Địa chỉ trống bị chặn là do ô SĐT trống. BUG-79: ảnh P3 cho thấy trạng thái rỗng hiện trước bảng đơn, trái với Actual P3.
+
+**6 bug sạch**, chờ SV xác nhận rồi em mới tạo issue (`--body-file`, label `bug`):
+
+| BUG | Tiêu đề GitHub |
+|---|---|
+| 58 | [HW03-C2-58] [Đăng nhập, Quên MK] Focus nhảy ngược và bỏ qua Navbar khi nhấn Tab |
+| 62 | [HW03-C2-62] [Đăng nhập, Quên MK B1] Ô Email type="text", email sai định dạng không bị chặn |
+| 70 | [HW03-C2-70] [Quên MK B2] Mật khẩu hợp lệ 'Abcdef1!' bị từ chối với thông báo "Mật khẩu quá yếu!" |
+| 80 | [HW03-C2-80] [Lịch sử đơn] Ngày đặt không đúng định dạng dd/mm/yyyy và không nhất quán giữa các nền tảng |
+| 81 | [HW03-C2-81] [Lịch sử đơn] Nút 'Hủy đơn' vẫn hiển thị và thao tác được ở đơn hàng trạng thái 'Đang giao' |
+| 82 | [HW03-C2-82] [Đăng nhập, Hồ sơ] Không sử dụng được tính năng tự động điền (Autofill) của trình duyệt |
+
+SV quyết: tạo trước 6 issue này, hay chờ sửa xong cả 14 rồi tạo một lượt.
+```
+*File AI ghi/gửi trong lượt này:* `bug_check2.md`
+
+**Xử lý:** [...]
+
+---
+
+## #177 | 07:51 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+10h là đl mình đặt ra thôi deadline thật là 11h30 nhé. 
+Giờ đang chờ chạy prompt sau khi sửa BUG, tôi có thể làm gì thêm không
+```
+
+**Output:**
+```
+Deadline 11:30 thì còn khoảng **3 giờ 40 phút**, đủ để làm cả video nếu giữ nhịp.
+
+Trong lúc Claude Code kiểm bug, em làm **findings Task 2 (§5.8–5.9, 🔒)**: việc lớn nhất, và không phụ thuộc gì nữa.
+
+**Nguồn dữ kiện**
+- `usability/sessions/notes/S00…S07.txt`: câu nói nguyên văn.
+- `usability/sessions/S0x.json`: sự kiện L/D/N, thời gian, SEQ/SUS từng người.
+- Bảng REPORT:U1 trong report: SUS 77,9, SEQ 6,3, 5/7 xong trong 6 phút.
+- 4 câu hỏi mở trong JSON (chép từ form).
+- Pilot S00 chỉ dùng như dữ kiện phụ, không tính vào thống kê.
+
+**Khung gợi ý cho §5.8 (gom pain point):**
+
+| Nhóm pain point | Phiên gặp (S0x) | Bằng chứng (câu nói / sự kiện) | Lỗi riêng lẻ hay vấn đề thiết kế | Liên quan bug/issue |
+|---|---|---|---|---|
+
+**Khung gợi ý cho §5.9 (xếp theo severity):**
+
+| # | Finding | Severity | Tần suất (x/7) | Ảnh hưởng tới hoàn thành nhiệm vụ | Đề xuất |
+|---|---|---|---|---|---|
+
+Thang severity em tự chốt (plan mục 9 để 📝) và ghi ngay dưới bảng. Ví dụ: severity × tần suất, hoặc thang 4 mức blocker/major/minor/cosmetic như slide môn học.
+
+Một số điều cần giữ khi viết:
+- Tần suất chỉ đếm S01–S07, ghi kiểu "4/7".
+- Tách **vấn đề usability** (người dùng bối rối) với **bug chức năng hay bảo mật** mà người tham gia vô tình lộ ra (ví dụ sửa được tổng tiền). Bug thật thì tra trùng với issue sẵn có trước khi đề xuất lập mới.
+- Không khẳng định quá dữ kiện. Ví dụ SUS 77,9 với 7 người, 3 người IT, nên dùng "cho thấy", không dùng "chứng minh".
+
+Viết xong commit `HW03[T2]: SV viết findings` rồi push, anh đọc lại dữ kiện.
+
+**Thứ tự sau đó:** §3.4 → Critique → Audit → video (giờ đã có chỗ).
+
+Anh cũng sẽ cập nhật handoff: deadline thật là 11:30.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #178 | 07:55 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+mình thấy 14 bug đã oke hết rồi, tạo issues hết nhé
+```
+
+**Output:**
+```
+Đã tạo issue cho cả 14 bug còn lại (#261–#274), đủ 28/28 bug đều có issue trên GitHub. Chưa push.
+
+- **Issue:** tạo trên `tkob-team/eshop-sut` bằng tài khoản ThachHaoo, label `bug`, tiêu đề dạng `[HW03-C2-xx] …`, body là nguyên file BUG. Trước khi tạo em kiểm lại thì chưa có issue mới nào sau #260.
+- **Link:** đã ghi vào mục "Link GitHub Issue" của 14 file BUG, chạy lại `summary_hw03.py` → "đã có link GitHub Issue: 28/28". Commit `77a351f`.
+- **Ảnh SV cần kéo vào từng issue** (thư mục `HW03/checklist/evidence/`):
+
+| Issue | BUG | Số ảnh | Ảnh |
+|---|---|---|---|
+| #261 | 58 | 4 | `auto/` P1, P2 của CL-10 và CL-12 |
+| #262 | 62 | 6 | `auto/` P1–P3 của CL-17 và CL-66 |
+| #263 | 63 | 6 | `auto/` P1–P3 của CL-20 và CL-21 |
+| #264 | 64 | 3 | `auto/` P1–P3 của CL-23 |
+| #265 | 70 | 3 | `auto/` P1–P3 của CL-29 |
+| #266 | 72 | 3 | `auto/` P1–P3 của CL-32 |
+| #267 | 73 | 3 | `auto/` P1–P3 của CL-37 |
+| #268 | 75 | 3 | `auto/` P1–P3 của CL-56 |
+| #269 | 76 | 6 | `auto/` P1–P3 của CL-49, mỗi nền tảng `_1`, `_2` |
+| #270 | 78 | 6 | CL-53 ở `P1_chrome`, `P2_firefox`, `P3_android` + `auto/` P1–P3 của SV-06 |
+| #271 | 79 | 5 | `P1_CL-63_1`, `_2` · `P2_CL-63_1` · `P3_CL-63_1`, `_2` |
+| #272 | 80 | 3 | CL-09 ở `P1_chrome`, `P2_firefox`, `P3_android` |
+| #273 | 81 | 6 | `auto/` P1–P3 của CL-59, mỗi nền tảng `_1`, `_2` |
+| #274 | 82 | 12 | SV-02 `_1`…`_4` ở cả ba thư mục `P1_chrome`, `P2_firefox`, `P3_android` |
+
+- **Lưu ý:** BUG-72 lên issue #266 với dòng "Dữ kiện (AI chép)" của CL-32 P3 đã bị sửa, không còn khớp `checklist.json`. Nếu muốn sửa thì phải sửa cả file BUG lẫn body issue.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #179 | 07:58 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Đã tạo issue cho cả 14 bug còn lại (#261–#274), đủ 28/28 bug đều có issue trên GitHub. Chưa push.
+
+- Issue: tạo trên tkob-team/eshop-sut bằng tài khoản ThachHaoo, label bug, tiêu đề dạng [HW03-C2-xx] …, body là nguyên file BUG. Trước khi tạo em kiểm lại thì chưa có issue mới nào sau #260.
+- Link: đã ghi vào mục "Link GitHub Issue" của 14 file BUG, chạy lại summary_hw03.py → "đã có link GitHub Issue: 28/28". Commit 77a351f.
+- Ảnh SV cần kéo vào từng issue (thư mục HW03/checklist/evidence/):
+
+┌───────┬─────┬────────┬───────────────────────────────────────────────────────────────────┐
+│ Issue │ BUG │ Số ảnh │                                Ảnh                                │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #261  │ 58  │ 4      │ auto/ P1, P2 của CL-10 và CL-12                                   │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #262  │ 62  │ 6      │ auto/ P1–P3 của CL-17 và CL-66                                    │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #263  │ 63  │ 6      │ auto/ P1–P3 của CL-20 và CL-21                                    │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #264  │ 64  │ 3      │ auto/ P1–P3 của CL-23                                             │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #265  │ 70  │ 3      │ auto/ P1–P3 của CL-29                                             │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #266  │ 72  │ 3      │ auto/ P1–P3 của CL-32                                             │
+│ #267  │ 73  │ 3      │ auto/ P1–P3 của CL-37                                             │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #268  │ 75  │ 3      │ auto/ P1–P3 của CL-56                                             │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #269  │ 76  │ 6      │ auto/ P1–P3 của CL-49, mỗi nền tảng _1, _2                        │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #270  │ 78  │ 6      │ CL-53 ở P1_chrome, P2_firefox, P3_android + auto/ P1–P3 của SV-06 │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #271  │ 79  │ 5      │ P1_CL-63_1, _2 · P2_CL-63_1 · P3_CL-63_1, _2                      │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #272  │ 80  │ 3      │ CL-09 ở P1_chrome, P2_firefox, P3_android                         │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #273  │ 81  │ 6      │ auto/ P1–P3 của CL-59, mỗi nền tảng _1, _2                        │
+├───────┼─────┼────────┼───────────────────────────────────────────────────────────────────┤
+│ #274  │ 82  │ 12     │ SV-02 _1…_4 ở cả ba thư mục P1_chrome, P2_firefox, P3_android     │
+└───────┴─────┴────────┴───────────────────────────────────────────────────────────────────┘
+
+- Lưu ý: BUG-72 lên issue #266 với dòng "Dữ kiện (AI chép)" của CL-32 P3 đã bị sửa, không còn khớp checklist.json. Nếu muốn sửa thì phải sửa cả file BUG lẫn body issue.
+===
+đã push rồi nhé
+```
+
+**Output:**
+````
+28/28 bug đã có issue. Anh kiểm BUG-72: dòng Dữ kiện (AI chép) của CL-32 P3 bị mất đoạn đầu `Lỗi: Error: 912345678 được lưu ·` trong commit sửa của em (`496ad20`). Có lẽ em lỡ xoá khi sửa phần Actual. Phần "Dữ kiện (AI chép)" phải khớp nguyên văn `checklist.json`, nên **khôi phục lại**. Đây là sửa dữ kiện sai, AI được làm, không đụng chữ em.
+
+**Việc của em bây giờ:** kéo ảnh cho 14 issue #261–#274 theo bảng Claude Code vừa in. Cách kéo giống lần trước, ảnh lấy từ `HW03\checklist\evidence\`. Có 81 ảnh, mất khoảng 15–20 phút.
+
+Kéo xong thì dán cho Claude Code:
+```
+1. BUG-72: khôi phục dòng "Actual nguyên văn CL-32 P3 (auto)" về đúng checklist.json (bị SV lỡ xoá ở 496ad20); gh issue edit #266 sửa body tương ứng + comment đính chính 1 dòng ("Đính chính: khôi phục dòng dữ kiện CL-32 P3 chép từ checklist.json"); log trước/sau vào HW03/bugs/issue_edits.md. Commit `HW03[T1]: khôi phục dữ kiện BUG-72 (#266)`.
+2. Kiểm 14 issue #261–#274 có đủ số ảnh theo bảng (ảnh trong body).
+3. Ảnh trang Issues: Playwright mở https://github.com/tkob-team/eshop-sut/issues?q=is%3Aissue+%22HW03-C2%22+author%3AThachHaoo (đủ 28, chụp nhiều trang nếu cần) → HW03/bugs/issues_page_HW03-C2_<n>.png; đưa vào report §6. Commit `HW03[T1]: ảnh trang Issues`.
+Không push. Báo ≤ 6 dòng + hash.
+```
+
+Trong lúc Claude Code chạy, em viết **findings §5.8–5.9** theo khung anh gửi lúc nãy.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #180 | 08:01 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Gửi cho tôi các link cần thêm evidence nhé
+```
+
+**Output:**
+```
+Danh sách issue cần kéo ảnh, ảnh lấy trong `HW03\checklist\evidence\`:
+
+| Issue | BUG | Số ảnh | Ảnh cần kéo |
+|---|---|---|---|
+| https://github.com/tkob-team/eshop-sut/issues/261 | 58 | 4 | `auto\`: P1, P2 của CL-10 và CL-12 |
+| https://github.com/tkob-team/eshop-sut/issues/262 | 62 | 6 | `auto\`: P1–P3 của CL-17 và CL-66 |
+| https://github.com/tkob-team/eshop-sut/issues/263 | 63 | 6 | `auto\`: P1–P3 của CL-20 và CL-21 |
+| https://github.com/tkob-team/eshop-sut/issues/264 | 64 | 3 | `auto\`: P1–P3 của CL-23 |
+| https://github.com/tkob-team/eshop-sut/issues/265 | 70 | 3 | `auto\`: P1–P3 của CL-29 |
+| https://github.com/tkob-team/eshop-sut/issues/266 | 72 | 3 | `auto\`: P1–P3 của CL-32 |
+| https://github.com/tkob-team/eshop-sut/issues/267 | 73 | 3 | `auto\`: P1–P3 của CL-37 |
+| https://github.com/tkob-team/eshop-sut/issues/268 | 75 | 3 | `auto\`: P1–P3 của CL-56 |
+| https://github.com/tkob-team/eshop-sut/issues/269 | 76 | 6 | `auto\`: P1–P3 của CL-49, mỗi nền tảng `_1`, `_2` |
+| https://github.com/tkob-team/eshop-sut/issues/270 | 78 | 6 | CL-53 ở `P1_chrome\`, `P2_firefox\`, `P3_android\` + `auto\` P1–P3 của SV-06 |
+| https://github.com/tkob-team/eshop-sut/issues/271 | 79 | 5 | `P1_CL-63_1`, `P1_CL-63_2`, `P2_CL-63_1`, `P3_CL-63_1`, `P3_CL-63_2` |
+| https://github.com/tkob-team/eshop-sut/issues/272 | 80 | 3 | CL-09 ở `P1_chrome\`, `P2_firefox\`, `P3_android\` |
+| https://github.com/tkob-team/eshop-sut/issues/273 | 81 | 6 | `auto\`: P1–P3 của CL-59, mỗi nền tảng `_1`, `_2` |
+| https://github.com/tkob-team/eshop-sut/issues/274 | 82 | 12 | SV-02 `_1`…`_4` ở `P1_chrome\`, `P2_firefox\`, `P3_android\` |
+
+Cách làm: mở link, bấm **⋯** ở body, chọn **Edit**, kéo ảnh vào mục **Bằng chứng**, rồi bấm **Update comment**.
+
+Riêng **#266 (BUG-72)**: Claude Code sẽ sửa lại body để khôi phục dòng dữ kiện. Em kéo ảnh trước hay sau cũng được, nhưng nếu kéo trước thì nhắc Claude Code là body đã có ảnh, để nó chỉ sửa đúng dòng đó, không ghi đè cả body bằng file.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #181 | 08:11 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+1. BUG-72: khôi phục dòng "Actual nguyên văn CL-32 P3 (auto)" về đúng checklist.json (bị SV lỡ xoá ở 496ad20); gh issue edit #266 sửa body tương ứng + comment đính chính 1 dòng ("Đính chính: khôi phục dòng dữ kiện CL-32 P3 chép từ checklist.json"); log trước/sau vào HW03/bugs/issue_edits.md. Commit `HW03[T1]: khôi phục dữ kiện BUG-72 (#266)`.
+2. Kiểm 14 issue #261–#274 có đủ số ảnh theo bảng (ảnh trong body).
+3. Ảnh trang Issues: Playwright mở https://github.com/tkob-team/eshop-sut/issues?q=is%3Aissue+%22HW03-C2%22+author%3AThachHaoo (đủ 28, chụp nhiều trang nếu cần) → HW03/bugs/issues_page_HW03-C2_<n>.png; đưa vào report §6. Commit `HW03[T1]: ảnh trang Issues`.
+Không push. Báo ≤ 6 dòng + hash.
+```
+
+**Output:**
+```
+Ảnh đủ cả 14. Chụp trang Issues.
+
+25 + 3 = 28. Xem ảnh trước khi commit.
+
+Xong cả 3 việc, chưa push.
+
+- **BUG-72 (#266):** dòng dữ kiện CL-32 P3 trong `BUG-72.md` đã khôi phục đúng `checklist.json`. Body issue #266 sửa đúng dòng đó, ảnh SV đã kéo giữ nguyên, kèm comment đính chính. Trước/sau ghi ở `HW03/bugs/issue_edits.md`. Commit `99a9e27`.
+- **Ảnh trong 14 issue #261–#274:** đủ số ảnh theo bảng, tất cả nằm trong body.
+- **Ảnh trang Issues:** chụp bằng Playwright, không đăng nhập. Trang tìm kiếm ra đúng 28 kết quả, chia 2 trang: `HW03/bugs/issues_page_HW03-C2_1.png` (25 issue) và `_2.png` (3 issue). Em đã xem từng ảnh, không thấy thông tin riêng. Đã chèn 2 ảnh và link tìm kiếm vào report §6. Commit `08fe5ab`.
+- **Còn trống trong report §6:** dòng 📝 "bảng BUG-58…, link GitHub Issues" em để nguyên, vì bảng bug là phần SV tự viết.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #182 | 08:25 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Xong cả 3 việc, chưa push.
+
+- BUG-72 (#266): dòng dữ kiện CL-32 P3 trong BUG-72.md đã khôi phục đúng checklist.json. Body issue #266 sửa đúng dòng đó, ảnh SV đã kéo giữ nguyên, kèm comment đính chính. Trước/sau ghi ở HW03/bugs/issue_edits.md. Commit 99a9e27.
+- Ảnh trong 14 issue #261–#274: đủ số ảnh theo bảng, tất cả nằm trong body.
+- Ảnh trang Issues: chụp bằng Playwright, không đăng nhập. Trang tìm kiếm ra đúng 28 kết quả, chia 2 trang: HW03/bugs/issues_page_HW03-C2_1.png (25 issue) và _2.png (3 issue). Em đã xem từng ảnh, không thấy thông tin riêng. Đã chèn 2 ảnh và link tìm kiếm vào report §6. Commit 08fe5ab.
+- Còn trống trong report §6: dòng 📝 "bảng BUG-58…, link GitHub Issues" em để nguyên, vì bảng bug là phần SV tự viết.
+===
+push rồi nhé, 5.8, 5.9 cũng viết xong rồi
+```
+
+**Output:**
+````
+Anh đã đọc §5.8–5.9. Có mấy lỗi dữ kiện nghiêm trọng, cần sửa trước khi nộp.
+
+**Trước hết, anh hỏi thẳng một lần:** phần này em có nhờ công cụ AI khác (ChatGPT, Gemini…) viết không? Dấu hiệu: cột "Liên quan" ghi **"Đã biết – BUG-01…BUG-06"** kèm tên tiếng Anh ("Client-side price override", "Unauthenticated cart session ambiguity"…), mà các bug này **không tồn tại**. BUG-01…06 của em là bug HW02 trang Đăng ký (BUG-01 = #17 regex mật khẩu), không liên quan giỏ hàng hay checkout. Nếu có dùng AI khác thì theo AI-01 em phải khai lượt đó (vào `prompt_log_extra.toml`) và **tự viết lại** phần 🔒 này. Nếu em tự viết thì cứ nói, anh chỉ ra chỗ sai dữ kiện để em sửa.
+
+**Lỗi dữ kiện (em sửa, anh không viết hộ)**
+
+| # | Chỗ | Vấn đề |
+|---|---|---|
+| 1 | Cột "Liên quan" ở cả 6 dòng "Đã biết – BUG-0x" | Bịa mã bug. Hoặc tra issue thật trên `tkob-team/eshop-sut` (bảo Claude Code kiểm trùng cho 7 pain point), hoặc ghi "chưa kiểm trùng" |
+| 2 | "Backend tin `totalAmount` từ Client" | Dữ kiện HW02 là `/api/checkout` đọc `total_amount` từ body. Tên trường sai; nếu nêu nguyên nhân thì dẫn đúng dữ kiện, không thì ghi "(chưa kiểm chứng)" |
+| 3 | "hỏng API trigger ở trang danh sách", đề xuất "Sửa API handler" | Giỏ web là **state React, không gọi API** (dữ kiện HW02 B). Câu này sai |
+| 4 | "Sai nhãn nút: Đăng nhập hiện 'Đăng ký'" | Đó là **tiêu đề form** "Đăng Ký" (`Login.jsx:24`), không phải nhãn nút. Đã **trùng #9** |
+| 5 | Severity **"Critical (Blocker)"** cho #1, #2 nhưng ghi "không cản trở hoàn thành nhiệm vụ" | Tự mâu thuẫn. Blocker là chặn hoàn thành, mà 7/7 phiên đều hoàn thành. Em chọn thang khác hoặc bỏ chữ "Blocker" |
+| 6 | Thang severity | Chưa ghi định nghĩa thang dưới bảng §5.9 (plan mục 9 để 📝) |
+| 7 | "Khó tìm lịch sử đơn": 1/7 (S02) | **S04 cũng tìm** ("về trang chủ… xem giỏ hàng… À đây (ở profile)") nên ít nhất là 2/7 |
+| 8 | "Thêm giỏ ở danh sách hỏng": tính S02 | Câu của S02 bị cụt ("Bấm nút thêm vào giỏ hàng mà…"), không cho biết ở trang nào. Tính vào 4/7 là khẳng định quá dữ kiện, trừ khi video xác nhận |
+| 9 | "thiếu đường dẫn trực tiếp trên Header", "thiếu Debounce/Idempotency" | Nguyên nhân chưa kiểm chứng. Ghi "(chưa kiểm chứng)" hoặc bỏ |
+
+Còn lại cấu trúc tốt: tách lỗi riêng lẻ với thiết kế, có tần suất, có đề xuất, bám câu nói thật.
+
+Nếu cần kiểm trùng nhanh cho mục 1, dán:
+```
+Chỉ đọc: với 7 pain point ở report §5.8 (sửa tổng tiền checkout; thêm giỏ ở danh sách không phản hồi; đặt đơn không cần SĐT/địa chỉ; bấm 1 thành 2 đơn; giỏ khi chưa đăng nhập; khó tìm lịch sử đơn; tiêu đề form Đăng nhập "Đăng Ký" + thiếu ảnh SP) → tìm issue trùng/liên quan trên tkob-team/eshop-sut (mọi tác giả) + BUG HW02/HW03 của SV; in bảng pain point – issue (số, tiêu đề) – mức. Không sửa report. Báo ≤ 12 dòng.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #183 | 08:31 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Không dùng AI, để mình sửa lại, đang buồn ngủ quá
+Sửa lại rồi, commit thế nào nhỉ, commit xong mình dùng prompt kia của bạn nhé
+```
+
+**Output:**
+````
+Commit và push như sau:
+
+```
+git add HW03/23120255_HW03_Report.md
+git commit -m "HW03[T2]: SV sửa findings theo kiểm dữ kiện"
+git push
+```
+
+Rồi dán prompt kiểm trùng cho Claude Code. Khi nó trả bảng pain point ↔ issue, em điền đúng số issue vào cột "Liên quan", commit thêm một lần: `HW03[T2]: SV ghi issue liên quan vào findings`.
+
+Em đang buồn ngủ, nên ưu tiên phần còn lại (deadline 11:30):
+1. **§3.4** (15'), **Critique** (25'), **verdict Audit** (30'): bắt buộc.
+2. Duyệt khối 📝, tự chấm, ký: 20'.
+3. Đóng gói: Claude Code làm, khoảng 30'.
+4. **Video**: chỉ làm nếu tới khoảng 10:15 vẫn còn dư giờ.
+
+Nếu cần chợp mắt thì ngủ 20 phút ngay bây giờ (đặt báo thức) còn hơn viết Critique lúc mắt díp. Sau đó làm liền một mạch tới lúc nộp.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #184 | 08:32 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Chỉ đọc: với 7 pain point ở report §5.8 (sửa tổng tiền checkout; thêm giỏ ở danh sách không phản hồi; đặt đơn không cần SĐT/địa chỉ; bấm 1 thành 2 đơn; giỏ khi chưa đăng nhập; khó tìm lịch sử đơn; tiêu đề form Đăng nhập "Đăng Ký" + thiếu ảnh SP) → tìm issue trùng/liên quan trên tkob-team/eshop-sut (mọi tác giả) + BUG HW02/HW03 của SV; in bảng pain point – issue (số, tiêu đề) – mức. Không sửa report. Báo ≤ 12 dòng.
+```
+
+**Output:**
+```
+Đã đối chiếu 7 pain point với toàn bộ issue của `tkob-team/eshop-sut` (đến #274, mọi tác giả) và BUG HW02 (BUG-01…57, #17–#30, #161–#203) + HW03 (BUG-58…85, #247–#274) của SV. Em chỉ so tiêu đề issue, chưa mở body; chưa sửa report. Còn 3 pain point (4, 6, ảnh SP ở 7) chưa có issue nào khớp đúng.
+
+| Pain point | Issue trùng / liên quan | Mức |
+|---|---|---|
+| 1. Sửa được tổng tiền ở checkout | #13 [BUG-FR08-04] Ô "Tổng tiền thanh toán" trên Web sửa được · #10 [BUG-FR08-01] Backend lưu mọi `total_amount` do client gửi | **Trùng** #13 (đã biết); #10 liên quan |
+| 2. Thêm giỏ ở danh sách không phản hồi | #162 [FR-07] Trang chủ: bấm 'Thêm vào giỏ' không có phản hồi trực quan (= HW02 BUG-16) · #166 Navbar thiếu badge số lượng giỏ (BUG-20, S05 gợi ý đúng ý này) · #161 nút ở trang chi tiết nuốt lượt bấm đầu (BUG-15) | **Trùng** #162 (BUG-16); #166, #161 liên quan |
+| 3. Đặt đơn không cần SĐT/địa chỉ | #65 [BUG-FR08-08] Thanh toán trên Web không gửi `shipping_address` · #58 bản Mobile | **Một phần** (#65): chưa issue nào nói checkout không bắt buộc SĐT/địa chỉ |
+| 4. Bấm 1 thành 2 đơn (S07) | #163 [FR-07] Thêm cùng sản phẩm nhiều lần thành nhiều dòng (BUG-17) · #270 [HW03-C2-78] nút submit không khoá (form C2, không phải checkout) | **Chưa có issue khớp**; SV cần xác định "2 đơn" là 2 đơn hàng hay 2 dòng trong giỏ (nếu là 2 dòng thì trùng #163) |
+| 5. Thêm giỏ khi chưa đăng nhập (S04) | #242 [HW03-C1][FR-08] Khách truy cập trực tiếp Checkout và thấy nút xác nhận · #69 [BUG-FR20-07] Đăng xuất không xoá giỏ | **Liên quan**: chưa issue nào về việc khách thêm được vào giỏ |
+| 6. Khó tìm lịch sử đơn (S02, S04) | (không có) – các issue Lịch sử đơn hiện có (#61, #271–#273) nói về màu, loading, ngày, nút huỷ | **Chưa có** |
+| 7a. Form Đăng nhập có tiêu đề "Đăng Ký" (S01) | #9 [BUG-FR02-09] Form đăng nhập: tiêu đề "Đăng Ký", nhãn "Username", nút "Sign In" | **Trùng** #9 (đã biết) |
+| 7b. Thiếu ảnh sản phẩm (S01, S03) | #171 [FR-07] 5 ảnh sản phẩm trang chủ có `alt=""` (BUG-25) | **Liên quan**: chưa issue nào về ảnh không hiển thị / sai hình |
+```
+
+**Xử lý:** [...]
+
+---
+
+## #185 | 08:33 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+buồn ngủ là nói về hiệu suất bị suy hụt, chứ không phải giờ muốn đi ngủ, tôi sẽ cố hoàn thành deadline rồi mới đi ngủ.
+```
+*Đính kèm:* `attachment.txt`
+
+**Output:**
+```
+Hiểu rồi, ta làm liền một mạch tới lúc nộp.
+
+**Điền cột "Liên quan" trong §5.8–5.9 theo bảng Claude Code vừa trả.** Lưu ý nó mới so **tiêu đề**, chưa mở body.
+
+| Pain point | Ghi vào "Liên quan" |
+|---|---|
+| 1. Sửa tổng tiền | Trùng **#13**; liên quan **#10** |
+| 2. Thêm giỏ ở danh sách | Trùng **#162** (BUG-16 của em); liên quan **#166** (badge, đúng ý S05), **#161** |
+| 3. Không cần SĐT/địa chỉ | Một phần **#65**; chưa có issue riêng |
+| 4. 1 thành 2 đơn (S07) | Chưa xác định. Nếu S07 nói 2 dòng trong giỏ thì trùng **#163**; 2 đơn hàng thì chưa có issue. Em xem video hoặc nhớ lại |
+| 5. Giỏ khi chưa đăng nhập | Liên quan **#242**, **#69**; chưa có issue riêng |
+| 6. Khó tìm lịch sử đơn | Chưa có issue (vấn đề usability, không hẳn là bug) |
+| 7a. Tiêu đề "Đăng Ký" | Trùng **#9** |
+| 7b. Thiếu ảnh SP | Liên quan **#171**; chưa có issue về ảnh không hiển thị |
+
+**Bug Task 2:** plan mục 9 ghi "bug thật → GitHub Issues". Những pain point **chưa có issue** (3, 4 nếu là 2 đơn, 5, 7b) em có thể lập thêm, mỗi bug khoảng 10' (em viết, Claude Code tạo). Với thời gian còn lại, anh khuyến nghị **không lập thêm**. Thay vào đó ghi một dòng dưới §5.9: *"Pain point 3, 5, 7b (và 4 nếu là 2 đơn hàng) chưa có issue; chưa lập do giới hạn thời gian"*. Vậy là trung thực, và người chấm thấy em đã kiểm trùng. Nếu cuối giờ còn dư thì lập sau.
+
+Commit `HW03[T2]: SV ghi issue liên quan vào findings`, push.
+
+**Tiếp theo: §3.4 (🔒, khoảng 15').** Nội dung là item em bổ sung SV-01…06 và vì sao AI bỏ sót.
+- Dữ kiện: `HW03/checklist/sv_items.md` (6 item của em) và `HW03/checklist/ai_gap_answer.md` (AI tự nhận, tách 3 loại: đã nghĩ nhưng không đưa vào / không nghĩ tới / bị gỡ theo quyết định SV).
+- Mỗi item 2–3 câu: item kiểm gì, AI có nghĩ ra không (theo `ai_gap_answer`), và theo em vì sao bỏ sót (prompt, phạm vi slide, cách skill dặn). Bài học handoff mục 6 có ghi gap SV-06 là do AI chỉ đọc một phần slide, đó là dữ kiện em dùng được.
+
+Xong §3.4 thì sang Critique.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #186 | 08:34 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+là giờ điền cột liên quan đó à, xong đặt ở đâu nhỉ
+```
+
+**Output:**
+````
+Đúng vậy. Em sửa thẳng trong report `HW03/23120255_HW03_Report.md`, ở hai bảng em vừa viết:
+
+**1. §5.8, cột cuối "Liên quan bug/issue"** (ngoài cùng bên phải). Thay nội dung đang có ở từng dòng, ví dụ:
+- Dòng "Cho phép tự điều chỉnh tổng tiền…": thay thành `Trùng #13; liên quan #10`.
+- Dòng "Nút Thêm vào giỏ ở trang danh sách…": thay thành `Trùng #162 (BUG-16); liên quan #166, #161`.
+- …các dòng khác theo bảng anh vừa gửi.
+
+**2. §5.9, cột "Đề xuất".** Mỗi ô đang mở đầu bằng **"Đã biết – BUG-0x:"**. Đổi phần đó thành số issue tương ứng, ví dụ `Trùng #13:` hoặc `Chưa có issue:`, phần đề xuất phía sau giữ nguyên.
+
+**3. Thêm một dòng ngay dưới bảng §5.9:**
+> Pain point 3, 5, 7b (và 4 nếu là 2 đơn hàng) chưa có issue; chưa lập do giới hạn thời gian. Đối chiếu trùng theo tiêu đề issue trên tkob-team/eshop-sut.
+
+Em viết lại câu này theo giọng của em cũng được.
+
+Xong thì:
+```
+git add HW03/23120255_HW03_Report.md
+git commit -m "HW03[T2]: SV ghi issue liên quan vào findings"
+git push
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #187 | 08:39 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Push rồi, có cần Claude Code kiểm tra lại gì không?
+```
+
+**Output:**
+```
+Anh đã kiểm trên repo (`afc81da`), không cần Claude Code kiểm lại:
+- Mã BUG-0x bịa, `totalAmount`, "API trigger/handler", "Blocker" đều đã gỡ hết.
+- Cột Liên quan có số issue thật (#9, #10, #13, #65, #69, #161, #162, #163, #166, #171, #242) và có dòng "chưa có issue".
+- Tần suất đã sửa: thêm giỏ 3/7, lịch sử đơn 2/7.
+
+**Còn thiếu 1 điểm nhỏ:** chưa có **định nghĩa thang severity** dưới bảng §5.9. Em thêm 1–2 dòng: Critical/High/Medium/Low nghĩa là gì theo em, ví dụ dựa trên ảnh hưởng tới nhiệm vụ, an toàn tiền/dữ liệu và tần suất. Vì #1 và #2 là Critical dù "không cản trở hoàn thành nhiệm vụ", thang phải giải thích được vì sao. Tối đa 3 phút. Commit chung với §3.4 cũng được.
+
+**Tiếp theo: §3.4** theo hướng dẫn anh gửi lúc nãy, dùng `sv_items.md` và `ai_gap_answer.md`.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #188 | 08:41 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Rồi thêm rồi nhé, push luôn rồi, xem oke chưa
+```
+
+**Output:**
+```
+Ổn. Thang đã giải thích được vì sao #1 và #2 là Critical dù nhiệm vụ vẫn hoàn thành, và các mức tách nhau rõ.
+
+Chỉ một chữ nhỏ, sửa hay không tuỳ em: ở mức Critical, cụm "nhờ thao tác lách/thủ công" khớp với #1 (sửa tổng tiền) nhưng không khớp #2 (đặt đơn không cần SĐT/địa chỉ, người dùng không lách gì). Muốn chặt thì bỏ cụm đó, chỉ giữ "dù người dùng vẫn hoàn thành nhiệm vụ".
+
+Task 2 coi như xong phần của em. **Tiếp: §3.4**, rồi Critique.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #189 | 08:48 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+xong 3.4 rồi, commit gì đây nhỉ, bạn check hay là Claude Code check đây nhỉ, và check trước khi commit hay sau khi commit
+```
+
+**Output:**
+````
+**Commit trước, kiểm sau.** Quy tắc vẫn như cũ: bản em viết phải nằm trong git trước, sửa gì sau đó thì tạo commit mới.
+
+```
+git add HW03/23120255_HW03_Report.md
+git commit -m "HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI bỏ sót"
+git push
+```
+
+**Anh kiểm**, vì đây là phần chữ của em: anh soi dữ kiện trên repo (mã SV-xx có thật không, câu "AI không nghĩ tới / đã nghĩ nhưng không đưa vào" có khớp `ai_gap_answer.md` không, có khẳng định quá mức không). Không cần Claude Code. Push xong em báo một câu, trong lúc anh đọc thì em bắt đầu viết **Critique**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #190 | 08:48 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+đã push rồi nhé
+```
+
+**Output:**
+```
+Anh đã đọc §3.4 và đối chiếu với `ai_gap_answer.md` và bản v1. Phần lớn khớp dữ kiện. Có một điểm cần sửa và hai điểm nhỏ.
+
+**Cần sửa: SV-05 lệch với câu trả lời của AI**
+- `ai_gap_answer.md` (commit `de4c69a`, 19:29 04/11) trả lời cho **SV-05 bản cũ: "Bố cục form khi bàn phím ảo hiện trên di động"**. Sau đó em đổi SV-05 thành **Target Size** ở `d173b63` (19:46), nên **AI chưa bao giờ trả lời "vì sao bỏ sót" cho Target Size**.
+- Trong §3.4, dòng "AI có nghĩ ra không: Không nghĩ tới (Nhóm 2)" của SV-05 đang trình bày như thể là câu trả lời của AI. Anh vừa grep bản v1: đúng là không có "24px", "target size", "vùng bấm", nên kết luận "không có trong v1" vẫn đúng. Nhưng em cần ghi rõ nguồn, đại ý: *AI trả lời cho SV-05 bản cũ (bàn phím ảo); sau khi em đổi SV-05 thành Target Size thì không hỏi lại AI, em tự đối chiếu v1 và không thấy item nào về kích thước vùng bấm.*
+- Câu nguyên nhân SV-05 khi đó là nhận định của em, không phải của AI. Viết sao cũng được, chỉ cần đúng là của em.
+
+**Hai điểm nhỏ**
+1. Các câu "Nguyên nhân bỏ sót" của SV-01, 02, 03, 04, 06 bám rất sát phần "Nguyên nhân khả dĩ (nhận định của AI)" trong `ai_gap_answer.md`, nhưng đang viết như khẳng định của em. Thêm một câu dẫn ở đầu §3.4 (ví dụ *"Nguyên nhân dựa trên câu trả lời của AI ở `ai_gap_answer.md`, em đối chiếu với v1"*) hoặc đổi vài chữ "do…" thành "có thể do…". Như vậy khớp với chỗ AI tự ghi là "khả dĩ".
+2. SV-06: câu "nằm ngoài đoạn slide AI được cấp… **dẫn đến việc** AI không mở rộng" là nguyên nhân chưa kiểm chứng. AI cũng chỉ ghi "có thể". Đổi thành "có thể dẫn đến".
+
+Sửa xong commit `HW03[T1]: SV sửa §3.4 theo kiểm dữ kiện`, push. Rồi sang **Critique**. Lúc này là 08:50; giữ nhịp thì Critique xong khoảng 09:20, Audit khoảng 09:50, đóng gói khoảng 10:30, và còn dư cho video.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #191 | 08:54 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Push ồi nhé, kiểm tra lần cuối trước khi mình sang Critique nhé
+```
+
+**Output:**
+```
+§3.4 ổn. Lệch SV-05 đã ghi rõ nguồn, câu dẫn đầu mục đúng sự thật, các câu nguyên nhân đã chuyển sang "có thể".
+
+Còn một chi tiết, sửa hay không tuỳ em: câu nguyên nhân SV-05 (*"Do AI chỉ quét cấu trúc mã nguồn tĩnh và đọc các thuộc tính CSS mặc định…"*) là nhận định của em nhưng vẫn viết dạng khẳng định. Ý "đọc CSS mặc định" chưa có dữ kiện. Đổi "Do" thành "Có thể do" là đồng bộ với 5 mục kia. Không sửa cũng không sai dữ kiện nghiêm trọng.
+
+**Sang Critique (§10, 🔒, 200–300 từ, đếm theo khoảng trắng)**
+
+Đề yêu cầu đủ 3 ý: AI **sai** ở đâu, **thiên lệch** ở đâu, **thiếu** gì. Dữ kiện có sẵn trong repo để em dẫn (chỉ là nguồn, câu chữ là của em):
+- **Sai:**
+  - Playwright tự động lệch với lượt tay: auto ép locale vi-VN nên CL-08 P2/P3 sai; CL-11 so toạ độ sai với bố cục 2 cột; CL-15 đo viewport 375. Xem report §4.1 bảng lệch.
+  - Timeout của harness ở P3 được ghi thành Blocked; BUG-78 lúc đầu có câu "TimeoutError" là lỗi harness.
+  - Khung `sv_items.md` thiếu trường `loai_nguon` (L2). RUN.md M6 mâu thuẫn chính nó. Commit ảnh sót P3_M2_2.
+- **Thiên lệch:**
+  - v1 bám SRS (40/65 item), bỏ quy tắc slide (Golden Rule, SV-03).
+  - Accessibility vắng hẳn vì prompt không nêu (SV-01, 04, 05).
+- **Thiếu:**
+  - AI chỉ đọc một phần slide (dòng 56–210, 401–460) nên bỏ double-submit (SV-06).
+  - Hành vi chỉ thấy trên trình duyệt hoặc thiết bị thật (autofill, focus ring).
+  - Task 2: AI không thay được người quan sát, mọi pain point đến từ người tham gia thật.
+- **Nguyên nhân phía em:** prompt bước 1 chỉ nêu 3 nguồn; skill viết trước khi quy trình chốt (handoff mục 6).
+
+Những điều cần giữ:
+- Tách "AI không nghĩ ra item" với "hệ thống có lỗi thật".
+- Không dùng item hoặc case đã bỏ làm bằng chứng.
+- Không dùng "luôn", "tuyệt đối"; dùng "cho thấy" thay "chứng minh".
+
+Viết xong commit `HW03: SV viết Critique`, push, anh đếm từ và soát dữ kiện.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #192 | 09:03 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+push rồi, xem nhé
+```
+
+**Output:**
+```
+Critique có đủ 3 ý (sai, thiên lệch, thiếu) và nêu được nguyên nhân phía em. Nhưng có 2 lỗi dữ kiện và **quá số từ**.
+
+**Số từ: 365, đề cho 200–300** (đếm theo khoảng trắng, không tính tiêu đề). Cần cắt khoảng 65–70 từ. Chỗ dễ cắt:
+- Câu mở đầu ("Nhìn lại cả hành trình…"): khoảng 30 từ, không mang dữ kiện.
+- Câu "Em nhận ra cần tách biệt rõ…": đây là lời nhắc anh gửi em, không phải nhận xét về AI. Bỏ được khoảng 20 từ.
+- Rút gọn ví dụ trong đoạn "điểm sai".
+
+**Lỗi dữ kiện**
+
+| Câu | Vấn đề |
+|---|---|
+| "đo nhầm kích thước viewport về 375px (CL-15)" | Auto đo **đúng** ở 375 px (scrollWidth 381 > 375). Chỗ lệch là lượt tay **không** đo ở 375 px (report §4.1). Đây không phải AI sai, nên bỏ hoặc sửa |
+| "AI ghi nhận nhầm timeout… thành trạng thái Blocked (BUG-78)" | Timeout của harness ghi **Blocked là đúng** (quy ước V1: timeout ≠ Failed). Chỗ sai thật là dòng "TimeoutError do dblclick" từ lượt auto đi vào Actual của BUG-78, trong khi đó là lỗi harness, không phải hành vi SUT. Viết lại cho đúng ý này hoặc bỏ |
+
+**Khẳng định hơi quá (nhẹ)**
+- "hoàn toàn vắng bóng **chỉ vì** prompt…": AI tự ghi đó là nguyên nhân *khả dĩ*. Đổi thành "có thể vì".
+- "**mọi** điểm nghẽn… đều xuất phát từ người dùng thật": dữ kiện của em ủng hộ ý này, nhưng nên viết "các điểm nghẽn em thu được đều…" thay cho "mọi".
+
+**Lỗi chính tả:** "bo qua" → "bỏ qua".
+
+Sửa xong commit `HW03: SV sửa Critique (số từ + dữ kiện)`, push, anh đếm lại.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #193 | 09:09 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Push rồi, xem lại giúp mình thử nhé
+```
+
+**Output:**
+```
+Đã đạt số từ: **283 từ**. Hai lỗi dữ kiện lần trước đã gỡ, chính tả đã sửa. Còn 2 chỗ chưa chính xác, mỗi chỗ chỉ cần sửa vài chữ:
+
+1. **"AI cũng đưa nhầm thông báo lỗi harness `TimeoutError` trên P3 vào phần Actual của BUG-78"**
+   Actual của BUG-78 là **em viết**. Phía AI là harness Playwright (do AI viết) ghi `TimeoutError` thành kết quả auto của SV-06 trên P3. Dòng đó nằm trong phần Dữ kiện, rồi em chép sang Actual. Nói "AI đưa vào Actual" là đổ lỗi chưa đúng chỗ. Gợi ý ý (câu chữ em tự viết): *harness do AI viết ghi `TimeoutError` (lỗi của chính test) thành kết quả SV-06 trên P3, nên lỗi này lọt vào BUG-78*.
+
+2. **"do AI chỉ đọc một phần slide…, kịch bản chống gửi trùng… đã bị bỏ qua"**
+   - Đây là nguyên nhân khả dĩ, AI cũng chỉ ghi "có thể". Đổi thành **"có thể do"**.
+   - AI **không bỏ qua hẳn**: CL-53 có chống gửi trùng, nhưng chỉ ở màn Đăng nhập khi mạng chậm (`ai_gap_answer.md` xếp SV-06 nhóm 1, "đã nghĩ nhưng không đưa vào"). Nên viết là chỉ phủ một màn hoặc một điều kiện, không phải bỏ qua.
+
+Sửa xong số từ vẫn trong khoảng 280–290, không lo vượt.
+
+Sửa, commit `HW03: SV sửa Critique (2 dữ kiện)`, push. Sau đó **chưa cần anh xem lại**, sang thẳng **verdict Audit**. Anh sẽ đưa lệnh xuất transcript và điền #n để Audit có đủ cột.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #194 | 09:11 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Push rồi, bạn xem đã oke chưa nhé
+```
+
+**Output:**
+````
+Hai dữ kiện đã đúng. Nhưng đoạn sửa làm Critique dài thêm: giờ là **308 từ**, vượt mức 300 khoảng 8 từ (đếm theo khoảng trắng, không tính tiêu đề).
+
+Cắt khoảng 10–15 từ cho an toàn. Gợi ý chỗ cắt, câu chữ vẫn là của em:
+- "(dẫn đến lỗi này lọt vào…)" có thể rút còn "(lọt vào BUG-78)".
+- "chứ chưa mở rộng sang các điều kiện và form khác" có thể rút còn "chưa mở rộng sang form khác".
+- "AI lộ hạn chế khi xử lý tự động hóa và dựng khung tài liệu" có thể rút gọn hoặc bỏ, vì các ví dụ phía sau đã nói đủ.
+
+Sửa xong commit `HW03: SV rút gọn Critique`, push. Không cần anh xem lại nội dung nữa. Nếu muốn, em tự đếm bằng PowerShell:
+```
+(Get-Content HW03\23120255_HW03_Report.md -Raw -Encoding UTF8) -match '(?s)## 10\.[^\n]*\n(.*?)\n## 11\.' | Out-Null; ($Matches[1] -split '\s+' | ? {$_}).Count
+```
+
+Sau đó sang **Audit**. Lệnh chuẩn bị Audit anh gửi ngay sau đây.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #195 | 09:12 11/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+285 từ rồi, kiểm tra giúp mình nhé
+```
+
+**Output:**
+```
+Critique đạt: **285 từ**, nằm trong khoảng 200–300, dữ kiện đã đúng. Xong.
+
+Anh xuất transcript phiên này (`_p2`) ngay bây giờ, để Claude Code điền #n vào Audit. File sẽ tới trong giây lát.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #196 | 09:13 11/11/2026 | Claude (không rõ model) | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+NHIỆM VỤ: chuẩn bị Audit + form. Không push, không amend, KHÔNG viết verdict/lý do/Critique/tự chấm.
+1. python tools/hooks/on_stop.py --manual (đã có .transcripts/claude-ai_session_HW03_p2.jsonl) → commit `HW03: prompt log thêm transcript phiên claude.ai (p2)`. Chạy --list --commits.
+2. AI-02: cập nhật danh mục artifact từ git (thêm các việc AI làm từ tối 10/11: khung bug theo mẫu HW02 + script, kiểm trùng issue, bug_check/bug_check2 + tests/repro_bugs.spec.ts, issue_edits, Google Form (Apps Script, phiên thảo luận), moderator_script, usability_fill_hw03.py + JSON phiên AI chép, summary_hw03 sửa, ảnh trang Issues, AI nháp §3.2/§4.2). Điền cột #n theo prompt log (dải lượt trước commit của artifact); verdict/lý do = <SV viết>. Bảng in gọn để SV điền nhanh.
+3. AI-03: cập nhật số lượt theo dòng "Tổng" (đủ model + lượt không rõ model + lý do = <SV viết> nếu notes chưa có).
+4. §11 Mandatory Disclosure + report_plan f/g: thêm các việc AI mới ở trên; dòng AI-05 về CSV có họ tên/SĐT.
+5. Chạy lại mọi script sinh bảng (report_t1, sus_score --report, summary_hw03, forms_hw03). Liệt kê mọi <SV viết>/<SV điền>/📝 còn lại (file:dòng).
+Commit theo từng việc. Báo cáo ≤ 12 dòng + hash.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 196 lượt; Claude Sonnet 4.6 3 lượt (#1, #2, #92); Claude Opus 5.5 186 lượt (#3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23, #24, #25, #26, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49, #50, #52, #53, #54, #55, #56, #58, #59, #60, #61, #62, #63, #64, #65, #66, #67, #68, #71, #72, #73, #74, #75, #76, #77, #78, #80, #81, #82, #83, #84, #85, #86, #87, #88, #89, #90, #91, #93, #94, #95, #96, #97, #98, #99, #100, #101, #102, #103, #104, #105, #106, #107, #108, #109, #110, #111, #112, #113, #114, #115, #116, #117, #118, #119, #120, #121, #122, #123, #124, #125, #126, #127, #128, #129, #130, #131, #132, #133, #134, #135, #136, #137, #138, #139, #140, #141, #142, #143, #144, #145, #146, #147, #148, #149, #150, #151, #152, #153, #154, #155, #156, #157, #158, #159, #160, #161, #162, #163, #164, #165, #166, #167, #168, #169, #170, #171, #172, #173, #174, #175, #176, #177, #178, #179, #180, #181, #182, #183, #184, #185, #186, #187, #188, #189, #190, #191, #192, #193, #194, #195); Claude (không rõ model) 7 lượt (#4, #51, #57, #69, #70, #79, #196).
