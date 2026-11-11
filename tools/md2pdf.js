@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { pathToFileURL } = require('url');
-const req = (m) => require(require.resolve(m, { paths: [path.join(__dirname, '..', 'HW02', 'tests')] }));
+const req = (m) => require(require.resolve(m, { paths: [path.join(__dirname, '..', 'HW02', 'tests'), path.join(__dirname, '..', 'HW03', 'tests')] }));
 const { marked } = req('marked');
 const { chromium } = req('playwright');
 

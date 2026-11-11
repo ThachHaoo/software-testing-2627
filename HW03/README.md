@@ -50,5 +50,5 @@
 | `ai-forms/` | AI-02 Audit Report, AI-03 Disclosure, AI-05 Privacy Checklist (.md + PDF) |
 | `appendix/A_prompt_log.md` | Prompt log (trích tự động) |
 | `appendix/ai-outputs/` | Output AI gốc (đóng băng) |
-| `commit_log.txt` | Git commit log |
+| `appendix/commit_log.txt` | Git commit log |
 | `skills/` | Agent Skill + `VideoLinks.md` |
