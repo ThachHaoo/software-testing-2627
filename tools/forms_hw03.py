@@ -2,7 +2,10 @@
 
     python tools/forms_hw03.py
 
-- Artifact AI tạo: danh mục DƯỚI ĐÂY + git (commit tạo, commit sửa sau đó). Cột #n = "[chờ chốt transcript]".
+- Artifact AI tạo: danh mục DƯỚI ĐÂY + git (commit tạo, commit sửa sau đó).
+- Cột #n: các lượt trong `appendix/prompt_log_turns.txt` (sinh bằng extract_prompt_log.py --list --commits, cùng since/exclude với log)
+  có giờ > commit liền trước (git log --all) và ≤ giờ commit tạo artifact = "dải lượt trước commit";
+  rỗng (nhiều commit liền nhau trong một lượt) → lượt cuối có giờ ≤ commit.
 - Verdict / Lý do / cam đoan / chữ ký / phần đánh giá: `<SV viết>` hoặc `[...]` — AI không điền.
 - Số lượt theo model: dòng "**Tổng:**" của HW03/appendix/A_prompt_log.md lúc chạy (chạy lại sau lần trích cuối).
 - Mẫu định dạng: HW02/ai-forms (không chép số liệu HW02). AI-05 không sinh ở đây.
@@ -19,7 +22,7 @@ for _s in (sys.stdout,):
 REPO = Path(__file__).resolve().parents[1]
 HW = REPO / "HW03"
 SV = "`<SV viết>`"
-TBD = "[chờ chốt transcript]"
+TBD = "–"
 HEAD = ["**Khoa Công nghệ Thông tin (FIT) – Trường Đại học Khoa học Tự nhiên (HCMUS)**",
         "**CSC13003 – Kiểm chứng Phần mềm (AI-augmented · 2026)**", "**CHÍNH SÁCH AI · BIỂU MẪU — 2026 v1.0**", ""]
 SIGN = ["## Chữ ký", "", "| Mục | Giá trị |", "|---|---|", "| Họ tên sinh viên (in hoa): | LÊ TẤN HIỆP |", "| MSSV: | 23120255 |",
@@ -43,16 +46,28 @@ ART = [
     ("T7", "Kiểm ảnh/kết quả chạy tay (`run_check.md`), nén + đổi tên ảnh", ["HW03/checklist/run_check.md", "tools/compress_hw03.py"], "R1–R12, L1–L8"),
     ("T8", "Gộp lượt auto + tay vào `checklist.json` (V1, override theo quyết định SV) + `checklist.md`", ["tools/merge_hw03.py"], "kết quả P1/P2/P3"),
     ("T9", "Excel 3 sheet", ["HW03/excel/23120255_HW03_Checklist.xlsx"], "Test Cases / Checklist / Test Summary Report"),
-    ("T10", "Danh sách Failed + đối chiếu trùng issue (`failed_list.md`, `dup_check.md`, `issues.json`, `issue_dup_FR02.md`)", ["HW03/bugs/failed_list.md", "HW03/bugs/dup_check.md", "HW03/bugs/issues.json", "HW03/checklist/issue_dup_FR02.md", "tools/failed_list_hw03.py"], "trùng 14 / một phần 4 / MỚI 28"),
-    ("T11", "Nhóm dữ kiện bug + khung BUG-58…85 (chỉ dữ kiện)", ["HW03/bugs/bug_groups.md", "tools/bug_groups_hw03.py", "tools/bug_skeleton_hw03.py"], "28 nhóm (SV chốt), 28 khung"),
+    ("T10", "Danh sách Failed + đối chiếu trùng issue theo tiêu đề (`failed_list.md`, `issues.json`, `issue_dup_FR02.md`)", ["HW03/bugs/failed_list.md", "HW03/bugs/issues.json", "HW03/checklist/issue_dup_FR02.md", "tools/failed_list_hw03.py"], "trùng 14 / một phần 4 / MỚI 28"),
+    ("T11", "Nhóm dữ kiện bug + khung BUG-58…85 (chỉ dữ kiện)", ["HW03/bugs/bug_groups.md", "tools/bug_groups_hw03.py"], "28 nhóm (SV chốt), 28 khung"),
     ("T12", "Danh sách ảnh thiếu (`missing_photos.md`)", ["HW03/checklist/missing_photos.md"], "đối chiếu RUN.md/report"),
+    ("B1", "Kiểm trùng 179 issue nhóm (`dup_check.md`; AI đề xuất mức, SV quyết)", ["HW03/bugs/dup_check.md"], "trùng / một phần / mới theo item Failed"),
+    ("B2", "Khung BUG-58…85 theo mẫu HW02 (chỉ dữ kiện) + script `bug_skeleton_hw03.py`", ["tools/bug_skeleton_hw03.py"], "28 file khung; Tiêu đề/Steps/Severity… để SV viết"),
+    ("B3", "Kiểm dữ kiện 28 bug + tái hiện Steps SV bằng Playwright (`bug_check.md`, `repro_bugs.spec.ts`)", ["HW03/bugs/bug_check.md", "HW03/tests/repro_bugs.spec.ts", "HW03/tests/repro.config.ts", "HW03/bugs/repro/repro_P1.json", "HW03/bugs/repro/repro_P2.json"], "sạch 14 / còn điểm 14; P1, P2"),
+    ("B4", "Kiểm lại 14 bug SV sửa (`bug_check2.md`)", ["HW03/bugs/bug_check2.md"], "đã xử lý 6 / còn điểm 8"),
+    ("B5", "Tạo 28 GitHub Issue bằng `gh issue create --body-file` (file SV viết) + ghi link vào BUG-xx, README, report", ["HW03/README.md"], "#247–#274 trên tkob-team/eshop-sut", "bf715c0"),
+    ("B6", "Sửa body issue #266 + comment theo lệnh SV (`issue_edits.md`)", ["HW03/bugs/issue_edits.md"], "nhật ký lệnh `gh issue edit`/comment"),
+    ("B7", "Ảnh trang Issues `[HW03-C2]` (Playwright chụp) chèn report §6", ["HW03/bugs/issues_page_HW03-C2_1.png", "HW03/bugs/issues_page_HW03-C2_2.png"], "25 + 3 issue"),
     ("U1", "Gói usability nháp – bản đóng băng (plan 9 phần, participant kit, phiếu quan sát)", ["HW03/appendix/ai-outputs/T2_plan_v1.md", "HW03/appendix/ai-outputs/T2_participant_kit_v1.md", "HW03/appendix/ai-outputs/T2_observation_sheet_v1.md"], "chưa dùng trong phiên thật"),
     ("U2", "Môi trường usability từ xa (script phiên, tunnel, đưa SUT về main) + sửa plan mục 5–6", ["tools/usability_session.ps1", "tools/sut_main.ps1", "tools/restart_backend.ps1", "HW03/usability/plan.md"], "nhánh local `usability-tunnel` trong eshop-sut (không nộp)"),
+    ("U3", "Google Form SEQ + SUS + 4 câu hỏi mở (Apps Script – phiên thảo luận claude.ai)", ["HW03/usability/plan.md"], "form trên Google, không có file trong repo; CSV trả lời không commit", "2485116"),
+    ("U4", "Kịch bản điều phối `moderator_script.md` (phiên thảo luận nháp, Claude Code commit nguyên văn)", ["HW03/usability/moderator_script.md"], "phiên ~10 phút"),
+    ("U5", "Phiếu phiên S00…S07.json AI chép từ notes SV + CSV (`usability_fill_hw03.py`)", ["tools/usability_fill_hw03.py", "HW03/usability/sessions/S00.json"], "nhãn \"AI chép, SV duyệt\"; thời gian/hoàn thành/trợ giúp SV điền"),
+    ("U6", "Đối chiếu 7 pain point §5.8 ↔ issue nhóm (chỉ đọc, trả lời trong phiên)", ["HW03/23120255_HW03_Report.md"], "bảng trùng / liên quan / chưa có; SV tự ghi vào report", "afc81da", "#184"),
     ("S1", "Agent Skill `gui-checklist-testing` (SKILL.md, reference, asset, 8 script)", ["HW03/skills/gui-checklist-testing"], "chép từ `.claude/skills/`"),
     ("S2", "Agent Skill `usability-evaluation` (SKILL.md, reference, asset, 6 script)", ["HW03/skills/usability-evaluation"], "chưa dùng trên phiên thật"),
     ("S3", "`skills/VideoLinks.md` + đề xuất demo (`demo_plan.md`, không nộp)", ["HW03/skills/VideoLinks.md", "HW03/skills/demo_plan.md"], "link `<SV điền>`"),
-    ("R1", "Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3) + nháp §3.2, §4.2 (📝 AI nháp)", ["tools/report_t1_hw03.py"], "khối giữa marker REPORT:T1"),
-    ("R2", "Test summary README + report §8", ["tools/summary_hw03.py"], "khối SUMMARY"),
+    ("R1", "Bảng report T1/T3 (§3.3, §3.5, §3.6, §4.1, §4.3)", ["tools/report_t1_hw03.py"], "khối giữa marker REPORT:T1"),
+    ("R4", "AI nháp report §3.2, §4.2 (📝 AI nháp – SV duyệt/sửa)", ["HW03/23120255_HW03_Report.md"], "chỉ dùng dữ kiện trong repo", "ad992bc"),
+    ("R2", "Test summary README + report §8 (11/11 thêm dòng U1 từ phiếu phiên)", ["tools/summary_hw03.py"], "khối SUMMARY"),
     ("R3", "Khung AI-02, AI-03, khối Mandatory Disclosure §11", ["tools/forms_hw03.py"], "file này"),
     ("E1", "Mô tả môi trường (`env/environment.md`)", ["HW03/env/environment.md"], "phiên bản trình duyệt/OS/thiết bị"),
 ]
@@ -79,6 +94,38 @@ def created(paths):
     return best
 
 
+def fixed(h):
+    """Commit tạo chỉ định tay (artifact không có file riêng hoặc file đã tồn tại trước)."""
+    h2, d, s = git("log", "-1", "--format=%h|%ad|%s", "--date=format:%d/%m/%Y %H:%M", h).split("|", 2)
+    return (None, h2, d, s)
+
+
+_TURNS = None
+
+
+def turns_before(h):
+    """#n của các lượt có giờ trong (commit liền trước, commit h] theo git log --all (phút)."""
+    global _TURNS
+    if _TURNS is None:
+        f = HW / "appendix" / "prompt_log_turns.txt"
+        _TURNS = [(int(m.group(1)), m.group(2)[:16]) for m in re.finditer(r'^#(\d+)\s+\["([^"]+)"\]', f.read_text(encoding="utf-8"), re.M)] if f.exists() else []
+        _TURNS.sort()
+    times = sorted(set(git("log", "--all", "--format=%ad", "--date=format:%Y-%m-%d %H:%M").splitlines()))
+    t = git("log", "-1", "--format=%ad", "--date=format:%Y-%m-%d %H:%M", h)
+    prev = max((x for x in times if x < t), default="")
+    ns = [n for n, k in _TURNS if prev < k <= t]
+    if not ns:  # nhiều commit liền nhau trong cùng lượt → lượt cuối cùng có giờ ≤ commit
+        ns = [n for n, k in _TURNS if k <= t][-1:]
+    if not ns:
+        return TBD
+    rs, a = [], ns[0]
+    for x, y in zip(ns, ns[1:] + [None]):
+        if y != x + 1:
+            rs.append(f"#{a}" if a == x else f"#{a}–#{x}")
+            a = y
+    return ", ".join(rs)
+
+
 def later(paths, first):
     out = git("log", "--format=%h %s", f"{first}..HEAD", "--", *paths).splitlines()
     return list(reversed(out))
@@ -96,15 +143,34 @@ def totals():
 
 def rows():
     out = []
-    for code, name, paths, note in ART:
-        c = created(paths)
+    for code, name, paths, note, *fix in ART:
+        c = fixed(fix[0]) if fix else created(paths)
         if not c:
             out.append((code, name, "chưa commit", note, "–"))
             continue
         _, h, d, s = c
         lt = later(paths, h)
         mod = "; ".join(f"`{x.split(' ', 1)[0]}` {x.split(' ', 1)[1]}" for x in lt[:4]) + (f"; … (+{len(lt) - 4})" if len(lt) > 4 else "") if lt else "không có"
-        out.append((code, name, f"Claude Code · {d} · `{h}` ({s}) · {TBD}", f"{note} · " + ", ".join(f"`{p}`" for p in paths[:3]) + (" …" if len(paths) > 3 else ""), mod))
+        out.append((code, name, f"Claude Code · {d} · `{h}` ({s}) · {fix[1] if len(fix) > 1 else turns_before(h)}", f"{note} · " + ", ".join(f"`{p}`" for p in paths[:3]) + (" …" if len(paths) > 3 else ""), mod))
+    return out
+
+
+def kept():
+    """Giữ ô em đã điền ở AI-02 (bảng 3.2, mục 4) khi chạy lại script."""
+    f = HW / "ai-forms" / "AI-02_Audit_Report_23120255.md"
+    if not f.exists():
+        return {}
+    t = f.read_text(encoding="utf-8")
+    out = {}
+    sec = t.split("### 3.2", 1)[-1].split("## 4.", 1)
+    for line in sec[0].splitlines():
+        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        if len(c) == 4 and re.fullmatch(r"[A-Z]\d+", c[0]) and (c[2] != SV or c[3] != SV):
+            out[c[0]] = (c[2], c[3])
+    if len(sec) > 1:
+        kl = sec[1].split("## 5.", 1)[0].split("\n", 1)[-1].strip()
+        if kl and kl != SV:
+            out["_kl"] = kl
     return out
 
 
@@ -125,10 +191,13 @@ def ai02(tot):
     for r in R:
         L.append("| " + " | ".join(r) + " |")
     L += ["", f"*{len(R)} artifact. Sinh bằng `tools/forms_hw03.py` từ danh mục trong script + `git log` (commit tạo = commit đầu tiên thêm file chính – đường dẫn đầu ở cột (2)). Cột (5) chỉ liệt kê commit, không diễn giải.*", "",
-          "### 3.2 Mục (3), (4)", "", "| Mã | Artifact | (3) Verdict (VALID / INVALID / INCOMPLETE) | (4) Lý do (dẫn ISTQB/slide) |", "|---|---|---|---|"]
-    for code, name, *_ in R:
-        L.append(f"| {code} | {name} | {SV} | {SV} |")
-    L += ["", "## 4. Kết luận chung", "", SV, "", "## 5. AI Critique", "", "Xem report chính `23120255_HW03_Report.md` §10.", ""] + SIGN + REFS
+          "### 3.2 Mục (3), (4) – em điền", "", "*Verdict: VALID / INVALID / INCOMPLETE. Lý do: 1–2 câu, dẫn ISTQB/slide. #n để mở `appendix/A_prompt_log.md`.*", "",
+          "| Mã | #n | (3) Verdict | (4) Lý do |", "|---|---|---|---|"]
+    keep = kept()
+    for code, name, c1, *_ in R:
+        v, ly = keep.get(code, (SV, SV))
+        L.append(f"| {code} | {c1.rsplit(' · ', 1)[-1]} | {v} | {ly} |")
+    L += ["", "## 4. Kết luận chung", "", keep.get("_kl", SV), "", "## 5. AI Critique", "", "Xem report chính `23120255_HW03_Report.md` §10.", ""] + SIGN + REFS
     return "\n".join(L)
 
 

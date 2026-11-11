@@ -1,0 +1,449 @@
+# Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list --commits). Dùng để gom khoá khoảng trong prompt_log_notes.toml.
+# Commit kế tiếp = commit đầu tiên có giờ commit sau giờ lượt (git log --all).
+
+# Khoảng gợi ý (51 khoảng; tách khi tiền tố bước của commit kế tiếp đổi hoặc hai lượt cách > 60 phút)
+# khoá khoảng | số lượt | #đầu–#cuối | model | commit kế tiếp đầu / cuối
+["2026-11-04 12:26 .. 2026-11-04 12:33"] | 5 | #1–#5 | Claude (không rõ model), Claude Opus 5.5, Claude Sonnet 4.6 | be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By / be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+["2026-11-04 17:02 .. 2026-11-04 17:21"] | 5 | #6–#10 | Claude Opus 5.5 | be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By / be8996e HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+["2026-11-04 17:31 .. 2026-11-04 18:41"] | 18 | #11–#28 | Claude Opus 5.5 | c409e1c HW03: khung bài + report_plan / b8a86e9 HW03: X1, X2
+["2026-11-04 18:46 .. 2026-11-04 19:26"] | 4 | #29–#32 | Claude Opus 5.5 | 823f7b9 HW03[T1] 2/6b: SV bổ sung item checklist (sv_items / 823f7b9 HW03[T1] 2/6b: SV bổ sung item checklist (sv_items
+["2026-11-04 19:27 .. 2026-11-04 19:27"] | 1 | #33–#33 | Claude Opus 5.5 | 9463442 HW03[T1] 2/6: vá CL-07 / 9463442 HW03[T1] 2/6: vá CL-07
+["2026-11-04 19:35 .. 2026-11-04 19:35"] | 1 | #34–#34 | Claude Opus 5.5 | 1e3b806 HW03[T1] 2/6b2: SV sửa item theo kiểm dữ kiện / 1e3b806 HW03[T1] 2/6b2: SV sửa item theo kiểm dữ kiện
+["2026-11-04 19:44 .. 2026-11-04 19:44"] | 1 | #35–#35 | Claude Opus 5.5 | d173b63 HW03[T1] 2/6b3: SV sửa SV-05, GA4 / d173b63 HW03[T1] 2/6b3: SV sửa SV-05, GA4
+["2026-11-04 19:47 .. 2026-11-04 19:48"] | 2 | #36–#37 | Claude Opus 5.5 | 0600998 HW03[T1] 2/6b4: SV sửa N/A SV-05, tách tiền điều k / 0600998 HW03[T1] 2/6b4: SV sửa N/A SV-05, tách tiền điều k
+["2026-11-04 19:53 .. 2026-11-04 19:53"] | 1 | #38–#38 | Claude Opus 5.5 | 3f2328f HW03[T1] 2/6d: gộp item SV, chốt checklist v2 / 3f2328f HW03[T1] 2/6d: gộp item SV, chốt checklist v2
+["2026-11-04 19:55 .. 2026-11-04 19:55"] | 2 | #39–#40 | Claude Opus 5.5 | 17f747d HW03[T1] 2/6d2: SV chốt loai_nguon item SV / 17f747d HW03[T1] 2/6d2: SV chốt loai_nguon item SV
+["2026-11-04 19:56 .. 2026-11-04 19:57"] | 2 | #41–#42 | Claude Opus 5.5 | 07982fc HW03[T1] 3/6: Playwright P1/P2 + RUN.md / 07982fc HW03[T1] 3/6: Playwright P1/P2 + RUN.md
+["2026-11-04 20:27 .. 2026-11-04 20:27"] | 1 | #43–#43 | Claude Opus 5.5 | 1172c20 HW03[T1] 3/6b: C1, H1, P3A / 1172c20 HW03[T1] 3/6b: C1, H1, P3A
+["2026-11-05 02:03 .. 2026-11-05 02:17"] | 5 | #44–#48 | Claude Opus 5.5 | 1172c20 HW03[T1] 3/6b: C1, H1, P3A / 1172c20 HW03[T1] 3/6b: C1, H1, P3A
+["2026-11-05 02:27 .. 2026-11-05 02:31"] | 4 | #49–#52 | Claude (không rõ model), Claude Opus 5.5 | 9dfb111 HW03[T1] 3/6c: restart_backend dùng chung, sửa tiề / 9dfb111 HW03[T1] 3/6c: restart_backend dùng chung, sửa tiề
+["2026-11-05 02:33 .. 2026-11-05 02:48"] | 2 | #53–#54 | Claude Opus 5.5 | 7ba0785 HW03[T1] 4/6a: SV chạy Playwright P1/P2/P3 / 7ba0785 HW03[T1] 4/6a: SV chạy Playwright P1/P2/P3
+["2026-11-05 02:49 .. 2026-11-05 02:49"] | 1 | #55–#55 | Claude Opus 5.5 | 99a64dc HW03: deadline thật 11/11 10:00 / 99a64dc HW03: deadline thật 11/11 10:00
+["2026-11-09 22:31 .. 2026-11-10 00:53"] | 9 | #56–#64 | Claude (không rõ model), Claude Opus 5.5 | 99a64dc HW03: deadline thật 11/11 10:00 / 99a64dc HW03: deadline thật 11/11 10:00
+["2026-11-10 02:00 .. 2026-11-10 02:00"] | 1 | #65–#65 | Claude Opus 5.5 | 99a64dc HW03: deadline thật 11/11 10:00 / 99a64dc HW03: deadline thật 11/11 10:00
+["2026-11-10 02:09 .. 2026-11-10 02:40"] | 8 | #66–#73 | Claude (không rõ model), Claude Opus 5.5 | 107b67f HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ả / 107b67f HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ả
+["2026-11-10 02:46 .. 2026-11-10 02:47"] | 2 | #74–#75 | Claude Opus 5.5 | 61858d4 HW03[T1] 4/6a2: sửa nhãn ảnh B3/B4, M5 dùng ảnh M3 / 61858d4 HW03[T1] 4/6a2: sửa nhãn ảnh B3/B4, M5 dùng ảnh M3
+["2026-11-10 03:01 .. 2026-11-10 03:03"] | 2 | #76–#77 | Claude Opus 5.5 | 0679e25 HW03[T1] 5/6a: quyết định treo + khung bug (dữ kiệ / 0679e25 HW03[T1] 5/6a: quyết định treo + khung bug (dữ kiệ
+["2026-11-10 03:09 .. 2026-11-10 03:12"] | 3 | #78–#80 | Claude (không rõ model), Claude Opus 5.5 | 3ab505e HW03[T1] 5/6b: SV chốt nhóm bug / 3ab505e HW03[T1] 5/6b: SV chốt nhóm bug
+["2026-11-10 03:13 .. 2026-11-10 03:21"] | 5 | #81–#85 | Claude Opus 5.5 | 4199810 HW03[T2] 2b/10: môi trường usability từ xa (tunnel / 4199810 HW03[T2] 2b/10: môi trường usability từ xa (tunnel
+["2026-11-10 03:24 .. 2026-11-10 03:35"] | 5 | #86–#90 | Claude Opus 5.5 | d811ea2 HW03: cập nhật skill theo cách làm thực tế / c6e9465 HW03: prompt log thêm transcript phiên claude.ai (
+["2026-11-10 03:41 .. 2026-11-10 03:41"] | 1 | #91–#91 | Claude Opus 5.5 | a46ea4d harness: bài học từ HW03 / a46ea4d harness: bài học từ HW03
+["2026-11-10 18:18 .. 2026-11-10 18:24"] | 6 | #92–#97 | Claude Opus 5.5, Claude Sonnet 4.6 | fcab9e1 HW03[Skill] 1/3: chép skill + VideoLinks / fcab9e1 HW03[Skill] 1/3: chép skill + VideoLinks
+["2026-11-10 18:26 .. 2026-11-10 18:27"] | 2 | #98–#99 | Claude Opus 5.5 | 090cabb HW03[T1] 4/6c: SV chốt R9, R11 / 090cabb HW03[T1] 4/6c: SV chốt R9, R11
+["2026-11-10 18:33 .. 2026-11-10 18:35"] | 2 | #100–#101 | Claude Opus 5.5 | e9a2c85 HW03[T1] 5/6c: kiểm trùng issue (khung bug chờ chố / e9a2c85 HW03[T1] 5/6c: kiểm trùng issue (khung bug chờ chố
+["2026-11-10 18:37 .. 2026-11-10 18:37"] | 1 | #102–#102 | Claude Opus 5.5 | 0d8fd34 HW03[Skill] 1/3b: D1 / 0d8fd34 HW03[Skill] 1/3b: D1
+["2026-11-10 18:44 .. 2026-11-10 18:48"] | 3 | #103–#105 | Claude Opus 5.5 | 4b4c64c HW03[T1] 4/6d: R4 / 4b4c64c HW03[T1] 4/6d: R4
+["2026-11-10 18:52 .. 2026-11-10 18:56"] | 4 | #106–#109 | Claude Opus 5.5 | f6e85c3 HW03[T1] 4/6e: M6 + tham chiếu CL-64 / f6e85c3 HW03[T1] 4/6e: M6 + tham chiếu CL-64
+["2026-11-10 18:58 .. 2026-11-10 19:02"] | 2 | #110–#111 | Claude Opus 5.5 | 6069790 HW03[T1] 4/6f: ảnh tổng quan P3 / 6069790 HW03[T1] 4/6f: ảnh tổng quan P3
+["2026-11-10 19:03 .. 2026-11-10 19:04"] | 3 | #112–#114 | Claude Opus 5.5 | c51665d HW03: report §5 – không có phiên usability / c51665d HW03: report §5 – không có phiên usability
+["2026-11-10 19:09 .. 2026-11-10 19:10"] | 3 | #115–#117 | Claude Opus 5.5 | df6a396 HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót / df6a396 HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót
+["2026-11-10 19:11 .. 2026-11-10 19:35"] | 10 | #118–#127 | Claude Opus 5.5 | 2485116 HW03[T2] 2d/10: plan theo phiên 10 phút + Google F / 2485116 HW03[T2] 2d/10: plan theo phiên 10 phút + Google F
+["2026-11-10 19:36 .. 2026-11-10 20:13"] | 2 | #128–#129 | Claude Opus 5.5 | af92e6d HW03[T1] 5/6d: SV viết BUG-58…85 / af92e6d HW03[T1] 5/6d: SV viết BUG-58…85
+["2026-11-10 20:14 .. 2026-11-10 20:14"] | 1 | #130–#130 | Claude Opus 5.5 | 715c4eb HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI) / 715c4eb HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI)
+["2026-11-10 21:54 .. 2026-11-10 21:55"] | 2 | #131–#132 | Claude Opus 5.5 | 575b28c HW03: cập nhật prompt log / 575b28c HW03: cập nhật prompt log
+["2026-11-10 21:56 .. 2026-11-11 00:47"] | 26 | #133–#158 | Claude Opus 5.5 | 411c7ca HW03[T2]: phiếu ghi tay S00–S07 / 411c7ca HW03[T2]: phiếu ghi tay S00–S07
+["2026-11-11 00:50 .. 2026-11-11 00:57"] | 5 | #159–#163 | Claude Opus 5.5 | d9919c9 HW03[T2] 10/10: số liệu U1 / d9919c9 HW03[T2] 10/10: số liệu U1
+["2026-11-11 05:12 .. 2026-11-11 05:15"] | 3 | #164–#166 | Claude Opus 5.5 | d9919c9 HW03[T2] 10/10: số liệu U1 / d9919c9 HW03[T2] 10/10: số liệu U1
+["2026-11-11 05:17 .. 2026-11-11 05:17"] | 2 | #167–#168 | Claude Opus 5.5 | bf715c0 HW03[T1] 6/6: link GitHub Issue #247–#260 cho 14 b / bf715c0 HW03[T1] 6/6: link GitHub Issue #247–#260 cho 14 b
+["2026-11-11 05:18 .. 2026-11-11 05:31"] | 5 | #169–#173 | Claude Opus 5.5 | c19c3ab HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a / c19c3ab HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a
+["2026-11-11 05:32 .. 2026-11-11 05:33"] | 2 | #174–#175 | Claude Opus 5.5 | 496ad20 HW03[T1] 5/6f: SV sửa BUG theo kiểm dữ kiện / 496ad20 HW03[T1] 5/6f: SV sửa BUG theo kiểm dữ kiện
+["2026-11-11 07:49 .. 2026-11-11 07:51"] | 2 | #176–#177 | Claude Opus 5.5 | de6882e HW03[T1] 5/6g: kiểm lại 14 bug SV sửa (AI) / de6882e HW03[T1] 5/6g: kiểm lại 14 bug SV sửa (AI)
+["2026-11-11 07:55 .. 2026-11-11 07:55"] | 1 | #178–#178 | Claude Opus 5.5 | 77a351f HW03[T1] 6/6: link GitHub Issue #261–#274 cho 14 b / 77a351f HW03[T1] 6/6: link GitHub Issue #261–#274 cho 14 b
+["2026-11-11 07:58 .. 2026-11-11 07:58"] | 1 | #179–#179 | Claude Opus 5.5 | 524926e HW03[T2]: SV viết findings / 524926e HW03[T2]: SV viết findings
+["2026-11-11 08:01 .. 2026-11-11 08:11"] | 2 | #180–#181 | Claude Opus 5.5 | 99a9e27 HW03[T1]: khôi phục dữ kiện BUG-72 (#266) / 99a9e27 HW03[T1]: khôi phục dữ kiện BUG-72 (#266)
+["2026-11-11 08:25 .. 2026-11-11 08:39"] | 6 | #182–#187 | Claude Opus 5.5 | f68ec0d HW03[T2]: SV sửa findings theo kiểm dữ kiện / f96dfb2 HW03[T2]: Thêm quy định Severity
+["2026-11-11 08:41 .. 2026-11-11 08:54"] | 4 | #188–#191 | Claude Opus 5.5 | cf4e6b7 HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI  / 1d0683b HW03[T1]: SV sửa câu từ 3.4
+["2026-11-11 09:03 .. 2026-11-11 09:13"] | 5 | #192–#196 | Claude (không rõ model), Claude Opus 5.5 | 4eb5a8d HW03: SV sửa Critique (số từ + dữ kiện) / 0c96555 HW03: prompt log thêm transcript phiên claude.ai (
+
+#1   ["2026-11-04 12:26"]  Claude Sonnet 4.6 Giờ tôi sẽ bắt đầu thực hiện HW03 nhé /cs423-ai-first-homework . Đầu tiên đọc đề
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#2   ["2026-11-04 12:31"]  Claude Sonnet 4.6 1. 07/11/2026
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#3   ["2026-11-04 12:31#2"]  Claude Opus 5.5  Continue with the task described in the conversation above. Your most recent mcp
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#4   ["2026-11-04 12:32"]  Claude (không rõ model) [Request interrupted by user]
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#5   ["2026-11-04 12:33"]  Claude Opus 5.5  1. 07/11/2026
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#6   ["2026-11-04 17:02"]  Claude Opus 5.5  Máy mình không có Firefox. Hiện tại mình đang sử dụng Cốc Cốc để làm. Và máy mìn
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#7   ["2026-11-04 17:09"]  Claude Opus 5.5  Ở HW02 mình đã làm các phần này: 
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#8   ["2026-11-04 17:11"]  Claude Opus 5.5  Rồi, viết lại cả C1, C2, C3 để mình đưa cho nhóm nhé. Mình oke với U1 nhé
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#9   ["2026-11-04 17:15"]  Claude Opus 5.5  HW03 – kiểm chứng P3 (chỉ kiểm, chưa commit gì)
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#10  ["2026-11-04 17:21"]  Claude Opus 5.5  3. Đã tuyển xong hết, không học lớp của tôi, một số non-IT, một số IT. Sau chạy 
+      → commit kế tiếp: be8996e (17:31 04/11) HW02: kết thúc – gỡ hook Stop, tắt Co-Authored-By
+#11  ["2026-11-04 17:31"]  Claude Opus 5.5  HW03 – kiểm chứng P3, chạy lại bước 3, 5, 6 (backend + web vẫn chạy nền; nếu đã 
+      → commit kế tiếp: c409e1c (17:41 04/11) HW03: khung bài + report_plan
+#12  ["2026-11-04 17:34"]  Claude Opus 5.5  Kết quả bước 6, đã đăng nhập bình thường
+      → commit kế tiếp: c409e1c (17:41 04/11) HW03: khung bài + report_plan
+#13  ["2026-11-04 17:35"]  Claude Opus 5.5  Đã kiểm xong P3: cả 6 bước đều đạt. Em chưa commit gì và cũng chưa xác nhận lượt
+      → commit kế tiếp: c409e1c (17:41 04/11) HW03: khung bài + report_plan
+#14  ["2026-11-04 17:38"]  Claude Opus 5.5  HW03 – khung bài (commit "HW03: khung bài + report_plan")
+      → commit kế tiếp: c409e1c (17:41 04/11) HW03: khung bài + report_plan
+#15  ["2026-11-04 17:40"]  Claude Opus 5.5  E1=a
+      → commit kế tiếp: c409e1c (17:41 04/11) HW03: khung bài + report_plan
+#16  ["2026-11-04 17:42"]  Claude Opus 5.5  email đúng, sao biết hay vậy. email chung của sv hcmus bị leak à
+      → commit kế tiếp: 4ab90da (17:44 04/11) HW03: chốt E1, O1, T
+#17  ["2026-11-04 17:44"]  Claude Opus 5.5  HW03 – 3 việc, mỗi việc 1 commit. Đọc HW03/report_plan.md trước.
+      → commit kế tiếp: 4ab90da (17:44 04/11) HW03: chốt E1, O1, T
+#18  ["2026-11-04 17:54"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: eced5dd (18:00 04/11) HW03: vá harness – since theo giờ
+#19  ["2026-11-04 17:56"]  Claude Opus 5.5  À mình tắt hook vì nó cứ dí vào cho HW02 ấy mà
+      → commit kế tiếp: eced5dd (18:00 04/11) HW03: vá harness – since theo giờ
+#20  ["2026-11-04 17:57"]  Claude Opus 5.5  HW03 – cấu hình + K1 (commit "HW03: bật hook Stop, bảo vệ ai-outputs/prompt log,
+      → commit kế tiếp: eced5dd (18:00 04/11) HW03: vá harness – since theo giờ
+#21  ["2026-11-04 18:02"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e781197 (18:12 04/11) HW03: tách CLAUDE.md theo bài
+#22  ["2026-11-04 18:06"]  Claude Opus 5.5  Mình chưa sử dụng prompt hiện tại bạn đưa nhé. Mình muốn hỏi bạn xem. Là mình có
+      → commit kế tiếp: e781197 (18:12 04/11) HW03: tách CLAUDE.md theo bài
+#23  ["2026-11-04 18:10"]  Claude Opus 5.5  HW03 – harness, mỗi mục 1 commit. Phần skill dùng skill testing-technique-skill-
+      → commit kế tiếp: e781197 (18:12 04/11) HW03: tách CLAUDE.md theo bài
+#24  ["2026-11-04 18:19"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: b8a86e9 (18:44 04/11) HW03: X1, X2
+#25  ["2026-11-04 18:33"]  Claude Opus 5.5  Ủa mới, bị reject push, bạn xem lại nhé. Mình chưa dùng prompt mới nhất đâu nhé
+      → commit kế tiếp: b8a86e9 (18:44 04/11) HW03: X1, X2
+#26  ["2026-11-04 18:37"]  Claude Opus 5.5  G1= Được
+      → commit kế tiếp: b8a86e9 (18:44 04/11) HW03: X1, X2
+#27  ["2026-11-04 18:40"]  Claude Opus 5.5  NA1=giữ, GA1=giữ, GA2=Nếu trong SRS không có thì bỏ luôn nhé. GA3= được
+      → commit kế tiếp: b8a86e9 (18:44 04/11) HW03: X1, X2
+#28  ["2026-11-04 18:41"]  Claude Opus 5.5  HW03 – 2 commit. Không sửa ai-outputs/.
+      → commit kế tiếp: b8a86e9 (18:44 04/11) HW03: X1, X2
+#29  ["2026-11-04 18:46"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 823f7b9 (19:27 04/11) HW03[T1] 2/6b: SV bổ sung item checklist (sv_items.md)
+#30  ["2026-11-04 18:48"]  Claude Opus 5.5  Đợi chút, trước khi mình viết, có thể cho mình một số hint để ra ý tưởng viết. H
+      → commit kế tiếp: 823f7b9 (19:27 04/11) HW03[T1] 2/6b: SV bổ sung item checklist (sv_items.md)
+#31  ["2026-11-04 18:52"]  Claude Opus 5.5  Rồi, vậy C2 mình cần xem qua các UI nào nhỉ.
+      → commit kế tiếp: 823f7b9 (19:27 04/11) HW03[T1] 2/6b: SV bổ sung item checklist (sv_items.md)
+#32  ["2026-11-04 19:26"]  Claude Opus 5.5  Thiên về b nhé
+      → commit kế tiếp: 823f7b9 (19:27 04/11) HW03[T1] 2/6b: SV bổ sung item checklist (sv_items.md)
+#33  ["2026-11-04 19:27"]  Claude Opus 5.5  HW03 – 3 commit. Không sửa sv_items.md, không sửa ai-outputs/.
+      → commit kế tiếp: 9463442 (19:27 04/11) HW03[T1] 2/6: vá CL-07
+#34  ["2026-11-04 19:35"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 1e3b806 (19:43 04/11) HW03[T1] 2/6b2: SV sửa item theo kiểm dữ kiện
+#35  ["2026-11-04 19:44"]  Claude Opus 5.5  push rồi nhé. Check lại nhé
+      → commit kế tiếp: d173b63 (19:46 04/11) HW03[T1] 2/6b3: SV sửa SV-05, GA4
+#36  ["2026-11-04 19:47"]  Claude Opus 5.5  HW03[T1] 2/6d – chốt checklist v2 (commit "HW03[T1] 2/6d: gộp item SV, chốt chec
+      → commit kế tiếp: 0600998 (19:52 04/11) HW03[T1] 2/6b4: SV sửa N/A SV-05, tách tiền điều kiện SV-02
+#37  ["2026-11-04 19:48"]  Claude Opus 5.5  Không dùng AI. 
+      → commit kế tiếp: 0600998 (19:52 04/11) HW03[T1] 2/6b4: SV sửa N/A SV-05, tách tiền điều kiện SV-02
+#38  ["2026-11-04 19:53"]  Claude Opus 5.5  HW03[T1] 2/6d – chốt checklist v2 (commit "HW03[T1] 2/6d: gộp item SV, chốt chec
+      → commit kế tiếp: 3f2328f (19:54 04/11) HW03[T1] 2/6d: gộp item SV, chốt checklist v2
+#39  ["2026-11-04 19:55"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 17f747d (19:56 04/11) HW03[T1] 2/6d2: SV chốt loai_nguon item SV
+#40  ["2026-11-04 19:55#2"]  Claude Opus 5.5  HW03[T1] 2/6d2 (commit "HW03[T1] 2/6d2: SV chốt loai_nguon item SV"): L2=b — điề
+      → commit kế tiếp: 17f747d (19:56 04/11) HW03[T1] 2/6d2: SV chốt loai_nguon item SV
+#41  ["2026-11-04 19:56"]  Claude Opus 5.5  - checklist.json: đã điền loai_nguon cho SV-01…06 đúng như bạn chốt (5 Heuristic
+      → commit kế tiếp: 07982fc (20:09 04/11) HW03[T1] 3/6: Playwright P1/P2 + RUN.md
+#42  ["2026-11-04 19:57"]  Claude Opus 5.5  HW03[T1] 3/6 – theo skill gui-checklist-testing bước 3 (commit "HW03[T1] 3/6: Pl
+      → commit kế tiếp: 07982fc (20:09 04/11) HW03[T1] 3/6: Playwright P1/P2 + RUN.md
+#43  ["2026-11-04 20:27"]  Claude Opus 5.5  Ghi nhớ những cái đang chạy. Tắt giúp mình để mình chạy về phòng. Rồi mình sẽ bả
+      → commit kế tiếp: 1172c20 (02:26 05/11) HW03[T1] 3/6b: C1, H1, P3A
+#44  ["2026-11-05 02:03"]  Claude Opus 5.5  bật lại nhé
+      → commit kế tiếp: 1172c20 (02:26 05/11) HW03[T1] 3/6b: C1, H1, P3A
+#45  ["2026-11-05 02:03#2"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 1172c20 (02:26 05/11) HW03[T1] 3/6b: C1, H1, P3A
+#46  ["2026-11-05 02:09"]  Claude Opus 5.5  1. Ủa hình như mình xoá Chrome rồi. Giờ chỉ còn Cốc Cốc với Edge thôi.
+      → commit kế tiếp: 1172c20 (02:26 05/11) HW03[T1] 3/6b: C1, H1, P3A
+#47  ["2026-11-05 02:15"]  Claude Opus 5.5  Google Chrome	157.0.8103.39 (Official Build) (64-bit) (cohort: Stable Installs &
+      → commit kế tiếp: 1172c20 (02:26 05/11) HW03[T1] 3/6b: C1, H1, P3A
+#48  ["2026-11-05 02:17"]  Claude Opus 5.5  HW03 – bật lại + chuẩn bị chạy (commit "HW03[T1] 3/6b: C1, H1, P3A"):
+      → commit kế tiếp: 1172c20 (02:26 05/11) HW03[T1] 3/6b: C1, H1, P3A
+#49  ["2026-11-05 02:27"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 9dfb111 (02:32 05/11) HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều kiện CL-58/59
+#50  ["2026-11-05 02:29"]  Claude Opus 5.5  "Trước mỗi lượt: Ctrl+C rồi chạy lại." Hình như trước đó mình có viết script đẻ 
+      → commit kế tiếp: 9dfb111 (02:32 05/11) HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều kiện CL-58/59
+#51  ["2026-11-05 02:31"]  Claude (không rõ model) ──
+      → commit kế tiếp: 9dfb111 (02:32 05/11) HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều kiện CL-58/59
+#52  ["2026-11-05 02:31#2"]  Claude Opus 5.5  HW03 – R1, R2 (commit "HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều 
+      → commit kế tiếp: 9dfb111 (02:32 05/11) HW03[T1] 3/6c: restart_backend dùng chung, sửa tiền điều kiện CL-58/59
+#53  ["2026-11-05 02:33"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7ba0785 (02:49 05/11) HW03[T1] 4/6a: SV chạy Playwright P1/P2/P3
+#54  ["2026-11-05 02:48"]  Claude Opus 5.5  Mình chạy xong phần tự động rồi, giờ buồn ngủ quá nên đi ngủ nhé. Lần sau thực h
+      → commit kế tiếp: 7ba0785 (02:49 05/11) HW03[T1] 4/6a: SV chạy Playwright P1/P2/P3
+#55  ["2026-11-05 02:49"]  Claude Opus 5.5  Lưu lại những gì đang chạy hiện tại, để lần sau mình yêu cầu bật lại thì mở lại 
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#56  ["2026-11-09 22:31"]  Claude Opus 5.5  mở lại nhé
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#57  ["2026-11-09 22:34"]  Claude (không rõ model) chạy npm run p1, npm run p2, npm run p3 trong HW03/tests (mỗi lệnh đã tự restart
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#58  ["2026-11-09 22:40"]  Claude Opus 5.5  Cho tôi hỏi, hiện là tôi chưa lấy/viết các skills cần thiết cho HW này chưa nhỉ?
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#59  ["2026-11-09 22:41"]  Claude Opus 5.5  Thật ra thì đó deadline tôi tự tạo, deadline thật là 10h sáng 11/11 cơ
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#60  ["2026-11-09 22:42"]  Claude Opus 5.5  Task 2 tôi có thể deploy rồi bảo bạn tôi vào test được không? Chứ ban đầu tôi mờ
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#61  ["2026-11-09 23:30"]  Claude Opus 5.5  khi chạy tay theo RUN.md có cần đọc thêm file khác không vậy?
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#62  ["2026-11-09 23:31"]  Claude Opus 5.5  Màn hình này là sao: "Đăng nhập, Quên mật khẩu B1 / B2, Hồ sơ" là bao nhiêu màn 
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#63  ["2026-11-10 00:22"]  Claude Opus 5.5  Firefox làm gì có lighthouse nhỉ
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#64  ["2026-11-10 00:53"]  Claude Opus 5.5  <task-notification>
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#65  ["2026-11-10 02:00"]  Claude Opus 5.5  HW03 – 2 việc (mỗi việc 1 commit):
+      → commit kế tiếp: 99a64dc (02:00 10/11) HW03: deadline thật 11/11 10:00
+#66  ["2026-11-10 02:09"]  Claude Opus 5.5  response prompt ở trên:
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#67  ["2026-11-10 02:11"]  Claude Opus 5.5  HW03[T1] 4/6 – kiểm + gộp. KHÔNG sửa chữ tôi viết trong runs/*_manual_*; chỉ liệ
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#68  ["2026-11-10 02:18"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#69  ["2026-11-10 02:23"]  Claude (không rõ model) Q1. Không, tôi không dùng Chrome, và tôi hết dung lượng, không có nhu cầu tải Ch
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#70  ["2026-11-10 02:23#2"]  Claude (không rõ model) [Request interrupted by user]
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#71  ["2026-11-10 02:24"]  Claude Opus 5.5  Q1. Không, tôi không dùng Chrome, và tôi hết dung lượng, không có nhu cầu tải Ch
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#72  ["2026-11-10 02:39"]  Claude Opus 5.5  Mình chưa sử dụng lệnh trên nhé.
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#73  ["2026-11-10 02:40"]  Claude Opus 5.5  HW03[T1] 4/6 – xử lý run_check (chưa gộp):
+      → commit kế tiếp: 107b67f (02:45 10/11) HW03[T1] 4/6a1: SV chạy tay P1/P2/P3 – kết quả + ảnh đạt
+#74  ["2026-11-10 02:46"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 61858d4 (02:48 10/11) HW03[T1] 4/6a2: sửa nhãn ảnh B3/B4, M5 dùng ảnh M3/M4
+#75  ["2026-11-10 02:47"]  Claude Opus 5.5  HW03[T1] 4/6b:
+      → commit kế tiếp: 61858d4 (02:48 10/11) HW03[T1] 4/6a2: sửa nhãn ảnh B3/B4, M5 dùng ảnh M3/M4
+#76  ["2026-11-10 03:01"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 0679e25 (03:07 10/11) HW03[T1] 5/6a: quyết định treo + khung bug (dữ kiện)
+#77  ["2026-11-10 03:03"]  Claude Opus 5.5  HW03[T1] 5/6a:
+      → commit kế tiếp: 0679e25 (03:07 10/11) HW03[T1] 5/6a: quyết định treo + khung bug (dữ kiện)
+#78  ["2026-11-10 03:09"]  Claude Opus 5.5  Cho mình hỏi skill của prompt mà mình dùng trước prompt tunnel đã được sinh ra c
+      → commit kế tiếp: 3ab505e (03:13 10/11) HW03[T1] 5/6b: SV chốt nhóm bug
+#79  ["2026-11-10 03:10"]  Claude (không rõ model) HW03[T1] 5/6b: tách G-02 → CL-13, CL-14 riêng; tách G-23 → CL-08, CL-09 riêng; G
+      → commit kế tiếp: 3ab505e (03:13 10/11) HW03[T1] 5/6b: SV chốt nhóm bug
+#80  ["2026-11-10 03:12"]  Claude Opus 5.5  G-13 gộp; #160 trùng, #165 trùng #167 trùng #169 trùng #170 trùng
+      → commit kế tiếp: 3ab505e (03:13 10/11) HW03[T1] 5/6b: SV chốt nhóm bug
+#81  ["2026-11-10 03:13"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 4199810 (03:22 10/11) HW03[T2] 2b/10: môi trường usability từ xa (tunnel)
+#82  ["2026-11-10 03:14"]  Claude Opus 5.5  HW03[T2] – môi trường usability từ xa (commit trong repo bài: "HW03[T2] 2b/10: m
+      → commit kế tiếp: 4199810 (03:22 10/11) HW03[T2] 2b/10: môi trường usability từ xa (tunnel)
+#83  ["2026-11-10 03:14#2"]  Claude Opus 5.5  Trong lúc đang chạy prompt trên thì tôi up 2 skill kia lên cho bạn nhé
+      → commit kế tiếp: 4199810 (03:22 10/11) HW03[T2] 2b/10: môi trường usability từ xa (tunnel)
+#84  ["2026-11-10 03:18"]  Claude Opus 5.5  Tunnel đã chạy. Em kiểm tra từ PC qua Internet: trang trả HTTP 200, API qua tunn
+      → commit kế tiếp: 4199810 (03:22 10/11) HW03[T2] 2b/10: môi trường usability từ xa (tunnel)
+#85  ["2026-11-10 03:21"]  Claude Opus 5.5  Đã thử hết luồng bạn nói, vào hồ sơ kiểm tra thì thấy 1 đơn hàng đã được giảm gi
+      → commit kế tiếp: 4199810 (03:22 10/11) HW03[T2] 2b/10: môi trường usability từ xa (tunnel)
+#86  ["2026-11-10 03:24"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: d811ea2 (03:29 10/11) HW03: cập nhật skill theo cách làm thực tế
+#87  ["2026-11-10 03:24#2"]  Claude Opus 5.5  HW03 – hoàn thiện 2 skill theo cách làm thực tế (commit "HW03: cập nhật skill th
+      → commit kế tiếp: d811ea2 (03:29 10/11) HW03: cập nhật skill theo cách làm thực tế
+#88  ["2026-11-10 03:31"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: cfa861e (03:34 10/11) HW03: handoff 10/11
+#89  ["2026-11-10 03:33"]  Claude Opus 5.5  HW03 – handoff trước khi nghỉ (commit "HW03: handoff 10/11"):
+      → commit kế tiếp: cfa861e (03:34 10/11) HW03: handoff 10/11
+#90  ["2026-11-10 03:35"]  Claude Opus 5.5  Tôi mới thêm transcript của claude.ai, giúp tôi chạy on_stop.py --manual rồi com
+      → commit kế tiếp: c6e9465 (03:36 10/11) HW03: prompt log thêm transcript phiên claude.ai (p1)
+#91  ["2026-11-10 03:41"]  Claude Opus 5.5  HW03 – bài học dùng chung (commit "harness: bài học từ HW03"):
+      → commit kế tiếp: a46ea4d (03:41 10/11) harness: bài học từ HW03
+#92  ["2026-11-10 18:18"]  Claude Sonnet 4.6 /cs423-ai-first-homework Tiếp tục HW03 (GUI & Usability), deadline 10:00 11/11/2
+      → commit kế tiếp: fcab9e1 (18:25 10/11) HW03[Skill] 1/3: chép skill + VideoLinks
+#93  ["2026-11-10 18:18#2"]  Claude Opus 5.5  Continue with the task described in the conversation above. Your most recent mcp
+      → commit kế tiếp: fcab9e1 (18:25 10/11) HW03[Skill] 1/3: chép skill + VideoLinks
+#94  ["2026-11-10 18:20"]  Claude Opus 5.5  Thôi giờ tôi chấp nhận bỏ Task 2, có thể làm full Task 1, 3 cùng với skill để ăn
+      → commit kế tiếp: fcab9e1 (18:25 10/11) HW03[Skill] 1/3: chép skill + VideoLinks
+#95  ["2026-11-10 18:23"]  Claude Opus 5.5  Giờ tôi muốn hoàn thành Task 1 hoặc Task 3 cũng như Skill ngay, Còn Task 2 thì n
+      → commit kế tiếp: fcab9e1 (18:25 10/11) HW03[Skill] 1/3: chép skill + VideoLinks
+#96  ["2026-11-10 18:24"]  Claude Opus 5.5  NHIỆM VỤ: chuẩn bị phần Skill để nộp HW03. Không push, không amend.
+      → commit kế tiếp: fcab9e1 (18:25 10/11) HW03[Skill] 1/3: chép skill + VideoLinks
+#97  ["2026-11-10 18:24#2"]  Claude Opus 5.5  Hiện tại Task 1 chỉ còn viết 28 bug là xong nhỉ. Vậy còn Task 3 đã làm gì chưa n
+      → commit kế tiếp: fcab9e1 (18:25 10/11) HW03[Skill] 1/3: chép skill + VideoLinks
+#98  ["2026-11-10 18:26"]  Claude Opus 5.5  Xong. Đã chép 2 skill vào HW03/skills/, tạo VideoLinks.md và demo_plan.md, commi
+      → commit kế tiếp: 090cabb (18:31 10/11) HW03[T1] 4/6c: SV chốt R9, R11
+#99  ["2026-11-10 18:27"]  Claude Opus 5.5  NHIỆM VỤ: R9/R11 + D1/D2 + điền chữ report T1/T3. SV chốt: R9=b, R11=b (lý do: E
+      → commit kế tiếp: 090cabb (18:31 10/11) HW03[T1] 4/6c: SV chốt R9, R11
+#100 ["2026-11-10 18:33"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: e9a2c85 (18:37 10/11) HW03[T1] 5/6c: kiểm trùng issue (khung bug chờ chốt tiền tố)
+#101 ["2026-11-10 18:35"]  Claude Opus 5.5  NHIỆM VỤ: kiểm trùng issue + dựng lại khung BUG-58…85 theo mẫu HW02. SV chốt: B8
+      → commit kế tiếp: e9a2c85 (18:37 10/11) HW03[T1] 5/6c: kiểm trùng issue (khung bug chờ chốt tiền tố)
+#102 ["2026-11-10 18:37"]  Claude Opus 5.5  Làm tiếp phần còn dở của lệnh trước: D1 (commit 1/3b), bước 2 report (§3.3, 3.5,
+      → commit kế tiếp: 0d8fd34 (18:38 10/11) HW03[Skill] 1/3b: D1
+#103 ["2026-11-10 18:44"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 4b4c64c (18:49 10/11) HW03[T1] 4/6d: R4
+#104 ["2026-11-10 18:47"]  Claude Opus 5.5  PFX=B; DUP=a; R4=phần jpg do mình lấy từ điện thoại, còn png là do chụp screensh
+      → commit kế tiếp: 4b4c64c (18:49 10/11) HW03[T1] 4/6d: R4
+#105 ["2026-11-10 18:48"]  Claude Opus 5.5  NHIỆM VỤ: dựng khung BUG-58…85 (bước 3 lệnh trước, message gốc). SV chốt: PFX=b 
+      → commit kế tiếp: 4b4c64c (18:49 10/11) HW03[T1] 4/6d: R4
+#106 ["2026-11-10 18:52"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f6e85c3 (18:57 10/11) HW03[T1] 4/6e: M6 + tham chiếu CL-64
+#107 ["2026-11-10 18:54"]  Claude Opus 5.5  NHIỆM VỤ: ảnh tổng quan P3 + dọn RUN.md. SV chốt M6=a (bỏ ảnh P*_M6_1 vì M6 khôn
+      → commit kế tiếp: f6e85c3 (18:57 10/11) HW03[T1] 4/6e: M6 + tham chiếu CL-64
+#108 ["2026-11-10 18:55"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: f6e85c3 (18:57 10/11) HW03[T1] 4/6e: M6 + tham chiếu CL-64
+#109 ["2026-11-10 18:56"]  Claude Opus 5.5  SV chốt: M6 làm ngay (commit riêng `HW03[T1] 4/6e: M6 + tham chiếu CL-64`); CL-6
+      → commit kế tiếp: f6e85c3 (18:57 10/11) HW03[T1] 4/6e: M6 + tham chiếu CL-64
+#110 ["2026-11-10 18:58"]  Claude Opus 5.5  overlay 5 ảnh nào đây nhỉ
+      → commit kế tiếp: 6069790 (19:03 10/11) HW03[T1] 4/6f: ảnh tổng quan P3
+#111 ["2026-11-10 19:02"]  Claude Opus 5.5  overlay xong 5 ảnh rồi nhé
+      → commit kế tiếp: 6069790 (19:03 10/11) HW03[T1] 4/6f: ảnh tổng quan P3
+#112 ["2026-11-10 19:03"]  Claude Opus 5.5  Em đã xem từng ảnh: cả 5 ảnh tổng quan P3 đều đạt, đã nén và đưa vào report.
+      → commit kế tiếp: c51665d (19:04 10/11) HW03: report §5 – không có phiên usability
+#113 ["2026-11-10 19:04"]  Claude Opus 5.5  Cho tôi xem tiến độ các task hiện tại (bao gồm cả task 2)
+      → commit kế tiếp: c51665d (19:04 10/11) HW03: report §5 – không có phiên usability
+#114 ["2026-11-10 19:04#2"]  Claude Opus 5.5  NHIỆM VỤ: chuẩn bị đóng gói HW03 (phần không cần SV). Không push, không amend, K
+      → commit kế tiếp: c51665d (19:04 10/11) HW03: report §5 – không có phiên usability
+#115 ["2026-11-10 19:09"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: df6a396 (19:10 10/11) HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót
+#116 ["2026-11-10 19:09#2"]  Claude Opus 5.5  PS D:\HK7\Testing\Exercise\HW\software-testing-2627> git status --short
+      → commit kế tiếp: df6a396 (19:10 10/11) HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót
+#117 ["2026-11-10 19:10"]  Claude Opus 5.5  1. P3_M2_2.png (evidence/P3_android) chưa được add trong 6069790 → kiểm 4 ảnh cò
+      → commit kế tiếp: df6a396 (19:10 10/11) HW03[T1] 4/6g: thêm ảnh P3_M2_2 bị sót
+#118 ["2026-11-10 19:11"]  Claude Opus 5.5  Đã thêm ảnh bị sót, sửa §5.3 và commit prompt log; git status --short hiện sạch.
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#119 ["2026-11-10 19:16"]  Claude Opus 5.5  Theo bạn, giờ tôi đưa link cho bạn tôi để làm task 2. Thì họ cần làm những gì, đ
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#120 ["2026-11-10 19:19"]  Claude Opus 5.5  Giúp tôi làm google form cho những cái cần thiết luôn được không, bạn có thể tha
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#121 ["2026-11-10 19:23"]  Claude Opus 5.5  https://docs.google.com/forms/d/1JMFzxKdVIvbXoNI9PLH4s3CK_d8PA_ehi7Pw4QCPUug/edi
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#122 ["2026-11-10 19:26"]  Claude Opus 5.5  tưởng có 2 form chứ, có 1 form thôi à
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#123 ["2026-11-10 19:28"]  Claude Opus 5.5  SEQ và 10 câu SUS là gì nhỉ
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#124 ["2026-11-10 19:29"]  Claude Opus 5.5  Rồi, giúp tôi viết các kịch bản: 
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#125 ["2026-11-10 19:31"]  Claude Opus 5.5  12-15 phút luôn à. Có thể rút gọn còn 10 phút được không. Vì mấy người tôi nhờ n
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#126 ["2026-11-10 19:34"]  Claude Opus 5.5  Có cần lưu file này vào trong software-testing không
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#127 ["2026-11-10 19:35"]  Claude Opus 5.5  1. HW03/usability/moderator_script.md (SV đặt vào, AI nháp ở phiên thảo luận 19:
+      → commit kế tiếp: 2485116 (19:36 10/11) HW03[T2] 2d/10: plan theo phiên 10 phút + Google Form
+#128 ["2026-11-10 19:36"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: af92e6d (20:14 10/11) HW03[T1] 5/6d: SV viết BUG-58…85
+#129 ["2026-11-10 20:13"]  Claude Opus 5.5  Viết xong các bug rồi, commit luôn hay là bảo Claude Code check rồi mới commit n
+      → commit kế tiếp: af92e6d (20:14 10/11) HW03[T1] 5/6d: SV viết BUG-58…85
+#130 ["2026-11-10 20:14"]  Claude Opus 5.5  NHIỆM VỤ: kiểm bug SV viết (BUG-58…85) – T1 bước 5/6e. KHÔNG sửa chữ SV (Tiêu đề
+      → commit kế tiếp: 715c4eb (20:33 10/11) HW03[T1] 5/6e: kiểm dữ kiện + tái hiện bug (AI)
+#131 ["2026-11-10 21:54"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 575b28c (21:56 10/11) HW03: cập nhật prompt log
+#132 ["2026-11-10 21:55"]  Claude Opus 5.5  1. Commit A_prompt_log.md (`HW03: cập nhật prompt log`). Ghi report_plan mục f: 
+      → commit kế tiếp: 575b28c (21:56 10/11) HW03: cập nhật prompt log
+#133 ["2026-11-10 21:56"]  Claude Opus 5.5  đưa tôi mấy cái sheet luôn nhé, tôi bắt đầu mở meet rồi
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#134 ["2026-11-10 22:14"]  Claude Opus 5.5  S00: Thấy nút thêm vào giỏ hàng bị lag, thấy bấm không hiện, sau đó đã được.
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#135 ["2026-11-10 22:15"]  Claude Opus 5.5  Bạn tiếp theo đã vào rồi. Mình thực hiện tiếp luôn nhé. Ghi note từng lần, còn đ
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#136 ["2026-11-10 22:16"]  Claude Opus 5.5  phiên mới
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#137 ["2026-11-10 22:17"]  Claude Opus 5.5  https://golf-mechanical-involves-attorneys.trycloudflare.com/
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#138 ["2026-11-10 22:30"]  Claude Opus 5.5  phiên mới
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#139 ["2026-11-10 22:32"]  Claude Opus 5.5  S01: Bấm đăng nhập mà thấy chữ đăng ký.
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#140 ["2026-11-10 22:47"]  Claude Opus 5.5  phiên mới
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#141 ["2026-11-10 22:49"]  Claude Opus 5.5  S02: Bấm nút thêm vào giỏ hàng mà mà 
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#142 ["2026-11-10 23:05"]  Claude Opus 5.5  phiên mới
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#143 ["2026-11-10 23:06"]  Claude Opus 5.5  S03: Chưa thấy hình của sản phẩm
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#144 ["2026-11-10 23:39"]  Claude Opus 5.5  phiên mới
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#145 ["2026-11-10 23:41"]  Claude Opus 5.5  S04: I clicked the button but it doesn't having anything. What is going on. 
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#146 ["2026-11-10 23:55"]  Claude Opus 5.5  phiên mới
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#147 ["2026-11-11 00:00"]  Claude Opus 5.5  S05: Mình nghĩ là khi ấn thêm vào giỏ thì phải hiện thông báo đơn hàng này phải 
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#148 ["2026-11-11 00:02"]  Claude Opus 5.5  Không làm pilot đâu nhé. Hết người rồi. Nên là nộp cả S00 đến S06 đấy nhé
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#149 ["2026-11-11 00:21"]  Claude Opus 5.5  tắt tunnel
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#150 ["2026-11-11 00:22"]  Claude Opus 5.5  Vậy S07 ngày mai thêm được không, vì giờ mọi người đi ngủ hết rồi á.
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#151 ["2026-11-11 00:30"]  Claude Opus 5.5  Mở lại tunnel
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#152 ["2026-11-11 00:32"]  Claude Opus 5.5  https://medicine-thee-flush-soldier.trycloudflare.com/
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#153 ["2026-11-11 00:41"]  Claude Opus 5.5  Xong luôn rồi, vẫn để pilot nhé. Nên là quay tới S07 là đúng nhỉ
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#154 ["2026-11-11 00:43"]  Claude Opus 5.5  Vậy prompt ở trên kia có cần sử dụng không nhỉ (prompt mà có tải CSV ấy)
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#155 ["2026-11-11 00:44"]  Claude Opus 5.5  Là dùng cả prompt trên và prompt dưới luôn sao, có thể giúp tôi gộp lại không
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#156 ["2026-11-11 00:45"]  Claude Opus 5.5  NHIỆM VỤ: nhập pilot + 7 phiên usability. SV chốt: S00 = pilot (chạy trước; sau 
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#157 ["2026-11-11 00:46"]  Claude Opus 5.5  đã đặt CSV và notes rồi, làm tiếp
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#158 ["2026-11-11 00:47"]  Claude Opus 5.5  đã đặt notes rồi, làm tiếp
+      → commit kế tiếp: 411c7ca (00:48 11/11) HW03[T2]: phiếu ghi tay S00–S07
+#159 ["2026-11-11 00:50"]  Claude Opus 5.5  - Trung bình S01–S07: SUS 77,86, SEQ 6,29, khớp số phiên thảo luận (77,9 / 6,29)
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#160 ["2026-11-11 00:52"]  Claude Opus 5.5  ```json
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#161 ["2026-11-11 00:53"]  Claude Opus 5.5  nen_tang là Chrome hay Firefox gì đó à
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#162 ["2026-11-11 00:55"]  Claude Opus 5.5  ```json
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#163 ["2026-11-11 00:57"]  Claude Opus 5.5  ```json
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#164 ["2026-11-11 05:12"]  Claude Opus 5.5  Đã điền xong hết rồi. làm gì tiếp nhỉ
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#165 ["2026-11-11 05:13"]  Claude Opus 5.5  1. sus_score.py HW03/usability/sessions --check phải 0 lỗi (lỗi → báo, không sửa
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#166 ["2026-11-11 05:15"]  Claude Opus 5.5  1. Tất cả đều không có trợ giúp. 2. Xác nhận
+      → commit kế tiếp: d9919c9 (05:15 11/11) HW03[T2] 10/10: số liệu U1
+#167 ["2026-11-11 05:17"]  Claude Opus 5.5  Xong cả hai việc: số liệu U1 đã vào report và README, 14 issue đã tạo (#247–#260
+      → commit kế tiếp: bf715c0 (05:18 11/11) HW03[T1] 6/6: link GitHub Issue #247–#260 cho 14 bug
+#168 ["2026-11-11 05:17#2"]  Claude Opus 5.5  1. Xác nhận #252 = BUG-67 (tiêu đề, label). 2. S04: SV chốt <a: ghi_chu "nhắc lạ
+      → commit kế tiếp: bf715c0 (05:18 11/11) HW03[T1] 6/6: link GitHub Issue #247–#260 cho 14 bug
+#169 ["2026-11-11 05:18"]  Claude Opus 5.5  link để kéo ảnh đâu nhỉ?
+      → commit kế tiếp: c19c3ab (05:31 11/11) HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a)
+#170 ["2026-11-11 05:29"]  Claude Opus 5.5  đã kéo ảnh
+      → commit kế tiếp: c19c3ab (05:31 11/11) HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a)
+#171 ["2026-11-11 05:30"]  Claude Opus 5.5  Em đã kiểm cả 14 issue #247–#260: mỗi issue có đủ số ảnh như bảng đã chốt. #254 
+      → commit kế tiếp: c19c3ab (05:31 11/11) HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a)
+#172 ["2026-11-11 05:31"]  Claude Opus 5.5  Ở lần này mình không làm alt nhé, nên không cần quan tâm
+      → commit kế tiếp: c19c3ab (05:31 11/11) HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a)
+#173 ["2026-11-11 05:31#2"]  Claude Opus 5.5  S04=a. Chạy lại --check/--report/summary. Ghi link issue vào 14 file BUG + summa
+      → commit kế tiếp: c19c3ab (05:31 11/11) HW03[T2]: S04 ghi chú nhắc lại nhiệm vụ (SV chốt a)
+#174 ["2026-11-11 05:32"]  Claude Opus 5.5  S04 đã ghi ghi_chu theo phương án a: dòng "Nhắc lại nhiệm vụ." là nhắc lại đề bà
+      → commit kế tiếp: 496ad20 (07:49 11/11) HW03[T1] 5/6f: SV sửa BUG theo kiểm dữ kiện
+#175 ["2026-11-11 05:33"]  Claude Opus 5.5  Giờ mình định đi ngủ, hiện tại khối lượng công việc tổng lại còn bao nhiêu nhỉ
+      → commit kế tiếp: 496ad20 (07:49 11/11) HW03[T1] 5/6f: SV sửa BUG theo kiểm dữ kiện
+#176 ["2026-11-11 07:49"]  Claude Opus 5.5  Kiểm lại 14 bug SV vừa sửa (58,62,63,64,70,72,73,75,76,78,79,80,81,82) theo bug_
+      → commit kế tiếp: de6882e (07:51 11/11) HW03[T1] 5/6g: kiểm lại 14 bug SV sửa (AI)
+#177 ["2026-11-11 07:51"]  Claude Opus 5.5  10h là đl mình đặt ra thôi deadline thật là 11h30 nhé. 
+      → commit kế tiếp: de6882e (07:51 11/11) HW03[T1] 5/6g: kiểm lại 14 bug SV sửa (AI)
+#178 ["2026-11-11 07:55"]  Claude Opus 5.5  mình thấy 14 bug đã oke hết rồi, tạo issues hết nhé
+      → commit kế tiếp: 77a351f (07:56 11/11) HW03[T1] 6/6: link GitHub Issue #261–#274 cho 14 bug còn lại
+#179 ["2026-11-11 07:58"]  Claude Opus 5.5  Đã tạo issue cho cả 14 bug còn lại (#261–#274), đủ 28/28 bug đều có issue trên G
+      → commit kế tiếp: 524926e (08:01 11/11) HW03[T2]: SV viết findings
+#180 ["2026-11-11 08:01"]  Claude Opus 5.5  Gửi cho tôi các link cần thêm evidence nhé
+      → commit kế tiếp: 99a9e27 (08:11 11/11) HW03[T1]: khôi phục dữ kiện BUG-72 (#266)
+#181 ["2026-11-11 08:11"]  Claude Opus 5.5  1. BUG-72: khôi phục dòng "Actual nguyên văn CL-32 P3 (auto)" về đúng checklist.
+      → commit kế tiếp: 99a9e27 (08:11 11/11) HW03[T1]: khôi phục dữ kiện BUG-72 (#266)
+#182 ["2026-11-11 08:25"]  Claude Opus 5.5  Xong cả 3 việc, chưa push.
+      → commit kế tiếp: f68ec0d (08:32 11/11) HW03[T2]: SV sửa findings theo kiểm dữ kiện
+#183 ["2026-11-11 08:31"]  Claude Opus 5.5  Không dùng AI, để mình sửa lại, đang buồn ngủ quá
+      → commit kế tiếp: f68ec0d (08:32 11/11) HW03[T2]: SV sửa findings theo kiểm dữ kiện
+#184 ["2026-11-11 08:32"]  Claude Opus 5.5  Chỉ đọc: với 7 pain point ở report §5.8 (sửa tổng tiền checkout; thêm giỏ ở danh
+      → commit kế tiếp: afc81da (08:39 11/11) HW03[T2]: SV ghi issue liên quan vào findings
+#185 ["2026-11-11 08:33"]  Claude Opus 5.5  buồn ngủ là nói về hiệu suất bị suy hụt, chứ không phải giờ muốn đi ngủ, tôi sẽ 
+      → commit kế tiếp: afc81da (08:39 11/11) HW03[T2]: SV ghi issue liên quan vào findings
+#186 ["2026-11-11 08:34"]  Claude Opus 5.5  là giờ điền cột liên quan đó à, xong đặt ở đâu nhỉ
+      → commit kế tiếp: afc81da (08:39 11/11) HW03[T2]: SV ghi issue liên quan vào findings
+#187 ["2026-11-11 08:39"]  Claude Opus 5.5  Push rồi, có cần Claude Code kiểm tra lại gì không?
+      → commit kế tiếp: f96dfb2 (08:41 11/11) HW03[T2]: Thêm quy định Severity
+#188 ["2026-11-11 08:41"]  Claude Opus 5.5  Rồi thêm rồi nhé, push luôn rồi, xem oke chưa
+      → commit kế tiếp: cf4e6b7 (08:48 11/11) HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI bỏ sót
+#189 ["2026-11-11 08:48"]  Claude Opus 5.5  xong 3.4 rồi, commit gì đây nhỉ, bạn check hay là Claude Code check đây nhỉ, và 
+      → commit kế tiếp: cf4e6b7 (08:48 11/11) HW03[T1]: SV viết §3.4 – item bổ sung + vì sao AI bỏ sót
+#190 ["2026-11-11 08:48#2"]  Claude Opus 5.5  đã push rồi nhé
+      → commit kế tiếp: 557c0fe (08:54 11/11) HW03[T1]: SV sửa §3.4 theo kiểm dữ kiện
+#191 ["2026-11-11 08:54"]  Claude Opus 5.5  Push ồi nhé, kiểm tra lần cuối trước khi mình sang Critique nhé
+      → commit kế tiếp: 1d0683b (08:56 11/11) HW03[T1]: SV sửa câu từ 3.4
+#192 ["2026-11-11 09:03"]  Claude Opus 5.5  push rồi, xem nhé
+      → commit kế tiếp: 4eb5a8d (09:08 11/11) HW03: SV sửa Critique (số từ + dữ kiện)
+#193 ["2026-11-11 09:09"]  Claude Opus 5.5  Push rồi, xem lại giúp mình thử nhé
+      → commit kế tiếp: 8fda931 (09:10 11/11) HW03: SV sửa Critique (2 dữ kiện)
+#194 ["2026-11-11 09:11"]  Claude Opus 5.5  Push rồi, bạn xem đã oke chưa nhé
+      → commit kế tiếp: 3bb0fe7 (09:12 11/11) HW03: SV rút gọn Critique
+#195 ["2026-11-11 09:12"]  Claude Opus 5.5  285 từ rồi, kiểm tra giúp mình nhé
+      → commit kế tiếp: 0c96555 (09:15 11/11) HW03: prompt log thêm transcript phiên claude.ai (p2)
+#196 ["2026-11-11 09:13"]  Claude (không rõ model) NHIỆM VỤ: chuẩn bị Audit + form. Không push, không amend, KHÔNG viết verdict/lý 
+      → commit kế tiếp: 0c96555 (09:15 11/11) HW03: prompt log thêm transcript phiên claude.ai (p2)
