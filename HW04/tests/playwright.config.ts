@@ -44,7 +44,7 @@ export default defineConfig({
   ],
   use: {
     screenshot: 'only-on-failure',
-    trace: 'retain-on-failure',
+    trace: 'off',                    // Z1=d: trace làm report quá lớn (zip > 20 MB); bằng chứng = screenshot + error-context
     video: 'off',
     locale: 'vi-VN',
     timezoneId: 'Asia/Ho_Chi_Minh',
