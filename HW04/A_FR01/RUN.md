@@ -10,6 +10,9 @@
 | Lượt thử 2 – edge | 2026-11-17T00:34:25+07:00 | `6fc76b5` | `HW04/reports/edge_20261117T003425/` | 8 Fail, 7 Pass |
 | Lượt thử 2 – firefox | 2026-11-17T00:37:11+07:00 | `6fc76b5` | `HW04/reports/firefox_20261117T003711/` | 8 Fail, 7 Pass |
 | Lượt thử 2 – chrome (chạy lại) | 2026-11-17T00:45:04+07:00 | `6fc76b5` | `HW04/reports/chrome_20261117T004504/` | 8 Fail, 7 Pass |
+| **Chính thức – chrome** | 2026-11-17T01:01:15+07:00 | `3d19917` (5/6d) | `HW04/reports/chrome_20261117T010115/` | 8 Fail, 7 Pass |
+| **Chính thức – edge** | 2026-11-17T01:04:19+07:00 | `3d19917` | `HW04/reports/edge_20261117T010419/` | 8 Fail, 7 Pass |
+| **Chính thức – firefox** | 2026-11-17T01:07:08+07:00 | `3d19917` | `HW04/reports/firefox_20261117T010708/` | 8 Fail, 7 Pass |
 
 ## Lượt thử 1 – ghi chú
 
@@ -22,3 +25,9 @@
 - Spec sau 5/6a (bỏ serial), trước các sửa 5/6b–5/6d theo review của SV (`review_sv.md`).
 - Cả 4 report: Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 (trùng nhau giữa các trình duyệt).
 - Không dùng làm lượt chính thức: spec còn đồng bộ submit bằng `Promise.race` + `catch` rỗng và gọi oracle API không chờ POST.
+
+## Lượt chính thức – ghi chú
+
+- Spec @ `3d19917` (sau 5/6b–5/6d). Lượt chạy bắt đầu sau commit này (00:58); mọi TC có annotation `phản hồi` (chỉ có từ 5/6b).
+- Kiểm "Run by" (16/11, AI mở `index.html` bằng Chrome): tiêu đề report và tên tab đều là `HW04 EShop – <trình duyệt> – Run by: 23120255 · <ISO>`, metadata `Run by` khớp; ISO có múi giờ +07:00.
+- Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng nhau ở 3 trình duyệt. Gộp: `results.md`, `bug_groups.md`.
