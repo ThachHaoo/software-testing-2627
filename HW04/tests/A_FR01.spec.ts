@@ -22,10 +22,13 @@ type Oracle = {
   relogin: boolean;                     // "đăng nhập lại … thành công"
 };
 
+/** Escape chuỗi lấy từ expected trước khi dựng RegExp (., (, +, ? … giữ nghĩa chữ). */
+const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 /** Đọc oracle từ expected nguyên văn. Không nhận dạng được loại kết quả → ném lỗi (không đoán). */
 function oracleOf(c: Case, ts: number): Oracle {
   const e = fill(c.expected, ts);
-  const success = /^Không có thông báo lỗi|Đăng ký thành công/.test(e);
+  const success = /^(Không có thông báo lỗi|Đăng ký thành công)/.test(e);
   const reject = /Có thông báo lỗi|không tạo tài khoản|không có user mới/.test(e);
   if (success === reject) throw new Error(`${c.tc_id}: không xác định được loại kết quả từ expected: ${e}`);
   const o: Oracle = { kind: success ? 'success' : 'reject', seedKept: /user seed không bị sửa/.test(e), relogin: /đăng nhập lại .*thành công/.test(e) };
@@ -35,7 +38,7 @@ function oracleOf(c: Case, ts: number): Oracle {
   if (u) o.user = { name: u[1], email: u[2] };
   else if (success) o.user = { name: c.inputs[COL.name], email: fill(c.inputs[COL.email], ts) };   // "Đăng ký thành công" (TS-SV)
   const h = /báo (mật khẩu|email|họ tên) thiếu ([^;]+)/i.exec(e);
-  if (h) o.hint = [new RegExp(h[1], 'i'), new RegExp(h[2].trim(), 'i')];
+  if (h) o.hint = [new RegExp(esc(h[1]), 'i'), new RegExp(esc(h[2].trim()), 'i')];
   return o;
 }
 
@@ -100,7 +103,7 @@ for (const c of DATA.testcases) {
     if (posts.length && !res) blocked(`đã gửi POST /api/register nhưng không nhận phản hồi sau ${WAIT} ms`);
 
     // Bước 5: UI
-    if (o.url) await expect.soft(page, 'URL sau khi bấm Đăng Ký').toHaveURL(new RegExp(`${o.url}$`));
+    if (o.url) await expect.soft(page, 'URL sau khi bấm Đăng Ký').toHaveURL(new RegExp(`${esc(o.url)}$`));
     if (o.kind === 'success') {
       await expect.soft(r.error, 'không có thông báo lỗi').toHaveCount(0);
     } else {
@@ -109,6 +112,7 @@ for (const c of DATA.testcases) {
         expect.soft(vm, `validationMessage ô '${o.vmField}'`).not.toEqual('');
         expect.soft(posts, 'A16: không gửi POST /api/register').toEqual([]);
       } else {
+        if (!o.hint) test.info().annotations.push({ type: 'oracle thông báo yếu', description: 'expected không nêu ý của thông báo lỗi → chỉ kiểm hộp lỗi hiện và có chữ' });
         await expect.soft(r.error, 'hộp lỗi đỏ trên form').toBeVisible();
         await expect.soft(r.error, 'hộp lỗi có nội dung').toHaveText(/\S/);
         for (const h of o.hint ?? []) await expect.soft(r.error, `thông báo nói về ${h.source}`).toContainText(h);
