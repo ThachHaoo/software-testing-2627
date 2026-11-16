@@ -1,0 +1,378 @@
+{
+  "feature": "A_FR01",
+  "source": {
+    "file": "HW02/A_FR01/testcases.json",
+    "commit": "af48958"
+  },
+  "preconditions": {
+    "TS-DOM-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).",
+      "Web http://localhost:5173 đang chạy.",
+      "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).",
+      "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).",
+      "Trạng thái ban đầu của mỗi case: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token).",
+      "Chạy tay: dùng cửa sổ ẩn danh và tắt autofill. Playwright: browser context mới cho mỗi case."
+    ],
+    "TS-BVA-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).",
+      "Web http://localhost:5173 đang chạy.",
+      "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).",
+      "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).",
+      "Trạng thái ban đầu của mỗi case: trang /register vừa tải xong, cả 4 ô (Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu nếu có) đều trống; chưa đăng nhập (localStorage không có token).",
+      "Chạy tay: dùng cửa sổ ẩn danh và tắt autofill. Playwright: browser context mới cho mỗi case."
+    ],
+    "TS-SV": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) để CSDL seed sạch, có admin@eshop.com và test@eshop.com (A13).",
+      "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho GET/DELETE /api/admin/users, A12).",
+      "Thay {ts} trong cột Email bằng Date.now() lúc chạy case để email là duy nhất (A19).",
+      "Trạng thái ban đầu của mỗi case tầng UI (trừ TC-FR01-223): trang /register vừa tải xong, các ô Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu (nếu có) đều trống; chưa đăng nhập (localStorage không có token); chạy tay dùng cửa sổ ẩn danh và tắt autofill; Playwright dùng browser context mới cho mỗi case."
+    ]
+  },
+  "testcases": [
+    {
+      "tc_id": "TC-FR01-01",
+      "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩu mạnh",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "dom01_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_{ts}@domain.com' như cột dữ liệu.",
+      "expected_sha1": "339b7d2f2f9e1663d8c88834fe074af34160a0e6",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17).",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-02",
+      "title": "Kiểm tra đăng ký thành công qua UI khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyễn Văn Ánh",
+        "Email": "dom02_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!#",
+        "Xác nhận mật khẩu": "Abcd1234!#"
+      },
+      "expected": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'dom02_{ts}@domain.com' như cột dữ liệu.",
+      "expected_sha1": "6fdb55d48e3939ceae25356d8040c0f818132638",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). EC2 (Họ Tên có dấu) bị chặn bởi TC-FR01-01 (A20); EC2 đã kiểm ở API TC-FR01-29.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-03",
+      "title": "Kiểm tra đăng ký thành công qua UI khi email có khoảng trắng đầu/cuối",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "  dom03_{ts}@domain.com  ",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom03_{ts}@domain.com' như cột dữ liệu. Email lưu đã được cắt khoảng trắng (A3).",
+      "expected_sha1": "90e2f6674452bfe70018695a8372e470c950dced",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). Verdict chỉnh theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — biến mục tiêu Email không được kiểm vì form từ chối bằng thông báo 'Mật khẩu quá yếu!' về Mật khẩu (giá trị hợp lệ theo SRS).",
+      "hw02": {
+        "status": "Blocked",
+        "auto_status": "Fail",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-05",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Họ Tên rỗng",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "",
+        "Email": "dom05_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "be38d8dadf5870edb6f984ca747fc4413beceb52",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17).",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR01-07",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Email rỗng",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "121c5539cf039cd8d90ee9a0669eccceaef956a5",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17).",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR01-08",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Email không có ký tự '@'",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "dom08_{ts}domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "121c5539cf039cd8d90ee9a0669eccceaef956a5",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). Verdict chỉnh theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — biến mục tiêu Email không được kiểm vì form từ chối bằng thông báo 'Mật khẩu quá yếu!' về Mật khẩu (giá trị hợp lệ theo SRS).",
+      "hw02": {
+        "status": "Blocked",
+        "auto_status": "Pass",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-14",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Email trùng chính xác tài khoản đã có",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "test@eshop.com",
+        "Email trong CSDL": "đã có 'test@eshop.com' (seed)",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "121c5539cf039cd8d90ee9a0669eccceaef956a5",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). Verdict chỉnh theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — biến mục tiêu Email (đã tồn tại) không được kiểm vì form từ chối bằng thông báo 'Mật khẩu quá yếu!' về Mật khẩu (giá trị hợp lệ theo SRS).",
+      "hw02": {
+        "status": "Blocked",
+        "auto_status": "Pass",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-17",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu rỗng",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "dom17_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "",
+        "Xác nhận mật khẩu": ""
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "0d1f181c0f8b1955bf876d2a112ec7a9dbf5e2cb",
+      "notes": "V5 = V4 = rỗng; EC39/EC40 trùng nhau chỉ vì V4 rỗng; lỗi quy cho EC24 — đối chiếu validationMessage của ô Mật khẩu khi chạy.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR01-18",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ hoa",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "dom18_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "abcd1234!",
+        "Xác nhận mật khẩu": "abcd1234!"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "0d1f181c0f8b1955bf876d2a112ec7a9dbf5e2cb",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). Pass hộp đen: form từ chối mọi mật khẩu không có khoảng trắng (xem TC-FR01-01, TC-FR01-202) nên Pass này không chứng minh luật ≥1 chữ hoa (FR-01.7a) được cài đúng.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR01-26",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Xác nhận mật khẩu khác Mật khẩu",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "dom26_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234?"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Xác nhận mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "c2696d33362befeda60a4d5433f5e2f34140b6d3",
+      "notes": "Lớp chỉ có ở tầng UI (A8). Nếu form không có ô Xác nhận mật khẩu → Blocked kèm mã bug (A17).",
+      "hw02": {
+        "status": "Blocked",
+        "auto_status": "Blocked",
+        "bug_id": "BUG-14"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-61",
+      "title": "Kiểm tra chấp nhận đăng ký qua UI khi độ dài Họ Tên = 1 ký tự (LB)",
+      "suite": "TS-BVA-UI",
+      "type": "Boundary",
+      "technique": "BVA",
+      "bva_point": "LB",
+      "inputs": {
+        "Họ Tên": "A",
+        "Email": "bva61_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abcd1234!",
+        "Xác nhận mật khẩu": "Abcd1234!"
+      },
+      "expected": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'A' và email 'bva61_{ts}@domain.com' như cột dữ liệu.",
+      "expected_sha1": "1df5c2ff2e30a18fb65de7220bcaf7f3c21a90c7",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). Verdict chỉnh theo A20 (SV duyệt 2026-10-19): bị chặn bởi TC-FR01-01 — biến mục tiêu Họ Tên không được kiểm vì form từ chối bằng thông báo 'Mật khẩu quá yếu!' về Mật khẩu (giá trị hợp lệ theo SRS).",
+      "hw02": {
+        "status": "Blocked",
+        "auto_status": "Fail",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-63",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi Mật khẩu dài 7 ký tự (LB-1)",
+      "suite": "TS-BVA-UI",
+      "type": "Boundary",
+      "technique": "BVA",
+      "bva_point": "LB-1",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "bva63_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abc12!x",
+        "Xác nhận mật khẩu": "Abc12!x"
+      },
+      "expected": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa.",
+      "expected_sha1": "0d1f181c0f8b1955bf876d2a112ec7a9dbf5e2cb",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17). Cùng giá trị với TC-FR01-16: điểm này vừa là đại diện lớp vừa là LB-1; giữ để bảng BVA đủ điểm theo slide. Pass hộp đen: form từ chối mọi mật khẩu không có khoảng trắng (xem TC-FR01-01, TC-FR01-202) nên Pass này không chứng minh luật độ dài tối thiểu 8 ký tự (FR-01.6) được cài đúng.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR01-64",
+      "title": "Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu dài 8 ký tự (LB)",
+      "suite": "TS-BVA-UI",
+      "type": "Boundary",
+      "technique": "BVA",
+      "bva_point": "LB",
+      "inputs": {
+        "Họ Tên": "Nguyen Van A",
+        "Email": "bva64_{ts}@domain.com",
+        "Email trong CSDL": "chưa có",
+        "Mật khẩu": "Abc12!xy",
+        "Xác nhận mật khẩu": "Abc12!xy"
+      },
+      "expected": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva64_{ts}@domain.com' như cột dữ liệu.",
+      "expected_sha1": "adf21647d83052057c36087f1344754fc963e2dc",
+      "notes": "Nếu form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5 và ghi vào notes (A17).",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-01"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-202",
+      "title": "Kiểm tra từ chối đăng ký qua UI khi mật khẩu chỉ có khoảng trắng làm ký tự đặc biệt",
+      "suite": "TS-SV",
+      "type": "Negative (suy ra)",
+      "technique": "EG",
+      "bva_point": "",
+      "inputs": {
+        "Tầng": "UI",
+        "Họ Tên": "Lê Tấn Hiệp",
+        "Email": "hiep.sv03@domain.com",
+        "Mật khẩu": "Abcd 1234",
+        "Thao tác riêng": ""
+      },
+      "expected": "Hệ thống báo mật khẩu thiếu ký tự đặc biệt; không tạo tài khoản",
+      "expected_sha1": "aa5d69d6759ba265e0fd025e53c5d9df19df1fcb",
+      "notes": "Bản API tách thành TC-FR01-224. Nguồn: SV-03 trong sv_cases.md. Khớp EC36 (chỉ có ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): UI: form chấp nhận `Abcd 1234`, chuyển tới /login; đăng nhập bằng tài khoản vừa tạo thành công (tức là đã tạo user) → Fail",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-02"
+      }
+    },
+    {
+      "tc_id": "TC-FR01-211",
+      "title": "Kiểm tra đăng ký và đăng nhập lại qua UI khi mật khẩu có khoảng trắng ở đầu",
+      "suite": "TS-SV",
+      "type": "Positive (suy ra)",
+      "technique": "EG",
+      "bva_point": "",
+      "inputs": {
+        "Tầng": "UI",
+        "Họ Tên": "Lê Tấn Hiệp",
+        "Email": "hiep.sv12@domain.com",
+        "Mật khẩu": " Hiep123$",
+        "Thao tác riêng": "Sau khi đăng ký: đăng nhập lại bằng đúng chuỗi ␣Hiep123$"
+      },
+      "expected": "Đăng ký thành công; đăng nhập lại bằng đúng chuỗi ␣Hiep123$ thành công",
+      "expected_sha1": "9e72869b0d812aebfe5daf9a94f962c8de475bd1",
+      "notes": "Bản API tách thành TC-FR01-229. Nguồn: SV-12 trong sv_cases.md. Khớp EC34 (có ký tự trong tập và ký tự ngoài tập). Quan sát thăm dò (SV chạy tay 19/10): UI: thông báo \"Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.\"; ở lại /register → Fail (nguyên nhân: regex mật khẩu từ chối \"$\")",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-01"
+      }
+    }
+  ]
+}
