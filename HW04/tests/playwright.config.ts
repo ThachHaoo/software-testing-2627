@@ -21,6 +21,7 @@ const projects = process.argv
   .filter(Boolean);
 const PROJECT_TAG = projects.length ? projects.join('+') : 'all';
 const RUN_BY = `Run by: ${STUDENT_ID} · ${RUN_ISO}`;
+const REPORT_DIR = path.join(__dirname, '..', 'reports', `${PROJECT_TAG}_${RUN_TAG}`);
 
 export default defineConfig({
   testDir: '.',                       // spec đặt thẳng trong HW04/tests/<X_FRnn>.spec.ts
@@ -35,9 +36,11 @@ export default defineConfig({
     ['list'],
     ['html', {
       title: `HW04 EShop – ${PROJECT_TAG} – ${RUN_BY}`,
-      outputFolder: path.join(__dirname, '..', 'reports', `${PROJECT_TAG}_${RUN_TAG}`),
+      outputFolder: REPORT_DIR,
       open: 'never',
     }],
+    // results.json cạnh index.html — merge_reports.py (skill playwright-ddt-automation, bước 6) đọc file này
+    ['json', { outputFile: path.join(REPORT_DIR, 'results.json') }],
   ],
   use: {
     screenshot: 'only-on-failure',
