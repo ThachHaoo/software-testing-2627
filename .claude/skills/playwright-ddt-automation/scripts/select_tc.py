@@ -57,13 +57,13 @@ def ui_cases(doc: dict):
                 yield s, c
 
 
-def kind(c: dict, override: dict) -> str:
-    """Loại +/-/biên: lấy type của HW02; thiếu thì lấy từ selection.json (ghi rõ là suy ra)."""
+def kind(c: dict, override: dict, note: str) -> str:
+    """Loại +/-/biên: lấy type của HW02; thiếu thì lấy từ selection.json kèm ghi chú nguồn (mặc định "suy ra")."""
     t = c.get("type")
     if t in ("Positive", "Negative", "Boundary"):
         return t
     if c["id"] in override:
-        return override[c["id"]] + " (suy ra)"
+        return f"{override[c['id']]} ({note})"
     return "?"
 
 
@@ -107,7 +107,7 @@ def main():
             "tc_id": c["id"],
             "title": c["title"],
             "suite": s["id"],
-            "type": kind(c, override),
+            "type": kind(c, override, sel.get("type_override_note", "suy ra")),
             "technique": c.get("technique", ""),
             "bva_point": c.get("bva_point") or "",
             "inputs": c["inputs"],
@@ -143,6 +143,8 @@ def main():
     if sel.get("excluded"):
         L += ["", "## Không chọn", "", "| TC / nhóm | lý do |", "|---|---|"]
         L += [f"| {k} | {v} |" for k, v in sel["excluded"].items()]
+    if sel.get("decisions"):
+        L += ["", "## Quyết định của SV", ""] + [f"- {x}" for x in sel["decisions"]]
     if sel.get("criteria"):
         L += ["", "## Tiêu chí", ""] + [f"- {x}" for x in sel["criteria"]]
     a.md.parent.mkdir(parents=True, exist_ok=True)
