@@ -1,0 +1,912 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "A_FR01",
+      "--project=chrome"
+    ],
+    "configFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\playwright.config.ts",
+    "rootDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "Run by": "23120255 · 2026-11-17T00:25:37+07:00",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:25:37+07:00",
+          "actualWorkers": 1
+        },
+        "id": "chrome",
+        "name": "chrome",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:25:37+07:00",
+          "actualWorkers": 1
+        },
+        "id": "edge",
+        "name": "edge",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:25:37+07:00",
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:25:37+07:00",
+          "actualWorkers": 1
+        },
+        "name": "chrome",
+        "testDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests",
+        "snapshotDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 30000,
+        "use": {
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "off",
+          "locale": "vi-VN",
+          "timezoneId": "Asia/Ho_Chi_Minh",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/159.0.8154.6 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "chrome"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chrome"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "title": "HW04 EShop – chrome – Run by: 23120255 · 2026-11-17T00:25:37+07:00",
+          "outputFolder": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\reports\\chrome_20261117T002537",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\reports\\chrome_20261117T002537\\results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "A_FR01.spec.ts",
+      "file": "A_FR01.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-FR01-01 Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩu mạnh",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                },
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_1794849939978@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10825,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 89
+                    },
+                    "snippet": " \u001b[90m 87 |\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 91 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 89
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 91 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 91
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 89 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 91 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 92 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 93 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 94 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:91:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 106
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"dom01_1794849939978@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyen Van A\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 104 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 107 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 108 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 109 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:106:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:37.902Z",
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "line": 0,
+                        "column": 0
+                      }
+                    },
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_1794849939978@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-01-Kiểm-tra-7a96a--email-mới-và-mật-khẩu-mạnh-chrome\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-01-Kiểm-tra-7a96a--email-mới-và-mật-khẩu-mạnh-chrome\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-01-Kiểm-tra-7a96a--email-mới-và-mật-khẩu-mạnh-chrome\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 89
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-2a9a5f1396a2b15a0e34",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-02 Kiểm tra đăng ký thành công qua UI khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.036Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-2e08b60fd2334998f35a",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-05 Kiểm tra từ chối đăng ký qua UI khi Họ Tên rỗng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.056Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-26681107fbccb800b64c",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-07 Kiểm tra từ chối đăng ký qua UI khi Email rỗng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.058Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-4b08e1ae8804e4b97a35",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-17 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu rỗng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.060Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-9882362528fcba4dfc28",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-18 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ hoa",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.062Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-82759e0ef10b042f0626",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-22 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ số",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.063Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-e02ee342390d5fce132f",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-23 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có ký tự đặc biệt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-3d78d86819f8cae0e79e",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-63 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu dài 7 ký tự (LB-1)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.066Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-4950f9f77bca7b1a32d9",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-64 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu dài 8 ký tự (LB)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.068Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-c1f1ff459644649a6904",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-68 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu có đúng 1 chữ hoa (LB)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-ac9a2bda9e454e2c0606",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-74 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu có đúng 1 chữ số (LB)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.073Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-c003ba4399704938b943",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-77 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu có đúng 1 ký tự đặc biệt (LB)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.075Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-9456b35d14dad05505d9",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-202 Kiểm tra từ chối đăng ký qua UI khi mật khẩu chỉ có khoảng trắng làm ký tự đặc biệt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.077Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-c24b0b6ed7887781eafd",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-211 Kiểm tra đăng ký và đăng nhập lại qua UI khi mật khẩu có khoảng trắng ở đầu",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "serial",
+                  "location": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "line": 0,
+                    "column": 0
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:25:51.079Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "18d717acd037600e28f0-3c0addd1869ef26e6bf7",
+          "file": "A_FR01.spec.ts",
+          "line": 52,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T17:25:37.557Z",
+    "duration": 13583.503,
+    "expected": 0,
+    "skipped": 14,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

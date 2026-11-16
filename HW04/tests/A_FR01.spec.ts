@@ -41,8 +41,6 @@ function oracleOf(c: Case, ts: number): Oracle {
 
 const pick = (us: User[]) => us.map(u => ({ name: u.name, email: u.email }));
 
-test.describe.configure({ mode: 'serial' });
-
 test.beforeAll(async ({}, testInfo) => {
   testInfo.setTimeout(120_000);
   resetDb();                                // tiền điều kiện suite: CSDL seed sạch (A13)
