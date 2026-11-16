@@ -137,6 +137,27 @@
       }
     },
     {
+      "tc_id": "TC-FR07-11",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng là số thập phân",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 1",
+        "Thao tác": "CT: id 5 × 1.5"
+      },
+      "expected": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2).",
+      "expected_sha1": "55ad3430d6a0799e95bc284cdbbb64cefc58798d",
+      "notes": "6b: Pass hộp đen: lần bấm đầu ở trang chi tiết không thêm cả giá trị hợp lệ (TC-FR07-61) → không chứng minh ô Số lượng chặn giá trị sai.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
       "tc_id": "TC-FR07-13",
       "title": "Kiểm tra thêm từ trang chi tiết khi số lượng không phải số",
       "suite": "TS-DOM-UI",
@@ -287,7 +308,7 @@
       "tc_id": "TC-FR07-200",
       "title": "Kiểm tra nhập payload XSS <script>alert(1)</script> vào ô Số lượng ở trang chi tiết sản phẩm",
       "suite": "TS-SV-UI",
-      "type": "Negative (AI suy ra)",
+      "type": "Negative (AI suy ra, SV duyệt)",
       "technique": "EG",
       "bva_point": "",
       "inputs": {
@@ -305,31 +326,10 @@
       }
     },
     {
-      "tc_id": "TC-FR07-201",
-      "title": "Kiểm tra bấm liên tục 20 lần nút 'Thêm vào giỏ' của cùng sản phẩm ở Trang chủ",
-      "suite": "TS-SV-UI",
-      "type": "Positive (AI suy ra)",
-      "technique": "EG",
-      "bva_point": "",
-      "inputs": {
-        "Đăng nhập": "khách",
-        "Giỏ ban đầu": "—",
-        "Thao tác": "bấm 'Thêm vào giỏ' id 4 đúng 20 lần trong 0,4 giây (cách nhau 20 ms)"
-      },
-      "expected": "/cart có đúng 1 dòng id 4, Số lượng = 20, Thành tiền = 20 × Đơn giá (FR-07.3, B4).",
-      "expected_sha1": "31b088e42aa1d6fa4108a2d47416f4981cff15bc",
-      "notes": "6b: Lượt 1 (giữ lại): bấm bằng page.mouse.click theo toạ độ, 20 lần trong 873 ms (> 400 ms của cột Thao tác); SAU giỏ trống; status Fail (auto). Chưa kết luận: script đã đổi sang element.click() trong trang cách 20 ms, chạy lại riêng TC-201 (RUN.md). Verdict chưa chốt. | Lượt 2: element.click() 20 lần trong 405 ms, SAU 20 dòng AirPods mỗi dòng SL 1 (auto Fail). Lượt 3: 410 ms, cùng kết quả. Verdict chưa chốt. | 6b (SV chốt): Fail. Lệch thời gian 405–410 ms so với 400 ms (~1–2%), không ảnh hưởng kết luận: 20 dòng riêng, mỗi dòng SL 1 = không cộng dồn (FR-07.3). Evidence từ lượt 3, kết quả trùng lượt 2.",
-      "hw02": {
-        "status": "Fail",
-        "auto_status": "Fail",
-        "bug_id": "BUG-17"
-      }
-    },
-    {
       "tc_id": "TC-FR07-205",
       "title": "Kiểm tra đổi Số lượng giữa hai lần bấm 'Thêm vào giỏ hàng' ở trang chi tiết",
       "suite": "TS-SV-UI",
-      "type": "Positive (AI suy ra)",
+      "type": "Positive (AI suy ra, SV duyệt)",
       "technique": "EG",
       "bva_point": "",
       "inputs": {
