@@ -50,7 +50,10 @@ const isRegister = (res: { request(): { method(): string }; url(): string }) =>
 
 test.beforeAll(async ({}, testInfo) => {
   testInfo.setTimeout(120_000);
-  resetDb();                                // tiền điều kiện suite: CSDL seed sạch (A13)
+  // resetDb() restart backend dùng chung → chạy song song (nhiều worker) sẽ restart đè lên nhau, xoá dữ liệu của worker khác
+  if (testInfo.config.workers > 1)
+    throw new Error(`[A_FR01] workers = ${testInfo.config.workers}: resetDb không an toàn khi chạy song song — chạy với --workers=1`);
+  resetDb();                               // tiền điều kiện suite: CSDL seed sạch (A13)
 });
 
 for (const c of DATA.testcases) {
