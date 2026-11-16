@@ -114,7 +114,9 @@ def main():
             "expected": exp,
             "expected_sha1": sha1(exp),
             "notes": c.get("notes", ""),
-            "hw02": {"status": c.get("status", ""), "auto_status": c.get("auto_status", ""), "bug_id": c.get("bug_id", "")},
+            "hw02": {"status": c.get("status", ""), "auto_status": c.get("auto_status", ""),
+                     # testcases.json không ghi bug_id → lấy từ bug_map (trích HW02/bugs/BUG-xx.md mục TC liên quan)
+                     "bug_id": c.get("bug_id") or sel.get("bug_map", {}).get(c["id"], "")},
         })
     data = {
         "feature": sel["feature"],
@@ -143,6 +145,8 @@ def main():
     if sel.get("excluded"):
         L += ["", "## Không chọn", "", "| TC / nhóm | lý do |", "|---|---|"]
         L += [f"| {k} | {v} |" for k, v in sel["excluded"].items()]
+    for title, lines in sel.get("sections", {}).items():
+        L += ["", f"## {title}", ""] + [f"- {x}" for x in lines]
     if sel.get("decisions"):
         L += ["", "## Quyết định của SV", ""] + [f"- {x}" for x in sel["decisions"]]
     if sel.get("criteria"):

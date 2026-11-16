@@ -1,0 +1,350 @@
+{
+  "feature": "B_FR07",
+  "source": {
+    "file": "HW02/B_FR07/testcases.json",
+    "commit": "352a34d"
+  },
+  "preconditions": {
+    "TS-DOM-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
+      "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
+      "Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).",
+      "Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.",
+      "Web http://localhost:5173 đang chạy.",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill (chạy tay); localStorage không có token; giỏ web rỗng."
+    ],
+    "TS-BVA-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
+      "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
+      "Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).",
+      "Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.",
+      "Web http://localhost:5173 đang chạy.",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill (chạy tay); localStorage không có token; giỏ web rỗng."
+    ],
+    "TS-SV-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch, userCarts rỗng (B0c).",
+      "Có token admin: POST /api/login với admin@eshop.com / Admin123! (dùng cho DELETE /api/admin/users/:id khi dọn dẹp).",
+      "Thay {ts} bằng Date.now() lúc chạy case để mỗi case có user riêng (B0a).",
+      "Sản phẩm seed (database.js dòng 98–102): id 1 'iPhone 15 Pro Max' 30.000.000 ₫ · id 2 'Samsung Galaxy S24 Ultra' 28.000.000 ₫ · id 3 'MacBook Pro M3' 45.000.000 ₫ · id 4 'Tai nghe AirPods Pro 2' 6.000.000 ₫ · id 5 'Bàn phím cơ Keychron Q1' 4.000.000 ₫. Giá trị CSDL dùng bảng này, không đọc qua GET /api/products/:id.",
+      "Web http://localhost:5173 đang chạy.",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill (chạy tay); localStorage không có token; giỏ web rỗng."
+    ]
+  },
+  "testcases": [
+    {
+      "tc_id": "TC-FR07-01",
+      "title": "Kiểm tra trang giỏ trống và việc quay về trang chủ khi khách chưa đăng nhập mở giỏ rỗng",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "khách",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "Ở trang giỏ: bấm link về trang chủ"
+      },
+      "expected": "Bước 3: không có bảng sản phẩm; có hình minh hoạ/icon (img hoặc svg) và dòng chữ báo giỏ trống; badge ẩn hoặc 0. Sau thao tác: URL = http://localhost:5173/.",
+      "expected_sha1": "f5e30617044a445ab2bfc09c437805fad53291f5",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-21"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-02",
+      "title": "Kiểm tra thêm sản phẩm mới với số lượng 2 từ trang chi tiết khi user đã đăng nhập và giỏ rỗng",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 2 × 2, rồi ở trang giỏ bấm link về trang chủ"
+      },
+      "expected": "Trong ≤ 2 giây sau khi bấm 'Thêm vào giỏ hàng': có ít nhất một phản hồi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút đổi; thông báo trên trang) — ghi loại phản hồi vào Actual (B21). TRƯỚC → SAU: 0 → 1 dòng 'Samsung Galaxy S24 Ultra', Đơn giá 28000000, Số lượng 2, Thành tiền 56000000; Tổng 56000000. Sau khi bấm link về trang chủ (giỏ có hàng): URL = http://localhost:5173/.",
+      "expected_sha1": "7b87787cc03cd7b15bf64c49aad8c55314eb3b9c",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-15"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-04",
+      "title": "Kiểm tra thêm lại sản phẩm từ trang chi tiết khi sản phẩm đã được thêm từ trang chủ và giỏ có 2 dòng",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 1; TC: id 4",
+        "Thao tác": "CT: id 4 × 2"
+      },
+      "expected": "TRƯỚC → SAU: vẫn 2 dòng; 'Tai nghe AirPods Pro 2' Số lượng 1 → 3, Thành tiền SAU 18000000; dòng 'iPhone 15 Pro Max' không đổi (Số lượng, Thành tiền SAU = TRƯỚC); Tổng SAU 48000000; badge SAU 4 (tổng Số lượng, B9).",
+      "expected_sha1": "595ae5342dcc4fbdbe15cfca702831046e56cbdd",
+      "notes": "6b: EC10 chưa đánh giá được (thêm từ trang chi tiết không vào giỏ, case gốc TC-61); Fail do EC43 – không có badge.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-20"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-08",
+      "title": "Kiểm tra xoá một dòng và xác nhận trong dialog khi giỏ có 2 dòng",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 4; TC: id 5",
+        "Thao tác": "Bấm nút xoá trên dòng id 4 → dialog: chọn xác nhận"
+      },
+      "expected": "Sau khi bấm nút xoá: hiện dialog xác nhận; dòng chưa bị xoá khi dialog đang mở. Sau khi xác nhận: TRƯỚC → SAU: 2 → 1 dòng; không còn 'Tai nghe AirPods Pro 2'; dòng 'Bàn phím cơ Keychron Q1' không đổi; Tổng SAU 4000000 (= Thành tiền dòng còn lại).",
+      "expected_sha1": "1be3ed1895dabf45ebf63a3acb46492e938c5f67",
+      "notes": "Dialog native (window.confirm) hay modal đều chấp nhận (B14). Không có dialog → Fail (biến mục tiêu).",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-19"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-10",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng âm",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 1",
+        "Thao tác": "CT: id 5 × -3"
+      },
+      "expected": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2).",
+      "expected_sha1": "55ad3430d6a0799e95bc284cdbbb64cefc58798d",
+      "notes": "6b: Pass hộp đen: lần bấm đầu ở trang chi tiết không thêm cả giá trị hợp lệ (TC-FR07-61) → không chứng minh ô Số lượng chặn giá trị sai.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR07-13",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng không phải số",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 1",
+        "Thao tác": "CT: id 5 × 'abc'"
+      },
+      "expected": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2).",
+      "expected_sha1": "55ad3430d6a0799e95bc284cdbbb64cefc58798d",
+      "notes": "Ô input type=number có thể không nhận chữ: nếu ô vẫn trống sau khi gõ thì ghi notes 'không nhập được', vẫn bấm thêm và so giỏ; verdict theo Expected. | 6b: Pass hộp đen: lần bấm đầu ở trang chi tiết không thêm cả giá trị hợp lệ (TC-FR07-61) → không chứng minh ô Số lượng chặn giá trị sai.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR07-60",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng bằng 0",
+      "suite": "TS-BVA-UI",
+      "type": "Negative",
+      "technique": "BVA",
+      "bva_point": "LB-1",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 1",
+        "Thao tác": "CT: id 5 × 0"
+      },
+      "expected": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2).",
+      "expected_sha1": "55ad3430d6a0799e95bc284cdbbb64cefc58798d",
+      "notes": "6b: Pass hộp đen: lần bấm đầu ở trang chi tiết không thêm cả giá trị hợp lệ (TC-FR07-61) → không chứng minh ô Số lượng chặn giá trị sai.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR07-61",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng bằng 1 và giỏ rỗng",
+      "suite": "TS-BVA-UI",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "LB",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 5 × 1"
+      },
+      "expected": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1, Thành tiền 4000000; Tổng 4000000.",
+      "expected_sha1": "795c9d53924c5f5e6880ea43df2f5cf092f62a86",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-15"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-62",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng bằng 2 và giỏ rỗng",
+      "suite": "TS-BVA-UI",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "LB+1",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 5 × 2"
+      },
+      "expected": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 2, Thành tiền 8000000; Tổng 8000000.",
+      "expected_sha1": "73d77964b25a7f037626b1ade23bddfabbc88c92",
+      "notes": "Cùng giá trị Số lượng với TC-FR07-02 (khác sản phẩm): điểm này vừa là đại diện lớp ở bước 3 vừa là LB+1.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-15"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-63",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng ở giá trị danh nghĩa 5",
+      "suite": "TS-BVA-UI",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "NOM",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 5 × 5"
+      },
+      "expected": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 5, Thành tiền 20000000; Tổng 20000000.",
+      "expected_sha1": "0dc9791405a5df75cd4ca17764f9b9b899cf37b2",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-15"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-64",
+      "title": "Kiểm tra thêm từ trang chi tiết khi số lượng là giá trị lớn 1000",
+      "suite": "TS-BVA-UI",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "LARGE",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 5 × 1000"
+      },
+      "expected": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1000, Thành tiền 4000000000; Tổng 4000000000 (B1: hợp lệ).",
+      "expected_sha1": "46324b896e53f15141364d28b6e512c0811596a9",
+      "notes": "Đại diện giá trị lớn thay UB/UB±1 (B1): SRS không có cận trên nên không có biên trên; 1000 là giá trị lớn hợp lệ chọn để kiểm, không phải giới hạn của giao diện.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-15"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-66",
+      "title": "Kiểm tra xoá và xác nhận dòng cuối cùng khi giỏ có đúng 1 dòng",
+      "suite": "TS-BVA-UI",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "LB",
+      "inputs": {
+        "Đăng nhập": "user {ts}",
+        "Giỏ ban đầu": "TC: id 4",
+        "Thao tác": "Bấm nút xoá trên dòng id 4 → dialog (nếu có): chọn xác nhận"
+      },
+      "expected": "TRƯỚC → SAU: 1 → 0 dòng; trang giỏ không còn bảng sản phẩm và chuyển sang trạng thái giỏ trống.",
+      "expected_sha1": "8ff8422965b9b5f21fceb148f5e26614bb72187e",
+      "notes": "Dialog không khẳng định ở đây (EC47 kiểm ở TC-FR07-08/09); có thì xác nhận, không có thì ghi Actual.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR07-200",
+      "title": "Kiểm tra nhập payload XSS <script>alert(1)</script> vào ô Số lượng ở trang chi tiết sản phẩm",
+      "suite": "TS-SV-UI",
+      "type": "Negative (AI suy ra)",
+      "technique": "EG",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "khách",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 1 × <script>alert(1)</script>"
+      },
+      "expected": "Ngay khi gõ/paste: ô input chặn hoặc không thực thi script. Bấm thêm: không bật alert XSS, giỏ không đổi.",
+      "expected_sha1": "efdbd0ee9af189273ff3a465ed74107c0c9f73c2",
+      "notes": "6b: Phần giỏ không đổi: Pass hộp đen: lần bấm đầu ở trang chi tiết không thêm cả giá trị hợp lệ (TC-FR07-61) → không chứng minh ô Số lượng chặn giá trị sai. Phần không bật alert: Pass thật (không có dialog; ô type=number không nhận chuỗi, value rỗng).",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR07-201",
+      "title": "Kiểm tra bấm liên tục 20 lần nút 'Thêm vào giỏ' của cùng sản phẩm ở Trang chủ",
+      "suite": "TS-SV-UI",
+      "type": "Positive (AI suy ra)",
+      "technique": "EG",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "khách",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "bấm 'Thêm vào giỏ' id 4 đúng 20 lần trong 0,4 giây (cách nhau 20 ms)"
+      },
+      "expected": "/cart có đúng 1 dòng id 4, Số lượng = 20, Thành tiền = 20 × Đơn giá (FR-07.3, B4).",
+      "expected_sha1": "31b088e42aa1d6fa4108a2d47416f4981cff15bc",
+      "notes": "6b: Lượt 1 (giữ lại): bấm bằng page.mouse.click theo toạ độ, 20 lần trong 873 ms (> 400 ms của cột Thao tác); SAU giỏ trống; status Fail (auto). Chưa kết luận: script đã đổi sang element.click() trong trang cách 20 ms, chạy lại riêng TC-201 (RUN.md). Verdict chưa chốt. | Lượt 2: element.click() 20 lần trong 405 ms, SAU 20 dòng AirPods mỗi dòng SL 1 (auto Fail). Lượt 3: 410 ms, cùng kết quả. Verdict chưa chốt. | 6b (SV chốt): Fail. Lệch thời gian 405–410 ms so với 400 ms (~1–2%), không ảnh hưởng kết luận: 20 dòng riêng, mỗi dòng SL 1 = không cộng dồn (FR-07.3). Evidence từ lượt 3, kết quả trùng lượt 2.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-17"
+      }
+    },
+    {
+      "tc_id": "TC-FR07-205",
+      "title": "Kiểm tra đổi Số lượng giữa hai lần bấm 'Thêm vào giỏ hàng' ở trang chi tiết",
+      "suite": "TS-SV-UI",
+      "type": "Positive (AI suy ra)",
+      "technique": "EG",
+      "bva_point": "",
+      "inputs": {
+        "Đăng nhập": "khách",
+        "Giỏ ban đầu": "—",
+        "Thao tác": "CT: id 5, nhập 2, bấm 'Thêm' **1 lần**, mở /cart (ghi giỏ); quay lại, nhập 5, bấm 'Thêm' **1 lần**, mở /cart"
+      },
+      "expected": "Sau lần 1: id 5 × 2 và có phản hồi trong ≤ 2 s (B21). Sau lần 2: 1 dòng id 5 × 7 (FR-07.3).",
+      "expected_sha1": "44c60892970a4d8effd629948d75189ac728ed51",
+      "notes": "6b: Fail do chính thao tác mục tiêu (thêm 2 lần ở trang chi tiết): lần 1 không thêm, khớp giả thuyết gray-box ProductDetail.jsx:21–31.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-15"
+      }
+    }
+  ]
+}
