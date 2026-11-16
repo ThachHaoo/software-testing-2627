@@ -1,0 +1,1944 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "B_FR07",
+      "--project=firefox"
+    ],
+    "configFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\playwright.config.ts",
+    "rootDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "Run by": "23120255 · 2026-11-17T01:47:56+07:00",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T01:47:56+07:00",
+          "actualWorkers": 1
+        },
+        "id": "chrome",
+        "name": "chrome",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T01:47:56+07:00",
+          "actualWorkers": 1
+        },
+        "id": "edge",
+        "name": "edge",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T01:47:56+07:00",
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T01:47:56+07:00",
+          "actualWorkers": 1
+        },
+        "name": "firefox",
+        "testDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests",
+        "snapshotDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 30000,
+        "use": {
+          "screenshot": "only-on-failure",
+          "trace": "off",
+          "video": "off",
+          "locale": "vi-VN",
+          "timezoneId": "Asia/Ho_Chi_Minh",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "firefox"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "firefox"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "title": "HW04 EShop – firefox – Run by: 23120255 · 2026-11-17T01:47:56+07:00",
+          "outputFolder": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\reports\\firefox_20261117T014756",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\reports\\firefox_20261117T014756\\results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "B_FR07.spec.ts",
+      "file": "B_FR07.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-FR07-01 Kiểm tra trang giỏ trống và việc quay về trang chủ khi khách chưa đăng nhập mở giỏ rỗng",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Bước 3: không có bảng sản phẩm; có hình minh hoạ/icon (img hoặc svg) và dòng chữ báo giỏ trống; badge ẩn hoặc 0. Sau thao tác: URL = http://localhost:5173/."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-21"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "oracle thông báo yếu",
+                  "description": "expected chỉ nói 'dòng chữ báo giỏ trống' (SRS không cho câu chữ) → kiểm chứa 'trống'"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7063,
+                  "error": {
+                    "message": "Error: giỏ trống: có img/svg minh hoạ\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('main img, main svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - giỏ trống: có img/svg minh hoạ locator('main img, main svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main img, main svg').first()\u001b[22m\n",
+                    "stack": "Error: giỏ trống: có img/svg minh hoạ\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('main img, main svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - giỏ trống: có img/svg minh hoạ locator('main img, main svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main img, main svg').first()\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:124:118",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 118,
+                      "line": 124
+                    },
+                    "snippet": " \u001b[90m 122 |\u001b[39m       ann(\u001b[32m'oracle thông báo yếu'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"expected chỉ nói 'dòng chữ báo giỏ trống' (SRS không cho câu chữ) → kiểm chứa 'trống'\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 123 |\u001b[39m     }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 124 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbefore\u001b[33m.\u001b[39millustration) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39memptyIllustration()\u001b[33m.\u001b[39mfirst()\u001b[33m,\u001b[39m \u001b[32m'giỏ trống: có img/svg minh hoạ'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 125 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbefore\u001b[33m.\u001b[39mbadgeZeroOrHidden) expect\u001b[33m.\u001b[39msoft([\u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m]\u001b[33m,\u001b[39m \u001b[32m`badge ẩn hoặc 0 (đọc được: ${before.badge})`\u001b[39m)\u001b[33m.\u001b[39mtoContain(before\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 126 |\u001b[39m\n \u001b[90m 127 |\u001b[39m     \u001b[90m// Bước 4–6: thao tác đúng 1 lần mỗi mục; phản hồi; /cart qua navbar → SAU\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 118,
+                        "line": 124
+                      },
+                      "message": "Error: giỏ trống: có img/svg minh hoạ\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('main img, main svg').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - giỏ trống: có img/svg minh hoạ locator('main img, main svg').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main img, main svg').first()\u001b[22m\n\n\n \u001b[90m 122 |\u001b[39m       ann(\u001b[32m'oracle thông báo yếu'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"expected chỉ nói 'dòng chữ báo giỏ trống' (SRS không cho câu chữ) → kiểm chứa 'trống'\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 123 |\u001b[39m     }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 124 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbefore\u001b[33m.\u001b[39millustration) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39memptyIllustration()\u001b[33m.\u001b[39mfirst()\u001b[33m,\u001b[39m \u001b[32m'giỏ trống: có img/svg minh hoạ'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 125 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbefore\u001b[33m.\u001b[39mbadgeZeroOrHidden) expect\u001b[33m.\u001b[39msoft([\u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m]\u001b[33m,\u001b[39m \u001b[32m`badge ẩn hoặc 0 (đọc được: ${before.badge})`\u001b[39m)\u001b[33m.\u001b[39mtoContain(before\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 126 |\u001b[39m\n \u001b[90m 127 |\u001b[39m     \u001b[90m// Bước 4–6: thao tác đúng 1 lần mỗi mục; phản hồi; /cart qua navbar → SAU\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:124:118\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:47:57.300Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Bước 3: không có bảng sản phẩm; có hình minh hoạ/icon (img hoặc svg) và dòng chữ báo giỏ trống; badge ẩn hoặc 0. Sau thao tác: URL = http://localhost:5173/."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-21"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "oracle thông báo yếu",
+                      "description": "expected chỉ nói 'dòng chữ báo giỏ trống' (SRS không cho câu chữ) → kiểm chứa 'trống'"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-01-Kiểm-tra-6353d--chưa-đăng-nhập-mở-giỏ-rỗng-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-01-Kiểm-tra-6353d--chưa-đăng-nhập-mở-giỏ-rỗng-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 118,
+                    "line": 124
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-1ac8780183dd5aca9059",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-02 Kiểm tra thêm sản phẩm mới với số lượng 2 từ trang chi tiết khi user đã đăng nhập và giỏ rỗng",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Trong ≤ 2 giây sau khi bấm 'Thêm vào giỏ hàng': có ít nhất một phản hồi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút đổi; thông báo trên trang) — ghi loại phản hồi vào Actual (B21). TRƯỚC → SAU: 0 → 1 dòng 'Samsung Galaxy S24 Ultra', Đơn giá 28000000, Số lượng 2, Thành tiền 56000000; Tổng 56000000. Sau khi bấm link về trang chủ (giỏ có hàng): URL = http://localhost:5173/."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-15"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4342,
+                  "error": {
+                    "message": "Error: B21: có phản hồi ≤ 2 s sau khi bấm thêm\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m",
+                    "stack": "Error: B21: có phản hồi ≤ 2 s sau khi bấm thêm\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:141:98",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 98,
+                      "line": 141
+                    },
+                    "snippet": " \u001b[90m 139 |\u001b[39m         ann(\u001b[32m'phản hồi sau khi bấm thêm'\u001b[39m\u001b[33m,\u001b[39m fb \u001b[33m??\u001b[39m \u001b[32m`không có thay đổi nhìn thấy trong ${FEEDBACK_WINDOW} ms`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 140 |\u001b[39m         \u001b[36mconst\u001b[39m wantFb \u001b[33m=\u001b[39m op\u001b[33m.\u001b[39msnapshot \u001b[33m?\u001b[39m o\u001b[33m.\u001b[39mphases[op\u001b[33m.\u001b[39msnapshot]\u001b[33m?.\u001b[39mfeedback \u001b[33m&&\u001b[39m \u001b[32m'present'\u001b[39m \u001b[33m:\u001b[39m o\u001b[33m.\u001b[39mfeedback\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 141 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'present'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'B21: có phản hồi ≤ 2 s sau khi bấm thêm'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 142 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'absent'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'không có phản hồi báo đã thêm'\u001b[39m)\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m 143 |\u001b[39m         \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mnoAlert) expect\u001b[33m.\u001b[39msoft(dialogs\u001b[33m.\u001b[39mfilter(d \u001b[33m=>\u001b[39m d\u001b[33m.\u001b[39mtype \u001b[33m===\u001b[39m \u001b[32m'alert'\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'không bật alert (XSS)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 144 |\u001b[39m         \u001b[36mawait\u001b[39m step(\u001b[32m'Mở /cart'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m cart\u001b[33m.\u001b[39mopen())\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 98,
+                        "line": 141
+                      },
+                      "message": "Error: B21: có phản hồi ≤ 2 s sau khi bấm thêm\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 139 |\u001b[39m         ann(\u001b[32m'phản hồi sau khi bấm thêm'\u001b[39m\u001b[33m,\u001b[39m fb \u001b[33m??\u001b[39m \u001b[32m`không có thay đổi nhìn thấy trong ${FEEDBACK_WINDOW} ms`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 140 |\u001b[39m         \u001b[36mconst\u001b[39m wantFb \u001b[33m=\u001b[39m op\u001b[33m.\u001b[39msnapshot \u001b[33m?\u001b[39m o\u001b[33m.\u001b[39mphases[op\u001b[33m.\u001b[39msnapshot]\u001b[33m?.\u001b[39mfeedback \u001b[33m&&\u001b[39m \u001b[32m'present'\u001b[39m \u001b[33m:\u001b[39m o\u001b[33m.\u001b[39mfeedback\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 141 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'present'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'B21: có phản hồi ≤ 2 s sau khi bấm thêm'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 142 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'absent'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'không có phản hồi báo đã thêm'\u001b[39m)\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m 143 |\u001b[39m         \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mnoAlert) expect\u001b[33m.\u001b[39msoft(dialogs\u001b[33m.\u001b[39mfilter(d \u001b[33m=>\u001b[39m d\u001b[33m.\u001b[39mtype \u001b[33m===\u001b[39m \u001b[32m'alert'\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'không bật alert (XSS)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 144 |\u001b[39m         \u001b[36mawait\u001b[39m step(\u001b[32m'Mở /cart'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m cart\u001b[33m.\u001b[39mopen())\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:141:98\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 104,
+                        "line": 179
+                      },
+                      "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Samsung Galaxy S24 Ultra\",\u001b[39m\n\u001b[32m-     \"price\": 28000000,\u001b[39m\n\u001b[32m-     \"qty\": \"2\",\u001b[39m\n\u001b[32m-     \"subtotal\": 56000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 83,
+                        "line": 180
+                      },
+                      "message": "Error: số dòng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n \u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:180:83\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 74,
+                        "line": 184
+                      },
+                      "message": "Error: Tổng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m56000000\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:184:74\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:07.766Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Trong ≤ 2 giây sau khi bấm 'Thêm vào giỏ hàng': có ít nhất một phản hồi nhìn thấy được gắn với lần thêm (toast; badge đổi; chữ/trạng thái nút đổi; thông báo trên trang) — ghi loại phản hồi vào Actual (B21). TRƯỚC → SAU: 0 → 1 dòng 'Samsung Galaxy S24 Ultra', Đơn giá 28000000, Số lượng 2, Thành tiền 56000000; Tổng 56000000. Sau khi bấm link về trang chủ (giỏ có hàng): URL = http://localhost:5173/."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-15"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-02-Kiểm-tra-b2257-er-đã-đăng-nhập-và-giỏ-rỗng-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-02-Kiểm-tra-b2257-er-đã-đăng-nhập-và-giỏ-rỗng-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 98,
+                    "line": 141
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-5f58ec9b037c7b7ba055",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-04 Kiểm tra thêm lại sản phẩm từ trang chi tiết khi sản phẩm đã được thêm từ trang chủ và giỏ có 2 dòng",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "TRƯỚC → SAU: vẫn 2 dòng; 'Tai nghe AirPods Pro 2' Số lượng 1 → 3, Thành tiền SAU 18000000; dòng 'iPhone 15 Pro Max' không đổi (Số lượng, Thành tiền SAU = TRƯỚC); Tổng SAU 48000000; badge SAU 4 (tổng Số lượng, B9)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-20"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000},{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000}],\"total\":36000000,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000},{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000}],\"total\":36000000,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4500,
+                  "error": {
+                    "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[33m@@ -6,9 +6,9 @@\u001b[39m\n\u001b[2m      \"subtotal\": 30000000,\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"name\": \"Tai nghe AirPods Pro 2\",\u001b[22m\n\u001b[2m      \"price\": 6000000,\u001b[22m\n\u001b[32m-     \"qty\": \"3\",\u001b[39m\n\u001b[32m-     \"subtotal\": 18000000,\u001b[39m\n\u001b[31m+     \"qty\": \"1\",\u001b[39m\n\u001b[31m+     \"subtotal\": 6000000,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[33m@@ -6,9 +6,9 @@\u001b[39m\n\u001b[2m      \"subtotal\": 30000000,\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"name\": \"Tai nghe AirPods Pro 2\",\u001b[22m\n\u001b[2m      \"price\": 6000000,\u001b[22m\n\u001b[32m-     \"qty\": \"3\",\u001b[39m\n\u001b[32m-     \"subtotal\": 18000000,\u001b[39m\n\u001b[31m+     \"qty\": \"1\",\u001b[39m\n\u001b[31m+     \"subtotal\": 6000000,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 104,
+                      "line": 179
+                    },
+                    "snippet": " \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 104,
+                        "line": 179
+                      },
+                      "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[33m@@ -6,9 +6,9 @@\u001b[39m\n\u001b[2m      \"subtotal\": 30000000,\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    Object {\u001b[22m\n\u001b[2m      \"name\": \"Tai nghe AirPods Pro 2\",\u001b[22m\n\u001b[2m      \"price\": 6000000,\u001b[22m\n\u001b[32m-     \"qty\": \"3\",\u001b[39m\n\u001b[32m-     \"subtotal\": 18000000,\u001b[39m\n\u001b[31m+     \"qty\": \"1\",\u001b[39m\n\u001b[31m+     \"subtotal\": 6000000,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m\n\n \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 74,
+                        "line": 184
+                      },
+                      "message": "Error: Tổng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m48000000\u001b[39m\nReceived: \u001b[31m36000000\u001b[39m\n\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:184:74\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 90,
+                        "line": 186
+                      },
+                      "message": "Error: badge SAU (tổng Số lượng, B9)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n \u001b[90m 188 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mempty\u001b[33m,\u001b[39m \u001b[32m'chuyển sang trạng thái giỏ trống'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 189 |\u001b[39m       \u001b[36mif\u001b[39m (page\u001b[33m.\u001b[39murl() \u001b[33m===\u001b[39m \u001b[32m`${WEB}/cart`\u001b[39m) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m.\u001b[39mlocator(\u001b[32m'main table'\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'không còn bảng sản phẩm'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:186:90\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:15.105Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "TRƯỚC → SAU: vẫn 2 dòng; 'Tai nghe AirPods Pro 2' Số lượng 1 → 3, Thành tiền SAU 18000000; dòng 'iPhone 15 Pro Max' không đổi (Số lượng, Thành tiền SAU = TRƯỚC); Tổng SAU 48000000; badge SAU 4 (tổng Số lượng, B9)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-20"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000},{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000}],\"total\":36000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000},{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000}],\"total\":36000000,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-04-Kiểm-tra-7d500--trang-chủ-và-giỏ-có-2-dòng-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-04-Kiểm-tra-7d500--trang-chủ-và-giỏ-có-2-dòng-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 104,
+                    "line": 179
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-3e83ead837fbd59aaa95",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-08 Kiểm tra xoá một dòng và xác nhận trong dialog khi giỏ có 2 dòng",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Sau khi bấm nút xoá: hiện dialog xác nhận; dòng chưa bị xoá khi dialog đang mở. Sau khi xác nhận: TRƯỚC → SAU: 2 → 1 dòng; không còn 'Tai nghe AirPods Pro 2'; dòng 'Bàn phím cơ Keychron Q1' không đổi; Tổng SAU 4000000 (= Thành tiền dòng còn lại)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-19"
+                },
+                {
+                  "type": "oracle không tự động",
+                  "description": "dòng chưa bị xoá khi dialog đang mở — dialog native khoá trang / không quan sát được bằng script; kiểm tay"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000},{\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"qty\":\"1\",\"subtotal\":4000000}],\"total\":10000000,\"badge\":null}"
+                },
+                {
+                  "type": "dialog sau khi bấm xoá",
+                  "description": "[]"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"qty\":\"1\",\"subtotal\":4000000}],\"total\":4000000,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4080,
+                  "error": {
+                    "message": "Error: hiện dialog xác nhận sau khi bấm xoá\n\nhiện dialog xác nhận sau khi bấm xoá\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 2000ms exceeded while waiting on the predicate",
+                    "stack": "Error: hiện dialog xác nhận sau khi bấm xoá\n\nhiện dialog xác nhận sau khi bấm xoá\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 2000ms exceeded while waiting on the predicate\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:161:140",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 140,
+                      "line": 161
+                    },
+                    "snippet": " \u001b[90m 159 |\u001b[39m         \u001b[36mawait\u001b[39m cart\u001b[33m.\u001b[39mremoveButton(name)\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m             \u001b[90m// ĐÚNG 1 lần\u001b[39m\n \u001b[90m 160 |\u001b[39m         \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mdialogConfirm) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 161 |\u001b[39m           \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m dialogs\u001b[33m.\u001b[39mlength \u001b[33m-\u001b[39m n0\u001b[33m,\u001b[39m { message\u001b[33m:\u001b[39m \u001b[32m'hiện dialog xác nhận sau khi bấm xoá'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mFEEDBACK_WINDOW\u001b[39m })\u001b[33m.\u001b[39mtoBe(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 162 |\u001b[39m           expect\u001b[33m.\u001b[39msoft(dialogs\u001b[33m.\u001b[39mslice(n0)\u001b[33m.\u001b[39mmap(d \u001b[33m=>\u001b[39m d\u001b[33m.\u001b[39mtype)\u001b[33m,\u001b[39m \u001b[32m'dialog là confirm'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(dialogs\u001b[33m.\u001b[39mlength \u001b[33m>\u001b[39m n0 \u001b[33m?\u001b[39m [\u001b[32m'confirm'\u001b[39m] \u001b[33m:\u001b[39m [])\u001b[33m;\u001b[39m\n \u001b[90m 163 |\u001b[39m         }\n \u001b[90m 164 |\u001b[39m         ann(\u001b[32m'dialog sau khi bấm xoá'\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(dialogs\u001b[33m.\u001b[39mslice(n0)))\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 140,
+                        "line": 161
+                      },
+                      "message": "Error: hiện dialog xác nhận sau khi bấm xoá\n\nhiện dialog xác nhận sau khi bấm xoá\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 2000ms exceeded while waiting on the predicate\n\n \u001b[90m 159 |\u001b[39m         \u001b[36mawait\u001b[39m cart\u001b[33m.\u001b[39mremoveButton(name)\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m             \u001b[90m// ĐÚNG 1 lần\u001b[39m\n \u001b[90m 160 |\u001b[39m         \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mdialogConfirm) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 161 |\u001b[39m           \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m dialogs\u001b[33m.\u001b[39mlength \u001b[33m-\u001b[39m n0\u001b[33m,\u001b[39m { message\u001b[33m:\u001b[39m \u001b[32m'hiện dialog xác nhận sau khi bấm xoá'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mFEEDBACK_WINDOW\u001b[39m })\u001b[33m.\u001b[39mtoBe(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 162 |\u001b[39m           expect\u001b[33m.\u001b[39msoft(dialogs\u001b[33m.\u001b[39mslice(n0)\u001b[33m.\u001b[39mmap(d \u001b[33m=>\u001b[39m d\u001b[33m.\u001b[39mtype)\u001b[33m,\u001b[39m \u001b[32m'dialog là confirm'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(dialogs\u001b[33m.\u001b[39mlength \u001b[33m>\u001b[39m n0 \u001b[33m?\u001b[39m [\u001b[32m'confirm'\u001b[39m] \u001b[33m:\u001b[39m [])\u001b[33m;\u001b[39m\n \u001b[90m 163 |\u001b[39m         }\n \u001b[90m 164 |\u001b[39m         ann(\u001b[32m'dialog sau khi bấm xoá'\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(dialogs\u001b[33m.\u001b[39mslice(n0)))\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:161:140\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:22.592Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Sau khi bấm nút xoá: hiện dialog xác nhận; dòng chưa bị xoá khi dialog đang mở. Sau khi xác nhận: TRƯỚC → SAU: 2 → 1 dòng; không còn 'Tai nghe AirPods Pro 2'; dòng 'Bàn phím cơ Keychron Q1' không đổi; Tổng SAU 4000000 (= Thành tiền dòng còn lại)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-19"
+                    },
+                    {
+                      "type": "oracle không tự động",
+                      "description": "dòng chưa bị xoá khi dialog đang mở — dialog native khoá trang / không quan sát được bằng script; kiểm tay"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000},{\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"qty\":\"1\",\"subtotal\":4000000}],\"total\":10000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "dialog sau khi bấm xoá",
+                      "description": "[]"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"qty\":\"1\",\"subtotal\":4000000}],\"total\":4000000,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-08-Kiểm-tra-81cce-ng-dialog-khi-giỏ-có-2-dòng-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-08-Kiểm-tra-81cce-ng-dialog-khi-giỏ-có-2-dòng-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 140,
+                    "line": 161
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-8296c7feb11d793a34d8",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-10 Kiểm tra thêm từ trang chi tiết khi số lượng âm",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"-3\",\"value\":\"-3\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4435,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:29.561Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"-3\",\"value\":\"-3\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-69a6786f57b120ce6dba",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-11 Kiểm tra thêm từ trang chi tiết khi số lượng là số thập phân",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"1.5\",\"value\":\"1.5\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4007,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:35.813Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"1.5\",\"value\":\"1.5\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-4f90ac8368d78ef60216",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-13 Kiểm tra thêm từ trang chi tiết khi số lượng không phải số",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"abc\",\"value\":\"\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3985,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:39.852Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"abc\",\"value\":\"\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-c8e82ad590c0e0a1b3a3",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-60 Kiểm tra thêm từ trang chi tiết khi số lượng bằng 0",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"0\",\"value\":\"0\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3943,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:43.871Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Ngay sau khi bấm thêm: không có phản hồi báo đã thêm. TRƯỚC → SAU: giỏ không đổi — số dòng SAU = TRƯỚC; Số lượng dòng 'iPhone 15 Pro Max' không đổi; không xuất hiện dòng 'Bàn phím cơ Keychron Q1'; Tổng SAU = Tổng TRƯỚC (B2)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"0\",\"value\":\"0\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"qty\":\"1\",\"subtotal\":30000000}],\"total\":30000000,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-551729ab06929fb62031",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-61 Kiểm tra thêm từ trang chi tiết khi số lượng bằng 1 và giỏ rỗng",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1, Thành tiền 4000000; Tổng 4000000."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-15"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"1\",\"value\":\"1\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3839,
+                  "error": {
+                    "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"1\",\u001b[39m\n\u001b[32m-     \"subtotal\": 4000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m",
+                    "stack": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"1\",\u001b[39m\n\u001b[32m-     \"subtotal\": 4000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 104,
+                      "line": 179
+                    },
+                    "snippet": " \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 104,
+                        "line": 179
+                      },
+                      "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"1\",\u001b[39m\n\u001b[32m-     \"subtotal\": 4000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 83,
+                        "line": 180
+                      },
+                      "message": "Error: số dòng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n \u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:180:83\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 74,
+                        "line": 184
+                      },
+                      "message": "Error: Tổng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4000000\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:184:74\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:47.855Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1, Thành tiền 4000000; Tổng 4000000."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-15"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"1\",\"value\":\"1\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-61-Kiểm-tra-3ab8f-số-lượng-bằng-1-và-giỏ-rỗng-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-61-Kiểm-tra-3ab8f-số-lượng-bằng-1-và-giỏ-rỗng-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 104,
+                    "line": 179
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-3791a82c3cab524989b8",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-62 Kiểm tra thêm từ trang chi tiết khi số lượng bằng 2 và giỏ rỗng",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 2, Thành tiền 8000000; Tổng 8000000."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-15"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4721,
+                  "error": {
+                    "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"2\",\u001b[39m\n\u001b[32m-     \"subtotal\": 8000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m",
+                    "stack": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"2\",\u001b[39m\n\u001b[32m-     \"subtotal\": 8000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 104,
+                      "line": 179
+                    },
+                    "snippet": " \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 104,
+                        "line": 179
+                      },
+                      "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"2\",\u001b[39m\n\u001b[32m-     \"subtotal\": 8000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 83,
+                        "line": 180
+                      },
+                      "message": "Error: số dòng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n \u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:180:83\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 74,
+                        "line": 184
+                      },
+                      "message": "Error: Tổng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m8000000\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:184:74\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:48:52.850Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 2, Thành tiền 8000000; Tổng 8000000."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-15"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-62-Kiểm-tra-32468-số-lượng-bằng-2-và-giỏ-rỗng-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-62-Kiểm-tra-32468-số-lượng-bằng-2-và-giỏ-rỗng-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 104,
+                    "line": 179
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-e081c736d55c042b2d8a",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-63 Kiểm tra thêm từ trang chi tiết khi số lượng ở giá trị danh nghĩa 5",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 5, Thành tiền 20000000; Tổng 20000000."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-15"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"5\",\"value\":\"5\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4236,
+                  "error": {
+                    "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"5\",\u001b[39m\n\u001b[32m-     \"subtotal\": 20000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m",
+                    "stack": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"5\",\u001b[39m\n\u001b[32m-     \"subtotal\": 20000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 104,
+                      "line": 179
+                    },
+                    "snippet": " \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 104,
+                        "line": 179
+                      },
+                      "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"5\",\u001b[39m\n\u001b[32m-     \"subtotal\": 20000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 83,
+                        "line": 180
+                      },
+                      "message": "Error: số dòng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n \u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:180:83\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 74,
+                        "line": 184
+                      },
+                      "message": "Error: Tổng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m20000000\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:184:74\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:49:00.833Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 5, Thành tiền 20000000; Tổng 20000000."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-15"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"5\",\"value\":\"5\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-63-Kiểm-tra-edb8d-ượng-ở-giá-trị-danh-nghĩa-5-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-63-Kiểm-tra-edb8d-ượng-ở-giá-trị-danh-nghĩa-5-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 104,
+                    "line": 179
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-4b089024b41707458730",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-64 Kiểm tra thêm từ trang chi tiết khi số lượng là giá trị lớn 1000",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1000, Thành tiền 4000000000; Tổng 4000000000 (B1: hợp lệ)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-15"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"1000\",\"value\":\"1000\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4143,
+                  "error": {
+                    "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"1000\",\u001b[39m\n\u001b[32m-     \"subtotal\": 4000000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m",
+                    "stack": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"1000\",\u001b[39m\n\u001b[32m-     \"subtotal\": 4000000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 104,
+                      "line": 179
+                    },
+                    "snippet": " \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 104,
+                        "line": 179
+                      },
+                      "message": "Error: các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 8\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"name\": \"Bàn phím cơ Keychron Q1\",\u001b[39m\n\u001b[32m-     \"price\": 4000000,\u001b[39m\n\u001b[32m-     \"qty\": \"1000\",\u001b[39m\n\u001b[32m-     \"subtotal\": 4000000000,\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 177 |\u001b[39m     \u001b[90m// Oracle trạng thái giỏ TRƯỚC → SAU (object)\u001b[39m\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:179:104\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 83,
+                        "line": 180
+                      },
+                      "message": "Error: số dòng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n \u001b[90m 178 |\u001b[39m     \u001b[36mconst\u001b[39m rows \u001b[33m=\u001b[39m expectedRows(before\u001b[33m,\u001b[39m o)\u001b[33m;\u001b[39m\n \u001b[90m 179 |\u001b[39m     \u001b[36mif\u001b[39m (rows) expect\u001b[33m.\u001b[39msoft(byName(after\u001b[33m.\u001b[39mrows)\u001b[33m,\u001b[39m \u001b[32m'các dòng giỏ SAU (tên, Đơn giá, Số lượng, Thành tiền)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual(byName(rows))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 180 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mcountAfter \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mlength\u001b[33m,\u001b[39m \u001b[32m'số dòng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mcountAfter)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 181 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mkeep) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k)\u001b[33m,\u001b[39m \u001b[32m`dòng '${k}' không đổi`\u001b[39m)\u001b[33m.\u001b[39mtoEqual(before\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfind(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m k))\u001b[33m;\u001b[39m\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:180:83\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 74,
+                        "line": 184
+                      },
+                      "message": "Error: Tổng SAU\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4000000000\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 182 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m k \u001b[36mof\u001b[39m [\u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mabsent\u001b[33m,\u001b[39m \u001b[33m...\u001b[39mo\u001b[33m.\u001b[39mremove]) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mmap(r \u001b[33m=>\u001b[39m r\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`không có dòng '${k}'`\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoContain(k)\u001b[33m;\u001b[39m\n \u001b[90m 183 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m===\u001b[39m \u001b[32m'unchanged'\u001b[39m) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU = Tổng TRƯỚC'\u001b[39m)\u001b[33m.\u001b[39mtoBe(before\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 |\u001b[39m     \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotal \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng SAU'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mtotal)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 185 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mtotalIsSum) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mtotal\u001b[33m,\u001b[39m \u001b[32m'Tổng = Σ Thành tiền'\u001b[39m)\u001b[33m.\u001b[39mtoBe(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mreduce((t\u001b[33m,\u001b[39m r) \u001b[33m=>\u001b[39m t \u001b[33m+\u001b[39m (r\u001b[33m.\u001b[39msubtotal \u001b[33m??\u001b[39m \u001b[35m0\u001b[39m)\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 186 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mbadge \u001b[33m!==\u001b[39m undefined) expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mbadge\u001b[33m,\u001b[39m \u001b[32m'badge SAU (tổng Số lượng, B9)'\u001b[39m)\u001b[33m.\u001b[39mtoBe(o\u001b[33m.\u001b[39mbadge)\u001b[33m;\u001b[39m\n \u001b[90m 187 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39memptyAfter) {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:184:74\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:49:07.962Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "TRƯỚC → SAU: 0 → 1 dòng 'Bàn phím cơ Keychron Q1', Số lượng 1000, Thành tiền 4000000000; Tổng 4000000000 (B1: hợp lệ)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-15"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"1000\",\"value\":\"1000\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-64-Kiểm-tra-34a08-ố-lượng-là-giá-trị-lớn-1000-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-64-Kiểm-tra-34a08-ố-lượng-là-giá-trị-lớn-1000-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 104,
+                    "line": 179
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-aab9f55eab1e348c98e1",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-66 Kiểm tra xoá và xác nhận dòng cuối cùng khi giỏ có đúng 1 dòng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "TRƯỚC → SAU: 1 → 0 dòng; trang giỏ không còn bảng sản phẩm và chuyển sang trạng thái giỏ trống."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":false,\"rows\":[{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000}],\"total\":6000000,\"badge\":null}"
+                },
+                {
+                  "type": "dialog sau khi bấm xoá",
+                  "description": "[]"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1811,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:49:14.988Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "TRƯỚC → SAU: 1 → 0 dòng; trang giỏ không còn bảng sản phẩm và chuyển sang trạng thái giỏ trống."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":false,\"rows\":[{\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"qty\":\"1\",\"subtotal\":6000000}],\"total\":6000000,\"badge\":null}"
+                    },
+                    {
+                      "type": "dialog sau khi bấm xoá",
+                      "description": "[]"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-7a7680e2089a768d7002",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-200 Kiểm tra nhập payload XSS <script>alert(1)</script> vào ô Số lượng ở trang chi tiết sản phẩm",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Ngay khi gõ/paste: ô input chặn hoặc không thực thi script. Bấm thêm: không bật alert XSS, giỏ không đổi."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"<script>alert(1)</script>\",\"value\":\"\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3011,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:49:18.538Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Ngay khi gõ/paste: ô input chặn hoặc không thực thi script. Bấm thêm: không bật alert XSS, giỏ không đổi."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"<script>alert(1)</script>\",\"value\":\"\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-5c7c34430a99c41ae660",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "TC-FR07-205 Kiểm tra đổi Số lượng giữa hai lần bấm 'Thêm vào giỏ hàng' ở trang chi tiết",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Sau lần 1: id 5 × 2 và có phản hồi trong ≤ 2 s (B21). Sau lần 2: 1 dòng id 5 × 7 (FR-07.3)."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-15"
+                },
+                {
+                  "type": "TRƯỚC",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU lần 1",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "ô Số lượng sau khi gõ",
+                  "description": "{\"gõ\":\"5\",\"value\":\"5\"}"
+                },
+                {
+                  "type": "phản hồi sau khi bấm thêm",
+                  "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                },
+                {
+                  "type": "SAU lần 2",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                },
+                {
+                  "type": "SAU",
+                  "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 21319,
+                  "error": {
+                    "message": "Error: B21: có phản hồi ≤ 2 s sau khi bấm thêm\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m",
+                    "stack": "Error: B21: có phản hồi ≤ 2 s sau khi bấm thêm\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:141:98",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                      "column": 98,
+                      "line": 141
+                    },
+                    "snippet": " \u001b[90m 139 |\u001b[39m         ann(\u001b[32m'phản hồi sau khi bấm thêm'\u001b[39m\u001b[33m,\u001b[39m fb \u001b[33m??\u001b[39m \u001b[32m`không có thay đổi nhìn thấy trong ${FEEDBACK_WINDOW} ms`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 140 |\u001b[39m         \u001b[36mconst\u001b[39m wantFb \u001b[33m=\u001b[39m op\u001b[33m.\u001b[39msnapshot \u001b[33m?\u001b[39m o\u001b[33m.\u001b[39mphases[op\u001b[33m.\u001b[39msnapshot]\u001b[33m?.\u001b[39mfeedback \u001b[33m&&\u001b[39m \u001b[32m'present'\u001b[39m \u001b[33m:\u001b[39m o\u001b[33m.\u001b[39mfeedback\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 141 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'present'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'B21: có phản hồi ≤ 2 s sau khi bấm thêm'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 142 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'absent'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'không có phản hồi báo đã thêm'\u001b[39m)\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m 143 |\u001b[39m         \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mnoAlert) expect\u001b[33m.\u001b[39msoft(dialogs\u001b[33m.\u001b[39mfilter(d \u001b[33m=>\u001b[39m d\u001b[33m.\u001b[39mtype \u001b[33m===\u001b[39m \u001b[32m'alert'\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'không bật alert (XSS)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 144 |\u001b[39m         \u001b[36mawait\u001b[39m step(\u001b[32m'Mở /cart'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m cart\u001b[33m.\u001b[39mopen())\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 98,
+                        "line": 141
+                      },
+                      "message": "Error: B21: có phản hồi ≤ 2 s sau khi bấm thêm\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 139 |\u001b[39m         ann(\u001b[32m'phản hồi sau khi bấm thêm'\u001b[39m\u001b[33m,\u001b[39m fb \u001b[33m??\u001b[39m \u001b[32m`không có thay đổi nhìn thấy trong ${FEEDBACK_WINDOW} ms`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 140 |\u001b[39m         \u001b[36mconst\u001b[39m wantFb \u001b[33m=\u001b[39m op\u001b[33m.\u001b[39msnapshot \u001b[33m?\u001b[39m o\u001b[33m.\u001b[39mphases[op\u001b[33m.\u001b[39msnapshot]\u001b[33m?.\u001b[39mfeedback \u001b[33m&&\u001b[39m \u001b[32m'present'\u001b[39m \u001b[33m:\u001b[39m o\u001b[33m.\u001b[39mfeedback\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 141 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'present'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'B21: có phản hồi ≤ 2 s sau khi bấm thêm'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 142 |\u001b[39m         \u001b[36mif\u001b[39m (wantFb \u001b[33m===\u001b[39m \u001b[32m'absent'\u001b[39m) expect\u001b[33m.\u001b[39msoft(fb\u001b[33m,\u001b[39m \u001b[32m'không có phản hồi báo đã thêm'\u001b[39m)\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m 143 |\u001b[39m         \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mnoAlert) expect\u001b[33m.\u001b[39msoft(dialogs\u001b[33m.\u001b[39mfilter(d \u001b[33m=>\u001b[39m d\u001b[33m.\u001b[39mtype \u001b[33m===\u001b[39m \u001b[32m'alert'\u001b[39m)\u001b[33m,\u001b[39m \u001b[32m'không bật alert (XSS)'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 144 |\u001b[39m         \u001b[36mawait\u001b[39m step(\u001b[32m'Mở /cart'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m cart\u001b[33m.\u001b[39mopen())\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:141:98\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 102,
+                        "line": 150
+                      },
+                      "message": "Error: lần 1: có dòng id 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('main table tbody tr').filter({ has: locator('td').filter({ hasText: 'Bàn phím cơ Keychron Q1' }) })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - lần 1: có dòng id 5 locator('main table tbody tr').filter({ has: locator('td').filter({ hasText: 'Bàn phím cơ Keychron Q1' }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main table tbody tr').filter({ has: locator('td').filter({ hasText: 'Bàn phím cơ Keychron Q1' }) })\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n \u001b[90m 148 |\u001b[39m           ann(\u001b[32m`SAU lần ${op.snapshot}`\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(after))\u001b[33m;\u001b[39m\n \u001b[90m 149 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m r \u001b[36mof\u001b[39m ph\u001b[33m.\u001b[39mrows) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 150 |\u001b[39m             \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrow(nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: có dòng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 151 |\u001b[39m             expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfilter(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m.\u001b[39mmap(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mqty)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: Số lượng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoEqual([\u001b[33mString\u001b[39m(r\u001b[33m.\u001b[39mqty)])\u001b[33m;\u001b[39m\n \u001b[90m 152 |\u001b[39m           }\n \u001b[90m 153 |\u001b[39m           \u001b[36mif\u001b[39m (ph\u001b[33m.\u001b[39mcount \u001b[33m!==\u001b[39m undefined) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrows\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: số dòng`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(ph\u001b[33m.\u001b[39mcount)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:150:102\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 138,
+                        "line": 151
+                      },
+                      "message": "Error: lần 1: Số lượng id 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   \"2\",\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 149 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m r \u001b[36mof\u001b[39m ph\u001b[33m.\u001b[39mrows) {\n \u001b[90m 150 |\u001b[39m             \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrow(nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: có dòng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 151 |\u001b[39m             expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfilter(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m.\u001b[39mmap(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mqty)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: Số lượng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoEqual([\u001b[33mString\u001b[39m(r\u001b[33m.\u001b[39mqty)])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 152 |\u001b[39m           }\n \u001b[90m 153 |\u001b[39m           \u001b[36mif\u001b[39m (ph\u001b[33m.\u001b[39mcount \u001b[33m!==\u001b[39m undefined) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrows\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: số dòng`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(ph\u001b[33m.\u001b[39mcount)\u001b[33m;\u001b[39m\n \u001b[90m 154 |\u001b[39m         }\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:151:138\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 102,
+                        "line": 150
+                      },
+                      "message": "Error: lần 2: có dòng id 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('main table tbody tr').filter({ has: locator('td').filter({ hasText: 'Bàn phím cơ Keychron Q1' }) })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - lần 2: có dòng id 5 locator('main table tbody tr').filter({ has: locator('td').filter({ hasText: 'Bàn phím cơ Keychron Q1' }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main table tbody tr').filter({ has: locator('td').filter({ hasText: 'Bàn phím cơ Keychron Q1' }) })\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n \u001b[90m 148 |\u001b[39m           ann(\u001b[32m`SAU lần ${op.snapshot}`\u001b[39m\u001b[33m,\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mstringify(after))\u001b[33m;\u001b[39m\n \u001b[90m 149 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m r \u001b[36mof\u001b[39m ph\u001b[33m.\u001b[39mrows) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 150 |\u001b[39m             \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrow(nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: có dòng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 151 |\u001b[39m             expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfilter(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m.\u001b[39mmap(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mqty)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: Số lượng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoEqual([\u001b[33mString\u001b[39m(r\u001b[33m.\u001b[39mqty)])\u001b[33m;\u001b[39m\n \u001b[90m 152 |\u001b[39m           }\n \u001b[90m 153 |\u001b[39m           \u001b[36mif\u001b[39m (ph\u001b[33m.\u001b[39mcount \u001b[33m!==\u001b[39m undefined) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrows\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: số dòng`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(ph\u001b[33m.\u001b[39mcount)\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:150:102\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 138,
+                        "line": 151
+                      },
+                      "message": "Error: lần 2: Số lượng id 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   \"7\",\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 149 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m r \u001b[36mof\u001b[39m ph\u001b[33m.\u001b[39mrows) {\n \u001b[90m 150 |\u001b[39m             \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrow(nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: có dòng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 151 |\u001b[39m             expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfilter(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m.\u001b[39mmap(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mqty)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: Số lượng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoEqual([\u001b[33mString\u001b[39m(r\u001b[33m.\u001b[39mqty)])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 152 |\u001b[39m           }\n \u001b[90m 153 |\u001b[39m           \u001b[36mif\u001b[39m (ph\u001b[33m.\u001b[39mcount \u001b[33m!==\u001b[39m undefined) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrows\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: số dòng`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(ph\u001b[33m.\u001b[39mcount)\u001b[33m;\u001b[39m\n \u001b[90m 154 |\u001b[39m         }\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:151:138\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                        "column": 99,
+                        "line": 153
+                      },
+                      "message": "Error: lần 2: số dòng\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('main table tbody tr')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - lần 2: số dòng locator('main table tbody tr') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('main table tbody tr')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n \u001b[90m 151 |\u001b[39m             expect\u001b[33m.\u001b[39msoft(after\u001b[33m.\u001b[39mrows\u001b[33m.\u001b[39mfilter(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mname \u001b[33m===\u001b[39m nameOf(r\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname)\u001b[33m.\u001b[39mmap(x \u001b[33m=>\u001b[39m x\u001b[33m.\u001b[39mqty)\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: Số lượng id ${r.id}`\u001b[39m)\u001b[33m.\u001b[39mtoEqual([\u001b[33mString\u001b[39m(r\u001b[33m.\u001b[39mqty)])\u001b[33m;\u001b[39m\n \u001b[90m 152 |\u001b[39m           }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 153 |\u001b[39m           \u001b[36mif\u001b[39m (ph\u001b[33m.\u001b[39mcount \u001b[33m!==\u001b[39m undefined) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(cart\u001b[33m.\u001b[39mrows\u001b[33m,\u001b[39m \u001b[32m`lần ${op.snapshot}: số dòng`\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(ph\u001b[33m.\u001b[39mcount)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 154 |\u001b[39m         }\n \u001b[90m 155 |\u001b[39m       } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (op\u001b[33m.\u001b[39mk \u001b[33m===\u001b[39m \u001b[32m'delete'\u001b[39m) {\n \u001b[90m 156 |\u001b[39m         \u001b[36mconst\u001b[39m name \u001b[33m=\u001b[39m nameOf(op\u001b[33m.\u001b[39mid)\u001b[33m.\u001b[39mname\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts:153:99\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T18:49:21.580Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Sau lần 1: id 5 × 2 và có phản hồi trong ≤ 2 s (B21). Sau lần 2: 1 dòng id 5 × 7 (FR-07.3)."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-15"
+                    },
+                    {
+                      "type": "TRƯỚC",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"2\",\"value\":\"2\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU lần 1",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "ô Số lượng sau khi gõ",
+                      "description": "{\"gõ\":\"5\",\"value\":\"5\"}"
+                    },
+                    {
+                      "type": "phản hồi sau khi bấm thêm",
+                      "description": "không có thay đổi nhìn thấy trong 2000 ms"
+                    },
+                    {
+                      "type": "SAU lần 2",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    },
+                    {
+                      "type": "SAU",
+                      "description": "{\"empty\":true,\"rows\":[],\"total\":null,\"badge\":null}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-205-Kiểm-tr-8f91b-o-giỏ-hàng-ở-trang-chi-tiết-firefox\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\B_FR07-TC-FR07-205-Kiểm-tr-8f91b-o-giỏ-hàng-ở-trang-chi-tiết-firefox\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\B_FR07.spec.ts",
+                    "column": 98,
+                    "line": 141
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "745431f51e81f006ca1e-de7782a65497d71fc04c",
+          "file": "B_FR07.spec.ts",
+          "line": 96,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T18:47:56.844Z",
+    "duration": 106798.691,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  }
+}
