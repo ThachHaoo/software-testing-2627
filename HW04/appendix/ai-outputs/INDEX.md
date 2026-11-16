@@ -5,3 +5,5 @@
 - 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/fixtures/a_fr01.ts` → `A_FR01/step2/a_fr01.ts` · sha256 989d646e3c92 · 
 - 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/pages/register.page.ts` → `A_FR01/step2/register.page.ts` · sha256 0c38963b8184 · 
 - 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/pages/login.page.ts` → `A_FR01/step2/login.page.ts` · sha256 1b4c53aecc6b · 
+- 00:23 17/11/2026 · A_FR01 bước 3 · `HW04/tests/A_FR01.spec.ts` → `A_FR01/step3/A_FR01.spec.ts` · sha256 65099986aa1a · 
+- 00:23 17/11/2026 · A_FR01 bước 3 · `HW04/A_FR01/assertions.md` → `A_FR01/step3/assertions.md` · sha256 c01bdedbd612 · 
