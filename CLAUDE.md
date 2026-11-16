@@ -73,7 +73,7 @@ Skill dùng trong repo:
 
 - Mỗi bước của quy trình một commit (đề yêu cầu). Message theo mẫu trong `HWxx/CLAUDE.md`.
 - **Không amend commit**; sửa gì cũng tạo commit mới (SV có thể đã push).
-- **Push: SV tự push; AI không push.** Không push `.transcripts/`. Repo bài nộp để private.
+- **Push: SV tự push; AI không push.** Không push `.transcripts/`. Repo bài nộp đã **public** (đề HW04 §12 bắt buộc) → không commit transcript, ảnh có thông tin cá nhân, file trong `context/private/`.
 - Zip bằng `git archive` — chỉ lấy file đã commit ở HEAD, tự bỏ file bị ignore:
 
   ```powershell

@@ -5,7 +5,7 @@ Phần chung (vai trò, khối báo cáo, giới hạn AI, prompt log, git, zip,
 ## 1. Đề và rubric
 
 - Đề: `context/HW04_assignment.md` (pdftotext từ `2026.HW04.Automation Testing_En.pdf`, bản PDF: `context/HW04_assignment.pdf`).
-- Bloom-AI **G9.2 (Apply) + G9.3 (Analyse) + G9.4 (Collaborate)**. Deadline: **<chưa có – SV đối chiếu Moodle>**.
+- Bloom-AI **G9.2 (Apply) + G9.3 (Analyse) + G9.4 (Collaborate)**. Deadline **11:00 18/11/2026** (Moodle).
 - Không nộp trễ; thiếu tài liệu bắt buộc = 0 điểm; chép giữa SV (kể cả prompt) = 0. 30% SV có thể bị gọi vấn đáp 5–7 phút tuần sau deadline.
 
 | # | Mục | Điểm |
@@ -43,16 +43,17 @@ Zip: `23120255_HW04_AI_Automation_<ggg>.zip` (ggg ∈ [000, 100]). Biểu mẫu 
 
 - SUT `../eshop-sut` nhánh **main @ de0f48f** (đã chuyển từ `usability-tunnel` 16/11). Backend :3000, web :5173, admin :5174.
 - Bộ test: `HW04/tests/` — `@playwright/test` **1.65.1**, project `chromium`/`firefox`/`webkit`, `workers: 1`, `retries: 0`, `globalSetup` kiểm SUT.
-- Report: `HW04/reports/<project>_<YYYYMMDDTHHMMSS>/` (Playwright HTML; tiêu đề + metadata `Run by: 23120255 · <ISO>`). Mỗi lượt một trình duyệt: `npm run test:chromium` (…`firefox`, `webkit`), `npm run test:all` chạy lần lượt cả 3.
+- Report: `HW04/reports/<project>_<YYYYMMDDTHHMMSS>/` (Playwright HTML; tiêu đề + metadata `Run by: 23120255 · <ISO>`). Mỗi lượt một trình duyệt: `npm run test:chrome` (…`edge`, `firefox`), `npm run test:all` chạy lần lượt cả 3.
 
 ## 4. Mâu thuẫn / điểm cần quyết định
 
-- **M1** – Đề §12 yêu cầu repo GitHub **public**; `CLAUDE.md` gốc mục 2 ghi "repo bài nộp để private". Chờ phiên thảo luận chốt (repo riêng cho HW04 / đổi visibility / …).
-- **M2** – Deadline thật chưa có (đề: "xem Moodle").
+- **M1** – Đề §12 yêu cầu repo **public** ↔ CLAUDE.md gốc ghi private → đã chốt: repo đã public (16/11), sửa CLAUDE.md gốc.
+- **M2** – Deadline thật: 11:00 18/11/2026 (Moodle).
 
 ## 5. Quyết định
 
-(ghi khi phiên thảo luận chốt)
+- **W1 = a** (16/11): WebKit bị Windows Smart App Control chặn → dùng **Chrome / Edge / Firefox** (đề §6 cho phép). Project `chrome` (channel `chrome`), `edge` (channel `msedge`), `firefox`.
+- **Quy trình**: skill `playwright-ddt-automation` (`.claude/skills/`), 6 bước/feature, commit `HW04[X-FRnn] k/6: …`; output AI freeze vào `HW04/appendix/ai-outputs/<X_FRnn>/step<k>/` trước khi SV sửa.
 
 ## 6. Giới hạn riêng HW04 (bổ sung mục 3 của `CLAUDE.md` gốc)
 
@@ -65,4 +66,4 @@ Zip: `23120255_HW04_AI_Automation_<ggg>.zip` (ggg ∈ [000, 100]). Biểu mẫu 
 
 ## 7. Quy trình và mẫu commit
 
-Commit chung: `HW04: …`. Bước theo feature (đề xuất, chờ phiên thảo luận chốt): `HW04[A] k/n: …`, `HW04[B] k/n: …`, `HW04[C] k/n: …`. Nhớ: ≥ 8 commit phải chạm file `.spec.ts`.
+Commit chung: `HW04: …`. Bước theo feature: `HW04[A-FR01] k/6: …`, `HW04[B-FR07] k/6: …`, `HW04[C-FR15] k/6: …`; sửa ở bước 5: `HW04[X-FRnn] 5/6x – sửa: …` (mỗi lần sửa một commit có sửa `.spec.ts`). Chi tiết: SKILL.md của skill. Nhớ: ≥ 8 commit phải chạm file `.spec.ts`.

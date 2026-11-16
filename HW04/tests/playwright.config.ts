@@ -15,7 +15,7 @@ process.env.HW04_RUN_ISO ??= isoLocal(new Date());
 const RUN_ISO = process.env.HW04_RUN_ISO;
 const RUN_TAG = RUN_ISO.slice(0, 19).replace(/[-:]/g, '');          // 20261116T223005
 
-// Tên thư mục report = project được chọn (--project=chromium …); chạy nhiều project một lượt → nối bằng "+".
+// Tên thư mục report = project được chọn (--project=chrome …); chạy nhiều project một lượt → nối bằng "+".
 const projects = process.argv
   .flatMap((a, i, all) => (a.startsWith('--project=') ? [a.slice(10)] : a === '--project' ? [all[i + 1]] : []))
   .filter(Boolean);
@@ -23,7 +23,8 @@ const PROJECT_TAG = projects.length ? projects.join('+') : 'all';
 const RUN_BY = `Run by: ${STUDENT_ID} · ${RUN_ISO}`;
 
 export default defineConfig({
-  testDir: './specs',
+  testDir: '.',                       // spec đặt thẳng trong HW04/tests/<X_FRnn>.spec.ts
+  testMatch: /.*\.spec\.ts$/,
   globalSetup: './global-setup.ts',   // kiểm backend/web/admin trước khi chạy; thiếu thì dừng
   fullyParallel: false,               // các test dùng chung một CSDL SQLite
   workers: 1,
@@ -46,8 +47,9 @@ export default defineConfig({
     timezoneId: 'Asia/Ho_Chi_Minh',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    // W1=a: WebKit bị Windows Smart App Control chặn → Chrome / Edge / Firefox (đề HW04 §6 cho phép).
+    { name: 'chrome', use: { ...devices['Desktop Chrome'], channel: 'chrome' } },
+    { name: 'edge', use: { ...devices['Desktop Edge'], channel: 'msedge' } },
     { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 });

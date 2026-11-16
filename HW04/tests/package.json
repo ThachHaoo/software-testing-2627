@@ -2,10 +2,10 @@
   "name": "hw04-eshop-automation",
   "private": true,
   "scripts": {
-    "test:chromium": "playwright test --project=chromium",
+    "test:chrome": "playwright test --project=chrome",
     "test:firefox": "playwright test --project=firefox",
-    "test:webkit": "playwright test --project=webkit",
-    "test:all": "npm run test:chromium && npm run test:firefox && npm run test:webkit"
+    "test:edge": "playwright test --project=edge",
+    "test:all": "npm run test:chrome && npm run test:edge && npm run test:firefox"
   },
   "devDependencies": {
     "@playwright/test": "1.65.1"
