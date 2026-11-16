@@ -1,3 +1,7 @@
 - 23:08 16/11/2026 · A_FR01 bước 1 · `HW04/A_FR01/selection.json` → `A_FR01/step1/selection.json` · sha256 34439ba939b4 · 
 - 23:08 16/11/2026 · A_FR01 bước 1 · `HW04/data/A_FR01.json` → `A_FR01/step1/A_FR01.json` · sha256 fa705184593d · 
 - 23:08 16/11/2026 · A_FR01 bước 1 · `HW04/A_FR01/selection.md` → `A_FR01/step1/selection.md` · sha256 4433883473d3 · 
+- 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/fixtures/ddt.ts` → `A_FR01/step2/ddt.ts` · sha256 8e7befe2706a · 
+- 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/fixtures/a_fr01.ts` → `A_FR01/step2/a_fr01.ts` · sha256 989d646e3c92 · 
+- 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/pages/register.page.ts` → `A_FR01/step2/register.page.ts` · sha256 0c38963b8184 · 
+- 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/pages/login.page.ts` → `A_FR01/step2/login.page.ts` · sha256 1b4c53aecc6b · 
