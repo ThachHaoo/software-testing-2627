@@ -13,3 +13,5 @@
 - 01:18 17/11/2026 · B_FR07 bước 1 · `HW04/B_FR07/selection.json` → `B_FR07/step1/selection.json` · sha256 12d9235c7d5f · 
 - 01:18 17/11/2026 · B_FR07 bước 1 · `HW04/data/B_FR07.json` → `B_FR07/step1/B_FR07.json` · sha256 8cfd026ff1dd · 
 - 01:18 17/11/2026 · B_FR07 bước 1 · `HW04/B_FR07/selection.md` → `B_FR07/step1/selection.md` · sha256 2bc673b12736 · 
+- 01:31 17/11/2026 · A_FR01 bước 6b · `HW04/A_FR01/results.md` → `A_FR01/step6b/results.md` · sha256 4e0c30ff6c44 · 
+- 01:31 17/11/2026 · A_FR01 bước 6b · `HW04/A_FR01/bug_groups.md` → `A_FR01/step6b/bug_groups.md` · sha256 6dce991c87c4 · 
