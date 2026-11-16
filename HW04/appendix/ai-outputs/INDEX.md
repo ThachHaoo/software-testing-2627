@@ -15,3 +15,5 @@
 - 01:18 17/11/2026 · B_FR07 bước 1 · `HW04/B_FR07/selection.md` → `B_FR07/step1/selection.md` · sha256 2bc673b12736 · 
 - 01:31 17/11/2026 · A_FR01 bước 6b · `HW04/A_FR01/results.md` → `A_FR01/step6b/results.md` · sha256 4e0c30ff6c44 · 
 - 01:31 17/11/2026 · A_FR01 bước 6b · `HW04/A_FR01/bug_groups.md` → `A_FR01/step6b/bug_groups.md` · sha256 6dce991c87c4 · 
+- 01:33 17/11/2026 · B_FR07 bước 2 · `HW04/tests/fixtures/b_fr07.ts` → `B_FR07/step2/b_fr07.ts` · sha256 c6a39672dda8 · 
+- 01:33 17/11/2026 · B_FR07 bước 2 · `HW04/tests/pages/shop.pages.ts` → `B_FR07/step2/shop.pages.ts` · sha256 7c91690a24c0 · 
