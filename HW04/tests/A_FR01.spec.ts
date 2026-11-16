@@ -40,6 +40,10 @@ function oracleOf(c: Case, ts: number): Oracle {
 }
 
 const pick = (us: User[]) => us.map(u => ({ name: u.name, email: u.email }));
+const WAIT = 10_000;                       // chờ phản hồi sau khi bấm Đăng Ký; quá hạn → Blocked
+const NO_POST = 2_000;                     // cửa sổ xác nhận "không có POST /api/register"
+const isRegister = (res: { request(): { method(): string }; url(): string }) =>
+  res.request().method() === 'POST' && res.url().endsWith('/api/register');
 
 test.beforeAll(async ({}, testInfo) => {
   testInfo.setTimeout(120_000);
@@ -76,12 +80,24 @@ for (const c of DATA.testcases) {
     await expect.soft(r.email()).toHaveValue(v(COL.email));
     await expect.soft(r.password()).toHaveValue(v(COL.pwd));
 
-    // Bước 4: bấm "Đăng Ký" đúng một lần, chờ phản hồi (chuyển trang / hộp lỗi / trình duyệt chặn submit)
+    // Bước 4: bấm "Đăng Ký" đúng một lần, xác định nhánh phản hồi, đồng bộ với POST /api/register
+    const regRes = page.waitForResponse(isRegister, { timeout: WAIT }).catch(() => null);   // đặt trước click để không lỡ phản hồi
     await r.submit.click();
-    await Promise.race([
-      page.waitForURL(u => !u.pathname.endsWith('/register'), { timeout: 5_000 }),
-      r.error.waitFor({ state: 'visible', timeout: 5_000 }),
-    ]).catch(() => { /* trình duyệt chặn submit (A16): không có điều hướng lẫn hộp lỗi */ });
+    let branch: string;
+    if (!(await page.locator('form').evaluate((f: HTMLFormElement) => f.checkValidity()))) {
+      branch = 'trình duyệt chặn';                    // A16: ô required trống → trình duyệt không submit
+    } else {
+      branch = await Promise.any([
+        page.waitForURL(u => !u.pathname.endsWith('/register'), { timeout: WAIT }).then(() => 'điều hướng'),
+        r.error.waitFor({ state: 'visible', timeout: WAIT }).then(() => 'hộp lỗi'),
+      ]).catch(() => 'timeout');
+    }
+    // Có POST → chờ phản hồi (backend ghi CSDL xong mới trả lời); chưa có → xác nhận không có POST trong NO_POST ms
+    if (!posts.length) await page.waitForRequest(req => req.method() === 'POST' && req.url().endsWith('/api/register'), { timeout: NO_POST }).catch(() => null);
+    const res = posts.length ? await regRes : null;
+    test.info().annotations.push({ type: 'phản hồi', description: `${branch}; POST /api/register: ${posts.length} lần${res ? ` (HTTP ${res.status()})` : ''}` });
+    if (branch === 'timeout') blocked(`không có phản hồi sau ${WAIT} ms (không điều hướng, không hộp lỗi, form hợp lệ)`);
+    if (posts.length && !res) blocked(`đã gửi POST /api/register nhưng không nhận phản hồi sau ${WAIT} ms`);
 
     // Bước 5: UI
     if (o.url) await expect.soft(page, 'URL sau khi bấm Đăng Ký').toHaveURL(new RegExp(`${o.url}$`));
