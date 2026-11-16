@@ -1,0 +1,25 @@
+{
+  "BUG-01": {
+    "issue": "#17 (https://github.com/tkob-team/eshop-sut/issues/17)",
+    "source": "HW02/bugs/BUG-01.md mục Yêu cầu",
+    "requirements": [
+      "FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập",
+      "Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)"
+    ],
+    "code": [
+      "../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\s)[A-Za-z\\d\\s]{8,}$/`",
+      "Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)"
+    ]
+  },
+  "BUG-02": {
+    "issue": "#18 (https://github.com/tkob-team/eshop-sut/issues/18)",
+    "source": "HW02/bugs/BUG-02.md mục Yêu cầu",
+    "requirements": [
+      "FR-01.8: Mật khẩu có ít nhất 1 ký tự đặc biệt thuộc tập @, $, !, %, *, ?, &",
+      "A5 (giả định HW02): tập ký tự đặc biệt là tập đóng – khoảng trắng không tính là ký tự đặc biệt"
+    ],
+    "code": [
+      "../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\s)[A-Za-z\\d\\s]{8,}$/`"
+    ]
+  }
+}

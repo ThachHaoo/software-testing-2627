@@ -7,3 +7,6 @@
 - 00:10 17/11/2026 · A_FR01 bước 2 · `HW04/tests/pages/login.page.ts` → `A_FR01/step2/login.page.ts` · sha256 1b4c53aecc6b · 
 - 00:23 17/11/2026 · A_FR01 bước 3 · `HW04/tests/A_FR01.spec.ts` → `A_FR01/step3/A_FR01.spec.ts` · sha256 65099986aa1a · 
 - 00:23 17/11/2026 · A_FR01 bước 3 · `HW04/A_FR01/assertions.md` → `A_FR01/step3/assertions.md` · sha256 c01bdedbd612 · 
+- 01:14 17/11/2026 · A_FR01 bước 6 · `HW04/A_FR01/results.md` → `A_FR01/step6/results.md` · sha256 a68718433100 · 
+- 01:14 17/11/2026 · A_FR01 bước 6 · `HW04/A_FR01/bug_groups.md` → `A_FR01/step6/bug_groups.md` · sha256 accf5de883b3 · 
+- 01:14 17/11/2026 · A_FR01 bước 6 · `HW04/A_FR01/bug_context.json` → `A_FR01/step6/bug_context.json` · sha256 477a38b6d9ea · 

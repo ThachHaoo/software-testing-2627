@@ -29,5 +29,5 @@
 ## Lượt chính thức – ghi chú
 
 - Spec @ `3d19917` (sau 5/6b–5/6d). Lượt chạy bắt đầu sau commit này (00:58); mọi TC có annotation `phản hồi` (chỉ có từ 5/6b).
-- Kiểm "Run by" (16/11, AI mở `index.html` bằng Chrome): tiêu đề report và tên tab đều là `HW04 EShop – <trình duyệt> – Run by: 23120255 · <ISO>`, metadata `Run by` khớp; ISO có múi giờ +07:00.
+- Kiểm "Run by" (17/11, AI mở `index.html` bằng Chrome): tiêu đề report và tên tab đều là `HW04 EShop – <trình duyệt> – Run by: 23120255 · <ISO>`, metadata `Run by` khớp; ISO có múi giờ +07:00.
 - Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng nhau ở 3 trình duyệt. Gộp: `results.md`, `bug_groups.md`.
