@@ -1,0 +1,13 @@
+{
+  "name": "hw04-eshop-automation",
+  "private": true,
+  "scripts": {
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:all": "npm run test:chromium && npm run test:firefox && npm run test:webkit"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1"
+  }
+}

@@ -7,7 +7,8 @@ File này chỉ giữ **phần chung** cho mọi bài. Đề, phạm vi, quy tr�
 | Bài | File | Trạng thái |
 |---|---|---|
 | HW02 – Domain Testing | `HW02/CLAUDE.md` | đã nộp |
-| HW03 – GUI & Usability | `HW03/CLAUDE.md` | **đang làm** |
+| HW03 – GUI & Usability | `HW03/CLAUDE.md` | đã nộp |
+| HW04 – Automation Testing | `HW04/CLAUDE.md` | **đang làm** |
 
 ## Vai trò của phiên Claude Code này: người thực hiện
 
