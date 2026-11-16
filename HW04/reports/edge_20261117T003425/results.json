@@ -1,0 +1,1570 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "A_FR01",
+      "--project=edge"
+    ],
+    "configFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\playwright.config.ts",
+    "rootDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "Run by": "23120255 · 2026-11-17T00:34:25+07:00",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:34:25+07:00",
+          "actualWorkers": 1
+        },
+        "id": "chrome",
+        "name": "chrome",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:34:25+07:00",
+          "actualWorkers": 1
+        },
+        "id": "edge",
+        "name": "edge",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:34:25+07:00",
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/HK7/Testing/Exercise/HW/software-testing-2627/HW04/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "Run by": "23120255 · 2026-11-17T00:34:25+07:00",
+          "actualWorkers": 1
+        },
+        "name": "edge",
+        "testDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests",
+        "snapshotDir": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 30000,
+        "use": {
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "off",
+          "locale": "vi-VN",
+          "timezoneId": "Asia/Ho_Chi_Minh",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/159.0.8154.6 Safari/537.36 Edg/159.0.8154.6",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "msedge"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "edge"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "title": "HW04 EShop – edge – Run by: 23120255 · 2026-11-17T00:34:25+07:00",
+          "outputFolder": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\reports\\edge_20261117T003425",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\reports\\edge_20261117T003425\\results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "A_FR01.spec.ts",
+      "file": "A_FR01.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-FR01-01 Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩu mạnh",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_1794850467727@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11190,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 87
+                    },
+                    "snippet": " \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 87
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"dom01_1794850467727@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyen Van A\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:34:25.676Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_1794850467727@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-01-Kiểm-tra-7a96a--email-mới-và-mật-khẩu-mạnh-edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-01-Kiểm-tra-7a96a--email-mới-và-mật-khẩu-mạnh-edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-01-Kiểm-tra-7a96a--email-mới-và-mật-khẩu-mạnh-edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 87
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-6eaa8da3a8e6e60cb2df",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-02 Kiểm tra đăng ký thành công qua UI khi Họ Tên có dấu và mật khẩu có thêm ký tự đặc biệt ngoài tập",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'dom02_1794850481451@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11177,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 87
+                    },
+                    "snippet": " \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 87
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"dom02_1794850481451@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyễn Văn Ánh\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:34:39.511Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'dom02_1794850481451@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-02-Kiểm-tra-bd85e-êm-ký-tự-đặc-biệt-ngoài-tập-edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-02-Kiểm-tra-bd85e-êm-ký-tự-đặc-biệt-ngoài-tập-edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-02-Kiểm-tra-bd85e-êm-ký-tự-đặc-biệt-ngoài-tập-edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 87
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-95b51b3dd9c04cc4545e",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-05 Kiểm tra từ chối đăng ký qua UI khi Họ Tên rỗng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6082,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:34:53.221Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Họ Tên' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-d4743c9503849bb05184",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-07 Kiểm tra từ chối đăng ký qua UI khi Email rỗng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6258,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:01.126Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Email' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-224f7c27e19588a512df",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-17 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu rỗng",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6263,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:07.446Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-7c2c6c332b595577a14d",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-18 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ hoa",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1421,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:13.748Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-3ebf68f1f86c0d7df9c3",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-22 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có chữ số",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1425,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:15.207Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-cfd92d69e69975712b15",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-23 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu không có ký tự đặc biệt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1321,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:16.669Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-aa99f311c82a390ea536",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-63 Kiểm tra từ chối đăng ký qua UI khi Mật khẩu dài 7 ký tự (LB-1)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Pass"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1262,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:18.027Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Có thông báo lỗi trên form (hộp lỗi đỏ, hoặc theo A16: không gửi POST /api/register và ô 'Mật khẩu' có validationMessage không rỗng); URL vẫn là /register; so với danh sách lấy ở bước 1 của chính case: không có user mới; user seed không bị sửa."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Pass"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-1b41e9bf95ca3cdac6e6",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-64 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu dài 8 ký tự (LB)",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva64_1794850519576@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11311,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 87
+                    },
+                    "snippet": " \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 87
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"bva64_1794850519576@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyen Van A\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:19.316Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva64_1794850519576@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-64-Kiểm-tra-48d5c-hi-Mật-khẩu-dài-8-ký-tự-LB--edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-64-Kiểm-tra-48d5c-hi-Mật-khẩu-dài-8-ký-tự-LB--edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-64-Kiểm-tra-48d5c-hi-Mật-khẩu-dài-8-ký-tự-LB--edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 87
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-0032d298525a0d50ecd0",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-68 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu có đúng 1 chữ hoa (LB)",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva68_1794850533518@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11165,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 87
+                    },
+                    "snippet": " \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 87
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"bva68_1794850533518@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyen Van A\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:31.571Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva68_1794850533518@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-68-Kiểm-tra-ca939--khẩu-có-đúng-1-chữ-hoa-LB--edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-68-Kiểm-tra-ca939--khẩu-có-đúng-1-chữ-hoa-LB--edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-68-Kiểm-tra-ca939--khẩu-có-đúng-1-chữ-hoa-LB--edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 87
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-7290f34e9d5404cf7d6f",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-74 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu có đúng 1 chữ số (LB)",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva74_1794850547173@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11328,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 87
+                    },
+                    "snippet": " \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 87
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"bva74_1794850547173@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyen Van A\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:45.279Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva74_1794850547173@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-74-Kiểm-tra-0bb2a-t-khẩu-có-đúng-1-chữ-số-LB--edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-74-Kiểm-tra-0bb2a-t-khẩu-có-đúng-1-chữ-số-LB--edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-74-Kiểm-tra-0bb2a-t-khẩu-có-đúng-1-chữ-số-LB--edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 87
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-e155d1d7572538283e88",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-77 Kiểm tra chấp nhận đăng ký qua UI khi Mật khẩu có đúng 1 ký tự đặc biệt (LB)",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva77_1794850560926@domain.com' như cột dữ liệu."
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                },
+                {
+                  "type": "A17",
+                  "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11178,
+                  "error": {
+                    "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n",
+                    "stack": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 67,
+                      "line": 87
+                    },
+                    "snippet": " \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 67,
+                        "line": 87
+                      },
+                      "message": "Error: URL sau khi bấm Đăng Ký\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5173/register\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - URL sau khi bấm Đăng Ký with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/register\"\u001b[22m\n\n\n \u001b[90m 85 |\u001b[39m\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Bước 5: UI\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n \u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:87:67\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"bva77_1794850560926@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Nguyen Van A\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:35:59.067Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva77_1794850560926@domain.com' như cột dữ liệu."
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    },
+                    {
+                      "type": "A17",
+                      "description": "form không có ô Xác nhận mật khẩu: bỏ qua bước nhập V5"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-77-Kiểm-tra-6e724-ó-đúng-1-ký-tự-đặc-biệt-LB--edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-77-Kiểm-tra-6e724-ó-đúng-1-ký-tự-đặc-biệt-LB--edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-77-Kiểm-tra-6e724-ó-đúng-1-ký-tự-đặc-biệt-LB--edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 67,
+                    "line": 87
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-fae1b7a61c2ae0a8e7b9",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-202 Kiểm tra từ chối đăng ký qua UI khi mật khẩu chỉ có khoảng trắng làm ký tự đặc biệt",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Hệ thống báo mật khẩu thiếu ký tự đặc biệt; không tạo tài khoản"
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-02"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 21177,
+                  "error": {
+                    "message": "Error: hộp lỗi đỏ trên form\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('div.bg-red-100')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - hộp lỗi đỏ trên form locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n",
+                    "stack": "Error: hộp lỗi đỏ trên form\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('div.bg-red-100')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - hộp lỗi đỏ trên form locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:96:60",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 60,
+                      "line": 96
+                    },
+                    "snippet": " \u001b[90m 94 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(posts\u001b[33m,\u001b[39m \u001b[32m'A16: không gửi POST /api/register'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 95 |\u001b[39m       } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi đỏ trên form'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi có nội dung'\u001b[39m)\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/\\S/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m h \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mhint \u001b[33m??\u001b[39m []) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m`thông báo nói về ${h.source}`\u001b[39m)\u001b[33m.\u001b[39mtoContainText(h)\u001b[33m;\u001b[39m\n \u001b[90m 99 |\u001b[39m       }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 96
+                      },
+                      "message": "Error: hộp lỗi đỏ trên form\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('div.bg-red-100')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - hộp lỗi đỏ trên form locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\n\n \u001b[90m 94 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(posts\u001b[33m,\u001b[39m \u001b[32m'A16: không gửi POST /api/register'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 95 |\u001b[39m       } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi đỏ trên form'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi có nội dung'\u001b[39m)\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/\\S/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m h \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mhint \u001b[33m??\u001b[39m []) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m`thông báo nói về ${h.source}`\u001b[39m)\u001b[33m.\u001b[39mtoContainText(h)\u001b[33m;\u001b[39m\n \u001b[90m 99 |\u001b[39m       }\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:96:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 59,
+                        "line": 97
+                      },
+                      "message": "Error: hộp lỗi có nội dung\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('div.bg-red-100')\nExpected pattern: \u001b[32m/\\S/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - hộp lỗi có nội dung locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\n\n \u001b[90m  95 |\u001b[39m       } \u001b[36melse\u001b[39m {\n \u001b[90m  96 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi đỏ trên form'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi có nội dung'\u001b[39m)\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/\\S/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m h \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mhint \u001b[33m??\u001b[39m []) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m`thông báo nói về ${h.source}`\u001b[39m)\u001b[33m.\u001b[39mtoContainText(h)\u001b[33m;\u001b[39m\n \u001b[90m  99 |\u001b[39m       }\n \u001b[90m 100 |\u001b[39m     }\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:97:59\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 98,
+                        "line": 98
+                      },
+                      "message": "Error: thông báo nói về mật khẩu\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('div.bg-red-100')\nExpected pattern: \u001b[32m/mật khẩu/i\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - thông báo nói về mật khẩu locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\n\n \u001b[90m  96 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi đỏ trên form'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m  97 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi có nội dung'\u001b[39m)\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/\\S/\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  98 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m h \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mhint \u001b[33m??\u001b[39m []) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m`thông báo nói về ${h.source}`\u001b[39m)\u001b[33m.\u001b[39mtoContainText(h)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  99 |\u001b[39m       }\n \u001b[90m 100 |\u001b[39m     }\n \u001b[90m 101 |\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:98:98\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 98,
+                        "line": 98
+                      },
+                      "message": "Error: thông báo nói về ký tự đặc biệt\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('div.bg-red-100')\nExpected pattern: \u001b[32m/ký tự đặc biệt/i\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - thông báo nói về ký tự đặc biệt locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\n\n \u001b[90m  96 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi đỏ trên form'\u001b[39m)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m  97 |\u001b[39m         \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'hộp lỗi có nội dung'\u001b[39m)\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/\\S/\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  98 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m h \u001b[36mof\u001b[39m o\u001b[33m.\u001b[39mhint \u001b[33m??\u001b[39m []) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m`thông báo nói về ${h.source}`\u001b[39m)\u001b[33m.\u001b[39mtoContainText(h)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  99 |\u001b[39m       }\n \u001b[90m 100 |\u001b[39m     }\n \u001b[90m 101 |\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:98:98\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 58,
+                        "line": 105
+                      },
+                      "message": "Error: không có user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 6\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"email\": \"hiep.sv03@domain.com\",\u001b[39m\n\u001b[31m+     \"name\": \"Lê Tấn Hiệp\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n \u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 108 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mremoved)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị xoá'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:105:58\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:36:12.727Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Hệ thống báo mật khẩu thiếu ký tự đặc biệt; không tạo tài khoản"
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-02"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-202-Kiểm-tr-af624-ng-trắng-làm-ký-tự-đặc-biệt-edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-202-Kiểm-tr-af624-ng-trắng-làm-ký-tự-đặc-biệt-edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-202-Kiểm-tr-af624-ng-trắng-làm-ký-tự-đặc-biệt-edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 60,
+                    "line": 96
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-d71250cac60538bea5bd",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        },
+        {
+          "title": "TC-FR01-211 Kiểm tra đăng ký và đăng nhập lại qua UI khi mật khẩu có khoảng trắng ở đầu",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected",
+                  "description": "Đăng ký thành công; đăng nhập lại bằng đúng chuỗi ␣Hiep123$ thành công"
+                },
+                {
+                  "type": "hw02",
+                  "description": "Fail BUG-01"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16471,
+                  "error": {
+                    "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60",
+                    "location": {
+                      "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                      "column": 60,
+                      "line": 89
+                    },
+                    "snippet": " \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 89
+                      },
+                      "message": "Error: không có thông báo lỗi\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có thông báo lỗi locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 87 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39murl) \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'URL sau khi bấm Đăng Ký'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(\u001b[32m`${o.url}$`\u001b[39m))\u001b[33m;\u001b[39m\n \u001b[90m 88 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 89 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(r\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có thông báo lỗi'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 90 |\u001b[39m     } \u001b[36melse\u001b[39m {\n \u001b[90m 91 |\u001b[39m       \u001b[36mconst\u001b[39m vm \u001b[33m=\u001b[39m o\u001b[33m.\u001b[39mvmField \u001b[33m?\u001b[39m \u001b[36mawait\u001b[39m r\u001b[33m.\u001b[39mvalidationMessage(r\u001b[33m.\u001b[39mfield(o\u001b[33m.\u001b[39mvmField)) \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 92 |\u001b[39m       \u001b[36mif\u001b[39m (vm) {                                         \u001b[90m// A16: trình duyệt chặn, không gửi POST\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:89:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 77,
+                        "line": 104
+                      },
+                      "message": "Error: đúng 1 user mới\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 6\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   Object {\u001b[39m\n\u001b[32m-     \"email\": \"hiep.sv12@domain.com\",\u001b[39m\n\u001b[32m-     \"name\": \"Lê Tấn Hiệp\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\n \u001b[90m 102 |\u001b[39m     \u001b[90m// Bước 6: oracle dữ liệu qua API (so với danh sách chụp ở bước 1)\u001b[39m\n \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m d \u001b[33m=\u001b[39m diffUsers(users\u001b[33m.\u001b[39mbefore\u001b[33m,\u001b[39m \u001b[36mawait\u001b[39m users\u001b[33m.\u001b[39mlist())\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mkind \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'đúng 1 user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([o\u001b[33m.\u001b[39muser])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 105 |\u001b[39m     \u001b[36melse\u001b[39m expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39madded)\u001b[33m,\u001b[39m \u001b[32m'không có user mới'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m     \u001b[36mif\u001b[39m (o\u001b[33m.\u001b[39mseedKept) {\n \u001b[90m 107 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(pick(d\u001b[33m.\u001b[39mchanged)\u001b[33m,\u001b[39m \u001b[32m'user seed không bị sửa'\u001b[39m)\u001b[33m.\u001b[39mtoEqual([])\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:104:77\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 62,
+                        "line": 115
+                      },
+                      "message": "Error: đăng nhập xong về trang chủ\n\n\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://localhost:5173/\"\u001b[39m\nReceived: \u001b[31m\"http://localhost:5173/\u001b[7mlogin\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - đăng nhập xong về trang chủ with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/login\"\u001b[22m\n\n\n \u001b[90m 113 |\u001b[39m       \u001b[36mawait\u001b[39m l\u001b[33m.\u001b[39mopen()\u001b[33m;\u001b[39m\n \u001b[90m 114 |\u001b[39m       \u001b[36mawait\u001b[39m l\u001b[33m.\u001b[39mlogin(v(\u001b[33mCOL\u001b[39m\u001b[33m.\u001b[39memail)\u001b[33m,\u001b[39m v(\u001b[33mCOL\u001b[39m\u001b[33m.\u001b[39mpwd))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 115 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'đăng nhập xong về trang chủ'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[32m`${WEB}/`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 116 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(l\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có lỗi đăng nhập'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 117 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(\u001b[36mawait\u001b[39m l\u001b[33m.\u001b[39mtoken()\u001b[33m,\u001b[39m \u001b[32m'có token trong localStorage'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m 118 |\u001b[39m     }\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:115:62\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 60,
+                        "line": 116
+                      },
+                      "message": "Error: không có lỗi đăng nhập\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.bg-red-100')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - không có lỗi đăng nhập locator('div.bg-red-100') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.bg-red-100')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n \u001b[90m 114 |\u001b[39m       \u001b[36mawait\u001b[39m l\u001b[33m.\u001b[39mlogin(v(\u001b[33mCOL\u001b[39m\u001b[33m.\u001b[39memail)\u001b[33m,\u001b[39m v(\u001b[33mCOL\u001b[39m\u001b[33m.\u001b[39mpwd))\u001b[33m;\u001b[39m\n \u001b[90m 115 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'đăng nhập xong về trang chủ'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[32m`${WEB}/`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 116 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(l\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có lỗi đăng nhập'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 117 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(\u001b[36mawait\u001b[39m l\u001b[33m.\u001b[39mtoken()\u001b[33m,\u001b[39m \u001b[32m'có token trong localStorage'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m 118 |\u001b[39m     }\n \u001b[90m 119 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:116:60\u001b[22m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                        "column": 71,
+                        "line": 117
+                      },
+                      "message": "Error: có token trong localStorage\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBeNull\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n\n \u001b[90m 115 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(page\u001b[33m,\u001b[39m \u001b[32m'đăng nhập xong về trang chủ'\u001b[39m)\u001b[33m.\u001b[39mtoHaveURL(\u001b[32m`${WEB}/`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 116 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39msoft(l\u001b[33m.\u001b[39merror\u001b[33m,\u001b[39m \u001b[32m'không có lỗi đăng nhập'\u001b[39m)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 117 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(\u001b[36mawait\u001b[39m l\u001b[33m.\u001b[39mtoken()\u001b[33m,\u001b[39m \u001b[32m'có token trong localStorage'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 118 |\u001b[39m     }\n \u001b[90m 119 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 120 |\u001b[39m }\n\u001b[2m    at D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts:117:71\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "backend restart xong: 5 sản phẩm\r\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T17:36:36.505Z",
+                  "annotations": [
+                    {
+                      "type": "expected",
+                      "description": "Đăng ký thành công; đăng nhập lại bằng đúng chuỗi ␣Hiep123$ thành công"
+                    },
+                    {
+                      "type": "hw02",
+                      "description": "Fail BUG-01"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-211-Kiểm-tr-2d8f8--khẩu-có-khoảng-trắng-ở-đầu-edge\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-211-Kiểm-tr-2d8f8--khẩu-có-khoảng-trắng-ở-đầu-edge\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\test-results\\A_FR01-TC-FR01-211-Kiểm-tr-2d8f8--khẩu-có-khoảng-trắng-ở-đầu-edge\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\HK7\\Testing\\Exercise\\HW\\software-testing-2627\\HW04\\tests\\A_FR01.spec.ts",
+                    "column": 60,
+                    "line": 89
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "18d717acd037600e28f0-deb10634a58166fdef99",
+          "file": "A_FR01.spec.ts",
+          "line": 50,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T17:34:25.274Z",
+    "duration": 150007.555,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}
