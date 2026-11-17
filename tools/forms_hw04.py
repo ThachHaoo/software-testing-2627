@@ -64,10 +64,10 @@ for f, x in FEAT.items():
         (f"{x}7", f"{f} `not_automated.md` – TC/phần expected không tự động", [f"HW04/{f}/not_automated.md"], "từ selection.json + annotation report"),
     ]
 ART += [
-    ("B1", "Dữ kiện nhóm Fail A+B, C (`_groups_AB.md`, `_groups_C.md`)", ["HW04/bugs/_groups_AB.md", "HW04/bugs/_groups_C.md"], "triệu chứng, vị trí mã SUT, issue HW02"),
-    ("B2", "Khung 18 bug (Cách 2, chỉ dữ kiện) + `bugs/README.md`", ["HW04/bugs/README.md", "HW04/bugs/BUG-86.md"], "nội dung bug do SV viết", "2667147"),
-    ("B3", "Kiểm tái hiện 18 bug bằng Playwright (`repro_check.md`)", ["HW04/bugs/repro_check.md"], "lần 1 lệch, lần 2 không lệch"),
-    ("B4", "Tạo 18 GitHub Issue `gh issue create --body-file` (file SV viết) + ảnh trang Issues", ["HW04/bugs/issues_page_1.png"], "#298–#315 trên tkob-team/eshop-sut"),
+    ("K1", "Dữ kiện nhóm Fail A+B, C (`_groups_AB.md`, `_groups_C.md`)", ["HW04/bugs/_groups_AB.md", "HW04/bugs/_groups_C.md"], "triệu chứng, vị trí mã SUT, issue HW02"),
+    ("K2", "Khung 18 bug (Cách 2, chỉ dữ kiện) + `bugs/README.md`", ["HW04/bugs/README.md", "HW04/bugs/BUG-86.md"], "nội dung bug do SV viết", "2667147"),
+    ("K3", "Kiểm tái hiện 18 bug bằng Playwright (`repro_check.md`)", ["HW04/bugs/repro_check.md"], "lần 1 lệch, lần 2 không lệch"),
+    ("K4", "Tạo 18 GitHub Issue `gh issue create --body-file` (file SV viết) + ảnh trang Issues", ["HW04/bugs/issues_page_1.png"], "#298–#315 trên tkob-team/eshop-sut"),
     ("R1", "README test summary (`tools/hw04_summary.py`)", ["tools/hw04_summary.py", "HW04/README.md"], "khối SUMMARY"),
     ("R2", "Dàn ý report + khối REPORT (`tools/hw04_report.py`)", ["tools/hw04_report.py", "HW04/23120255_HW04_Report.md"], "bảng chọn TC/kết quả/review/bug/audit"),
     ("R3", "Khung AI-02 + khối Mandatory Disclosure §10 (`tools/forms_hw04.py`)", ["tools/forms_hw04.py", "HW04/ai-forms/AI-02_Audit_Report_23120255.md"], "file này"),

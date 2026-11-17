@@ -101,7 +101,7 @@ Nguồn: `HW04/*/RUN.md`, `HW04/*/review_sv.md`, khối báo cáo các lệnh, g
 - Lỗi script AI do **phiên thảo luận** phát hiện (khi đối chiếu code):
   - A: `mode: 'serial'` (1 Fail chặn 14 TC) → 5/6a `6fc76b5`.
   - A: nhóm regex `^(…|…)` trong `oracleOf`, thiếu escape trước `new RegExp` → 5/6c `740934b`.
-  - `users.list` – `[...]` (SV/phiên thảo luận ghi rõ commit/bài).
+  - A: `users.list()` gọi ngay sau khi race kết thúc, không chờ phản hồi `POST /api/register` (A_FR01/review_sv.md "Phiên thảo luận bổ sung") → 5/6b `5a378f1`.
   - C: `errShown` đếm mọi hộp thoại (kể cả "Cập nhật thành công!") là "có thông báo lỗi" → R3=a giữ, ghi điểm yếu.
 - Lỗi skill lộ ra khi chạy demo / chạy thử (18/11, lệnh #26–#28):
   - Template spec v1 còn `test.describe.configure({ mode: 'serial' })` – lỗi đã sửa ở A 5/6a nhưng chưa đưa ngược vào skill → sửa ở v2 `5bb31d1`.

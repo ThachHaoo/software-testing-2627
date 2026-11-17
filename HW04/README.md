@@ -1,6 +1,6 @@
 # HW04 – Automation Testing on EShop (bản nháp)
 
-Lê Tấn Hiệp – 23120255 – Software Testing 23_3. Repo: [...]
+Lê Tấn Hiệp – 23120255 – Software Testing 23_3. Repo: https://github.com/ThachHaoo/software-testing-2627
 
 ## Test summary
 
@@ -34,4 +34,11 @@ _Sinh bởi `python tools/hw04_summary.py` (HEAD lúc sinh: `6ef3a84`) — khôn
 
 ## Bảng tự chấm
 
-[...]
+| No. | Tiêu chí | Điểm | Tự đánh giá |
+|---|---|---|---|
+| 1 | Task 1 – Feature A | 25 | `<SV viết>` |
+| 1 | Task 1 – Feature B | 25 | `<SV viết>` |
+| 1 | Task 1 – Feature C | 25 | `<SV viết>` |
+| 2 | Task 2 – Demo video | 15 | `<SV viết>` |
+| 3 | Agent Skills | 10 | `<SV viết>` |
+| | Tổng | 100 | `<SV viết>` |
