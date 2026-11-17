@@ -24,3 +24,24 @@ Claude Code chạy lại bước tái hiện SV viết trong `BUG-86…103` bằ
 | BUG-103 | Có: "Cập nhật thành công!"; GET list và GET /:id name 256 'x'; mọi dòng 'Tên SP' = 256 'x' | **Tiền điều kiện, bước 5 và Actual ghi M `id = 8` (`GET /api/products/8`); thực tế trên CSDL vừa seed: M `id = 6`** |
 
 Tổng: 18/18 tái hiện được hành vi. Lệch giá trị: BUG-96, 101, 103 (id). Lệch cách ghi bước: BUG-87 (thiếu mật khẩu cụ thể), BUG-89–94 (URL `/cart` thay vì link navbar), BUG-95 (category_id thay vì tên danh mục), BUG-97 (`price: null`).
+
+## Lần 2 – sau khi SV sửa (commit `b264556`)
+
+Chạy lại chỉ các bug SV vừa sửa: BUG-87, 89, 90, 91, 92, 93, 94, 95, 96, 97, 101, 103 (cùng script, Chrome 157, CSDL seed lại trước từng bug, vào giỏ bằng link navbar).
+
+| Bug | Tái hiện được? | Còn lệch? |
+|---|---|---|
+| BUG-87 | Có: mật khẩu `Abcd 1234` → không hộp lỗi, chuyển `/login`, API login 200 | Không |
+| BUG-89 | Có: không phản hồi 2 s; giỏ trống | Không |
+| BUG-90 | Có: chỉ chữ + link; img/svg = 0 | Không |
+| BUG-91 | Có: không phản hồi 2 s; giỏ trống | Không |
+| BUG-92 | Có: badge null; AirPods SL 1; Tổng 36000000 | Không |
+| BUG-93 | Có: 0 hộp thoại trong 2 s; còn Keychron, Tổng 4000000 | Không |
+| BUG-94 | Có: lần 1 và lần 2 giỏ trống | Không |
+| BUG-95 | Có: chọn `Phụ kiện`; mọi dòng 'Tên SP' = tên mới; Giá M `1000000 ₫` | Không |
+| BUG-96 | Có: bản ghi mới id 6 (bug ghi "id tiếp theo; ở lượt chính thức là 7") | Không |
+| BUG-97 | Có: cột Giá `₫` | Không |
+| BUG-101 | Có: bản ghi mới id 6 (bug ghi "id tiếp theo") | Không |
+| BUG-103 | Có: M id 6 (bug ghi "<id của M>", lượt chính thức 8) | Không |
+
+Kết luận dữ kiện: không còn lệch → tạo issue (lệnh #22).

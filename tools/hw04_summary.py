@@ -5,6 +5,7 @@ Nguồn:
 - Lượt chính thức: các dòng có chữ "Chính thức" trong HW04/<feature>/RUN.md, lấy đường dẫn HW04/reports/<dir>/.
 - Verdict từng test: results.json của report chính thức, phân loại bằng verdict() của merge_reports.py (cùng quy tắc bước 6).
 - Commit có sửa .spec.ts: git log -- 'HW04/tests/*.spec.ts'.
+- Số bug: số dòng "| BUG-xx |" có link issue "[#n](…/issues/n)" trong HW04/bugs/README.md.
 Ghi đè phần giữa <!-- SUMMARY:BEGIN --> và <!-- SUMMARY:END --> trong HW04/README.md.
 
 Chạy: python tools/hw04_summary.py
@@ -67,6 +68,9 @@ def main():
             tot["runs"] += 1
     spec_commits = subprocess.run(["git", "log", "--oneline", "--", "HW04/tests/*.spec.ts"], cwd=ROOT,
                                   capture_output=True, text=True, encoding="utf-8", check=True).stdout.strip().splitlines()
+    bug_rows = [l for l in (ROOT / "HW04/bugs/README.md").read_text(encoding="utf-8").splitlines()
+                if re.match(r"^\| BUG-\d+ \|", l)]
+    bugs_with_issue = [l for l in bug_rows if re.search(r"\[#\d+\]\(https://github\.com/[^)]+/issues/\d+\)", l)]
     head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
 
     md = [BEGIN, f"_Sinh bởi `python tools/hw04_summary.py` (HEAD lúc sinh: `{head}`) — không sửa tay._", "",
@@ -77,7 +81,7 @@ def main():
           f"| Số lượt test thực thi (TC × trình duyệt) | {tot['exec']} |",
           f"| Pass / Fail / Blocked | {tot['Pass']} / {tot['Fail']} / {tot['Blocked']} |",
           f"| Số commit có sửa `HW04/tests/*.spec.ts` | {len(spec_commits)} |",
-          "| Số bug (GitHub Issues) | [...] |",
+          f"| Số bug (GitHub Issues, tkob-team/eshop-sut) | {len(bugs_with_issue)} / {len(bug_rows)} bug report có issue — `HW04/bugs/README.md` |",
           "| Video demo | [...] |",
           "| Video Agent Skill | [...] |", "",
           "| Feature | Trình duyệt | TC automated | Executed | Pass | Fail | Blocked | Report · Run by |",

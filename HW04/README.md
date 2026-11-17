@@ -5,7 +5,7 @@ Lê Tấn Hiệp – 23120255 – Software Testing 23_3. Repo: [...]
 ## Test summary
 
 <!-- SUMMARY:BEGIN -->
-_Sinh bởi `python tools/hw04_summary.py` (HEAD lúc sinh: `2c54f76`) — không sửa tay._
+_Sinh bởi `python tools/hw04_summary.py` (HEAD lúc sinh: `b264556`) — không sửa tay._
 
 | Chỉ số | Giá trị |
 |---|---|
@@ -15,7 +15,7 @@ _Sinh bởi `python tools/hw04_summary.py` (HEAD lúc sinh: `2c54f76`) — khôn
 | Số lượt test thực thi (TC × trình duyệt) | 135 |
 | Pass / Fail / Blocked | 57 / 78 / 0 |
 | Số commit có sửa `HW04/tests/*.spec.ts` | 12 |
-| Số bug (GitHub Issues) | [...] |
+| Số bug (GitHub Issues, tkob-team/eshop-sut) | 18 / 18 bug report có issue — `HW04/bugs/README.md` |
 | Video demo | [...] |
 | Video Agent Skill | [...] |
 
