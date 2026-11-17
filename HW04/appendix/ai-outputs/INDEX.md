@@ -22,3 +22,6 @@
 - 01:43 17/11/2026 · B_FR07 bước 3 · `HW04/B_FR07/assertions.md` → `B_FR07/step3/assertions.md` · sha256 f187df174e57 · 
 - 14:05 17/11/2026 · A_FR01 bước 6c · `HW04/A_FR01/results.md` → `A_FR01/step6c/results.md` · sha256 8a954a745b10 · 
 - 14:05 17/11/2026 · A_FR01 bước 6c · `HW04/A_FR01/bug_groups.md` → `A_FR01/step6c/bug_groups.md` · sha256 5ae5f15cd40b · 
+- 14:14 17/11/2026 · C_FR15 bước 1 · `HW04/C_FR15/selection.json` → `C_FR15/step1/selection.json` · sha256 d23fe8cd1b57 · 
+- 14:14 17/11/2026 · C_FR15 bước 1 · `HW04/C_FR15/selection.md` → `C_FR15/step1/selection.md` · sha256 5e42f001902f · 
+- 14:14 17/11/2026 · C_FR15 bước 1 · `HW04/data/C_FR15.json` → `C_FR15/step1/C_FR15.json` · sha256 0190a4ef1e05 · 

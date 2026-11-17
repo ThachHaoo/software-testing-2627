@@ -1,0 +1,399 @@
+{
+  "feature": "C_FR15",
+  "source": {
+    "file": "HW02/C_FR15/testcases.json",
+    "commit": "afa074e"
+  },
+  "preconditions": {
+    "TS-DOM-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+      "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+      "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+      "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định."
+    ],
+    "TS-BVA-UI-THEM": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+      "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+      "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+      "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định."
+    ],
+    "TS-BVA-UI-SUA": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+      "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+      "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+      "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định."
+    ],
+    "TS-SV-UI": [
+      "Trước mỗi lượt chạy cả suite: khởi động lại backend (node server.js) → CSDL seed sạch: 5 sản phẩm id 1–5, 3 danh mục id 1 'Điện thoại', 2 'Laptop', 3 'Phụ kiện' (database.js dòng 84–103) (C0).",
+      "Backend http://localhost:3000 và web admin http://localhost:5174 đang chạy.",
+      "Có token admin TA: POST /api/login với admin@eshop.com / Admin123! (README.md dòng 22) — dùng dựng dữ liệu, quan sát, dọn dẹp.",
+      "Thay {ts} bằng Date.now() lúc chạy case; NN = số TC (C0).",
+      "Trạng thái ban đầu của mỗi case: browser context mới (Playwright) hoặc cửa sổ ẩn danh, tắt autofill; localStorage không có adminToken; form sản phẩm mở ở trạng thái 'Thêm sản phẩm mới', mọi ô trống, ô chọn danh mục ở giá trị mặc định."
+    ]
+  },
+  "testcases": [
+    {
+      "tc_id": "TC-FR15-01",
+      "title": "Kiểm tra thêm sản phẩm qua form khi mọi trường hợp lệ và giá là số nguyên",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "Bàn phím UI01 {ts}",
+        "Giá": "1500000",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Không có thông báo lỗi (thông báo thành công, nếu có, chỉ ghi Actual — C13). Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'Bàn phím UI01 {ts}', 'Giá' = 1500000 (so giá trị số). Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có name = 'Bàn phím UI01 {ts}', price = 1500000, category_id = 2 (so giá trị số).",
+      "expected_sha1": "f4cdc3096fcee33864fbacc0cc5b99b2ea636de4",
+      "notes": "6b: status để trống — auto Fail chỉ do khẳng định EC73 'không có thông báo lỗi', mà quan sát HTML5 là giả do harness (lib.ts:196–200 đọc tính hợp lệ HTML5 sau 1,2 s — sau khi lưu thành công form reset, ô Tên rỗng nên luôn có 'Please fill out this field.' (xuất hiện ở mọi case UI, kể cả case lưu thành công)). Dữ liệu và bảng đạt (bản ghi mới đúng name/price/category_id; bảng thêm 1 dòng đúng). Chờ SV quyết / vá harness. · 6c (lượt 6): Pass — harness đã vá H1; không có thông báo, dữ liệu và bảng đạt.",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR15-03",
+      "title": "Kiểm tra sửa tên, giá, danh mục của một sản phẩm qua form khi giá mới là số nguyên",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Sửa",
+        "Tên sản phẩm": "Sửa UI03 {ts}",
+        "Giá": "2500000",
+        "Danh mục": "Phụ kiện",
+        "Mô tả": "(giữ)",
+        "URL Ảnh": "(giữ)"
+      },
+      "expected": "Không đánh giá thông báo. Bảng: dòng của M hiển thị 'Tên SP' = 'Sửa UI03 {ts}', 'Giá' = 2500000 (so giá trị số); mọi dòng khác SAU_UI = TRƯỚC_UI; số dòng không đổi. Dữ liệu: M_SAU có name = 'Sửa UI03 {ts}', price = 2500000, category_id = 3 (so giá trị số).",
+      "expected_sha1": "a786a4482a983d4591b6f5733cb8dcff90edbe5e",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-45"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-05",
+      "title": "Kiểm tra xoá một sản phẩm từ bảng khi sản phẩm tồn tại",
+      "suite": "TS-DOM-UI",
+      "type": "Positive",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Xóa",
+        "Tên sản phẩm": "—",
+        "Giá": "—",
+        "Danh mục": "—",
+        "Mô tả": "—",
+        "URL Ảnh": "—"
+      },
+      "expected": "Bảng: dòng 'Muc tieu 05 {ts}' không còn; số dòng SAU_UI = TRƯỚC_UI − 1. Dữ liệu: GET /api/products SAU không còn id M; số bản ghi SAU = TRƯỚC − 1.",
+      "expected_sha1": "a4dbd1bf09db31af6ca3c0f9723a15c87399b8e1",
+      "notes": "",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR15-07",
+      "title": "Kiểm tra thêm sản phẩm qua form khi ô 'Tên sản phẩm' để trống",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "",
+        "Giá": "1500000",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "d3e0bb70da60392da239c96fa76c2d81aec58806",
+      "notes": "",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR15-10",
+      "title": "Kiểm tra thêm sản phẩm qua form khi giá âm",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "Tai nghe UI10 {ts}",
+        "Giá": "-1000",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "d3e0bb70da60392da239c96fa76c2d81aec58806",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-36"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-11",
+      "title": "Kiểm tra thêm sản phẩm qua form khi ô 'Giá tiền' để trống",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "Tai nghe UI11 {ts}",
+        "Giá": "",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "d3e0bb70da60392da239c96fa76c2d81aec58806",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-36"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-15",
+      "title": "Kiểm tra sửa sản phẩm qua form khi giá mới âm",
+      "suite": "TS-DOM-UI",
+      "type": "Negative",
+      "technique": "EP",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Sửa",
+        "Tên sản phẩm": "(giữ)",
+        "Giá": "-1000",
+        "Danh mục": "(giữ)",
+        "Mô tả": "(giữ)",
+        "URL Ảnh": "(giữ)"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "cd709c39c7770cf12e1b5106b7d42a4434f1d956",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-38"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-65",
+      "title": "Kiểm tra thêm sản phẩm qua form khi tên dài 255 ký tự (điểm UB)",
+      "suite": "TS-BVA-UI-THEM",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "UB",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "'x' × 255",
+        "Giá": "1500000",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'x' × 255. Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có name = 'x' × 255 (255 ký tự, so đúng chuỗi).",
+      "expected_sha1": "3c6e9c62110f7b10392843b26bb7bbdd897208fd",
+      "notes": "",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR15-66",
+      "title": "Kiểm tra thêm sản phẩm qua form khi tên dài 256 ký tự (điểm UB+1)",
+      "suite": "TS-BVA-UI-THEM",
+      "type": "Negative",
+      "technique": "BVA",
+      "bva_point": "UB+1",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "'x' × 256",
+        "Giá": "1500000",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "d3e0bb70da60392da239c96fa76c2d81aec58806",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-35"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-67",
+      "title": "Kiểm tra thêm sản phẩm qua form khi giá = 0 (điểm LB-1)",
+      "suite": "TS-BVA-UI-THEM",
+      "type": "Negative",
+      "technique": "BVA",
+      "bva_point": "LB-1",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "Tai nghe BVA 67 {ts}",
+        "Giá": "0",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "d3e0bb70da60392da239c96fa76c2d81aec58806",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-36"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-68",
+      "title": "Kiểm tra thêm sản phẩm qua form khi giá = 0.1 (điểm LB)",
+      "suite": "TS-BVA-UI-THEM",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "LB",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "Tai nghe BVA 68 {ts}",
+        "Giá": "0.1",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả NN {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Bảng: SAU_UI có thêm đúng 1 dòng 'Tên SP' = 'Tai nghe BVA 68 {ts}', 'Giá' = 0.1 (so giá trị số). Dữ liệu: số bản ghi SAU = TRƯỚC + 1; bản ghi mới có price = 0.1 (so giá trị số).",
+      "expected_sha1": "28cab60e71cd29ddb1216143974639e673442a6b",
+      "notes": "",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR15-77",
+      "title": "Kiểm tra sửa sản phẩm qua form khi tên mới dài 255 ký tự (điểm UB)",
+      "suite": "TS-BVA-UI-SUA",
+      "type": "Positive",
+      "technique": "BVA",
+      "bva_point": "UB",
+      "inputs": {
+        "Thao tác CRUD": "Sửa",
+        "Tên sản phẩm": "'x' × 255",
+        "Giá": "(giữ)",
+        "Danh mục": "(giữ)",
+        "Mô tả": "(giữ)",
+        "URL Ảnh": "(giữ)"
+      },
+      "expected": "Bảng: dòng của M hiển thị 'Tên SP' = 'x' × 255. Dữ liệu: M_SAU có name = 'x' × 255 (255 ký tự, so đúng chuỗi); price, category_id = M_TRƯỚC; số bản ghi SAU = TRƯỚC.",
+      "expected_sha1": "732ddf656547e269bda1d2311f0e87b6902c807a",
+      "notes": "",
+      "hw02": {
+        "status": "Pass",
+        "auto_status": "Pass",
+        "bug_id": ""
+      }
+    },
+    {
+      "tc_id": "TC-FR15-78",
+      "title": "Kiểm tra sửa sản phẩm qua form khi tên mới dài 256 ký tự (điểm UB+1)",
+      "suite": "TS-BVA-UI-SUA",
+      "type": "Negative",
+      "technique": "BVA",
+      "bva_point": "UB+1",
+      "inputs": {
+        "Thao tác CRUD": "Sửa",
+        "Tên sản phẩm": "'x' × 256",
+        "Giá": "(giữ)",
+        "Danh mục": "(giữ)",
+        "Mô tả": "(giữ)",
+        "URL Ảnh": "(giữ)"
+      },
+      "expected": "Có thông báo lỗi (bong bóng HTML5, thông báo trên trang hoặc hộp thoại trình duyệt đều tính; nội dung ghi vào Actual) (C7, C16). Bảng: SAU_UI = TRƯỚC_UI. Dữ liệu: M_SAU = M_TRƯỚC; GET /api/products SAU = TRƯỚC.",
+      "expected_sha1": "cd709c39c7770cf12e1b5106b7d42a4434f1d956",
+      "notes": "",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-37"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-200",
+      "title": "Kiểm tra chèn XSS `<script>alert(1)</script>` vào ô 'Tên sản phẩm' ở form Thêm",
+      "suite": "TS-SV-UI",
+      "type": "Negative (AI suy ra)",
+      "technique": "Security (XSS)",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "<script>alert(1)</script>",
+        "Giá": "1500000",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả SV200 {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Báo lỗi; tuyệt đối không kích hoạt alert XSS (SEC-04, C21).",
+      "expected_sha1": "7e15e03cf1c96943e480f88b7581efafe83d4708",
+      "notes": "6b: status để trống — auto Pass dựa vào 'báo lỗi' lấy từ quan sát HTML5 giả (lib.ts:196–200 đọc tính hợp lệ HTML5 sau 1,2 s — sau khi lưu thành công form reset, ô Tên rỗng nên luôn có 'Please fill out this field.' (xuất hiện ở mọi case UI, kể cả case lưu thành công)). Actual: không có hộp thoại; bản ghi mới name '<script>alert(1)</script>' được tạo (5 → 6). Chờ SV quyết / vá harness. · 6c (lượt 6): Fail — không có thông báo nào (HTML5/hộp thoại/trên trang); bản ghi name '<script>alert(1)</script>' được tạo; không có hộp thoại '1'.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-39"
+      }
+    },
+    {
+      "tc_id": "TC-FR15-201",
+      "title": "Kiểm tra nhập giá tiền dạng E-notation `1e5` vào ô 'Giá tiền'",
+      "suite": "TS-SV-UI",
+      "type": "Negative (AI suy ra)",
+      "technique": "Type / JS Math",
+      "bva_point": "",
+      "inputs": {
+        "Thao tác CRUD": "Thêm",
+        "Tên sản phẩm": "Sản phẩm E-Notation {ts}",
+        "Giá": "1e5",
+        "Danh mục": "Laptop",
+        "Mô tả": "Mô tả SV201 {ts}",
+        "URL Ảnh": "https://placehold.co/300"
+      },
+      "expected": "Form chặn do type=number.",
+      "expected_sha1": "eda1506c02caa8a403b3c768d2837145fde9c1df",
+      "notes": "5/7d–5/7e: SV giữ nhánh 'bị chặn', xếp '1e5' vào EC20 (C24, SV chốt). EC mục tiêu cũ EC17.",
+      "hw02": {
+        "status": "Fail",
+        "auto_status": "Fail",
+        "bug_id": "BUG-40"
+      }
+    }
+  ]
+}

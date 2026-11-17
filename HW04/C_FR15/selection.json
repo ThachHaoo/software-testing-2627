@@ -1,0 +1,94 @@
+{
+  "feature": "C_FR15",
+  "ids": [
+    "TC-FR15-01",
+    "TC-FR15-03",
+    "TC-FR15-05",
+    "TC-FR15-07",
+    "TC-FR15-10",
+    "TC-FR15-11",
+    "TC-FR15-15",
+    "TC-FR15-65",
+    "TC-FR15-66",
+    "TC-FR15-67",
+    "TC-FR15-68",
+    "TC-FR15-77",
+    "TC-FR15-78",
+    "TC-FR15-200",
+    "TC-FR15-201"
+  ],
+  "type_override": {
+    "TC-FR15-200": "Negative",
+    "TC-FR15-201": "Negative"
+  },
+  "type_override_note": "AI suy ra",
+  "bug_map": {
+    "TC-FR15-03": "BUG-45",
+    "TC-FR15-10": "BUG-36",
+    "TC-FR15-11": "BUG-36",
+    "TC-FR15-67": "BUG-36",
+    "TC-FR15-15": "BUG-38",
+    "TC-FR15-66": "BUG-35",
+    "TC-FR15-78": "BUG-37",
+    "TC-FR15-200": "BUG-39",
+    "TC-FR15-201": "BUG-40"
+  },
+  "reasons": {
+    "TC-FR15-01": "Thêm – Positive EP chính (mọi trường hợp lệ, danh mục khác mặc định); HW02 Pass – đối chứng luồng Thêm",
+    "TC-FR15-03": "Sửa – Positive EP sửa tên/giá/danh mục; HW02 Fail BUG-45 (mọi dòng bảng đổi tên, giá dòng M không cập nhật); case gốc của 5 Blocked HW02",
+    "TC-FR15-05": "Xóa – Positive EP; HW02 Pass – đối chứng thao tác Xóa (phủ đủ Thêm/Sửa/Xóa)",
+    "TC-FR15-07": "Thêm – Negative EP tên rỗng; HW02 Pass (bong bóng HTML5 required) – đối chứng phía từ chối",
+    "TC-FR15-10": "Thêm – Negative EP giá âm; HW02 Fail BUG-36",
+    "TC-FR15-11": "Thêm – Negative EP giá rỗng; HW02 Fail BUG-36 (bản ghi mới price \"\")",
+    "TC-FR15-15": "Sửa – Negative EP giá âm; HW02 Fail BUG-38",
+    "TC-FR15-65": "Thêm – Boundary UB tên 255 ký tự; HW02 Pass – cặp với TC-66",
+    "TC-FR15-66": "Thêm – Boundary UB+1 tên 256 ký tự; HW02 Fail BUG-35",
+    "TC-FR15-67": "Thêm – Boundary LB-1 giá 0; HW02 Fail BUG-36 – cặp với TC-68",
+    "TC-FR15-68": "Thêm – Boundary LB giá 0.1; HW02 Pass",
+    "TC-FR15-77": "Sửa – Boundary UB tên 255 ký tự; HW02 Pass (oracle bảng chỉ xét dòng M) – cặp với TC-78",
+    "TC-FR15-78": "Sửa – Boundary UB+1 tên 256 ký tự; HW02 Fail BUG-37",
+    "TC-FR15-200": "Thêm – Negative (EG, SV) XSS <script>alert(1)</script> ở tên; HW02 Fail BUG-39; kiểm không bật alert",
+    "TC-FR15-201": "Thêm – Negative (EG, SV) giá E-notation 1e5; HW02 Fail BUG-40"
+  },
+  "excluded": {
+    "TS-DOM-API, TS-BVA-API-*, TS-SV-API": "tầng API – HW04 tự động hoá web admin (UI); API chỉ dùng làm oracle dữ liệu và dựng/dọn dữ liệu",
+    "TS-GUI TC-FR15-90…94, TS-SV-GUI": "checklist thuộc tính tĩnh, không có inputs → không data-driven",
+    "TC-FR15-04, 80, 81, 82, 83 (Blocked)": "HW02 Blocked, case gốc TC-03 (BUG-45: sửa 1 SP → mọi dòng bảng đổi tên, oracle bảng không đọc được) – sẽ Blocked lại; đã chọn TC-03",
+    "TC-FR15-202": "HW02 ghi lỗi thiết kế TC (expected 7000000 ≠ giá trị số của 00700000 = 700000; _groups_C_FR15.md) – không dùng expected sai",
+    "TC-FR15-205": "giá full-width → ô type=number nhận \"\" (HW02 Actual) – cùng nhánh giá rỗng với TC-11 đã chọn",
+    "TC-FR15-206": "chuỗi 2 thao tác (Sửa SP1 → Sửa SP2 không Hủy) không biểu diễn được bằng cột 'Thao tác CRUD' một lần của procedure; HW02 Pass",
+    "TC-FR15-08, 09": "tên 300 ký tự / 3 dấu cách khi Thêm – cùng BUG-35 với TC-66 đã chọn",
+    "TC-FR15-13, 14, 16, 79": "Sửa tên 300 / 3 dấu cách (BUG-37), giá rỗng / 0 (BUG-38) – cùng bug với TC-78, TC-15 đã chọn",
+    "TC-FR15-02, 06, 12, 61–64, 69–76": "HW02 Pass, cùng lớp/điểm BVA với TC đã chọn (đối chứng đã đủ: 01, 05, 07, 65, 68, 77)"
+  },
+  "sections": {
+    "Đặc điểm SUT ảnh hưởng script (HW02 + ../eshop-sut/frontend-admin/src/App.jsx @ de0f48f)": [
+      "Đăng nhập admin http://localhost:5174: ô placeholder 'Email' / 'Password', admin@eshop.com / Admin123! (setup_guide ghi admin123 – sai so với seed).",
+      "Form Thêm và Sửa dùng chung (App.jsx dòng 94–130, 488–546): chỉ có placeholder 'Tên sản phẩm', 'Giá tiền', 'URL Ảnh', 'Mô tả' + 1 ô chọn danh mục, không có nhãn; nút 'Lưu sản phẩm'. Trạng thái Sửa = productForm.id khác null.",
+      "Sửa 1 sản phẩm → UI gán name mới cho MỌI dòng bảng (App.jsx dòng 110–114, chỉ ở state React, không gọi API) rồi alert 'Cập nhật thành công!' (dòng 115). Oracle bảng của case Sửa ('mọi dòng khác SAU_UI = TRƯỚC_UI') sẽ lộ BUG-45; oracle dữ liệu vẫn đọc qua API.",
+      "Thêm không có alert; Sửa có alert native → script phải xử lý dialog (ghi nội dung, bấm OK) như procedure bước 6.",
+      "Bảng hiển thị giá `{p.price} ₫` không phân cách (dòng 590) → đọc giá trị số bằng cách bỏ ký hiệu tiền và dấu phân cách (procedure bước 4)."
+    ],
+    "Oracle dữ liệu": [
+      "Oracle dữ liệu = GET /api/products TRƯỚC/SAU (danh sách bản ghi, so số bản ghi + bản ghi mới/đổi) và GET /api/products/M (M_TRƯỚC/M_SAU) cho case Sửa/Xóa, đúng procedure HW02 bước 2 và 7.",
+      "GET /api/products/:id trả price dạng chuỗi khi id chẵn (BUG-48, server.js dòng 162) → so giá trị số (procedure HW02 ghi 'so giá trị số').",
+      "Dựng M bằng POST /api/products (Bearer admin) trước case Sửa/Xóa; dọn: DELETE mọi id mới + M sau mỗi case (cleanup HW02)."
+    ],
+    "Rủi ro sập backend (price null + id chẵn) – CHƯA quyết": [
+      "Cơ chế (BUG-48, server.js dòng 159–165): GET /api/products/:id với bản ghi id chẵn và price = null → `row.price.toString()` ném TypeError trong callback sqlite → tiến trình node thoát (HW02 BUG-48 mục 'Trường hợp sập Backend'). Mọi TC chạy sau đó mất backend.",
+      "Script gọi GET /api/products/:id ở case Sửa/Xóa (M_TRƯỚC, M_SAU): TC-03, TC-05, TC-15, TC-77, TC-78. M được dựng bằng API với price 1000000; các case này ghi price = 2500000 (03), -1000 (15), giữ nguyên (77, 78) → theo dữ liệu đã chọn KHÔNG có price = null khi gọi /:id.",
+      "Case ghi price bất thường qua UI: TC-11 (giá rỗng – HW02 Actual: bản ghi mới price \"\", không phải null), TC-201 (1e5 → 100000), TC-10/67 (số). Theo HW02, form gửi chuỗi \"\" chứ không gửi null; nhưng script không gọi /:id cho bản ghi mới của case Thêm. Nếu trình duyệt khác (Firefox/Edge) gửi khác (vd null) mà bản ghi mới có id chẵn thì chỉ sập khi có GET /:id lên id đó – trong luồng C không có, nhưng web người dùng (FR-06 trang chi tiết) có thể gọi nếu chạy chung SUT.",
+      "Ngoài 15 TC: TC-16 (Sửa giá rỗng, đã loại) là case gần nhất với cơ chế này (M_SAU price \"\" rồi GET /api/products/M).",
+      "Đề xuất xử lý (chưa quyết, SV chọn): (a) sau mỗi case kiểm backend còn sống (GET /api/products 200), chết → các TC sau Blocked + resetDb rồi chạy tiếp; (b) tránh GET /:id, lấy M_TRƯỚC/M_SAU từ danh sách GET /api/products (lệch nhẹ procedure HW02 bước 2/7 – phải ghi giả định); (c) cleanup xoá ngay bản ghi có price null/\"\" sau case; (d) giữ nguyên procedure, chấp nhận rủi ro vì 15 TC không tạo price null."
+    ]
+  },
+  "criteria": [
+    "15 TC tầng UI (suite TS-DOM-UI, TS-BVA-UI-THEM, TS-BVA-UI-SUA, TS-SV-UI), nguồn HW02/C_FR15/testcases.json; Blocked theo HW02 tối đa 2 → chọn 0",
+    "có cả Thêm (10 TC), Sửa (4 TC: 03, 15, 77, 78) và Xóa (1 TC: 05)",
+    "đủ loại: Positive (EP, BVA), Negative (EP, BVA, EG), Boundary qua điểm BVA UB/UB+1 tên (Thêm, Sửa), LB-1/LB giá (Thêm)",
+    "ưu tiên TC từng Fail ở HW02 (9 TC); giữ 6 TC Pass làm đối chứng (01, 05, 07, 65, 68, 77)",
+    "phủ bug HW02: BUG-35, 36, 37, 38, 39, 40, 45 (bug_id lấy từ mục TC liên quan của HW02/bugs/BUG-xx.md vì testcases.json không ghi)",
+    "TC-200, 201 không có loại trong HW02 (TS-SV-UI) → AI suy ra Negative (expected là chặn/báo lỗi), chờ SV duyệt"
+  ],
+  "decisions": []
+}
