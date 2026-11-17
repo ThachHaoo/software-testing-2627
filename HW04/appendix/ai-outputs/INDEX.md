@@ -29,3 +29,7 @@
 - 14:18 17/11/2026 · B_FR07 bước 6 · `HW04/B_FR07/bug_groups.md` → `B_FR07/step6/bug_groups.md` · sha256 ddade72bde84 · 
 - 14:20 17/11/2026 · C_FR15 bước 2 · `HW04/tests/fixtures/c_fr15.ts` → `C_FR15/step2/c_fr15.ts` · sha256 71bfd3913acc · 
 - 14:20 17/11/2026 · C_FR15 bước 2 · `HW04/tests/pages/admin.pages.ts` → `C_FR15/step2/admin.pages.ts` · sha256 12a506f39cbb · 
+- 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/tests/C_FR15.spec.ts` → `C_FR15/step3/C_FR15.spec.ts` · sha256 44a7406dccce · 
+- 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/tests/oracles/c_fr15.oracle.ts` → `C_FR15/step3/c_fr15.oracle.ts` · sha256 e79cdc9b4237 · 
+- 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/C_FR15/assertions.md` → `C_FR15/step3/assertions.md` · sha256 54f630d4eca1 · 
+- 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/data/C_FR15.json` → `C_FR15/step3/C_FR15.json` · sha256 48bb3f48c001 · 

@@ -95,5 +95,19 @@
   "decisions": [
     "C1: loại TC-200 = Negative, TC-201 = Negative (AI suy ra, SV duyệt).",
     "C2=a: health-check backend sau mỗi case; sập → case Fail + annotation \"backend sập\", resetDb trước case kế; không đổi procedure, không xoá bản ghi để tránh sập."
-  ]
+  ],
+  "assumptions": {
+    "page_message_selector": {
+      "value": "[role=\"alert\"],[role=\"status\"],[aria-live],[class*=\"error\" i],[class*=\"alert\" i],[class*=\"toast\" i],[class*=\"notif\" i],[class*=\"message\" i]",
+      "note": "giả định từ HW02 (H3, HW02/tests/C_FR15/lib.ts dòng 193), chờ SV duyệt: 'thông báo trên trang' = phần tử khớp selector này xuất hiện mới sau khi bấm; expected không nêu selector"
+    },
+    "xss_alert_text": {
+      "value": "1",
+      "note": "giả định từ HW02 (C21), chờ SV duyệt: payload alert(1) bật hộp thoại có nội dung '1' → có hộp thoại '1' = XSS kích hoạt"
+    },
+    "form_blocked_means": {
+      "value": "GET /api/products SAU = TRƯỚC",
+      "note": "giả định từ HW02 (C24, HW02/tests/C_FR15/C_FR15.spec.ts dòng 23), chờ SV duyệt: 'Form chặn' = không gửi được → dữ liệu SAU = TRƯỚC"
+    }
+  }
 }
