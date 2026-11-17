@@ -4,6 +4,7 @@ Nguồn:
 - Số TC automated: HW04/data/<feature>.json (testcases).
 - Lượt chính thức: các dòng có chữ "Chính thức" trong HW04/<feature>/RUN.md, lấy đường dẫn HW04/reports/<dir>/.
 - Verdict từng test: results.json của report chính thức, phân loại bằng verdict() của merge_reports.py (cùng quy tắc bước 6).
+- Link video: HW04/skills/VideoLinks.md.
 - Commit có sửa .spec.ts: git log -- 'HW04/tests/*.spec.ts'.
 - Số bug: số dòng "| BUG-xx |" có link issue "[#n](…/issues/n)" trong HW04/bugs/README.md.
 Ghi đè phần giữa <!-- SUMMARY:BEGIN --> và <!-- SUMMARY:END --> trong HW04/README.md.
@@ -53,6 +54,17 @@ def count(report_dir: str) -> dict:
     return c
 
 
+def video(label: str) -> str:
+    """Link video lấy từ HW04/skills/VideoLinks.md (dòng bảng bắt đầu bằng label); chưa có → [...]."""
+    f = ROOT / "HW04/skills/VideoLinks.md"
+    if f.exists():
+        for line in f.read_text(encoding="utf-8").splitlines():
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if len(cells) >= 2 and cells[0].startswith(label) and cells[1].startswith("http"):
+                return cells[1]
+    return "[...]"
+
+
 def main():
     rows, tot = [], {"auto": 0, "exec": 0, "Pass": 0, "Fail": 0, "Blocked": 0, "runs": 0}
     for feat, label in FEATURES:
@@ -82,8 +94,8 @@ def main():
           f"| Pass / Fail / Blocked | {tot['Pass']} / {tot['Fail']} / {tot['Blocked']} |",
           f"| Số commit có sửa `HW04/tests/*.spec.ts` | {len(spec_commits)} |",
           f"| Số bug (GitHub Issues, tkob-team/eshop-sut) | {len(bugs_with_issue)} / {len(bug_rows)} bug report có issue — `HW04/bugs/README.md` |",
-          "| Video demo | [...] |",
-          "| Video Agent Skill | [...] |", "",
+          f"| Video demo (Task 2) | {video('Task 2')} |",
+          f"| Video Agent Skill | {video('Agent Skill')} |", "",
           "| Feature | Trình duyệt | TC automated | Executed | Pass | Fail | Blocked | Report · Run by |",
           "|---|---|---|---|---|---|---|---|", *rows, END]
     readme = ROOT / "HW04/README.md"

@@ -68,3 +68,13 @@ Kết quả chính thức của A **giữ nguyên** lượt 13:47–13:52 ở b�
 - Nguyên nhân lượt (1), (2): Windows Code Integrity chặn `node.exe` nạp `C:\Users\…\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe` ("did not meet the Enterprise signing level requirements or violated code integrity policy"), sự kiện mã **3077** và **3033** lúc **23:05** (log Microsoft-Windows-CodeIntegrity/Operational do SV xuất: `HW04/env/firefox_blocked_20261117.txt`, chép nguyên văn).
 - Firefox Fail ở (1), (2) là lỗi môi trường (trình duyệt không khởi động được, không có assertion nào chạy) → không phải Fail của TC, không lập bug.
 - Sau khi khởi động lại máy, Firefox chạy được (lượt 3), kết quả trùng lượt chính thức.
+
+## Lượt quay video Task 2 (không chính thức)
+
+Ba lượt dưới đây chạy khi quay video Task 2 (https://youtu.be/TNy_QPFwyB4) – **không chính thức**; report **không commit** (chỉ ghi đường dẫn). Kết quả chính thức giữ lượt 13:47–13:52.
+
+| Lượt (không chính thức) | Thời điểm (Run by) | Report (không commit) | Kết quả |
+|---|---|---|---|
+| Quay video – chrome | 2026-11-17T23:42:59+07:00 | `HW04/reports/chrome_20261117T234259/` | 7 Pass / 8 Fail |
+| Quay video – edge | 2026-11-17T23:45:46+07:00 | `HW04/reports/edge_20261117T234546/` | 7 Pass / 8 Fail |
+| Quay video – firefox | 2026-11-17T23:48:34+07:00 | `HW04/reports/firefox_20261117T234834/` | 7 Pass / 8 Fail |
