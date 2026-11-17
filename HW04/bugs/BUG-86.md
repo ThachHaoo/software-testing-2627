@@ -28,7 +28,7 @@
 1. Truy cập trang đăng ký tài khoản tại `http://localhost:5173/register`.
 2. Nhập **Họ và tên** hợp lệ (ví dụ: `Nguyen Van A`).
 3. Nhập **Email** hợp lệ chưa tồn tại trong hệ thống (ví dụ: `dom01_1794898036476@domain.com`).
-4. Nhập **Mật khẩu** đáp ứng đầy đủ quy tắc mật khẩu mạnh theo đặc tả (tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt thuộc `@$!%*?&`, không chứa khoảng trắng.
+4. Nhập **Mật khẩu** đáp ứng đầy đủ quy tắc mật khẩu mạnh theo đặc tả (tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt thuộc `@$!%*?&`, không chứa khoảng trắng): (ví dụ: `Abcd1234!`).
 5. Nhấn nút **Đăng Ký**.
 
 ## Expected (trích SRS)
@@ -302,7 +302,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Register.jsx` dòng 15, biểu thức chính quy `flawedStrongPasswordRegex` viết sai logic kiểm tra ký tự đặc biệt: dùng `(?=.*\s)` và tập ký tự `[A-Za-z\d\s]` (bắt buộc có khoảng trắng `\s` và chỉ cho phép chữ cái, số, khoảng trắng) thay vì tập ký tự đặc biệt hợp lệ theo đặc tả (`@$!%*?&`). Do đó, mọi mật khẩu chứa ký tự đặc biệt thông thường đều không khớp regex, kích hoạt nhánh `if (!flawedStrongPasswordRegex.test(password))` ở dòng 17–19 để gọi `setError(...)` và `return` sớm trước khi gửi request tạo tài khoản lên server.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) qua 6 test case thuộc nhóm `A-G1` (`TC-FR01-01`, `02`, `64`, `68`, `74`, `77`).
-- **Lưu ý quy tắc gộp (nếu áp dụng Cách 2 + ràng buộc từ phiên thảo luận):** Nếu bạn quyết định gộp `A-G3` (`TC-FR01-211`) vào `BUG-86` vì cùng nguyên nhân regex khiến không tạo được tài khoản để đăng nhập, hãy bổ sung `TC-FR01-211` và nhóm `A-G3` vào mục **TC liên quan** và **Bằng chứng**; nếu giữ `A-G1` độc lập như template hiện tại của AI thì giữ nguyên như trên.
 
 ## Liên quan
 

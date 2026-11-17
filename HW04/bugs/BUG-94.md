@@ -144,9 +144,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/ProductDetail.jsx` dòng 21–25, biến trạng thái cục bộ `clickCount` của component `ProductDetail` được khởi tạo bằng `0` mỗi khi trang chi tiết sản phẩm mount, và hàm `handleAddToCart` kiểm tra `if (clickCount === 0)` thì chỉ gán `setClickCount(1)` rồi `return` sớm. Trong kịch bản của `TC-FR07-205`, sau lần bấm 1 tại trang chi tiết, test case điều hướng sang `/cart` để kiểm tra giỏ hàng (làm `ProductDetail` unmount) rồi quay lại trang chi tiết ở lần 2 (làm `ProductDetail` mount lại với `clickCount = 0`). Do đó, cả hai lần bấm đều rơi vào lần bấm đầu tiên của instance component, khiến `addToCart` và `setAdded(true)` không bao giờ được gọi.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-205` thuộc nhóm `B-G6`.
-- **Ghi chú duyệt:**
-  - Nhóm dữ kiện `B-G6` có cùng nguyên nhân gốc với `B-G1` (`BUG-89`) và `B-G3` (`BUG-91`) tại `ProductDetail.jsx:21-31` (issue HW02 `#161`). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `BUG-94` vào `BUG-89`.
-  - Nếu giữ tách riêng file `BUG-94.md` này, bạn có thể xóa bớt dòng bullet cuối về `B1` (`TC-64: 1000 không được thêm`) trong mục **Yêu cầu bị vi phạm** vì mục đó chỉ áp dụng cho `TC-FR07-64`.
 
 ## Liên quan
 

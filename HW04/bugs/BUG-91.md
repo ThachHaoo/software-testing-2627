@@ -125,7 +125,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/ProductDetail.jsx` dòng 21–25, hàm `handleAddToCart` kiểm tra điều kiện `if (clickCount === 0)` thì chỉ tăng `setClickCount(1)` và `return` sớm mà không gọi `addToCart(product, parseInt(quantity))` cũng như không gọi `setAdded(true)` ở dòng 28. Vì vậy, lần bấm đầu tiên vừa không thêm sản phẩm vào giỏ, vừa không kích hoạt thông báo phản hồi trực quan trong 2 giây.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-02` thuộc nhóm `B-G3`.
-- **Ghi chú duyệt:** Nhóm dữ kiện `B-G3` có cùng nguyên nhân gốc với `B-G1` (`BUG-89`) và `B-G6` (cùng hàm `handleAddToCart` tại `ProductDetail.jsx:21-31` và cùng issue HW02 `#161`; khác ở chỗ `TC-FR07-02` có assertion kiểm tra riêng phản hồi ≤ 2 giây theo giả định B21 và chạy với user đã đăng nhập). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `BUG-91` vào `BUG-89`; nếu giữ tách riêng từng nhóm triệu chứng theo template thì giữ nguyên file này (đồng thời lưu ý dòng bullet cuối cùng về `B1` trong mục **Yêu cầu bị vi phạm** do AI chép từ `BUG-15.md` chỉ áp dụng cho `TC-FR07-64`, bạn có thể xóa bớt dòng `B1` đó ở file này cho gọn).
 
 ## Liên quan
 

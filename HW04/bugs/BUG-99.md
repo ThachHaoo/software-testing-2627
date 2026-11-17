@@ -33,11 +33,11 @@
 
 ## Expected (trích SRS)
 
-- Hệ thống báo lỗi từ chối dữ liệu đầu vào chứa thẻ script (`<script>alert(1)</script>`) theo giả định **C21** (và các quy tắc thông báo lỗi **C7**, **C16**); tuyệt đối không kích hoạt thực thi mã độc XSS (**SEC-04**).
+- Theo Expected của `TC-FR15-200` (HW02): Hệ thống báo lỗi từ chối dữ liệu đầu vào chứa thẻ script (`<script>alert(1)</script>`) theo quy tắc thông báo lỗi (**C7**, **C16**); tuyệt đối không kích hoạt hộp thoại cảnh báo XSS (**SEC-04**).
 
 ## Actual
 
-- Hệ thống không kích hoạt hộp thoại `alert(1)` (assertion kiểm tra XSS đạt do cơ chế tự động escape của React), nhưng hoàn toàn không hiển thị bất kỳ thông báo lỗi từ chối nào (bong bóng HTML5, hộp thoại trình duyệt hay thông báo trên trang đều trả về `false`).
+- Hệ thống không kích hoạt hộp thoại `alert(1)` (assertion XSS đạt), nhưng hoàn toàn không hiển thị bất kỳ thông báo lỗi từ chối nào (bong bóng HTML5, hộp thoại trình duyệt hay thông báo trên trang đều trả về `false`).
 
 ## Bằng chứng
 
@@ -104,10 +104,9 @@
 ### Nhận định
 
 - **Nguyên nhân gốc (Root cause):** Cả tầng giao diện lẫn máy chủ đều không có bước kiểm tra lọc hoặc từ chối ký tự/thẻ HTML/script nguy hiểm trong tên sản phẩm:
-  1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 491–499, ô nhập liệu `<input placeholder="Tên sản phẩm" ... required />` chỉ kiểm tra không để trống (`required`) mà không có thuộc tính `pattern` hay hàm kiểm tra ký tự hợp lệ trước khi gửi form.
+  1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 491–499, ô nhập liệu `<input placeholder="Tên sản phẩm" ... required />` chỉ kiểm tra không để trống (`required`) mà không có thuộc tính `pattern` hay hàm kiểm tra ký tự hợp lệ trước khi gửi form. (Việc hộp thoại `alert(1)` không bật lên có thể do cơ chế tự động escape chuỗi khi render của React — chưa kiểm chứng).
   2. **Backend:** Tại `backend/server.js` dòng 167–177, endpoint `POST /api/products` nhận trực tiếp chuỗi `name` thô từ `req.body` và lưu thẳng vào cơ sở dữ liệu mà không sanitize hay từ chối thẻ `<script>`.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-200` thuộc nhóm `C-G5`.
-- **Ghi chú duyệt:** Severity/Priority đang để `Medium` vì React tự động escape chuỗi khi render nên mã script không thực thi được trên trình duyệt (assertion XSS đạt), chỉ vi phạm yêu cầu báo lỗi từ chối dữ liệu chứa mã script; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-39.md` để đồng bộ nếu cần.
 
 ## Liên quan
 

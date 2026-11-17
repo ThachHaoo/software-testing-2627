@@ -30,7 +30,7 @@
 3. Nhập **Email** hợp lệ chưa tồn tại trong hệ thống: `hiep.sv12@domain.com`.
 4. Nhập **Mật khẩu** hợp lệ có khoảng trắng ở đầu và chứa đầy đủ chữ hoa, chữ thường, chữ số, ký tự đặc biệt chuẩn: ` Hiep123$` (chuỗi `␣Hiep123$`).
 5. Nhấn nút **Đăng Ký**.
-6. Chuyển tới trang Đăng nhập (`http://localhost:5173/login`), nhập email `hiep.sv12@domain.com` và mật khẩu ` Hiep123$` rồi nhấn **Đăng Nhập**.  ## Expected (trích SRS)  - Hệ thống chấp nhận mật khẩu hợp lệ đáp ứng đầy đủ các quy tắc độ dài và độ phức tạp (**FR-01.5–01.8**), tạo tài khoản mới thành công trong cơ sở dữ liệu và chuyển hướng người dùng sang trang Đăng nhập (`/login`) (**FR-01.10**). - Sau khi chuyển sang trang Đăng nhập, người dùng đăng nhập lại được bằng đúng chuỗi mật khẩu `␣Hiep123$` đã đăng ký, hệ thống cấp token trong `localStorage` và chuyển hướng về trang chủ (`http://localhost:5173/`).
+6. Chuyển tới trang Đăng nhập (`http://localhost:5173/login`), nhập email `hiep.sv12@domain.com` và mật khẩu ` Hiep123$` rồi nhấn **Đăng Nhập**.
 
 ## Expected (trích SRS)
 
@@ -127,7 +127,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Register.jsx` dòng 15, biểu thức chính quy `flawedStrongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/` chỉ cho phép tập ký tự `[A-Za-z\d\s]` và không bao gồm ký tự đặc biệt `$`. Do đó, dù chuỗi `␣Hiep123$` có chứa khoảng trắng (`\s`), ký tự `$` vẫn làm biểu thức chính quy trả về `false`, kích hoạt nhánh `if (!flawedStrongPasswordRegex.test(password))` ở dòng 17–19 để báo lỗi và `return` sớm trước khi gọi API đăng ký. Việc đăng nhập sau đó thất bại là hệ quả dây chuyền do tài khoản chưa từng được tạo.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR01-211` thuộc nhóm `A-G3`.
-- **Ghi chú duyệt:** Nhóm dữ kiện `A-G3` có cùng nguyên nhân gốc với `A-G1` (`BUG-86`, cùng đoạn mã `Register.jsx:15-19` và cùng issue HW02 `#17`). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `TC-FR01-211` vào `BUG-86`; nếu giữ tách riêng từng nhóm triệu chứng theo file template thì giữ nguyên file `BUG-88.md` này.
 
 ## Liên quan
 
