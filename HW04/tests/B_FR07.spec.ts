@@ -25,6 +25,10 @@ const assumption = (key: string) => {
 };
 /** Escape chuỗi lấy từ data trước khi dựng RegExp. */
 const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** P1=a (5/6c): ảnh ngay sau thao tác chính, đính vào report bằng testInfo.attach (tên <TC>_after-action[-k]). */
+async function attachAfterAction(page: Page, tcId: string, suffix = '') {
+  await test.info().attach(`${tcId}_after-action${suffix}`, { body: await page.screenshot(), contentType: 'image/png' });
+}
 const FEEDBACK_WINDOW = 2_000;             // B21: phản hồi trong ≤ 2 giây sau khi bấm thêm (cửa sổ quan sát của oracle)
 
 const nameOf = (id: number) => {
@@ -110,6 +114,8 @@ for (const c of DATA.testcases) {
     const o = parseExpected(c.expected, SEED);
     for (const u of o.unmapped) ann('oracle không tự động', `${u} — dialog native khoá trang / không quan sát được bằng script; kiểm tay`);
     const { nav, home, detail, cart, dialogs } = shop;
+    const mains: (typeof ops)[number][] = ops.filter(x => x.k !== 'home-link');   // thao tác chính = bấm Thêm / Xoá
+    const shotSuffix = (op: (typeof ops)[number]) => (mains.length > 1 ? `-${mains.indexOf(op) + 1}` : '');
 
     // Bước 1–2: mở trang (lần goto duy nhất) + dựng giỏ ban đầu
     await step('Mở trang / đăng nhập', () => shop.startSession(c.inputs[COL.login], c.tc_id, ts));
@@ -150,7 +156,11 @@ for (const c of DATA.testcases) {
         ann('ô Số lượng sau khi gõ', JSON.stringify({ gõ: op.qty, value: typed }));
         const snap = await feedbackSnapshot(page);
         await detail.add.click();                          // ĐÚNG 1 lần (procedure HW02 bước 4)
-        const fb = await observeFeedback(page, snap);
+        // chụp song song với cửa sổ quan sát B21 để ảnh là trạng thái ngay sau khi bấm, không làm trễ việc đo phản hồi
+        const [fb] = await Promise.all([
+          observeFeedback(page, snap),
+          attachAfterAction(page, c.tc_id, shotSuffix(op)),
+        ]);
         ann('phản hồi sau khi bấm thêm', fb ?? `không có thay đổi nhìn thấy trong ${FEEDBACK_WINDOW} ms`);
         const wantFb = op.snapshot ? o.phases[op.snapshot]?.feedback && 'present' : o.feedback;
         if (wantFb === 'present') expect.soft(fb, 'B21: có phản hồi ≤ 2 s sau khi bấm thêm').not.toBeNull();
@@ -172,6 +182,7 @@ for (const c of DATA.testcases) {
         shop.dialogAction = op.dialog;
         const n0 = dialogs.length;
         await cart.removeButton(name).click();             // ĐÚNG 1 lần
+        await attachAfterAction(page, c.tc_id, shotSuffix(op));
         if (o.dialogConfirm) {
           await expect.soft.poll(() => dialogs.length - n0, { message: 'hiện dialog xác nhận sau khi bấm xoá', timeout: FEEDBACK_WINDOW }).toBe(1);
           expect.soft(dialogs.slice(n0).map(d => d.type), 'dialog là confirm').toEqual(dialogs.length > n0 ? ['confirm'] : []);
