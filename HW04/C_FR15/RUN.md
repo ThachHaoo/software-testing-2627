@@ -51,3 +51,14 @@ Metadata `Run by` trong `results.json` cả 3: `23120255 · <ISO +07:00>`. Mỗi
 
 - Ô không hợp lệ ở TC-07 được ghi 2 lần: spec gọi `form.checkValidity()` trước khi bấm (để biết có gửi request không) — lệnh này cũng bắn sự kiện `invalid` mà hook đang nghe. Chỉ xảy ra khi form thật sự không hợp lệ (cùng điều kiện trình duyệt hiện bong bóng), không đổi verdict; chưa sửa.
 - `results.json` ghi mỗi annotation 2 lần (mức test và mức result) như A/B.
+
+## Lượt chính thức
+
+| Lượt | Bắt đầu (Run by) | Spec | Report | Kết quả |
+|---|---|---|---|---|
+| Chính thức – chrome | 2026-11-17T15:11:43+07:00 | `2e9e454` | `HW04/reports/chrome_20261117T151143/` | 6 Pass, 9 Fail, 0 Blocked |
+| Chính thức – edge | 2026-11-17T15:12:25+07:00 | `2e9e454` | `HW04/reports/edge_20261117T151225/` | 6 Pass, 9 Fail, 0 Blocked |
+| Chính thức – firefox | 2026-11-17T15:13:06+07:00 | `2e9e454` | `HW04/reports/firefox_20261117T151306/` | 6 Pass, 9 Fail, 0 Blocked |
+
+- `Run by` (metadata `results.json`) cả 3: `23120255 · <ISO +07:00>`, khớp tên thư mục.
+- Verdict trùng HW02 15/15, trùng lượt thử 1, không lệch giữa trình duyệt. Gộp + nhóm Fail: `results.md`, `bug_groups.md` (9 nhóm), `evidence/` (27 ảnh lúc kết thúc + 27 ảnh `_after-save`).

@@ -33,3 +33,5 @@
 - 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/tests/oracles/c_fr15.oracle.ts` → `C_FR15/step3/c_fr15.oracle.ts` · sha256 e79cdc9b4237 · 
 - 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/C_FR15/assertions.md` → `C_FR15/step3/assertions.md` · sha256 54f630d4eca1 · 
 - 14:28 17/11/2026 · C_FR15 bước 3 · `HW04/data/C_FR15.json` → `C_FR15/step3/C_FR15.json` · sha256 48bb3f48c001 · 
+- 15:17 17/11/2026 · C_FR15 bước 6 · `HW04/C_FR15/results.md` → `C_FR15/step6/results.md` · sha256 df502a6c880c · 
+- 15:17 17/11/2026 · C_FR15 bước 6 · `HW04/C_FR15/bug_groups.md` → `C_FR15/step6/bug_groups.md` · sha256 166800dc6d05 · 
