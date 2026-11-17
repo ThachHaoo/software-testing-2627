@@ -13,10 +13,19 @@
 import { test as base, expect, errors, request, type APIRequestContext, type Page, type TestInfo } from '@playwright/test';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
-export const REPO = path.resolve(__dirname, '..', '..', '..');
+/** Gốc repo: đi lên từ thư mục fixture tới chỗ có tools/restart_backend.ps1 (đúng cả khi spec ở chế độ demo, không phụ thuộc độ sâu). */
+function findRepo(start: string): string {
+  for (let d = start; ; d = path.dirname(d)) {
+    if (existsSync(path.join(d, 'tools', 'restart_backend.ps1'))) return d;
+    if (path.dirname(d) === d) throw new Error(`[ddt] không tìm thấy gốc repo (tools/restart_backend.ps1) từ ${start}`);
+  }
+}
+export const REPO = findRepo(__dirname);
+/** Thư mục data: chính thức HW04/data; chế độ demo đặt DDT_DATA_DIR trong config demo (<dir>/data). */
+export const DATA_DIR = process.env.DDT_DATA_DIR ?? path.join(REPO, 'HW04', 'data');
 export const API = 'http://localhost:3000';
 export const ADMIN = { email: 'admin@eshop.com', password: 'Admin123!' };   // SRS README.md dòng 22
 export const WAIT = 10_000;              // hạn chờ phản hồi mạng/hộp thoại sau thao tác; quá hạn → Blocked
@@ -32,7 +41,7 @@ export type DataFile = {
   assumptions?: Record<string, { value: string; note: string }>;   // giả định SV chốt (không tính sha1)
 };
 
-export function loadData(feature: string, file = path.join(REPO, 'HW04', 'data', `${feature}.json`)): DataFile {
+export function loadData(feature: string, file = path.join(DATA_DIR, `${feature}.json`)): DataFile {
   const data = JSON.parse(readFileSync(file, 'utf-8')) as DataFile;
   for (const c of data.testcases) {
     const h = createHash('sha1').update(c.expected, 'utf8').digest('hex');
@@ -45,7 +54,7 @@ export function loadData(feature: string, file = path.join(REPO, 'HW04', 'data',
 /** Giả định ngoài expected (vd từ khoá thông báo, selector khối thông báo). Thiếu → ném lỗi, KHÔNG đoán, KHÔNG gõ cứng ở spec. */
 export function assumption(data: DataFile, key: string) {
   const a = data.assumptions?.[key];
-  if (!a?.value) throw new Error(`[ddt] thiếu assumptions.${key} trong HW04/data/${data.feature}.json (giả định chờ SV duyệt)`);
+  if (!a?.value) throw new Error(`[ddt] thiếu assumptions.${key} trong ${path.join(DATA_DIR, data.feature + '.json')} (giả định chờ SV duyệt)`);
   return a;
 }
 
@@ -81,10 +90,14 @@ export async function step<T>(what: string, fn: () => Promise<T>): Promise<T> {
   }
 }
 
-/** Chờ một trạng thái rõ ràng phía Node (log mạng, số hộp thoại) tối đa `ms`; quá hạn → Blocked. Không chờ cứng. */
-export async function until(what: string, cond: () => boolean, ms = WAIT) {
+/**
+ * Chờ một trạng thái rõ ràng (log mạng, URL, phần tử thông báo hiện, số hộp thoại) tối đa `ms`; quá hạn → Blocked.
+ * Không chờ cứng. Sau thao tác, điều kiện phải gồm MỌI nhánh phản hồi quan sát được — form hợp lệ HTML5 KHÔNG có nghĩa
+ * là sẽ có request (ứng dụng có thể tự kiểm phía client rồi hiện lỗi, không gửi gì) — v2.1, lỗi chạy thử A_FR01.
+ */
+export async function until(what: string, cond: () => boolean | Promise<boolean>, ms = WAIT) {
   const t0 = Date.now();
-  while (!cond()) {
+  while (!(await cond())) {
     if (Date.now() - t0 > ms) blocked(`${what}: quá ${ms} ms`);
     await new Promise(r => setTimeout(r, 50));
   }

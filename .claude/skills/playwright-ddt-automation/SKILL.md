@@ -16,7 +16,7 @@ Gọi: `/playwright-ddt-automation <X_FRnn> <bước>` — vd `A_FR01 1`. Thiế
 1. **Không đổi expected hay assertion để test xanh.** expected chép nguyên văn từ HW02 tại commit nguồn, khoá bằng sha1; `check_data.py` và fixture đều kiểm. Muốn đổi oracle → hỏi người dùng, ghi lý do, đổi ở HW02 bằng commit riêng rồi chọn lại.
 2. **Timeout = Blocked**, không Fail, không lập bug. Test fail chỉ vì `TimeoutError` (không assertion nào fail) là lỗi harness.
 3. **Healer / tự sửa** chỉ được sửa **selector** và **chờ** (wait/locator), mỗi lần ghi lý do trong commit; không đụng dữ liệu, expected, assertion.
-4. **Đóng băng output AI** bằng `freeze.py` TRƯỚC khi người dùng sửa; không bao giờ sửa file đã đóng băng.
+4. **Đóng băng output AI** bằng `freeze.py` TRƯỚC khi người dùng sửa; không bao giờ sửa file đã đóng băng. Bản đóng băng **không được bị Playwright nạp**: `--out` phải nằm ngoài testDir (`--testdir`, mặc định `HW04/tests`; script từ chối nếu nằm trong), file mã đổi đuôi `*.ts.txt` (v2.1). Bản đóng băng v1 đã có (`HW04/appendix/ai-outputs/`, đuôi `.ts`) nằm ngoài testDir nên giữ nguyên.
 5. **Không viết mô tả bug** (tiêu đề, steps, expected/actual, severity). Bước 6 chỉ gom dữ kiện.
 6. Fail ≠ bug: cô lập nguyên nhân (chạy lại, restart backend, so UI với API) trước khi người dùng kết luận.
 7. Quy định khoá học/repo (CLAUDE.md, skill khoá học) thắng skill này.
@@ -37,7 +37,7 @@ Gọi: `/playwright-ddt-automation <X_FRnn> <bước>` — vd `A_FR01 1`. Thiế
 ### 3 — Sinh spec (AI)
 - Từ `assets/spec.template.ts` (v2, cấu trúc theo `C_FR15.spec.ts` @2e9e454): `for (const c of DATA.testcases)`, tiêu đề `"<tc_id> <title>"`, giá trị từ `c.inputs` (thay `{ts}`), oracle parse từ `c.expected` — **không đọc được loại kết quả → ném lỗi**; ý không tự động được → annotation `oracle không tự động`.
 - Câu chữ/từ khoá/selector **không có trong expected** (vd từ khoá "giỏ trống", khối thông báo trên trang) → trường `assumptions` của file data (giả định, SV duyệt ở bước 1/3; không tính sha1), không gõ cứng trong spec.
-- Thứ tự mỗi TC: API TRƯỚC → thao tác **đúng số lần procedure ghi** (gắn `netLog` trước khi bấm) → `until` phản hồi request + `await done` → `settle` → ghi quan sát → ảnh `<TC>_after-*` (chụp SAU khi đo xong) → API SAU → oracle.
+- Thứ tự mỗi TC: API TRƯỚC → thao tác **đúng số lần procedure ghi** (gắn `netLog` trước khi bấm) → `until` **một trong các nhánh phản hồi** (request / URL đổi / thông báo hiện / hộp thoại; form hợp lệ HTML5 vẫn có thể không gửi request vì ứng dụng tự kiểm phía client) → nếu có request thì `await done` → `settle` → ghi quan sát → ảnh `<TC>_after-*` (chụp SAU khi đo xong) → API SAU → oracle.
 - ≥ 3 kiểu assertion: **trạng thái UI** (`toBeVisible`/`toHaveURL`), **nội dung thông báo** (`toHaveText`/`toContainText`), **oracle dữ liệu qua API trước/sau** (`toEqual`), **đếm/giá trị** (`toHaveCount`/`toHaveValue`); dùng `expect.soft`.
 - Điều kiện chặn đã biết (trường đặc tả có mà UI không có…) → `blocked('<lý do + case gốc>')`, không Fail giả.
 - Cấm (lỗi đã gặp ở review A/B/C): `test.describe.configure({ mode: 'serial' })` (1 Fail chặn mọi TC sau); `catch {}` rỗng; `waitForTimeout`/chờ cứng; `Promise.race` nuốt lỗi; gọi API đọc dữ liệu trước khi request của thao tác có phản hồi; `new RegExp(chuỗi chưa esc)`; `^a|b` (chỉ neo nhánh đầu → viết `^(?:a|b)`); đếm hộp thoại bất kỳ (có thể là "thành công") là "thông báo lỗi" khi chưa có giả định SV phân loại → ghi annotation `oracle thông báo yếu`.
@@ -57,6 +57,17 @@ Gọi: `/playwright-ddt-automation <X_FRnn> <bước>` — vd `A_FR01 1`. Thiế
 ### 6 — Gộp kết quả (AI gộp, SV viết bug)
 - `merge_reports.py <data> <feature-dir> <report chrome> <report edge> <report firefox>` → `results.md` (Pass/Fail/Blocked theo trình duyệt, cột HW02) + `bug_groups.md` (TC Fail gom theo lỗi đầu tiên, chỉ dữ kiện).
 - SV cô lập nguyên nhân, viết bug + GitHub Issue (ảnh). AI chỉ kiểm trường thiếu, chạy `gh issue create --body-file` với file SV viết.
+
+## Chế độ demo (v2.1) – quay video / chạy thử skill
+
+Chạy trọn 6 bước trên **một feature, ít TC** (vd 4: 2 Fail + 2 Pass theo HW02) mà không chạm `HW04/data`, spec, report hay `appendix/ai-outputs` chính thức.
+
+- Dựng: `python $S/demo.py --feature <X_FRnn> [--dir HW04/tests/_demo] [--min 4]` → in đủ lệnh từng bước.
+- Bố cục `<dir>` (phải nằm dưới `HW04/tests` để Node thấy `node_modules`): `playwright.config.ts` (testDir `./tests`, testMatch `*.demo.ts`, testIgnore `**/ai-outputs/**`, report → `<dir>/reports/<project>_<ts>/`, metadata "Chế độ: demo"), `tests/fixtures/ddt.ts` (đọc data qua `DDT_DATA_DIR` = `<dir>/data`), `tests/<X_FRnn>.demo.ts`, `data/`, `<X_FRnn>/` (selection, results, bug_groups), `ai-outputs/` (ngoài testDir demo, đuôi `.txt`).
+- Spec demo đuôi **`.demo.ts`** (không phải `.spec.ts`) để config chính thức (testDir `HW04/tests`, testMatch `*.spec.ts`) không nạp nhầm; chạy demo luôn kèm `--config ./_demo/playwright.config.ts` (từ `HW04/tests`).
+- Đường dẫn: fixture tìm gốc repo bằng cách đi lên tới `tools/restart_backend.ps1` (không phụ thuộc độ sâu); page object chính thức import từ spec demo bằng `../../pages/<file>`; globalSetup dùng `HW04/tests/global-setup.ts`.
+- Script chạy từ **gốc repo** (`select_tc.py`/`check_data.py` gọi `git show` theo đường dẫn tương đối).
+- Điểm dừng giữ nguyên: sau bước 1 (SV duyệt TC), bước 4 (SV tự chạy 3 trình duyệt), bước 5 (SV review). Không commit gì của demo; xong thì xoá `<dir>`.
 
 ## Checklist review bước 5 (lỗi spec AI đã gặp ở HW04 A/B/C)
 
@@ -92,6 +103,7 @@ Cấu hình Playwright cần: project `chrome`/`edge`/`firefox`, `workers: 1`, `
 
 - `scripts/select_tc.py` — liệt kê ứng viên; xuất data JSON + selection.md
 - `scripts/check_data.py` — đủ trường, ≥ 12 TC, sha1, expected trùng nguyên văn nguồn HW02
-- `scripts/freeze.py` — đóng băng output AI theo `<X_FRnn>/step<k>/`, không ghi đè
+- `scripts/freeze.py` — đóng băng output AI theo `<X_FRnn>/step<k>/`, không ghi đè; từ chối `--out` trong testDir; file mã → `*.ts.txt`
+- `scripts/demo.py` — dựng chế độ demo (config/fixture/spec `.demo.ts`/data/reports riêng trong `<dir>`)
 - `scripts/merge_reports.py` — gộp 3 report → results.md + bug_groups.md
 - `assets/ddt-fixture.template.ts`, `assets/spec.template.ts`, `assets/selection.example.json`

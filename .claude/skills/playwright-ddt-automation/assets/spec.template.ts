@@ -69,10 +69,16 @@ for (const c of DATA.testcases) {
     const pageMessages = () => page.locator(msgSel).allTextContents();
     const msgBefore = await pageMessages();
     const valid = await page.locator('form').evaluate((f: HTMLFormElement) => f.checkValidity());
+    const errorBox = page.locator(msgSel);
     await page.getByRole('button', { name: SEL.submit }).click();      // ĐÚNG 1 lần
     if (valid) {
-      await until(`chờ ${ACTION.method} ${API_PREFIX}`, () => net.some(x => x.method === ACTION.method));
-      await net.find(x => x.method === ACTION.method)!.done;           // body đã về → mới đọc dữ liệu SAU
+      // Chờ MỘT TRONG các nhánh phản hồi: có request / URL đổi / thông báo hiện / hộp thoại mới.
+      // Form hợp lệ HTML5 vẫn có thể không gửi request (ứng dụng tự kiểm phía client) → không chờ riêng request.
+      const url0 = page.url();
+      await until('chờ phản hồi sau khi bấm', async () =>
+        net.some(x => x.method === ACTION.method) || page.url() !== url0 || dialogs.length > n0 || (await errorBox.count()) > msgBefore.length);
+      const sent = net.find(x => x.method === ACTION.method);
+      if (sent) await sent.done;                                       // body đã về → mới đọc dữ liệu SAU
     }
     await settle(page);
 
