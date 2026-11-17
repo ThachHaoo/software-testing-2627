@@ -13,9 +13,9 @@
 | Lượt thử 3 – chrome | 2026-11-17T01:01:15+07:00 | `3d19917` (5/6d) | `HW04/reports/chrome_20261117T010115/` | 8 Fail, 7 Pass |
 | Lượt thử 3 – edge | 2026-11-17T01:04:19+07:00 | `3d19917` | `HW04/reports/edge_20261117T010419/` | 8 Fail, 7 Pass |
 | Lượt thử 3 – firefox | 2026-11-17T01:07:08+07:00 | `3d19917` | `HW04/reports/firefox_20261117T010708/` | 8 Fail, 7 Pass |
-| **Chính thức – chrome** | 2026-11-17T01:17:31+07:00 | spec `3d19917`, config `597bda7` (trace off) | `HW04/reports/chrome_20261117T011731/` | 8 Fail, 7 Pass |
-| **Chính thức – edge** | 2026-11-17T01:20:24+07:00 | như trên | `HW04/reports/edge_20261117T012024/` | 8 Fail, 7 Pass |
-| **Chính thức – firefox** | 2026-11-17T01:23:54+07:00 | như trên | `HW04/reports/firefox_20261117T012354/` | 8 Fail, 7 Pass |
+| Lượt thử 4 – chrome | 2026-11-17T01:17:31+07:00 | spec `3d19917`, config `597bda7` (trace off) | `HW04/reports/chrome_20261117T011731/` | 8 Fail, 7 Pass |
+| Lượt thử 4 – edge | 2026-11-17T01:20:24+07:00 | như trên | `HW04/reports/edge_20261117T012024/` | 8 Fail, 7 Pass |
+| Lượt thử 4 – firefox | 2026-11-17T01:23:54+07:00 | như trên | `HW04/reports/firefox_20261117T012354/` | 8 Fail, 7 Pass |
 
 ## Lượt thử 1 – ghi chú
 
@@ -36,9 +36,10 @@
 - Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng nhau ở 3 trình duyệt. Gộp: `results.md`, `bug_groups.md`.
 - Đổi thành lượt thử 3 (Z1=d, 17/11): report có trace, 3 report ≈ 30 MB (zip ≈ 10.6 MB, cả 10 report ≈ 26.8 MB > 20 MB). Tắt trace ở `playwright.config.ts`; SV chạy lại A làm lượt chính thức. `results.md`/`bug_groups.md`/ảnh đã gộp lại từ lượt chính thức (6/6b).
 
-## Lượt chính thức – ghi chú
+## Lượt thử 4 – ghi chú (trước đây ghi là lượt chính thức)
 
 - Spec @ `3d19917`, `playwright.config.ts` @ `597bda7` (trace off, commit 01:17:19; lượt chrome bắt đầu 01:17:31). Mỗi report ≈ 1.1 MB (index.html + results.json + data/ ảnh, error-context; không có trace).
 - Kiểm "Run by" (17/11, AI mở `index.html` bằng Chrome): tiêu đề `HW04 EShop – <trình duyệt> – Run by: 23120255 · <ISO +07:00>` ở cả 3 report.
 - Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng nhau ở 3 trình duyệt và trùng lượt thử 2, 3.
 - Gộp (bước 6, 6/6b): `results.md`, `bug_groups.md` (3 nhóm), `evidence/` 24 ảnh — từ 3 report này.
+- Đổi thành lượt thử 4 (lệnh #12, P1=a): thêm ảnh ngay sau khi bấm Đăng Ký (`<TC>_after-submit`, commit `HW04[A-FR01] 5/6e – ảnh sau submit`) → spec đổi sau lượt này. SV chạy lại A làm lượt chính thức; `results.md`/`bug_groups.md`/`evidence/` hiện vẫn gộp từ lượt thử 4, sẽ gộp lại từ lượt chính thức mới.

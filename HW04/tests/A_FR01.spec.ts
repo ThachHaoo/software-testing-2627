@@ -89,8 +89,11 @@ for (const c of DATA.testcases) {
     // Bước 4: bấm "Đăng Ký" đúng một lần, xác định nhánh phản hồi, đồng bộ với POST /api/register
     const regRes = page.waitForResponse(isRegister, { timeout: WAIT }).catch(() => null);   // đặt trước click để không lỡ phản hồi
     await r.submit.click();
+    const valid = await page.locator('form').evaluate((f: HTMLFormElement) => f.checkValidity());
+    // P1=a (5/6e): ảnh ngay sau khi bấm Đăng Ký, chụp song song với việc chờ nhánh phản hồi (không làm trễ đồng bộ)
+    const shot = page.screenshot().then(body => test.info().attach(`${c.tc_id}_after-submit`, { body, contentType: 'image/png' }));
     let branch: string;
-    if (!(await page.locator('form').evaluate((f: HTMLFormElement) => f.checkValidity()))) {
+    if (!valid) {
       branch = 'trình duyệt chặn';                    // A16: ô required trống → trình duyệt không submit
     } else {
       branch = await Promise.any([
@@ -98,6 +101,7 @@ for (const c of DATA.testcases) {
         r.error.waitFor({ state: 'visible', timeout: WAIT }).then(() => 'hộp lỗi'),
       ]).catch(() => 'timeout');
     }
+    await shot;
     // Có POST → chờ phản hồi (backend ghi CSDL xong mới trả lời); chưa có → xác nhận không có POST trong NO_POST ms
     if (!posts.length) await page.waitForRequest(req => req.method() === 'POST' && req.url().endsWith('/api/register'), { timeout: NO_POST }).catch(() => null);
     const res = posts.length ? await regRes : null;
