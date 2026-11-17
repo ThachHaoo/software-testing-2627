@@ -82,8 +82,14 @@ export class CartPage {
   }
   row(name: string): Locator { return this.rows.filter({ has: this.page.locator('td', { hasText: name }) }); }
   removeButton(name: string): Locator { return this.row(name).getByRole('button', { name: 'Xóa' }); }
-  /** Ảnh/icon minh hoạ trong trạng thái giỏ trống (img hoặc svg trong vùng main). */
-  emptyIllustration(): Locator { return this.page.locator('main img, main svg'); }
+  /** Phần tử trong vùng main chứa dòng chữ báo giỏ trống (từ khoá lấy từ data – giả định SV chốt). */
+  emptyMessage(keyword: RegExp): Locator { return this.page.locator('main').getByText(keyword); }
+  /** Khối chứa dòng chữ giỏ trống = phần tử cha trực tiếp của dòng chữ đó. */
+  emptyBlock(keyword: RegExp): Locator { return this.emptyMessage(keyword).locator('xpath=..'); }
+  /** Ảnh/icon minh hoạ (img hoặc svg) nằm TRONG khối chứa dòng chữ giỏ trống và đang hiển thị (R2, 5/6b). */
+  emptyIllustration(keyword: RegExp): Locator {
+    return this.emptyBlock(keyword).locator('img, svg').filter({ visible: true });
+  }
 
   /** Đọc trạng thái giỏ trên UI: dòng (tên, Giá, Số lượng, Thành tiền), Tổng, badge. */
   async state(): Promise<CartState> {

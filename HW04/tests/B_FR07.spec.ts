@@ -125,12 +125,18 @@ for (const c of DATA.testcases) {
       blocked(`Giỏ ban đầu không khớp cột '${COL.start}': cần ${JSON.stringify(want)}, có ${JSON.stringify(got)}`);
     if (o.countBefore !== undefined) await expect.soft(cart.rows, 'số dòng TRƯỚC').toHaveCount(o.countBefore);
     if (o.before.noTable) await expect.soft(page.locator('main table'), 'giỏ trống: không có bảng sản phẩm').toHaveCount(0);
-    if (o.before.emptyText) {
+    if (o.before.emptyText || o.before.illustration) {
       const kw = assumption('empty_cart_keyword');
-      await expect.soft(page.locator('main'), 'giỏ trống: dòng chữ báo giỏ trống').toContainText(new RegExp(esc(kw.value), 'i'));
-      ann('oracle thông báo yếu', `expected chỉ nói 'dòng chữ báo giỏ trống' → kiểm chứa '${kw.value}' (${kw.note})`);
+      const kwRe = new RegExp(esc(kw.value), 'i');
+      if (o.before.emptyText) {
+        await expect.soft(cart.emptyMessage(kwRe), 'giỏ trống: dòng chữ báo giỏ trống').not.toHaveCount(0);
+        await expect.soft(page.locator('main'), 'giỏ trống: nội dung dòng chữ').toContainText(kwRe);
+        ann('oracle thông báo yếu', `expected chỉ nói 'dòng chữ báo giỏ trống' → kiểm chứa '${kw.value}' (${kw.note})`);
+      }
+      // R2: img/svg phải nằm trong cùng khối với dòng chữ giỏ trống (không nhận icon ở chỗ khác của main), không dùng .first()
+      if (o.before.illustration)
+        await expect.soft(cart.emptyIllustration(kwRe), 'giỏ trống: có img/svg minh hoạ trong khối chứa dòng chữ giỏ trống').not.toHaveCount(0);
     }
-    if (o.before.illustration) await expect.soft(cart.emptyIllustration().first(), 'giỏ trống: có img/svg minh hoạ').toBeVisible();
     if (o.before.badgeZeroOrHidden) expect.soft([null, 0], `badge ẩn hoặc 0 (đọc được: ${before.badge})`).toContain(before.badge);
 
     // Bước 4–6: thao tác đúng 1 lần mỗi mục; phản hồi; /cart qua navbar → SAU
