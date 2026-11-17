@@ -118,8 +118,45 @@ def clean_prompt(raw: str):
     return txt.strip(), attachments
 
 
+def load_claude_ai_export(path: Path):
+    """Hội thoại claude.ai lấy từ bản xuất dữ liệu (conversations.json: một object có chat_messages, hoặc list các object).
+    Mỗi tin 'human' = một lượt: text block + nội dung dán kèm (attachments.extracted_content), tên file → attachments.
+    Tin 'assistant': text block + SendUserMessage → output. Bản xuất không ghi model → NO_MODEL."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    convs = data if isinstance(data, list) else [data]
+    turns = []
+    for conv in convs:
+        cur = None
+        for m in sorted(conv.get("chat_messages", []), key=lambda x: x["created_at"]):
+            blocks = m.get("content") or []
+            if m.get("sender") == "human":
+                text = "\n".join(b.get("text", "") for b in blocks if b.get("type") == "text") or m.get("text", "")
+                pasted = [a.get("extracted_content") for a in m.get("attachments", []) if a.get("extracted_content")]
+                if pasted:
+                    text = text + "".join(f"\n\n{p}" for p in pasted)
+                prompt, att = clean_prompt(text)
+                att += [f["file_name"] for f in m.get("files", []) if f.get("file_name")]
+                att += [b["title"] for b in blocks if b.get("type") == "document" and b.get("title") and b["title"] not in att]
+                if not prompt:
+                    continue
+                cur = {"time": parse_ts(m["created_at"]), "tool": NO_MODEL, "models": [], "prompt": prompt,
+                       "attachments": att, "output": [], "files": []}
+                turns.append(cur)
+            elif m.get("sender") == "assistant" and cur is not None:
+                for b in blocks:
+                    if b.get("type") == "text" and (b.get("text") or "").strip():
+                        cur["output"].append(b["text"].strip())
+                    elif b.get("type") == "tool_use" and b.get("name") == "SendUserMessage":
+                        msg = (b.get("input") or {}).get("message")
+                        if msg:
+                            cur["output"].append(str(msg).strip())
+    return turns
+
+
 def load_session(path: Path):
     """Gom transcript thành danh sách lượt {time, tool, prompt, attachments, output, files}."""
+    if path.suffix == ".json":
+        return load_claude_ai_export(path)
     turns, cur, pending_attach = [], None, []
     for line in path.read_text(encoding="utf-8").splitlines():
         try:

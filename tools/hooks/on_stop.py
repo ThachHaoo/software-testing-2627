@@ -66,7 +66,8 @@ def main():
         if src and Path(src).exists():
             shutil.copy2(src, tdir / Path(src).name)
 
-    sessions = sorted(str(p) for p in tdir.glob("*.jsonl"))
+    # *.jsonl = transcript Claude Code; claude-ai_*.json = hội thoại claude.ai lấy từ bản xuất dữ liệu
+    sessions = sorted(str(p) for p in [*tdir.glob("*.jsonl"), *tdir.glob("claude-ai_*.json")])
     if not sessions:
         log(f"chưa có transcript nào trong {tdir} (Claude Code chưa có lượt trả lời nào, hoặc chưa chép transcript của phiên claude.ai vào đây)")
         return
