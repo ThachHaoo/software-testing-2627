@@ -351,7 +351,7 @@
       "tc_id": "TC-FR15-200",
       "title": "Kiểm tra chèn XSS `<script>alert(1)</script>` vào ô 'Tên sản phẩm' ở form Thêm",
       "suite": "TS-SV-UI",
-      "type": "Negative (AI suy ra)",
+      "type": "Negative (AI suy ra, SV duyệt)",
       "technique": "Security (XSS)",
       "bva_point": "",
       "inputs": {
@@ -375,7 +375,7 @@
       "tc_id": "TC-FR15-201",
       "title": "Kiểm tra nhập giá tiền dạng E-notation `1e5` vào ô 'Giá tiền'",
       "suite": "TS-SV-UI",
-      "type": "Negative (AI suy ra)",
+      "type": "Negative (AI suy ra, SV duyệt)",
       "technique": "Type / JS Math",
       "bva_point": "",
       "inputs": {

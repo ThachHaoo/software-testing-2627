@@ -20,8 +20,8 @@ Loại: Negative 9, Positive 6 · HW02 status: Fail 9, Pass 6
 | 11 | TC-FR15-68 | Positive | BVA | LB | Pass / Pass |  | Thêm – Boundary LB giá 0.1; HW02 Pass |
 | 12 | TC-FR15-77 | Positive | BVA | UB | Pass / Pass |  | Sửa – Boundary UB tên 255 ký tự; HW02 Pass (oracle bảng chỉ xét dòng M) – cặp với TC-78 |
 | 13 | TC-FR15-78 | Negative | BVA | UB+1 | Fail / Fail | BUG-37 | Sửa – Boundary UB+1 tên 256 ký tự; HW02 Fail BUG-37 |
-| 14 | TC-FR15-200 | Negative (AI suy ra) | Security (XSS) |  | Fail / Fail | BUG-39 | Thêm – Negative (EG, SV) XSS <script>alert(1)</script> ở tên; HW02 Fail BUG-39; kiểm không bật alert |
-| 15 | TC-FR15-201 | Negative (AI suy ra) | Type / JS Math |  | Fail / Fail | BUG-40 | Thêm – Negative (EG, SV) giá E-notation 1e5; HW02 Fail BUG-40 |
+| 14 | TC-FR15-200 | Negative (AI suy ra, SV duyệt) | Security (XSS) |  | Fail / Fail | BUG-39 | Thêm – Negative (EG, SV) XSS <script>alert(1)</script> ở tên; HW02 Fail BUG-39; kiểm không bật alert |
+| 15 | TC-FR15-201 | Negative (AI suy ra, SV duyệt) | Type / JS Math |  | Fail / Fail | BUG-40 | Thêm – Negative (EG, SV) giá E-notation 1e5; HW02 Fail BUG-40 |
 
 ## Không chọn
 
@@ -51,13 +51,20 @@ Loại: Negative 9, Positive 6 · HW02 status: Fail 9, Pass 6
 - GET /api/products/:id trả price dạng chuỗi khi id chẵn (BUG-48, server.js dòng 162) → so giá trị số (procedure HW02 ghi 'so giá trị số').
 - Dựng M bằng POST /api/products (Bearer admin) trước case Sửa/Xóa; dọn: DELETE mọi id mới + M sau mỗi case (cleanup HW02).
 
-## Rủi ro sập backend (price null + id chẵn) – CHƯA quyết
+## Rủi ro sập backend (price null + id chẵn) – SV chốt C2=a
 
 - Cơ chế (BUG-48, server.js dòng 159–165): GET /api/products/:id với bản ghi id chẵn và price = null → `row.price.toString()` ném TypeError trong callback sqlite → tiến trình node thoát (HW02 BUG-48 mục 'Trường hợp sập Backend'). Mọi TC chạy sau đó mất backend.
 - Script gọi GET /api/products/:id ở case Sửa/Xóa (M_TRƯỚC, M_SAU): TC-03, TC-05, TC-15, TC-77, TC-78. M được dựng bằng API với price 1000000; các case này ghi price = 2500000 (03), -1000 (15), giữ nguyên (77, 78) → theo dữ liệu đã chọn KHÔNG có price = null khi gọi /:id.
 - Case ghi price bất thường qua UI: TC-11 (giá rỗng – HW02 Actual: bản ghi mới price "", không phải null), TC-201 (1e5 → 100000), TC-10/67 (số). Theo HW02, form gửi chuỗi "" chứ không gửi null; nhưng script không gọi /:id cho bản ghi mới của case Thêm. Nếu trình duyệt khác (Firefox/Edge) gửi khác (vd null) mà bản ghi mới có id chẵn thì chỉ sập khi có GET /:id lên id đó – trong luồng C không có, nhưng web người dùng (FR-06 trang chi tiết) có thể gọi nếu chạy chung SUT.
 - Ngoài 15 TC: TC-16 (Sửa giá rỗng, đã loại) là case gần nhất với cơ chế này (M_SAU price "" rồi GET /api/products/M).
-- Đề xuất xử lý (chưa quyết, SV chọn): (a) sau mỗi case kiểm backend còn sống (GET /api/products 200), chết → các TC sau Blocked + resetDb rồi chạy tiếp; (b) tránh GET /:id, lấy M_TRƯỚC/M_SAU từ danh sách GET /api/products (lệch nhẹ procedure HW02 bước 2/7 – phải ghi giả định); (c) cleanup xoá ngay bản ghi có price null/"" sau case; (d) giữ nguyên procedure, chấp nhận rủi ro vì 15 TC không tạo price null.
+- Các phương án đã đề xuất: (a) sau mỗi case kiểm backend còn sống (GET /api/products 200), chết → các TC sau Blocked + resetDb rồi chạy tiếp; (b) tránh GET /:id, lấy M_TRƯỚC/M_SAU từ danh sách GET /api/products (lệch nhẹ procedure HW02 bước 2/7 – phải ghi giả định); (c) cleanup xoá ngay bản ghi có price null/"" sau case; (d) giữ nguyên procedure, chấp nhận rủi ro vì 15 TC không tạo price null.
+- SV chốt C2=a: sau mỗi case kiểm backend còn sống (GET /api/products trả 200). Backend sập → case đó Fail + annotation "backend sập"; resetDb (restart backend, seed lại) trước case kế tiếp.
+- Không đổi procedure HW02 (vẫn GET /api/products/:id cho M_TRƯỚC/M_SAU); không xoá bản ghi để tránh sập (cleanup giữ như HW02: chỉ xoá id mới + M sau case).
+
+## Quyết định của SV
+
+- C1: loại TC-200 = Negative, TC-201 = Negative (AI suy ra, SV duyệt).
+- C2=a: health-check backend sau mỗi case; sập → case Fail + annotation "backend sập", resetDb trước case kế; không đổi procedure, không xoá bản ghi để tránh sập.
 
 ## Tiêu chí
 
@@ -66,4 +73,4 @@ Loại: Negative 9, Positive 6 · HW02 status: Fail 9, Pass 6
 - đủ loại: Positive (EP, BVA), Negative (EP, BVA, EG), Boundary qua điểm BVA UB/UB+1 tên (Thêm, Sửa), LB-1/LB giá (Thêm)
 - ưu tiên TC từng Fail ở HW02 (9 TC); giữ 6 TC Pass làm đối chứng (01, 05, 07, 65, 68, 77)
 - phủ bug HW02: BUG-35, 36, 37, 38, 39, 40, 45 (bug_id lấy từ mục TC liên quan của HW02/bugs/BUG-xx.md vì testcases.json không ghi)
-- TC-200, 201 không có loại trong HW02 (TS-SV-UI) → AI suy ra Negative (expected là chặn/báo lỗi), chờ SV duyệt
+- TC-200, 201 không có loại trong HW02 (TS-SV-UI) → Negative (AI suy ra, SV duyệt)
