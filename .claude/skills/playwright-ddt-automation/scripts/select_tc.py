@@ -124,6 +124,8 @@ def main():
         "preconditions": {s["id"]: s.get("preconditions", []) for s, _ in (by_id[i] for i in sel["ids"])},
         "testcases": tcs,
     }
+    if sel.get("assumptions"):        # dữ liệu phụ ngoài expected (giả định SV chốt), không đổi sha1 expected
+        data["assumptions"] = sel["assumptions"]
     a.data.parent.mkdir(parents=True, exist_ok=True)
     a.data.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 

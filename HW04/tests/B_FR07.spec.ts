@@ -17,6 +17,14 @@ import type { CartRow, CartState } from './pages/shop.pages';
 const DATA = loadData('B_FR07');           // ném lỗi nếu sha1(expected) lệch → cả file không chạy
 const SEED = seedProducts(DATA);
 const COL = { login: 'Đăng nhập', start: 'Giỏ ban đầu', action: 'Thao tác' };
+/** Giả định SV chốt trong file data (ngoài expected). Thiếu → ném lỗi, không đoán. */
+const assumption = (key: string) => {
+  const a = DATA.assumptions?.[key];
+  if (!a?.value) throw new Error(`[B_FR07] thiếu assumptions.${key} trong HW04/data/B_FR07.json`);
+  return a;
+};
+/** Escape chuỗi lấy từ data trước khi dựng RegExp. */
+const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const FEEDBACK_WINDOW = 2_000;             // B21: phản hồi trong ≤ 2 giây sau khi bấm thêm (cửa sổ quan sát của oracle)
 
 const nameOf = (id: number) => {
@@ -118,8 +126,9 @@ for (const c of DATA.testcases) {
     if (o.countBefore !== undefined) await expect.soft(cart.rows, 'số dòng TRƯỚC').toHaveCount(o.countBefore);
     if (o.before.noTable) await expect.soft(page.locator('main table'), 'giỏ trống: không có bảng sản phẩm').toHaveCount(0);
     if (o.before.emptyText) {
-      await expect.soft(page.locator('main'), 'giỏ trống: dòng chữ báo giỏ trống').toContainText(/trống/i);
-      ann('oracle thông báo yếu', "expected chỉ nói 'dòng chữ báo giỏ trống' (SRS không cho câu chữ) → kiểm chứa 'trống'");
+      const kw = assumption('empty_cart_keyword');
+      await expect.soft(page.locator('main'), 'giỏ trống: dòng chữ báo giỏ trống').toContainText(new RegExp(esc(kw.value), 'i'));
+      ann('oracle thông báo yếu', `expected chỉ nói 'dòng chữ báo giỏ trống' → kiểm chứa '${kw.value}' (${kw.note})`);
     }
     if (o.before.illustration) await expect.soft(cart.emptyIllustration().first(), 'giỏ trống: có img/svg minh hoạ').toBeVisible();
     if (o.before.badgeZeroOrHidden) expect.soft([null, 0], `badge ẩn hoặc 0 (đọc được: ${before.badge})`).toContain(before.badge);

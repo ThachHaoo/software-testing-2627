@@ -26,6 +26,7 @@ export type Case = {
 export type DataFile = {
   feature: string; source: { file: string; commit: string };
   preconditions: Record<string, string[]>; testcases: Case[];
+  assumptions?: Record<string, { value: string; note: string }>;   // giả định SV chốt ngoài expected (không tính sha1)
 };
 
 export function loadData(feature: string): DataFile {

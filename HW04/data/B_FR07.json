@@ -346,5 +346,11 @@
         "bug_id": "BUG-15"
       }
     }
-  ]
+  ],
+  "assumptions": {
+    "empty_cart_keyword": {
+      "value": "trống",
+      "note": "giả định SV chốt (SRS không có câu chữ) – R1=a, 5/6a: dòng chữ báo giỏ trống phải chứa từ khoá này (không phân biệt hoa thường)"
+    }
+  }
 }
