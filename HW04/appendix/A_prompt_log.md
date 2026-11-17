@@ -3436,6 +3436,297 @@ HW04 – lệnh #24.
 
 **Output:**
 ```
+Prompt log xong, không có cảnh báo khoá. Giờ cập nhật `report_plan.md` rồi commit.
+
+### Báo cáo cho phiên thảo luận
+- `report_plan.md`: mục Quyết định đã ghi S1, T1–T4 (= a), W1, B1. Mã S1 trong `A_FR01/selection.json` trùng tên với S1 mới nên em đổi thành **A-S1**. Mục Khai cho Audit có thêm bộ đọc claude.ai (`86d4d78`) và lý do 36 lượt "không rõ model".
+- `prompt_log_notes.toml`: thêm khoá khoảng `2026-11-12 18:51 .. 2026-11-18 11:00`, ghi chú model chép nguyên văn câu SV. Notes cũ không có cách giới hạn một khoá cho riêng lượt claude.ai, nên em thêm 2 trường vào `extract_prompt_log.py`: `nguon_luot` (khoá chỉ áp cho lượt claude.ai) và `ghi_chu_model` (hiện thành dòng "*Ghi chú model:*" dưới tiêu đề lượt). Cột model trong log giữ nguyên.
+- `on_stop.py --manual`: 66 lượt, không có cảnh báo khoá không khớp. Ghi chú model hiện ở đúng 36 lượt claude.ai; tổng có 37 lượt "không rõ model", tức thêm 1 lượt Claude Code chưa có lý do trong notes.
+- Commit: `60bec96` HW04: report_plan ghi S1/T1–T4, khai bộ đọc claude.ai; notes ghi chú model lượt claude.ai (nguon_luot)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #67 | 22:24 17/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Hiện tại session này có đang chạy gì không nhỉ? Như backend gì đó chẳng hạn
+```
+
+**Output:**
+````
+Cả 3 thành phần SUT đang chạy, nhưng không cái nào còn được session này quản lý như tác vụ nền.
+
+| Cổng | Tiến trình | Bắt đầu | Nguồn |
+|---|---|---|---|
+| 3000 backend | `node server.js` (pid 9420) | 21:19 17/11 | Do `tools/restart_backend.ps1` khởi động, có thể từ lượt tái hiện bug em chạy lúc ~21:19 hoặc từ lượt test của bạn. Script tách tiến trình ra riêng nên nó không gắn với session. |
+| 5173 web | `vite --port 5173` (pid 17984) | 13:46 17/11 | Session ghi nhận đã dừng 2 tác vụ nền web/admin lúc máy thiếu bộ nhớ, nhưng 2 tiến trình vite này vẫn sống. |
+| 5174 admin | `vite --port 5174` (pid 3392) | 13:46 17/11 | Như trên. |
+
+Muốn tắt hết thì chạy lệnh sau trong PowerShell:
+```powershell
+3000,5173,5174 | % { Stop-Process -Id (Get-NetTCPConnection -State Listen -LocalPort $_).OwningProcess -Force }
+```
+Lưu ý: tắt backend sẽ mất giỏ hàng và tài khoản đã tạo, vì CSDL seed lại khi bật lại. Nếu bạn đang quay video thì để nguyên.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #68 | 22:26 17/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trước tiên, đưa tôi lệnh để tôi tự chạy các tiến trình đó qua Terminal. Sau đó giúp tôi tắt cả 3 để tôi tự chạy nhé
+```
+
+**Output:**
+````
+Em đã tắt cả 3 tiến trình, kiểm lại thì cổng 3000, 5173, 5174 đều đã trống.
+
+Để tự chạy lại, mở 3 cửa sổ PowerShell riêng và chạy mỗi cửa sổ một lệnh:
+
+```powershell
+# 1. Backend :3000 (mỗi lần khởi động CSDL bị xoá và seed lại)
+cd D:\HK7\Testing\Exercise\HW\eshop-sut\backend
+node server.js
+```
+
+```powershell
+# 2. Web :5173
+cd D:\HK7\Testing\Exercise\HW\eshop-sut\frontend-web
+npx vite --host 127.0.0.1 --port 5173
+```
+
+```powershell
+# 3. Admin :5174
+cd D:\HK7\Testing\Exercise\HW\eshop-sut\frontend-admin
+npx vite --host 127.0.0.1 --port 5174
+```
+
+- Bật backend trước. Muốn tắt tiến trình nào thì bấm `Ctrl+C` trong cửa sổ của nó.
+- Không đổi `--host 127.0.0.1` thành `localhost`, vì Windows có thể phân giải `localhost` sang IPv6.
+- Lúc chạy test, `beforeAll` gọi `tools/restart_backend.ps1`: script này tắt backend bạn đang mở và bật một backend mới ở chế độ nền. Nếu muốn backend luôn nằm trong cửa sổ của mình thì chạy lại lệnh 1 sau khi test xong.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #69 | 00:19 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_20261117.txt (nguyên văn). RUN.md của A: thêm (1) lượt 23:03 gộp chrome+edge+firefox: chrome 7P/8F, edge 7P/8F, firefox 0/15 spawn UNKNOWN; (2) firefox riêng ngay sau: 0/15; nguyên nhân Windows Code Integrity (mã 3077/3033, 23:05) chặn firefox-1572\firefox.exe; (3) ~23:2x sau khi khởi động lại máy: firefox riêng 7P/8F, khớp lượt chính thức. Cả 3 = "không chính thức"; kết quả chính thức giữ lượt 13:47–13:52. Không commit report của các lượt này (chỉ ghi đường dẫn). Thêm vào report_plan "Khai cho Audit"/sự cố môi trường. Commit.
+```
+
+**Output:**
+```
+Đã ghi 3 lượt không chính thức vào RUN.md của A và vào mục Khai cho Audit, commit `eb40646`. Còn 3 report khác lúc 23:42–23:48 lệnh không nhắc tới, em chưa ghi vào đâu.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: lệnh #25 — log Firefox bị chặn, ghi 3 lượt không chính thức của A, khai sự cố môi trường.
+- File:
+  - `HW04/env/firefox_blocked_20261117.txt`: SV đã đặt sẵn file, em giữ nguyên và commit.
+  - `HW04/A_FR01/RUN.md`: thêm mục "Lượt không chính thức 17/11 tối"; kết quả chính thức giữ lượt 13:47–13:52.
+  - `HW04/report_plan.md`: thêm dòng sự cố môi trường vào mục Khai cho Audit.
+- **Kết quả 3 lượt:**
+  - Lượt gộp: chrome 7P/8F, edge 7P/8F, firefox 0/15 (`spawn UNKNOWN` ở cả 15 TC).
+  - Firefox riêng ngay sau (23:05:15): 0/15. Log có sự kiện 3077/3033 lúc 23:05.
+  - Firefox sau khi khởi động lại máy (23:22:25): 7P/8F, khớp lượt chính thức.
+- **Lệch giờ:** report lượt gộp ghi `Run by` 22:56:09, phần firefox bắt đầu 23:01:14; lệnh ghi "23:03". Em ghi cả hai, chưa sửa con số của lệnh.
+- Report 3 lượt này để ngoài git như lệnh, chỉ ghi đường dẫn. Vì chưa commit nên `git archive` sẽ không đưa chúng vào zip.
+- **Thêm 3 report lệnh không nhắc tới** (đều là A, 7P/8F): `chrome_20261117T234259`, `edge_20261117T234546`, `firefox_20261117T234834`. Có thể là lượt chạy khi quay video.
+- Log có đường dẫn `C:\Users\tanhi\…` (tên user Windows) và sẽ lên repo public khi SV push.
+- Kết quả kiểm tra: test Not run.
+- Commit: `eb40646` HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tối (Firefox bị Code Integrity chặn) + log môi trường
+- Cần quyết định:
+  - 3 report 23:42–23:48 — ghi vào RUN.md là "lượt quay video, không chính thức" hay bỏ qua?
+  - Log có tên user Windows — giữ nguyên hay che `tanhi`?
+```
+
+**Xử lý:** [...]
+
+---
+
+## #70 | 00:22 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #26.
+A. Ghi link video Task 2 https://youtu.be/TNy_QPFwyB4 vào HW04/README.md, report §7, HW04/skills/VideoLinks.md. RUN.md của A: 3 report 23:42–23:48 = "lượt quay video Task 2, không chính thức" (không commit report). Commit, rồi:
+B. DEMO skill cho video (SV đang quay): git switch -c demo-video. Chạy skill playwright-ddt-automation E2E trên phạm vi thu nhỏ: feature A_FR01, chỉ 4 TC (2 Pass + 2 Fail theo HW02), mọi file ghi vào HW04/demo/ (KHÔNG đụng HW04/data, tests chính thức, ai-outputs, reports chính thức). Mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra.
+   - Bước 1 xong → DỪNG, chờ SV gõ "tiếp" (SV duyệt danh sách TC).
+   - Bước 2–3 (fixture dùng lại, spec demo) + tsc + --list.
+   - Bước 4 → DỪNG, in lệnh để SV tự chạy chrome/edge/firefox, chờ "tiếp".
+   - Bước 5: in nhắc "SV review spec" → DỪNG, chờ "tiếp" (không tự sửa).
+   - Bước 6: merge → results.md + bug_groups.md trong HW04/demo/, in tóm tắt; nhắc "bug do SV viết".
+   Xong: KHÔNG commit gì trên demo-video; chờ SV xác nhận đã quay xong rồi mới: git switch main, xoá nhánh demo-video và thư mục HW04/demo/.
+```
+
+**Output:**
+```
+Phần A đã commit: `2d3660b`. Phần B đang ở nhánh `demo-video`, xong bước 1 và dừng chờ bạn duyệt 4 TC.
+
+**Bước 1/6: chọn TC** → tạo `HW04/demo/selection.json`, `HW04/demo/selection.md`, `HW04/demo/data/A_FR01.json`, `HW04/demo/candidates.txt`. Bản đóng băng nằm ở `HW04/demo/ai-outputs/A_FR01/step1/`. `check_data`: 4 TC, 0 lỗi.
+
+| # | TC | Loại | HW02 | Bug |
+|---|---|---|---|---|
+| 1 | TC-FR01-01 | Positive | Fail | BUG-01 |
+| 2 | TC-FR01-202 | Negative (suy ra) | Fail | BUG-02 |
+| 3 | TC-FR01-05 | Negative (Họ Tên rỗng) | Pass | – |
+| 4 | TC-FR01-63 | Boundary LB-1 (mật khẩu 7 ký tự) | Pass | – |
+
+- Hai TC Fail thuộc hai nhóm lỗi khác nhau (BUG-01 và BUG-02), hai TC Pass để đối chứng.
+- Lý do chọn từng TC chép từ lựa chọn chính thức. Mục "Quyết định của SV" để trống cho bạn điền khi duyệt trong video.
+- `check_data` chạy với `--min 4`, vì mặc định nó đòi ít nhất 12 TC.
+- Bản đóng băng ghi vào `HW04/demo/ai-outputs/`, không đụng `HW04/appendix/ai-outputs/`. Em đóng băng 2 lần: lần đầu `selection.md` chép nhầm các quyết định S1/S2 của lượt chính thức, nên em xoá bản đóng băng trong `HW04/demo/` rồi làm lại.
+- Chưa commit gì trên `demo-video`; `HW04/data`, spec chính thức và report chính thức giữ nguyên.
+
+Gõ **"tiếp"** để chạy bước 2–3.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #71 | 00:24 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – huỷ demo: KHÔNG chạy bước 2. Chưa commit gì trên demo-video → git switch main; xoá nhánh demo-video (git branch -D); xoá thư mục HW04/demo/ (kể cả HW04/demo/ai-outputs). Kiểm git status sạch, HW04/data + spec + report chính thức không đổi. Báo cáo 3 dòng.
+```
+
+**Output:**
+```
+Đã huỷ demo. Đang ở `main` @ `2d3660b`, đã xoá nhánh `demo-video` (không có commit nào trên đó) và xoá `HW04/demo/` cùng `HW04/demo/ai-outputs/`.
+
+`HW04/data`, `HW04/tests`, `HW04/appendix/ai-outputs` không đổi so với HEAD, report chính thức đã commit nên cũng không đổi.
+
+`git status` chưa sạch hẳn, còn đúng những thứ đã có từ trước demo: `A_prompt_log.md` (hook tự sinh lại), 6 report không chính thức (cố ý không commit) và `context/HW04_assignment.pdf` (không commit).
+```
+
+**Xử lý:** [...]
+
+---
+
+## #72 | 00:37 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Demo skill playwright-ddt-automation cho video (HW04, CS423). Đọc HW04/CLAUDE.md và .claude/skills/playwright-ddt-automation/SKILL.md trước.
+- git switch -c demo-video. Mọi file ghi vào HW04/demo/ (data, spec, ai-outputs, report). KHÔNG đụng HW04/data, HW04/tests/*.spec.ts chính thức, HW04/appendix, HW04/reports chính thức. Không commit gì.
+- Phạm vi thu nhỏ: feature A_FR01 (nguồn HW02/A_FR01/testcases.json), 4 TC: 2 từng Fail + 2 từng Pass ở HW02, khác nhóm lỗi. check_data chạy --min 4.
+- Chạy 6 bước của skill, mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra:
+  1 chọn TC → DỪNG, chờ tôi gõ "tiếp".
+  2–3 fixture (dùng lại fixtures/ chung) + spec demo HW04/demo/A_FR01.demo.spec.ts; tsc + --list.
+  4 DỪNG, in lệnh để TÔI tự chạy chrome/edge/firefox (report ra HW04/demo/reports/), chờ "tiếp".
+  5 in "SV review spec" → DỪNG, không tự sửa, chờ "tiếp".
+  6 merge → HW04/demo/results.md + bug_groups.md; in tóm tắt; nhắc "bug report do SV viết, AI không viết".
+- Luật: không đổi expected/assertion để test xanh; không viết mô tả bug.
+```
+
+**Output:**
+```
+Chọn: Fail 01 (BUG-01), Fail 202 (BUG-02), Pass 05 (ô bắt buộc), Pass 63 (biên độ dài). Tạo selection + data.
+
+**Bước 1/6: chọn TC** → đã tạo các file:
+- `HW04/demo/selection.json`
+- `HW04/demo/data/A_FR01.demo.json` (4 TC, expected chép nguyên văn từ HW02 kèm sha1)
+- `HW04/demo/selection.md`
+- bản đóng băng: `HW04/demo/ai-outputs/A_FR01/step1/`
+
+4 TC đã chọn:
+
+| tc_id | loại | HW02 | nhóm |
+|---|---|---|---|
+| TC-FR01-01 | Positive | Fail | BUG-01 |
+| TC-FR01-202 | Negative (AI suy ra loại, chờ SV duyệt) | Fail | BUG-02 |
+| TC-FR01-05 | Negative | Pass | ô bắt buộc (Họ Tên rỗng) |
+| TC-FR01-63 | Boundary LB-1 | Pass | biên độ dài mật khẩu |
+
+`check_data --min 4`: 0 lỗi, 0 cảnh báo. Em đã tạo nhánh `demo-video`. Chưa commit gì.
+
+Bước kế tiếp: sinh fixture và spec demo. Gõ **"tiếp"** để làm bước 2–3.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #73 | 00:38 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp
+```
+
+**Output:**
+````
+Giờ sinh spec demo.
+
+Bản đóng băng trong `ai-outputs/` bị testMatch bắt. Thêm `testIgnore` vào config demo (harness, không đụng spec/data).
+
+**Bước 2/6: fixture / page object** → dùng lại phần chung, không viết fixture mới:
+- `HW04/tests/fixtures/ddt.ts`: đọc data + kiểm sha1, token admin
+- `HW04/tests/fixtures/a_fr01.ts`: lấy danh sách user trước/sau, `diffUsers`, dọn user sau mỗi case
+- `HW04/tests/pages/register.page.ts`
+
+File mới tạo, chỉ để chạy demo:
+- `HW04/demo/playwright.demo.config.ts`: report ra `HW04/demo/reports/`, giữ Run by + ISO, `workers 1`, `retries 0`
+- `HW04/demo/tsconfig.json`
+- bản đóng băng: `HW04/demo/ai-outputs/A_FR01/step2/`
+
+**Bước 3/6: sinh spec** → `HW04/demo/A_FR01.demo.spec.ts`, bản đóng băng ở `HW04/demo/ai-outputs/A_FR01/step3/`.
+- Spec có 4 kiểu assertion: trạng thái UI (`toHaveURL`, `toBeVisible`), nội dung thông báo (`toContainText`), dữ liệu qua API trước/sau (`toEqual`), đếm (`toHaveCount`, `toHaveLength`).
+- Spec gọi `loadCases('../demo/data/A_FR01.demo')`: đường dẫn tính từ `HW04/data`, vẫn kiểm sha1, nên không phải sửa fixture chung.
+
+Kết quả kiểm tra:
+- `tsc --noEmit`: không lỗi.
+- `--list`: 12 test = 4 TC × 3 trình duyệt. Lệnh này không tạo report.
+- Lần `--list` đầu lỗi `Cannot find module`: bản đóng băng trong `ai-outputs/` cũng khớp tên `*.demo.spec.ts` nên bị nạp nhầm. Em đã thêm `testIgnore` vào config demo, sau khi config đã đóng băng ở step2; bản đóng băng không đổi. Nếu cần, nói chỗ sửa này trong video.
+
+**Bước 4/6: chạy 3 trình duyệt.** Em dừng ở đây; bạn tự chạy (backend, web, admin phải đang chạy):
+
+```powershell
+cd D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests
+npx playwright test -c ../demo/playwright.demo.config.ts --project=chrome
+npx playwright test -c ../demo/playwright.demo.config.ts --project=edge
+npx playwright test -c ../demo/playwright.demo.config.ts --project=firefox
+npx playwright show-report ../demo/reports/<chrome_ts>
+```
+
+Report ra `HW04/demo/reports/<project>_<ts>/` (`index.html` + `results.json`). Nếu muốn CSDL sạch thì restart backend trước khi chạy.
+
+Gõ **"tiếp"** khi đã chạy xong 3 lượt.
+````
+*File AI ghi/gửi trong lượt này:* `A_FR01.demo.spec.ts`
+
+**Xử lý:** [...]
+
+---
+
+## #74 | 00:50 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm git status sạch và HW04/data, spec, report chính thức không đổi. Báo cáo 3 dòng.
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -3443,4 +3734,335 @@ HW04 – lệnh #24.
 
 ---
 
-**Tổng:** 66 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 29 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66).
+## #75 | 00:52 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #27: skill playwright-ddt-automation v2 (trên main, sau khi demo-video đã xoá).
+Cập nhật SKILL.md + assets/spec.template.ts + assets/ddt-fixture.template.ts theo bài học review A/B/C (review_sv.md 3 feature):
+- bỏ mode serial; guard workers > 1;
+- không catch rỗng: chỉ TimeoutError → Blocked; chờ phản hồi mạng/điều kiện cụ thể, không chờ cứng, không Promise.race nuốt lỗi; gọi API đọc dữ liệu SAU khi đã có phản hồi request;
+- escape chuỗi trước new RegExp; nhóm ^(…|…) đúng; expected không đọc được → ném lỗi; oracle yếu → annotation;
+- câu chữ/từ khoá không có trong expected → trường assumptions trong file data (giả định SV), không gõ cứng trong spec;
+- thông báo: không đếm hộp thoại thành công là "thông báo lỗi" khi chưa có giả định SV (ghi điểm yếu H4 thành cảnh báo);
+- ảnh <TC>_after-* chụp SAU khi đo xong; bấm đúng số lần theo procedure;
+- trace off (report ~1 MB); worker crash 0xC0000409 ở 0 ms → chạy lại, ghi lỗi hạ tầng, không lập bug;
+- mục "Checklist review bước 5" (liệt kê các lỗi trên để SV soi).
+Template lấy theo cấu trúc spec chính thức mới nhất (C_FR15.spec.ts @2e9e454). Không sửa spec/data/report chính thức. Kiểm: sinh thử spec từ template bằng script tạm cho 1 TC → tsc + --list, xong xoá. Commit "HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)". Báo cáo ≤ 8 dòng: thay đổi chính.
+```
+
+**Output:**
+```
+Đã sửa xong `SKILL.md` và 2 template. Giờ sinh thử spec cho 1 TC bằng script tạm, chạy `tsc` và `--list`.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: lệnh #27 – skill `playwright-ddt-automation` v2 theo bài học review A/B/C; đã commit `5bb31d1`.
+- **Fixture template:** thêm `guardWorkers` (dừng khi workers > 1), `step` (chỉ `TimeoutError` → Blocked, lỗi khác ném tiếp), `until`/`settle`/`netLog` thay cho chờ cứng và `Promise.race`, `esc` trước `new RegExp`, `assumption()` (thiếu giả định → ném lỗi), fixture `dialogs`.
+- **Spec template:** dựng theo `C_FR15.spec.ts` @2e9e454.
+  - Bỏ mode serial; expected không đọc được → ném lỗi; regex nhóm `^(?:…)`.
+  - Thứ tự mỗi TC: API trước → bấm đúng 1 lần → chờ phản hồi request → ghi quan sát → chụp ảnh `<TC>_after-*` → API sau → oracle.
+  - Chưa có giả định SV thì hộp thoại không tính là thông báo lỗi; chỉ ghi annotation `oracle thông báo yếu`.
+- **SKILL.md:** bước 2/3 ghi các helper mới, quy định đưa câu chữ không có trong expected vào `assumptions` và danh sách cấm; bước 4 ghi `trace: 'off'` và cách xử lý lỗi hạ tầng (`0xC0000409`, `spawn UNKNOWN`: chạy lại, ghi RUN.md, không lập bug); thêm mục "Checklist review bước 5" (12 mục).
+- Kết quả kiểm tra: spec sinh thử cho 1 TC (TC-FR01-01) qua `tsc` không lỗi, `--list` ra 3 test; đã xoá cả 3 file tạm. Test Not run.
+- Không đụng spec/data/report chính thức; diff chỉ có 3 file trong `.claude/skills/playwright-ddt-automation/`.
+- Cần quyết định: không.
+```
+*File AI ghi/gửi trong lượt này:* `ddt-fixture.template.ts`, `spec.template.ts`
+
+**Xử lý:** [...]
+
+---
+
+## #76 | 01:02 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Demo skill playwright-ddt-automation cho video (HW04, CS423). Đọc HW04/CLAUDE.md và .claude/skills/playwright-ddt-automation/SKILL.md trước.
+- git switch -c demo-video. Mọi file ghi vào HW04/demo/ (data, spec, ai-outputs, report). KHÔNG đụng HW04/data, HW04/tests/*.spec.ts chính thức, HW04/appendix, HW04/reports chính thức. Không commit gì.
+- Phạm vi thu nhỏ: feature A_FR01 (nguồn HW02/A_FR01/testcases.json), 4 TC: 2 từng Fail + 2 từng Pass ở HW02, khác nhóm lỗi. check_data chạy --min 4.
+- Chạy 6 bước của skill, mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra:
+  1 chọn TC → DỪNG, chờ tôi gõ "tiếp".
+  2–3 fixture (dùng lại fixtures/ chung) + spec demo HW04/demo/A_FR01.demo.spec.ts; tsc + --list.
+  4 DỪNG, in lệnh để TÔI tự chạy chrome/edge/firefox (report ra HW04/demo/reports/), chờ "tiếp".
+  5 in "SV review spec" → DỪNG, không tự sửa, chờ "tiếp".
+  6 merge → HW04/demo/results.md + bug_groups.md; in tóm tắt; nhắc "bug report do SV viết, AI không viết".
+- Luật: không đổi expected/assertion để test xanh; không viết mô tả bug.
+```
+
+**Output:**
+```
+Bước 1/6: chọn 4 TC A_FR01 → `HW04/demo/A_FR01/selection.json`, `HW04/demo/A_FR01/selection.md`, `HW04/demo/data/A_FR01.json` (check_data --min 4: 0 lỗi; freeze → `HW04/demo/ai-outputs/A_FR01/step1/`)
+
+| TC | Loại | HW02 | Nhóm |
+|---|---|---|---|
+| TC-FR01-01 | Positive EP | Fail | BUG-01 (từ chối mật khẩu mạnh hợp lệ) |
+| TC-FR01-202 | Negative EG (suy ra) | Fail | BUG-02 (khoảng trắng thay ký tự đặc biệt) |
+| TC-FR01-05 | Negative EP | Pass | ô bắt buộc Họ Tên |
+| TC-FR01-63 | Boundary LB-1 | Pass | biên độ dài mật khẩu |
+
+Đã ở nhánh `demo-video`, chưa commit gì. Loại của TC-202 là AI tự suy ra, bạn cần duyệt.
+
+**DỪNG.** Gõ "tiếp" để làm bước 2–3.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #77 | 01:04 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp
+```
+
+**Output:**
+````
+Đang viết fixture demo (dùng lại `fixtures/` chung) + config demo, rồi spec.
+
+Giờ viết spec demo.
+
+Bước 2/6: fixture → `HW04/demo/fixtures/a_fr01.demo.ts` (dùng lại `tests/fixtures/a_fr01.ts` + `ddt.ts`, thêm phần v2 còn thiếu: `loadDemoData`/sha1, `step`, `until`, `settle`, `netLog`, `guardWorkers`, `esc`), `HW04/demo/playwright.demo.config.ts`, `HW04/demo/tsconfig.json` → freeze `HW04/demo/ai-outputs/A_FR01/step2/`
+Bước 3/6: spec → `HW04/demo/A_FR01.demo.spec.ts` → freeze `HW04/demo/ai-outputs/A_FR01/step3/`
+- `tsc --noEmit`: 0 lỗi. `--list`: 12 test = 4 TC × 3 trình duyệt.
+- Không sửa file chính thức nào. Riêng `A_prompt_log.md` đang bị đổi là do hook tự ghi.
+- Mình đã tạo thêm junction `HW04/demo/node_modules` → `HW04/tests/node_modules` để spec trong `demo/` tìm được `@playwright/test`. Junction này đã nằm trong gitignore.
+
+Bước 4/6: bạn tự chạy. Bật SUT trước (backend :3000, web :5173, admin :5174). Mỗi lượt sẽ tự restart backend:
+
+```powershell
+cd D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests
+npx playwright test -c ../demo/playwright.demo.config.ts --project=chrome
+npx playwright test -c ../demo/playwright.demo.config.ts --project=edge
+npx playwright test -c ../demo/playwright.demo.config.ts --project=firefox
+npx playwright show-report ../demo/reports/<project>_<ts>
+```
+
+Report ra `HW04/demo/reports/<project>_<ts>/` (`index.html` có "Run by: 23120255 · ISO", kèm `results.json`).
+
+**DỪNG.** Chạy xong 3 lượt thì gõ "tiếp".
+````
+*File AI ghi/gửi trong lượt này:* `a_fr01.demo.ts`, `playwright.demo.config.ts`, `A_FR01.demo.spec.ts`
+
+**Xử lý:** [...]
+
+---
+
+## #78 | 01:12 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Dừng demo. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm git status sạch. Báo 2 dòng.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+## #79 | 01:13 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #28: skill playwright-ddt-automation v2.1 – phải chạy E2E sạch trước khi SV quay.
+1. Sửa skill:
+   - freeze.py: bản đóng băng KHÔNG được bị Playwright nạp → lưu ngoài testDir và đổi đuôi (vd *.spec.ts.txt); ghi luật này vào SKILL.md.
+   - Thêm chế độ demo chính thức trong SKILL.md + script (vd tham số --demo <dir> --min N): sinh data/spec/fixture/config demo trong <dir>, config có testIgnore ['**/ai-outputs/**'], đường import đúng từ chỗ spec đặt, report ra <dir>/reports/.
+   - Rà mọi đường dẫn tương đối trong template/scripts khi spec không nằm ở HW04/tests/.
+2. Tự chạy thử E2E (không quay, không commit gì của demo): git switch -c skill-dryrun; chạy chế độ demo cho A_FR01 với 4 TC (2 Fail + 2 Pass HW02); bước 1→6 không dừng; TỰ chạy chrome, edge, firefox (lượt thử, không phải lượt chính thức). Yêu cầu: không lỗi nạp file, 4 TC × 3 trình duyệt chạy hết, verdict khớp HW02, merge ra results.md + bug_groups.md. Lỗi do skill → sửa skill (trên main sau khi quay về) rồi chạy thử lại tới khi sạch. Crash 0xC0000409 / spawn UNKNOWN → chạy lại 1 lần, ghi lại.
+3. Xong: git switch main; xoá nhánh skill-dryrun + thư mục demo + report thử. Commit trên main chỉ các file skill: "HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch".
+4. In ra LỆNH DEMO MỚI ngắn gọn cho SV dán ở session mới (dùng chế độ demo của skill, có 3 điểm dừng: sau bước 1, bước 4 SV tự chạy, bước 5).
+Báo cáo ≤ 10 dòng: lỗi đã gặp khi chạy thử + cách sửa, kết quả 4×3, lệnh demo mới.
+```
+
+**Output:**
+```
+Đang viết script `demo.py` dựng khung chế độ demo (config, fixture, spec, thư mục data/report).
+
+Chạy thử lần 1 ra: 01 và 63 Blocked (lẽ ra 01 Fail, 63 Pass). Đang xem lý do Blocked.
+
+Đang chạy lại từ đầu với template đã sửa (dựng khung → bước 1 → 3 → chạy 3 trình duyệt → gộp kết quả).
+
+Phát hiện thêm: config chính thức nạp luôn spec demo (45 test thừa). Sửa: file spec demo đặt đuôi `.demo.ts`, config demo chỉ match đuôi đó. Chạy lại toàn bộ.
+
+Chạy lại E2E lần 3 (spec demo đuôi `.demo.ts`).
+```
+*File AI ghi/gửi trong lượt này:* `demo.py`
+
+**Xử lý:** [...]
+
+---
+
+## #80 | 01:34 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trước khi dựng: kiểm git branch hiện tại là main và git status sạch; thêm HW04/tests/_demo/ vào .git/info/exclude (không sửa .gitignore).
+HW04 – DEMO skill playwright-ddt-automation (chế độ demo, SV đang quay). Không commit gì; không đụng HW04/data, spec/report/ai-outputs chính thức.
+Dựng: python .claude/skills/playwright-ddt-automation/scripts/demo.py --feature A_FR01 --min 4 (thư mục HW04/tests/_demo). Mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra.
+- Bước 1: chọn 4 TC (2 Fail + 2 Pass theo HW02) → selection + data + check_data --min 4 + freeze → DỪNG, chờ SV gõ "tiếp".
+- Bước 2–3: fixture (dùng lại page object chính thức) + spec A_FR01.demo.ts từ template v2.1 → freeze → tsc + --list (--config ./_demo/playwright.config.ts).
+- Bước 4: in lệnh để SV tự chạy chrome/edge/firefox (từ HW04/tests, kèm --config ./_demo/playwright.config.ts) → DỪNG, chờ "tiếp".
+- Bước 5: in nhắc "SV review spec theo Checklist review bước 5" → DỪNG, chờ "tiếp" (không tự sửa).
+- Bước 6: merge_reports → results.md + bug_groups.md trong _demo; in tóm tắt; nhắc "bug do SV viết".
+Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
+```
+
+**Output:**
+```
+Dựng demo.
+
+Kiểm tra trước khi dựng: branch là `main`. Git status chưa sạch, nhưng bạn đã chọn chạy demo luôn. Đã thêm `HW04/tests/_demo/` vào `.git/info/exclude`.
+
+**Bước 1/6: chọn TC (xong).** Đã chọn 4 TC, `check_data --min 4` báo 0 lỗi, 0 cảnh báo.
+- TC Fail ở HW02: TC-FR01-01 (Positive), TC-FR01-64 (Boundary LB, 8 ký tự)
+- TC Pass ở HW02, làm đối chứng: TC-FR01-05 (Negative, Họ Tên rỗng), TC-FR01-63 (Boundary LB-1, 7 ký tự)
+
+File tạo ra:
+- `HW04/tests/_demo/A_FR01/selection.json`, `HW04/tests/_demo/A_FR01/selection.md`
+- `HW04/tests/_demo/data/A_FR01.json` (expected chép nguyên văn từ HW02 @ `af48958`, kèm sha1)
+- Bản đóng băng: `HW04/tests/_demo/ai-outputs/A_FR01/step1/` (3 file)
+- Khung có sẵn từ lúc dựng: `HW04/tests/_demo/playwright.config.ts`, `tests/fixtures/ddt.ts`, `tests/A_FR01.demo.ts`
+
+⏸ Dừng ở đây để bạn duyệt TC. Gõ **"tiếp"** để sang bước 2–3.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #81 | 01:36 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp
+```
+
+**Output:**
+````
+Bước 2/6 xong. Giờ spec bước 3.
+
+**Bước 2/6: fixture.** Fixture dùng chung + fixture `users`/`registerPage`. Page object chính thức `pages/register.page.ts` được dùng lại, không sửa.
+- `HW04/tests/_demo/tests/fixtures/ddt.ts`, `HW04/tests/_demo/tests/fixtures/a_fr01.ts`
+- Đóng băng: `HW04/tests/_demo/ai-outputs/A_FR01/step2/` (2 file `.ts.txt`)
+
+**Bước 3/6: spec.** Spec viết từ template v2.1. Oracle đọc từ expected: nhánh chấp nhận và nhánh từ chối; không đọc được loại kết quả thì ném lỗi.
+- `HW04/tests/_demo/tests/A_FR01.demo.ts`
+- Đóng băng: `HW04/tests/_demo/ai-outputs/A_FR01/step3/A_FR01.demo.ts.txt`
+- `npx tsc --noEmit` không báo lỗi (exit 0). `--list` ra 12 test = 4 TC × 3 trình duyệt.
+
+**Bước 4/6: bạn tự chạy 3 trình duyệt.** Backend, web và admin phải đang chạy. Chạy trong `HW04/tests`:
+
+```powershell
+npx playwright test --config ./_demo/playwright.config.ts --project=chrome
+npx playwright test --config ./_demo/playwright.config.ts --project=edge
+npx playwright test --config ./_demo/playwright.config.ts --project=firefox
+```
+
+Report ra `HW04/tests/_demo/reports/<project>_<ts>/`, có "Run by: 23120255 · ISO", kèm metadata "Chế độ: demo". Mở report: `npx playwright show-report ./_demo/reports/chrome_<ts>`.
+
+⏸ Chạy xong cả 3 lượt thì gõ **"tiếp"**.
+````
+*File AI ghi/gửi trong lượt này:* `A_FR01.demo.ts`
+
+**Xử lý:** [...]
+
+---
+
+## #82 | 01:43 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp
+```
+
+**Output:**
+```
+Đã có đủ 3 report của bước 4:
+- `HW04/tests/_demo/reports/chrome_20261118T014015`
+- `HW04/tests/_demo/reports/edge_20261118T014123`
+- `HW04/tests/_demo/reports/firefox_20261118T014222`
+
+**Bước 5/6: bạn review spec theo Checklist review bước 5.**
+- Checklist ở `.claude/skills/playwright-ddt-automation/SKILL.md:72`.
+- File cần review: `HW04/tests/_demo/tests/A_FR01.demo.ts`. So với bản đóng băng `HW04/tests/_demo/ai-outputs/A_FR01/step3/A_FR01.demo.ts.txt`.
+- Tôi không tự sửa và không gợi ý gì trong lúc bạn review.
+
+⏸ Review xong thì gõ **"tiếp"** để gộp kết quả.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #83 | 01:45 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+tiếp
+```
+
+**Output:**
+```
+**Bước 6/6: gộp kết quả (xong).** Đã gộp 3 report demo.
+- `HW04/tests/_demo/A_FR01/results.md`
+- `HW04/tests/_demo/A_FR01/bug_groups.md`
+
+Tóm tắt:
+
+| | chrome | edge | firefox |
+|---|---|---|---|
+| Pass | 2 (TC-05, TC-63) | 2 | 2 |
+| Fail | 2 (TC-01, TC-64) | 2 | 2 |
+| Blocked | 0 | 0 | 0 |
+
+- Kết quả khớp HW02 cả 4 TC trên cả 3 trình duyệt.
+- `bug_groups.md` có 1 nhóm G1: TC-01 và TC-64 × 3 trình duyệt, cùng 4 assertion lỗi:
+  - vẫn hiện hộp lỗi đỏ (`div.bg-red-100`);
+  - URL vẫn là `/register`;
+  - API không ghi nhận user mới nào (0 thay vì 1).
+- Lượt chạy dùng spec AI nguyên bản: file spec giống hệt bản đóng băng step3, bạn chưa sửa gì.
+- Script báo "0 ảnh" vì lệnh gộp chạy không kèm cờ `--evidence`, không phải spec thiếu ảnh. Ảnh `_after-submit` vẫn nằm trong HTML report. Cần tách ảnh ra `HW04/tests/_demo/A_FR01/evidence/` thì tôi chạy lại với `--evidence`.
+
+⚠ **Bug do bạn viết.** Tôi chỉ gom dữ kiện: không đặt tên bug, không ghi severity, không kết luận nguyên nhân.
+
+Không commit gì. `HW04/data`, spec, report và ai-outputs chính thức không bị đụng tới.
+
+⏸ Quay xong thì báo để tôi xoá `HW04/tests/_demo` (dòng thêm vào `.git/info/exclude` có cần gỡ không, bạn quyết).
+```
+
+**Xử lý:** [...]
+
+---
+
+## #84 | 01:48 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+quay xong rồi, xoá _demo giúp tgooi
+```
+
+**Output:**
+```
+Folder rỗng, nhưng có process đang giữ. Thử lại.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 84 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 47 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84).
