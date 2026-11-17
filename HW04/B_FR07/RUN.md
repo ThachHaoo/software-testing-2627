@@ -10,6 +10,10 @@ Lệnh (PowerShell, `HW04\tests`): `npx playwright test B_FR07 --project=<chrome
 | Lượt thử 2 – chrome | 2026-11-17T13:55:45+07:00 | `c8a2ce9` (5/6a–c) | `HW04/reports/chrome_20261117T135545/` | 6 Pass, 9 Fail, 0 Blocked |
 | Lượt thử 2 – edge | 2026-11-17T13:57:10+07:00 | `c8a2ce9` | `HW04/reports/edge_20261117T135710/` | 6 Pass, 9 Fail, 0 Blocked |
 | Lượt thử 2 – firefox | 2026-11-17T13:58:36+07:00 | `c8a2ce9` | `HW04/reports/firefox_20261117T135836/` | 5 Pass, 10 Fail, 0 Blocked |
+| Chạy riêng TC-60 – firefox (`--grep "TC-FR07-60 " --repeat-each=3`) | 2026-11-17T14:08:40+07:00 | `c8a2ce9` | `HW04/reports/firefox_20261117T140840/` | 3/3 Pass |
+| **Chính thức – chrome** | 2026-11-17T14:11:03+07:00 | `c8a2ce9` | `HW04/reports/chrome_20261117T141103/` | 6 Pass, 9 Fail, 0 Blocked |
+| **Chính thức – edge** | 2026-11-17T14:12:30+07:00 | `c8a2ce9` | `HW04/reports/edge_20261117T141230/` | 6 Pass, 9 Fail, 0 Blocked |
+| **Chính thức – firefox** | 2026-11-17T14:13:59+07:00 | `c8a2ce9` | `HW04/reports/firefox_20261117T141359/` | 6 Pass, 9 Fail, 0 Blocked |
 
 Metadata `Run by` trong `results.json` của cả 3: `23120255 · <ISO +07:00>` (khớp cột Bắt đầu). Mỗi report ≈ 1.2 MB.
 
@@ -88,3 +92,10 @@ Metadata `Run by` trong `results.json` của cả 3: `23120255 · <ISO +07:00>` 
 
 - Lượt thử 2: worker crash `0xC0000409`, thân test chưa chạy (0 ms, không annotation, không assertion).
 - SV chạy riêng `npx playwright test B_FR07 --project=firefox --grep "TC-FR07-60 " --repeat-each=3`: **3/3 Pass** → lỗi hạ tầng (worker Firefox crash), không lập bug.
+
+## Lượt chính thức – ghi chú
+
+- Spec + page object + fixture @ `c8a2ce9` (commit spec mới nhất), config @ `597bda7` (trace off). Mỗi report ≈ 2.1 MB.
+- Kiểm "Run by" (17/11, AI mở `index.html` bằng Chrome): tiêu đề `HW04 EShop – <trình duyệt> – Run by: 23120255 · <ISO +07:00>` ở cả 3 report (và report chạy riêng TC-60).
+- Fail = TC-FR07-01, 02, 04, 08, 61, 62, 63, 64, 205; Pass = 10, 11, 13, 60, 66, 200 — trùng ở 3 trình duyệt, trùng HW02 và lượt thử 1.
+- Gộp (bước 6): `results.md`, `bug_groups.md` (6 nhóm G1–G6), `evidence/` 54 ảnh = 27 ảnh lúc kết thúc + 27 ảnh `<TC>_after-action[-k]_<trình duyệt>` (chỉ TC Fail; TC-01 không có thao tác chính nên không có ảnh after-action; TC-205 có 2).
