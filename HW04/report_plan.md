@@ -94,7 +94,7 @@ Nguồn: `HW04/*/RUN.md`, `HW04/*/review_sv.md`, khối báo cáo các lệnh, g
   - 3 report rỗng 13:46 (global-setup không thấy backend) → xoá theo lệnh #14.
   - Tiến trình nền web/admin bị Claude Code dừng do máy thiếu bộ nhớ (17/11); AI không tự bật lại.
   - TC-60 firefox lượt thử 2 B: worker crash `0xC0000409` → SV chạy lại 3/3 Pass → lỗi hạ tầng (B RUN.md).
-  - 17/11 tối, A (không chính thức): Windows Code Integrity chặn `firefox-1572irefox.exe` (sự kiện 3077/3033, 23:05) → lượt gộp 22:56 (firefox 0/15, `spawn UNKNOWN`) và firefox riêng 23:05 (0/15); sau khi khởi động lại máy firefox 23:22 = 7P/8F, khớp chính thức. Chính thức giữ 13:47–13:52; report 3 lượt này không commit. Log: `HW04/env/firefox_blocked_20261117.txt` (A RUN.md).
+  - 17/11 tối, A (không chính thức): Windows Code Integrity chặn `firefox-1572\firefox.exe` (sự kiện 3077/3033, 23:05) → lượt gộp 22:56 (firefox 0/15, `spawn UNKNOWN`) và firefox riêng 23:05 (0/15); sau khi khởi động lại máy firefox 23:22 = 7P/8F, khớp chính thức. Chính thức giữ 13:47–13:52; report 3 lượt này không commit. Log: `HW04/env/firefox_blocked_20261117.txt` (A RUN.md).
 - Lỗi do AI, phát hiện sau:
   - **C3 chép nhầm** vào "Yêu cầu bị vi phạm" của BUG-101, BUG-103 (generator lấy mọi dòng Yêu cầu của HW02 BUG-35/37) → sửa `d6cd474`.
   - C TC-07: ô không hợp lệ ghi 2 lần (`checkValidity()` cũng bắn `invalid`) – AI phát hiện ở lệnh #17 → sửa 5/6a `2e9e454`.
@@ -103,6 +103,12 @@ Nguồn: `HW04/*/RUN.md`, `HW04/*/review_sv.md`, khối báo cáo các lệnh, g
   - A: nhóm regex `^(…|…)` trong `oracleOf`, thiếu escape trước `new RegExp` → 5/6c `740934b`.
   - `users.list` – `[...]` (SV/phiên thảo luận ghi rõ commit/bài).
   - C: `errShown` đếm mọi hộp thoại (kể cả "Cập nhật thành công!") là "có thông báo lỗi" → R3=a giữ, ghi điểm yếu.
+- Lỗi skill lộ ra khi chạy demo / chạy thử (18/11, lệnh #26–#28):
+  - Template spec v1 còn `test.describe.configure({ mode: 'serial' })` – lỗi đã sửa ở A 5/6a nhưng chưa đưa ngược vào skill → sửa ở v2 `5bb31d1`.
+  - Bản đóng băng nằm trong thư mục Playwright quét (demo đóng băng vào thư mục demo) → có thể bị nạp như spec → v2.1 `99080b2`: `freeze.py` từ chối `--out` trong testDir, đổi đuôi `*.ts.txt`.
+  - Template v2 chờ riêng `POST` sau khi bấm → TC-01, TC-63 (ứng dụng tự kiểm phía client, không gửi POST) bị Blocked giả "chờ POST quá 10000 ms" → v2.1: chờ một trong các nhánh phản hồi (request / URL đổi / thông báo / hộp thoại).
+  - Config chính thức (testMatch `*.spec.ts`) nạp luôn spec demo (`--list` 4 file, thừa 45 test) → v2.1: spec demo đuôi `*.demo.ts`.
+  - Phiên thảo luận không ra lệnh cập nhật skill sau review A (bài học A chỉ sửa trong spec A) → B, C và template vẫn mang bản v1 tới lệnh #27.
 - Script tạm AI viết, **không commit**: sinh 18 khung bug (`gen_bugs.py`), Playwright tái hiện 18 bug (`repro.spec.ts`), tạo issue (`mk_issues.py`), chụp trang Issues (`shot.cjs`), đọc phiên bản trình duyệt.
 - AI chạy `gh issue create` 18 lần (#298–#315) với file SV viết; chụp `issues_page_1.png` (chưa đăng nhập GitHub).
 - AI chỉ xem mẫu ảnh evidence (A 3/48, B 3/54, C 2/54) – SV xem phần còn lại.

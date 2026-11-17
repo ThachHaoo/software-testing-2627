@@ -6,6 +6,7 @@ Khối theo feature (A_FR01, B_FR07, C_FR15):
 - data: số TC, cột inputs, giả định ngoài expected – đọc từ HW04/data/<X>.json.
 Khối chung:
 - bugs: bảng "(AI chép)" từ HW04/bugs/BUG-*.md (tiêu đề, severity, priority, TC, issue).
+- summary: chép khối SUMMARY của HW04/README.md.
 - audit: mỗi commit có "HW04" trong message (git log, cũ → mới) là một artifact; verdict/lý do để <SV viết>.
 
 Chạy: python tools/hw04_report.py
@@ -91,8 +92,17 @@ def audit_block() -> str:
     return "\n".join(rows)
 
 
+def summary_block() -> str:
+    """Bảng test summary: chép khối SUMMARY của HW04/README.md (sinh bởi tools/hw04_summary.py)."""
+    t = (ROOT / "HW04/README.md").read_text(encoding="utf-8")
+    b, e = "<!-- SUMMARY:BEGIN -->", "<!-- SUMMARY:END -->"
+    if b not in t or e not in t:
+        return "_(README chưa có khối SUMMARY – chạy python tools/hw04_summary.py)_"
+    return "_Chép từ khối SUMMARY của `README.md` (`tools/hw04_summary.py`)._\n" + t[t.index(b) + len(b):t.index(e)].strip("\n")
+
+
 def main():
-    blocks = {"bugs": bugs_block(), "audit": audit_block()}
+    blocks = {"bugs": bugs_block(), "audit": audit_block(), "summary": summary_block()}
     for f in FEATS:
         d = ROOT / "HW04" / f
         blocks[f"{f}:selection"] = copy_md(d / "selection.md")
