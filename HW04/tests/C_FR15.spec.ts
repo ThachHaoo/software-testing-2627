@@ -146,7 +146,12 @@ for (const c of DATA.testcases) {
       if (sent('DELETE')!.status === 200) { await until('chờ GET /api/products sau khi xoá', () => !!listAfter(i)); await listAfter(i)!.done; }
       else await until('chờ hộp thoại lỗi xoá', () => dialogs.length > n0);
     } else {
-      const valid = await form.root.evaluate((f: HTMLFormElement) => f.checkValidity());
+      // checkValidity() cũng bắn 'invalid' → xoá __inv ngay sau đó, chỉ giữ sự kiện của lần bấm Lưu (5/6a)
+      const valid = await form.root.evaluate((f: HTMLFormElement) => {
+        const ok = f.checkValidity();
+        (window as unknown as { __inv: string[] }).__inv = [];
+        return ok;
+      });
       await form.save.click();                                   // ĐÚNG 1 lần
       if (valid) {
         const method = op === 'Thêm' ? 'POST' : 'PUT';
