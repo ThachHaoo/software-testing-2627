@@ -31,26 +31,49 @@ Gọi: `/playwright-ddt-automation <X_FRnn> <bước>` — vd `A_FR01 1`. Thiế
 - `check_data.py` phải 0 lỗi → `freeze.py --step 1` → commit → **DỪNG cho SV duyệt**.
 
 ### 2 — Fixture / page object (AI)
-- Từ `assets/ddt-fixture.template.ts`: `loadCases` (đọc data + kiểm sha1), `resetDb` (`tools/restart_backend.ps1`), fixture `api` có token admin, `blocked()`; page object của form/màn hình feature với selector lấy từ **mã UI thật** (nhãn, role, placeholder) — không bịa.
+- Từ `assets/ddt-fixture.template.ts` (v2): `loadData` (đọc data + kiểm sha1), `assumption()` (giả định SV ngoài expected; thiếu → ném lỗi), `resetDb` + `guardWorkers` (dừng nếu workers > 1), `blocked()`, `step()` (**chỉ** `TimeoutError` → Blocked, lỗi khác ném tiếp), `until()` (chờ điều kiện cụ thể có hạn), `settle()`, `netLog()`, `esc()`, fixture `api` có token admin + `dialogs` (ghi hộp thoại); page object của form/màn hình feature với selector lấy từ **mã UI thật** (nhãn, role, placeholder) — không bịa.
 - Không chứa dữ liệu test. `freeze.py --step 2` → commit → dừng.
 
 ### 3 — Sinh spec (AI)
-- Từ `assets/spec.template.ts`: `for (const c of loadCases(...))`, tiêu đề `"<tc_id> <title>"`, giá trị từ `c.inputs` (thay `{ts}`), oracle từ `c.expected`.
+- Từ `assets/spec.template.ts` (v2, cấu trúc theo `C_FR15.spec.ts` @2e9e454): `for (const c of DATA.testcases)`, tiêu đề `"<tc_id> <title>"`, giá trị từ `c.inputs` (thay `{ts}`), oracle parse từ `c.expected` — **không đọc được loại kết quả → ném lỗi**; ý không tự động được → annotation `oracle không tự động`.
+- Câu chữ/từ khoá/selector **không có trong expected** (vd từ khoá "giỏ trống", khối thông báo trên trang) → trường `assumptions` của file data (giả định, SV duyệt ở bước 1/3; không tính sha1), không gõ cứng trong spec.
+- Thứ tự mỗi TC: API TRƯỚC → thao tác **đúng số lần procedure ghi** (gắn `netLog` trước khi bấm) → `until` phản hồi request + `await done` → `settle` → ghi quan sát → ảnh `<TC>_after-*` (chụp SAU khi đo xong) → API SAU → oracle.
 - ≥ 3 kiểu assertion: **trạng thái UI** (`toBeVisible`/`toHaveURL`), **nội dung thông báo** (`toHaveText`/`toContainText`), **oracle dữ liệu qua API trước/sau** (`toEqual`), **đếm/giá trị** (`toHaveCount`/`toHaveValue`); dùng `expect.soft`.
 - Điều kiện chặn đã biết (trường đặc tả có mà UI không có…) → `blocked('<lý do + case gốc>')`, không Fail giả.
+- Cấm (lỗi đã gặp ở review A/B/C): `test.describe.configure({ mode: 'serial' })` (1 Fail chặn mọi TC sau); `catch {}` rỗng; `waitForTimeout`/chờ cứng; `Promise.race` nuốt lỗi; gọi API đọc dữ liệu trước khi request của thao tác có phản hồi; `new RegExp(chuỗi chưa esc)`; `^a|b` (chỉ neo nhánh đầu → viết `^(?:a|b)`); đếm hộp thoại bất kỳ (có thể là "thành công") là "thông báo lỗi" khi chưa có giả định SV phân loại → ghi annotation `oracle thông báo yếu`.
 - `freeze.py --step 3` → commit → dừng.
 
 ### 4 — List + typecheck (AI chạy, SV chạy 3 trình duyệt)
 - Claude Code **chỉ** chạy: `npx playwright test <X_FRnn> --list --reporter=list` (tránh sinh report rỗng) và `npx tsc --noEmit`. Báo số test = số TC trong data.
 - SV chạy `npm run test:chrome`, `test:edge`, `test:firefox` trên máy mình → 3 report có "Run by" + ISO timestamp. AI không chạy lượt chính thức, không sửa report.
+- Config: `trace: 'off'` (trace làm report vài chục MB, zip > 20 MB; với off ~1 MB/report), `screenshot: 'only-on-failure'`, `workers: 1`, `retries: 0`.
+- Lỗi hạ tầng: worker crash (vd Windows `0xC0000409`, test dừng ở 0 ms, không assertion nào chạy) hoặc trình duyệt không khởi động (`spawn UNKNOWN`, chặn bởi chính sách hệ thống) → **chạy lại** TC/lượt, ghi "lỗi hạ tầng" trong RUN.md, không tính Fail, không lập bug. Lượt hỏng không dùng làm chính thức.
 
 ### 5 — SV review và sửa
 - SV đọc spec, so với bản đóng băng step3, sửa. **Mỗi lần sửa một commit riêng có sửa `.spec.ts`**: `HW04[X-FRnn] 5/6x – sửa: <tóm tắt>` (x = a, b, c…).
 - AI không gợi ý edge case/assertion còn thiếu trong lúc SV review. Chỉ khi SV hỏi "vì sao AI bỏ sót" sau khi đã commit phần của SV mới trả lời — trung thực, tách *đã nghĩ tới nhưng không đưa vào* với *không nghĩ tới*.
+- Trước khi review, SV có thể dùng mục **Checklist review bước 5** bên dưới (lỗi đã gặp ở A/B/C).
 
 ### 6 — Gộp kết quả (AI gộp, SV viết bug)
 - `merge_reports.py <data> <feature-dir> <report chrome> <report edge> <report firefox>` → `results.md` (Pass/Fail/Blocked theo trình duyệt, cột HW02) + `bug_groups.md` (TC Fail gom theo lỗi đầu tiên, chỉ dữ kiện).
 - SV cô lập nguyên nhân, viết bug + GitHub Issue (ảnh). AI chỉ kiểm trường thiếu, chạy `gh issue create --body-file` với file SV viết.
+
+## Checklist review bước 5 (lỗi spec AI đã gặp ở HW04 A/B/C)
+
+Danh sách lỗi đã thấy trong bản AI ở `HW04/<X_FRnn>/review_sv.md` — SV soi từng dòng; danh sách này không thay việc SV tự đọc spec.
+
+- [ ] Không có `mode: 'serial'`; `beforeAll` dừng khi `workers > 1` (resetDb).
+- [ ] Không `catch` rỗng; chỉ `TimeoutError` → Blocked; lỗi khác ném tiếp.
+- [ ] Không `waitForTimeout`/chờ cứng; không `Promise.race` nuốt lỗi; chờ phản hồi mạng hoặc điều kiện cụ thể.
+- [ ] API đọc dữ liệu "sau" chỉ gọi khi request của thao tác đã có phản hồi (hoặc đã xác nhận không có request).
+- [ ] Chuỗi dựng `RegExp` đã escape; nhiều nhánh nhóm đúng `^(?:a|b)`.
+- [ ] Expected không đọc được → ném lỗi; oracle yếu/không tự động → annotation (không im lặng Pass).
+- [ ] Câu chữ/từ khoá/selector không có trong expected nằm ở `assumptions` của file data, không gõ cứng.
+- [ ] Hộp thoại "thành công" không bị đếm là "thông báo lỗi" khi chưa có giả định SV.
+- [ ] Bấm đúng số lần procedure ghi; không có bước phụ sinh sự kiện trùng (vd `checkValidity()` bắn `invalid`).
+- [ ] Ảnh `<TC>_after-*` chụp sau khi đo xong, không chụp song song lúc đang chờ.
+- [ ] Selector bám mã UI thật, không `.first()` chung chung bắt nhầm phần tử.
+- [ ] Config: `trace: 'off'`, `retries: 0`, `workers: 1`.
 
 ## Lệnh
 
