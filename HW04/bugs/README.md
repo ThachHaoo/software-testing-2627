@@ -4,6 +4,10 @@
 
 - **G → BUG = Cách 2:** mỗi nhóm Fail (G) = 1 bug.
   - Lý do SV: bám `_groups` (`_groups_AB.md`, `_groups_C.md`); bước tái hiện gọn; confirmation test được từng hành vi.
+  - **Quyết định giữ riêng BUG-88, BUG-91, BUG-94 (không gộp vào BUG-86 và BUG-89):** Dù cùng chung vị trí lỗi ở mã nguồn, hành vi người dùng quan sát được và bước kiểm thử khác nhau:
+    - **BUG-88 (A-G3)** khác **BUG-86 (A-G1)** ở trường hợp đầu vào có khoảng trắng đầu chuỗi (` Hiep123$`) và kéo theo bước kiểm thử luồng đăng nhập lại sau khi đăng ký.
+    - **BUG-91 (B-G3)** khác **BUG-89 (B-G1)** ở trạng thái người dùng đã đăng nhập và kiểm tra phản hồi trực quan tức thì trong ≤ 2 giây ngay sau thao tác bấm.
+    - **BUG-94 (B-G6)** khác **BUG-89 (B-G1)** ở luồng thao tác thêm nhiều lần liên tiếp có điều hướng sang trang giỏ hàng ở giữa để kiểm tra logic cộng dồn số lượng.
 - **B1 = b:** tạo issue **mới** trên `tkob-team/eshop-sut` cho mọi bug (không comment vào issue HW02). Tiêu đề GitHub: `[HW04][FR-xx] …`. Mục "Liên quan" của mỗi bug trỏ issue HW02.
 - **Đánh số:** tiếp toàn môn — HW03 dừng ở BUG-85 (đã kiểm `HW03/bugs/`) → HW04 bắt đầu từ **BUG-86**.
 - Khung `BUG-xx.md` theo mẫu HW02 (`HW02/bugs/BUG-22.md` @ d0d0e05). Ô `<SV viết>`: Tiêu đề, Severity, Priority, Tiền điều kiện, Bước tái hiện, Expected, Actual, Nhận định. AI chỉ điền dữ kiện (môi trường, TC, bằng chứng, yêu cầu theo HW02, assertion nguyên văn, code SUT, liên quan).

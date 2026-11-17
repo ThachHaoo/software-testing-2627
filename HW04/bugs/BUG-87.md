@@ -126,7 +126,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Register.jsx` dòng 15, biểu thức chính quy `flawedStrongPasswordRegex` kiểm tra ký tự đặc biệt bằng lookahead `(?=.*\s)` và tập ký tự `[A-Za-z\d\s]` (coi khoảng trắng `\s` là điều kiện hợp lệ thay vì tập ký tự đặc biệt `@$!%*?&` theo đặc tả FR-01.8 và giả định A5). Vì vậy, mật khẩu chứa chữ hoa, chữ thường, số và khoảng trắng đã vượt qua bước kiểm tra phía client và gửi request tạo tài khoản thành công lên server.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR01-202` thuộc nhóm `A-G2`.
-- **Ghi chú duyệt:** Severity/Priority đang để `Medium` (lỗ hổng yếu quy tắc validation mật khẩu nhưng không chặn luồng chính của người dùng; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-02.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

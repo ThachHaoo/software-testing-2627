@@ -156,7 +156,6 @@
   1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 500–507, thẻ `<input type="number" placeholder="Giá tiền" ... />` không khai báo thuộc tính `required` hay `min`, và hàm xử lý submit không kiểm tra `productForm.price` bị rỗng trước khi gửi request.
   2. **Backend:** Tại `backend/server.js` dòng 167–177, endpoint `POST /api/products` nhận trực tiếp `price` (lúc này là `""`) từ `req.body` và lưu thẳng vào bảng `products` qua câu lệnh `INSERT INTO products ...` mà không kiểm tra dữ liệu đầu vào.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-11` thuộc nhóm `C-G3`.
-- **Ghi chú duyệt:** Nhóm dữ kiện `C-G3` có cùng nguyên nhân gốc và cùng issue HW02 `BUG-36` (`#182`) với `C-G2` (`BUG-96`, giá `-1000`) và `C-G8` (`TC-FR15-67`, giá `0`). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `BUG-97` và `C-G8` vào `BUG-96`; nếu giữ tách riêng từng nhóm triệu chứng theo template thì giữ nguyên file này.
 
 ## Liên quan
 

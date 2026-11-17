@@ -130,9 +130,6 @@
   1. **Thiếu badge số lượng trên link Giỏ hàng:** Tại `frontend-web/src/App.jsx` dòng 23, thẻ `<Link to="/cart" className="hover:underline">Giỏ hàng</Link>` chỉ render văn bản tĩnh mà không đọc dữ liệu từ `CartContext` để hiển thị badge tổng số lượng sản phẩm theo đặc tả FR-23.2.
   2. **Bỏ qua lần bấm thêm đầu tiên ở trang chi tiết:** Tại `frontend-web/src/pages/ProductDetail.jsx` dòng 21–25, hàm `handleAddToCart` kiểm tra `if (clickCount === 0)` thì chỉ tăng `setClickCount(1)` và `return` sớm, khiến lần bấm đầu tiên không gọi `addToCart` nên không cộng dồn số lượng của `Tai nghe AirPods Pro 2` (giống nguyên nhân gốc của `BUG-89` / HW02 `#161`).
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-04` thuộc nhóm `B-G4`.
-- **Ghi chú duyệt:**
-  - Nếu bạn giữ tách riêng `BUG-92` cho lỗi thiếu badge trên thanh điều hướng (`App.jsx:23`, nối tiếp HW02 `BUG-20` `#166`) và quy phần không cộng dồn số lượng ở trang chi tiết về nguyên nhân đã nêu ở `BUG-89` (`ProductDetail.jsx:21-25`), bạn có thể rút gọn tiêu đề của `BUG-92` tập trung vào lỗi thiếu badge Giỏ hàng và xóa bớt các bullet thừa của `BUG-15` (`Chức năng thêm...`, `FR-06.3`, `FR-24.1`, `B21`, `B1`) trong mục **Yêu cầu bị vi phạm**.
-  - Severity/Priority đang để `Medium` theo lỗi hiển thị badge bị thiếu (bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-20.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

@@ -156,7 +156,6 @@
   1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 500–507, thẻ `<input type="number" placeholder="Giá tiền" ... />` không khai báo thuộc tính `min` (ví dụ `min="1"` hoặc `min="0.01"`) và hàm xử lý submit không kiểm tra điều kiện `Number(productForm.price) > 0`.
   2. **Backend:** Tại `backend/server.js` dòng 167–177, endpoint `POST /api/products` nhận trực tiếp `price` từ `req.body` và chạy câu lệnh `INSERT INTO products ...` mà không kiểm tra `typeof price !== 'number' || price <= 0`.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-10` thuộc nhóm `C-G2`.
-- **Ghi chú duyệt:** Nhóm dữ kiện `C-G2` có cùng nguyên nhân gốc và cùng issue HW02 `BUG-36` (`#182`) với `C-G3` (`TC-FR15-11`, giá rỗng) và `C-G8` (`TC-FR15-67`, giá `0`). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `C-G3` và `C-G8` vào `BUG-96`; nếu giữ tách riêng từng nhóm triệu chứng theo template thì giữ nguyên file `BUG-96.md` này (đồng thời có thể gọn lại phần mô tả trong ngoặc ở mục **Yêu cầu bị vi phạm** nếu không gộp).
 
 ## Liên quan
 

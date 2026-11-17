@@ -86,7 +86,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Cart.jsx` dòng 20–27, nhánh điều kiện `if (cart.length === 0)` chỉ render thẻ tiêu đề `<h2>Giỏ hàng của bạn đang trống</h2>` và thẻ `<Link to="/">Tiếp tục mua sắm</Link>`, thiếu phần tử hình ảnh (`<img>`) hoặc biểu tượng vector (`<svg>`) minh họa trạng thái trống (Empty State) theo đặc tả FR-07.7 và FR-24.3.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-01` thuộc nhóm `B-G2`.
-- **Ghi chú duyệt:** Severity/Priority đang để `Low` (lỗi giao diện/UI không ảnh hưởng đến chức năng cốt lõi; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-21.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

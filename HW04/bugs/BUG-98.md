@@ -183,7 +183,6 @@
   2. **Backend:** Tại `backend/server.js` dòng 179–189, endpoint `PUT /api/products/:id` nhận trực tiếp `price` từ `req.body` và thực thi câu lệnh `UPDATE products SET ... WHERE id = ?` mà không kiểm tra tính hợp lệ (`price > 0`).
   3. **Tác động phụ trên UI:** Sau khi `PUT` thành công, logic cập nhật state ở `App.jsx:110-114` ghi đè `name` của toàn bộ danh sách sản phẩm trên giao diện thành `productForm.name` (cùng nguyên nhân gốc với `BUG-95`).
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-15` thuộc nhóm `C-G4`.
-- **Ghi chú duyệt:** Nhóm dữ kiện `C-G4` nối tiếp issue HW02 `BUG-38` (`#184`). Nếu giữ tách riêng file `BUG-98.md` này, bạn có thể xóa bớt phần ghi chú trong ngoặc `(TC-15: -1000; TC-79: 0; TC-16: rỗng)` ở mục **Yêu cầu bị vi phạm** vì trong HW04 nhóm `C-G4` chỉ chứa `TC-FR15-15`.
 
 ## Liên quan
 

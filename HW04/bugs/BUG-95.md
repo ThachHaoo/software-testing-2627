@@ -137,7 +137,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-admin/src/App.jsx` dòng 109–114, sau khi gọi API `await axios.put(\`${API_URL}/products/${productForm.id}\`, productForm)` thành công, hàm `handleProductSubmit` không cập nhật state `products` theo đúng sản phẩm có `id === productForm.id` hoặc gọi lại API lấy danh sách mới, mà lại chạy vòng lặp `products.map((p) => ({ ...p, name: productForm.name }))`. Đoạn mã này vừa ghi đè thuộc tính `name` của toàn bộ sản phẩm trong state UI thành `productForm.name`, vừa bỏ sót việc cập nhật các trường khác như `price` và `category_id` của sản phẩm đang sửa trên state giao diện.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-03` thuộc nhóm `C-G1`.
-- **Ghi chú duyệt:** Theo dữ kiện trong `_groups_C.md`, triệu chứng ghi đè cột `Tên SP` của toàn bộ bảng trên UI cũng xuất hiện ở nhóm `C-G4` (`TC-FR15-15`) và `C-G9` (`TC-FR15-78`) do dùng chung đoạn logic `App.jsx:108-115` khi thực hiện thao tác Sửa.
 
 ## Liên quan
 

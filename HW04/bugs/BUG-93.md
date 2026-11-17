@@ -100,7 +100,6 @@
 
 - **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Cart.jsx` dòng 50–55, sự kiện `onClick={() => removeFromCart(index)}` của nút **Xóa** gọi thẳng hàm `removeFromCart` trong `frontend-web/src/context/CartContext.jsx` (dòng 12–16) để cắt bỏ phần tử khỏi mảng `cart` ngay lập tức, hoàn toàn thiếu bước hiển thị hộp thoại xác nhận (như `window.confirm` hoặc modal xác nhận) theo đặc tả FR-07.4 và FR-24.2.
 - **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-08` thuộc nhóm `B-G5`.
-- **Ghi chú duyệt:** Severity/Priority đang để `Medium` (thiếu bước xác nhận dẫn đến rủi ro người dùng xóa nhầm sản phẩm khỏi giỏ hàng nhưng không chặn chức năng xóa; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-19.md` để đồng bộ nếu cần).
 
 ## Liên quan
 
