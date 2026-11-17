@@ -20,3 +20,5 @@
 - 01:43 17/11/2026 · B_FR07 bước 3 · `HW04/tests/B_FR07.spec.ts` → `B_FR07/step3/B_FR07.spec.ts` · sha256 c0d478fa288b · 
 - 01:43 17/11/2026 · B_FR07 bước 3 · `HW04/tests/oracles/b_fr07.oracle.ts` → `B_FR07/step3/b_fr07.oracle.ts` · sha256 274e042baaac · 
 - 01:43 17/11/2026 · B_FR07 bước 3 · `HW04/B_FR07/assertions.md` → `B_FR07/step3/assertions.md` · sha256 f187df174e57 · 
+- 14:05 17/11/2026 · A_FR01 bước 6c · `HW04/A_FR01/results.md` → `A_FR01/step6c/results.md` · sha256 8a954a745b10 · 
+- 14:05 17/11/2026 · A_FR01 bước 6c · `HW04/A_FR01/bug_groups.md` → `A_FR01/step6c/bug_groups.md` · sha256 5ae5f15cd40b · 

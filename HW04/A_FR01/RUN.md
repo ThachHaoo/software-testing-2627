@@ -16,6 +16,9 @@
 | Lượt thử 4 – chrome | 2026-11-17T01:17:31+07:00 | spec `3d19917`, config `597bda7` (trace off) | `HW04/reports/chrome_20261117T011731/` | 8 Fail, 7 Pass |
 | Lượt thử 4 – edge | 2026-11-17T01:20:24+07:00 | như trên | `HW04/reports/edge_20261117T012024/` | 8 Fail, 7 Pass |
 | Lượt thử 4 – firefox | 2026-11-17T01:23:54+07:00 | như trên | `HW04/reports/firefox_20261117T012354/` | 8 Fail, 7 Pass |
+| **Chính thức – chrome** | 2026-11-17T13:47:09+07:00 | spec `9f26855` (5/6e ảnh sau submit), config `597bda7` | `HW04/reports/chrome_20261117T134709/` | 8 Fail, 7 Pass |
+| **Chính thức – edge** | 2026-11-17T13:49:50+07:00 | như trên | `HW04/reports/edge_20261117T134950/` | 8 Fail, 7 Pass |
+| **Chính thức – firefox** | 2026-11-17T13:52:30+07:00 | như trên | `HW04/reports/firefox_20261117T135230/` | 8 Fail, 7 Pass |
 
 ## Lượt thử 1 – ghi chú
 
@@ -42,4 +45,12 @@
 - Kiểm "Run by" (17/11, AI mở `index.html` bằng Chrome): tiêu đề `HW04 EShop – <trình duyệt> – Run by: 23120255 · <ISO +07:00>` ở cả 3 report.
 - Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng nhau ở 3 trình duyệt và trùng lượt thử 2, 3.
 - Gộp (bước 6, 6/6b): `results.md`, `bug_groups.md` (3 nhóm), `evidence/` 24 ảnh — từ 3 report này.
-- Đổi thành lượt thử 4 (lệnh #12, P1=a): thêm ảnh ngay sau khi bấm Đăng Ký (`<TC>_after-submit`, commit `HW04[A-FR01] 5/6e – ảnh sau submit`) → spec đổi sau lượt này. SV chạy lại A làm lượt chính thức; `results.md`/`bug_groups.md`/`evidence/` hiện vẫn gộp từ lượt thử 4, sẽ gộp lại từ lượt chính thức mới.
+- Đổi thành lượt thử 4 (lệnh #12, P1=a): thêm ảnh ngay sau khi bấm Đăng Ký (`<TC>_after-submit`, commit `HW04[A-FR01] 5/6e – ảnh sau submit`) → spec đổi sau lượt này. SV chạy lại A làm lượt chính thức; `results.md`/`bug_groups.md`/`evidence/` đã gộp lại từ lượt chính thức (6/6c).
+
+## Lượt chính thức – ghi chú
+
+- Spec @ `9f26855`, config @ `597bda7` (trace off). Mỗi report ≈ 1.9 MB (thêm ảnh `<TC>_after-submit` cho cả 15 TC).
+- `Run by` trong `results.json` cả 3: `23120255 · <ISO +07:00>` (khớp cột Bắt đầu).
+- Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng ở 3 trình duyệt, trùng lượt thử 2–4.
+- Gộp (bước 6, 6/6c): `results.md`, `bug_groups.md` (3 nhóm G1/G2/G3 như cũ), `evidence/` 48 ảnh = 24 ảnh lúc kết thúc + 24 ảnh `<TC>_after-submit_<trình duyệt>` (chỉ TC Fail). `merge_reports.py` mở rộng để tách ảnh `*_after-*`.
+- Lượt 13:46:05–07 (3 thư mục `*_20261117T13460x`, 0 test): global-setup báo backend không trả lời → không chạy test; không dùng, không commit.

@@ -87,8 +87,9 @@ def verdict(test) -> tuple[str, list[str]]:
     return "Fail", errs
 
 
-def screenshots(report: Path) -> dict[str, Path]:
-    """tiêu đề test → ảnh screenshot cuối cùng trong HTML report (dữ liệu nhúng trong index.html)."""
+def screenshots(report: Path, extra: bool = False) -> dict:
+    """tiêu đề test → ảnh screenshot cuối cùng trong HTML report (dữ liệu nhúng trong index.html).
+    extra=True: tiêu đề test → [(tên attachment, ảnh)] của ảnh do spec tự đính (tên chứa '_after-', vd <TC>_after-action)."""
     html = (report / "index.html").read_text(encoding="utf-8")
     m = re.search(r"base64,(UEsDB[A-Za-z0-9+/=]+)", html)
     if not m:
@@ -99,8 +100,13 @@ def screenshots(report: Path) -> dict[str, Path]:
         if n == "report.json":
             continue
         for t in json.loads(z.read(n)).get("tests", []):
-            shots = [a["path"] for r in t.get("results", []) for a in r.get("attachments", [])
-                     if a.get("name") == "screenshot" and a.get("path")]
+            atts = [a for r in t.get("results", []) for a in r.get("attachments", []) if a.get("path")]
+            if extra:
+                ex = [(a["name"], report / a["path"]) for a in atts if "_after-" in a.get("name", "")]
+                if ex:
+                    out[t["title"]] = ex
+                continue
+            shots = [a["path"] for a in atts if a.get("name") == "screenshot"]
             if shots:
                 out[t["title"]] = report / shots[-1]
     return out
@@ -119,7 +125,7 @@ def main():
     ids = list(cases)
     ctx = json.loads(a.context.read_text(encoding="utf-8")) if a.context else {}
     table = defaultdict(dict)       # tc_id -> project -> (verdict, errs)
-    runs, shots = [], {}
+    runs, shots, extras = [], {}, {}
     for rep in a.reports:
         rj = json.loads((rep / "results.json").read_text(encoding="utf-8"))
         project = rep.name.rsplit("_", 1)[0]
@@ -136,6 +142,10 @@ def main():
                 tc = next((i for i in ids if title.startswith(i + " ")), None)
                 if tc:
                     shots[(tc, project)] = p
+            for title, lst in screenshots(rep, extra=True).items():
+                tc = next((i for i in ids if title.startswith(i + " ")), None)
+                if tc:
+                    extras[(tc, project)] = lst
     projects = [p for p, _, _ in runs]
 
     # results.md
@@ -159,6 +169,7 @@ def main():
     # evidence
     ev_dir = a.feature_dir / "evidence"
     copied = {}
+    copied_extra = {}      # (tc, project) -> [ảnh do spec tự đính: <TC>_after-*]
     if a.evidence:
         ev_dir.mkdir(exist_ok=True)
         for (tc, p), src in shots.items():
@@ -166,6 +177,13 @@ def main():
                 dst = ev_dir / f"{tc}_{p}.png"
                 shutil.copy2(src, dst)
                 copied[(tc, p)] = dst
+        for (tc, p), lst in extras.items():
+            if table[tc].get(p, ("",))[0] in ("Fail", "Blocked"):
+                for name, src in lst:
+                    if src.is_file():
+                        dst = ev_dir / f"{name}_{p}.png"
+                        shutil.copy2(src, dst)
+                        copied_extra.setdefault((tc, p), []).append(dst)
 
     # bug_groups.md
     groups = defaultdict(list)      # signature -> [(tc, project, errs)]
@@ -177,7 +195,8 @@ def main():
     G = [f"# {data['feature']} – nhóm TC Fail (dữ kiện, SV viết bug)", "",
          "Nhóm = cùng tập assertion lỗi và cùng giá trị nhận được (triệu chứng giống hệt; số dài `{ts}` chuẩn hoá).",
          "Không đặt tên bug, không severity/priority, không kết luận nguyên nhân, không đề xuất gộp/tách.",
-         "Ảnh = screenshot Playwright chụp lúc test KẾT THÚC (screenshot: 'only-on-failure'), không phải lúc assertion đầu tiên lỗi.", ""]
+         "Ảnh lúc kết thúc = screenshot Playwright chụp lúc test KẾT THÚC (screenshot: 'only-on-failure'), không phải lúc assertion đầu tiên lỗi.",
+         "Ảnh ngay sau thao tác chính = ảnh spec tự đính (`<TC>_after-submit` / `<TC>_after-action[-k]`) ngay sau bấm Đăng Ký / Thêm / Xoá.", ""]
     for n, (sig, items) in enumerate(sorted(groups.items(), key=lambda x: (-len(x[1]), x[1][0][0])), 1):
         tcs = list(dict.fromkeys(i for i, _, _ in items))
         G += [f"## G{n} – {len(tcs)} TC × {len(items) // max(len(tcs), 1)} trình duyệt ({len(items)} lượt Fail)", "",
@@ -200,13 +219,16 @@ def main():
                 G.append("- Vị trí code SUT: " + "; ".join(info["code"]))
             ev = [f"`{copied[(tc, p)].relative_to(a.feature_dir).as_posix()}`" for p in br if (tc, p) in copied]
             if ev:
-                G.append("- Ảnh: " + ", ".join(ev))
+                G.append("- Ảnh lúc kết thúc: " + ", ".join(ev))
+            evx = [f"`{d.relative_to(a.feature_dir).as_posix()}`" for p in br for d in copied_extra.get((tc, p), [])]
+            if evx:
+                G.append("- Ảnh ngay sau thao tác chính: " + ", ".join(evx))
             errs = next(e for i, p, e in items if i == tc)
             G += [f"- Actual ({br[0]}, nguyên văn assertion lỗi):", "", "```"] + ["\n\n".join(errs)] + ["```", ""]
     if not groups:
         G.append("Không có TC Fail.")
     (a.feature_dir / "bug_groups.md").write_text("\n".join(G) + "\n", encoding="utf-8", newline="\n")
-    print(f"Đã ghi {a.feature_dir / 'results.md'}, bug_groups.md ({len(groups)} nhóm), {len(copied)} ảnh")
+    print(f"Đã ghi {a.feature_dir / 'results.md'}, bug_groups.md ({len(groups)} nhóm), {len(copied)} ảnh lúc kết thúc + {sum(map(len, copied_extra.values()))} ảnh sau thao tác")
 
 
 if __name__ == "__main__":

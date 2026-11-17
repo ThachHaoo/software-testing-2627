@@ -2,7 +2,8 @@
 
 Nhóm = cùng tập assertion lỗi và cùng giá trị nhận được (triệu chứng giống hệt; số dài `{ts}` chuẩn hoá).
 Không đặt tên bug, không severity/priority, không kết luận nguyên nhân, không đề xuất gộp/tách.
-Ảnh = screenshot Playwright chụp lúc test KẾT THÚC (screenshot: 'only-on-failure'), không phải lúc assertion đầu tiên lỗi.
+Ảnh lúc kết thúc = screenshot Playwright chụp lúc test KẾT THÚC (screenshot: 'only-on-failure'), không phải lúc assertion đầu tiên lỗi.
+Ảnh ngay sau thao tác chính = ảnh spec tự đính (`<TC>_after-submit` / `<TC>_after-action[-k]`) ngay sau bấm Đăng Ký / Thêm / Xoá.
 
 ## G1 – 6 TC × 3 trình duyệt (18 lượt Fail)
 
@@ -20,7 +21,8 @@ Assertion lỗi (chung của nhóm):
 - Expected (HW02, nguyên văn): Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'dom01_{ts}@domain.com' như cột dữ liệu.
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-01_chrome.png`, `evidence/TC-FR01-01_edge.png`, `evidence/TC-FR01-01_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-01_chrome.png`, `evidence/TC-FR01-01_edge.png`, `evidence/TC-FR01-01_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-01_after-submit_chrome.png`, `evidence/TC-FR01-01_after-submit_edge.png`, `evidence/TC-FR01-01_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -50,7 +52,7 @@ expect(received).toEqual(expected) // deep equality
 
 - Array [
 -   Object {
--     "email": "dom01_1794853054640@domain.com",
+-     "email": "dom01_1794898036476@domain.com",
 -     "name": "Nguyen Van A",
 -   },
 - ]
@@ -65,7 +67,8 @@ expect(received).toEqual(expected) // deep equality
 - Expected (HW02, nguyên văn): Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyễn Văn Ánh' và email 'dom02_{ts}@domain.com' như cột dữ liệu.
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-02_chrome.png`, `evidence/TC-FR01-02_edge.png`, `evidence/TC-FR01-02_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-02_chrome.png`, `evidence/TC-FR01-02_edge.png`, `evidence/TC-FR01-02_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-02_after-submit_chrome.png`, `evidence/TC-FR01-02_after-submit_edge.png`, `evidence/TC-FR01-02_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -95,7 +98,7 @@ expect(received).toEqual(expected) // deep equality
 
 - Array [
 -   Object {
--     "email": "dom02_1794853069799@domain.com",
+-     "email": "dom02_1794898051878@domain.com",
 -     "name": "Nguyễn Văn Ánh",
 -   },
 - ]
@@ -110,7 +113,8 @@ expect(received).toEqual(expected) // deep equality
 - Expected (HW02, nguyên văn): Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva64_{ts}@domain.com' như cột dữ liệu.
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-64_chrome.png`, `evidence/TC-FR01-64_edge.png`, `evidence/TC-FR01-64_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-64_chrome.png`, `evidence/TC-FR01-64_edge.png`, `evidence/TC-FR01-64_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-64_after-submit_chrome.png`, `evidence/TC-FR01-64_after-submit_edge.png`, `evidence/TC-FR01-64_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -140,7 +144,7 @@ expect(received).toEqual(expected) // deep equality
 
 - Array [
 -   Object {
--     "email": "bva64_1794853105071@domain.com",
+-     "email": "bva64_1794898087685@domain.com",
 -     "name": "Nguyen Van A",
 -   },
 - ]
@@ -155,7 +159,8 @@ expect(received).toEqual(expected) // deep equality
 - Expected (HW02, nguyên văn): Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva68_{ts}@domain.com' như cột dữ liệu.
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-68_chrome.png`, `evidence/TC-FR01-68_edge.png`, `evidence/TC-FR01-68_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-68_chrome.png`, `evidence/TC-FR01-68_edge.png`, `evidence/TC-FR01-68_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-68_after-submit_chrome.png`, `evidence/TC-FR01-68_after-submit_edge.png`, `evidence/TC-FR01-68_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -185,7 +190,7 @@ expect(received).toEqual(expected) // deep equality
 
 - Array [
 -   Object {
--     "email": "bva68_1794853120255@domain.com",
+-     "email": "bva68_1794898102824@domain.com",
 -     "name": "Nguyen Van A",
 -   },
 - ]
@@ -200,7 +205,8 @@ expect(received).toEqual(expected) // deep equality
 - Expected (HW02, nguyên văn): Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva74_{ts}@domain.com' như cột dữ liệu.
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-74_chrome.png`, `evidence/TC-FR01-74_edge.png`, `evidence/TC-FR01-74_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-74_chrome.png`, `evidence/TC-FR01-74_edge.png`, `evidence/TC-FR01-74_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-74_after-submit_chrome.png`, `evidence/TC-FR01-74_after-submit_edge.png`, `evidence/TC-FR01-74_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -230,7 +236,7 @@ expect(received).toEqual(expected) // deep equality
 
 - Array [
 -   Object {
--     "email": "bva74_1794853135607@domain.com",
+-     "email": "bva74_1794898117881@domain.com",
 -     "name": "Nguyen Van A",
 -   },
 - ]
@@ -245,7 +251,8 @@ expect(received).toEqual(expected) // deep equality
 - Expected (HW02, nguyên văn): Không có thông báo lỗi; trình duyệt chuyển tới /login (FR-01.10); so với danh sách lấy ở bước 1 của chính case: đúng 1 user mới, có name 'Nguyen Van A' và email 'bva77_{ts}@domain.com' như cột dữ liệu.
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-77_chrome.png`, `evidence/TC-FR01-77_edge.png`, `evidence/TC-FR01-77_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-77_chrome.png`, `evidence/TC-FR01-77_edge.png`, `evidence/TC-FR01-77_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-77_after-submit_chrome.png`, `evidence/TC-FR01-77_after-submit_edge.png`, `evidence/TC-FR01-77_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -275,7 +282,7 @@ expect(received).toEqual(expected) // deep equality
 
 - Array [
 -   Object {
--     "email": "bva77_1794853150892@domain.com",
+-     "email": "bva77_1794898133099@domain.com",
 -     "name": "Nguyen Van A",
 -   },
 - ]
@@ -300,7 +307,8 @@ Assertion lỗi (chung của nhóm):
 - Expected (HW02, nguyên văn): Hệ thống báo mật khẩu thiếu ký tự đặc biệt; không tạo tài khoản
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-02.md mục Yêu cầu): FR-01.8: Mật khẩu có ít nhất 1 ký tự đặc biệt thuộc tập @, $, !, %, *, ?, &; A5 (giả định HW02): tập ký tự đặc biệt là tập đóng – khoảng trắng không tính là ký tự đặc biệt
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`
-- Ảnh: `evidence/TC-FR01-202_chrome.png`, `evidence/TC-FR01-202_edge.png`, `evidence/TC-FR01-202_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-202_chrome.png`, `evidence/TC-FR01-202_edge.png`, `evidence/TC-FR01-202_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-202_after-submit_chrome.png`, `evidence/TC-FR01-202_after-submit_edge.png`, `evidence/TC-FR01-202_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
@@ -374,7 +382,8 @@ Assertion lỗi (chung của nhóm):
 - Expected (HW02, nguyên văn): Đăng ký thành công; đăng nhập lại bằng đúng chuỗi ␣Hiep123$ thành công
 - Yêu cầu bị vi phạm (theo HW02/bugs/BUG-01.md mục Yêu cầu): FR-01.10: Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập; Chấp nhận mật khẩu hợp lệ theo FR-01.5–01.8 (ngầm định)
 - Vị trí code SUT: ../eshop-sut/frontend-web/src/pages/Register.jsx:15 `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/`; Register.jsx:17-19 (không khớp → setError 'Mật khẩu quá yếu!…', return trước POST)
-- Ảnh: `evidence/TC-FR01-211_chrome.png`, `evidence/TC-FR01-211_edge.png`, `evidence/TC-FR01-211_firefox.png`
+- Ảnh lúc kết thúc: `evidence/TC-FR01-211_chrome.png`, `evidence/TC-FR01-211_edge.png`, `evidence/TC-FR01-211_firefox.png`
+- Ảnh ngay sau thao tác chính: `evidence/TC-FR01-211_after-submit_chrome.png`, `evidence/TC-FR01-211_after-submit_edge.png`, `evidence/TC-FR01-211_after-submit_firefox.png`
 - Actual (chrome, nguyên văn assertion lỗi):
 
 ```
