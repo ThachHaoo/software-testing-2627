@@ -65,6 +65,7 @@ Loại: Negative 9, Positive 6 · HW02 status: Fail 9, Pass 6
 
 - C1: loại TC-200 = Negative, TC-201 = Negative (AI suy ra, SV duyệt).
 - C2=a: health-check backend sau mỗi case; sập → case Fail + annotation "backend sập", resetDb trước case kế; không đổi procedure, không xoá bản ghi để tránh sập.
+- C3: 3 giả định ngoài expected trong assumptions (page_message_selector, xss_alert_text = '1', form_blocked_means = SAU = TRƯỚC) – kế thừa HW02 H3/C21/C24, SV chốt lại.
 
 ## Tiêu chí
 

@@ -20,6 +20,6 @@ Spec: `HW04/tests/C_FR15.spec.ts`; oracle đọc từ `expected` của `HW04/dat
 - "Có thông báo" = ô không hợp lệ HTML5 (sự kiện `invalid` trong lần bấm) hoặc hộp thoại hoặc thông báo mới trên trang (selector ở `assumptions.page_message_selector`) — không phân loại nội dung (HW02 H4). Chỉ có hộp thoại → annotation `oracle thông báo yếu` kèm nội dung để SV xét.
 - Bấm 'Lưu sản phẩm' / 'Xóa' đúng 1 lần. Chờ trạng thái rõ: phản hồi POST/PUT/DELETE trong log mạng → GET /api/products tải lại (Thêm/Xóa) hoặc hộp thoại (Sửa, lỗi) → 2 khung hình render. Quá 10 s → Blocked. Form không hợp lệ HTML5 → không có request, không chờ.
 - Ảnh `<TC>_after-save` chụp SAU khi đo xong (không song song với việc chờ/đo).
-- Giả định ngoài expected (chờ SV duyệt) nằm ở `assumptions` của file data: `page_message_selector` (HW02 H3), `xss_alert_text` = '1' (HW02 C21), `form_blocked_means` = dữ liệu SAU = TRƯỚC (HW02 C24).
+- Giả định ngoài expected (kế thừa HW02 H3/C21/C24, SV chốt lại) nằm ở `assumptions` của file data: `page_message_selector` (HW02 H3), `xss_alert_text` = '1' (HW02 C21), `form_blocked_means` = dữ liệu SAU = TRƯỚC (HW02 C24).
 - C2=a: fixture kiểm backend sau mỗi case; sập → annotation `backend sập`, resetDb, case Fail.
 - Annotation mỗi TC: `expected`, `hw02`, `TRƯỚC`, `ô Giá tiền sau khi nhập`, `quan sát sau thao tác` (ô không hợp lệ, hộp thoại, thông báo, request), `SAU`.
