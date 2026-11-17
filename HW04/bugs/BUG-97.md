@@ -1,9 +1,9 @@
 # BUG-97
 
 - **ID:** BUG-97
-- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `[HW04][FR-15] Hệ thống cho phép thêm mới sản phẩm khi bỏ trống ô 'Giá tiền' và lưu vào cơ sở dữ liệu mà không báo lỗi`
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -19,19 +19,32 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend-admin (`http://localhost:5174`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng đã đăng nhập trang quản trị (Admin) và đang ở tab Quản lý Sản phẩm.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang quản trị (`http://localhost:5174`), mở tab **Sản phẩm**.
+2. Mở form thêm mới sản phẩm và nhập dữ liệu:
+   - **Tên sản phẩm:** `Tai nghe UI11 1794903118181` (chuỗi dạng `Tai nghe UI11 {ts}`)
+   - **Giá tiền:** để trống (`""`)
+   - **Danh mục:** `category_id = 2`
+   - **Mô tả:** `Mô tả NN 1794903118181`
+   - **Ảnh (imageUrl):** `https://placehold.co/300`
+3. Nhấn nút lưu để gửi form thêm sản phẩm.
+4. Quan sát thông báo lỗi, bảng danh sách sản phẩm trên UI và dữ liệu trả về từ `GET /api/products`.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống từ chối lưu sản phẩm vì trường **Giá tiền** là bắt buộc và phải là số dương lớn hơn `0` (**FR-15.3**).
+- Hiển thị thông báo lỗi hợp lệ (bong bóng HTML5, hộp thoại trình duyệt hoặc thông báo trên trang theo giả định **C7**, **C16**).
+- Bảng danh sách sản phẩm trên giao diện (`SAU_UI = TRƯỚC_UI`) và dữ liệu từ `GET /api/products` (`SAU = TRƯỚC`) giữ nguyên như trước khi thao tác, không thêm bản ghi mới.
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không hiển thị bất kỳ thông báo lỗi nào (kết quả kiểm tra thông báo lỗi trả về `false`).
+- Bảng danh sách sản phẩm trên UI hiển thị thêm 1 dòng mới: `Tai nghe UI11 1794903118181` với giá rỗng (`price: null`, hiển thị `"₫"`).
+- API `GET /api/products` trả về thêm bản ghi mới có `id = 6`, `name = "Tai nghe UI11 1794903118181"`, `price = ""` (chuỗi rỗng).
 
 ## Bằng chứng
 
@@ -139,7 +152,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Hệ thống thiếu kiểm tra ràng buộc bắt buộc nhập (`required`) và giá trị dương (`price > 0`) ở cả hai tầng:
+  1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 500–507, thẻ `<input type="number" placeholder="Giá tiền" ... />` không khai báo thuộc tính `required` hay `min`, và hàm xử lý submit không kiểm tra `productForm.price` bị rỗng trước khi gửi request.
+  2. **Backend:** Tại `backend/server.js` dòng 167–177, endpoint `POST /api/products` nhận trực tiếp `price` (lúc này là `""`) từ `req.body` và lưu thẳng vào bảng `products` qua câu lệnh `INSERT INTO products ...` mà không kiểm tra dữ liệu đầu vào.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-11` thuộc nhóm `C-G3`.
+- **Ghi chú duyệt:** Nhóm dữ kiện `C-G3` có cùng nguyên nhân gốc và cùng issue HW02 `BUG-36` (`#182`) với `C-G2` (`BUG-96`, giá `-1000`) và `C-G8` (`TC-FR15-67`, giá `0`). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `BUG-97` và `C-G8` vào `BUG-96`; nếu giữ tách riêng từng nhóm triệu chứng theo template thì giữ nguyên file này.
 
 ## Liên quan
 

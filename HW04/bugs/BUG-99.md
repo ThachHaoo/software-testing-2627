@@ -1,9 +1,9 @@
 # BUG-99
 
 - **ID:** BUG-99
-- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `[HW04][FR-15] Hệ thống không báo lỗi từ chối khi nhập chuỗi mã script XSS (<script>alert(1)</script>) vào ô 'Tên sản phẩm' ở form Thêm`
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -19,19 +19,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend-admin (`http://localhost:5174`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng đã đăng nhập trang quản trị (Admin) và đang ở tab Quản lý Sản phẩm.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang quản trị (`http://localhost:5174`), mở tab **Sản phẩm**.
+2. Mở form thêm mới sản phẩm và nhập dữ liệu:
+   - **Tên sản phẩm:** `<script>alert(1)</script>`
+   - Các trường bắt buộc khác (giá tiền, danh mục) nhập giá trị hợp lệ.
+3. Nhấn nút lưu để gửi form thêm sản phẩm.
+4. Quan sát thông báo lỗi hiển thị trên giao diện/trình duyệt và kiểm tra việc thực thi script.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống báo lỗi từ chối dữ liệu đầu vào chứa thẻ script (`<script>alert(1)</script>`) theo giả định **C21** (và các quy tắc thông báo lỗi **C7**, **C16**); tuyệt đối không kích hoạt thực thi mã độc XSS (**SEC-04**).
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không kích hoạt hộp thoại `alert(1)` (assertion kiểm tra XSS đạt do cơ chế tự động escape của React), nhưng hoàn toàn không hiển thị bất kỳ thông báo lỗi từ chối nào (bong bóng HTML5, hộp thoại trình duyệt hay thông báo trên trang đều trả về `false`).
 
 ## Bằng chứng
 
@@ -97,7 +103,11 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Cả tầng giao diện lẫn máy chủ đều không có bước kiểm tra lọc hoặc từ chối ký tự/thẻ HTML/script nguy hiểm trong tên sản phẩm:
+  1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 491–499, ô nhập liệu `<input placeholder="Tên sản phẩm" ... required />` chỉ kiểm tra không để trống (`required`) mà không có thuộc tính `pattern` hay hàm kiểm tra ký tự hợp lệ trước khi gửi form.
+  2. **Backend:** Tại `backend/server.js` dòng 167–177, endpoint `POST /api/products` nhận trực tiếp chuỗi `name` thô từ `req.body` và lưu thẳng vào cơ sở dữ liệu mà không sanitize hay từ chối thẻ `<script>`.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-200` thuộc nhóm `C-G5`.
+- **Ghi chú duyệt:** Severity/Priority đang để `Medium` vì React tự động escape chuỗi khi render nên mã script không thực thi được trên trình duyệt (assertion XSS đạt), chỉ vi phạm yêu cầu báo lỗi từ chối dữ liệu chứa mã script; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-39.md` để đồng bộ nếu cần.
 
 ## Liên quan
 

@@ -1,9 +1,9 @@
 # BUG-92
 
 - **ID:** BUG-92
-- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `[HW04][FR-07] Link 'Giỏ hàng' thiếu badge hiển thị tổng số lượng sản phẩm và không cộng dồn số lượng ở lần bấm đầu tiên khi thêm lại sản phẩm từ trang chi tiết`
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -19,19 +19,25 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
+- Giỏ hàng ban đầu đã có 2 dòng sản phẩm được thêm từ trang chủ: `iPhone 15 Pro Max` (đơn giá `30000000`, số lượng `1`, thành tiền `30000000`) và `Tai nghe AirPods Pro 2` (đơn giá `6000000`, số lượng `1`, thành tiền `6000000`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang chi tiết của sản phẩm `Tai nghe AirPods Pro 2`.
+2. Nhập **Số lượng** bằng `2`.
+3. Nhấn nút **Thêm vào giỏ hàng** 1 lần đầu tiên.
+4. Quan sát khu vực liên kết **Giỏ hàng** trên thanh điều hướng và mở trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra các dòng sản phẩm, thành tiền và tổng tiền.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Link **Giỏ hàng** trên thanh điều hướng hiển thị badge tổng số lượng sản phẩm trong giỏ là `4` (**FR-23.2**, giả định **B9**).
+- Tại trang Giỏ hàng: vẫn giữ nguyên 2 dòng sản phẩm; dòng `Tai nghe AirPods Pro 2` được cộng dồn số lượng từ `1` lên `3`, thành tiền cập nhật thành `18000000` (**FR-07.3**); dòng `iPhone 15 Pro Max` giữ nguyên; **Tổng** tiền cập nhật thành `48000000`.
 
 ## Actual
 
-`<SV viết>`
+- Link **Giỏ hàng** trên thanh điều hướng không hiển thị badge số lượng sản phẩm (kết quả kiểm tra badge trả về `null`).
+- Tại trang Giỏ hàng: dòng `Tai nghe AirPods Pro 2` không được cộng dồn, vẫn giữ nguyên Số lượng là `1` và Thành tiền là `6000000`; **Tổng** tiền vẫn là `36000000`.
 
 ## Bằng chứng
 
@@ -120,7 +126,13 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Nhóm fail `B-G4` (`TC-FR07-04`) đồng thời bộc lộ 2 lỗi từ 2 vị trí mã nguồn khác nhau:
+  1. **Thiếu badge số lượng trên link Giỏ hàng:** Tại `frontend-web/src/App.jsx` dòng 23, thẻ `<Link to="/cart" className="hover:underline">Giỏ hàng</Link>` chỉ render văn bản tĩnh mà không đọc dữ liệu từ `CartContext` để hiển thị badge tổng số lượng sản phẩm theo đặc tả FR-23.2.
+  2. **Bỏ qua lần bấm thêm đầu tiên ở trang chi tiết:** Tại `frontend-web/src/pages/ProductDetail.jsx` dòng 21–25, hàm `handleAddToCart` kiểm tra `if (clickCount === 0)` thì chỉ tăng `setClickCount(1)` và `return` sớm, khiến lần bấm đầu tiên không gọi `addToCart` nên không cộng dồn số lượng của `Tai nghe AirPods Pro 2` (giống nguyên nhân gốc của `BUG-89` / HW02 `#161`).
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-04` thuộc nhóm `B-G4`.
+- **Ghi chú duyệt:**
+  - Nếu bạn giữ tách riêng `BUG-92` cho lỗi thiếu badge trên thanh điều hướng (`App.jsx:23`, nối tiếp HW02 `BUG-20` `#166`) và quy phần không cộng dồn số lượng ở trang chi tiết về nguyên nhân đã nêu ở `BUG-89` (`ProductDetail.jsx:21-25`), bạn có thể rút gọn tiêu đề của `BUG-92` tập trung vào lỗi thiếu badge Giỏ hàng và xóa bớt các bullet thừa của `BUG-15` (`Chức năng thêm...`, `FR-06.3`, `FR-24.1`, `B21`, `B1`) trong mục **Yêu cầu bị vi phạm**.
+  - Severity/Priority đang để `Medium` theo lỗi hiển thị badge bị thiếu (bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-20.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

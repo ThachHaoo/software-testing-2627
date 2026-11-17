@@ -1,9 +1,9 @@
 # BUG-93
 
 - **ID:** BUG-93
-- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `[HW04][FR-07] Không hiển thị dialog xác nhận trước khi xóa sản phẩm khỏi giỏ hàng`
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -19,19 +19,24 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
+- Giỏ hàng ban đầu đã có 2 dòng sản phẩm: `Bàn phím cơ Keychron Q1` (thành tiền `4000000`) và `Tai nghe AirPods Pro 2`.
+- Người dùng đang ở trang Giỏ hàng (`http://localhost:5173/cart`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang Giỏ hàng (`http://localhost:5173/cart`) đang có 2 dòng sản phẩm (`Bàn phím cơ Keychron Q1` và `Tai nghe AirPods Pro 2`).
+2. Nhấn nút **Xóa** ở dòng sản phẩm `Tai nghe AirPods Pro 2`.
+3. Quan sát phản hồi giao diện ngay sau khi bấm nút **Xóa**.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Sau khi bấm nút **Xóa**, hệ thống hiển thị dialog xác nhận trước khi thực hiện xóa sản phẩm (**FR-07.4**, **FR-24.2**); dòng sản phẩm chưa bị xóa khi dialog xác nhận đang mở.
+- Sau khi người dùng xác nhận trong dialog: giỏ hàng giảm từ 2 xuống còn 1 dòng (`Bàn phím cơ Keychron Q1`), không còn `Tai nghe AirPods Pro 2`, và **Tổng** tiền cập nhật thành `4000000`.
 
 ## Actual
 
-`<SV viết>`
+- Sau khi bấm nút **Xóa**, hệ thống không hiển thị bất kỳ dialog xác nhận nào (kết quả kiểm tra số lượng dialog xuất hiện trả về `0` sau 2000ms) mà thực hiện xóa trực tiếp sản phẩm ngay lập tức.
 
 ## Bằng chứng
 
@@ -93,7 +98,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Cart.jsx` dòng 50–55, sự kiện `onClick={() => removeFromCart(index)}` của nút **Xóa** gọi thẳng hàm `removeFromCart` trong `frontend-web/src/context/CartContext.jsx` (dòng 12–16) để cắt bỏ phần tử khỏi mảng `cart` ngay lập tức, hoàn toàn thiếu bước hiển thị hộp thoại xác nhận (như `window.confirm` hoặc modal xác nhận) theo đặc tả FR-07.4 và FR-24.2.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-08` thuộc nhóm `B-G5`.
+- **Ghi chú duyệt:** Severity/Priority đang để `Medium` (thiếu bước xác nhận dẫn đến rủi ro người dùng xóa nhầm sản phẩm khỏi giỏ hàng nhưng không chặn chức năng xóa; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-19.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

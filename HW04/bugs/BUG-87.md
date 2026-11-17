@@ -1,9 +1,9 @@
 # BUG-87
 
 - **ID:** BUG-87
-- **Tiêu đề (GitHub: `[HW04][FR-01] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-01] …`):** `[HW04][FR-01] Hệ thống chấp nhận mật khẩu chỉ chứa khoảng trắng thay cho ký tự đặc biệt hợp lệ khi đăng ký tài khoản`
+- **Severity:** Medium
+- **Priority:** Medium
 
 ## Môi trường
 
@@ -19,19 +19,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng chưa đăng nhập và đang ở trang Đăng ký (`http://localhost:5173/register`).
+- Email dùng để đăng ký chưa tồn tại trong cơ sở dữ liệu (ví dụ: `hiep.sv03@domain.com`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang đăng ký tài khoản tại `http://localhost:5173/register`.
+2. Nhập **Họ và tên** hợp lệ: `Lê Tấn Hiệp`.
+3. Nhập **Email** hợp lệ chưa tồn tại trong hệ thống: `hiep.sv03@domain.com`.
+4. Nhập **Mật khẩu** đáp ứng độ dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, chữ số nhưng **không** chứa ký tự đặc biệt thuộc tập `@$!%*?&` mà chỉ dùng khoảng trắng thay thế.
+5. Nhấn nút **Đăng Ký**.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống từ chối đăng ký vì mật khẩu thiếu ký tự đặc biệt hợp lệ thuộc tập `@, $, !, %, *, ?, &` (**FR-01.8**; khoảng trắng không được tính là ký tự đặc biệt theo giả định **A5**).
+- Hiển thị khung thông báo lỗi trên form (`div.bg-red-100`) nêu rõ lỗi liên quan đến mật khẩu / ký tự đặc biệt và không tạo tài khoản mới trong cơ sở dữ liệu.
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không hiển thị bất kỳ hộp thông báo lỗi nào (`locator('div.bg-red-100')` không tìm thấy / không hiển thị trên form).
+- Hệ thống chấp nhận mật khẩu và tạo thành công tài khoản mới trong cơ sở dữ liệu (`{ "email": "hiep.sv03@domain.com", "name": "Lê Tấn Hiệp" }`).
 
 ## Bằng chứng
 
@@ -116,7 +124,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Register.jsx` dòng 15, biểu thức chính quy `flawedStrongPasswordRegex` kiểm tra ký tự đặc biệt bằng lookahead `(?=.*\s)` và tập ký tự `[A-Za-z\d\s]` (coi khoảng trắng `\s` là điều kiện hợp lệ thay vì tập ký tự đặc biệt `@$!%*?&` theo đặc tả FR-01.8 và giả định A5). Vì vậy, mật khẩu chứa chữ hoa, chữ thường, số và khoảng trắng đã vượt qua bước kiểm tra phía client và gửi request tạo tài khoản thành công lên server.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR01-202` thuộc nhóm `A-G2`.
+- **Ghi chú duyệt:** Severity/Priority đang để `Medium` (lỗ hổng yếu quy tắc validation mật khẩu nhưng không chặn luồng chính của người dùng; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-02.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

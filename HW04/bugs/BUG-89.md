@@ -1,9 +1,9 @@
 # BUG-89
 
 - **ID:** BUG-89
-- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `[HW04][FR-07] Nút 'Thêm vào giỏ hàng' ở trang chi tiết sản phẩm không hoạt động ở lần bấm đầu tiên`
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -19,19 +19,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
+- Giỏ hàng ban đầu đang rỗng (`0` sản phẩm).
+- Người dùng đang mở trang chi tiết của một sản phẩm bất kỳ (ví dụ: `Bàn phím cơ Keychron Q1`, đơn giá `4000000`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang chi tiết sản phẩm `Bàn phím cơ Keychron Q1`.
+2. Nhập **Số lượng** hợp lệ ≥ 1 (ví dụ: `1`, `2`, `5`, hoặc `1000`).
+3. Nhấn nút **Thêm vào giỏ hàng** 1 lần đầu tiên.
+4. Điều hướng sang trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra trạng thái giỏ.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Ngay sau lần bấm đầu tiên nút **Thêm vào giỏ hàng**, sản phẩm được thêm vào giỏ hàng với đúng số lượng đã nhập (bao gồm cả giá trị lớn `1000` theo giả định **B1**).
+- Hiển thị phản hồi trực quan trong vòng ≤ 2 giây (**FR-06.3**, **FR-24.1**, **B21**).
+- Tại trang Giỏ hàng: hiển thị 1 dòng sản phẩm `Bàn phím cơ Keychron Q1` với đúng số lượng, thành tiền tương ứng (`4000000`, `8000000`, `20000000`, hoặc `4000000000`) và **Tổng** tiền khớp với thành tiền.
 
 ## Actual
 
-`<SV viết>`
+- Sau lần bấm đầu tiên nút **Thêm vào giỏ hàng**, hệ thống không thêm sản phẩm vào giỏ hàng và không có bất kỳ phản hồi trực quan nào.
+- Khi mở trang Giỏ hàng: giỏ hàng vẫn rỗng (`0` dòng, danh sách dòng trả về `[]`), không hiển thị **Tổng** tiền (`null`).
 
 ## Bằng chứng
 
@@ -220,7 +228,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/ProductDetail.jsx` dòng 21–25, hàm `handleAddToCart` cố tình kiểm tra điều kiện `if (clickCount === 0)` thì chỉ tăng `setClickCount(1)` và `return` sớm mà không gọi `addToCart(product, parseInt(quantity))` hay cập nhật trạng thái phản hồi `setAdded(true)`. Do đó, lần bấm đầu tiên của người dùng ở trang chi tiết sản phẩm luôn bị bỏ qua bất kể giá trị số lượng hợp lệ nào.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) qua 4 test case thuộc nhóm `B-G1` (`TC-FR07-61`, `TC-FR07-62`, `TC-FR07-63`, `TC-FR07-64`).
+- **Ghi chú duyệt:** Nhóm dữ kiện `B-G1` có cùng nguyên nhân gốc với `B-G3` (`TC-FR07-02`) và `B-G6` (`TC-FR07-205`) (cùng hàm `handleAddToCart` tại `ProductDetail.jsx:21-31` và cùng issue HW02 `#161`). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `B-G3` và `B-G6` vào `BUG-89`; nếu giữ tách riêng từng nhóm triệu chứng theo template thì giữ nguyên như trên.
 
 ## Liên quan
 

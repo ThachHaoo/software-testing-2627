@@ -1,9 +1,9 @@
 # BUG-90
 
 - **ID:** BUG-90
-- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `[HW04][FR-07] Trang giỏ hàng trống thiếu hình minh họa hoặc biểu tượng (img/svg)`
+- **Severity:** Low
+- **Priority:** Low
 
 ## Môi trường
 
@@ -19,19 +19,23 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng chưa đăng nhập (khách) và giỏ hàng đang rỗng (`0` sản phẩm).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang chủ của hệ thống tại `http://localhost:5173/`.
+2. Điều hướng đến trang Giỏ hàng (`http://localhost:5173/cart`) khi giỏ hàng chưa có sản phẩm nào.
+3. Quan sát nội dung hiển thị ở vùng trạng thái giỏ hàng trống trên trang.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Khi giỏ hàng trống, trang không hiển thị bảng sản phẩm; có hiển thị cả hình minh họa/icon (`img` hoặc `svg`) lẫn dòng thông báo rõ ràng, thân thiện báo giỏ trống (**FR-07.7**, **FR-24.3**); badge giỏ hàng ẩn hoặc bằng `0`.
 
 ## Actual
 
-`<SV viết>`
+- Tại khối hiển thị trạng thái giỏ trống, hệ thống chỉ hiển thị dòng chữ `"Giỏ hàng của bạn đang trống"` và liên kết `"Tiếp tục mua sắm"`.
+- Hoàn toàn không có hình minh họa hoặc biểu tượng (`img` hoặc `svg`) nào trong khối chứa dòng thông báo giỏ trống (`locator('main').getByText(/trống/i).locator('..').locator('img, svg')` trả về `0`).
 
 ## Bằng chứng
 
@@ -80,7 +84,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/Cart.jsx` dòng 20–27, nhánh điều kiện `if (cart.length === 0)` chỉ render thẻ tiêu đề `<h2>Giỏ hàng của bạn đang trống</h2>` và thẻ `<Link to="/">Tiếp tục mua sắm</Link>`, thiếu phần tử hình ảnh (`<img>`) hoặc biểu tượng vector (`<svg>`) minh họa trạng thái trống (Empty State) theo đặc tả FR-07.7 và FR-24.3.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-01` thuộc nhóm `B-G2`.
+- **Ghi chú duyệt:** Severity/Priority đang để `Low` (lỗi giao diện/UI không ảnh hưởng đến chức năng cốt lõi; bạn có thể đối chiếu lại mức độ trong `HW02/bugs/BUG-21.md` để đồng bộ nếu cần).
 
 ## Liên quan
 

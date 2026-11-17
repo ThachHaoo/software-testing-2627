@@ -1,9 +1,9 @@
 # BUG-95
 
 - **ID:** BUG-95
-- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `[HW04][FR-15] Bảng sản phẩm hiển thị sai tên tất cả sản phẩm thành tên mới vừa sửa và không cập nhật giá mới trên UI sau khi sửa sản phẩm`
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -19,19 +19,31 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend-admin (`http://localhost:5174`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng đã đăng nhập trang quản trị (Admin) và đang ở tab Quản lý Sản phẩm.
+- Danh sách sản phẩm ban đầu gồm 5 sản phẩm có sẵn (`iPhone 15 Pro Max`, `Samsung Galaxy S24 Ultra`, `MacBook Pro M3`, `Tai nghe AirPods Pro 2`, `Bàn phím cơ Keychron Q1`) cùng sản phẩm mục tiêu `M` vừa được tạo (có giá ban đầu là `1000000`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang quản trị (`http://localhost:5174`), mở tab **Sản phẩm**.
+2. Chọn thao tác **Sửa** trên dòng sản phẩm mục tiêu `M` (có giá ban đầu `1000000`).
+3. Nhập dữ liệu mới hợp lệ vào form:
+   - **Tên sản phẩm:** `Sửa UI03 1794903107473` (chuỗi dạng `Sửa UI03 {ts}`)
+   - **Giá tiền:** `2500000`
+   - **Danh mục:** chọn danh mục có `category_id = 3`
+4. Nhấn nút lưu form cập nhật sản phẩm và xác nhận hộp thoại `"Cập nhật thành công!"`.
+5. Quan sát bảng danh sách sản phẩm hiển thị trên giao diện.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Khi sửa một sản phẩm, chỉ sản phẩm mục tiêu `M` bị thay đổi; tất cả các sản phẩm khác trên bảng giữ nguyên dữ liệu như trước khi sửa (**FR-15.5**).
+- Bảng danh sách sản phẩm hiển thị chính xác thông tin đã cập nhật của `M` (**FR-15.1**): **Tên SP** = `Sửa UI03 {ts}`, **Giá** = `2500000`, số dòng không đổi.
+- Trong dữ liệu backend: bản ghi `M` được cập nhật `name = 'Sửa UI03 {ts}'`, `price = 2500000`, `category_id = 3`.
 
 ## Actual
 
-`<SV viết>`
+- Trên bảng danh sách sản phẩm UI: tất cả 5 sản phẩm khác (`iPhone 15 Pro Max`, `Samsung Galaxy S24 Ultra`, `MacBook Pro M3`, `Tai nghe AirPods Pro 2`, `Bàn phím cơ Keychron Q1`) đều bị đổi cột **Tên SP** thành tên mới của sản phẩm mục tiêu (`Sửa UI03 1794903107473`).
+- Tại dòng của sản phẩm mục tiêu `M` trên bảng UI: cột **Giá** vẫn hiển thị giá cũ là `1000000` thay vì giá mới `2500000` (mặc dù API backend đã lưu dữ liệu mới).
 
 ## Bằng chứng
 
@@ -123,7 +135,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Tại `frontend-admin/src/App.jsx` dòng 109–114, sau khi gọi API `await axios.put(\`${API_URL}/products/${productForm.id}\`, productForm)` thành công, hàm `handleProductSubmit` không cập nhật state `products` theo đúng sản phẩm có `id === productForm.id` hoặc gọi lại API lấy danh sách mới, mà lại chạy vòng lặp `products.map((p) => ({ ...p, name: productForm.name }))`. Đoạn mã này vừa ghi đè thuộc tính `name` của toàn bộ sản phẩm trong state UI thành `productForm.name`, vừa bỏ sót việc cập nhật các trường khác như `price` và `category_id` của sản phẩm đang sửa trên state giao diện.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-03` thuộc nhóm `C-G1`.
+- **Ghi chú duyệt:** Theo dữ kiện trong `_groups_C.md`, triệu chứng ghi đè cột `Tên SP` của toàn bộ bảng trên UI cũng xuất hiện ở nhóm `C-G4` (`TC-FR15-15`) và `C-G9` (`TC-FR15-78`) do dùng chung đoạn logic `App.jsx:108-115` khi thực hiện thao tác Sửa.
 
 ## Liên quan
 

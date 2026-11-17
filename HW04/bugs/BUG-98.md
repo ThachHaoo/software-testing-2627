@@ -1,9 +1,9 @@
 # BUG-98
 
 - **ID:** BUG-98
-- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-15] …`):** `[HW04][FR-15] Hệ thống cho phép sửa sản phẩm với giá âm (-1000) và lưu vào cơ sở dữ liệu`
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -19,19 +19,29 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend-admin (`http://localhost:5174`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng đã đăng nhập trang quản trị (Admin) và đang ở tab Quản lý Sản phẩm.
+- Sản phẩm mục tiêu `M` tồn tại trong danh sách sản phẩm với `id = 6`, `name = "Muc tieu 15 1794903121716"`, `price = 1000000`, `category_id = 1`, `description = "Mô tả mục tiêu 1794903121716"`, `imageUrl = "https://placehold.co/300"`.
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Truy cập trang quản trị (`http://localhost:5174`), mở tab **Sản phẩm**.
+2. Chọn thao tác **Sửa** trên dòng sản phẩm mục tiêu `M` (`Muc tieu 15 1794903121716`).
+3. Tại ô **Giá tiền**, nhập giá trị âm `-1000` (giữ nguyên các thông tin hợp lệ khác).
+4. Nhấn nút lưu form cập nhật sản phẩm.
+5. Quan sát hộp thoại/thông báo lỗi, bảng danh sách sản phẩm trên UI và dữ liệu trả về từ `GET /api/products` cũng như `GET /api/products/6`.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Hệ thống từ chối cập nhật sản phẩm vì giá phải là số dương lớn hơn `0` (**FR-15.3**).
+- Hiển thị thông báo lỗi hợp lệ (bong bóng HTML5, hộp thoại trình duyệt hoặc thông báo trên trang theo giả định **C7**, **C16**).
+- Dữ liệu không thay đổi: bản ghi mục tiêu giữ nguyên `M_SAU = M_TRƯỚC` (`price = 1000000`), `GET /api/products SAU = TRƯỚC`, và bảng danh sách sản phẩm trên UI giữ nguyên `SAU_UI = TRƯỚC_UI`.
 
 ## Actual
 
-`<SV viết>`
+- Hệ thống không từ chối mà vẫn cập nhật thành công và hiện hộp thoại `"Cập nhật thành công!"`.
+- API `GET /api/products` trả về bản ghi `id = 6` có `price = -1000`; `GET /api/products/6` (`M_SAU`) trả về `price = "-1000"` (bị đổi từ `1000000` thành `-1000`).
+- Ngoài ra, trên bảng danh sách sản phẩm UI (`SAU_UI`), toàn bộ 5 sản phẩm khác đều bị ghi đè cột **Tên SP** thành `"Muc tieu 15 1794903121716"` (hệ quả từ lỗi cập nhật state UI khi Sửa ở `BUG-95`).
 
 ## Bằng chứng
 
@@ -168,7 +178,12 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Hệ thống thiếu kiểm tra ràng buộc giá trị dương (`price > 0`) ở cả hai tầng khi cập nhật sản phẩm:
+  1. **Frontend:** Tại `frontend-admin/src/App.jsx` dòng 500–507, thẻ `<input type="number" placeholder="Giá tiền" ... />` không khai báo thuộc tính `min` và hàm xử lý submit không kiểm tra điều kiện `Number(productForm.price) > 0` trước khi gọi API `PUT`.
+  2. **Backend:** Tại `backend/server.js` dòng 179–189, endpoint `PUT /api/products/:id` nhận trực tiếp `price` từ `req.body` và thực thi câu lệnh `UPDATE products SET ... WHERE id = ?` mà không kiểm tra tính hợp lệ (`price > 0`).
+  3. **Tác động phụ trên UI:** Sau khi `PUT` thành công, logic cập nhật state ở `App.jsx:110-114` ghi đè `name` của toàn bộ danh sách sản phẩm trên giao diện thành `productForm.name` (cùng nguyên nhân gốc với `BUG-95`).
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR15-15` thuộc nhóm `C-G4`.
+- **Ghi chú duyệt:** Nhóm dữ kiện `C-G4` nối tiếp issue HW02 `BUG-38` (`#184`). Nếu giữ tách riêng file `BUG-98.md` này, bạn có thể xóa bớt phần ghi chú trong ngoặc `(TC-15: -1000; TC-79: 0; TC-16: rỗng)` ở mục **Yêu cầu bị vi phạm** vì trong HW04 nhóm `C-G4` chỉ chứa `TC-FR15-15`.
 
 ## Liên quan
 

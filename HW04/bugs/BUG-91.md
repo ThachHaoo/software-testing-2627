@@ -1,9 +1,9 @@
 # BUG-91
 
 - **ID:** BUG-91
-- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `<SV viết>`
-- **Severity:** `<SV viết>` (Critical/High/Medium/Low)
-- **Priority:** `<SV viết>` (High/Medium/Low)
+- **Tiêu đề (GitHub: `[HW04][FR-07] …`):** `[HW04][FR-07] Không có phản hồi trực quan trong ≤ 2 giây và không thêm được sản phẩm ở lần bấm đầu tiên nút 'Thêm vào giỏ hàng' trên trang chi tiết (user đã đăng nhập)`
+- **Severity:** High
+- **Priority:** High
 
 ## Môi trường
 
@@ -19,19 +19,27 @@
 
 ## Tiền điều kiện
 
-`<SV viết>`
+- Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
+- Người dùng đã đăng nhập vào hệ thống và giỏ hàng ban đầu đang rỗng (`0` sản phẩm).
+- Người dùng đang mở trang chi tiết của sản phẩm `Samsung Galaxy S24 Ultra` (đơn giá `28000000`).
 
 ## Các bước tái hiện
 
-`<SV viết>`
+1. Đăng nhập tài khoản người dùng hợp lệ trên hệ thống.
+2. Truy cập trang chi tiết sản phẩm `Samsung Galaxy S24 Ultra`.
+3. Nhập **Số lượng** bằng `2`.
+4. Nhấn nút **Thêm vào giỏ hàng** 1 lần đầu tiên và quan sát phản hồi trên giao diện trong vòng 2 giây.
+5. Điều hướng sang trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra trạng thái giỏ hàng.
 
 ## Expected (trích SRS)
 
-`<SV viết>`
+- Trong vòng ≤ 2 giây sau khi bấm nút **Thêm vào giỏ hàng**, hệ thống hiển thị ít nhất một phản hồi trực quan nhìn thấy được gắn với thao tác thêm (toast notification, badge cập nhật, chữ/trạng thái nút đổi, hoặc thông báo trên trang) (**FR-06.3**, **FR-24.1**, **B21**).
+- Tại trang Giỏ hàng: hiển thị 1 dòng sản phẩm `Samsung Galaxy S24 Ultra` với Đơn giá `28000000`, Số lượng `2`, Thành tiền `56000000` và **Tổng** tiền bằng `56000000`.
 
 ## Actual
 
-`<SV viết>`
+- Trong vòng 2 giây sau lần bấm đầu tiên nút **Thêm vào giỏ hàng**, hệ thống không hiển thị bất kỳ phản hồi trực quan nào (kết quả kiểm tra phản hồi trả về `null`).
+- Khi mở trang Giỏ hàng: giỏ hàng vẫn rỗng (`0` dòng, danh sách dòng trả về `[]`), không hiển thị **Tổng** tiền (`null`).
 
 ## Bằng chứng
 
@@ -115,7 +123,9 @@
 
 ### Nhận định
 
-`<SV viết>`
+- **Nguyên nhân gốc (Root cause):** Tại `frontend-web/src/pages/ProductDetail.jsx` dòng 21–25, hàm `handleAddToCart` kiểm tra điều kiện `if (clickCount === 0)` thì chỉ tăng `setClickCount(1)` và `return` sớm mà không gọi `addToCart(product, parseInt(quantity))` cũng như không gọi `setAdded(true)` ở dòng 28. Vì vậy, lần bấm đầu tiên vừa không thêm sản phẩm vào giỏ, vừa không kích hoạt thông báo phản hồi trực quan trong 2 giây.
+- **Tính tái hiện:** Lỗi xảy ra nhất quán trên cả 3 trình duyệt (Chrome, Edge, Firefox) ở `TC-FR07-02` thuộc nhóm `B-G3`.
+- **Ghi chú duyệt:** Nhóm dữ kiện `B-G3` có cùng nguyên nhân gốc với `B-G1` (`BUG-89`) và `B-G6` (cùng hàm `handleAddToCart` tại `ProductDetail.jsx:21-31` và cùng issue HW02 `#161`; khác ở chỗ `TC-FR07-02` có assertion kiểm tra riêng phản hồi ≤ 2 giây theo giả định B21 và chạy với user đã đăng nhập). Nếu bạn áp dụng quy tắc gộp theo nguyên nhân gốc ở bước tổng hợp, có thể gộp `BUG-91` vào `BUG-89`; nếu giữ tách riêng từng nhóm triệu chứng theo template thì giữ nguyên file này (đồng thời lưu ý dòng bullet cuối cùng về `B1` trong mục **Yêu cầu bị vi phạm** do AI chép từ `BUG-15.md` chỉ áp dụng cho `TC-FR07-64`, bạn có thể xóa bớt dòng `B1` đó ở file này cho gọn).
 
 ## Liên quan
 
