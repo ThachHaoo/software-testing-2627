@@ -63,9 +63,13 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW04_AI_Automation_<gg
 
 | Mã | Quyết định | Nguồn |
 |---|---|---|
-| S1 | A: loại TC-202 = Negative, TC-211 = Positive (AI suy ra, SV duyệt) | `HW04/A_FR01/selection.json` decisions |
-| T1–T4 | `[...]` – nội dung chưa ghi trong repo (chốt ở phiên thảo luận); SV/phiên thảo luận điền | — |
+| S1 = a | Tự viết skill `playwright-ddt-automation` | phiên thảo luận 23:01 16/11 |
+| T1 = a | 15 TC UI mỗi feature | phiên thảo luận 23:01 16/11 |
+| T2 = a | Dữ liệu JSON (expected nguyên văn HW02 + sha1) | phiên thảo luận 23:01 16/11 |
+| T3 = a | Chromium/Firefox/WebKit → thay bằng W1 = a | phiên thảo luận 23:01 16/11 |
+| T4 = a | Playwright HTML reporter, "Run by" ở title + metadata | phiên thảo luận 23:01 16/11 |
 | W1 = a | WebKit bị Smart App Control chặn → Chrome (channel chrome) / Edge (msedge) / Firefox | `HW04/CLAUDE.md` §5 |
+| A-S1 | A: loại TC-202 = Negative, TC-211 = Positive (AI suy ra, SV duyệt) – mã S1 trong `A_FR01/selection.json`, khác S1 ở trên | `HW04/A_FR01/selection.json` decisions |
 | B1 = b | Tạo issue MỚI cho mọi bug (không comment issue HW02); tiêu đề `[HW04][FR-xx] …`; mục "Liên quan" trỏ issue HW02 | `HW04/bugs/README.md` |
 | Z1 = d | Tắt trace trong `playwright.config.ts` (3 report có trace ≈ 30 MB); A chạy lại | `HW04/A_FR01/RUN.md` |
 | Z2 | Lượt thử export-ignore khi đóng gói; chỉ nộp 9 lượt chính thức | phiên thảo luận (chưa áp vào `HW04/.gitattributes`) |
@@ -78,7 +82,7 @@ Moodle: ≤ 20 file, mỗi file ≤ 20 MB. Zip: `23120255_HW04_AI_Automation_<gg
 | C3 | C: 3 giả định ngoài expected (selector thông báo, alert XSS '1', "Form chặn" = SAU = TRƯỚC) – kế thừa HW02 H3/C21/C24, SV chốt | C selection.json |
 | Cách 2 | Mỗi nhóm Fail (G) = 1 bug → 18 bug BUG-86…103 | `HW04/bugs/README.md` |
 
-**Còn chờ SV chốt:** T1–T4 (ghi nội dung), áp Z2 vào `.gitattributes`.
+**Còn chờ SV chốt:** áp Z2 vào `.gitattributes`.
 
 ## f. Khai cho Audit (ghi dần)
 
@@ -101,6 +105,7 @@ Nguồn: `HW04/*/RUN.md`, `HW04/*/review_sv.md`, khối báo cáo các lệnh, g
 - Script tạm AI viết, **không commit**: sinh 18 khung bug (`gen_bugs.py`), Playwright tái hiện 18 bug (`repro.spec.ts`), tạo issue (`mk_issues.py`), chụp trang Issues (`shot.cjs`), đọc phiên bản trình duyệt.
 - AI chạy `gh issue create` 18 lần (#298–#315) với file SV viết; chụp `issues_page_1.png` (chưa đăng nhập GitHub).
 - AI chỉ xem mẫu ảnh evidence (A 3/48, B 3/54, C 2/54) – SV xem phần còn lại.
+- Prompt log: AI thêm bộ đọc bản xuất dữ liệu claude.ai (`conversations.json`) vào `tools/extract_prompt_log.py` (`86d4d78`); hội thoại chép nguyên văn vào `.transcripts/claude-ai_session_HW04_p1.json` (không nộp). 36 lượt claude.ai ghi "Claude (không rõ model)" vì bản xuất không ghi model; SV xác nhận dùng Opus 5.5 (ghi ở `prompt_log_notes.toml`, trường `ghi_chu_model`, chỉ áp cho lượt claude.ai qua `nguon_luot`).
 
 ## g. Danh sách cho Mandatory Disclosure (ghi dần)
 

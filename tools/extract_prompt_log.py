@@ -41,6 +41,9 @@ File lượt ngoài Claude Code (Gemini, ChatGPT…), cùng được đánh số
   time   = "2026-10-20T09:15"        # giờ địa phương
   tool   = "Gemini Flash"
   source = "Chép tay từ giao diện …"   # tuỳ chọn, hiện thành dòng "*Nguồn:*" dưới tiêu đề lượt
+Trường tuỳ chọn khác của ghi chú:
+  nguon_luot   = "claude.ai"   # khoá (thường là khoá khoảng) chỉ áp cho lượt có nguồn này ("claude.ai" | "claude-code" | "extra")
+  ghi_chu_model = "…"          # hiện thành dòng "*Ghi chú model:*" dưới tiêu đề lượt (cột model giữ nguyên)
   prompt = '''...'''
   output = '''...'''
 """
@@ -140,7 +143,7 @@ def load_claude_ai_export(path: Path):
                 if not prompt:
                     continue
                 cur = {"time": parse_ts(m["created_at"]), "tool": NO_MODEL, "models": [], "prompt": prompt,
-                       "attachments": att, "output": [], "files": []}
+                       "attachments": att, "output": [], "files": [], "origin": "claude.ai"}
                 turns.append(cur)
             elif m.get("sender") == "assistant" and cur is not None:
                 for b in blocks:
@@ -178,7 +181,7 @@ def load_session(path: Path):
             if not prompt:  # tin nhắn chỉ để giao file: giữ tên file cho lượt kế tiếp
                 pending_attach += att
                 continue
-            cur = {"time": parse_ts(d["timestamp"]), "tool": NO_MODEL, "models": [], "prompt": prompt,
+            cur = {"time": parse_ts(d["timestamp"]), "tool": NO_MODEL, "models": [], "prompt": prompt, "origin": "claude-code",
                    "attachments": pending_attach + att, "output": [], "files": []}
             pending_attach = []
             turns.append(cur)
@@ -254,7 +257,8 @@ def note_for(notes, keys, i, turns=None, ranges=()):
     if not ranges:
         return single
     t = turns[i - 1]["time"].replace(tzinfo=None, second=0, microsecond=0)
-    hits = [r for r in ranges if r[0] <= t <= r[1]]
+    origin = turns[i - 1].get("origin", "extra")
+    hits = [r for r in ranges if r[0] <= t <= r[1] and r[2].get("nguon_luot", origin) == origin]
     if not hits:
         return single
     return {**min(hits, key=lambda r: r[1] - r[0])[2], **single}
@@ -262,8 +266,8 @@ def note_for(notes, keys, i, turns=None, ranges=()):
 
 def warn_unmatched(notes, keys, turns, ranges):
     """In ra stderr mọi khoá ghi chú không khớp lượt nào (kể cả khoá gõ sai cú pháp)."""
-    times = [t["time"].replace(tzinfo=None, second=0, microsecond=0) for t in turns]
-    used_ranges = {id(r[2]) for r in ranges if any(r[0] <= x <= r[1] for x in times)}
+    times = [(t["time"].replace(tzinfo=None, second=0, microsecond=0), t.get("origin", "extra")) for t in turns]
+    used_ranges = {id(r[2]) for r in ranges if any(r[0] <= x <= r[1] and r[2].get("nguon_luot", o) == o for x, o in times)}
     for k, v in notes.items():
         if RANGE_SEP in k:
             ok = id(v) in used_ranges
@@ -353,6 +357,8 @@ def render(turns, notes, args):
         out.append(f"## #{i} | {t['time']:%H:%M %d/%m/%Y} | {t['tool']} | {n.get('section', '[...]')}")
         if t.get("source"):
             out.append(f"*Nguồn:* {t['source']}")
+        if n.get("ghi_chu_model"):
+            out.append(f"*Ghi chú model:* {n['ghi_chu_model']}")
         out.append(f"**Mục đích:** {n.get('muc_dich', '[...]')}")
         out += ["", "**Prompt:**", fence(t["prompt"])]
         if n.get("dinh_kem"):

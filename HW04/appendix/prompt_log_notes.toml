@@ -6,3 +6,8 @@
 #   ["YYYY-MM-DD HH:MM"]                        một lượt (lượt thứ k cùng phút: "YYYY-MM-DD HH:MM#k")
 #   ["YYYY-MM-DD HH:MM .. YYYY-MM-DD HH:MM"]    mọi lượt trong khoảng, hai đầu tính cả (theo phút)
 # Khoá giờ đơn ưu tiên hơn khoá khoảng, ghi đè từng trường.
+
+# Lượt phiên thảo luận claude.ai (bản xuất dữ liệu không ghi model) – chỉ áp cho lượt claude.ai
+["2026-11-12 18:51 .. 2026-11-18 11:00"]
+nguon_luot    = "claude.ai"
+ghi_chu_model = "Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)"

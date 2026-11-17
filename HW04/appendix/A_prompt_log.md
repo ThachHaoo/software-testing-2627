@@ -6,6 +6,7 @@
 ---
 
 ## #1 | 18:51 12/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -73,6 +74,7 @@ Trả lời xong mình sẽ lập kế hoạch nộp và dàn ý, rồi viết l
 ---
 
 ## #2 | 19:44 16/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -231,6 +233,7 @@ Report đúng. Giờ xoá smoke, sinh log HW04, commit.
 ---
 
 ## #4 | 23:01 16/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -365,6 +368,7 @@ Bước 1 A_FR01: liệt kê ứng viên.
 ---
 
 ## #6 | 23:16 16/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -470,6 +474,7 @@ Bước 1b (SV chốt) và bước 2 của A_FR01 đã commit; em dừng trướ
 ---
 
 ## #8 | 00:13 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -593,6 +598,7 @@ Spec A_FR01 đã sinh và commit; `--list` ra đủ 45 test. Em chưa chạy tes
 ---
 
 ## #10 | 00:28 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -718,6 +724,7 @@ Spec đã sửa, bỏ mode serial và commit 5/6a. 3 report lượt thử 1 đư
 ---
 
 ## #12 | 00:44 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -776,6 +783,7 @@ Chạy xong cả 3 trình duyệt mà kết quả giống nhau (8 Fail / 7 Pass)
 ---
 
 ## #13 | 00:54 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -891,6 +899,7 @@ Cập nhật RUN.md + commit report lượt thử 2.
 ---
 
 ## #15 | 01:10 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -995,6 +1004,7 @@ Bước 6 của A_FR01 đã xong và commit; em dừng ở đây. Có một rủ
 ---
 
 ## #17 | 01:16 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1103,6 +1113,7 @@ Facts confirmed (CartContext.jsx: `useState([])`, no axios/localStorage). Writin
 ---
 
 ## #19 | 01:28 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1213,6 +1224,7 @@ Khôi phục đủ (diff rỗng). Sửa `waitLoaded` của trang chi tiết, pro
 ---
 
 ## #21 | 01:34 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1321,6 +1333,7 @@ npx playwright test B_FR07 --project=chrome; npx playwright test B_FR07 --projec
 ---
 
 ## #23 | 01:49 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1422,6 +1435,7 @@ Kết quả: 15/15 trùng HW02, 3 trình duyệt giống nhau. Lấy thêm annot
 ---
 
 ## #25 | 01:52 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1503,6 +1517,7 @@ No response requested.
 ---
 
 ## #27 | 13:34 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1547,6 +1562,7 @@ Em push xong nói mình, mình đọc code rồi chốt bảng đánh giá và �
 ---
 
 ## #28 | 13:35 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1693,6 +1709,7 @@ Code sửa ở lệnh #12 (5/6a–c của B, 5/6e của A) chưa chạy trên SU
 ---
 
 ## #31 | 14:03 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1805,6 +1822,7 @@ npx playwright test B_FR07 --project=firefox --grep "TC-FR07-60 " --repeat-each=
 ---
 
 ## #33 | 14:10 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -1912,6 +1930,7 @@ Xem rủi ro sập backend (price null + id chẵn) trong mã SUT và tài liệ
 ---
 
 ## #35 | 14:16 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2026,6 +2045,7 @@ Bước 2 C: đọc UI admin thật.
 ---
 
 ## #37 | 14:22 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2161,6 +2181,7 @@ npx playwright test C_FR15 --project=chrome; npx playwright test C_FR15 --projec
 ---
 
 ## #40 | 14:46 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2272,6 +2293,7 @@ Lệnh #17 xong 3 phần, mỗi phần một commit. C lượt thử 1 trùng HW
 ---
 
 ## #42 | 15:00 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2348,6 +2370,7 @@ Em push C rồi gửi mình: tiêu chí G→BUG em chọn, và 5 ý đã viết 
 ---
 
 ## #43 | 15:02 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2397,6 +2420,7 @@ Sau đó em chạy lượt chính thức C, và gửi mình **tiêu chí G→BUG
 ---
 
 ## #44 | 15:07 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2503,6 +2527,7 @@ npx playwright test C_FR15 --project=chrome; npx playwright test C_FR15 --projec
 ---
 
 ## #46 | 15:16 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2601,6 +2626,7 @@ Lệnh #19 xong: C chốt lượt chính thức (bước 6), có bảng dữ ki�
 ---
 
 ## #48 | 15:20 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2666,6 +2692,7 @@ Claude Code lại hỏi, nhưng em đã chốt **B1=b: tạo issue mới cho m�
 ---
 
 ## #49 | 15:29 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2752,6 +2779,7 @@ Khung 18 bug đã sinh, đoạn code khớp số dòng. Giờ ghi `HW04/bugs/REA
 ---
 
 ## #51 | 15:36 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2880,6 +2908,7 @@ Bước kế (SV viết 18 bug) không cần SUT. Khi cần chạy test lại (c
 ---
 
 ## #54 | 20:21 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2937,6 +2966,7 @@ Em trả lời mình trước câu hỏi ở trên, rồi mình mới kiểm d�
 ---
 
 ## #55 | 20:24 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -2979,6 +3009,7 @@ Nhúng ảnh bằng link raw từ repo public giúp em khỏi phải kéo tay �
 ---
 
 ## #56 | 20:39 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3010,6 +3041,7 @@ HW04 – lệnh #21, bug 7c + issue.
 ---
 
 ## #57 | 20:54 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3080,6 +3112,7 @@ Em dừng ở bước 1, chưa tạo issue: cả 18 bug đều tái hiện đư�
 ---
 
 ## #59 | 21:07 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3181,6 +3214,7 @@ Thư mục chưa có, chưa issue nào được tạo. Chạy lại.
 ---
 
 ## #61 | 21:31 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3291,6 +3325,7 @@ Commit. Báo cáo ≤ 10 dòng.
 ---
 
 ## #63 | 21:33 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3324,6 +3359,7 @@ Em thử cách 1 khi rảnh tay, vẫn kịp trước khi chốt prompt log sán
 ---
 
 ## #64 | 21:40 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** [...]
 
 **Prompt:**
@@ -3369,10 +3405,42 @@ HW04 – trích phiên claude.ai từ bản xuất dữ liệu: đọc d:\HK7\Te
 **Output:**
 ```
 Thêm bộ đọc bản xuất claude.ai vào `extract_prompt_log.py`, chép nguyên hội thoại ra `.transcripts/`.
+
+Đã trích phiên claude.ai vào prompt log: **36 lượt**, lượt đầu **18:51 12/11/2026**, lượt cuối **21:40 17/11/2026** (giờ Asia/Saigon). Prompt log HW04 giờ có **65 lượt**: 28 lượt Claude Code trước đó + 36 lượt claude.ai + lượt hiện tại.
+
+- **Transcript:** hội thoại `419e0cdc-…` gồm 72 tin, được chép nguyên văn thành `.transcripts/claude-ai_session_HW04_p1.json` (đã nằm trong gitignore). Hội thoại không có nhánh sửa, nên không phải chọn nhánh.
+- **Bộ đọc mới:** em thêm vào `tools/extract_prompt_log.py` một bộ đọc cho file `.json` lấy từ bản xuất dữ liệu, không chuyển định dạng.
+  - Mỗi tin của bạn thành một lượt. Phần dán kèm được nối vào prompt nguyên văn (lượt 17/11 15:16 có đoạn dán 2970 ký tự); tên file đính kèm được ghi lại, ví dụ đề PDF ở lượt #1.
+  - Output chỉ lấy phần chữ của tin trả lời; bỏ phần suy nghĩ và gọi công cụ.
+  - `on_stop.py` giờ đọc thêm các file `claude-ai_*.json`.
+- **Model:** bản xuất của claude.ai không ghi model, nên cả 36 lượt hiện là "Claude (không rõ model)". Theo CLAUDE.md, lý do cho các lượt này bạn ghi trong `prompt_log_notes.toml`.
+- **T1–T4:** lượt #3 (23:01 16/11) ghi "S1:a; T1:a; T2;a; T3:a; T4:a; B1: b". Như vậy mỗi mục chọn phương án a, nhưng nội dung từng phương án chỉ có ở tin trả lời trước đó. Em chưa điền vào `report_plan.md`.
+- Commit: `86d4d78` tools: đọc hội thoại claude.ai từ bản xuất dữ liệu (claude-ai_*.json); HW04 prompt log 65 lượt
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 65 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 28 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65).
+## #66 | 22:19 17/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #24.
+1. report_plan.md mục "Quyết định": S1=a tự viết skill playwright-ddt-automation; T1=a 15 TC UI/feature; T2=a JSON (expected nguyên văn HW02 + sha1); T3=a Chromium/Firefox/WebKit → thay bằng W1=a Chrome/Edge/Firefox (WebKit bị Smart App Control chặn); T4=a Playwright HTML, Run by ở title + metadata; B1=b issue mới cho mọi bug.
+2. report_plan.md mục "Khai cho Audit": bộ đọc conversations.json thêm vào extract_prompt_log.py (86d4d78); 36 lượt claude.ai "không rõ model" do bản xuất không ghi model.
+3. HW04/appendix/prompt_log_notes.toml: khoá khoảng "2026-11-12 18:51 .. 2026-11-18 11:00" (chỉ áp cho lượt claude.ai), ghi chú = NGUYÊN VĂN câu SV: "Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết." + "(bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)". Không đổi cột model trong log.
+4. Chạy on_stop.py --manual, kiểm không có cảnh báo khoá không khớp. Commit. Báo cáo ≤ 5 dòng.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 66 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 29 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66).
