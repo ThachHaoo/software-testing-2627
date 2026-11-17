@@ -27,7 +27,7 @@
 1. Truy cập trang chi tiết của sản phẩm `Tai nghe AirPods Pro 2`.
 2. Nhập **Số lượng** bằng `2`.
 3. Nhấn nút **Thêm vào giỏ hàng** 1 lần đầu tiên.
-4. Quan sát khu vực liên kết **Giỏ hàng** trên thanh điều hướng và mở trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra các dòng sản phẩm, thành tiền và tổng tiền.
+4. Quan sát khu vực liên kết **Giỏ hàng** trên thanh điều hướng và bấm link **Giỏ hàng** trên thanh điều hướng để kiểm tra các dòng sản phẩm, thành tiền và tổng tiền.
 
 ## Expected (trích SRS)
 

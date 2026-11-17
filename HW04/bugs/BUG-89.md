@@ -28,7 +28,7 @@
 1. Truy cập trang chi tiết sản phẩm `Bàn phím cơ Keychron Q1`.
 2. Nhập **Số lượng** bằng `1` (mức biên dưới hợp lệ).
 3. Nhấn nút **Thêm vào giỏ hàng** 1 lần đầu tiên.
-4. Điều hướng sang trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra trạng thái giỏ.
+4. Bấm link **Giỏ hàng** trên thanh điều hướng để kiểm tra trạng thái giỏ.
 
 ## Expected (trích SRS)
 

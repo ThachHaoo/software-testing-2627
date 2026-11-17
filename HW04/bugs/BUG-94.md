@@ -26,9 +26,9 @@
 ## Các bước tái hiện
 
 1. Truy cập trang chi tiết sản phẩm `Bàn phím cơ Keychron Q1` (id `5`).
-2. Nhập **Số lượng** bằng `2` và nhấn nút **Thêm vào giỏ hàng** (lần 1). Quan sát phản hồi trong ≤ 2 giây và mở trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra.
+2. Nhập **Số lượng** bằng `2` và nhấn nút **Thêm vào giỏ hàng** (lần 1). Quan sát phản hồi trong ≤ 2 giây và bấm link **Giỏ hàng** trên thanh điều hướng để kiểm tra.
 3. Quay lại trang chi tiết sản phẩm `Bàn phím cơ Keychron Q1` (id `5`), đổi **Số lượng** thành `5` và nhấn nút **Thêm vào giỏ hàng** (lần 2).
-4. Mở trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra số dòng và số lượng sản phẩm.
+4. Bấm link **Giỏ hàng** trên thanh điều hướng để kiểm tra số dòng và số lượng sản phẩm.
 
 ## Expected (trích SRS)
 

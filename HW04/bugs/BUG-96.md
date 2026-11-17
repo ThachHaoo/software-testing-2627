@@ -44,7 +44,7 @@
 
 - Hệ thống không hiển thị bất kỳ thông báo lỗi nào (kết quả kiểm tra thông báo lỗi trả về `false`).
 - Bảng danh sách sản phẩm trên UI hiển thị thêm 1 dòng mới: `Tai nghe UI10 1794903113968` với giá `-1000` (`-1000 ₫`).
-- API `GET /api/products` trả về thêm bản ghi mới có `id = 7`, `name = "Tai nghe UI10 1794903113968"`, `price = -1000`.
+- API `GET /api/products` trả về thêm bản ghi mới (id tiếp theo; ở lượt chính thức là `7`), `name = "Tai nghe UI10 1794903113968"`, `price = -1000`.
 
 ## Bằng chứng
 

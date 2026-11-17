@@ -28,7 +28,7 @@
 1. Truy cập trang đăng ký tài khoản tại `http://localhost:5173/register`.
 2. Nhập **Họ và tên** hợp lệ: `Lê Tấn Hiệp`.
 3. Nhập **Email** hợp lệ chưa tồn tại trong hệ thống: `hiep.sv03@domain.com`.
-4. Nhập **Mật khẩu** đáp ứng độ dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, chữ số nhưng **không** chứa ký tự đặc biệt thuộc tập `@$!%*?&` mà chỉ dùng khoảng trắng thay thế.
+4. Nhập **Mật khẩu** đáp ứng độ dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, chữ số nhưng **không** chứa ký tự đặc biệt thuộc tập `@$!%*?&` mà chỉ dùng khoảng trắng thay thế: `Abcd 1234`.
 5. Nhấn nút **Đăng Ký**.
 
 ## Expected (trích SRS)

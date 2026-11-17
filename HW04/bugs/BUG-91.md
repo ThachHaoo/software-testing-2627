@@ -29,7 +29,7 @@
 2. Truy cập trang chi tiết sản phẩm `Samsung Galaxy S24 Ultra`.
 3. Nhập **Số lượng** bằng `2`.
 4. Nhấn nút **Thêm vào giỏ hàng** 1 lần đầu tiên và quan sát phản hồi trên giao diện trong vòng 2 giây.
-5. Điều hướng sang trang Giỏ hàng (`http://localhost:5173/cart`) để kiểm tra trạng thái giỏ hàng.
+5. Bấm link **Giỏ hàng** trên thanh điều hướng để kiểm tra trạng thái giỏ hàng.
 
 ## Expected (trích SRS)
 

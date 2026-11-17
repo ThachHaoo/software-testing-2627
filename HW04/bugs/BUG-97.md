@@ -43,7 +43,7 @@
 ## Actual
 
 - Hệ thống không hiển thị bất kỳ thông báo lỗi nào (kết quả kiểm tra thông báo lỗi trả về `false`).
-- Bảng danh sách sản phẩm trên UI hiển thị thêm 1 dòng mới: `Tai nghe UI11 1794903118181` với giá rỗng (`price: null`, hiển thị `"₫"`).
+- Bảng danh sách sản phẩm trên UI hiển thị thêm 1 dòng mới: `Tai nghe UI11 1794903118181`, cột **Giá** chỉ hiển thị `"₫"` (không có số).
 - API `GET /api/products` trả về thêm bản ghi mới có `id = 6`, `name = "Tai nghe UI11 1794903118181"`, `price = ""` (chuỗi rỗng).
 
 ## Bằng chứng

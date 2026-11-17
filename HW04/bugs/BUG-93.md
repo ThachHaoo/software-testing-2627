@@ -20,12 +20,11 @@
 ## Tiền điều kiện
 
 - Hệ thống frontend (`http://localhost:5173`) và backend (`node server.js`) đang hoạt động bình thường.
-- Giỏ hàng ban đầu đã có 2 dòng sản phẩm: `Bàn phím cơ Keychron Q1` (thành tiền `4000000`) và `Tai nghe AirPods Pro 2`.
-- Người dùng đang ở trang Giỏ hàng (`http://localhost:5173/cart`).
+- Giỏ hàng ban đầu đã có 2 dòng sản phẩm được thêm từ trang chủ/chi tiết: `Bàn phím cơ Keychron Q1` (thành tiền `4000000`) và `Tai nghe AirPods Pro 2`.
 
 ## Các bước tái hiện
 
-1. Truy cập trang Giỏ hàng (`http://localhost:5173/cart`) đang có 2 dòng sản phẩm (`Bàn phím cơ Keychron Q1` và `Tai nghe AirPods Pro 2`).
+1. Từ trang sản phẩm sau khi đã thêm 2 sản phẩm (`Bàn phím cơ Keychron Q1` và `Tai nghe AirPods Pro 2`), bấm link **Giỏ hàng** trên thanh điều hướng để mở trang Giỏ hàng.
 2. Nhấn nút **Xóa** ở dòng sản phẩm `Tai nghe AirPods Pro 2`.
 3. Quan sát phản hồi giao diện ngay sau khi bấm nút **Xóa**.
 
@@ -36,7 +35,7 @@
 
 ## Actual
 
-- Sau khi bấm nút **Xóa**, hệ thống không hiển thị bất kỳ dialog xác nhận nào (kết quả kiểm tra số lượng dialog xuất hiện trả về `0` sau 2000ms) mà thực hiện xóa trực tiếp sản phẩm ngay lập tức.
+- Sau khi bấm nút **Xóa**, hệ thống không hiển thị bất kỳ dialog xác nhận nào (kết quả kiểm tra số lượng dialog xuất hiện trả về `0` sau 2000ms).
 
 ## Bằng chứng
 

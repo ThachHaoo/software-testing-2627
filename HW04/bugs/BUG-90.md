@@ -25,7 +25,7 @@
 ## Các bước tái hiện
 
 1. Truy cập trang chủ của hệ thống tại `http://localhost:5173/`.
-2. Điều hướng đến trang Giỏ hàng (`http://localhost:5173/cart`) khi giỏ hàng chưa có sản phẩm nào.
+2. Bấm link **Giỏ hàng** trên thanh điều hướng khi giỏ hàng chưa có sản phẩm nào.
 3. Quan sát nội dung hiển thị ở vùng trạng thái giỏ hàng trống trên trang.
 
 ## Expected (trích SRS)

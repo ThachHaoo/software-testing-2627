@@ -30,7 +30,7 @@
 3. Nhập dữ liệu mới hợp lệ vào form:
    - **Tên sản phẩm:** `Sửa UI03 1794903107473` (chuỗi dạng `Sửa UI03 {ts}`)
    - **Giá tiền:** `2500000`
-   - **Danh mục:** chọn danh mục có `category_id = 3`
+   - **Danh mục:** chọn `"Phụ kiện"` (`category_id 3`)
 4. Nhấn nút lưu form cập nhật sản phẩm và xác nhận hộp thoại `"Cập nhật thành công!"`.
 5. Quan sát bảng danh sách sản phẩm hiển thị trên giao diện.
 
@@ -43,7 +43,7 @@
 ## Actual
 
 - Trên bảng danh sách sản phẩm UI: tất cả 5 sản phẩm khác (`iPhone 15 Pro Max`, `Samsung Galaxy S24 Ultra`, `MacBook Pro M3`, `Tai nghe AirPods Pro 2`, `Bàn phím cơ Keychron Q1`) đều bị đổi cột **Tên SP** thành tên mới của sản phẩm mục tiêu (`Sửa UI03 1794903107473`).
-- Tại dòng của sản phẩm mục tiêu `M` trên bảng UI: cột **Giá** vẫn hiển thị giá cũ là `1000000` thay vì giá mới `2500000` (mặc dù API backend đã lưu dữ liệu mới).
+- Tại dòng của sản phẩm mục tiêu `M` trên bảng UI: cột **Giá** vẫn hiển thị giá cũ là `1000000` thay vì giá mới `2500000`.
 
 ## Bằng chứng
 
