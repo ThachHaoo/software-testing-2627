@@ -54,3 +54,17 @@
 - Fail = TC-FR01-01, 02, 64, 68, 74, 77, 202, 211; Pass = 05, 07, 17, 18, 22, 23, 63 — trùng ở 3 trình duyệt, trùng lượt thử 2–4.
 - Gộp (bước 6, 6/6c): `results.md`, `bug_groups.md` (3 nhóm G1/G2/G3 như cũ), `evidence/` 48 ảnh = 24 ảnh lúc kết thúc + 24 ảnh `<TC>_after-submit_<trình duyệt>` (chỉ TC Fail). `merge_reports.py` mở rộng để tách ảnh `*_after-*`.
 - Lượt 13:46:05–07 (3 thư mục `*_20261117T13460x`, 0 test): global-setup báo backend không trả lời → không chạy test; không dùng, không commit.
+
+## Lượt không chính thức 17/11 tối (sự cố Firefox bị Windows Code Integrity chặn)
+
+Kết quả chính thức của A **giữ nguyên** lượt 13:47–13:52 ở bảng trên. Ba lượt dưới đây là **không chính thức**; report **không commit** (chỉ ghi đường dẫn, thư mục để ngoài git).
+
+| Lượt (không chính thức) | Thời điểm (Run by) | Report (không commit) | Kết quả |
+|---|---|---|---|
+| (1) Gộp chrome + edge + firefox | 2026-11-17T22:56:09+07:00 (SV ghi lượt 23:03; phần firefox bắt đầu 23:01:14 theo `startTime` trong `results.json`) | `HW04/reports/chrome+edge+firefox_20261117T225609/` | chrome 7 Pass / 8 Fail; edge 7 Pass / 8 Fail; firefox 0 / 15 (15 Fail, lỗi `spawn UNKNOWN` khi mở trình duyệt) |
+| (2) Firefox riêng, ngay sau (1) | 2026-11-17T23:05:15+07:00 | `HW04/reports/firefox_20261117T230515/` | 0 / 15 (15 Fail, `spawn UNKNOWN`) |
+| (3) Firefox riêng, sau khi khởi động lại máy | 2026-11-17T23:22:25+07:00 | `HW04/reports/firefox_20261117T232225/` | 7 Pass / 8 Fail – khớp lượt chính thức firefox 13:52 |
+
+- Nguyên nhân lượt (1), (2): Windows Code Integrity chặn `node.exe` nạp `C:\Users\…\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe` ("did not meet the Enterprise signing level requirements or violated code integrity policy"), sự kiện mã **3077** và **3033** lúc **23:05** (log Microsoft-Windows-CodeIntegrity/Operational do SV xuất: `HW04/env/firefox_blocked_20261117.txt`, chép nguyên văn).
+- Firefox Fail ở (1), (2) là lỗi môi trường (trình duyệt không khởi động được, không có assertion nào chạy) → không phải Fail của TC, không lập bug.
+- Sau khi khởi động lại máy, Firefox chạy được (lượt 3), kết quả trùng lượt chính thức.

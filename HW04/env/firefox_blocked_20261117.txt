@@ -1,0 +1,123 @@
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests> Get-WinEvent -LogName "Microsoft-Windows-CodeIntegrity/Operational" -MaxEvents 50 |                                                 
+>>   Where-Object { $_.Message -match 'firefox' } |
+>>   Select-Object TimeCreated, Id, Message | Format-List
+
+TimeCreated : 11/17/2026 11:05:42 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:42 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:40 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:40 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:38 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:38 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:36 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:36 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:35 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:35 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:33 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:33 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:31 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:31 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:29 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:29 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:28 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:28 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:26 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:26 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.

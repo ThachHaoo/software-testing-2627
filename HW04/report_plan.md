@@ -94,6 +94,7 @@ Nguồn: `HW04/*/RUN.md`, `HW04/*/review_sv.md`, khối báo cáo các lệnh, g
   - 3 report rỗng 13:46 (global-setup không thấy backend) → xoá theo lệnh #14.
   - Tiến trình nền web/admin bị Claude Code dừng do máy thiếu bộ nhớ (17/11); AI không tự bật lại.
   - TC-60 firefox lượt thử 2 B: worker crash `0xC0000409` → SV chạy lại 3/3 Pass → lỗi hạ tầng (B RUN.md).
+  - 17/11 tối, A (không chính thức): Windows Code Integrity chặn `firefox-1572irefox.exe` (sự kiện 3077/3033, 23:05) → lượt gộp 22:56 (firefox 0/15, `spawn UNKNOWN`) và firefox riêng 23:05 (0/15); sau khi khởi động lại máy firefox 23:22 = 7P/8F, khớp chính thức. Chính thức giữ 13:47–13:52; report 3 lượt này không commit. Log: `HW04/env/firefox_blocked_20261117.txt` (A RUN.md).
 - Lỗi do AI, phát hiện sau:
   - **C3 chép nhầm** vào "Yêu cầu bị vi phạm" của BUG-101, BUG-103 (generator lấy mọi dòng Yêu cầu của HW02 BUG-35/37) → sửa `d6cd474`.
   - C TC-07: ô không hợp lệ ghi 2 lần (`checkValidity()` cũng bắn `invalid`) – AI phát hiện ở lệnh #17 → sửa 5/6a `2e9e454`.
