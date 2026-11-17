@@ -82,4 +82,9 @@ Metadata `Run by` trong `results.json` của cả 3: `23120255 · <ISO +07:00>` 
 
 ### Lượt 13:46:05–07 (không thuộc A/B)
 
-- 3 thư mục `chrome_20261117T134605`, `edge_20261117T134606`, `firefox_20261117T134607`: 0 test, global-setup báo `Backend http://localhost:3000 không trả lời` → không chạy. Không commit, để nguyên trong thư mục (chưa xoá).
+- 13:46:05–07: global-setup báo backend chưa chạy, 0 test → 3 report rỗng đã xoá (lệnh #14), không commit.
+
+### TC-FR07-60 / firefox – kết luận lượt thử 2 (lệnh #14)
+
+- Lượt thử 2: worker crash `0xC0000409`, thân test chưa chạy (0 ms, không annotation, không assertion).
+- SV chạy riêng `npx playwright test B_FR07 --project=firefox --grep "TC-FR07-60 " --repeat-each=3`: **3/3 Pass** → lỗi hạ tầng (worker Firefox crash), không lập bug.
