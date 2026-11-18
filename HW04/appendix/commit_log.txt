@@ -1576,3 +1576,20 @@ M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.pdf
 M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.md
 M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
 M	HW04/appendix/A_prompt_log.md
+
+9962ce0 | 09:37 18/11/2026 | TonKnight | HW04: commit log text
+M	HW04/appendix/commit_log.txt
+
+20f974a | 09:46 18/11/2026 | TonKnight | HW04: SV update prompt_log_notes.toml
+M	HW04/appendix/prompt_log_notes.toml
+
+9828d1e | 09:48 18/11/2026 | TonKnight | HW04: bß║ún cuß╗æi ΓÇô bß╗Å placeholder AI-03, quy ╞░ß╗¢c report, prompt log 124 l╞░ß╗út, PDF report + AI-02/03/05
+M	HW04/23120255_HW04_Report.md
+M	HW04/23120255_HW04_Report.pdf
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.md
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+M	HW04/appendix/A_prompt_log.md
