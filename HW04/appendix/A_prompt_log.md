@@ -5,7 +5,7 @@
 
 ---
 
-## #1 | 18:51 12/11/2026 | Claude (không rõ model) | [...]
+## #1 | 18:51 12/11/2026 | Claude (không rõ model) | Môi trường + skill
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
@@ -73,7 +73,7 @@ Trả lời xong mình sẽ lập kế hoạch nộp và dàn ý, rồi viết l
 
 ---
 
-## #2 | 19:44 16/11/2026 | Claude (không rõ model) | [...]
+## #2 | 19:44 16/11/2026 | Claude (không rõ model) | Môi trường + skill
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
@@ -175,7 +175,7 @@ Sau khi em chốt S1–B1, mình sẽ đưa lệnh #2: dựng skill rồi áp l�
 
 ---
 
-## #3 | 22:20 16/11/2026 | Claude Opus 5.5 | [...]
+## #3 | 22:20 16/11/2026 | Claude Opus 5.5 | Môi trường + skill
 **Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
@@ -232,7 +232,7 @@ Report đúng. Giờ xoá smoke, sinh log HW04, commit.
 
 ---
 
-## #4 | 23:01 16/11/2026 | Claude (không rõ model) | [...]
+## #4 | 23:01 16/11/2026 | Claude (không rõ model) | Môi trường + skill
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
@@ -301,7 +301,7 @@ Gửi mình báo cáo, mình sẽ cùng em duyệt 15 TC của A, rồi chạy t
 
 ---
 
-## #5 | 23:02 16/11/2026 | Claude Opus 5.5 | [...]
+## #5 | 23:02 16/11/2026 | Claude Opus 5.5 | Môi trường + skill
 **Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
@@ -367,7 +367,7 @@ Bước 1 A_FR01: liệt kê ứng viên.
 
 ---
 
-## #6 | 23:16 16/11/2026 | Claude (không rõ model) | [...]
+## #6 | 23:16 16/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -425,7 +425,7 @@ Bước 3 (sinh spec) sẽ là một prompt riêng sau khi xem fixture.
 
 ---
 
-## #7 | 00:07 17/11/2026 | Claude Opus 5.5 | [...]
+## #7 | 00:07 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -473,7 +473,7 @@ Bước 1b (SV chốt) và bước 2 của A_FR01 đã commit; em dừng trướ
 
 ---
 
-## #8 | 00:13 17/11/2026 | Claude (không rõ model) | [...]
+## #8 | 00:13 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -534,7 +534,7 @@ Lúc này là 00:13, còn khoảng 35 tiếng. Nếu tối nay xong A tới bư�
 
 ---
 
-## #9 | 00:21 17/11/2026 | Claude Opus 5.5 | [...]
+## #9 | 00:21 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -597,7 +597,7 @@ Spec A_FR01 đã sinh và commit; `--list` ra đủ 45 test. Em chưa chạy tes
 
 ---
 
-## #10 | 00:28 17/11/2026 | Claude (không rõ model) | [...]
+## #10 | 00:28 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -681,7 +681,7 @@ Xong lệnh #5, em chạy lại 3 trình duyệt (cùng lệnh như trên, đó 
 
 ---
 
-## #11 | 00:29 17/11/2026 | Claude Opus 5.5 | [...]
+## #11 | 00:29 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -723,7 +723,7 @@ Spec đã sửa, bỏ mode serial và commit 5/6a. 3 report lượt thử 1 đư
 
 ---
 
-## #12 | 00:44 17/11/2026 | Claude (không rõ model) | [...]
+## #12 | 00:44 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -782,7 +782,7 @@ Chạy xong cả 3 trình duyệt mà kết quả giống nhau (8 Fail / 7 Pass)
 
 ---
 
-## #13 | 00:54 17/11/2026 | Claude (không rõ model) | [...]
+## #13 | 00:54 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -840,7 +840,7 @@ Lúc này đã 01:00. A sắp xong. Nếu em định ngủ thì điểm dừng h
 
 ---
 
-## #14 | 00:55 17/11/2026 | Claude Opus 5.5 | [...]
+## #14 | 00:55 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -898,7 +898,7 @@ Cập nhật RUN.md + commit report lượt thử 2.
 
 ---
 
-## #15 | 01:10 17/11/2026 | Claude (không rõ model) | [...]
+## #15 | 01:10 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -953,7 +953,7 @@ Khi nào em muốn nghỉ, nói "xuất transcript", mình sẽ chép phiên nà
 
 ---
 
-## #16 | 01:11 17/11/2026 | Claude Opus 5.5 | [...]
+## #16 | 01:11 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -1003,7 +1003,7 @@ Bước 6 của A_FR01 đã xong và commit; em dừng ở đây. Có một rủ
 
 ---
 
-## #17 | 01:16 17/11/2026 | Claude (không rõ model) | [...]
+## #17 | 01:16 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -1068,7 +1068,7 @@ Trong lúc Claude Code làm lệnh #8, em chạy lại A trên 3 trình duyệt 
 
 ---
 
-## #18 | 01:17 17/11/2026 | Claude Opus 5.5 | [...]
+## #18 | 01:17 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -1112,7 +1112,7 @@ Facts confirmed (CartContext.jsx: `useState([])`, no axios/localStorage). Writin
 
 ---
 
-## #19 | 01:28 17/11/2026 | Claude (không rõ model) | [...]
+## #19 | 01:28 17/11/2026 | Claude (không rõ model) | A_FR01
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
@@ -1177,7 +1177,7 @@ Báo cáo ≤ 10 dòng.
 
 ---
 
-## #20 | 01:30 17/11/2026 | Claude Opus 5.5 | [...]
+## #20 | 01:30 17/11/2026 | Claude Opus 5.5 | A_FR01
 **Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
@@ -1223,7 +1223,7 @@ Khôi phục đủ (diff rỗng). Sửa `waitLoaded` của trang chi tiết, pro
 
 ---
 
-## #21 | 01:34 17/11/2026 | Claude (không rõ model) | [...]
+## #21 | 01:34 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1272,7 +1272,7 @@ Lỗi giống A (serial, catch rỗng) đã được dặn trước nên chắc 
 
 ---
 
-## #22 | 01:37 17/11/2026 | Claude Opus 5.5 | [...]
+## #22 | 01:37 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1332,7 +1332,7 @@ npx playwright test B_FR07 --project=chrome; npx playwright test B_FR07 --projec
 
 ---
 
-## #23 | 01:49 17/11/2026 | Claude (không rõ model) | [...]
+## #23 | 01:49 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1399,7 +1399,7 @@ Em gửi mình cả báo cáo #11 lẫn danh sách tự soi. Mình đối chiế
 
 ---
 
-## #24 | 01:51 17/11/2026 | Claude Opus 5.5 | [...]
+## #24 | 01:51 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1434,7 +1434,7 @@ Kết quả: 15/15 trùng HW02, 3 trình duyệt giống nhau. Lấy thêm annot
 
 ---
 
-## #25 | 01:52 17/11/2026 | Claude (không rõ model) | [...]
+## #25 | 01:52 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1483,7 +1483,7 @@ Em đi ngủ được rồi. A đã xong cả 6 bước. B đã chạy lượt t
 
 ---
 
-## #26 | 01:55 17/11/2026 | Claude Opus 5.5 | [...]
+## #26 | 01:55 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1516,7 +1516,7 @@ No response requested.
 
 ---
 
-## #27 | 13:34 17/11/2026 | Claude (không rõ model) | [...]
+## #27 | 13:34 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1561,7 +1561,7 @@ Em push xong nói mình, mình đọc code rồi chốt bảng đánh giá và �
 
 ---
 
-## #28 | 13:35 17/11/2026 | Claude (không rõ model) | [...]
+## #28 | 13:35 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1615,7 +1615,7 @@ Sau lệnh #12, em chạy **A và B** trên 3 trình duyệt (6 lượt, khoản
 
 ---
 
-## #29 | 13:39 17/11/2026 | Claude Opus 5.5 | [...]
+## #29 | 13:39 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1678,7 +1678,7 @@ npx playwright test B_FR07 --project=chrome; npx playwright test B_FR07 --projec
 
 ---
 
-## #30 | 13:46 17/11/2026 | Claude Opus 5.5 | [...]
+## #30 | 13:46 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1708,7 +1708,7 @@ Code sửa ở lệnh #12 (5/6a–c của B, 5/6e của A) chưa chạy trên SU
 
 ---
 
-## #31 | 14:03 17/11/2026 | Claude (không rõ model) | [...]
+## #31 | 14:03 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1766,7 +1766,7 @@ Dù kết quả thế nào, đây cũng là một ý "AI sinh ra flaky" rất t�
 
 ---
 
-## #32 | 14:04 17/11/2026 | Claude Opus 5.5 | [...]
+## #32 | 14:04 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1821,7 +1821,7 @@ npx playwright test B_FR07 --project=firefox --grep "TC-FR07-60 " --repeat-each=
 
 ---
 
-## #33 | 14:10 17/11/2026 | Claude (không rõ model) | [...]
+## #33 | 14:10 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -1876,7 +1876,7 @@ Chạy xong B, em báo kết quả. Nếu cả 3 cùng 6/9, mình chốt B 6/6 c
 
 ---
 
-## #34 | 14:10 17/11/2026 | Claude Opus 5.5 | [...]
+## #34 | 14:10 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -1929,7 +1929,7 @@ Xem rủi ro sập backend (price null + id chẵn) trong mã SUT và tài liệ
 
 ---
 
-## #35 | 14:16 17/11/2026 | Claude (không rõ model) | [...]
+## #35 | 14:16 17/11/2026 | Claude (không rõ model) | B_FR07
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
@@ -2002,7 +2002,7 @@ Sau đó còn bước 3 của C (sinh spec), lượt thử, em tự soi, sửa, 
 
 ---
 
-## #36 | 14:18 17/11/2026 | Claude Opus 5.5 | [...]
+## #36 | 14:18 17/11/2026 | Claude Opus 5.5 | B_FR07
 **Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
@@ -2044,7 +2044,7 @@ Bước 2 C: đọc UI admin thật.
 
 ---
 
-## #37 | 14:22 17/11/2026 | Claude (không rõ model) | [...]
+## #37 | 14:22 17/11/2026 | Claude (không rõ model) | C_FR15
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
@@ -2096,7 +2096,7 @@ Sau đó em chạy lượt thử 1 của C trên 3 trình duyệt và tự soi s
 
 ---
 
-## #38 | 14:23 17/11/2026 | Claude Opus 5.5 | [...]
+## #38 | 14:23 17/11/2026 | Claude Opus 5.5 | C_FR15
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
@@ -2128,7 +2128,7 @@ Mình chưa làm gì thêm. Repo sạch, commit mới nhất là `16d791d` (C 2/
 
 ---
 
-## #39 | 14:24 17/11/2026 | Claude Opus 5.5 | [...]
+## #39 | 14:24 17/11/2026 | Claude Opus 5.5 | C_FR15
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
@@ -2180,7 +2180,7 @@ npx playwright test C_FR15 --project=chrome; npx playwright test C_FR15 --projec
 
 ---
 
-## #40 | 14:46 17/11/2026 | Claude (không rõ model) | [...]
+## #40 | 14:46 17/11/2026 | Claude (không rõ model) | C_FR15
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
@@ -2248,7 +2248,7 @@ Lần này em cố chỉ ghi những gì **thấy trong code**, như ở B đã 
 
 ---
 
-## #41 | 14:46 17/11/2026 | Claude Opus 5.5 | [...]
+## #41 | 14:46 17/11/2026 | Claude Opus 5.5 | C_FR15
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
@@ -2292,7 +2292,7 @@ Lệnh #17 xong 3 phần, mỗi phần một commit. C lượt thử 1 trùng HW
 
 ---
 
-## #42 | 15:00 17/11/2026 | Claude (không rõ model) | [...]
+## #42 | 15:00 17/11/2026 | Claude (không rõ model) | C_FR15
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
@@ -2369,7 +2369,7 @@ Em push C rồi gửi mình: tiêu chí G→BUG em chọn, và 5 ý đã viết 
 
 ---
 
-## #43 | 15:02 17/11/2026 | Claude (không rõ model) | [...]
+## #43 | 15:02 17/11/2026 | Claude (không rõ model) | C_FR15
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
@@ -2419,7 +2419,7 @@ Sau đó em chạy lượt chính thức C, và gửi mình **tiêu chí G→BUG
 
 ---
 
-## #44 | 15:07 17/11/2026 | Claude (không rõ model) | [...]
+## #44 | 15:07 17/11/2026 | Claude (không rõ model) | C_FR15
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
@@ -2478,7 +2478,7 @@ DỪNG. Báo cáo ≤ 8 dòng + lệnh SV chạy lượt chính thức C.
 
 ---
 
-## #45 | 15:10 17/11/2026 | Claude Opus 5.5 | [...]
+## #45 | 15:10 17/11/2026 | Claude Opus 5.5 | C_FR15
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
@@ -2526,7 +2526,7 @@ npx playwright test C_FR15 --project=chrome; npx playwright test C_FR15 --projec
 
 ---
 
-## #46 | 15:16 17/11/2026 | Claude (không rõ model) | [...]
+## #46 | 15:16 17/11/2026 | Claude (không rõ model) | C_FR15
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
@@ -2581,7 +2581,7 @@ Gửi mình tiêu chí G→BUG kèm báo cáo #19, mình đưa lệnh dựng khu
 
 ---
 
-## #47 | 15:16 17/11/2026 | Claude Opus 5.5 | [...]
+## #47 | 15:16 17/11/2026 | Claude Opus 5.5 | C_FR15
 **Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
@@ -2625,7 +2625,7 @@ Lệnh #19 xong: C chốt lượt chính thức (bước 6), có bảng dữ ki�
 
 ---
 
-## #48 | 15:20 17/11/2026 | Claude (không rõ model) | [...]
+## #48 | 15:20 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -2691,7 +2691,7 @@ Claude Code lại hỏi, nhưng em đã chốt **B1=b: tạo issue mới cho m�
 
 ---
 
-## #49 | 15:29 17/11/2026 | Claude (không rõ model) | [...]
+## #49 | 15:29 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -2733,7 +2733,7 @@ Trong lúc em viết bug, mình chuẩn bị luôn **bảng thời gian + ý ch�
 
 ---
 
-## #50 | 15:29 17/11/2026 | Claude Opus 5.5 | [...]
+## #50 | 15:29 17/11/2026 | Claude Opus 5.5 | Bug
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
@@ -2778,7 +2778,7 @@ Khung 18 bug đã sinh, đoạn code khớp số dòng. Giờ ghi `HW04/bugs/REA
 
 ---
 
-## #51 | 15:36 17/11/2026 | Claude (không rõ model) | [...]
+## #51 | 15:36 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -2857,7 +2857,7 @@ Khi viết bug xong, nói mình, mình đưa **một lệnh E2E** cho Claude Cod
 
 ---
 
-## #52 | 19:45 17/11/2026 | Claude (không rõ model) | [...]
+## #52 | 19:45 17/11/2026 | Claude (không rõ model) | Bug
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
@@ -2881,7 +2881,7 @@ Khi viết bug xong, nói mình, mình đưa **một lệnh E2E** cho Claude Cod
 
 ---
 
-## #53 | 19:45 17/11/2026 | Claude Opus 5.5 | [...]
+## #53 | 19:45 17/11/2026 | Claude Opus 5.5 | Bug
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
@@ -2907,7 +2907,7 @@ Bước kế (SV viết 18 bug) không cần SUT. Khi cần chạy test lại (c
 
 ---
 
-## #54 | 20:21 17/11/2026 | Claude (không rõ model) | [...]
+## #54 | 20:21 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -2965,7 +2965,7 @@ Em trả lời mình trước câu hỏi ở trên, rồi mình mới kiểm d�
 
 ---
 
-## #55 | 20:24 17/11/2026 | Claude (không rõ model) | [...]
+## #55 | 20:24 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -3008,7 +3008,7 @@ Nhúng ảnh bằng link raw từ repo public giúp em khỏi phải kéo tay �
 
 ---
 
-## #56 | 20:39 17/11/2026 | Claude (không rõ model) | [...]
+## #56 | 20:39 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -3040,7 +3040,7 @@ HW04 – lệnh #21, bug 7c + issue.
 
 ---
 
-## #57 | 20:54 17/11/2026 | Claude (không rõ model) | [...]
+## #57 | 20:54 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -3066,7 +3066,7 @@ Trong lúc Claude Code chạy lệnh #21 (tái hiện và tạo 18 issue), em ch
 
 ---
 
-## #58 | 20:55 17/11/2026 | Claude Opus 5.5 | [...]
+## #58 | 20:55 17/11/2026 | Claude Opus 5.5 | Bug
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
@@ -3111,7 +3111,7 @@ Em dừng ở bước 1, chưa tạo issue: cả 18 bug đều tái hiện đư�
 
 ---
 
-## #59 | 21:07 17/11/2026 | Claude (không rõ model) | [...]
+## #59 | 21:07 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -3163,7 +3163,7 @@ HW04 – lệnh #22. SV đã sửa bước tái hiện (BUG-87, 89–94, 95, 96,
 
 ---
 
-## #60 | 21:18 17/11/2026 | Claude Opus 5.5 | [...]
+## #60 | 21:18 17/11/2026 | Claude Opus 5.5 | Bug
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
@@ -3213,7 +3213,7 @@ Thư mục chưa có, chưa issue nào được tạo. Chạy lại.
 
 ---
 
-## #61 | 21:31 17/11/2026 | Claude (không rõ model) | [...]
+## #61 | 21:31 17/11/2026 | Claude (không rõ model) | Bug
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
@@ -3280,7 +3280,7 @@ Em quay video Task 2 theo bảng thời gian ở tin trước. Đoạn kể lỗ
 
 ---
 
-## #62 | 21:32 17/11/2026 | Claude Opus 5.5 | [...]
+## #62 | 21:32 17/11/2026 | Claude Opus 5.5 | Report + prompt log
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
@@ -3324,7 +3324,7 @@ Commit. Báo cáo ≤ 10 dòng.
 
 ---
 
-## #63 | 21:33 17/11/2026 | Claude (không rõ model) | [...]
+## #63 | 21:33 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3358,7 +3358,7 @@ Em thử cách 1 khi rảnh tay, vẫn kịp trước khi chốt prompt log sán
 
 ---
 
-## #64 | 21:40 17/11/2026 | Claude (không rõ model) | [...]
+## #64 | 21:40 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3394,7 +3394,7 @@ Giờ em quay video Task 2 trước nhé, phần này không phụ thuộc gì c
 
 ---
 
-## #65 | 21:47 17/11/2026 | Claude (không rõ model) | [...]
+## #65 | 21:47 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3456,7 +3456,7 @@ Quay xong Task 2 là tới video skill. Mình sẽ đưa lệnh E2E chạy trên
 
 ---
 
-## #66 | 22:11 17/11/2026 | Claude Opus 5.5 | [...]
+## #66 | 22:11 17/11/2026 | Claude Opus 5.5 | Report + prompt log
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
@@ -3484,7 +3484,7 @@ Thêm bộ đọc bản xuất claude.ai vào `extract_prompt_log.py`, chép ngu
 
 ---
 
-## #67 | 22:14 17/11/2026 | Claude (không rõ model) | [...]
+## #67 | 22:14 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3530,7 +3530,7 @@ Giờ em gửi link video Task 2 khi xong nhé.
 
 ---
 
-## #68 | 22:17 17/11/2026 | Claude (không rõ model) | [...]
+## #68 | 22:17 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3557,7 +3557,7 @@ Hệ quả cho form:
 
 ---
 
-## #69 | 22:18 17/11/2026 | Claude (không rõ model) | [...]
+## #69 | 22:18 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3583,7 +3583,7 @@ HW04 – lệnh #24.
 
 ---
 
-## #70 | 22:19 17/11/2026 | Claude Opus 5.5 | [...]
+## #70 | 22:19 17/11/2026 | Claude Opus 5.5 | Report + prompt log
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
@@ -3610,7 +3610,7 @@ Prompt log xong, không có cảnh báo khoá. Giờ cập nhật `report_plan.m
 
 ---
 
-## #71 | 22:23 17/11/2026 | Claude (không rõ model) | [...]
+## #71 | 22:23 17/11/2026 | Claude (không rõ model) | Report + prompt log
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
@@ -3639,7 +3639,7 @@ Giờ em quay video Task 2 theo kịch bản ở trên, xong gửi mình link.
 
 ---
 
-## #72 | 22:24 17/11/2026 | Claude Opus 5.5 | [...]
+## #72 | 22:24 17/11/2026 | Claude Opus 5.5 | Video Task 2
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -3668,7 +3668,7 @@ Lưu ý: tắt backend sẽ mất giỏ hàng và tài khoản đã tạo, vì C
 
 ---
 
-## #73 | 22:26 17/11/2026 | Claude Opus 5.5 | [...]
+## #73 | 22:26 17/11/2026 | Claude Opus 5.5 | Video Task 2
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -3709,7 +3709,7 @@ npx vite --host 127.0.0.1 --port 5174
 
 ---
 
-## #74 | 22:35 17/11/2026 | Claude (không rõ model) | [...]
+## #74 | 22:35 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -3742,7 +3742,7 @@ Có, 18 issue **đã có ảnh**. Claude Code nhúng ảnh bằng link raw từ 
 
 ---
 
-## #75 | 22:59 17/11/2026 | Claude (không rõ model) | [...]
+## #75 | 22:59 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -3770,7 +3770,7 @@ Dòng chữ đó được in theo chuỗi gọi sau:
 
 ---
 
-## #76 | 23:01 17/11/2026 | Claude (không rõ model) | [...]
+## #76 | 23:01 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -3810,7 +3810,7 @@ Em có thể nói ngắn gọn ý này trong video lúc dòng "backend restart x
 
 ---
 
-## #77 | 23:03 17/11/2026 | Claude (không rõ model) | [...]
+## #77 | 23:03 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -3845,7 +3845,7 @@ Nếu đúng là chỉ lỗi khi chạy gộp thì đây là **thêm một phát
 
 ---
 
-## #78 | 23:04 17/11/2026 | Claude (không rõ model) | [...]
+## #78 | 23:04 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -3909,7 +3909,7 @@ Report chạy gộp vừa sinh, em giữ lại nhưng **không commit vào bộ 
 
 ---
 
-## #79 | 23:07 17/11/2026 | Claude (không rõ model) | [...]
+## #79 | 23:07 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -3950,7 +3950,7 @@ Quay xong, Claude Code sẽ ghi sự cố này vào `RUN.md` và "Khai cho Audit
 
 ---
 
-## #80 | 23:08 17/11/2026 | Claude (không rõ model) | [...]
+## #80 | 23:08 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -4101,7 +4101,7 @@ HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_2026
 
 ---
 
-## #81 | 23:25 17/11/2026 | Claude (không rõ model) | [...]
+## #81 | 23:25 17/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -4132,7 +4132,7 @@ Quay xong gửi mình link YouTube nhé.
 
 ---
 
-## #82 | 00:19 18/11/2026 | Claude Opus 5.5 | [...]
+## #82 | 00:19 18/11/2026 | Claude Opus 5.5 | Video Task 2
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -4169,7 +4169,7 @@ HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_2026
 
 ---
 
-## #83 | 00:21 18/11/2026 | Claude (không rõ model) | [...]
+## #83 | 00:21 18/11/2026 | Claude (không rõ model) | Video Task 2
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
@@ -4250,7 +4250,7 @@ Quay xong gửi link, mình đưa lệnh dọn nhánh và bắt đầu phần re
 
 ---
 
-## #84 | 00:22 18/11/2026 | Claude Opus 5.5 | [...]
+## #84 | 00:22 18/11/2026 | Claude Opus 5.5 | Video Task 2
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -4292,7 +4292,7 @@ Gõ **"tiếp"** để chạy bước 2–3.
 
 ---
 
-## #85 | 00:24 18/11/2026 | Claude (không rõ model) | [...]
+## #85 | 00:24 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -4384,7 +4384,7 @@ Quay xong gửi link, rồi mình chuyển sang report (phần 🔒 của em + A
 
 ---
 
-## #86 | 00:24 18/11/2026 | Claude Opus 5.5 | [...]
+## #86 | 00:24 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4405,7 +4405,7 @@ HW04 – huỷ demo: KHÔNG chạy bước 2. Chưa commit gì trên demo-video 
 
 ---
 
-## #87 | 00:37 18/11/2026 | Claude Opus 5.5 | [...]
+## #87 | 00:37 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4450,7 +4450,7 @@ Bước kế tiếp: sinh fixture và spec demo. Gõ **"tiếp"** để làm bư
 
 ---
 
-## #88 | 00:38 18/11/2026 | Claude Opus 5.5 | [...]
+## #88 | 00:38 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4503,7 +4503,7 @@ Gõ **"tiếp"** khi đã chạy xong 3 lượt.
 
 ---
 
-## #89 | 00:49 18/11/2026 | Claude (không rõ model) | [...]
+## #89 | 00:49 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -4555,7 +4555,7 @@ Template lấy theo cấu trúc spec chính thức mới nhất (C_FR15.spec.ts 
 
 ---
 
-## #90 | 00:50 18/11/2026 | Claude Opus 5.5 | [...]
+## #90 | 00:50 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4576,7 +4576,7 @@ Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm gi
 
 ---
 
-## #91 | 00:52 18/11/2026 | Claude Opus 5.5 | [...]
+## #91 | 00:52 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4616,7 +4616,7 @@ Template lấy theo cấu trúc spec chính thức mới nhất (C_FR15.spec.ts 
 
 ---
 
-## #92 | 00:55 18/11/2026 | Claude (không rõ model) | [...]
+## #92 | 00:55 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -4660,7 +4660,7 @@ Nhắc lại khi quay:
 
 ---
 
-## #93 | 01:02 18/11/2026 | Claude Opus 5.5 | [...]
+## #93 | 01:02 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4697,7 +4697,7 @@ Bước 1/6: chọn 4 TC A_FR01 → `HW04/demo/A_FR01/selection.json`, `HW04/dem
 
 ---
 
-## #94 | 01:04 18/11/2026 | Claude Opus 5.5 | [...]
+## #94 | 01:04 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4737,7 +4737,7 @@ Report ra `HW04/demo/reports/<project>_<ts>/` (`index.html` có "Run by: 2312025
 
 ---
 
-## #95 | 01:11 18/11/2026 | Claude (không rõ model) | [...]
+## #95 | 01:11 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -4804,7 +4804,7 @@ Lỗi này cũng là **bài học cho skill**: bản đóng băng không đượ
 
 ---
 
-## #96 | 01:12 18/11/2026 | Claude (không rõ model) | [...]
+## #96 | 01:12 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -4844,7 +4844,7 @@ Những lỗi gặp tối nay (serial trong template, bản đóng băng bị n�
 
 ---
 
-## #97 | 01:12 18/11/2026 | Claude Opus 5.5 | [...]
+## #97 | 01:12 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4862,7 +4862,7 @@ Demo dừng: đã xoá `HW04/demo/`, xoá nhánh `demo-video`, đang ở `main`.
 
 ---
 
-## #98 | 01:13 18/11/2026 | Claude Opus 5.5 | [...]
+## #98 | 01:13 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4928,7 +4928,7 @@ Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
 
 ---
 
-## #99 | 01:27 18/11/2026 | Claude (không rõ model) | [...]
+## #99 | 01:27 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -4995,7 +4995,7 @@ Sau đó chuyển sang report. Em viết Critique thì mình nhắc 4 ý trên.
 
 ---
 
-## #100 | 01:29 18/11/2026 | Claude (không rõ model) | [...]
+## #100 | 01:29 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -5033,7 +5033,7 @@ Em quay được rồi.
 
 ---
 
-## #101 | 01:34 18/11/2026 | Claude Opus 5.5 | [...]
+## #101 | 01:34 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -5072,7 +5072,7 @@ File tạo ra:
 
 ---
 
-## #102 | 01:36 18/11/2026 | Claude Opus 5.5 | [...]
+## #102 | 01:36 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -5111,7 +5111,7 @@ Report ra `HW04/tests/_demo/reports/<project>_<ts>/`, có "Run by: 23120255 · I
 
 ---
 
-## #103 | 01:43 18/11/2026 | Claude Opus 5.5 | [...]
+## #103 | 01:43 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -5138,7 +5138,7 @@ tiếp
 
 ---
 
-## #104 | 01:45 18/11/2026 | Claude Opus 5.5 | [...]
+## #104 | 01:45 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -5179,7 +5179,7 @@ Không commit gì. `HW04/data`, spec, report và ai-outputs chính thức không
 
 ---
 
-## #105 | 01:48 18/11/2026 | Claude Opus 5.5 | [...]
+## #105 | 01:48 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -5210,7 +5210,7 @@ Dòng `HW04/tests/_demo/` vẫn còn trong `.git/info/exclude`. Dòng này vô h
 
 ---
 
-## #106 | 01:49 18/11/2026 | Claude (không rõ model) | [...]
+## #106 | 01:49 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -5266,7 +5266,7 @@ Khi em bắt đầu viết Critique, nhắn mình. Mình sẽ đưa lại 4 ý v
 
 ---
 
-## #107 | 02:02 18/11/2026 | Claude (không rõ model) | [...]
+## #107 | 02:02 18/11/2026 | Claude (không rõ model) | Skill v2.1 + video
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
@@ -5301,7 +5301,7 @@ Nếu bảng phân loại ở bước 0 có nhóm lạ (không phải report, PD
 
 ---
 
-## #108 | 02:02 18/11/2026 | Claude Opus 5.5 | [...]
+## #108 | 02:02 18/11/2026 | Claude Opus 5.5 | Skill v2.1 + video
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -5364,7 +5364,7 @@ Bảng audit trong report thêm hàng cho commit vừa tạo; commit lần cuố
 
 ---
 
-## #109 | 02:09 18/11/2026 | Claude (không rõ model) | [...]
+## #109 | 02:09 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5451,7 +5451,7 @@ Em có thể viết **Critique trước rồi gửi mình**. Mình chỉ kiểm 
 
 ---
 
-## #110 | 02:21 18/11/2026 | Claude (không rõ model) | [...]
+## #110 | 02:21 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5489,7 +5489,7 @@ Sửa xong mấy điểm này thì sang **verdict Audit** (33 artifact, dùng b�
 
 ---
 
-## #111 | 02:29 18/11/2026 | Claude (không rõ model) | [...]
+## #111 | 02:29 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5541,7 +5541,7 @@ Sửa xong em làm tương tự cho §4.6 (ghi chú P1 là cải tiến do promp
 
 ---
 
-## #112 | 02:30 18/11/2026 | Claude (không rõ model) | [...]
+## #112 | 02:30 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5590,7 +5590,7 @@ Xong §4.6 là sang verdict Audit.
 
 ---
 
-## #113 | 02:30 18/11/2026 | Claude (không rõ model) | [...]
+## #113 | 02:30 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5613,7 +5613,7 @@ Giờ em chuyển sang **verdict + lý do cho 33 artifact trong Audit** (bảng 
 
 ---
 
-## #114 | 02:34 18/11/2026 | Claude (không rõ model) | [...]
+## #114 | 02:34 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5654,7 +5654,7 @@ Nếu chọn A mà buồn ngủ quá, em viết lý do Audit thật ngắn (ví 
 
 ---
 
-## #115 | 02:39 18/11/2026 | Claude (không rõ model) | [...]
+## #115 | 02:39 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5680,7 +5680,7 @@ Ok, em ngủ đi. Mình đã cập nhật `claude/HW04_handoff.md` trong Project
 
 ---
 
-## #116 | 08:41 18/11/2026 | Claude (không rõ model) | [...]
+## #116 | 08:41 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5727,7 +5727,7 @@ Có báo cáo #30 thì gửi mình. Kế tiếp là ký, zip, **nộp bản an t
 
 ---
 
-## #117 | 08:48 18/11/2026 | Claude (không rõ model) | [...]
+## #117 | 08:48 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5769,7 +5769,7 @@ Mốc giờ: **09:20** có báo cáo #30 → em ký PDF, tick AI-05 → **09:40*
 
 ---
 
-## #118 | 08:51 18/11/2026 | Claude Opus 5.5 | [...]
+## #118 | 08:51 18/11/2026 | Claude Opus 5.5 | Report + form
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
@@ -5836,7 +5836,7 @@ Rà soát xong. Ghi kết quả vào file rồi commit.
 
 ---
 
-## #119 | 08:58 18/11/2026 | Claude (không rõ model) | [...]
+## #119 | 08:58 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5913,7 +5913,7 @@ HW04 – lệnh #31 (chốt nộp).
 
 ---
 
-## #120 | 09:27 18/11/2026 | Claude (không rõ model) | [...]
+## #120 | 09:27 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -5950,7 +5950,7 @@ Gửi mình báo cáo #31, mình kiểm lần cuối trong lúc em upload.
 
 ---
 
-## #121 | 09:28 18/11/2026 | Claude Opus 5.5 | [...]
+## #121 | 09:28 18/11/2026 | Claude Opus 5.5 | Report + form
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
@@ -5991,7 +5991,7 @@ Zip nộp được: `..\23120255_HW04_AI_Automation_093.zip` = **16.798.843 byte
 
 ---
 
-## #122 | 09:29 18/11/2026 | Claude (không rõ model) | [...]
+## #122 | 09:29 18/11/2026 | Claude (không rõ model) | Report + form
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
@@ -6022,7 +6022,7 @@ Lần trước em yêu cầu lúc khoảng 21:47 và có file trước 22:14, t�
 
 ---
 
-## #123 | 09:35 18/11/2026 | Claude Opus 5.5 | [...]
+## #123 | 09:35 18/11/2026 | Claude Opus 5.5 | Report + form
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
@@ -6056,7 +6056,7 @@ HW04 – cập nhật transcript claude.ai: đọc d:\HK7\Testing\Exercise\HW\co
 
 ---
 
-## #124 | 09:47 18/11/2026 | Claude Opus 5.5 | [...]
+## #124 | 09:47 18/11/2026 | Claude Opus 5.5 | Report + form
 **Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
@@ -6070,6 +6070,37 @@ HW04 – lệnh #32 (bản cuối):
 
 **Output:**
 ```
+Đang commit, xuất commit log, đóng zip.
+
+Đã làm xong lệnh #32 và đóng zip lại; prompt log còn 0 lượt `[...]`.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** lệnh #32 (bản cuối).
+- **Bước 1:**
+  - AI-03: "[...]" sau câu cam đoan đã được xoá từ trước trong bản làm việc của SV; em commit nguyên như vậy.
+  - Report dòng 9: SV đã xoá cả dòng quy ước. Em làm theo lệnh: khôi phục dòng đó, chỉ bỏ vế "`<SV viết>` = chỗ em còn phải viết", giữ 🔒 và câu về khối REPORT. Nếu SV muốn bỏ hẳn dòng này thì báo lại.
+- **Prompt log:** 124 lượt (Claude Opus 5.5: 52; không rõ model: 72), còn **0** lượt `[...]`. Lượt mới #124 là lượt lệnh này. AI-02/03/05 đã sửa từ 123/51 sang 124/52 cho khớp; AI-03 ghi lượt chốt nộp là #124.
+- **PDF:** xuất lại report và AI-02/03/05; chữ ký vẫn nhúng trong cả 3 form.
+- **Commit:** `9828d1e` (bản cuối), `5577fb1` HW04: commit log text.
+- **Zip** `..\23120255_HW04_AI_Automation_093.zip`: **16.826.672 byte**, 532 file, 10 thư mục report.
+- **sha256:** `d19998873d2551152a0f293beec8f69a220905a81114875a157c93a04266cb4a`
+- **Lưu ý:** sau lượt này hook sẽ ghi lại `A_prompt_log.md` trong thư mục làm việc (output #124 dài thêm). Zip lấy từ HEAD nên không đổi. Chỉ commit lại nếu muốn log có đủ output #124; khi đó phải xuất lại commit log và đóng zip lại, sha256 sẽ đổi.
+```
+
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
+
+---
+
+## #125 | 09:53 18/11/2026 | Claude Opus 5.5 | Report + form
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
+
+**Prompt:**
+```
+HW04 – lệnh #33: on_stop.py --manual; báo số tiêu đề lượt còn "| [...]" (mục tiêu 0) và số lượt còn [...] ở Mục đích/Xử lý; số lượt tổng khớp AI-02/03/05 (lệch thì sửa + xuất lại PDF, giữ chữ ký). Commit. Commit log → commit riêng. git archive lại zip; báo byte + sha256.
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -6077,4 +6108,4 @@ HW04 – lệnh #32 (bản cuối):
 
 ---
 
-**Tổng:** 124 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 52 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123, #124).
+**Tổng:** 125 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 53 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123, #124, #125).
