@@ -36,9 +36,9 @@ _Sinh bởi `python tools/hw04_summary.py` (HEAD lúc sinh: `6ef3a84`) — khôn
 
 | No. | Tiêu chí | Điểm | Tự đánh giá |
 |---|---|---|---|
-| 1 | Task 1 – Feature A | 25 | `<SV viết>` |
-| 1 | Task 1 – Feature B | 25 | `<SV viết>` |
-| 1 | Task 1 – Feature C | 25 | `<SV viết>` |
-| 2 | Task 2 – Demo video | 15 | `<SV viết>` |
-| 3 | Agent Skills | 10 | `<SV viết>` |
-| | Tổng | 100 | `<SV viết>` |
+| 1 | Task 1 – Feature A | 25 | 23 |
+| 1 | Task 1 – Feature B | 25 | 23 |
+| 1 | Task 1 – Feature C | 25 | 24 |
+| 2 | Task 2 – Demo video | 15 | 14 |
+| 3 | Agent Skills | 10 | 9 |
+| | Tổng | 100 | 93 |
