@@ -26,3 +26,5 @@ reports/firefox_20261117T012354 export-ignore
 reports/firefox_20261117T014756 export-ignore
 reports/firefox_20261117T135836 export-ignore
 reports/firefox_20261117T144359 export-ignore
+appendix/prompt_log_extra.toml export-ignore
+.gitattributes export-ignore
