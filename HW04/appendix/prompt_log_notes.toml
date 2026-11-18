@@ -11,33 +11,34 @@
 ["2026-11-12 18:51 .. 2026-11-18 11:00"]
 nguon_luot    = "claude.ai"
 ghi_chu_model = "Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)"
-# 1. Môi trường & Agent Skill v1
-["2026-11-16 22:20 .. 2026-11-16 23:02"]
-muc_dich = "Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước."
-xu_ly    = "SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt."
+
+# 1. Phân tích đề, dựng môi trường & Agent Skill v1
+["2026-11-12 18:51 .. 2026-11-16 23:02"]
+muc_dich = "Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước."
+xu_ly    = "SV chốt deadline, chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt."
 
 # 2. Chức năng A_FR01 (Đăng ký tài khoản)
-["2026-11-17 00:07 .. 2026-11-17 01:30"]
+["2026-11-16 23:16 .. 2026-11-17 01:30"]
 muc_dich = "Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01."
 xu_ly    = "SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức."
 
 # 3. Chức năng B_FR07 (Xem giỏ hàng)
-["2026-11-17 01:37 .. 2026-11-17 14:18"]
+["2026-11-17 01:34 .. 2026-11-17 14:18"]
 muc_dich = "Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07."
 xu_ly    = "SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức."
 
 # 4. Chức năng C_FR15 (Cập nhật thông tin cá nhân)
-["2026-11-17 14:23 .. 2026-11-17 15:16"]
+["2026-11-17 14:22 .. 2026-11-17 15:16"]
 muc_dich = "Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15."
 xu_ly    = "SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức."
 
 # 5. Phân loại, viết và tái hiện 18 Bug Report + GitHub Issues
-["2026-11-17 15:29 .. 2026-11-17 21:18"]
+["2026-11-17 15:20 .. 2026-11-17 21:31"]
 muc_dich = "Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues."
 xu_ly    = "SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp."
 
 # 6. Dàn ý báo cáo & công cụ trích xuất prompt log
-["2026-11-17 21:32 .. 2026-11-17 22:19"]
+["2026-11-17 21:32 .. 2026-11-17 22:23"]
 muc_dich = "Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai."
 xu_ly    = "SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md."
 
@@ -51,7 +52,7 @@ xu_ly    = "SV tự chạy lệnh kiểm thử để quay và thuyết minh vide
 muc_dich = "Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill."
 xu_ly    = "SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video."
 
-# 9. Hoàn thiện biểu mẫu AI Audit, AI Disclosure & rà soát cuối trước khi nộp
-["2026-11-18 08:51 .. 2026-11-18 08:51"]
-muc_dich = "Đồng bộ số liệu kiểm toán AI-02, AI-03, AI-05 và chỉnh sửa các chi tiết sót cuối cùng."
-xu_ly    = "SV giữ nguyên các verdict tự chấm trong AI-02, rà soát lại bug/tỉ lệ và chốt các biểu mẫu nộp bài."
+# 9. Hoàn thiện báo cáo, biểu mẫu AI Audit/Disclosure & đóng gói nộp bài
+["2026-11-18 02:03 .. 2026-11-18 11:00"]
+muc_dich = "Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài."
+xu_ly    = "SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài."
