@@ -22,12 +22,11 @@
 
 ### 1. Công cụ AI đã dùng:
 
-- **Claude Opus 5.5** (Claude Code) – 50 lượt
-- **Claude (không rõ model)** – 37 lượt trong log:
-  - 36 lượt phiên thảo luận claude.ai: bản xuất dữ liệu claude.ai (`conversations.json`) không ghi model; em xác nhận dùng **Claude Opus 5.5** (ghi ở `appendix/prompt_log_notes.toml`, trường `ghi_chu_model`, áp cho các lượt `nguon_luot = "claude.ai"`). Log giữ nguyên nhãn "không rõ model".
+- **Claude Opus 5.5** (Claude Code) – 51 lượt
+- **Claude (không rõ model)** – 72 lượt trong log:
+  - 71 lượt phiên thảo luận claude.ai: bản xuất dữ liệu claude.ai (`conversations.json`) không ghi model; em xác nhận dùng **Claude Opus 5.5** (ghi ở `appendix/prompt_log_notes.toml`, trường `ghi_chu_model`, áp cho các lượt `nguon_luot = "claude.ai"`). Log giữ nguyên nhãn "không rõ model".
   - #52 (19:45 17/11/2026, Claude Code): lượt `<task-notification>` do Claude Code tự sinh khi một tiến trình nền kết thúc (không phải em gõ); transcript không ghi model cho lượt này (AI chép từ log).
-- Tổng 87 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 09:40 18/11/2026; #87 là lượt chốt nộp, output chép tới lúc commit). Danh sách mã `#n` từng model ở dòng đó.
-- Phiên claude.ai lấy từ bản xuất dữ liệu có lượt cuối lúc 21:40 17/11/2026; **các lượt claude.ai sau 21:40 17/11/2026 chưa có trong bản xuất** (chưa xuất lại) nên chưa có trong prompt log.
+- Tổng 123 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 09:40 18/11/2026; phiên claude.ai theo bản xuất dữ liệu có lượt cuối 09:29 18/11/2026; #123 là lượt chốt nộp, output chép tới lúc commit). Danh sách mã `#n` từng model ở dòng đó.
 - Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận "Homework Testing Software": lập kế hoạch, soạn lệnh, đối chiếu code khi em review).
 - Cách tạo prompt log: hook Stop của Claude Code (`tools/hooks/on_stop.py`) chép transcript vào `.transcripts/` (không nộp) và chạy `tools/extract_prompt_log.py`: chép nguyên văn prompt + output, lọc khối hệ thống, giờ Asia/Saigon, ghi model từng lượt; phiên claude.ai đọc từ bản xuất dữ liệu (`claude-ai_session_HW04_p1.json`). Mốc/bỏ lượt theo `tools/hw.toml`; Section / Mục đích / Xử lý do em ghi trong `prompt_log_notes.toml`. Không sửa tay log.
 
@@ -47,7 +46,7 @@
 
 - **Lượt #5 (23:02 16/11/2026 – Claude Opus 5.5, Claude Code):** Dựng quy trình 6 bước data-driven (`playwright-ddt-automation` v1) gồm `SKILL.md`, 4 script kiểm tra/đóng băng/gộp báo cáo và 3 template; cấu hình chạy 3 trình duyệt Chrome/Edge/Firefox kèm reporter `Run by: 23120255` và chọn 15 TC bước 1 cho `A_FR01`.
 - **Lượt #14 (00:55 17/11/2026 – Claude Opus 5.5, Claude Code):** Ghi nhận kết quả tự soi `A_FR01.spec.ts` vào `review_sv.md` trước khi sửa mã, sau đó thực hiện 3 commit tách biệt để sửa lỗi đồng bộ API (`users.list()` chờ phản hồi `POST /api/register`), sửa nhóm regex oracle `^(…|…)` kèm escape ký tự đặc biệt và chặn chạy khi `workers > 1`.
-- **Lượt #79 (01:13 18/11/2026 – Claude Opus 5.5, Claude Code):** Tự chạy thử nghiệm đầu-cuối (E2E) ở chế độ demo trên nhánh tạm `skill-dryrun` để rà soát và nâng cấp Agent Skill lên v2.1 (khắc phục lỗi nạp nhầm file đóng băng trong `testDir`, lỗi chờ cứng `POST` gây Blocked giả ở form HTML5 và xung đột `testMatch` giữa config chính thức với spec demo).
+- **Lượt #98 (01:13 18/11/2026 – Claude Opus 5.5, Claude Code):** Tự chạy thử nghiệm đầu-cuối (E2E) ở chế độ demo trên nhánh tạm `skill-dryrun` để rà soát và nâng cấp Agent Skill lên v2.1 (khắc phục lỗi nạp nhầm file đóng băng trong `testDir`, lỗi chờ cứng `POST` gây Blocked giả ở form HTML5 và xung đột `testMatch` giữa config chính thức với spec demo).
 
 ### 4. Phần cụ thể AI đóng góp:
 

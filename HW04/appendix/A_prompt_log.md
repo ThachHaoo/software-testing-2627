@@ -3394,7 +3394,69 @@ Giờ em quay video Task 2 trước nhé, phần này không phụ thuộc gì c
 
 ---
 
-## #65 | 22:11 17/11/2026 | Claude Opus 5.5 | [...]
+## #65 | 21:47 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
+
+**Prompt:**
+```
+Bạn giúp tôi lên kế hoạch cũng như kịch bản để thực hiện video task 2nhé
+```
+
+**Output:**
+```
+## Kế hoạch quay video Task 2 (mục tiêu 6–8 phút, tối thiểu 5 phút)
+
+Mình chỉ đưa thứ tự màn hình và ý chính. **Lời nói em tự nói bằng giọng của em**, không cần học thuộc. Nhìn bảng mà nói theo ý là tự nhiên nhất.
+
+### A. Chuẩn bị (khoảng 10 phút, trước khi bấm quay)
+1. **Bật SUT** (backend :3000, web :5173, admin :5174) và kiểm mở được trang.
+2. **Mở sẵn các thứ sau** (mỗi thứ một tab/cửa sổ, theo thứ tự quay):
+   - Terminal PowerShell ở `HW04\tests`.
+   - VS Code: `HW04/data/A_FR01.json`, `HW04/tests/A_FR01.spec.ts`, `HW04/A_FR01/review_sv.md`.
+   - Report **lượt thử 1** của A: `HW04/reports/chrome_20261117T00…` (bản 1 Fail + 14 did not run).
+   - Trang commit `6fc76b5` trên GitHub (diff bỏ `mode: 'serial'`).
+   - Trang Issues lọc `[HW04]` trên `tkob-team/eshop-sut`.
+   - `HW04/README.md` (bảng test summary).
+3. **Dọn màn hình:**
+   - Tắt thông báo Windows/Zalo.
+   - Đóng tab có email hay tài khoản cá nhân.
+   - Phóng to chữ trong terminal và VS Code (`Ctrl` + `=`) cho dễ đọc.
+4. **Công cụ quay:** OBS, hoặc `Win + Alt + R` (Xbox Game Bar, chỉ quay được một cửa sổ, nên OBS tiện hơn). Quay thử 10 giây để nghe lại mic.
+
+### B. Thứ tự quay
+| # | Thời gian | Màn hình / thao tác | Ý chính em nói |
+|---|---|---|---|
+| 1 | 0:00–0:30 | Terminal: gõ `whoami`, rồi `hostname` | Tên, MSSV, bài HW04 Automation Testing, chứng minh đang quay trên máy của mình |
+| 2 | 0:30–1:15 | Cây thư mục `HW04/`, mở `data/A_FR01.json` | Dùng lại 3 feature của HW02 (FR-01, FR-07, FR-15). Mỗi feature 15 TC. Dữ liệu và Expected nằm trong file JSON riêng, có sha1 khoá Expected |
+| 3 | 1:15–2:15 | `A_FR01.spec.ts`: vòng lặp `for (const c of DATA.testcases)`, chỉ vài assertion | Script không gõ cứng dữ liệu. Các kiểu assertion: URL/hiển thị, nội dung thông báo, so dữ liệu API trước/sau, đếm/giá trị. Script do AI sinh **theo từng bước** của skill |
+| 4 | 2:15–3:45 | **Lỗi đã sửa:** mở report lượt thử 1 (1 Fail, 14 did not run) → diff `6fc76b5` trên GitHub | AI để `mode: 'serial'`, nên 1 TC Fail (bug thật) làm 14 TC sau không chạy. Phát hiện khi đọc report. Sửa: bỏ serial, mỗi TC độc lập. Nói rõ: lỗi này **phiên thảo luận chỉ ra, em quyết định sửa** |
+| 5 | 3:45–4:15 | (Tuỳ chọn) `review_sv.md` | Nhắc nhanh thêm 1 lỗi khác, ví dụ `users.list()` không chờ POST nên có thể Pass giả |
+| 6 | 4:15–6:00 | Terminal: `npx playwright test A_FR01 --project=chrome --project=edge --project=firefox` | Chạy cùng bộ test trên 3 trình duyệt. Trong lúc chạy, giải thích: backend được reset đầu lượt, Fail là bug thật chứ không phải lỗi script |
+| 7 | 6:00–7:00 | Mở report vừa sinh: tiêu đề "Run by: 23120255 · <ISO>", metadata, 1 TC Fail (ví dụ TC-FR01-01) kèm ảnh after-submit | Cách đọc report, chỗ có MSSV + giờ. Kết quả 7 Pass / 8 Fail giống trên cả 3 trình duyệt. Fail này ứng với BUG-86 |
+| 8 | 7:00–7:30 | Trang Issues `[HW04]` → mở issue #298 | 18 bug do em viết, mỗi issue có ảnh |
+| 9 | 7:30–8:00 | `README.md` test summary | Tổng: 3 feature, 45 TC, 9 lượt chính thức, số Pass/Fail, 18 bug. Kết |
+
+**Mẹo ở bước 6:** lượt chạy 3 trình duyệt mất khoảng 9 phút. Em cứ quay đủ, rồi cắt hoặc tua nhanh đoạn giữa khi dựng. Nhớ để lại đoạn bắt đầu chạy và đoạn kết thúc có dòng tổng kết của từng trình duyệt.
+
+### C. Lưu ý quan trọng
+- **Report sinh ra khi quay KHÔNG thay report chính thức.** Quay xong em xoá thư mục report mới, hoặc để nguyên mà không commit. Lệnh 3 project trong một lần chạy sẽ sinh **một** report chung tên `chrome+edge+firefox_…`, dễ nhận ra.
+- **Không quay:** token trong localStorage, mật khẩu thật, tab Gmail. Mật khẩu admin seed `Admin123!` là dữ liệu demo nên không sao.
+- **Đúng sự thật:** script do AI sinh, em review và quyết định sửa. Lỗi serial do phiên thảo luận phát hiện. Đừng nói em tự phát hiện, vì trong `review_sv.md` đã ghi nguồn.
+
+### D. Sau khi quay
+1. Upload YouTube, chế độ **Unlisted (Không công khai)**. Tiêu đề gợi ý: `23120255 – HW04 Automation Testing – Demo Playwright đa trình duyệt`.
+2. Mở link bằng tab ẩn danh để kiểm xem được.
+3. Gửi link cho mình. Claude Code sẽ điền vào `README.md`, report §7 và `HW04/skills/VideoLinks.md`.
+
+Quay xong Task 2 là tới video skill. Mình sẽ đưa lệnh E2E chạy trên nhánh `demo-video`, nhưng chỉ gửi khi em sẵn sàng quay, để nó không chạy trước.
+```
+
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
+
+---
+
+## #66 | 22:11 17/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
@@ -3422,7 +3484,106 @@ Thêm bộ đọc bản xuất claude.ai vào `extract_prompt_log.py`, chép ngu
 
 ---
 
-## #66 | 22:19 17/11/2026 | Claude Opus 5.5 | [...]
+## #67 | 22:14 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
+
+**Prompt:**
+```
+Trước khi gửi bạn Video Task 2, mình gửi bạn response của trích phiên sau khi mình đưa conversation.json cho Claude Code đã nhé:
+Đã trích phiên claude.ai vào prompt log: 36 lượt, lượt đầu 18:51 12/11/2026, lượt cuối 21:40 17/11/2026 (giờ Asia/Saigon). Prompt log HW04 giờ có 65 lượt: 28 lượt Claude Code trước đó + 36 lượt claude.ai + lượt hiện tại.
+
+- Transcript: hội thoại 419e0cdc-… gồm 72 tin, được chép nguyên văn thành .transcripts/claude-ai_session_HW04_p1.json (đã nằm trong gitignore). Hội thoại không có nhánh sửa, nên không phải chọn nhánh.
+- Bộ đọc mới: em thêm vào tools/extract_prompt_log.py một bộ đọc cho file .json lấy từ bản xuất dữ liệu, không chuyển định dạng.
+  - Mỗi tin của bạn thành một lượt. Phần dán kèm được nối vào prompt nguyên văn (lượt 17/11 15:16 có đoạn dán 2970 ký tự); tên file đính kèm được ghi lại, ví dụ đề PDF ở lượt #1.
+  - Output chỉ lấy phần chữ của tin trả lời; bỏ phần suy nghĩ và gọi công cụ.
+  - on_stop.py giờ đọc thêm các file claude-ai_*.json.
+- Model: bản xuất của claude.ai không ghi model, nên cả 36 lượt hiện là "Claude (không rõ model)". Theo CLAUDE.md, lý do cho các lượt này bạn ghi trong prompt_log_notes.toml.
+- T1–T4: lượt #3 (23:01 16/11) ghi "S1:a; T1:a; T2;a; T3:a; T4:a; B1: b". Như vậy mỗi mục chọn phương án a, nhưng nội dung từng phương án chỉ có ở tin trả lời trước đó. Em chưa điền vào report_plan.md.
+- Commit: 86d4d78 tools: đọc hội thoại claude.ai từ bản xuất dữ liệu (claude-ai_*.json); HW04 prompt log 65 lượt
+```
+
+**Output:**
+````
+Trích transcript thành công: **36 lượt khớp đúng** số tin nhắn em gửi trong phiên (18:51 12/11 → 21:40 17/11). Phần prompt log của phiên thảo luận giờ đã do code trích, không ai chép tay.
+
+## Việc cần làm tiếp
+1. **Model "không rõ" (36 lượt):** giữ nguyên trong log, không vá script, theo đúng quy ước HW02. Em thêm một khoá khoảng vào `prompt_log_notes.toml`, đại ý: "phiên claude.ai, bản xuất dữ liệu không ghi model; giao diện chọn Claude Opus 5.5". **Em kiểm lại trên giao diện xem đúng model nào rồi mới ghi**, mình không khẳng định thay em. AI-03 liệt kê 36 lượt này kèm lý do.
+2. **Ý nghĩa S1/T1–T4/B1** (để Claude Code điền `report_plan.md`):
+   - S1=a: tự viết skill `playwright-ddt-automation` (không dùng Playwright Test Agents hay lackeyjb/playwright-skill).
+   - T1=a: 15 TC UI mỗi feature.
+   - T2=a: dữ liệu JSON, Expected nguyên văn HW02 + sha1.
+   - T3=a: Chromium/Firefox/WebKit. **Sau đó đổi thành W1=a: Chrome/Edge/Firefox**, vì WebKit bị Smart App Control chặn.
+   - T4=a: Playwright HTML reporter, "Run by" ở title + metadata.
+   - B1=b: tạo issue mới cho mọi bug.
+3. **Xuất lại một lần nữa trước khi chốt prompt log** (sáng mai, ngay trước khi zip): các lượt sau 21:40 (lượt này, lượt kịch bản video, phần báo cáo/form) chưa có trong bản xuất hiện tại. Cách làm giống lần này, thay file `_p1` bằng bản mới. Số #n chỉ điền vào Audit/AI-03 **sau** lần xuất cuối.
+
+Gửi Claude Code lệnh ngắn:
+```
+HW04: điền report_plan.md mục "Quyết định": S1=a tự viết skill playwright-ddt-automation; T1=a 15 TC UI/feature; T2=a JSON (expected nguyên văn HW02 + sha1); T3=a Chromium/Firefox/WebKit → thay bằng W1=a Chrome/Edge/Firefox (WebKit bị Smart App Control chặn); T4=a Playwright HTML, Run by ở title + metadata; B1=b issue mới cho mọi bug. Ghi vào "Khai cho Audit": bộ đọc conversations.json thêm vào extract_prompt_log.py (86d4d78); 36 lượt claude.ai "không rõ model" do bản xuất không ghi model. Commit.
+```
+
+Giờ em gửi link video Task 2 khi xong nhé.
+````
+
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
+
+---
+
+## #68 | 22:17 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
+
+**Prompt:**
+```
+1. Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. Có cần viết lại prompt không?
+```
+
+**Output:**
+````
+Không cần viết lại prompt nào. Prompt log giữ nguyên như script đã trích. Em chỉ cần **ghi chú** lý do cho 36 lượt "không rõ model", và đó là lời xác nhận của em.
+
+Đưa Claude Code lệnh ngắn này, nó chép nguyên văn câu của em vào file ghi chú:
+```
+HW04: thêm vào HW04/appendix/prompt_log_notes.toml một khoá khoảng "2026-11-12 18:51 .. 2026-11-17 21:40" (chỉ áp cho lượt claude.ai), trường lý do/ghi chú = NGUYÊN VĂN câu SV: "Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết." + "(bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)". Không đổi cột model trong log. Chạy on_stop.py --manual, kiểm không có cảnh báo khoá không khớp. Commit.
+```
+
+Hệ quả cho form:
+- **AI-03:** dòng công cụ ghi "Claude Opus 5.5 (claude.ai, SV xác nhận; log ghi 'không rõ model' vì bản xuất không có trường model)" cộng với các model của Claude Code theo dòng "Tổng".
+- **Lần xuất cuối sáng mai:** khoá khoảng nên mở tới hạn nộp, ví dụ `… .. 2026-11-18 11:00`, để phủ cả các lượt mới.
+````
+
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
+
+---
+
+## #69 | 22:18 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
+
+**Prompt:**
+```
+ý mình là viết lại prompt mà bạn vừa đưa cho mình á
+```
+
+**Output:**
+````
+À, ý em là gộp lại thành một lệnh. Đây là lệnh gộp cả hai việc, em dán một lần:
+
+```
+HW04 – lệnh #24.
+1. report_plan.md mục "Quyết định": S1=a tự viết skill playwright-ddt-automation; T1=a 15 TC UI/feature; T2=a JSON (expected nguyên văn HW02 + sha1); T3=a Chromium/Firefox/WebKit → thay bằng W1=a Chrome/Edge/Firefox (WebKit bị Smart App Control chặn); T4=a Playwright HTML, Run by ở title + metadata; B1=b issue mới cho mọi bug.
+2. report_plan.md mục "Khai cho Audit": bộ đọc conversations.json thêm vào extract_prompt_log.py (86d4d78); 36 lượt claude.ai "không rõ model" do bản xuất không ghi model.
+3. HW04/appendix/prompt_log_notes.toml: khoá khoảng "2026-11-12 18:51 .. 2026-11-18 11:00" (chỉ áp cho lượt claude.ai), ghi chú = NGUYÊN VĂN câu SV: "Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết." + "(bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)". Không đổi cột model trong log.
+4. Chạy on_stop.py --manual, kiểm không có cảnh báo khoá không khớp. Commit. Báo cáo ≤ 5 dòng.
+```
+````
+
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
+
+---
+
+## #70 | 22:19 17/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
@@ -3449,7 +3610,36 @@ Prompt log xong, không có cảnh báo khoá. Giờ cập nhật `report_plan.m
 
 ---
 
-## #67 | 22:24 17/11/2026 | Claude Opus 5.5 | [...]
+## #71 | 22:23 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- report_plan.md: mục Quyết định đã ghi S1, T1–T4 (= a), W1, B1. Mã S1 trong A_FR01/selection.json trùng tên với S1 mới nên em đổi thành A-S1. Mục Khai cho Audit có thêm bộ đọc claude.ai (86d4d78) và lý do 36 lượt "không rõ model".
+- prompt_log_notes.toml: thêm khoá khoảng 2026-11-12 18:51 .. 2026-11-18 11:00, ghi chú model chép nguyên văn câu SV. Notes cũ không có cách giới hạn một khoá cho riêng lượt claude.ai, nên em thêm 2 trường vào extract_prompt_log.py: nguon_luot (khoá chỉ áp cho lượt claude.ai) và ghi_chu_model (hiện thành dòng "Ghi chú model:" dưới tiêu đề lượt). Cột model trong log giữ nguyên.
+- on_stop.py --manual: 66 lượt, không có cảnh báo khoá không khớp. Ghi chú model hiện ở đúng 36 lượt claude.ai; tổng có 37 lượt "không rõ model", tức thêm 1 lượt Claude Code chưa có lý do trong notes.
+- Commit: 60bec96 HW04: report_plan ghi S1/T1–T4, khai bộ đọc claude.ai; notes ghi chú model lượt claude.ai (nguon_luot)
+===
+oke rồi nhỉ, làm video tiếp nhé
+```
+
+**Output:**
+```
+Ổn rồi. Còn 2 việc nhỏ, để sáng mai làm cùng lúc chốt prompt log:
+- **1 lượt Claude Code "không rõ model"**: khi chốt log, em xem lượt đó là gì (bấm Ctrl+C, chạm giới hạn, hay dán nhầm) rồi ghi lý do vào notes.
+- **Claude Code tự đổi tên S1 → A-S1 trong `A_FR01/selection.json`** (ngoài lệnh). Thêm vào "Khai cho Audit". File này không phải file data nên sha1 không bị ảnh hưởng.
+
+Giờ em quay video Task 2 theo kịch bản ở trên, xong gửi mình link.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #72 | 22:24 17/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -3478,7 +3668,7 @@ Lưu ý: tắt backend sẽ mất giỏ hàng và tài khoản đã tạo, vì C
 
 ---
 
-## #68 | 22:26 17/11/2026 | Claude Opus 5.5 | [...]
+## #73 | 22:26 17/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -3519,7 +3709,430 @@ npx vite --host 127.0.0.1 --port 5174
 
 ---
 
-## #69 | 00:19 18/11/2026 | Claude Opus 5.5 | [...]
+## #74 | 22:35 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+Đợi đã, mà những issues này không cần thêm ảnh giống như các HW trước sao?
+```
+
+**Output:**
+```
+Có, 18 issue **đã có ảnh**. Claude Code nhúng ảnh bằng link raw từ repo public của em, ghim theo commit `b264556`. Mỗi issue có 1 ảnh sau thao tác chính và 1 ảnh lúc kết thúc (BUG-90 chỉ có 1 ảnh). Khác với HW02/HW03 ở chỗ ảnh **không được kéo thả tải lên GitHub**, mà hiển thị qua link tới file trong repo.
+
+**Em kiểm ngay:** mở thử 2–3 issue (ví dụ #298, #302, #315) xem ảnh có hiện trong thân issue không. Mình không mở được trang GitHub của em để xem thay.
+
+**So sánh 2 cách:**
+| | Link raw (hiện tại) | Kéo thả tải lên (như HW02/HW03) |
+|---|---|---|
+| Hiển thị trong issue | Có | Có |
+| Phụ thuộc | Repo phải **giữ public** tới khi có điểm; link ghim commit nên không đổi theo code | Ảnh lưu trên GitHub, không phụ thuộc repo |
+| Đúng chữ đề "attaching a screenshot" | Gần đúng: ảnh hiện trong issue nhưng không phải tệp đính kèm | Đúng hoàn toàn |
+| Thời gian | Đã xong | Khoảng 15–20 phút cho 18 issue |
+
+**Khuyến nghị:**
+- Nếu ảnh hiện đúng thì **giữ nguyên tối nay** và quay video trước, vì video là việc gấp hơn.
+- Sáng mai còn dư thời gian thì kéo thả bổ sung **1 ảnh chính** vào mỗi issue bằng `gh issue edit` hoặc sửa tay, để khớp chữ đề và giống các HW trước.
+- Dù chọn cách nào, em **không đổi repo sang private** trước khi có điểm.
+```
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #75 | 22:59 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+Oke, thấy ảnh oke hết rồi
+===
+Đang quay video, mà thấy nó "backend restart xong: 5 sản phẩm" nhiều, logic này được viết ở đâu vyaaj nhỉ
+```
+
+**Output:**
+```
+Dòng chữ đó được in theo chuỗi gọi sau:
+
+1. **`tools/restart_backend.ps1` dòng 9:** script dừng backend rồi bật lại (`node server.js` xoá CSDL và seed lại), sau đó gọi `GET /api/products`. Khi thấy đủ ≥ 5 sản phẩm thì in `backend restart xong: 5 sản phẩm`.
+2. **`HW04/tests/fixtures/ddt.ts`, hàm `resetDb()`:** gọi script trên bằng `execFileSync('powershell', … restart_backend.ps1)`.
+3. **`beforeAll` trong mỗi spec** (ví dụ `A_FR01.spec.ts` khoảng dòng 56) gọi `resetDb()`, để CSDL sạch trước khi chạy.
+
+**Vì sao in nhiều lần:** `beforeAll` lẽ ra chạy 1 lần mỗi lượt. Nhưng mỗi khi có test **Fail**, Playwright bỏ worker cũ và mở worker mới cho test kế tiếp, nên `beforeAll` chạy lại và backend bị restart thêm một lần. A có 8 Fail, nên một trình duyệt in khoảng 9 lần. Chạy 3 trình duyệt trong một lệnh thì khoảng 27 lần.
+
+Đây chính là điểm yếu em đã ghi trong review (ý "restart backend tốn thời gian"). Trong video, nếu muốn, em nói luôn lúc dòng này hiện lên: verdict vẫn đúng vì CSDL luôn sạch, chỉ tốn thêm thời gian, và hướng cải tiến là reset 1 lần ở `globalSetup`, mỗi case tự dọn dữ liệu.
+```
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #76 | 23:01 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+giải thích cho tôi hiểu tại sao bỏ worker cũ và mở worker mới được không?
+```
+
+**Output:**
+````
+**Worker** là một tiến trình Node.js riêng mà Playwright dùng để chạy test. Config đặt `workers: 1`, nên tại một thời điểm chỉ có một worker chạy lần lượt từng test.
+
+**Vì sao test Fail thì worker bị bỏ:** khi một test Fail, Playwright không biết test đó đã để lại "rác" gì trong tiến trình. Ví dụ:
+- trình duyệt hoặc trang chưa đóng hẳn,
+- promise còn treo, timer còn chạy,
+- biến toàn cục hay fixture dùng chung cho cả worker (như `adminToken` ở B/C) đang ở trạng thái lỗi.
+
+Nếu chạy test tiếp theo trong cùng tiến trình đó, test sau có thể Fail **vì rác của test trước** chứ không phải vì SUT. Kết quả sẽ sai và khó truy nguyên. Vì vậy Playwright chọn cách an toàn: **bỏ hẳn tiến trình cũ, mở tiến trình mới sạch** cho các test còn lại. Đây là thiết kế mặc định của Playwright, không phải do code của em.
+
+**Hệ quả với `beforeAll`:** `beforeAll` và fixture có phạm vi worker (`scope: 'worker'`) chạy **một lần cho mỗi worker**. Worker mới thì chúng chạy lại từ đầu. Do đó, cứ sau mỗi test Fail:
+
+```
+test Fail → bỏ worker → worker mới → beforeAll chạy lại → resetDb() → restart backend
+```
+
+**So sánh dễ hình dung:** giống phòng thi. Một thí sinh làm đổ mực ra bàn thì giám thị không lau tạm rồi cho người sau ngồi, mà đổi hẳn sang phòng khác sạch. Đổi phòng thì phải sắp xếp lại từ đầu, tức là `beforeAll` chạy lại.
+
+**Cách tránh nếu muốn (điểm cải tiến cho review):**
+- Đưa `resetDb()` sang `globalSetup`. `globalSetup` chạy **một lần cho cả lượt**, không phụ thuộc worker.
+- Mỗi test tự dọn dữ liệu nó tạo ra. Spec hiện đã có phần dọn cho user/sản phẩm tạo trong case.
+- Chỉ reset lại khi phát hiện CSDL bẩn.
+
+Em có thể nói ngắn gọn ý này trong video lúc dòng "backend restart xong" hiện lên. Nhưng đừng sa đà, giữ thời lượng cho phần lỗi serial và report.
+````
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #77 | 23:03 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+Mới chạy lệnh: "npx playwright test A_FR01 --project=chrome --project=edge --project=firefox" mà có 14 pass 31 fail. Thấy firefox nó fail hết luôn
+```
+
+**Output:**
+````
+Đừng kết luận vội. Số liệu chỉ ra chỗ bất thường: Chrome 7/8 + Edge 7/8 = **14 Pass / 16 Fail**, cộng **Firefox Fail cả 15**. Chrome và Edge vẫn đúng như lượt chính thức, chỉ Firefox hỏng **khi chạy chung một lệnh với 2 trình duyệt kia**. Lượt chính thức chạy riêng Firefox thì vẫn ra 7/8.
+
+Nghĩa là nhiều khả năng đây là **lỗi môi trường hoặc harness khi chạy 3 project trong một lần**, không phải bug SUT. Ví dụ: Firefox không khởi động được sau khi backend bị restart liên tục, hoặc fixture/beforeAll xử lý sai khi đổi project. Phải xem lỗi thật mới biết.
+
+## Làm ngay (2 phút)
+1. Mở report vừa sinh (`chrome+edge+firefox_…`), lọc Firefox, mở **TC đầu tiên** của Firefox, xem dòng **Error** là gì: timeout, browser crash, hay assertion nào.
+2. Chạy riêng: `npx playwright test A_FR01 --project=firefox`.
+   - Ra **7/8** như lượt chính thức → xác nhận lỗi chỉ xảy ra khi chạy gộp.
+   - Vẫn Fail hết → môi trường Firefox trên máy đang có vấn đề, dán dòng Error cho mình.
+
+## Cho video
+**Quay bằng 3 lệnh riêng**, giống lượt chính thức (đã chạy ổn nhiều lần):
+```
+npx playwright test A_FR01 --project=chrome; npx playwright test A_FR01 --project=edge; npx playwright test A_FR01 --project=firefox
+```
+Lần chạy gộp vừa rồi **không phải report chính thức**. Em để đó làm bằng chứng, đừng xoá, rồi dán dòng Error cho mình.
+
+Nếu đúng là chỉ lỗi khi chạy gộp thì đây là **thêm một phát hiện thật** cho phần review: harness của AI chưa chịu được khi chạy nhiều project trong một lệnh. Mình sẽ đưa lệnh cho Claude Code chẩn đoán sau khi em quay xong. Đừng để việc này chặn video.
+````
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #78 | 23:04 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+````
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: A_FR01.spec.ts >> TC-FR01-01 Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩu mạnh
+- Location: A_FR01.spec.ts:60:3
+
+# Error details
+
+```
+Error: browserType.launch: spawn UNKNOWN
+Call log:
+  - <launching> C:\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe -no-remote -headless -profile C:\Users\tanhi\AppData\Local\Temp\playwright_firefoxdev_profile-5o2Eo0 -juggler-pipe -silent
+
+```
+
+# Stdout
+
+```
+backend restart xong: 5 sản phẩm
+
+===
+xem nhé
+````
+
+**Output:**
+```
+Lỗi này **không phải do harness**, cũng không phải do chạy gộp. Đây là đúng loại lỗi đã chặn WebKit ở bước 0:
+
+- `browserType.launch: spawn UNKNOWN` nghĩa là Windows **không cho chạy** file `firefox-1572\firefox\firefox.exe`. Test chưa kịp mở trang nào thì đã Fail.
+- Nguyên nhân gần như chắc chắn là **Smart App Control / Windows Application Control**. Bản Firefox của Playwright là bản build riêng, không có chữ ký phổ biến. Smart App Control có thể cho chạy hôm nay rồi chặn hôm sau, tuỳ đánh giá "uy tín" của file.
+- Lượt chính thức 13:52 Firefox vẫn chạy bình thường, nên **report và kết quả chính thức không bị ảnh hưởng**.
+
+Câu "giải thích và đưa code sửa" trong đoạn em dán là prompt Playwright tự sinh khi bấm "Copy prompt". Không có code nào sửa được lỗi này, vì vấn đề nằm ở Windows, không nằm trong spec.
+
+## Kiểm nhanh
+1. Chạy riêng `npx playwright test A_FR01 --project=firefox`.
+2. Nếu vẫn `spawn UNKNOWN`: mở **Windows Security → App & browser control → Protection history**, xem có dòng chặn `firefox.exe` của ms-playwright không. Có thì đó là bằng chứng. Nên chụp ảnh lại, dùng cho report.
+3. **Không tắt Smart App Control.** Tắt rồi là không bật lại được nếu không cài lại Windows, đúng như đã cân nhắc ở W1.
+
+## Cho video (đừng để chuyện này chặn)
+- **Firefox chạy được lại:** quay như kịch bản.
+- **Firefox vẫn bị chặn:**
+  - Quay chạy thật **Chrome và Edge**.
+  - Với Firefox, mở **report chính thức** `firefox_20261117T135230` (có "Run by" và giờ 13:52), nói rõ: lúc quay, Windows Smart App Control chặn tiến trình Firefox của Playwright (lỗi `spawn UNKNOWN`). Kết quả Firefox lấy từ lượt chính thức chạy trước đó.
+  - Nói thật như vậy hợp lệ, vì đề chấm việc bộ test chạy được trên 3 trình duyệt, và 9 report chính thức đã chứng minh điều đó.
+
+Report chạy gộp vừa sinh, em giữ lại nhưng **không commit vào bộ chính thức**. Sau video, mình cho Claude Code ghi sự cố này vào RUN.md và mục "Khai cho Audit", như sự cố TC-60 crash trước đây.
+```
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #79 | 23:07 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+Chạy riêng xong nó vẫn 0/15 hết
+===
+protection history ở đâu?
+```
+*Đính kèm:* `1794931613677_image.png`
+
+**Output:**
+````
+**Protection history** nằm ở mục **cuối cùng của thanh bên trái**, ngay dưới "Family options" trong ảnh em gửi.
+
+Lưu ý: Smart App Control **không phải lúc nào cũng ghi vào Protection history**. Nếu ở đó không thấy gì, em lấy bằng chứng từ nhật ký Windows bằng PowerShell:
+```powershell
+Get-WinEvent -LogName "Microsoft-Windows-CodeIntegrity/Operational" -MaxEvents 50 |
+  Where-Object { $_.Message -match 'firefox' } |
+  Select-Object TimeCreated, Id, Message | Format-List
+```
+Có dòng (thường mã 3077 hoặc 3033) nhắc `ms-playwright\firefox-1572\firefox\firefox.exe` quanh 23:03–23:07 thì đó là bằng chứng Windows chặn. Chụp màn hình hoặc lưu output vào `HW04/env/firefox_blocked_20261117.txt` để đưa vào report.
+
+## Chốt lại
+- Firefox chạy riêng cũng 0/15 với `spawn UNKNOWN`. Vậy tối nay **Windows đang chặn hẳn Firefox của Playwright**. Lỗi không nằm ở spec hay cách chạy gộp.
+- **Kết quả chính thức không bị ảnh hưởng.** 3 report Firefox của A, B, C đều chạy trước khi bị chặn (13:52, 14:13, khoảng 14:5x), có "Run by" và giờ, kết quả khớp Chrome/Edge.
+- **Không tắt Smart App Control**, và không cần chạy lại Firefox nữa.
+
+## Quay video theo cách này
+1. Chạy thật **Chrome** (quay trọn), rồi **Edge** (có thể tua nhanh).
+2. Mở **report Firefox chính thức** `firefox_20261117T135230`. Chỉ vào tiêu đề "Run by: 23120255 · …T13:52…" và kết quả 7 Pass / 8 Fail. Nói thật: lúc quay, Windows Smart App Control chặn tiến trình Firefox của Playwright (`spawn UNKNOWN`), nên phần Firefox dùng report chính thức chạy lúc 13:52.
+3. Có thể chèn nhanh dòng lỗi `spawn UNKNOWN` hoặc output PowerShell ở trên làm bằng chứng. Như vậy video còn thể hiện được việc **cô lập nguyên nhân trước khi kết luận**, đúng tinh thần môn học.
+
+Quay xong, Claude Code sẽ ghi sự cố này vào `RUN.md` và "Khai cho Audit". Report chạy gộp lúc 23:03 cùng lượt Firefox riêng giữ làm bằng chứng, không đưa vào bộ chính thức.
+````
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #80 | 23:08 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests> Get-WinEvent -LogName "Microsoft-Windows-CodeIntegrity/Operational" -MaxEvents 50 |                                                 
+>>   Where-Object { $_.Message -match 'firefox' } |
+>>   Select-Object TimeCreated, Id, Message | Format-List
+
+TimeCreated : 11/17/2026 11:05:42 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:42 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:40 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:40 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:38 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:38 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:36 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:36 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:35 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:35 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:33 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:33 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:31 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:31 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:29 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:29 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:28 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:28 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+
+TimeCreated : 11/17/2026 11:05:26 PM
+Id          : 3077
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements or violated code integrity policy (Policy ID:{0283ac0f-fff1-49ae-ada1-8a933130cad6}).
+
+TimeCreated : 11/17/2026 11:05:26 PM
+Id          : 3033
+Message     : Code Integrity determined that a process (\Device\HarddiskVolume3\Program Files\nodejs\node.exe) attempted to load 
+              \Device\HarddiskVolume3\Users\tanhi\AppData\Local\ms-playwright\firefox-1572\firefox\firefox.exe that did not meet the 
+              Enterprise signing level requirements.
+```
+
+**Output:**
+````
+Bằng chứng đã rõ, đúng như dự đoán:
+
+- **Mã 3077 / 3033 (Code Integrity)**, 23:05:26 → 23:05:42: `node.exe` (Playwright) cố chạy `ms-playwright\firefox-1572\firefox\firefox.exe` thì bị chặn, vì file "did not meet the Enterprise signing level requirements or violated code integrity policy".
+- Mỗi lần thử khởi động cách nhau khoảng 2 giây, khớp với 15 TC Firefox Fail liên tiếp bằng `spawn UNKNOWN`.
+- Policy ID `{0283ac0f-…}` là chính sách Code Integrity của Windows (Smart App Control). Đây là **lỗi môi trường, không phải bug SUT, không phải lỗi script**.
+
+**Lưu bằng chứng:** em lưu nguyên file này vào repo, ví dụ `HW04/env/firefox_blocked_20261117.txt`. Có đường dẫn `C:\Users\tanhi\…` nhưng chỉ là tên người dùng Windows, không nhạy cảm. Muốn kỹ thì thay bằng `<user>` trong **bản đưa vào report**, còn bản gốc giữ nguyên.
+
+Giờ em quay video theo cách đã chốt: chạy thật Chrome + Edge, phần Firefox mở report chính thức 13:52, chèn nhanh dòng log 3077 làm bằng chứng. Quay xong gửi mình link, kèm lệnh này cho Claude Code ghi nhận sự cố:
+```
+HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_20261117.txt (nguyên văn). RUN.md của A: thêm lượt 23:03 (chrome+edge+firefox gộp: chrome 7P/8F, edge 7P/8F, firefox 0/15 spawn UNKNOWN) và lượt firefox riêng (0/15) = "lượt quay video – không chính thức"; nguyên nhân: Windows Code Integrity (mã 3077/3033, 23:05) chặn firefox-1572\firefox.exe; kết quả Firefox chính thức giữ lượt 13:52. Không commit report của các lượt này (ghi đường dẫn). Thêm vào report_plan "Khai cho Audit"/sự cố môi trường. Commit.
+```
+````
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #81 | 23:25 17/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+mới restart máy thì chạy riêng firefox 7 pass 8 fail
+```
+
+**Output:**
+````
+Tốt. Sau khi khởi động lại máy, Firefox chạy được, kết quả **7 Pass / 8 Fail** khớp lượt chính thức. Vậy lúc 23:03–23:05 Windows chặn tạm thời, không phải chặn vĩnh viễn. Kết luận "lỗi môi trường, không phải bug" càng chắc.
+
+**Video:** giờ em quay đủ cả 3 trình duyệt chạy thật, theo kịch bản gốc. Chạy **từng lệnh riêng** cho chắc, vì Firefox vừa bị chặn khi chạy gộp:
+```
+npx playwright test A_FR01 --project=chrome; npx playwright test A_FR01 --project=edge; npx playwright test A_FR01 --project=firefox
+```
+Muốn thì nhắc thêm 10–15 giây về sự cố Firefox (lỗi `spawn UNKNOWN` → log 3077 → khởi động lại máy thì chạy được). Đó là ví dụ tốt về việc cô lập nguyên nhân. Không bắt buộc.
+
+Lệnh #25 cho Claude Code sửa lại một chút cho đúng diễn biến, dùng bản này:
+```
+HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_20261117.txt (nguyên văn). RUN.md của A: thêm (1) lượt 23:03 gộp chrome+edge+firefox: chrome 7P/8F, edge 7P/8F, firefox 0/15 spawn UNKNOWN; (2) firefox riêng ngay sau: 0/15; nguyên nhân Windows Code Integrity (mã 3077/3033, 23:05) chặn firefox-1572\firefox.exe; (3) ~23:2x sau khi khởi động lại máy: firefox riêng 7P/8F, khớp lượt chính thức. Cả 3 = "không chính thức"; kết quả chính thức giữ lượt 13:47–13:52. Không commit report của các lượt này (chỉ ghi đường dẫn). Thêm vào report_plan "Khai cho Audit"/sự cố môi trường. Commit.
+```
+
+Quay xong gửi mình link YouTube nhé.
+````
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #82 | 00:19 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -3556,7 +4169,88 @@ HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_2026
 
 ---
 
-## #70 | 00:22 18/11/2026 | Claude Opus 5.5 | [...]
+## #83 | 00:21 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
+
+**Prompt:**
+```
+Quay xong rồi, link đây nhé: https://youtu.be/TNy_QPFwyB4
+===
+response prompt trên:
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: lệnh #25 — log Firefox bị chặn, ghi 3 lượt không chính thức của A, khai sự cố môi trường.
+- File:
+  - HW04/env/firefox_blocked_20261117.txt: SV đã đặt sẵn file, em giữ nguyên và commit.
+  - HW04/A_FR01/RUN.md: thêm mục "Lượt không chính thức 17/11 tối"; kết quả chính thức giữ lượt 13:47–13:52.
+  - HW04/report_plan.md: thêm dòng sự cố môi trường vào mục Khai cho Audit.
+- Kết quả 3 lượt:
+  - Lượt gộp: chrome 7P/8F, edge 7P/8F, firefox 0/15 (spawn UNKNOWN ở cả 15 TC).
+  - Firefox riêng ngay sau (23:05:15): 0/15. Log có sự kiện 3077/3033 lúc 23:05.
+  - Firefox sau khi khởi động lại máy (23:22:25): 7P/8F, khớp lượt chính thức.
+- Lệch giờ: report lượt gộp ghi Run by 22:56:09, phần firefox bắt đầu 23:01:14; lệnh ghi "23:03". Em ghi cả hai, chưa sửa con số của lệnh.
+- Report 3 lượt này để ngoài git như lệnh, chỉ ghi đường dẫn. Vì chưa commit nên git archive sẽ không đưa chúng vào zip.
+- Thêm 3 report lệnh không nhắc tới (đều là A, 7P/8F): chrome_20261117T234259, edge_20261117T234546, firefox_20261117T234834. Có thể là lượt chạy khi quay video.
+- Log có đường dẫn C:\Users\tanhi\… (tên user Windows) và sẽ lên repo public khi SV push.
+- Kết quả kiểm tra: test Not run.
+- Commit: eb40646 HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tối (Firefox bị Code Integrity chặn) + log môi trường
+- Cần quyết định:
+  - 3 report 23:42–23:48 — ghi vào RUN.md là "lượt quay video, không chính thức" hay bỏ qua?
+  - Log có tên user Windows — giữ nguyên hay che tanhi?
+===
+mới push rồi nhé
+```
+
+**Output:**
+````
+Đã ghi nhận link video Task 2: **https://youtu.be/TNy_QPFwyB4**. Em mở thử bằng tab ẩn danh để chắc chế độ Unlisted vẫn xem được.
+
+## Quyết định cho báo cáo #25
+- **3 report 23:42–23:48:** ghi vào RUN.md là "lượt quay video Task 2, không chính thức", **không commit** report, giống 3 lượt kia.
+- **Tên user `tanhi` trong log:** giữ nguyên, vì đã push. Đây chỉ là tên tài khoản Windows, không phải thông tin nhạy cảm, và nó còn làm bằng chứng đúng máy của em.
+- **Lệch giờ "23:03":** giữ cả hai mốc như Claude Code ghi. Số đúng lấy theo report.
+
+## Tiếp theo: video Agent Skill (10 điểm)
+Giờ là 00:21. Đề xuất thứ tự:
+1. **Bây giờ (khoảng 40 phút):** quay video skill.
+2. **Sáng sớm:** em viết phần 🔒 (gap analysis 3 feature, Critique 200–300 từ), chấm verdict Audit.
+3. **Sau đó:** form, xuất transcript lần cuối, commit log, rà soát, zip. **Nộp bản an toàn trước 09:30.**
+
+Critique và Audit thiếu là **0 điểm cả bài**, nên nếu buồn ngủ quá thì quay skill video ngắn gọn, đừng cầu toàn.
+
+## Lệnh cho Claude Code #26: ghi link video + chạy demo skill E2E (dán khi em bấm quay)
+```
+HW04 – lệnh #26.
+A. Ghi link video Task 2 https://youtu.be/TNy_QPFwyB4 vào HW04/README.md, report §7, HW04/skills/VideoLinks.md. RUN.md của A: 3 report 23:42–23:48 = "lượt quay video Task 2, không chính thức" (không commit report). Commit, rồi:
+B. DEMO skill cho video (SV đang quay): git switch -c demo-video. Chạy skill playwright-ddt-automation E2E trên phạm vi thu nhỏ: feature A_FR01, chỉ 4 TC (2 Pass + 2 Fail theo HW02), mọi file ghi vào HW04/demo/ (KHÔNG đụng HW04/data, tests chính thức, ai-outputs, reports chính thức). Mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra.
+   - Bước 1 xong → DỪNG, chờ SV gõ "tiếp" (SV duyệt danh sách TC).
+   - Bước 2–3 (fixture dùng lại, spec demo) + tsc + --list.
+   - Bước 4 → DỪNG, in lệnh để SV tự chạy chrome/edge/firefox, chờ "tiếp".
+   - Bước 5: in nhắc "SV review spec" → DỪNG, chờ "tiếp" (không tự sửa).
+   - Bước 6: merge → results.md + bug_groups.md trong HW04/demo/, in tóm tắt; nhắc "bug do SV viết".
+   Xong: KHÔNG commit gì trên demo-video; chờ SV xác nhận đã quay xong rồi mới: git switch main, xoá nhánh demo-video và thư mục HW04/demo/.
+```
+
+Bảng thời gian quay video skill (ý chính, em tự nói):
+| Thời gian | Màn hình | Ý chính |
+|---|---|---|
+| 0:00–0:30 | `whoami`, `hostname`; mở `SKILL.md` | Skill tên gì, 6 bước, dùng lại được cho feature khác |
+| 0:30–1:30 | Dán lệnh B, bước 1 dừng → em xem danh sách 4 TC, gõ "tiếp" | Người duyệt TC; dữ liệu tách ra JSON có sha1 |
+| 1:30–3:00 | Bước 2–3: spec demo sinh ra, `tsc` + `--list` | Spec lặp theo data, ≥3 kiểu assertion; luật không đổi Expected |
+| 3:00–4:30 | Bước 4: em chạy 3 lệnh, mở report có "Run by" | Chạy đa trình duyệt (tua nhanh) |
+| 4:30–5:00 | Bước 5 dừng → nhắc lại quy trình review (chỉ vào `review_sv.md` thật của A) | Người review, AI không tự sửa |
+| 5:00–5:45 | Bước 6: `results.md`, `bug_groups.md` | Skill gom Fail thành dữ kiện, bug do em viết |
+| 5:45–6:00 | Kết | Xoá nhánh demo sau khi quay |
+
+Quay xong gửi link, mình đưa lệnh dọn nhánh và bắt đầu phần report.
+````
+
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
+
+---
+
+## #84 | 00:22 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
@@ -3598,7 +4292,99 @@ Gõ **"tiếp"** để chạy bước 2–3.
 
 ---
 
-## #71 | 00:24 18/11/2026 | Claude Opus 5.5 | [...]
+## #85 | 00:24 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Phần A đã commit: 2d3660b. Phần B đang ở nhánh demo-video, xong bước 1 và dừng chờ bạn duyệt 4 TC.
+
+Bước 1/6: chọn TC → tạo HW04/demo/selection.json, HW04/demo/selection.md, HW04/demo/data/A_FR01.json, HW04/demo/candidates.txt. Bản đóng băng nằm ở HW04/demo/ai-outputs/A_FR01/step1/. check_data: 4 TC, 0 lỗi.
+
+┌─────┬─────────────┬──────────────────────────────────┬──────┬────────┐
+│  #  │     TC      │               Loại               │ HW02 │  Bug   │
+├─────┼─────────────┼──────────────────────────────────┼──────┼────────┤
+│ 1   │ TC-FR01-01  │ Positive                         │ Fail │ BUG-01 │
+├─────┼─────────────┼──────────────────────────────────┼──────┼────────┤
+│ 2   │ TC-FR01-202 │ Negative (suy ra)                │ Fail │ BUG-02 │
+├─────┼─────────────┼──────────────────────────────────┼──────┼────────┤
+│ 3   │ TC-FR01-05  │ Negative (Họ Tên rỗng)           │ Pass │ –      │
+├─────┼─────────────┼──────────────────────────────────┼──────┼────────┤
+│ 4   │ TC-FR01-63  │ Boundary LB-1 (mật khẩu 7 ký tự) │ Pass │ –      │
+└─────┴─────────────┴──────────────────────────────────┴──────┴────────┘
+
+- Hai TC Fail thuộc hai nhóm lỗi khác nhau (BUG-01 và BUG-02), hai TC Pass để đối chứng.
+- Lý do chọn từng TC chép từ lựa chọn chính thức. Mục "Quyết định của SV" để trống cho bạn điền khi duyệt trong video.
+- check_data chạy với --min 4, vì mặc định nó đòi ít nhất 12 TC.
+- Bản đóng băng ghi vào HW04/demo/ai-outputs/, không đụng HW04/appendix/ai-outputs/. Em đóng băng 2 lần: lần đầu selection.md chép nhầm các quyết định S1/S2 của lượt chính thức, nên em xoá bản đóng băng trong HW04/demo/ rồi làm lại.
+- Chưa commit gì trên demo-video; HW04/data, spec chính thức và report chính thức giữ nguyên.
+
+Gõ "tiếp" để chạy bước 2–3.
+===
+Ủa, là prompt này vừa dùng để ghi link video, vừa chạy demo skill luôn hả? Tách hẳn ra được không? Vì tôi muốn tạo session mới để demo skill hơn. Kiểu ở session này chỉ cần prompt cho nó prepare, rồi tôi mở session mới demo skill, sau đó thì bảo nó dọn dẹp nếu cần...
+===
+CŨng giúp tôi lên kế hoạch luôn nhé
+```
+
+**Output:**
+````
+Được, tách ra là hợp lý. Session mới thì video sạch hơn: Claude Code tự nhận skill trong `.claude/skills/` từ đầu, người xem thấy đúng "một lệnh gọi skill, chạy trọn feature". Lượt demo ở session mới vẫn tự vào prompt log qua hook, không phải làm gì thêm.
+
+## Kế hoạch
+| Bước | Ở đâu | Việc |
+|---|---|---|
+| 1 | **Session hiện tại** | Huỷ demo đang dở, quay về `main`, xoá nhánh và thư mục demo (lệnh ①) |
+| 2 | Em | Mở OBS, mở terminal, chuẩn bị SUT đang chạy |
+| 3 | **Session mới** (bắt đầu quay) | `whoami`, `hostname` → dán lệnh ② → làm theo các điểm dừng |
+| 4 | Session mới | Quay xong, dán lệnh ③ để dọn |
+| 5 | Em | Upload YouTube Unlisted, gửi link cho mình |
+
+---
+
+### ① Session hiện tại: huỷ demo
+```
+HW04 – huỷ demo: KHÔNG chạy bước 2. Chưa commit gì trên demo-video → git switch main; xoá nhánh demo-video (git branch -D); xoá thư mục HW04/demo/ (kể cả HW04/demo/ai-outputs). Kiểm git status sạch, HW04/data + spec + report chính thức không đổi. Báo cáo 3 dòng.
+```
+
+### ② Session MỚI: demo skill (dán khi đang quay)
+```
+Demo skill playwright-ddt-automation cho video (HW04, CS423). Đọc HW04/CLAUDE.md và .claude/skills/playwright-ddt-automation/SKILL.md trước.
+- git switch -c demo-video. Mọi file ghi vào HW04/demo/ (data, spec, ai-outputs, report). KHÔNG đụng HW04/data, HW04/tests/*.spec.ts chính thức, HW04/appendix, HW04/reports chính thức. Không commit gì.
+- Phạm vi thu nhỏ: feature A_FR01 (nguồn HW02/A_FR01/testcases.json), 4 TC: 2 từng Fail + 2 từng Pass ở HW02, khác nhóm lỗi. check_data chạy --min 4.
+- Chạy 6 bước của skill, mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra:
+  1 chọn TC → DỪNG, chờ tôi gõ "tiếp".
+  2–3 fixture (dùng lại fixtures/ chung) + spec demo HW04/demo/A_FR01.demo.spec.ts; tsc + --list.
+  4 DỪNG, in lệnh để TÔI tự chạy chrome/edge/firefox (report ra HW04/demo/reports/), chờ "tiếp".
+  5 in "SV review spec" → DỪNG, không tự sửa, chờ "tiếp".
+  6 merge → HW04/demo/results.md + bug_groups.md; in tóm tắt; nhắc "bug report do SV viết, AI không viết".
+- Luật: không đổi expected/assertion để test xanh; không viết mô tả bug.
+```
+
+### ③ Session mới: dọn sau khi quay
+```
+Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm git status sạch và HW04/data, spec, report chính thức không đổi. Báo cáo 3 dòng.
+```
+
+---
+
+### Lưu ý khi quay
+- **Mở session mới trong thư mục repo** để Claude Code nạp `CLAUDE.md` và thấy skill.
+- Các điểm dừng là lúc em **nói ý chính** theo bảng thời gian ở tin trước:
+  - Bước 1: duyệt TC.
+  - Bước 4: chạy 3 trình duyệt (tua nhanh).
+  - Bước 5: chỉ vào `review_sv.md` thật của A để nói về review.
+- Chạy lệnh ở bước 4 **từng trình duyệt một**. Nếu Firefox lại `spawn UNKNOWN` thì nói ngắn gọn rồi bỏ qua, vì đã có bằng chứng ở Task 2.
+- Thời lượng khoảng 6 phút là đủ, đề không quy định tối thiểu cho video skill.
+
+Quay xong gửi link, rồi mình chuyển sang report (phần 🔒 của em + Audit + form).
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #86 | 00:24 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3619,7 +4405,7 @@ HW04 – huỷ demo: KHÔNG chạy bước 2. Chưa commit gì trên demo-video 
 
 ---
 
-## #72 | 00:37 18/11/2026 | Claude Opus 5.5 | [...]
+## #87 | 00:37 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3664,7 +4450,7 @@ Bước kế tiếp: sinh fixture và spec demo. Gõ **"tiếp"** để làm bư
 
 ---
 
-## #73 | 00:38 18/11/2026 | Claude Opus 5.5 | [...]
+## #88 | 00:38 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3717,7 +4503,59 @@ Gõ **"tiếp"** khi đã chạy xong 3 lượt.
 
 ---
 
-## #74 | 00:50 18/11/2026 | Claude Opus 5.5 | [...]
+## #89 | 00:49 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Có vẻ skill hiện tại chưa tối ưu lắm nhỉ.
+Chạy lần đầu:   1 failed
+    [chrome] › ..\demo\A_FR01.demo.spec.ts:15:3 › TC-FR01-01 Kiểm tra đăng ký thành công qua UI khi Họ Tên không dấu, email mới và mật khẩumạnh 
+  3 did not run
+===
+Xong tôi phải tự xoá tay dòng serial, xong chạy chrome lần đầu thì 1 pass 3 fail, 1 cái fail vì: "Error: worker process exited unexpectedly (code=3221226505, signal=null)" với 0ms.
+Còn 2 trình duyệt kia bình thường. Kiểm tra lại skill giúp tôi nhé
+```
+
+**Output:**
+````
+Đúng, skill có lỗi thật. Mình đã kiểm repo:
+
+- **`assets/spec.template.ts` dòng 10 vẫn còn `test.describe.configure({ mode: 'serial' })`.** Từ v1 (`b0e2f7c`) tới giờ, skill **chưa hề được cập nhật** theo các bài học review của A. B và C tránh được lỗi chỉ vì mình **dặn trực tiếp trong lệnh**, không phải vì skill tốt lên. Lần này chạy từ session mới, chỉ dựa vào skill, nên lỗi cũ quay lại y nguyên.
+- Lỗi này **có phần của phiên thảo luận**: mình chưa bao giờ ra lệnh cập nhật skill sau khi review xong A. Bài học HW03 đã ghi rõ "cập nhật skill ngay khi đổi cách làm" mà mình vẫn bỏ sót. Em ghi vào "Khai cho Audit". Đây cũng là một ý rất tốt cho Critique: skill do AI viết không tự học từ review, phải có người đưa bài học vào.
+- **Lỗi worker `3221226505` (0xC0000409) ở Chrome** là cùng loại crash với Firefox TC-60 trước đây, ở thời điểm 0 ms, chưa chạy thân test. Đây là lỗi môi trường, không liên quan skill. Chạy lại là qua.
+
+## Cách làm (khoảng 25 phút)
+**Lưu ý:** hai session đang dùng chung một thư mục repo. Phải dọn nhánh demo **trước**, nếu không phần sửa skill sẽ rơi vào nhánh `demo-video` rồi bị xoá theo.
+
+**① Ở session demo:** dán lệnh dọn ③ đã đưa (quay về `main`, xoá `demo-video` và `HW04/demo/`).
+
+**② Ở session hiện tại: nâng skill lên v2**
+```
+HW04 – lệnh #27: skill playwright-ddt-automation v2 (trên main, sau khi demo-video đã xoá).
+Cập nhật SKILL.md + assets/spec.template.ts + assets/ddt-fixture.template.ts theo bài học review A/B/C (review_sv.md 3 feature):
+- bỏ mode serial; guard workers > 1;
+- không catch rỗng: chỉ TimeoutError → Blocked; chờ phản hồi mạng/điều kiện cụ thể, không chờ cứng, không Promise.race nuốt lỗi; gọi API đọc dữ liệu SAU khi đã có phản hồi request;
+- escape chuỗi trước new RegExp; nhóm ^(…|…) đúng; expected không đọc được → ném lỗi; oracle yếu → annotation;
+- câu chữ/từ khoá không có trong expected → trường assumptions trong file data (giả định SV), không gõ cứng trong spec;
+- thông báo: không đếm hộp thoại thành công là "thông báo lỗi" khi chưa có giả định SV (ghi điểm yếu H4 thành cảnh báo);
+- ảnh <TC>_after-* chụp SAU khi đo xong; bấm đúng số lần theo procedure;
+- trace off (report ~1 MB); worker crash 0xC0000409 ở 0 ms → chạy lại, ghi lỗi hạ tầng, không lập bug;
+- mục "Checklist review bước 5" (liệt kê các lỗi trên để SV soi).
+Template lấy theo cấu trúc spec chính thức mới nhất (C_FR15.spec.ts @2e9e454). Không sửa spec/data/report chính thức. Kiểm: sinh thử spec từ template bằng script tạm cho 1 TC → tsc + --list, xong xoá. Commit "HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)". Báo cáo ≤ 8 dòng: thay đổi chính.
+```
+
+**③ Mở session mới, quay lại từ đầu** với lệnh demo ② cũ (giữ nguyên). Lần này kỳ vọng không còn `serial`. Nếu Chrome lại crash ở 0 ms thì chạy lại lệnh đó một lần.
+
+**Gợi ý cho video:** có thể dành 20–30 giây ở đầu: "lần quay thử trước, skill v1 còn sinh `mode: 'serial'` → em nâng lên v2 bằng các bài học review" và mở diff commit v2. Đúng sự thật, và cho thấy skill được bảo trì, đúng yêu cầu "maintenance" của đề §7.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #90 | 00:50 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3738,7 +4576,7 @@ Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm gi
 
 ---
 
-## #75 | 00:52 18/11/2026 | Claude Opus 5.5 | [...]
+## #91 | 00:52 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3778,7 +4616,51 @@ Template lấy theo cấu trúc spec chính thức mới nhất (C_FR15.spec.ts 
 
 ---
 
-## #76 | 01:02 18/11/2026 | Claude Opus 5.5 | [...]
+## #92 | 00:55 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: lệnh #27 – skill playwright-ddt-automation v2 theo bài học review A/B/C; đã commit 5bb31d1.
+- Fixture template: thêm guardWorkers (dừng khi workers > 1), step (chỉ TimeoutError → Blocked, lỗi khác ném tiếp), until/settle/netLog thay cho chờ cứng và Promise.race, esc trước new RegExp, assumption() (thiếu giả định → ném lỗi), fixture dialogs.
+- Spec template: dựng theo C_FR15.spec.ts @2e9e454.
+  - Bỏ mode serial; expected không đọc được → ném lỗi; regex nhóm ^(?:…).
+  - Thứ tự mỗi TC: API trước → bấm đúng 1 lần → chờ phản hồi request → ghi quan sát → chụp ảnh <TC>_after-* → API sau → oracle.
+  - Chưa có giả định SV thì hộp thoại không tính là thông báo lỗi; chỉ ghi annotation oracle thông báo yếu.
+- SKILL.md: bước 2/3 ghi các helper mới, quy định đưa câu chữ không có trong expected vào assumptions và danh sách cấm; bước 4 ghi trace: 'off' và cách xử lý lỗi hạ tầng (0xC0000409, spawn UNKNOWN: chạy lại, ghi RUN.md, không lập bug); thêm mục "Checklist review bước 5" (12 mục).
+- Kết quả kiểm tra: spec sinh thử cho 1 TC (TC-FR01-01) qua tsc không lỗi, --list ra 3 test; đã xoá cả 3 file tạm. Test Not run.
+- Không đụng spec/data/report chính thức; diff chỉ có 3 file trong .claude/skills/playwright-ddt-automation/.
+- Cần quyết định: không.
+===
+xem oke chưa, quay được chưa
+```
+
+**Output:**
+````
+Báo cáo ổn, các bài học đã vào đủ template và checklist. Commit `5bb31d1` **chưa push** nên mình chưa đọc được bản v2. Trước khi quay, em tự kiểm nhanh 3 thứ trong PowerShell ở gốc repo (khoảng 30 giây):
+
+```powershell
+git branch --show-current          # phải là: main
+git branch --list demo-video       # phải rỗng (nhánh demo cũ đã xoá)
+Select-String -Path .claude\skills\playwright-ddt-automation\assets\*.ts -Pattern "serial"   # phải không ra dòng nào
+```
+
+Cả 3 đúng thì **quay được**: mở session mới, chạy `whoami` / `hostname`, dán lệnh demo ② (giữ nguyên như trước).
+
+Nhắc lại khi quay:
+- Bước 4: chạy **từng trình duyệt một**. Gặp crash ở 0 ms hay `spawn UNKNOWN` thì chạy lại lệnh đó một lần, nói ngắn gọn là lỗi môi trường.
+- 20–30 giây đầu (tuỳ chọn): kể skill v1 sinh `serial` ở lần quay thử, rồi mở diff commit `5bb31d1` để cho thấy skill đã được bảo trì.
+- Quay xong: dán lệnh dọn ③, **push** (để có commit v2 trên repo), gửi mình link.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #93 | 01:02 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3815,7 +4697,7 @@ Bước 1/6: chọn 4 TC A_FR01 → `HW04/demo/A_FR01/selection.json`, `HW04/dem
 
 ---
 
-## #77 | 01:04 18/11/2026 | Claude Opus 5.5 | [...]
+## #94 | 01:04 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3855,7 +4737,114 @@ Report ra `HW04/demo/reports/<project>_<ts>/` (`index.html` có "Run by: 2312025
 
 ---
 
-## #78 | 01:12 18/11/2026 | Claude Opus 5.5 | [...]
+## #95 | 01:11 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Sao khổ vậy nè, quay video mà nó cứ lỗi vậy?
+Bước 4/6: bạn tự chạy. Bật SUT trước (backend :3000, web :5173, admin :5174). Mỗi lượt sẽ tự restart backend:
+
+cd D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests
+npx playwright test -c ../demo/playwright.demo.config.ts --project=chrome
+npx playwright test -c ../demo/playwright.demo.config.ts --project=edge
+npx playwright test -c ../demo/playwright.demo.config.ts --project=firefox
+npx playwright show-report ../demo/reports/<project>_<ts>
+
+Report ra HW04/demo/reports/<project>_<ts>/ (index.html có "Run by: 23120255 · ISO", kèm results.json).
+
+DỪNG. Chạy xong 3 lượt thì gõ "tiếp".
+===
+PS D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests> npx playwright test -c ../demo/playwright.demo.config.ts --project=chrome
+Error: Cannot find module './fixtures/a_fr01.demo'
+Require stack:
+- D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\demo\ai-outputs\A_FR01\step3\A_FR01.demo.spec.ts
+- D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests\node_modules\playwright\lib\common\index.js
+- D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests\node_modules\playwright\lib\program.js
+- D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\tests\node_modules\@playwright\test\cli.js
+
+   at ai-outputs\A_FR01\step3\A_FR01.demo.spec.ts:9
+
+   7 |  * oracle dữ liệu API trước/sau (toEqual). Dùng expect.soft.
+   8 |  */
+>  9 | import {
+     | ^
+  10 |   test, expect, loadDemoData, fill, esc, resetDb, guardWorkers, blocked, step, until, settle, netLog,
+  11 |   diffUsers, API, WAIT, REGISTER_ERROR_SEL, type User,
+  12 | } from './fixtures/a_fr01.demo';
+    at Object.<anonymous> (D:\HK7\Testing\Exercise\HW\software-testing-2627\HW04\demo\ai-outputs\A_FR01\step3\A_FR01.demo.spec.ts:9:1)
+
+
+To open last HTML report run:
+
+  npx playwright show-report ..\demo\reports\chrome_20261118T010923
+???
+```
+
+**Output:**
+````
+Lỗi này không do SUT hay trình duyệt, mà do **cấu hình demo**. Sửa được trong 1 phút.
+
+**Nguyên nhân:** `playwright.demo.config.ts` lấy cả thư mục `HW04/demo/` làm thư mục test. Mà bản đóng băng ở bước 3 lại nằm **bên trong** đó (`HW04/demo/ai-outputs/A_FR01/step3/A_FR01.demo.spec.ts`), vẫn giữ đuôi `.spec.ts`. Playwright tưởng đây cũng là test nên nạp vào. File đóng băng import `./fixtures/a_fr01.demo` theo đường dẫn tương đối, mà ở thư mục đóng băng không có file đó, nên báo lỗi.
+
+Bộ chính thức không gặp lỗi này vì `ai-outputs` nằm ở `HW04/appendix/`, ngoài thư mục test.
+
+**Cách xử lý:** em **tạm dừng quay** (cắt đoạn này khi dựng, hoặc giữ lại và nói ngắn gọn là lỗi cấu hình demo), rồi gõ vào session demo:
+```
+Lỗi: config demo nạp cả bản đóng băng trong HW04/demo/ai-outputs (import tương đối hỏng). Sửa HW04/demo/playwright.demo.config.ts: testIgnore ['**/ai-outputs/**'] (hoặc testMatch chỉ HW04/demo/A_FR01.demo.spec.ts). Chạy --list kiểm chỉ còn 4 TC × 3 project. Không sửa spec. Rồi in lại lệnh chạy cho tôi.
+```
+
+Sau đó em chạy lại 3 lệnh chrome / edge / firefox như bình thường.
+
+Lỗi này cũng là **bài học cho skill**: bản đóng băng không được nằm trong thư mục test, hoặc phải đổi đuôi (ví dụ `.spec.ts.txt`). Quay xong mình sẽ thêm vào skill (v2.1) cùng lúc với lệnh dọn. Giờ cứ quay cho xong trước đã.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #96 | 01:12 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+sửa lại hẳn cái skill đi, mất hứng quá
+```
+
+**Output:**
+````
+Hợp lý. Trước khi quay lại, cho Claude Code **tự chạy thử trọn quy trình demo một lần**, có cả 3 trình duyệt. Có lỗi thì nó sửa skill tới khi chạy sạch. Em chỉ quay khi đã chắc chạy được.
+
+### ① Session demo: dọn
+```
+Dừng demo. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm git status sạch. Báo 2 dòng.
+```
+
+### ② Session hiện tại: sửa skill tận gốc + tự chạy thử E2E
+```
+HW04 – lệnh #28: skill playwright-ddt-automation v2.1 – phải chạy E2E sạch trước khi SV quay.
+1. Sửa skill:
+   - freeze.py: bản đóng băng KHÔNG được bị Playwright nạp → lưu ngoài testDir và đổi đuôi (vd *.spec.ts.txt); ghi luật này vào SKILL.md.
+   - Thêm chế độ demo chính thức trong SKILL.md + script (vd tham số --demo <dir> --min N): sinh data/spec/fixture/config demo trong <dir>, config có testIgnore ['**/ai-outputs/**'], đường import đúng từ chỗ spec đặt, report ra <dir>/reports/.
+   - Rà mọi đường dẫn tương đối trong template/scripts khi spec không nằm ở HW04/tests/.
+2. Tự chạy thử E2E (không quay, không commit gì của demo): git switch -c skill-dryrun; chạy chế độ demo cho A_FR01 với 4 TC (2 Fail + 2 Pass HW02); bước 1→6 không dừng; TỰ chạy chrome, edge, firefox (lượt thử, không phải lượt chính thức). Yêu cầu: không lỗi nạp file, 4 TC × 3 trình duyệt chạy hết, verdict khớp HW02, merge ra results.md + bug_groups.md. Lỗi do skill → sửa skill (trên main sau khi quay về) rồi chạy thử lại tới khi sạch. Crash 0xC0000409 / spawn UNKNOWN → chạy lại 1 lần, ghi lại.
+3. Xong: git switch main; xoá nhánh skill-dryrun + thư mục demo + report thử. Commit trên main chỉ các file skill: "HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch".
+4. In ra LỆNH DEMO MỚI ngắn gọn cho SV dán ở session mới (dùng chế độ demo của skill, có 3 điểm dừng: sau bước 1, bước 4 SV tự chạy, bước 5).
+Báo cáo ≤ 10 dòng: lỗi đã gặp khi chạy thử + cách sửa, kết quả 4×3, lệnh demo mới.
+```
+
+Đợi Claude Code báo "chạy thử E2E sạch" rồi mới mở OBS. Lúc đó em dùng **lệnh demo mới** nó in ra, không dùng lệnh ② cũ nữa.
+
+Những lỗi gặp tối nay (serial trong template, bản đóng băng bị nạp nhầm) em cứ ghi lại. Chúng là dữ kiện thật cho phần Critique: skill AI viết chạy tốt khi có người dặn từng lệnh, nhưng chạy độc lập thì lộ lỗi, vì chưa từng được kiểm E2E.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #97 | 01:12 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3873,7 +4862,7 @@ Demo dừng: đã xoá `HW04/demo/`, xoá nhánh `demo-video`, đang ở `main`.
 
 ---
 
-## #79 | 01:13 18/11/2026 | Claude Opus 5.5 | [...]
+## #98 | 01:13 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3939,7 +4928,112 @@ Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
 
 ---
 
-## #80 | 01:34 18/11/2026 | Claude Opus 5.5 | [...]
+## #99 | 01:27 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Giúp tôi ghi nhớ, rồi sau nhắc tôi viết thêm vào Critique nhé.
+===
+Báo cáo cho phiên thảo luận
+
+- Lỗi 1 (template): lần chạy 1, TC-01 và TC-63 bị Blocked "chờ POST quá 10000 ms". Template chờ riêng request, nhưng form hợp lệ HTML5 vẫn có thể không gửi POST vì ứng dụng tự kiểm phía client rồi hiện lỗi. Sửa: until() nhận điều kiện async; spec chờ một trong các nhánh (có request / URL đổi / thông báo hiện / hộp thoại mới), có request thì mới chờ body về.
+- Lỗi 2 (chế độ demo): config chính thức nạp luôn spec demo (--list ra 4 file, thừa 45 test). Sửa: spec demo đặt đuôi *.demo.ts, config demo chỉ match đuôi này. Sau sửa: config chính thức 45/45/45, demo 12.
+- Freeze: từ chối --out nằm trong testDir; file mã đổi đuôi *.ts.txt. Fixture tìm gốc repo bằng cách đi lên tới tools/restart_backend.ps1; data đọc qua DDT_DATA_DIR. Đã ghi cả hai luật vào SKILL.md.
+- Kết quả 4×3 (lượt thử lần 3, report ~0,8 MB):
+
+| TC  | HW02 | chrome / edge / firefox |
+|-----|------|-------------------------|
+| 01  | Fail | Fail                    |
+| 202 | Fail | Fail                    |
+| 05  | Pass | Pass                    |
+| 63  | Pass | Pass                    |
+  merge_reports ra results.md và bug_groups.md (2 nhóm). Không gặp 0xC0000409 hay spawn UNKNOWN.
+- Backend: resetDb đã restart backend, nên backend chạy trong cửa sổ terminal của SV đã bị tắt, giờ backend chạy nền. Web và
+  admin vẫn chạy.
+- Commit: 99080b2 HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch
+- Cần quyết định: không.
+
+Lệnh demo mới (dán vào session mới):
+HW04 – DEMO skill playwright-ddt-automation (chế độ demo, SV đang quay). Không commit gì; không đụng HW04/data, spec/report/ai-outputs chính thức.
+Dựng: python .claude/skills/playwright-ddt-automre A_FR01 --min 4 (thư mục HW04/tests/_demo). Mỗibước in 1 dòng "Bước k/6: …" + file tạo ra.
+- Bước 1: chọn 4 TC (2 Fail + 2 Pass theo HW02) → selection + data + check_data --min 4 + freeze → DỪNG, chờ SV gõ "tiếp".
+- Bước 2–3: fixture (dùng lại page object chính thức) + spec A_FR01.demo.ts từ template v2.1 → freeze → tsc + --list (--config
+./_demo/playwright.config.ts).
+- Bước 4: in lệnh để SV tự chạy chrome/edge/firefox (từ HW04/tests, kèm --config ./_demo/playwright.config.ts) → DỪNG, chờ
+"tiếp".
+- Bước 5: in nhắc "SV review spec theo Checklist review bước 5" → DỪNG, chờ "tiếp" (không tự sửa).
+- Bước 6: merge_reports → results.md + bug_group nhắc "bug do SV viết".
+Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
+```
+
+**Output:**
+```
+Mình đã ghi lại, khi em viết Critique mình sẽ nhắc. Bốn ý cho Critique:
+1. Template v1 vẫn còn `mode: 'serial'` dù đã sửa ở review A: bài học review không được đưa vào skill, và phiên thảo luận cũng không ra lệnh cập nhật.
+2. Bản đóng băng nằm trong thư mục test của demo, vẫn đuôi `.spec.ts`, nên Playwright nạp nhầm và báo lỗi import.
+3. Template chỉ chờ request POST, nên 2 TC bị Blocked giả khi app tự chặn phía client.
+4. Config chính thức nạp luôn spec demo, thừa 45 test.
+
+Ý chính: skill chạy được khi có người dặn từng lệnh, nhưng chạy độc lập thì lộ lỗi, vì chưa từng được kiểm E2E. Sửa ở v2 (`5bb31d1`) và v2.1 (`99080b2`).
+
+## Quay được rồi
+Claude Code đã tự chạy thử trọn quy trình: 4 TC × 3 trình duyệt chạy hết, verdict khớp HW02, không crash. Trước khi quay, em kiểm 2 điểm:
+- **Lệnh demo em dán cho mình bị cụt chữ** (`playwright-ddt-automre…`, `bug_group nhắc…`). Em **copy lại nguyên văn từ cửa sổ Claude Code**, đừng copy từ tin nhắn này.
+- **Backend đang chạy nền** (script reset đã tắt cửa sổ backend cũ của em). Như vậy vẫn ổn, test vẫn chạy được. Em kiểm `http://localhost:3000/api/products` mở được là đủ.
+
+Quay theo bảng thời gian cũ. Quay xong:
+1. Dán lệnh dọn (xoá `HW04/tests/_demo`).
+2. **Push** (để có commit v2, v2.1 trên repo).
+3. Gửi mình link.
+
+Sau đó chuyển sang report. Em viết Critique thì mình nhắc 4 ý trên.
+```
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #100 | 01:29 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+HW04 – DEMO skill playwright-ddt-automation (chế độ demo, SV đang quay). Không commit gì; không đụng HW04/data, spec/report/ai-outputs chính thức.
+Dựng: python .claude/skills/playwright-ddt-automation/scripts/demo.py --feature A_FR01 --min 4 (thư mục HW04/tests/_demo). Mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra.
+- Bước 1: chọn 4 TC (2 Fail + 2 Pass theo HW02) → selection + data + check_data --min 4 + freeze → DỪNG, chờ SV gõ "tiếp".
+- Bước 2–3: fixture (dùng lại page object chính thức) + spec A_FR01.demo.ts từ template v2.1 → freeze → tsc + --list (--config ./_demo/playwright.config.ts).
+- Bước 4: in lệnh để SV tự chạy chrome/edge/firefox (từ HW04/tests, kèm --config ./_demo/playwright.config.ts) → DỪNG, chờ "tiếp".
+- Bước 5: in nhắc "SV review spec theo Checklist review bước 5" → DỪNG, chờ "tiếp" (không tự sửa).
+- Bước 6: merge_reports → results.md + bug_groups.md trong _demo; in tóm tắt; nhắc "bug do SV viết".
+Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
+===
+không có checkout nhỉ
+```
+
+**Output:**
+````
+Đúng, lệnh mới **không tạo nhánh `demo-video`**, và trường hợp này không cần:
+- Chế độ demo ghi mọi thứ vào `HW04/tests/_demo/`, một thư mục **chưa được git theo dõi**. Lệnh dặn không commit gì, không đụng file chính thức.
+- Claude Code đã kiểm: config chính thức vẫn chỉ nạp 45 test, không nạp nhầm spec demo.
+- Quay xong xoá `_demo` là sạch, không phải đổi nhánh qua lại. Nhờ vậy cũng tránh được lỗi tối nay: hai session dùng chung thư mục mà ở hai nhánh khác nhau.
+
+Nếu muốn chắc hơn nữa (không bắt buộc), thêm một dòng vào đầu lệnh:
+```
+Trước khi dựng: kiểm git branch hiện tại là main và git status sạch; thêm HW04/tests/_demo/ vào .git/info/exclude (không sửa .gitignore).
+```
+`.git/info/exclude` chỉ có tác dụng trên máy em, không tạo commit, nên lỡ có ai `git add -A` thì `_demo` cũng không bị đưa vào.
+
+Em quay được rồi.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #101 | 01:34 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -3978,7 +5072,7 @@ File tạo ra:
 
 ---
 
-## #81 | 01:36 18/11/2026 | Claude Opus 5.5 | [...]
+## #102 | 01:36 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4017,7 +5111,7 @@ Report ra `HW04/tests/_demo/reports/<project>_<ts>/`, có "Run by: 23120255 · I
 
 ---
 
-## #82 | 01:43 18/11/2026 | Claude Opus 5.5 | [...]
+## #103 | 01:43 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4044,7 +5138,7 @@ tiếp
 
 ---
 
-## #83 | 01:45 18/11/2026 | Claude Opus 5.5 | [...]
+## #104 | 01:45 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4085,7 +5179,7 @@ Không commit gì. `HW04/data`, spec, report và ai-outputs chính thức không
 
 ---
 
-## #84 | 01:48 18/11/2026 | Claude Opus 5.5 | [...]
+## #105 | 01:48 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4116,7 +5210,98 @@ Dòng `HW04/tests/_demo/` vẫn còn trong `.git/info/exclude`. Dòng này vô h
 
 ---
 
-## #85 | 02:02 18/11/2026 | Claude Opus 5.5 | [...]
+## #106 | 01:49 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Đã xoá HW04/tests/_demo. Lần xoá đầu báo "Device or resource busy", vì terminal đang đứng trong thư mục đó; xoá lại bằng PowerShell thì được, đã kiểm thư mục không còn. Git status giống hệt lúc bắt đầu, không có gì mới.
+
+Dòng HW04/tests/_demo/ vẫn còn trong .git/info/exclude. Dòng này vô hại, không lên repo, để lại lần sau demo dùng tiếp. Muốn gỡ thì báo tôi.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: DEMO skill playwright-ddt-automation A_FR01 (chế độ demo, --min 4) để SV quay video Agent Skill; xong đã xoá HW04/tests/_demo.
+- File đã tạo/sửa: chỉ HW04/tests/_demo/** (đã xoá) + thêm 1 dòng "HW04/tests/_demo/" vào .git/info/exclude (không lên repo). Không đụng HW04/data, spec, report, ai-outputs chính thức.
+- Kết quả kiểm tra: check_data 4 TC, 0 lỗi; tsc Pass (exit 0); --list 12 test (4 TC × 3 trình duyệt); SV tự chạy chrome/edge/firefox → mỗi trình duyệt Pass 2 (TC-05, TC-63), Fail 2 (TC-01, TC-64), Blocked 0, khớp HW02; bug_groups 1 nhóm G1 (TC-01 + TC-64: hộp lỗi đỏ, URL vẫn /register, 0 user mới).
+- Commit: không có (theo lệnh).
+- Cần quyết định / câu hỏi: không.
+- Bất thường: lúc bắt đầu git status không sạch (A_prompt_log.md đã sửa; 6 thư mục HW04/reports/*_20261117T22xx–23xx chưa track; context/HW04_assignment.pdf chưa track). SV chọn vẫn chạy demo, các file này để nguyên, chưa xử lý.
+```
+
+**Output:**
+````
+Demo khớp HW02 (2 Pass / 2 Fail × 3 trình duyệt), dọn sạch. Dòng trong `.git/info/exclude` để nguyên cũng được.
+
+Vài file bất thường đều không ảnh hưởng: 6 report lượt quay video chưa commit, `git archive` lúc zip sẽ tự bỏ qua. `A_prompt_log.md` sẽ được commit ở lần chốt log cuối.
+
+**Em gửi mình link video skill**, Claude Code sẽ điền vào README/report/VideoLinks.
+
+## Phần còn lại (giờ hiện tại 01:49, hạn 11:00)
+| Việc | Ai | Ước tính |
+|---|---|---|
+| Điền dữ kiện report: bảng kết quả, bug (AI chép), dòng artifact Audit từ git, nháp Mandatory Disclosure, link 2 video | Claude Code | 15 phút |
+| **Phần 🔒:** "Vì sao AI sai/bỏ sót" cho 3 feature, **Critique 200–300 từ** (có 4 ý skill mình đã lưu), **verdict + lý do Audit**, điểm tự chấm | **Em** | 1,5–2 giờ |
+| Xuất transcript claude.ai lần cuối, chốt prompt log + notes (1 lượt Claude Code "không rõ model") | Em + Claude Code | 20 phút |
+| AI-02 / AI-03 / AI-05, xuất PDF, ký | Claude Code + em | 30 phút |
+| Commit log, `hw-submission-audit`, zip `git archive` (chỉ 9 report chính thức), đo dung lượng | Claude Code | 20 phút |
+| **Nộp bản an toàn** | Em | **trước 09:30** |
+
+Tổng còn khoảng 4 giờ làm. Nếu em muốn ngủ thì điểm dừng hợp lý là sau khi gửi link video skill và chạy lệnh dưới. Ngủ tới khoảng 05:30 vẫn kịp, nhưng sát.
+
+## Lệnh cho Claude Code #29 (dán sau khi có link video skill)
+```
+HW04 – lệnh #29.
+1. Link video Agent Skill <link> → README, report §7, HW04/skills/VideoLinks.md. Chép skill .claude/skills/playwright-ddt-automation → HW04/skills/ (bản v2.1 @99080b2).
+2. Report HW04/23120255_HW04_Report.md: điền mọi phần dữ kiện còn [...] (bảng kết quả 3 feature sinh bằng script, bảng 18 bug "(AI chép)" + số issue #298–#315, TC không tự động hoá được, sự cố môi trường Firefox/0xC0000409, số commit .spec, ghi skill v1→v2→v2.1 và lý do). Phần 🔒 giữ `<SV viết>`.
+3. Audit: bảng artifact lấy từ git (freeze từng bước, skill v1/v2/v2.1, harness/script, khung bug, form…), cột verdict/lý do `<SV viết>`; mục "Khai cho Audit" chép từ report_plan.md.
+4. Mandatory Disclosure: nháp "📝 AI nháp – SV xác nhận".
+5. In danh sách mọi ô `<SV viết>` còn lại (file:dòng) vào HW04/placeholders_left.md. Commit. Báo cáo ≤ 8 dòng.
+```
+
+Khi em bắt đầu viết Critique, nhắn mình. Mình sẽ đưa lại 4 ý về skill kèm dữ kiện các lỗi đã gặp ở A/B/C, để em tự viết bằng lời của em.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #107 | 02:02 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
+
+**Prompt:**
+```
+Quay xong video demo Agent skill rồi: https://youtu.be/yGC0R2qd92U.
+Hiện tôi chưa dùng prompt của bạn, và đang có 183 file chưa commit
+```
+
+**Output:**
+````
+Đã nhận link video Agent Skill: **https://youtu.be/yGC0R2qd92U**. Em nhớ mở bằng tab ẩn danh kiểm chế độ Unlisted.
+
+**183 file chưa commit: đừng `git add -A` vội.** Nhiều khả năng phần lớn là **6 thư mục report không chính thức** (lượt 22:56, 23:05, 23:22 và 3 lượt quay video Task 2 lúc 23:42–23:48). Mỗi report có `index.html`, `data/`, ảnh…, cộng lại rất nhiều file. Những report này đã chốt là **không commit**. Commit nhầm thì repo lẫn lượt không chính thức với chính thức, zip cũng phình to.
+
+Mình thêm bước 0 vào lệnh #29 để Claude Code phân loại trước:
+
+```
+HW04 – lệnh #29.
+0. git status đang có ~183 file chưa commit. Phân loại (KHÔNG add -A): (a) report không chính thức 17/11 tối (22:56, 23:05, 23:22, 23:42–23:48) → để ngoài git, thêm đường dẫn từng thư mục vào .git/info/exclude; (b) context/HW04_assignment.pdf → để ngoài git như các bài trước; (c) HW04/appendix/A_prompt_log.md và file hợp lệ khác → commit riêng. In bảng phân loại (nhóm, số file, xử lý). File không rõ thuộc nhóm nào → DỪNG hỏi SV.
+1. Link video Agent Skill https://youtu.be/yGC0R2qd92U → README, report §7, HW04/skills/VideoLinks.md (cạnh link Task 2 https://youtu.be/TNy_QPFwyB4). Chép .claude/skills/playwright-ddt-automation → HW04/skills/ (bản v2.1 @99080b2).
+2. Report HW04/23120255_HW04_Report.md: điền mọi phần dữ kiện còn [...] (bảng kết quả 3 feature sinh bằng script, bảng 18 bug "(AI chép)" + issue #298–#315, TC không tự động hoá được, sự cố môi trường Firefox/0xC0000409, số commit .spec, skill v1→v2→v2.1 và lý do). Phần 🔒 giữ `<SV viết>`.
+3. Audit: bảng artifact lấy từ git (freeze từng bước, skill v1/v2/v2.1, harness/script, khung bug, form…), verdict/lý do `<SV viết>`; "Khai cho Audit" chép từ report_plan.md (thêm: lỗi skill khi quay demo – serial trong template v1, freeze bị nạp, chờ POST → Blocked giả, config nạp spec demo; phiên thảo luận không ra lệnh cập nhật skill sau review A).
+4. Mandatory Disclosure: nháp "📝 AI nháp – SV xác nhận".
+5. Danh sách mọi ô `<SV viết>` còn lại (file:dòng) → HW04/placeholders_left.md. Commit. Báo cáo ≤ 10 dòng.
+```
+
+Nếu bảng phân loại ở bước 0 có nhóm lạ (không phải report, PDF đề hay prompt log), em gửi mình xem trước khi trả lời Claude Code.
+````
+
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
+
+---
+
+## #108 | 02:02 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
@@ -4179,7 +5364,412 @@ Bảng audit trong report thêm hàng cho commit vừa tạo; commit lần cuố
 
 ---
 
-## #86 | 08:51 18/11/2026 | Claude Opus 5.5 | [...]
+## #109 | 02:09 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: lệnh #29 – phân loại file chưa commit, link video Agent Skill, chép skill, điền dữ kiện report, AI-02, nháp Mandatory Disclosure, danh sách ô chờ SV.
+- Phân loại 183 file chưa commit:
+
+| Nhóm                                            | Số file | Xử lý                                     |
+|-------------------------------------------------|---------|-------------------------------------------|
+| (a) 6 thư mục report không chính thức 17/11 tối | 181     | Thêm từng đường dẫn vào .git/info/exclude |
+| (b) context/HW04_assignment.pdf                 | 1       | Thêm vào .git/info/exclude                |
+| (c) A_prompt_log.md                             | 1       | Commit riêng 6ef3a84                      |
+  Không có file nào không rõ nhóm.
+- Link video: đã ghi https://youtu.be/yGC0R2qd92U vào README, report §2/§7, skills/VideoLinks.md. Skill chép từ 99080b2 sang HW04/skills/playwright-ddt-automation/; so với bản gốc chỉ khác CRLF.
+- Report:
+  - Điền link repo; thêm §1.1 sự cố môi trường (0xC0000409, Code Integrity, WebKit), §1.2 tổng hợp kết quả chép từ README bằng script, §2.1 bảng skill v1/v2/v2.1 kèm lý do.
+  - Mới tạo A_FR01/not_automated.md và C_FR15/not_automated.md (lấy từ selection.json và annotation trong report chính thức), §3.7/§5.7 nay đã có nội dung.
+  - §10 là bản "📝 AI nháp – SV xác nhận" (9 mục), sinh bằng tools/forms_hw04.py.
+  - Phần 🔒 giữ <SV viết>. Riêng "chỗ sửa script AI kể trong video" em không biết nội dung video nên để <SV viết>.
+- AI-02: ai-forms/AI-02_Audit_Report_23120255.md gồm 33 artifact lấy từ git: harness, skill S1–S4, mỗi feature 6 hàng (bản đóng băng bước 1/2/3/6, RUN.md, not_automated), khung bug K1–K4, script sinh bảng R1–R3, bộ đọc claude.ai P1, chạy thử D1.
+  - Verdict, lý do, kết luận và chữ ký để <SV viết>; cột #n để "–" vì HW04 chưa có prompt_log_turns.txt.
+  - Mục 3.3 chép nguyên văn mục f của report_plan.md. Mục f đã thêm 5 ý lỗi skill khi demo theo lệnh, và điền ý users.list → 5a378f1 (theo A_FR01/review_sv.md).
+- Ngoài phạm vi lệnh:
+  - Sửa đường dẫn firefox trong report_plan.md bị hỏng do ký tự \f.
+  - README thêm bảng tự chấm toàn <SV viết>.
+  - placeholders_left.md đánh dấu export-ignore để không vào zip.
+- Ô chờ SV: 120 dòng, ghi ở HW04/placeholders_left.md. Trong đó có 2 dòng chỉ là câu quy ước (report dòng 9, bugs/README.md:13), không phải ô cần điền. Bảng audit §9 vừa thêm 1 hàng nên số dòng §9–§11 trong file danh sách lệch +1.
+- Kết quả kiểm tra: không chạy test.
+- Commit: 6ef3a84, e3ae77f, 6ceb790, a99d6ee (cuối: HW04: report §9 bảng audit cập nhật tới 6ceb790)
+- Cần quyết định: không có.
+```
+
+**Output:**
+```
+Dữ kiện đã điền xong. Giờ là phần của em: 120 ô `<SV viết>`. Mình **không viết hộ**, chỉ đưa dữ kiện để em viết nhanh và nhất quán. Thứ tự nên làm, theo mức rủi ro 0 điểm:
+
+## 1. Critique 200–300 từ (bắt buộc, làm trước)
+Đề yêu cầu trả lời đủ 3 câu: AI **sai / thiên lệch / thiếu** ở đâu; **vì sao** AI không tự bắt được; em rút ra **nguyên tắc** gì khi làm việc với AI. Dữ kiện em có thể dùng:
+- **Skill khi chạy độc lập (ý em nhờ mình nhớ):** template v1 vẫn còn `serial` dù đã sửa ở review A; bản đóng băng nằm trong thư mục test nên bị nạp nhầm; chỉ chờ POST nên 2 TC Blocked giả; config chính thức nạp luôn spec demo. Chạy được khi có người dặn từng lệnh, chạy độc lập thì lộ lỗi vì chưa từng kiểm E2E. Phiên thảo luận cũng không ra lệnh cập nhật skill sau review A.
+- **Script A:** `serial` làm 1 Fail chặn 14 TC; `users.list()` không chờ POST nên có nguy cơ **Pass giả** ở case Negative.
+- **Script C (thiên lệch / áp luật máy móc):** `errShown` coi hộp thoại "Cập nhật thành công!" là thông báo lỗi, vì AI áp quy ước H4 quá đúng chữ.
+- **Báo cáo của AI lệch thực tế:** báo cáo bước 2 của B nói mặc định `dismiss` (đúng), nhưng phiên thảo luận cũng từng kết luận sai (`id = 7` "không có trong dữ liệu"). Cả AI kiểm tra AI cũng có thể sai.
+- **Ý của em sau khi đối chiếu:** ý `waitForTimeout` ở B không có trong code; ý 1–3 ở C là bug SUT chứ không phải lỗi script. Bài học: review phải bám code, không bám cảm giác.
+
+Tránh "luôn / không bao giờ / chứng minh", dùng "cho thấy". Chỉ dùng case đã chạy làm bằng chứng.
+
+## 2. "Vì sao AI sai/bỏ sót" cho 3 feature
+Mỗi lỗi trong `review_sv.md` viết 1–2 câu, xếp vào **một trong ba nguyên nhân** đề gợi ý:
+- **Chất lượng prompt / skill:** ví dụ lệnh không cấm `serial`, skill không có checklist.
+- **Giới hạn của model:** ví dụ áp H4 máy móc, không tự nghĩ tới việc phải chờ request.
+- **Đặc điểm feature:** ví dụ dialog native khoá trang, giỏ là state React mất khi tải lại, Expected HW02 không nêu câu chữ.
+
+Nói thật cả phần lỗi do prompt của em hoặc của phiên thảo luận.
+
+## 3. Verdict Audit (33 artifact): dữ kiện để chấm cho nhất quán
+Quy tắc: artifact có **lỗi của AI đã ghi nhận** hoặc **có commit sửa vì lỗi AI** thì **không thể VALID**. Dữ kiện đã có trong repo:
+
+| Artifact | Dữ kiện |
+|---|---|
+| A bước 1 (chọn TC) | Em thay 4 TC Blocked (`1/6b`) |
+| A bước 3 (spec) | Sửa 5/6a–d: serial, catch rỗng, không chờ POST, `^`/escape |
+| B bước 1 | Em thay TC-201 → TC-11 |
+| B bước 3 | Sửa 5/6a–b: từ khoá gõ cứng, selector minh hoạ (5/6c ảnh là cải tiến, không phải lỗi) |
+| C bước 3 | `errShown` (giữ theo H4, ghi điểm yếu), TC-07 ghi trùng (5/6a) |
+| Skill v1 | Template còn `serial`, freeze nạp nhầm, chờ POST → phải ra v2, v2.1 |
+| Khung bug | C3 chép nhầm vào BUG-101/103 |
+| `rm -rf` report | Claude Code xoá nhầm, đã khôi phục |
+| A/B/C bước 2 (fixture), bước 6 (merge), bộ đọc claude.ai | Không có commit sửa vì lỗi AI |
+
+Verdict cuối cùng do em quyết. Nếu gần như toàn bộ là VALID thì sẽ mâu thuẫn với Critique.
+
+## 4. Điểm tự chấm
+Video, skill và cả 3 feature đều đã xong. Em tự chấm trung thực từng mục. Tổng điểm phải khớp 3 số trong tên zip.
+
+---
+
+Em có thể viết **Critique trước rồi gửi mình**. Mình chỉ kiểm dữ kiện, đếm từ và xem đã đủ 3 câu của đề chưa, không sửa câu chữ. Trong lúc đó Claude Code chưa có việc gì cần làm.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #110 | 02:21 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Mới viết xong 1 và 2 rồi, push rồi. Bạn kiểm tra giúp mình nhé
+```
+
+**Output:**
+```
+Mình đã đọc §3.6, §4.6, §5.6 và §8 trên repo (`00697ab`). Phần lớn đúng dữ kiện, chỉ vài điểm nhỏ cần chỉnh.
+
+## Critique (§8): đạt
+- **291 từ** (đếm theo khoảng trắng), nằm trong khoảng 200–300.
+- **Trả lời đủ 3 câu của đề:** sai và thiên lệch (serial, `users.list`, `errShown` áp H4 máy móc, lỗi skill khi chạy độc lập, AI đối chiếu kết luận sai `id = 7`); vì sao (không kiểm E2E, không cập nhật ngược bài học); nguyên tắc (bám code và log, đóng băng trước khi sửa, cập nhật skill và kiểm E2E).
+- **Dữ kiện đúng**, kể cả TC-01/TC-63 Blocked giả ở lần chạy thử skill.
+- **Một gợi ý, không bắt buộc:** phần nguyên nhân đang quy hết cho AI ("thiếu cơ chế tự động cập nhật ngược bài học"). Thực tế là **em và phiên thảo luận không ra lệnh cập nhật skill** sau review A. Nếu thêm vế này thì Critique trung thực và cân bằng hơn, đúng kiểu TA thích. Nhớ cắt bớt chỗ khác để không vượt 300 từ.
+
+## §3.6 (A)
+- **`resetDb()` thiếu guard:** nên thêm "rủi ro tiềm ẩn, **chưa xảy ra** vì config `workers: 1`". Nếu không, câu đọc như lỗi đã gặp.
+- **"`users.list()` … (dòng 103)":** trong spec bản 3/6, lệnh đó ở **dòng 105**. Sửa số dòng, hoặc bỏ số dòng đi.
+- Các ý còn lại (serial dòng 44, `Promise.race`, `^`/escape dòng 28/38, regex tiếng Việt) đều đúng.
+
+## §4.6 (B)
+- **"Chưa chụp ảnh ngay sau thao tác chính (P1=a)":** đây là **cải tiến** phiên thảo luận đề xuất, không phải lỗi AI làm sai. Để ở mục "chất lượng prompt/skill" thì được, nhưng nên ghi rõ là "thiếu sót do prompt, không làm sai verdict", để khỏi lẫn với lỗi thật.
+- `main img, main svg` dòng 124, `/trống/i` dòng 121, Expected TC-01 và dialog native TC-08 đều đúng.
+
+## §5.6 (C)
+- Đúng dữ kiện. `errShown` (TC-15/78), TC-07 ghi trùng, validation/alert native đều khớp code và `review_sv.md`.
+
+Sửa xong mấy điểm này thì sang **verdict Audit** (33 artifact, dùng bảng dữ kiện mình đưa ở tin trước) và **điểm tự chấm**. Xong 2 phần đó là hết phần 🔒. Phần còn lại là form và đóng gói, chủ yếu Claude Code làm.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #111 | 02:29 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+````
+Tiếp tục giúp mình sửa 3.6 nhé:
+
+```markdown
+### 3.6 Vì sao AI sai / bỏ sót 🔒
+
+- **Chất lượng prompt / skill:**
+  - **Cấu hình `mode: 'serial'` (dòng 44):** Trong skill v1 và prompt ban đầu, em chưa quy định rõ việc cấm chế độ chạy tuần tự phụ thuộc hay yêu cầu các test case phải độc lập nên AI tự thêm `test.describe.configure({ mode: 'serial' })`, làm 1 case Fail chặn đứng 14 case còn lại.
+  - **Hàm `resetDb()` chưa có guard khi chạy song song (`workers > 1`):** Do thiết kế skill v1 chưa ràng buộc kiểm tra số worker trong `beforeAll`, AI sinh mã khởi động lại backend mà chưa chặn trường hợp chạy đa luồng đè nhau.
+
+- **Giới hạn của model:**
+  - **Gọi `users.list()` mà không chờ `POST /api/register` (dòng 103):** AI chỉ đồng bộ theo tín hiệu chuyển hướng hoặc hộp lỗi trên UI rồi lập tức truy vấn danh sách user qua API, không tự lường trước độ trễ ghi cơ sở dữ liệu khiến các case Negative dễ gặp nguy cơ Pass giả.
+  - **Dùng `Promise.race` kèm `catch(() => {})` rỗng:** Khi xử lý bất đồng bộ sau lúc bấm Đăng Ký, AI nuốt mất lỗi timeout thay vì phân loại sang trạng thái `Blocked`, dễ làm script hiểu nhầm trình duyệt đang chặn submit khi mạng chậm.
+  - **Viết biểu thức chính quy thiếu dấu ngoặc nhóm và escape (dòng 28, 38):** Khi sinh hàm `oracleOf`, AI ghép `^` trực tiếp vào phép tuyển `|` nên chỉ neo nhánh đầu tiên, đồng thời truyền chuỗi từ `expected` thẳng vào `new RegExp(...)` mà không escape ký tự đặc biệt.
+
+- **Đặc điểm feature:**
+  - **Oracle phụ thuộc regex phân tích câu chữ tiếng Việt:** Đặc tả `expected` của HW02 được viết bằng ngôn ngữ tự nhiên tiếng Việt (nhiều biến thể diễn đạt khác nhau cho từng điều kiện từ chối) thay vì mã lỗi chuẩn hóa, dẫn đến việc bộ phân tích regex dễ lệch nghĩa hoặc rơi vào nhánh `oracle thông báo yếu` khi câu chữ thay đổi nhẹ.
+```
+````
+
+**Output:**
+```
+Phần 3.6 thuộc mục 🔒 (gap analysis do em viết), nên mình không viết lại câu chữ. Mình chỉ chỉ ra **2 chỗ sửa dữ kiện**, mỗi chỗ chỉ thêm hoặc thay vài chữ, phần còn lại giữ nguyên văn của em:
+
+**1. Ý `resetDb()`:** thêm một vế dữ kiện vào cuối câu để khỏi khẳng định quá mức. Tìm:
+> …AI sinh mã khởi động lại backend mà chưa chặn trường hợp chạy đa luồng đè nhau.
+
+Thêm vào sau dấu chấm, hoặc thay dấu chấm bằng dấu phẩy rồi viết tiếp, nội dung: **rủi ro tiềm ẩn, chưa xảy ra trong các lượt chạy vì config đặt `workers: 1`; đã thêm guard ở commit 5/6d (`3d19917`).** Câu chữ em tự viết theo giọng của em.
+
+**2. Ý `users.list()`:** đổi số dòng.
+> `(dòng 103)` → `(dòng 105)`
+
+Dòng 105 là vị trí trong spec bản AI sinh (`9a5e558`, bước 3/6): `const d = diffUsers(users.before, await users.list());`. Không muốn ghi số dòng thì bỏ hẳn cũng được.
+
+Các ý còn lại khớp code và commit, giữ nguyên:
+- serial dòng 44,
+- `Promise.race` + `catch` rỗng,
+- `^` / escape dòng 28, 38,
+- regex tiếng Việt.
+
+Sửa xong em làm tương tự cho §4.6 (ghi chú P1 là cải tiến do prompt thiếu, không phải AI làm sai verdict), rồi chuyển sang verdict Audit.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #112 | 02:30 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+````
+à quên, tiếp tục giúp mình chỉ ra ở 4.6 nhé:
+
+```markdown
+### 4.6 Vì sao AI sai / bỏ sót 🔒
+
+- **Chất lượng prompt / skill:**
+  - **Chưa chụp ảnh bằng chứng ngay sau thao tác chính (P1=a):** Trong skill và prompt ban đầu, em mới chỉ cấu hình chụp ảnh khi kết thúc test case (`only-on-failure`), chưa quy định chụp trạng thái giao diện ngay sau lúc bấm nút **Thêm vào giỏ hàng** hoặc **Xóa** nên sau review phải bổ sung thêm `testInfo.attach` cho `<TC>_after-action`.
+
+- **Giới hạn của model:**
+  - **Selector kiểm tra hình minh họa giỏ trống còn chung chung (R2, dòng 124):** Khi ánh xạ yêu cầu *"có img hoặc svg minh họa giỏ trống"*, AI viết selector `main img, main svg` kèm `.first()`, dẫn đến nguy cơ bắt nhầm các biểu tượng khác nằm trong thẻ `<main>` thay vì khu vực chứa thông báo giỏ trống.
+  - **Gõ cứng từ khóa kiểm tra thông báo giỏ trống (`/trống/i`, dòng 121):** Thay vì tách giả định từ khóa ra file dữ liệu JSON như quy tắc data-driven, AI viết cứng biểu thức `/trống/i` ngay trong mã nguồn của spec.
+
+- **Đặc điểm feature:**
+  - **Expected HW02 không nêu câu chữ thông báo giỏ trống cố định:** Đặc tả của `TC-FR07-01` chỉ yêu cầu có thông báo giỏ trống rõ ràng mà không chốt một chuỗi văn bản duy nhất, khiến việc kiểm tra nội dung thông báo phải thông qua giả định từ khóa riêng (`assumptions.empty_cart_keyword`).
+  - **Dialog xác nhận native (`window.confirm`) khóa luồng trình duyệt (`TC-FR07-08`):** Do đặc thù hộp thoại native của trình duyệt chặn toàn bộ luồng thực thi JavaScript và DOM khi đang mở, Playwright buộc phải gắn sự kiện xử lý trước (`accept`/`dismiss`) nên không thể kiểm tra phần expected *"dòng chưa bị xóa khi dialog đang mở"*.
+
+```
+````
+
+**Output:**
+```
+Trong §4.6 có **1 chỗ sai dữ kiện cần sửa** và **1 chỗ nên làm rõ**. Phần còn lại giữ nguyên.
+
+**1. Ý dialog TC-08 (cần sửa):** câu hiện tại ngầm nói **SUT có dùng `window.confirm`**. Thực tế ngược lại: SUT **không hiện dialog xác nhận nào**, đó chính là BUG-93 em đã viết, kết quả dialog = 0 sau 2000 ms. Phần "dòng chưa bị xoá khi dialog đang mở" không tự động hoá được vì **giả sử SUT có dialog native như Expected yêu cầu** thì script vẫn không đọc được DOM lúc dialog đang mở. Em sửa câu theo hướng:
+- Hiện SUT không có dialog (BUG-93), nên lượt chạy không đi tới điểm quan sát này.
+- Lý do không tự động hoá được nằm ở **bản chất dialog native** (nếu có), không phải ở `window.confirm` của SUT.
+
+Câu chữ em tự viết. Tên `window.confirm` nên bỏ hoặc ghi rõ là "nếu dùng".
+
+**2. Ý P1 (nên làm rõ):** chụp ảnh `after-*` là **cải tiến** do phiên thảo luận đề xuất, áp cho cả A, B, C, không phải lỗi khiến verdict sai. Để ở mục "chất lượng prompt/skill" là được. Em thêm một vế kiểu "thiếu sót về bằng chứng do prompt, không ảnh hưởng verdict" để người chấm không hiểu nhầm là AI làm sai test.
+
+Các ý khác đều khớp code ở bản AI sinh (`7e75536`):
+- selector `main img, main svg` + `.first()` dòng 124,
+- `/trống/i` dòng 121,
+- Expected TC-01 không chốt câu chữ, `assumptions.empty_cart_keyword`.
+
+Xong §4.6 là sang verdict Audit.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #113 | 02:30 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+5.6 thì không cần sửa nhỉ
+```
+
+**Output:**
+```
+Đúng, §5.6 không cần sửa. Cả 3 ý khớp dữ kiện:
+- **`errShown`**: đếm hộp thoại "Cập nhật thành công!" ở TC-15/78, gốc từ quy ước H4 kế thừa HW02. Xếp vào "prompt/skill" là hợp lý, vì quy ước đó do em và phiên thảo luận đặt.
+- **TC-07 ghi trùng `invalid`** do `checkValidity()` gọi trước khi bấm Lưu, khớp báo cáo #17 và commit sửa 5/6a.
+- **Validation HTML5 + `alert()` native** cùng Expected không bắt kiểm câu chữ (C13, H4), khớp Expected của TC-01/03/15.
+
+Giờ em chuyển sang **verdict + lý do cho 33 artifact trong Audit** (bảng dữ kiện mình đã đưa), rồi **điểm tự chấm**. Xong gửi mình kiểm chỗ mâu thuẫn giữa verdict và Critique.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #114 | 02:34 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Oke sửa xong rồi, push rồi. Check giúp mình nhé. 
+Giờ viết Audit mục 9 đúng không nhỉ? Theo bạn thời gian còn lại để hoàn thành là bao nhiêu nhỉ, buồn ngủ quá
+```
+
+**Output:**
+```
+Đã kiểm: §3.6 (guard `workers: 1`, dòng 105) và §4.6 (P1 không ảnh hưởng verdict, TC-08 ghi rõ SUT không có dialog, BUG-93) đều đúng. Còn 2 chỗ nhỏ **do AI viết** cũng lệch theo, để Claude Code sửa ở lượt dọn cuối (em không phải làm): dòng 251 (review A ghi "dòng 103") và bảng dòng 407 (ngầm nói SUT dùng `window.confirm`).
+
+## Đúng, giờ viết Audit §9
+- Chỉ viết **một nơi**: bảng §9 trong report. Sau đó Claude Code chép sang `AI-02_Audit_Report_23120255.md` bằng script, để 2 file khớp nhau. Đừng viết tay 2 lần.
+- **Lý do mỗi dòng 1 câu là đủ**, dựa vào bảng dữ kiện mình đưa trước đó (artifact nào có commit sửa vì lỗi AI thì là INCOMPLETE, artifact bị loại bỏ thì là INVALID, không sửa gì thì là VALID).
+- Cuối mục: tỉ lệ VALID/INVALID/INCOMPLETE do Claude Code đếm. Câu kết luận "khi nào nên/không nên dùng AI" em viết 2–3 câu.
+
+## Thời gian còn lại, nói thật
+| Việc | Phần của em | Phần Claude Code |
+|---|---|---|
+| Verdict + lý do 33 dòng Audit, câu kết luận | 45–60 phút | – |
+| Điểm tự chấm (README + report §11) | 5 phút | – |
+| Xuất transcript claude.ai lần cuối, chốt notes | 10 phút | 10 phút |
+| AI-03, AI-05: em tick mục cam kết, ký PDF | 15 phút | 20 phút |
+| Rà soát, commit log, zip, nộp | 10 phút | 15 phút |
+
+**Tổng phần của em khoảng 1,5–2 giờ.** Còn khoảng 8,5 giờ tới hạn.
+
+**Hai lựa chọn:**
+- **A (mình khuyến nghị): làm tiếp tới khoảng 04:30.** Viết Audit + tự chấm, cho Claude Code làm form và zip, **nộp bản an toàn trước khi ngủ**. Sáng dậy còn sức thì nộp bản hoàn thiện thay thế. Hạn 11:00 mà ngủ quên là mất trắng, nên có bản đã nộp là chắc nhất.
+- **B: ngủ ngay, đặt 2 báo thức 06:00 và 06:15.** Sáng làm 2 giờ, nộp trước 09:30. Đầu óc tỉnh hơn khi chấm Audit, nhưng không có lưới an toàn.
+
+Nếu chọn A mà buồn ngủ quá, em viết lý do Audit thật ngắn (ví dụ "Có commit sửa 5/6a–d vì serial/catch rỗng/không chờ POST/regex → INCOMPLETE"). Như vậy vẫn đủ ý, sáng mai sửa lại cũng được.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #115 | 02:39 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+ngủ phát, tí dậy tôi viết tiếp. Giờ tôi buồn ngủ quá
+```
+
+**Output:**
+```
+Ok, em ngủ đi. Mình đã cập nhật `claude/HW04_handoff.md` trong Project (trạng thái và các bước còn lại), sáng em mở lại là làm tiếp được ngay.
+
+**Trước khi ngủ:** đặt **2 báo thức, 06:00 và 06:15**. Hạn 11:00 không lùi được.
+
+**Sáng dậy làm theo thứ tự:**
+1. Verdict + lý do 33 dòng ở report §9, câu kết luận (khoảng 45 phút). Lý do mỗi dòng 1 câu là đủ.
+2. Điểm tự chấm (5 phút).
+3. Nhắn mình. Mình đưa các lệnh còn lại cho Claude Code: sửa 2 chỗ nhỏ, xuất lại transcript, AI-03/AI-05, PDF, commit log, rà soát, zip.
+4. **Nộp bản an toàn trước 09:30**, còn thời gian thì nộp bản hoàn thiện thay thế.
+```
+
+**Xử lý:** [...]
+
+---
+
+## #116 | 08:41 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Tôi đã viết xong Verdict rồi. Còn điểm tự chấm, có thể cho tôi range điểm gợi ý tự chấm, với từng mục đạt được được không. Kiểu như  đạt được gì thì có thêm điểm, thiếu gì thì trừ điểm á
+```
+
+**Output:**
+````
+Còn 2 giờ 20 phút tới hạn. Nhanh nhé.
+
+**Điểm tự chấm là phần em quyết** (AI-01 không cho AI chấm hộ), nên mình không đưa con số. Dưới đây là đối chiếu rubric với những gì đã có và những chỗ có thể bị trừ. Em dựa vào đó tự cho điểm từng mục.
+
+## Đối chiếu rubric
+| Mục (tối đa) | Đã đạt (có bằng chứng) | Chỗ có thể bị trừ, em tự cân nhắc |
+|---|---|---|
+| **Task 1 – mỗi feature (25 × 3)** | 15 TC (≥12) · AI sinh từng bước, mỗi bước một commit · data JSON riêng · ≥3 kiểu assertion · 3 trình duyệt, 9 report có "Run by" + ISO · review + "vì sao AI sai" · bug ghi Markdown + Issues · TC không tự động hoá được | • Bug đều **trùng nguyên nhân** với bug HW02 (issue mới nhưng không phải phát hiện mới), mà số bug là căn cứ phân hoá điểm<br>• A: 7 TC có "oracle thông báo yếu"<br>• Ảnh issue là ảnh **nhúng link**, không phải tệp đính kèm<br>• B: ý `waitForTimeout` trong review bản 1 sai (đã ghi đối chiếu) |
+| **Task 2 – video (15)** | YouTube Unlisted · `whoami`/`hostname` · chạy 3 trình duyệt · HTML report · kể lỗi serial đã sửa | • Video có **≥ 5 phút** không (em kiểm độ dài)<br>• Giọng em tự nói, tiếng Việt |
+| **Agent Skill (10)** | Skill v2.1 + video demo một feature trọn vẹn, đã chạy thử E2E | • Skill v1 lộ lỗi khi chạy độc lập (đã sửa, đã ghi trung thực) |
+| **Điều kiện 0 điểm** | Critique ✓ · Audit ✓ | **AI-02/03/05 + PDF + commit log + zip chưa xong**: phải xong trước khi nộp |
+
+Ba nơi phải khớp nhau: README, report §11 và **3 số trong tên zip**.
+
+## Làm song song ngay bây giờ
+**1. Claude Code (dán luôn):**
+```
+HW04 – lệnh #30 (gấp, hạn 11:00).
+1. Chép verdict/lý do §9 report → ai-forms/AI-02 bằng tools/forms_hw04.py; đếm tỉ lệ VALID/INVALID/INCOMPLETE; báo hàng nào VALID mà có commit sửa vì lỗi AI (mâu thuẫn).
+2. Sửa dữ kiện AI viết: report dòng ~251 "dòng 103" → 105; bảng TC-08 dòng ~407 ghi rõ SUT không hiện dialog (BUG-93), lý do áp cho dialog native nếu có.
+3. Dựng AI-03, AI-05 (mẫu HW03/ai-forms, không chép số liệu): AI-03 công cụ = Claude Opus 5.5 (claude.ai, SV xác nhận; log ghi không rõ model) + model Claude Code theo dòng "Tổng"; liệt kê lượt không rõ model + lý do; cách tạo prompt log. AI-05 mục cam kết để [ ] "(em tự xác nhận)".
+4. Commit log text (tools/export_commit_log.ps1), xuất PDF report + AI-02/03/05 (chưa ký).
+5. Chạy hw-submission-audit. Commit. Báo cáo ≤ 10 dòng: tỉ lệ verdict, mâu thuẫn, danh sách còn thiếu.
+```
+**2. Em, trong lúc chờ:**
+- **Yêu cầu xuất dữ liệu claude.ai ngay** để lấy các lượt sau 21:40. Nếu tới khoảng 10:00 vẫn chưa có file thì bỏ qua, ghi trong AI-03 là "các lượt sau 21:40 17/11 chưa có trong bản xuất". Không để việc này chặn nộp bài.
+- Chấm điểm tự đánh giá theo bảng trên, điền README + report §11.
+- Kiểm độ dài video Task 2.
+
+Có báo cáo #30 thì gửi mình. Kế tiếp là ký, zip, **nộp bản an toàn trước 09:30–09:45**.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #117 | 08:48 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Tôi cũng đã chấm điểm xong, push luôn cả Audit. Bạn xem thử giúp tôi nhé. Tôi chưa sử dụng prompt mà bạn vừa gửi đâu nhé
+```
+
+**Output:**
+````
+Mình đã đọc §9 (63 dòng) và §11. Tổng điểm **93 khớp** giữa README và report (23 + 23 + 24 + 14 + 9 = 93), nên tên zip sẽ là `…_093.zip`. Điểm là quyết định của em, mình không góp ý con số.
+
+## Audit: 4 chỗ nên sửa (khoảng 10 phút)
+1. **Các dòng là việc của em, không phải output AI:** dòng 47, 48, 49, 52 ("SV viết 18 bug", "SV sửa bug…"), và 6, 21, 36 ("SV chốt"). Chấm VALID như một artifact AI là **nguy hiểm**: TA đọc sẽ hiểu bug là do AI viết, trong khi AI-01 §11 bắt bug 100% do em viết. Em đổi cột Verdict của các dòng này thành **"— (SV làm, không thuộc phạm vi audit AI)"**.
+2. **Dòng 8 (A 3/6) = INVALID:** INVALID nghĩa là sai và **bị loại bỏ**. Nhưng spec này được **giữ lại và sửa** qua 5/6a–d, nên đúng ra là **INCOMPLETE**, lý do giữ nguyên.
+3. **Dòng 46 (khung bug) = INCOMPLETE nhưng lý do chưa đúng:** "chỉ chứa dữ kiện thô để SV tự viết" là **thiết kế đúng**, không phải lỗi. Lỗi thật của khung là **chép nhầm C3** vào mục Yêu cầu của BUG-101/103 (sửa ở `d6cd474`). Lý do nên nêu ý đó.
+4. **Lý do chưa khớp verdict:**
+   - Dòng 32 (lượt thử 2 của B, INCOMPLETE): lý do chỉ nói "ghi nhận trung thực sự cố", không chỉ ra artifact sai chỗ nào. Hoặc ghi rõ cái thiếu, hoặc đổi thành VALID.
+   - Dòng 34 (C 1/6, INCOMPLETE): "chờ SV chốt C2" là bước quyết định bình thường, không phải lỗi của AI. Nếu không có chỗ sai thì nên là VALID.
+
+Các dòng còn lại nhất quán với Critique: skill v1/v2 INCOMPLETE, A/B/C 3/6 không VALID, bản sửa 5/6x VALID.
+
+Bảng mới tự sinh tới `6ceb790`. Các commit sau (`a99d6ee`, `00697ab`, `39e1536`, `fad3ddf` và lệnh tới) sẽ được Claude Code thêm vào. Commit của em cũng ghi "— (SV làm)" giống trên.
+
+## Sửa xong thì dán lệnh này (bản #30 cập nhật)
+```
+HW04 – lệnh #30 (gấp, hạn 11:00).
+1. Sinh lại bảng audit §9 tới HEAD, GIỮ verdict/lý do SV đã viết; commit mới của SV (SV viết/sửa/chốt/hoàn thiện) → cột Verdict "— (SV làm)"; commit mới của AI → `<SV viết>`. Chép §9 → ai-forms/AI-02 (tools/forms_hw04.py); đếm tỉ lệ VALID/INVALID/INCOMPLETE (không tính dòng SV làm).
+2. Sửa dữ kiện AI viết: report dòng ~251 "dòng 103" → 105; bảng TC-08 dòng ~407 ghi rõ SUT không hiện dialog (BUG-93), lý do áp cho dialog native nếu có.
+3. Dựng AI-03, AI-05 (mẫu HW03/ai-forms, không chép số liệu): AI-03 công cụ = Claude Opus 5.5 (claude.ai, SV xác nhận; log ghi không rõ model) + model Claude Code theo dòng "Tổng"; lượt không rõ model + lý do; cách tạo prompt log; ghi "các lượt claude.ai sau 21:40 17/11 chưa có trong bản xuất" nếu chưa xuất lại. AI-05 mục cam kết để [ ] "(em tự xác nhận)".
+4. Commit log text, xuất PDF report + AI-02/03/05 (chưa ký). Chạy hw-submission-audit.
+5. Commit. Báo cáo ≤ 10 dòng: tỉ lệ verdict, ô `<SV viết>` còn lại, kết quả rà soát, dung lượng zip dự kiến.
+```
+
+Mốc giờ: **09:20** có báo cáo #30 → em ký PDF, tick AI-05 → **09:40** zip và nộp bản an toàn.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #118 | 08:51 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** Đồng bộ số liệu kiểm toán AI-02, AI-03, AI-05 và chỉnh sửa các chi tiết sót cuối cùng.
 
 **Prompt:**
@@ -4246,7 +5836,121 @@ Rà soát xong. Ghi kết quả vào file rồi commit.
 
 ---
 
-## #87 | 09:28 18/11/2026 | Claude Opus 5.5 | [...]
+## #119 | 08:58 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Sửa xong rồi:
+Báo cáo cho phiên thảo luận
+
+- Nhiệm vụ: lệnh #30 – sinh lại bảng audit §9, sửa 2 dữ kiện, dựng AI-03/AI-05, xuất PDF + commit log, chạy rà soát nộp bài.
+- Bảng audit §9: verdict và lý do SV đã viết giữ nguyên (tools/hw04_report.py giữ theo hash commit). 4 commit mới của SV ghi "— (SV làm…)"; commit AI a99d6ee còn <SV viết>. AI-02 mục 3.1 chép đúng bảng §9.
+- Tỉ lệ verdict (56 commit AI có verdict; không tính 11 commit SV làm và 1 commit chưa có verdict):
+
+| Verdict    | Số commit |
+|------------|-----------|
+| VALID      | 45 (80%)  |
+| INCOMPLETE | 11 (20%)  |
+| INVALID    | 0         |
+
+- Sửa dữ kiện: "dòng 103" → 105, đã đối chiếu bản spec đóng băng. Dòng TC-08 nay ghi rõ SUT không hiện dialog (lượt chính thức [], BUG-93); lý do dialog native chỉ áp nếu SUT có dialog.
+- AI-03: Claude Code dùng Claude Opus 5.5, 49 lượt. 37 lượt "không rõ model" gồm 36 lượt claude.ai (Opus 5.5, SV xác nhận) và #52 (lượt <task-notification> Claude Code tự sinh khi tiến trình nền kết thúc). Có ghi các lượt claude.ai sau 21:40 17/11 chưa có trong bản xuất.
+- AI-05: mục có bằng chứng đã tick; 7 mục cam kết để [ ] "(em tự xác nhận)".
+- Ô SV còn phải làm:
+  - §10: xác nhận nháp 📝 và viết 2 ô.
+  - §7: chỗ sửa script AI kể trong video.
+  - §9: verdict cho a99d6ee.
+  - AI-02 §4 Kết luận.
+  - AI-03 mục 2/3/4/5.
+  - Ký AI-02/03/05.
+  - 86 lượt prompt log còn [...] ở Mục đích/Xử lý (ghi trong prompt_log_notes.toml).
+- Rà soát nộp bài (HW04/submission_check.md): đủ AI-02/03/05 có PDF (chưa ký); Cấp 4 khớp; số lượt 86 khớp giữa log, AI-02, AI-03, AI-05; Critique 292 từ; các commit có lỗi AI đều ghi INCOMPLETE, không có commit lỗi nào ghi VALID. Script báo "135 lượt" và 11 anchor mục lục – đều là báo nhầm (135 là số lượt chạy test, không phải lượt AI).
+- Zip: hiện 54,1 MB. Nếu đánh dấu export-ignore cho 23 thư mục report lượt thử (Z2) thì còn 16,4 MB (em đã đo thử, chưa áp). Tên zip dự kiến 23120255_HW04_AI_Automation_093.zip (tổng tự chấm 93).
+- Kết quả kiểm tra: không chạy test.
+- Commit: 0dc0b14, 433cd54, f9a7d67, 87bd6cb (cuối: HW04: rà soát trước khi nộp (submission_check.md, không nộp))
+- Cần quyết định:
+  - Z2 – áp export-ignore cho 23 thư mục report lượt thử, hay split-and-zip? Chưa xử lý thì không nộp được.
+  - Xuất lại dữ liệu claude.ai để bổ sung các lượt sau 21:40 17/11, hay giữ nguyên như đang ghi ở AI-03?
+- Thứ tự hoàn tất sau khi SV điền xong: trích lại prompt log → python tools/forms_hw04.py → xuất lại PDF và ký → commit → xuất lại commit log → commit → git archive → kiểm dung lượng.
+===
+push bản mới nhất rồi nhé
+```
+
+**Output:**
+````
+Tốt, gần xong rồi. Tỉ lệ 45 VALID / 11 INCOMPLETE và không còn artifact có lỗi nào bị chấm VALID, nhất quán với Critique.
+
+## Quyết định
+- **Z2 = export-ignore 23 thư mục report lượt thử** (đã chốt từ trước). Zip còn **16,4 MB**, an toàn. Lệnh dưới bắt kiểm lại zip vẫn chứa đủ **9 report chính thức + report TC-60**. Không cần split-and-zip.
+- **Transcript:** nếu bản xuất mới **đã tới email** thì dùng (cách làm như lần trước, khoảng 5 phút). Chưa tới thì **giữ nguyên** như AI-03 đang ghi, không chờ.
+
+## Việc của em, theo thứ tự (09:00 → 09:25)
+1. **§9:** verdict cho `a99d6ee` (Claude Code cập nhật bảng audit, không có lỗi, nên 1 dòng là xong).
+2. **§7:** 1–2 câu về lỗi đã kể trong video (serial ở commit `6fc76b5`).
+3. **§10 Mandatory Disclosure:** đọc nháp, xoá dòng 📝, viết 2 ô còn trống.
+4. **AI-02 §4:** 2–3 câu kết luận khi nào nên/không nên dùng AI.
+5. **AI-03 mục 2/3/4/5:** xác nhận/điền phần của em.
+6. **AI-05:** tick 7 mục cam kết (nếu đúng sự thật).
+7. **Prompt log (86 lượt còn `[...]`):** đừng điền từng lượt. Dùng **khoá khoảng** trong `prompt_log_notes.toml`, khoảng 8–10 khoá theo giai đoạn: môi trường + skill, A, B, C, bug, video, report/form. Mỗi khoá chỉ cần "Mục đích" và "Xử lý" một dòng. Muốn có gợi ý ranh giới khoảng thì nhờ Claude Code in `--list --commits` (nó chỉ in giờ và commit, chữ em tự viết).
+
+## Lệnh cho Claude Code #31: chốt và đóng gói (dán sau khi em xong 7 việc trên)
+```
+HW04 – lệnh #31 (chốt nộp).
+1. Trích lại prompt log (on_stop.py --manual); không còn cảnh báo khoá không khớp; báo số lượt còn [...].
+2. python tools/forms_hw04.py; điền #n vào AI-02/AI-03 theo log đã chốt. Chữ ký: SV đặt ảnh ở <đường dẫn ảnh chữ ký> → thu nhỏ (< 30 KB), chèn vào AI-02/03/05; KHÔNG đè ô SV đã điền.
+3. Xuất PDF report + AI-02/03/05. Commit.
+4. Z2: export-ignore 23 thư mục report lượt thử + placeholders_left.md, submission_check.md, report_plan.md (file nội bộ). Kiểm zip vẫn chứa 9 report chính thức (A/B/C × chrome/edge/firefox) + firefox_20261117T140840 (TC-60). Commit.
+5. Xuất commit log text → commit riêng (để log có commit chốt).
+6. git archive --format=zip -o ..\23120255_HW04_AI_Automation_093.zip HEAD HW04; đo byte (< 20.000.000); liệt kê file cấp 1 trong zip. Báo cáo ≤ 8 dòng + sha256.
+```
+
+**Mốc giờ:** khoảng 09:30 chạy #31, khoảng **09:45 nộp bản an toàn** lên Moodle. Sau đó, nếu còn thời gian trước 11:00 thì sửa thêm và nộp thay. Nộp xong nhớ **push** và tag `hw04-submitted`.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #120 | 09:27 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Tôi đã xong hết các mục theo thứ tự từ 1-7 mà bạn yêu cầu tôi rồi nhé, tôi push rồi. Bạn xem có cần sửa lại prompt trên không nhé
+```
+
+**Output:**
+````
+Đã kiểm repo (`574ec01`). Các ô `<SV viết>` thật đã hết; mấy chữ "SV viết" còn lại chỉ nằm trong message commit và dòng quy ước, không phải ô trống. AI-05 đã tick đủ. Prompt log vẫn còn `[...]` vì **chưa trích lại** sau khi em sửa notes, bước 1 của lệnh sẽ xử lý.
+
+**Cần sửa lệnh ở 1 chỗ: chữ ký.** AI-03 đang trỏ tới `ai-forms/signature.png`, nhưng **file này chưa có trong repo**. Em chép ảnh chữ ký vào `HW04/ai-forms/signature.png` (hoặc ghi đường dẫn khác vào lệnh). Ảnh gốc to cũng được, Claude Code sẽ thu nhỏ.
+
+Lệnh #31 bản sửa, dán sau khi đã đặt ảnh chữ ký:
+```
+HW04 – lệnh #31 (chốt nộp, hạn 11:00).
+1. Trích lại prompt log (on_stop.py --manual) theo notes mới (574ec01); kiểm 0 cảnh báo khoá không khớp; báo số lượt còn [...] (mục tiêu 0; còn thì liệt kê #n, KHÔNG tự điền).
+2. python tools/forms_hw04.py; điền #n vào AI-02/AI-03 theo log đã chốt. Chữ ký: ảnh HW04/ai-forms/signature.png → thu nhỏ (< 30 KB, ghi đè bản nhỏ), chèn vào ô ký AI-02/03/05; KHÔNG đè ô SV đã điền.
+3. Xuất PDF report + AI-02/03/05; mở kiểm PDF có chữ ký, không vỡ bảng. Commit.
+4. Z2: export-ignore 23 thư mục report lượt thử + placeholders_left.md, submission_check.md, report_plan.md. Kiểm zip vẫn chứa 9 report chính thức (A/B/C × chrome/edge/firefox) + firefox_20261117T140840 (TC-60). Commit.
+5. Xuất commit log text → commit riêng.
+6. git archive --format=zip -o ..\23120255_HW04_AI_Automation_093.zip HEAD HW04; đo byte (< 20.000.000); liệt kê file cấp 1. Báo cáo ≤ 8 dòng + sha256.
+```
+
+Chạy xong, em **nộp bản an toàn ngay** (khoảng 09:45), rồi push và tag:
+```
+git push; git tag hw04-submitted <hash commit tạo zip>; git push origin hw04-submitted
+```
+Gửi mình báo cáo #31, mình kiểm lần cuối trong lúc em upload.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #121 | 09:28 18/11/2026 | Claude Opus 5.5 | [...]
 **Mục đích:** [...]
 
 **Prompt:**
@@ -4263,10 +5967,76 @@ HW04 – lệnh #31 (chốt nộp, hạn 11:00).
 **Output:**
 ```
 Đã sửa script prompt log (khoảng ghi chú gộp, giữ ghi chú model). Còn 8 lượt `[...]`. Giờ kiểm SV đã sửa gì trong AI form trước khi chạy `forms_hw04.py`.
+
+Điền xong #n cho 33 artifact + số lượt 87. Giờ thu nhỏ chữ ký.
+
+Chữ ký sạch, 6,5 KB. Ghi đè, xuất PDF.
+
+Bước 4: áp Z2.
+
+Zip nộp được: `..\23120255_HW04_AI_Automation_093.zip` = **16.798.843 byte** (dưới 20.000.000), 532 file.
+
+### Báo cáo cho phiên thảo luận
+- **Prompt log:** 87 lượt (Claude Opus 5.5: 50, không rõ model: 37), 0 cảnh báo khoá không khớp. Còn 8 lượt `[...]` ở Mục đích/Xử lý, em không tự điền: #1, #2, #6, #21, #37, #48, #61, #87. Script trước đây làm rơi `ghi_chu_model` khi một lượt nằm trong nhiều khoảng ghi chú; em đã sửa thành gộp các khoảng (`tools/extract_prompt_log.py`).
+- **AI form:** `forms_hw04.py` không chạy lại vì form đã có chữ ký; em sửa trực tiếp: điền #n cho 33 artifact ở AI-02 (lượt Claude Code ngay trước commit tạo ra artifact), cập nhật số lượt 86/49 → 87/50 ở AI-02/03/05. Ô SV đã điền giữ nguyên.
+- **Chữ ký:** cắt, bỏ nền giấy (còn mực xanh), 6,5 KB, ghi đè `signature.png`. Đã xem PDF AI-05: chữ ký hiện rõ; AI-02 và AI-03 có nhúng ảnh. Report có một bảng vỡ cột do ký tự `|` trong code span ở `A_FR01/review_sv.md`; đã escape, các bảng khác đủ cột.
+- **Z2:** zip còn đúng 10 thư mục report: 9 lượt chính thức (A/B/C × chrome/edge/firefox) + `firefox_20261117T140840` (TC-60). `report_plan.md`, `placeholders_left.md`, `submission_check.md`, `CLAUDE.md` không có trong zip.
+- **Thư mục cấp 1 trong zip:** `.gitattributes`, `23120255_HW04_Report.md/.pdf`, `README.md`, `A_FR01/`, `B_FR07/`, `C_FR15/`, `ai-forms/`, `appendix/`, `bugs/`, `data/`, `env/`, `reports/`, `skills/`, `tests/`.
+- **Bất thường:** RUN.md, results.md, README và report vẫn ghi tên các thư mục lượt thử đã loại khỏi zip (report 7 tên, README 3, RUN.md/results.md 35); đây chỉ là chữ, không vỡ file. #87 trong log đã commit chỉ chép output tới lúc commit.
+- Commit: `a396871`, `7f2fc5c`, `a050e68`, `9b0781e` HW04: commit log text
+- sha256: `214805a4b62064c1f0cc63887ca6362dfe9e17c6523201ab2be052ecb59423f1`
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 87 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 50 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87).
+## #122 | 09:29 18/11/2026 | Claude (không rõ model) | [...]
+*Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
+**Mục đích:** [...]
+
+**Prompt:**
+```
+Trong lúc chờ Claude Code chạy prompt trên, bạn có thể gửi tôi các transcript mới không nhỉ? Hay tôi lại phải đi trích xuất tiếp?
+```
+
+**Output:**
+````
+Mình vẫn **không gửi được**. Workspace của phiên này không có file transcript (đã kiểm hôm qua), nên muốn có các lượt sau 21:40 17/11 thì em phải **xuất lại dữ liệu claude.ai** giống lần trước.
+
+Lần trước em yêu cầu lúc khoảng 21:47 và có file trước 22:14, tức mất chưa tới 30 phút. Đề xuất:
+
+1. **Yêu cầu xuất ngay bây giờ** (09:29).
+2. **Không chờ.** Nộp **bản an toàn** từ lệnh #31 như đang làm. AI-03 đã ghi "các lượt claude.ai sau 21:40 17/11 chưa có trong bản xuất", nên bản này đã khai đúng sự thật.
+3. **Nếu file tới trước khoảng 10:15:** đặt file `conversations.json` mới vào chỗ cũ, rồi đưa Claude Code lệnh:
+   ```
+   HW04 – cập nhật transcript claude.ai: đọc <đường dẫn>/conversations.json mới, lấy hội thoại 419e0cdc-250c-4f3a-9605-9037b0a32381, ghi đè .transcripts/claude-ai_session_HW04_p1.json; on_stop.py --manual; báo số lượt mới + lượt cuối. Lượt mới không có notes → báo #n (SV tự ghi Mục đích/Xử lý hoặc để khoá khoảng cuối phủ). Sau đó chạy lại bước 2–6 của lệnh #31 (forms, PDF + ký, commit log, zip mới) và bỏ câu "chưa có trong bản xuất" ở AI-03. Báo sha256 zip mới.
+   ```
+   Xong thì **nộp thay** bản an toàn trên Moodle.
+4. **Nếu tới 10:15 vẫn chưa có file:** giữ bản đã nộp. Đừng làm gấp sát 11:00 kẻo hỏng bản tốt.
+
+Để các lượt mới khỏi lẻ `[...]`, khoá khoảng cuối trong notes nên mở tới `2026-11-18 11:00`, mục đích kiểu "hoàn thiện report, form, đóng gói". Em tự ghi câu đó.
+````
+
+**Xử lý:** [...]
+
+---
+
+## #123 | 09:35 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – cập nhật transcript claude.ai: đọc d:\HK7\Testing\Exercise\HW\conversations-000\conversations.json mới, lấy hội thoại 419e0cdc-250c-4f3a-9605-9037b0a32381, ghi đè .transcripts/claude-ai_session_HW04_p1.json; on_stop.py --manual; báo số lượt mới + lượt cuối. Lượt mới không có notes → báo #n (SV tự ghi Mục đích/Xử lý hoặc để khoá khoảng cuối phủ). Sau đó chạy lại bước 2–6 của lệnh #31 (forms, PDF + ký, commit log, zip mới) và bỏ câu "chưa có trong bản xuất" ở AI-03. Báo sha256 zip mới.
+```
+
+**Output:**
+```
+Đang cập nhật số lượt + #n trong form theo log 123 lượt.
+```
+
+**Xử lý:** [...]
+
+---
+
+**Tổng:** 123 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 51 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123).
