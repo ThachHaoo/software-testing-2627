@@ -176,7 +176,7 @@ Sau khi em chốt S1–B1, mình sẽ đưa lệnh #2: dựng skill rồi áp l�
 ---
 
 ## #3 | 22:20 16/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -228,13 +228,13 @@ Report đúng. Giờ xoá smoke, sinh log HW04, commit.
 ```
 *File AI ghi/gửi trong lượt này:* `hw.toml`, `CLAUDE.md`, `package.json`, `playwright.config.ts`, `global-setup.ts`, `hw03-runtime-state.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #4 | 23:01 16/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -297,12 +297,12 @@ Báo cáo ≤ 15 dòng: kết quả trình duyệt, cấu trúc skill, bảng 15
 Gửi mình báo cáo, mình sẽ cùng em duyệt 15 TC của A, rồi chạy tiếp bước 2–3. Mỗi bước là một prompt riêng, để prompt log thể hiện được yêu cầu "sinh script từng bước" của đề.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #5 | 23:02 16/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -363,7 +363,7 @@ Bước 1 A_FR01: liệt kê ứng viên.
 ```
 *File AI ghi/gửi trong lượt này:* `select_tc.py`, `check_data.py`, `freeze.py`, `merge_reports.py`, `ddt-fixture.template.ts`, `spec.template.ts`, `selection.example.json`, `SKILL.md`, `selection.json`
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
@@ -426,7 +426,7 @@ Bước 3 (sinh spec) sẽ là một prompt riêng sau khi xem fixture.
 ---
 
 ## #7 | 00:07 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -469,13 +469,13 @@ Bước 1b (SV chốt) và bước 2 của A_FR01 đã commit; em dừng trướ
 ```
 *File AI ghi/gửi trong lượt này:* `ddt.ts`, `register.page.ts`, `login.page.ts`, `a_fr01.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #8 | 00:13 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -530,12 +530,12 @@ Báo cáo ≤ 12 dòng: số test --list, bảng kiểu assertion, lệnh SV dù
 Lúc này là 00:13, còn khoảng 35 tiếng. Nếu tối nay xong A tới bước chạy 3 trình duyệt thì mai làm B và C khá thoải mái.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #9 | 00:21 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -593,13 +593,13 @@ Spec A_FR01 đã sinh và commit; `--list` ra đủ 45 test. Em chưa chạy tes
 ````
 *File AI ghi/gửi trong lượt này:* `A_FR01.spec.ts`, `assertions.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #10 | 00:28 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -677,12 +677,12 @@ Xong lệnh #5, em chạy lại 3 trình duyệt (cùng lệnh như trên, đó 
 - **Case Fail:** case nào Fail chỉ trên một trình duyệt (dấu hiệu flaky).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #11 | 00:29 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -719,13 +719,13 @@ Spec đã sửa, bỏ mode serial và commit 5/6a. 3 report lượt thử 1 đư
 ```
 *File AI ghi/gửi trong lượt này:* `RUN.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #12 | 00:44 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -778,13 +778,13 @@ Kết quả Firefox **đúng như dự kiến**: 8 Fail khớp đúng 8 TC từn
 Chạy xong cả 3 trình duyệt mà kết quả giống nhau (8 Fail / 7 Pass) thì đó là **lượt chính thức của A**. Lúc đó em gửi mình danh sách tự soi spec như đã nói, để làm bước 5b rồi sang bước 6.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #13 | 00:54 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -836,12 +836,12 @@ Sau đó em chạy lại 3 trình duyệt. Đó là **lượt chính thức củ
 Lúc này đã 01:00. A sắp xong. Nếu em định ngủ thì điểm dừng hợp lý là sau lượt chính thức của A. Mai làm B và C nhanh hơn, vì skill và fixture đã ổn định.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #14 | 00:55 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -894,13 +894,13 @@ Cập nhật RUN.md + commit report lượt thử 2.
 ````
 *File AI ghi/gửi trong lượt này:* `esc.js`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #15 | 01:10 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -949,12 +949,12 @@ Báo cáo ≤ 10 dòng: số nhóm G, TC mỗi nhóm, dung lượng reports.
 Khi nào em muốn nghỉ, nói "xuất transcript", mình sẽ chép phiên này ra `claude-ai_session_HW04_p1.jsonl` để đưa vào prompt log.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #16 | 01:11 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -999,13 +999,13 @@ Bước 6 của A_FR01 đã xong và commit; em dừng ở đây. Có một rủ
 ```
 *File AI ghi/gửi trong lượt này:* `merge_reports.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #17 | 01:16 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -1064,12 +1064,12 @@ Báo cáo ≤ 12 dòng: bảng 15 TC (mã, loại +/-/biên, kỹ thuật, HW02 
 Trong lúc Claude Code làm lệnh #8, em chạy lại A trên 3 trình duyệt (sau khi commit config). Báo cho mình dung lượng 3 report mới là bao nhiêu.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #18 | 01:17 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -1108,13 +1108,13 @@ Facts confirmed (CartContext.jsx: `useState([])`, no axios/localStorage). Writin
 ```
 *File AI ghi/gửi trong lượt này:* `selection.json`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #19 | 01:28 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -1173,12 +1173,12 @@ Báo cáo ≤ 10 dòng.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
 ## #20 | 01:30 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -1219,7 +1219,7 @@ Khôi phục đủ (diff rỗng). Sửa `waitLoaded` của trang chi tiết, pro
 ```
 *File AI ghi/gửi trong lượt này:* `shop.pages.ts`, `b_fr07.ts`, `reports-no-glob-delete.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
@@ -1273,7 +1273,7 @@ Lỗi giống A (serial, catch rỗng) đã được dặn trước nên chắc 
 ---
 
 ## #22 | 01:37 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1328,13 +1328,13 @@ npx playwright test B_FR07 --project=chrome; npx playwright test B_FR07 --projec
 ````
 *File AI ghi/gửi trong lượt này:* `b_fr07.oracle.ts`, `B_FR07.spec.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #23 | 01:49 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1395,12 +1395,12 @@ Báo cáo ≤ 10 dòng.
 Em gửi mình cả báo cáo #11 lẫn danh sách tự soi. Mình đối chiếu với code rồi mới ra lệnh sửa (bước 5).
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #24 | 01:51 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1430,13 +1430,13 @@ Kết quả: 15/15 trùng HW02, 3 trình duyệt giống nhau. Lấy thêm annot
 - Cần quyết định: không.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #25 | 01:52 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1479,12 +1479,12 @@ Em đi ngủ được rồi. A đã xong cả 6 bước. B đã chạy lượt t
 - Trước khi push: xem hết 24 ảnh evidence của A, vì repo đang public.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #26 | 01:55 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1512,13 +1512,13 @@ No response requested.
 ```
 *File AI ghi/gửi trong lượt này:* `hw03-runtime-state.md`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #27 | 13:34 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1557,13 +1557,13 @@ Mình khuyến nghị **a**, nếu em chấp nhận lượt chính thức của 
 Em push xong nói mình, mình đọc code rồi chốt bảng đánh giá và đưa lệnh sửa (bước 5 của B). Em cũng chọn luôn **a** hay **b** cho phần ảnh.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #28 | 13:35 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1611,12 +1611,12 @@ HW04 – lệnh #12, B_FR07 BƯỚC 5 (+ ảnh A).
 Sau lệnh #12, em chạy **A và B** trên 3 trình duyệt (6 lượt, khoảng 20 phút). Đó là lượt chính thức của cả hai. Trong lúc chờ, mình sẽ chuẩn bị lệnh bước 1 của C.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #29 | 13:39 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1674,12 +1674,12 @@ npx playwright test B_FR07 --project=chrome; npx playwright test B_FR07 --projec
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #30 | 13:46 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1704,13 +1704,13 @@ npx playwright test B_FR07 --project=chrome; npx playwright test B_FR07 --projec
 Code sửa ở lệnh #12 (5/6a–c của B, 5/6e của A) chưa chạy trên SUT. Nếu muốn, mình chạy thử nhanh trên Chrome với `--reporter=line` trước khi bạn chạy lượt chính thức; cách này không tạo HTML report nên không lẫn vào thư mục `reports`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #31 | 14:03 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1762,12 +1762,12 @@ Em chạy lệnh `--repeat-each=3` mà Claude Code đưa:
 Dù kết quả thế nào, đây cũng là một ý "AI sinh ra flaky" rất tốt cho phần review và video.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #32 | 14:04 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1817,13 +1817,13 @@ npx playwright test B_FR07 --project=firefox --grep "TC-FR07-60 " --repeat-each=
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #33 | 14:10 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1872,12 +1872,12 @@ Báo cáo ≤ 12 dòng: bảng 15 TC (mã, Thêm/Sửa, loại, kỹ thuật, HW
 Chạy xong B, em báo kết quả. Nếu cả 3 cùng 6/9, mình chốt B 6/6 cùng lúc với duyệt danh sách TC của C.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #34 | 14:10 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1925,13 +1925,13 @@ Xem rủi ro sập backend (price null + id chẵn) trong mã SUT và tài liệ
 ```
 *File AI ghi/gửi trong lượt này:* `selection.json`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #35 | 14:16 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1998,12 +1998,12 @@ Báo cáo ≤ 10 dòng + số nhóm G của B.
 Sau đó còn bước 3 của C (sinh spec), lượt thử, em tự soi, sửa, lượt chính thức. Cố xong C trước khoảng 17:00, tối còn thời gian viết bug, quay video và làm report.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
 ## #36 | 14:18 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -2040,7 +2040,7 @@ Bước 2 C: đọc UI admin thật.
 ```
 *File AI ghi/gửi trong lượt này:* `admin.pages.ts`, `c_fr15.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
@@ -2097,7 +2097,7 @@ Sau đó em chạy lượt thử 1 của C trên 3 trình duyệt và tự soi s
 ---
 
 ## #38 | 14:23 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2124,12 +2124,12 @@ Báo cáo cho phiên thảo luận
 Mình chưa làm gì thêm. Repo sạch, commit mới nhất là `16d791d` (C 2/6). Mình đang dừng chờ lệnh #16, có thể là bước 3 của C (sinh spec) hoặc quyết định export-ignore cho các lượt thử để zip dưới 20 MB.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #39 | 14:24 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2176,13 +2176,13 @@ npx playwright test C_FR15 --project=chrome; npx playwright test C_FR15 --projec
 ````
 *File AI ghi/gửi trong lượt này:* `c_fr15.oracle.ts`, `C_FR15.spec.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #40 | 14:46 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2244,12 +2244,12 @@ Ngoài ra, em để ý thêm `sameNumber` (`Number(actual) === expected`). Cách
 Lần này em cố chỉ ghi những gì **thấy trong code**, như ở B đã rút kinh nghiệm. Nhớ ghi số dòng, để lúc đối chiếu nhanh và chắc hơn.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #41 | 14:46 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2288,13 +2288,13 @@ Lệnh #17 xong 3 phần, mỗi phần một commit. C lượt thử 1 trùng HW
   - Mọi nhóm đều đã có issue HW02 (#17, #18, #161, #165, #166, #167): comment vào issue cũ hay tạo issue mới cho HW04.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #42 | 15:00 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2365,13 +2365,13 @@ Em push C giúp mình. Repo mới tới `6d9f402`, mình chưa đọc được `
 Em push C rồi gửi mình: tiêu chí G→BUG em chọn, và 5 ý đã viết lại (hoặc nói mình đọc code trước rồi em mới viết lại).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #43 | 15:02 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2415,13 +2415,13 @@ HW04 – lệnh #18, C_FR15 BƯỚC 5.
 Sau đó em chạy lượt chính thức C, và gửi mình **tiêu chí G→BUG** em chọn. Khi bước 6 của C xong, Claude Code dựng bảng nhóm Fail cho C, rồi dựng khung bug cho cả 3 feature theo mapping của em.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #44 | 15:07 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2474,12 +2474,12 @@ DỪNG. Báo cáo ≤ 8 dòng + lệnh SV chạy lượt chính thức C.
 Áp dụng luôn cho A và B: `review_sv.md` của 2 feature đó đã tách rõ "ý của SV" và "phiên thảo luận bổ sung". Hiện ổn, không cần sửa.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #45 | 15:10 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2522,13 +2522,13 @@ npx playwright test C_FR15 --project=chrome; npx playwright test C_FR15 --projec
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #46 | 15:16 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2577,12 +2577,12 @@ Mình không chọn thay em. Lưu ý trung thực: **không chọn b chỉ để
 Gửi mình tiêu chí G→BUG kèm báo cáo #19, mình đưa lệnh dựng khung bug cho cả 3 feature.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
 ## #47 | 15:16 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2621,7 +2621,7 @@ Lệnh #19 xong: C chốt lượt chính thức (bước 6), có bảng dữ ki�
 ```
 *File AI ghi/gửi trong lượt này:* `hw04_summary.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
@@ -2693,7 +2693,7 @@ Claude Code lại hỏi, nhưng em đã chốt **B1=b: tạo issue mới cho m�
 
 ## #49 | 15:29 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2729,12 +2729,12 @@ Báo cáo ≤ 10 dòng: bảng BUG-xx ↔ G ↔ TC ↔ issue HW02 liên quan.
 Trong lúc em viết bug, mình chuẩn bị luôn **bảng thời gian + ý chính cho 2 video** (không viết lời thoại), để viết bug xong là em quay được ngay.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #50 | 15:29 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2774,13 +2774,13 @@ Khung 18 bug đã sinh, đoạn code khớp số dòng. Giờ ghi `HW04/bugs/REA
 ```
 *File AI ghi/gửi trong lượt này:* `gen_bugs.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #51 | 15:36 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2853,12 +2853,12 @@ Cách đã dùng ở HW03: **nhánh tạm `demo-video`**, chạy skill trên ph�
 Khi viết bug xong, nói mình, mình đưa **một lệnh E2E** cho Claude Code chạy skill trên nhánh `demo-video`. Lệnh đó dừng ở các bước của người, đúng cách đã làm ở HW03.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #52 | 19:45 17/11/2026 | Claude (không rõ model) | [...]
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2877,12 +2877,12 @@ Khi viết bug xong, nói mình, mình đưa **một lệnh E2E** cho Claude Cod
 (không có output dạng văn bản)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #53 | 19:45 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2903,13 +2903,13 @@ Máy thiếu bộ nhớ nên Claude Code đã tự dừng 2 tiến trình nền:
 Bước kế (SV viết 18 bug) không cần SUT. Khi cần chạy test lại (chụp ảnh tái hiện, quay video), bạn nhắn "bật lại web + admin" thì em chạy lại 2 lệnh `npx vite --host 127.0.0.1 --port 5173` / `5174`.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #54 | 20:21 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2961,13 +2961,13 @@ Cách 2 em chọn có ràng buộc: **cùng một triệu chứng thì gộp.** 
 Em trả lời mình trước câu hỏi ở trên, rồi mình mới kiểm dữ kiện chi tiết.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #55 | 20:24 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3004,13 +3004,13 @@ HW04 – lệnh #21, bug 7c + issue.
 Nhúng ảnh bằng link raw từ repo public giúp em khỏi phải kéo tay ảnh vào 18 issue, mà mỗi issue vẫn **hiện ảnh** đúng yêu cầu đề.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #56 | 20:39 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3036,13 +3036,13 @@ HW04 – lệnh #21, bug 7c + issue.
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #57 | 20:54 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3062,12 +3062,12 @@ Một góp ý nhỏ, không chặn: lý do của BUG-88 và BUG-94 thiên về "
 Trong lúc Claude Code chạy lệnh #21 (tái hiện và tạo 18 issue), em chuẩn bị quay **video Task 2** theo bảng thời gian ở tin trước. Mở sẵn terminal `whoami` / `hostname`, cùng report lượt thử 1 và report chính thức của A.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #58 | 20:55 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3107,13 +3107,13 @@ Em dừng ở bước 1, chưa tạo issue: cả 18 bug đều tái hiện đư�
 ```
 *File AI ghi/gửi trong lượt này:* `repro.spec.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #59 | 21:07 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3159,12 +3159,12 @@ HW04 – lệnh #22. SV đã sửa bước tái hiện (BUG-87, 89–94, 95, 96,
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
 ## #60 | 21:18 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3209,7 +3209,7 @@ Thư mục chưa có, chưa issue nào được tạo. Chạy lại.
 ```
 *File AI ghi/gửi trong lượt này:* `mk_issues.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
@@ -3281,7 +3281,7 @@ Em quay video Task 2 theo bảng thời gian ở tin trước. Đoạn kể lỗ
 ---
 
 ## #62 | 21:32 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
 ```
@@ -3320,13 +3320,13 @@ Commit. Báo cáo ≤ 10 dòng.
 ```
 *File AI ghi/gửi trong lượt này:* `report_plan.md`, `23120255_HW04_Report.md`, `hw04_report.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
 
 ---
 
 ## #63 | 21:33 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
 ```
@@ -3354,13 +3354,13 @@ Phần Claude Code trên máy em không bị ảnh hưởng: transcript vẫn n�
 Em thử cách 1 khi rảnh tay, vẫn kịp trước khi chốt prompt log sáng mai. Giờ em cứ quay video Task 2 trước.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
 
 ---
 
 ## #64 | 21:40 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
 ```
@@ -3390,12 +3390,12 @@ Nếu tới sáng không có bản xuất, mình dùng phương án dự phòng 
 Giờ em quay video Task 2 trước nhé, phần này không phụ thuộc gì cả.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
 
 ---
 
 ## #65 | 22:11 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
 ```
@@ -3418,12 +3418,12 @@ Thêm bộ đọc bản xuất claude.ai vào `extract_prompt_log.py`, chép ngu
 - Commit: `86d4d78` tools: đọc hội thoại claude.ai từ bản xuất dữ liệu (claude-ai_*.json); HW04 prompt log 65 lượt
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
 
 ---
 
 ## #66 | 22:19 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
 ```
@@ -3445,12 +3445,12 @@ Prompt log xong, không có cảnh báo khoá. Giờ cập nhật `report_plan.m
 - Commit: `60bec96` HW04: report_plan ghi S1/T1–T4, khai bộ đọc claude.ai; notes ghi chú model lượt claude.ai (nguon_luot)
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
 
 ---
 
 ## #67 | 22:24 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
 ```
@@ -3474,12 +3474,12 @@ Muốn tắt hết thì chạy lệnh sau trong PowerShell:
 Lưu ý: tắt backend sẽ mất giỏ hàng và tài khoản đã tạo, vì CSDL seed lại khi bật lại. Nếu bạn đang quay video thì để nguyên.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
 
 ---
 
 ## #68 | 22:26 17/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
 ```
@@ -3515,12 +3515,12 @@ npx vite --host 127.0.0.1 --port 5174
 - Lúc chạy test, `beforeAll` gọi `tools/restart_backend.ps1`: script này tắt backend bạn đang mở và bật một backend mới ở chế độ nền. Nếu muốn backend luôn nằm trong cửa sổ của mình thì chạy lại lệnh 1 sau khi test xong.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
 
 ---
 
 ## #69 | 00:19 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
 ```
@@ -3552,12 +3552,12 @@ HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_2026
   - Log có tên user Windows — giữ nguyên hay che `tanhi`?
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
 
 ---
 
 ## #70 | 00:22 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Chạy minh hoạ thực tế trên terminal để quay video Task 2 và ghi nhận log môi trường.
 
 **Prompt:**
 ```
@@ -3594,12 +3594,12 @@ Phần A đã commit: `2d3660b`. Phần B đang ở nhánh `demo-video`, xong b�
 Gõ **"tiếp"** để chạy bước 2–3.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự chạy lệnh kiểm thử để quay và thuyết minh video Task 2, đồng thời xuất log hệ thống khi Firefox bị Windows chặn.
 
 ---
 
 ## #71 | 00:24 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3615,12 +3615,12 @@ HW04 – huỷ demo: KHÔNG chạy bước 2. Chưa commit gì trên demo-video 
 `git status` chưa sạch hẳn, còn đúng những thứ đã có từ trước demo: `A_prompt_log.md` (hook tự sinh lại), 6 report không chính thức (cố ý không commit) và `context/HW04_assignment.pdf` (không commit).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #72 | 00:37 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3660,12 +3660,12 @@ Chọn: Fail 01 (BUG-01), Fail 202 (BUG-02), Pass 05 (ô bắt buộc), Pass 63 
 Bước kế tiếp: sinh fixture và spec demo. Gõ **"tiếp"** để làm bước 2–3.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #73 | 00:38 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3713,12 +3713,12 @@ Gõ **"tiếp"** khi đã chạy xong 3 lượt.
 ````
 *File AI ghi/gửi trong lượt này:* `A_FR01.demo.spec.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #74 | 00:50 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3734,12 +3734,12 @@ Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm gi
 `HW04/data`, `HW04/tests` và `HW04/reports` không khác HEAD (`git diff` rỗng). Thư mục `HW04/reports` vẫn đủ 38 mục, 6 report chưa commit vẫn còn nguyên.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #75 | 00:52 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3774,12 +3774,12 @@ Template lấy theo cấu trúc spec chính thức mới nhất (C_FR15.spec.ts 
 ```
 *File AI ghi/gửi trong lượt này:* `ddt-fixture.template.ts`, `spec.template.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #76 | 01:02 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3811,12 +3811,12 @@ Bước 1/6: chọn 4 TC A_FR01 → `HW04/demo/A_FR01/selection.json`, `HW04/dem
 **DỪNG.** Gõ "tiếp" để làm bước 2–3.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #77 | 01:04 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3851,12 +3851,12 @@ Report ra `HW04/demo/reports/<project>_<ts>/` (`index.html` có "Run by: 2312025
 ````
 *File AI ghi/gửi trong lượt này:* `a_fr01.demo.ts`, `playwright.demo.config.ts`, `A_FR01.demo.spec.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #78 | 01:12 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3869,12 +3869,12 @@ Demo dừng: đã xoá `HW04/demo/`, xoá nhánh `demo-video`, đang ở `main`.
 `git status` chưa sạch hẳn, nhưng chỉ còn đúng các thay đổi đã có trước demo: `A_prompt_log.md` do hook tự ghi, 6 thư mục `HW04/reports/*_20261117T*` và `context/HW04_assignment.pdf`. Mình không đụng tới các file này.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #79 | 01:13 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3935,12 +3935,12 @@ Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
 ````
 *File AI ghi/gửi trong lượt này:* `demo.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #80 | 01:34 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -3974,12 +3974,12 @@ File tạo ra:
 ⏸ Dừng ở đây để bạn duyệt TC. Gõ **"tiếp"** để sang bước 2–3.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #81 | 01:36 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -4013,12 +4013,12 @@ Report ra `HW04/tests/_demo/reports/<project>_<ts>/`, có "Run by: 23120255 · I
 ````
 *File AI ghi/gửi trong lượt này:* `A_FR01.demo.ts`
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #82 | 01:43 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -4040,12 +4040,12 @@ tiếp
 ⏸ Review xong thì gõ **"tiếp"** để gộp kết quả.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #83 | 01:45 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -4081,12 +4081,12 @@ Không commit gì. `HW04/data`, spec, report và ai-outputs chính thức không
 ⏸ Quay xong thì báo để tôi xoá `HW04/tests/_demo` (dòng thêm vào `.git/info/exclude` có cần gỡ không, bạn quyết).
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #84 | 01:48 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -4112,12 +4112,12 @@ Dòng `HW04/tests/_demo/` vẫn còn trong `.git/info/exclude`. Dòng này vô h
 ```
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #85 | 02:02 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Nâng cấp Agent Skill từ bài học review A/B/C, chạy thử E2E sạch và quay video demo skill.
 
 **Prompt:**
 ```
@@ -4175,12 +4175,12 @@ Bảng audit trong report thêm hàng cho commit vừa tạo; commit lần cuố
 ```
 *File AI ghi/gửi trong lượt này:* `forms_hw04.py`
 
-**Xử lý:** [...]
+**Xử lý:** SV giám sát các vòng chạy thử demo, yêu cầu sửa lỗi đóng băng/form HTML5 lên v2.1 và tự quay, thuyết minh video.
 
 ---
 
 ## #86 | 08:51 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Đồng bộ số liệu kiểm toán AI-02, AI-03, AI-05 và chỉnh sửa các chi tiết sót cuối cùng.
 
 **Prompt:**
 ```
@@ -4197,10 +4197,76 @@ HW04 – lệnh #30 (gấp, hạn 11:00).
 Đã sửa 2 dữ kiện (đúng: dòng 105, TC-08 lượt chính thức `[]`). Giờ sửa `hw04_report.py` để giữ verdict SV khi sinh lại bảng audit.
 
 Bảng §9 giữ nguyên verdict SV, thêm 5 hàng mới. Giờ dựng AI-02 (chép §9 + tỉ lệ), AI-03, AI-05.
+
+Viết lại phần sinh form trong `forms_hw04.py` (AI-02 chép §9 + tỉ lệ, thêm AI-03, AI-05).
+
+Tỉ lệ: VALID 45 (80%), INCOMPLETE 11 (20%), INVALID 0. Commit rồi xuất commit log + PDF.
+
+Zip dự kiến 54 MB, vượt 20 MB. Đang đo thư mục nào nặng.
+
+Áp Z2 thì zip còn 16,4 MB (chưa áp, chờ SV chốt). Chạy skill rà soát nộp bài.
+
+Rà soát xong. Ghi kết quả vào file rồi commit.
+
+Đã làm xong 5 mục của lệnh #30, nhưng **chưa nộp được ngay**: zip hiện là 54 MB, vượt giới hạn 20 MB của Moodle. Commit cuối là `87bd6cb`.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: lệnh #30 – sinh lại bảng audit §9, sửa 2 dữ kiện, dựng AI-03/AI-05, xuất PDF + commit log, chạy rà soát nộp bài.
+- **Bảng audit §9:** verdict và lý do SV đã viết giữ nguyên (`tools/hw04_report.py` giữ theo hash commit). 4 commit mới của SV ghi "— (SV làm…)"; commit AI `a99d6ee` còn `<SV viết>`. AI-02 mục 3.1 chép đúng bảng §9.
+- **Tỉ lệ verdict** (56 commit AI có verdict; không tính 11 commit SV làm và 1 commit chưa có verdict):
+
+  | Verdict | Số commit |
+  |---|---|
+  | VALID | 45 (80%) |
+  | INCOMPLETE | 11 (20%) |
+  | INVALID | 0 |
+- **Sửa dữ kiện:** "dòng 103" → 105, đã đối chiếu bản spec đóng băng. Dòng TC-08 nay ghi rõ SUT không hiện dialog (lượt chính thức `[]`, BUG-93); lý do dialog native chỉ áp nếu SUT có dialog.
+- **AI-03:** Claude Code dùng Claude Opus 5.5, 49 lượt. 37 lượt "không rõ model" gồm 36 lượt claude.ai (Opus 5.5, SV xác nhận) và #52 (lượt `<task-notification>` Claude Code tự sinh khi tiến trình nền kết thúc). Có ghi các lượt claude.ai sau 21:40 17/11 chưa có trong bản xuất.
+- **AI-05:** mục có bằng chứng đã tick; 7 mục cam kết để `[ ]` "(em tự xác nhận)".
+- **Ô SV còn phải làm:**
+  - §10: xác nhận nháp 📝 và viết 2 ô.
+  - §7: chỗ sửa script AI kể trong video.
+  - §9: verdict cho `a99d6ee`.
+  - AI-02 §4 Kết luận.
+  - AI-03 mục 2/3/4/5.
+  - Ký AI-02/03/05.
+  - 86 lượt prompt log còn `[...]` ở Mục đích/Xử lý (ghi trong `prompt_log_notes.toml`).
+- **Rà soát nộp bài** (`HW04/submission_check.md`): đủ AI-02/03/05 có PDF (chưa ký); Cấp 4 khớp; số lượt 86 khớp giữa log, AI-02, AI-03, AI-05; Critique 292 từ; các commit có lỗi AI đều ghi INCOMPLETE, không có commit lỗi nào ghi VALID. Script báo "135 lượt" và 11 anchor mục lục – đều là báo nhầm (135 là số lượt chạy test, không phải lượt AI).
+- **Zip:** hiện 54,1 MB. Nếu đánh dấu `export-ignore` cho 23 thư mục report lượt thử (Z2) thì còn **16,4 MB** (em đã đo thử, chưa áp). Tên zip dự kiến `23120255_HW04_AI_Automation_093.zip` (tổng tự chấm 93).
+- Kết quả kiểm tra: không chạy test.
+- Commit: `0dc0b14`, `433cd54`, `f9a7d67`, `87bd6cb` (cuối: HW04: rà soát trước khi nộp (submission_check.md, không nộp))
+- **Cần quyết định:**
+  - Z2 – áp `export-ignore` cho 23 thư mục report lượt thử, hay split-and-zip? Chưa xử lý thì không nộp được.
+  - Xuất lại dữ liệu claude.ai để bổ sung các lượt sau 21:40 17/11, hay giữ nguyên như đang ghi ở AI-03?
+- **Thứ tự hoàn tất sau khi SV điền xong:** trích lại prompt log → `python tools/forms_hw04.py` → xuất lại PDF và ký → commit → xuất lại commit log → commit → `git archive` → kiểm dung lượng.
+```
+*File AI ghi/gửi trong lượt này:* `forms_new.py`
+
+**Xử lý:** SV giữ nguyên các verdict tự chấm trong AI-02, rà soát lại bug/tỉ lệ và chốt các biểu mẫu nộp bài.
+
+---
+
+## #87 | 09:28 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #31 (chốt nộp, hạn 11:00).
+1. Trích lại prompt log (on_stop.py --manual) theo notes mới (574ec01); kiểm 0 cảnh báo khoá không khớp; báo số lượt còn [...] (mục tiêu 0; còn thì liệt kê #n, KHÔNG tự điền).
+2. python tools/forms_hw04.py; điền #n vào AI-02/AI-03 theo log đã chốt. Chữ ký: ảnh HW04/ai-forms/signature.png → thu nhỏ (< 30 KB, ghi đè bản nhỏ), chèn vào ô ký AI-02/03/05; KHÔNG đè ô SV đã điền.
+3. Xuất PDF report + AI-02/03/05; mở kiểm PDF có chữ ký, không vỡ bảng. Commit.
+4. Z2: export-ignore 23 thư mục report lượt thử + placeholders_left.md, submission_check.md, report_plan.md. Kiểm zip vẫn chứa 9 report chính thức (A/B/C × chrome/edge/firefox) + firefox_20261117T140840 (TC-60). Commit.
+5. Xuất commit log text → commit riêng.
+6. git archive --format=zip -o ..\23120255_HW04_AI_Automation_093.zip HEAD HW04; đo byte (< 20.000.000); liệt kê file cấp 1. Báo cáo ≤ 8 dòng + sha256.
+```
+
+**Output:**
+```
+Đã sửa script prompt log (khoảng ghi chú gộp, giữ ghi chú model). Còn 8 lượt `[...]`. Giờ kiểm SV đã sửa gì trong AI form trước khi chạy `forms_hw04.py`.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 86 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 49 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86).
+**Tổng:** 87 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 50 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86, #87).

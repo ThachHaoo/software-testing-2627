@@ -252,7 +252,7 @@ def parse_ranges(notes):
 
 def note_for(notes, keys, i, turns=None, ranges=()):
     """Ưu tiên khoá giờ, sau đó số thứ tự (1-based). Khoá khoảng cho giá trị mặc định từng trường;
-    khoá giờ/số ghi đè từng trường. Nhiều khoảng chứa cùng lượt → khoảng hẹp nhất (bằng nhau: khoảng ghi trước)."""
+    khoá giờ/số ghi đè từng trường. Nhiều khoảng chứa cùng lượt → gộp, khoảng hẹp hơn ghi đè từng trường của khoảng rộng hơn."""
     single = notes.get(keys[i - 1]) or notes.get(str(i), {})
     if not ranges:
         return single
@@ -261,7 +261,12 @@ def note_for(notes, keys, i, turns=None, ranges=()):
     hits = [r for r in ranges if r[0] <= t <= r[1] and r[2].get("nguon_luot", origin) == origin]
     if not hits:
         return single
-    return {**min(hits, key=lambda r: r[1] - r[0])[2], **single}
+    # gộp mọi khoảng chứa lượt: khoảng rộng trước, hẹp sau (hẹp ghi đè từng trường) → trường chỉ có ở khoảng rộng
+    # (vd ghi_chu_model của khoảng claude.ai) không bị mất khi lượt cũng nằm trong khoảng hẹp hơn
+    merged = {}
+    for r in sorted(hits, key=lambda r: r[1] - r[0], reverse=True):
+        merged.update(r[2])
+    return {**merged, **single}
 
 
 def warn_unmatched(notes, keys, turns, ranges):

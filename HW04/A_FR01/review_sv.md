@@ -24,5 +24,5 @@ Dọn dữ liệu (cleanup) và resetDb() chưa an toàn khi chạy song song: c
 |---|---|
 | 5/6a | bỏ mode serial |
 | 5/6b | chờ phản hồi POST / xác nhận không có POST rồi mới gọi `users.list()`; bỏ `catch` rỗng, annotation nhánh phản hồi; timeout → Blocked |
-| 5/6c | `oracleOf`: nhóm `^(…|…)`, escape chuỗi trước `new RegExp`; reject không đọc được ý thông báo → annotation "oracle thông báo yếu" |
+| 5/6c | `oracleOf`: nhóm `^(…\|…)`, escape chuỗi trước `new RegExp`; reject không đọc được ý thông báo → annotation "oracle thông báo yếu" |
 | 5/6d | `beforeAll` dừng nếu workers > 1 |
