@@ -6101,6 +6101,38 @@ HW04 – lệnh #33: on_stop.py --manual; báo số tiêu đề lượt còn "| 
 
 **Output:**
 ```
+Đã đóng zip mới; prompt log không còn `[...]`, và số lượt tổng đã sửa cho khớp ở AI-02/03/05.
+
+### Báo cáo cho phiên thảo luận
+- **Nhiệm vụ:** lệnh #33.
+- **Prompt log:** 125 lượt (Claude Opus 5.5: 53; không rõ model: 72). Lượt mới #125 là chính lượt lệnh này.
+  - Tiêu đề lượt còn `| [...]`: **0**.
+  - Mục đích/Xử lý còn `[...]`: **0**.
+- **Số lượt ở form:** AI-02/03/05 đang ghi 124/52, không khớp log nên em sửa thành 125/53. AI-03 ghi lượt chốt nộp là #125. Đã xuất lại 3 PDF form, chữ ký vẫn còn trong cả 3. Report không ghi số lượt nên không xuất lại.
+- **Commit:** `254077a` (prompt log + form + PDF), `8b415fb` HW04: commit log text.
+- **Zip** `..\23120255_HW04_AI_Automation_093.zip`: **16.827.563 byte**, 532 file.
+- **sha256:** `8c53ca58dd3be6e06e86710341b4479a5aef6d6f3a6ff3071af4450327a067e3`
+- **Nộp bản này:** nếu gửi thêm một lệnh nữa thì log sẽ thành 126 lượt và lại lệch với form. Hạn 11:00.
+```
+
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
+
+---
+
+## #126 | 10:08 18/11/2026 | Claude Opus 5.5 | Report + form
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
+
+**Prompt:**
+```
+HW04 – đóng zip lại (KHÔNG commit HW04/appendix/A_prompt_log.md):
+1. Hoàn tác file HW02 vừa bị export_commit_log.ps1 ghi đè (git restore HW02/...); kiểm git status không còn thay đổi ở HW02/.
+2. Kiểm HW04/README.md đã bỏ "(bản nháp)" và HW04/.gitattributes có export-ignore cho appendix/prompt_log_extra.toml + .gitattributes; commit 2 file này nếu chưa commit.
+3. Xuất commit log cho HW04 (đúng tham số như lần trước) → commit riêng chỉ HW04/appendix/commit_log.txt.
+4. git archive --format=zip -o ..\23120255_HW04_AI_Automation_093.zip HEAD HW04; báo byte, số file, sha256; xác nhận zip không có prompt_log_extra.toml, .gitattributes, report_plan.md.
+```
+
+**Output:**
+```
 (không có output dạng văn bản)
 ```
 
@@ -6108,4 +6140,4 @@ HW04 – lệnh #33: on_stop.py --manual; báo số tiêu đề lượt còn "| 
 
 ---
 
-**Tổng:** 125 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 53 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123, #124, #125).
+**Tổng:** 126 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 54 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123, #124, #125, #126).

@@ -1,0 +1,210 @@
+# Danh sách lượt (sinh bởi tools/extract_prompt_log.py --list --commits). Dùng để gom khoá khoảng trong prompt_log_notes.toml.
+# Commit kế tiếp = commit đầu tiên có giờ commit sau giờ lượt (git log --all).
+
+# Khoảng gợi ý (30 khoảng; tách khi tiền tố bước của commit kế tiếp đổi hoặc hai lượt cách > 60 phút)
+# khoá khoảng | số lượt | #đầu–#cuối | model | commit kế tiếp đầu / cuối
+["2026-11-12 18:51 .. 2026-11-12 18:51"] | 1 | #1–#1 | Claude (không rõ model) | 4d14bd7 HW04: bước 0 – môi trường / 4d14bd7 HW04: bước 0 – môi trường
+["2026-11-16 19:44 .. 2026-11-16 19:44"] | 1 | #2–#2 | Claude (không rõ model) | 4d14bd7 HW04: bước 0 – môi trường / 4d14bd7 HW04: bước 0 – môi trường
+["2026-11-16 22:20 .. 2026-11-16 23:02"] | 3 | #3–#5 | Claude (không rõ model), Claude Opus 5.5 | 4d14bd7 HW04: bước 0 – môi trường / 838752b HW04: đổi sang Chrome/Edge/Firefox (W1=a)
+["2026-11-16 23:16 .. 2026-11-17 00:07"] | 2 | #6–#7 | Claude (không rõ model), Claude Opus 5.5 | 0990ac0 HW04[A-FR01] 1/6b – SV chốt / 0990ac0 HW04[A-FR01] 1/6b – SV chốt
+["2026-11-17 00:13 .. 2026-11-17 00:21"] | 2 | #8–#9 | Claude (không rõ model), Claude Opus 5.5 | 9a5e558 HW04[A-FR01] 3/6: sinh spec data-driven + bảng ass / 9a5e558 HW04[A-FR01] 3/6: sinh spec data-driven + bảng ass
+["2026-11-17 00:28 .. 2026-11-17 00:29"] | 2 | #10–#11 | Claude (không rõ model), Claude Opus 5.5 | 6fc76b5 HW04[A-FR01] 5/6a – sửa: bỏ mode serial (1 Fail ch / 6fc76b5 HW04[A-FR01] 5/6a – sửa: bỏ mode serial (1 Fail ch
+["2026-11-17 00:44 .. 2026-11-17 00:55"] | 3 | #12–#14 | Claude (không rõ model), Claude Opus 5.5 | 3e7dda8 HW04[A-FR01] review của SV / 3e7dda8 HW04[A-FR01] review của SV
+["2026-11-17 01:10 .. 2026-11-17 01:11"] | 2 | #15–#16 | Claude (không rõ model), Claude Opus 5.5 | 74dd2c6 HW04[A-FR01]: lượt chính thức (3 report) + RUN.md / 74dd2c6 HW04[A-FR01]: lượt chính thức (3 report) + RUN.md
+["2026-11-17 01:16 .. 2026-11-17 01:17"] | 2 | #17–#18 | Claude (không rõ model), Claude Opus 5.5 | 597bda7 HW04: tắt trace để report < 20 MB (Z1=d) / 597bda7 HW04: tắt trace để report < 20 MB (Z1=d)
+["2026-11-17 01:28 .. 2026-11-17 01:30"] | 2 | #19–#20 | Claude (không rõ model), Claude Opus 5.5 | b7cbc6b HW04[A-FR01] 6/6b – lượt chính thức (trace off) / b7cbc6b HW04[A-FR01] 6/6b – lượt chính thức (trace off)
+["2026-11-17 01:34 .. 2026-11-17 01:37"] | 2 | #21–#22 | Claude (không rõ model), Claude Opus 5.5 | 7e75536 HW04[B-FR07] 3/6: spec data-driven + parser oracle / 7e75536 HW04[B-FR07] 3/6: spec data-driven + parser oracle
+["2026-11-17 01:49 .. 2026-11-17 01:51"] | 2 | #23–#24 | Claude (không rõ model), Claude Opus 5.5 | 6d9f402 HW04[B-FR07] 4/6: lượt thử 1 (3 trình duyệt) + RUN / 6d9f402 HW04[B-FR07] 4/6: lượt thử 1 (3 trình duyệt) + RUN
+["2026-11-17 01:52 .. 2026-11-17 01:55"] | 2 | #25–#26 | Claude (không rõ model), Claude Opus 5.5 | 2c8372f HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối c / 2c8372f HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối c
+["2026-11-17 13:34 .. 2026-11-17 13:39"] | 3 | #27–#29 | Claude (không rõ model), Claude Opus 5.5 | 2c8372f HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối c / 2c8372f HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối c
+["2026-11-17 13:46 .. 2026-11-17 14:04"] | 3 | #30–#32 | Claude (không rõ model), Claude Opus 5.5 | ea55c9c HW04[A-FR01] 6/6c – lượt chính thức / ea55c9c HW04[A-FR01] 6/6c – lượt chính thức
+["2026-11-17 14:10 .. 2026-11-17 14:10"] | 2 | #33–#34 | Claude (không rõ model), Claude Opus 5.5 | d676bf9 HW04[B-FR07] 5/6: RUN.md – TC-60 firefox lỗi hạ tầ / d676bf9 HW04[B-FR07] 5/6: RUN.md – TC-60 firefox lỗi hạ tầ
+["2026-11-17 14:16 .. 2026-11-17 14:18"] | 2 | #35–#36 | Claude (không rõ model), Claude Opus 5.5 | 072e47f HW04[B-FR07] 6/6 – lượt chính thức / 072e47f HW04[B-FR07] 6/6 – lượt chính thức
+["2026-11-17 14:22 .. 2026-11-17 14:24"] | 3 | #37–#39 | Claude (không rõ model), Claude Opus 5.5 | 370c9cd HW04[C-FR15] 3/6: spec data-driven + parser oracle / 370c9cd HW04[C-FR15] 3/6: spec data-driven + parser oracle
+["2026-11-17 14:46 .. 2026-11-17 14:46"] | 2 | #40–#41 | Claude (không rõ model), Claude Opus 5.5 | 0631be5 HW04[C-FR15] 4/6: lượt thử 1 (3 trình duyệt) + RUN / 0631be5 HW04[C-FR15] 4/6: lượt thử 1 (3 trình duyệt) + RUN
+["2026-11-17 15:00 .. 2026-11-17 15:10"] | 4 | #42–#45 | Claude (không rõ model), Claude Opus 5.5 | 9b1a139 HW04[C-FR15] 5/6: review_sv.md (SV soi bản 1 + bản / 9b1a139 HW04[C-FR15] 5/6: review_sv.md (SV soi bản 1 + bản
+["2026-11-17 15:16 .. 2026-11-17 15:16"] | 2 | #46–#47 | Claude (không rõ model), Claude Opus 5.5 | 2c54f76 HW04[C-FR15] 6/6 – lượt chính thức / 2c54f76 HW04[C-FR15] 6/6 – lượt chính thức
+["2026-11-17 15:20 .. 2026-11-17 15:36"] | 4 | #48–#51 | Claude (không rõ model), Claude Opus 5.5 | 2667147 HW04: khung 18 bug (Cách 2) / 2775914 HW04: SV viết 18 bug
+["2026-11-17 19:45 .. 2026-11-17 21:33"] | 12 | #52–#63 | Claude (không rõ model), Claude Opus 5.5 | 2775914 HW04: SV viết 18 bug / ac813b0 HW04: report_plan + dàn ý report (khối REPORT sinh
+["2026-11-17 21:40 .. 2026-11-17 22:11"] | 2 | #64–#65 | Claude (không rõ model), Claude Opus 5.5 | 86d4d78 tools: đọc hội thoại claude.ai từ bản xuất dữ liệu / 86d4d78 tools: đọc hội thoại claude.ai từ bản xuất dữ liệu
+["2026-11-17 22:19 .. 2026-11-17 22:19"] | 1 | #66–#66 | Claude Opus 5.5 | 60bec96 HW04: report_plan ghi S1/T1–T4, khai bộ đọc claude / 60bec96 HW04: report_plan ghi S1/T1–T4, khai bộ đọc claude
+["2026-11-17 22:24 .. 2026-11-17 22:26"] | 2 | #67–#68 | Claude Opus 5.5 | eb40646 HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tố / eb40646 HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tố
+["2026-11-18 00:19 .. 2026-11-18 00:19"] | 1 | #69–#69 | Claude Opus 5.5 | eb40646 HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tố / eb40646 HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tố
+["2026-11-18 00:22 .. 2026-11-18 02:02"] | 16 | #70–#85 | Claude Opus 5.5 | 2d3660b HW04: link video Task 2 (README, report §7, skills / 6ef3a84 HW04: prompt log trích lại (on_stop)
+["2026-11-18 08:51 .. 2026-11-18 08:51"] | 1 | #86–#86 | Claude Opus 5.5 | 0dc0b14 HW04: audit §9 giữ verdict SV + commit mới, AI-02  / 0dc0b14 HW04: audit §9 giữ verdict SV + commit mới, AI-02 
+["2026-11-18 09:28 .. 2026-11-18 09:28"] | 1 | #87–#87 | Claude Opus 5.5 | (chưa có) / (chưa có)
+
+#1   ["2026-11-12 18:51"]  Claude (không rõ model) Giờ tôi sẽ bắt đầu thực hiện HW04 nhé /cs423-ai-first-homework  . Đầu tiên đọc đ
+      → commit kế tiếp: 4d14bd7 (22:34 16/11) HW04: bước 0 – môi trường
+#2   ["2026-11-16 19:44"]  Claude (không rõ model) 1. 11h ngày 18/11
+      → commit kế tiếp: 4d14bd7 (22:34 16/11) HW04: bước 0 – môi trường
+#3   ["2026-11-16 22:20"]  Claude Opus 5.5  HW04 – bước 0: dựng môi trường. Repo hiện tại.
+      → commit kế tiếp: 4d14bd7 (22:34 16/11) HW04: bước 0 – môi trường
+#4   ["2026-11-16 23:01"]  Claude (không rõ model) S1:a; T1:a; T2;a; T3:a; T4:a; B1: b, mình nghĩ tạo lại hết, cho dù đã trùng, vì 
+      → commit kế tiếp: 838752b (23:03 16/11) HW04: đổi sang Chrome/Edge/Firefox (W1=a)
+#5   ["2026-11-16 23:02"]  Claude Opus 5.5  HW04 – lệnh #2. Deadline thật: 11:00 18/11/2026 (ghi vào HW04/CLAUDE.md). Repo đ
+      → commit kế tiếp: 838752b (23:03 16/11) HW04: đổi sang Chrome/Edge/Firefox (W1=a)
+#6   ["2026-11-16 23:16"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 0990ac0 (00:08 17/11) HW04[A-FR01] 1/6b – SV chốt
+#7   ["2026-11-17 00:07"]  Claude Opus 5.5  HW04 – lệnh #3, A_FR01.
+      → commit kế tiếp: 0990ac0 (00:08 17/11) HW04[A-FR01] 1/6b – SV chốt
+#8   ["2026-11-17 00:13"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 9a5e558 (00:23 17/11) HW04[A-FR01] 3/6: sinh spec data-driven + bảng assertion
+#9   ["2026-11-17 00:21"]  Claude Opus 5.5  HW04 – lệnh #4, A_FR01, BƯỚC 3 của skill.
+      → commit kế tiếp: 9a5e558 (00:23 17/11) HW04[A-FR01] 3/6: sinh spec data-driven + bảng assertion
+#10  ["2026-11-17 00:28"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 6fc76b5 (00:30 17/11) HW04[A-FR01] 5/6a – sửa: bỏ mode serial (1 Fail chặn 14 TC)
+#11  ["2026-11-17 00:29"]  Claude Opus 5.5  HW04 – lệnh #5, A_FR01, BƯỚC 5 (SV review).
+      → commit kế tiếp: 6fc76b5 (00:30 17/11) HW04[A-FR01] 5/6a – sửa: bỏ mode serial (1 Fail chặn 14 TC)
+#12  ["2026-11-17 00:44"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 3e7dda8 (00:56 17/11) HW04[A-FR01] review của SV
+#13  ["2026-11-17 00:54"]  Claude (không rõ model) à mình nhầm, nó cũng lỗi như vậy.
+      → commit kế tiếp: 3e7dda8 (00:56 17/11) HW04[A-FR01] review của SV
+#14  ["2026-11-17 00:55"]  Claude Opus 5.5  HW04 – lệnh #6, A_FR01, BƯỚC 5 (tiếp).
+      → commit kế tiếp: 3e7dda8 (00:56 17/11) HW04[A-FR01] review của SV
+#15  ["2026-11-17 01:10"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 74dd2c6 (01:12 17/11) HW04[A-FR01]: lượt chính thức (3 report) + RUN.md
+#16  ["2026-11-17 01:11"]  Claude Opus 5.5  HW04 – lệnh #7, A_FR01.
+      → commit kế tiếp: 74dd2c6 (01:12 17/11) HW04[A-FR01]: lượt chính thức (3 report) + RUN.md
+#17  ["2026-11-17 01:16"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 597bda7 (01:17 17/11) HW04: tắt trace để report < 20 MB (Z1=d)
+#18  ["2026-11-17 01:17"]  Claude Opus 5.5  HW04 – lệnh #8.
+      → commit kế tiếp: 597bda7 (01:17 17/11) HW04: tắt trace để report < 20 MB (Z1=d)
+#19  ["2026-11-17 01:28"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: b7cbc6b (01:31 17/11) HW04[A-FR01] 6/6b – lượt chính thức (trace off)
+#20  ["2026-11-17 01:30"]  Claude Opus 5.5  HW04 – lệnh #9.
+      → commit kế tiếp: b7cbc6b (01:31 17/11) HW04[A-FR01] 6/6b – lượt chính thức (trace off)
+#21  ["2026-11-17 01:34"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 7e75536 (01:43 17/11) HW04[B-FR07] 3/6: spec data-driven + parser oracle + bảng assertion (45 test)
+#22  ["2026-11-17 01:37"]  Claude Opus 5.5  HW04 – lệnh #10, B_FR07, BƯỚC 3.
+      → commit kế tiếp: 7e75536 (01:43 17/11) HW04[B-FR07] 3/6: spec data-driven + parser oracle + bảng assertion (45 test)
+#23  ["2026-11-17 01:49"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 6d9f402 (01:52 17/11) HW04[B-FR07] 4/6: lượt thử 1 (3 trình duyệt) + RUN.md
+#24  ["2026-11-17 01:51"]  Claude Opus 5.5  HW04 – lệnh #11, B_FR07.
+      → commit kế tiếp: 6d9f402 (01:52 17/11) HW04[B-FR07] 4/6: lượt thử 1 (3 trình duyệt) + RUN.md
+#25  ["2026-11-17 01:52"]  Claude (không rõ model) Mình tạm gửi báo cáo trước. Nếu chỉ còn việc tự soi, thì mình đi ngủ đã nhé.
+      → commit kế tiếp: 2c8372f (13:39 17/11) HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối chiếu code
+#26  ["2026-11-17 01:55"]  Claude Opus 5.5  Giờ mình sẽ tạm thời đi ngủ, giúp mình ghi nhớ những gì đang chạy nhé. Rồi tắt n
+      → commit kế tiếp: 2c8372f (13:39 17/11) HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối chiếu code
+#27  ["2026-11-17 13:34"]  Claude (không rõ model) Soi spec: 
+      → commit kế tiếp: 2c8372f (13:39 17/11) HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối chiếu code
+#28  ["2026-11-17 13:35"]  Claude (không rõ model) push xong rồi nhé, xem giúp mình nhé
+      → commit kế tiếp: 2c8372f (13:39 17/11) HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối chiếu code
+#29  ["2026-11-17 13:39"]  Claude Opus 5.5  HW04 – lệnh #12, B_FR07 BƯỚC 5 (+ ảnh A).
+      → commit kế tiếp: 2c8372f (13:39 17/11) HW04[B-FR07] 5/6: SV soi spec (nguyên văn) + đối chiếu code
+#30  ["2026-11-17 13:46"]  Claude Opus 5.5  chạy lại tất cả
+      → commit kế tiếp: ea55c9c (14:05 17/11) HW04[A-FR01] 6/6c – lượt chính thức
+#31  ["2026-11-17 14:03"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: ea55c9c (14:05 17/11) HW04[A-FR01] 6/6c – lượt chính thức
+#32  ["2026-11-17 14:04"]  Claude Opus 5.5  HW04 – lệnh #13.
+      → commit kế tiếp: ea55c9c (14:05 17/11) HW04[A-FR01] 6/6c – lượt chính thức
+#33  ["2026-11-17 14:10"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: d676bf9 (14:11 17/11) HW04[B-FR07] 5/6: RUN.md – TC-60 firefox lỗi hạ tầng (3/3 Pass khi chạy riêng), xoá 3 report rỗng
+#34  ["2026-11-17 14:10#2"]  Claude Opus 5.5  HW04 – lệnh #14.
+      → commit kế tiếp: d676bf9 (14:11 17/11) HW04[B-FR07] 5/6: RUN.md – TC-60 firefox lỗi hạ tầng (3/3 Pass khi chạy riêng), xoá 3 report rỗng
+#35  ["2026-11-17 14:16"]  Claude (không rõ model) ===
+      → commit kế tiếp: 072e47f (14:18 17/11) HW04[B-FR07] 6/6 – lượt chính thức
+#36  ["2026-11-17 14:18"]  Claude Opus 5.5  HW04 – lệnh #15.
+      → commit kế tiếp: 072e47f (14:18 17/11) HW04[B-FR07] 6/6 – lượt chính thức
+#37  ["2026-11-17 14:22"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 370c9cd (14:28 17/11) HW04[C-FR15] 3/6: spec data-driven + parser oracle + bảng assertion (45 test); giả định ngoài expected vào data
+#38  ["2026-11-17 14:23"]  Claude Opus 5.5  Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 370c9cd (14:28 17/11) HW04[C-FR15] 3/6: spec data-driven + parser oracle + bảng assertion (45 test); giả định ngoài expected vào data
+#39  ["2026-11-17 14:24"]  Claude Opus 5.5  HW04 – lệnh #16, C_FR15, BƯỚC 3.
+      → commit kế tiếp: 370c9cd (14:28 17/11) HW04[C-FR15] 3/6: spec data-driven + parser oracle + bảng assertion (45 test); giả định ngoài expected vào data
+#40  ["2026-11-17 14:46"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 0631be5 (14:47 17/11) HW04[C-FR15] 4/6: lượt thử 1 (3 trình duyệt) + RUN.md
+#41  ["2026-11-17 14:46#2"]  Claude Opus 5.5  HW04 – lệnh #17.
+      → commit kế tiếp: 0631be5 (14:47 17/11) HW04[C-FR15] 4/6: lượt thử 1 (3 trình duyệt) + RUN.md
+#42  ["2026-11-17 15:00"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 9b1a139 (15:10 17/11) HW04[C-FR15] 5/6: review_sv.md (SV soi bản 1 + bản 2 sau đối chiếu)
+#43  ["2026-11-17 15:02"]  Claude (không rõ model) push C rồi nhé
+      → commit kế tiếp: 9b1a139 (15:10 17/11) HW04[C-FR15] 5/6: review_sv.md (SV soi bản 1 + bản 2 sau đối chiếu)
+#44  ["2026-11-17 15:07"]  Claude (không rõ model) Mình chưa sử dụng prompt bạn gửi, mình muốn viết lại soi spec thử, bạn xem giúp 
+      → commit kế tiếp: 9b1a139 (15:10 17/11) HW04[C-FR15] 5/6: review_sv.md (SV soi bản 1 + bản 2 sau đối chiếu)
+#45  ["2026-11-17 15:10"]  Claude Opus 5.5  HW04 – lệnh #18, C_FR15 BƯỚC 5.
+      → commit kế tiếp: 9b1a139 (15:10 17/11) HW04[C-FR15] 5/6: review_sv.md (SV soi bản 1 + bản 2 sau đối chiếu)
+#46  ["2026-11-17 15:16"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 2c54f76 (15:17 17/11) HW04[C-FR15] 6/6 – lượt chính thức
+#47  ["2026-11-17 15:16#2"]  Claude Opus 5.5  HW04 – lệnh #19.
+      → commit kế tiếp: 2c54f76 (15:17 17/11) HW04[C-FR15] 6/6 – lượt chính thức
+#48  ["2026-11-17 15:20"]  Claude (không rõ model) Bạn nói rõ hơn tiêu chí G->BUG này được không? Là mình chọn A hoặc B hay là sao 
+      → commit kế tiếp: 2667147 (15:34 17/11) HW04: khung 18 bug (Cách 2)
+#49  ["2026-11-17 15:29"]  Claude (không rõ model) Mình sẽ chọn G->BUG: Cách 2. Chắc là vì bám sát dữ liệu đầu vào `_groups` từ bộ 
+      → commit kế tiếp: 2667147 (15:34 17/11) HW04: khung 18 bug (Cách 2)
+#50  ["2026-11-17 15:29#2"]  Claude Opus 5.5  HW04 – lệnh #20. G→BUG = Cách 2 (mỗi G = 1 bug; SV: bám _groups, bước tái hiện g
+      → commit kế tiếp: 2667147 (15:34 17/11) HW04: khung 18 bug (Cách 2)
+#51  ["2026-11-17 15:36"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: 2775914 (20:20 17/11) HW04: SV viết 18 bug
+#52  ["2026-11-17 19:45"]  Claude (không rõ model) <task-notification>
+      → commit kế tiếp: 2775914 (20:20 17/11) HW04: SV viết 18 bug
+#53  ["2026-11-17 19:45#2"]  Claude Opus 5.5  <task-notification>
+      → commit kế tiếp: 2775914 (20:20 17/11) HW04: SV viết 18 bug
+#54  ["2026-11-17 20:21"]  Claude (không rõ model) Oke viết xong rồi, push luôn rồi. Bạn xem giúp mình nhé
+      → commit kế tiếp: 8f47846 (20:38 17/11) HW04: SV sửa bug theo kiểm dữ kiện
+#55  ["2026-11-17 20:24"]  Claude (không rõ model) chắc chắn là không rồi, mình ngồi 5 tiếng để viết mấy cái bugs này mà
+      → commit kế tiếp: 8f47846 (20:38 17/11) HW04: SV sửa bug theo kiểm dữ kiện
+#56  ["2026-11-17 20:39"]  Claude (không rõ model) Push rồi nhé, mình nghĩ là mình cần bạn xem thêm  1 lần nữa trước khi mình sử dụ
+      → commit kế tiếp: 1881c16 (20:53 17/11) HW04: SV sửa bug theo kiểm dữ kiện
+#57  ["2026-11-17 20:54"]  Claude (không rõ model) Mới sửa và thêm vào README rồi nhé. Xem đã oke chưa để mình dùng prompt trên nhé
+      → commit kế tiếp: d6cd474 (20:55 17/11) HW04: sửa Yêu cầu do AI chép nhầm C3 (BUG-101, 103)
+#58  ["2026-11-17 20:55"]  Claude Opus 5.5  HW04 – lệnh #21, bug 7c + issue.
+      → commit kế tiếp: d6cd474 (20:55 17/11) HW04: sửa Yêu cầu do AI chép nhầm C3 (BUG-101, 103)
+#59  ["2026-11-17 21:07"]  Claude (không rõ model) Báo cáo cho phiên thảo luận
+      → commit kế tiếp: b264556 (21:17 17/11) HW04: SV sửa bug theo Claude Code tái hiện
+#60  ["2026-11-17 21:18"]  Claude Opus 5.5  HW04 – lệnh #22. SV đã sửa bước tái hiện (BUG-87, 89–94, 95, 96, 97, 101, 103).
+      → commit kế tiếp: 78873e0 (21:22 17/11) HW04: tạo 18 issue [HW04] (#298–#315), điền số issue, ảnh trang Issues, README số bug
+#61  ["2026-11-17 21:31"]  Claude (không rõ model) Đã sửa, đã push.
+      → commit kế tiếp: ac813b0 (21:36 17/11) HW04: report_plan + dàn ý report (khối REPORT sinh bằng tools/hw04_report.py) + prompt log 28 lượt
+#62  ["2026-11-17 21:32"]  Claude Opus 5.5  HW04 – lệnh #23. SV đang quay video: KHÔNG restart SUT, không chạy test, không x
+      → commit kế tiếp: ac813b0 (21:36 17/11) HW04: report_plan + dàn ý report (khối REPORT sinh bằng tools/hw04_report.py) + prompt log 28 lượt
+#63  ["2026-11-17 21:33"]  Claude (không rõ model) tôi đã sử dụng prompt của bạn rồi. Nhưng tại sao bạn không xuất transcript được 
+      → commit kế tiếp: ac813b0 (21:36 17/11) HW04: report_plan + dàn ý report (khối REPORT sinh bằng tools/hw04_report.py) + prompt log 28 lượt
+#64  ["2026-11-17 21:40"]  Claude (không rõ model) thử xuất lại thử xem?
+      → commit kế tiếp: 86d4d78 (22:12 17/11) tools: đọc hội thoại claude.ai từ bản xuất dữ liệu (claude-ai_*.json); HW04 prompt log 65 lượt
+#65  ["2026-11-17 22:11"]  Claude Opus 5.5  HW04 – trích phiên claude.ai từ bản xuất dữ liệu: đọc d:\HK7\Testing\Exercise\HW
+      → commit kế tiếp: 86d4d78 (22:12 17/11) tools: đọc hội thoại claude.ai từ bản xuất dữ liệu (claude-ai_*.json); HW04 prompt log 65 lượt
+#66  ["2026-11-17 22:19"]  Claude Opus 5.5  HW04 – lệnh #24.
+      → commit kế tiếp: 60bec96 (22:20 17/11) HW04: report_plan ghi S1/T1–T4, khai bộ đọc claude.ai; notes ghi chú model lượt claude.ai (nguon_luot)
+#67  ["2026-11-17 22:24"]  Claude Opus 5.5  Hiện tại session này có đang chạy gì không nhỉ? Như backend gì đó chẳng hạn
+      → commit kế tiếp: eb40646 (00:20 18/11) HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tối (Firefox bị Code Integrity chặn) + log môi trường
+#68  ["2026-11-17 22:26"]  Claude Opus 5.5  Trước tiên, đưa tôi lệnh để tôi tự chạy các tiến trình đó qua Terminal. Sau đó g
+      → commit kế tiếp: eb40646 (00:20 18/11) HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tối (Firefox bị Code Integrity chặn) + log môi trường
+#69  ["2026-11-18 00:19"]  Claude Opus 5.5  HW04 – lệnh #25. Lưu file log SV gửi thành HW04/env/firefox_blocked_20261117.txt
+      → commit kế tiếp: eb40646 (00:20 18/11) HW04[A-FR01]: ghi 3 lượt không chính thức 17/11 tối (Firefox bị Code Integrity chặn) + log môi trường
+#70  ["2026-11-18 00:22"]  Claude Opus 5.5  HW04 – lệnh #26.
+      → commit kế tiếp: 2d3660b (00:22 18/11) HW04: link video Task 2 (README, report §7, skills/VideoLinks.md); RUN.md A ghi 3 lượt quay video
+#71  ["2026-11-18 00:24"]  Claude Opus 5.5  HW04 – huỷ demo: KHÔNG chạy bước 2. Chưa commit gì trên demo-video → git switch 
+      → commit kế tiếp: 5bb31d1 (00:54 18/11) HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)
+#72  ["2026-11-18 00:37"]  Claude Opus 5.5  Demo skill playwright-ddt-automation cho video (HW04, CS423). Đọc HW04/CLAUDE.md
+      → commit kế tiếp: 5bb31d1 (00:54 18/11) HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)
+#73  ["2026-11-18 00:38"]  Claude Opus 5.5  tiếp
+      → commit kế tiếp: 5bb31d1 (00:54 18/11) HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)
+#74  ["2026-11-18 00:50"]  Claude Opus 5.5  Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm git s
+      → commit kế tiếp: 5bb31d1 (00:54 18/11) HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)
+#75  ["2026-11-18 00:52"]  Claude Opus 5.5  HW04 – lệnh #27: skill playwright-ddt-automation v2 (trên main, sau khi demo-vid
+      → commit kế tiếp: 5bb31d1 (00:54 18/11) HW04: skill playwright-ddt-automation v2 (bài học review A/B/C)
+#76  ["2026-11-18 01:02"]  Claude Opus 5.5  Demo skill playwright-ddt-automation cho video (HW04, CS423). Đọc HW04/CLAUDE.md
+      → commit kế tiếp: 99080b2 (01:26 18/11) HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch
+#77  ["2026-11-18 01:04"]  Claude Opus 5.5  tiếp
+      → commit kế tiếp: 99080b2 (01:26 18/11) HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch
+#78  ["2026-11-18 01:12"]  Claude Opus 5.5  Dừng demo. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm git s
+      → commit kế tiếp: 99080b2 (01:26 18/11) HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch
+#79  ["2026-11-18 01:13"]  Claude Opus 5.5  HW04 – lệnh #28: skill playwright-ddt-automation v2.1 – phải chạy E2E sạch trước
+      → commit kế tiếp: 99080b2 (01:26 18/11) HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch
+#80  ["2026-11-18 01:34"]  Claude Opus 5.5  Trước khi dựng: kiểm git branch hiện tại là main và git status sạch; thêm HW04/t
+      → commit kế tiếp: 6ef3a84 (02:03 18/11) HW04: prompt log trích lại (on_stop)
+#81  ["2026-11-18 01:36"]  Claude Opus 5.5  tiếp
+      → commit kế tiếp: 6ef3a84 (02:03 18/11) HW04: prompt log trích lại (on_stop)
+#82  ["2026-11-18 01:43"]  Claude Opus 5.5  tiếp
+      → commit kế tiếp: 6ef3a84 (02:03 18/11) HW04: prompt log trích lại (on_stop)
+#83  ["2026-11-18 01:45"]  Claude Opus 5.5  tiếp
+      → commit kế tiếp: 6ef3a84 (02:03 18/11) HW04: prompt log trích lại (on_stop)
+#84  ["2026-11-18 01:48"]  Claude Opus 5.5  quay xong rồi, xoá _demo giúp tgooi
+      → commit kế tiếp: 6ef3a84 (02:03 18/11) HW04: prompt log trích lại (on_stop)
+#85  ["2026-11-18 02:02"]  Claude Opus 5.5  HW04 – lệnh #29.
+      → commit kế tiếp: 6ef3a84 (02:03 18/11) HW04: prompt log trích lại (on_stop)
+#86  ["2026-11-18 08:51"]  Claude Opus 5.5  HW04 – lệnh #30 (gấp, hạn 11:00).
+      → commit kế tiếp: 0dc0b14 (08:55 18/11) HW04: audit §9 giữ verdict SV + commit mới, AI-02 chép §9 + tỉ lệ, AI-03, AI-05; sửa dòng 105, TC-08 (BUG-93)
+#87  ["2026-11-18 09:28"]  Claude Opus 5.5  HW04 – lệnh #31 (chốt nộp, hạn 11:00).
+      → commit kế tiếp: (chưa có)
