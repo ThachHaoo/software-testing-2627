@@ -1525,3 +1525,41 @@ A	HW04/23120255_HW04_Report.pdf
 A	HW04/ai-forms/AI-02_Audit_Report_23120255.pdf
 A	HW04/ai-forms/AI-03_Disclosure_Form_23120255.pdf
 A	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+
+f9a7d67 | 08:56 18/11/2026 | TonKnight | HW04: commit log text
+A	HW04/appendix/commit_log.txt
+
+87bd6cb | 08:57 18/11/2026 | TonKnight | HW04: r├á so├ít tr╞░ß╗¢c khi nß╗Öp (submission_check.md, kh├┤ng nß╗Öp)
+M	HW04/.gitattributes
+A	HW04/submission_check.md
+
+505b25d | 09:06 18/11/2026 | TonKnight | HW04: SV ho├án thiß╗çn Report
+M	HW04/23120255_HW04_Report.md
+
+9d961b0 | 09:23 18/11/2026 | TonKnight | HW04: Ho├án thiß╗çn c├íc AI form
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.md
+A	HW04/ai-forms/signature.png
+
+574ec01 | 09:26 18/11/2026 | TonKnight | HW04: Ho├án thiß╗çn prompt_log_notes.toml
+M	HW04/appendix/prompt_log_notes.toml
+
+a396871 | 09:34 18/11/2026 | TonKnight | HW04: prompt log theo notes SV (87 l╞░ß╗út), #n v├áo AI-02, chß╗» k├╜ thu nhß╗Å, PDF report + AI-02/03/05 ─æ├ú k├╜
+M	HW04/23120255_HW04_Report.md
+M	HW04/23120255_HW04_Report.pdf
+M	HW04/A_FR01/review_sv.md
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.md
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+M	HW04/ai-forms/signature.png
+M	HW04/appendix/A_prompt_log.md
+
+7f2fc5c | 09:34 18/11/2026 | TonKnight | HW04: Z2 ΓÇô l╞░ß╗út thß╗¡ export-ignore (nß╗Öp 9 l╞░ß╗út ch├¡nh thß╗⌐c + firefox_20261117T140840 TC-60)
+M	HW04/.gitattributes
+
+a050e68 | 09:34 18/11/2026 | TonKnight | HW04: Z2 ΓÇô export-ignore cß║ú th╞░ mß╗Ñc l╞░ß╗út thß╗¡ (kh├┤ng ─æß╗â th╞░ mß╗Ñc rß╗ùng trong zip)
+M	HW04/.gitattributes
