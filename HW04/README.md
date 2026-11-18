@@ -1,4 +1,4 @@
-# HW04 – Automation Testing on EShop (bản nháp)
+# HW04 – Automation Testing on EShop
 
 Lê Tấn Hiệp – 23120255 – Software Testing 23_3. Repo: https://github.com/ThachHaoo/software-testing-2627
 
