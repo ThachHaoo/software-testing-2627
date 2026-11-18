@@ -22,11 +22,11 @@
 
 ### 1. Công cụ AI đã dùng:
 
-- **Claude Opus 5.5** (Claude Code) – 51 lượt
+- **Claude Opus 5.5** (Claude Code) – 52 lượt
 - **Claude (không rõ model)** – 72 lượt trong log:
   - 71 lượt phiên thảo luận claude.ai: bản xuất dữ liệu claude.ai (`conversations.json`) không ghi model; em xác nhận dùng **Claude Opus 5.5** (ghi ở `appendix/prompt_log_notes.toml`, trường `ghi_chu_model`, áp cho các lượt `nguon_luot = "claude.ai"`). Log giữ nguyên nhãn "không rõ model".
   - #52 (19:45 17/11/2026, Claude Code): lượt `<task-notification>` do Claude Code tự sinh khi một tiến trình nền kết thúc (không phải em gõ); transcript không ghi model cho lượt này (AI chép từ log).
-- Tổng 123 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 09:40 18/11/2026; phiên claude.ai theo bản xuất dữ liệu có lượt cuối 09:29 18/11/2026; #123 là lượt chốt nộp, output chép tới lúc commit). Danh sách mã `#n` từng model ở dòng đó.
+- Tổng 124 lượt theo dòng "Tổng" của `appendix/A_prompt_log.md` (bản trích 09:40 18/11/2026; phiên claude.ai theo bản xuất dữ liệu có lượt cuối 09:29 18/11/2026; #124 là lượt chốt nộp, output chép tới lúc commit). Danh sách mã `#n` từng model ở dòng đó.
 - Kênh: Claude Code (chạy lệnh, sửa file, commit trong repo) và claude.ai (phiên thảo luận "Homework Testing Software": lập kế hoạch, soạn lệnh, đối chiếu code khi em review).
 - Cách tạo prompt log: hook Stop của Claude Code (`tools/hooks/on_stop.py`) chép transcript vào `.transcripts/` (không nộp) và chạy `tools/extract_prompt_log.py`: chép nguyên văn prompt + output, lọc khối hệ thống, giờ Asia/Saigon, ghi model từng lượt; phiên claude.ai đọc từ bản xuất dữ liệu (`claude-ai_session_HW04_p1.json`). Mốc/bỏ lượt theo `tools/hw.toml`; Section / Mục đích / Xử lý do em ghi trong `prompt_log_notes.toml`. Không sửa tay log.
 
@@ -78,7 +78,7 @@ Theo danh mục artifact của AI-02 (mục 3.3): H1 Harness HW04: `HW04/CLAUDE.
 
 ## 3. Cam đoan Trung thực
 
-*Bằng việc ký tên dưới đây, em cam đoan thông tin khai báo ở trên là chính xác và đầy đủ.* [...]
+*Bằng việc ký tên dưới đây, em cam đoan thông tin khai báo ở trên là chính xác và đầy đủ.*
 
 ## Chữ ký
 

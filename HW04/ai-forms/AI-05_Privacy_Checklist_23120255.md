@@ -5,7 +5,7 @@
 # Bảng Kiểm Quyền Riêng tư & Sử dụng AI Có Trách nhiệm
 
 **Bài tập:** HW04-AI – Automation Testing on EShop
-**Công cụ AI:** Claude (không rõ model) 72 lượt; Claude Opus 5.5 51 lượt (tổng 123 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, khớp AI-03 mục 1; lượt claude.ai: Claude Opus 5.5 theo em xác nhận)
+**Công cụ AI:** Claude (không rõ model) 72 lượt; Claude Opus 5.5 52 lượt (tổng 124 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, khớp AI-03 mục 1; lượt claude.ai: Claude Opus 5.5 theo em xác nhận)
 
 *Chỉ tick mục có bằng chứng trong repo (ghi ở cuối dòng). Mục cam kết cá nhân để trống "(em tự xác nhận)".*
 
@@ -22,7 +22,7 @@
   - **Minh bạch:** log Code Integrity em xuất (`env/firefox_blocked_20261117.txt`) có đường dẫn chứa tên người dùng Windows; tài khoản thử nghiệm dùng tài khoản seed của SUT (`admin@eshop.com`, `test@eshop.com`) và email sinh theo `{ts}`.
 - [x] Không paste nguyên si tài liệu có bản quyền lên AI. 
 - [x] Không paste code công ty / code open-source giới hạn license. 
-- [x] Đã ghi mọi prompt + phản hồi AI vào prompt log có timestamp. — *`appendix/A_prompt_log.md` (123 lượt, trích tự động, giờ Asia/Saigon; phiên claude.ai theo bản xuất dữ liệu 18/11/2026)*
+- [x] Đã ghi mọi prompt + phản hồi AI vào prompt log có timestamp. — *`appendix/A_prompt_log.md` (124 lượt, trích tự động, giờ Asia/Saigon; phiên claude.ai theo bản xuất dữ liệu 18/11/2026)*
 
 ## 3. Trước khi nộp bài
 

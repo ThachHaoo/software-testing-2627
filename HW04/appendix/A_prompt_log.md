@@ -7,7 +7,7 @@
 
 ## #1 | 18:51 12/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -69,13 +69,13 @@ Dự kiến thư mục `HW04/ai-forms/` gồm `AI-02_Audit_Report_23120255.md/.p
 Trả lời xong mình sẽ lập kế hoạch nộp và dàn ý, rồi viết lệnh ngắn cho Claude Code bắt đầu dựng project Playwright.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt deadline, chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #2 | 19:44 16/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -171,12 +171,12 @@ Báo cáo ≤ 12 dòng: phiên bản Playwright, "Run by" hiện ở đâu trong
 Sau khi em chốt S1–B1, mình sẽ đưa lệnh #2: dựng skill rồi áp lên feature A.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt deadline, chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #3 | 22:20 16/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước.
+**Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -228,13 +228,13 @@ Report đúng. Giờ xoá smoke, sinh log HW04, commit.
 ```
 *File AI ghi/gửi trong lượt này:* `hw.toml`, `CLAUDE.md`, `package.json`, `playwright.config.ts`, `global-setup.ts`, `hw03-runtime-state.md`
 
-**Xử lý:** SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
+**Xử lý:** SV chốt deadline, chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #4 | 23:01 16/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước.
+**Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -297,12 +297,12 @@ Báo cáo ≤ 15 dòng: kết quả trình duyệt, cấu trúc skill, bảng 15
 Gửi mình báo cáo, mình sẽ cùng em duyệt 15 TC của A, rồi chạy tiếp bước 2–3. Mỗi bước là một prompt riêng, để prompt log thể hiện được yêu cầu "sinh script từng bước" của đề.
 ````
 
-**Xử lý:** SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
+**Xử lý:** SV chốt deadline, chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #5 | 23:02 16/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** Khởi tạo môi trường Playwright 3 trình duyệt (Chrome/Edge/Firefox) và dựng Agent Skill quy trình 6 bước.
+**Mục đích:** Phân tích đề bài HW04, khởi tạo môi trường Playwright 3 trình duyệt và dựng Agent Skill quy trình 6 bước.
 
 **Prompt:**
 ```
@@ -363,13 +363,13 @@ Bước 1 A_FR01: liệt kê ứng viên.
 ```
 *File AI ghi/gửi trong lượt này:* `select_tc.py`, `check_data.py`, `freeze.py`, `merge_reports.py`, `ddt-fixture.template.ts`, `spec.template.ts`, `selection.example.json`, `SKILL.md`, `selection.json`
 
-**Xử lý:** SV chốt chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
+**Xử lý:** SV chốt deadline, chọn 3 trình duyệt thay thế (W1=a), cấu hình reporter kèm 'Run by: 23120255' và kiểm tra cài đặt.
 
 ---
 
 ## #6 | 23:16 16/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Sinh dữ liệu, fixture/POM, spec data-driven và chạy kiểm thử chính thức 3 trình duyệt cho A_FR01.
 
 **Prompt:**
 ```
@@ -421,7 +421,7 @@ Báo cáo ≤ 12 dòng: bảng 15 TC cuối (mã, loại, kỹ thuật, HW02 sta
 Bước 3 (sinh spec) sẽ là một prompt riêng sau khi xem fixture.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự soi spec (review_sv.md), tách 3 commit sửa lỗi serial/API/regex, tắt trace (Z1=d) và tự chạy 3 lượt chính thức.
 
 ---
 
@@ -1225,7 +1225,7 @@ Khôi phục đủ (diff rỗng). Sửa `waitLoaded` của trang chi tiết, pro
 
 ## #21 | 01:34 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Triển khai bộ kịch bản data-driven, thực thi kiểm thử và tổng hợp báo cáo cho B_FR07.
 
 **Prompt:**
 ```
@@ -1268,7 +1268,7 @@ Sau đó em chạy lượt thử 1 của B trên 3 trình duyệt, rồi tự so
 Lỗi giống A (serial, catch rỗng) đã được dặn trước nên chắc sẽ không lặp lại. Vì vậy những gì em tìm được ở B sẽ là lỗi mới, có giá trị hơn cho phần review.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự review spec, chạy cô lập --repeat-each=3 xác minh lỗi hạ tầng Firefox (TC-60) và hoàn tất 3 lượt chính thức.
 
 ---
 
@@ -2046,7 +2046,7 @@ Bước 2 C: đọc UI admin thật.
 
 ## #37 | 14:22 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Xây dựng dữ liệu, spec data-driven và chạy kiểm thử 3 trình duyệt cho C_FR15.
 
 **Prompt:**
 ```
@@ -2092,7 +2092,7 @@ Sau đó em chạy lượt thử 1 của C trên 3 trình duyệt và tự soi s
 - Bảng hiển thị giá "30000000 ₫" được đọc thành số ra sao.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV chốt giả định kiểm thử ngoài expected, tự soi 2 vòng trong review_sv.md, yêu cầu sửa locator/validation và chạy chính thức.
 
 ---
 
@@ -2627,7 +2627,7 @@ Lệnh #19 xong: C chốt lượt chính thức (bước 6), có bảng dữ ki�
 
 ## #48 | 15:20 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -2687,7 +2687,7 @@ Claude Code lại hỏi, nhưng em đã chốt **B1=b: tạo issue mới cho m�
 **Nhắc em:** C còn 52 ảnh em chưa xem (B còn 51, A còn 45) trước khi push lần tới.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
@@ -3215,7 +3215,7 @@ Thư mục chưa có, chưa issue nào được tạo. Chạy lại.
 
 ## #61 | 21:31 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Gom nhóm lỗi (Cách 2), kiểm tái hiện thực tế 18 bug và đăng lên GitHub Issues.
 
 **Prompt:**
 ```
@@ -3276,7 +3276,7 @@ Commit. Báo cáo ≤ 10 dòng.
 Em quay video Task 2 theo bảng thời gian ở tin trước. Đoạn kể lỗi đã sửa: mở report **lượt thử 1 của A** (`chrome_20261117T00…`, 1 Fail + 14 did not run), rồi diff commit `6fc76b5` bỏ `mode: 'serial'`. Đây là phần đề bắt buộc phải có.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự viết toàn bộ nội dung 18 bug (BUG-86..103), sửa lại 12 bug sau khi tái hiện thực tế và tự rà soát ảnh chụp.
 
 ---
 
@@ -3612,7 +3612,7 @@ Prompt log xong, không có cảnh báo khoá. Giờ cập nhật `report_plan.m
 
 ## #71 | 22:23 17/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Lập dàn ý báo cáo HW04 và xây dựng script đọc dữ liệu hội thoại claude.ai.
 
 **Prompt:**
 ```
@@ -3635,7 +3635,7 @@ oke rồi nhỉ, làm video tiếp nhé
 Giờ em quay video Task 2 theo kịch bản ở trên, xong gửi mình link.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV đối chiếu số lượt thống kê, xác nhận model phiên thảo luận trên claude.ai và cập nhật kế hoạch report_plan.md.
 
 ---
 
@@ -5366,7 +5366,7 @@ Bảng audit trong report thêm hàng cho commit vừa tạo; commit lần cuố
 
 ## #109 | 02:09 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5447,13 +5447,13 @@ Video, skill và cả 3 feature đều đã xong. Em tự chấm trung thực t�
 Em có thể viết **Critique trước rồi gửi mình**. Mình chỉ kiểm dữ kiện, đếm từ và xem đã đủ 3 câu của đề chưa, không sửa câu chữ. Trong lúc đó Claude Code chưa có việc gì cần làm.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #110 | 02:21 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5485,13 +5485,13 @@ Mình đã đọc §3.6, §4.6, §5.6 và §8 trên repo (`00697ab`). Phần l�
 Sửa xong mấy điểm này thì sang **verdict Audit** (33 artifact, dùng bảng dữ kiện mình đưa ở tin trước) và **điểm tự chấm**. Xong 2 phần đó là hết phần 🔒. Phần còn lại là form và đóng gói, chủ yếu Claude Code làm.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #111 | 02:29 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ````
@@ -5537,13 +5537,13 @@ Các ý còn lại khớp code và commit, giữ nguyên:
 Sửa xong em làm tương tự cho §4.6 (ghi chú P1 là cải tiến do prompt thiếu, không phải AI làm sai verdict), rồi chuyển sang verdict Audit.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #112 | 02:30 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ````
@@ -5586,13 +5586,13 @@ Các ý khác đều khớp code ở bản AI sinh (`7e75536`):
 Xong §4.6 là sang verdict Audit.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #113 | 02:30 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5609,13 +5609,13 @@ Xong §4.6 là sang verdict Audit.
 Giờ em chuyển sang **verdict + lý do cho 33 artifact trong Audit** (bảng dữ kiện mình đã đưa), rồi **điểm tự chấm**. Xong gửi mình kiểm chỗ mâu thuẫn giữa verdict và Critique.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #114 | 02:34 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5650,13 +5650,13 @@ Giờ viết Audit mục 9 đúng không nhỉ? Theo bạn thời gian còn lạ
 Nếu chọn A mà buồn ngủ quá, em viết lý do Audit thật ngắn (ví dụ "Có commit sửa 5/6a–d vì serial/catch rỗng/không chờ POST/regex → INCOMPLETE"). Như vậy vẫn đủ ý, sáng mai sửa lại cũng được.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #115 | 02:39 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5676,13 +5676,13 @@ Ok, em ngủ đi. Mình đã cập nhật `claude/HW04_handoff.md` trong Project
 4. **Nộp bản an toàn trước 09:30**, còn thời gian thì nộp bản hoàn thiện thay thế.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #116 | 08:41 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5723,13 +5723,13 @@ HW04 – lệnh #30 (gấp, hạn 11:00).
 Có báo cáo #30 thì gửi mình. Kế tiếp là ký, zip, **nộp bản an toàn trước 09:30–09:45**.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #117 | 08:48 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5765,12 +5765,12 @@ HW04 – lệnh #30 (gấp, hạn 11:00).
 Mốc giờ: **09:20** có báo cáo #30 → em ký PDF, tick AI-05 → **09:40** zip và nộp bản an toàn.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #118 | 08:51 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** Đồng bộ số liệu kiểm toán AI-02, AI-03, AI-05 và chỉnh sửa các chi tiết sót cuối cùng.
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5832,13 +5832,13 @@ Rà soát xong. Ghi kết quả vào file rồi commit.
 ```
 *File AI ghi/gửi trong lượt này:* `forms_new.py`
 
-**Xử lý:** SV giữ nguyên các verdict tự chấm trong AI-02, rà soát lại bug/tỉ lệ và chốt các biểu mẫu nộp bài.
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #119 | 08:58 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5909,13 +5909,13 @@ HW04 – lệnh #31 (chốt nộp).
 **Mốc giờ:** khoảng 09:30 chạy #31, khoảng **09:45 nộp bản an toàn** lên Moodle. Sau đó, nếu còn thời gian trước 11:00 thì sửa thêm và nộp thay. Nộp xong nhớ **push** và tag `hw04-submitted`.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #120 | 09:27 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5946,12 +5946,12 @@ git push; git tag hw04-submitted <hash commit tạo zip>; git push origin hw04-s
 Gửi mình báo cáo #31, mình kiểm lần cuối trong lúc em upload.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #121 | 09:28 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -5987,13 +5987,13 @@ Zip nộp được: `..\23120255_HW04_AI_Automation_093.zip` = **16.798.843 byte
 - sha256: `214805a4b62064c1f0cc63887ca6362dfe9e17c6523201ab2be052ecb59423f1`
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #122 | 09:29 18/11/2026 | Claude (không rõ model) | [...]
 *Ghi chú model:* Các model trên Claude.ai này mình đều sử dụng Opus 5.5 hết. (bản xuất dữ liệu claude.ai không ghi model; SV xác nhận)
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -6018,12 +6018,12 @@ Lần trước em yêu cầu lúc khoảng 21:47 và có file trước 22:14, t�
 Để các lượt mới khỏi lẻ `[...]`, khoá khoảng cuối trong notes nên mở tới `2026-11-18 11:00`, mục đích kiểu "hoàn thiện report, form, đóng gói". Em tự ghi câu đó.
 ````
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
 ## #123 | 09:35 18/11/2026 | Claude Opus 5.5 | [...]
-**Mục đích:** [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
 
 **Prompt:**
 ```
@@ -6033,10 +6033,48 @@ HW04 – cập nhật transcript claude.ai: đọc d:\HK7\Testing\Exercise\HW\co
 **Output:**
 ```
 Đang cập nhật số lượt + #n trong form theo log 123 lượt.
+
+Đã thay transcript claude.ai bằng bản xuất mới, trích lại prompt log, cập nhật form và đóng zip mới. Zip 16.826.770 byte (dưới 20.000.000), 532 file, đủ 10 thư mục report.
+
+### Báo cáo cho phiên thảo luận
+- **Transcript:** lấy hội thoại `419e0cdc…` (142 tin nhắn, tin cuối 09:29 18/11) ghi đè `.transcripts/claude-ai_session_HW04_p1.json`.
+- **Prompt log:** **123 lượt** (Claude Opus 5.5: 51; không rõ model: 72 = 71 lượt claude.ai + #52). Lượt cuối **#123 | 09:35 18/11/2026 | Claude Opus 5.5** (lượt lệnh này). Không có cảnh báo khoá không khớp.
+- **Số thứ tự lượt bị dịch** vì lượt claude.ai chèn vào giữa:
+  - Lệnh #31 trước là #87, nay là **#121**.
+  - Lượt #79 trong AI-03 mục 3 (01:13 18/11) nay là **#98**; em chỉ sửa số, giữ nguyên chữ SV.
+  - Cột #n của 33 artifact ở AI-02 đã tính lại theo số mới.
+- **SV cần ghi Mục đích/Xử lý**, chưa có notes, khoá khoảng cuối hiện tại không phủ:
+  - Lượt mới: #71 (22:23 17/11), #109–#117 (02:09–08:48 18/11), #119, #120, #121, #122, #123.
+  - Lượt cũ vẫn trống: #1, #2, #6, #21, #37, #48, #61.
+- **AI-02/03/05:** số lượt đổi 87/50/37 → 123/51/72, số lượt claude.ai 36 → 71. Đã bỏ câu "chưa có trong bản xuất" ở AI-03 và câu tương tự ở AI-05. Đã xuất lại 4 PDF, chữ ký còn nhúng trong cả 3 form.
+- Commit: `a51223c` (prompt log + form + PDF), `9962ce0` HW04: commit log text
+- **sha256 zip mới** `..\23120255_HW04_AI_Automation_093.zip`: `6dbe52cb3a98562a222bc4dbeefe6ceed568bc32af91db78b0dff1f9f2669b7e`
+- **Lưu ý:** nếu SV điền thêm notes thì phải trích log lại, commit, xuất lại commit log và đóng zip lại; sha256 sẽ đổi.
 ```
 
-**Xử lý:** [...]
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
 
 ---
 
-**Tổng:** 123 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 51 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123).
+## #124 | 09:47 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** Hoàn thiện report, form, rà soát cuối và đóng gói nộp bài.
+
+**Prompt:**
+```
+HW04 – lệnh #32 (bản cuối):
+1. AI-03 dòng ~81: xoá "[...]" thừa sau câu cam đoan. Report dòng 9: bỏ vế "`<SV viết>` = chỗ em còn phải viết" (giữ phần còn lại).
+2. on_stop.py --manual; báo số lượt còn [...] (mục tiêu 0); số lượt tổng phải khớp AI-02/03/05 (lệch thì sửa).
+3. Xuất lại PDF report + AI-03 (giữ chữ ký). Commit.
+4. Xuất commit log → commit riêng. git archive lại zip cùng tên; báo byte + sha256.
+```
+
+**Output:**
+```
+(không có output dạng văn bản)
+```
+
+**Xử lý:** SV tự điền phần đóng góp/rà soát trong AI-03, giữ verdict tự chấm trong AI-02, hoàn thiện AI-05 và chốt gói nộp bài.
+
+---
+
+**Tổng:** 124 lượt; Claude (không rõ model) 72 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64, #65, #67, #68, #69, #71, #74, #75, #76, #77, #78, #79, #80, #81, #83, #85, #89, #92, #95, #96, #99, #100, #106, #107, #109, #110, #111, #112, #113, #114, #115, #116, #117, #119, #120, #122); Claude Opus 5.5 52 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #66, #70, #72, #73, #82, #84, #86, #87, #88, #90, #91, #93, #94, #97, #98, #101, #102, #103, #104, #105, #108, #118, #121, #123, #124).

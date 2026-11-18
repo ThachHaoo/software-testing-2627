@@ -15,7 +15,7 @@
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Mã bài tập: | HW04-AI – Automation Testing on EShop |
 | Ngày làm bài: | 16/11/2026 – 18/11/2026 |
-| Công cụ AI đã dùng: | Claude (Anthropic) qua Claude Code và claude.ai — Claude (không rõ model) 72 lượt; Claude Opus 5.5 51 lượt (tổng 123 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, bản trích 08:53 18/11/2026); lượt claude.ai: Claude Opus 5.5 (em xác nhận, log ghi "không rõ model") – AI-03 mục 1 |
+| Công cụ AI đã dùng: | Claude (Anthropic) qua Claude Code và claude.ai — Claude (không rõ model) 72 lượt; Claude Opus 5.5 52 lượt (tổng 124 lượt theo dòng Tổng của `appendix/A_prompt_log.md`, bản trích 08:53 18/11/2026); lượt claude.ai: Claude Opus 5.5 (em xác nhận, log ghi "không rõ model") – AI-03 mục 1 |
 | Có sử dụng AI: | [x] Có [ ] Không |
 
 **Tuyên bố sử dụng AI (đề):** xem report chính §10 Mandatory Disclosure.
