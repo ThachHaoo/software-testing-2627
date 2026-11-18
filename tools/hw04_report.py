@@ -7,7 +7,8 @@ Khối theo feature (A_FR01, B_FR07, C_FR15):
 Khối chung:
 - bugs: bảng "(AI chép)" từ HW04/bugs/BUG-*.md (tiêu đề, severity, priority, TC, issue).
 - summary: chép khối SUMMARY của HW04/README.md.
-- audit: mỗi commit có "HW04" trong message (git log, cũ → mới) là một artifact; verdict/lý do để <SV viết>.
+- audit: mỗi commit có "HW04" trong message (git log, cũ → mới) là một artifact; GIỮ verdict/lý do đã có (theo hash);
+  commit mới của SV (message có "SV viết/sửa/chốt/hoàn thiện/duyệt" hoặc "HW04: Sửa lại") → "— (SV làm…)"; commit mới của AI → <SV viết>.
 
 Chạy: python tools/hw04_report.py
 """
@@ -75,10 +76,34 @@ def bugs_block() -> str:
     return "\n".join(rows)
 
 
+SV_MSG = re.compile(r"SV (viết|sửa|chốt|hoàn thiện|duyệt)|^HW04: Sửa lại", re.I)
+SV_DONE = "— (SV làm, không thuộc phạm vi audit AI)"
+ESC = "\\|"                                   # | trong ô bảng markdown
+
+
+def split_row(line: str) -> list[str]:
+    """Tách ô bảng markdown, bỏ qua ký tự | đã escape (backslash + |) trong ô."""
+    return [c.strip().replace(ESC, "|") for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+
+
+def kept_audit() -> dict:
+    """Verdict + lý do đã có trong bảng §9 (giữ khi sinh lại), theo hash commit."""
+    t = REPORT.read_text(encoding="utf-8")
+    b, e = "<!-- REPORT:audit:BEGIN -->", "<!-- REPORT:audit:END -->"
+    out = {}
+    if b in t and e in t:
+        for line in t[t.index(b):t.index(e)].splitlines():
+            c = split_row(line) if line.startswith("|") else []
+            if len(c) >= 7 and re.fullmatch(r"`[0-9a-f]{7,}`", c[2]):
+                out[c[2].strip("`")] = (c[-2], c[-1])
+    return out
+
+
 def audit_block() -> str:
     log = subprocess.run(["git", "log", "--reverse", "--date=format:%Y-%m-%d %H:%M", "--format=%h%x09%ad%x09%s"],
                          cwd=ROOT, capture_output=True, text=True, encoding="utf-8", check=True).stdout.splitlines()
     rows = ["| # | Thời điểm | Commit | Artifact (message) | Sửa `.spec.ts` | Verdict | Lý do |", "|---|---|---|---|---|---|---|"]
+    keep = kept_audit()
     i = 0
     for line in log:
         h, ad, s = line.split("\t", 2)
@@ -88,7 +113,8 @@ def audit_block() -> str:
         files = subprocess.run(["git", "show", "--name-only", "--format=", h], cwd=ROOT, capture_output=True, text=True,
                                encoding="utf-8", check=True).stdout.split()
         spec = "Có" if any(re.match(r"HW04/tests/[^/]+\.spec\.ts$", f) for f in files) else ""
-        rows.append(f"| {i} | {ad} | `{h}` | {s.replace('|', '\\|')} | {spec} | `<SV viết>` | `<SV viết>` |")
+        v, why = keep.get(h) or ((SV_DONE, "—") if SV_MSG.search(s) else ("`<SV viết>`", "`<SV viết>`"))
+        rows.append(f"| {i} | {ad} | `{h}` | {s.replace('|', ESC)} | {spec} | {v.replace('|', ESC)} | {why.replace('|', ESC)} |")
     return "\n".join(rows)
 
 

@@ -3727,7 +3727,11 @@ Quay xong. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm gi
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Đã về `main`, xoá nhánh `demo-video` (trỏ `2d3660b`, không có commit riêng) và xoá thư mục `HW04/demo/` (kể cả report demo).
+
+`git status` chưa hẳn sạch nhưng giống hệt lúc bắt đầu phiên: còn `HW04/appendix/A_prompt_log.md` đã sửa (hook prompt log tự ghi), cùng 6 thư mục `HW04/reports/*_20261117T*` và `context/HW04_assignment.pdf` chưa commit, đều có từ trước.
+
+`HW04/data`, `HW04/tests` và `HW04/reports` không khác HEAD (`git diff` rỗng). Thư mục `HW04/reports` vẫn đủ 38 mục, 6 report chưa commit vẫn còn nguyên.
 ```
 
 **Xử lý:** [...]
@@ -3861,7 +3865,8 @@ Dừng demo. git switch main; git branch -D demo-video; xoá HW04/demo/. Kiểm 
 
 **Output:**
 ```
-(không có output dạng văn bản)
+Demo dừng: đã xoá `HW04/demo/`, xoá nhánh `demo-video`, đang ở `main`. Junction gỡ trước khi xoá nên `HW04/tests/node_modules` còn nguyên.
+`git status` chưa sạch hẳn, nhưng chỉ còn đúng các thay đổi đã có trước demo: `A_prompt_log.md` do hook tự ghi, 6 thư mục `HW04/reports/*_20261117T*` và `context/HW04_assignment.pdf`. Mình không đụng tới các file này.
 ```
 
 **Xử lý:** [...]
@@ -3885,7 +3890,7 @@ Báo cáo ≤ 10 dòng: lỗi đã gặp khi chạy thử + cách sửa, kết q
 ```
 
 **Output:**
-```
+````
 Đang viết script `demo.py` dựng khung chế độ demo (config, fixture, spec, thư mục data/report).
 
 Chạy thử lần 1 ra: 01 và 63 Blocked (lẽ ra 01 Fail, 63 Pass). Đang xem lý do Blocked.
@@ -3895,7 +3900,39 @@ Chạy thử lần 1 ra: 01 và 63 Blocked (lẽ ra 01 Fail, 63 Pass). Đang xem
 Phát hiện thêm: config chính thức nạp luôn spec demo (45 test thừa). Sửa: file spec demo đặt đuôi `.demo.ts`, config demo chỉ match đuôi đó. Chạy lại toàn bộ.
 
 Chạy lại E2E lần 3 (spec demo đuôi `.demo.ts`).
+
+Chạy thử E2E ở chế độ demo đã sạch: 4 TC × 3 trình duyệt chạy hết, verdict khớp HW02. Skill v2.1 đã commit trên main (`99080b2`); nhánh `skill-dryrun`, thư mục `_demo` và report thử đã xoá.
+
+### Báo cáo cho phiên thảo luận
+- **Lỗi 1 (template):** lần chạy 1, TC-01 và TC-63 bị Blocked "chờ POST quá 10000 ms". Template chờ riêng request, nhưng form hợp lệ HTML5 vẫn có thể không gửi POST vì ứng dụng tự kiểm phía client rồi hiện lỗi. Sửa: `until()` nhận điều kiện async; spec chờ một trong các nhánh (có request / URL đổi / thông báo hiện / hộp thoại mới), có request thì mới chờ body về.
+- **Lỗi 2 (chế độ demo):** config chính thức nạp luôn spec demo (`--list` ra 4 file, thừa 45 test). Sửa: spec demo đặt đuôi `*.demo.ts`, config demo chỉ match đuôi này. Sau sửa: config chính thức 45/45/45, demo 12.
+- **Freeze:** từ chối `--out` nằm trong testDir; file mã đổi đuôi `*.ts.txt`. Fixture tìm gốc repo bằng cách đi lên tới `tools/restart_backend.ps1`; data đọc qua `DDT_DATA_DIR`. Đã ghi cả hai luật vào SKILL.md.
+- **Kết quả 4×3** (lượt thử lần 3, report ~0,8 MB):
+
+  | TC | HW02 | chrome / edge / firefox |
+  |---|---|---|
+  | 01 | Fail | Fail |
+  | 202 | Fail | Fail |
+  | 05 | Pass | Pass |
+  | 63 | Pass | Pass |
+
+  `merge_reports` ra `results.md` và `bug_groups.md` (2 nhóm). Không gặp `0xC0000409` hay `spawn UNKNOWN`.
+- **Backend:** `resetDb` đã restart backend, nên backend chạy trong cửa sổ terminal của SV đã bị tắt, giờ backend chạy nền. Web và admin vẫn chạy.
+- Commit: `99080b2` HW04: skill v2.1 – freeze ngoài testDir, chế độ demo, chạy thử E2E sạch
+- Cần quyết định: không.
+
+**Lệnh demo mới** (dán vào session mới):
 ```
+HW04 – DEMO skill playwright-ddt-automation (chế độ demo, SV đang quay). Không commit gì; không đụng HW04/data, spec/report/ai-outputs chính thức.
+Dựng: python .claude/skills/playwright-ddt-automation/scripts/demo.py --feature A_FR01 --min 4 (thư mục HW04/tests/_demo). Mỗi bước in 1 dòng "Bước k/6: …" + file tạo ra.
+- Bước 1: chọn 4 TC (2 Fail + 2 Pass theo HW02) → selection + data + check_data --min 4 + freeze → DỪNG, chờ SV gõ "tiếp".
+- Bước 2–3: fixture (dùng lại page object chính thức) + spec A_FR01.demo.ts từ template v2.1 → freeze → tsc + --list (--config ./_demo/playwright.config.ts).
+- Bước 4: in lệnh để SV tự chạy chrome/edge/firefox (từ HW04/tests, kèm --config ./_demo/playwright.config.ts) → DỪNG, chờ "tiếp".
+- Bước 5: in nhắc "SV review spec theo Checklist review bước 5" → DỪNG, chờ "tiếp" (không tự sửa).
+- Bước 6: merge_reports → results.md + bug_groups.md trong _demo; in tóm tắt; nhắc "bug do SV viết".
+Xong: chờ SV xác nhận đã quay xong rồi mới xoá HW04/tests/_demo.
+```
+````
 *File AI ghi/gửi trong lượt này:* `demo.py`
 
 **Xử lý:** [...]
@@ -4057,12 +4094,113 @@ quay xong rồi, xoá _demo giúp tgooi
 ```
 
 **Output:**
-```
+````
 Folder rỗng, nhưng có process đang giữ. Thử lại.
+
+Đã xoá `HW04/tests/_demo`. Lần xoá đầu báo "Device or resource busy", vì terminal đang đứng trong thư mục đó; xoá lại bằng PowerShell thì được, đã kiểm thư mục không còn. Git status giống hệt lúc bắt đầu, không có gì mới.
+
+Dòng `HW04/tests/_demo/` vẫn còn trong `.git/info/exclude`. Dòng này vô hại, không lên repo, để lại lần sau demo dùng tiếp. Muốn gỡ thì báo tôi.
+
+```
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: DEMO skill playwright-ddt-automation A_FR01 (chế độ demo, --min 4) để SV quay video Agent Skill; xong đã xoá HW04/tests/_demo.
+- File đã tạo/sửa: chỉ HW04/tests/_demo/** (đã xoá) + thêm 1 dòng "HW04/tests/_demo/" vào .git/info/exclude (không lên repo). Không đụng HW04/data, spec, report, ai-outputs chính thức.
+- Kết quả kiểm tra: check_data 4 TC, 0 lỗi; tsc Pass (exit 0); --list 12 test (4 TC × 3 trình duyệt); SV tự chạy chrome/edge/firefox → mỗi trình duyệt Pass 2 (TC-05, TC-63), Fail 2 (TC-01, TC-64), Blocked 0, khớp HW02; bug_groups 1 nhóm G1 (TC-01 + TC-64: hộp lỗi đỏ, URL vẫn /register, 0 user mới).
+- Commit: không có (theo lệnh).
+- Cần quyết định / câu hỏi: không.
+- Bất thường: lúc bắt đầu git status không sạch (A_prompt_log.md đã sửa; 6 thư mục HW04/reports/*_20261117T22xx–23xx chưa track; context/HW04_assignment.pdf chưa track). SV chọn vẫn chạy demo, các file này để nguyên, chưa xử lý.
+```
+````
+
+**Xử lý:** [...]
+
+---
+
+## #85 | 02:02 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #29.
+0. git status đang có ~183 file chưa commit. Phân loại (KHÔNG add -A): (a) report không chính thức 17/11 tối (22:56, 23:05, 23:22, 23:42–23:48) → để ngoài git, thêm đường dẫn từng thư mục vào .git/info/exclude; (b) context/HW04_assignment.pdf → để ngoài git như các bài trước; (c) HW04/appendix/A_prompt_log.md và file hợp lệ khác → commit riêng. In bảng phân loại (nhóm, số file, xử lý). File không rõ thuộc nhóm nào → DỪNG hỏi SV.
+1. Link video Agent Skill https://youtu.be/yGC0R2qd92U → README, report §7, HW04/skills/VideoLinks.md (cạnh link Task 2 https://youtu.be/TNy_QPFwyB4). Chép .claude/skills/playwright-ddt-automation → HW04/skills/ (bản v2.1 @99080b2).
+2. Report HW04/23120255_HW04_Report.md: điền mọi phần dữ kiện còn [...] (bảng kết quả 3 feature sinh bằng script, bảng 18 bug "(AI chép)" + issue #298–#315, TC không tự động hoá được, sự cố môi trường Firefox/0xC0000409, số commit .spec, skill v1→v2→v2.1 và lý do). Phần 🔒 giữ `<SV viết>`.
+3. Audit: bảng artifact lấy từ git (freeze từng bước, skill v1/v2/v2.1, harness/script, khung bug, form…), verdict/lý do `<SV viết>`; "Khai cho Audit" chép từ report_plan.md (thêm: lỗi skill khi quay demo – serial trong template v1, freeze bị nạp, chờ POST → Blocked giả, config nạp spec demo; phiên thảo luận không ra lệnh cập nhật skill sau review A).
+4. Mandatory Disclosure: nháp "📝 AI nháp – SV xác nhận".
+5. Danh sách mọi ô `<SV viết>` còn lại (file:dòng) → HW04/placeholders_left.md. Commit. Báo cáo ≤ 10 dòng.
+```
+
+**Output:**
+```
+Đang gom dữ kiện "TC không tự động hoá được" cho A và C (từ selection.json + annotation `oracle không tự động` trong report chính thức).
+
+Đang dựng `tools/forms_hw04.py` (AI-02 từ danh mục artifact + `git log`), theo cách của `forms_hw03.py`.
+
+Đang viết `tools/forms_hw04.py` (AI-02 + khối Mandatory Disclosure §10).
+
+Đã commit phần chính. Đang kiểm AI-02, quét `[...]` còn sót và lập `placeholders_left.md`.
+
+Bảng audit trong report thêm hàng cho commit vừa tạo; commit lần cuối rồi báo cáo.
+
+Đã xong cả 5 mục, cây làm việc sạch; commit cuối là `a99d6ee`.
+
+### Báo cáo cho phiên thảo luận
+- Nhiệm vụ: lệnh #29 – phân loại file chưa commit, link video Agent Skill, chép skill, điền dữ kiện report, AI-02, nháp Mandatory Disclosure, danh sách ô chờ SV.
+- **Phân loại 183 file chưa commit:**
+
+  | Nhóm | Số file | Xử lý |
+  |---|---|---|
+  | (a) 6 thư mục report không chính thức 17/11 tối | 181 | Thêm từng đường dẫn vào `.git/info/exclude` |
+  | (b) `context/HW04_assignment.pdf` | 1 | Thêm vào `.git/info/exclude` |
+  | (c) `A_prompt_log.md` | 1 | Commit riêng `6ef3a84` |
+
+  Không có file nào không rõ nhóm.
+- **Link video:** đã ghi https://youtu.be/yGC0R2qd92U vào README, report §2/§7, `skills/VideoLinks.md`. Skill chép từ `99080b2` sang `HW04/skills/playwright-ddt-automation/`; so với bản gốc chỉ khác CRLF.
+- **Report:**
+  - Điền link repo; thêm §1.1 sự cố môi trường (0xC0000409, Code Integrity, WebKit), §1.2 tổng hợp kết quả chép từ README bằng script, §2.1 bảng skill v1/v2/v2.1 kèm lý do.
+  - Mới tạo `A_FR01/not_automated.md` và `C_FR15/not_automated.md` (lấy từ `selection.json` và annotation trong report chính thức), §3.7/§5.7 nay đã có nội dung.
+  - §10 là bản "📝 AI nháp – SV xác nhận" (9 mục), sinh bằng `tools/forms_hw04.py`.
+  - Phần 🔒 giữ `<SV viết>`. Riêng "chỗ sửa script AI kể trong video" em không biết nội dung video nên để `<SV viết>`.
+- **AI-02:** `ai-forms/AI-02_Audit_Report_23120255.md` gồm 33 artifact lấy từ git: harness, skill S1–S4, mỗi feature 6 hàng (bản đóng băng bước 1/2/3/6, `RUN.md`, `not_automated`), khung bug K1–K4, script sinh bảng R1–R3, bộ đọc claude.ai P1, chạy thử D1.
+  - Verdict, lý do, kết luận và chữ ký để `<SV viết>`; cột #n để "–" vì HW04 chưa có `prompt_log_turns.txt`.
+  - Mục 3.3 chép nguyên văn mục f của `report_plan.md`. Mục f đã thêm 5 ý lỗi skill khi demo theo lệnh, và điền ý `users.list` → `5a378f1` (theo `A_FR01/review_sv.md`).
+- **Ngoài phạm vi lệnh:**
+  - Sửa đường dẫn firefox trong `report_plan.md` bị hỏng do ký tự `\f`.
+  - README thêm bảng tự chấm toàn `<SV viết>`.
+  - `placeholders_left.md` đánh dấu `export-ignore` để không vào zip.
+- **Ô chờ SV:** 120 dòng, ghi ở `HW04/placeholders_left.md`. Trong đó có 2 dòng chỉ là câu quy ước (report dòng 9, `bugs/README.md:13`), không phải ô cần điền. Bảng audit §9 vừa thêm 1 hàng nên số dòng §9–§11 trong file danh sách lệch +1.
+- Kết quả kiểm tra: không chạy test.
+- Commit: `6ef3a84`, `e3ae77f`, `6ceb790`, `a99d6ee` (cuối: HW04: report §9 bảng audit cập nhật tới 6ceb790)
+- Cần quyết định: không có.
+```
+*File AI ghi/gửi trong lượt này:* `forms_hw04.py`
+
+**Xử lý:** [...]
+
+---
+
+## #86 | 08:51 18/11/2026 | Claude Opus 5.5 | [...]
+**Mục đích:** [...]
+
+**Prompt:**
+```
+HW04 – lệnh #30 (gấp, hạn 11:00).
+1. Sinh lại bảng audit §9 tới HEAD, GIỮ verdict/lý do SV đã viết; commit mới của SV (SV viết/sửa/chốt/hoàn thiện) → cột Verdict "— (SV làm)"; commit mới của AI → `<SV viết>`. Chép §9 → ai-forms/AI-02 (tools/forms_hw04.py); đếm tỉ lệ VALID/INVALID/INCOMPLETE (không tính dòng SV làm).
+2. Sửa dữ kiện AI viết: report dòng ~251 "dòng 103" → 105; bảng TC-08 dòng ~407 ghi rõ SUT không hiện dialog (BUG-93), lý do áp cho dialog native nếu có.
+3. Dựng AI-03, AI-05 (mẫu HW03/ai-forms, không chép số liệu): AI-03 công cụ = Claude Opus 5.5 (claude.ai, SV xác nhận; log ghi không rõ model) + model Claude Code theo dòng "Tổng"; lượt không rõ model + lý do; cách tạo prompt log; ghi "các lượt claude.ai sau 21:40 17/11 chưa có trong bản xuất" nếu chưa xuất lại. AI-05 mục cam kết để [ ] "(em tự xác nhận)".
+4. Commit log text, xuất PDF report + AI-02/03/05 (chưa ký). Chạy hw-submission-audit.
+5. Commit. Báo cáo ≤ 10 dòng: tỉ lệ verdict, ô `<SV viết>` còn lại, kết quả rà soát, dung lượng zip dự kiến.
+```
+
+**Output:**
+```
+Đã sửa 2 dữ kiện (đúng: dòng 105, TC-08 lượt chính thức `[]`). Giờ sửa `hw04_report.py` để giữ verdict SV khi sinh lại bảng audit.
+
+Bảng §9 giữ nguyên verdict SV, thêm 5 hàng mới. Giờ dựng AI-02 (chép §9 + tỉ lệ), AI-03, AI-05.
 ```
 
 **Xử lý:** [...]
 
 ---
 
-**Tổng:** 84 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 47 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84).
+**Tổng:** 86 lượt; Claude (không rõ model) 37 lượt (#1, #2, #4, #6, #8, #10, #12, #13, #15, #17, #19, #21, #23, #25, #27, #28, #31, #33, #35, #37, #40, #42, #43, #44, #46, #48, #49, #51, #52, #54, #55, #56, #57, #59, #61, #63, #64); Claude Opus 5.5 49 lượt (#3, #5, #7, #9, #11, #14, #16, #18, #20, #22, #24, #26, #29, #30, #32, #34, #36, #38, #39, #41, #45, #47, #50, #53, #58, #60, #62, #65, #66, #67, #68, #69, #70, #71, #72, #73, #74, #75, #76, #77, #78, #79, #80, #81, #82, #83, #84, #85, #86).

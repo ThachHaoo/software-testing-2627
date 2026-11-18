@@ -16,7 +16,7 @@ Dọn dữ liệu (cleanup) và resetDb() chưa an toàn khi chạy song song: c
 - **Serial** – `test.describe.configure({ mode: 'serial' })` (bản AI, dòng 44): TC đầu Fail thì 14 TC còn lại không chạy. Đã sửa ở `HW04[A-FR01] 5/6a`.
 - **`^` ở dòng 28** – `/^Không có thông báo lỗi|Đăng ký thành công/`: `^` chỉ neo nhánh thứ nhất; nhánh "Đăng ký thành công" khớp ở bất kỳ đâu trong câu. Sửa ở 5/6c.
 - **RegExp không escape ở dòng 38** – `new RegExp(h[1])`, `new RegExp(h[2].trim())` dựng regex trực tiếp từ chữ trong expected; ký tự đặc biệt (`.`, `(`, `+`, `?`…) sẽ đổi nghĩa hoặc làm regex lỗi. Sửa ở 5/6c.
-- **`users.list()` không chờ POST (dòng 103)** – oracle API gọi ngay sau khi race kết thúc, không chờ phản hồi `POST /api/register`; nếu request còn đang xử lý thì danh sách "sau" chưa có user mới. Sửa ở 5/6b.
+- **`users.list()` không chờ POST (dòng 105)** – oracle API gọi ngay sau khi race kết thúc, không chờ phản hồi `POST /api/register`; nếu request còn đang xử lý thì danh sách "sau" chưa có user mới. Sửa ở 5/6b.
 
 ## Sửa theo review
 

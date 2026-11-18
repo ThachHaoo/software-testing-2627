@@ -29,4 +29,4 @@ Spec: `HW04/tests/B_FR07.spec.ts`; thao tác + oracle đọc từ cột `Thao t�
 
 | TC | Cụm expected | Lý do |
 |---|---|---|
-| TC-FR07-08 | "dòng chưa bị xoá khi dialog đang mở" | dialog native (`window.confirm`) khoá trang: script không đọc DOM khi dialog đang mở → kiểm tay |
+| TC-FR07-08 | "dòng chưa bị xoá khi dialog đang mở" | SUT hiện không hiện dialog nào khi bấm Xóa (lượt chính thức: `dialog sau khi bấm xoá = []`, BUG-93) → không có trạng thái "dialog đang mở" để kiểm. Nếu SUT có dialog native (`window.confirm`): dialog khoá trang, script không đọc DOM khi dialog đang mở → kiểm tay |
