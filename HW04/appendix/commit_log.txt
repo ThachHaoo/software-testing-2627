@@ -1563,3 +1563,16 @@ M	HW04/.gitattributes
 
 a050e68 | 09:34 18/11/2026 | TonKnight | HW04: Z2 ΓÇô export-ignore cß║ú th╞░ mß╗Ñc l╞░ß╗út thß╗¡ (kh├┤ng ─æß╗â th╞░ mß╗Ñc rß╗ùng trong zip)
 M	HW04/.gitattributes
+
+9b0781e | 09:34 18/11/2026 | TonKnight | HW04: commit log text
+M	HW04/appendix/commit_log.txt
+
+a51223c | 09:37 18/11/2026 | TonKnight | HW04: prompt log c├│ phi├¬n claude.ai xuß║Ñt lß║íi (123 l╞░ß╗út), cß║¡p nhß║¡t sß╗æ l╞░ß╗út + #n AI-02/03/05, PDF ─æ├ú k├╜
+M	HW04/23120255_HW04_Report.pdf
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.md
+M	HW04/ai-forms/AI-02_Audit_Report_23120255.pdf
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.md
+M	HW04/ai-forms/AI-03_Disclosure_Form_23120255.pdf
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.md
+M	HW04/ai-forms/AI-05_Privacy_Checklist_23120255.pdf
+M	HW04/appendix/A_prompt_log.md
