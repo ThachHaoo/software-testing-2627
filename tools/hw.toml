@@ -1,5 +1,13 @@
-# Cấu hình bài đang làm — hook on_stop.py và các script đọc file này.
-# Đổi sang bài mới: sửa hw, since, until (nếu có), title.
+# Cấu hình bài đang làm — hook on_stop.py, extract_prompt_log.py, export_commit_log.ps1 đọc file này.
+#
+# Chuyển sang bài mới (vd HW05):
+#   1. Chép khối cấu hình bài cũ xuống cuối file thành comment "--- Cấu hình HWxx (đã nộp) ---",
+#      ghi until = mốc nộp để có thể trích lại log bài cũ.
+#   2. Sửa hw, since (giờ lượt đầu của bài mới), bỏ until, exclude = [], title, log/notes/extra sang HW05/appendix/.
+#   3. Tạo HW05/appendix/prompt_log_notes.toml (+ prompt_log_extra.toml nếu dùng công cụ khác);
+#      thêm cặp luật deny cho HW05/appendix/A_prompt_log.md và HW05/appendix/ai-outputs/** trong .claude/settings.json.
+#   4. Kiểm: python tools/hooks/on_stop.py --manual → log mới chỉ có lượt của bài mới (lượt bài cũ lọt vào → exclude).
+#   5. export_commit_log.ps1 không cần tham số: tự lấy hw ở đây.
 
 hw    = "HW04"
 since = "2026-11-12 18:51"    # bỏ các lượt AI trước mốc này ("YYYY-MM-DD" hoặc "YYYY-MM-DD HH:MM", giờ Asia/Saigon)

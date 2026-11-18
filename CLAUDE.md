@@ -95,12 +95,20 @@ Skill dùng trong repo:
 - **Không** tự đổi Expected sau khi có Actual. Không kết luận bug trước khi cô lập nguyên nhân (chạy lại, reset dữ liệu, so UI với API).
 - Mọi lượt AI làm "việc phụ" (dàn ý, script, form, README, sửa nhất quán) đều là artifact phải khai trong Audit/Disclosure. Bản thân harness này (CLAUDE.md, skill, script) cũng do AI hỗ trợ tạo → khai trong Audit.
 
+### Quy tắc làm việc (bài học HW04)
+
+- **Không `rm -rf` thư mục đã commit.** Chỉ xoá đúng thư mục vừa sinh trong lượt đó (kiểm `git ls-files <dir>` rỗng trước khi xoá); không xoá bằng glob.
+- **Báo cáo đủ dữ kiện lệnh yêu cầu**: mỗi mục lệnh hỏi (số lượt, byte, sha256, danh sách #n, file cấp 1…) phải có trong khối báo cáo; thiếu thì ghi rõ "chưa làm/không đo được" + lý do.
+- **Demo / chạy thử** ghi vào thư mục chưa track, thêm vào `.git/info/exclude` (không sửa `.gitignore`), dọn ngay sau khi xong; không để demo lẫn vào config/report chính thức.
+- **Sau mỗi review** (SV sửa spec/script AI): cập nhật skill/template ngay theo lỗi vừa sửa, rồi **chạy thử E2E skill trên nhánh tạm** trước khi quay video skill.
+- **Transcript claude.ai thiếu** → SV xuất dữ liệu tài khoản claude.ai (`conversations.json`), lấy hội thoại theo `uuid` ghi vào `.transcripts/claude-ai_session_<HW>_p<n>.json`; `tools/extract_prompt_log.py` có bộ đọc định dạng này. Xuất lại trước khi chốt log lần cuối.
+
 ## 4. Prompt log (tự động)
 
 - Hook **Stop** (`.claude/settings.json` → `tools/hooks/on_stop.py`) chạy sau mỗi lượt: chép transcript vào `.transcripts/` (gitignore, không nộp) rồi tái tạo prompt log của bài đang làm bằng `tools/extract_prompt_log.py`. Bài đang làm, đường dẫn log/notes/extra, mốc `since`/`until`, danh sách `exclude` lấy từ **`tools/hw.toml`**. Script chỉ chép nguyên văn, lọc khối hệ thống, giờ Asia/Saigon, ghi model của từng lượt.
 - `since`/`until` nhận `YYYY-MM-DD` hoặc `YYYY-MM-DD HH:MM`; `exclude` nhận khoá giờ như notes (`"YYYY-MM-DD HH:MM"`, `"…#k"`, khoảng `"A .. B"`) để bỏ lượt của bài khác lẫn vào.
 - SV tự ghi **Section / Mục đích / Xử lý** trong `HWxx/appendix/prompt_log_notes.toml`; lượt dùng công cụ khác (Gemini, ChatGPT…) chép nguyên văn vào `prompt_log_extra.toml`.
-- Transcript session cloud (claude.ai) do người dùng tải về, đặt vào `.transcripts/` (tên `claude-ai_session_<HW>_p<n>.jsonl`).
+- Transcript session cloud (claude.ai) do người dùng tải về, đặt vào `.transcripts/` (tên `claude-ai_session_<HW>_p<n>.jsonl`, hoặc `.json` = một hội thoại lấy từ bản xuất dữ liệu `conversations.json`, xem mục 3 "Quy tắc làm việc").
 - Chạy tay: `python tools/hooks/on_stop.py --manual`. Xem lượt: `python tools/extract_prompt_log.py ".transcripts/*.jsonl" --since <mốc> --list` (thêm `--commits -o HWxx/appendix/prompt_log_turns.txt` để gom khoảng theo commit).
 - Log sai → sửa script/ghi chú rồi trích lại; không sửa tay output. Trước khi nộp: trích lại lần cuối, đếm lượt, cập nhật số liệu ở report, Audit, AI-03, AI-05.
 - Giữ nguyên mọi lượt "Claude (không rõ model)"; lý do do SV ghi trong notes; AI-03 liệt kê đủ.
