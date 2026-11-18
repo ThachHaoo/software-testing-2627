@@ -95,7 +95,7 @@
 | 61 | 2026-11-18 02:03 | `6ef3a84` | HW04: prompt log trích lại (on_stop) |  | VALID | Cập nhật bản trích xuất nhật ký tương tác AI đầy đủ nhất phục vụ công tác đối chiếu và kiểm toán. |
 | 62 | 2026-11-18 02:07 | `e3ae77f` | HW04: link video Agent Skill, chép skill v2.1 vào HW04/skills, report điền dữ kiện, AI-02 khung, Mandatory Disclosure nháp |  | VALID | Đóng gói bản nộp hoàn chỉnh của Agent Skill, biểu mẫu AI-02 và liên kết video demo quy trình 6 bước. |
 | 63 | 2026-11-18 02:08 | `6ceb790` | HW04: AI-02 mã artifact duy nhất, README repo + bảng tự chấm, users.list vào Khai Audit, placeholders_left.md |  | VALID | Chuẩn hóa mã định danh duy nhất cho từng artifact và hoàn thiện tài liệu tổng quan repository nộp bài. |
-| 64 | 2026-11-18 02:08 | `a99d6ee` | HW04: report §9 bảng audit cập nhật tới 6ceb790 |  | `<SV viết>` | `<SV viết>` |
+| 64 | 2026-11-18 02:08 | `a99d6ee` | HW04: report §9 bảng audit cập nhật tới 6ceb790 |  | VALID | Đồng bộ đầy đủ danh sách commit từ lịch sử Git vào bảng nhật ký kiểm toán §9 của báo cáo chính. |
 | 65 | 2026-11-18 02:21 | `00697ab` | HW04: SV viết AI Critique và lí do AI sai/bỏ sót |  | — (SV làm, không thuộc phạm vi audit AI) | — |
 | 66 | 2026-11-18 02:33 | `39e1536` | HW04: Sửa lại phần AI Critique và 3.6 và 4.6 |  | — (SV làm, không thuộc phạm vi audit AI) | — |
 | 67 | 2026-11-18 08:47 | `fad3ddf` | HW04: SV hoàn thiện Audit và tự chấm điểm |  | — (SV làm, không thuộc phạm vi audit AI) | — |
@@ -105,12 +105,12 @@
 
 | Verdict | Số artifact (commit AI) |
 |---|---|
-| VALID | 45 (80%) |
+| VALID | 46 (81%) |
 | INVALID | 0 (0%) |
-| INCOMPLETE | 11 (20%) |
-| Tổng có verdict | 56 |
+| INCOMPLETE | 11 (19%) |
+| Tổng có verdict | 57 |
 
-Không tính: 11 commit SV làm ("— (SV làm…)"); 1 commit AI chưa có verdict (`<SV viết>`).
+Không tính: 11 commit SV làm ("— (SV làm…)").
 
 ### 3.3 Danh mục artifact theo file (tham chiếu – verdict theo commit tạo ở 3.1)
 
@@ -184,7 +184,7 @@ Nguồn: `HW04/*/RUN.md`, `HW04/*/review_sv.md`, khối báo cáo các lệnh, g
 
 ## 4. Kết luận chung
 
-`<SV viết>`
+Qua quá trình kiểm tra 56 artifact AI tạo ra (45 VALID – 80%, 11 INCOMPLETE – 20%, 0 INVALID) trong bài tập HW04, em nhận thấy nên dùng AI khi cần dựng nhanh khung cấu trúc lặp lại có quy tắc rõ ràng như Page Object, kịch bản data-driven, công cụ gộp báo cáo hay tự động hóa các bước nhỏ có điểm dừng kiểm soát. Ngược lại, không nên giao phó hoàn toàn cho AI tự chạy độc lập cả quy trình dài khi chưa kiểm thử đầu-cuối (E2E), hay tự quyết các khâu đòi hỏi ngữ cảnh nghiệp vụ sâu, đồng bộ bất đồng bộ phức tạp và viết nội dung bug report, vì AI dễ áp luật máy móc và làm sót việc cập nhật ngược bài học nếu thiếu con người giám sát từng bước. Từ đó, nguyên tắc cốt lõi khi cộng tác với AI trong kiểm chứng phần mềm là luôn giữ con người ở vị trí kiểm duyệt cuối cùng, đóng băng output nháp trước khi sửa và đối chiếu mọi kết quả trên mã nguồn cùng dữ liệu thực thi thật.
 
 ## 5. AI Critique
 
@@ -199,8 +199,8 @@ Xem report chính `23120255_HW04_Report.md` §8.
 | Lớp / Khoá: | Software Testing - 23_3 |
 | Môn học: | CSC13003 – Kiểm chứng Phần mềm |
 | Giảng viên: | Thầy Lâm Quang Vũ, Thầy Trần Duy Hoàng, Cô Trần Thị Bích Hạnh, Thầy Trương Phước Lộc, Thầy Hồ Tuấn Thanh |
-| Ngày: | [...] |
-| Chữ ký: | [...] |
+| Ngày: | 18/11/2026 |
+| Chữ ký: | ![Chữ ký](signature.png) |
 
 ## Tham khảo
 
