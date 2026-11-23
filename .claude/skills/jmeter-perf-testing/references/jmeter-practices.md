@@ -38,7 +38,7 @@ Nguồn tham khảo: **QAInsights/perf-skills**, https://github.com/QAInsights/p
 - Tăng heap JVM khi tải lớn (`-Xms/-Xmx`).
   - → skill này: tham số `-Heap` của `run_scenario.ps1`, mặc định 1 GB giống `jmeter.bat`.
 - Dùng `-J` để truyền thuộc tính, trong plan đọc bằng `${__P(...)}`.
-  - → skill này: `-Jlistener.dir` cho đường dẫn file của listener.
+  - → skill này: listener không ghi file; số liệu lấy từ jtl `-l`.
 
 ## 4. Đọc kết quả (nguồn: `topics/results-analysis.md` – Core Metrics, Response Time Percentiles, Reading JMeter Reports, Bottleneck Identification)
 

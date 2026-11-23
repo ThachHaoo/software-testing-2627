@@ -105,6 +105,7 @@ Mỗi lần gọi skill **chỉ làm một bước rồi dừng** để người
   - `java -jar ApacheJMeter.jar -n -t -l -e -o`;
   - ghi `RUN.md`.
 - GUI chỉ dùng để chụp hoặc quay ở tải nhỏ (H2 = a), mở cùng khung hình với Task Manager.
+- **Bằng chứng report view** (3 loại listener khác nhau): listener trong `.jmx` không ghi file. Sau lượt chính thức, mở `.jmx` bằng GUI JMeter → chọn listener của scenario (Aggregate / Summary / View Results Tree chỉ lỗi / Response Time Graph) → ô *Write results to file / Read from file* bấm **Browse…** chọn `runs/<plan>_<ts>/<plan>.jtl` → chờ nạp xong → chụp, lưu `evidence/<scenario>/`. Không sửa jtl khi mở.
 - Khi stress hoặc spike làm khoá tài khoản: reset (restart backend) giữa các lượt và ghi các bước vào `RUN.md`.
 - Nộp jtl đầy đủ. Kiểm dung lượng (Moodle ≤ 20 MB mỗi file) trước khi commit.
 
@@ -164,7 +165,7 @@ python $S/render_md.py HW05/23120255_HW05_Report.md load_stats HW05/runs/<run>/s
   - Response/JSON/Duration Assertion;
   - timer;
   - Thread Group theo stage, Thread Group lockout;
-  - listener ghi file.
+  - listener (không ghi file; xem bằng chứng report view ở bước 6).
 - `scripts/check_plan.py`: kiểm plan và `.jmx` (xem bước 3).
 - `scripts/run_scenario.ps1`: restart backend, typeperf, JMeter non-GUI, `RUN.md`.
 - `scripts/jtl_stats.py`: số liệu theo label (percentile tính như JMeter), timeline theo phút, lỗi hay gặp, đối chiếu `statistics.json`.

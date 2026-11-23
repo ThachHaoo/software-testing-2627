@@ -147,6 +147,7 @@ Thứ tự: **smoke → load → stress → soak → spike**.
 - Backend SUT được khởi động 2 lần khi E2E (reseed CSDL) rồi dừng lại; trạng thái trước đó là không chạy.
 - Vá harness theo review của **phiên thảo luận** (23/11):
   - A1: giữ bố cục `runs/<plan>_<ts>/`; sửa report_plan và dàn ý cho khớp; thêm `-Official` (RUN.md ghi lượt chính thức); smoke export-ignore.
+  - A2: listener trong `.jmx` không ghi file (trước ghi CSV trùng jtl); bằng chứng report view = GUI → listener → Browse jtl chính thức → chụp.
 - Lỗi do AI, phát hiện sau: `[...]`
 
 ## g2. Nguồn tham khảo bên ngoài

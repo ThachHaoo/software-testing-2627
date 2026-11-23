@@ -12,7 +12,7 @@ Cấu trúc sinh ra:
   │    CSV Data Set (data scope "main") → workflow[]: request once_per_vu nằm trong Once Only Controller,
   │    think_before_ms = timer con của sampler (chạy TRƯỚC sampler đó), extractor JSON, assertion theo assertions[id]
   ├─ Thread Group lockout (nếu lockout_flow.enabled và scenarios.<s>.lockout = true), CSV user riêng
-  └─ Listener theo listeners.<s> (ghi file vào ${__P(listener.dir,.)}/<plan>_<type>.csv)
+  └─ Listener theo listeners.<s> – KHÔNG ghi file; bằng chứng: mở .jmx bằng GUI, listener → Browse… jtl chính thức → chụp
 
 Usage: python gen_jmx.py HW05/perf_plan.json --date 20261125 [--scenario load ...] [--out HW05/testplans] [--hw-dir HW05]
 """
@@ -206,13 +206,13 @@ def listener(lst, plan_name):
     gui, title = LISTENERS[lst["type"]]
     cfg = "".join(f"<{k}>{v}</{k}>" if v is None else f"<{k}>{'true' if v else 'false'}</{k}>" for k, v in SAVE_FIELDS)
     cfg = cfg.replace("<assertionsResultsToSave>None</assertionsResultsToSave>", "<assertionsResultsToSave>0</assertionsResultsToSave>")
-    fname = f"${{__P(listener.dir,.)}}/{plan_name}_{lst['type']}.csv" if lst.get("file", True) else ""
+    # Không ghi filename: jtl chính thức (-l) là nguồn duy nhất; listener chỉ để mở GUI → Browse jtl → chụp (tránh CSV trùng jtl)
     errs = lst.get("errors_only", False)
     name = title + (" (chỉ lỗi)" if errs else "")
     return el("ResultCollector", gui, "ResultCollector", name, [
         b("ResultCollector.error_logging", errs),
         f'<objProp><name>saveConfig</name><value class="SampleSaveConfiguration">{cfg}</value></objProp>',
-        s("filename", fname)])
+        s("filename", "")])
 
 
 def build(plan, scen, date, jmx_dir, hw_dir):

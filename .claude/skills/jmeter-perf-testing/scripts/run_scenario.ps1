@@ -85,7 +85,7 @@ if ($inst) {
 $jtl = Join-Path $run "$plan.jtl"
 $html = Join-Path $run 'html'
 $jargs = @($Heap -split ' ' | Where-Object { $_ }) + @('-jar', $jar, '-n', '-t', $Jmx, '-l', $jtl, '-e', '-o', $html,
-          '-j', (Join-Path $run 'jmeter.log'), "-Jlistener.dir=$run", '-Jjmeter.save.saveservice.output_format=csv')
+          '-j', (Join-Path $run 'jmeter.log'), '-Jjmeter.save.saveservice.output_format=csv')
 $start = (Get-Date).ToString('o')
 $ErrorActionPreference = 'Continue'   # JMeter/log4j ghi cảnh báo ra stderr – PS 5.1 không được coi là lỗi
 $console = & java @jargs 2>&1 | ForEach-Object { $line = "$_"; Write-Host $line; $line }

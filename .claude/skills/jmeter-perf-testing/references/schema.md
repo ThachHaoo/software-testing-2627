@@ -106,9 +106,9 @@ Scenario có thể tắt luồng này bằng `"lockout": false` (vd smoke, soak)
 
 ## listeners.<scenario>
 
-`[{"type": "summary|aggregate|view_results_tree|response_time_graph|table", "errors_only": bool, "file": bool}]`
+`[{"type": "summary|aggregate|view_results_tree|response_time_graph|table", "errors_only": bool}]`
 
-- `file: true` thì listener ghi `${__P(listener.dir,.)}/<plan>_<type>.csv`.
+- Listener **không ghi file** (filename rỗng): jtl chính thức (`-l`) là nguồn số liệu duy nhất. Bằng chứng report view: mở `.jmx` bằng GUI → chọn listener → **Browse…** chọn jtl của lượt chính thức → chụp màn hình.
 - 3 plan chính (load, stress, spike) **không được dùng chung loại listener** nào (đề HW05 §6).
 - Soak để `[]`: không gắn listener, chỉ ghi `.jtl` qua `-l`.
 

@@ -61,11 +61,11 @@
     ]}
   },
   "listeners": {
-    "smoke":  [{"type": "summary", "file": true}],
-    "load":   [{"type": "aggregate", "file": true}],
-    "stress": [{"type": "summary", "file": true}],
+    "smoke":  [{"type": "summary"}],
+    "load":   [{"type": "aggregate"}],
+    "stress": [{"type": "summary"}],
     "soak":   [],
-    "spike":  [{"type": "view_results_tree", "errors_only": true, "file": true}, {"type": "response_time_graph", "file": false}]
+    "spike":  [{"type": "view_results_tree", "errors_only": true}, {"type": "response_time_graph"}]
   },
   "thresholds": {"p95_ms": {"*": 1000}, "error_pct": 1.0},
   "review_log": [],
