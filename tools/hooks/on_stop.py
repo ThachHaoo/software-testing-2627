@@ -15,6 +15,7 @@ import subprocess
 import sys
 import time
 import tomllib
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(os.environ.get("CLAUDE_PROJECT_DIR") or Path(__file__).resolve().parents[2])
@@ -52,9 +53,17 @@ def main():
     tdir.mkdir(exist_ok=True)
 
     if MANUAL:
-        # chạy tay: gom mọi transcript Claude Code của repo này
+        # chạy tay: gom transcript Claude Code của repo này, chỉ phiên có hoạt động từ mốc since
+        # (transcript bài cũ đã chuyển vào .transcripts/<HW>/, không chép lại vào gốc)
+        min_mtime = 0.0
+        if cfg.get("since"):
+            s = str(cfg["since"])
+            fmt = "%Y-%m-%d %H:%M" if " " in s else "%Y-%m-%d"
+            min_mtime = datetime.strptime(s, fmt).replace(tzinfo=timezone(timedelta(hours=7))).timestamp()
         for d in local_session_dirs():
             for src in d.glob("*.jsonl"):
+                if src.stat().st_mtime < min_mtime:
+                    continue
                 shutil.copy2(src, tdir / src.name)
                 log(f"chép {src}")
     else:

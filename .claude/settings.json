@@ -32,7 +32,11 @@
       "Edit(/HW04/appendix/ai-outputs/**)",
       "Write(/HW04/appendix/ai-outputs/**)",
       "Edit(/HW04/appendix/A_prompt_log.md)",
-      "Write(/HW04/appendix/A_prompt_log.md)"
+      "Write(/HW04/appendix/A_prompt_log.md)",
+      "Edit(/HW05/appendix/ai-outputs/**)",
+      "Write(/HW05/appendix/ai-outputs/**)",
+      "Edit(/HW05/appendix/A_prompt_log.md)",
+      "Write(/HW05/appendix/A_prompt_log.md)"
     ]
   },
   "hooks": {

@@ -9,20 +9,32 @@
 #   4. Kiểm: python tools/hooks/on_stop.py --manual → log mới chỉ có lượt của bài mới (lượt bài cũ lọt vào → exclude).
 #   5. export_commit_log.ps1 không cần tham số: tự lấy hw ở đây.
 
-hw    = "HW04"
-since = "2026-11-12 18:51"    # bỏ các lượt AI trước mốc này ("YYYY-MM-DD" hoặc "YYYY-MM-DD HH:MM", giờ Asia/Saigon)
+hw    = "HW05"
+since = "2026-11-23 12:39"    # bỏ các lượt AI trước mốc này ("YYYY-MM-DD" hoặc "YYYY-MM-DD HH:MM", giờ Asia/Saigon)
 # until = "2026-11-30"        # bỏ các lượt sau mốc này (bật khi đã nộp)
 # Lượt của bài khác lọt sau mốc since (khoá giờ như notes: "YYYY-MM-DD HH:MM", "…#k", khoảng "A .. B").
 exclude = []
-title = "Prompt Log – HW04"
+title = "Prompt Log – HW05"
 name  = "Lê Tấn Hiệp"
 mssv  = "23120255"
 
 # Đường dẫn tính từ gốc repo
-log   = "HW04/appendix/A_prompt_log.md"
-notes = "HW04/appendix/prompt_log_notes.toml"
-extra = "HW04/appendix/prompt_log_extra.toml"
-transcripts = ".transcripts"   # bản sao transcript (gitignore, KHÔNG nộp, KHÔNG push)
+log   = "HW05/appendix/A_prompt_log.md"
+notes = "HW05/prompt_log_notes.toml"
+extra = "HW05/prompt_log_extra.toml"
+transcripts = ".transcripts"   # bản sao transcript (gitignore, KHÔNG nộp, KHÔNG push); chỉ đọc file ở gốc thư mục này
+# Transcript bài cũ đã chuyển vào .transcripts/<HW>/ (HW02, HW03, HW04). Trích lại log bài cũ:
+#   bật khối cấu hình bài đó và đặt transcripts = ".transcripts/HWxx".
+
+# --- Cấu hình HW04 (đã nộp 18/11; log đã commit 0b03c20, 126 lượt) ---
+# hw    = "HW04"
+# since = "2026-11-12 18:51"
+# until = "2026-11-18 10:12"
+# title = "Prompt Log – HW04"
+# log   = "HW04/appendix/A_prompt_log.md"
+# notes = "HW04/appendix/prompt_log_notes.toml"
+# extra = "HW04/appendix/prompt_log_extra.toml"
+# transcripts = ".transcripts/HW04"
 
 # --- Cấu hình HW03 (đã nộp 11/11; ngừng ghi log từ 16/11 — lượt #232 11:39 11/11 bị bỏ theo quyết định SV) ---
 # hw    = "HW03"
@@ -33,6 +45,7 @@ transcripts = ".transcripts"   # bản sao transcript (gitignore, KHÔNG nộp, 
 # log   = "HW03/appendix/A_prompt_log.md"
 # notes = "HW03/appendix/prompt_log_notes.toml"
 # extra = "HW03/appendix/prompt_log_extra.toml"
+# transcripts = ".transcripts/HW03"
 
 # --- Cấu hình HW02 (đã nộp) ---
 # hw    = "HW02"
@@ -41,3 +54,4 @@ transcripts = ".transcripts"   # bản sao transcript (gitignore, KHÔNG nộp, 
 # log   = "HW02/appendix/A_prompt_log.md"
 # notes = "HW02/appendix/prompt_log_notes.toml"
 # extra = "HW02/appendix/prompt_log_extra.toml"
+# transcripts = ".transcripts/HW02"
