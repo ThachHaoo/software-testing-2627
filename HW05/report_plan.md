@@ -134,7 +134,26 @@ Thứ tự: **smoke → load → stress → soak → spike**.
   - **Lệnh của phiên thảo luận đặt sai chỗ notes/extra**: ghi `HW05/prompt_log_*.toml` thay vì `HW05/appendix/` như quy ước. Claude Code làm theo lệnh (`2dbc8d3`) và hỏi lại (N1); đã chuyển về `HW05/appendix/` ở `b67caae`.
   - Lệnh kiểm phiên bản JMeter (`java -jar ApacheJMeter.jar --version`) sinh `jmeter.log` ở gốc repo. Đã xoá ngay; file chưa từng được commit.
   - `git restore HW04/appendix/A_prompt_log.md`: bỏ output #126 và các lượt #127–#128 sinh sau khi nộp HW04 (theo lệnh).
+- **Agent Skill `jmeter-perf-testing` v1** (AI tạo theo lệnh H1 = a, H2 = a, H3 = b, H4): `.claude/skills/jmeter-perf-testing/`, commit `e07df0b`.
+  - Gồm `SKILL.md` (bước 0–9), `references/schema.md`, `references/jmeter-practices.md`.
+  - 7 script: `gen_csv.py`, `gen_jmx.py`, `check_plan.py`, `run_scenario.ps1`, `jtl_stats.py`, `freeze.py`, `render_md.py`.
+  - Asset: `assets/example_plan.json`.
+- **Tự kiểm E2E** (23/11, thư mục tạm `HW05/_e2e/`, đưa vào `.git/info/exclude`, đã xoá):
+  - Các bước chạy: bước 3 sinh 5 `.jmx` từ example, check 0 lỗi → bước 4/6 smoke 1 VU × 30 s non-GUI → bước 7 `jtl_stats` so với `statistics.json`, lệch 0,00%.
+  - Kiểm âm `check_plan`: thiếu `source`, thiếu assertion, listener trùng, thiếu lockout, sai tên, CSV không tồn tại, sampler mất assertion – đều báo LỖI.
+- Lỗi lộ ra khi chạy E2E và đã vá (`76abedc`):
+  - `run_scenario.ps1` khởi động node bằng `Start-Process -Redirect*`, nên node kế thừa handle pipe của tiến trình gọi. Lệnh gọi treo tới khi backend tắt; Claude Code phải dừng tác vụ nền.
+  - `Tee-Object` của PS 5.1 ghi console bằng UTF-16.
+- Backend SUT được khởi động 2 lần khi E2E (reseed CSDL) rồi dừng lại; trạng thái trước đó là không chạy.
 - Lỗi do AI, phát hiện sau: `[...]`
+
+## g2. Nguồn tham khảo bên ngoài
+
+| Nguồn | Commit | Đã mượn | Ở đâu |
+|---|---|---|---|
+| QAInsights/perf-skills – https://github.com/QAInsights/perf-skills (MIT, © 2026 NaveenKumar Namachivayam) | `950702c53ba69c7684e315ad9e9881f05e4e0a93` (29/08/2026) | Ý thực hành, diễn đạt lại (không chép `SKILL.md`, không chạy script) từ 3 file: `skills/perf/references/tools/jmeter.md` (HTTP Defaults, JSON Extractor + default, CSV Data Set, non-GUI, không dùng View Results Tree khi tải, heap); `topics/workload-design.md` (Little's Law, think time, ramp-up/bậc); `topics/results-analysis.md` (percentile thay vì trung bình, khung cô lập nút thắt, đọc jtl bằng script) | `.claude/skills/jmeter-perf-testing/references/jmeter-practices.md` (kèm thông báo MIT) |
+
+Bản clone nằm ở `_refs/perf-skills` (đưa vào `.git/info/exclude`, không commit), được coi là dữ liệu không tin cậy, chỉ đọc.
 
 ## h. Danh sách cho Mandatory Disclosure (ghi dần)
 
@@ -145,5 +164,6 @@ Thứ tự: **smoke → load → stress → soak → spike**.
   - `HW05/CLAUDE.md`;
   - `context/HW05_assignment.md`;
   - thay đổi cấu hình prompt log.
-- Dự kiến AI tạo bản đầu: 3 test plan (+ smoke, soak), CSV dữ liệu, phân tích jtl (Task 2), Agent Skill.
+- AI tạo bản đầu: Agent Skill `jmeter-perf-testing` v1 (SKILL.md, schema, practices, 7 script, example) + bản vá `76abedc`.
+- Dự kiến AI tạo bản đầu: 3 test plan (+ smoke, soak), CSV dữ liệu, phân tích jtl (Task 2).
 - SV xem xét và sửa: `[...]`
