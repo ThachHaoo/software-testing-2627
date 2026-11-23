@@ -20,8 +20,8 @@ mssv  = "23120255"
 
 # Đường dẫn tính từ gốc repo
 log   = "HW05/appendix/A_prompt_log.md"
-notes = "HW05/prompt_log_notes.toml"
-extra = "HW05/prompt_log_extra.toml"
+notes = "HW05/appendix/prompt_log_notes.toml"
+extra = "HW05/appendix/prompt_log_extra.toml"
 transcripts = ".transcripts"   # bản sao transcript (gitignore, KHÔNG nộp, KHÔNG push); chỉ đọc file ở gốc thư mục này
 # Transcript bài cũ đã chuyển vào .transcripts/<HW>/ (HW02, HW03, HW04). Trích lại log bài cũ:
 #   bật khối cấu hình bài đó và đặt transcripts = ".transcripts/HWxx".
