@@ -8,6 +8,7 @@
   [int]$Port = 3000,
   [switch]$NoRestart,
   [switch]$StopBackend,
+  [switch]$Official,
   [string]$Note = ''
 )
 <#
@@ -108,6 +109,7 @@ $md = @"
 
 | Mục | Giá trị |
 |---|---|
+| Lượt chính thức | $(if ($Official) { 'CÓ (-Official) – số liệu dùng trong report' } else { 'KHÔNG (lượt thử / smoke – export-ignore khi nộp)' }) |
 | Ghi chú | $Note |
 | Hostname | $env:COMPUTERNAME |
 | CPU / luồng logic | $($cpu.Name) / $($cpu.NumberOfLogicalProcessors) |

@@ -3,3 +3,4 @@ report_plan.md export-ignore
 appendix/prompt_log_extra.toml export-ignore
 **/.gitkeep export-ignore
 .gitattributes export-ignore
+runs/*_Smoke_* export-ignore

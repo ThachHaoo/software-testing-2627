@@ -41,7 +41,7 @@ Video, soak, hardware report và bug không có dòng điểm riêng. Theo §6 T
 | 1 | Main report (.md + PDF): performance-testing report + AI-analysis critique | `HW05/23120255_HW05_Report.md` / `.pdf` | .md: ĐÃ CÓ (dàn ý) · PDF: THIẾU | 🔒 Critique, "vì sao AI sai", tự đánh giá |
 | 2 | Link repo GitHub public (test plan + data) | README + report §1 | THIẾU (ô `[...]`) | repo `ThachHaoo/software-testing-2627`, SV điền link |
 | 3 | 3 test plan Load / Stress / Spike, tên `23120255_<Scenario>_<YYYYMMDD>.jmx` | `HW05/testplans/` | THIẾU (thư mục rỗng) | YYYYMMDD = ngày chạy chính thức (D4) |
-| 4 | 3 file `.jtl` thô + 3 thư mục HTML report | `HW05/results/*.jtl`, `HW05/reports/<Scenario>_html/` | THIẾU | Nộp đủ file, không chỉ summary (§11); xem rủi ro dung lượng ở mục f |
+| 4 | 3 file `.jtl` thô + 3 thư mục HTML report | `HW05/runs/<plan>_<ts>/<plan>.jtl`, `HW05/runs/<plan>_<ts>/html/` (lượt có `RUN.md` ghi "Lượt chính thức: CÓ") | THIẾU | Nộp đủ file, không chỉ summary (§11); lượt smoke/thử export-ignore; xem rủi ro dung lượng ở mục f |
 | 5 | Ảnh resource monitor + hardware spec | `HW05/evidence/<scenario>/`, `HW05/env/` | THIẾU | Mỗi lượt chạy: ảnh công cụ + mức dùng tài nguyên của tiến trình backend; dxdiag/screenfetch + bảng spec |
 | 6 | Link video YouTube unlisted (≥ 6 phút, công cụ + resource monitor cùng khung hình, giọng SV) | README, report §3.11 | THIẾU | 🔒 thuyết minh do SV |
 | 7 | AI Critique + AI Audit Report (.md + PDF) | report §9, §10; `HW05/ai-forms/AI-02…` | THIẾU | Critique 🔒 200–300 từ |
@@ -50,8 +50,8 @@ Video, soak, hardware report và bug không có dòng điểm riêng. Theo §6 T
 | 10 | README.md: bảng tự chấm + test summary (scenario đã chạy, nhóm endpoint, endurance threshold có số, số bug/perf issue, link video) | `HW05/README.md` | THIẾU | |
 | 11a | Supporting – Agent Skill + video dùng skill | `HW05/skills/<tên-skill>/`, `HW05/skills/VideoLinks.md` | THIẾU | Video riêng chạy skill trên trọn một nhóm endpoint (§7) |
 | 11b | Supporting – dữ liệu CSV | `HW05/data/` | THIẾU (thư mục rỗng) | |
-| 11c | Supporting – soak (jtl, CSV typeperf, ảnh) | `HW05/results/23120255_Soak_<YYYYMMDD>.jtl`, `HW05/env/`, `HW05/evidence/soak/` | THIẾU | Không nằm trong danh sách 3 jtl, xem mục d |
-| 11d | Supporting – smoke | `HW05/results/`, `HW05/evidence/smoke/` | THIẾU | |
+| 11c | Supporting – soak (jtl, monitor.csv, ảnh) | `HW05/runs/23120255_Soak_<YYYYMMDD>_<ts>/`, `HW05/evidence/soak/` | THIẾU | Không nằm trong danh sách 3 jtl, xem mục d |
+| 11d | Supporting – smoke | `HW05/runs/23120255_Smoke_*` (export-ignore, không nộp), `HW05/evidence/smoke/` | THIẾU | Chỉ trích số liệu vào report |
 | 11e | Supporting – Task 2 (prompt, output AI, bảng đối chiếu) | `HW05/analysis/` | THIẾU (thư mục rỗng) | |
 | 11f | Supporting – prompt log | `HW05/appendix/A_prompt_log.md` | ĐÃ CÓ (tự trích) | Còn thiếu transcript claude.ai của phiên thảo luận |
 | 11g | Supporting – khảo sát SUT | `HW05/notes/sut_recon.md` | ĐÃ CÓ | |
@@ -118,7 +118,7 @@ Thứ tự: **smoke → load → stress → soak → spike**.
   1. jtl ở dạng CSV, không lưu response data. Có thể bớt cột qua `jmeter.save.saveservice.*`, nhưng phải giữ đủ cột HTML dashboard cần (kiểm khi chạy smoke).
   2. CSV jtl nén zip rất tốt; đo kích thước sau `git archive`.
   3. Vẫn vượt → split-and-zip (CLAUDE.md gốc, mục 2), hoặc tách jtl soak (không thuộc 3 jtl bắt buộc) thành phần riêng.
-  4. Không nộp lượt thử: đánh `export-ignore` trong `HW05/.gitattributes`.
+  4. Bố cục mỗi lượt: `runs/<plan>_<yyyyMMddTHHmmss>/` (jtl, `html/`, monitor, `RUN.md`). Lượt chính thức chạy với `-Official` → `RUN.md` ghi "Lượt chính thức: CÓ". Smoke luôn export-ignore (`runs/*_Smoke_*`); lượt thử khác thêm từng dòng `runs/<thư mục> export-ignore` vào `HW05/.gitattributes`.
   5. Không commit jtl > 100 MB lên GitHub (giới hạn file của GitHub); nén trước hoặc tách.
 
 ## g. Khai cho Audit (ghi dần)
@@ -145,6 +145,8 @@ Thứ tự: **smoke → load → stress → soak → spike**.
   - `run_scenario.ps1` khởi động node bằng `Start-Process -Redirect*`, nên node kế thừa handle pipe của tiến trình gọi. Lệnh gọi treo tới khi backend tắt; Claude Code phải dừng tác vụ nền.
   - `Tee-Object` của PS 5.1 ghi console bằng UTF-16.
 - Backend SUT được khởi động 2 lần khi E2E (reseed CSDL) rồi dừng lại; trạng thái trước đó là không chạy.
+- Vá harness theo review của **phiên thảo luận** (23/11):
+  - A1: giữ bố cục `runs/<plan>_<ts>/`; sửa report_plan và dàn ý cho khớp; thêm `-Official` (RUN.md ghi lượt chính thức); smoke export-ignore.
 - Lỗi do AI, phát hiện sau: `[...]`
 
 ## g2. Nguồn tham khảo bên ngoài

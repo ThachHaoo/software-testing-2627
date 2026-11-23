@@ -98,7 +98,8 @@ Mỗi lần gọi skill **chỉ làm một bước rồi dừng** để người
 ### 6 – Chạy (SV chạy lượt chính thức)
 
 - Thứ tự: smoke → load → stress → soak → spike.
-- Mỗi lượt dùng `run_scenario.ps1`, script tự làm:
+- Lượt chính thức chạy `run_scenario.ps1 -Official` (RUN.md ghi "Lượt chính thức: CÓ"); smoke/lượt thử không có `-Official` và được export-ignore (`runs/*_Smoke_*`, lượt thử thêm từng dòng vào `.gitattributes`).
+- Mỗi lượt nằm trong `runs/<plan>_<yyyyMMddTHHmmss>/`; script tự làm:
   - restart backend;
   - typeperf CPU/RAM tiến trình node;
   - `java -jar ApacheJMeter.jar -n -t -l -e -o`;
