@@ -54,11 +54,14 @@ if (-not $NoRestart) {
   Get-NetTCPConnection -State Listen -LocalPort $Port -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force }
   Start-Sleep -Milliseconds 800
-  $p = Start-Process -FilePath 'node' -ArgumentList 'server.js' -WorkingDirectory $BackendDir -WindowStyle Hidden -PassThru `
-        -RedirectStandardOutput (Join-Path $run 'backend.out.log') -RedirectStandardError (Join-Path $run 'backend.err.log')
+  # Không dùng Start-Process -Redirect*: khi đó node kế thừa handle stdout/stderr của tiến trình gọi, lệnh gọi script
+  # qua pipe (CI, Claude Code) treo tới khi backend tắt. cmd /c qua ShellExecute không kế thừa handle; log ghi bằng '>'.
+  $outLog = Join-Path $run 'backend.out.log'; $errLog = Join-Path $run 'backend.err.log'
+  Start-Process -FilePath 'cmd.exe' -ArgumentList "/c node server.js > `"$outLog`" 2> `"$errLog`"" `
+    -WorkingDirectory $BackendDir -WindowStyle Hidden
   $restartAt = (Get-Date).ToString('o')
-  if (-not (Wait-Backend)) { throw "Backend không lên sau 30 s (xem $run\backend.err.log)" }
-  $nodePid = $p.Id
+  if (-not (Wait-Backend)) { throw "Backend không lên sau 30 s (xem $errLog)" }
+  $nodePid = (Get-NetTCPConnection -State Listen -LocalPort $Port | Select-Object -First 1).OwningProcess
 } else {
   $c = Get-NetTCPConnection -State Listen -LocalPort $Port -ErrorAction SilentlyContinue | Select-Object -First 1
   if (-not $c) { throw "Không có tiến trình nghe cổng $Port (bỏ -NoRestart để tự khởi động)" }
@@ -84,8 +87,10 @@ $jargs = @($Heap -split ' ' | Where-Object { $_ }) + @('-jar', $jar, '-n', '-t',
           '-j', (Join-Path $run 'jmeter.log'), "-Jlistener.dir=$run", '-Jjmeter.save.saveservice.output_format=csv')
 $start = (Get-Date).ToString('o')
 $ErrorActionPreference = 'Continue'   # JMeter/log4j ghi cảnh báo ra stderr – PS 5.1 không được coi là lỗi
-& java @jargs 2>&1 | Tee-Object -FilePath (Join-Path $run 'jmeter.console.txt')
+$console = & java @jargs 2>&1 | ForEach-Object { $line = "$_"; Write-Host $line; $line }
 $exit = $LASTEXITCODE
+# Tee-Object của PS 5.1 ghi UTF-16 → tự ghi UTF-8 không BOM
+[IO.File]::WriteAllLines((Join-Path $run 'jmeter.console.txt'), [string[]]@($console), (New-Object Text.UTF8Encoding $false))
 $end = (Get-Date).ToString('o')
 
 # 4. dừng typeperf, RUN.md
