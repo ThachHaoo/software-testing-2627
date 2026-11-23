@@ -106,7 +106,7 @@ Thứ tự: **smoke → load → stress → soak → spike**.
 - **Soak:**
   - Mức tải = 70–80% mức ổn định tìm được ở stress, chạy 10–15 phút.
   - Tên `23120255_Soak_YYYYMMDD`, không gắn listener, chỉ ghi `.jtl`.
-  - `typeperf` ghi CPU/RAM của tiến trình `node` ra CSV trong `HW05/env/`.
+  - `run_scenario.ps1` lấy mẫu 1 s CPU/RAM theo PID backend + PID JMeter ra `runs/<plan>_<ts>/monitor.csv`.
   - Kết quả báo endurance threshold (RPS tối đa ổn định, trần bộ nhớ) bằng số.
 
 **Rủi ro dung lượng** (Moodle ≤ 20 file, mỗi file ≤ 20 MB; zip tạo bằng `git archive`):
@@ -148,6 +148,7 @@ Thứ tự: **smoke → load → stress → soak → spike**.
 - Vá harness theo review của **phiên thảo luận** (23/11):
   - A1: giữ bố cục `runs/<plan>_<ts>/`; sửa report_plan và dàn ý cho khớp; thêm `-Official` (RUN.md ghi lượt chính thức); smoke export-ignore.
   - A2: listener trong `.jmx` không ghi file (trước ghi CSV trùng jtl); bằng chứng report view = GUI → listener → Browse jtl chính thức → chụp.
+  - A3: bỏ typeperf theo tên instance (dễ lệch khi nhiều node); lấy mẫu 1 s theo PID backend + PID JMeter → `monitor.csv`; RUN.md ghi heap JMeter + RAM trống lúc bắt đầu.
 - Lỗi do AI, phát hiện sau: `[...]`
 
 ## g2. Nguồn tham khảo bên ngoài

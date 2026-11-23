@@ -1,6 +1,6 @@
 ---
 name: jmeter-perf-testing
-description: Kiểm thử hiệu năng backend REST bằng JMeter theo 10 bước có điểm dừng cho người review — khảo sát SUT → workflow → tham số scenario (smoke/load/stress/soak/spike) → sinh .jmx từ perf_plan.json + kiểm tra → smoke → SV review → chạy non-GUI kèm typeperf → AI phân tích jtl (đối chiếu stats_truth) → AI đề xuất tối ưu (SV phân loại) → render bảng vào report. Output AI đóng băng trước khi sửa; tên plan {MSSV}_{Type}_{YYYYMMDD}. Dùng khi người dùng nói "performance test", "load/stress/spike/soak test", "JMeter", "jtl", "endurance threshold", "HW05", hoặc gọi /jmeter-perf-testing kèm thư mục bài và số bước.
+description: Kiểm thử hiệu năng backend REST bằng JMeter theo 10 bước có điểm dừng cho người review — khảo sát SUT → workflow → tham số scenario (smoke/load/stress/soak/spike) → sinh .jmx từ perf_plan.json + kiểm tra → smoke → SV review → chạy non-GUI kèm giám sát CPU/RAM theo PID → AI phân tích jtl (đối chiếu stats_truth) → AI đề xuất tối ưu (SV phân loại) → render bảng vào report. Output AI đóng băng trước khi sửa; tên plan {MSSV}_{Type}_{YYYYMMDD}. Dùng khi người dùng nói "performance test", "load/stress/spike/soak test", "JMeter", "jtl", "endurance threshold", "HW05", hoặc gọi /jmeter-perf-testing kèm thư mục bài và số bước.
 ---
 
 # Kiểm thử hiệu năng bằng JMeter, từng bước
@@ -17,7 +17,7 @@ Mỗi lần gọi skill **chỉ làm một bước rồi dừng** để người
 | Kế hoạch | `perf_plan.json` |
 | CSV | `data/` |
 | Test plan | `testplans/<MSSV>_<Type>_<YYYYMMDD>.jmx` |
-| Lượt chạy | `runs/<plan>_<ts>/` (jtl, `html/`, `typeperf_node.csv`, `RUN.md`) |
+| Lượt chạy | `runs/<plan>_<ts>/` (jtl, `html/`, `monitor.csv`, `RUN.md`) |
 | Phân tích | `analysis/` |
 | Đóng băng | `appendix/ai-outputs/step<k>/` |
 
@@ -101,7 +101,7 @@ Mỗi lần gọi skill **chỉ làm một bước rồi dừng** để người
 - Lượt chính thức chạy `run_scenario.ps1 -Official` (RUN.md ghi "Lượt chính thức: CÓ"); smoke/lượt thử không có `-Official` và được export-ignore (`runs/*_Smoke_*`, lượt thử thêm từng dòng vào `.gitattributes`).
 - Mỗi lượt nằm trong `runs/<plan>_<yyyyMMddTHHmmss>/`; script tự làm:
   - restart backend;
-  - typeperf CPU/RAM tiến trình node;
+  - lấy mẫu mỗi 1 s theo PID backend + PID JMeter (CPU% cả máy, WorkingSet, PrivateBytes, RAM trống) → `monitor.csv`;
   - `java -jar ApacheJMeter.jar -n -t -l -e -o`;
   - ghi `RUN.md`.
 - GUI chỉ dùng để chụp hoặc quay ở tải nhỏ (H2 = a), mở cùng khung hình với Task Manager.
@@ -111,7 +111,7 @@ Mỗi lần gọi skill **chỉ làm một bước rồi dừng** để người
 
 ### 7 – AI phân tích (AI → đóng băng → SV tìm chỗ đọc sai)
 
-- AI đọc jtl, `html/statistics.json` và `typeperf_node.csv`, rồi viết phân tích và đề xuất ngưỡng vào `analysis/ai_analysis_<scenario>.md` (H3 = b: được xem cả jtl lẫn stats_truth).
+- AI đọc jtl, `html/statistics.json` và `monitor.csv`, rồi viết phân tích và đề xuất ngưỡng vào `analysis/ai_analysis_<scenario>.md` (H3 = b: được xem cả jtl lẫn stats_truth).
 - `jtl_stats.py <jtl> --json stats_truth.json --md stats_truth.md --compare html/statistics.json` cho ra số liệu chuẩn, kèm phần trăm lệch với HTML report.
 - `freeze.py --step 7` → commit → **dừng**. SV tự đối chiếu và viết chỗ AI đọc sai kèm giá trị đúng từ jtl. AI không chỉ ra chỗ sai của chính mình.
 
@@ -167,7 +167,7 @@ python $S/render_md.py HW05/23120255_HW05_Report.md load_stats HW05/runs/<run>/s
   - Thread Group theo stage, Thread Group lockout;
   - listener (không ghi file; xem bằng chứng report view ở bước 6).
 - `scripts/check_plan.py`: kiểm plan và `.jmx` (xem bước 3).
-- `scripts/run_scenario.ps1`: restart backend, typeperf, JMeter non-GUI, `RUN.md`.
+- `scripts/run_scenario.ps1`: restart backend, JMeter non-GUI, `monitor.csv` theo PID, `RUN.md` (heap, RAM trống lúc bắt đầu, `-Official`).
 - `scripts/jtl_stats.py`: số liệu theo label (percentile tính như JMeter), timeline theo phút, lỗi hay gặp, đối chiếu `statistics.json`.
 - `scripts/freeze.py`: đóng băng output AI theo `step<k>/`, không ghi đè; file `.jmx` đổi đuôi thành `.jmx.txt`.
 - `scripts/render_md.py`: chèn nội dung giữa marker.

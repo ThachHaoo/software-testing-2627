@@ -14,11 +14,13 @@
 <#
   Chạy MỘT scenario JMeter ở chế độ non-GUI (H2=a) và gom bằng chứng vào <OutDir>\<plan>_<yyyyMMddTHHmmss>\:
     1. restart backend EShop (CSDL seed lại, xoá trạng thái khoá) – trừ khi -NoRestart
-    2. typeperf ghi CPU/RAM tiến trình node (PID backend) + CPU tổng + RAM trống ra typeperf_node.csv mỗi -SampleSec giây
-    3. java -jar ApacheJMeter.jar -n -t <jmx> -l <plan>.jtl -e -o html -j jmeter.log -Jlistener.dir=<run>
-    4. dừng typeperf, ghi RUN.md (giờ ISO, hostname, commit repo + SUT, sha256 jmx, lệnh, exit code, số dòng jtl)
+    2. java -jar ApacheJMeter.jar -n -t <jmx> -l <plan>.jtl -e -o html -j jmeter.log (tiến trình riêng, biết PID)
+    3. trong lúc JMeter chạy: mỗi -SampleSec giây lấy mẫu theo PID backend (node) + PID JMeter (java):
+       CPU% (theo cả máy = Δ thời gian CPU / Δ thời gian thực / số luồng logic), WorkingSet, PrivateBytes, RAM trống
+       → monitor.csv. Lấy theo PID (Get-Process -Id), không theo tên instance counter (node#1… đổi khi có nhiều node).
+    4. ghi RUN.md (lượt chính thức?, giờ ISO, hostname, heap JMeter, RAM trống lúc bắt đầu, commit repo + SUT,
+       sha256 jmx, lệnh, exit code, số dòng jtl)
   Gọi java trực tiếp (không qua jmeter.bat) để không bị lệnh "pause" của jmeter.bat treo khi JMeter lỗi.
-  "% Processor Time" của tiến trình là tổng trên mọi lõi (có thể > 100) – chia cho số luồng logic khi báo cáo.
 
   Ví dụ:
     powershell -ExecutionPolicy Bypass -File .claude\skills\jmeter-perf-testing\scripts\run_scenario.ps1 `
@@ -69,33 +71,53 @@ if (-not $NoRestart) {
   $nodePid = $c.OwningProcess
 }
 
-# 2. typeperf theo PID
-$inst = (Get-Counter '\Process(node*)\ID Process' -ErrorAction SilentlyContinue).CounterSamples |
-          Where-Object { [int]$_.CookedValue -eq $nodePid } | Select-Object -First 1 -ExpandProperty InstanceName
-$tpCsv = Join-Path $run 'typeperf_node.csv'
-$tp = $null
-if ($inst) {
-  $ctr = @("\Process($inst)\% Processor Time", "\Process($inst)\Working Set - Private", "\Process($inst)\Private Bytes",
-           '\Processor(_Total)\% Processor Time', '\Memory\Available MBytes') | ForEach-Object { '"' + $_ + '"' }
-  $tp = Start-Process -FilePath 'typeperf' -ArgumentList ($ctr + @('-si', $SampleSec, '-f', 'CSV', '-o', "`"$tpCsv`"", '-y')) `
-          -WindowStyle Hidden -PassThru
-} else { Write-Warning "Không tìm được instance counter cho PID $nodePid – bỏ typeperf" }
-
-# 3. JMeter non-GUI
+# 2. JMeter non-GUI (tiến trình riêng để biết PID)
 $jtl = Join-Path $run "$plan.jtl"
 $html = Join-Path $run 'html'
 $jargs = @($Heap -split ' ' | Where-Object { $_ }) + @('-jar', $jar, '-n', '-t', $Jmx, '-l', $jtl, '-e', '-o', $html,
           '-j', (Join-Path $run 'jmeter.log'), '-Jjmeter.save.saveservice.output_format=csv')
+$quoted = $jargs | ForEach-Object { if ($_ -match '\s') { '"' + $_ + '"' } else { $_ } }
+$os0 = Get-CimInstance Win32_OperatingSystem
+$freeStartMB = [Math]::Round($os0.FreePhysicalMemory / 1024)
+$totalMB = [Math]::Round($os0.TotalVisibleMemorySize / 1024)
+$ncpu = [Environment]::ProcessorCount
 $start = (Get-Date).ToString('o')
-$ErrorActionPreference = 'Continue'   # JMeter/log4j ghi cảnh báo ra stderr – PS 5.1 không được coi là lỗi
-$console = & java @jargs 2>&1 | ForEach-Object { $line = "$_"; Write-Host $line; $line }
-$exit = $LASTEXITCODE
-# Tee-Object của PS 5.1 ghi UTF-16 → tự ghi UTF-8 không BOM
-[IO.File]::WriteAllLines((Join-Path $run 'jmeter.console.txt'), [string[]]@($console), (New-Object Text.UTF8Encoding $false))
-$end = (Get-Date).ToString('o')
+$jp = Start-Process -FilePath 'java' -ArgumentList $quoted -NoNewWindow -PassThru `
+        -RedirectStandardOutput (Join-Path $run 'jmeter.console.txt') -RedirectStandardError (Join-Path $run 'jmeter.console.err.txt')
+$null = $jp.Handle   # PS 5.1: giữ handle để đọc được ExitCode sau khi tiến trình kết thúc
 
-# 4. dừng typeperf, RUN.md
-if ($tp) { Start-Sleep -Seconds ([Math]::Max(1, $SampleSec)); Stop-Process -Id $tp.Id -Force -ErrorAction SilentlyContinue }
+# 3. lấy mẫu theo PID tới khi JMeter kết thúc
+$mon = Join-Path $run 'monitor.csv'
+$sw = New-Object IO.StreamWriter($mon, $false, (New-Object Text.UTF8Encoding $false))
+$sw.WriteLine('time_iso,elapsed_s,role,pid,cpu_pct_machine,working_set_mb,private_mb,avail_mb')
+$prev = @{}; $t0 = Get-Date
+while (-not $jp.HasExited) {
+  $now = Get-Date
+  $avail = [Math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1024)
+  foreach ($r in @(@('backend', $nodePid), @('jmeter', $jp.Id))) {
+    $p = Get-Process -Id $r[1] -ErrorAction SilentlyContinue
+    if (-not $p) { continue }
+    $cpuT = $p.TotalProcessorTime.TotalMilliseconds
+    $pct = ''
+    if ($prev.ContainsKey($r[0])) {
+      $dt = ($now - $prev[$r[0]][1]).TotalMilliseconds
+      if ($dt -gt 0) { $pct = [Math]::Round(100 * ($cpuT - $prev[$r[0]][0]) / $dt / $ncpu, 2) }
+    }
+    $prev[$r[0]] = @($cpuT, $now)
+    $sw.WriteLine(('{0},{1},{2},{3},{4},{5},{6},{7}' -f $now.ToString('o'), [Math]::Round(($now - $t0).TotalSeconds, 1),
+      $r[0], $r[1], $pct, [Math]::Round($p.WorkingSet64 / 1MB, 1), [Math]::Round($p.PrivateMemorySize64 / 1MB, 1), $avail))
+  }
+  $sw.Flush()
+  Start-Sleep -Seconds $SampleSec
+}
+$sw.Close()
+$jp.WaitForExit()
+$exit = $jp.ExitCode
+$end = (Get-Date).ToString('o')
+Get-Content (Join-Path $run 'jmeter.console.txt') -Tail 8 | ForEach-Object { Write-Host $_ }
+
+# 4. RUN.md
+$ErrorActionPreference = 'Continue'   # java -version/git ghi ra stderr – PS 5.1 không được coi là lỗi
 if ($StopBackend) { Stop-Process -Id $nodePid -Force -ErrorAction SilentlyContinue }
 $rows = if (Test-Path $jtl) { (Get-Content $jtl | Measure-Object -Line).Lines - 1 } else { 0 }
 $jtlBytes = if (Test-Path $jtl) { (Get-Item $jtl).Length } else { 0 }
@@ -116,16 +138,17 @@ $md = @"
 | Bắt đầu JMeter (ISO) | $start |
 | Kết thúc JMeter (ISO) | $end |
 | Restart backend lúc | $(if ($restartAt) { $restartAt } else { 'không restart (-NoRestart)' }) |
-| PID node / instance counter | $nodePid / $inst |
+| PID backend (node) / JMeter (java) | $nodePid / $($jp.Id) |
 | Test plan | ``$Jmx`` |
 | sha256 test plan | ``$sha`` |
 | Commit repo / SUT | ``$gitRepo`` / ``$gitSut`` |
 | JMeter / Java | $JmeterHome / $java |
 | Heap JMeter | ``$Heap`` |
+| RAM trống lúc bắt đầu / tổng | $freeStartMB MB / $totalMB MB |
 | Exit code JMeter | $exit |
 | jtl | ``$plan.jtl`` – $rows dòng, $jtlBytes byte |
 | HTML report | ``html/index.html`` (số liệu: ``html/statistics.json``) |
-| typeperf | ``typeperf_node.csv`` (mỗi $SampleSec s; % Processor Time của tiến trình = tổng các lõi) |
+| Giám sát tài nguyên | ``monitor.csv`` (mỗi $SampleSec s, theo PID; cpu_pct_machine = % của cả máy, $ncpu luồng logic) |
 
 Lệnh JMeter:
 

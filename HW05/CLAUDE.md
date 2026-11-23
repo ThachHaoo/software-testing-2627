@@ -68,7 +68,7 @@ Chi tiết LK (lockout và reset):
 - **Soak:**
   - Mức tải = 70–80% mức ổn định tìm được ở stress, chạy 10–15 phút.
   - Tên `23120255_Soak_YYYYMMDD`, không gắn listener.
-  - `typeperf` ghi CPU/RAM của tiến trình `node` ra CSV.
+  - `run_scenario.ps1` lấy mẫu 1 s theo PID backend + JMeter ra `monitor.csv` (thay typeperf).
 - **Trước mỗi lượt:** restart backend và ghi lại các bước reset.
 
 ## 6. Giới hạn riêng HW05 (bổ sung mục 3 của `CLAUDE.md` gốc)

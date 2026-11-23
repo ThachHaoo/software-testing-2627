@@ -45,7 +45,7 @@ Nguồn tham khảo: **QAInsights/perf-skills**, https://github.com/QAInsights/p
 - Không kết luận chỉ dựa vào trung bình. Báo p50, p95, p99 và max; p95 là chỉ số SLA thông dụng, p99 cho thấy đuôi phân phối.
 - Đọc throughput cùng với số thread đang hoạt động: throughput đi ngang trong khi thread tăng là dấu hiệu bão hoà. Error rate phải tách theo mã phản hồi.
 - Thứ tự cô lập nút thắt: error rate → throughput đi ngang → CPU > 80% → truy vấn CSDL chậm → tràn pool hoặc kết nối → mạng.
-  - → skill này: bước 7 đối chiếu với `typeperf_node.csv`. SUT không có pool, chỉ có một kết nối SQLite (`sut_recon.md` §3), nên mọi kết luận về pool phải dựa vào mã thật.
+  - → skill này: bước 7 đối chiếu với `monitor.csv` (CPU/RAM theo PID backend và JMeter). SUT không có pool, chỉ có một kết nối SQLite (`sut_recon.md` §3), nên mọi kết luận về pool phải dựa vào mã thật.
 - Trích số liệu từ jtl bằng script.
   - → skill này: `jtl_stats.py` tính percentile theo cách của JMeter và đối chiếu với `statistics.json` của HTML report.
 
