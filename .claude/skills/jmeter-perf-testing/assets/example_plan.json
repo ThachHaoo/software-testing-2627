@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "mssv": "23120255",
+    "hw": "example",
+    "description": "Ví dụ NHỎ cho skill: chỉ GET /api/products?search= (read-heavy), không login – KHÔNG phải workflow chính của bài.",
+    "sut": "tkob-team/eshop-sut @ de0f48f",
+    "base": {"protocol": "http", "host": "localhost", "port": 3000, "connect_timeout_ms": 5000, "response_timeout_ms": 30000},
+    "plan_dir": "testplans",
+    "lockout_required": false,
+    "auth_header": "Bearer ${token}"
+  },
+  "data": [
+    {
+      "id": "keywords",
+      "file": "data/example_keywords.csv",
+      "columns": ["keyword"],
+      "scope": "main",
+      "share": "all",
+      "recycle": true,
+      "stop_thread": false,
+      "generator": {"type": "values", "values": ["iPhone", "Samsung", "MacBook", "AirPods", "Keychron"]},
+      "note": "Từ khoá khớp tên sản phẩm seed (database.js:95-101) → mỗi tìm kiếm trả ≥ 1 dòng"
+    }
+  ],
+  "setup": [],
+  "workflow": [
+    {
+      "id": "search",
+      "label": "01_GET_products_search",
+      "method": "GET",
+      "path": "/api/products?search=${keyword}",
+      "auth": false,
+      "body": null,
+      "once_per_vu": false,
+      "think_before_ms": {"type": "uniform", "min": 500, "max": 1500},
+      "extract": [],
+      "source": "server.js:141-157"
+    }
+  ],
+  "assertions": {
+    "search": [
+      {"type": "code", "equals": "200"},
+      {"type": "json", "path": "$[0].id", "name": "Có ≥ 1 sản phẩm trong kết quả"},
+      {"type": "duration", "ms": 2000}
+    ]
+  },
+  "lockout_flow": {"enabled": false},
+  "scenarios": {
+    "smoke":  {"groups": [{"name": "smoke", "threads": 1, "ramp_s": 1, "delay_s": 0, "duration_s": 30}], "lockout": false},
+    "load":   {"groups": [{"name": "ổn định", "threads": 10, "ramp_s": 30, "delay_s": 0, "duration_s": 300}]},
+    "stress": {"groups": [
+      {"name": "bậc 1", "threads": 10, "ramp_s": 10, "delay_s": 0,   "duration_s": 360},
+      {"name": "bậc 2", "threads": 10, "ramp_s": 10, "delay_s": 90,  "duration_s": 270},
+      {"name": "bậc 3", "threads": 10, "ramp_s": 10, "delay_s": 180, "duration_s": 180},
+      {"name": "bậc 4", "threads": 10, "ramp_s": 10, "delay_s": 270, "duration_s": 90}
+    ]},
+    "soak":   {"groups": [{"name": "duy trì", "threads": 8, "ramp_s": 30, "delay_s": 0, "duration_s": 600}], "lockout": false},
+    "spike":  {"groups": [
+      {"name": "nền", "threads": 5, "ramp_s": 10, "delay_s": 0, "duration_s": 300},
+      {"name": "đột biến", "threads": 50, "ramp_s": 2, "delay_s": 120, "duration_s": 60}
+    ]}
+  },
+  "listeners": {
+    "smoke":  [{"type": "summary", "file": true}],
+    "load":   [{"type": "aggregate", "file": true}],
+    "stress": [{"type": "summary", "file": true}],
+    "soak":   [],
+    "spike":  [{"type": "view_results_tree", "errors_only": true, "file": true}, {"type": "response_time_graph", "file": false}]
+  },
+  "thresholds": {"p95_ms": {"*": 1000}, "error_pct": 1.0},
+  "review_log": [],
+  "assumptions": [
+    "Ví dụ minh hoạ skill; tham số tải không được chọn cho bài thật."
+  ]
+}
