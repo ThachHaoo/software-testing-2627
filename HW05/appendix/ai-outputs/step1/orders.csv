@@ -1,0 +1,9 @@
+product_id,product_name,unit_price,quantity,total_amount
+1,iPhone 15 Pro Max,30000000,1,30000000
+2,Samsung Galaxy S24 Ultra,28000000,1,28000000
+3,MacBook Pro M3,45000000,1,45000000
+4,Tai nghe AirPods Pro 2,6000000,2,12000000
+5,Bàn phím cơ Keychron Q1,4000000,3,12000000
+4,Tai nghe AirPods Pro 2,6000000,1,6000000
+5,Bàn phím cơ Keychron Q1,4000000,1,4000000
+1,iPhone 15 Pro Max,30000000,2,60000000

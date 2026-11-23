@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "mssv": "23120255",
+    "hw": "HW05",
+    "description": "Workflow C: POST /api/login → GET /api/products → POST /api/checkout → GET /api/orders/my-orders (bản AI, bước 1 – chưa có tham số scenario)",
+    "sut": "tkob-team/eshop-sut @ de0f48f",
+    "base": {"protocol": "http", "host": "localhost", "port": 3000, "connect_timeout_ms": 5000, "response_timeout_ms": 30000},
+    "plan_dir": "testplans",
+    "lockout_required": true,
+    "auth_header": "Bearer ${token}"
+  },
+  "data": [
+    {
+      "id": "users",
+      "file": "data/users.csv",
+      "columns": ["email", "password", "name"],
+      "scope": "main",
+      "share": "all",
+      "recycle": true,
+      "stop_thread": false,
+      "generator": {"type": "users", "count": 200, "start": 1, "email": "perf{i}@eshop.test", "password": "Perf@1234", "name": "Perf User {i}"},
+      "note": "Chỉ credential đúng (D2). Đăng ký lại ở setUp mỗi lượt (D1). Số dòng phải ≥ số VU đỉnh – 200 là giá trị tạm, chốt ở bước 2."
+    },
+    {
+      "id": "lockout_users",
+      "file": "data/lockout_users.csv",
+      "columns": ["email", "password", "name"],
+      "scope": "lockout",
+      "share": "group",
+      "recycle": false,
+      "stop_thread": true,
+      "generator": {"type": "users", "count": 20, "start": 1, "email": "lock{i}@eshop.test", "password": "Lock@1234", "name": "Lock User {i}"},
+      "note": "Tập user riêng cho luồng cố ý sai (D2); không chung email với users.csv. Mỗi vòng lockout dùng 1 user mới nên không phải chờ hết thời gian khoá."
+    },
+    {
+      "id": "orders",
+      "file": "data/orders.csv",
+      "columns": ["product_id", "product_name", "unit_price", "quantity", "total_amount"],
+      "scope": "main",
+      "share": "all",
+      "recycle": true,
+      "stop_thread": false,
+      "generator": {"type": "values", "values": [
+        [1, "iPhone 15 Pro Max", 30000000, 1, 30000000],
+        [2, "Samsung Galaxy S24 Ultra", 28000000, 1, 28000000],
+        [3, "MacBook Pro M3", 45000000, 1, 45000000],
+        [4, "Tai nghe AirPods Pro 2", 6000000, 2, 12000000],
+        [5, "Bàn phím cơ Keychron Q1", 4000000, 3, 12000000],
+        [4, "Tai nghe AirPods Pro 2", 6000000, 1, 6000000],
+        [5, "Bàn phím cơ Keychron Q1", 4000000, 1, 4000000],
+        [1, "iPhone 15 Pro Max", 30000000, 2, 60000000]
+      ]},
+      "note": "Sản phẩm + giá lấy từ seed (database.js:95-101); total_amount = unit_price × quantity."
+    }
+  ],
+  "setup": [
+    {
+      "name": "đăng ký user chính",
+      "data": "users",
+      "requests": [
+        {
+          "id": "setup_register_user",
+          "label": "00_setup_register_user",
+          "method": "POST",
+          "path": "/api/register",
+          "auth": false,
+          "body": "{\"name\":\"${name}\",\"email\":\"${email}\",\"password\":\"${password}\"}",
+          "source": "server.js:20-30"
+        }
+      ]
+    },
+    {
+      "name": "đăng ký user lockout",
+      "data": "lockout_users",
+      "requests": [
+        {
+          "id": "setup_register_lockout",
+          "label": "00_setup_register_lockout",
+          "method": "POST",
+          "path": "/api/register",
+          "auth": false,
+          "body": "{\"name\":\"${name}\",\"email\":\"${email}\",\"password\":\"${password}\"}",
+          "source": "server.js:20-30"
+        }
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "id": "login",
+      "label": "01_POST_login",
+      "method": "POST",
+      "path": "/api/login",
+      "auth": false,
+      "body": "{\"email\":\"${email}\",\"password\":\"${password}\"}",
+      "once_per_vu": false,
+      "think_before_ms": {"type": "uniform", "min": 1000, "max": 3000},
+      "extract": [{"type": "json", "var": "token", "path": "$.token", "default": "NOT_FOUND"}],
+      "source": "server.js:32-66"
+    },
+    {
+      "id": "products",
+      "label": "02_GET_products",
+      "method": "GET",
+      "path": "/api/products",
+      "auth": false,
+      "body": null,
+      "once_per_vu": false,
+      "think_before_ms": {"type": "uniform", "min": 1000, "max": 3000},
+      "extract": [],
+      "source": "server.js:141-157"
+    },
+    {
+      "id": "checkout",
+      "label": "03_POST_checkout",
+      "method": "POST",
+      "path": "/api/checkout",
+      "auth": true,
+      "body": "{\"items\":[{\"id\":${product_id},\"name\":\"${product_name}\",\"price\":${unit_price},\"quantity\":${quantity}}],\"total_amount\":${total_amount},\"coupon_id\":null}",
+      "once_per_vu": false,
+      "think_before_ms": {"type": "uniform", "min": 2000, "max": 5000},
+      "extract": [{"type": "json", "var": "orderId", "path": "$.orderId", "default": "NOT_FOUND"}],
+      "source": "server.js:297-309, Checkout.jsx:45-48"
+    },
+    {
+      "id": "my_orders",
+      "label": "04_GET_my_orders",
+      "method": "GET",
+      "path": "/api/orders/my-orders",
+      "auth": true,
+      "body": null,
+      "once_per_vu": false,
+      "think_before_ms": {"type": "uniform", "min": 1000, "max": 2000},
+      "extract": [],
+      "source": "server.js:311-319"
+    }
+  ],
+  "assertions": {
+    "setup_register_user": [
+      {"type": "code", "equals": "200"},
+      {"type": "json", "path": "$.message", "value": "User registered successfully"}
+    ],
+    "setup_register_lockout": [
+      {"type": "code", "equals": "200"},
+      {"type": "json", "path": "$.message", "value": "User registered successfully"}
+    ],
+    "login": [
+      {"type": "code", "equals": "200"},
+      {"type": "json", "path": "$.token", "name": "Có token JWT"}
+    ],
+    "products": [
+      {"type": "code", "equals": "200"},
+      {"type": "json", "path": "$[0].id", "name": "Danh sách sản phẩm không rỗng"}
+    ],
+    "checkout": [
+      {"type": "code", "equals": "200"},
+      {"type": "json", "path": "$.message", "value": "Checkout successful"},
+      {"type": "json", "path": "$.orderId", "name": "Có orderId"}
+    ],
+    "my_orders": [
+      {"type": "code", "equals": "200"},
+      {"type": "contains", "text": "\"id\":${orderId},", "name": "Đơn vừa tạo có trong lịch sử"}
+    ],
+    "lock_wrong_1": [
+      {"type": "code", "equals": "401"},
+      {"type": "not_contains", "text": "\"token\"", "name": "Không cấp token khi sai mật khẩu"}
+    ],
+    "lock_wrong_2": [
+      {"type": "code", "equals": "401"},
+      {"type": "not_contains", "text": "\"token\"", "name": "Không cấp token khi sai mật khẩu"}
+    ],
+    "lock_wrong_3": [
+      {"type": "not_contains", "text": "\"token\"", "name": "Không cấp token khi sai mật khẩu"}
+    ],
+    "lock_correct_after": [
+      {"type": "not_contains", "text": "\"token\"", "name": "Đang khoá: mật khẩu đúng cũng không được cấp token"},
+      {"type": "contains", "text": "khóa", "name": "Có thông báo khoá"}
+    ]
+  },
+  "lockout_flow": {
+    "enabled": true,
+    "data": "lockout_users",
+    "threads": 1,
+    "ramp_s": 1,
+    "loops": 20,
+    "delay_s": 0,
+    "requests": [
+      {
+        "id": "lock_wrong_1",
+        "label": "L1_POST_login_sai_1",
+        "method": "POST",
+        "path": "/api/login",
+        "auth": false,
+        "body": "{\"email\":\"${email}\",\"password\":\"WrongPass1!\"}",
+        "think_before_ms": {"type": "constant", "ms": 500},
+        "source": "server.js:32-66"
+      },
+      {
+        "id": "lock_wrong_2",
+        "label": "L2_POST_login_sai_2",
+        "method": "POST",
+        "path": "/api/login",
+        "auth": false,
+        "body": "{\"email\":\"${email}\",\"password\":\"WrongPass2!\"}",
+        "think_before_ms": {"type": "constant", "ms": 500},
+        "source": "server.js:32-66"
+      },
+      {
+        "id": "lock_wrong_3",
+        "label": "L3_POST_login_sai_3",
+        "method": "POST",
+        "path": "/api/login",
+        "auth": false,
+        "body": "{\"email\":\"${email}\",\"password\":\"WrongPass3!\"}",
+        "think_before_ms": {"type": "constant", "ms": 500},
+        "source": "server.js:32-66"
+      },
+      {
+        "id": "lock_correct_after",
+        "label": "L4_POST_login_dung_khi_khoa",
+        "method": "POST",
+        "path": "/api/login",
+        "auth": false,
+        "body": "{\"email\":\"${email}\",\"password\":\"${password}\"}",
+        "think_before_ms": {"type": "constant", "ms": 500},
+        "source": "server.js:32-66"
+      }
+    ]
+  },
+  "scenarios": {},
+  "listeners": {},
+  "thresholds": {},
+  "review_log": [],
+  "assumptions": [
+    "A1 – Login chạy MỖI vòng lặp (once_per_vu = false) để nhóm auth-heavy chịu tải đúng nghĩa; JWT không hết hạn (server.js:51) nên login một lần/VU cũng chạy được nhưng sẽ gần như bỏ trống nhóm auth.",
+    "A2 – Body checkout mô phỏng web: {items, total_amount, coupon_id: null} (Checkout.jsx:45-48); web không gửi shipping_address nên plan cũng không gửi. Backend bỏ qua items/coupon_id và lưu total_amount do client gửi (server.js:299-303).",
+    "A3 – Assertion my-orders dùng chuỗi \"id\":<orderId>, thay vì $[0].id = orderId, vì nhiều VU có thể dùng chung user (CSV share all + recycle) và chèn đơn xen giữa checkout và my-orders.",
+    "A4 – Luồng lockout theo SRS FR-02 (README.md:40-42): 3 lần sai liên tiếp → khoá. Lần sai 1–2 kỳ vọng 401 như code (server.js:63); SRS không nói mã/thông báo khi khoá – chuỗi 'khóa' lấy từ thông báo trong code (server.js:43) là giả định; lần sai thứ 3 chỉ assert không có token vì SRS không nói phản hồi của chính lần đó.",
+    "A5 – Mật khẩu user test thoả quy tắc mật khẩu mạnh SRS FR-01 (README.md:33) dù backend không kiểm (server.js:20-30); email dạng perf{i}@eshop.test / lock{i}@eshop.test, duy nhất (users.email không UNIQUE – database.js:52-63).",
+    "A6 – Số user chính (200) và số vòng lockout (20) là giá trị tạm; bước 2 chốt theo số VU đỉnh (users.csv ≥ VU đỉnh).",
+    "A7 – Think time trong workflow là giá trị tạm (uniform 1–3 s, checkout 2–5 s); bước 2 chốt cùng tham số scenario.",
+    "A8 – Chưa có Duration Assertion: ngưỡng thời gian phản hồi thuộc thresholds của bước 2.",
+    "A9 – SRS không có yêu cầu phi chức năng (hiệu năng); mọi ngưỡng sẽ là giả định SV chốt."
+  ]
+}
