@@ -99,6 +99,7 @@ Scenario có thể tắt luồng này bằng `"lockout": false` (vd smoke, soak)
 |---|---|
 | `groups` | `[{"name","threads","ramp_s","delay_s","duration_s"}]` (hoặc `loops` thay cho `duration_s`). Mỗi group là một Thread Group lõi |
 | `lockout` | `false` thì không sinh luồng lockout trong plan này |
+| `think_scale` | Hệ số nhân mọi `think_before_ms` của workflow trong plan này (mặc định 1.0; 0 = bỏ timer). Dùng khi stress/soak cần nhiều req/s hơn mà không tăng số thread quá sức máy sinh tải. Không áp cho setUp và luồng lockout |
 | `rationale` | Lý do chọn tham số: λ mục tiêu, W = RT + think, N theo Little's Law, nguồn số liệu (vd kết quả smoke) |
 
 - Stress dạng bậc thang: các group bắt đầu lệch nhau theo `delay_s` và cùng kết thúc.

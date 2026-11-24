@@ -149,6 +149,7 @@ Thứ tự: **smoke → load → stress → soak → spike**.
   - A1: giữ bố cục `runs/<plan>_<ts>/`; sửa report_plan và dàn ý cho khớp; thêm `-Official` (RUN.md ghi lượt chính thức); smoke export-ignore.
   - A2: listener trong `.jmx` không ghi file (trước ghi CSV trùng jtl); bằng chứng report view = GUI → listener → Browse jtl chính thức → chụp.
   - A3: bỏ typeperf theo tên instance (dễ lệch khi nhiều node); lấy mẫu 1 s theo PID backend + PID JMeter → `monitor.csv`; RUN.md ghi heap JMeter + RAM trống lúc bắt đầu.
+  - T1-2 (AI tự thêm khi làm bước 2, 25/11): `gen_jmx.py` hỗ trợ `scenarios.<s>.think_scale` – think time chung của workflow không cho stress/soak đạt req/s cao với số thread máy chịu được.
 - Lỗi do AI, phát hiện sau: `[...]`
 
 ## g2. Nguồn tham khảo bên ngoài

@@ -93,9 +93,11 @@ def csv_dataset(d, jmx_dir, hw_dir):
     ])
 
 
-def timer(t):
-    if not t:
+def timer(t, scale=1.0):
+    """Timer chạy trước sampler; scale = scenarios.<s>.think_scale (nhân mọi giá trị ms)."""
+    if not t or scale == 0:
         return ""
+    t = {k: (round(v * scale) if k in ("ms", "min", "max", "dev") else v) for k, v in t.items()}
     kind = t.get("type", "constant")
     if kind == "constant":
         return el("ConstantTimer", "ConstantTimerGui", "ConstantTimer", f"Think {t['ms']} ms", [s("ConstantTimer.delay", t["ms"])])
@@ -143,7 +145,7 @@ def extractor(x):
     ])
 
 
-def sampler(r, asserts, auth_header):
+def sampler(r, asserts, auth_header, scale=1.0):
     body = r.get("body")
     if isinstance(body, (dict, list)):
         body = json.dumps(body, ensure_ascii=False)
@@ -161,7 +163,7 @@ def sampler(r, asserts, auth_header):
               b("HTTPSampler.follow_redirects", False), b("HTTPSampler.auto_redirects", False),
               b("HTTPSampler.use_keepalive", True), b("HTTPSampler.DO_MULTIPART_POST", False),
               s("TestPlan.comments", f"nguồn: {r.get('source', '?')}")]
-    kids = timer(r.get("think_before_ms"))
+    kids = timer(r.get("think_before_ms"), scale)
     if r.get("auth"):
         kids += header_manager("Authorization", {"Authorization": auth_header})
     kids += "".join(extractor(x) for x in r.get("extract", []))
@@ -169,11 +171,11 @@ def sampler(r, asserts, auth_header):
     return el("HTTPSamplerProxy", "HttpTestSampleGui", "HTTPSamplerProxy", r["label"], props, kids)
 
 
-def requests_tree(reqs, plan):
+def requests_tree(reqs, plan, scale=1.0):
     auth = plan["meta"].get("auth_header", "Bearer ${token}")
     out, once = "", ""
     for r in reqs:
-        x = sampler(r, plan.get("assertions", {}).get(r["id"], []), auth)
+        x = sampler(r, plan.get("assertions", {}).get(r["id"], []), auth, scale)
         if r.get("once_per_vu"):
             once += x
         else:
@@ -229,7 +231,7 @@ def build(plan, scen, date, jmx_dir, hw_dir):
     main_csv = "".join(csv_dataset(d, jmx_dir, hw_dir) for d in plan.get("data", []) if d.get("scope", "main") == "main")
     for i, g in enumerate(sc["groups"], 1):
         label = g.get("name") or f"Nhóm {i}"
-        body += thread_group(f"{TYPES[scen]} – {label} ({g['threads']} VU)", g, main_csv + requests_tree(plan["workflow"], plan))
+        body += thread_group(f"{TYPES[scen]} – {label} ({g['threads']} VU)", g, main_csv + requests_tree(plan["workflow"], plan, sc.get("think_scale", 1.0)))
     lf = plan.get("lockout_flow") or {}
     if lf.get("enabled") and sc.get("lockout", True):
         d = data[lf["data"]]
