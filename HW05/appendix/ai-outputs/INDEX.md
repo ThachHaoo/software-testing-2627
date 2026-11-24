@@ -6,3 +6,11 @@
 - 00:24 25/11/2026 · bước 2 · `HW05/perf_plan.json` → `step2/perf_plan.json` · sha256 1a7fa89e2da3 · T1-2 bản AI
 - 00:24 25/11/2026 · bước 2 · `HW05/design/02_scenarios.md` → `step2/02_scenarios.md` · sha256 8111b92c20cd · T1-2 bản AI
 - 00:24 25/11/2026 · bước 2 · `HW05/data/users.csv` → `step2/users.csv` · sha256 2ecdf42bec02 · T1-2 bản AI
+- 00:25 25/11/2026 · bước 3 · `testplans/23120255_Load_20261125.jmx` → `step3/23120255_Load_20261125.jmx.txt` · sha256 13bedc2a5132 · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `testplans/23120255_Smoke_20261125.jmx` → `step3/23120255_Smoke_20261125.jmx.txt` · sha256 9fb84f8fdfbe · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `testplans/23120255_Soak_20261125.jmx` → `step3/23120255_Soak_20261125.jmx.txt` · sha256 2e66313d7a2d · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `testplans/23120255_Spike_20261125.jmx` → `step3/23120255_Spike_20261125.jmx.txt` · sha256 71197ccc4b2f · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `testplans/23120255_Stress_20261125.jmx` → `step3/23120255_Stress_20261125.jmx.txt` · sha256 d00bce75a439 · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `data/lockout_users.csv` → `step3/lockout_users.csv` · sha256 398be9f025a8 · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `data/orders.csv` → `step3/orders.csv` · sha256 d8a45a21364e · T1-3 bản AI (ngày tạm 20261125)
+- 00:25 25/11/2026 · bước 3 · `data/users.csv` → `step3/users.csv` · sha256 2ecdf42bec02 · T1-3 bản AI (ngày tạm 20261125)
