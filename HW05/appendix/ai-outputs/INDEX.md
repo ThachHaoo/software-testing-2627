@@ -3,3 +3,6 @@
 - 14:21 23/11/2026 · bước 1 · `HW05/data/users.csv` → `step1/users.csv` · sha256 f938e765e6fd · T1-1 bản AI
 - 14:21 23/11/2026 · bước 1 · `HW05/data/lockout_users.csv` → `step1/lockout_users.csv` · sha256 398be9f025a8 · T1-1 bản AI
 - 14:21 23/11/2026 · bước 1 · `HW05/data/orders.csv` → `step1/orders.csv` · sha256 d8a45a21364e · T1-1 bản AI
+- 00:24 25/11/2026 · bước 2 · `HW05/perf_plan.json` → `step2/perf_plan.json` · sha256 1a7fa89e2da3 · T1-2 bản AI
+- 00:24 25/11/2026 · bước 2 · `HW05/design/02_scenarios.md` → `step2/02_scenarios.md` · sha256 8111b92c20cd · T1-2 bản AI
+- 00:24 25/11/2026 · bước 2 · `HW05/data/users.csv` → `step2/users.csv` · sha256 2ecdf42bec02 · T1-2 bản AI
