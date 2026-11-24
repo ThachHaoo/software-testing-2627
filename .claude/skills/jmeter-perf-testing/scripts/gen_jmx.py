@@ -116,12 +116,14 @@ def assertion(a, i):
         field = "Assertion.response_code" if t == "code" else "Assertion.response_data"
         val = a.get("equals") if t == "code" else a.get("text")
         ttype = {"code": 8, "equals_body": 8, "contains": 16, "not_contains": 16 | 4}[t]
+        # Ignore Status: JMeter mặc định coi 4xx/5xx là lỗi trước khi chạy assertion; bật khi phản hồi lỗi là ĐÚNG kỳ vọng
+        ignore = a.get("ignore_status", t == "code" and not str(val).startswith(("2", "3")))
         name = a.get("name") or {"code": f"Code = {val}", "contains": f"Body chứa '{val}'",
                                  "not_contains": f"Body không chứa '{val}'", "equals_body": "Body = …"}[t]
         return el("ResponseAssertion", "AssertionGui", "ResponseAssertion", name, [
             f'<collectionProp name="Asserion.test_strings">{s(str(zlib.crc32(f"{val}#{i}".encode())), val)}</collectionProp>',
             s("Assertion.custom_message", a.get("message", "")), s("Assertion.test_field", field),
-            b("Assertion.assume_success", False), f'<intProp name="Assertion.test_type">{ttype}</intProp>',
+            b("Assertion.assume_success", ignore), f'<intProp name="Assertion.test_type">{ttype}</intProp>',
         ])
     if t == "json":
         has_val = "value" in a
@@ -167,7 +169,11 @@ def sampler(r, asserts, auth_header, scale=1.0):
     if r.get("auth"):
         kids += header_manager("Authorization", {"Authorization": auth_header})
     kids += "".join(extractor(x) for x in r.get("extract", []))
-    kids += "".join(assertion(a, i) for i, a in enumerate(asserts))
+    # assertion có Ignore Status phải chạy TRƯỚC: nó đặt lại success = true, chạy sau sẽ che lỗi của assertion trước nó
+    def _ign(a):
+        return a.get("ignore_status", a["type"] == "code" and not str(a.get("equals", "")).startswith(("2", "3")))
+    ordered = sorted(asserts, key=lambda a: not _ign(a))
+    kids += "".join(assertion(a, i) for i, a in enumerate(ordered))
     return el("HTTPSamplerProxy", "HttpTestSampleGui", "HTTPSamplerProxy", r["label"], props, kids)
 
 

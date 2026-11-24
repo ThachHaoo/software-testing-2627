@@ -75,6 +75,8 @@ Mọi test plan trong skill đều sinh từ **một** file `perf_plan.json` (H1
 
 Mọi loại đều nhận thêm `name` và `message` (thông báo khi fail).
 
+`ignore_status` (chỉ cho `code`/`contains`/`not_contains`/`equals_body`): bật *Ignore Status* của Response Assertion – dùng khi phản hồi 4xx/5xx là **đúng kỳ vọng** (vd login sai → 401). JMeter mặc định coi 4xx/5xx là lỗi trước khi chạy assertion. `code` với mã không phải 2xx/3xx tự bật. `gen_jmx.py` đưa assertion có cờ này lên đầu (nó đặt lại success = true; chạy sau sẽ che lỗi của assertion trước).
+
 ## setup[]
 
 `[{"name": "...", "data": "<data id>", "requests": [request…]}]`.

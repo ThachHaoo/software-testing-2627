@@ -368,14 +368,16 @@
       {
         "type": "not_contains",
         "text": "\"token\"",
-        "name": "Không cấp token khi sai mật khẩu"
+        "name": "Không cấp token khi sai mật khẩu",
+        "ignore_status": true
       }
     ],
     "lock_correct_after": [
       {
         "type": "not_contains",
         "text": "\"token\"",
-        "name": "Đang khoá: mật khẩu đúng cũng không được cấp token"
+        "name": "Đang khoá: mật khẩu đúng cũng không được cấp token",
+        "ignore_status": true
       },
       {
         "type": "contains",
@@ -599,7 +601,16 @@
     "fail_duration_ms": 2000,
     "note": "SRS không có yêu cầu hiệu năng (A9) – ngưỡng là giả định A11, SV chốt ở bước 5."
   },
-  "review_log": [],
+  "review_log": [
+    {
+      "date": "2026-11-25 00:30",
+      "by": "AI",
+      "step": 4,
+      "change": "L3/L4: not_contains thêm ignore_status; harness gen_jmx hỗ trợ ignore_status (code 4xx tự bật)",
+      "reason": "Smoke lượt 1 – S1: 80 mẫu lockout bị JMeter tính lỗi vì mã 4xx dù assertion qua (design/04_smoke_log.md)",
+      "commit": "(commit này)"
+    }
+  ],
   "assumptions": [
     "A1 – Login chạy MỖI vòng lặp (once_per_vu = false) để nhóm auth-heavy chịu tải đúng nghĩa; JWT không hết hạn (server.js:51) nên login một lần/VU cũng chạy được nhưng sẽ gần như bỏ trống nhóm auth.",
     "A2 – Body checkout mô phỏng web: {items, total_amount, coupon_id: null} (Checkout.jsx:45-48); web không gửi shipping_address nên plan cũng không gửi. Backend bỏ qua items/coupon_id và lưu total_amount do client gửi (server.js:299-303).",
