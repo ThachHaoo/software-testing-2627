@@ -30,3 +30,15 @@ Mỗi lỗi được ghi ở đây **trước** khi sửa. Mỗi lần sửa là
   2. `gen_jmx.py` đưa assertion có `ignore_status` lên đầu danh sách, vì JMeter đặt lại `success = true` khi chạy assertion đó; nếu nó chạy sau thì sẽ che lỗi của assertion đứng trước.
   3. Trong plan, L3/L4 đặt `ignore_status: true` ở `not_contains`.
   4. Ghi một dòng `review_log` (by AI, step 4).
+
+## Lượt 2 – `runs/23120255_Smoke_20261125_20261125T002744/` (sau S1, commit `b8c96ad`)
+
+- Kết quả: 549 mẫu, **0 lỗi (0,00%)**, 8,68 req/s. `jtl_stats` lệch `statistics.json` 0,00%.
+- Luồng chính: login 13, products 13, checkout 12, my-orders 11 mẫu, 0 lỗi.
+  - p95 theo ms: login 11, products 5, checkout 20, my-orders 5.
+  - Đơn tạo được, và `orderId` có trong `my-orders`.
+- Lockout: L1 401 ×20, L2 401 ×20, L3 403 ×20, L4 403 ×20, mọi assertion qua.
+  - Mã phản hồi giống lượt 1, nên `ignore_status` không đổi phản hồi; chỉ để assertion quyết định kết quả.
+  - L3 nhận 403 ở lần sai thứ 3, nghĩa là bị khoá từ lần sai thứ 2. Dữ kiện, chưa kết luận; trùng nội dung issue #280.
+- Tài nguyên: RAM trống lúc bắt đầu chỉ còn 2.729 / 16.017 MB (`RUN.md`). JMeter dùng khoảng 1,2 GB private (heap 1 GB). Đây là rủi ro cho stress 300 thread.
+- **Smoke sạch, dừng trước bước 5 (SV review).**

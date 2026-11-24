@@ -1,0 +1,550 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795541128346,128,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,316,253,1,2,http://localhost:3000/api/register,127,0,63
+1795541128346,128,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,316,253,1,2,http://localhost:3000/api/register,127,0,63
+1795541128560,10,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,316,253,1,2,http://localhost:3000/api/register,9,0,0
+1795541128560,17,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,316,253,1,2,http://localhost:3000/api/register,17,0,0
+1795541128571,12,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,316,253,1,2,http://localhost:3000/api/register,12,0,0
+1795541128579,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,316,253,1,2,http://localhost:3000/api/register,10,0,0
+1795541128585,10,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,316,253,1,2,http://localhost:3000/api/register,10,0,0
+1795541128591,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,253,1,2,http://localhost:3000/api/register,10,0,0
+1795541128597,11,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,253,1,2,http://localhost:3000/api/register,11,0,0
+1795541128604,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,253,1,2,http://localhost:3000/api/register,10,0,0
+1795541128610,11,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,253,1,2,http://localhost:3000/api/register,11,0,0
+1795541128616,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,253,1,2,http://localhost:3000/api/register,12,0,0
+1795541128623,14,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,253,1,2,http://localhost:3000/api/register,14,0,0
+1795541128631,14,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,253,1,2,http://localhost:3000/api/register,14,0,0
+1795541128640,13,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,253,1,2,http://localhost:3000/api/register,13,0,0
+1795541128648,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,253,1,2,http://localhost:3000/api/register,12,0,0
+1795541128656,11,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,253,1,2,http://localhost:3000/api/register,11,0,0
+1795541128662,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,253,1,2,http://localhost:3000/api/register,9,0,0
+1795541128669,9,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128673,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,10,0,0
+1795541128680,12,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,12,0,0
+1795541128685,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,12,0,0
+1795541128694,9,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128699,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,10,0,0
+1795541128704,11,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,11,0,0
+1795541128710,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128716,8,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,8,0,0
+1795541128721,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128726,9,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128732,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,8,0,0
+1795541128736,10,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,10,0,0
+1795541128742,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,11,0,0
+1795541128748,10,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,10,0,0
+1795541128755,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,8,0,0
+1795541128759,9,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128765,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,8,0,0
+1795541128769,9,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128774,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128779,9,00_setup_register_lockout,200,OK,setUp 2 – đăng ký user lockout (20 dòng) 2-1,text,true,,317,255,1,2,http://localhost:3000/api/register,9,0,0
+1795541128784,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,11,0,0
+1795541128797,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128806,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128815,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128824,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541128833,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541128843,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128851,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541128858,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541128867,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,10,0,0
+1795541128878,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541128888,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128897,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541128908,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541128916,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128924,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128932,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541128940,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541128947,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541128957,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128965,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541128974,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541128983,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541128991,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129001,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129013,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129023,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129030,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129039,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129048,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129056,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129064,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129073,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129082,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129093,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,10,0,0
+1795541129104,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129111,5,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,5,0,0
+1795541129117,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129124,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129132,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129139,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129146,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129154,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129162,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129171,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129180,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,10,0,0
+1795541129192,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129202,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129212,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,7,0,0
+1795541129220,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129229,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129236,5,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,5,0,0
+1795541129242,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129251,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129260,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,6,0,0
+1795541129267,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129276,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129286,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,317,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129296,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129305,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129315,29,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,29,0,0
+1795541129345,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129355,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129364,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129375,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,10,0,0
+1795541129387,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129397,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,11,0,0
+1795541129409,15,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,14,0,0
+1795541129426,15,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,15,0,0
+1795541129443,14,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,14,0,0
+1795541129459,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,13,0,0
+1795541129473,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,11,0,0
+1795541129485,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,10,0,0
+1795541129496,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129506,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129517,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129527,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129537,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129547,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,8,0,0
+1795541129556,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,255,1,1,http://localhost:3000/api/register,9,0,0
+1795541129566,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541129574,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541129581,16,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,16,0,0
+1795541129600,19,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,19,0,0
+1795541129622,19,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,19,0,0
+1795541129645,15,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,15,0,0
+1795541129662,18,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,17,0,0
+1795541129683,20,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,20,0,0
+1795541129708,26,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,26,0,0
+1795541129739,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129750,16,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,16,0,0
+1795541129769,15,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,15,0,0
+1795541129785,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129795,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541129803,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129814,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541129822,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129833,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,12,0,0
+1795541129846,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541129858,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541129871,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541129882,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129892,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541129900,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129910,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541129920,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541129929,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541129938,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129948,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129958,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541129967,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541129976,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541129985,5,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,5,0,0
+1795541129991,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130001,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130015,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130025,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130032,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130041,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130048,5,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,5,0,0
+1795541130054,5,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,5,0,0
+1795541130060,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130067,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130075,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130084,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130092,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130100,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130106,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130113,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130120,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130127,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130135,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130144,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130152,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130159,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130168,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130175,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130186,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130195,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130202,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130210,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130217,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130225,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130233,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130240,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130248,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130257,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130265,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130273,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130281,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541130288,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130297,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130309,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,12,0,0
+1795541130324,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541130336,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130347,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130357,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130368,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130378,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130387,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130396,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130404,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130415,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541130429,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130440,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130451,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130460,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130470,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130481,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130490,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130500,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,12,0,0
+1795541130513,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130521,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130531,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130540,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130551,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541130563,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130572,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130580,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130591,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130601,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130611,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130620,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130630,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130640,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130650,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130660,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130672,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130682,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130693,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130702,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130712,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130723,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541130735,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541130747,14,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,14,0,0
+1795541130763,15,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,15,0,0
+1795541130780,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541130795,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541130810,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541130824,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541130837,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130847,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130858,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130867,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130875,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130885,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130896,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130906,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541130917,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130927,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541130936,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130946,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541130954,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541130964,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541130976,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541130991,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541131005,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131018,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541131033,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131046,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131056,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131067,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131076,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131086,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131096,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131104,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131111,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131119,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131127,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131134,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131143,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131151,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131159,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131167,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131174,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131181,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131187,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131194,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131202,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131211,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131219,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131226,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131234,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131243,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131251,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131258,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131266,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131276,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131286,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131296,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131305,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131313,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131323,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131333,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131344,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131354,30,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,30,0,0
+1795541131385,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131396,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131404,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131415,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131425,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131436,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131446,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131456,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131466,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131478,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131487,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131496,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131505,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131516,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131526,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131536,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131545,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131554,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131565,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131574,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131583,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131593,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131604,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131614,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131624,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131633,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131645,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131655,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131667,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131677,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131684,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131691,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131700,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131711,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131719,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131727,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131735,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131743,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131751,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131759,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131766,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131773,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131781,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131788,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131796,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131803,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131810,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131818,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131828,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131836,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131846,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131856,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131866,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131877,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131887,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131897,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541131909,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541131918,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131927,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131935,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131945,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131953,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541131964,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541131972,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541131979,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541131989,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132000,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132012,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132023,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132034,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132045,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132056,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132067,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132079,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132091,16,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,15,0,0
+1795541132108,15,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,15,0,0
+1795541132124,14,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541132139,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132151,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132161,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132169,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132177,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132185,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132193,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132202,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132211,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132222,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132232,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,12,0,0
+1795541132245,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132257,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132270,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132282,12,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,12,0,0
+1795541132295,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132304,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132315,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132327,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132338,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132348,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132355,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132363,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132372,6,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,6,0,0
+1795541132380,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132388,31,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,31,0,0
+1795541132420,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132429,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132437,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132446,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132454,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132466,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132476,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132485,10,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,10,0,0
+1795541132496,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132503,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132513,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132523,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132534,13,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,13,0,0
+1795541132547,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132558,11,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,11,0,0
+1795541132570,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132580,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132589,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132598,8,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,8,0,0
+1795541132607,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541132617,7,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,7,0,0
+1795541132625,9,00_setup_register_user,200,OK,setUp 1 – đăng ký user chính (400 dòng) 1-1,text,true,,318,257,1,1,http://localhost:3000/api/register,9,0,0
+1795541133202,10,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,2,http://localhost:3000/api/login,9,0,3
+1795541133715,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541134232,5,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,5,0,0
+1795541134738,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,4,0,0
+1795541135249,3,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541135477,11,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,639,229,2,3,http://localhost:3000/api/login,11,0,3
+1795541135758,3,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541136264,6,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,5,0,0
+1795541136695,6,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,639,229,2,3,http://localhost:3000/api/login,6,0,3
+1795541136772,2,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,2,0,0
+1795541136950,4,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,1238,160,2,3,http://localhost:3000/api/products,4,0,0
+1795541137278,5,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,5,0,0
+1795541137799,3,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541138320,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541138444,5,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,1238,160,2,3,http://localhost:3000/api/products,5,0,0
+1795541138828,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,4,0,0
+1795541139348,5,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,5,0,0
+1795541139865,5,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,5,0,0
+1795541140380,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541140895,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,3,0,0
+1795541141144,15,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,312,457,2,3,http://localhost:3000/api/checkout,15,0,0
+1795541141400,4,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541141913,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541142066,14,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,312,464,2,3,http://localhost:3000/api/checkout,14,0,0
+1795541142414,5,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,392,325,2,3,http://localhost:3000/api/orders/my-orders,5,0,0
+1795541142430,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541142948,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,3,0,0
+1795541143461,4,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541143695,6,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,392,325,2,3,http://localhost:3000/api/orders/my-orders,6,0,0
+1795541143967,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541144476,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541144990,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,4,0,0
+1795541145176,4,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,639,229,2,3,http://localhost:3000/api/login,4,0,0
+1795541145504,4,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541145803,4,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,642,229,2,3,http://localhost:3000/api/login,4,0,0
+1795541146015,5,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,5,0,0
+1795541146530,4,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541147037,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,3,0,0
+1795541147556,4,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,1238,160,2,3,http://localhost:3000/api/products,3,0,0
+1795541147556,4,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541147868,3,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,1238,160,2,3,http://localhost:3000/api/products,3,0,0
+1795541148069,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541148574,4,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,4,0,0
+1795541149092,5,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,5,0,0
+1795541149613,3,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541150129,3,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541150519,15,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,312,463,2,3,http://localhost:3000/api/checkout,15,0,0
+1795541150646,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,231,1,3,http://localhost:3000/api/login,3,0,0
+1795541151157,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,229,1,3,http://localhost:3000/api/login,3,0,0
+1795541151665,6,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,6,0,0
+1795541152079,3,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,393,327,2,3,http://localhost:3000/api/orders/my-orders,3,0,0
+1795541152182,2,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,2,0,0
+1795541152491,25,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,312,454,2,3,http://localhost:3000/api/checkout,25,0,0
+1795541152696,4,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541153204,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,3,0,0
+1795541153715,5,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,5,0,0
+1795541154031,4,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,392,325,2,3,http://localhost:3000/api/orders/my-orders,4,0,0
+1795541154230,2,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,2,0,0
+1795541154478,4,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,642,229,2,3,http://localhost:3000/api/login,4,0,0
+1795541154741,2,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,2,0,0
+1795541155256,2,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,2,0,0
+1795541155767,5,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,642,229,2,3,http://localhost:3000/api/login,5,0,0
+1795541155767,5,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,5,0,0
+1795541156282,3,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541156796,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541157150,4,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,1238,160,2,3,http://localhost:3000/api/products,3,0,0
+1795541157301,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,4,0,0
+1795541157443,4,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,1238,160,2,3,http://localhost:3000/api/products,4,0,0
+1795541157813,3,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541158316,5,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541158823,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541159335,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,3,0,0
+1795541159848,3,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541160032,20,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,312,462,2,3,http://localhost:3000/api/checkout,20,0,0
+1795541160361,5,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,5,0,0
+1795541160874,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541161016,12,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,312,467,2,3,http://localhost:3000/api/checkout,12,0,0
+1795541161383,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,4,0,0
+1795541161845,4,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,392,327,2,3,http://localhost:3000/api/orders/my-orders,4,0,0
+1795541161892,5,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,5,0,0
+1795541162411,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541162427,2,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,393,327,2,3,http://localhost:3000/api/orders/my-orders,2,0,0
+1795541162925,3,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541163435,6,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,6,0,0
+1795541163605,3,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,642,229,2,3,http://localhost:3000/api/login,3,0,0
+1795541163949,4,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541164463,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541164691,4,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,642,229,2,3,http://localhost:3000/api/login,3,0,0
+1795541164982,5,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,5,0,0
+1795541165489,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,4,0,0
+1795541165757,4,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,1238,160,2,3,http://localhost:3000/api/products,4,0,0
+1795541165998,5,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,5,0,0
+1795541166251,5,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,1238,160,2,3,http://localhost:3000/api/products,5,0,0
+1795541166515,7,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,7,0,0
+1795541167023,2,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,2,0,0
+1795541167540,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,3,0,0
+1795541167791,12,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,312,459,2,3,http://localhost:3000/api/checkout,12,0,0
+1795541168054,4,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541168568,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541169084,4,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541169251,4,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,393,327,2,3,http://localhost:3000/api/orders/my-orders,4,0,0
+1795541169597,3,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,3,0,0
+1795541169854,8,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,312,466,2,3,http://localhost:3000/api/checkout,8,0,0
+1795541170103,3,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541170618,4,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541171126,7,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,7,0,0
+1795541171510,4,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,392,327,2,3,http://localhost:3000/api/orders/my-orders,4,0,0
+1795541171637,2,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,2,0,0
+1795541171667,5,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,642,229,2,3,http://localhost:3000/api/login,5,0,0
+1795541172140,3,L1_POST_login_sai_1,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,3,0,0
+1795541172657,2,L2_POST_login_sai_2,401,Unauthorized,"Lockout – user riêng, cố ý sai 2-1",text,false,,314,232,1,3,http://localhost:3000/api/login,2,0,0
+1795541173160,4,L3_POST_login_sai_3,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,232,1,3,http://localhost:3000/api/login,4,0,0
+1795541173668,4,L4_POST_login_dung_khi_khoa,403,Forbidden,"Lockout – user riêng, cố ý sai 2-1",text,false,,342,230,1,3,http://localhost:3000/api/login,4,0,0
+1795541173731,5,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,644,230,2,2,http://localhost:3000/api/login,5,0,0
+1795541174262,3,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,1238,160,2,2,http://localhost:3000/api/products,3,0,0
+1795541176611,3,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,1238,160,2,2,http://localhost:3000/api/products,3,0,0
+1795541178011,11,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,312,459,2,2,http://localhost:3000/api/checkout,11,0,0
+1795541179137,9,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,313,466,2,2,http://localhost:3000/api/checkout,9,0,0
+1795541180018,5,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,393,327,2,2,http://localhost:3000/api/orders/my-orders,5,0,0
+1795541180649,5,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,394,327,2,2,http://localhost:3000/api/orders/my-orders,5,0,0
+1795541182914,4,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,644,230,2,2,http://localhost:3000/api/login,4,0,0
+1795541183263,3,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,644,230,2,2,http://localhost:3000/api/login,3,0,0
+1795541184701,3,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,1238,160,2,2,http://localhost:3000/api/products,3,0,0
+1795541184949,3,02_GET_products,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,1238,160,2,2,http://localhost:3000/api/products,3,0,0
+1795541187846,14,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,313,456,2,2,http://localhost:3000/api/checkout,14,0,0
+1795541189285,10,03_POST_checkout,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,313,463,2,2,http://localhost:3000/api/checkout,10,0,0
+1795541189501,3,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,394,327,2,2,http://localhost:3000/api/orders/my-orders,3,0,0
+1795541190901,4,01_POST_login,200,OK,Smoke – smoke (2 VU) 1-2,text,true,,644,230,2,2,http://localhost:3000/api/login,4,0,0
+1795541191165,3,04_GET_my_orders,200,OK,Smoke – smoke (2 VU) 1-1,text,true,,394,327,1,1,http://localhost:3000/api/orders/my-orders,3,0,0
